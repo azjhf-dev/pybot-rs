@@ -137,6 +137,11 @@ pub fn py_hasattr(v: &Py, name: &str) -> bool { py_getattr(v, name).is_ok() }
 // ---------------------------------------------------------------- method calls
 pub fn py_method_call(recv: &Py, name: &str, args: &[Py]) -> PyResult {
     match recv {
+        Py::Func(f) if f.name.starts_with("datetime.") => {
+            let path = f.name.trim_start_matches("datetime.");
+            let full = format!("{}.{}", path, name);
+            crate::stdlib::stdlib_call("datetime", &full, args)
+        }
         Py::Func(f) if f.name == "str" && name == "maketrans" => Ok(pystr::maketrans(args)),
         Py::Func(f) if f.name == "dict" && name == "fromkeys" => {
             let keys = py_iter(args.first().unwrap_or(&Py::None))?;
