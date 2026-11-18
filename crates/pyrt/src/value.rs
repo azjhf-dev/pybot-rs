@@ -744,10 +744,10 @@ pub fn slice_indices(len: i64, start: Option<i64>, stop: Option<i64>, step: i64)
     if step == 0 { return out; }
     let (mut lo, mut hi) = if step > 0 { (0i64, len) } else { (-1i64, -len - 1) };
     let clamp = |v: i64| -> i64 {
-        if step > 0 { v.max(0).min(len) } else { v.max(-len - 1).min(len - 1) }
+        if step > 0 { v.max(0).min(len) } else { v.max(-1).min(len - 1) }
     };
     let s = match start { None => if step > 0 { 0 } else { len - 1 }, Some(v) => clamp(if v < 0 { v + len } else { v }) };
-    let e = match stop { None => if step > 0 { len } else { -len - 1 }, Some(v) => clamp(if v < 0 { v + len } else { v }) };
+    let e = match stop { None => if step > 0 { len } else { -1 }, Some(v) => clamp(if v < 0 { v + len } else { v }) };
     let _ = (&mut lo, &mut hi);
     let mut i = s;
     if step > 0 {
@@ -891,5 +891,16 @@ pub fn py_delitem(v: &Py, key: &Py) -> Result<(), PyExc> {
             }
         }
         _ => Err(type_err("does not support item deletion")),
+    }
+}
+
+#[cfg(test)]
+mod slice_tests {
+    use super::*;
+    #[test] fn reverse_slices_stay_in_range() {
+        assert_eq!(slice_indices(1,None,None,-1),vec![0]);
+        assert_eq!(slice_indices(3,None,None,-1),vec![2,1,0]);
+        assert_eq!(slice_indices(3,Some(-8),None,-1),Vec::<i64>::new());
+        assert_eq!(slice_indices(0,None,None,-1),Vec::<i64>::new());
     }
 }
