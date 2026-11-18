@@ -27,30 +27,6 @@
     "exact": true
   },
   {
-    "case": 10,
-    "inputs": [
-      "thank you",
-      "you are welcome"
-    ],
-    "python": {
-      "returncode": 0,
-      "replies": [
-        "Happy to help.",
-        "Alright then \u2014 good luck with it."
-      ],
-      "diagnostics": "[module: chat | 564 ms]\n[module: chat | 248 ms]\n"
-    },
-    "rust": {
-      "returncode": 0,
-      "replies": [
-        "Happy to help.",
-        "Alright then \u2014 good luck with it."
-      ],
-      "diagnostics": "[module: chat | 25491 ms]\n[module: chat | 1121 ms]\n"
-    },
-    "exact": true
-  },
-  {
     "case": 11,
     "inputs": [
       "I have a dog named Buddy",
@@ -284,6 +260,30 @@
         "I haven't got anything for that to point at yet \u2014 give me the thing in a few words and I'll answer for it."
       ],
       "diagnostics": "[module: chat | 25693 ms]\n[module: memory_store | 774 ms]\n"
+    },
+    "exact": true
+  },
+  {
+    "case": 10,
+    "inputs": [
+      "thank you",
+      "you are welcome"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "Happy to help.",
+        "Alright then \u2014 good luck with it."
+      ],
+      "diagnostics": "[module: chat | 592 ms]\n[module: chat | 262 ms]\n"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "Happy to help.",
+        "Alright then \u2014 good luck with it."
+      ],
+      "diagnostics": "[module: chat | 23282 ms]\n[module: chat | 1108 ms]\n"
     },
     "exact": true
   }
