@@ -1,52 +1,6 @@
 [
   {
     "binary_sha256": "d4cabea0451fe30ff4ca24c455750b4e0d45833b59a77fa13bf5c230bb078a33",
-    "case": 3,
-    "inputs": [
-      "convert 5 miles to kilometres"
-    ],
-    "python": {
-      "returncode": 0,
-      "replies": [
-        "5 miles is about 8 km."
-      ],
-      "diagnostics": "[module: answers | 916 ms]\n"
-    },
-    "rust": {
-      "returncode": 0,
-      "replies": [
-        "5 miles is about 8 km."
-      ],
-      "diagnostics": "[module: answers | 34334 ms]\n"
-    },
-    "exact": true
-  },
-  {
-    "binary_sha256": "d4cabea0451fe30ff4ca24c455750b4e0d45833b59a77fa13bf5c230bb078a33",
-    "case": 2,
-    "inputs": [
-      "what is 15 percent of 80"
-    ],
-    "python": {
-      "returncode": 0,
-      "replies": [
-        "15% of 80 is 12."
-      ],
-      "diagnostics": "[module: answers | 4187 ms]\n",
-      "baseline_reused": true,
-      "source_commit": "7d63c7fbebb44c7e466e5c8b5c1f341ab767929e"
-    },
-    "rust": {
-      "returncode": 0,
-      "replies": [
-        "15% of 80 is 12."
-      ],
-      "diagnostics": "[module: answers | 46455 ms]\n"
-    },
-    "exact": true
-  },
-  {
-    "binary_sha256": "d4cabea0451fe30ff4ca24c455750b4e0d45833b59a77fa13bf5c230bb078a33",
     "case": 4,
     "inputs": [
       "how do I fix a leaking tap"
@@ -255,6 +209,54 @@
         "You've got a cat called Luna."
       ],
       "diagnostics": "[module: greeting | 33227 ms]\n[module: memory_store | 4865 ms]\n"
+    },
+    "exact": true
+  },
+  {
+    "binary_sha256": "bf98fc48613880ed03b5c39ce2e1c0769a2ba2ab7ebf72108aa0dbe06a569520",
+    "case": 2,
+    "inputs": [
+      "what is 15 percent of 80"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "15% of 80 is 12."
+      ],
+      "diagnostics": "[module: answers | 4187 ms]\n",
+      "baseline_reused": true,
+      "source_commit": "7d63c7fbebb44c7e466e5c8b5c1f341ab767929e"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "15% of 80 is 12."
+      ],
+      "diagnostics": "[module: answers | 43925 ms]\n"
+    },
+    "exact": true
+  },
+  {
+    "binary_sha256": "bf98fc48613880ed03b5c39ce2e1c0769a2ba2ab7ebf72108aa0dbe06a569520",
+    "case": 3,
+    "inputs": [
+      "convert 5 miles to kilometres"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "5 miles is about 8 km."
+      ],
+      "diagnostics": "[module: answers | 916 ms]\n",
+      "baseline_reused": true,
+      "source_commit": "7d63c7fbebb44c7e466e5c8b5c1f341ab767929e"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "5 miles is about 8 km."
+      ],
+      "diagnostics": "[module: answers | 33821 ms]\n"
     },
     "exact": true
   }
