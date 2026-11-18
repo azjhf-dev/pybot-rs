@@ -1,0 +1,19 @@
+[
+  "modules.memory_store:5221: unresolved call _food_facts",
+  "modules.memory_store:5232: unresolved call _what_a_dinner_has_to_leave_out",
+  "modules.memory_store:5234: unresolved call _say_a_list",
+  "modules.memory_store:5237: unresolved call _food_facts",
+  "modules.memory_store:5242: unresolved call _say_a_list",
+  "modules.memory_store:5244: unresolved call _food_facts",
+  "modules.memory_store:5246: unresolved call _say_a_list",
+  "modules.memory_store:5247: unresolved call _other_fact",
+  "modules.memory_store:5257: unresolved call _diet_words",
+  "modules.memory_store:5259: unresolved call _the_take_back",
+  "modules.memory_store:5264: unresolved call _a_take_back_said_back",
+  "modules.memory_store:5271: unresolved call _deny",
+  "modules.memory_store:5278: unresolved call _what_a_dinner_has_to_leave_out",
+  "modules.memory_store:5280: unresolved call _say_a_list",
+  "modules.memory_store:5285: unresolved call _diet_how",
+  "modules.memory_store:5287: unresolved call _diet_words",
+  "modules.memory_store:5290: unresolved call _diet_words"
+]
