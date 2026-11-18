@@ -527,7 +527,7 @@ pub fn _correct_other(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&who.clone()))) {
     continue;
     }
-    kept = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("memory.store_lines", "OTHER_SAID")) { let __unpk4999 = py_unpack(&__item.clone(), 2, None); let mut kind: Py = __unpk4999[0].clone(); let mut _u: Py = __unpk4999[1].clone(); if py_truthy(&mcall(&entry.clone(), "get", &[kind.clone()])) {  __out.push(kind.clone()); } } py_list(__out) })() };
+    kept = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("memory.store_lines", "OTHER_SAID")) { let __unpk6088 = py_unpack(&__item.clone(), 2, None); let mut kind: Py = __unpk6088[0].clone(); let mut _u: Py = __unpk6088[1].clone(); if py_truthy(&mcall(&entry.clone(), "get", &[kind.clone()])) {  __out.push(kind.clone()); } } py_list(__out) })() };
     let __iter4 = py_iter_or_raise(&pyrt::xrefs::xget("memory.store_lines", "OTHER_SAID"));
     for __item in __iter4 {
     let __unpk5 = py_unpack(&__item.clone(), 2, None);

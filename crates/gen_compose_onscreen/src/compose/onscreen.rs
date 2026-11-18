@@ -501,16 +501,16 @@ pub fn the_answer_on_screen(args: &[Py]) -> Py {
     for __item in __iter7 {
     sentence = __item.clone();
     if py_truthy(&{ let __b = op_lt(&call_builtin("len", &[mcall(&sentence.clone(), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(5)); if py_truthy(&__b) { __b } else { mcall(&sentence.clone(), "endswith", &[py_str("?")]) } }) {
-    return py_tuple(vec![Py::Int(2), Py::None]);
+    continue;
     }
     if py_truthy(&mcall(&g_NOT_TO_HAND_BACK(), "match", &[sentence.clone()])) {
-    return py_tuple(vec![Py::Int(2), Py::None]);
+    continue;
     }
     if py_truthy(&mcall(&g_QUOTED(), "search", &[sentence.clone()])) {
-    return py_tuple(vec![Py::Int(2), Py::None]);
+    continue;
     }
     if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback", "PUNT")) { let mut punt: Py = __item.clone(); __out.push(Py::Bool(py_contains(&mcall(&sentence.clone(), "lower", &[]), &punt.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
-    return py_tuple(vec![Py::Int(2), Py::None]);
+    continue;
     }
     step = call_builtin("bool", &[mcall(&g_A_STEP_IN_IT(), "search", &[sentence.clone()])]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&step.clone()) {
@@ -526,7 +526,7 @@ pub fn the_answer_on_screen(args: &[Py]) -> Py {
     for __item in __iter8 {
     piece = __item.clone();
     if py_truthy(&op_gt(&call_builtin("len", &[mcall(&piece.clone(), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), &g_LONG_SENTENCE())) {
-    return py_tuple(vec![Py::Int(2), Py::None]);
+    continue;
     }
     words = call_builtin("set", &[pyrt::xrefs::xcall("compose.fallback", "_flat_words", &[piece.clone()])]).unwrap_or_else(|e| exc::raise(e));
     score = call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mine.clone()) { let mut word: Py = __item.clone(); if py_truthy(&_the_same_word(&[word.clone(), words.clone()])) {  __out.push(Py::Int(1)); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
@@ -632,7 +632,6 @@ pub fn the_answer_on_screen(args: &[Py]) -> Py {
         }
     }
     if let Some(__e) = __unhandled4 { exc::raise(__e); }
-    if py_eq(&__ret2, &Py::Int(2)) { continue; }
     if py_truthy(&__ret2) { return __val3; }
     Py::None
 }

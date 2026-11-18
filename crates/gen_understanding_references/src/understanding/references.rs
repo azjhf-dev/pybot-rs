@@ -422,7 +422,7 @@ pub fn _named_before(args: &[Py]) -> Py {
     let __iter1 = py_iter_or_raise(&names.clone());
     for __item in __iter1 {
     name = __item.clone();
-    at = call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk5870 = py_unpack(&__item.clone(), 2, None); let mut i: Py = __unpk5870[0].clone(); let mut word: Py = __unpk5870[1].clone(); if py_truthy(&Py::Bool(py_contains(&geti(&g_PRONOUNS(), &name.clone()), &word.clone()))) {  __out.push(i.clone()); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e));
+    at = call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk5663 = py_unpack(&__item.clone(), 2, None); let mut i: Py = __unpk5663[0].clone(); let mut word: Py = __unpk5663[1].clone(); if py_truthy(&Py::Bool(py_contains(&geti(&g_PRONOUNS(), &name.clone()), &word.clone()))) {  __out.push(i.clone()); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&Py::Bool(py_is(&at.clone(), &Py::None))) {
     continue;
     }
@@ -770,7 +770,7 @@ pub fn resolve(args: &[Py]) -> Py {
     let _ = py_str("{\"it\", \"that\", \"they\", \"there\", \"followup\"} for the current line.");
     prev_entities = { let __b = prev_entities.clone(); if py_truthy(&__b) { __b } else { py_list(vec![]) } };
     words = call_builtin("set", &[geti(&line.clone(), &py_str("norm"))]).unwrap_or_else(|e| exc::raise(e));
-    used = { (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_PRONOUNS(), "items", &[])) { let __unpk4600 = py_unpack(&__item.clone(), 2, None); let mut name: Py = __unpk4600[0].clone(); let mut aliases: Py = __unpk4600[1].clone(); __out.push((name.clone(), call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&aliases.clone()) { let mut p: Py = __item.clone(); if py_truthy(&Py::Bool(py_contains(&words.clone(), &p.clone()))) {  __out.push(p.clone()); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e)))); } py_dict(__out) })() };
+    used = { (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_PRONOUNS(), "items", &[])) { let __unpk8968 = py_unpack(&__item.clone(), 2, None); let mut name: Py = __unpk8968[0].clone(); let mut aliases: Py = __unpk8968[1].clone(); __out.push((name.clone(), call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&aliases.clone()) { let mut p: Py = __item.clone(); if py_truthy(&Py::Bool(py_contains(&words.clone(), &p.clone()))) {  __out.push(p.clone()); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e)))); } py_dict(__out) })() };
     ref_ = py_dict(vec![(py_str("it"), Py::None), (py_str("that"), Py::None), (py_str("they"), Py::None), (py_str("there"), Py::None), (py_str("he"), Py::None), (py_str("she"), Py::None), (py_str("kind"), Py::None), (py_str("followup"), Py::Bool(false))]);
     if py_truthy(&Py::Bool(py_is(&prev_line.clone(), &Py::None))) {
     return ref_.clone();

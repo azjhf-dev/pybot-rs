@@ -637,14 +637,17 @@ class Gen:
                     self.gen_stmt(s, ctx)
             E("    }")
         elif isinstance(node, ast.While):
+            ctx.loop_depth = getattr(ctx, 'loop_depth', 0) + 1
             E(f"    while py_truthy(&{self.gen_expr(node.test, ctx)}) {{")
             for s in node.body:
                 self.gen_stmt(s, ctx)
             E("    }")
+            ctx.loop_depth -= 1
             if node.orelse:
                 for s in node.orelse:
                     self.gen_stmt(s, ctx)
         elif isinstance(node, ast.For):
+            ctx.loop_depth = getattr(ctx, 'loop_depth', 0) + 1
             it = ctx.tmpname('iter')
             E(f"    let {it} = py_iter_or_raise(&{self.gen_expr(node.iter, ctx)});")
             broke = ctx.tmpname('else') if node.orelse else None
@@ -657,15 +660,16 @@ class Gen:
             for s in node.body:
                 self.gen_stmt(s, ctx)
             E("    }")
+            ctx.loop_depth -= 1
             if node.orelse:
                 for s in node.orelse:
                     self.gen_stmt(s, ctx)
         elif isinstance(node, ast.Break):
             E("    break;")
         elif isinstance(node, ast.Continue):
-            if getattr(ctx, 'try_closure', 0):
+            if getattr(ctx, 'try_stack', []) and getattr(ctx, 'loop_depth', 0) == ctx.try_stack[-1]['depth']:
                 E('    return py_tuple(vec![Py::Int(2), Py::None]);')
-                ctx.try_has_continue = True
+                ctx.try_stack[-1]['continue'] = True
             else:
                 E("    continue;")
         elif isinstance(node, ast.Try):
@@ -674,8 +678,11 @@ class Gen:
                                           ctx.tmpname('unhandled'), ctx.tmpname('handled'))
             E(f"    let {body_tmp} = exc::catch(|| {{")
             ctx.try_closure = getattr(ctx, 'try_closure', 0) + 1
+            ctx.try_stack = getattr(ctx, 'try_stack', [])
+            ctx.try_stack.append({'depth': getattr(ctx, 'loop_depth', 0), 'continue': False})
             for s in node.body:
                 self.gen_stmt(s, ctx)
+            try_info = ctx.try_stack.pop()
             ctx.try_closure -= 1
             E("        py_tuple(vec![Py::Bool(false), Py::None])")
             E("    });")
@@ -707,9 +714,12 @@ class Gen:
                 self.gen_stmt(s, ctx)
             E(f"    if let Some(__e) = {unh_v} {{ exc::raise(__e); }}")
             if ctx.kind == 'fn':
-                if getattr(ctx, 'try_has_continue', False):
-                    E(f"    if py_eq(&{ret_v}, &Py::Int(2)) {{ continue; }}")
-                    ctx.try_has_continue = False
+                if try_info['continue']:
+                    if ctx.try_stack and ctx.try_stack[-1]['depth'] == getattr(ctx, 'loop_depth', 0):
+                        E(f"    if py_eq(&{ret_v}, &Py::Int(2)) {{ return py_tuple(vec![{ret_v}, {val_v}]); }}")
+                        ctx.try_stack[-1]['continue'] = True
+                    else:
+                        E(f"    if py_eq(&{ret_v}, &Py::Int(2)) {{ continue; }}")
                 if getattr(ctx, 'try_closure', 0):
                     E(f"    if py_truthy(&{ret_v}) {{ return py_tuple(vec![{ret_v}, {val_v}]); }}")
                 else:
@@ -1580,9 +1590,9 @@ def write_crate_files(mods, fns, glbs, classes):
         dotted = f"modules.{stem}"
         path = rust_path(dotted)
         pri = f"|| match {path}::g_PRIORITY() {{ Py::Int(i) => i, Py::Float(f) => f as i64, _ => 0 }}" if 'PRIORITY' in glbs.get(dotted, set()) else "|| 0"
-        obs = f"Some({path}::observe)" if 'observe' in fns.get(dotted, set()) else "None"
-        resp = f"Some({path}::respond)" if 'respond' in fns.get(dotted, set()) else "None"
-        aft = f"Some({path}::after)" if 'after' in fns.get(dotted, set()) else "None"
+        obs = f'Some(|args| pyrt::xrefs::xcall("{dotted}", "observe", args))' if 'observe' in fns.get(dotted, set()) else "None"
+        resp = f'Some(|args| pyrt::xrefs::xcall("{dotted}", "respond", args))' if 'respond' in fns.get(dotted, set()) else "None"
+        aft = f'Some(|args| pyrt::xrefs::xcall("{dotted}", "after", args))' if 'after' in fns.get(dotted, set()) else "None"
         lines.append(f"        ModuleEntry {{ name: {rust_string(stem)}, priority: {pri}, observe: {obs}, respond: {resp}, after: {aft} }},")
     lines.append("    ]")
     lines.append("}")

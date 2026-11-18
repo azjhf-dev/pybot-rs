@@ -192,7 +192,7 @@ pub fn senses(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&op_bitand(&_forms(&[word.clone()]), &words.clone())))) {
     continue;
     }
-    scored = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&by_sense.clone(), "items", &[])) { let __unpk9611 = py_unpack(&__item.clone(), 2, None); let mut sense: Py = __unpk9611[0].clone(); let mut cues: Py = __unpk9611[1].clone(); __out.push(py_tuple(vec![_how_many_words(&[cues.clone(), words.clone()]), sense.clone()])); } py_list(__out) })() }); __kws.extend(vec![("reverse".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sorted", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
+    scored = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&by_sense.clone(), "items", &[])) { let __unpk495 = py_unpack(&__item.clone(), 2, None); let mut sense: Py = __unpk495[0].clone(); let mut cues: Py = __unpk495[1].clone(); __out.push(py_tuple(vec![_how_many_words(&[cues.clone(), words.clone()]), sense.clone()])); } py_list(__out) })() }); __kws.extend(vec![("reverse".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sorted", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
     if py_truthy(&op_lt(&call_builtin("len", &[scored.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2))) {
     continue;
     }

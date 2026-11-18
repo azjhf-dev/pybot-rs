@@ -301,7 +301,7 @@ pub fn _other_place(args: &[Py]) -> Py {
     let mut want: Py = Py::None;
     let _ = py_str("The last place the user gave for this person, said back as a line.");
     want = mcall(&mcall(&{ let __b = who.clone(); if py_truthy(&__b) { __b } else { py_str("") } }, "lower", &[]), "rstrip", &[py_str("s")]);
-    found = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&_said_places(&[memory.clone()])) { let __unpk8144 = py_unpack(&__item.clone(), 2, None); let mut said: Py = __unpk8144[0].clone(); let mut place: Py = __unpk8144[1].clone(); if py_truthy(&{ let __b = Py::Bool(!py_truthy(&want.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_eq(&mcall(&mcall(&said.clone(), "lower", &[]), "rstrip", &[py_str("s")]), &want.clone())) } }) {  __out.push(py_tuple(vec![said.clone(), place.clone()])); } } py_list(__out) })() };
+    found = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&_said_places(&[memory.clone()])) { let __unpk8837 = py_unpack(&__item.clone(), 2, None); let mut said: Py = __unpk8837[0].clone(); let mut place: Py = __unpk8837[1].clone(); if py_truthy(&{ let __b = Py::Bool(!py_truthy(&want.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_eq(&mcall(&mcall(&said.clone(), "lower", &[]), "rstrip", &[py_str("s")]), &want.clone())) } }) {  __out.push(py_tuple(vec![said.clone(), place.clone()])); } } py_list(__out) })() };
     if py_truthy(&Py::Bool(!py_truthy(&found.clone()))) {
     return Py::None;
     }

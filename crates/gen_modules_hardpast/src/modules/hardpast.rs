@@ -115,7 +115,7 @@ pub fn _hangs_on_the_person(args: &[Py]) -> Py {
     }
     }
     low = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&before.clone()) { let mut word: Py = __item.clone(); __out.push(mcall(&word.clone(), "replace", &[py_str("'"), py_str("")])); } py_list(__out) })() };
-    seen = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[low.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk4375 = py_unpack(&__item.clone(), 2, None); let mut i: Py = __unpk4375[0].clone(); let mut word: Py = __unpk4375[1].clone(); if py_truthy(&Py::Bool(py_contains(&g_A_SUBJECT(), &word.clone()))) {  __out.push(i.clone()); } } py_list(__out) })() };
+    seen = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[low.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk3278 = py_unpack(&__item.clone(), 2, None); let mut i: Py = __unpk3278[0].clone(); let mut word: Py = __unpk3278[1].clone(); if py_truthy(&Py::Bool(py_contains(&g_A_SUBJECT(), &word.clone()))) {  __out.push(i.clone()); } } py_list(__out) })() };
     if py_truthy(&seen.clone()) {
     return call_builtin("all", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&slice_or_raise(&low.clone(), &op_add(&geti(&seen.clone(), &op_neg(&Py::Int(1))), &Py::Int(1)), &Py::None, &Py::None)) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&g_A_BETWEEN(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     }

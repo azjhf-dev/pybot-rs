@@ -167,7 +167,7 @@ pub fn _a_copy_of(args: &[Py]) -> Py {
     let _ = py_str("Memory as a module may read it: everything copied, the turns shared, as the runtime does.");
     let __try1 = exc::catch(|| {
     copy = stdlib_module("copy");
-    return py_tuple(vec![Py::Bool(true), { (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&memory.clone(), "items", &[])) { let __unpk6284 = py_unpack(&__item.clone(), 2, None); let mut key: Py = __unpk6284[0].clone(); let mut value: Py = __unpk6284[1].clone(); __out.push((key.clone(), if py_truthy(&Py::Bool(py_eq(&key.clone(), &py_str("turns")))) { value.clone() } else { mcall(&copy.clone(), "deepcopy", &[value.clone()]) })); } py_dict(__out) })() }]);
+    return py_tuple(vec![Py::Bool(true), { (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&memory.clone(), "items", &[])) { let __unpk773 = py_unpack(&__item.clone(), 2, None); let mut key: Py = __unpk773[0].clone(); let mut value: Py = __unpk773[1].clone(); __out.push((key.clone(), if py_truthy(&Py::Bool(py_eq(&key.clone(), &py_str("turns")))) { value.clone() } else { mcall(&copy.clone(), "deepcopy", &[value.clone()]) })); } py_dict(__out) })() }]);
         py_tuple(vec![Py::Bool(false), Py::None])
     });
     let mut __ret2: Py = Py::Bool(false);

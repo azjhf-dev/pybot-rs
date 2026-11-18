@@ -296,7 +296,7 @@ pub fn _sums(args: &[Py]) -> Py {
     let __iter8 = py_iter_or_raise(&mcall(&g_BARE_NUMBER(), "finditer", &[text.clone()]));
     for __item in __iter8 {
     match_ = __item.clone();
-    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&taken.clone()) { let __unpk7746 = py_unpack(&__item.clone(), 2, None); let mut start: Py = __unpk7746[0].clone(); let mut end: Py = __unpk7746[1].clone(); __out.push({ let __cmp11: Py = mcall(&match_.clone(), "start", &[]); if py_truthy(&op_le(&start.clone(), &__cmp11)) { op_lt(&__cmp11, &end.clone()) } else { Py::Bool(false) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&taken.clone()) { let __unpk3933 = py_unpack(&__item.clone(), 2, None); let mut start: Py = __unpk3933[0].clone(); let mut end: Py = __unpk3933[1].clone(); __out.push({ let __cmp11: Py = mcall(&match_.clone(), "start", &[]); if py_truthy(&op_le(&start.clone(), &__cmp11)) { op_lt(&__cmp11, &end.clone()) } else { Py::Bool(false) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     continue;
     }
     if py_truthy(&{ let __b = mcall(&slice_or_raise(&text.clone(), &mcall(&match_.clone(), "end", &[]), &op_add(&mcall(&match_.clone(), "end", &[]), &Py::Int(1)), &Py::None), "isalpha", &[]); if py_truthy(&__b) { __b } else { mcall(&g_A_MEASURE(), "match", &[slice_or_raise(&text.clone(), &mcall(&match_.clone(), "end", &[]), &Py::None, &Py::None)]) } }) {
@@ -626,7 +626,7 @@ pub fn the_income_in_the_line(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&incomes.clone()))) {
     return Py::None;
     }
-    return py_tuple(vec![call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&incomes.clone()) { let __unpk6752 = py_unpack(&__item.clone(), 3, None); let mut value: Py = __unpk6752[0].clone(); let mut _start: Py = __unpk6752[1].clone(); let mut _end: Py = __unpk6752[2].clone(); __out.push(value.clone()); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)), _period(&[line.clone()])]);
+    return py_tuple(vec![call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&incomes.clone()) { let __unpk5154 = py_unpack(&__item.clone(), 3, None); let mut value: Py = __unpk5154[0].clone(); let mut _start: Py = __unpk5154[1].clone(); let mut _end: Py = __unpk5154[2].clone(); __out.push(value.clone()); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)), _period(&[line.clone()])]);
     Py::None
 }
 pub fn _the_cost_the_figure_is_for(args: &[Py]) -> Py {
@@ -748,7 +748,7 @@ pub fn the_costs_with_units_in_the_line(args: &[Py]) -> Py {
     return py_list(vec![]);
     }
     sums = _sums(&[line.clone()]);
-    incomes = call_builtin("set", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&_the_incomes_in_the_line(&[line.clone(), sums.clone()])) { let __unpk7754 = py_unpack(&__item.clone(), 3, None); let mut _value: Py = __unpk7754[0].clone(); let mut start: Py = __unpk7754[1].clone(); let mut _end: Py = __unpk7754[2].clone(); __out.push(start.clone()); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    incomes = call_builtin("set", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&_the_incomes_in_the_line(&[line.clone(), sums.clone()])) { let __unpk6214 = py_unpack(&__item.clone(), 3, None); let mut _value: Py = __unpk6214[0].clone(); let mut start: Py = __unpk6214[1].clone(); let mut _end: Py = __unpk6214[2].clone(); __out.push(start.clone()); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     found = py_list(vec![]);
     let __iter1 = py_iter_or_raise(&sums.clone());
     for __item in __iter1 {
@@ -788,7 +788,7 @@ pub fn the_outgoings_in_the_line(args: &[Py]) -> Py {
     let mut name: Py = Py::None;
     let mut value: Py = Py::None;
     let _ = py_str("[(name, value)] for the costs the line names with a figure beside them, all of them.");
-    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&the_costs_with_units_in_the_line(&[text.clone()])) { let __unpk5306 = py_unpack(&__item.clone(), 3, None); let mut name: Py = __unpk5306[0].clone(); let mut value: Py = __unpk5306[1].clone(); let mut _unit: Py = __unpk5306[2].clone(); __out.push(py_tuple(vec![name.clone(), value.clone()])); } py_list(__out) })() };
+    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&the_costs_with_units_in_the_line(&[text.clone()])) { let __unpk5959 = py_unpack(&__item.clone(), 3, None); let mut name: Py = __unpk5959[0].clone(); let mut value: Py = __unpk5959[1].clone(); let mut _unit: Py = __unpk5959[2].clone(); __out.push(py_tuple(vec![name.clone(), value.clone()])); } py_list(__out) })() };
     Py::None
 }
 pub fn _there_is_memory(args: &[Py]) -> Py {
@@ -1163,7 +1163,7 @@ pub fn reply_for(args: &[Py]) -> Py {
     unit = _period(&[line.clone()]);
     income = the_income_in_the_line(&[line.clone()]);
     with_units = the_costs_with_units_in_the_line(&[line.clone()]);
-    costs = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&with_units.clone()) { let __unpk6396 = py_unpack(&__item.clone(), 3, None); let mut name: Py = __unpk6396[0].clone(); let mut value: Py = __unpk6396[1].clone(); let mut _said: Py = __unpk6396[2].clone(); __out.push(py_tuple(vec![name.clone(), value.clone()])); } py_list(__out) })() };
+    costs = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&with_units.clone()) { let __unpk2482 = py_unpack(&__item.clone(), 3, None); let mut name: Py = __unpk2482[0].clone(); let mut value: Py = __unpk2482[1].clone(); let mut _said: Py = __unpk2482[2].clone(); __out.push(py_tuple(vec![name.clone(), value.clone()])); } py_list(__out) })() };
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&_there_is_memory(&[memory.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&{ let __b = income.clone(); if !py_truthy(&__b) { __b } else { costs.clone() } })) } }) {
     return py_str("");
     }
@@ -1184,7 +1184,7 @@ pub fn reply_for(args: &[Py]) -> Py {
     if py_truthy(&costs.clone()) {
     before = py_list(vec![]);
     if py_truthy(&Py::Bool(!py_truthy(&own_month.clone()))) {
-    before = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&_the_costs_before(&[memory.clone()])) { let mut cost: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&costs.clone()) { let __unpk3446 = py_unpack(&__item.clone(), 2, None); let mut name: Py = __unpk3446[0].clone(); let mut _value: Py = __unpk3446[1].clone(); __out.push(name.clone()); } py_list(__out) })() }, &geti(&cost.clone(), &Py::Int(0))))) {  __out.push(cost.clone()); } } py_list(__out) })() };
+    before = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&_the_costs_before(&[memory.clone()])) { let mut cost: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&costs.clone()) { let __unpk8209 = py_unpack(&__item.clone(), 2, None); let mut name: Py = __unpk8209[0].clone(); let mut _value: Py = __unpk8209[1].clone(); __out.push(name.clone()); } py_list(__out) })() }, &geti(&cost.clone(), &Py::Int(0))))) {  __out.push(cost.clone()); } } py_list(__out) })() };
     }
     costs = op_add(&before.clone(), &costs.clone());
     cost = geti(&geti(&costs.clone(), &op_neg(&Py::Int(1))), &Py::Int(1));
@@ -1195,18 +1195,18 @@ pub fn reply_for(args: &[Py]) -> Py {
     }
     if py_truthy(&{ let __b = Py::Bool(py_eq(&unit.clone(), &py_str("a year"))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_eq(&cost_unit.clone(), &py_str("a year"))) } }) {
     a_month = call_builtin("round", &[op_truediv(&value.clone(), &Py::Float(12.0))]).unwrap_or_else(|e| exc::raise(e));
-    left = op_sub(&a_month.clone(), &call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&costs.clone()) { let __unpk8372 = py_unpack(&__item.clone(), 2, None); let mut _name: Py = __unpk8372[0].clone(); let mut cost: Py = __unpk8372[1].clone(); __out.push(cost.clone()); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
+    left = op_sub(&a_month.clone(), &call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&costs.clone()) { let __unpk4834 = py_unpack(&__item.clone(), 2, None); let mut _name: Py = __unpk4834[0].clone(); let mut cost: Py = __unpk4834[1].clone(); __out.push(cost.clone()); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
     if py_truthy(&{ let __b = op_le(&left.clone(), &Py::Int(0)); if py_truthy(&__b) { __b } else { op_lt(&left.clone(), &op_mul(&a_month.clone(), &Py::Float(0.05))) } }) {
     return py_str("");
     }
     let _ = _remember(&[memory.clone(), left.clone(), py_str("a month")]);
     return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("in_amount".to_string(), _pounds(&[value.clone()])), ("a_month".to_string(), _pounds(&[a_month.clone()])), ("named".to_string(), named.clone()), ("left".to_string(), _with_unit(&[left.clone(), py_str("a month")]))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&_choice(&[g_A_YEAR_AND_A_MONTH(), line.clone(), memory.clone()]), "format", args))(&__args) };
     }
-    left = op_sub(&value.clone(), &call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&costs.clone()) { let __unpk2837 = py_unpack(&__item.clone(), 2, None); let mut _name: Py = __unpk2837[0].clone(); let mut cost: Py = __unpk2837[1].clone(); __out.push(cost.clone()); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
+    left = op_sub(&value.clone(), &call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&costs.clone()) { let __unpk4114 = py_unpack(&__item.clone(), 2, None); let mut _name: Py = __unpk4114[0].clone(); let mut cost: Py = __unpk4114[1].clone(); __out.push(cost.clone()); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
     if py_truthy(&{ let __b = op_le(&left.clone(), &Py::Int(0)); if py_truthy(&__b) { __b } else { op_lt(&left.clone(), &op_mul(&value.clone(), &Py::Float(0.05))) } }) {
     return py_str("");
     }
-    spent_all = call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&costs.clone()) { let __unpk9317 = py_unpack(&__item.clone(), 2, None); let mut _name: Py = __unpk9317[0].clone(); let mut amount: Py = __unpk9317[1].clone(); __out.push(amount.clone()); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    spent_all = call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&costs.clone()) { let __unpk355 = py_unpack(&__item.clone(), 2, None); let mut _name: Py = __unpk355[0].clone(); let mut amount: Py = __unpk355[1].clone(); __out.push(amount.clone()); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     pot = _the_pot_in_the_line(&[line.clone()]);
     reply = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("left".to_string(), _with_unit(&[left.clone(), unit.clone()])), ("named".to_string(), named.clone()), ("in_amount".to_string(), _pounds(&[value.clone()])), ("out_amount".to_string(), _pounds(&[spent_all.clone()]))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&_choice(&[g_LEFT(), line.clone(), memory.clone()]), "format", args))(&__args) };
     if py_truthy(&pot.clone()) {

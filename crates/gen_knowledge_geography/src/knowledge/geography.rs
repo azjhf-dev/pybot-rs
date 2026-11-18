@@ -1103,7 +1103,7 @@ pub fn _countries_said(args: &[Py]) -> Py {
     let __unpk4 = py_unpack(&mcall(&match_.clone(), "span", &[]), 2, None);
     start = __unpk4[0].clone();
     end = __unpk4[1].clone();
-    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&taken.clone()) { let __unpk5452 = py_unpack(&__item.clone(), 2, None); let mut before: Py = __unpk5452[0].clone(); let mut after: Py = __unpk5452[1].clone(); __out.push({ let __b = op_lt(&before.clone(), &end.clone()); if !py_truthy(&__b) { __b } else { op_lt(&start.clone(), &after.clone()) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&taken.clone()) { let __unpk6421 = py_unpack(&__item.clone(), 2, None); let mut before: Py = __unpk6421[0].clone(); let mut after: Py = __unpk6421[1].clone(); __out.push({ let __b = op_lt(&before.clone(), &end.clone()); if !py_truthy(&__b) { __b } else { op_lt(&start.clone(), &after.clone()) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     continue;
     }
     let _ = mcall(&taken.clone(), "append", &[py_tuple(vec![start.clone(), end.clone()])]);
@@ -1317,7 +1317,7 @@ pub fn _continent_countries(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(py_is(&region.clone(), &Py::None))) {
     return Py::None;
     }
-    members = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_COUNTRIES(), "items", &[])) { let __unpk8632 = py_unpack(&__item.clone(), 2, None); let mut name: Py = __unpk8632[0].clone(); let mut row: Py = __unpk8632[1].clone(); if py_truthy(&Py::Bool(py_eq(&geti(&row.clone(), &Py::Int(0)), &region.clone()))) {  __out.push(name.clone()); } } py_list(__out) })() };
+    members = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_COUNTRIES(), "items", &[])) { let __unpk8839 = py_unpack(&__item.clone(), 2, None); let mut name: Py = __unpk8839[0].clone(); let mut row: Py = __unpk8839[1].clone(); if py_truthy(&Py::Bool(py_eq(&geti(&row.clone(), &Py::Int(0)), &region.clone()))) {  __out.push(name.clone()); } } py_list(__out) })() };
     if py_truthy(&Py::Bool(!py_truthy(&members.clone()))) {
     return Py::None;
     }

@@ -211,7 +211,7 @@ pub fn _said_back(args: &[Py]) -> Py {
     held = pyrt::xrefs::xcall("memory.favourite", "the_favourites", &[memory.clone()]);
     if py_truthy(&held.clone()) {
     last = slice_or_raise(&held.clone(), &op_neg(&Py::Int(4)), &Py::None, &Py::None);
-    parts = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&last.clone()) { let __unpk2273 = py_unpack(&__item.clone(), 2, None); let mut thing: Py = __unpk2273[0].clone(); let mut value: Py = __unpk2273[1].clone(); __out.push(op_add(&op_add(&op_add(&py_str("your favourite "), &call_builtin("str", &[thing.clone()]).unwrap_or_else(|e| exc::raise(e))), &py_str(" is ")), &call_builtin("str", &[value.clone()]).unwrap_or_else(|e| exc::raise(e)))); } py_list(__out) })() };
+    parts = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&last.clone()) { let __unpk9922 = py_unpack(&__item.clone(), 2, None); let mut thing: Py = __unpk9922[0].clone(); let mut value: Py = __unpk9922[1].clone(); __out.push(op_add(&op_add(&op_add(&py_str("your favourite "), &call_builtin("str", &[thing.clone()]).unwrap_or_else(|e| exc::raise(e))), &py_str(" is ")), &call_builtin("str", &[value.clone()]).unwrap_or_else(|e| exc::raise(e)))); } py_list(__out) })() };
     if py_truthy(&Py::Bool(py_eq(&call_builtin("len", &[parts.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1)))) {
     said_all = op_add(&op_add(&py_str("You have told me one: "), &geti(&parts.clone(), &Py::Int(0))), &py_str("."));
     } else {

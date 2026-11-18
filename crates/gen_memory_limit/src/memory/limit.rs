@@ -700,7 +700,7 @@ pub fn _names(args: &[Py]) -> Py {
     for __item in __iter1 {
     start = __item.clone();
     window = slice_or_raise(&got.clone(), &start.clone(), &op_add(&start.clone(), &call_builtin("len", &[want.clone()]).unwrap_or_else(|e| exc::raise(e))), &Py::None);
-    if py_truthy(&call_builtin("all", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[window.clone(), want.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk9823 = py_unpack(&__item.clone(), 2, None); let mut one: Py = __unpk9823[0].clone(); let mut other: Py = __unpk9823[1].clone(); __out.push({ let __b = Py::Bool(py_eq(&one.clone(), &other.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xcall("memory.topics", "forms", &[other.clone()]), &one.clone())) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    if py_truthy(&call_builtin("all", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[window.clone(), want.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk2507 = py_unpack(&__item.clone(), 2, None); let mut one: Py = __unpk2507[0].clone(); let mut other: Py = __unpk2507[1].clone(); __out.push({ let __b = Py::Bool(py_eq(&one.clone(), &other.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xcall("memory.topics", "forms", &[other.clone()]), &one.clone())) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     return Py::Bool(true);
     }
     }
@@ -1150,9 +1150,9 @@ pub fn _steps_the_limit_left(args: &[Py]) -> Py {
     _thing = __unpk2[1].clone();
     bare = __unpk2[2].clone();
     if py_truthy(&Py::Bool(py_eq(&kind.clone(), &py_str("pet")))) {
-    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&_steps(&[answer.clone()])) { let __unpk6235 = py_unpack(&__item.clone(), 2, None); let mut step: Py = __unpk6235[0].clone(); let mut _u: Py = __unpk6235[1].clone(); if py_truthy(&Py::Bool(!py_truthy(&mcall(&g_NOT_WITH_A_PET(), "search", &[step.clone()])))) {  __out.push(step.clone()); } } py_list(__out) })() };
+    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&_steps(&[answer.clone()])) { let __unpk9745 = py_unpack(&__item.clone(), 2, None); let mut step: Py = __unpk9745[0].clone(); let mut _u: Py = __unpk9745[1].clone(); if py_truthy(&Py::Bool(!py_truthy(&mcall(&g_NOT_WITH_A_PET(), "search", &[step.clone()])))) {  __out.push(step.clone()); } } py_list(__out) })() };
     }
-    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&_steps(&[answer.clone()])) { let __unpk7781 = py_unpack(&__item.clone(), 2, None); let mut step: Py = __unpk7781[0].clone(); let mut _u: Py = __unpk7781[1].clone(); if py_truthy(&Py::Bool(!py_truthy(&_names(&[step.clone(), bare.clone()])))) {  __out.push(step.clone()); } } py_list(__out) })() };
+    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&_steps(&[answer.clone()])) { let __unpk7201 = py_unpack(&__item.clone(), 2, None); let mut step: Py = __unpk7201[0].clone(); let mut _u: Py = __unpk7201[1].clone(); if py_truthy(&Py::Bool(!py_truthy(&_names(&[step.clone(), bare.clone()])))) {  __out.push(step.clone()); } } py_list(__out) })() };
     Py::None
 }
 pub fn a_detail_of_a_fault(args: &[Py]) -> Py {
@@ -1543,8 +1543,8 @@ pub fn _with_a_pet(args: &[Py]) -> Py {
     let mut steps: Py = Py::None;
     let _ = py_str("The steps a cat or a child does not rule out, said with the reason they are missing.");
     steps = _steps(&[answer.clone()]);
-    hazard = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&steps.clone()) { let __unpk6673 = py_unpack(&__item.clone(), 2, None); let mut step: Py = __unpk6673[0].clone(); let mut _u: Py = __unpk6673[1].clone(); if py_truthy(&mcall(&g_NOT_WITH_A_PET(), "search", &[step.clone()])) {  __out.push(step.clone()); } } py_list(__out) })() };
-    safe = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&steps.clone()) { let __unpk2050 = py_unpack(&__item.clone(), 2, None); let mut step: Py = __unpk2050[0].clone(); let mut _u: Py = __unpk2050[1].clone(); if py_truthy(&Py::Bool(!py_truthy(&mcall(&g_NOT_WITH_A_PET(), "search", &[step.clone()])))) {  __out.push(step.clone()); } } py_list(__out) })() };
+    hazard = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&steps.clone()) { let __unpk8004 = py_unpack(&__item.clone(), 2, None); let mut step: Py = __unpk8004[0].clone(); let mut _u: Py = __unpk8004[1].clone(); if py_truthy(&mcall(&g_NOT_WITH_A_PET(), "search", &[step.clone()])) {  __out.push(step.clone()); } } py_list(__out) })() };
+    safe = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&steps.clone()) { let __unpk2292 = py_unpack(&__item.clone(), 2, None); let mut step: Py = __unpk2292[0].clone(); let mut _u: Py = __unpk2292[1].clone(); if py_truthy(&Py::Bool(!py_truthy(&mcall(&g_NOT_WITH_A_PET(), "search", &[step.clone()])))) {  __out.push(step.clone()); } } py_list(__out) })() };
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&hazard.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&safe.clone())) } }) {
     return Py::None;
     }
