@@ -559,7 +559,7 @@ pub fn _correct_other(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&who.clone()))) {
     continue;
     }
-    kept = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_OTHER_SAID()) { let __unpk6805 = py_unpack(&__item.clone(), 2, None); let mut kind: Py = __unpk6805[0].clone(); let mut _u: Py = __unpk6805[1].clone(); if py_truthy(&mcall(&entry.clone(), "get", &[kind.clone()])) {  __out.push(kind.clone()); } } py_list(__out) })() };
+    kept = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_OTHER_SAID()) { let __unpk1 = py_unpack(&__item.clone(), 2, None); let mut kind: Py = __unpk1[0].clone(); let mut _u: Py = __unpk1[1].clone(); if py_truthy(&mcall(&entry.clone(), "get", &[kind.clone()])) {  __out.push(kind.clone()); } } py_list(__out) })() };
     let __iter4 = py_iter_or_raise(&g_OTHER_SAID());
     for __item in __iter4 {
     let __unpk5 = py_unpack(&__item.clone(), 2, None);

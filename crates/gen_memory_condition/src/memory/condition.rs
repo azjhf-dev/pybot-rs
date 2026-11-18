@@ -124,7 +124,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.condition.UNITS"); }
     s_UNITS(call_builtin("frozenset", &[mcall(&py_str("year month week day hour minute mile km kilo stone pound percent"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.condition.NUMBERS"); }
-    s_NUMBERS({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[mcall(&py_str("zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty thirty forty fifty sixty seventy eighty ninety hundred"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))) { let __unpk1450 = py_unpack(&__item.clone(), 2, None); let mut value: Py = __unpk1450[0].clone(); let mut word: Py = __unpk1450[1].clone(); __out.push((word.clone(), value.clone())); } py_dict(__out) })() });
+    s_NUMBERS({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[mcall(&py_str("zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty thirty forty fifty sixty seventy eighty ninety hundred"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))) { let __unpk1 = py_unpack(&__item.clone(), 2, None); let mut value: Py = __unpk1[0].clone(); let mut word: Py = __unpk1[1].clone(); __out.push((word.clone(), value.clone())); } py_dict(__out) })() });
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.condition.BELOW"); }
     s_BELOW(py_tuple(vec![py_str("under"), py_str("below"), py_str("less than"), py_str("fewer than"), py_str("up to"), py_str("at most"), py_str("no more than"), py_str("within"), py_str("younger than"), py_str("shorter than")]));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.condition.ABOVE"); }
@@ -182,7 +182,7 @@ pub fn _pairs(args: &[Py]) -> Py {
     let mut first: Py = Py::None;
     let mut second: Py = Py::None;
     let _ = py_str("Every two words that sit next to each other and are not both empty ones.");
-    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[words.clone(), slice_or_raise(&words.clone(), &Py::Int(1), &Py::None, &Py::None)]).unwrap_or_else(|e| exc::raise(e))) { let __unpk1812 = py_unpack(&__item.clone(), 2, None); let mut first: Py = __unpk1812[0].clone(); let mut second: Py = __unpk1812[1].clone(); if py_truthy(&{ let __b = Py::Bool(!py_contains(&g_EMPTY(), &first.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&g_EMPTY(), &second.clone())) } }) {  __out.push(op_add(&op_add(&first.clone(), &py_str(" ")), &second.clone())); } } py_set(__out) })() };
+    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[words.clone(), slice_or_raise(&words.clone(), &Py::Int(1), &Py::None, &Py::None)]).unwrap_or_else(|e| exc::raise(e))) { let __unpk1 = py_unpack(&__item.clone(), 2, None); let mut first: Py = __unpk1[0].clone(); let mut second: Py = __unpk1[1].clone(); if py_truthy(&{ let __b = Py::Bool(!py_contains(&g_EMPTY(), &first.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&g_EMPTY(), &second.clone())) } }) {  __out.push(op_add(&op_add(&first.clone(), &py_str(" ")), &second.clone())); } } py_set(__out) })() };
     Py::None
 }
 pub fn about_someone_else(args: &[Py]) -> Py {
@@ -532,7 +532,7 @@ pub fn refused(args: &[Py]) -> Py {
     let mut _u: Py = Py::None;
     let mut case: Py = Py::None;
     let _ = py_str("Whether the last answer put a test on the number this line gives, and their number fails.\n\n    The other half of the same reading: \"repair it if it is under five years old\" is answered\n    \"its 8 years old\", and the answer's verdict does not apply to them. The caller says the fact\n    back and stops, which is the honest reply - the answer itself already said what to do about\n    the two cases it named, and neither of them is this one.\n    ");
-    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&_candidates(&[text.clone(), said.clone()])) { let __unpk5109 = py_unpack(&__item.clone(), 2, None); let mut case: Py = __unpk5109[0].clone(); let mut _u: Py = __unpk5109[1].clone(); __out.push(Py::Bool(py_is(&_meets(&[case.clone(), text.clone()]), &Py::Bool(false)))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&_candidates(&[text.clone(), said.clone()])) { let __unpk1 = py_unpack(&__item.clone(), 2, None); let mut case: Py = __unpk1[0].clone(); let mut _u: Py = __unpk1[1].clone(); __out.push(Py::Bool(py_is(&_meets(&[case.clone(), text.clone()]), &Py::Bool(false)))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn _carried(args: &[Py]) -> Py {

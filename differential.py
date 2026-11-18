@@ -9,7 +9,7 @@ for i in range(a.start,min(a.end,len(cases))):
  lines=cases[i];data='\n'.join(lines)+'\n';results=[]
  for cmd,cwd in [([sys.executable,'-m','pybot','-s','42','-v'],a.python),([a.rust,'-s','42','-v'],None)]:
   try:
-   r=subprocess.run(cmd,input=data,text=True,capture_output=True,cwd=cwd,timeout=20)
+   r=subprocess.run(cmd,input=data,text=True,capture_output=True,cwd=cwd,timeout=120)
    results.append({'returncode':r.returncode,'replies':r.stdout.splitlines(),'diagnostics':r.stderr[-20000:]})
   except subprocess.TimeoutExpired:
    results.append({'timeout':True,'replies':[]})

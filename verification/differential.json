@@ -1,0 +1,23 @@
+[
+  {
+    "case": 6,
+    "inputs": [
+      "I smell gas in my kitchen"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "The gas shut-off is the lever on the pipe beside the meter, usually in a box outside or under the stairs: a quarter turn so the lever sits across the pipe rather than along it turns the gas off. If you can smell gas, do not touch a switch, a light or a phone indoors - open the windows, get everyone out and ring the gas emergency line from outside: 0800 111 999 in England, Scotland and Wales, 0800 002 001 in Northern Ireland, 911 in the US. Only a Gas Safe engineer turns it back on."
+      ],
+      "diagnostics": "[module: answers | 1108 ms]\n"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "Take your time. What would you like to talk about?"
+      ],
+      "diagnostics": "[module: greeting | 41135 ms]\n"
+    },
+    "exact": false
+  }
+]

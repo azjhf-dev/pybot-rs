@@ -11,6 +11,8 @@ use std::rc::Rc;
 use indexmap::IndexMap;
 
 
+thread_local! { static MODULE_DICT: RefCell<Py> = RefCell::new(py_dict(vec![])); }
+pub fn __globals() -> Py { ensure_init(); MODULE_DICT.with(|d| d.borrow().clone()) }
 thread_local! { static G_A_BODY_STATE: RefCell<Py> = const { RefCell::new(Py::None) }; }
 thread_local! { static G_A_DESCRIBING: RefCell<Py> = const { RefCell::new(Py::None) }; }
 thread_local! { static G_A_STATE: RefCell<Py> = const { RefCell::new(Py::None) }; }
@@ -63,6 +65,9 @@ thread_local! { static G__DOUBLED_NOT_A_SLIP: RefCell<Py> = const { RefCell::new
 thread_local! { static G__ENGINE_WORDS: RefCell<Py> = const { RefCell::new(Py::None) }; }
 thread_local! { static G__H_RUN: RefCell<Py> = const { RefCell::new(Py::None) }; }
 thread_local! { static G__LAUGH_RUN: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__words: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G_every_word: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G_is_a_laugh: RefCell<Py> = const { RefCell::new(Py::None) }; }
 static INIT: Once = Once::new();
 thread_local! { static INITIALIZING: Cell<bool> = const { Cell::new(false) }; }
 pub fn ensure_init() {
@@ -73,163 +78,120 @@ pub fn ensure_init() {
         INITIALIZING.with(|c| c.set(false));
     });
 }
-pub fn g_A_BODY_STATE() -> Py { ensure_init(); G_A_BODY_STATE.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_A_BODY_STATE(v: Py) { ensure_init(); G_A_BODY_STATE.with(|c| *c.borrow_mut() = v); }
-pub fn g_A_DESCRIBING() -> Py { ensure_init(); G_A_DESCRIBING.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_A_DESCRIBING(v: Py) { ensure_init(); G_A_DESCRIBING.with(|c| *c.borrow_mut() = v); }
-pub fn g_A_STATE() -> Py { ensure_init(); G_A_STATE.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_A_STATE(v: Py) { ensure_init(); G_A_STATE.with(|c| *c.borrow_mut() = v); }
-pub fn g_BACKGROUND_STARTS() -> Py { ensure_init(); G_BACKGROUND_STARTS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_BACKGROUND_STARTS(v: Py) { ensure_init(); G_BACKGROUND_STARTS.with(|c| *c.borrow_mut() = v); }
-pub fn g_BODY_PARTS() -> Py { ensure_init(); G_BODY_PARTS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_BODY_PARTS(v: Py) { ensure_init(); G_BODY_PARTS.with(|c| *c.borrow_mut() = v); }
-pub fn g_CHAT() -> Py { ensure_init(); G_CHAT.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_CHAT(v: Py) { ensure_init(); G_CHAT.with(|c| *c.borrow_mut() = v); }
-pub fn g_CLAUSE_BREAKS() -> Py { ensure_init(); G_CLAUSE_BREAKS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_CLAUSE_BREAKS(v: Py) { ensure_init(); G_CLAUSE_BREAKS.with(|c| *c.borrow_mut() = v); }
-pub fn g_COMMON() -> Py { ensure_init(); G_COMMON.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_COMMON(v: Py) { ensure_init(); G_COMMON.with(|c| *c.borrow_mut() = v); }
-pub fn g_COMMON_NAMES() -> Py { ensure_init(); G_COMMON_NAMES.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_COMMON_NAMES(v: Py) { ensure_init(); G_COMMON_NAMES.with(|c| *c.borrow_mut() = v); }
-pub fn g_CONFUSIONS() -> Py { ensure_init(); G_CONFUSIONS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_CONFUSIONS(v: Py) { ensure_init(); G_CONFUSIONS.with(|c| *c.borrow_mut() = v); }
-pub fn g_CONFUSIONS_AFTER() -> Py { ensure_init(); G_CONFUSIONS_AFTER.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_CONFUSIONS_AFTER(v: Py) { ensure_init(); G_CONFUSIONS_AFTER.with(|c| *c.borrow_mut() = v); }
-pub fn g_CONFUSIONS_BEFORE() -> Py { ensure_init(); G_CONFUSIONS_BEFORE.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_CONFUSIONS_BEFORE(v: Py) { ensure_init(); G_CONFUSIONS_BEFORE.with(|c| *c.borrow_mut() = v); }
-pub fn g_CONFUSIONS_BEFORE_A_QUESTION() -> Py { ensure_init(); G_CONFUSIONS_BEFORE_A_QUESTION.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_CONFUSIONS_BEFORE_A_QUESTION(v: Py) { ensure_init(); G_CONFUSIONS_BEFORE_A_QUESTION.with(|c| *c.borrow_mut() = v); }
-pub fn g_CONFUSIONS_IN_A_FEELING() -> Py { ensure_init(); G_CONFUSIONS_IN_A_FEELING.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_CONFUSIONS_IN_A_FEELING(v: Py) { ensure_init(); G_CONFUSIONS_IN_A_FEELING.with(|c| *c.borrow_mut() = v); }
-pub fn g_CONTRACTIONS() -> Py { ensure_init(); G_CONTRACTIONS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_CONTRACTIONS(v: Py) { ensure_init(); G_CONTRACTIONS.with(|c| *c.borrow_mut() = v); }
-pub fn g_CORE() -> Py { ensure_init(); G_CORE.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_CORE(v: Py) { ensure_init(); G_CORE.with(|c| *c.borrow_mut() = v); }
-pub fn g_CORE_WORDS() -> Py { ensure_init(); G_CORE_WORDS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_CORE_WORDS(v: Py) { ensure_init(); G_CORE_WORDS.with(|c| *c.borrow_mut() = v); }
-pub fn g_DIALECT_STATES() -> Py { ensure_init(); G_DIALECT_STATES.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_DIALECT_STATES(v: Py) { ensure_init(); G_DIALECT_STATES.with(|c| *c.borrow_mut() = v); }
-pub fn g_EXPAND() -> Py { ensure_init(); G_EXPAND.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_EXPAND(v: Py) { ensure_init(); G_EXPAND.with(|c| *c.borrow_mut() = v); }
-pub fn g_FEELINGS() -> Py { ensure_init(); G_FEELINGS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_FEELINGS(v: Py) { ensure_init(); G_FEELINGS.with(|c| *c.borrow_mut() = v); }
-pub fn g_FEELING_FILLER() -> Py { ensure_init(); G_FEELING_FILLER.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_FEELING_FILLER(v: Py) { ensure_init(); G_FEELING_FILLER.with(|c| *c.borrow_mut() = v); }
-pub fn g_FEELING_LEAD() -> Py { ensure_init(); G_FEELING_LEAD.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_FEELING_LEAD(v: Py) { ensure_init(); G_FEELING_LEAD.with(|c| *c.borrow_mut() = v); }
-pub fn g_HANDOFF_BRIDGES() -> Py { ensure_init(); G_HANDOFF_BRIDGES.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_HANDOFF_BRIDGES(v: Py) { ensure_init(); G_HANDOFF_BRIDGES.with(|c| *c.borrow_mut() = v); }
-pub fn g_HANDOFF_LEADS() -> Py { ensure_init(); G_HANDOFF_LEADS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_HANDOFF_LEADS(v: Py) { ensure_init(); G_HANDOFF_LEADS.with(|c| *c.borrow_mut() = v); }
-pub fn g_JOINED_WORDS() -> Py { ensure_init(); G_JOINED_WORDS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_JOINED_WORDS(v: Py) { ensure_init(); G_JOINED_WORDS.with(|c| *c.borrow_mut() = v); }
-pub fn g_LAUGHTER() -> Py { ensure_init(); G_LAUGHTER.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_LAUGHTER(v: Py) { ensure_init(); G_LAUGHTER.with(|c| *c.borrow_mut() = v); }
-pub fn g_MISSPELLINGS() -> Py { ensure_init(); G_MISSPELLINGS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_MISSPELLINGS(v: Py) { ensure_init(); G_MISSPELLINGS.with(|c| *c.borrow_mut() = v); }
-pub fn g_NEGATIONS() -> Py { ensure_init(); G_NEGATIONS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_NEGATIONS(v: Py) { ensure_init(); G_NEGATIONS.with(|c| *c.borrow_mut() = v); }
-pub fn g_NOT_A_FEELING() -> Py { ensure_init(); G_NOT_A_FEELING.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_NOT_A_FEELING(v: Py) { ensure_init(); G_NOT_A_FEELING.with(|c| *c.borrow_mut() = v); }
-pub fn g_NOT_A_LAUGH() -> Py { ensure_init(); G_NOT_A_LAUGH.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_NOT_A_LAUGH(v: Py) { ensure_init(); G_NOT_A_LAUGH.with(|c| *c.borrow_mut() = v); }
-pub fn g_OPENERS() -> Py { ensure_init(); G_OPENERS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_OPENERS(v: Py) { ensure_init(); G_OPENERS.with(|c| *c.borrow_mut() = v); }
-pub fn g_PAIN_WORDS() -> Py { ensure_init(); G_PAIN_WORDS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_PAIN_WORDS(v: Py) { ensure_init(); G_PAIN_WORDS.with(|c| *c.borrow_mut() = v); }
-pub fn g_PLACE_PREPS() -> Py { ensure_init(); G_PLACE_PREPS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_PLACE_PREPS(v: Py) { ensure_init(); G_PLACE_PREPS.with(|c| *c.borrow_mut() = v); }
-pub fn g_PLAIN_EXPANDS() -> Py { ensure_init(); G_PLAIN_EXPANDS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_PLAIN_EXPANDS(v: Py) { ensure_init(); G_PLAIN_EXPANDS.with(|c| *c.borrow_mut() = v); }
-pub fn g_PLAIN_ONE_WORD() -> Py { ensure_init(); G_PLAIN_ONE_WORD.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_PLAIN_ONE_WORD(v: Py) { ensure_init(); G_PLAIN_ONE_WORD.with(|c| *c.borrow_mut() = v); }
-pub fn g_QUESTION_WORDS() -> Py { ensure_init(); G_QUESTION_WORDS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_QUESTION_WORDS(v: Py) { ensure_init(); G_QUESTION_WORDS.with(|c| *c.borrow_mut() = v); }
-pub fn g_REAL_IN() -> Py { ensure_init(); G_REAL_IN.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_REAL_IN(v: Py) { ensure_init(); G_REAL_IN.with(|c| *c.borrow_mut() = v); }
-pub fn g_REAL_WORDS() -> Py { ensure_init(); G_REAL_WORDS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_REAL_WORDS(v: Py) { ensure_init(); G_REAL_WORDS.with(|c| *c.borrow_mut() = v); }
-pub fn g_SAID_SHORT() -> Py { ensure_init(); G_SAID_SHORT.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_SAID_SHORT(v: Py) { ensure_init(); G_SAID_SHORT.with(|c| *c.borrow_mut() = v); }
-pub fn g_SOUNDS_LIKE_A_FEELING() -> Py { ensure_init(); G_SOUNDS_LIKE_A_FEELING.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_SOUNDS_LIKE_A_FEELING(v: Py) { ensure_init(); G_SOUNDS_LIKE_A_FEELING.with(|c| *c.borrow_mut() = v); }
-pub fn g_START_VERBS() -> Py { ensure_init(); G_START_VERBS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_START_VERBS(v: Py) { ensure_init(); G_START_VERBS.with(|c| *c.borrow_mut() = v); }
-pub fn g_STATES_SAID_ONTO_IM() -> Py { ensure_init(); G_STATES_SAID_ONTO_IM.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_STATES_SAID_ONTO_IM(v: Py) { ensure_init(); G_STATES_SAID_ONTO_IM.with(|c| *c.borrow_mut() = v); }
-pub fn g_STATES_WITHOUT_G() -> Py { ensure_init(); G_STATES_WITHOUT_G.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_STATES_WITHOUT_G(v: Py) { ensure_init(); G_STATES_WITHOUT_G.with(|c| *c.borrow_mut() = v); }
-pub fn g_TRAITS() -> Py { ensure_init(); G_TRAITS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_TRAITS(v: Py) { ensure_init(); G_TRAITS.with(|c| *c.borrow_mut() = v); }
-pub fn g_TYPED_CONTRACTIONS() -> Py { ensure_init(); G_TYPED_CONTRACTIONS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_TYPED_CONTRACTIONS(v: Py) { ensure_init(); G_TYPED_CONTRACTIONS.with(|c| *c.borrow_mut() = v); }
-pub fn g_TYPED_WORDS() -> Py { ensure_init(); G_TYPED_WORDS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_TYPED_WORDS(v: Py) { ensure_init(); G_TYPED_WORDS.with(|c| *c.borrow_mut() = v); }
-pub fn g_URGENT_MISSPELLINGS() -> Py { ensure_init(); G_URGENT_MISSPELLINGS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_URGENT_MISSPELLINGS(v: Py) { ensure_init(); G_URGENT_MISSPELLINGS.with(|c| *c.borrow_mut() = v); }
-pub fn g_US_SPELLINGS() -> Py { ensure_init(); G_US_SPELLINGS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_US_SPELLINGS(v: Py) { ensure_init(); G_US_SPELLINGS.with(|c| *c.borrow_mut() = v); }
-pub fn g__DOUBLED_NOT_A_SLIP() -> Py { ensure_init(); G__DOUBLED_NOT_A_SLIP.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__DOUBLED_NOT_A_SLIP(v: Py) { ensure_init(); G__DOUBLED_NOT_A_SLIP.with(|c| *c.borrow_mut() = v); }
-pub fn g__ENGINE_WORDS() -> Py { ensure_init(); G__ENGINE_WORDS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__ENGINE_WORDS(v: Py) { ensure_init(); G__ENGINE_WORDS.with(|c| *c.borrow_mut() = v); }
-pub fn g__H_RUN() -> Py { ensure_init(); G__H_RUN.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__H_RUN(v: Py) { ensure_init(); G__H_RUN.with(|c| *c.borrow_mut() = v); }
-pub fn g__LAUGH_RUN() -> Py { ensure_init(); G__LAUGH_RUN.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__LAUGH_RUN(v: Py) { ensure_init(); G__LAUGH_RUN.with(|c| *c.borrow_mut() = v); }
+pub fn g_A_BODY_STATE() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("A_BODY_STATE"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_A_BODY_STATE(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("A_BODY_STATE"), v); }
+pub fn g_A_DESCRIBING() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("A_DESCRIBING"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_A_DESCRIBING(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("A_DESCRIBING"), v); }
+pub fn g_A_STATE() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("A_STATE"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_A_STATE(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("A_STATE"), v); }
+pub fn g_BACKGROUND_STARTS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("BACKGROUND_STARTS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_BACKGROUND_STARTS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("BACKGROUND_STARTS"), v); }
+pub fn g_BODY_PARTS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("BODY_PARTS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_BODY_PARTS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("BODY_PARTS"), v); }
+pub fn g_CHAT() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("CHAT"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_CHAT(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("CHAT"), v); }
+pub fn g_CLAUSE_BREAKS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("CLAUSE_BREAKS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_CLAUSE_BREAKS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("CLAUSE_BREAKS"), v); }
+pub fn g_COMMON() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("COMMON"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_COMMON(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("COMMON"), v); }
+pub fn g_COMMON_NAMES() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("COMMON_NAMES"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_COMMON_NAMES(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("COMMON_NAMES"), v); }
+pub fn g_CONFUSIONS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("CONFUSIONS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_CONFUSIONS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("CONFUSIONS"), v); }
+pub fn g_CONFUSIONS_AFTER() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("CONFUSIONS_AFTER"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_CONFUSIONS_AFTER(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("CONFUSIONS_AFTER"), v); }
+pub fn g_CONFUSIONS_BEFORE() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("CONFUSIONS_BEFORE"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_CONFUSIONS_BEFORE(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("CONFUSIONS_BEFORE"), v); }
+pub fn g_CONFUSIONS_BEFORE_A_QUESTION() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("CONFUSIONS_BEFORE_A_QUESTION"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_CONFUSIONS_BEFORE_A_QUESTION(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("CONFUSIONS_BEFORE_A_QUESTION"), v); }
+pub fn g_CONFUSIONS_IN_A_FEELING() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("CONFUSIONS_IN_A_FEELING"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_CONFUSIONS_IN_A_FEELING(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("CONFUSIONS_IN_A_FEELING"), v); }
+pub fn g_CONTRACTIONS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("CONTRACTIONS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_CONTRACTIONS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("CONTRACTIONS"), v); }
+pub fn g_CORE() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("CORE"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_CORE(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("CORE"), v); }
+pub fn g_CORE_WORDS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("CORE_WORDS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_CORE_WORDS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("CORE_WORDS"), v); }
+pub fn g_DIALECT_STATES() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("DIALECT_STATES"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_DIALECT_STATES(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("DIALECT_STATES"), v); }
+pub fn g_EXPAND() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("EXPAND"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_EXPAND(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("EXPAND"), v); }
+pub fn g_FEELINGS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("FEELINGS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_FEELINGS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("FEELINGS"), v); }
+pub fn g_FEELING_FILLER() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("FEELING_FILLER"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_FEELING_FILLER(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("FEELING_FILLER"), v); }
+pub fn g_FEELING_LEAD() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("FEELING_LEAD"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_FEELING_LEAD(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("FEELING_LEAD"), v); }
+pub fn g_HANDOFF_BRIDGES() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("HANDOFF_BRIDGES"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_HANDOFF_BRIDGES(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("HANDOFF_BRIDGES"), v); }
+pub fn g_HANDOFF_LEADS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("HANDOFF_LEADS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_HANDOFF_LEADS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("HANDOFF_LEADS"), v); }
+pub fn g_JOINED_WORDS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("JOINED_WORDS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_JOINED_WORDS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("JOINED_WORDS"), v); }
+pub fn g_LAUGHTER() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("LAUGHTER"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_LAUGHTER(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("LAUGHTER"), v); }
+pub fn g_MISSPELLINGS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("MISSPELLINGS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_MISSPELLINGS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("MISSPELLINGS"), v); }
+pub fn g_NEGATIONS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("NEGATIONS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_NEGATIONS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("NEGATIONS"), v); }
+pub fn g_NOT_A_FEELING() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("NOT_A_FEELING"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_NOT_A_FEELING(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("NOT_A_FEELING"), v); }
+pub fn g_NOT_A_LAUGH() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("NOT_A_LAUGH"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_NOT_A_LAUGH(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("NOT_A_LAUGH"), v); }
+pub fn g_OPENERS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("OPENERS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_OPENERS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("OPENERS"), v); }
+pub fn g_PAIN_WORDS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("PAIN_WORDS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_PAIN_WORDS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("PAIN_WORDS"), v); }
+pub fn g_PLACE_PREPS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("PLACE_PREPS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_PLACE_PREPS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("PLACE_PREPS"), v); }
+pub fn g_PLAIN_EXPANDS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("PLAIN_EXPANDS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_PLAIN_EXPANDS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("PLAIN_EXPANDS"), v); }
+pub fn g_PLAIN_ONE_WORD() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("PLAIN_ONE_WORD"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_PLAIN_ONE_WORD(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("PLAIN_ONE_WORD"), v); }
+pub fn g_QUESTION_WORDS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("QUESTION_WORDS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_QUESTION_WORDS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("QUESTION_WORDS"), v); }
+pub fn g_REAL_IN() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("REAL_IN"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_REAL_IN(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("REAL_IN"), v); }
+pub fn g_REAL_WORDS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("REAL_WORDS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_REAL_WORDS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("REAL_WORDS"), v); }
+pub fn g_SAID_SHORT() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("SAID_SHORT"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_SAID_SHORT(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("SAID_SHORT"), v); }
+pub fn g_SOUNDS_LIKE_A_FEELING() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("SOUNDS_LIKE_A_FEELING"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_SOUNDS_LIKE_A_FEELING(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("SOUNDS_LIKE_A_FEELING"), v); }
+pub fn g_START_VERBS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("START_VERBS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_START_VERBS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("START_VERBS"), v); }
+pub fn g_STATES_SAID_ONTO_IM() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("STATES_SAID_ONTO_IM"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_STATES_SAID_ONTO_IM(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("STATES_SAID_ONTO_IM"), v); }
+pub fn g_STATES_WITHOUT_G() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("STATES_WITHOUT_G"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_STATES_WITHOUT_G(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("STATES_WITHOUT_G"), v); }
+pub fn g_TRAITS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("TRAITS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_TRAITS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("TRAITS"), v); }
+pub fn g_TYPED_CONTRACTIONS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("TYPED_CONTRACTIONS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_TYPED_CONTRACTIONS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("TYPED_CONTRACTIONS"), v); }
+pub fn g_TYPED_WORDS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("TYPED_WORDS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_TYPED_WORDS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("TYPED_WORDS"), v); }
+pub fn g_URGENT_MISSPELLINGS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("URGENT_MISSPELLINGS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_URGENT_MISSPELLINGS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("URGENT_MISSPELLINGS"), v); }
+pub fn g_US_SPELLINGS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("US_SPELLINGS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_US_SPELLINGS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("US_SPELLINGS"), v); }
+pub fn g__DOUBLED_NOT_A_SLIP() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_DOUBLED_NOT_A_SLIP"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__DOUBLED_NOT_A_SLIP(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_DOUBLED_NOT_A_SLIP"), v); }
+pub fn g__ENGINE_WORDS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_ENGINE_WORDS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__ENGINE_WORDS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_ENGINE_WORDS"), v); }
+pub fn g__H_RUN() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_H_RUN"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__H_RUN(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_H_RUN"), v); }
+pub fn g__LAUGH_RUN() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_LAUGH_RUN"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__LAUGH_RUN(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_LAUGH_RUN"), v); }
+pub fn g__words() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_words"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__words(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_words"), v); }
+pub fn g_every_word() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("every_word"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_every_word(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("every_word"), v); }
+pub fn g_is_a_laugh() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("is_a_laugh"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_is_a_laugh(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("is_a_laugh"), v); }
 fn module_body() {
+    s__words(py_func("_words", |args: &[Py]| _words__wrapped(args)));
+    s_is_a_laugh(py_func("is_a_laugh", |args: &[Py]| is_a_laugh__wrapped(args)));
+    s_every_word(py_func("every_word", |args: &[Py]| every_word__wrapped(args)));
     let _ = py_str("Word data for the understanding engine: common words, chat-speak, misspellings.\n\nThe understanding lane owns this file. Data lives here, mechanisms live in the sibling\nmodules (`normalize.py`, `kinds.py`, `topics.py`, `references.py`). Keep it plain data so other\nlanes can extend a vocabulary without touching logic.\n\nNothing here is keyed by a whole sentence: these are words and short phrases, so the same\nentry helps every line that uses it.\n");
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.lexicon.COMMON"); }
     s_COMMON(py_str("\nthe be to of and a in that have i it for not on with he as you do at this but his by from\n# The words a person judges themselves with. The answers in bot/modules/chat.py key on them\n# (\"im a faliure\", \"i feel usless\"), so the reading has to be able to hear a typo of one:\n# a word the vocabulary does not hold cannot be repaired, and \"i feel like a faliure\" came\n# back as \"Got it. Is there anything you'd like a hand with?\" while \"i feel like a failure\"\n# was answered. Nothing here is new to the bot: it is the vocabulary the answers are written in.\nfailure failures useless worthless hopeless ashamed pathetic burden fraud disappointment\ndisappointment disgrace waste selfish jealousy uselessness failure\nthey we say her she or an will my one all would there their what so up out if about who get\nwhich go me when make can like time no just him know take people into year your good some\ncould them see other than then now look only come its over think also back after use two how\nour work first well way even new want because any these give day most us is are was were been\nbeing am does did done doing has had having\n\nhello hi hey morning evening night goodbye bye thanks thank please sorry yes yeah no nah nope\nyep ok okay right sure fine cool great nice lovely good bad better best worse worst really\nvery super too much many more less little bit lot quite rather pretty enough almost just still\nagain once always never sometimes often usually maybe perhaps probably definitely actually\nbasically honestly literally obviously obviously anyway anyways somehow somewhere anywhere\neverywhere nowhere here there where when why how what who whom whose which while until since\nbefore after during between among through across along around behind beside beyond near off\nonto over under above below inside outside toward towards without within upon about against\n\ni you he she it we they me him her us them my your his its our their mine yours hers ours\ntheirs myself yourself himself herself itself ourselves themselves this that these those\nsomeone somebody something anyone anybody anything everyone everybody everything nobody\nnothing none all both each either neither other another such same different\n\nis are was were am be been being do does did done have has had having can could will would\nshall should may might must ought need dare let make made get got gotten go went gone going\ncome came come coming take took taken taking give gave given giving see saw seen seeing say\nsaid saying tell told telling ask asked asking answer know knew known knowing think thought\nthinking feel felt feeling want wanted wanting need needed needing like liked liking love\nloved loving hate hated hating try tried trying start started starting stop stopped stopping\nkeep kept keeping put putting set setting run ran running walk walked walking drive drove\ndriving fly flew flying travel travelled traveled plan planned planning buy bought buying\npay paid paying sell sold selling find found finding look looked looking watch watched\nwatching read reading write wrote written writing learn learned learnt learning teach taught\nteach teaching study studied studying work worked working cook cooked cooking bake baked\nbaking boil boiled boiling fry fried frying roast roasted roasting chop chopped chopping\nwash washed washing clean cleaned cleaning fix fixed fixing build built building grow grew\ngrown growing plant planted planting water watered watering feed fed feeding walk walked\n\ngood bad great awful terrible fine okay nice lovely wonderful brilliant perfect horrible\nhappy sad angry tired hungry thirsty cold hot warm cool freezing boiling busy stressed\nworried nervous scared afraid anxious excited bored lonely upset disappointed pleased glad\nproud grateful thankful sorry guilty embarrassed confused lost stuck fed up\n\nmorning afternoon evening night today tomorrow tonight yesterday week weekend month year\nhour minute second time day date monday tuesday wednesday thursday friday saturday sunday\njanuary february march april may june july august september october november december\nspring summer autumn fall winter christmas easter holiday holidays birthday anniversary\n\nhome house flat apartment room kitchen bedroom bathroom living room garden garage door\nwindow wall floor ceiling roof table chair bed sofa carpet shelf cupboard fridge oven hob\nmicrowave kettle sink toilet bath shower radiator boiler heating washing machine dishwasher\nlight lamp plug socket key lock bag box car bike bicycle bus train plane flight airport\nstation ticket road street city town village country place park river sea beach mountain\nhill forest lake garden shop store market supermarket bank post office hospital doctor\ndentist pharmacy school university office work job boss colleague meeting money price cost\ncheap expensive card cash salary bill budget loan debt savings account\n\nfood drink meal breakfast lunch dinner snack water tea coffee milk juice wine beer bread\nrice pasta potato potatoes tomato onion garlic carrot chicken beef pork lamb fish egg eggs\ncheese butter milk yogurt cream sugar salt pepper oil sauce soup salad sandwich pizza cake\nbiscuit bread fruit apple banana orange lemon strawberry chocolate vegetable vegetables\nbeans lentils nuts vegetarian vegan recipe cook oven bake boil grill roast fry\n\nhead face eye eyes blink blinks blinking ear ears nose mouth tooth teeth neck throat shoulder arm hand hands hiss\nfinger fingers chest back stomach leg legs knee foot feet toe toes skin hair blood body\ntired sleep asleep wake woke waking rest night bed dream pain hurt ache ache sore sick ill\nillness cold flu fever cough headache doctor medicine tablet hospital ambulance diarrhea\nhangover hungover jetlag crackered\n\ncat cats dog dogs puppy kitten pet pets bird birds fish goldfish hamster rabbit horse\nchocolate dangerous vet lead walk train feed tank\n\nchild children kid kids baby toddler son daughter boy girl mother mum mom father dad\nparent parents husband wife partner family sister brother friend friends grandmother\ngrandfather grandma grandpa uncle aunt cousin neighbour colleague\n\nbook books read reading novel story film films movie movies watch series show tv\ntelevision music song songs podcast game games board game play theatre concert\nrecommend recommendation best favourite favorite character author writer episode season\nboring funny interesting exciting scary sad happy mardy crabbit\n\ncomputer laptop phone mobile tablet screen keyboard mouse internet wifi email password\nsoftware app website online download upload battery charger cable printer photo camera\nvideo call message text imessage imessages\n\n# The cake: \"parkin\" is \"parking\" with the g left off, which is the one repair of its kind that\n# a real word loses, and \"what is parkin\" wants the cake and its follow-up.\nparkin\n\nfast slow heavy light big small large little long short tall wide narrow new old young\nyounger older easy hard simple difficult quick quickly slowly careful safely safe\nopen closed full empty free cheap clean dirty strong weak loud quiet\n\npounds euros dollars pence cents money cost price cheap expensive worth\n\njeans trousers pants shoes trainers boots socks shirt tshirt sweatshirt jumper hoodie jacket\ncoat skirt dress suit hat cap gloves scarf belt wallet purse bag backpack umbrella\nwool wood cotton linen silk denim leather velvet metal plastic\nring watch jewellery makeup razor toothbrush toothpaste towel soap shampoo brush comb\npillow blanket duvet curtain rug mat cushion mirror picture poster bin basket\nbottle glass cup mug plate bowl knife fork spoon pan pot tray jug tin jar tin foil\nwashing dryer iron hoover vacuum broom mop sponge cloth detergent bleach\nsour cream sauce spice herb herbs pepper sugar flour yeast dough batter\nscifi sciencefiction poem poetry joke jokes riddle quiz crossword puzzle\nbattery charger headphones speaker router printer scanner screen keyboard mouse\nvitamins protein fibre fibre carbs calories diet weight muscle\nstretch stretching workout gym run running walk cycling swim swimming yoga\nbudget savings insurance mortgage rent landlord tenant deposit invoice receipt\ninterview cv resume application deadline meeting email colleague manager\nhomework exam revision grades term lesson class teacher student\nvolcano earthquake storm thunder lightning rainbow clouds rain snow wind fog ice\nleaves leaf tree trees plant plants soil compost weed weeds seed seeds bulb\ndog cat rabbit hamster guinea pig budgie parrot goldfish kitten puppy\nshrank shrunk stretched stretch colour color favourite favorite\nwrote written built bought brought caught chose chosen drank drunk ate eaten fell fallen\nflew flown forgot forgotten gave given grew grown hid hidden knew known lay lain lent\nlost made meant met paid put rode ridden rang rung rose risen said saw seen sold sent\nsang sung sat slept spoke spoken spent stood stole stolen swam swum taught thought threw\nthrown understood woke worn won\n\nadd adopted adult adults advice already allergic allotment antibiotics appointment architecture\nargument australia bacteria badge balcony ball basil begin bio bleed bleeding blossom blue bot\nbottom breath bring broken cancelling capital causing change chasing chat cheapest check cherry\nclimate coach coached commute completely conference course credit cricket cut debit defensive\ndidn difference dinosaurs disease difference drains dried driver dropping duty easiest east eat\neating empire end energy erupts essay ever every exactly explain failed fair fan feedback fewer\nfight finally finish finished firefighter five float florence football footie footy\nfour fractions france\nfrench fresh friendship front fun gift giza gory group handle happens hasn haven help helpful\nhelps heron hides history idea ideas idiot improve industrial inspection instead instrument japan\njet jigsaw joint journey knocked kyoto lag land last lately later leeds left leftover line\nlisbon lower main mainly martian match meat men mentioned miles miss mix moon mould move moved\nmoving musical name next nine noise nurse nutshell offside overgrown overnight own oxygen pack\npaint part party pass performance person photosynthesis piano pick plumber politely powder\nprepare project proper pulls pyramids questions race rail rainy recline red repairing replace\nrescue review revising revolution rid role rolled roman rome rosemary roughly rubbery rude\nruining rule rules runny sam sandwiches sane save science scrambled screenshot seat secondary\nsecurity sentence session settle shift shouldn signal simply sitting six sky slipped soda\nsounding sounds sourdough space spain spanish speaking speech spend spinach split sticky stiff\nstruggling suggest sunlight sydney system talk talked team temperature test theme thighs things\nthirty thoughtful three thunderstorm tips titles tokyo tom top tricks trip true trust tulip\nturn turning twins unblock university unwind usual vaccines virus visiting vocabulary volcanoes\nwedding wee west wimbledon word wrong yellow yet yolk\nhell\nbaker bridge bumpy fitter ounce packet plaster poison power primer shout sleepy stroke sweaty\ntower\n\n# Found the same way: a scan of every word the knowledge base and the deck use, run through the\n# one-edit fixer. Each of these is a word of its own that was being \"corrected\" into another one\n# (bee->be, thin->thing, wee->we, satin->sating, area->are, died->did, wars/wasp->was).\narea bee died wars wasp wee satin thin thick war\n# A pudding, not a small animal: \"chocolate mousse\" was read as \"chocolate mouse\".\nmousse\n# One edit from a feeling and a word of its own in a line people write often: \"i think my email\n# has been hacked\" was being read as \"whacked\", and a rabbit that \"hasnt pooed\" as \"pooped\".\nhack hacked hacking hacker poo pooed pooing\n"));
@@ -247,8 +209,9 @@ fn module_body() {
     s_COMMON(__aug4);
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.lexicon.CORE"); }
     s_CORE(py_str("\nthe a an and or but not no yes is are was were be been have has had do does did\ni you he she we they it me my your his her our their this that these those\nwhat why how when where who which can could would should will just now then\ntoday tonight tomorrow thanks thank please hello hi hey ok okay sorry good great\nmake get take go come see know think want need like try use find give tell say\n"));
+    s__words(py_func("_words", |args: &[Py]| _words__wrapped(args)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.lexicon.FEELINGS"); }
-    s_FEELINGS(_words(&[py_str("sad unhappy miserable down low gutted heartbroken crying tears\ndisappointed devastated depressed upset lonely alone isolated angry annoyed furious cross\nirritated frustrated mad livid raging anxious worried worry nervous scared afraid\nfrightened stressed overwhelmed panic panicking dreading tired exhausted knackered\n# The doing form of a worry: \"im worrying\", \"im stressing\", \"im overthinking\", \"im obsessing\".\n# A word the reading calls a feeling has to be in this list, or \"im worrying\" is a name.\nworrying stressing overthinking obsessing spiralling spiraling\nshattered wiped sleepy bushed drained happy glad delighted thrilled pleased excited proud\nrelieved chuffed grateful thankful appreciate guilty ashamed embarrassed bored boring\nstress cry terrified petrified panicky butterflies\nweepy tearful homesick shy hungry starving thirsty peckish ravenous\nrotten lousy meh rough crap rubbish grumpy restless numb\n# \"im worse\", \"im no better\": a comparison of two states is how a bad day is told in a second\n# turn, and a cue the reading calls a feeling has to be in this list or the line reads as a name.\nworse\ncheesed empty flat hollow blank\n# The plain words for a low day: \"i feel awful\", \"i feel hopeless\", \"im still grieving\",\n# \"my anxiety is bad\". The reading and the reply must agree on what a feeling word is.\nawful hopeless worthless grieving mourning despair despairing anxiety\n# The plain words for being unsure or worried about something: \"im confused\", \"im concerned\",\n# and the moods that name themselves: glum, mardy, zonked.\nconfused confusing confusion puzzled baffled bewildered muddled\ninterested concerned glum mopey teary downhearted despondent blah bleh cranky\nsnappy tetchy ratty mardy jittery antsy edgy tense pooped whacked zonked\nhungover hangover jet-lagged run-down crackered\n# \"im fried\" is the same tiredness as \"im wiped\", and it is in the reading's tiredness list, so\n# it has to be a feeling word here too: the two lists are read as one (MisspeltFeelingTest).\nfried\nfuming seething frazzled incandescent narked miffed\n# \"im awesome\", \"im hopeful\", \"im emotional\" were answered \"Hi Awesome - fair enough\" and \"Nice\n# to meet you, Emotional\": the lexicon held the near-synonyms (\"excited\", \"glad\") but not the\n# words themselves, so neither the reading nor the name reader knew them.\nawesome hopeful emotional\n# The same gap, one letter out: \"im irritble\" and \"im aprehensive\" are answered \"Nice to meet\n# you, ...\" because the one-edit repair has nothing to repair them to - \"irritable\" and\n# \"apprehensive\" were not in the vocabulary at all, and the lists above held only their\n# near-synonyms (\"irritated\", \"anxious\"). \"im cheerful\" was answered \"I'm listening\" for the\n# same reason.\nirritable apprehensive cheerful\n# The ending a state is said with, which a reply already answers and the reading did not know:\n# the pools read \"im wrecked\", \"im spent\", \"im swamped\" and \"im jetlagged\" as the tired and\n# stressed days they are, but none of those words was in the vocabulary, so the one-edit repair\n# had nothing to repair a slip toward and the line fell out of its pool altogether - \"im wrcked\"\n# got \"Got it. Is there anything you'd like a hand with?\", and \"im spnt\", \"im bet\" and \"im ded\"\n# were answered \"Nice to meet you, Spnt\" / \"Bet\" / \"Ded\" - a word the reading does not know,\n# standing where a state stands after \"im\", is a name. A state typed correctly was read as an\n# introduction for the same reason (\"im cheery\" was \"Hi Cheery\").\n# Every word here is one a reply in bot/modules/ already answers in a line of its own (\"worn\"\n# and \"wearing\" only in \"worn out\" and \"wearing thin\"), and a word the lexicon knows keeps its\n# own meaning in the repair: \"boat\" is not bent to \"beat\" and \"deaf\" is not \"dead\".\nbeat dead draining exhausting fagged knackering spent tiring wearing worn wrecked\noverwhelming stressful swamped jetlagged cheery buzzing brilliant\n# The colour as the mood: \"im blue\", \"feeling a bit blue\". It was not a feeling word at all, so\n# \"im blue\" was read as a name and answered \"Nice to meet you, Blue\". The state has to be said of\n# the person (see SELF_ONLY_STATE), because a door and a sea are blue too.\nblue\n# A condition somebody says they have is how they are, not who they are. \"im bipolar\" was\n# answered \"Nice to meet you, Bipolar\", and the store filed the word as a name, so every later\n# line knew the person by it. The seven below were found by probing the class; the rest are the\n# conditions a person names about themselves in the same position. A word here is a state the\n# reading knows, which is what stops a name.\nbipolar schizophrenic anorexic bulimic narcoleptic psychotic infertile sterile paranoid\ntransgender nonbinary hiv")]));
+    s_FEELINGS(py_call(&g__words(), &[py_str("sad unhappy miserable down low gutted heartbroken crying tears\ndisappointed devastated depressed upset lonely alone isolated angry annoyed furious cross\nirritated frustrated mad livid raging anxious worried worry nervous scared afraid\nfrightened stressed overwhelmed panic panicking dreading tired exhausted knackered\n# The doing form of a worry: \"im worrying\", \"im stressing\", \"im overthinking\", \"im obsessing\".\n# A word the reading calls a feeling has to be in this list, or \"im worrying\" is a name.\nworrying stressing overthinking obsessing spiralling spiraling\nshattered wiped sleepy bushed drained happy glad delighted thrilled pleased excited proud\nrelieved chuffed grateful thankful appreciate guilty ashamed embarrassed bored boring\nstress cry terrified petrified panicky butterflies\nweepy tearful homesick shy hungry starving thirsty peckish ravenous\nrotten lousy meh rough crap rubbish grumpy restless numb\n# \"im worse\", \"im no better\": a comparison of two states is how a bad day is told in a second\n# turn, and a cue the reading calls a feeling has to be in this list or the line reads as a name.\nworse\ncheesed empty flat hollow blank\n# The plain words for a low day: \"i feel awful\", \"i feel hopeless\", \"im still grieving\",\n# \"my anxiety is bad\". The reading and the reply must agree on what a feeling word is.\nawful hopeless worthless grieving mourning despair despairing anxiety\n# The plain words for being unsure or worried about something: \"im confused\", \"im concerned\",\n# and the moods that name themselves: glum, mardy, zonked.\nconfused confusing confusion puzzled baffled bewildered muddled\ninterested concerned glum mopey teary downhearted despondent blah bleh cranky\nsnappy tetchy ratty mardy jittery antsy edgy tense pooped whacked zonked\nhungover hangover jet-lagged run-down crackered\n# \"im fried\" is the same tiredness as \"im wiped\", and it is in the reading's tiredness list, so\n# it has to be a feeling word here too: the two lists are read as one (MisspeltFeelingTest).\nfried\nfuming seething frazzled incandescent narked miffed\n# \"im awesome\", \"im hopeful\", \"im emotional\" were answered \"Hi Awesome - fair enough\" and \"Nice\n# to meet you, Emotional\": the lexicon held the near-synonyms (\"excited\", \"glad\") but not the\n# words themselves, so neither the reading nor the name reader knew them.\nawesome hopeful emotional\n# The same gap, one letter out: \"im irritble\" and \"im aprehensive\" are answered \"Nice to meet\n# you, ...\" because the one-edit repair has nothing to repair them to - \"irritable\" and\n# \"apprehensive\" were not in the vocabulary at all, and the lists above held only their\n# near-synonyms (\"irritated\", \"anxious\"). \"im cheerful\" was answered \"I'm listening\" for the\n# same reason.\nirritable apprehensive cheerful\n# The ending a state is said with, which a reply already answers and the reading did not know:\n# the pools read \"im wrecked\", \"im spent\", \"im swamped\" and \"im jetlagged\" as the tired and\n# stressed days they are, but none of those words was in the vocabulary, so the one-edit repair\n# had nothing to repair a slip toward and the line fell out of its pool altogether - \"im wrcked\"\n# got \"Got it. Is there anything you'd like a hand with?\", and \"im spnt\", \"im bet\" and \"im ded\"\n# were answered \"Nice to meet you, Spnt\" / \"Bet\" / \"Ded\" - a word the reading does not know,\n# standing where a state stands after \"im\", is a name. A state typed correctly was read as an\n# introduction for the same reason (\"im cheery\" was \"Hi Cheery\").\n# Every word here is one a reply in bot/modules/ already answers in a line of its own (\"worn\"\n# and \"wearing\" only in \"worn out\" and \"wearing thin\"), and a word the lexicon knows keeps its\n# own meaning in the repair: \"boat\" is not bent to \"beat\" and \"deaf\" is not \"dead\".\nbeat dead draining exhausting fagged knackering spent tiring wearing worn wrecked\noverwhelming stressful swamped jetlagged cheery buzzing brilliant\n# The colour as the mood: \"im blue\", \"feeling a bit blue\". It was not a feeling word at all, so\n# \"im blue\" was read as a name and answered \"Nice to meet you, Blue\". The state has to be said of\n# the person (see SELF_ONLY_STATE), because a door and a sea are blue too.\nblue\n# A condition somebody says they have is how they are, not who they are. \"im bipolar\" was\n# answered \"Nice to meet you, Bipolar\", and the store filed the word as a name, so every later\n# line knew the person by it. The seven below were found by probing the class; the rest are the\n# conditions a person names about themselves in the same position. A word here is a state the\n# reading knows, which is what stops a name.\nbipolar schizophrenic anorexic bulimic narcoleptic psychotic infertile sterile paranoid\ntransgender nonbinary hiv")]));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.lexicon.A_BODY_STATE"); }
     s_A_BODY_STATE(call_builtin("frozenset", &[mcall(&py_str("pale pallid ashen grey gray greyish grayish mottled blotchy spotty\npuffy bloated clammy flushed feverish shivery shaky tender husky snotty sniffly"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.lexicon.A_STATE"); }
@@ -368,6 +331,7 @@ fn module_body() {
     s_TRAITS(call_builtin("frozenset", &[mcall(&py_str("lazy shy awkward clumsy forgetful impatient selfish greedy mean nasty\nboring thick stupid dumb daft clueless useless worthless rubbish crap weak cowardly spineless\njealous moody annoying irritating ugly fat"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.lexicon.A_DESCRIBING"); }
     s_A_DESCRIBING(call_builtin("frozenset", &[mcall(&py_str("quiet messy noisy picky fussy bossy stubborn rude spoilt chatty\nnegative positive tidy untidy nosy weird odd loud hard"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_is_a_laugh(py_func("is_a_laugh", |args: &[Py]| is_a_laugh__wrapped(args)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.lexicon.NOT_A_LAUGH"); }
     s_NOT_A_LAUGH(call_builtin("frozenset", &[mcall(&py_str("huh halo helo hilo hola lolo lulu"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.lexicon._LAUGH_RUN"); }
@@ -407,8 +371,9 @@ fn module_body() {
     s_QUESTION_WORDS(call_builtin("frozenset", &[mcall(&py_str("when how why what if whether where who which"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.lexicon._ENGINE_WORDS"); }
     s__ENGINE_WORDS(Py::None);
+    s_every_word(py_func("every_word", |args: &[Py]| every_word__wrapped(args)));
 }
-pub fn _words(args: &[Py]) -> Py {
+pub fn _words__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -443,7 +408,7 @@ pub fn _words(args: &[Py]) -> Py {
     return call_builtin("frozenset", &[words.clone()]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
-pub fn is_a_laugh(args: &[Py]) -> Py {
+pub fn is_a_laugh__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -466,7 +431,7 @@ pub fn is_a_laugh(args: &[Py]) -> Py {
     return call_builtin("bool", &[{ let __b = { let __b = op_gt(&call_builtin("len", &[word.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)); if !py_truthy(&__b) { __b } else { mcall(&g__LAUGH_RUN(), "fullmatch", &[word.clone()]) } }; if py_truthy(&__b) { __b } else { mcall(&g__H_RUN(), "fullmatch", &[word.clone()]) } }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
-pub fn every_word(args: &[Py]) -> Py {
+pub fn every_word__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -494,7 +459,7 @@ pub fn every_word(args: &[Py]) -> Py {
     body = pyrt::xrefs::xmodule("understanding.body");
     kinds = pyrt::xrefs::xmodule("understanding.kinds");
     topics = pyrt::xrefs::xmodule("understanding.topics");
-    tables = py_tuple(vec![call_builtin("globals", &[]).unwrap_or_else(|e| exc::raise(e)), call_builtin("vars", &[topics.clone()]).unwrap_or_else(|e| exc::raise(e)), call_builtin("vars", &[kinds.clone()]).unwrap_or_else(|e| exc::raise(e)), call_builtin("vars", &[body.clone()]).unwrap_or_else(|e| exc::raise(e))]);
+    tables = py_tuple(vec![__globals(), call_builtin("vars", &[topics.clone()]).unwrap_or_else(|e| exc::raise(e)), call_builtin("vars", &[kinds.clone()]).unwrap_or_else(|e| exc::raise(e)), call_builtin("vars", &[body.clone()]).unwrap_or_else(|e| exc::raise(e))]);
     words = call_builtin("set", &[]).unwrap_or_else(|e| exc::raise(e));
     let __iter1 = py_iter_or_raise(&tables.clone());
     for __item in __iter1 {
@@ -592,9 +557,9 @@ pub fn module_obj() -> Py {
             "_ENGINE_WORDS" => Some(g__ENGINE_WORDS()),
             "_H_RUN" => Some(g__H_RUN()),
             "_LAUGH_RUN" => Some(g__LAUGH_RUN()),
-            "_words" => Some(py_func("_words", |args: &[Py]| _words(args))),
-            "every_word" => Some(py_func("every_word", |args: &[Py]| every_word(args))),
-            "is_a_laugh" => Some(py_func("is_a_laugh", |args: &[Py]| is_a_laugh(args))),
+            "_words" => Some(g__words()),
+            "every_word" => Some(g_every_word()),
+            "is_a_laugh" => Some(g_is_a_laugh()),
             "re" => Some(stdlib_module("re")),
             _ => None,
         }),
@@ -651,15 +616,18 @@ pub fn module_obj() -> Py {
             "_ENGINE_WORDS" => s__ENGINE_WORDS(v),
             "_H_RUN" => s__H_RUN(v),
             "_LAUGH_RUN" => s__LAUGH_RUN(v),
+            "_words" => s__words(v),
+            "every_word" => s_every_word(v),
+            "is_a_laugh" => s_is_a_laugh(v),
             _ => {},
         })),
     }))
 }
 pub fn register() {
     pyrt::xrefs::reg_module("understanding.lexicon", module_obj);
-    pyrt::xrefs::reg_fn("understanding.lexicon", "_words", py_func("_words", |args: &[Py]| _words(args)));
-    pyrt::xrefs::reg_fn("understanding.lexicon", "is_a_laugh", py_func("is_a_laugh", |args: &[Py]| is_a_laugh(args)));
-    pyrt::xrefs::reg_fn("understanding.lexicon", "every_word", py_func("every_word", |args: &[Py]| every_word(args)));
+    pyrt::xrefs::reg_fn("understanding.lexicon", "_words", py_func("_words", |args: &[Py]| py_call(&g__words(), args)));
+    pyrt::xrefs::reg_fn("understanding.lexicon", "is_a_laugh", py_func("is_a_laugh", |args: &[Py]| py_call(&g_is_a_laugh(), args)));
+    pyrt::xrefs::reg_fn("understanding.lexicon", "every_word", py_func("every_word", |args: &[Py]| py_call(&g_every_word(), args)));
     pyrt::xrefs::reg_access("understanding.lexicon", "A_BODY_STATE", g_A_BODY_STATE, s_A_BODY_STATE);
     pyrt::xrefs::reg_access("understanding.lexicon", "A_DESCRIBING", g_A_DESCRIBING, s_A_DESCRIBING);
     pyrt::xrefs::reg_access("understanding.lexicon", "A_STATE", g_A_STATE, s_A_STATE);
@@ -712,4 +680,7 @@ pub fn register() {
     pyrt::xrefs::reg_access("understanding.lexicon", "_ENGINE_WORDS", g__ENGINE_WORDS, s__ENGINE_WORDS);
     pyrt::xrefs::reg_access("understanding.lexicon", "_H_RUN", g__H_RUN, s__H_RUN);
     pyrt::xrefs::reg_access("understanding.lexicon", "_LAUGH_RUN", g__LAUGH_RUN, s__LAUGH_RUN);
+    pyrt::xrefs::reg_access("understanding.lexicon", "_words", g__words, s__words);
+    pyrt::xrefs::reg_access("understanding.lexicon", "every_word", g_every_word, s_every_word);
+    pyrt::xrefs::reg_access("understanding.lexicon", "is_a_laugh", g_is_a_laugh, s_is_a_laugh);
 }

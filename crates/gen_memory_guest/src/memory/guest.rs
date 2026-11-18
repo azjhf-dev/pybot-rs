@@ -357,7 +357,7 @@ pub fn found(args: &[Py]) -> Py {
     let __iter3 = py_iter_or_raise(&pieces.clone());
     for __item in __iter3 {
     item = __item.clone();
-    if py_truthy(&{ let __b = { let __b = _is_food(&[item.clone()]); if py_truthy(&__b) { __b } else { a_pair.clone() } }; if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&out.clone()) { let __unpk8064 = py_unpack(&__item.clone(), 2, None); let mut food: Py = __unpk8064[0].clone(); let mut _at: Py = __unpk8064[1].clone(); __out.push(food.clone()); } py_list(__out) })() }, &item.clone())) } }) {
+    if py_truthy(&{ let __b = { let __b = _is_food(&[item.clone()]); if py_truthy(&__b) { __b } else { a_pair.clone() } }; if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&out.clone()) { let __unpk1 = py_unpack(&__item.clone(), 2, None); let mut food: Py = __unpk1[0].clone(); let mut _at: Py = __unpk1[1].clone(); __out.push(food.clone()); } py_list(__out) })() }, &item.clone())) } }) {
     let _ = mcall(&out.clone(), "append", &[py_tuple(vec![item.clone(), mcall(&match_.clone(), "start", &[py_str("food")])])]);
     }
     }

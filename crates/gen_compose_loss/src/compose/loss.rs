@@ -2968,7 +2968,7 @@ pub fn administration_keys(args: &[Py]) -> Py {
     let mut pattern: Py = Py::None;
     let _ = py_str("The pieces of paperwork a line or a reply names, as plain keys.");
     lowered = mcall(&py_str(" "), "join", &[mcall(&mcall(&mcall(&call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]), "replace", &[py_str("’"), py_str("'")]), "split", &[])]);
-    return call_builtin("frozenset", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_ADMINISTRATION_KEYS()) { let __unpk582 = py_unpack(&__item.clone(), 2, None); let mut key: Py = __unpk582[0].clone(); let mut pattern: Py = __unpk582[1].clone(); if py_truthy(&stdlib_call("re", "search", &[pattern.clone(), lowered.clone()]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(key.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("frozenset", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_ADMINISTRATION_KEYS()) { let __unpk1 = py_unpack(&__item.clone(), 2, None); let mut key: Py = __unpk1[0].clone(); let mut pattern: Py = __unpk1[1].clone(); if py_truthy(&stdlib_call("re", "search", &[pattern.clone(), lowered.clone()]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(key.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn is_about_the_paperwork(args: &[Py]) -> Py {
@@ -3378,7 +3378,7 @@ pub fn _a_habit_in(args: &[Py]) -> Py {
     let mut _pool: Py = Py::None;
     let mut pattern: Py = Py::None;
     let _ = py_str("True when the line reports one of the habits the pools above answer, whatever the pool.");
-    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_HABIT_PATTERNS()) { let __unpk7689 = py_unpack(&__item.clone(), 2, None); let mut pattern: Py = __unpk7689[0].clone(); let mut _pool: Py = __unpk7689[1].clone(); __out.push(mcall(&pattern.clone(), "search", &[line.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_HABIT_PATTERNS()) { let __unpk1 = py_unpack(&__item.clone(), 2, None); let mut pattern: Py = __unpk1[0].clone(); let mut _pool: Py = __unpk1[1].clone(); __out.push(mcall(&pattern.clone(), "search", &[line.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn _telling_a_child(args: &[Py]) -> Py {
@@ -3893,7 +3893,7 @@ pub fn _a_thing_of_theirs(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = Py::Bool(!py_contains(&g_PEOPLE(), &word.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&g_PEOPLE(), &stem.clone())) } }) {
     continue;
     }
-    others = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk4704 = py_unpack(&__item.clone(), 2, None); let mut place: Py = __unpk4704[0].clone(); let mut other: Py = __unpk4704[1].clone(); if py_truthy(&{ let __b = Py::Bool(!py_eq(&place.clone(), &index.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&g_PEOPLE(), &other.clone())); if py_truthy(&__b) { __b } else { { let __b = op_gt(&call_builtin("len", &[other.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)); if !py_truthy(&__b) { __b } else { { let __b = mcall(&other.clone(), "endswith", &[py_str("s")]); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_PEOPLE(), &slice_or_raise(&other.clone(), &Py::None, &op_neg(&Py::Int(1)), &Py::None))) } } } } } } } }) {  __out.push(other.clone()); } } py_list(__out) })() };
+    others = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk1 = py_unpack(&__item.clone(), 2, None); let mut place: Py = __unpk1[0].clone(); let mut other: Py = __unpk1[1].clone(); if py_truthy(&{ let __b = Py::Bool(!py_eq(&place.clone(), &index.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&g_PEOPLE(), &other.clone())); if py_truthy(&__b) { __b } else { { let __b = op_gt(&call_builtin("len", &[other.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)); if !py_truthy(&__b) { __b } else { { let __b = mcall(&other.clone(), "endswith", &[py_str("s")]); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_PEOPLE(), &slice_or_raise(&other.clone(), &Py::None, &op_neg(&Py::Int(1)), &Py::None))) } } } } } } } }) {  __out.push(other.clone()); } } py_list(__out) })() };
     if py_truthy(&Py::Bool(!py_truthy(&others.clone()))) {
     return Py::Bool(true);
     }
@@ -4427,7 +4427,7 @@ pub fn a_thing_stopped(args: &[Py]) -> Py {
     if py_truthy(&_object_died(&[words.clone()])) {
     return Py::Bool(true);
     }
-    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk1134 = py_unpack(&__item.clone(), 2, None); let mut place: Py = __unpk1134[0].clone(); let mut word: Py = __unpk1134[1].clone(); __out.push({ let __b = Py::Bool(py_eq(&word.clone(), &py_str("dead"))); if !py_truthy(&__b) { __b } else { _dead_is_not_a_death(&[words.clone(), place.clone()]) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk1 = py_unpack(&__item.clone(), 2, None); let mut place: Py = __unpk1[0].clone(); let mut word: Py = __unpk1[1].clone(); __out.push({ let __b = Py::Bool(py_eq(&word.clone(), &py_str("dead"))); if !py_truthy(&__b) { __b } else { _dead_is_not_a_death(&[words.clone(), place.clone()]) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn reads_as_loss(args: &[Py]) -> Py {

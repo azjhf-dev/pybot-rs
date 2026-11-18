@@ -57,8 +57,9 @@ fn module_body() {
     s_A_LENGTH_IN_MONTHS(stdlib_call("re", "compile", &[py_str("\\b(?:is|in|takes|takes\\s+about)\\s+(?:about\\s+)?(?:\\d[\\d,]*|a|an|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve)\\s*(?:month|months|year|years|week|weeks)\\b|\\bone\\s+pay\\s+packet\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.saving_followup._SEEN"); }
     s__SEEN(py_dict(vec![]));
+    s_respond(py_func("respond", |args: &[Py]| respond__wrapped(args)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.saving_followup.respond"); }
-    s_respond(pyrt::xrefs::xcall("memory.again", "replied", &[py_func("respond", |args: &[Py]| respond__wrapped(args))]));
+    s_respond(pyrt::xrefs::xcall("memory.again", "replied", &[g_respond()]));
 }
 pub fn _lower_first(args: &[Py]) -> Py {
     ensure_init();

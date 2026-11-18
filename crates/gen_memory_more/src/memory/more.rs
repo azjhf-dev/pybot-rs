@@ -270,7 +270,7 @@ pub fn _the_rest(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = op_lt(&call_builtin("len", &[parts.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)); if py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&given.clone(), &_flat(&[geti(&parts.clone(), &Py::Int(0))]))) } }) {
     continue;
     }
-    left = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[parts.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk7382 = py_unpack(&__item.clone(), 2, None); let mut index: Py = __unpk7382[0].clone(); let mut part: Py = __unpk7382[1].clone(); if py_truthy(&Py::Bool(!py_contains(&given.clone(), &_flat(&[part.clone()])))) {  __out.push(index.clone()); } } py_list(__out) })() };
+    left = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[parts.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk1 = py_unpack(&__item.clone(), 2, None); let mut index: Py = __unpk1[0].clone(); let mut part: Py = __unpk1[1].clone(); if py_truthy(&Py::Bool(!py_contains(&given.clone(), &_flat(&[part.clone()])))) {  __out.push(index.clone()); } } py_list(__out) })() };
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&left.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_eq(&geti(&left.clone(), &Py::Int(0)), &Py::Int(0))) } }) {
     continue;
     }

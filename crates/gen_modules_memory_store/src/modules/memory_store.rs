@@ -2768,7 +2768,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.ASK_OPENERS"); }
     s_ASK_OPENERS(call_builtin("frozenset", &[mcall(&py_str("what whats which when where who whose why how hows\ndo does did is are was were am can could should would will shall have has had\nany anyone anything"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.AGES_IN_WORDS"); }
-    s_AGES_IN_WORDS({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&pyrt::xrefs::xget("memory.facts", "FIGURE_WORDS"), "items", &[])) { let __unpk4713 = py_unpack(&__item.clone(), 2, None); let mut word: Py = __unpk4713[0].clone(); let mut number: Py = __unpk4713[1].clone(); __out.push((call_builtin("int", &[number.clone()]).unwrap_or_else(|e| exc::raise(e)), word.clone())); } py_dict(__out) })() });
+    s_AGES_IN_WORDS({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&pyrt::xrefs::xget("memory.facts", "FIGURE_WORDS"), "items", &[])) { let __unpk1 = py_unpack(&__item.clone(), 2, None); let mut word: Py = __unpk1[0].clone(); let mut number: Py = __unpk1[1].clone(); __out.push((call_builtin("int", &[number.clone()]).unwrap_or_else(|e| exc::raise(e)), word.clone())); } py_dict(__out) })() });
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.NAMED_FACT_ASK"); }
     s_NAMED_FACT_ASK(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&py_str("\\bwhat(?:'s|s| is| are| was| were)?\\s+my\\s+"), &g__FACT_SLOT()), &py_str("\\b|\\bwhat\\s+(?:is|are|was|were)\\s+my\\s+")), &g__FACT_SLOT()), &py_str("\\b|\\bwhere do i (?:work|live|come from)\\b(?=\\s*(?:[?.!,;:]|$)|\\s+(?:now|again|then|at|from|these|days|properly|though|honestly|anymore|either|oh|wait|sorry|hmm|actually|um|right|please|thanks)\\b)|\\bwhat do i work as\\b|\\bwho am i\\b|\\bhow old am i\\b|\\bwhat do i do for a living\\b")), stdlib_attr("re", "IGNORECASE").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.ASK_ABOUT_THEM"); }
@@ -6993,7 +6993,7 @@ pub fn _the_figure_the_answer_names(args: &[Py]) -> Py {
     }
     continue;
     }
-    stated = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&found.clone()) { let __unpk1612 = py_unpack(&__item.clone(), 2, None); let mut figure: Py = __unpk1612[0].clone(); let mut _u: Py = __unpk1612[1].clone(); __out.push(mcall(&figure.clone(), "lower", &[])); } py_set(__out) })() };
+    stated = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&found.clone()) { let __unpk1 = py_unpack(&__item.clone(), 2, None); let mut figure: Py = __unpk1[0].clone(); let mut _u: Py = __unpk1[1].clone(); __out.push(mcall(&figure.clone(), "lower", &[])); } py_set(__out) })() };
     if py_truthy(&op_gt(&call_builtin("len", &[stated.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1))) {
     return Py::None;
     }
@@ -7462,7 +7462,7 @@ pub fn _the_ask_behind_the_recall(args: &[Py]) -> Py {
     }
     rest = stdlib_call("re", "sub", &[py_str("\\s+(?:was|is|were|are)\\s*$"), py_str(""), mcall(&mcall(&wrapped.clone(), "group", &[py_str("rest")]), "strip", &[])]).unwrap_or_else(|e| exc::raise(e));
     said = mcall(&mcall(&mcall(&wrapped.clone(), "group", &[py_str("word")]), "lower", &[]), "replace", &[py_str("  "), py_str(" ")]);
-    slot = call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_RECALL_SLOTS()) { let __unpk8733 = py_unpack(&__item.clone(), 3, None); let mut pattern: Py = __unpk8733[0].clone(); let mut word: Py = __unpk8733[1].clone(); let mut name: Py = __unpk8733[2].clone(); if py_truthy(&mcall(&pattern.clone(), "search", &[rest.clone()])) {  __out.push(py_tuple(vec![word.clone(), name.clone()])); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e));
+    slot = call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_RECALL_SLOTS()) { let __unpk1 = py_unpack(&__item.clone(), 3, None); let mut pattern: Py = __unpk1[0].clone(); let mut word: Py = __unpk1[1].clone(); let mut name: Py = __unpk1[2].clone(); if py_truthy(&mcall(&pattern.clone(), "search", &[rest.clone()])) {  __out.push(py_tuple(vec![word.clone(), name.clone()])); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&Py::Bool(!py_truthy(&slot.clone()))) {
     return Py::None;
     }

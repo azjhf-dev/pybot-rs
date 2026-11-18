@@ -74,6 +74,9 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.outlook._OUTCOME"); }
     s__OUTCOME(stdlib_call("re", "compile", &[py_str("\\b(?:better|worse|normal|again|ok|okay|alright|fine|same|improve|improves|change|changes|always|ever|forever|go(?:es)?\\s+away|get\\s+over|recover|heals?|happens?|now|tomorrow|feel\\s+like\\s+this)\\b|\\b(?:stop|stops|stopped|end|ends|pass|passes|ease|eases|last|lasts)\\b\\s*(?:soon|now|altogether|completely|on\\s+its\\s+own|eventually|in\\s+a\\s+day\\s+or\\s+two)?\\s*[?.!]*$")]).unwrap_or_else(|e| exc::raise(e)));
     let __try1 = exc::catch(|| {
+    s_BODY_PARTS(pyrt::xrefs::xget("compose.fallback_data", "BODY_PARTS"));
+    s_HEALTH_WORDS(pyrt::xrefs::xget("compose.fallback_data", "HEALTH_WORDS"));
+    s_SYMPTOM_WORDS(pyrt::xrefs::xget("compose.fallback_data", "SYMPTOM_WORDS"));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.outlook._THE_THING_ITSELF"); }
     s__THE_THING_ITSELF(call_builtin("frozenset", &[op_bitor(&op_bitor(&g_BODY_PARTS(), &g_HEALTH_WORDS()), &g_SYMPTOM_WORDS())]).unwrap_or_else(|e| exc::raise(e)));
         py_tuple(vec![Py::Bool(false), Py::None])

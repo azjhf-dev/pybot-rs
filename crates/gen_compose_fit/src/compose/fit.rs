@@ -2899,7 +2899,7 @@ fn module_body() {
     s__steps_by_the_verb_list(py_func("_steps", |args: &[Py]| _steps(args)));
     let _ = py_setitem(&g__CHECKS(), &g_STEPS(), py_func("_steps", |args: &[Py]| _steps(args)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fit._CLEAR"); }
-    s__CLEAR(call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g__CLEAR()) { let __unpk2046 = py_unpack(&__item.clone(), 2, None); let mut want: Py = __unpk2046[0].clone(); let mut check: Py = __unpk2046[1].clone(); __out.push(if py_truthy(&Py::Bool(py_eq(&want.clone(), &g_STEPS()))) { py_tuple(vec![want.clone(), py_func("_steps", |args: &[Py]| _steps(args))]) } else { py_tuple(vec![want.clone(), check.clone()]) }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
+    s__CLEAR(call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g__CLEAR()) { let __unpk1 = py_unpack(&__item.clone(), 2, None); let mut want: Py = __unpk1[0].clone(); let mut check: Py = __unpk1[1].clone(); __out.push(if py_truthy(&Py::Bool(py_eq(&want.clone(), &g_STEPS()))) { py_tuple(vec![want.clone(), py_func("_steps", |args: &[Py]| _steps(args))]) } else { py_tuple(vec![want.clone(), check.clone()]) }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
 }
 pub fn _the_rule_settles_it(args: &[Py]) -> Py {
     ensure_init();

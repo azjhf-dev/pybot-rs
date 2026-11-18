@@ -581,11 +581,11 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.when.MONTH_NUMBER"); }
     s_MONTH_NUMBER(py_dict(vec![(py_str("january"), Py::Int(1)), (py_str("february"), Py::Int(2)), (py_str("march"), Py::Int(3)), (py_str("april"), Py::Int(4)), (py_str("may"), Py::Int(5)), (py_str("june"), Py::Int(6)), (py_str("july"), Py::Int(7)), (py_str("august"), Py::Int(8)), (py_str("september"), Py::Int(9)), (py_str("october"), Py::Int(10)), (py_str("november"), Py::Int(11)), (py_str("december"), Py::Int(12))]));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.when.MONTH_NAME"); }
-    s_MONTH_NAME({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_MONTH_NUMBER(), "items", &[])) { let __unpk842 = py_unpack(&__item.clone(), 2, None); let mut name: Py = __unpk842[0].clone(); let mut number: Py = __unpk842[1].clone(); __out.push((number.clone(), mcall(&name.clone(), "capitalize", &[]))); } py_dict(__out) })() });
+    s_MONTH_NAME({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_MONTH_NUMBER(), "items", &[])) { let __unpk1 = py_unpack(&__item.clone(), 2, None); let mut name: Py = __unpk1[0].clone(); let mut number: Py = __unpk1[1].clone(); __out.push((number.clone(), mcall(&name.clone(), "capitalize", &[]))); } py_dict(__out) })() });
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.when.WEEKDAY_NUMBER"); }
     s_WEEKDAY_NUMBER(py_dict(vec![(py_str("monday"), Py::Int(0)), (py_str("tuesday"), Py::Int(1)), (py_str("wednesday"), Py::Int(2)), (py_str("thursday"), Py::Int(3)), (py_str("friday"), Py::Int(4)), (py_str("saturday"), Py::Int(5)), (py_str("sunday"), Py::Int(6))]));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.when.WEEKDAY_NAME"); }
-    s_WEEKDAY_NAME({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_WEEKDAY_NUMBER(), "items", &[])) { let __unpk2378 = py_unpack(&__item.clone(), 2, None); let mut name: Py = __unpk2378[0].clone(); let mut number: Py = __unpk2378[1].clone(); __out.push((number.clone(), mcall(&name.clone(), "capitalize", &[]))); } py_dict(__out) })() });
+    s_WEEKDAY_NAME({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_WEEKDAY_NUMBER(), "items", &[])) { let __unpk1 = py_unpack(&__item.clone(), 2, None); let mut name: Py = __unpk1[0].clone(); let mut number: Py = __unpk1[1].clone(); __out.push((number.clone(), mcall(&name.clone(), "capitalize", &[]))); } py_dict(__out) })() });
     fn __data1() -> Py { py_tuple(vec![py_str("early"), py_str("mid"), py_str("late"), py_str("end"), py_str("ends"), py_str("ending"), py_str("next"), py_str("this"), py_str("month"), py_str("week"), py_str("the"), py_str("of"), py_str("in"), py_str("on"), py_str("at"), py_str("by"), py_str("start"), py_str("beginning"), py_str("weekend"), py_str("a"), py_str("an"), py_str("for"), py_str("from"), py_str("to"), py_str("until"), py_str("till"), py_str("around"), py_str("about")]) }
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.when.A_DATE_WORD"); }
     s_A_DATE_WORD(op_bitor(&op_bitor(&call_builtin("frozenset", &[g_MONTH_NUMBER()]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("frozenset", &[g_WEEKDAY_NUMBER()]).unwrap_or_else(|e| exc::raise(e))), &call_builtin("frozenset", &[__data1()]).unwrap_or_else(|e| exc::raise(e))));
@@ -725,10 +725,10 @@ pub fn _more_than_one_day(args: &[Py]) -> Py {
     let mut spans: Py = Py::None;
     let _ = py_str("True when the chat holds two different days, and neither of them is a day put right.\n\n    A correction is them telling us which day to use (\"i start monday\" / \"actually i meant\n    tuesday\"), so the two days are one answer and the newest is right. Two days about two things\n    are a choice the line has to make, and a line with no words of its own cannot make it.\n    ");
     dated = _dated(&[memory.clone()]);
-    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&dated.clone()) { let __unpk1181 = py_unpack(&__item.clone(), 2, None); let mut said: Py = __unpk1181[0].clone(); let mut spans: Py = __unpk1181[1].clone(); __out.push(pyrt::xrefs::xcall("memory.facts", "a_date_put_right", &[said.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&dated.clone()) { let __unpk1 = py_unpack(&__item.clone(), 2, None); let mut said: Py = __unpk1[0].clone(); let mut spans: Py = __unpk1[1].clone(); __out.push(pyrt::xrefs::xcall("memory.facts", "a_date_put_right", &[said.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     return Py::Bool(false);
     }
-    return op_gt(&call_builtin("len", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&dated.clone()) { let __unpk221 = py_unpack(&__item.clone(), 2, None); let mut said: Py = __unpk221[0].clone(); let mut spans: Py = __unpk221[1].clone(); if py_truthy(&spans.clone()) {  __out.push(geti(&geti(&spans.clone(), &op_neg(&Py::Int(1))), &Py::Int(0))); } } py_set(__out) })() }]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1));
+    return op_gt(&call_builtin("len", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&dated.clone()) { let __unpk1 = py_unpack(&__item.clone(), 2, None); let mut said: Py = __unpk1[0].clone(); let mut spans: Py = __unpk1[1].clone(); if py_truthy(&spans.clone()) {  __out.push(geti(&geti(&spans.clone(), &op_neg(&Py::Int(1))), &Py::Int(0))); } } py_set(__out) })() }]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1));
     Py::None
 }
 pub fn when_answer(args: &[Py]) -> Py {
@@ -799,7 +799,7 @@ pub fn when_answer(args: &[Py]) -> Py {
     asked = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&g_TRIP_WORDS(), &word.clone()))) {  __out.push(word.clone()); } } py_list(__out) })() };
     trip = Py::Bool(!py_eq(&asked.clone(), &words.clone()));
     if py_truthy(&Py::Bool(!py_truthy(&asked.clone()))) {
-    said_before = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&_dated(&[memory.clone()])) { let __unpk2641 = py_unpack(&__item.clone(), 2, None); let mut said: Py = __unpk2641[0].clone(); let mut spans: Py = __unpk2641[1].clone(); for __item in py_iter_or_raise(&pyrt::xrefs::xcall("memory.topics", "content", &[said.clone()])) { let mut word: Py = __item.clone(); __out.push(word.clone()); } } py_set(__out) })() };
+    said_before = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&_dated(&[memory.clone()])) { let __unpk1 = py_unpack(&__item.clone(), 2, None); let mut said: Py = __unpk1[0].clone(); let mut spans: Py = __unpk1[1].clone(); for __item in py_iter_or_raise(&pyrt::xrefs::xcall("memory.topics", "content", &[said.clone()])) { let mut word: Py = __item.clone(); __out.push(word.clone()); } } py_set(__out) })() };
     anchors = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xcall("memory.topics", "content", &[line.clone()])) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(py_contains(&said_before.clone(), &word.clone()))) {  __out.push(word.clone()); } } py_list(__out) })() };
     if py_truthy(&anchors.clone()) {
     let __unpk3 = py_unpack(&py_tuple(vec![anchors.clone(), Py::Bool(false)]), 2, None);
@@ -1750,7 +1750,7 @@ pub fn the_part_asked(args: &[Py]) -> Py {
     return op_add(&_a_name(&[place.clone()]), &py_str("."));
     }
     if py_truthy(&mcall(&g_ASKS_WHEN(), "search", &[ask.clone()])) {
-    when = _the_date_asked(&[ask.clone(), { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&spans.clone()) { let __unpk4590 = py_unpack(&__item.clone(), 3, None); let mut _u: Py = __unpk4590[0].clone(); let mut _u: Py = __unpk4590[1].clone(); let mut said: Py = __unpk4590[2].clone(); __out.push(said.clone()); } py_list(__out) })() }]);
+    when = _the_date_asked(&[ask.clone(), { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&spans.clone()) { let __unpk1 = py_unpack(&__item.clone(), 3, None); let mut _u: Py = __unpk1[0].clone(); let mut _u: Py = __unpk1[1].clone(); let mut said: Py = __unpk1[2].clone(); __out.push(said.clone()); } py_list(__out) })() }]);
     return if py_truthy(&when.clone()) { _sentence(&[when.clone()]) } else { py_str("") };
     }
     return py_str("");
@@ -1930,7 +1930,7 @@ pub fn _the_dates_in(args: &[Py]) -> Py {
     let __iter2 = py_iter_or_raise(&mcall(&pattern.clone(), "finditer", &[text.clone()]));
     for __item in __iter2 {
     found = __item.clone();
-    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&out.clone()) { let __unpk1416 = py_unpack(&__item.clone(), 3, None); let mut start: Py = __unpk1416[0].clone(); let mut end: Py = __unpk1416[1].clone(); let mut _u: Py = __unpk1416[2].clone(); __out.push({ let __b = op_lt(&mcall(&found.clone(), "start", &[]), &end.clone()); if !py_truthy(&__b) { __b } else { op_lt(&start.clone(), &mcall(&found.clone(), "end", &[])) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&out.clone()) { let __unpk1 = py_unpack(&__item.clone(), 3, None); let mut start: Py = __unpk1[0].clone(); let mut end: Py = __unpk1[1].clone(); let mut _u: Py = __unpk1[2].clone(); __out.push({ let __b = op_lt(&mcall(&found.clone(), "start", &[]), &end.clone()); if !py_truthy(&__b) { __b } else { op_lt(&start.clone(), &mcall(&found.clone(), "end", &[])) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     continue;
     }
     let _ = mcall(&out.clone(), "append", &[py_tuple(vec![mcall(&found.clone(), "start", &[]), mcall(&found.clone(), "end", &[]), mcall(&found.clone(), "group", &[Py::Int(0)])])]);

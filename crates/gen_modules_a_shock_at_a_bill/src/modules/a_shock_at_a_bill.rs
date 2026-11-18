@@ -137,6 +137,8 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.a_shock_at_a_bill._A_STATE_OF_A_BODY"); }
     s__A_STATE_OF_A_BODY(stdlib_call("re", "compile", &[py_str("\\b(?:hurt|hurts|hurting|sore|soreness|tight|tightness|numb|numbness|ache|aches|aching|throb|throbbing|swollen|swelling|bleeding|stiff|stiffness|weak|weakness|shaky|shaking|still|worse|pounding|squeezing|burning|itchy|itching|watering|gone|goes|went)\\b")]).unwrap_or_else(|e| exc::raise(e)));
     let __try2 = exc::catch(|| {
+    s__A_BODY_WORD(pyrt::xrefs::xget("compose.fallback_data", "BODY_PARTS"));
+    s__A_SYMPTOM(pyrt::xrefs::xget("compose.fallback_data", "SYMPTOM_WORDS"));
         py_tuple(vec![Py::Bool(false), Py::None])
     });
     let mut __ret3: Py = Py::Bool(false);

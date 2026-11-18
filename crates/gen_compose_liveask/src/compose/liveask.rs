@@ -55,7 +55,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.liveask.LIVE_DECIDE_ASKS"); }
     s_LIVE_DECIDE_ASKS(stdlib_call("re", "compile", &[py_str("\\b(?:should i|shall i|is it worth|is it better|would it be better|do i need|do you think i should|what would you do|not sure|unsure|dont know|do not know|no idea|cant decide|torn between|in two minds|whether to|if i can)\\b")]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.liveask.NOTE_KIND"); }
-    s_NOTE_KIND({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback", "LIVE_KINDS")) { let __unpk8880 = py_unpack(&__item.clone(), 3, None); let mut kind: Py = __unpk8880[0].clone(); let mut _phrases: Py = __unpk8880[1].clone(); let mut pool: Py = __unpk8880[2].clone(); for __item in py_iter_or_raise(&pool.clone()) { let mut line: Py = __item.clone(); __out.push((line.clone(), kind.clone())); } } py_dict(__out) })() });
+    s_NOTE_KIND({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback", "LIVE_KINDS")) { let __unpk1 = py_unpack(&__item.clone(), 3, None); let mut kind: Py = __unpk1[0].clone(); let mut _phrases: Py = __unpk1[1].clone(); let mut pool: Py = __unpk1[2].clone(); for __item in py_iter_or_raise(&pool.clone()) { let mut line: Py = __item.clone(); __out.push((line.clone(), kind.clone())); } } py_dict(__out) })() });
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.liveask.NO_MARK"); }
     s_NO_MARK(stdlib_call("re", "compile", &[py_str("['\\u2019`]")]).unwrap_or_else(|e| exc::raise(e)));
 }
