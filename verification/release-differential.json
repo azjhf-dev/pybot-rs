@@ -78,30 +78,6 @@
     "exact": true
   },
   {
-    "case": 4,
-    "inputs": [
-      "I like pizza",
-      "what do I like"
-    ],
-    "python": {
-      "returncode": 0,
-      "replies": [
-        "Ah, pizza. What got you into that?",
-        "You like pizza."
-      ],
-      "diagnostics": "[module: greeting | 680 ms]\n[module: memory_store | 961 ms]\n"
-    },
-    "rust": {
-      "returncode": 0,
-      "replies": [
-        "Ah, pizza. What got you into that?",
-        "One pizza each and a garlic bread to share: a 12-inch is one hungry person and a 9-inch a light one, so a 12-inch between two plus a side is the cheaper way to feed a pair. A plain margherita and one with a topping beats two fully loaded ones, which are the ones left half eaten."
-      ],
-      "diagnostics": "[module: greeting | 26785 ms]\n[module: answers | 3448 ms]\n"
-    },
-    "exact": false
-  },
-  {
     "case": 2,
     "inputs": [
       "what is 2 plus 2",
@@ -284,6 +260,30 @@
         "You've got a dog called Buddy."
       ],
       "diagnostics": "[module: chat | 37810 ms]\n[module: memory_store | 6359 ms]\n"
+    },
+    "exact": true
+  },
+  {
+    "case": 4,
+    "inputs": [
+      "I like pizza",
+      "what do I like"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "Ah, pizza. What got you into that?",
+        "You like pizza."
+      ],
+      "diagnostics": "[module: greeting | 680 ms]\n[module: memory_store | 963 ms]\n"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "Ah, pizza. What got you into that?",
+        "You like pizza."
+      ],
+      "diagnostics": "[module: greeting | 25601 ms]\n[module: memory_store | 3940 ms]\n"
     },
     "exact": true
   }
