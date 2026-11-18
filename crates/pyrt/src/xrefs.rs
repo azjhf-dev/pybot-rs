@@ -42,7 +42,11 @@ fn lookup_func(module: &str, name: &str) -> Option<Py> {
 
 pub fn xcall(module: &str, name: &str, args: &[Py]) -> Py {
     match lookup_func(module, name) {
-        Some(f) => crate::builtins::py_call(&f, args),
+        Some(f) => {
+            if std::env::var_os("PYBOT_TRACE_CALL_ERRORS").is_some() {
+                exc::catch(||crate::builtins::py_call(&f,args)).unwrap_or_else(|e| {eprintln!("XERR {}.{}: {} {}",module,name,e.class_name,e.message);exc::raise(e)})
+            } else {crate::builtins::py_call(&f,args)}
+        },
         None => exc::raise(PyExc::new("AttributeError", &format!("module '{}' has no attribute '{}'", module, name))),
     }
 }
