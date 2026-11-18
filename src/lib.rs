@@ -1,8 +1,8 @@
 //! pybot-rs: a chatbot written in plain Rust. No weights, no training, just rules.
 //!
 //! A Rust port of PyBot (https://github.com/huggingface/pybot): every upstream
-//! Python module under bot/ is transpiled to Rust under src/gen/, running on a
-//! Python-semantics runtime (src/pyrt/). See README.md.
+//! Python module under bot/ is translated into the generated crates under crates/,
+//! running on the shared Python-semantics library in crates/pyrt/. See README.md.
 
 pub mod memory;
 pub mod runtime;
