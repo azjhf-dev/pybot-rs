@@ -191,7 +191,7 @@ pub fn call_builtin(name: &str, args: &[Py]) -> PyResult {
             Ok(py_tuple(vec![py_floordiv(a, b)?, py_mod(a, b)?]))
         }
         "hash" => Ok(Py::Int(py_hash(args.first().unwrap_or(&Py::None)))),
-        "id" => Ok(Py::Int(args.first().map(|p| p as *const Py as i64).unwrap_or(0))),
+        "id" => Ok(Py::Int(args.first().map(py_identity).unwrap_or(0))),
         "getattr" => {
             let v = args.first().unwrap_or(&Py::None);
             let name = args.get(1).and_then(|p| p.as_str()).unwrap_or("");

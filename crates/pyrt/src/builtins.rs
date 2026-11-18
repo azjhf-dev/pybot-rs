@@ -157,6 +157,8 @@ pub fn py_method_call(recv: &Py, name: &str, args: &[Py]) -> PyResult {
         Py::Pattern(p) => pattern_method(p, name, args),
         Py::Match(m) => match_method(m, name, args),
         Py::Instance(inst) => {
+            let attr = inst.attrs.borrow().get(name).cloned();
+            if let Some(f) = attr { return py_call_result(&f, args); }
             if let Some(m) = class_method(&inst.class_name, name) {
                 let mut full = vec![recv.clone()];
                 full.extend_from_slice(args);

@@ -924,3 +924,26 @@ pub fn py_setslice(v:&Py,start:&Py,stop:&Py,step:&Py,replacement:&Py)->Result<()
  use super::*;
  #[test] fn full_slice_replaces_not_nests(){ let a=py_list(vec![Py::Int(1)]);let alias=a.clone();py_setslice(&a,&Py::None,&Py::None,&Py::None,&py_list(vec![Py::Int(2),Py::Int(3)])).unwrap();assert!(py_eq(&alias,&py_list(vec![Py::Int(2),Py::Int(3)]))); }
 }
+
+/// Identity follows reference storage across argument clones.
+pub fn py_identity(v:&Py)->i64 { match v {
+ Py::Str(x)=>Rc::as_ptr(x) as usize as i64,
+ Py::List(x)=>Rc::as_ptr(x) as usize as i64,
+ Py::Tuple(x)=>Rc::as_ptr(x) as usize as i64,
+ Py::Dict(x)=>Rc::as_ptr(x) as usize as i64,
+ Py::Set(x)=>Rc::as_ptr(x) as usize as i64,
+ Py::FrozenSet(x)=>Rc::as_ptr(x) as usize as i64,
+ Py::Range(x)=>Rc::as_ptr(x) as usize as i64,
+ Py::Pattern(x)=>Rc::as_ptr(x) as usize as i64,
+ Py::Match(x)=>Rc::as_ptr(x) as usize as i64,
+ Py::Func(x)=>Rc::as_ptr(x) as usize as i64,
+ Py::BoundMethod(x)=>Rc::as_ptr(x) as usize as i64,
+ Py::Instance(x)=>Rc::as_ptr(x) as usize as i64,
+ Py::Module(x)=>Rc::as_ptr(x) as usize as i64,
+ Py::Date(x)=>Rc::as_ptr(x) as usize as i64,
+ Py::DateTime(x)=>Rc::as_ptr(x) as usize as i64,
+ Py::TimeDelta(x)=>Rc::as_ptr(x) as usize as i64,
+ Py::Kwargs(x)=>Rc::as_ptr(x) as usize as i64,
+ Py::Exc(x)=>Rc::as_ptr(x) as usize as i64,
+ Py::Bytes(x)=>Rc::as_ptr(x) as usize as i64,
+ Py::None=>1,Py::Bool(false)=>2,Py::Bool(true)=>3,Py::Int(n)=>n.wrapping_mul(16).wrapping_add(4),Py::Float(n)=>n.to_bits() as i64,_=>5,}}
