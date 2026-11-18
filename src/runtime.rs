@@ -147,3 +147,25 @@ fn choose(text: &str, memory: &Memory, candidates: &[Candidate], arbiter: Option
         _ => 0,
     }
 }
+
+#[cfg(test)]
+mod copy_tests {
+    use super::*;
+    #[test]
+    fn candidate_copies_share_only_turn_history() {
+        let turns=py_list(vec![]);let facts=py_dict(vec![(py_str("name"),py_str("Alex"))]);
+        let memory=py_dict(vec![(py_str("turns"),turns.clone()),(py_str("user"),facts.clone())]);
+        let copied=copy_for_module(&memory);
+        assert!(py_is(&py_getitem(&copied,&py_str("turns")).unwrap(),&turns));
+        assert!(!py_is(&py_getitem(&copied,&py_str("user")).unwrap(),&facts));
+    }
+    #[test]
+    fn chosen_copy_updates_original_dictionary_identity() {
+        let rt=Runtime::new(vec![ModuleEntry{name:"test",priority:||1,observe:None,respond:Some(|args|{
+            py_setitem(&args[1],&py_str("seen"),Py::Bool(true)).unwrap();py_str("ok")
+        }),after:None}],None);
+        let mut memory=crate::memory::new_memory();let alias=memory.clone();
+        assert_eq!(rt.reply("hello",&mut memory),"ok");
+        assert!(py_is(&memory,&alias));assert!(py_truthy(&py_getitem(&alias,&py_str("seen")).unwrap()));
+    }
+}
