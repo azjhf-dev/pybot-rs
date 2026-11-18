@@ -50,7 +50,7 @@ impl Runtime {
             if let Some(respond) = m.respond {
                 if std::env::var_os("PYBOT_TRACE_MODULES").is_some() { eprintln!("RESPOND {}",m.name); }
                 let tick=std::time::Instant::now();
-                let mut mine = pyrt::builtins::py_deepcopy(memory);
+                let mine = copy_for_module(memory);
                 let name = m.name;
                 let answer = exc::catch({
                     let text_py = text_py.clone();
@@ -81,7 +81,10 @@ impl Runtime {
             let reply = candidates[index].reply.clone();
             let module = candidates[index].module.clone();
             let chosen = copies.swap_remove(index);
-            *memory = chosen;
+            if let (Py::Dict(original), Py::Dict(selected)) = (&*memory, &chosen) {
+                let entries=selected.borrow().clone();
+                *original.borrow_mut()=entries;
+            } else { *memory=chosen; }
             (reply, Some(module))
         };
 
@@ -102,6 +105,15 @@ impl Runtime {
     pub fn reply(&self, text: &str, memory: &mut Memory) -> String {
         self.turn(text, memory).reply
     }
+}
+
+/// Mirrors Python runtime._copy: only the turn history is shared.
+fn copy_for_module(memory: &Memory) -> Memory {
+    if let Py::Dict(d) = memory {
+        py_dict(d.borrow().iter().map(|(k,v)| {
+            (k.0.clone(), if k.0.as_str()==Some("turns") {v.clone()} else {pyrt::builtins::py_deepcopy(v)})
+        }).collect())
+    } else {memory.clone()}
 }
 
 /// The arbiter's pick, as an index into candidates; 0 when it fails or
