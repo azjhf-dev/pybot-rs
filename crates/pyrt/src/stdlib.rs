@@ -13,6 +13,7 @@ use crate::value::*;
 
 /// Attribute *load* on a stdlib module (constants mostly).
 pub fn stdlib_attr(module: &str, name: &str) -> PyResult {
+    if module == "ast" && matches!(name,"Add"|"Sub"|"Mult"|"Div"|"Pow"|"Mod"|"UAdd"|"USub"|"Expression"|"Constant"|"BinOp"|"UnaryOp") { return Ok(py_str(&format!("ast.{}",name))); }
     match (module, name) {
         ("re", "I") | ("re", "IGNORECASE") => Ok(Py::Int(pyre::IGNORECASE)),
         ("re", "M") | ("re", "MULTILINE") => Ok(Py::Int(pyre::MULTILINE)),
@@ -192,6 +193,7 @@ pub fn stdlib_call(module: &str, name: &str, args: &[Py]) -> PyResult {
         },
         "operator" => operator_call(name, args),
         "ast" => match name {
+            "parse" => crate::pyast::parse(args.first().and_then(|v|v.as_str()).unwrap_or("")),
             "literal_eval" => literal_eval(args.first().and_then(|p| p.as_str()).unwrap_or("")),
             _ => Err(attr_err(name)),
         },

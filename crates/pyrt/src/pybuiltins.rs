@@ -62,7 +62,7 @@ pub fn call_builtin(name: &str, args: &[Py]) -> PyResult {
             let t = args.get(1).unwrap_or(&Py::None);
             py_isinstance(v, t)
         }
-        "type" => Ok(py_str(args.first().unwrap_or(&Py::None).type_name())),
+        "type" => Ok(match args.first() { Some(Py::Instance(i)) => py_str(&i.class_name), other => py_str(other.unwrap_or(&Py::None).type_name()) }),
         "any" => {
             for x in py_iter(args.first().unwrap_or(&Py::None))? {
                 if x.is_truthy() { return Ok(Py::Bool(true)); }
@@ -332,6 +332,7 @@ pub fn py_isinstance(v: &Py, spec: &Py) -> PyResult {
 }
 
 pub fn isinstance_name(v: &Py, name: &str) -> bool {
+    if let Py::Instance(i) = v { if i.class_name == name { return true; } }
     match name {
         "str" => matches!(v, Py::Str(_)),
         "int" => matches!(v, Py::Int(_) | Py::Bool(_)),
