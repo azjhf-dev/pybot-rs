@@ -168,30 +168,6 @@
     "exact": false
   },
   {
-    "case": 9,
-    "inputs": [
-      "tell me a joke",
-      "another one"
-    ],
-    "python": {
-      "returncode": 0,
-      "replies": [
-        "What do you call a sleeping bull? A bulldozer.",
-        "I haven't got anything for that to point at yet \u2014 give me the thing in a few words and I'll answer for it."
-      ],
-      "diagnostics": "[module: chat | 843 ms]\n[module: memory_store | 178 ms]\n"
-    },
-    "rust": {
-      "returncode": 0,
-      "replies": [
-        "What do you call a sleeping bull? A bulldozer.",
-        "I used to be a banker, but I lost interest."
-      ],
-      "diagnostics": "[module: chat | 27163 ms]\n[module: chat | 756 ms]\n"
-    },
-    "exact": false
-  },
-  {
     "case": 10,
     "inputs": [
       "thank you",
@@ -284,6 +260,30 @@
         "You're Alex."
       ],
       "diagnostics": "[module: chat | 34942 ms]\n[module: memory_store | 13454 ms]\n"
+    },
+    "exact": true
+  },
+  {
+    "case": 9,
+    "inputs": [
+      "tell me a joke",
+      "another one"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "What do you call a sleeping bull? A bulldozer.",
+        "I haven't got anything for that to point at yet \u2014 give me the thing in a few words and I'll answer for it."
+      ],
+      "diagnostics": "[module: chat | 837 ms]\n[module: memory_store | 191 ms]\n"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "What do you call a sleeping bull? A bulldozer.",
+        "I haven't got anything for that to point at yet \u2014 give me the thing in a few words and I'll answer for it."
+      ],
+      "diagnostics": "[module: chat | 26700 ms]\n[module: memory_store | 773 ms]\n"
     },
     "exact": true
   }
