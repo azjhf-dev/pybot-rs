@@ -13,13 +13,13 @@ The complete safety module and its priority band are represented. The sample gas
 ## Build and run
 
 ```sh
-cargo build -j1
-cargo run -- -s 42 -p 'hello'
-printf 'hello\nhow are you\n' | cargo run -- -s 42
+cargo build --release -j1
+cargo run --release -- -s 42 -p 'hello'
+printf 'hello\nhow are you\n' | cargo run --release -- -s 42
 cargo test -p pyrt --lib
 ```
 
-A first build is large. Use `-j1` on memory-constrained machines. Release-build verification is still pending.
+A first build is large. Use `-j1` on memory-constrained machines. The release executable builds on Linux x86_64 (glibc 2.35 or newer for the current binary). Runtime performance is still under investigation: measured first replies take about 25 to 55 seconds, and some multi-turn comparisons time out.
 
 ## Layout
 
