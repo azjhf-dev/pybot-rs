@@ -138,30 +138,6 @@
     "exact": true
   },
   {
-    "case": 4,
-    "inputs": [
-      "I like pizza",
-      "what do I like"
-    ],
-    "python": {
-      "returncode": 0,
-      "replies": [
-        "Ah, pizza. What got you into that?",
-        "You like pizza."
-      ],
-      "diagnostics": "[module: greeting | 680 ms]\n[module: memory_store | 963 ms]\n"
-    },
-    "rust": {
-      "returncode": 0,
-      "replies": [
-        "Ah, pizza. What got you into that?",
-        "You like pizza."
-      ],
-      "diagnostics": "[module: greeting | 25601 ms]\n[module: memory_store | 3940 ms]\n"
-    },
-    "exact": true
-  },
-  {
     "case": 9,
     "inputs": [
       "tell me a joke",
@@ -284,6 +260,30 @@
         "You're Alex."
       ],
       "diagnostics": "[module: chat | 35334 ms]\n[module: memory_store | 11411 ms]\n"
+    },
+    "exact": true
+  },
+  {
+    "case": 4,
+    "inputs": [
+      "I like pizza",
+      "what do I like"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "Ah, pizza. What got you into that?",
+        "You like pizza."
+      ],
+      "diagnostics": "[module: greeting | 687 ms]\n[module: memory_store | 969 ms]\n"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "Ah, pizza. What got you into that?",
+        "You like pizza."
+      ],
+      "diagnostics": "[module: greeting | 24805 ms]\n[module: memory_store | 3803 ms]\n"
     },
     "exact": true
   }
