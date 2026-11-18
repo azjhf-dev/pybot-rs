@@ -238,32 +238,6 @@
   },
   {
     "binary_sha256": "b84c22abffae6825dd5b70341887eb51482a4f66344401316112bfbd5a63e52e",
-    "case": 2,
-    "inputs": [
-      "what is 2 plus 2",
-      "what is 12 times 8",
-      "what is the capital of France"
-    ],
-    "python": {
-      "returncode": 0,
-      "replies": [
-        "That's 4.",
-        "That's 96.",
-        "Paris."
-      ],
-      "diagnostics": "[module: answers | 6284 ms]\n[module: answers | 6902 ms]\n[module: answers | 1080 ms]\n"
-    },
-    "rust": {
-      "timeout": true,
-      "timeout_seconds": 95,
-      "replies": [
-        "That's 4."
-      ]
-    },
-    "exact": false
-  },
-  {
-    "binary_sha256": "b84c22abffae6825dd5b70341887eb51482a4f66344401316112bfbd5a63e52e",
     "case": 11,
     "inputs": [
       "I have a dog named Buddy",
@@ -286,5 +260,33 @@
       "diagnostics": "[module: chat | 35575 ms]\n[module: memory_store | 11189 ms]\n"
     },
     "exact": true
+  },
+  {
+    "binary_sha256": "b84c22abffae6825dd5b70341887eb51482a4f66344401316112bfbd5a63e52e",
+    "case": 2,
+    "inputs": [
+      "what is 2 plus 2",
+      "what is 12 times 8",
+      "what is the capital of France"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "That's 4.",
+        "That's 96.",
+        "Paris."
+      ],
+      "diagnostics": "[module: answers | 6284 ms]\n[module: answers | 6902 ms]\n[module: answers | 1080 ms]\n",
+      "baseline_reused": true,
+      "source_commit": "7d63c7fbebb44c7e466e5c8b5c1f341ab767929e"
+    },
+    "rust": {
+      "timeout": true,
+      "timeout_seconds": 110,
+      "replies": [
+        "That's 4."
+      ]
+    },
+    "exact": false
   }
 ]
