@@ -493,7 +493,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| eprintln!("INIT compose_fit: {} {}", e.class_name, e.message));
         INITIALIZING.with(|c| c.set(false));
     });
 }

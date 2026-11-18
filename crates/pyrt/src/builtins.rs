@@ -341,7 +341,7 @@ fn dict_method(d: &Rc<RefCell<IndexMap<PyKey, Py>>>, name: &str, args: &[Py]) ->
             Ok(d.borrow().get(&PyKey(key.clone())).cloned().unwrap_or(default))
         }
         "items" => Ok(py_list(d.borrow().iter().map(|(k, v)| py_tuple(vec![k.0.clone(), v.clone()])).collect())),
-        "keys" => Ok(py_list(d.borrow().keys().map(|k| k.0.clone()).collect())),
+        "keys" => Ok(py_set(d.borrow().keys().map(|k| k.0.clone()).collect())),
         "values" => Ok(py_list(d.borrow().values().cloned().collect())),
         "pop" => {
             let key = args.first().unwrap_or(&Py::None);

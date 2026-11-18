@@ -45,7 +45,7 @@ pub fn catch<F: FnOnce() -> Py>(f: F) -> Result<Py, PyExc> {
         Err(payload) => {
             SUPPRESS.with(|s| s.set(false));
             match downcast(payload) {
-                Some(exc) => Err(exc),
+                Some(exc) => { if std::env::var_os("PYBOT_TRACE_EXCEPTIONS").is_some() { eprintln!("PYEXC: {} {}",exc.class_name,exc.message); } Err(exc) },
                 None => std::panic::panic_any(FatalPanic),
             }
         }

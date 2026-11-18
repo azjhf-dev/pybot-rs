@@ -54,7 +54,7 @@ impl Runtime {
                     let text_py = text_py.clone();
                     let mine_ref = mine.clone();
                     move || respond(&[text_py, mine_ref])
-                }).unwrap_or(Py::None);
+                }).unwrap_or_else(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("{}: {} {}", name, e.class_name, e.message); } Py::None });
                 if let Py::Str(reply) = &answer {
                     let cleaned = reply.split_whitespace().collect::<Vec<_>>().join(" ");
                     if !cleaned.is_empty() {
