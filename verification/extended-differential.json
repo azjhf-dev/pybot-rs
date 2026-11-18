@@ -206,5 +206,30 @@
       "diagnostics": "[module: answers | 27787 ms]\n"
     },
     "exact": true
+  },
+  {
+    "binary_sha256": "bf98fc48613880ed03b5c39ce2e1c0769a2ba2ab7ebf72108aa0dbe06a569520",
+    "case": 9,
+    "inputs": [
+      "I feel nervous about my exam",
+      "what should I do"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "Going blank is your body, not your memory: breathe out longer than you breathe in for a minute and it settles. Then read the whole paper and start with the question you know best, and if a question stalls, jot the first line you can and move on. Do not spend the first five minutes trying to feel calm \u2014 just start writing.",
+        "I would start here: Do not spend the first five minutes trying to feel calm."
+      ],
+      "diagnostics": "[module: answers | 890 ms]\n[module: chat | 746 ms]\n"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "Going blank is your body, not your memory: breathe out longer than you breathe in for a minute and it settles. Then read the whole paper and start with the question you know best, and if a question stalls, jot the first line you can and move on. Do not spend the first five minutes trying to feel calm \u2014 just start writing.",
+        "I would start here: Do not spend the first five minutes trying to feel calm."
+      ],
+      "diagnostics": "[module: answers | 25113 ms]\n[module: chat | 2932 ms]\n"
+    },
+    "exact": true
   }
 ]
