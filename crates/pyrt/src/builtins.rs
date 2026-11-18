@@ -57,6 +57,7 @@ pub fn py_call_result(f: &Py, args: &[Py]) -> PyResult {
 // ---------------------------------------------------------------- getattr
 pub fn py_getattr(v: &Py, name: &str) -> PyResult {
     match v {
+        Py::None => Err(attr_err(name)),
         Py::Instance(inst) => {
             if let Some(val) = inst.attrs.borrow().get(name) {
                 return Ok(val.clone());
@@ -806,4 +807,8 @@ pub fn unbound_name(name: &str) -> Py { exc::raise(name_err(name)) }
 
 #[cfg(test)] mod subset_tests {use super::*;
  #[test] fn subset_is_not_lexicographic(){let a=py_set(vec![py_str("b")]);let b=py_set(vec![py_str("a"),py_str("b")]);assert!(py_truthy(&op_le(&a,&b)));assert!(!py_truthy(&op_le(&py_set(vec![py_str("c")]),&b)));}
+}
+
+#[cfg(test)] mod missing_attribute_tests{use super::*;
+ #[test] fn none_has_no_key_attribute(){assert!(py_getattr(&Py::None,"key").is_err());let x=crate::pybuiltins::call_builtin("getattr",&[Py::None,py_str("key"),py_tuple(vec![])]).unwrap();assert!(py_iter(&x).unwrap().is_empty());}
 }
