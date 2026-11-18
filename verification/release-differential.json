@@ -1,29 +1,5 @@
 [
   {
-    "case": 3,
-    "inputs": [
-      "I feel sad",
-      "I had a hard day"
-    ],
-    "python": {
-      "returncode": 0,
-      "replies": [
-        "Do one small thing you used to enjoy today, at half enthusiasm, because mood follows action more often than it arrives on its own: a walk to the shop, a phone call, ten minutes of a game you liked. Then stack the three things that lift a low mood most reliably - daylight within an hour of waking, 20 minutes of walking, and one person you really talk to rather than message - and keep bedtime and meals at the same time, because a sad week wrecks both and then feeds itself. Write one line a day about how it went, so you can see it is not all bad. If it is most days for two weeks, if the pleasure has gone out of everything, or if it is stopping you eating or working, take it to the GP: talking therapy works, and in most areas you can refer yourself.",
-        "Those days are draining. Get the food and the rest in first, and leave the rest till tomorrow."
-      ],
-      "diagnostics": "[module: answers | 719 ms]\n[module: chat | 527 ms]\n"
-    },
-    "rust": {
-      "returncode": 0,
-      "replies": [
-        "Do one small thing you used to enjoy today, at half enthusiasm, because mood follows action more often than it arrives on its own: a walk to the shop, a phone call, ten minutes of a game you liked. Then stack the three things that lift a low mood most reliably - daylight within an hour of waking, 20 minutes of walking, and one person you really talk to rather than message - and keep bedtime and meals at the same time, because a sad week wrecks both and then feeds itself. Write one line a day about how it went, so you can see it is not all bad. If it is most days for two weeks, if the pleasure has gone out of everything, or if it is stopping you eating or working, take it to the GP: talking therapy works, and in most areas you can refer yourself.",
-        "Those days are draining. Get the food and the rest in first, and leave the rest till tomorrow."
-      ],
-      "diagnostics": "[module: answers | 27144 ms]\n[module: chat | 2441 ms]\n"
-    },
-    "exact": true
-  },
-  {
     "case": 2,
     "inputs": [
       "what is 2 plus 2",
@@ -284,6 +260,30 @@
         "See you \u2014 good luck with it."
       ],
       "diagnostics": "[module: chat | 25049 ms]\n[module: chat | 2915 ms]\n[module: chat | 15535 ms]\n[module: chat | 454 ms]\n"
+    },
+    "exact": true
+  },
+  {
+    "case": 3,
+    "inputs": [
+      "I feel sad",
+      "I had a hard day"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "Do one small thing you used to enjoy today, at half enthusiasm, because mood follows action more often than it arrives on its own: a walk to the shop, a phone call, ten minutes of a game you liked. Then stack the three things that lift a low mood most reliably - daylight within an hour of waking, 20 minutes of walking, and one person you really talk to rather than message - and keep bedtime and meals at the same time, because a sad week wrecks both and then feeds itself. Write one line a day about how it went, so you can see it is not all bad. If it is most days for two weeks, if the pleasure has gone out of everything, or if it is stopping you eating or working, take it to the GP: talking therapy works, and in most areas you can refer yourself.",
+        "Those days are draining. Get the food and the rest in first, and leave the rest till tomorrow."
+      ],
+      "diagnostics": "[module: answers | 713 ms]\n[module: chat | 527 ms]\n"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "Do one small thing you used to enjoy today, at half enthusiasm, because mood follows action more often than it arrives on its own: a walk to the shop, a phone call, ten minutes of a game you liked. Then stack the three things that lift a low mood most reliably - daylight within an hour of waking, 20 minutes of walking, and one person you really talk to rather than message - and keep bedtime and meals at the same time, because a sad week wrecks both and then feeds itself. Write one line a day about how it went, so you can see it is not all bad. If it is most days for two weeks, if the pleasure has gone out of everything, or if it is stopping you eating or working, take it to the GP: talking therapy works, and in most areas you can refer yourself.",
+        "Those days are draining. Get the food and the rest in first, and leave the rest till tomorrow."
+      ],
+      "diagnostics": "[module: answers | 26496 ms]\n[module: chat | 2506 ms]\n"
     },
     "exact": true
   }
