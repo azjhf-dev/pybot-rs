@@ -151,6 +151,7 @@ fn choose(text: &str, memory: &Memory, candidates: &[Candidate], arbiter: Option
 #[cfg(test)]
 mod copy_tests {
     use super::*;
+    use pyrt::builtins::py_is;
     #[test]
     fn candidate_copies_share_only_turn_history() {
         let turns=py_list(vec![]);let facts=py_dict(vec![(py_str("name"),py_str("Alex"))]);
