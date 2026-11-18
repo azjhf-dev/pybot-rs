@@ -775,6 +775,11 @@ pub fn op_bitxor(a: &Py, b: &Py) -> Py { py_bitxor(a, b).unwrap_or_else(|e| exc:
 pub fn op_lshift(a: &Py, b: &Py) -> Py { py_lshift(a, b).unwrap_or_else(|e| exc::raise(e)) }
 pub fn op_rshift(a: &Py, b: &Py) -> Py { py_rshift(a, b).unwrap_or_else(|e| exc::raise(e)) }
 fn cmp_bool(a: &Py, b: &Py, op: &str) -> Py {
+    if matches!(a,Py::Set(_)|Py::FrozenSet(_)) && matches!(b,Py::Set(_)|Py::FrozenSet(_)) {
+        let x=py_iter(a).unwrap();let y=py_iter(b).unwrap();
+        let sub=x.iter().all(|k|py_contains(b,k));let sup=y.iter().all(|k|py_contains(a,k));
+        return Py::Bool(match op {"<"=>sub&&x.len()<y.len(),"<="=>sub,">"=>sup&&x.len()>y.len(),">="=>sup,"=="=>sub&&sup,"!="=>!(sub&&sup),_=>false});
+    }
     match py_cmp(a, b, op) {
         Ok(std::cmp::Ordering::Less) => Py::Bool(matches!(op, "<" | "<=" | "!=")),
         Ok(std::cmp::Ordering::Equal) => Py::Bool(matches!(op, "<=" | ">=" | "==")),
@@ -797,4 +802,8 @@ pub fn unbound_name(name: &str) -> Py { exc::raise(name_err(name)) }
 #[cfg(test)] mod regex_method_tests {
  use super::*;
  #[test] fn pattern_sub_takes_replacement_then_text(){let p=pyre::compile(r"(cat)",0).unwrap();let x=pattern_method(&p,"sub",&[py_str(r"\1s"),py_str("one cat")]).unwrap();assert_eq!(x.as_str(),Some("one cats"));}
+}
+
+#[cfg(test)] mod subset_tests {use super::*;
+ #[test] fn subset_is_not_lexicographic(){let a=py_set(vec![py_str("b")]);let b=py_set(vec![py_str("a"),py_str("b")]);assert!(py_truthy(&op_le(&a,&b)));assert!(!py_truthy(&op_le(&py_set(vec![py_str("c")]),&b)));}
 }
