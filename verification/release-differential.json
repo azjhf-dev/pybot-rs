@@ -238,5 +238,53 @@
       "diagnostics": "[module: chat | 27163 ms]\n[module: chat | 756 ms]\n"
     },
     "exact": false
+  },
+  {
+    "case": 10,
+    "inputs": [
+      "thank you",
+      "you are welcome"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "Happy to help.",
+        "Alright then \u2014 good luck with it."
+      ],
+      "diagnostics": "[module: chat | 564 ms]\n[module: chat | 248 ms]\n"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "Happy to help.",
+        "Alright then \u2014 good luck with it."
+      ],
+      "diagnostics": "[module: chat | 25491 ms]\n[module: chat | 1121 ms]\n"
+    },
+    "exact": true
+  },
+  {
+    "case": 11,
+    "inputs": [
+      "I have a dog named Buddy",
+      "what is my dog called"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "Buddy \u2014 good name for a dog. How old is Buddy?",
+        "You've got a dog called Buddy."
+      ],
+      "diagnostics": "[module: chat | 1263 ms]\n[module: memory_store | 2587 ms]\n"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "Buddy \u2014 good name for a dog. How old is Buddy?",
+        "You've got a dog called Buddy."
+      ],
+      "diagnostics": "[module: chat | 37810 ms]\n[module: memory_store | 6359 ms]\n"
+    },
+    "exact": true
   }
 ]
