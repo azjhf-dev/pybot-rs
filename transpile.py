@@ -392,6 +392,7 @@ class Gen:
         seen = {}
         for f in reversed(fdefs):
             old = f.name
+            f._original_name = old
             if old in seen:
                 seen[old] += 1
                 f.name += '__dup' + str(seen[old])
@@ -443,6 +444,7 @@ class Gen:
         # module body
         self.emit("fn module_body() {")
         self.rebound_pending = set(self.rebound)
+        self.active_module_defs = {}
         ctx = Ctx(self, 'module', self.dotted)
         ctx.globals_all = mod_globals | fn_names
         for stmt in body:
@@ -459,6 +461,8 @@ class Gen:
                             self.emit(f"    s_{rust_ident(alias)}({expr});")
                 continue
             if isinstance(stmt, (ast.FunctionDef, ast.ClassDef)):
+                if isinstance(stmt, ast.FunctionDef):
+                    self.active_module_defs[getattr(stmt, '_original_name', stmt.name)] = stmt.name
                 if isinstance(stmt, ast.FunctionDef) and stmt.name in self.decorated:
                     rn = rust_ident(stmt.name)
                     value = f'py_func({rust_string(stmt.name)}, |args: &[Py]| {rn}__wrapped(args))'
@@ -1170,6 +1174,13 @@ class Gen:
             if name in (self.glbs.get(self.dotted, set())):
                 return f'g_{r}()'
         else:
+            # A later def replaces a function only when execution reaches it.
+            active = getattr(self, 'active_module_defs', {}).get(name)
+            if active is not None and active != name:
+                ar = rust_ident(active)
+                if active in self.decorated:
+                    return f'g_{ar}()'
+                return f'py_func({rust_string(name)}, |args: &[Py]| {ar}(args))'
             # module body context
             if name in getattr(self, 'rebound_pending', set()):
                 return f'py_func({rust_string(name)}, |args: &[Py]| {r}__wrapped(args))'
@@ -1318,6 +1329,9 @@ class Gen:
                                        args, kwargs, has_star, ctx, node)
         if isinstance(node.func, ast.Name):
             name = node.func.id
+            active = getattr(self, 'active_module_defs', {}).get(name) if ctx.kind == 'module' else None
+            if active is not None and active != name:
+                return self.call_with_args(f'|args: &[Py]| py_call(&{self.resolve_name(name, ctx)}, args)', args, kwargs, has_star, ctx, node)
             if name == 'globals' and self.has_globals:
                 return '__globals()'
             # Function-local bindings shadow imports and builtins.
