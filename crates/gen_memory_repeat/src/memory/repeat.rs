@@ -1526,7 +1526,7 @@ pub fn _doings(args: &[Py]) -> Py {
     let mut words: Py = Py::None;
     let _ = py_str("The verb families a line asks its work with.");
     words = call_builtin("set", &[pyrt::xrefs::xcall("memory.topics", "words", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }])]).unwrap_or_else(|e| exc::raise(e));
-    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[g_DOINGS()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk6225 = py_unpack(&__item.clone(), 2, None); let mut i: Py = __unpk6225[0].clone(); let mut family: Py = __unpk6225[1].clone(); if py_truthy(&op_bitand(&words.clone(), &call_builtin("set", &[family.clone()]).unwrap_or_else(|e| exc::raise(e)))) {  __out.push(i.clone()); } } py_set(__out) })() };
+    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[g_DOINGS()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk614 = py_unpack(&__item.clone(), 2, None); let mut i: Py = __unpk614[0].clone(); let mut family: Py = __unpk614[1].clone(); if py_truthy(&op_bitand(&words.clone(), &call_builtin("set", &[family.clone()]).unwrap_or_else(|e| exc::raise(e)))) {  __out.push(i.clone()); } } py_set(__out) })() };
     Py::None
 }
 pub fn asks_for_the_same_work(args: &[Py]) -> Py {
@@ -2790,7 +2790,7 @@ pub fn _says_what_to_do(args: &[Py]) -> Py {
     IMPERATIVES = pyrt::xrefs::xget("compose.verdict", "IMPERATIVES");
     words = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&mcall(&call_builtin("str", &[part.clone()]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]), "split", &[])) { let mut w: Py = __item.clone(); __out.push(mcall(&w.clone(), "strip", &[py_str(" ,;:.")])); } py_list(__out) })() };
     orders = call_builtin("bool", &[stdlib_call("re", "search", &[py_str("\\bdo not\\b|\\bdon'?t\\b"), call_builtin("str", &[part.clone()]).unwrap_or_else(|e| exc::raise(e)), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e));
-    at = call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk2242 = py_unpack(&__item.clone(), 2, None); let mut index: Py = __unpk2242[0].clone(); let mut word: Py = __unpk2242[1].clone(); if py_truthy(&Py::Bool(py_contains(&IMPERATIVES.clone(), &word.clone()))) {  __out.push(index.clone()); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e));
+    at = call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk9445 = py_unpack(&__item.clone(), 2, None); let mut index: Py = __unpk9445[0].clone(); let mut word: Py = __unpk9445[1].clone(); if py_truthy(&Py::Bool(py_contains(&IMPERATIVES.clone(), &word.clone()))) {  __out.push(index.clone()); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&Py::Bool(py_is(&at.clone(), &Py::None))) {
     return orders.clone();
     }
@@ -5670,6 +5670,7 @@ pub fn _the_steps(args: &[Py]) -> Py {
     let mut trimmed: Py = Py::None;
     let mut verbs: Py = Py::None;
     let mut words: Py = Py::None;
+    let mut __yielded: Vec<Py> = Vec::new();
     let _ = py_str("Every instruction in the answer, in the order the answer gives them.\n\n    `_the_first_step` wants the first one; a \"what else can i do\" wants the first one that is not\n    the thing the person has just said did not work, so both read the answer through this.\n    ");
     IMPERATIVES = pyrt::xrefs::xget("compose.verdict", "IMPERATIVES");
     verbs = op_bitor(&call_builtin("frozenset", &[IMPERATIVES.clone()]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("frozenset", &[g_MOVE_VERBS()]).unwrap_or_else(|e| exc::raise(e)));
@@ -5754,16 +5755,16 @@ pub fn _the_steps(args: &[Py]) -> Py {
     let __iter8 = py_iter_or_raise(&found.clone());
     for __item in __iter8 {
     step = __item.clone();
-    let _ = Py::None;
+    __yielded.push(step.clone());
     }
     if py_truthy(&Py::Bool(!py_truthy(&found.clone()))) {
     item = _a_list_item(&[part.clone()]);
     if py_truthy(&item.clone()) {
-    let _ = Py::None;
+    __yielded.push(op_add(&mcall(&geti(&item.clone(), &Py::Int(0)), "lower", &[]), &slice_or_raise(&item.clone(), &Py::Int(1), &Py::None, &Py::None)));
     }
     }
     }
-    Py::None
+    py_list(__yielded)
 }
 pub fn _the_next_step(args: &[Py]) -> Py {
     ensure_init();
@@ -7323,7 +7324,7 @@ pub fn _the_length_they_mean(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&pool.clone()))) {
     continue;
     }
-    distinct = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pool.clone()) { let __unpk9020 = py_unpack(&__item.clone(), 2, None); let mut _back: Py = __unpk9020[0].clone(); let mut figures: Py = __unpk9020[1].clone(); for __item in py_iter_or_raise(&figures.clone()) { let mut one: Py = __item.clone(); __out.push(mcall(&geti(&one.clone(), &Py::Int(1)), "lower", &[])); } } py_set(__out) })() };
+    distinct = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pool.clone()) { let __unpk1500 = py_unpack(&__item.clone(), 2, None); let mut _back: Py = __unpk1500[0].clone(); let mut figures: Py = __unpk1500[1].clone(); for __item in py_iter_or_raise(&figures.clone()) { let mut one: Py = __item.clone(); __out.push(mcall(&geti(&one.clone(), &Py::Int(1)), "lower", &[])); } } py_set(__out) })() };
     if py_truthy(&Py::Bool(py_eq(&call_builtin("len", &[distinct.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1)))) {
     let __unpk5 = py_unpack(&geti(&pool.clone(), &op_neg(&Py::Int(1))), 2, None);
     back = __unpk5[0].clone();
@@ -7456,7 +7457,7 @@ pub fn a_narrowing_and_its_line(args: &[Py]) -> Py {
     return Py::None;
     }
     lines = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&turns.clone()) { let mut turn: Py = __item.clone(); if py_truthy(&call_builtin("isinstance", &[turn.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(mcall(&py_str(" "), "join", &[mcall(&call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("user")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "split", &[])])); } } py_list(__out) })() };
-    places = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[lines.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk5911 = py_unpack(&__item.clone(), 2, None); let mut at: Py = __unpk5911[0].clone(); let mut text: Py = __unpk5911[1].clone(); if py_truthy(&Py::Bool(py_eq(&text.clone(), &said.clone()))) {  __out.push(at.clone()); } } py_list(__out) })() };
+    places = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[lines.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk9350 = py_unpack(&__item.clone(), 2, None); let mut at: Py = __unpk9350[0].clone(); let mut text: Py = __unpk9350[1].clone(); if py_truthy(&Py::Bool(py_eq(&text.clone(), &said.clone()))) {  __out.push(at.clone()); } } py_list(__out) })() };
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&places.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&geti(&places.clone(), &op_neg(&Py::Int(1))))) } }) {
     return Py::None;
     }
@@ -7659,10 +7660,10 @@ pub fn the_figure_they_gave(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&bare.clone()))) {
     return Py::None;
     }
-    found = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[lines.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk1740 = py_unpack(&__item.clone(), 2, None); let mut back: Py = __unpk1740[0].clone(); let mut line: Py = __unpk1740[1].clone(); if py_truthy(&Py::Bool(!py_truthy(&mcall(&g_A_LINE_THAT_ASKS(), "search", &[line.clone()])))) {  for __item in py_iter_or_raise(&_figures_in(&[line.clone()])) { let mut one: Py = __item.clone(); if py_truthy(&Py::Bool(py_eq(&geti(&one.clone(), &Py::Int(0)), &kind.clone()))) {  __out.push(py_tuple(vec![back.clone(), geti(&one.clone(), &Py::Int(1))])); } } } } py_list(__out) })() };
-    distinct = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&found.clone()) { let __unpk3180 = py_unpack(&__item.clone(), 2, None); let mut _back: Py = __unpk3180[0].clone(); let mut one: Py = __unpk3180[1].clone(); __out.push(mcall(&one.clone(), "lower", &[])); } py_set(__out) })() };
+    found = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[lines.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk5421 = py_unpack(&__item.clone(), 2, None); let mut back: Py = __unpk5421[0].clone(); let mut line: Py = __unpk5421[1].clone(); if py_truthy(&Py::Bool(!py_truthy(&mcall(&g_A_LINE_THAT_ASKS(), "search", &[line.clone()])))) {  for __item in py_iter_or_raise(&_figures_in(&[line.clone()])) { let mut one: Py = __item.clone(); if py_truthy(&Py::Bool(py_eq(&geti(&one.clone(), &Py::Int(0)), &kind.clone()))) {  __out.push(py_tuple(vec![back.clone(), geti(&one.clone(), &Py::Int(1))])); } } } } py_list(__out) })() };
+    distinct = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&found.clone()) { let __unpk6861 = py_unpack(&__item.clone(), 2, None); let mut _back: Py = __unpk6861[0].clone(); let mut one: Py = __unpk6861[1].clone(); __out.push(mcall(&one.clone(), "lower", &[])); } py_set(__out) })() };
     if py_truthy(&Py::Bool(!py_eq(&call_builtin("len", &[distinct.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1)))) {
-    corrected = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&found.clone()) { let __unpk3948 = py_unpack(&__item.clone(), 2, None); let mut back: Py = __unpk3948[0].clone(); let mut one: Py = __unpk3948[1].clone(); if py_truthy(&mcall(&g_A_CORRECTION(), "search", &[geti(&lines.clone(), &back.clone())])) {  __out.push(one.clone()); } } py_list(__out) })() };
+    corrected = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&found.clone()) { let __unpk7629 = py_unpack(&__item.clone(), 2, None); let mut back: Py = __unpk7629[0].clone(); let mut one: Py = __unpk7629[1].clone(); if py_truthy(&mcall(&g_A_CORRECTION(), "search", &[geti(&lines.clone(), &back.clone())])) {  __out.push(one.clone()); } } py_list(__out) })() };
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&corrected.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_eq(&geti(&geti(&found.clone(), &op_neg(&Py::Int(1))), &Py::Int(1)), &geti(&corrected.clone(), &op_neg(&Py::Int(1))))) } }) {
     return Py::None;
     }

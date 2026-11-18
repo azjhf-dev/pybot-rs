@@ -649,7 +649,7 @@ pub fn the_favourites(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&call_builtin("isinstance", &[held.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))))) {
     return py_list(vec![]);
     }
-    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&held.clone(), "items", &[])) { let __unpk4484 = py_unpack(&__item.clone(), 2, None); let mut thing: Py = __unpk4484[0].clone(); let mut value: Py = __unpk4484[1].clone(); if py_truthy(&call_builtin("isinstance", &[value.clone(), py_func("str", |args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(py_tuple(vec![thing.clone(), value.clone()])); } } py_list(__out) })() };
+    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&held.clone(), "items", &[])) { let __unpk1744 = py_unpack(&__item.clone(), 2, None); let mut thing: Py = __unpk1744[0].clone(); let mut value: Py = __unpk1744[1].clone(); if py_truthy(&call_builtin("isinstance", &[value.clone(), py_func("str", |args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(py_tuple(vec![thing.clone(), value.clone()])); } } py_list(__out) })() };
     Py::None
 }
 pub fn store(args: &[Py]) -> Py {

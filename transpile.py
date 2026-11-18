@@ -205,7 +205,7 @@ def find_defs(mods):
                 for t in n.targets:
                     for name in target_names(t):
                         glbs[dotted].add(name)
-            elif isinstance(n, ast.AnnAssign) and isinstance(n.target, ast.Name):
+            elif isinstance(n, (ast.AnnAssign, ast.AugAssign)) and isinstance(n.target, ast.Name):
                 glbs[dotted].add(n.target.id)
             elif isinstance(n, (ast.If, ast.For, ast.While, ast.Try)):
                 for name in assigned_names(n):
@@ -545,6 +545,7 @@ class Gen:
         locals_, globals_declared = self.fn_scope(node)
         ctx.locals = locals_
         ctx.global_names = globals_declared
+        ctx.generator = any(isinstance(n, (ast.Yield, ast.YieldFrom)) for n in ast.walk(node))
         self.emit(f"pub fn {rname}(args: &[Py]) -> Py {{")
         self.emit("    ensure_init();")
         self.emit("    let mut __pos: Vec<Py> = Vec::new();")
@@ -573,9 +574,11 @@ class Gen:
             self.emit(f"    let mut {kp}: Py = py_dict(__kw.iter().filter(|(n, _)| ![{pnames}].contains(&n.as_str())).map(|(n, v)| (py_str(n), v.clone())).collect());")
         for name in sorted(ctx.locals - set(params) - ({node.args.vararg.arg} if node.args.vararg else set()) - ({node.args.kwarg.arg} if node.args.kwarg else set())):
             self.emit(f"    let mut {rust_ident(name)}: Py = Py::None;")
+        if ctx.generator:
+            self.emit('    let mut __yielded: Vec<Py> = Vec::new();')
         for stmt in node.body:
             self.gen_stmt(stmt, ctx)
-        self.emit("    Py::None")
+        self.emit("    py_list(__yielded)" if ctx.generator else "    Py::None")
         self.emit("}")
 
     def gen_class(self, node):
@@ -602,11 +605,18 @@ class Gen:
     def gen_stmt(self, node, ctx):
         E = self.emit
         if isinstance(node, ast.Expr):
-            E(f"    let _ = {self.gen_expr(node.value, ctx)};")
+            if isinstance(node.value, ast.Yield):
+                E(f'    __yielded.push({self.gen_expr(node.value.value, ctx)});')
+            elif isinstance(node.value, ast.YieldFrom):
+                E(f'    __yielded.extend(py_iter_or_raise(&{self.gen_expr(node.value.value, ctx)}));')
+            else:
+                E(f"    let _ = {self.gen_expr(node.value, ctx)};")
         elif isinstance(node, ast.Pass):
             pass
         elif isinstance(node, ast.Return):
-            if getattr(ctx, 'try_closure', 0):
+            if getattr(ctx, 'generator', False):
+                E('    return py_list(__yielded);')
+            elif getattr(ctx, 'try_closure', 0):
                 v = self.gen_expr(node.value, ctx) if node.value is not None else 'Py::None'
                 E(f"    return py_tuple(vec![Py::Bool(true), {v}]);")
             elif node.value is None:
@@ -1112,6 +1122,8 @@ class Gen:
                 return f'py_func({rust_string(name)}, |args: &[Py]| {r}(args))'
             if name in self.glbs.get(self.dotted, set()) or name in self.decorated:
                 return f'g_{r}()'
+        if name in getattr(self, 'import_globals', {}):
+            return f'g_{r}()'
         # imports
         if name in self.info.std:
             return f'stdlib_module({rust_string(self.info.std[name])})'
@@ -1420,7 +1432,9 @@ class Gen:
             lines.append(f'let mut {rust_ident(target.id)}: Py = {expr};')
         elif isinstance(target, (ast.Tuple, ast.List)):
             tmp = f'__unpk{id(target) % 9999}'
-            lines.append(f'let {tmp} = py_unpack(&{expr}, {len(target.elts)}, None);')
+            star = next((i for i,e in enumerate(target.elts) if isinstance(e, ast.Starred)), None)
+            star_expr = 'None' if star is None else f'Some({star})'
+            lines.append(f'let {tmp} = py_unpack(&{expr}, {len(target.elts)}, {star_expr});')
             for i, e in enumerate(target.elts):
                 if isinstance(e, ast.Name):
                     lines.append(f'let mut {rust_ident(e.id)}: Py = {tmp}[{i}].clone();')

@@ -365,7 +365,7 @@ pub fn _names_an_occasion(args: &[Py]) -> Py {
     let mut _key: Py = Py::None;
     let mut _phrase: Py = Py::None;
     let mut pattern: Py = Py::None;
-    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_OCCASIONS()) { let __unpk1759 = py_unpack(&__item.clone(), 3, None); let mut pattern: Py = __unpk1759[0].clone(); let mut _key: Py = __unpk1759[1].clone(); let mut _phrase: Py = __unpk1759[2].clone(); __out.push(mcall(&pattern.clone(), "search", &[text.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_OCCASIONS()) { let __unpk2013 = py_unpack(&__item.clone(), 3, None); let mut pattern: Py = __unpk2013[0].clone(); let mut _key: Py = __unpk2013[1].clone(); let mut _phrase: Py = __unpk2013[2].clone(); __out.push(mcall(&pattern.clone(), "search", &[text.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn _names_its_own_outing(args: &[Py]) -> Py {

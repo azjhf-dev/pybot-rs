@@ -459,11 +459,11 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.when.WHAT_DAY_SAYS"); }
     s_WHAT_DAY_SAYS(call_builtin("frozenset", &[py_tuple(vec![py_str("day"), py_str("date")])]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.when.MONTH_NAMES"); }
-    s_MONTH_NAMES(mcall(&py_str("|"), "join", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(pyrt::xrefs::xget("memory.facts", "MONTHS")); __kws.extend(vec![("key".to_string(), py_func("len", |args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e)))), ("reverse".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sorted", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }]));
+    s_MONTH_NAMES(mcall(&py_str("|"), "join", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(g_MONTHS()); __kws.extend(vec![("key".to_string(), py_func("len", |args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e)))), ("reverse".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sorted", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }]));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.when.SHORT_DATE"); }
-    s_SHORT_DATE(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&py_str("\\b(?:for|in|on|by|until|till|around|from)\\s+(?:the\\s+)?(?:(?:early|mid|late)\\s+)?(?:"), &g_MONTH_NAMES()), &py_str("|")), &mcall(&py_str("|"), "join", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(pyrt::xrefs::xget("memory.facts", "DAYS")); __kws.extend(vec![("key".to_string(), py_func("len", |args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e)))), ("reverse".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sorted", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }])), &py_str("|(?:0?[1-9]|[12]\\d|3[01])(?:st|nd|rd|th)?(?!\\s*(?:k|grand|thousand|hundred|million|billion|quid|pounds?|dollars?|euros?|cents?|percent|%|per\\b|a\\s+(?:week|month|year|day)))(?:\\s+(?:of\\s+)?(?:")), &g_MONTH_NAMES()), &py_str("))?)\\b|\\b(?:is|was|it's|its)\\s+(?:in\\s+|on\\s+)?(?:")), &mcall(&py_str("|"), "join", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(pyrt::xrefs::xget("memory.facts", "MONTHS")); __kws.extend(vec![("key".to_string(), py_func("len", |args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e)))), ("reverse".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sorted", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }])), &py_str(")")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s_SHORT_DATE(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&py_str("\\b(?:for|in|on|by|until|till|around|from)\\s+(?:the\\s+)?(?:(?:early|mid|late)\\s+)?(?:"), &g_MONTH_NAMES()), &py_str("|")), &mcall(&py_str("|"), "join", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(g_DAYS()); __kws.extend(vec![("key".to_string(), py_func("len", |args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e)))), ("reverse".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sorted", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }])), &py_str("|(?:0?[1-9]|[12]\\d|3[01])(?:st|nd|rd|th)?(?!\\s*(?:k|grand|thousand|hundred|million|billion|quid|pounds?|dollars?|euros?|cents?|percent|%|per\\b|a\\s+(?:week|month|year|day)))(?:\\s+(?:of\\s+)?(?:")), &g_MONTH_NAMES()), &py_str("))?)\\b|\\b(?:is|was|it's|its)\\s+(?:in\\s+|on\\s+)?(?:")), &mcall(&py_str("|"), "join", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(g_MONTHS()); __kws.extend(vec![("key".to_string(), py_func("len", |args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e)))), ("reverse".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sorted", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }])), &py_str(")")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.when.BARE_DAY"); }
-    s_BARE_DAY(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("\\b(?:start|starts|starting|begin|begins|beginning|finish|finishes|finishing|end|ends|ending|leave|leaves|leaving|go|goes|going|come|comes|coming|return|returns|returning|fly|flies|flying|arrive|arrives|arriving|land|lands|landing|move|moves|moving|open|opens|opening|close|closes|closing|visit|visits|visiting|meet|meets|meeting|submit|submits|hand|hands|deliver|delivers|book|booked|due|held|happens|happen|is|are|was|were|have|has|got)\\s+(?:on\\s+|this\\s+|next\\s+)?(?:(?!and\\b|but\\b|because\\b|if\\b|[.!?])[\\w']+\\s+){0,3}("), &mcall(&py_str("|"), "join", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(pyrt::xrefs::xget("memory.facts", "DAYS")); __kws.extend(vec![("key".to_string(), py_func("len", |args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e)))), ("reverse".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sorted", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }])), &py_str(")\\b(?!\\s+(?:is|was|are|were)\\b)")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s_BARE_DAY(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("\\b(?:start|starts|starting|begin|begins|beginning|finish|finishes|finishing|end|ends|ending|leave|leaves|leaving|go|goes|going|come|comes|coming|return|returns|returning|fly|flies|flying|arrive|arrives|arriving|land|lands|landing|move|moves|moving|open|opens|opening|close|closes|closing|visit|visits|visiting|meet|meets|meeting|submit|submits|hand|hands|deliver|delivers|book|booked|due|held|happens|happen|is|are|was|were|have|has|got)\\s+(?:on\\s+|this\\s+|next\\s+)?(?:(?!and\\b|but\\b|because\\b|if\\b|[.!?])[\\w']+\\s+){0,3}("), &mcall(&py_str("|"), "join", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(g_DAYS()); __kws.extend(vec![("key".to_string(), py_func("len", |args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e)))), ("reverse".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sorted", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }])), &py_str(")\\b(?!\\s+(?:is|was|are|were)\\b)")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.when.PAST_WHEN"); }
     s_PAST_WHEN(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("\\b(?:last|back in|this past)\\s+(?:(?:early|mid|late)\\s+)?(?:"), &g_MONTH_NAMES()), &py_str("|spring|summer|autumn|winter|year)\\b")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.when.TRIP_WORDS"); }
@@ -507,7 +507,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.when.LEAD"); }
     s_LEAD(py_tuple(vec![py_str("for"), py_str("is"), py_str("was"), py_str("it's"), py_str("its"), py_str("'s")]));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.when.MONTH_AFTER_THE_DAY"); }
-    s_MONTH_AFTER_THE_DAY(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("^\\s+(?:of\\s+)?(?:"), &mcall(&py_str("|"), "join", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(pyrt::xrefs::xget("memory.facts", "MONTHS")); __kws.extend(vec![("key".to_string(), py_func("len", |args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e)))), ("reverse".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sorted", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }])), &py_str(")\\b")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s_MONTH_AFTER_THE_DAY(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("^\\s+(?:of\\s+)?(?:"), &mcall(&py_str("|"), "join", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(g_MONTHS()); __kws.extend(vec![("key".to_string(), py_func("len", |args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e)))), ("reverse".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sorted", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }])), &py_str(")\\b")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.when.A_THING_NAMED"); }
     s_A_THING_NAMED(stdlib_call("re", "compile", &[py_str("\\b(?:my|our|your|his|her|their|the|this|that|these|those|a|an)\\s+([a-z][a-z'-]{1,19})"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.when.SAME_THING"); }
@@ -581,11 +581,11 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.when.MONTH_NUMBER"); }
     s_MONTH_NUMBER(py_dict(vec![(py_str("january"), Py::Int(1)), (py_str("february"), Py::Int(2)), (py_str("march"), Py::Int(3)), (py_str("april"), Py::Int(4)), (py_str("may"), Py::Int(5)), (py_str("june"), Py::Int(6)), (py_str("july"), Py::Int(7)), (py_str("august"), Py::Int(8)), (py_str("september"), Py::Int(9)), (py_str("october"), Py::Int(10)), (py_str("november"), Py::Int(11)), (py_str("december"), Py::Int(12))]));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.when.MONTH_NAME"); }
-    s_MONTH_NAME({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_MONTH_NUMBER(), "items", &[])) { let __unpk8449 = py_unpack(&__item.clone(), 2, None); let mut name: Py = __unpk8449[0].clone(); let mut number: Py = __unpk8449[1].clone(); __out.push((number.clone(), mcall(&name.clone(), "capitalize", &[]))); } py_dict(__out) })() });
+    s_MONTH_NAME({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_MONTH_NUMBER(), "items", &[])) { let __unpk842 = py_unpack(&__item.clone(), 2, None); let mut name: Py = __unpk842[0].clone(); let mut number: Py = __unpk842[1].clone(); __out.push((number.clone(), mcall(&name.clone(), "capitalize", &[]))); } py_dict(__out) })() });
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.when.WEEKDAY_NUMBER"); }
     s_WEEKDAY_NUMBER(py_dict(vec![(py_str("monday"), Py::Int(0)), (py_str("tuesday"), Py::Int(1)), (py_str("wednesday"), Py::Int(2)), (py_str("thursday"), Py::Int(3)), (py_str("friday"), Py::Int(4)), (py_str("saturday"), Py::Int(5)), (py_str("sunday"), Py::Int(6))]));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.when.WEEKDAY_NAME"); }
-    s_WEEKDAY_NAME({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_WEEKDAY_NUMBER(), "items", &[])) { let __unpk6913 = py_unpack(&__item.clone(), 2, None); let mut name: Py = __unpk6913[0].clone(); let mut number: Py = __unpk6913[1].clone(); __out.push((number.clone(), mcall(&name.clone(), "capitalize", &[]))); } py_dict(__out) })() });
+    s_WEEKDAY_NAME({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_WEEKDAY_NUMBER(), "items", &[])) { let __unpk2378 = py_unpack(&__item.clone(), 2, None); let mut name: Py = __unpk2378[0].clone(); let mut number: Py = __unpk2378[1].clone(); __out.push((number.clone(), mcall(&name.clone(), "capitalize", &[]))); } py_dict(__out) })() });
     fn __data1() -> Py { py_tuple(vec![py_str("early"), py_str("mid"), py_str("late"), py_str("end"), py_str("ends"), py_str("ending"), py_str("next"), py_str("this"), py_str("month"), py_str("week"), py_str("the"), py_str("of"), py_str("in"), py_str("on"), py_str("at"), py_str("by"), py_str("start"), py_str("beginning"), py_str("weekend"), py_str("a"), py_str("an"), py_str("for"), py_str("from"), py_str("to"), py_str("until"), py_str("till"), py_str("around"), py_str("about")]) }
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.when.A_DATE_WORD"); }
     s_A_DATE_WORD(op_bitor(&op_bitor(&call_builtin("frozenset", &[g_MONTH_NUMBER()]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("frozenset", &[g_WEEKDAY_NUMBER()]).unwrap_or_else(|e| exc::raise(e))), &call_builtin("frozenset", &[__data1()]).unwrap_or_else(|e| exc::raise(e))));
@@ -725,10 +725,10 @@ pub fn _more_than_one_day(args: &[Py]) -> Py {
     let mut spans: Py = Py::None;
     let _ = py_str("True when the chat holds two different days, and neither of them is a day put right.\n\n    A correction is them telling us which day to use (\"i start monday\" / \"actually i meant\n    tuesday\"), so the two days are one answer and the newest is right. Two days about two things\n    are a choice the line has to make, and a line with no words of its own cannot make it.\n    ");
     dated = _dated(&[memory.clone()]);
-    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&dated.clone()) { let __unpk5792 = py_unpack(&__item.clone(), 2, None); let mut said: Py = __unpk5792[0].clone(); let mut spans: Py = __unpk5792[1].clone(); __out.push(pyrt::xrefs::xcall("memory.facts", "a_date_put_right", &[said.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&dated.clone()) { let __unpk1181 = py_unpack(&__item.clone(), 2, None); let mut said: Py = __unpk1181[0].clone(); let mut spans: Py = __unpk1181[1].clone(); __out.push(pyrt::xrefs::xcall("memory.facts", "a_date_put_right", &[said.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     return Py::Bool(false);
     }
-    return op_gt(&call_builtin("len", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&dated.clone()) { let __unpk6368 = py_unpack(&__item.clone(), 2, None); let mut said: Py = __unpk6368[0].clone(); let mut spans: Py = __unpk6368[1].clone(); if py_truthy(&spans.clone()) {  __out.push(geti(&geti(&spans.clone(), &op_neg(&Py::Int(1))), &Py::Int(0))); } } py_set(__out) })() }]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1));
+    return op_gt(&call_builtin("len", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&dated.clone()) { let __unpk221 = py_unpack(&__item.clone(), 2, None); let mut said: Py = __unpk221[0].clone(); let mut spans: Py = __unpk221[1].clone(); if py_truthy(&spans.clone()) {  __out.push(geti(&geti(&spans.clone(), &op_neg(&Py::Int(1))), &Py::Int(0))); } } py_set(__out) })() }]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1));
     Py::None
 }
 pub fn when_answer(args: &[Py]) -> Py {
@@ -799,7 +799,7 @@ pub fn when_answer(args: &[Py]) -> Py {
     asked = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&g_TRIP_WORDS(), &word.clone()))) {  __out.push(word.clone()); } } py_list(__out) })() };
     trip = Py::Bool(!py_eq(&asked.clone(), &words.clone()));
     if py_truthy(&Py::Bool(!py_truthy(&asked.clone()))) {
-    said_before = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&_dated(&[memory.clone()])) { let __unpk2047 = py_unpack(&__item.clone(), 2, None); let mut said: Py = __unpk2047[0].clone(); let mut spans: Py = __unpk2047[1].clone(); for __item in py_iter_or_raise(&pyrt::xrefs::xcall("memory.topics", "content", &[said.clone()])) { let mut word: Py = __item.clone(); __out.push(word.clone()); } } py_set(__out) })() };
+    said_before = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&_dated(&[memory.clone()])) { let __unpk2641 = py_unpack(&__item.clone(), 2, None); let mut said: Py = __unpk2641[0].clone(); let mut spans: Py = __unpk2641[1].clone(); for __item in py_iter_or_raise(&pyrt::xrefs::xcall("memory.topics", "content", &[said.clone()])) { let mut word: Py = __item.clone(); __out.push(word.clone()); } } py_set(__out) })() };
     anchors = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xcall("memory.topics", "content", &[line.clone()])) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(py_contains(&said_before.clone(), &word.clone()))) {  __out.push(word.clone()); } } py_list(__out) })() };
     if py_truthy(&anchors.clone()) {
     let __unpk3 = py_unpack(&py_tuple(vec![anchors.clone(), Py::Bool(false)]), 2, None);
@@ -939,7 +939,7 @@ pub fn _no_date_yet(args: &[Py]) -> Py {
     if py_truthy(&_is_an_ask(&[said.clone()])) {
     continue;
     }
-    if py_truthy(&{ let __b = call_builtin("list", &[mcall(&pyrt::xrefs::xget("memory.facts", "FUTURE"), "finditer", &[said.clone()])]).unwrap_or_else(|e| exc::raise(e)); if py_truthy(&__b) { __b } else { call_builtin("list", &[mcall(&g_SHORT_DATE(), "finditer", &[said.clone()])]).unwrap_or_else(|e| exc::raise(e)) } }) {
+    if py_truthy(&{ let __b = call_builtin("list", &[mcall(&g_FUTURE(), "finditer", &[said.clone()])]).unwrap_or_else(|e| exc::raise(e)); if py_truthy(&__b) { __b } else { call_builtin("list", &[mcall(&g_SHORT_DATE(), "finditer", &[said.clone()])]).unwrap_or_else(|e| exc::raise(e)) } }) {
     return Py::None;
     }
     if py_truthy(&asked.clone()) {
@@ -981,7 +981,7 @@ pub fn _a_day_and_a_month(args: &[Py]) -> Py {
     let mut word: Py = Py::None;
     let _ = py_str("The two halves of one date joined: \"on the 4th\" put right under \"in june\".\n\n    A day put right says the day and nothing else, so the month has to come from the line it\n    corrects: \"i'm going to spain in june\" / \"sorry, it's the 4th\" / \"when do we fly\" is\n    \"On the 4th of june.\", not \"On the 4th.\" (no month) or \"In June.\" (the month they took\n    back). Returns \"\" unless one half is a day and the other a month.\n    ");
     the_day = stdlib_call("re", "search", &[py_str("\\b\\d{1,2}(?:st|nd|rd|th)\\b"), call_builtin("str", &[{ let __b = day.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e));
-    a_month = call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&stdlib_call("re", "findall", &[py_str("[A-Za-z]+"), call_builtin("str", &[{ let __b = month.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e))) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(py_contains(&pyrt::xrefs::xget("memory.facts", "MONTHS"), &mcall(&word.clone(), "lower", &[])))) {  __out.push(word.clone()); } } py_list(__out) })() }, py_str("")]).unwrap_or_else(|e| exc::raise(e));
+    a_month = call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&stdlib_call("re", "findall", &[py_str("[A-Za-z]+"), call_builtin("str", &[{ let __b = month.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e))) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(py_contains(&g_MONTHS(), &mcall(&word.clone(), "lower", &[])))) {  __out.push(word.clone()); } } py_list(__out) })() }, py_str("")]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&Py::Bool(!py_truthy(&{ let __b = the_day.clone(); if !py_truthy(&__b) { __b } else { a_month.clone() } }))) {
     return py_str("");
     }
@@ -1138,7 +1138,7 @@ pub fn _the_thing_before_the_date(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&line.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_eq(&line.clone(), &key.clone())) } }) {
     continue;
     }
-    spans = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&pyrt::xrefs::xget("memory.facts", "FUTURE"), "finditer", &[line.clone()])) { let mut found: Py = __item.clone(); __out.push(mcall(&found.clone(), "group", &[Py::Int(0)])); } py_list(__out) })() };
+    spans = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_FUTURE(), "finditer", &[line.clone()])) { let mut found: Py = __item.clone(); __out.push(mcall(&found.clone(), "group", &[Py::Int(0)])); } py_list(__out) })() };
     let __aug2 = op_add(&spans.clone(), &{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_SHORT_DATE(), "finditer", &[line.clone()])) { let mut found: Py = __item.clone(); __out.push(mcall(&found.clone(), "group", &[Py::Int(0)])); } py_list(__out) })() });
     spans = __aug2;
     if py_truthy(&pyrt::xrefs::xcall("memory.facts", "a_date_put_right", &[line.clone()])) {
@@ -1195,7 +1195,7 @@ pub fn _the_line_put_right(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&pyrt::xrefs::xcall("memory.facts", "a_moved_time", &[meant.clone()])))) {
     return py_tuple(vec![py_str(""), py_str("")]);
     }
-    spans = op_add(&call_builtin("list", &[mcall(&pyrt::xrefs::xget("memory.facts", "FUTURE"), "finditer", &[line.clone()])]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("list", &[mcall(&g_SHORT_DATE(), "finditer", &[line.clone()])]).unwrap_or_else(|e| exc::raise(e)));
+    spans = op_add(&call_builtin("list", &[mcall(&g_FUTURE(), "finditer", &[line.clone()])]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("list", &[mcall(&g_SHORT_DATE(), "finditer", &[line.clone()])]).unwrap_or_else(|e| exc::raise(e)));
     if py_truthy(&Py::Bool(!py_truthy(&spans.clone()))) {
     return py_tuple(vec![py_str(""), py_str("")]);
     }
@@ -1273,7 +1273,7 @@ pub fn _dated(args: &[Py]) -> Py {
     let __unpk5 = py_unpack(&py_tuple(vec![py_list(vec![]), call_builtin("set", &[]).unwrap_or_else(|e| exc::raise(e))]), 2, None);
     spans = __unpk5[0].clone();
     places = __unpk5[1].clone();
-    let __iter6 = py_iter_or_raise(&mcall(&pyrt::xrefs::xget("memory.facts", "FUTURE"), "finditer", &[said.clone()]));
+    let __iter6 = py_iter_or_raise(&mcall(&g_FUTURE(), "finditer", &[said.clone()]));
     for __item in __iter6 {
     found = __item.clone();
     let _ = mcall(&spans.clone(), "append", &[py_tuple(vec![_lead(&[_with_the_month_after(&[said.clone(), found.clone()])]), mcall(&found.clone(), "start", &[])])]);
@@ -1348,7 +1348,7 @@ pub fn _lead(args: &[Py]) -> Py {
     return rest.clone();
     }
     first = mcall(&geti(&stdlib_call("re", "split", &[py_str("[\\s,]"), rest.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(0)), "lower", &[]);
-    if py_truthy(&{ let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("memory.facts", "MONTHS"), &first.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&py_tuple(vec![py_str("early"), py_str("mid"), py_str("late")]), &first.clone())) } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_MONTHS(), &first.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&py_tuple(vec![py_str("early"), py_str("mid"), py_str("late")]), &first.clone())) } }) {
     return op_add(&py_str("in "), &rest.clone());
     }
     return op_add(&py_str("on "), &rest.clone());
@@ -1502,7 +1502,7 @@ pub fn _names_a_thing_of_its_own(args: &[Py]) -> Py {
     continue;
     }
     behind = if py_truthy(&index.clone()) { geti(&words.clone(), &op_sub(&index.clone(), &Py::Int(1))) } else { py_str("") };
-    if py_truthy(&{ let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("memory.facts", "DETERMINERS"), &behind.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_a_doing_word(&[slice_or_raise(&words.clone(), &op_add(&index.clone(), &Py::Int(1)), &Py::None, &Py::None)]))) } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_DETERMINERS(), &behind.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_a_doing_word(&[slice_or_raise(&words.clone(), &op_add(&index.clone(), &Py::Int(1)), &Py::None, &Py::None)]))) } }) {
     continue;
     }
     return Py::Bool(true);
@@ -1591,7 +1591,7 @@ pub fn _put_right(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&sentence.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&old.clone())) } }) {
     return py_tuple(vec![py_str(""), py_str("")]);
     }
-    found = op_add(&call_builtin("list", &[mcall(&pyrt::xrefs::xget("memory.facts", "FUTURE"), "finditer", &[sentence.clone()])]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("list", &[mcall(&g_SHORT_DATE(), "finditer", &[sentence.clone()])]).unwrap_or_else(|e| exc::raise(e)));
+    found = op_add(&call_builtin("list", &[mcall(&g_FUTURE(), "finditer", &[sentence.clone()])]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("list", &[mcall(&g_SHORT_DATE(), "finditer", &[sentence.clone()])]).unwrap_or_else(|e| exc::raise(e)));
     if py_truthy(&Py::Bool(!py_truthy(&found.clone()))) {
     return py_tuple(vec![py_str(""), py_str("")]);
     }
@@ -1620,11 +1620,11 @@ pub fn _a_date_said(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&words.clone()))) {
     return py_str("");
     }
-    if py_truthy(&{ let __b = op_ge(&call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)); if !py_truthy(&__b) { __b } else { { let __b = stdlib_call("re", "fullmatch", &[py_str("\\d{1,2}(?:st|nd|rd|th)?"), geti(&words.clone(), &Py::Int(0))]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("memory.facts", "MONTHS"), &geti(&words.clone(), &Py::Int(1)))); if py_truthy(&__b) { __b } else { { let __b = op_gt(&call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)); if !py_truthy(&__b) { __b } else { Py::Bool(py_eq(&geti(&words.clone(), &Py::Int(1)), &py_str("of"))) } } } } } } } }) {
-    rest = if py_truthy(&Py::Bool(py_contains(&pyrt::xrefs::xget("memory.facts", "MONTHS"), &geti(&words.clone(), &Py::Int(1))))) { mcall(&py_str(" "), "join", &[slice_or_raise(&words.clone(), &Py::Int(1), &Py::None, &Py::None)]) } else { mcall(&py_str(" "), "join", &[slice_or_raise(&words.clone(), &Py::Int(2), &Py::None, &Py::None)]) };
+    if py_truthy(&{ let __b = op_ge(&call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)); if !py_truthy(&__b) { __b } else { { let __b = stdlib_call("re", "fullmatch", &[py_str("\\d{1,2}(?:st|nd|rd|th)?"), geti(&words.clone(), &Py::Int(0))]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&g_MONTHS(), &geti(&words.clone(), &Py::Int(1)))); if py_truthy(&__b) { __b } else { { let __b = op_gt(&call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)); if !py_truthy(&__b) { __b } else { Py::Bool(py_eq(&geti(&words.clone(), &Py::Int(1)), &py_str("of"))) } } } } } } } }) {
+    rest = if py_truthy(&Py::Bool(py_contains(&g_MONTHS(), &geti(&words.clone(), &Py::Int(1))))) { mcall(&py_str(" "), "join", &[slice_or_raise(&words.clone(), &Py::Int(1), &Py::None, &Py::None)]) } else { mcall(&py_str(" "), "join", &[slice_or_raise(&words.clone(), &Py::Int(2), &Py::None, &Py::None)]) };
     return op_add(&op_add(&op_add(&py_str("on the "), &geti(&words.clone(), &Py::Int(0))), &py_str(" of ")), &rest.clone());
     }
-    if py_truthy(&{ let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("memory.facts", "MONTHS"), &geti(&words.clone(), &Py::Int(0)))); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&py_tuple(vec![py_str("early"), py_str("mid"), py_str("late")]), &geti(&words.clone(), &Py::Int(0)))) } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_MONTHS(), &geti(&words.clone(), &Py::Int(0)))); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&py_tuple(vec![py_str("early"), py_str("mid"), py_str("late")]), &geti(&words.clone(), &Py::Int(0)))) } }) {
     return op_add(&py_str("in "), &phrase.clone());
     }
     return op_add(&py_str("on "), &phrase.clone());
@@ -1750,7 +1750,7 @@ pub fn the_part_asked(args: &[Py]) -> Py {
     return op_add(&_a_name(&[place.clone()]), &py_str("."));
     }
     if py_truthy(&mcall(&g_ASKS_WHEN(), "search", &[ask.clone()])) {
-    when = _the_date_asked(&[ask.clone(), { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&spans.clone()) { let __unpk3965 = py_unpack(&__item.clone(), 3, None); let mut _u: Py = __unpk3965[0].clone(); let mut _u: Py = __unpk3965[1].clone(); let mut said: Py = __unpk3965[2].clone(); __out.push(said.clone()); } py_list(__out) })() }]);
+    when = _the_date_asked(&[ask.clone(), { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&spans.clone()) { let __unpk4590 = py_unpack(&__item.clone(), 3, None); let mut _u: Py = __unpk4590[0].clone(); let mut _u: Py = __unpk4590[1].clone(); let mut said: Py = __unpk4590[2].clone(); __out.push(said.clone()); } py_list(__out) })() }]);
     return if py_truthy(&when.clone()) { _sentence(&[when.clone()]) } else { py_str("") };
     }
     return py_str("");
@@ -1924,13 +1924,13 @@ pub fn _the_dates_in(args: &[Py]) -> Py {
     let mut start: Py = Py::None;
     let _ = py_str("Every date in a piece of a line, in the order it is said, with where it sits.");
     out = py_list(vec![]);
-    let __iter1 = py_iter_or_raise(&py_tuple(vec![pyrt::xrefs::xget("memory.facts", "FUTURE"), g_SHORT_DATE(), g_PAST_WHEN()]));
+    let __iter1 = py_iter_or_raise(&py_tuple(vec![g_FUTURE(), g_SHORT_DATE(), g_PAST_WHEN()]));
     for __item in __iter1 {
     pattern = __item.clone();
     let __iter2 = py_iter_or_raise(&mcall(&pattern.clone(), "finditer", &[text.clone()]));
     for __item in __iter2 {
     found = __item.clone();
-    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&out.clone()) { let __unpk2577 = py_unpack(&__item.clone(), 3, None); let mut start: Py = __unpk2577[0].clone(); let mut end: Py = __unpk2577[1].clone(); let mut _u: Py = __unpk2577[2].clone(); __out.push({ let __b = op_lt(&mcall(&found.clone(), "start", &[]), &end.clone()); if !py_truthy(&__b) { __b } else { op_lt(&start.clone(), &mcall(&found.clone(), "end", &[])) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&out.clone()) { let __unpk1416 = py_unpack(&__item.clone(), 3, None); let mut start: Py = __unpk1416[0].clone(); let mut end: Py = __unpk1416[1].clone(); let mut _u: Py = __unpk1416[2].clone(); __out.push({ let __b = op_lt(&mcall(&found.clone(), "start", &[]), &end.clone()); if !py_truthy(&__b) { __b } else { op_lt(&start.clone(), &mcall(&found.clone(), "end", &[])) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     continue;
     }
     let _ = mcall(&out.clone(), "append", &[py_tuple(vec![mcall(&found.clone(), "start", &[]), mcall(&found.clone(), "end", &[]), mcall(&found.clone(), "group", &[Py::Int(0)])])]);
@@ -1965,10 +1965,10 @@ pub fn _the_date_asked(args: &[Py]) -> Py {
     when = __item.clone();
     plain = mcall(&_plain(&[when.clone()]), "lower", &[]);
     words = call_builtin("set", &[mcall(&plain.clone(), "split", &[])]).unwrap_or_else(|e| exc::raise(e));
-    if py_truthy(&{ let __b = mcall(&g_ASKS_THE_MONTH(), "search", &[ask.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&op_bitand(&words.clone(), &pyrt::xrefs::xget("memory.facts", "MONTHS")))) } }) {
+    if py_truthy(&{ let __b = mcall(&g_ASKS_THE_MONTH(), "search", &[ask.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&op_bitand(&words.clone(), &g_MONTHS()))) } }) {
     continue;
     }
-    if py_truthy(&{ let __b = mcall(&g_ASKS_THE_DAY(), "search", &[ask.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&{ let __b = op_bitand(&words.clone(), &pyrt::xrefs::xget("memory.facts", "DAYS")); if py_truthy(&__b) { __b } else { stdlib_call("re", "search", &[py_str("\\d"), plain.clone()]).unwrap_or_else(|e| exc::raise(e)) } })) } }) {
+    if py_truthy(&{ let __b = mcall(&g_ASKS_THE_DAY(), "search", &[ask.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&{ let __b = op_bitand(&words.clone(), &g_DAYS()); if py_truthy(&__b) { __b } else { stdlib_call("re", "search", &[py_str("\\d"), plain.clone()]).unwrap_or_else(|e| exc::raise(e)) } })) } }) {
     continue;
     }
     return when.clone();
@@ -2028,13 +2028,13 @@ pub fn already_answer(args: &[Py]) -> Py {
     }
     plain = mcall(&_plain(&[when.clone()]), "split", &[]);
     if py_truthy(&_has_happened(&[said.clone()])) {
-    if py_truthy(&{ let __b = plain.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("memory.facts", "MONTHS"), &geti(&plain.clone(), &Py::Int(0)))); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("memory.facts", "DAYS"), &geti(&plain.clone(), &Py::Int(0)))) } } } }) {
+    if py_truthy(&{ let __b = plain.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&g_MONTHS(), &geti(&plain.clone(), &Py::Int(0)))); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_DAYS(), &geti(&plain.clone(), &Py::Int(0)))) } } } }) {
     return op_add(&py_str("Yes - that was in "), &_sentence(&[when.clone()]));
     }
     said_when = _sentence(&[when.clone()]);
     return op_add(&op_add(&py_str("Yes - that was "), &mcall(&slice_or_raise(&said_when.clone(), &Py::None, &Py::Int(1), &Py::None), "lower", &[])), &slice_or_raise(&said_when.clone(), &Py::Int(1), &Py::None, &Py::None));
     }
-    if py_truthy(&{ let __b = plain.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("memory.facts", "MONTHS"), &geti(&plain.clone(), &Py::Int(0)))); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("memory.facts", "DAYS"), &geti(&plain.clone(), &Py::Int(0)))) } } } }) {
+    if py_truthy(&{ let __b = plain.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&g_MONTHS(), &geti(&plain.clone(), &Py::Int(0)))); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_DAYS(), &geti(&plain.clone(), &Py::Int(0)))) } } } }) {
     return op_add(&py_str("No - that's in "), &_sentence(&[when.clone()]));
     }
     said_when = _sentence(&[when.clone()]);
@@ -2084,7 +2084,7 @@ pub fn _was_sentence(args: &[Py]) -> Py {
     let mut said: Py = Py::None;
     let _ = py_str("A date the line says has already happened: \"in june\" -> \"That was in June.\" ");
     plain = mcall(&_plain(&[when.clone()]), "split", &[]);
-    if py_truthy(&{ let __b = plain.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("memory.facts", "MONTHS"), &geti(&plain.clone(), &Py::Int(0)))); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("memory.facts", "DAYS"), &geti(&plain.clone(), &Py::Int(0)))) } } } }) {
+    if py_truthy(&{ let __b = plain.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&g_MONTHS(), &geti(&plain.clone(), &Py::Int(0)))); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_DAYS(), &geti(&plain.clone(), &Py::Int(0)))) } } } }) {
     return op_add(&py_str("That was in "), &_sentence(&[when.clone()]));
     }
     said = _sentence(&[when.clone()]);
@@ -2114,7 +2114,7 @@ pub fn _sentence(args: &[Py]) -> Py {
     for __item in __iter1 {
     word = __item.clone();
     low = mcall(&mcall(&word.clone(), "lower", &[]), "strip", &[py_str(",;:")]);
-    if py_truthy(&{ let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("memory.facts", "MONTHS"), &low.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("memory.facts", "DAYS"), &low.clone())) } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_MONTHS(), &low.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_DAYS(), &low.clone())) } }) {
     word = op_add(&mcall(&slice_or_raise(&word.clone(), &Py::None, &Py::Int(1), &Py::None), "upper", &[]), &slice_or_raise(&word.clone(), &Py::Int(1), &Py::None, &Py::None));
     }
     let _ = mcall(&out.clone(), "append", &[word.clone()]);
@@ -3544,7 +3544,7 @@ pub fn _the_day_a_span_names(args: &[Py]) -> Py {
     let __iter1 = py_iter_or_raise(&words.clone());
     for __item in __iter1 {
     word = __item.clone();
-    if py_truthy(&Py::Bool(py_contains(&pyrt::xrefs::xget("memory.facts", "MONTHS"), &word.clone()))) {
+    if py_truthy(&Py::Bool(py_contains(&g_MONTHS(), &word.clone()))) {
     month = _the_month_number(&[word.clone()]);
     } else {
     if py_truthy(&stdlib_call("re", "fullmatch", &[py_str("\\d{4}"), word.clone()]).unwrap_or_else(|e| exc::raise(e))) {

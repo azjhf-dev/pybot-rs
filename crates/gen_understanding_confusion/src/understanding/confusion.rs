@@ -115,7 +115,7 @@ pub fn _a_confusion_ruled_out(args: &[Py]) -> Py {
     else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "before_cue") { v.clone() }
     else { exc::raise(type_err(&format!("missing required argument: before_cue"))) };
     let _ = py_str("True when the words in front of the cue rule it out (\"im not confused about the manual\").");
-    return call_builtin("bool", &[mcall(&pyrt::xrefs::xget("understanding.kinds", "DENY_BEFORE"), "search", &[mcall(&g_CONFUSION_HELPER_NOT(), "sub", &[py_str(""), before_cue.clone()])])]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("bool", &[mcall(&g_DENY_BEFORE(), "search", &[mcall(&g_CONFUSION_HELPER_NOT(), "sub", &[py_str(""), before_cue.clone()])])]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn _a_thing_trimmed(args: &[Py]) -> Py {

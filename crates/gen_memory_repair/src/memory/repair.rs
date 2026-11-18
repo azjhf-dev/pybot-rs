@@ -209,7 +209,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.repair.SENTENCE_END"); }
     s_SENTENCE_END(stdlib_call("re", "compile", &[py_str("(?<=[.!?])\\s+")]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.repair.THE_WORD_FOR"); }
-    s_THE_WORD_FOR({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&pyrt::xrefs::xget("memory.facts", "FIGURE_WORDS"), "items", &[])) { let __unpk211 = py_unpack(&__item.clone(), 2, None); let mut word: Py = __unpk211[0].clone(); let mut number: Py = __unpk211[1].clone(); __out.push((number.clone(), word.clone())); } py_dict(__out) })() });
+    s_THE_WORD_FOR({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&pyrt::xrefs::xget("memory.facts", "FIGURE_WORDS"), "items", &[])) { let __unpk1785 = py_unpack(&__item.clone(), 2, None); let mut word: Py = __unpk1785[0].clone(); let mut number: Py = __unpk1785[1].clone(); __out.push((number.clone(), word.clone())); } py_dict(__out) })() });
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.repair.SWAPPED"); }
     s_SWAPPED(py_tuple(vec![py_str("{thing}, then."), py_str("Got it — {thing}."), py_str("{thing} it is.")]));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.repair.AN_ASK_OPENS"); }
@@ -1558,7 +1558,7 @@ pub fn _the_fact_moved_to_the_person_they_meant(args: &[Py]) -> Py {
     return py_str("");
     }
     let _ = mcall(&py_call(&others, &[memory.clone()]), "remove", &[entry.clone()]);
-    moved = { (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&entry.clone(), "items", &[])) { let __unpk3762 = py_unpack(&__item.clone(), 2, None); let mut key: Py = __unpk3762[0].clone(); let mut value: Py = __unpk3762[1].clone(); if py_truthy(&Py::Bool(!py_eq(&key.clone(), &py_str("who")))) {  __out.push((key.clone(), value.clone())); } } py_dict(__out) })() };
+    moved = { (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&entry.clone(), "items", &[])) { let __unpk2110 = py_unpack(&__item.clone(), 2, None); let mut key: Py = __unpk2110[0].clone(); let mut value: Py = __unpk2110[1].clone(); if py_truthy(&Py::Bool(!py_eq(&key.clone(), &py_str("who")))) {  __out.push((key.clone(), value.clone())); } } py_dict(__out) })() };
     let _ = py_setitem(&moved.clone(), &py_str("who"), wanted.clone());
     let _ = py_call(&remember_other, &[memory.clone(), moved.clone(), call_builtin("str", &[text.clone()]).unwrap_or_else(|e| exc::raise(e))]);
     return fact.clone();

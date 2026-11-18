@@ -67,7 +67,7 @@ fn module_body() {
     s_UNKNOWN(pyrt::xrefs::xget("compose.fallback_data", "UNKNOWN"));
     s_the_place_the_answer_is_kept(py_func("the_place_the_answer_is_kept", |args: &[Py]| pyrt::xrefs::xcall("compose.fallback_data", "the_place_the_answer_is_kept", args)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.kept_nearby.PLAIN_HEADS"); }
-    s_PLAIN_HEADS(call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "UNKNOWN")) { let mut line: Py = __item.clone(); __out.push(slice_or_raise(&line.clone(), &Py::None, &Py::Int(40), &Py::None)); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
+    s_PLAIN_HEADS(call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_UNKNOWN()) { let mut line: Py = __item.clone(); __out.push(slice_or_raise(&line.clone(), &Py::None, &Py::Int(40), &Py::None)); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.kept_nearby.LEANING"); }
     s_LEANING(stdlib_call("re", "compile", &[py_str("^(?:(?:and|also|so|but|ok|okay|then|plus)\\b|\\W*(?:what|how|where|when|who|which|is|are|do|does|can|could|should|shall|will|would|have|has|did)\\b)"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.kept_nearby.SHORT"); }

@@ -72,14 +72,14 @@ pub fn asks_for_a_judgement(args: &[Py]) -> Py {
     clean = mcall(&py_str(" "), "join", &[mcall(&mcall(&call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]), "split", &[])]);
     let __try1 = exc::catch(|| {
     said = mcall(&pyrt::xrefs::xcall("compose.fallback", "_matchable", &[clean.clone()]), "rstrip", &[py_str(" ?.!,")]);
-    if py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback", "JUDGE_ASK"), "match", &[said.clone()])) {
+    if py_truthy(&mcall(&g_JUDGE_ASK(), "match", &[said.clone()])) {
     return py_tuple(vec![Py::Bool(true), Py::Bool(true)]);
     }
-    bare = mcall(&pyrt::xrefs::xget("compose.fallback", "JUDGE_ASK_BARE"), "match", &[said.clone()]);
+    bare = mcall(&g_JUDGE_ASK_BARE(), "match", &[said.clone()]);
     if py_truthy(&Py::Bool(!py_truthy(&bare.clone()))) {
     return py_tuple(vec![Py::Bool(true), Py::Bool(false)]);
     }
-    if py_truthy(&Py::Bool(!py_truthy(&{ let __b = mcall(&bare.clone(), "group", &[py_str("bare_noun")]); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "JUDGE_BARE_FACES"), &mcall(&bare.clone(), "group", &[py_str("face")]))) } }))) {
+    if py_truthy(&Py::Bool(!py_truthy(&{ let __b = mcall(&bare.clone(), "group", &[py_str("bare_noun")]); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_JUDGE_BARE_FACES(), &mcall(&bare.clone(), "group", &[py_str("face")]))) } }))) {
     return py_tuple(vec![Py::Bool(true), Py::Bool(false)]);
     }
     return py_tuple(vec![Py::Bool(true), call_builtin("bool", &[pyrt::xrefs::xcall("compose.fallback", "_the_plan_on_the_table", &[{ let __b = memory.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }])]).unwrap_or_else(|e| exc::raise(e))]);

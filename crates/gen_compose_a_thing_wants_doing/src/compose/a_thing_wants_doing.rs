@@ -99,7 +99,7 @@ pub fn reads(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_contains(&g_A_STATE(), &state.clone()))) {
     return Py::None;
     }
-    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&thing.clone(), "split", &[])) { let mut word: Py = __item.clone(); __out.push({ let __b = Py::Bool(py_contains(&g_A_PERSON(), &word.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "BODY_PARTS"), &word.clone())) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&thing.clone(), "split", &[])) { let mut word: Py = __item.clone(); __out.push({ let __b = Py::Bool(py_contains(&g_A_PERSON(), &word.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_BODY_PARTS(), &word.clone())) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     return Py::None;
     }
     return thing.clone();

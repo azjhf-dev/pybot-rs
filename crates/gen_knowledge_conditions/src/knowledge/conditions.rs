@@ -57,7 +57,7 @@ fn module_body() {
     s_ENTRIES(py_list(vec![]));
     fn __data1() -> Py { py_tuple(vec![py_str("what is"), py_str("whats"), py_str("what are"), py_str("explain"), py_str("tell me about"), py_str("mean"), py_str("means"), py_str("symptoms"), py_str("signs"), py_str("diagnosed"), py_str("diagnosis"), py_str("test"), py_str("tests"), py_str("how long"), py_str("last"), py_str("lasts"), py_str("cause"), py_str("causes"), py_str("why"), py_str("have"), py_str("got"), py_str("ive"), py_str("i've"), py_str("think"), py_str("worse"), py_str("better"), py_str("cure"), py_str("cured"), py_str("serious"), py_str("dangerous"), py_str("normal"), py_str("contagious"), py_str("catch"), py_str("should i"), py_str("see a doctor"), py_str("gp"), py_str("hospital")]) }
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.conditions._ASKING"); }
-    s__ASKING(op_add(&pyrt::xrefs::xget("knowledge.lookup", "ASK_ABOUT"), &__data1()));
+    s__ASKING(op_add(&g_ASK_ABOUT(), &__data1()));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.conditions._PREGNANT"); }
     s__PREGNANT(py_tuple(vec![py_str("pregnant"), py_str("pregnancy"), py_str("expecting"), py_str("trimester"), py_str("weeks pregnant"), py_str("midwife"), py_str("trying to conceive"), py_str("ivf")]));
     fn __data2() -> Py { py_tuple(vec![py_str("dog"), py_str("dogs"), py_str("puppy"), py_str("pup"), py_str("cat"), py_str("cats"), py_str("kitten"), py_str("pet"), py_str("pets"), py_str("vet"), py_str("hamster"), py_str("rabbit"), py_str("horse"), py_str("guinea pig"), py_str("parrot"), py_str("fish")]) }

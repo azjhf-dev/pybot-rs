@@ -916,7 +916,7 @@ pub fn names_a_thing(args: &[Py]) -> Py {
     return Py::Bool(false);
     }
     blob = mcall(&py_str(" "), "join", &[call_builtin("sorted", &[said.clone()]).unwrap_or_else(|e| exc::raise(e))]);
-    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_TRADES()) { let __unpk9190 = py_unpack(&__item.clone(), 3, None); let mut entry_words: Py = __unpk9190[0].clone(); let mut _u: Py = __unpk9190[1].clone(); let mut _u: Py = __unpk9190[2].clone(); __out.push(_names(&[said.clone(), blob.clone(), entry_words.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_TRADES()) { let __unpk3734 = py_unpack(&__item.clone(), 3, None); let mut entry_words: Py = __unpk3734[0].clone(); let mut _u: Py = __unpk3734[1].clone(); let mut _u: Py = __unpk3734[2].clone(); __out.push(_names(&[said.clone(), blob.clone(), entry_words.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn has_evidence(args: &[Py]) -> Py {
@@ -2688,7 +2688,7 @@ pub fn _in_care(args: &[Py]) -> Py {
     for __item in __iter1 {
     line = __item.clone();
     said = mcall(&py_str(" "), "join", &[words_of(&[line.clone()])]);
-    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_TRADES()) { let __unpk3203 = py_unpack(&__item.clone(), 3, None); let mut entry_words: Py = __unpk3203[0].clone(); let mut _u: Py = __unpk3203[1].clone(); let mut _u: Py = __unpk3203[2].clone(); __out.push(_names(&[call_builtin("set", &[mcall(&said.clone(), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), said.clone(), entry_words.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_TRADES()) { let __unpk9728 = py_unpack(&__item.clone(), 3, None); let mut entry_words: Py = __unpk9728[0].clone(); let mut _u: Py = __unpk9728[1].clone(); let mut _u: Py = __unpk9728[2].clone(); __out.push(_names(&[call_builtin("set", &[mcall(&said.clone(), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), said.clone(), entry_words.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     return Py::None;
     }
     if py_truthy(&Py::Bool(!py_truthy(&mcall(&g_IN_CARE(), "search", &[said.clone()])))) {
@@ -2698,7 +2698,7 @@ pub fn _in_care(args: &[Py]) -> Py {
     person_with = if py_truthy(&with_someone.clone()) { _the_person_word(&[mcall(&with_someone.clone(), "group", &[Py::Int(1)])]) } else { py_str("") };
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&person_with.clone())); if !py_truthy(&__b) { __b } else { with_someone.clone() } }) {
     word_with = mcall(&mcall(&with_someone.clone(), "group", &[Py::Int(1)]), "rstrip", &[py_str("'s")]);
-    if py_truthy(&{ let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("memory.facts", "RELATIONS"), &word_with.clone())); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("memory.facts", "RELATIONS"), &mcall(&word_with.clone(), "rstrip", &[py_str("s")]))); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("memory.facts", "PEOPLE_AGED"), &word_with.clone())) } } } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_A_PERSON(), &word_with.clone())); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&g_A_PERSON(), &mcall(&word_with.clone(), "rstrip", &[py_str("s")]))); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_PEOPLE_AGED(), &word_with.clone())) } } } }) {
     return py_tuple(vec![py_str(""), py_str("they"), py_str("them")]);
     }
     }

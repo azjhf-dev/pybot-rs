@@ -2622,7 +2622,7 @@ fn module_body() {
     s__near_bare_range(py_func("_near_bare_range", |args: &[Py]| pyrt::xrefs::xcall("memory.enough", "_near_bare_range", args)));
     s__target(py_func("_target", |args: &[Py]| pyrt::xrefs::xcall("memory.enough", "_target", args)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store._enough_reply"); }
-    s__enough_reply(pyrt::xrefs::xget("memory.store_replies", "enough_reply"));
+    s__enough_reply(g_enough_reply());
     s_ABOUT_PERSON_ASK(pyrt::xrefs::xget("memory.relations", "ABOUT_PERSON_ASK"));
     s_AGE_ADVERB(pyrt::xrefs::xget("memory.relations", "AGE_ADVERB"));
     s_AGE_AGAIN(pyrt::xrefs::xget("memory.relations", "AGE_AGAIN"));
@@ -2768,9 +2768,9 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.ASK_OPENERS"); }
     s_ASK_OPENERS(call_builtin("frozenset", &[mcall(&py_str("what whats which when where who whose why how hows\ndo does did is are was were am can could should would will shall have has had\nany anyone anything"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.AGES_IN_WORDS"); }
-    s_AGES_IN_WORDS({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&pyrt::xrefs::xget("memory.facts", "FIGURE_WORDS"), "items", &[])) { let __unpk9972 = py_unpack(&__item.clone(), 2, None); let mut word: Py = __unpk9972[0].clone(); let mut number: Py = __unpk9972[1].clone(); __out.push((call_builtin("int", &[number.clone()]).unwrap_or_else(|e| exc::raise(e)), word.clone())); } py_dict(__out) })() });
+    s_AGES_IN_WORDS({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&pyrt::xrefs::xget("memory.facts", "FIGURE_WORDS"), "items", &[])) { let __unpk4713 = py_unpack(&__item.clone(), 2, None); let mut word: Py = __unpk4713[0].clone(); let mut number: Py = __unpk4713[1].clone(); __out.push((call_builtin("int", &[number.clone()]).unwrap_or_else(|e| exc::raise(e)), word.clone())); } py_dict(__out) })() });
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.NAMED_FACT_ASK"); }
-    s_NAMED_FACT_ASK(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&py_str("\\bwhat(?:'s|s| is| are| was| were)?\\s+my\\s+"), &pyrt::xrefs::xget("memory.store_lines", "_FACT_SLOT")), &py_str("\\b|\\bwhat\\s+(?:is|are|was|were)\\s+my\\s+")), &pyrt::xrefs::xget("memory.store_lines", "_FACT_SLOT")), &py_str("\\b|\\bwhere do i (?:work|live|come from)\\b(?=\\s*(?:[?.!,;:]|$)|\\s+(?:now|again|then|at|from|these|days|properly|though|honestly|anymore|either|oh|wait|sorry|hmm|actually|um|right|please|thanks)\\b)|\\bwhat do i work as\\b|\\bwho am i\\b|\\bhow old am i\\b|\\bwhat do i do for a living\\b")), stdlib_attr("re", "IGNORECASE").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s_NAMED_FACT_ASK(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&py_str("\\bwhat(?:'s|s| is| are| was| were)?\\s+my\\s+"), &g__FACT_SLOT()), &py_str("\\b|\\bwhat\\s+(?:is|are|was|were)\\s+my\\s+")), &g__FACT_SLOT()), &py_str("\\b|\\bwhere do i (?:work|live|come from)\\b(?=\\s*(?:[?.!,;:]|$)|\\s+(?:now|again|then|at|from|these|days|properly|though|honestly|anymore|either|oh|wait|sorry|hmm|actually|um|right|please|thanks)\\b)|\\bwhat do i work as\\b|\\bwho am i\\b|\\bhow old am i\\b|\\bwhat do i do for a living\\b")), stdlib_attr("re", "IGNORECASE").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.ASK_ABOUT_THEM"); }
     s_ASK_ABOUT_THEM(stdlib_call("re", "compile", &[py_str("^\\W*(?:is|are|does|do|did|was|were|can|could|has|have|will)\\b|\\bwhat (?:does|do|did|can|could|is|are|was|were) (?:he|she|they|your|my|his|her|their)\\b|\\bwhat(?:'s|s| is| are)\\s+(?:my|his|her|their|he|she|they)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.PERSON_ADVICE_ASK"); }
@@ -3099,14 +3099,14 @@ fn module_body() {
     for __item in __iter5 {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store._word"); }
     s__word(__item.clone());
-    let _ = py_setitem(&pyrt::xrefs::xget("memory.store_lines", "CONCEPTS"), &g__word(), g__concept());
+    let _ = py_setitem(&g_CONCEPTS(), &g__word(), g__concept());
     }
     }
     let __iter6 = py_iter_or_raise(&pyrt::xrefs::xget("memory.facts", "COUNTRIES"));
     for __item in __iter6 {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store._country"); }
     s__country(__item.clone());
-    let _ = mcall(&pyrt::xrefs::xget("memory.store_lines", "CONCEPTS"), "setdefault", &[mcall(&g__country(), "lower", &[]), py_str("holiday")]);
+    let _ = mcall(&g_CONCEPTS(), "setdefault", &[mcall(&g__country(), "lower", &[]), py_str("holiday")]);
     }
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.A_RECALL_IN_ANOTHER_SHAPE"); }
     s_A_RECALL_IN_ANOTHER_SHAPE(stdlib_call("re", "compile", &[py_str("^(?:and|so|but|also|again|ok|okay|well)?\\s*(?:tell\\s+me\\s+what\\s+(?:i|we)\\s+(?:said|say|told\\s+(?:you|u)|tell\\s+(?:you|u)|mentioned?)\\b|(?:did|do)\\s+(?:i|we)\\s+(?:say|tell\\s+(?:you|u)|told\\s+(?:you|u)|mentioned?)\\s+(?:anything|something|much)\\b|what\\s+(?:was|were)\\s+(?:the\\s+thing|that\\s+thing|that)\\s+(?:that\\s+)?(?:i|we)\\s+(?:said|told\\s+(?:you|u)|mentioned?)\\b|remind\\s+me\\s+what\\s+(?:that|it|this|those|they)\\s+(?:was|were|is|are)\\b)"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
@@ -3183,10 +3183,10 @@ pub fn _their_own_line_ask(args: &[Py]) -> Py {
     let _ = py_str("True on the one ask the store must win even against a topic entry: their own line back.\n\n    \"what was my plan?\" is read as the topic the plan is about (\"what paint should i use for a\n    hallway?\" then \"what was my plan?\" was answered by the money entry), and the store's own plan\n    line is the answer.\n\n    \"what was i cooking?\" is read as a cooking line, and the cooking entry answers a different\n    question - a chilli recipe for a chilli they had already told us they were making, and the\n    recipe's timings for \"how long does that take\" after it. The person asked what they said,\n    not what to do. The store answers only from a line they really said, so this is said for\n    exactly the asks whose answer is that line, and every other line the store proposes on is\n    left to the arbiter's own rules.\n    ");
     let __try1 = exc::catch(|| {
     low = { let __b = pyrt::xrefs::xcall("memory.store_replies", "_bare", &[text.clone()]); if py_truthy(&__b) { __b } else { py_str("") } };
-    if py_truthy(&mcall(&pyrt::xrefs::xget("memory.store_replies", "PLAN_MINE"), "search", &[low.clone()])) {
+    if py_truthy(&mcall(&g_PLAN_MINE(), "search", &[low.clone()])) {
     return py_tuple(vec![Py::Bool(true), call_builtin("bool", &[{ let __b = mcall(&{ let __b = py_call(&pyrt::xrefs::xget("memory.store_replies", "user"), &[memory.clone()]); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[py_str("plans")]); if py_truthy(&__b) { __b } else { mcall(&{ let __b = py_call(&pyrt::xrefs::xget("memory.store_replies", "user"), &[memory.clone()]); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[py_str("plan")]) } }]).unwrap_or_else(|e| exc::raise(e))]);
     }
-    if py_truthy(&Py::Bool(!py_truthy(&mcall(&pyrt::xrefs::xget("memory.store_replies", "ACTIVITY_ASK"), "search", &[low.clone()])))) {
+    if py_truthy(&Py::Bool(!py_truthy(&mcall(&g_ACTIVITY_ASK(), "search", &[low.clone()])))) {
     return py_tuple(vec![Py::Bool(true), Py::Bool(false)]);
     }
     return py_tuple(vec![Py::Bool(true), call_builtin("bool", &[pyrt::xrefs::xcall("memory.store_replies", "_activity_line", &[memory.clone()])]).unwrap_or_else(|e| exc::raise(e))]);
@@ -4552,7 +4552,7 @@ pub fn _retract_last(args: &[Py]) -> Py {
     }
     continue;
     }
-    if py_truthy(&Py::Bool(py_contains(&pyrt::xrefs::xget("memory.store_lines", "NOT_RETRACTED"), &key.clone()))) {
+    if py_truthy(&Py::Bool(py_contains(&g_NOT_RETRACTED(), &key.clone()))) {
     continue;
     }
     dropped = py_call(&pyrt::xrefs::xget("memory.store_replies", "forget"), &[memory.clone(), key.clone(), value.clone()]);
@@ -4595,17 +4595,17 @@ pub fn _reads_the_store(args: &[Py]) -> Py {
     return Py::Bool(false);
     }
     low = pyrt::xrefs::xcall("memory.store_replies", "_bare", &[py_call(&pyrt::xrefs::xget("memory.store_replies", "_folded"), &[text.clone(), memory.clone()])]);
-    if py_truthy(&{ let __b = mcall(&g_NAMED_FACT_ASK(), "search", &[low.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&pyrt::xrefs::xget("memory.store_replies", "TOPIC_ASK"), "search", &[low.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&pyrt::xrefs::xget("memory.store_replies", "ASK_WITHOUT_MY"), "search", &[low.clone()]); if py_truthy(&__b) { __b } else { mcall(&pyrt::xrefs::xget("modules.memory_tables", "HOW_MANY_OF_MINE"), "search", &[low.clone()]) } } } } } }) {
+    if py_truthy(&{ let __b = mcall(&g_NAMED_FACT_ASK(), "search", &[low.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_TOPIC_ASK(), "search", &[low.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_ASK_WITHOUT_MY(), "search", &[low.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_HOW_MANY_OF_MINE(), "search", &[low.clone()]) } } } } } }) {
     return Py::Bool(true);
     }
-    if py_truthy(&Py::Bool(!py_truthy(&{ let __b = mcall(&pyrt::xrefs::xget("memory.store_replies", "OTHER_FACT"), "search", &[low.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&pyrt::xrefs::xget("memory.store_replies", "CANT_HAVE"), "search", &[low.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&pyrt::xrefs::xget("memory.store_replies", "CAN_HAVE"), "search", &[low.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&pyrt::xrefs::xget("memory.store_replies", "CAN_THEY_HAVE"), "search", &[low.clone()]); if py_truthy(&__b) { __b } else { pyrt::xrefs::xcall("memory.store_replies", "_a_bare_limit_ask", &[low.clone(), memory.clone()]) } } } } } } } }))) {
+    if py_truthy(&Py::Bool(!py_truthy(&{ let __b = mcall(&g_OTHER_FACT(), "search", &[low.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_CANT_HAVE(), "search", &[low.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_CAN_HAVE(), "search", &[low.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_CAN_THEY_HAVE(), "search", &[low.clone()]); if py_truthy(&__b) { __b } else { pyrt::xrefs::xcall("memory.store_replies", "_a_bare_limit_ask", &[low.clone(), memory.clone()]) } } } } } } } }))) {
     return Py::Bool(false);
     }
     if py_truthy(&Py::Bool(!py_truthy(&pyrt::xrefs::xcall("memory.store_replies", "_asks_about_someone", &[low.clone(), text.clone(), memory.clone()])))) {
     return Py::Bool(false);
     }
     whole = mcall(&py_str(" "), "join", &[mcall(&mcall(&call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]), "split", &[])]);
-    if py_truthy(&{ let __b = mcall(&pyrt::xrefs::xget("memory.store_replies", "STATES_A_LIMIT"), "search", &[whole.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&pyrt::xrefs::xget("memory.store_replies", "A_HAVE_QUESTION"), "search", &[whole.clone()]))) } }) {
+    if py_truthy(&{ let __b = mcall(&g_STATES_A_LIMIT(), "search", &[whole.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_A_HAVE_QUESTION(), "search", &[whole.clone()]))) } }) {
     return Py::Bool(false);
     }
     said = pyrt::xrefs::xcall("memory.store_replies", "_other_person_reply", &[{ let __b = memory.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, low.clone()]);
@@ -4639,7 +4639,7 @@ pub fn _the_plan_they_took_back(args: &[Py]) -> Py {
     return Py::Bool(false);
     }
     low = mcall(&py_str(" "), "join", &[mcall(&mcall(&call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]), "split", &[])]);
-    return call_builtin("bool", &[mcall(&pyrt::xrefs::xget("memory.store_replies", "WHERE_PLAN"), "search", &[low.clone()])]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("bool", &[mcall(&g_WHERE_PLAN(), "search", &[low.clone()])]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn _the_clock_in_their_line(args: &[Py]) -> Py {
@@ -4662,7 +4662,7 @@ pub fn _the_clock_in_their_line(args: &[Py]) -> Py {
     let _ = py_str("True when the ask wants a clock or a day the person gave, and the store can place it.\n\n    \"what time is my appointment\" after \"i have a dentist appointment on friday at 3\" was\n    answered \"Ring practices near you and ask straight out whether they take new NHS patients\":\n    the store had the hour and proposed it, but the claim that hands the store its own asks was\n    gated on the word \"when\", so a clock ask fell to the knowledge base's entry about the same\n    noun. The hour or the day is in what the person said, so the ask is the store's - and every\n    such ask it cannot place (no plan naming it, nothing to read the hour off) is left alone,\n    which keeps \"what time do i start work\" with whoever can answer it.\n    ");
     let __try1 = exc::catch(|| {
     low = mcall(&text.clone(), "lower", &[]);
-    if py_truthy(&Py::Bool(!py_truthy(&{ let __b = mcall(&pyrt::xrefs::xget("memory.store_replies", "TIME_ASKS"), "search", &[low.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&pyrt::xrefs::xget("memory.store_replies", "TIME_THING"), "search", &[low.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&pyrt::xrefs::xget("memory.store_replies", "TIME_IT"), "search", &[low.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&pyrt::xrefs::xget("memory.store_replies", "DAY_THING"), "search", &[low.clone()]); if py_truthy(&__b) { __b } else { mcall(&pyrt::xrefs::xget("memory.store_replies", "DAY_IT"), "search", &[low.clone()]) } } } } } } } }))) {
+    if py_truthy(&Py::Bool(!py_truthy(&{ let __b = mcall(&g_TIME_ASKS(), "search", &[low.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_TIME_THING(), "search", &[low.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_TIME_IT(), "search", &[low.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_DAY_THING(), "search", &[low.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_DAY_IT(), "search", &[low.clone()]) } } } } } } } }))) {
     return py_tuple(vec![Py::Bool(true), Py::Bool(false)]);
     }
     return py_tuple(vec![Py::Bool(true), call_builtin("bool", &[pyrt::xrefs::xcall("memory.store_replies", "_plans_reply", &[memory.clone(), low.clone()])]).unwrap_or_else(|e| exc::raise(e))]);
@@ -4714,10 +4714,10 @@ pub fn _an_ask_about_someone_else(args: &[Py]) -> Py {
     return Py::Bool(false);
     }
     keys = py_list(vec![]);
-    if py_truthy(&mcall(&pyrt::xrefs::xget("memory.store_replies", "OTHER_FACT"), "search", &[text.clone()])) {
+    if py_truthy(&mcall(&g_OTHER_FACT(), "search", &[text.clone()])) {
     let _ = mcall(&keys.clone(), "append", &[py_str("allergies")]);
     }
-    if py_truthy(&mcall(&pyrt::xrefs::xget("memory.store_replies", "EAT_ASK"), "search", &[text.clone()])) {
+    if py_truthy(&mcall(&g_EAT_ASK(), "search", &[text.clone()])) {
     let _ = mcall(&keys.clone(), "append", &[py_str("diet")]);
     }
     if py_truthy(&Py::Bool(!py_truthy(&keys.clone()))) {
@@ -4827,7 +4827,7 @@ pub fn _the_store_readings(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = _reads_the_store(&[text.clone(), memory.clone()]); if py_truthy(&__b) { __b } else { { let __b = _their_own_line_ask(&[text.clone(), memory.clone()]); if py_truthy(&__b) { __b } else { { let __b = _the_part_that_hurts_asked(&[text.clone(), memory.clone()]); if py_truthy(&__b) { __b } else { { let __b = _their_fact_ask(&[text.clone(), memory.clone()]); if py_truthy(&__b) { __b } else { { let __b = _a_kept_fact_read(&[text.clone(), memory.clone()]); if py_truthy(&__b) { __b } else { { let __b = pyrt::xrefs::xcall("memory.decided", "asks", &[text.clone()]); if py_truthy(&__b) { __b } else { { let __b = pyrt::xrefs::xcall("memory.told", "ABOUT_THE_CHAT", &[text.clone(), memory.clone()]); if py_truthy(&__b) { __b } else { pyrt::xrefs::xcall("memory.told", "A_CALLBACK", &[text.clone(), memory.clone()]) } } } } } } } } } } } } } }) {
     return Py::Bool(true);
     }
-    if py_truthy(&{ let __b = mcall(&pyrt::xrefs::xget("memory.store_replies", "WHOLE_ASK"), "match", &[mcall(&mcall(&call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "strip", &[]), "lower", &[])]); if !py_truthy(&__b) { __b } else { pyrt::xrefs::xcall("memory.store_replies", "_a_whole_answer_to_hand_back", &[memory.clone(), text.clone()]) } }) {
+    if py_truthy(&{ let __b = mcall(&g_WHOLE_ASK(), "match", &[mcall(&mcall(&call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "strip", &[]), "lower", &[])]); if !py_truthy(&__b) { __b } else { pyrt::xrefs::xcall("memory.store_replies", "_a_whole_answer_to_hand_back", &[memory.clone(), text.clone()]) } }) {
     return Py::Bool(true);
     }
     if py_truthy(&pyrt::xrefs::xcall("memory.store_replies", "_a_state_that_was", &[text.clone(), memory.clone(), py_str("")])) {
@@ -4883,7 +4883,7 @@ pub fn _the_store_readings(args: &[Py]) -> Py {
     return py_tuple(vec![Py::Bool(true), Py::Bool(false)]);
     }
     line = pyrt::xrefs::xcall("memory.store_replies", "_bare", &[py_call(&pyrt::xrefs::xget("memory.store_replies", "_folded"), &[text.clone(), memory.clone()])]);
-    if py_truthy(&{ let __b = { let __b = mcall(&pyrt::xrefs::xget("memory.store_replies", "POINTS_BACK_AT_IT"), "search", &[line.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_WORK_ON_IT(), "search", &[line.clone()]) } }; if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&pyrt::xrefs::xcall("memory.store_replies", "_the_prep_day", &[memory.clone(), line.clone()]))) } }) {
+    if py_truthy(&{ let __b = { let __b = mcall(&g_POINTS_BACK_AT_IT(), "search", &[line.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_WORK_ON_IT(), "search", &[line.clone()]) } }; if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&pyrt::xrefs::xcall("memory.store_replies", "_the_prep_day", &[memory.clone(), line.clone()]))) } }) {
     return py_tuple(vec![Py::Bool(true), Py::Bool(false)]);
     }
     if py_truthy(&_the_clock_in_their_line(&[text.clone(), memory.clone()])) {
@@ -4938,27 +4938,27 @@ pub fn _their_fact_ask(args: &[Py]) -> Py {
     return Py::Bool(false);
     }
     low = pyrt::xrefs::xcall("memory.store_replies", "_bare", &[py_call(&pyrt::xrefs::xget("memory.store_replies", "_folded"), &[text.clone(), memory.clone()])]);
-    if py_truthy(&{ let __b = mcall(&g_PERSON_ADVICE_ASK(), "match", &[low.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&{ let __b = mcall(&pyrt::xrefs::xget("memory.store_replies", "CAN_THEY_HAVE"), "search", &[low.clone()]); if !py_truthy(&__b) { __b } else { pyrt::xrefs::xcall("memory.store_replies", "_a_limit_kept_for_them", &[low.clone(), memory.clone()]) } })) } }) {
+    if py_truthy(&{ let __b = mcall(&g_PERSON_ADVICE_ASK(), "match", &[low.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&{ let __b = mcall(&g_CAN_THEY_HAVE(), "search", &[low.clone()]); if !py_truthy(&__b) { __b } else { pyrt::xrefs::xcall("memory.store_replies", "_a_limit_kept_for_them", &[low.clone(), memory.clone()]) } })) } }) {
     return Py::Bool(false);
     }
     undeclared = pyrt::xrefs::xcall("memory.store_replies", "_the_person_still_in_hand", &[low.clone(), memory.clone()]);
-    if py_truthy(&Py::Bool(!py_truthy(&{ let __b = undeclared.clone(); if py_truthy(&__b) { __b } else { { let __b = mcall(&pyrt::xrefs::xget("memory.store_replies", "OTHER_FACT"), "search", &[low.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&pyrt::xrefs::xget("memory.store_replies", "EAT_ASK"), "search", &[low.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&pyrt::xrefs::xget("memory.store_replies", "CANT_HAVE"), "search", &[low.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&pyrt::xrefs::xget("memory.store_replies", "CAN_HAVE"), "search", &[low.clone()]); if py_truthy(&__b) { __b } else { mcall(&pyrt::xrefs::xget("memory.store_replies", "CAN_THEY_HAVE"), "search", &[low.clone()]) } } } } } } } } } }))) {
+    if py_truthy(&Py::Bool(!py_truthy(&{ let __b = undeclared.clone(); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_OTHER_FACT(), "search", &[low.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_EAT_ASK(), "search", &[low.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_CANT_HAVE(), "search", &[low.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_CAN_HAVE(), "search", &[low.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_CAN_THEY_HAVE(), "search", &[low.clone()]) } } } } } } } } } }))) {
     return Py::Bool(false);
     }
     if py_truthy(&Py::Bool(!py_truthy(&{ let __b = undeclared.clone(); if py_truthy(&__b) { __b } else { { let __b = py_call(&pyrt::xrefs::xget("memory.store_replies", "_asks"), &[low.clone()]); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&text.clone(), &py_str("?"))); if py_truthy(&__b) { __b } else { _asks_about_someone_else(&[text.clone()]) } } } } } }))) {
     return Py::Bool(false);
     }
-    if py_truthy(&Py::Bool(!py_truthy(&{ let __b = undeclared.clone(); if py_truthy(&__b) { __b } else { { let __b = mcall(&pyrt::xrefs::xget("memory.store_replies", "THEM"), "search", &[low.clone()]); if py_truthy(&__b) { __b } else { { let __b = py_call(&pyrt::xrefs::xget("memory.store_replies", "_named_person"), &[low.clone()]); if py_truthy(&__b) { __b } else { stdlib_call("re", "search", &[op_add(&op_add(&py_str("\\bmy\\s+(?:"), &pyrt::xrefs::xget("memory.store_replies", "_RELATION")), &py_str(")\\b(?!'s|s\\b)(?!s\\b)")), low.clone()]).unwrap_or_else(|e| exc::raise(e)) } } } } } }))) {
+    if py_truthy(&Py::Bool(!py_truthy(&{ let __b = undeclared.clone(); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_THEM(), "search", &[low.clone()]); if py_truthy(&__b) { __b } else { { let __b = py_call(&pyrt::xrefs::xget("memory.store_replies", "_named_person"), &[low.clone()]); if py_truthy(&__b) { __b } else { stdlib_call("re", "search", &[op_add(&op_add(&py_str("\\bmy\\s+(?:"), &g__RELATION()), &py_str(")\\b(?!'s|s\\b)(?!s\\b)")), low.clone()]).unwrap_or_else(|e| exc::raise(e)) } } } } } }))) {
     return Py::Bool(false);
     }
-    if py_truthy(&{ let __b = mcall(&pyrt::xrefs::xget("memory.store_replies", "CAN_THEY_HAVE_A_FOOD"), "search", &[low.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&pyrt::xrefs::xcall("memory.store_replies", "_a_limit_kept_for_them", &[low.clone(), memory.clone()]))) } }) {
+    if py_truthy(&{ let __b = mcall(&g_CAN_THEY_HAVE_A_FOOD(), "search", &[low.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&pyrt::xrefs::xcall("memory.store_replies", "_a_limit_kept_for_them", &[low.clone(), memory.clone()]))) } }) {
     return Py::Bool(false);
     }
     said = pyrt::xrefs::xcall("memory.store_replies", "_other_person_reply", &[memory.clone(), low.clone()]);
     if py_truthy(&Py::Bool(!py_truthy(&said.clone()))) {
     return Py::Bool(false);
     }
-    if py_truthy(&mcall(&pyrt::xrefs::xget("memory.store_replies", "NO_RECORD"), "search", &[said.clone()])) {
+    if py_truthy(&mcall(&g_NO_RECORD(), "search", &[said.clone()])) {
     return Py::Bool(false);
     }
     return Py::Bool(true);
@@ -5311,10 +5311,10 @@ pub fn _fix_a_pets_age(args: &[Py]) -> Py {
     let _ = py_str("\"my dog is 5\" then \"sorry he is 6\": the correction goes on the animal it corrects.\n\n    The line names no animal - it names a pronoun and a figure - and the store already has one\n    age for the animal the chat is on, so that is the age the figure replaces. Read the same way\n    a person's corrected age is read (`_fix_a_persons_age`): only a short line, only with a\n    correction word in it, and only when there is an age stored to replace, because a\n    correction replaces a fact rather than being the first one said.\n\n    Without this the store kept the old figure and the bot said it as fact: \"my dog is 5\" /\n    \"sorry he is 6\" / \"how old is my dog\" answered \"Your dog is 5.\" after the person had said 6.\n    ");
     said = mcall(&py_str(" "), "join", &[mcall(&mcall(&call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]), "split", &[])]);
     low = _without_a_lead_in(&[said.clone()]);
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&low.clone())); if py_truthy(&__b) { __b } else { { let __b = op_gt(&call_builtin("len", &[mcall(&low.clone(), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), &pyrt::xrefs::xget("memory.store_lines", "PET_AGE_FIX_WORDS")); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_CORRECTING(), "search", &[said.clone()]))) } } } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&low.clone())); if py_truthy(&__b) { __b } else { { let __b = op_gt(&call_builtin("len", &[mcall(&low.clone(), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), &g_PET_AGE_FIX_WORDS()); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_CORRECTING(), "search", &[said.clone()]))) } } } }) {
     return Py::None;
     }
-    if py_truthy(&mcall(&pyrt::xrefs::xget("memory.relations", "_PET_WORD"), "search", &[low.clone()])) {
+    if py_truthy(&mcall(&g__PET_WORD(), "search", &[low.clone()])) {
     return Py::None;
     }
     match_ = mcall(&g_AGE_FIX(), "search", &[low.clone()]);
@@ -5386,7 +5386,7 @@ pub fn _age_said_of_the_only_animal(args: &[Py]) -> Py {
     }
     name = mcall(&mcall(&call_builtin("str", &[{ let __b = mcall(&pet.clone(), "get", &[py_str("name")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "strip", &[]), "lower", &[]);
     called = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&py_tuple(vec![py_str("animal"), py_str("breed")])) { let mut word: Py = __item.clone(); __out.push(mcall(&mcall(&call_builtin("str", &[{ let __b = mcall(&pet.clone(), "get", &[word.clone()]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "strip", &[]), "lower", &[])); } py_list(__out) })() };
-    if py_truthy(&Py::Bool(!py_truthy(&{ let __b = mcall(&pyrt::xrefs::xget("memory.relations", "_PET_WORD"), "search", &[previous.clone()]); if py_truthy(&__b) { __b } else { { let __b = { let __b = op_gt(&call_builtin("len", &[name.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&previous.clone(), &name.clone())) } }; if py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&called.clone()) { let mut word: Py = __item.clone(); __out.push({ let __b = op_gt(&call_builtin("len", &[word.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&previous.clone(), &word.clone())) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } } } }))) {
+    if py_truthy(&Py::Bool(!py_truthy(&{ let __b = mcall(&g__PET_WORD(), "search", &[previous.clone()]); if py_truthy(&__b) { __b } else { { let __b = { let __b = op_gt(&call_builtin("len", &[name.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&previous.clone(), &name.clone())) } }; if py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&called.clone()) { let mut word: Py = __item.clone(); __out.push({ let __b = op_gt(&call_builtin("len", &[word.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&previous.clone(), &word.clone())) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } } } }))) {
     return Py::None;
     }
     if py_truthy(&Py::Bool(!py_truthy(&stdlib_call("re", "search", &[py_str("\\b(?:he|she|it|they)(?:'s|s|\\s+is|\\s+are)?\\b"), said.clone()]).unwrap_or_else(|e| exc::raise(e))))) {
@@ -5447,7 +5447,7 @@ pub fn _age_they_answered(args: &[Py]) -> Py {
     return Py::None;
     }
     names = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pets.clone()) { let mut pet: Py = __item.clone(); __out.push(mcall(&mcall(&call_builtin("str", &[{ let __b = mcall(&pet.clone(), "get", &[py_str("name")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "strip", &[]), "lower", &[])); } py_list(__out) })() };
-    if py_truthy(&Py::Bool(!py_truthy(&{ let __b = mcall(&pyrt::xrefs::xget("memory.relations", "_PET_WORD"), "search", &[asked.clone()]); if py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&names.clone()) { let mut name: Py = __item.clone(); __out.push({ let __b = name.clone(); if !py_truthy(&__b) { __b } else { stdlib_call("re", "search", &[op_add(&op_add(&py_str("\\b"), &stdlib_call("re", "escape", &[name.clone()]).unwrap_or_else(|e| exc::raise(e))), &py_str("\\b")), mcall(&asked.clone(), "lower", &[])]).unwrap_or_else(|e| exc::raise(e)) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }))) {
+    if py_truthy(&Py::Bool(!py_truthy(&{ let __b = mcall(&g__PET_WORD(), "search", &[asked.clone()]); if py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&names.clone()) { let mut name: Py = __item.clone(); __out.push({ let __b = name.clone(); if !py_truthy(&__b) { __b } else { stdlib_call("re", "search", &[op_add(&op_add(&py_str("\\b"), &stdlib_call("re", "escape", &[name.clone()]).unwrap_or_else(|e| exc::raise(e))), &py_str("\\b")), mcall(&asked.clone(), "lower", &[])]).unwrap_or_else(|e| exc::raise(e)) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }))) {
     return Py::None;
     }
     match_ = mcall(&g_PET_AGE_ANSWER(), "match", &[call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))]);
@@ -5545,7 +5545,7 @@ pub fn _fix_a_persons_age(args: &[Py]) -> Py {
     let mut who: Py = Py::None;
     let _ = py_str("Put a corrected age on the person the pronoun points at.\n\n    \"my son is 7\" then \"actually hes 8\" leaves the store saying 7 while the bot has already said\n    \"Got it - he's 8.\", so the person thinks the correction landed. The line names no relation,\n    so who it is about comes from the pronoun, and the age it replaces has to be one the store\n    already has.\n    ");
     low = mcall(&py_str(" "), "join", &[mcall(&mcall(&call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]), "split", &[])]);
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&low.clone())); if py_truthy(&__b) { __b } else { { let __b = op_gt(&call_builtin("len", &[mcall(&low.clone(), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), &pyrt::xrefs::xget("memory.store_lines", "AGE_FIX_WORDS")); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_CORRECTING(), "search", &[low.clone()]))) } } } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&low.clone())); if py_truthy(&__b) { __b } else { { let __b = op_gt(&call_builtin("len", &[mcall(&low.clone(), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), &g_AGE_FIX_WORDS()); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_CORRECTING(), "search", &[low.clone()]))) } } } }) {
     return Py::None;
     }
     match_ = mcall(&g_AGE_FIX(), "search", &[low.clone()]);
@@ -5681,7 +5681,7 @@ pub fn _fix_a_pets_name(args: &[Py]) -> Py {
     pet_rename = pyrt::xrefs::xmodule("memory.rename");
     low = mcall(&py_str(" "), "join", &[mcall(&mcall(&call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]), "split", &[])]);
     moves = mcall(&pet_rename.clone(), "moves", &[low.clone()]);
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&low.clone())); if py_truthy(&__b) { __b } else { { let __b = op_gt(&call_builtin("len", &[mcall(&low.clone(), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), &pyrt::xrefs::xget("memory.store_lines", "NAME_FIX_WORDS")); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&{ let __b = mcall(&g_CORRECTING(), "search", &[low.clone()]); if py_truthy(&__b) { __b } else { moves.clone() } })) } } } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&low.clone())); if py_truthy(&__b) { __b } else { { let __b = op_gt(&call_builtin("len", &[mcall(&low.clone(), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), &g_NAME_FIX_WORDS()); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&{ let __b = mcall(&g_CORRECTING(), "search", &[low.clone()]); if py_truthy(&__b) { __b } else { moves.clone() } })) } } } }) {
     return Py::None;
     }
     match_ = mcall(&g_A_NAME_WITH_ITS_VERB(), "search", &[low.clone()]);
@@ -6009,7 +6009,7 @@ pub fn _fix_a_persons_name(args: &[Py]) -> Py {
     let mut word: Py = Py::None;
     let _ = py_str("Put a corrected name on the person the pronoun points at.\n\n    \"my sister is called meg\" then \"actually she's called maggie\" left the store saying Meg, so\n    the ask after it answered with the name the person had just put right. The line names no\n    relation, so who it is about comes from the pronoun, and the name it replaces has to be one\n    the store already has: a correction replaces a fact, it is not the first one said.\n    ");
     low = mcall(&py_str(" "), "join", &[mcall(&mcall(&call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]), "split", &[])]);
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&low.clone())); if py_truthy(&__b) { __b } else { { let __b = op_gt(&call_builtin("len", &[mcall(&low.clone(), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), &pyrt::xrefs::xget("memory.store_lines", "NAME_FIX_WORDS")); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_CORRECTING(), "search", &[low.clone()]))) } } } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&low.clone())); if py_truthy(&__b) { __b } else { { let __b = op_gt(&call_builtin("len", &[mcall(&low.clone(), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), &g_NAME_FIX_WORDS()); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_CORRECTING(), "search", &[low.clone()]))) } } } }) {
     return Py::None;
     }
     match_ = mcall(&g_NAME_FIX(), "search", &[low.clone()]);
@@ -6092,7 +6092,7 @@ pub fn _the_name_they_gave_to_the_person_they_mean(args: &[Py]) -> Py {
     let mut word: Py = Py::None;
     let _ = py_str("Put a name given with a pronoun on the person the store already holds.\n\n    \"my son is called jack\" then \"hes called jake\" left the store saying Jack while the reply said\n    \"He's called jake, good to know\": the person is told it landed and it did not, so the next\n    \"what is my son called\" answers with the name they have just given. Who it is about comes from\n    the pronoun.\n\n    A name the store already holds is replaced. A person it holds and never named gets the name as\n    their first one - \"im taking my daughter to london\" then \"her name is maggie\" - because the\n    reply already promises to remember it, and only when exactly one unnamed person fits the\n    pronoun.\n\n    A bare name after the word that opens a correction (\"no, jake\") is not this reader's: that is\n    a correction of a name said wrong, and `_correct_a_persons_name` owns it.\n    ");
     low = mcall(&py_str(" "), "join", &[mcall(&mcall(&call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]), "split", &[])]);
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&low.clone())); if py_truthy(&__b) { __b } else { { let __b = op_gt(&call_builtin("len", &[mcall(&low.clone(), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), &pyrt::xrefs::xget("memory.store_lines", "NAME_GIVEN_WORDS")); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&low.clone(), &py_str("?"))) } } } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&low.clone())); if py_truthy(&__b) { __b } else { { let __b = op_gt(&call_builtin("len", &[mcall(&low.clone(), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), &g_NAME_GIVEN_WORDS()); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&low.clone(), &py_str("?"))) } } } }) {
     return Py::None;
     }
     match_ = mcall(&g_NAME_GIVEN(), "search", &[low.clone()]);
@@ -6399,7 +6399,7 @@ pub fn _drop_value(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&low.clone()))) {
     return Py::None;
     }
-    let __iter1 = py_iter_or_raise(&pyrt::xrefs::xget("memory.store_lines", "DROP_LISTS"));
+    let __iter1 = py_iter_or_raise(&g_DROP_LISTS());
     for __item in __iter1 {
     key = __item.clone();
     held = mcall(&known.clone(), "get", &[key.clone()]);
@@ -6484,7 +6484,7 @@ pub fn _drop_from_plan(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&low.clone()))) {
     return Py::None;
     }
-    if py_truthy(&{ let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("memory.store_replies", "MONTHS"), &low.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("memory.facts", "DAYS"), &low.clone())) } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_MONTHS(), &low.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("memory.facts", "DAYS"), &low.clone())) } }) {
     return Py::None;
     }
     plans = mcall(&known.clone(), "get", &[py_str("plans")]);
@@ -6763,7 +6763,7 @@ pub fn _the_unit_asked(args: &[Py]) -> Py {
     continue;
     }
     family = Py::None;
-    let __iter2 = py_iter_or_raise(&mcall(&pyrt::xrefs::xget("memory.store_lines", "FIGURE_UNITS"), "items", &[]));
+    let __iter2 = py_iter_or_raise(&mcall(&g_FIGURE_UNITS(), "items", &[]));
     for __item in __iter2 {
     let __unpk3 = py_unpack(&__item.clone(), 2, None);
     name = __unpk3[0].clone();
@@ -6780,8 +6780,8 @@ pub fn _the_unit_asked(args: &[Py]) -> Py {
     let _ = mcall(&units.clone(), "append", &[family.clone()]);
     }
     }
-    per_week = stdlib_call("re", "match", &[op_modulo(&py_str("^\\W*(?:a|an|per|each)\\s+(?:%s)\\b"), &mcall(&py_str("|"), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("memory.store_lines", "FIGURE_TIME")) { let mut family: Py = __item.clone(); for __item in py_iter_or_raise(&geti(&pyrt::xrefs::xget("memory.store_lines", "FIGURE_UNITS"), &family.clone())) { let mut word: Py = __item.clone(); __out.push(word.clone()); } } py_set(__out) })() }); __kws.extend(vec![("key".to_string(), py_func("len", |args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e)))), ("reverse".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sorted", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }) { let mut word: Py = __item.clone(); __out.push(stdlib_call("re", "escape", &[word.clone()]).unwrap_or_else(|e| exc::raise(e))); } py_list(__out) })() }])), { let __b = mcall(&found.clone(), "group", &[py_str("rest")]); if py_truthy(&__b) { __b } else { py_str("") } }, stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e));
-    if py_truthy(&{ let __b = per_week.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_eq(&mcall(&mcall(&found.clone(), "group", &[py_str("asked")]), "lower", &[]), &py_str("much"))); if !py_truthy(&__b) { __b } else { op_le(&call_builtin("set", &[units.clone()]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("set", &[pyrt::xrefs::xget("memory.store_lines", "FIGURE_TIME")]).unwrap_or_else(|e| exc::raise(e))) } } } }) {
+    per_week = stdlib_call("re", "match", &[op_modulo(&py_str("^\\W*(?:a|an|per|each)\\s+(?:%s)\\b"), &mcall(&py_str("|"), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_FIGURE_TIME()) { let mut family: Py = __item.clone(); for __item in py_iter_or_raise(&geti(&g_FIGURE_UNITS(), &family.clone())) { let mut word: Py = __item.clone(); __out.push(word.clone()); } } py_set(__out) })() }); __kws.extend(vec![("key".to_string(), py_func("len", |args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e)))), ("reverse".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sorted", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }) { let mut word: Py = __item.clone(); __out.push(stdlib_call("re", "escape", &[word.clone()]).unwrap_or_else(|e| exc::raise(e))); } py_list(__out) })() }])), { let __b = mcall(&found.clone(), "group", &[py_str("rest")]); if py_truthy(&__b) { __b } else { py_str("") } }, stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e));
+    if py_truthy(&{ let __b = per_week.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_eq(&mcall(&mcall(&found.clone(), "group", &[py_str("asked")]), "lower", &[]), &py_str("much"))); if !py_truthy(&__b) { __b } else { op_le(&call_builtin("set", &[units.clone()]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("set", &[g_FIGURE_TIME()]).unwrap_or_else(|e| exc::raise(e))) } } } }) {
     return g_FIGURE_MONEY();
     }
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&units.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(py_eq(&mcall(&mcall(&found.clone(), "group", &[py_str("asked")]), "lower", &[]), &py_str("much"))) } }) {
@@ -6790,7 +6790,7 @@ pub fn _the_unit_asked(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&units.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(py_eq(&mcall(&mcall(&found.clone(), "group", &[py_str("asked")]), "lower", &[]), &py_str("many"))) } }) {
     return Py::None;
     }
-    return { let __b = call_builtin("tuple", &[units.clone()]).unwrap_or_else(|e| exc::raise(e)); if py_truthy(&__b) { __b } else { pyrt::xrefs::xget("memory.store_lines", "FIGURE_TIME") } };
+    return { let __b = call_builtin("tuple", &[units.clone()]).unwrap_or_else(|e| exc::raise(e)); if py_truthy(&__b) { __b } else { g_FIGURE_TIME() } };
     Py::None
 }
 pub fn _the_clause(args: &[Py]) -> Py {
@@ -6896,9 +6896,9 @@ pub fn _the_figures_in(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(py_contains(&units.clone(), &py_str("money")))) {
     return _the_money_figures(&[said.clone()]);
     }
-    words = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&units.clone()) { let mut unit: Py = __item.clone(); for __item in py_iter_or_raise(&geti(&pyrt::xrefs::xget("memory.store_lines", "FIGURE_UNITS"), &unit.clone())) { let mut word: Py = __item.clone(); __out.push(word.clone()); } } py_set(__out) })() }); __kws.extend(vec![("key".to_string(), py_func("len", |args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e)))), ("reverse".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sorted", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
+    words = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&units.clone()) { let mut unit: Py = __item.clone(); for __item in py_iter_or_raise(&geti(&g_FIGURE_UNITS(), &unit.clone())) { let mut word: Py = __item.clone(); __out.push(word.clone()); } } py_set(__out) })() }); __kws.extend(vec![("key".to_string(), py_func("len", |args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e)))), ("reverse".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sorted", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
     unit = op_modulo(&py_str("(?-i:%s)"), &mcall(&py_str("|"), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); __out.push(stdlib_call("re", "escape", &[word.clone()]).unwrap_or_else(|e| exc::raise(e))); } py_list(__out) })() }]));
-    pattern = stdlib_call("re", "compile", &[op_modulo(&py_str("(?<![\\d,])\\b(?P<qual>%s\\s+)?(?P<num>%s)(?:\\s*(?:-|to|or)\\s*(?P<more>%s))?\\s*(?P<unit>%s)\\b(?P<extra>\\s+\\d{1,3})?(?P<after>[^.;:!?,]*)"), &py_tuple(vec![pyrt::xrefs::xget("memory.store_lines", "FIGURE_QUALIFIER"), pyrt::xrefs::xget("memory.store_lines", "FIGURE_NUMBER"), pyrt::xrefs::xget("memory.store_lines", "FIGURE_NUMBER"), unit.clone()])), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e));
+    pattern = stdlib_call("re", "compile", &[op_modulo(&py_str("(?<![\\d,])\\b(?P<qual>%s\\s+)?(?P<num>%s)(?:\\s*(?:-|to|or)\\s*(?P<more>%s))?\\s*(?P<unit>%s)\\b(?P<extra>\\s+\\d{1,3})?(?P<after>[^.;:!?,]*)"), &py_tuple(vec![g_FIGURE_QUALIFIER(), g_FIGURE_NUMBER(), g_FIGURE_NUMBER(), unit.clone()])), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e));
     out = py_list(vec![]);
     let __iter1 = py_iter_or_raise(&mcall(&pattern.clone(), "finditer", &[said.clone()]));
     for __item in __iter1 {
@@ -6907,7 +6907,7 @@ pub fn _the_figures_in(args: &[Py]) -> Py {
     next_word = geti(&{ let __b = stdlib_call("re", "findall", &[py_str("[a-z']+"), after.clone()]).unwrap_or_else(|e| exc::raise(e)); if py_truthy(&__b) { __b } else { py_list(vec![py_str("")]) } }, &Py::Int(0));
     unit_word = mcall(&mcall(&found.clone(), "group", &[py_str("unit")]), "lower", &[]);
     one = { let __b = Py::Bool(!py_truthy(&mcall(&unit_word.clone(), "endswith", &[py_str("s")]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&py_tuple(vec![py_str("km"), py_str("kg"), py_str("lb"), py_str("lbs")]), &unit_word.clone())) } };
-    if py_truthy(&{ let __b = one.clone(); if !py_truthy(&__b) { __b } else { { let __b = next_word.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_contains(&g_FIGURE_AFTER(), &next_word.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&units.clone()) { let mut family: Py = __item.clone(); for __item in py_iter_or_raise(&geti(&pyrt::xrefs::xget("memory.store_lines", "FIGURE_UNITS"), &family.clone())) { let mut word: Py = __item.clone(); __out.push(word.clone()); } } py_set(__out) })() }, &next_word.clone())) } } } } } }) {
+    if py_truthy(&{ let __b = one.clone(); if !py_truthy(&__b) { __b } else { { let __b = next_word.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_contains(&g_FIGURE_AFTER(), &next_word.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&units.clone()) { let mut family: Py = __item.clone(); for __item in py_iter_or_raise(&geti(&g_FIGURE_UNITS(), &family.clone())) { let mut word: Py = __item.clone(); __out.push(word.clone()); } } py_set(__out) })() }, &next_word.clone())) } } } } } }) {
     continue;
     }
     pieces = py_list(vec![{ let __b = mcall(&found.clone(), "group", &[py_str("qual")]); if py_truthy(&__b) { __b } else { py_str("") } }, mcall(&found.clone(), "group", &[py_str("num")]), if py_truthy(&mcall(&found.clone(), "group", &[py_str("more")])) { op_add(&py_str("to "), &mcall(&found.clone(), "group", &[py_str("more")])) } else { py_str("") }, mcall(&found.clone(), "group", &[py_str("unit")]), { let __b = mcall(&found.clone(), "group", &[py_str("extra")]); if py_truthy(&__b) { __b } else { py_str("") } }]);
@@ -6968,16 +6968,16 @@ pub fn _the_figure_the_answer_names(args: &[Py]) -> Py {
     }
     rate_ask = call_builtin("bool", &[mcall(&g_A_RATE_ASK(), "match", &[mcall(&py_str(" "), "join", &[mcall(&mcall(&text.clone(), "lower", &[]), "split", &[])])])]).unwrap_or_else(|e| exc::raise(e));
     turns = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let __b = mcall(&memory.clone(), "get", &[py_str("turns")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }) { let mut turn: Py = __item.clone(); if py_truthy(&call_builtin("isinstance", &[turn.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(turn.clone()); } } py_list(__out) })() };
-    let __iter1 = py_iter_or_raise(&call_builtin("enumerate", &[call_builtin("reversed", &[slice_or_raise(&turns.clone(), &op_neg(&pyrt::xrefs::xget("memory.store_lines", "LOOK_BACK_FIGURE")), &Py::None, &Py::None)]).unwrap_or_else(|e| exc::raise(e)), Py::Int(1)]).unwrap_or_else(|e| exc::raise(e)));
+    let __iter1 = py_iter_or_raise(&call_builtin("enumerate", &[call_builtin("reversed", &[slice_or_raise(&turns.clone(), &op_neg(&g_LOOK_BACK_FIGURE()), &Py::None, &Py::None)]).unwrap_or_else(|e| exc::raise(e)), Py::Int(1)]).unwrap_or_else(|e| exc::raise(e)));
     for __item in __iter1 {
     let __unpk2 = py_unpack(&__item.clone(), 2, None);
     back = __unpk2[0].clone();
     turn = __unpk2[1].clone();
-    if py_truthy(&Py::Bool(!py_contains(&pyrt::xrefs::xget("memory.store_replies", "ANSWER_MODULES"), &mcall(&turn.clone(), "get", &[py_str("module")])))) {
+    if py_truthy(&Py::Bool(!py_contains(&g_ANSWER_MODULES(), &mcall(&turn.clone(), "get", &[py_str("module")])))) {
     continue;
     }
     said = mcall(&py_str(" "), "join", &[mcall(&call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("bot")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "split", &[])]);
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&said.clone())); if py_truthy(&__b) { __b } else { { let __b = op_lt(&call_builtin("len", &[said.clone()]).unwrap_or_else(|e| exc::raise(e)), &pyrt::xrefs::xget("memory.store_lines", "FIGURE_ANSWER_LEN")); if py_truthy(&__b) { __b } else { mcall(&mcall(&said.clone(), "rstrip", &[]), "endswith", &[py_str("?")]) } } } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&said.clone())); if py_truthy(&__b) { __b } else { { let __b = op_lt(&call_builtin("len", &[said.clone()]).unwrap_or_else(|e| exc::raise(e)), &g_FIGURE_ANSWER_LEN()); if py_truthy(&__b) { __b } else { mcall(&mcall(&said.clone(), "rstrip", &[]), "endswith", &[py_str("?")]) } } } }) {
     continue;
     }
     if py_truthy(&{ let __b = rate_ask.clone(); if !py_truthy(&__b) { __b } else { mcall(&g_A_RATE_STATED(), "search", &[said.clone()]) } }) {
@@ -6993,7 +6993,7 @@ pub fn _the_figure_the_answer_names(args: &[Py]) -> Py {
     }
     continue;
     }
-    stated = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&found.clone()) { let __unpk1125 = py_unpack(&__item.clone(), 2, None); let mut figure: Py = __unpk1125[0].clone(); let mut _u: Py = __unpk1125[1].clone(); __out.push(mcall(&figure.clone(), "lower", &[])); } py_set(__out) })() };
+    stated = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&found.clone()) { let __unpk1612 = py_unpack(&__item.clone(), 2, None); let mut figure: Py = __unpk1612[0].clone(); let mut _u: Py = __unpk1612[1].clone(); __out.push(mcall(&figure.clone(), "lower", &[])); } py_set(__out) })() };
     if py_truthy(&op_gt(&call_builtin("len", &[stated.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1))) {
     return Py::None;
     }
@@ -7027,12 +7027,12 @@ pub fn _a_figure_of_those_units(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(py_contains(&units.clone(), &py_str("money")))) {
     return call_builtin("bool", &[{ let __b = mcall(&g_A_MONEY_FIGURE(), "search", &[said.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_A_PERCENT_FIGURE(), "search", &[said.clone()]) } }]).unwrap_or_else(|e| exc::raise(e));
     }
-    words = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&units.clone()) { let mut unit: Py = __item.clone(); for __item in py_iter_or_raise(&geti(&pyrt::xrefs::xget("memory.store_lines", "FIGURE_UNITS"), &unit.clone())) { let mut word: Py = __item.clone(); __out.push(word.clone()); } } py_set(__out) })() }); __kws.extend(vec![("key".to_string(), py_func("len", |args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e)))), ("reverse".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sorted", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
+    words = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&units.clone()) { let mut unit: Py = __item.clone(); for __item in py_iter_or_raise(&geti(&g_FIGURE_UNITS(), &unit.clone())) { let mut word: Py = __item.clone(); __out.push(word.clone()); } } py_set(__out) })() }); __kws.extend(vec![("key".to_string(), py_func("len", |args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e)))), ("reverse".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sorted", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
     if py_truthy(&Py::Bool(!py_truthy(&words.clone()))) {
     return Py::Bool(false);
     }
     unit = op_modulo(&py_str("(?-i:%s)"), &mcall(&py_str("|"), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); __out.push(stdlib_call("re", "escape", &[word.clone()]).unwrap_or_else(|e| exc::raise(e))); } py_list(__out) })() }]));
-    pattern = stdlib_call("re", "compile", &[op_modulo(&py_str("(?<![\\d,])(?:%s|%s)\\s*(?:-|to|or)?\\s*%s\\b"), &py_tuple(vec![pyrt::xrefs::xget("memory.store_lines", "FIGURE_NUMBER"), py_str("\\d[\\d,.]*"), unit.clone()])), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e));
+    pattern = stdlib_call("re", "compile", &[op_modulo(&py_str("(?<![\\d,])(?:%s|%s)\\s*(?:-|to|or)?\\s*%s\\b"), &py_tuple(vec![g_FIGURE_NUMBER(), py_str("\\d[\\d,.]*"), unit.clone()])), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e));
     return call_builtin("bool", &[mcall(&pattern.clone(), "search", &[said.clone()])]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
@@ -7067,7 +7067,7 @@ pub fn _the_time_they_put_right(args: &[Py]) -> Py {
     return Py::None;
     }
     what = mcall(&py_str(" "), "join", &[mcall(&call_builtin("str", &[{ let __b = mcall(&fixed.clone(), "get", &[py_str("what")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "split", &[])]);
-    said_back = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("at".to_string(), at.clone()), ("what".to_string(), what.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let __b = mcall(&pyrt::xrefs::xget("memory.store_lines", "ROUTINE_SAY_BACK"), "get", &[what.clone()]); if py_truthy(&__b) { __b } else { py_str("You {what} at {at}.") } }, "format", args))(&__args) };
+    said_back = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("at".to_string(), at.clone()), ("what".to_string(), what.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let __b = mcall(&g_ROUTINE_SAY_BACK(), "get", &[what.clone()]); if py_truthy(&__b) { __b } else { py_str("You {what} at {at}.") } }, "format", args))(&__args) };
     said_back = mcall(&said_back.clone(), "rstrip", &[py_str(" .")]);
     was = mcall(&py_str(" "), "join", &[mcall(&call_builtin("str", &[{ let __b = mcall(&fixed.clone(), "get", &[py_str("from")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "split", &[])]);
     if py_truthy(&{ let __b = was.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(!py_eq(&was.clone(), &at.clone())) } }) {
@@ -7210,7 +7210,7 @@ pub fn respond(args: &[Py]) -> Py {
     return reply.clone();
     }
     reply = _the_places_are_written_as_names(&[reply.clone(), memory.clone()]);
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&mcall(&pyrt::xrefs::xget("memory.store_replies", "WHOLE_ASK"), "match", &[mcall(&mcall(&call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "strip", &[]), "lower", &[])]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_asks_to_hear_it_again(&[text.clone(), memory.clone()]))) } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&mcall(&g_WHOLE_ASK(), "match", &[mcall(&mcall(&call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "strip", &[]), "lower", &[])]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_asks_to_hear_it_again(&[text.clone(), memory.clone()]))) } }) {
     framed = mcall(&same_again.clone(), "instead", &[reply.clone(), text.clone(), memory.clone()]);
     if py_truthy(&framed.clone()) {
     return framed.clone();
@@ -7274,7 +7274,7 @@ pub fn _asks_about_someone_else(args: &[Py]) -> Py {
     let mut line: Py = Py::None;
     let _ = py_str("True for a yes/no question about a person (\"is he allergic to peanuts\").\n\n    The question mark is not asked for. Most people type an ask about their son on a phone\n    without one, and \"is he allergic to peanuts\" filed peanuts on the son while the same line\n    with a \"?\" did not - the fault this guard exists for, in the one shape where a wrong stored\n    fact matters most. What makes the line an ask is the auxiliary at the front and a person\n    after it: \"is my son\", \"does he\", \"can they\" never open a statement. A word that is not a\n    person (\"is it expensive\", \"is the boiler new\") keeps the question mark it needs, because\n    those openings are also how a statement about the weather goes.\n    ");
     line = mcall(&py_str(" "), "join", &[mcall(&call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "split", &[])]);
-    return call_builtin("bool", &[mcall(&pyrt::xrefs::xget("memory.store_replies", "YES_NO_ASK"), "match", &[line.clone()])]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("bool", &[mcall(&g_YES_NO_ASK(), "match", &[line.clone()])]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn _note_a_corrected_fact(args: &[Py]) -> Py {
@@ -7462,7 +7462,7 @@ pub fn _the_ask_behind_the_recall(args: &[Py]) -> Py {
     }
     rest = stdlib_call("re", "sub", &[py_str("\\s+(?:was|is|were|are)\\s*$"), py_str(""), mcall(&mcall(&wrapped.clone(), "group", &[py_str("rest")]), "strip", &[])]).unwrap_or_else(|e| exc::raise(e));
     said = mcall(&mcall(&mcall(&wrapped.clone(), "group", &[py_str("word")]), "lower", &[]), "replace", &[py_str("  "), py_str(" ")]);
-    slot = call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_RECALL_SLOTS()) { let __unpk776 = py_unpack(&__item.clone(), 3, None); let mut pattern: Py = __unpk776[0].clone(); let mut word: Py = __unpk776[1].clone(); let mut name: Py = __unpk776[2].clone(); if py_truthy(&mcall(&pattern.clone(), "search", &[rest.clone()])) {  __out.push(py_tuple(vec![word.clone(), name.clone()])); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e));
+    slot = call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_RECALL_SLOTS()) { let __unpk8733 = py_unpack(&__item.clone(), 3, None); let mut pattern: Py = __unpk8733[0].clone(); let mut word: Py = __unpk8733[1].clone(); let mut name: Py = __unpk8733[2].clone(); if py_truthy(&mcall(&pattern.clone(), "search", &[rest.clone()])) {  __out.push(py_tuple(vec![word.clone(), name.clone()])); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&Py::Bool(!py_truthy(&slot.clone()))) {
     return Py::None;
     }
@@ -7532,7 +7532,7 @@ pub fn TAKES_AS_IT_COMES(args: &[Py]) -> Py {
     if py_truthy(&pyrt::xrefs::xcall("memory.reminded", "about_a_thing_they_said", &[text.clone(), memory.clone()])) {
     return Py::Bool(true);
     }
-    if py_truthy(&Py::Bool(!py_truthy(&mcall(&pyrt::xrefs::xget("memory.store_replies", "BARE_WHAT_I_DO"), "match", &[pyrt::xrefs::xcall("memory.store_replies", "_bare", &[{ let __b = py_call(&pyrt::xrefs::xget("memory.store_replies", "_folded"), &[text.clone(), memory.clone()]); if py_truthy(&__b) { __b } else { text.clone() } }])])))) {
+    if py_truthy(&Py::Bool(!py_truthy(&mcall(&g_BARE_WHAT_I_DO(), "match", &[pyrt::xrefs::xcall("memory.store_replies", "_bare", &[{ let __b = py_call(&pyrt::xrefs::xget("memory.store_replies", "_folded"), &[text.clone(), memory.clone()]); if py_truthy(&__b) { __b } else { text.clone() } }])])))) {
     return Py::Bool(false);
     }
     return { let __b = call_builtin("bool", &[mcall(&py_call(&pyrt::xrefs::xget("memory.store_replies", "user"), &[memory.clone()]), "get", &[py_str("job")])]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { pyrt::xrefs::xcall("memory.store_replies", "_the_job_was_just_said", &[memory.clone()]) } };
@@ -7818,7 +7818,7 @@ pub fn _points_back_at_nothing(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&pyrt::xrefs::xcall("memory.thread", "points_back", &[text.clone()]))); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&pyrt::xrefs::xcall("memory.thread", "nothing_said", &[memory.clone()]))) } }) {
     return Py::None;
     }
-    return pyrt::xrefs::xcall("memory.store_replies", "_vary", &[pyrt::xrefs::xget("memory.store_lines", "POINTS_BACK_NOTHING"), memory.clone()]);
+    return pyrt::xrefs::xcall("memory.store_replies", "_vary", &[g_POINTS_BACK_NOTHING(), memory.clone()]);
     Py::None
 }
 pub fn _a_recall_about_nothing(args: &[Py]) -> Py {
@@ -7841,7 +7841,7 @@ pub fn _a_recall_about_nothing(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&pyrt::xrefs::xcall("memory.thread", "asks_what_i_said", &[text.clone()]))); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&pyrt::xrefs::xcall("memory.thread", "nothing_said", &[memory.clone()]))) } }) {
     return Py::None;
     }
-    return pyrt::xrefs::xcall("memory.store_replies", "_vary", &[pyrt::xrefs::xget("memory.store_lines", "WHAT_I_SAID_NOTHING"), memory.clone()]);
+    return pyrt::xrefs::xcall("memory.store_replies", "_vary", &[g_WHAT_I_SAID_NOTHING(), memory.clone()]);
     Py::None
 }
 pub fn _names_nothing_in_a_recall(args: &[Py]) -> Py {
@@ -7893,7 +7893,7 @@ pub fn _a_recall_frame_about_nothing(args: &[Py]) -> Py {
     wrapped_low = mcall(&mcall(&py_str(" "), "join", &[mcall(&mcall(&call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]), "split", &[])]), "strip", &[py_str(" .!?,")]);
     another = mcall(&g_A_RECALL_IN_ANOTHER_SHAPE(), "match", &[wrapped_low.clone()]);
     if py_truthy(&{ let __b = another.clone(); if !py_truthy(&__b) { __b } else { _names_nothing_in_a_recall(&[slice_or_raise(&wrapped_low.clone(), &mcall(&another.clone(), "end", &[]), &Py::None, &Py::None)]) } }) {
-    return pyrt::xrefs::xcall("memory.store_replies", "_vary", &[pyrt::xrefs::xget("memory.store_lines", "WHAT_I_SAID_NOTHING"), memory.clone()]);
+    return pyrt::xrefs::xcall("memory.store_replies", "_vary", &[g_WHAT_I_SAID_NOTHING(), memory.clone()]);
     }
     wrapped = mcall(&g_RECALL_WRAPPER(), "match", &[wrapped_low.clone()]);
     if py_truthy(&Py::Bool(!py_truthy(&wrapped.clone()))) {
@@ -7903,7 +7903,7 @@ pub fn _a_recall_frame_about_nothing(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&mcall(&pyrt::xrefs::xget("memory.thread", "POINTING_WORD"), "search", &[rest.clone()]))); if py_truthy(&__b) { __b } else { op_gt(&call_builtin("len", &[stdlib_call("re", "findall", &[py_str("[a-z]+"), rest.clone()]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)) } }) {
     return Py::None;
     }
-    return pyrt::xrefs::xcall("memory.store_replies", "_vary", &[pyrt::xrefs::xget("memory.store_lines", "WHAT_I_SAID_NOTHING"), memory.clone()]);
+    return pyrt::xrefs::xcall("memory.store_replies", "_vary", &[g_WHAT_I_SAID_NOTHING(), memory.clone()]);
     Py::None
 }
 pub fn _an_ask_about_nothing(args: &[Py]) -> Py {
@@ -7931,7 +7931,7 @@ pub fn _an_ask_about_nothing(args: &[Py]) -> Py {
     if py_truthy(&mcall(&fallback.clone(), "_points_at_nothing", &[text.clone(), memory.clone()])) {
     return Py::None;
     }
-    return pyrt::xrefs::xcall("memory.store_replies", "_vary", &[pyrt::xrefs::xget("memory.store_lines", "POINTING_WORD_NOTHING"), memory.clone()]);
+    return pyrt::xrefs::xcall("memory.store_replies", "_vary", &[g_POINTING_WORD_NOTHING(), memory.clone()]);
     Py::None
 }
 pub fn _the_last_ask_about_the_bot(args: &[Py]) -> Py {
@@ -8045,7 +8045,7 @@ pub fn _asks_whether_we_followed(args: &[Py]) -> Py {
     if py_truthy(&pyrt::xrefs::xcall("memory.store_replies", "_reads_as_the_invitation", &[low.clone(), memory.clone()])) {
     return Py::Bool(false);
     }
-    return call_builtin("bool", &[mcall(&pyrt::xrefs::xget("memory.store_replies", "CHECK_FOLLOWED"), "match", &[low.clone()])]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("bool", &[mcall(&g_CHECK_FOLLOWED(), "match", &[low.clone()])]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn _the_group_size_ask(args: &[Py]) -> Py {

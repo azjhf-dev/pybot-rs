@@ -616,7 +616,7 @@ pub fn _the_whole_answer(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = op_lt(&call_builtin("len", &[last.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(60)); if py_truthy(&__b) { __b } else { mcall(&last.clone(), "endswith", &[py_str("?")]) } }) {
     return py_str("");
     }
-    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback", "PUNT")) { let mut punt: Py = __item.clone(); __out.push(Py::Bool(py_contains(&mcall(&last.clone(), "lower", &[]), &punt.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_PUNT()) { let mut punt: Py = __item.clone(); __out.push(Py::Bool(py_contains(&mcall(&last.clone(), "lower", &[]), &punt.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     return py_str("");
     }
     if py_truthy(&mcall(&mcall(&last.clone(), "lower", &[]), "startswith", &[g_RULED_OUT_NO_ANSWER()])) {

@@ -101,7 +101,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.aboutthem.AHEAD_TIME"); }
     s_AHEAD_TIME(stdlib_call("re", "compile", &[py_str("\\bnext\\s+(?P<next>year|summer|birthday)\\b|\\bthis\\s+time\\s+next\\s+year\\b|\\bin\\s+(?P<years>\\d{1,2}|a|one|two|three|four|five|six|seven|eight|nine|ten)\\s+years?\\b|\\bin\\s+(?P<year>(?:19|20)\\d\\d)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.aboutthem.COUNT"); }
-    s_COUNT({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[py_tuple(vec![py_str("zero"), py_str("one"), py_str("two"), py_str("three"), py_str("four"), py_str("five"), py_str("six"), py_str("seven"), py_str("eight"), py_str("nine"), py_str("ten"), py_str("eleven"), py_str("twelve")]), Py::Int(0)]).unwrap_or_else(|e| exc::raise(e))) { let __unpk4855 = py_unpack(&__item.clone(), 2, None); let mut number: Py = __unpk4855[0].clone(); let mut word: Py = __unpk4855[1].clone(); __out.push((word.clone(), number.clone())); } py_dict(__out) })() });
+    s_COUNT({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[py_tuple(vec![py_str("zero"), py_str("one"), py_str("two"), py_str("three"), py_str("four"), py_str("five"), py_str("six"), py_str("seven"), py_str("eight"), py_str("nine"), py_str("ten"), py_str("eleven"), py_str("twelve")]), Py::Int(0)]).unwrap_or_else(|e| exc::raise(e))) { let __unpk1296 = py_unpack(&__item.clone(), 2, None); let mut number: Py = __unpk1296[0].clone(); let mut word: Py = __unpk1296[1].clone(); __out.push((word.clone(), number.clone())); } py_dict(__out) })() });
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.aboutthem.KIN"); }
     s_KIN(stdlib_call("re", "compile", &[py_str("\\bmy\\s+(?:little\\s+|big\\s+|eldest\\s+|youngest\\s+)?(?P<who>son|daughter|boy|girl|child|kid|lad|little one)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.aboutthem.KIN_SAME"); }
@@ -148,12 +148,12 @@ pub fn _the_child(args: &[Py]) -> Py {
     }
     word = mcall(&{ let __b = mcall(&found.clone(), "group", &[py_str("who")]); if py_truthy(&__b) { __b } else { { let __b = mcall(&found.clone(), "group", &[py_str("own")]); if py_truthy(&__b) { __b } else { { let __b = mcall(&found.clone(), "group", &[py_str("obj")]); if py_truthy(&__b) { __b } else { py_str("") } } } } } }, "lower", &[]);
     if py_truthy(&{ let __b = Py::Bool(py_eq(&word.clone(), &py_str("she"))); if py_truthy(&__b) { __b } else { Py::Bool(py_eq(&word.clone(), &py_str("her"))) } }) {
-    fits = pyrt::xrefs::xget("memory.facts", "SHE");
+    fits = g_SHE();
     } else {
     if py_truthy(&{ let __b = Py::Bool(py_eq(&word.clone(), &py_str("he"))); if py_truthy(&__b) { __b } else { Py::Bool(py_eq(&word.clone(), &py_str("his"))) } }) {
-    fits = pyrt::xrefs::xget("memory.facts", "HE");
+    fits = g_HE();
     } else {
-    fits = op_bitor(&pyrt::xrefs::xget("memory.facts", "SHE"), &pyrt::xrefs::xget("memory.facts", "HE"));
+    fits = op_bitor(&g_SHE(), &g_HE());
     }
     }
     let __iter1 = py_iter_or_raise(&_people(&[memory.clone()]));
@@ -434,16 +434,16 @@ pub fn _the_one_asked_about(args: &[Py]) -> Py {
     }
     word = mcall(&{ let __b = mcall(&found.clone(), "group", &[py_str("who")]); if py_truthy(&__b) { __b } else { { let __b = mcall(&found.clone(), "group", &[py_str("own")]); if py_truthy(&__b) { __b } else { { let __b = mcall(&found.clone(), "group", &[py_str("obj")]); if py_truthy(&__b) { __b } else { py_str("") } } } } } }, "lower", &[]);
     if py_truthy(&Py::Bool(py_contains(&py_tuple(vec![py_str("she"), py_str("her")]), &word.clone()))) {
-    let __unpk3 = py_unpack(&py_tuple(vec![pyrt::xrefs::xget("memory.facts", "SHE"), py_str("she")]), 2, None);
+    let __unpk3 = py_unpack(&py_tuple(vec![g_SHE(), py_str("she")]), 2, None);
     fits = __unpk3[0].clone();
     said_who = __unpk3[1].clone();
     } else {
     if py_truthy(&Py::Bool(py_contains(&py_tuple(vec![py_str("he"), py_str("his"), py_str("him")]), &word.clone()))) {
-    let __unpk4 = py_unpack(&py_tuple(vec![pyrt::xrefs::xget("memory.facts", "HE"), py_str("he")]), 2, None);
+    let __unpk4 = py_unpack(&py_tuple(vec![g_HE(), py_str("he")]), 2, None);
     fits = __unpk4[0].clone();
     said_who = __unpk4[1].clone();
     } else {
-    let __unpk5 = py_unpack(&py_tuple(vec![op_bitor(&pyrt::xrefs::xget("memory.facts", "SHE"), &pyrt::xrefs::xget("memory.facts", "HE")), py_str("they")]), 2, None);
+    let __unpk5 = py_unpack(&py_tuple(vec![op_bitor(&g_SHE(), &g_HE()), py_str("they")]), 2, None);
     fits = __unpk5[0].clone();
     said_who = __unpk5[1].clone();
     }

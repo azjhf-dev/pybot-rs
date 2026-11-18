@@ -1395,7 +1395,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.topics.POINTING_WORD"); }
     s_POINTING_WORD(stdlib_call("re", "compile", &[py_str("\\b(?:it|that|this|those|these|them|they|one|ones)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.topics.A_VERDICT"); }
-    s_A_VERDICT(op_bitor(&pyrt::xrefs::xget("understanding.kinds", "NEGATIVE"), &pyrt::xrefs::xget("understanding.kinds", "POSITIVE")));
+    s_A_VERDICT(op_bitor(&g_NEGATIVE(), &g_POSITIVE()));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.topics.A_BARE_MEASURE"); }
     s_A_BARE_MEASURE(stdlib_call("re", "compile", &[py_str("\\b(?:how much|how many|how often|how long|how far|how soon)\\b")]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.topics.MEASURE_WORDS"); }
@@ -5357,22 +5357,23 @@ pub fn _the_ways_of_saying_it(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: cands"))) };
     let mut cand: Py = Py::None;
     let mut carried: Py = Py::None;
+    let mut __yielded: Vec<Py> = Vec::new();
     let _ = py_str("The follow-up with the subject carried, said the two ways it can be said.\n\n    A follow-up that names nothing takes the topic's words with it: \"how often should I go?\"\n    after \"I want to start running\" is \"how often should I go running\". When the line points\n    back with a word of its own (\"when do those go in\"), the subject is what that word stands\n    for, so it is put in its place rather than added after it - \"when do those go in tomatoes\"\n    reaches no entry, and \"when do tomatoes go in\" is the planting one.\n    ");
     let __iter1 = py_iter_or_raise(&cands.clone());
     for __item in __iter1 {
     cand = __item.clone();
     carried = mcall(&py_str(" "), "join", &[cand.clone()]);
-    let _ = Py::None;
+    __yielded.push(py_tuple(vec![op_add(&op_add(&stem_of.clone(), &py_str(" ")), &carried.clone()), carried.clone()]));
     }
     if py_truthy(&mcall(&g_POINTING_WORD(), "search", &[call_builtin("str", &[{ let __b = line.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))])) {
     let __iter2 = py_iter_or_raise(&cands.clone());
     for __item in __iter2 {
     cand = __item.clone();
     carried = mcall(&py_str(" "), "join", &[cand.clone()]);
-    let _ = Py::None;
+    __yielded.push(py_tuple(vec![mcall(&py_str(" "), "join", &[mcall(&mcall(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(carried.clone()); __args.push(call_builtin("str", &[line.clone()]).unwrap_or_else(|e| exc::raise(e))); __kws.extend(vec![("count".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g_POINTING_WORD(), "sub", args))(&__args) }, "lower", &[]), "split", &[])]), carried.clone()]));
     }
     }
-    Py::None
+    py_list(__yielded)
 }
 pub fn _the_last_answer(args: &[Py]) -> Py {
     ensure_init();
@@ -11263,6 +11264,7 @@ pub fn _the_limit_written_out(args: &[Py]) -> Py {
     let mut said: Py = Py::None;
     let mut whole: Py = Py::None;
     let mut word: Py = Py::None;
+    let mut __yielded: Vec<Py> = Vec::new();
     let _ = py_str("The ask with the thing in it, the thing's own name before the doing word beside it.\n\n    The store keeps the gist of the line that put the thing in hand there, so \"i drink a lot of\n    coffee\" leaves \"drink coffee\": the limit row is keyed to the coffee, not to the drinking, and\n    a single word of the gist that is not a verb is the thing's own name.\n    ");
     whole = mcall(&py_str(" "), "join", &[mcall(&call_builtin("str", &[{ let __b = thing.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "split", &[])]);
     named = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&whole.clone(), "split", &[])) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(!py_truthy(&_a_doing_word(&[word.clone()])))) {  __out.push(word.clone()); } } py_list(__out) })() };
@@ -11300,10 +11302,10 @@ pub fn _the_limit_written_out(args: &[Py]) -> Py {
     let __iter8 = py_iter_or_raise(&g_THE_LIMIT());
     for __item in __iter8 {
     said = __item.clone();
-    let _ = Py::None;
+    __yielded.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("thing".to_string(), one.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&said.clone(), "format", args))(&__args) });
     }
     }
-    Py::None
+    py_list(__yielded)
 }
 pub fn _a_doing_word(args: &[Py]) -> Py {
     ensure_init();
@@ -11352,6 +11354,7 @@ pub fn _fills_from_the_things(args: &[Py]) -> Py {
     let mut seen: Py = Py::None;
     let mut things: Py = Py::None;
     let mut word: Py = Py::None;
+    let mut __yielded: Vec<Py> = Vec::new();
     let _ = py_str("Every ask the line means, the gist of the thing first and then the words of its key.\n\n    The store's word for the thing in hand is the gist of the line that put it there - \"car failed\n    mot broken\", \"washing machine making bang\" - and the price entries are keyed on the short\n    noun: \"how much does a car failed mot broken cost\" is nothing, and \"how much does mot cost\"\n    is the MOT fee. `key_subject` is the entry's own subject, so it is the second thing to write\n    the ask with.\n    ");
     seen = call_builtin("set", &[]).unwrap_or_else(|e| exc::raise(e));
     things = py_list(vec![thing.clone()]);
@@ -11390,11 +11393,11 @@ pub fn _fills_from_the_things(args: &[Py]) -> Py {
     ask = __item.clone();
     if py_truthy(&Py::Bool(!py_contains(&seen.clone(), &ask.clone()))) {
     let _ = mcall(&seen.clone(), "add", &[ask.clone()]);
-    let _ = Py::None;
+    __yielded.push(ask.clone());
     }
     }
     }
-    Py::None
+    py_list(__yielded)
 }
 pub fn _fills(args: &[Py]) -> Py {
     ensure_init();
@@ -12319,6 +12322,7 @@ pub fn _the_things_the_chat_named(args: &[Py]) -> Py {
     let mut seen: Py = Py::None;
     let mut text: Py = Py::None;
     let mut texts: Py = Py::None;
+    let mut __yielded: Vec<Py> = Vec::new();
     let _ = py_str("The things the chat has named, newest first, to read a follow-up against.\n\n    The topic the line leans on is not always the one that can answer it. \"im learning to drive\"\n    then \"my test is in march\" then \"how many lessons will i need\": the newest thing the chat\n    named is the date, and read against the date the ask reaches nothing, but the plan two lines\n    back reaches the lessons answer in full. A follow-up is read against the newest thing that\n    can answer it, which is the rule the picture is worth: the chat is still on the plan.\n    ");
     seen = py_list(vec![]);
     texts = py_list(vec![call_builtin("str", &[{ let __b = record_text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))]);
@@ -12342,9 +12346,9 @@ pub fn _the_things_the_chat_named(args: &[Py]) -> Py {
     continue;
     }
     let _ = mcall(&seen.clone(), "append", &[mcall(&py_str(" "), "join", &[words(&[said.clone()])])]);
-    let _ = Py::None;
+    __yielded.push(said.clone());
     }
-    Py::None
+    py_list(__yielded)
 }
 pub fn followup_reading(args: &[Py]) -> Py {
     ensure_init();
@@ -12727,14 +12731,15 @@ pub fn _the_records(args: &[Py]) -> Py {
     else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "memory") { v.clone() }
     else { exc::raise(type_err(&format!("missing required argument: memory"))) };
     let mut record: Py = Py::None;
+    let mut __yielded: Vec<Py> = Vec::new();
     let __iter1 = py_iter_or_raise(&op_add(&py_list(vec![mcall(&memory.clone(), "get", &[py_str("topic")])]), &call_builtin("list", &[{ let __b = mcall(&memory.clone(), "get", &[py_str("topics")]); if py_truthy(&__b) { __b } else { py_tuple(vec![]) } }]).unwrap_or_else(|e| exc::raise(e))));
     for __item in __iter1 {
     record = __item.clone();
     if py_truthy(&call_builtin("isinstance", &[record.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) {
-    let _ = Py::None;
+    __yielded.push(record.clone());
     }
     }
-    Py::None
+    py_list(__yielded)
 }
 pub fn _the_words_this_turn(args: &[Py]) -> Py {
     ensure_init();

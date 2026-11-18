@@ -810,10 +810,10 @@ pub fn _drafting_pool(args: &[Py]) -> Py {
     else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "clean") { v.clone() }
     else { exc::raise(type_err(&format!("missing required argument: clean"))) };
     let _ = py_str("The drafting invite, without asking for what the line already said.\n\n    \"Give me who it's for\" is the right question after \"can you write a text for me\", and the\n    wrong one after \"can you send a text to my landlord\" - the person named the landlord in the\n    same breath. So the pool is picked on the shape: when an addressee is already named, the\n    invite asks for the gist and the tone, which is what is actually missing.\n    ");
-    if py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback", "no_eyes"), "names_the_addressee", &[clean.clone()])) {
-    return pyrt::xrefs::xget("compose.fallback", "UNKNOWN_WORD_NAMED");
+    if py_truthy(&mcall(&g_no_eyes(), "names_the_addressee", &[clean.clone()])) {
+    return g_UNKNOWN_WORD_NAMED();
     }
-    return pyrt::xrefs::xget("compose.fallback", "UNKNOWN_WORD");
+    return g_UNKNOWN_WORD();
     Py::None
 }
 pub fn _a_care_thread(args: &[Py]) -> Py {
@@ -843,7 +843,7 @@ pub fn _a_care_thread(args: &[Py]) -> Py {
     let __iter1 = py_iter_or_raise(&slice_or_raise(&turns.clone(), &op_neg(&look_back.clone()), &Py::None, &Py::None));
     for __item in __iter1 {
     turn = __item.clone();
-    if py_truthy(&mcall(&pyrt::xrefs::xget("compose.the_rule_for_it", "A_CARE_WORD"), "search", &[mcall(&call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("user")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[])])) {
+    if py_truthy(&mcall(&g_A_CARE_WORD(), "search", &[mcall(&call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("user")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[])])) {
     return Py::Bool(true);
     }
     }
@@ -874,7 +874,7 @@ pub fn _a_money_thread(args: &[Py]) -> Py {
     let __iter1 = py_iter_or_raise(&slice_or_raise(&turns.clone(), &op_neg(&look_back.clone()), &Py::None, &Py::None));
     for __item in __iter1 {
     turn = __item.clone();
-    if py_truthy(&mcall(&pyrt::xrefs::xget("compose.the_rule_for_it", "A_MONEY_WORD"), "search", &[mcall(&call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("user")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[])])) {
+    if py_truthy(&mcall(&g_A_MONEY_WORD(), "search", &[mcall(&call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("user")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[])])) {
     return Py::Bool(true);
     }
     }
@@ -907,11 +907,11 @@ pub fn _the_rule_for_it_for_the_turn(args: &[Py]) -> Py {
     return Py::None;
     }
     words = op_bitor(&call_builtin("set", &[stdlib_call("re", "findall", &[py_str("[a-z']+"), mcall(&call_builtin("str", &[{ let __b = clean.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[])]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("set", &[stdlib_call("re", "findall", &[py_str("[a-z']+"), mcall(&call_builtin("str", &[{ let __b = repaired.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[])]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
-    if py_truthy(&op_bitand(&words.clone(), &op_bitor(&op_bitor(&pyrt::xrefs::xget("compose.fallback", "BODY_PARTS"), &pyrt::xrefs::xget("compose.fallback", "SYMPTOM_WORDS")), &pyrt::xrefs::xget("compose.fallback", "HEALTH_WORDS")))) {
+    if py_truthy(&op_bitand(&words.clone(), &op_bitor(&op_bitor(&g_BODY_PARTS(), &g_SYMPTOM_WORDS()), &g_HEALTH_WORDS()))) {
     return Py::None;
     }
     pool = pyrt::xrefs::xcall("compose.the_rule_for_it", "the_rule_for_it", &[clean.clone(), repaired.clone()]);
-    if py_truthy(&{ let __b = Py::Bool(py_is(&pool.clone(), &pyrt::xrefs::xget("compose.the_rule_for_it", "TIME_RULE"))); if !py_truthy(&__b) { __b } else { _a_money_thread(&[memory.clone()]) } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_is(&pool.clone(), &g_TIME_RULE())); if !py_truthy(&__b) { __b } else { _a_money_thread(&[memory.clone()]) } }) {
     return Py::None;
     }
     return pool.clone();
@@ -953,13 +953,13 @@ pub fn _a_missed_step(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = mcall(&g_MISSED_STEP_KEEPS(), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_MISSED_STEP_KEEPS(), "search", &[repaired.clone()]) } }) {
     return Py::None;
     }
-    if py_truthy(&{ let __b = op_bitand(&call_builtin("set", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &pyrt::xrefs::xget("compose.fallback", "HEALTH_WORDS")); if py_truthy(&__b) { __b } else { op_bitand(&call_builtin("set", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &pyrt::xrefs::xget("compose.fallback", "BODY_PARTS")) } }) {
+    if py_truthy(&{ let __b = op_bitand(&call_builtin("set", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &g_HEALTH_WORDS()); if py_truthy(&__b) { __b } else { op_bitand(&call_builtin("set", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &g_BODY_PARTS()) } }) {
     return Py::None;
     }
     if py_truthy(&{ let __b = pyrt::xrefs::xcall("compose.fallback", "in_a_safety_thread", &[memory.clone()]); if py_truthy(&__b) { __b } else { { let __b = pyrt::xrefs::xcall("compose.fallback", "_grief_thread", &[memory.clone()]); if py_truthy(&__b) { __b } else { { let __b = pyrt::xrefs::xcall("compose.fallback", "_in_a_loss_thread", &[memory.clone()]); if py_truthy(&__b) { __b } else { { let __b = pyrt::xrefs::xcall("compose.fallback", "_thread_is_about_the_body", &[memory.clone()]); if py_truthy(&__b) { __b } else { { let __b = pyrt::xrefs::xcall("compose.fallback", "_thread_is_about_a_pet", &[memory.clone()]); if py_truthy(&__b) { __b } else { pyrt::xrefs::xcall("compose.fallback", "_thread_is_about_someone_else", &[memory.clone()]) } } } } } } } } } }) {
     return Py::None;
     }
-    return pyrt::xrefs::xget("compose.fallback_data", "MISSED_STEP_LINES");
+    return g_MISSED_STEP_LINES();
     Py::None
 }
 pub fn _unknown(args: &[Py]) -> Py {
@@ -1030,27 +1030,27 @@ pub fn _unknown(args: &[Py]) -> Py {
     if py_truthy(&own_day.clone()) {
     return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[own_day.clone(), memory.clone(), clean.clone()]);
     }
-    body_lines = mcall(&pyrt::xrefs::xget("compose.fallback", "no_eyes"), "look_at_a_body_lines", &[clean.clone(), repaired.clone(), memory.clone()]);
+    body_lines = mcall(&g_no_eyes(), "look_at_a_body_lines", &[clean.clone(), repaired.clone(), memory.clone()]);
     if py_truthy(&body_lines.clone()) {
     return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[body_lines.clone(), memory.clone(), clean.clone()]);
     }
-    cannot_see = mcall(&pyrt::xrefs::xget("compose.fallback", "no_eyes"), "cannot_see_your_thing", &[clean.clone()]);
+    cannot_see = mcall(&g_no_eyes(), "cannot_see_your_thing", &[clean.clone()]);
     if py_truthy(&cannot_see.clone()) {
     return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[cannot_see.clone(), memory.clone(), clean.clone()]);
     }
-    described = mcall(&pyrt::xrefs::xget("compose.fallback", "no_eyes"), "what_they_described", &[clean.clone(), memory.clone()]);
+    described = mcall(&g_no_eyes(), "what_they_described", &[clean.clone(), memory.clone()]);
     if py_truthy(&described.clone()) {
     return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[described.clone(), memory.clone(), clean.clone()]);
     }
-    in_the_room = mcall(&pyrt::xrefs::xget("compose.fallback", "no_eyes"), "a_thing_in_the_room", &[clean.clone()]);
+    in_the_room = mcall(&g_no_eyes(), "a_thing_in_the_room", &[clean.clone()]);
     if py_truthy(&in_the_room.clone()) {
     return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[in_the_room.clone(), memory.clone(), clean.clone()]);
     }
-    if py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback", "no_eyes"), "writes_the_message", &[clean.clone()])) {
+    if py_truthy(&mcall(&g_no_eyes(), "writes_the_message", &[clean.clone()])) {
     return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[_drafting_pool(&[clean.clone()]), memory.clone(), clean.clone()]);
     }
-    if py_truthy(&{ let __b = pyrt::xrefs::xcall("compose.fallback", "_in_a_crisis_thread", &[memory.clone()]); if !py_truthy(&__b) { __b } else { { let __b = pyrt::xrefs::xcall("compose.fallback", "_asks_for_a_person_to_talk_to", &[clean.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&pyrt::xrefs::xget("compose.fallback", "CRISIS_ASK"), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { mcall(&pyrt::xrefs::xget("compose.fallback", "WHO_FOR_IT"), "match", &[clean.clone()]) } } } } } }) {
-    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[pyrt::xrefs::xget("compose.fallback", "A_PERSON_IN_A_CRISIS"), memory.clone(), clean.clone()]);
+    if py_truthy(&{ let __b = pyrt::xrefs::xcall("compose.fallback", "_in_a_crisis_thread", &[memory.clone()]); if !py_truthy(&__b) { __b } else { { let __b = pyrt::xrefs::xcall("compose.fallback", "_asks_for_a_person_to_talk_to", &[clean.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_CRISIS_ASK(), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_WHO_FOR_IT(), "match", &[clean.clone()]) } } } } } }) {
+    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[g_A_PERSON_IN_A_CRISIS(), memory.clone(), clean.clone()]);
     }
     lost = pyrt::xrefs::xcall("compose.fallback", "the_lost_ask_reply", &[memory.clone(), clean.clone(), repaired.clone()]);
     if py_truthy(&lost.clone()) {
@@ -1059,72 +1059,72 @@ pub fn _unknown(args: &[Py]) -> Py {
     if py_truthy(&pyrt::xrefs::xcall("compose.fallback", "_asks_a_name_back", &[clean.clone(), { let __b = mcall(&understood.clone(), "get", &[py_str("words")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }])) {
     given = pyrt::xrefs::xcall("compose.fallback", "_name_given_before", &[clean.clone(), memory.clone()]);
     if py_truthy(&given.clone()) {
-    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback", "HANDED_BACK")) { let mut line: Py = __item.clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("name".to_string(), given.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&line.clone(), "format", args))(&__args) }); } py_list(__out) })() }, memory.clone(), clean.clone()]);
+    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_HANDED_BACK()) { let mut line: Py = __item.clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("name".to_string(), given.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&line.clone(), "format", args))(&__args) }); } py_list(__out) })() }, memory.clone(), clean.clone()]);
     }
-    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[pyrt::xrefs::xget("compose.fallback", "NOT_NOTED"), memory.clone(), clean.clone()]);
+    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[g_NOT_NOTED(), memory.clone(), clean.clone()]);
     }
     forecast = pyrt::xrefs::xcall("compose.fallback", "_forecast_pool", &[clean.clone(), repaired.clone(), memory.clone()]);
     if py_truthy(&forecast.clone()) {
     return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[forecast.clone(), memory.clone(), clean.clone()]);
     }
     if py_truthy(&pyrt::xrefs::xcall("compose.fallback", "reads_as_if_i_saw", &[clean.clone(), memory.clone()])) {
-    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[pyrt::xrefs::xget("compose.fallback", "ASKED_IF_I_SAW_LINES"), memory.clone(), clean.clone()]);
+    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[g_ASKED_IF_I_SAW_LINES(), memory.clone(), clean.clone()]);
     }
     if py_truthy(&{ let __b = pyrt::xrefs::xcall("compose.fallback", "_asked_about_the_day_they_had", &[clean.clone()]); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&pyrt::xrefs::xcall("compose.fallback", "in_a_safety_thread", &[memory.clone()]))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&pyrt::xrefs::xcall("compose.fallback", "_grief_thread", &[memory.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&pyrt::xrefs::xcall("compose.fallback", "_in_a_loss_thread", &[memory.clone()]))) } } } } } }) {
-    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[pyrt::xrefs::xget("compose.fallback", "WASNT_THERE"), memory.clone(), clean.clone()]);
+    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[g_WASNT_THERE(), memory.clone(), clean.clone()]);
     }
-    how_to = mcall(&pyrt::xrefs::xget("compose.fallback", "HOW_TO_DECIDE"), "search", &[clean.clone()]);
+    how_to = mcall(&g_HOW_TO_DECIDE(), "search", &[clean.clone()]);
     how_line = clean.clone();
     if py_truthy(&{ let __b = Py::Bool(py_is(&how_to.clone(), &Py::None)); if !py_truthy(&__b) { __b } else { Py::Bool(!py_eq(&repaired.clone(), &clean.clone())) } }) {
-    how_to = mcall(&pyrt::xrefs::xget("compose.fallback", "HOW_TO_DECIDE"), "search", &[repaired.clone()]);
+    how_to = mcall(&g_HOW_TO_DECIDE(), "search", &[repaired.clone()]);
     how_line = repaired.clone();
     }
-    if py_truthy(&{ let __b = Py::Bool(!py_is(&how_to.clone(), &Py::None)); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&py_call(&pyrt::xrefs::xget("compose.fallback", "_reads"), &[gattr(&pyrt::xrefs::xget("compose.fallback", "LIFE_DIRECTION"), "search"), clean.clone(), repaired.clone()]))); if !py_truthy(&__b) { __b } else { pyrt::xrefs::xcall("compose.fallback", "_nothing_to_choose", &[slice_or_raise(&how_line.clone(), &mcall(&how_to.clone(), "end", &[]), &Py::None, &Py::None)]) } } } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_is(&how_to.clone(), &Py::None)); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&py_call(&pyrt::xrefs::xget("compose.fallback", "_reads"), &[gattr(&g_LIFE_DIRECTION(), "search"), clean.clone(), repaired.clone()]))); if !py_truthy(&__b) { __b } else { pyrt::xrefs::xcall("compose.fallback", "_nothing_to_choose", &[slice_or_raise(&how_line.clone(), &mcall(&how_to.clone(), "end", &[]), &Py::None, &Py::None)]) } } } }) {
     said_words = op_add(&op_add(&py_str(" "), &stdlib_call("re", "sub", &[py_str("[^a-z0-9']"), py_str(" "), how_line.clone()]).unwrap_or_else(|e| exc::raise(e))), &py_str(" "));
     plain = mcall(&mcall(&said_words.clone(), "replace", &[py_str("'"), py_str("")]), "split", &[]);
-    if py_truthy(&Py::Bool(!py_truthy(&{ let __b = op_bitand(&call_builtin("set", &[plain.clone()]).unwrap_or_else(|e| exc::raise(e)), &pyrt::xrefs::xget("compose.fallback", "HEALTH_WORDS")); if py_truthy(&__b) { __b } else { { let __b = op_bitand(&call_builtin("set", &[plain.clone()]).unwrap_or_else(|e| exc::raise(e)), &pyrt::xrefs::xget("compose.fallback", "EXPERT_WORDS")); if py_truthy(&__b) { __b } else { { let __b = op_bitand(&call_builtin("set", &[plain.clone()]).unwrap_or_else(|e| exc::raise(e)), &pyrt::xrefs::xget("compose.fallback", "BODY_PARTS")); if py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&plain.clone()) { let mut w: Py = __item.clone(); __out.push({ let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback", "ANIMALS"), &w.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback", "ANIMALS"), &mcall(&w.clone(), "rstrip", &[py_str("s")]))) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } } } } } }))) {
-    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[pyrt::xrefs::xget("compose.fallback", "HOW_TO_DECIDE_LINES"), memory.clone(), clean.clone()]);
+    if py_truthy(&Py::Bool(!py_truthy(&{ let __b = op_bitand(&call_builtin("set", &[plain.clone()]).unwrap_or_else(|e| exc::raise(e)), &g_HEALTH_WORDS()); if py_truthy(&__b) { __b } else { { let __b = op_bitand(&call_builtin("set", &[plain.clone()]).unwrap_or_else(|e| exc::raise(e)), &g_EXPERT_WORDS()); if py_truthy(&__b) { __b } else { { let __b = op_bitand(&call_builtin("set", &[plain.clone()]).unwrap_or_else(|e| exc::raise(e)), &g_BODY_PARTS()); if py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&plain.clone()) { let mut w: Py = __item.clone(); __out.push({ let __b = Py::Bool(py_contains(&g_ANIMALS(), &w.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_ANIMALS(), &mcall(&w.clone(), "rstrip", &[py_str("s")]))) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } } } } } }))) {
+    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[g_HOW_TO_DECIDE_LINES(), memory.clone(), clean.clone()]);
     }
     }
     if py_truthy(&pyrt::xrefs::xcall("compose.fallback", "_reads_as_taste", &[clean.clone(), { let __b = mcall(&understood.clone(), "get", &[py_str("words")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }])) {
-    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[pyrt::xrefs::xget("compose.fallback", "UNKNOWN"), memory.clone(), clean.clone()]);
+    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[g_UNKNOWN(), memory.clone(), clean.clone()]);
     }
-    if py_truthy(&{ let __b = py_call(&pyrt::xrefs::xget("compose.fallback", "_reads"), &[gattr(&pyrt::xrefs::xget("compose.fallback", "REPAIR_WHETHER"), "search"), clean.clone(), repaired.clone()]); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&py_call(&pyrt::xrefs::xget("compose.fallback", "_reads"), &[gattr(&pyrt::xrefs::xget("compose.fallback", "REPAIR_WHAT_IT_IS_WORTH"), "search"), clean.clone(), repaired.clone()]))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&pyrt::xrefs::xcall("compose.fallback", "who_settles", &[clean.clone(), memory.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&pyrt::xrefs::xcall("compose.fallback", "_a_repair_already_spoken_of", &[memory.clone()]))) } } } } } }) {
-    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[pyrt::xrefs::xget("compose.fallback_data", "REPAIR_WHETHER_LINES"), memory.clone(), clean.clone()]);
+    if py_truthy(&{ let __b = py_call(&pyrt::xrefs::xget("compose.fallback", "_reads"), &[gattr(&g_REPAIR_WHETHER(), "search"), clean.clone(), repaired.clone()]); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&py_call(&pyrt::xrefs::xget("compose.fallback", "_reads"), &[gattr(&g_REPAIR_WHAT_IT_IS_WORTH(), "search"), clean.clone(), repaired.clone()]))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&pyrt::xrefs::xcall("compose.fallback", "who_settles", &[clean.clone(), memory.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&pyrt::xrefs::xcall("compose.fallback", "_a_repair_already_spoken_of", &[memory.clone()]))) } } } } } }) {
+    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[g_REPAIR_WHETHER_LINES(), memory.clone(), clean.clone()]);
     }
-    if py_truthy(&{ let __b = py_call(&pyrt::xrefs::xget("compose.fallback", "_reads"), &[gattr(&pyrt::xrefs::xget("compose.fallback", "REPAIR_DECISION"), "search"), clean.clone(), repaired.clone()]); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&py_call(&pyrt::xrefs::xget("compose.fallback", "_reads"), &[gattr(&pyrt::xrefs::xget("compose.fallback", "REPAIR_TRADE"), "search"), clean.clone(), repaired.clone()]))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&py_call(&pyrt::xrefs::xget("compose.fallback", "_reads"), &[gattr(&pyrt::xrefs::xget("compose.fallback", "REPAIR_PERSON"), "search"), clean.clone(), repaired.clone()]))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&{ let __b = py_call(&pyrt::xrefs::xget("compose.fallback", "_reads"), &[gattr(&pyrt::xrefs::xget("compose.fallback", "LEAVING_IN_THE_LINE"), "search"), clean.clone(), repaired.clone()]); if !py_truthy(&__b) { __b } else { pyrt::xrefs::xcall("compose.fallback", "_thread_is_about_a_person", &[memory.clone()]) } })); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&py_call(&pyrt::xrefs::xget("compose.fallback", "_reads"), &[gattr(&pyrt::xrefs::xget("compose.fallback", "REPAIR_TARIFF"), "search"), clean.clone(), repaired.clone()]))) } } } } } } } }) {
+    if py_truthy(&{ let __b = py_call(&pyrt::xrefs::xget("compose.fallback", "_reads"), &[gattr(&g_REPAIR_DECISION(), "search"), clean.clone(), repaired.clone()]); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&py_call(&pyrt::xrefs::xget("compose.fallback", "_reads"), &[gattr(&g_REPAIR_TRADE(), "search"), clean.clone(), repaired.clone()]))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&py_call(&pyrt::xrefs::xget("compose.fallback", "_reads"), &[gattr(&g_REPAIR_PERSON(), "search"), clean.clone(), repaired.clone()]))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&{ let __b = py_call(&pyrt::xrefs::xget("compose.fallback", "_reads"), &[gattr(&g_LEAVING_IN_THE_LINE(), "search"), clean.clone(), repaired.clone()]); if !py_truthy(&__b) { __b } else { pyrt::xrefs::xcall("compose.fallback", "_thread_is_about_a_person", &[memory.clone()]) } })); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&py_call(&pyrt::xrefs::xget("compose.fallback", "_reads"), &[gattr(&g_REPAIR_TARIFF(), "search"), clean.clone(), repaired.clone()]))) } } } } } } } }) {
     if py_truthy(&{ let __b = pyrt::xrefs::xcall("compose.fallback", "in_a_safety_thread", &[memory.clone()]); if py_truthy(&__b) { __b } else { { let __b = pyrt::xrefs::xcall("compose.fallback", "_grief_thread", &[memory.clone()]); if py_truthy(&__b) { __b } else { pyrt::xrefs::xcall("compose.fallback", "_in_a_loss_thread", &[memory.clone()]) } } } }) {
-    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[pyrt::xrefs::xget("compose.fallback", "CARE_HERE"), memory.clone(), clean.clone()]);
+    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[g_CARE_HERE(), memory.clone(), clean.clone()]);
     }
     own_thing = { let __b = pyrt::xrefs::xcall("compose.fallback", "_names_its_own_thing", &[clean.clone()]); if py_truthy(&__b) { __b } else { pyrt::xrefs::xcall("compose.fallback", "_names_its_own_thing", &[repaired.clone()]) } };
     line_words = op_bitor(&call_builtin("set", &[stdlib_call("re", "findall", &[py_str("[a-z']+"), clean.clone()]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("set", &[stdlib_call("re", "findall", &[py_str("[a-z']+"), repaired.clone()]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
-    no_thing_named = { let __b = py_call(&pyrt::xrefs::xget("compose.fallback", "_reads"), &[gattr(&pyrt::xrefs::xget("compose.fallback", "REPAIR_BARE_IT"), "search"), clean.clone(), repaired.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&pyrt::xrefs::xcall("compose.fallback", "_thread_names_a_machine", &[memory.clone()]))) } };
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&own_thing.clone())); if !py_truthy(&__b) { __b } else { { let __b = { let __b = pyrt::xrefs::xcall("compose.fallback", "_thread_is_about_the_body", &[memory.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&pyrt::xrefs::xcall("compose.fallback", "_thread_names_a_machine", &[memory.clone()]))) } }; if py_truthy(&__b) { __b } else { op_bitand(&line_words.clone(), &op_bitor(&op_bitor(&pyrt::xrefs::xget("compose.fallback", "BODY_PARTS"), &pyrt::xrefs::xget("compose.fallback", "SYMPTOM_WORDS")), &pyrt::xrefs::xget("compose.fallback", "HEALTH_WORDS"))) } } } }) {
+    no_thing_named = { let __b = py_call(&pyrt::xrefs::xget("compose.fallback", "_reads"), &[gattr(&g_REPAIR_BARE_IT(), "search"), clean.clone(), repaired.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&pyrt::xrefs::xcall("compose.fallback", "_thread_names_a_machine", &[memory.clone()]))) } };
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&own_thing.clone())); if !py_truthy(&__b) { __b } else { { let __b = { let __b = pyrt::xrefs::xcall("compose.fallback", "_thread_is_about_the_body", &[memory.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&pyrt::xrefs::xcall("compose.fallback", "_thread_names_a_machine", &[memory.clone()]))) } }; if py_truthy(&__b) { __b } else { op_bitand(&line_words.clone(), &op_bitor(&op_bitor(&g_BODY_PARTS(), &g_SYMPTOM_WORDS()), &g_HEALTH_WORDS())) } } } }) {
     if py_truthy(&pyrt::xrefs::xcall("compose.fallback", "_offers_to_fix_themselves", &[clean.clone()])) {
-    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[pyrt::xrefs::xget("compose.fallback", "BODY_IS_NOT_A_MACHINE"), memory.clone(), clean.clone()]);
+    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[g_BODY_IS_NOT_A_MACHINE(), memory.clone(), clean.clone()]);
     }
-    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[pyrt::xrefs::xget("compose.fallback", "UNKNOWN_HEALTH"), memory.clone(), clean.clone()]);
+    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[g_UNKNOWN_HEALTH(), memory.clone(), clean.clone()]);
     }
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&no_thing_named.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&pyrt::xrefs::xcall("compose.fallback", "_thread_is_about_a_person", &[memory.clone()]))); if py_truthy(&__b) { __b } else { { let __b = own_thing.clone(); if py_truthy(&__b) { __b } else { pyrt::xrefs::xcall("compose.fallback", "_a_thing_was_named", &[memory.clone()]) } } } } } }) {
-    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[pyrt::xrefs::xget("compose.fallback", "REPAIR_RULE"), memory.clone(), clean.clone()]);
+    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[g_REPAIR_RULE(), memory.clone(), clean.clone()]);
     }
-    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[pyrt::xrefs::xget("compose.fallback", "UNKNOWN_DECIDE"), memory.clone(), clean.clone()]);
+    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[g_UNKNOWN_DECIDE(), memory.clone(), clean.clone()]);
     }
-    if py_truthy(&{ let __b = py_call(&pyrt::xrefs::xget("compose.fallback", "_reads"), &[gattr(&pyrt::xrefs::xget("compose.fallback", "TOO_LATE"), "search"), clean.clone(), repaired.clone()]); if !py_truthy(&__b) { __b } else { { let __b = pyrt::xrefs::xcall("compose.fallback", "_a_thing_they_started", &[memory.clone()]); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&pyrt::xrefs::xcall("compose.fallback", "_hedged_recently", &[memory.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&pyrt::xrefs::xcall("compose.fallback", "_thread_is_about_the_body", &[memory.clone()]))) } } } } } }) {
-    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[pyrt::xrefs::xget("compose.fallback", "UNKNOWN_TOO_LATE"), memory.clone(), clean.clone()]);
+    if py_truthy(&{ let __b = py_call(&pyrt::xrefs::xget("compose.fallback", "_reads"), &[gattr(&g_TOO_LATE(), "search"), clean.clone(), repaired.clone()]); if !py_truthy(&__b) { __b } else { { let __b = pyrt::xrefs::xcall("compose.fallback", "_a_thing_they_started", &[memory.clone()]); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&pyrt::xrefs::xcall("compose.fallback", "_hedged_recently", &[memory.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&pyrt::xrefs::xcall("compose.fallback", "_thread_is_about_the_body", &[memory.clone()]))) } } } } } }) {
+    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[g_UNKNOWN_TOO_LATE(), memory.clone(), clean.clone()]);
     }
-    if py_truthy(&{ let __b = { let __b = pyrt::xrefs::xcall("compose.fallback", "_a_plan_doubt", &[gattr(&pyrt::xrefs::xget("compose.fallback", "REALISTIC"), "search"), clean.clone(), repaired.clone()]); if py_truthy(&__b) { __b } else { { let __b = pyrt::xrefs::xcall("compose.fallback", "_a_plan_doubt", &[gattr(&pyrt::xrefs::xget("compose.fallback", "REALISTIC_ABOUT_ME"), "search"), clean.clone(), repaired.clone()]); if !py_truthy(&__b) { __b } else { pyrt::xrefs::xcall("compose.fallback", "_a_plan_in_the_thread", &[clean.clone(), memory.clone()]) } } } }; if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&pyrt::xrefs::xcall("compose.fallback", "_hedged_recently", &[memory.clone()]))) } }) {
-    pool = if py_truthy(&pyrt::xrefs::xcall("compose.fallback", "_the_thread_is_heavy", &[memory.clone()])) { pyrt::xrefs::xget("compose.fallback", "UNKNOWN_REALISTIC_CARE") } else { pyrt::xrefs::xget("compose.fallback", "UNKNOWN_REALISTIC") };
+    if py_truthy(&{ let __b = { let __b = pyrt::xrefs::xcall("compose.fallback", "_a_plan_doubt", &[gattr(&g_REALISTIC(), "search"), clean.clone(), repaired.clone()]); if py_truthy(&__b) { __b } else { { let __b = pyrt::xrefs::xcall("compose.fallback", "_a_plan_doubt", &[gattr(&g_REALISTIC_ABOUT_ME(), "search"), clean.clone(), repaired.clone()]); if !py_truthy(&__b) { __b } else { pyrt::xrefs::xcall("compose.fallback", "_a_plan_in_the_thread", &[clean.clone(), memory.clone()]) } } } }; if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&pyrt::xrefs::xcall("compose.fallback", "_hedged_recently", &[memory.clone()]))) } }) {
+    pool = if py_truthy(&pyrt::xrefs::xcall("compose.fallback", "_the_thread_is_heavy", &[memory.clone()])) { g_UNKNOWN_REALISTIC_CARE() } else { g_UNKNOWN_REALISTIC() };
     return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[pool.clone(), memory.clone(), clean.clone(), op_add(&op_add(&clean.clone(), &py_str(" ")), &pyrt::xrefs::xcall("compose.fallback", "_the_line_before", &[memory.clone()]))]);
     }
     said = op_add(&op_add(&py_str(" "), &stdlib_call("re", "sub", &[py_str("[^a-z0-9']"), py_str(" "), clean.clone()]).unwrap_or_else(|e| exc::raise(e))), &py_str(" "));
     words = mcall(&mcall(&said.clone(), "replace", &[py_str("'"), py_str("")]), "split", &[]);
     waited = pyrt::xrefs::xcall("compose.waited_for", "for_the_ask", &[clean.clone(), repaired.clone(), memory.clone()]);
-    if py_truthy(&{ let __b = Py::Bool(!py_is(&waited.clone(), &Py::None)); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_is(&waited.clone(), &pyrt::xrefs::xget("compose.waited_for", "NOTHING_HELD"))); if !py_truthy(&__b) { __b } else { mcall(&pyrt::xrefs::xget("compose.fallback", "BARE_FOLLOW_UP"), "match", &[clean.clone()]) } } } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_is(&waited.clone(), &Py::None)); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_is(&waited.clone(), &pyrt::xrefs::xget("compose.waited_for", "NOTHING_HELD"))); if !py_truthy(&__b) { __b } else { mcall(&g_BARE_FOLLOW_UP(), "match", &[clean.clone()]) } } } }) {
     return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[waited.clone(), memory.clone(), clean.clone()]);
     }
-    if py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback", "BARE_FOLLOW_UP"), "match", &[clean.clone()])) {
-    pool = if py_truthy(&pyrt::xrefs::xcall("compose.fallback", "_the_thread_is_heavy", &[memory.clone()])) { pyrt::xrefs::xget("compose.fallback", "BARE_FOLLOW_UP_CARE_REPLIES") } else { pyrt::xrefs::xget("compose.fallback", "BARE_FOLLOW_UP_REPLIES") };
+    if py_truthy(&mcall(&g_BARE_FOLLOW_UP(), "match", &[clean.clone()])) {
+    pool = if py_truthy(&pyrt::xrefs::xcall("compose.fallback", "_the_thread_is_heavy", &[memory.clone()])) { g_BARE_FOLLOW_UP_CARE_REPLIES() } else { g_BARE_FOLLOW_UP_REPLIES() };
     return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[pool.clone(), memory.clone(), clean.clone(), op_add(&op_add(&clean.clone(), &py_str(" ")), &pyrt::xrefs::xcall("compose.fallback", "_the_line_before", &[memory.clone()]))]);
     }
     switched = pyrt::xrefs::xcall("compose.fallback", "_a_switch_off_asked", &[memory.clone(), clean.clone()]);
@@ -1132,56 +1132,56 @@ pub fn _unknown(args: &[Py]) -> Py {
     return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[switched.clone(), memory.clone(), op_add(&op_add(&clean.clone(), &py_str(" ")), &pyrt::xrefs::xcall("compose.fallback", "_the_line_before", &[memory.clone()]))]);
     }
     if py_truthy(&pyrt::xrefs::xcall("compose.fallback", "_points_at_nothing", &[clean.clone(), memory.clone(), repaired.clone()])) {
-    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[pyrt::xrefs::xget("compose.fallback", "POINTING_LINES"), memory.clone(), clean.clone()]);
+    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[g_POINTING_LINES(), memory.clone(), clean.clone()]);
     }
     weird = if py_truthy(&Py::Bool(!py_truthy(&pyrt::xrefs::xcall("compose.fallback", "_hedged_recently", &[memory.clone()])))) { pyrt::xrefs::xcall("compose.fallback", "_the_weird_ask_pool", &[clean.clone(), memory.clone()]) } else { Py::None };
     if py_truthy(&Py::Bool(!py_is(&weird.clone(), &Py::None))) {
     return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[weird.clone(), memory.clone(), clean.clone()]);
     }
     pool = pyrt::xrefs::xcall("compose.fallback", "unknown_pool", &[clean.clone(), words.clone()]);
-    if py_truthy(&{ let __b = Py::Bool(py_is(&pool.clone(), &pyrt::xrefs::xget("compose.fallback", "UNKNOWN"))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_eq(&repaired.clone(), &clean.clone())) } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_is(&pool.clone(), &g_UNKNOWN())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_eq(&repaired.clone(), &clean.clone())) } }) {
     said = op_add(&op_add(&py_str(" "), &stdlib_call("re", "sub", &[py_str("[^a-z0-9']"), py_str(" "), repaired.clone()]).unwrap_or_else(|e| exc::raise(e))), &py_str(" "));
     words = mcall(&mcall(&said.clone(), "replace", &[py_str("'"), py_str("")]), "split", &[]);
     pool = pyrt::xrefs::xcall("compose.fallback", "unknown_pool", &[repaired.clone(), words.clone()]);
     }
-    if py_truthy(&{ let __b = Py::Bool(py_is(&pool.clone(), &pyrt::xrefs::xget("compose.fallback", "UNKNOWN"))); if py_truthy(&__b) { __b } else { Py::Bool(py_is(&pool.clone(), &pyrt::xrefs::xget("compose.fallback", "UNKNOWN_DECIDE"))) } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_is(&pool.clone(), &g_UNKNOWN())); if py_truthy(&__b) { __b } else { Py::Bool(py_is(&pool.clone(), &g_UNKNOWN_DECIDE())) } }) {
     missed = _a_missed_step(&[clean.clone(), repaired.clone(), memory.clone(), words.clone()]);
     if py_truthy(&Py::Bool(!py_is(&missed.clone(), &Py::None))) {
     return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[missed.clone(), memory.clone(), clean.clone()]);
     }
     }
-    if py_truthy(&{ let __b = Py::Bool(py_is(&pool.clone(), &pyrt::xrefs::xget("compose.fallback", "UNKNOWN_WORRY"))); if !py_truthy(&__b) { __b } else { { let __b = pyrt::xrefs::xcall("compose.fallback", "_a_bare_worry", &[clean.clone()]); if !py_truthy(&__b) { __b } else { pyrt::xrefs::xcall("compose.fallback", "_thread_is_about_the_body", &[memory.clone()]) } } } }) {
-    pool = pyrt::xrefs::xget("compose.fallback", "UNKNOWN_HEALTH");
+    if py_truthy(&{ let __b = Py::Bool(py_is(&pool.clone(), &g_UNKNOWN_WORRY())); if !py_truthy(&__b) { __b } else { { let __b = pyrt::xrefs::xcall("compose.fallback", "_a_bare_worry", &[clean.clone()]); if !py_truthy(&__b) { __b } else { pyrt::xrefs::xcall("compose.fallback", "_thread_is_about_the_body", &[memory.clone()]) } } } }) {
+    pool = g_UNKNOWN_HEALTH();
     } else {
-    if py_truthy(&{ let __b = Py::Bool(py_is(&pool.clone(), &pyrt::xrefs::xget("compose.fallback", "UNKNOWN_WORRY"))); if !py_truthy(&__b) { __b } else { { let __b = pyrt::xrefs::xcall("compose.fallback", "_a_bare_worry", &[clean.clone()]); if !py_truthy(&__b) { __b } else { pyrt::xrefs::xcall("compose.fallback", "_thread_is_about_a_pet", &[memory.clone()]) } } } }) {
-    pool = pyrt::xrefs::xget("compose.fallback", "UNKNOWN_ABOUT_A_PET");
+    if py_truthy(&{ let __b = Py::Bool(py_is(&pool.clone(), &g_UNKNOWN_WORRY())); if !py_truthy(&__b) { __b } else { { let __b = pyrt::xrefs::xcall("compose.fallback", "_a_bare_worry", &[clean.clone()]); if !py_truthy(&__b) { __b } else { pyrt::xrefs::xcall("compose.fallback", "_thread_is_about_a_pet", &[memory.clone()]) } } } }) {
+    pool = g_UNKNOWN_ABOUT_A_PET();
     } else {
-    if py_truthy(&{ let __b = Py::Bool(py_is(&pool.clone(), &pyrt::xrefs::xget("compose.fallback", "UNKNOWN_WORRY"))); if !py_truthy(&__b) { __b } else { { let __b = pyrt::xrefs::xcall("compose.fallback", "_a_bare_worry", &[clean.clone()]); if !py_truthy(&__b) { __b } else { pyrt::xrefs::xcall("compose.fallback", "_thread_is_about_someone_else", &[memory.clone()]) } } } }) {
-    pool = pyrt::xrefs::xget("compose.fallback", "UNKNOWN_ABOUT_SOMEONE");
+    if py_truthy(&{ let __b = Py::Bool(py_is(&pool.clone(), &g_UNKNOWN_WORRY())); if !py_truthy(&__b) { __b } else { { let __b = pyrt::xrefs::xcall("compose.fallback", "_a_bare_worry", &[clean.clone()]); if !py_truthy(&__b) { __b } else { pyrt::xrefs::xcall("compose.fallback", "_thread_is_about_someone_else", &[memory.clone()]) } } } }) {
+    pool = g_UNKNOWN_ABOUT_SOMEONE();
     }
     }
     }
-    if py_truthy(&{ let __b = Py::Bool(py_is(&pool.clone(), &pyrt::xrefs::xget("compose.fallback", "UNKNOWN"))); if py_truthy(&__b) { __b } else { Py::Bool(py_is(&pool.clone(), &pyrt::xrefs::xget("compose.fallback", "UNKNOWN_DECIDE"))) } }) {
-    if py_truthy(&{ let __b = waited.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_is(&pool.clone(), &pyrt::xrefs::xget("compose.fallback", "UNKNOWN"))); if py_truthy(&__b) { __b } else { Py::Bool(!py_is(&waited.clone(), &pyrt::xrefs::xget("compose.waited_for", "NOTHING_HELD"))) } } } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_is(&pool.clone(), &g_UNKNOWN())); if py_truthy(&__b) { __b } else { Py::Bool(py_is(&pool.clone(), &g_UNKNOWN_DECIDE())) } }) {
+    if py_truthy(&{ let __b = waited.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_is(&pool.clone(), &g_UNKNOWN())); if py_truthy(&__b) { __b } else { Py::Bool(!py_is(&waited.clone(), &pyrt::xrefs::xget("compose.waited_for", "NOTHING_HELD"))) } } } }) {
     return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[waited.clone(), memory.clone(), clean.clone()]);
     }
     }
-    if py_truthy(&{ let __b = { let __b = Py::Bool(py_is(&pool.clone(), &pyrt::xrefs::xget("compose.fallback", "UNKNOWN"))); if py_truthy(&__b) { __b } else { Py::Bool(py_is(&pool.clone(), &pyrt::xrefs::xget("compose.fallback", "UNKNOWN_WORRY"))) } }; if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&pyrt::xrefs::xcall("compose.fallback", "_hedged_recently", &[memory.clone()]))) } }) {
+    if py_truthy(&{ let __b = { let __b = Py::Bool(py_is(&pool.clone(), &g_UNKNOWN())); if py_truthy(&__b) { __b } else { Py::Bool(py_is(&pool.clone(), &g_UNKNOWN_WORRY())) } }; if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&pyrt::xrefs::xcall("compose.fallback", "_hedged_recently", &[memory.clone()]))) } }) {
     worry = pyrt::xrefs::xcall("compose.fallback", "_the_pool_for_a_worry_about_them", &[clean.clone(), memory.clone()]);
     if py_truthy(&worry.clone()) {
     return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[worry.clone(), memory.clone(), clean.clone()]);
     }
     }
-    if py_truthy(&Py::Bool(py_is(&pool.clone(), &pyrt::xrefs::xget("compose.fallback", "UNKNOWN_WORD")))) {
+    if py_truthy(&Py::Bool(py_is(&pool.clone(), &g_UNKNOWN_WORD()))) {
     return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[_drafting_pool(&[clean.clone()]), memory.clone(), clean.clone()]);
     }
     if py_truthy(&{ let __b = pyrt::xrefs::xcall("compose.fallback", "asks_for_more", &[said.clone(), memory.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&pyrt::xrefs::xcall("compose.fallback", "_hedged_recently", &[memory.clone()]))) } }) {
     if py_truthy(&pyrt::xrefs::xcall("compose.fallback", "_answered_recently", &[memory.clone()])) {
-    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[pyrt::xrefs::xget("compose.fallback", "HELP_ALREADY"), memory.clone(), clean.clone()]);
+    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[g_HELP_ALREADY(), memory.clone(), clean.clone()]);
     }
     }
-    if py_truthy(&Py::Bool(py_is(&pool.clone(), &pyrt::xrefs::xget("compose.fallback", "UNKNOWN")))) {
-    routed = mcall(&pyrt::xrefs::xget("compose.fallback", "finding_out"), "for_the_ask", &[clean.clone(), repaired.clone(), understood.clone()]);
+    if py_truthy(&Py::Bool(py_is(&pool.clone(), &g_UNKNOWN()))) {
+    routed = mcall(&g_finding_out(), "for_the_ask", &[clean.clone(), repaired.clone(), understood.clone()]);
     if py_truthy(&routed.clone()) {
     said = py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[routed.clone(), memory.clone(), clean.clone()]);
     if py_truthy(&said.clone()) {
@@ -1204,57 +1204,57 @@ pub fn _unknown(args: &[Py]) -> Py {
     if py_truthy(&for_the_thread.clone()) {
     return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[for_the_thread.clone(), memory.clone(), clean.clone()]);
     }
-    if py_truthy(&{ let __b = py_call(&pyrt::xrefs::xget("compose.fallback", "_reads"), &[py_func("_is_a_tips_ask", |args: &[Py]| pyrt::xrefs::xcall("compose.fallback", "_is_a_tips_ask", args)), clean.clone(), repaired.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&understood.clone(), "get", &[py_str("help_ask")]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback", "NOT_A_TIPS_ASK"), "search", &[clean.clone()]))) } } } }) {
+    if py_truthy(&{ let __b = py_call(&pyrt::xrefs::xget("compose.fallback", "_reads"), &[g__is_a_tips_ask(), clean.clone(), repaired.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&understood.clone(), "get", &[py_str("help_ask")]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_NOT_A_TIPS_ASK(), "search", &[clean.clone()]))) } } } }) {
     tips = pyrt::xrefs::xcall("compose.fallback", "_tips", &[memory.clone(), clean.clone(), repaired.clone()]);
     if py_truthy(&tips.clone()) {
     return tips.clone();
     }
-    if py_truthy(&{ let __b = mcall(&understood.clone(), "get", &[py_str("help_ask")]); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&py_call(&pyrt::xrefs::xget("compose.fallback", "_reads"), &[gattr(&pyrt::xrefs::xget("compose.fallback", "TIPS_ASKS"), "search"), clean.clone(), repaired.clone()]))); if !py_truthy(&__b) { __b } else { pyrt::xrefs::xcall("compose.fallback", "_hedged_recently", &[memory.clone()]) } } } }) {
+    if py_truthy(&{ let __b = mcall(&understood.clone(), "get", &[py_str("help_ask")]); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&py_call(&pyrt::xrefs::xget("compose.fallback", "_reads"), &[gattr(&g_TIPS_ASKS(), "search"), clean.clone(), repaired.clone()]))); if !py_truthy(&__b) { __b } else { pyrt::xrefs::xcall("compose.fallback", "_hedged_recently", &[memory.clone()]) } } } }) {
     return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[pool.clone(), memory.clone(), clean.clone()]);
     }
     if py_truthy(&pyrt::xrefs::xcall("compose.fallback", "_answered_already", &[memory.clone()])) {
-    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[pyrt::xrefs::xget("compose.fallback", "HELP_ALREADY"), memory.clone(), clean.clone()]);
+    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[g_HELP_ALREADY(), memory.clone(), clean.clone()]);
     }
-    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[pyrt::xrefs::xget("compose.fallback", "TIPS_LINES"), memory.clone(), clean.clone()]);
+    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[g_TIPS_LINES(), memory.clone(), clean.clone()]);
     }
     if py_truthy(&mcall(&understood.clone(), "get", &[py_str("tag")])) {
-    if py_truthy(&{ let __b = pyrt::xrefs::xcall("compose.fallback", "_answered_already", &[memory.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback", "TAG_CAN"), "search", &[clean.clone()]))) } }) {
-    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[pyrt::xrefs::xget("compose.fallback", "TAG_CONFIRM"), memory.clone(), clean.clone()]);
+    if py_truthy(&{ let __b = pyrt::xrefs::xcall("compose.fallback", "_answered_already", &[memory.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_TAG_CAN(), "search", &[clean.clone()]))) } }) {
+    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[g_TAG_CONFIRM(), memory.clone(), clean.clone()]);
     }
-    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[pyrt::xrefs::xget("compose.fallback", "TAG_UNSURE"), memory.clone(), clean.clone()]);
+    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[g_TAG_UNSURE(), memory.clone(), clean.clone()]);
     }
-    if py_truthy(&{ let __b = Py::Bool(py_is(&pool.clone(), &pyrt::xrefs::xget("compose.fallback", "UNKNOWN"))); if !py_truthy(&__b) { __b } else { pyrt::xrefs::xcall("compose.fallback", "_says_it_already", &[clean.clone(), call_builtin("list", &[{ let __b = mcall(&understood.clone(), "get", &[py_str("words")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }]).unwrap_or_else(|e| exc::raise(e)), memory.clone()]) } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_is(&pool.clone(), &g_UNKNOWN())); if !py_truthy(&__b) { __b } else { pyrt::xrefs::xcall("compose.fallback", "_says_it_already", &[clean.clone(), call_builtin("list", &[{ let __b = mcall(&understood.clone(), "get", &[py_str("words")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }]).unwrap_or_else(|e| exc::raise(e)), memory.clone()]) } }) {
     answer = _the_repeat_answer(&[memory.clone()]);
     if py_truthy(&answer.clone()) {
-    return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("answer".to_string(), answer.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[pyrt::xrefs::xget("compose.fallback", "SAME_AGAIN_WITH_THE_ANSWER"), memory.clone(), clean.clone()]), "format", args))(&__args) };
+    return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("answer".to_string(), answer.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[g_SAME_AGAIN_WITH_THE_ANSWER(), memory.clone(), clean.clone()]), "format", args))(&__args) };
     }
-    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[pyrt::xrefs::xget("compose.fallback", "SAME_AGAIN"), memory.clone(), clean.clone()]);
+    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[g_SAME_AGAIN(), memory.clone(), clean.clone()]);
     }
     pick = { let __b = pyrt::xrefs::xcall("compose.fallback", "_bare_pick", &[clean.clone(), memory.clone()]); if py_truthy(&__b) { __b } else { pyrt::xrefs::xcall("compose.fallback", "_bare_pick", &[repaired.clone(), memory.clone()]) } };
     if py_truthy(&pick.clone()) {
     return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[pick.clone(), memory.clone(), clean.clone()]);
     }
     if py_truthy(&{ let __b = pyrt::xrefs::xcall("compose.fallback", "_a_dead_end", &[clean.clone()]); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&pyrt::xrefs::xcall("compose.fallback", "_in_a_care_thread", &[memory.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&{ let __b = pyrt::xrefs::xcall("compose.fallback", "_news_above", &[memory.clone()]); if py_truthy(&__b) { __b } else { pyrt::xrefs::xcall("compose.fallback", "_a_subject_above", &[memory.clone()]) } })) } } } }) {
-    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[pyrt::xrefs::xget("compose.fallback", "DITHER_OPEN_LINES"), memory.clone(), clean.clone()]);
+    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[g_DITHER_OPEN_LINES(), memory.clone(), clean.clone()]);
     }
     about_a_person = pyrt::xrefs::xcall("compose.fallback", "_a_question_about_the_person", &[clean.clone(), memory.clone()]);
     if py_truthy(&about_a_person.clone()) {
     return about_a_person.clone();
     }
-    if py_truthy(&{ let __b = Py::Bool(py_is(&pool.clone(), &pyrt::xrefs::xget("compose.fallback", "UNKNOWN"))); if !py_truthy(&__b) { __b } else { { let __b = mcall(&pyrt::xrefs::xget("compose.fallback", "A_STEP_ASK"), "match", &[mcall(&call_builtin("str", &[{ let __b = clean.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "strip", &[])]); if !py_truthy(&__b) { __b } else { pyrt::xrefs::xcall("compose.fallback", "_news_above", &[memory.clone()]) } } } }) {
-    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[pyrt::xrefs::xget("compose.fallback", "BARE_PICK_AFTER_NEWS"), memory.clone(), clean.clone()]);
+    if py_truthy(&{ let __b = Py::Bool(py_is(&pool.clone(), &g_UNKNOWN())); if !py_truthy(&__b) { __b } else { { let __b = mcall(&g_A_STEP_ASK(), "match", &[mcall(&call_builtin("str", &[{ let __b = clean.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "strip", &[])]); if !py_truthy(&__b) { __b } else { pyrt::xrefs::xcall("compose.fallback", "_news_above", &[memory.clone()]) } } } }) {
+    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[g_BARE_PICK_AFTER_NEWS(), memory.clone(), clean.clone()]);
     }
-    if py_truthy(&Py::Bool(py_is(&pool.clone(), &pyrt::xrefs::xget("compose.fallback", "UNKNOWN")))) {
+    if py_truthy(&Py::Bool(py_is(&pool.clone(), &g_UNKNOWN()))) {
     care = py_call(&pyrt::xrefs::xget("compose.fallback", "_a_care_home_line"), &[understood.clone(), memory.clone()]);
     if py_truthy(&care.clone()) {
     return care.clone();
     }
     }
     price = pyrt::xrefs::xcall("compose.fallback", "_a_price_wants_a_verdict", &[clean.clone(), memory.clone()]);
-    if py_truthy(&{ let __b = price.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_is(&pool.clone(), &pyrt::xrefs::xget("compose.fallback", "UNKNOWN"))) } }) {
+    if py_truthy(&{ let __b = price.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_is(&pool.clone(), &g_UNKNOWN())) } }) {
     return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[price.clone(), memory.clone(), clean.clone()]);
     }
-    if py_truthy(&Py::Bool(py_is(&pool.clone(), &pyrt::xrefs::xget("compose.fallback", "UNKNOWN")))) {
+    if py_truthy(&Py::Bool(py_is(&pool.clone(), &g_UNKNOWN()))) {
     mine = pyrt::xrefs::xcall("compose.fallback_data", "the_bots_own_answer", &[clean.clone()]);
     if py_truthy(&{ let __b = Py::Bool(py_is(&mine.clone(), &Py::None)); if !py_truthy(&__b) { __b } else { Py::Bool(!py_eq(&repaired.clone(), &clean.clone())) } }) {
     mine = pyrt::xrefs::xcall("compose.fallback_data", "the_bots_own_answer", &[repaired.clone()]);
@@ -1274,14 +1274,14 @@ pub fn _unknown(args: &[Py]) -> Py {
     return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[place.clone(), memory.clone(), clean.clone()]);
     }
     }
-    if py_truthy(&{ let __b = Py::Bool(py_is(&pool.clone(), &pyrt::xrefs::xget("compose.fallback", "UNKNOWN"))); if py_truthy(&__b) { __b } else { Py::Bool(py_is(&pool.clone(), &pyrt::xrefs::xget("compose.fallback", "UNKNOWN_WORRY"))) } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_is(&pool.clone(), &g_UNKNOWN())); if py_truthy(&__b) { __b } else { Py::Bool(py_is(&pool.clone(), &g_UNKNOWN_WORRY())) } }) {
     own_ask = pyrt::xrefs::xmodule("compose.own_ask");
     own = mcall(&own_ask.clone(), "answer", &[clean.clone(), memory.clone()]);
     if py_truthy(&own.clone()) {
     return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[py_list(vec![own.clone()]), memory.clone(), clean.clone()]);
     }
     }
-    if py_truthy(&Py::Bool(py_is(&pool.clone(), &pyrt::xrefs::xget("compose.fallback", "UNKNOWN")))) {
+    if py_truthy(&Py::Bool(py_is(&pool.clone(), &g_UNKNOWN()))) {
     method = pyrt::xrefs::xcall("compose.fallback", "method_ask_pool", &[clean.clone(), memory.clone()]);
     if py_truthy(&{ let __b = Py::Bool(py_is(&method.clone(), &Py::None)); if !py_truthy(&__b) { __b } else { Py::Bool(!py_eq(&repaired.clone(), &clean.clone())) } }) {
     method = pyrt::xrefs::xcall("compose.fallback", "method_ask_pool", &[repaired.clone(), memory.clone()]);
@@ -1358,10 +1358,10 @@ pub fn _the_view_asked_for(args: &[Py]) -> Py {
     }
     turns = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let __b = mcall(&memory.clone(), "get", &[py_str("turns")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }) { let mut t: Py = __item.clone(); if py_truthy(&call_builtin("isinstance", &[t.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(t.clone()); } } py_list(__out) })() };
     if py_truthy(&Py::Bool(!py_truthy(&turns.clone()))) {
-    if py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback", "VIEW_NAMES_SOMEBODY"), "search", &[clean.clone()])) {
+    if py_truthy(&mcall(&g_VIEW_NAMES_SOMEBODY(), "search", &[clean.clone()])) {
     return Py::None;
     }
-    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[pyrt::xrefs::xget("compose.fallback", "VIEW_NO_SUBJECT"), memory.clone(), clean.clone()]);
+    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[g_VIEW_NO_SUBJECT(), memory.clone(), clean.clone()]);
     }
     last = geti(&turns.clone(), &op_neg(&Py::Int(1)));
     said = mcall(&call_builtin("str", &[{ let __b = mcall(&last.clone(), "get", &[py_str("bot")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "strip", &[]);
@@ -1379,10 +1379,10 @@ pub fn _the_view_asked_for(args: &[Py]) -> Py {
     return Py::None;
     }
     }
-    if py_truthy(&Py::Bool(!py_truthy(&{ let __b = mcall(&pyrt::xrefs::xget("compose.fallback", "ack"), "reads_as_a_receipt", &[said.clone()]); if py_truthy(&__b) { __b } else { pyrt::xrefs::xcall("compose.fallback", "_in_a_pool", &[said.clone(), py_tuple(vec![pyrt::xrefs::xget("compose.fallback", "NEUTRAL")])]) } }))) {
+    if py_truthy(&Py::Bool(!py_truthy(&{ let __b = mcall(&g_ack(), "reads_as_a_receipt", &[said.clone()]); if py_truthy(&__b) { __b } else { pyrt::xrefs::xcall("compose.fallback", "_in_a_pool", &[said.clone(), py_tuple(vec![g_NEUTRAL()])]) } }))) {
     said = { let __b = pyrt::xrefs::xcall("compose.fallback", "_the_answer_in_reply", &[mcall(&last.clone(), "get", &[py_str("user")]), said.clone()]); if py_truthy(&__b) { __b } else { said.clone() } };
     }
-    while py_truthy(&{ let __b = mcall(&pyrt::xrefs::xget("compose.fallback", "ack"), "reads_as_a_receipt", &[said.clone()]); if py_truthy(&__b) { __b } else { pyrt::xrefs::xcall("compose.fallback", "_in_a_pool", &[said.clone(), py_tuple(vec![pyrt::xrefs::xget("compose.fallback", "NEUTRAL")])]) } }) {
+    while py_truthy(&{ let __b = mcall(&g_ack(), "reads_as_a_receipt", &[said.clone()]); if py_truthy(&__b) { __b } else { pyrt::xrefs::xcall("compose.fallback", "_in_a_pool", &[said.clone(), py_tuple(vec![g_NEUTRAL()])]) } }) {
     answered = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let __b = mcall(&memory.clone(), "get", &[py_str("turns")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }) { let mut t: Py = __item.clone(); if py_truthy(&{ let __b = call_builtin("isinstance", &[t.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { { let __b = mcall(&call_builtin("str", &[{ let __b = mcall(&t.clone(), "get", &[py_str("bot")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "strip", &[]); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_is(&t.clone(), &last.clone())); if !py_truthy(&__b) { __b } else { op_lt(&mcall(&turns.clone(), "index", &[t.clone()]), &mcall(&turns.clone(), "index", &[last.clone()])) } } } } } }) {  __out.push(t.clone()); } } py_list(__out) })() };
     if py_truthy(&Py::Bool(!py_truthy(&answered.clone()))) {
     return Py::None;
@@ -1391,26 +1391,26 @@ pub fn _the_view_asked_for(args: &[Py]) -> Py {
     said = mcall(&call_builtin("str", &[{ let __b = mcall(&last.clone(), "get", &[py_str("bot")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "strip", &[]);
     }
     if py_truthy(&pyrt::xrefs::xcall("compose.fallback", "_only_a_reaction", &[mcall(&last.clone(), "get", &[py_str("module")]), said.clone()])) {
-    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[pyrt::xrefs::xget("compose.fallback", "VIEW_ON_GOOD_NEWS"), memory.clone(), clean.clone()]);
+    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[g_VIEW_ON_GOOD_NEWS(), memory.clone(), clean.clone()]);
     }
-    if py_truthy(&Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback", "CARE_MODULES"), &call_builtin("str", &[{ let __b = mcall(&last.clone(), "get", &[py_str("module")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))))) {
+    if py_truthy(&Py::Bool(py_contains(&g_CARE_MODULES(), &call_builtin("str", &[{ let __b = mcall(&last.clone(), "get", &[py_str("module")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))))) {
     if py_truthy(&Py::Bool(py_contains(&py_tuple(vec![py_str("loss"), py_str("grief")]), &call_builtin("str", &[{ let __b = mcall(&last.clone(), "get", &[py_str("module")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))))) {
-    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[pyrt::xrefs::xget("compose.fallback", "VIEW_AFTER_A_DEATH"), memory.clone(), clean.clone()]);
+    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[g_VIEW_AFTER_A_DEATH(), memory.clone(), clean.clone()]);
     }
     return Py::None;
     }
-    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback", "VIEW_HANDBACK")) { let mut phrase: Py = __item.clone(); __out.push(Py::Bool(py_contains(&mcall(&said.clone(), "lower", &[]), &phrase.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
-    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[pyrt::xrefs::xget("compose.fallback", "VIEW_DECIDE"), memory.clone(), clean.clone()]);
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_VIEW_HANDBACK()) { let mut phrase: Py = __item.clone(); __out.push(Py::Bool(py_contains(&mcall(&said.clone(), "lower", &[]), &phrase.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[g_VIEW_DECIDE(), memory.clone(), clean.clone()]);
     }
     if py_truthy(&pyrt::xrefs::xcall("compose.fallback", "_is_a_hedge", &[said.clone()])) {
     return Py::None;
     }
-    if py_truthy(&{ let __b = mcall(&pyrt::xrefs::xget("compose.fallback", "VIEW_MIRROR"), "match", &[mcall(&said.clone(), "lower", &[])]); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&pyrt::xrefs::xcall("compose.fallback", "_reads_as_a_claim", &[said.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&geti(&pyrt::xrefs::xcall("compose.fallback", "_the_view_of", &[said.clone()]), &Py::Int(0)))) } } } }) {
-    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[pyrt::xrefs::xget("compose.fallback", "VIEW_COMPANY"), memory.clone(), clean.clone()]);
+    if py_truthy(&{ let __b = mcall(&g_VIEW_MIRROR(), "match", &[mcall(&said.clone(), "lower", &[])]); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&pyrt::xrefs::xcall("compose.fallback", "_reads_as_a_claim", &[said.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&geti(&pyrt::xrefs::xcall("compose.fallback", "_the_view_of", &[said.clone()]), &Py::Int(0)))) } } } }) {
+    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[g_VIEW_COMPANY(), memory.clone(), clean.clone()]);
     }
     if py_truthy(&Py::Bool(!py_truthy(&pyrt::xrefs::xcall("compose.fallback", "_reads_as_a_claim", &[said.clone()])))) {
     first = mcall(&mcall(&geti(&stdlib_call("re", "split", &[py_str("(?<=[.!?])\\s+"), mcall(&said.clone(), "strip", &[])]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(0)), "strip", &[]), "lower", &[]);
-    if py_truthy(&Py::Bool(!py_truthy(&{ let __b = mcall(&pyrt::xrefs::xget("compose.fallback", "VIEW_MIRROR"), "match", &[first.clone()]); if !py_truthy(&__b) { __b } else { geti(&pyrt::xrefs::xcall("compose.fallback", "_the_view_of", &[said.clone()]), &Py::Int(0)) } }))) {
+    if py_truthy(&Py::Bool(!py_truthy(&{ let __b = mcall(&g_VIEW_MIRROR(), "match", &[first.clone()]); if !py_truthy(&__b) { __b } else { geti(&pyrt::xrefs::xcall("compose.fallback", "_the_view_of", &[said.clone()]), &Py::Int(0)) } }))) {
     return Py::None;
     }
     }
@@ -1419,17 +1419,17 @@ pub fn _the_view_asked_for(args: &[Py]) -> Py {
     mirrored = __unpk1[1].clone();
     if py_truthy(&Py::Bool(!py_truthy(&headline.clone()))) {
     if py_truthy(&mirrored.clone()) {
-    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[pyrt::xrefs::xget("compose.fallback", "VIEW_COMPANY"), memory.clone(), clean.clone()]);
+    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[g_VIEW_COMPANY(), memory.clone(), clean.clone()]);
     }
     return Py::None;
     }
     if py_truthy(&mcall(&headline.clone(), "endswith", &[py_str("?")])) {
-    lines = pyrt::xrefs::xget("compose.fallback", "VIEW_ASK_LINES");
+    lines = g_VIEW_ASK_LINES();
     } else {
     if py_truthy(&mirrored.clone()) {
-    lines = pyrt::xrefs::xget("compose.fallback", "VIEW_MIRROR_LINES");
+    lines = g_VIEW_MIRROR_LINES();
     } else {
-    lines = pyrt::xrefs::xget("compose.fallback", "VIEW_LINES");
+    lines = g_VIEW_LINES();
     }
     }
     return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&lines.clone()) { let mut line: Py = __item.clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("said".to_string(), pyrt::xrefs::xcall("compose.fallback", "_after_a_colon", &[headline.clone()]))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&line.clone(), "format", args))(&__args) }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)), memory.clone(), clean.clone()]);

@@ -453,7 +453,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.thread.CALENDAR"); }
     s_CALENDAR(call_builtin("frozenset", &[mcall(&py_str("today tomorrow yesterday tonight morning afternoon evening night week\nweekend month year hour minute second monday tuesday wednesday thursday friday saturday sunday\njanuary february march april may june july august september october november december\nspring summer autumn winter christmas easter holidays"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.thread.QUALITY"); }
-    s_QUALITY(op_bitor(&pyrt::xrefs::xget("understanding.kinds", "POSITIVE"), &pyrt::xrefs::xget("understanding.kinds", "NEGATIVE")));
+    s_QUALITY(op_bitor(&g_POSITIVE(), &g_NEGATIVE()));
     fn __data9() -> Py { py_tuple(vec![py_str("it's"), py_str("that's"), py_str("there's"), py_str("they're"), py_str("we're"), py_str("he's"), py_str("she's"), py_str("you're"), py_str("i'm"), py_str("i've"), py_str("i'd"), py_str("i'll"), py_str("there"), py_str("it"), py_str("this"), py_str("that"), py_str("they"), py_str("these"), py_str("those"), py_str("here")]) }
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.thread.CONTRACTIONS"); }
     s_CONTRACTIONS(call_builtin("frozenset", &[__data9()]).unwrap_or_else(|e| exc::raise(e)));
@@ -538,7 +538,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.thread.STATE_FILLER"); }
     s_STATE_FILLER(call_builtin("frozenset", &[mcall(&py_str("a an the bit little very really so quite pretty too that this\n    honestly actually just totally proper still always kinda sorta dead well rather"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.thread.VERB_WORDS"); }
-    s_VERB_WORDS(op_bitor(&pyrt::xrefs::xget("understanding.kinds", "VERB_FORMS"), &pyrt::xrefs::xget("understanding.kinds", "VERBISH")));
+    s_VERB_WORDS(op_bitor(&g_VERB_FORMS(), &g_VERBISH()));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.thread.DETAIL_OPENER"); }
     s_DETAIL_OPENER(stdlib_call("re", "compile", &[py_str("^\\s*(?:its|it's|it is|thats|that's|that is|theyre|they're|they are|hes|he's|she's|shes)\\s+"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.thread.CHECK_VERDICT"); }
@@ -1309,15 +1309,15 @@ pub fn _phrase_for(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&nouns.clone()))) {
     return Py::None;
     }
-    things = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&nouns.clone()) { let mut w: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&pyrt::xrefs::xget("understanding.kinds", "VERB_FORMS"), &w.clone()))) {  __out.push(w.clone()); } } py_list(__out) })() };
+    things = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&nouns.clone()) { let mut w: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&g_VERB_FORMS(), &w.clone()))) {  __out.push(w.clone()); } } py_list(__out) })() };
     if py_truthy(&things.clone()) {
     nouns = things.clone();
     }
-    kept = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&nouns.clone()) { let mut w: Py = __item.clone(); if py_truthy(&{ let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("understanding.topics", "PLACES"), &w.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_word_behind_prep(&[reading.clone(), w.clone()]))) } }) {  __out.push(w.clone()); } } py_list(__out) })() };
+    kept = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&nouns.clone()) { let mut w: Py = __item.clone(); if py_truthy(&{ let __b = Py::Bool(py_contains(&g_PLACE_WORDS(), &w.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_word_behind_prep(&[reading.clone(), w.clone()]))) } }) {  __out.push(w.clone()); } } py_list(__out) })() };
     if py_truthy(&{ let __b = kept.clone(); if !py_truthy(&__b) { __b } else { op_lt(&call_builtin("len", &[kept.clone()]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("len", &[nouns.clone()]).unwrap_or_else(|e| exc::raise(e))) } }) {
     nouns = kept.clone();
     }
-    if py_truthy(&Py::Bool(py_contains(&pyrt::xrefs::xget("understanding.topics", "PLACES"), &geti(&nouns.clone(), &op_neg(&Py::Int(1)))))) {
+    if py_truthy(&Py::Bool(py_contains(&g_PLACE_WORDS(), &geti(&nouns.clone(), &op_neg(&Py::Int(1)))))) {
     return _place_case(&[_same_spelling(&[text.clone(), geti(&nouns.clone(), &op_neg(&Py::Int(1)))])]);
     }
     around = _the_phrase_around(&[reading.clone(), geti(&nouns.clone(), &op_neg(&Py::Int(1)))]);
@@ -1350,7 +1350,7 @@ pub fn _place_case(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&words.clone()))) {
     return name.clone();
     }
-    if py_truthy(&{ let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("understanding.topics", "PLACES"), &mcall(&name.clone(), "lower", &[]))); if py_truthy(&__b) { __b } else { call_builtin("all", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut w: Py = __item.clone(); __out.push(Py::Bool(py_contains(&pyrt::xrefs::xget("understanding.topics", "PLACES"), &mcall(&w.clone(), "lower", &[])))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_PLACE_WORDS(), &mcall(&name.clone(), "lower", &[]))); if py_truthy(&__b) { __b } else { call_builtin("all", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut w: Py = __item.clone(); __out.push(Py::Bool(py_contains(&g_PLACE_WORDS(), &mcall(&w.clone(), "lower", &[])))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }) {
     return mcall(&py_str(" "), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut w: Py = __item.clone(); __out.push(_capital(&[w.clone()])); } py_list(__out) })() }]);
     }
     return name.clone();
@@ -1446,7 +1446,7 @@ pub fn about(args: &[Py]) -> Py {
     let mut reading: Py = Py::None;
     let mut text: Py = Py::None;
     let _ = py_str("The thing the conversation is on, as a phrase (\"the birthday cake\", \"Lisbon\"), or None.\n\n    The newest line that carries a subject wins, so a return to something said earlier is\n    named before the small talk that followed it. A line that names something beats one that\n    only carries a content word, so \"and can I make it the day before?\" never becomes the\n    subject of a conversation about a cake.\n\n    When no line carries a subject of its own it defers to `topics.subject`, so this module\n    adds a reader on top of the store's answer instead of a second answer to the same\n    question.\n    ");
-    lines = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&user_lines(&[memory.clone()])) { let __unpk5581 = py_unpack(&__item.clone(), 2, None); let mut text: Py = __unpk5581[0].clone(); let mut reading: Py = __unpk5581[1].clone(); if py_truthy(&{ let __b = Py::Bool(!py_truthy(&_is_thin(&[reading.clone()]))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&_is_memory_line(&[reading.clone()]))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&_asks_about_the_chat(&[text.clone(), memory.clone(), skip.clone()]))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&_asks_about_the_bot(&[reading.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&signs_off(&[text.clone()]))) } } } } } } } }) {  __out.push(py_tuple(vec![text.clone(), reading.clone()])); } } py_list(__out) })() };
+    lines = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&user_lines(&[memory.clone()])) { let __unpk6629 = py_unpack(&__item.clone(), 2, None); let mut text: Py = __unpk6629[0].clone(); let mut reading: Py = __unpk6629[1].clone(); if py_truthy(&{ let __b = Py::Bool(!py_truthy(&_is_thin(&[reading.clone()]))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&_is_memory_line(&[reading.clone()]))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&_asks_about_the_chat(&[text.clone(), memory.clone(), skip.clone()]))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&_asks_about_the_bot(&[reading.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&signs_off(&[text.clone()]))) } } } } } } } }) {  __out.push(py_tuple(vec![text.clone(), reading.clone()])); } } py_list(__out) })() };
     let __iter1 = py_iter_or_raise(&py_tuple(vec![py_str("entity"), py_str("statement"), py_str("any")]));
     for __item in __iter1 {
     pass_kind = __item.clone();
@@ -3089,7 +3089,7 @@ pub fn _a_done_word(args: &[Py]) -> Py {
     else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "word") { v.clone() }
     else { exc::raise(type_err(&format!("missing required argument: word"))) };
     let _ = py_str("Whether this word is a participle, so what follows \"i had\" is the doing, not the thing.");
-    return { let __b = mcall(&word.clone(), "endswith", &[py_str("ed")]); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&g_DONE_WORDS(), &word.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("understanding.normalize", "IRREGULAR_PARTICIPLES"), &word.clone())) } } } };
+    return { let __b = mcall(&word.clone(), "endswith", &[py_str("ed")]); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&g_DONE_WORDS(), &word.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_IRREGULAR_PARTICIPLES(), &word.clone())) } } } };
     Py::None
 }
 pub fn _the_verdict_they_gave(args: &[Py]) -> Py {

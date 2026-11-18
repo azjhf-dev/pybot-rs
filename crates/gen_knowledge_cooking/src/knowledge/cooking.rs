@@ -2821,7 +2821,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking.BASICS"); }
     s_BASICS(__data6());
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking._STAPLE_NAMES"); }
-    s__STAPLE_NAMES(call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_BASICS()) { let __unpk7032 = py_unpack(&__item.clone(), 2, None); let mut _names: Py = __unpk7032[0].clone(); let mut _reply: Py = __unpk7032[1].clone(); for __item in py_iter_or_raise(&_names.clone()) { let mut name: Py = __item.clone(); __out.push(name.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
+    s__STAPLE_NAMES(call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_BASICS()) { let __unpk7708 = py_unpack(&__item.clone(), 2, None); let mut _names: Py = __unpk7708[0].clone(); let mut _reply: Py = __unpk7708[1].clone(); for __item in py_iter_or_raise(&_names.clone()) { let mut name: Py = __item.clone(); __out.push(name.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
     fn __data7() -> Py { py_tuple(vec![py_str("make with"), py_str("made with"), py_str("make using"), py_str("use up"), py_str("using up"), py_str("use it up"), py_str("what can i"), py_str("what should i"), py_str("what could i"), py_str("hate"), py_str("hates"), py_str("hated"), py_str("dislike"), py_str("dislikes"), py_str("allergic"), py_str("allergy"), py_str("cant stand"), py_str("cannot stand"), py_str("doesnt like"), py_str("does not like"), py_str("dont like"), py_str("do not like"), py_str("wont eat"), py_str("wont touch"), py_str("fussy"), py_str("left with"), py_str("half a"), py_str("yesterday"), py_str("yesterdays"), py_str("last night"), py_str("the day before"), py_str("day before"), py_str("the day after"), py_str("day after"), py_str("day later"), py_str("a day later"), py_str("days ago"), py_str("a couple of days ago"), py_str("2 days ago"), py_str("two days ago"), py_str("backhand"), py_str("forehand"), py_str("racket"), py_str("racquet"), py_str("tennis court"), py_str("squash court"), py_str("badminton"), py_str("volleyball"), py_str("netball"), py_str("the ball"), py_str("cricket")]) }
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking.NOT_A_METHOD"); }
     s_NOT_A_METHOD(__data7());
@@ -2914,7 +2914,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking._CROWD_NOT_A_MEAL"); }
     s__CROWD_NOT_A_MEAL(__data19());
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking._CROWD_WORDS"); }
-    s__CROWD_WORDS({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g__CROWD_NUMBERS(), "items", &[])) { let __unpk1414 = py_unpack(&__item.clone(), 2, None); let mut k: Py = __unpk1414[0].clone(); let mut v: Py = __unpk1414[1].clone(); __out.push((v.clone(), k.clone())); } py_dict(__out) })() });
+    s__CROWD_WORDS({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g__CROWD_NUMBERS(), "items", &[])) { let __unpk5313 = py_unpack(&__item.clone(), 2, None); let mut k: Py = __unpk5313[0].clone(); let mut v: Py = __unpk5313[1].clone(); __out.push((v.clone(), k.clone())); } py_dict(__out) })() });
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking.A_TIME_OR_HEAT_ASK"); }
     s_A_TIME_OR_HEAT_ASK(stdlib_call("re", "compile", &[py_str("\\b(how many minutes?|how many mins?|how long|how much time|minutes a side|mins a side|minutes per side|what temperature|what temp|what heat|gas mark|how do i time)\\b")]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking.ANY_MEAL"); }
@@ -3162,7 +3162,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking._FROZEN_MANY"); }
     s__FROZEN_MANY(py_str("{} can go straight into the pan from frozen: cook them a few minutes longer than you would thawed, turning so they colour on all sides, and check they are piping hot in the middle."));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking._FROZEN_CUT_WORDS"); }
-    s__FROZEN_CUT_WORDS(op_add(&call_builtin("tuple", &[geti(&g__FROZEN_CUTS(), &Py::Int(0))]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g__FROZEN_WHOLE()) { let __unpk1954 = py_unpack(&__item.clone(), 3, None); let mut word: Py = __unpk1954[0].clone(); let mut _u: Py = __unpk1954[1].clone(); let mut _u: Py = __unpk1954[2].clone(); __out.push(word.clone()); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))));
+    s__FROZEN_CUT_WORDS(op_add(&call_builtin("tuple", &[geti(&g__FROZEN_CUTS(), &Py::Int(0))]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g__FROZEN_WHOLE()) { let __unpk1792 = py_unpack(&__item.clone(), 3, None); let mut word: Py = __unpk1792[0].clone(); let mut _u: Py = __unpk1792[1].clone(); let mut _u: Py = __unpk1792[2].clone(); __out.push(word.clone()); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking.JOINT_BEEF"); }
     s_JOINT_BEEF(py_str("Beef or lamb: 20 minutes at 220C (200C fan) to brown it, then 190C (170C fan) for 15 minutes a 500g for rare, 20 for medium and 25 for well done. The reliable check is a meat thermometer in the thickest part - 52C rare, 60C medium, 70C well done - and rest it 20 minutes under foil before carving."));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking.JOINT_PORK"); }
@@ -3500,7 +3500,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking._NUTRIENT_WORDS"); }
     s__NUTRIENT_WORDS(__data75());
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking._NUTRIENT_ASK_WORDS"); }
-    s__NUTRIENT_ASK_WORDS(op_add(&call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g__NUTRIENT_WORDS()) { let __unpk639 = py_unpack(&__item.clone(), 2, None); let mut word: Py = __unpk639[0].clone(); let mut _column: Py = __unpk639[1].clone(); __out.push(word.clone()); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)), &py_tuple(vec![py_str("calorie"), py_str("calories"), py_str("cals"), py_str("kcal"), py_str("kilocalories"), py_str("nutrition")])));
+    s__NUTRIENT_ASK_WORDS(op_add(&call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g__NUTRIENT_WORDS()) { let __unpk6430 = py_unpack(&__item.clone(), 2, None); let mut word: Py = __unpk6430[0].clone(); let mut _column: Py = __unpk6430[1].clone(); __out.push(word.clone()); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)), &py_tuple(vec![py_str("calorie"), py_str("calories"), py_str("cals"), py_str("kcal"), py_str("kilocalories"), py_str("nutrition")])));
     fn __data76() -> Py { py_tuple(vec![py_str("bread"), py_str("cake"), py_str("pie"), py_str("tart"), py_str("muffin"), py_str("sauce"), py_str("soup"), py_str("sandwich"), py_str("wrap"), py_str("curry"), py_str("salad"), py_str("smoothie"), py_str("juice"), py_str("pudding"), py_str("jam"), py_str("chips"), py_str("butter"), py_str("cheese"), py_str("cream"), py_str("biscuit"), py_str("cereal"), py_str("porridge"), py_str("pasta"), py_str("rice"), py_str("pizza"), py_str("stew"), py_str("casserole"), py_str("roast"), py_str("bake"), py_str("baked"), py_str("fried"), py_str("milkshake"), py_str("flapjack"), py_str("brownie"), py_str("cookie"), py_str("pancake"), py_str("waffle"), py_str("toast"), py_str("milk"), py_str("sugar"), py_str("flour"), py_str("crisps"), py_str("chocolate"), py_str("yoghurt"), py_str("yogurt"), py_str("egg"), py_str("nuts"), py_str("peanut"), py_str("roll"), py_str("rolls"), py_str("burger"), py_str("burgers"), py_str("bun"), py_str("buns"), py_str("pastry"), py_str("puff")]) }
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking._NUTRIENT_DISH"); }
     s__NUTRIENT_DISH(__data76());
@@ -3571,7 +3571,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking.LACK_NOUNS"); }
     s_LACK_NOUNS(py_dict(vec![(py_str("oven"), py_tuple(vec![py_str("an oven"), py_str("a oven"), py_str("oven")])), (py_str("hob"), py_tuple(vec![py_str("a hob"), py_str("hob")])), (py_str("microwave"), py_tuple(vec![py_str("a microwave"), py_str("microwave")])), (py_str("freezer"), py_tuple(vec![py_str("a freezer"), py_str("freezer")])), (py_str("kettle"), py_tuple(vec![py_str("a kettle"), py_str("kettle")]))]));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking.LACK_SAID"); }
-    s_LACK_SAID(call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_LACK_NOUNS(), "items", &[])) { let __unpk4893 = py_unpack(&__item.clone(), 2, None); let mut name: Py = __unpk4893[0].clone(); let mut nouns: Py = __unpk4893[1].clone(); for __item in py_iter_or_raise(&g_LACK_HEADS()) { let mut head: Py = __item.clone(); for __item in py_iter_or_raise(&nouns.clone()) { let mut noun: Py = __item.clone(); __out.push(py_tuple(vec![name.clone(), op_add(&op_add(&head.clone(), &py_str(" ")), &noun.clone())])); } } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
+    s_LACK_SAID(call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_LACK_NOUNS(), "items", &[])) { let __unpk4714 = py_unpack(&__item.clone(), 2, None); let mut name: Py = __unpk4714[0].clone(); let mut nouns: Py = __unpk4714[1].clone(); for __item in py_iter_or_raise(&g_LACK_HEADS()) { let mut head: Py = __item.clone(); for __item in py_iter_or_raise(&nouns.clone()) { let mut noun: Py = __item.clone(); __out.push(py_tuple(vec![name.clone(), op_add(&op_add(&head.clone(), &py_str(" ")), &noun.clone())])); } } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
     fn __data87() -> Py { py_tuple(vec![py_str("thermometer"), py_str("gloves"), py_str("glove"), py_str("mitt"), py_str("mitts"), py_str("tray"), py_str("dish"), py_str("rack"), py_str("shelf"), py_str("light"), py_str("bulb"), py_str("door"), py_str("liner"), py_str("paper"), py_str("foil"), py_str("bag"), py_str("bags")]) }
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking.LACK_ATTACHED"); }
     s_LACK_ATTACHED(__data87());
@@ -3849,7 +3849,7 @@ fn module_body() {
     s__LISTED_ENTRIES(pyrt::xrefs::xget("knowledge.cooking_entries", "ENTRIES"));
     s__NO_SUGAR(pyrt::xrefs::xget("knowledge.cooking_entries", "NO_SUGAR"));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking.ENTRIES"); }
-    s_ENTRIES(call_builtin("list", &[pyrt::xrefs::xget("knowledge.cooking_entries", "ENTRIES")]).unwrap_or_else(|e| exc::raise(e)));
+    s_ENTRIES(call_builtin("list", &[g__LISTED_ENTRIES()]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking._KINDS"); }
     s__KINDS(py_tuple(vec![py_tuple(vec![py_tuple(vec![py_str("tea"), py_str("teas")]), py_str("tea"), py_str("Black, green, white and oolong are the same leaf, picked and processed differently: black is fully oxidised and malty, green is steamed or pan-fired and grassy, white is the young leaf dried, and oolong sits between green and black. Everything else - peppermint, chamomile, rooibos, fruit - is a herbal infusion rather than tea, so it brews and keeps differently.")]), py_tuple(vec![py_tuple(vec![py_str("pasta"), py_str("pastas")]), py_str("pasta"), py_str("Long pasta - spaghetti, linguine, tagliatelle - is for thin sauces that coat it. Short shapes - penne, fusilli, rigatoni - hold chunkier sauces, and the ridges and tubes are there to catch them. Filled pasta - ravioli, tortellini - is a meal with its sauce inside. Dried is durum wheat and water; fresh is egg and soft wheat, cooks in two or three minutes, and is richer. Wholewheat is the same shapes with the bran left in, and takes a minute longer.")]), py_tuple(vec![py_tuple(vec![py_str("oil"), py_str("oils")]), py_str("oil"), py_str("Olive oil splits in two: extra virgin is the cold-pressed first press, peppery and best raw or for low heat, and ordinary olive oil is refined, plainer and fine for frying. Rapeseed is the mild all-rounder and the cheapest British one. Sunflower and vegetable oil are neutral and take high heat, which is what chips and stir-fries want. Sesame is for flavour, a teaspoon at the end, and coconut oil tastes of coconut. Groundnut oil is the one restaurants fry in, because it is neutral and stable when hot.")]), py_tuple(vec![py_tuple(vec![py_str("honey"), py_str("honeys")]), py_str("honey"), py_str("It is named for the flower the bees worked: clover and acacia are light and mild, heather and chestnut are dark and strong, and orange blossom is perfumed. Runny or set is the same honey - set has simply crystallised, which a warm jug of water undoes. Raw or unfiltered means it has not been heated, so it is cloudier and tastes more of the flowers. Never give any honey to a baby under one, because of the botulism risk.")]), py_tuple(vec![py_tuple(vec![py_str("milk"), py_str("milks")]), py_str("milk"), py_str("Cow's milk comes by fat: whole at about 3.5%, semi-skimmed at 1.7% and skimmed at almost nothing, and the fat is what carries the taste in coffee and sauces. Fresh and UHT are the same milk, one pasteurised hotter so it keeps for months unopened. Goat's and sheep's are the other animals, sharper and richer. Plant milks - oat, soya, almond, coconut - are a different drink, and the barista ones are the ones that do not split in hot coffee.")]), py_tuple(vec![py_tuple(vec![py_str("bean"), py_str("beans")]), py_str("bean"), py_str("Dried or tinned is the first split: dried needs soaking overnight and a hard ten-minute boil, tinned is cooked and ready. After that it is the bean: kidney is the chilli one, cannellini and haricot are creamy and white (baked beans are haricot in tomato), black beans are earthy for Mexican food, and butter beans are the big soft ones. Chickpeas, lentils and split peas are the same family - pulses - and they cook without soaking.")]), py_tuple(vec![py_tuple(vec![py_str("lettuce"), py_str("lettuces")]), py_str("lettuce"), py_str("Crisphead - iceberg - is the crunchy one that keeps for a week and is mostly water. Cos, or romaine, is the upright one with a spine, and it is the one for Caesar. Butterhead - round and little gem - is soft and sweet, and wilts first. Loose-leaf - oakleaf, lollo rosso, frisée - is the curly one to tear into a bowl. Rocket and spinach are leaves sold beside it, not lettuce, and they are peppery or earthy rather than crisp.")]), py_tuple(vec![py_tuple(vec![py_str("wine"), py_str("wines")]), py_str("wine"), py_str("Red, white and rosé are about the skin, not the grape: red is fermented on it, white off it, and rosé briefly on it. Sparkling is a second fermentation for the bubbles, and fortified - sherry, port, madeira - has spirit added, which is why it keeps for weeks after opening. The other axis is the grape and where it grew, which is what makes a Chablis lean and a Chardonnay from a hot place buttery, and a wine dry or sweet.")]), py_tuple(vec![py_tuple(vec![py_str("coffee"), py_str("coffees")]), py_str("coffee"), py_str("Two beans: arabica is the fruity, slightly acidic one in most good coffee, and robusta is stronger, more bitter and has about twice the caffeine, which is why instant and cheap espresso blends use it. Roast runs from light, which keeps the fruit and the acidity, to dark, which tastes of the roast itself. Then it is ground to the brew: fine for espresso, medium for a filter machine, coarse for a cafetière. Instant is brewed and dried, a different drink, not a weaker one.")]), py_tuple(vec![py_tuple(vec![py_str("yoghurt"), py_str("yogurt"), py_str("yoghurts"), py_str("yogurts")]), py_str("yoghurt"), py_str("Natural is milk and cultures and nothing else, and it is what to cook with. Greek is the same yoghurt strained of its whey, so it is thicker and higher in protein; Greek-style is thickened with milk powder and is cheaper and sweeter. Set is cultured in the pot and stays firm, stirred is smooth. Skyr is strained further still, so it is very thick and very high in protein. Live yoghurt has the cultures still alive, which is the kind that helps an unsettled stomach.")])]));
     let _ = mcall(&g_ENTRIES(), "extend", &[pyrt::xrefs::xcall("knowledge.lookup", "kinds_entries", &[g__KINDS()])]);
@@ -3924,7 +3924,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking._row"); }
     s__row(__item.clone());
     if py_truthy(&Py::Bool(py_eq(&gattr(&g__row(), "id"), &py_str("fridge-life")))) {
-    let _ = py_setattr(&g__row(), "avoid", op_add(&gattr(&g__row(), "avoid"), &call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("knowledge.cooking_tables", "KEEPS")) { let __unpk103 = py_unpack(&__item.clone(), 2, None); let mut _names: Py = __unpk103[0].clone(); let mut _u: Py = __unpk103[1].clone(); for __item in py_iter_or_raise(&_names.clone()) { let mut _name: Py = __item.clone(); __out.push(_name.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))));
+    let _ = py_setattr(&g__row(), "avoid", op_add(&gattr(&g__row(), "avoid"), &call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_KEEPS()) { let __unpk5359 = py_unpack(&__item.clone(), 2, None); let mut _names: Py = __unpk5359[0].clone(); let mut _u: Py = __unpk5359[1].clone(); for __item in py_iter_or_raise(&_names.clone()) { let mut _name: Py = __item.clone(); __out.push(_name.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))));
     let _ = mcall(&g_ENTRIES(), "append", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("fridge-life-cooked")); __args.push(py_tuple(vec![g__COOKED_KEEPING(), g__KEEPING_ASK()])); __args.push(gattr(&g__row(), "reply")); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("avoid".to_string(), py_tuple(vec![py_str("rice"), py_str("burnt"), py_str("burned"), py_str("charred"), py_str("scorched"), py_str("burnt on"), py_str("caught on the bottom")]))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }]);
     }
     }
@@ -3937,7 +3937,7 @@ fn module_body() {
     s__OFF_THE_THING(__data141());
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking.KEEP_AHEAD_OF_THE_GENERAL"); }
     s_KEEP_AHEAD_OF_THE_GENERAL(call_builtin("frozenset", &[py_tuple(vec![py_str("courgette"), py_str("aubergine"), py_str("broccoli"), py_str("radish"), py_str("butternut squash"), py_str("cabbage")])]).unwrap_or_else(|e| exc::raise(e)));
-    let __iter142 = py_iter_or_raise(&pyrt::xrefs::xget("knowledge.cooking_tables", "KEEPS"));
+    let __iter142 = py_iter_or_raise(&g_KEEPS());
     for __item in __iter142 {
     let __unpk143 = py_unpack(&__item.clone(), 2, None);
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking._names"); }
@@ -3950,7 +3950,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking._avoid"); }
     s__avoid(op_add(&g__avoid(), &g_GREEN_SAFETY_WORDS()));
     }
-    let __aug144 = op_add(&g__avoid(), &op_add(&op_add(&mcall(&g_KEEP_STAND_DOWN(), "get", &[geti(&g__names(), &Py::Int(0)), py_tuple(vec![])]), &pyrt::xrefs::xget("knowledge.dishes", "KEEP_QUALITY_WORDS")), &g__OFF_THE_THING()));
+    let __aug144 = op_add(&g__avoid(), &op_add(&op_add(&mcall(&g_KEEP_STAND_DOWN(), "get", &[geti(&g__names(), &Py::Int(0)), py_tuple(vec![])]), &g_KEEP_QUALITY_WORDS()), &g__OFF_THE_THING()));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking._avoid"); }
     s__avoid(__aug144);
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking._key"); }
@@ -3959,14 +3959,14 @@ fn module_body() {
     s__bias(if py_truthy(&Py::Bool(py_contains(&g_KEEP_AHEAD_OF_THE_GENERAL(), &geti(&g__names(), &Py::Int(0))))) { Py::Int(2) } else { Py::Int(1) });
     let _ = mcall(&g_ENTRIES(), "append", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(op_modulo(&py_str("keep-%s"), &geti(&g__names(), &Py::Int(0)))); __args.push(py_tuple(vec![g__names(), g__key()])); __args.push(g__reply()); __kws.extend(vec![("avoid".to_string(), g__avoid()), ("bias".to_string(), g__bias()), ("guard".to_string(), py_func("_a_food_and_not_a_blank", |args: &[Py]| _a_food_and_not_a_blank(args)))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }]);
     }
-    let __iter145 = py_iter_or_raise(&pyrt::xrefs::xget("knowledge.keeping_cooked", "COOKED_KEEPS"));
+    let __iter145 = py_iter_or_raise(&g_COOKED_KEEPS());
     for __item in __iter145 {
     let __unpk146 = py_unpack(&__item.clone(), 2, None);
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking._names"); }
     s__names(__unpk146[0].clone());
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking._reply"); }
     s__reply(__unpk146[1].clone());
-    let _ = mcall(&g_ENTRIES(), "append", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(op_modulo(&py_str("cooked-keep-%s"), &geti(&g__names(), &Py::Int(0)))); __args.push(py_tuple(vec![g__names(), op_add(&op_add(&g_KEEP_WORDS(), &py_tuple(vec![py_str("good for")])), &g_FREEZER_WORDS())])); __args.push(g__reply()); __kws.extend(vec![("avoid".to_string(), op_add(&op_add(&op_add(&op_add(&g_USE_UP_WORDS(), &py_tuple(vec![py_str("raw"), py_str("uncooked"), py_str("freezer burn")])), &g_STILL_FROZEN_WORDS()), &py_tuple(vec![py_str("shelf life"), py_str("shelf-life")])), &pyrt::xrefs::xget("knowledge.keeping_cooked", "COOKED_KEEP_AVOID"))), ("bias".to_string(), Py::Int(2)), ("ask".to_string(), pyrt::xrefs::xget("knowledge.keeping_cooked", "COOKED_KEEP_ASK")), ("guard".to_string(), py_func("lambda", move |args: &[Py]| {  let u: Py = __kwp(args, 0, "u").unwrap_or(Py::None); { let __b = _already_cooked_is_the_question(&[u.clone()]); if !py_truthy(&__b) { __b } else { _a_food_and_not_a_blank(&[u.clone()]) } } }))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }]);
+    let _ = mcall(&g_ENTRIES(), "append", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(op_modulo(&py_str("cooked-keep-%s"), &geti(&g__names(), &Py::Int(0)))); __args.push(py_tuple(vec![g__names(), op_add(&op_add(&g_KEEP_WORDS(), &py_tuple(vec![py_str("good for")])), &g_FREEZER_WORDS())])); __args.push(g__reply()); __kws.extend(vec![("avoid".to_string(), op_add(&op_add(&op_add(&op_add(&g_USE_UP_WORDS(), &py_tuple(vec![py_str("raw"), py_str("uncooked"), py_str("freezer burn")])), &g_STILL_FROZEN_WORDS()), &py_tuple(vec![py_str("shelf life"), py_str("shelf-life")])), &g_COOKED_KEEP_AVOID())), ("bias".to_string(), Py::Int(2)), ("ask".to_string(), g_COOKED_KEEP_ASK()), ("guard".to_string(), py_func("lambda", move |args: &[Py]| {  let u: Py = __kwp(args, 0, "u").unwrap_or(Py::None); { let __b = _already_cooked_is_the_question(&[u.clone()]); if !py_truthy(&__b) { __b } else { _a_food_and_not_a_blank(&[u.clone()]) } } }))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }]);
     }
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking.KEEPS_COOKED"); }
     s_KEEPS_COOKED(py_tuple(vec![py_tuple(vec![py_tuple(vec![py_str("jacket potato"), py_str("jacket potatoes"), py_str("baked potato"), py_str("baked potatoes"), py_str("potato skins")]), py_str("A jacket potato is fine the next day: cool it within an hour, keep it in the fridge covered and eat it within 2 days, skin and all. Reheat it until it is piping hot right through, or cut it up and fry it - a foil-wrapped one left on the side overnight goes in the bin.")]), py_tuple(vec![py_tuple(vec![py_str("coleslaw"), py_str("slaw")]), py_str("Coleslaw keeps 3 days in the fridge once it is opened, and homemade 2, because it is the mayonnaise that turns. Keep the tub cold and eat it by the date on it, and bin slaw that smells sharp or has gone watery in the bottom of the tub.")]), py_tuple(vec![py_tuple(vec![py_str("scone"), py_str("scones"), py_str("fruit scone"), py_str("cheese scone")]), py_str("Scones are best the day they are made and keep 2 days in a tin, or a day in the fridge. Sprinkle them with water and give them 3 minutes in a warm oven to bring them back; freeze them on the day and refresh from frozen, and bin any with green on them.")]), py_tuple(vec![py_tuple(vec![py_str("sushi"), py_str("shop sushi"), py_str("sushi box")]), py_str("Shop sushi is made to be eaten the day you buy it: keep it in the fridge, eat it within 24 hours and do not leave it out on the side. The rice and the raw fish are what go off, so bin what is left rather than keeping it for tomorrow.")]), py_tuple(vec![py_tuple(vec![py_str("tuna"), py_str("tinned tuna"), py_str("tin of tuna"), py_str("canned tuna")]), py_str("An opened tin of tuna keeps 2 days in the fridge, emptied into a bowl with a lid - left in the tin it tastes of metal. Eat it cold in a sandwich or flake it through a sauce, and do not freeze it, because it comes back dry and woolly.")]), py_tuple(vec![py_tuple(vec![py_str("cooked salmon"), py_str("cooked fish"), py_str("leftover salmon"), py_str("leftover fish"), py_str("smoked salmon")]), py_str("Cooked salmon keeps 2 days in the fridge, covered, and it is better cold in a salad than reheated, which dries it out. Cool it within an hour of cooking and bin it after 2 days; smoked salmon keeps 3 days once the pack is open and freezes for a month.")]), py_tuple(vec![py_tuple(vec![py_str("prawn"), py_str("prawns"), py_str("cooked prawns"), py_str("king prawns")]), py_str("Cooked prawns keep 2 days in the fridge, in a sealed box away from anything raw, and ones from the deli counter keep a day less than a sealed pack. Eat them cold or warm them through in a sauce rather than frying them again, and bin any that smell of ammonia.")]), py_tuple(vec![py_tuple(vec![py_str("gravy"), py_str("gravies"), py_str("onion gravy"), py_str("leftover gravy"), py_str("brandy sauce")]), py_str("Gravy keeps 2 days in the fridge, less than the meat does, because it is mostly liquid and it cools slowly in the jug: get it in within 2 hours of making it, standing the jug in a bowl of cold water if it is still hot. Reheat it until it boils right through, and bin any that has sat out on the table all evening.")]), py_tuple(vec![py_tuple(vec![py_str("stuffing"), py_str("sage and onion"), py_str("forcemeat"), py_str("stuffing balls")]), py_str("Cooked stuffing keeps 2 days in the fridge and it is the leftover to be strict with, because it has been inside the bird and soaked up the juices: cool it within 2 hours, box it, and reheat it until it is piping hot right through. Stuffing that never went in the oven is a different thing and keeps as long as the bread in it.")]), py_tuple(vec![py_tuple(vec![py_str("custard"), py_str("homemade custard"), py_str("custard sauce"), py_str("creme anglaise")]), py_str("Homemade custard keeps 2 days in the fridge, in a jug with a lid or a sheet of cling film pressed onto the surface so no skin forms. Reheat it gently and stir rather than boiling it, and bin any that has stood on the table through dinner.")]), py_tuple(vec![py_tuple(vec![py_str("trifle"), py_str("trifles"), py_str("sherry trifle")]), py_str("A trifle keeps 2 days in the fridge, and it is the cream and the fruit that turn rather than the sponge: cover it once it is made and eat it within a day or two. Do not freeze it - the cream splits and the sponge goes watery.")])]));
@@ -3987,14 +3987,14 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking._row"); }
     s__row(__item.clone());
     if py_truthy(&Py::Bool(py_eq(&gattr(&g__row(), "id"), &py_str("fridge-life")))) {
-    let _ = py_setattr(&g__row(), "avoid", op_add(&gattr(&g__row(), "avoid"), &call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_KEEPS_COOKED()) { let __unpk4277 = py_unpack(&__item.clone(), 2, None); let mut _names: Py = __unpk4277[0].clone(); let mut _reply: Py = __unpk4277[1].clone(); for __item in py_iter_or_raise(&_names.clone()) { let mut _name: Py = __item.clone(); __out.push(_name.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))));
+    let _ = py_setattr(&g__row(), "avoid", op_add(&gattr(&g__row(), "avoid"), &call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_KEEPS_COOKED()) { let __unpk9870 = py_unpack(&__item.clone(), 2, None); let mut _names: Py = __unpk9870[0].clone(); let mut _reply: Py = __unpk9870[1].clone(); for __item in py_iter_or_raise(&_names.clone()) { let mut _name: Py = __item.clone(); __out.push(_name.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))));
     }
     }
     fn __data151() -> Py { py_dict(vec![(py_str("egg"), py_str("Eggs going spare: a frittata or a tortilla takes six or eight at once with whatever veg is in the fridge, a quiche takes four plus milk and cheese, and meringues or a pavlova use up whites on their own. Hard boiled, they keep a week and make sandwiches, or halve them into a salad with mustard and oil.")), (py_str("chicken"), py_str("Cooked chicken: shred it into a salad with mayonnaise, lemon and something crunchy, or stir it through fried rice with soy sauce and peas for a 10-minute dinner.")), (py_str("potato"), py_str("Leftover potatoes: crush them a little and fry them in hot oil until crisp, or slice them into a frittata with eggs.")), (py_str("pasta"), py_str("Leftover pasta: loosen it in a hot pan with a splash of water and a little oil, or bake it with a spoon of tomato sauce and cheese on top.")), (py_str("salmon"), py_str("Leftover salmon: flake it through pasta or a salad with lemon and yoghurt, and don't reheat it hard or it dries out.")), (py_str("bread"), py_str("Stale bread: tear it into croutons fried in oil and garlic, or blitz it into breadcrumbs and freeze them.")), (py_str("lentil"), py_str("Leftover dhal: thin it with a splash of stock into soup, or eat it cold as a dip with bread and yoghurt.")), (py_str("coconut milk"), py_str("Half a tin of coconut milk: simmer it with curry paste and whatever veg you have for 10 minutes, or stir it into rice instead of water for a coconut rice. It freezes in an ice cube tray for next time.")), (py_str("cream"), py_str("Cream or soured cream going spare: stir it into a chilli or curry off the heat so it does not split, spoon it over baked potatoes or fruit, or let it down with a squeeze of lemon and use it as a dressing. Soured cream also freezes badly, so use it rather than keep it.")), (py_str("sprout"), py_str("Leftover sprouts: halve them and fry cut side down in butter until they caramelise, about 8 minutes, or shred them raw into a salad with lemon, oil and toasted nuts.")), (py_str("marrow"), py_str("Half a marrow left: scoop out the seeds, stuff it with mince and rice and bake it 45 minutes at 190C (170C fan), or grate it into a curry - the water it gives up thickens the sauce as it cooks.")), (py_str("buttermilk"), py_str("Buttermilk going spare: soda bread takes 284ml, or thin a pancake batter with it, or marinate chicken in it for an hour before frying - it tenderises the meat.")), (py_str("hot cross bun"), py_str("Buns going stale: butter them and bake them in a bread and butter pudding, or halve and toast them under a grill with a little sugar on top.")), (py_str("stuffing"), py_str("Leftover stuffing: shape it into balls and fry or roast them 15 minutes at 200C (180C fan), or press it into a tray and cut it into crisp squares - it is the best part of the tray, so do not bin it.")), (py_str("porridge"), py_str("Leftover porridge: loosen it with milk and reheat it, or beat in an egg and fry spoonfuls in butter for oat fritters with jam.")), (py_str("bolognese"), py_str("Leftover bolognese: bake it with pasta and white sauce, spoon it over a jacket potato, or thin it with stock and beans into a soup.")), (py_str("curry"), py_str("Leftover curry: reheat it once until piping hot and eat it with rice, or bake it under a mash topping for a curry pie."))]) }
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking.LEFTOVER_IDEAS"); }
     s_LEFTOVER_IDEAS(__data151());
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking._NAMED_FOODS"); }
-    s__NAMED_FOODS(call_builtin("tuple", &[call_builtin("sorted", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&pyrt::xrefs::xget("knowledge.cooking_tables", "PANTRY"), "values", &[])) { let __unpk3646 = py_unpack(&__item.clone(), 2, None); let mut aliases: Py = __unpk3646[0].clone(); let mut _reply: Py = __unpk3646[1].clone(); for __item in py_iter_or_raise(&aliases.clone()) { let mut word: Py = __item.clone(); __out.push(word.clone()); } } py_set(__out) })() }]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s__NAMED_FOODS(call_builtin("tuple", &[call_builtin("sorted", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_PANTRY(), "values", &[])) { let __unpk2511 = py_unpack(&__item.clone(), 2, None); let mut aliases: Py = __unpk2511[0].clone(); let mut _reply: Py = __unpk2511[1].clone(); for __item in py_iter_or_raise(&aliases.clone()) { let mut word: Py = __item.clone(); __out.push(word.clone()); } } py_set(__out) })() }]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking._FOODS_SAID"); }
     s__FOODS_SAID(Py::None);
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking.LEFTOVER_SOUP"); }
@@ -4084,7 +4084,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking._INGREDIENT_WORDS"); }
     s__INGREDIENT_WORDS(py_dict(vec![]));
     let _ = _fold_meal_ideas(&[]);
-    let __iter165 = py_iter_or_raise(&mcall(&pyrt::xrefs::xget("knowledge.cooking_tables", "PANTRY"), "items", &[]));
+    let __iter165 = py_iter_or_raise(&mcall(&g_PANTRY(), "items", &[]));
     for __item in __iter165 {
     let __unpk166 = py_unpack(&__item.clone(), 2, None);
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking._name"); }
@@ -4102,9 +4102,9 @@ fn module_body() {
     }
     }
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking._ALIASES_BY_LENGTH"); }
-    s__ALIASES_BY_LENGTH({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&pyrt::xrefs::xget("knowledge.cooking_tables", "PANTRY"), "items", &[])) { let __unpk986 = py_unpack(&__item.clone(), 2, None); let mut _name: Py = __unpk986[0].clone(); let __unpk1082 = py_unpack(&__unpk986[1].clone(), 2, None); let mut _aliases: Py = __unpk1082[0].clone(); let mut _idea: Py = __unpk1082[1].clone(); for __item in py_iter_or_raise(&_aliases.clone()) { let mut _alias: Py = __item.clone(); __out.push(py_tuple(vec![call_builtin("tuple", &[mcall(&_fold(&[_alias.clone()]), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), _name.clone()])); } } py_list(__out) })() }); __kws.extend(vec![("key".to_string(), py_func("lambda", move |args: &[Py]| {  let pair: Py = __kwp(args, 0, "pair").unwrap_or(Py::None); op_neg(&call_builtin("len", &[geti(&pair.clone(), &Py::Int(0))]).unwrap_or_else(|e| exc::raise(e))) }))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sorted", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
+    s__ALIASES_BY_LENGTH({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_PANTRY(), "items", &[])) { let __unpk3583 = py_unpack(&__item.clone(), 2, None); let mut _name: Py = __unpk3583[0].clone(); let __unpk3487 = py_unpack(&__unpk3583[1].clone(), 2, None); let mut _aliases: Py = __unpk3487[0].clone(); let mut _idea: Py = __unpk3487[1].clone(); for __item in py_iter_or_raise(&_aliases.clone()) { let mut _alias: Py = __item.clone(); __out.push(py_tuple(vec![call_builtin("tuple", &[mcall(&_fold(&[_alias.clone()]), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), _name.clone()])); } } py_list(__out) })() }); __kws.extend(vec![("key".to_string(), py_func("lambda", move |args: &[Py]| {  let pair: Py = __kwp(args, 0, "pair").unwrap_or(Py::None); op_neg(&call_builtin("len", &[geti(&pair.clone(), &Py::Int(0))]).unwrap_or_else(|e| exc::raise(e))) }))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sorted", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking._ALIAS_TEXT"); }
-    s__ALIAS_TEXT({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&pyrt::xrefs::xget("knowledge.cooking_tables", "PANTRY"), "items", &[])) { let __unpk2666 = py_unpack(&__item.clone(), 2, None); let mut _name: Py = __unpk2666[0].clone(); let __unpk2762 = py_unpack(&__unpk2666[1].clone(), 2, None); let mut _aliases: Py = __unpk2762[0].clone(); let mut _idea: Py = __unpk2762[1].clone(); for __item in py_iter_or_raise(&_aliases.clone()) { let mut _alias: Py = __item.clone(); __out.push((call_builtin("tuple", &[mcall(&_fold(&[_alias.clone()]), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), _alias.clone())); } } py_dict(__out) })() });
+    s__ALIAS_TEXT({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_PANTRY(), "items", &[])) { let __unpk1903 = py_unpack(&__item.clone(), 2, None); let mut _name: Py = __unpk1903[0].clone(); let __unpk1807 = py_unpack(&__unpk1903[1].clone(), 2, None); let mut _aliases: Py = __unpk1807[0].clone(); let mut _idea: Py = __unpk1807[1].clone(); for __item in py_iter_or_raise(&_aliases.clone()) { let mut _alias: Py = __item.clone(); __out.push((call_builtin("tuple", &[mcall(&_fold(&[_alias.clone()]), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), _alias.clone())); } } py_dict(__out) })() });
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking.FORMS"); }
     s_FORMS(py_tuple(vec![py_tuple(vec![py_str("frozen"), py_tuple(vec![py_str("frozen"), py_str("freezer")])]), py_tuple(vec![py_str("tinned"), py_tuple(vec![py_str("tinned"), py_str("canned"), py_str("tin of"), py_str("can of")])]), py_tuple(vec![py_str("dried"), py_tuple(vec![py_str("dried"), py_str("dry")])]), py_tuple(vec![py_str("jarred"), py_tuple(vec![py_str("jarred"), py_str("jar of")])]), py_tuple(vec![py_str("fresh"), py_tuple(vec![py_str("fresh")])])]));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking.OUT_ASKS"); }
@@ -4125,11 +4125,11 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking.FORM_FOODS"); }
     s_FORM_FOODS(__data169());
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking._FORM_FOOD_WORDS"); }
-    s__FORM_FOOD_WORDS(call_builtin("tuple", &[call_builtin("sorted", &[op_bitor(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_FORM_FOODS()) { let mut name: Py = __item.clone(); for __item in py_iter_or_raise(&geti(&mcall(&pyrt::xrefs::xget("knowledge.cooking_tables", "PANTRY"), "get", &[name.clone(), py_tuple(vec![py_tuple(vec![]), py_str("")])]), &Py::Int(0))) { let mut alias: Py = __item.clone(); for __item in py_iter_or_raise(&mcall(&_fold(&[alias.clone()]), "split", &[])) { let mut word: Py = __item.clone(); __out.push(word.clone()); } } } py_set(__out) })() }, &call_builtin("set", &[g_FORM_FOODS()]).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s__FORM_FOOD_WORDS(call_builtin("tuple", &[call_builtin("sorted", &[op_bitor(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_FORM_FOODS()) { let mut name: Py = __item.clone(); for __item in py_iter_or_raise(&geti(&mcall(&g_PANTRY(), "get", &[name.clone(), py_tuple(vec![py_tuple(vec![]), py_str("")])]), &Py::Int(0))) { let mut alias: Py = __item.clone(); for __item in py_iter_or_raise(&mcall(&_fold(&[alias.clone()]), "split", &[])) { let mut word: Py = __item.clone(); __out.push(word.clone()); } } } py_set(__out) })() }, &call_builtin("set", &[g_FORM_FOODS()]).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     fn __data170() -> Py { py_tuple(vec![py_str("instead"), py_str("swap"), py_str("swapping"), py_str("substitute"), py_str("replace"), py_str("out of"), py_str("ran out"), py_str("run out"), py_str("havent got"), py_str("havent any"), py_str("dont have"), py_str("didnt have"), py_str("no fresh")]) }
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking.FORM_SWAP_WORDS"); }
     s_FORM_SWAP_WORDS(__data170());
-    let _ = mcall(&g_ENTRIES(), "append", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("form-swap")); __args.push(py_tuple(vec![call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_FORMS()) { let __unpk70 = py_unpack(&__item.clone(), 2, None); let mut _form: Py = __unpk70[0].clone(); let mut names: Py = __unpk70[1].clone(); for __item in py_iter_or_raise(&names.clone()) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(!py_eq(&word.clone(), &py_str("canned")))) {  __out.push(word.clone()); } } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)), g_FORM_SWAP_WORDS()])); __args.push(py_func("_form_swap", |args: &[Py]| _form_swap(args))); __kws.extend(vec![("ask".to_string(), g__SWAP_ASK()), ("avoid".to_string(), py_tuple(vec![py_str("keep"), py_str("keeps"), py_str("keeping"), py_str("store"), py_str("storing"), py_str("last"), py_str("lasts"), py_str("gone off"), py_str("going off"), py_str("mouldy")]))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }]);
+    let _ = mcall(&g_ENTRIES(), "append", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("form-swap")); __args.push(py_tuple(vec![call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_FORMS()) { let __unpk5342 = py_unpack(&__item.clone(), 2, None); let mut _form: Py = __unpk5342[0].clone(); let mut names: Py = __unpk5342[1].clone(); for __item in py_iter_or_raise(&names.clone()) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(!py_eq(&word.clone(), &py_str("canned")))) {  __out.push(word.clone()); } } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)), g_FORM_SWAP_WORDS()])); __args.push(py_func("_form_swap", |args: &[Py]| _form_swap(args))); __kws.extend(vec![("ask".to_string(), g__SWAP_ASK()), ("avoid".to_string(), py_tuple(vec![py_str("keep"), py_str("keeps"), py_str("keeping"), py_str("store"), py_str("storing"), py_str("last"), py_str("lasts"), py_str("gone off"), py_str("going off"), py_str("mouldy")]))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }]);
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking.NEGATIONS"); }
     s_NEGATIONS(call_builtin("frozenset", &[mcall(&py_str("\nwithout no not except minus avoiding avoid hate hates hateful allergic dislike dont don't\nnever leave skip skipped out off\nstand wont won't refuse refuses sick\nhavent haven't hasnt hasn't hadnt hadn't didnt didn't\n"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
     fn __data171() -> Py { py_tuple(vec![py_str("not a fan of"), py_str("not a fan"), py_str("not keen on"), py_str("not fussed about"), py_str("cant stand"), py_str("can t stand"), py_str("cannot stand"), py_str("sick of"), py_str("tired of"), py_str("bored of"), py_str("fed up of"), py_str("fed up with"), py_str("had enough of"), py_str("gone off"), py_str("allergic to"), py_str("instead of"), py_str("hate"), py_str("hates"), py_str("dislike"), py_str("dislikes"), py_str("loathe"), py_str("not into")]) }
@@ -4147,7 +4147,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking.FILLER"); }
     s_FILLER(call_builtin("frozenset", &[mcall(&py_str("\na an the and or plus too also some a bit little half of with without im i am m we us my our\nhave has got get only just thats that it is are so oh hey hi and its ive weve some more\ni'm im you're we're theyre\nnah nope yeah yep yeh eh well ok okay hmm hm um umm er erm literally honestly actually\n"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking._DIET_WORDS"); }
-    s__DIET_WORDS(call_builtin("frozenset", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_DIETS()) { let __unpk2874 = py_unpack(&__item.clone(), 2, None); let mut _cues: Py = __unpk2874[0].clone(); let mut _ruled: Py = __unpk2874[1].clone(); for __item in py_iter_or_raise(&_cues.clone()) { let mut _cue: Py = __item.clone(); for __item in py_iter_or_raise(&mcall(&_cue.clone(), "split", &[])) { let mut word: Py = __item.clone(); __out.push(word.clone()); } } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
+    s__DIET_WORDS(call_builtin("frozenset", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_DIETS()) { let __unpk2477 = py_unpack(&__item.clone(), 2, None); let mut _cues: Py = __unpk2477[0].clone(); let mut _ruled: Py = __unpk2477[1].clone(); for __item in py_iter_or_raise(&_cues.clone()) { let mut _cue: Py = __item.clone(); for __item in py_iter_or_raise(&mcall(&_cue.clone(), "split", &[])) { let mut word: Py = __item.clone(); __out.push(word.clone()); } } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking.NEGATION_REACH"); }
     s_NEGATION_REACH(Py::Int(3));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking.COOKED_REACH"); }
@@ -4217,7 +4217,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking.SENTENCE"); }
     s_SENTENCE(stdlib_call("re", "compile", &[py_str("(?<=[.!?])\\s+")]).unwrap_or_else(|e| exc::raise(e)));
     fn __data180() -> Py { py_tuple(vec![py_str("blood"), py_str("chest pain"), py_str("cant breathe"), py_str("can't breathe"), py_str("short of breath"), py_str("pregnant"), py_str("weeks"), py_str("baby"), py_str("babies"), py_str("toddler"), py_str("my son"), py_str("my daughter"), py_str("my mum"), py_str("my dad"), py_str("my husband"), py_str("my wife"), py_str("my partner"), py_str("child"), py_str("children"), py_str("diarrhoea"), py_str("diarrhea"), py_str("three days"), py_str("four days"), py_str("a week"), py_str("doctor"), py_str("hospital"), py_str("medicine"), py_str("antibiotic"), py_str("tests"), py_str("why do i"), py_str("why am i"), py_str("cold rice"), py_str("cold chicken"), py_str("cold pizza"), py_str("left out"), py_str("gone off"), py_str("ok to eat"), py_str("safe to eat"), py_str("still ok"), py_str("is it ok"), py_str("help a cold"), py_str("help my cold"), py_str("help the cold"), py_str("help a cough"), py_str("help my cough"), py_str("help a sore throat"), py_str("help my throat"), py_str("does honey"), py_str("will honey"), py_str("honey help"), py_str("honey and lemon"), py_str("lemon and honey"), py_str("honey in warm water"), py_str("my cat"), py_str("my dog"), py_str("my puppy"), py_str("my kitten"), py_str("my rabbit"), py_str("my hamster"), py_str("my guinea pig"), py_str("my parrot"), py_str("my budgie"), py_str("my tortoise"), py_str("my pet"), py_str("my puppy"), py_str("cat"), py_str("dog"), py_str("puppy"), py_str("kitten"), py_str("rabbit"), py_str("hamster"), py_str("guinea pig"), py_str("parrot"), py_str("budgie"), py_str("tortoise"), py_str("the cat"), py_str("the dog"), py_str("the puppy"), py_str("the kitten")]) }
-    let _ = mcall(&g_ENTRIES(), "append", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("eat-when-ill")); __args.push(py_tuple(vec![g_SICK_PHRASES(), g_SICK_EAT_WORDS()])); __args.push(py_func("_eat_when_ill", |args: &[Py]| _eat_when_ill(args))); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("avoid".to_string(), op_add(&__data180(), &pyrt::xrefs::xget("knowledge.lookup", "TOOTH_OR_GUM")))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }]);
+    let _ = mcall(&g_ENTRIES(), "append", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("eat-when-ill")); __args.push(py_tuple(vec![g_SICK_PHRASES(), g_SICK_EAT_WORDS()])); __args.push(py_func("_eat_when_ill", |args: &[Py]| _eat_when_ill(args))); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("avoid".to_string(), op_add(&__data180(), &g_TOOTH_OR_GUM()))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }]);
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking._WHAT_IS_IT"); }
     s__WHAT_IS_IT(stdlib_call("re", "compile", &[py_str("\\b(?:is|are)\\s+(?:a|an)?\\s*[a-z]+\\s+(?:a|an)?\\s*(?:fruit|vegetable|berry|berries|tuber|root|grain|pulse)s?\\s*(?:\\?|$|or\\b|,|\\.)")]).unwrap_or_else(|e| exc::raise(e)));
     fn __data181() -> Py { py_tuple(vec![py_str("should i"), py_str("shall i"), py_str("do i use"), py_str("can i use"), py_str("could i use"), py_str("which"), py_str("better"), py_str("instead"), py_str("rather"), py_str("or is"), py_str("or would"), py_str("or should"), py_str("or do i"), py_str("what about"), py_str("worth using"), py_str("go for"), py_str("stick to")]) }
@@ -4290,7 +4290,7 @@ fn module_body() {
     fn __data186() -> Py { py_tuple(vec![py_str("thicker"), py_str("thicken"), py_str("thickens"), py_str("thickening"), py_str("thinner"), py_str("too thick"), py_str("too thin"), py_str("watery"), py_str("runny"), py_str("stodgy"), py_str("lumpy"), py_str("curdled"), py_str("curdles"), py_str("split"), py_str("splits"), py_str("too salty"), py_str("too spicy"), py_str("too sweet"), py_str("bland"), py_str("burnt"), py_str("burning")]) }
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking._RECIPE_FAULT_WORDS"); }
     s__RECIPE_FAULT_WORDS(__data186());
-    let __iter187 = py_iter_or_raise(&pyrt::xrefs::xget("knowledge.cooking_tables", "RECIPES"));
+    let __iter187 = py_iter_or_raise(&g_RECIPES());
     for __item in __iter187 {
     let __unpk188 = py_unpack(&__item.clone(), 4, None);
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking._names"); }
@@ -4314,13 +4314,13 @@ pub fn __nested__alone_188(args: &[Py]) -> Py {
     Py::None
 }
     s__alone(py_func("_alone", move |args: &[Py]| { let mut full = vec![]; full.extend_from_slice(args); __nested__alone_188(&full) }));
-    let _ = mcall(&g_ENTRIES(), "append", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(op_add(&py_str("recipe-"), &mcall(&geti(&g__key(), &Py::Int(0)), "replace", &[py_str(" "), py_str("-")]))); __args.push(py_tuple(vec![g__names(), g__RECIPE_ASK()])); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(g__reply()); __args.push(g__names()); __kws.extend(vec![("no_yeast_ok".to_string(), Py::Bool(py_eq(&geti(&g__key(), &Py::Int(0)), &py_str("soda bread"))))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _recipe_only_when_asked_for_this(args))(&__args) }); __kws.extend(vec![("ask".to_string(), op_add(&call_builtin("tuple", &[g__RECIPE_ASK()]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("tuple", &[g__names()]).unwrap_or_else(|e| exc::raise(e)))), ("shape".to_string(), py_tuple(vec![g__alone()])), ("bias".to_string(), if py_truthy(&Py::Bool(py_contains(&py_tuple(vec![py_str("rice and peas"), py_str("soda bread")]), &geti(&g__key(), &Py::Int(0))))) { Py::Int(2) } else { if py_truthy(&Py::Bool(py_eq(&geti(&g__key(), &Py::Int(0)), &py_str("sandwich")))) { Py::Int(1) } else { Py::Int(0) } }), ("avoid".to_string(), op_add(&op_add(&op_add(&op_add(&call_builtin("tuple", &[g__avoid()]).unwrap_or_else(|e| exc::raise(e)), &g__RECIPE_FAULT_WORDS()), &g__RECIPE_GROWING_WORDS()), &pyrt::xrefs::xget("knowledge.cooking_entries", "NO_SUGAR")), &g_ANNOUNCED_DISH())), ("guard".to_string(), py_func("_a_made_pot_is_not_its_recipe", |args: &[Py]| _a_made_pot_is_not_its_recipe(args)))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }]);
+    let _ = mcall(&g_ENTRIES(), "append", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(op_add(&py_str("recipe-"), &mcall(&geti(&g__key(), &Py::Int(0)), "replace", &[py_str(" "), py_str("-")]))); __args.push(py_tuple(vec![g__names(), g__RECIPE_ASK()])); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(g__reply()); __args.push(g__names()); __kws.extend(vec![("no_yeast_ok".to_string(), Py::Bool(py_eq(&geti(&g__key(), &Py::Int(0)), &py_str("soda bread"))))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _recipe_only_when_asked_for_this(args))(&__args) }); __kws.extend(vec![("ask".to_string(), op_add(&call_builtin("tuple", &[g__RECIPE_ASK()]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("tuple", &[g__names()]).unwrap_or_else(|e| exc::raise(e)))), ("shape".to_string(), py_tuple(vec![g__alone()])), ("bias".to_string(), if py_truthy(&Py::Bool(py_contains(&py_tuple(vec![py_str("rice and peas"), py_str("soda bread")]), &geti(&g__key(), &Py::Int(0))))) { Py::Int(2) } else { if py_truthy(&Py::Bool(py_eq(&geti(&g__key(), &Py::Int(0)), &py_str("sandwich")))) { Py::Int(1) } else { Py::Int(0) } }), ("avoid".to_string(), op_add(&op_add(&op_add(&op_add(&call_builtin("tuple", &[g__avoid()]).unwrap_or_else(|e| exc::raise(e)), &g__RECIPE_FAULT_WORDS()), &g__RECIPE_GROWING_WORDS()), &g__NO_SUGAR()), &g_ANNOUNCED_DISH())), ("guard".to_string(), py_func("_a_made_pot_is_not_its_recipe", |args: &[Py]| _a_made_pot_is_not_its_recipe(args)))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }]);
     }
     fn __data190() -> Py { py_tuple(vec![py_str("leftover"), py_str("leftovers"), py_str("left over"), py_str("left from"), py_str("use up"), py_str("using up"), py_str("used up"), py_str("spare"), py_str("stale"), py_str("already made"), py_str("goes off"), py_str("go off"), py_str("out of date")]) }
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking._USE_UP_WORDS"); }
     s__USE_UP_WORDS(__data190());
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cooking._PANTRY_FOODS"); }
-    s__PANTRY_FOODS(call_builtin("frozenset", &[op_add(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&pyrt::xrefs::xget("knowledge.cooking_tables", "PANTRY"), "values", &[])) { let __unpk6797 = py_unpack(&__item.clone(), 2, None); let mut aliases: Py = __unpk6797[0].clone(); let mut _reply: Py = __unpk6797[1].clone(); for __item in py_iter_or_raise(&aliases.clone()) { let mut alias: Py = __item.clone(); __out.push(_fold(&[alias.clone()])); } } py_list(__out) })() }, &{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("knowledge.cooking_tables", "PANTRY")) { let mut name: Py = __item.clone(); __out.push(_fold(&[name.clone()])); } py_list(__out) })() })]).unwrap_or_else(|e| exc::raise(e)));
+    s__PANTRY_FOODS(call_builtin("frozenset", &[op_add(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_PANTRY(), "values", &[])) { let __unpk3250 = py_unpack(&__item.clone(), 2, None); let mut aliases: Py = __unpk3250[0].clone(); let mut _reply: Py = __unpk3250[1].clone(); for __item in py_iter_or_raise(&aliases.clone()) { let mut alias: Py = __item.clone(); __out.push(_fold(&[alias.clone()])); } } py_list(__out) })() }, &{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_PANTRY()) { let mut name: Py = __item.clone(); __out.push(_fold(&[name.clone()])); } py_list(__out) })() })]).unwrap_or_else(|e| exc::raise(e)));
     fn __data191() -> Py { py_tuple(vec![py_str("pastry"), py_str("flan"), py_str("pastry case"), py_str("pastry base"), py_str("pie base"), py_str("tart base"), py_str("pie case"), py_str("tart case"), py_str("flan case"), py_str("blind bake"), py_str("blind baking"), py_str("quiche"), py_str("quiches")]) }
     fn __data192() -> Py { py_tuple(vec![py_str("blind"), py_str("blind bake"), py_str("blind baking"), py_str("bake"), py_str("baking"), py_str("line"), py_str("lined"), py_str("weights"), py_str("baking beans"), py_str("dry rice"), py_str("empty case"), py_str("before the filling"), py_str("how long"), py_str("how many minutes")]) }
     fn __data193() -> Py { py_tuple(vec![py_str("shrank"), py_str("shrink"), py_str("shrunk"), py_str("soggy"), py_str("sunk"), py_str("sank"), py_str("raw"), py_str("burnt"), py_str("burned"), py_str("cracked"), py_str("cracking"), py_str("crumbly"), py_str("falls apart"), py_str("how do i make pastry"), py_str("pastry recipe"), py_str("shortcrust"), py_str("rough puff"), py_str("puff pastry"), py_str("choux"), py_str("filo"), py_str("filling"), py_str("freeze"), py_str("frozen"), py_str("keep"), py_str("leftover"), py_str("make a quiche"), py_str("cook a quiche"), py_str("quiche recipe"), py_str("quiche recipe")]) }
@@ -4388,7 +4388,7 @@ pub fn __nested__alone_188(args: &[Py]) -> Py {
     s_wants(py_func("wants", |args: &[Py]| pyrt::xrefs::xcall("knowledge.cooking_more", "wants", args)));
     s__clean(py_func("_clean", |args: &[Py]| pyrt::xrefs::xcall("knowledge.cooking_more", "_clean", args)));
     s__said_words(py_func("_said_words", |args: &[Py]| pyrt::xrefs::xcall("knowledge.cooking_more", "_said_words", args)));
-    let _ = mcall(&g_ENTRIES(), "extend", &[pyrt::xrefs::xget("knowledge.cooking_more", "ENTRIES")]);
+    let _ = mcall(&g_ENTRIES(), "extend", &[g__TAIL_ENTRIES()]);
 }
 pub fn _container_keep(args: &[Py]) -> Py {
     ensure_init();
@@ -4920,9 +4920,9 @@ pub fn _staple(args: &[Py]) -> Py {
     continue;
     }
     rest = op_add(&slice_or_raise(&said.clone(), &Py::None, &start.clone(), &Py::None), &slice_or_raise(&said.clone(), &op_add(&start.clone(), &size.clone()), &Py::None, &Py::None));
-    guards = mcall(&pyrt::xrefs::xget("knowledge.cooking_tables", "NOT_WANTED"), "get", &[geti(&names.clone(), &Py::Int(0)), py_tuple(vec![])]);
+    guards = mcall(&g_NOT_WANTED(), "get", &[geti(&names.clone(), &Py::Int(0)), py_tuple(vec![])]);
     if py_truthy(&Py::Bool(!py_eq(&name.clone(), &geti(&names.clone(), &Py::Int(0))))) {
-    guards = op_add(&guards.clone(), &mcall(&pyrt::xrefs::xget("knowledge.cooking_tables", "NOT_WANTED"), "get", &[name.clone(), py_tuple(vec![])]));
+    guards = op_add(&guards.clone(), &mcall(&g_NOT_WANTED(), "get", &[name.clone(), py_tuple(vec![])]));
     }
     own = if py_truthy(&call_builtin("isinstance", &[reply.clone(), py_func("str", |args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) { _fold(&[mcall(&reply.clone(), "lower", &[])]) } else { py_str("") };
     if py_truthy(&_a_guard_said(&[rest.clone(), joined.clone(), guards.clone(), own.clone()])) {
@@ -5480,7 +5480,7 @@ pub fn _a_seasoning(args: &[Py]) -> Py {
     let mut reply: Py = Py::None;
     let _ = py_str("The seasoning answer for the food this line names, or None when it names none I know.");
     best = Py::None;
-    let __iter1 = py_iter_or_raise(&pyrt::xrefs::xget("knowledge.cooking_tables", "SEASONINGS"));
+    let __iter1 = py_iter_or_raise(&g_SEASONINGS());
     for __item in __iter1 {
     let __unpk2 = py_unpack(&__item.clone(), 2, None);
     names = __unpk2[0].clone();
@@ -5521,7 +5521,7 @@ pub fn _spelled_counts(args: &[Py]) -> Py {
     let mut word: Py = Py::None;
     let mut words: Py = Py::None;
     let _ = py_str("Every count a person spells out, from two up to a hundred.\n\n    The written-out numbers used to stop at twenty, so \"dinner for thirty people\" was not a count\n    at all and got the answer for one plate: it is the same question as \"for twenty\", read the\n    way a typed number is read.\n    ");
-    counts = { (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&py_tuple(vec![g__ONES(), g__TEENS(), g__TENS()])) { let mut words: Py = __item.clone(); for __item in py_iter_or_raise(&mcall(&words.clone(), "items", &[])) { let __unpk6660 = py_unpack(&__item.clone(), 2, None); let mut value: Py = __unpk6660[0].clone(); let mut word: Py = __unpk6660[1].clone(); if py_truthy(&op_ge(&value.clone(), &Py::Int(2))) {  __out.push((word.clone(), value.clone())); } } } py_dict(__out) })() };
+    counts = { (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&py_tuple(vec![g__ONES(), g__TEENS(), g__TENS()])) { let mut words: Py = __item.clone(); for __item in py_iter_or_raise(&mcall(&words.clone(), "items", &[])) { let __unpk9705 = py_unpack(&__item.clone(), 2, None); let mut value: Py = __unpk9705[0].clone(); let mut word: Py = __unpk9705[1].clone(); if py_truthy(&op_ge(&value.clone(), &Py::Int(2))) {  __out.push((word.clone(), value.clone())); } } } py_dict(__out) })() };
     let __iter1 = py_iter_or_raise(&mcall(&g__TENS(), "items", &[]));
     for __item in __iter1 {
     let __unpk2 = py_unpack(&__item.clone(), 2, None);
@@ -5937,7 +5937,7 @@ pub fn _table_side(args: &[Py]) -> Py {
     let mut reply: Py = Py::None;
     let _ = py_str("The longest name in the sides table this line uses, and its reply.");
     best = Py::None;
-    let __iter1 = py_iter_or_raise(&pyrt::xrefs::xget("knowledge.cooking_tables", "SIDES"));
+    let __iter1 = py_iter_or_raise(&g_SIDES());
     for __item in __iter1 {
     let __unpk2 = py_unpack(&__item.clone(), 2, None);
     names = __unpk2[0].clone();
@@ -7559,7 +7559,7 @@ pub fn _frozen_cook_reply(args: &[Py]) -> Py {
     if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&geti(&g__FROZEN_CUTS(), &Py::Int(0))) { let mut cut: Py = __item.clone(); __out.push(Py::Bool(py_contains(&words.clone(), &cut.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     led = py_str("Mince can go straight into the pan from frozen: brown it over a high heat, break it up as it loosens and give it a few extra minutes before the sauce goes in.");
     } else {
-    let __unpk1 = py_unpack(&call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g__FROZEN_WHOLE()) { let __unpk8386 = py_unpack(&__item.clone(), 3, None); let mut word: Py = __unpk8386[0].clone(); let mut said: Py = __unpk8386[1].clone(); let mut one: Py = __unpk8386[2].clone(); if py_truthy(&Py::Bool(py_contains(&words.clone(), &word.clone()))) {  __out.push(py_tuple(vec![said.clone(), one.clone()])); } } py_list(__out) })() }, py_tuple(vec![py_str(""), Py::Bool(false)])]).unwrap_or_else(|e| exc::raise(e)), 2, None);
+    let __unpk1 = py_unpack(&call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g__FROZEN_WHOLE()) { let __unpk6559 = py_unpack(&__item.clone(), 3, None); let mut word: Py = __unpk6559[0].clone(); let mut said: Py = __unpk6559[1].clone(); let mut one: Py = __unpk6559[2].clone(); if py_truthy(&Py::Bool(py_contains(&words.clone(), &word.clone()))) {  __out.push(py_tuple(vec![said.clone(), one.clone()])); } } py_list(__out) })() }, py_tuple(vec![py_str(""), Py::Bool(false)])]).unwrap_or_else(|e| exc::raise(e)), 2, None);
     said = __unpk1[0].clone();
     one = __unpk1[1].clone();
     if py_truthy(&said.clone()) {
@@ -7994,7 +7994,7 @@ pub fn _roast_shopping(args: &[Py]) -> Py {
     people = _head_count(&[text.clone()]);
     trimmings = py_str("potatoes, carrots, parsnips or swede, and something green like cabbage or sprouts, plus oil, and stock and flour for the gravy");
     if py_truthy(&{ let __b = Py::Bool(py_contains(&text.clone(), &py_str("turkey"))); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&text.clone(), &py_str("christmas dinner"))); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&text.clone(), &py_str("xmas dinner"))) } } } }) {
-    let __unpk1 = py_unpack(&py_tuple(vec![pyrt::xrefs::xget("knowledge.units", "BIRD_GRAMS"), py_str("turkey"), py_str("20 minutes per 500g plus 90")]), 3, None);
+    let __unpk1 = py_unpack(&py_tuple(vec![g_BIRD_GRAMS(), py_str("turkey"), py_str("20 minutes per 500g plus 90")]), 3, None);
     per = __unpk1[0].clone();
     bird = __unpk1[1].clone();
     timing = __unpk1[2].clone();
@@ -8005,7 +8005,7 @@ pub fn _roast_shopping(args: &[Py]) -> Py {
     }
     } else {
     if py_truthy(&Py::Bool(py_contains(&text.clone(), &py_str("chicken")))) {
-    let __unpk2 = py_unpack(&py_tuple(vec![pyrt::xrefs::xget("knowledge.units", "BIRD_GRAMS"), py_str("chicken"), py_str("20 minutes per 500g plus 20")]), 3, None);
+    let __unpk2 = py_unpack(&py_tuple(vec![g_BIRD_GRAMS(), py_str("chicken"), py_str("20 minutes per 500g plus 20")]), 3, None);
     per = __unpk2[0].clone();
     bird = __unpk2[1].clone();
     timing = __unpk2[2].clone();
@@ -8182,7 +8182,7 @@ pub fn __nested_note_0(args: &[Py]) -> Py {
     let _ = py_setitem(&state.clone(), &word.clone(), positive.clone());
     }
     }
-    banned = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&state.clone(), "items", &[])) { let __unpk2123 = py_unpack(&__item.clone(), 2, None); let mut word: Py = __unpk2123[0].clone(); let mut on: Py = __unpk2123[1].clone(); if py_truthy(&on.clone()) {  __out.push(word.clone()); } } py_set(__out) })() };
+    banned = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&state.clone(), "items", &[])) { let __unpk9507 = py_unpack(&__item.clone(), 2, None); let mut word: Py = __unpk9507[0].clone(); let mut on: Py = __unpk9507[1].clone(); if py_truthy(&on.clone()) {  __out.push(word.clone()); } } py_set(__out) })() };
     if py_truthy(&{ let __b = Py::Bool(py_contains(&banned.clone(), &py_str("cheese"))); if py_truthy(&__b) { __b } else { op_bitand(&g_DAIRY(), &banned.clone()) } }) {
     let _ = mcall(&banned.clone(), "update", &[g_CHEESES()]);
     }
@@ -8691,7 +8691,7 @@ pub fn _named_families(args: &[Py]) -> Py {
     let mut family: Py = Py::None;
     let mut name: Py = Py::None;
     let _ = py_str("The families the person named outright, which is not every family they touch.\n\n    A ban on shellfish reaches the word \"prawn\", and the word \"prawn\" is also in the meat family,\n    so intersecting the families alone would say a shellfish allergy is a meat one. The name the\n    person used is the one that decides.");
-    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_BAN_SAY()) { let __unpk5070 = py_unpack(&__item.clone(), 2, None); let mut family: Py = __unpk5070[0].clone(); let mut name: Py = __unpk5070[1].clone(); if py_truthy(&Py::Bool(py_contains(&banned.clone(), &name.clone()))) {  __out.push(family.clone()); } } py_set(__out) })() };
+    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_BAN_SAY()) { let __unpk8053 = py_unpack(&__item.clone(), 2, None); let mut family: Py = __unpk8053[0].clone(); let mut name: Py = __unpk8053[1].clone(); if py_truthy(&Py::Bool(py_contains(&banned.clone(), &name.clone()))) {  __out.push(family.clone()); } } py_set(__out) })() };
     Py::None
 }
 pub fn _bans_said(args: &[Py]) -> Py {
@@ -8713,9 +8713,9 @@ pub fn _bans_said(args: &[Py]) -> Py {
     let mut names: Py = Py::None;
     let _ = py_str("The names of what they avoid, in the order the families are listed.\n\n    A ban on meat already covers the shellfish in it, so a person who avoids meat is not also\n    told they avoid shellfish: that lists the same food twice and reads like a machine.");
     named = _named_families(&[banned.clone()]);
-    names = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_BAN_SAY()) { let __unpk3870 = py_unpack(&__item.clone(), 2, None); let mut family: Py = __unpk3870[0].clone(); let mut name: Py = __unpk3870[1].clone(); if py_truthy(&Py::Bool(py_contains(&named.clone(), &family.clone()))) {  __out.push(name.clone()); } } py_list(__out) })() };
+    names = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_BAN_SAY()) { let __unpk9253 = py_unpack(&__item.clone(), 2, None); let mut family: Py = __unpk9253[0].clone(); let mut name: Py = __unpk9253[1].clone(); if py_truthy(&Py::Bool(py_contains(&named.clone(), &family.clone()))) {  __out.push(name.clone()); } } py_list(__out) })() };
     if py_truthy(&Py::Bool(!py_truthy(&names.clone()))) {
-    names = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_BAN_SAY()) { let __unpk3102 = py_unpack(&__item.clone(), 2, None); let mut family: Py = __unpk3102[0].clone(); let mut name: Py = __unpk3102[1].clone(); if py_truthy(&op_bitand(&family.clone(), &banned.clone())) {  __out.push(name.clone()); } } py_list(__out) })() };
+    names = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_BAN_SAY()) { let __unpk22 = py_unpack(&__item.clone(), 2, None); let mut family: Py = __unpk22[0].clone(); let mut name: Py = __unpk22[1].clone(); if py_truthy(&op_bitand(&family.clone(), &banned.clone())) {  __out.push(name.clone()); } } py_list(__out) })() };
     }
     if py_truthy(&{ let __b = Py::Bool(py_contains(&names.clone(), &py_str("meat"))); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&names.clone(), &py_str("shellfish"))) } }) {
     let _ = mcall(&names.clone(), "remove", &[py_str("shellfish")]);
@@ -9764,7 +9764,7 @@ pub fn fitted_for_the_one_talked_about(args: &[Py]) -> Py {
     return reply.clone();
     }
     text = reply.clone();
-    text = _nut_swapped(&[mcall(&pyrt::xrefs::xget("knowledge.cooking_tables", "DIET_VARIANTS"), "get", &[mcall(&text.clone(), "strip", &[]), text.clone()]), banned.clone(), line.clone()]);
+    text = _nut_swapped(&[mcall(&g_DIET_VARIANTS(), "get", &[mcall(&text.clone(), "strip", &[]), text.clone()]), banned.clone(), line.clone()]);
     if py_truthy(&names_a_banned_food(&[text.clone(), banned.clone(), line.clone()])) {
     return Py::None;
     }
@@ -9874,7 +9874,7 @@ pub fn fits_the_diet(args: &[Py]) -> Py {
     }
     nuts_only = { let __b = op_bitand(&g_NUTS(), &banned.clone()); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&op_sub(&banned.clone(), &g_NUTS()))) } };
     if py_truthy(&{ let __b = op_bitand(&g_MEAT(), &banned.clone()); if py_truthy(&__b) { __b } else { { let __b = op_bitand(&g_FISH(), &banned.clone()); if py_truthy(&__b) { __b } else { nuts_only.clone() } } } }) {
-    text = mcall(&pyrt::xrefs::xget("knowledge.cooking_tables", "DIET_VARIANTS"), "get", &[mcall(&text.clone(), "strip", &[]), text.clone()]);
+    text = mcall(&g_DIET_VARIANTS(), "get", &[mcall(&text.clone(), "strip", &[]), text.clone()]);
     }
     if py_truthy(&{ let __b = op_bitand(&g_DAIRY(), &banned.clone()); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_contains(&banned.clone(), &py_str("lactose"))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_PLANT_SAID(), "search", &[text.clone()]))) } } } }) {
     let __iter4 = py_iter_or_raise(&g_DAIRY_SWAPS());
@@ -9960,7 +9960,7 @@ pub fn _the_card_without_that_sentence(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&mcall(&geti(&keep.clone(), &Py::Int(0)), "strip", &[py_str(" ,.;:")]))); if py_truthy(&__b) { __b } else { Py::Bool(!py_is(&geti(&keep.clone(), &Py::Int(0)), &geti(&bits.clone(), &Py::Int(0)))) } }) {
     return Py::None;
     }
-    said = mcall(&py_str(", "), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[keep.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk5798 = py_unpack(&__item.clone(), 2, None); let mut index: Py = __unpk5798[0].clone(); let mut part: Py = __unpk5798[1].clone(); if py_truthy(&mcall(&part.clone(), "strip", &[py_str(" ,.;:")])) {  __out.push(if py_truthy(&index.clone()) { mcall(&mcall(&part.clone(), "strip", &[py_str(" ,.;:")]), "lower", &[]) } else { mcall(&part.clone(), "strip", &[py_str(" ,;")]) }); } } py_list(__out) })() }]);
+    said = mcall(&py_str(", "), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[keep.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk7813 = py_unpack(&__item.clone(), 2, None); let mut index: Py = __unpk7813[0].clone(); let mut part: Py = __unpk7813[1].clone(); if py_truthy(&mcall(&part.clone(), "strip", &[py_str(" ,.;:")])) {  __out.push(if py_truthy(&index.clone()) { mcall(&mcall(&part.clone(), "strip", &[py_str(" ,.;:")]), "lower", &[]) } else { mcall(&part.clone(), "strip", &[py_str(" ,;")]) }); } } py_list(__out) })() }]);
     if py_truthy(&Py::Bool(!py_truthy(&said.clone()))) {
     return Py::None;
     }
@@ -10489,7 +10489,7 @@ pub fn _pet_or_meat(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&_reads_as_a_pet(&[low.clone()])))) {
     return Py::None;
     }
-    let __iter1 = py_iter_or_raise(&mcall(&pyrt::xrefs::xget("knowledge.cooking_tables", "PANTRY"), "items", &[]));
+    let __iter1 = py_iter_or_raise(&mcall(&g_PANTRY(), "items", &[]));
     for __item in __iter1 {
     let __unpk2 = py_unpack(&__item.clone(), 2, None);
     name = __unpk2[0].clone();
@@ -10644,7 +10644,7 @@ pub fn pantry_idea(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&folded.clone()))) {
     return Py::None;
     }
-    let __iter1 = py_iter_or_raise(&mcall(&pyrt::xrefs::xget("knowledge.cooking_tables", "PANTRY"), "values", &[]));
+    let __iter1 = py_iter_or_raise(&mcall(&g_PANTRY(), "values", &[]));
     for __item in __iter1 {
     let __unpk2 = py_unpack(&__item.clone(), 2, None);
     aliases = __unpk2[0].clone();
@@ -10694,7 +10694,7 @@ pub fn _pantry_idea(args: &[Py]) -> Py {
     let _ = py_str("The pantry's idea for the first food the line names, when no meal idea covers it.\n\n    MEAL_IDEAS names forty foods and the pantry a hundred and forty, so \"what can I make with\n    bananas\" or \"with cabbage\" fell past both and got the default ten-minute list while the\n    pantry held a good answer all along. Same shape as the loop above: earliest food in the\n    line wins, and an idea the line has ruled out is skipped.\n\n    A name here has to be that name: `_same` reads a prefix as the same word, which is right for\n    eggs/egg but made \"peanut butter\" a pea and \"bean sprouts\" the beans on toast, so the match\n    is the folded word (and `NOT_THIS_FOOD` steps the name aside when a word in front makes it a\n    different food).\n    ");
     found = Py::None;
     reached = Py::None;
-    let __iter1 = py_iter_or_raise(&mcall(&pyrt::xrefs::xget("knowledge.cooking_tables", "PANTRY"), "items", &[]));
+    let __iter1 = py_iter_or_raise(&mcall(&g_PANTRY(), "items", &[]));
     for __item in __iter1 {
     let __unpk2 = py_unpack(&__item.clone(), 2, None);
     name = __unpk2[0].clone();
@@ -10935,7 +10935,7 @@ pub fn _lunch_ideas(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&banned.clone()))) {
     return g_ANY_LUNCH();
     }
-    fillings = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&py_tuple(vec![py_tuple(vec![py_str("cheese"), g_DAIRY()]), py_tuple(vec![py_str("tuna"), py_set(vec![py_str("tuna")])]), py_tuple(vec![py_str("ham"), py_set(vec![py_str("ham")])]), py_tuple(vec![py_str("egg"), g_EGGS()]), py_tuple(vec![py_str("hummus"), call_builtin("set", &[]).unwrap_or_else(|e| exc::raise(e))]), py_tuple(vec![py_str("avocado"), call_builtin("set", &[]).unwrap_or_else(|e| exc::raise(e))]), py_tuple(vec![py_str("roasted vegetables"), call_builtin("set", &[]).unwrap_or_else(|e| exc::raise(e))])])) { let __unpk5384 = py_unpack(&__item.clone(), 2, None); let mut name: Py = __unpk5384[0].clone(); let mut needs: Py = __unpk5384[1].clone(); if py_truthy(&Py::Bool(!py_truthy(&op_bitand(&needs.clone(), &banned.clone())))) {  __out.push(name.clone()); } } py_list(__out) })() };
+    fillings = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&py_tuple(vec![py_tuple(vec![py_str("cheese"), g_DAIRY()]), py_tuple(vec![py_str("tuna"), py_set(vec![py_str("tuna")])]), py_tuple(vec![py_str("ham"), py_set(vec![py_str("ham")])]), py_tuple(vec![py_str("egg"), g_EGGS()]), py_tuple(vec![py_str("hummus"), call_builtin("set", &[]).unwrap_or_else(|e| exc::raise(e))]), py_tuple(vec![py_str("avocado"), call_builtin("set", &[]).unwrap_or_else(|e| exc::raise(e))]), py_tuple(vec![py_str("roasted vegetables"), call_builtin("set", &[]).unwrap_or_else(|e| exc::raise(e))])])) { let __unpk4156 = py_unpack(&__item.clone(), 2, None); let mut name: Py = __unpk4156[0].clone(); let mut needs: Py = __unpk4156[1].clone(); if py_truthy(&Py::Bool(!py_truthy(&op_bitand(&needs.clone(), &banned.clone())))) {  __out.push(name.clone()); } } py_list(__out) })() };
     if py_truthy(&Py::Bool(py_contains(&banned.clone(), &py_str("gluten")))) {
     if py_truthy(&fillings.clone()) {
     return op_add(&op_add(&py_str("For a lunch that is not a sandwich: a rice or potato salad with "), &mcall(&py_str(", "), "join", &[slice_or_raise(&fillings.clone(), &Py::None, &Py::Int(3), &Py::None)])), &py_str(", fruit and a drink. Cook extra dinner and take the leftovers in a tub and it is quicker still. Keep it in a cool bag until lunch."));
@@ -11069,7 +11069,7 @@ pub fn _a_freeze_fact(args: &[Py]) -> Py {
     let mut word: Py = Py::None;
     let _ = py_str("The most specific food freeze fact the words carry, or None.");
     best = Py::None;
-    let __iter1 = py_iter_or_raise(&pyrt::xrefs::xget("knowledge.cooking_tables", "FREEZE_FACTS"));
+    let __iter1 = py_iter_or_raise(&g_FREEZE_FACTS());
     for __item in __iter1 {
     let __unpk2 = py_unpack(&__item.clone(), 2, None);
     names = __unpk2[0].clone();
@@ -11115,7 +11115,7 @@ pub fn _names_one_food(args: &[Py]) -> Py {
     let mut unit: Py = Py::None;
     let _ = py_str("The one food name a line carries, or None when it carries two or more.\n\n    \"what can i cook with mince and a tin of tomatoes\" names two things and is about neither of\n    them: the answer for tomatoes (freeze them whole, the skins slip off) is a bad answer to\n    \"can i freeze the rest\" about a ragù, and the plain three-month answer is a true one. Two\n    names is a list, so the chat does not name a dish.\n    ");
     seen = call_builtin("set", &[]).unwrap_or_else(|e| exc::raise(e));
-    let __iter1 = py_iter_or_raise(&pyrt::xrefs::xget("knowledge.cooking_tables", "FREEZE_FACTS"));
+    let __iter1 = py_iter_or_raise(&g_FREEZE_FACTS());
     for __item in __iter1 {
     let __unpk2 = py_unpack(&__item.clone(), 2, None);
     names = __unpk2[0].clone();
@@ -11550,7 +11550,7 @@ pub fn _a_food_word_misspelt(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(py_eq(&squashed.clone(), &_squashed(&[name.clone()])))) {
     return name.clone();
     }
-    if py_truthy(&{ let __b = Py::Bool(py_eq(&geti(&name.clone(), &op_neg(&Py::Int(1))), &geti(&word.clone(), &op_neg(&Py::Int(1))))); if !py_truthy(&__b) { __b } else { Py::Bool(py_eq(&call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[word.clone(), name.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk2109 = py_unpack(&__item.clone(), 2, None); let mut one: Py = __unpk2109[0].clone(); let mut other: Py = __unpk2109[1].clone(); __out.push(Py::Bool(!py_eq(&one.clone(), &other.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1))) } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_eq(&geti(&name.clone(), &op_neg(&Py::Int(1))), &geti(&word.clone(), &op_neg(&Py::Int(1))))); if !py_truthy(&__b) { __b } else { Py::Bool(py_eq(&call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[word.clone(), name.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk3270 = py_unpack(&__item.clone(), 2, None); let mut one: Py = __unpk3270[0].clone(); let mut other: Py = __unpk3270[1].clone(); __out.push(Py::Bool(!py_eq(&one.clone(), &other.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1))) } }) {
     return name.clone();
     }
     } else {
@@ -11826,9 +11826,9 @@ pub fn _nutrients(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(py_is(&column.clone(), &Py::None))) {
     return Py::None;
     }
-    found = _nutrient_food(&[read.clone(), pyrt::xrefs::xget("knowledge.cooking_tables", "FOOD_NUTRIENTS")]);
+    found = _nutrient_food(&[read.clone(), g_FOOD_NUTRIENTS()]);
     if py_truthy(&{ let __b = Py::Bool(py_is(&found.clone(), &Py::None)); if !py_truthy(&__b) { __b } else { plain.clone() } }) {
-    found = _nutrient_food(&[if py_truthy(&Py::Bool(py_eq(&read.clone(), &clean.clone()))) { plain.clone() } else { clean.clone() }, pyrt::xrefs::xget("knowledge.cooking_tables", "FOOD_NUTRIENTS")]);
+    found = _nutrient_food(&[if py_truthy(&Py::Bool(py_eq(&read.clone(), &clean.clone()))) { plain.clone() } else { clean.clone() }, g_FOOD_NUTRIENTS()]);
     }
     if py_truthy(&Py::Bool(py_is(&found.clone(), &Py::None))) {
     return Py::None;
@@ -11836,7 +11836,7 @@ pub fn _nutrients(args: &[Py]) -> Py {
     let __unpk1 = py_unpack(&found.clone(), 2, None);
     food = __unpk1[0].clone();
     count = __unpk1[1].clone();
-    let __unpk2 = py_unpack(&geti(&pyrt::xrefs::xget("knowledge.cooking_tables", "FOOD_NUTRIENTS"), &food.clone()), 3, None);
+    let __unpk2 = py_unpack(&geti(&g_FOOD_NUTRIENTS(), &food.clone()), 3, None);
     subject = __unpk2[0].clone();
     portion = __unpk2[1].clone();
     numbers = __unpk2[2].clone();
@@ -11955,7 +11955,7 @@ pub fn _names_a_food(args: &[Py]) -> Py {
     let mut table: Py = Py::None;
     let _ = py_str("True when a word of the line is a food one of the calorie and nutrient tables holds.");
     lowered = mcall(&line.clone(), "lower", &[]);
-    let __iter1 = py_iter_or_raise(&py_tuple(vec![pyrt::xrefs::xget("knowledge.cooking_tables", "FOOD_CALORIES"), pyrt::xrefs::xget("knowledge.cooking_tables", "FOOD_CALORIE_MEALS"), pyrt::xrefs::xget("knowledge.cooking_tables", "FOOD_NUTRIENTS")]));
+    let __iter1 = py_iter_or_raise(&py_tuple(vec![g_FOOD_CALORIES(), g_FOOD_CALORIE_MEALS(), g_FOOD_NUTRIENTS()]));
     for __item in __iter1 {
     table = __item.clone();
     let __iter2 = py_iter_or_raise(&table.clone());
@@ -12072,7 +12072,7 @@ pub fn __nested__part_of_a_dish_0(args: &[Py]) -> Py {
 }
     _part_of_a_dish = {{ let _part_of_a_dish = _part_of_a_dish.clone(); let after = after.clone(); let back = back.clone(); let before = before.clone(); let best = best.clone(); let clean = clean.clone(); let count = count.clone(); let dish = dish.clone(); let food = food.clone(); let head = head.clone(); let i = i.clone(); let matches = matches.clone(); let meal = meal.clone(); let memory = memory.clone(); let plain = plain.clone(); let portion = portion.clone(); let said = said.clone(); let slipped = slipped.clone(); let subject = subject.clone(); let tail = tail.clone(); let understood = understood.clone(); let verb = verb.clone(); let word = word.clone(); let words = words.clone(); py_func("_part_of_a_dish", move |args: &[Py]| { let mut full = vec![_part_of_a_dish.clone(), after.clone(), back.clone(), before.clone(), best.clone(), clean.clone(), count.clone(), dish.clone(), food.clone(), head.clone(), i.clone(), matches.clone(), meal.clone(), memory.clone(), plain.clone(), portion.clone(), said.clone(), slipped.clone(), subject.clone(), tail.clone(), understood.clone(), verb.clone(), word.clone(), words.clone()]; full.extend_from_slice(args); __nested__part_of_a_dish_0(&full) }) }};
     meal = Py::None;
-    let __iter2 = py_iter_or_raise(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(pyrt::xrefs::xget("knowledge.cooking_tables", "FOOD_CALORIE_MEALS")); __kws.extend(vec![("key".to_string(), py_func("len", |args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e)))), ("reverse".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sorted", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
+    let __iter2 = py_iter_or_raise(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(g_FOOD_CALORIE_MEALS()); __kws.extend(vec![("key".to_string(), py_func("len", |args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e)))), ("reverse".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sorted", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
     for __item in __iter2 {
     dish = __item.clone();
     if py_truthy(&py_call(&_part_of_a_dish, &[dish.clone()])) {
@@ -12084,16 +12084,16 @@ pub fn __nested__part_of_a_dish_0(args: &[Py]) -> Py {
     }
     }
     if py_truthy(&meal.clone()) {
-    let __unpk3 = py_unpack(&geti(&pyrt::xrefs::xget("knowledge.cooking_tables", "FOOD_CALORIE_MEALS"), &meal.clone()), 3, None);
+    let __unpk3 = py_unpack(&geti(&g_FOOD_CALORIE_MEALS(), &meal.clone()), 3, None);
     subject = __unpk3[0].clone();
     portion = __unpk3[1].clone();
     count = __unpk3[2].clone();
     said = op_add(&mcall(&slice_or_raise(&subject.clone(), &Py::None, &Py::Int(1), &Py::None), "upper", &[]), &slice_or_raise(&subject.clone(), &Py::Int(1), &Py::None, &Py::None));
     return { let mut __s = String::new(); __s.push_str(&fstr(&said.clone(), -1, "")); __s.push_str(" is about "); __s.push_str(&fstr(&count.clone(), -1, "")); __s.push_str(" calories ("); __s.push_str(&fstr(&portion.clone(), -1, "")); __s.push_str(")."); py_string(__s) };
     }
-    matches = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("knowledge.cooking_tables", "FOOD_CALORIES")) { let mut food: Py = __item.clone(); if py_truthy(&stdlib_call("re", "search", &[op_add(&op_add(&py_str("(?<![a-z0-9])"), &stdlib_call("re", "escape", &[food.clone()]).unwrap_or_else(|e| exc::raise(e))), &py_str("s?(?![a-z0-9])")), clean.clone()]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(food.clone()); } } py_list(__out) })() };
+    matches = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_FOOD_CALORIES()) { let mut food: Py = __item.clone(); if py_truthy(&stdlib_call("re", "search", &[op_add(&op_add(&py_str("(?<![a-z0-9])"), &stdlib_call("re", "escape", &[food.clone()]).unwrap_or_else(|e| exc::raise(e))), &py_str("s?(?![a-z0-9])")), clean.clone()]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(food.clone()); } } py_list(__out) })() };
     if py_truthy(&Py::Bool(!py_truthy(&matches.clone()))) {
-    slipped = _the_food_named_by_a_slip(&[words.clone(), pyrt::xrefs::xget("knowledge.cooking_tables", "FOOD_CALORIES")]);
+    slipped = _the_food_named_by_a_slip(&[words.clone(), g_FOOD_CALORIES()]);
     if py_truthy(&Py::Bool(py_is(&slipped.clone(), &Py::None))) {
     return Py::None;
     }
@@ -12125,7 +12125,7 @@ pub fn __nested__part_of_a_dish_0(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = before.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g__CALORIE_JOIN(), &before.clone())) } }) {
     return Py::None;
     }
-    let __unpk7 = py_unpack(&geti(&pyrt::xrefs::xget("knowledge.cooking_tables", "FOOD_CALORIES"), &best.clone()), 3, None);
+    let __unpk7 = py_unpack(&geti(&g_FOOD_CALORIES(), &best.clone()), 3, None);
     subject = __unpk7[0].clone();
     portion = __unpk7[1].clone();
     count = __unpk7[2].clone();
@@ -12676,7 +12676,7 @@ pub fn available(args: &[Py]) -> Py {
     return py_set(vec![name.clone()]);
     }
     }
-    named = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_HAVE_ONE(), "items", &[])) { let __unpk1752 = py_unpack(&__item.clone(), 2, None); let mut name: Py = __unpk1752[0].clone(); let mut phrases: Py = __unpk1752[1].clone(); if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&phrases.clone()) { let mut one: Py = __item.clone(); __out.push(Py::Bool(py_contains(&text.clone(), &one.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(name.clone()); } } py_set(__out) })() };
+    named = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_HAVE_ONE(), "items", &[])) { let __unpk2801 = py_unpack(&__item.clone(), 2, None); let mut name: Py = __unpk2801[0].clone(); let mut phrases: Py = __unpk2801[1].clone(); if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&phrases.clone()) { let mut one: Py = __item.clone(); __out.push(Py::Bool(py_contains(&text.clone(), &one.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(name.clone()); } } py_set(__out) })() };
     let __aug3 = op_sub(&named.clone(), &call_builtin("set", &[{ let __b = gone.clone(); if py_truthy(&__b) { __b } else { py_tuple(vec![]) } }]).unwrap_or_else(|e| exc::raise(e)));
     named = __aug3;
     if py_truthy(&named.clone()) {
@@ -12797,7 +12797,7 @@ pub fn _cook_word(args: &[Py]) -> Py {
     let __unpk2 = py_unpack(&__item.clone(), 2, None);
     pos = __unpk2[0].clone();
     word = __unpk2[1].clone();
-    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&found.clone()) { let __unpk7093 = py_unpack(&__item.clone(), 2, None); let mut other_pos: Py = __unpk7093[0].clone(); let mut other: Py = __unpk7093[1].clone(); __out.push({ let __b = op_ge(&pos.clone(), &other_pos.clone()); if !py_truthy(&__b) { __b } else { { let __b = op_le(&op_add(&pos.clone(), &call_builtin("len", &[word.clone()]).unwrap_or_else(|e| exc::raise(e))), &op_add(&other_pos.clone(), &call_builtin("len", &[other.clone()]).unwrap_or_else(|e| exc::raise(e)))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_eq(&word.clone(), &other.clone())) } } } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&found.clone()) { let __unpk9394 = py_unpack(&__item.clone(), 2, None); let mut other_pos: Py = __unpk9394[0].clone(); let mut other: Py = __unpk9394[1].clone(); __out.push({ let __b = op_ge(&pos.clone(), &other_pos.clone()); if !py_truthy(&__b) { __b } else { { let __b = op_le(&op_add(&pos.clone(), &call_builtin("len", &[word.clone()]).unwrap_or_else(|e| exc::raise(e))), &op_add(&other_pos.clone(), &call_builtin("len", &[other.clone()]).unwrap_or_else(|e| exc::raise(e)))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_eq(&word.clone(), &other.clone())) } } } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     continue;
     }
     let _ = mcall(&named.clone(), "append", &[word.clone()]);
@@ -12833,7 +12833,7 @@ pub fn _bake_aliases(args: &[Py]) -> Py {
     let mut name: Py = Py::None;
     let mut part: Py = Py::None;
     if py_truthy(&Py::Bool(py_is(&g__BAKE_ALIASES(), &Py::None))) {
-    s__BAKE_ALIASES(call_builtin("tuple", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&pyrt::xrefs::xget("knowledge.cooking_tables", "BAKES"), "items", &[])) { let __unpk1356 = py_unpack(&__item.clone(), 2, None); let mut name: Py = __unpk1356[0].clone(); let __unpk1260 = py_unpack(&__unpk1356[1].clone(), 2, None); let mut aliases: Py = __unpk1260[0].clone(); let mut _u: Py = __unpk1260[1].clone(); for __item in py_iter_or_raise(&aliases.clone()) { let mut alias: Py = __item.clone(); __out.push(py_tuple(vec![{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&alias.clone(), "split", &[])) { let mut part: Py = __item.clone(); __out.push(_fold(&[part.clone()])); } py_list(__out) })() }, name.clone()])); } } py_list(__out) })() }); __kws.extend(vec![("key".to_string(), { let _u = _u.clone(); let alias = alias.clone(); let aliases = aliases.clone(); let name = name.clone(); let part = part.clone(); py_func("lambda", move |args: &[Py]| { let _u = _u.clone(); let alias = alias.clone(); let aliases = aliases.clone(); let name = name.clone(); let part = part.clone(); let pair: Py = __kwp(args, 0, "pair").unwrap_or(Py::None); op_neg(&call_builtin("len", &[geti(&pair.clone(), &Py::Int(0))]).unwrap_or_else(|e| exc::raise(e))) }) })]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sorted", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }]).unwrap_or_else(|e| exc::raise(e)));
+    s__BAKE_ALIASES(call_builtin("tuple", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_BAKES(), "items", &[])) { let __unpk898 = py_unpack(&__item.clone(), 2, None); let mut name: Py = __unpk898[0].clone(); let __unpk802 = py_unpack(&__unpk898[1].clone(), 2, None); let mut aliases: Py = __unpk802[0].clone(); let mut _u: Py = __unpk802[1].clone(); for __item in py_iter_or_raise(&aliases.clone()) { let mut alias: Py = __item.clone(); __out.push(py_tuple(vec![{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&alias.clone(), "split", &[])) { let mut part: Py = __item.clone(); __out.push(_fold(&[part.clone()])); } py_list(__out) })() }, name.clone()])); } } py_list(__out) })() }); __kws.extend(vec![("key".to_string(), { let _u = _u.clone(); let alias = alias.clone(); let aliases = aliases.clone(); let name = name.clone(); let part = part.clone(); py_func("lambda", move |args: &[Py]| { let _u = _u.clone(); let alias = alias.clone(); let aliases = aliases.clone(); let name = name.clone(); let part = part.clone(); let pair: Py = __kwp(args, 0, "pair").unwrap_or(Py::None); op_neg(&call_builtin("len", &[geti(&pair.clone(), &Py::Int(0))]).unwrap_or_else(|e| exc::raise(e))) }) })]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sorted", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }]).unwrap_or_else(|e| exc::raise(e)));
     }
     return g__BAKE_ALIASES();
     Py::None
@@ -12850,7 +12850,7 @@ pub fn _pantry_words(args: &[Py]) -> Py {
     }
     let mut name: Py = Py::None;
     if py_truthy(&Py::Bool(py_is(&g__PANTRY_AS_WORDS(), &Py::None))) {
-    s__PANTRY_AS_WORDS(call_builtin("frozenset", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("knowledge.cooking_tables", "PANTRY")) { let mut name: Py = __item.clone(); __out.push(_fold(&[name.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
+    s__PANTRY_AS_WORDS(call_builtin("frozenset", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_PANTRY()) { let mut name: Py = __item.clone(); __out.push(_fold(&[name.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
     }
     return g__PANTRY_AS_WORDS();
     Py::None
@@ -12921,7 +12921,7 @@ pub fn _names_a_bake(args: &[Py]) -> Py {
     words = mcall(&call_builtin("str", &[{ let __b = mcall(&understood.clone(), "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "split", &[]);
     }
     folded = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); __out.push(_fold(&[word.clone()])); } py_list(__out) })() };
-    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(folded.clone()); __kws.extend(vec![("skip_pantry".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _bake_hits(args))(&__args) }) { let __unpk7498 = py_unpack(&__item.clone(), 2, None); let mut parts: Py = __unpk7498[0].clone(); let mut _name: Py = __unpk7498[1].clone(); __out.push(Py::Bool(!py_truthy(&_already_baked(&[folded.clone(), parts.clone()])))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(folded.clone()); __kws.extend(vec![("skip_pantry".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _bake_hits(args))(&__args) }) { let __unpk9327 = py_unpack(&__item.clone(), 2, None); let mut parts: Py = __unpk9327[0].clone(); let mut _name: Py = __unpk9327[1].clone(); __out.push(Py::Bool(!py_truthy(&_already_baked(&[folded.clone(), parts.clone()])))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn _already_baked(args: &[Py]) -> Py {
@@ -13011,7 +13011,7 @@ pub fn _bake(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&hits.clone())); if py_truthy(&__b) { __b } else { _already_baked(&[folded.clone(), geti(&geti(&hits.clone(), &Py::Int(0)), &Py::Int(0))]) } }) {
     return Py::None;
     }
-    return geti(&geti(&pyrt::xrefs::xget("knowledge.cooking_tables", "BAKES"), &geti(&geti(&hits.clone(), &Py::Int(0)), &Py::Int(1))), &Py::Int(1));
+    return geti(&geti(&g_BAKES(), &geti(&geti(&hits.clone(), &Py::Int(0)), &Py::Int(1))), &Py::Int(1));
     Py::None
 }
 pub fn _non_stick_pan(args: &[Py]) -> Py {
@@ -13699,7 +13699,7 @@ pub fn _oil_smoking(args: &[Py]) -> Py {
     return py_str("");
     }
     if py_truthy(&_says(&[text.clone(), py_tuple(vec![py_str("smoke point"), py_str("smoking point"), py_str("smokes at"), py_str("smoke at"), py_str("smoke too")])])) {
-    return op_add(&op_add(&py_str("Every fat has a smoke point: "), &mcall(&py_str("; "), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_OIL_SMOKE_POINTS()) { let __unpk2787 = py_unpack(&__item.clone(), 2, None); let mut name: Py = __unpk2787[0].clone(); let mut temp: Py = __unpk2787[1].clone(); __out.push({ let mut __s = String::new(); __s.push_str(&fstr(&name.clone(), -1, "")); __s.push_str(" "); __s.push_str(&fstr(&temp.clone(), -1, "")); py_string(__s) }); } py_list(__out) })() }])), &py_str(". Above that it is breaking down, so keep the pan under it - a thermometer takes the guesswork out, and a drop of the oil in a cold pan, brought up slowly, tells you when it is ready."));
+    return op_add(&op_add(&py_str("Every fat has a smoke point: "), &mcall(&py_str("; "), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_OIL_SMOKE_POINTS()) { let __unpk8335 = py_unpack(&__item.clone(), 2, None); let mut name: Py = __unpk8335[0].clone(); let mut temp: Py = __unpk8335[1].clone(); __out.push({ let mut __s = String::new(); __s.push_str(&fstr(&name.clone(), -1, "")); __s.push_str(" "); __s.push_str(&fstr(&temp.clone(), -1, "")); py_string(__s) }); } py_list(__out) })() }])), &py_str(". Above that it is breaking down, so keep the pan under it - a thermometer takes the guesswork out, and a drop of the oil in a cold pan, brought up slowly, tells you when it is ready."));
     }
     if py_truthy(&_says(&[text.clone(), py_tuple(vec![py_str("in the water"), py_str("pasta water"), py_str("rice water"), py_str("boiling water"), py_str("the water for"), py_str("water for the pasta"), py_str("water for the rice"), py_str("in the pot of water"), py_str("into the water"), py_str("salt water"), py_str("salted water"), py_str("the pasta water")])])) {
     return py_str("");
@@ -13711,7 +13711,7 @@ pub fn _oil_smoking(args: &[Py]) -> Py {
     return py_str("");
     }
     if py_truthy(&_says(&[text.clone(), py_tuple(vec![py_str("how hot"), py_str("hot enough"), py_str("what temperature"), py_str("temperature for"), py_str("hot should"), py_str("heat of the oil"), py_str("temperature does"), py_str("is hot"), py_str("is ready"), py_str("pan heat"), py_str("the heat"), py_str("test the heat"), py_str("check the heat"), py_str("hot oil"), py_str("oil is hot"), py_str("oil is ready"), py_str("fat is hot"), py_str("fat is ready"), py_str("heat the pan"), py_str("heating the pan"), py_str("heat the oil"), py_str("heating the oil")])])) {
-    return op_add(&op_add(&py_str("Around 180C for most frying, 170C for chips so they cook through before they colour; with no thermometer a cube of day-old bread turns golden in about 30 seconds. Heat the oil with nothing in it and fry in small batches so it does not drop. Stay under the fat's smoke point: "), &mcall(&py_str("; "), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&op_add(&slice_or_raise(&g_OIL_SMOKE_POINTS(), &Py::None, &Py::Int(1), &Py::None), &slice_or_raise(&g_OIL_SMOKE_POINTS(), &Py::Int(2), &Py::Int(4), &Py::None))) { let __unpk1521 = py_unpack(&__item.clone(), 2, None); let mut name: Py = __unpk1521[0].clone(); let mut temp: Py = __unpk1521[1].clone(); __out.push({ let mut __s = String::new(); __s.push_str(&fstr(&name.clone(), -1, "")); __s.push_str(" "); __s.push_str(&fstr(&temp.clone(), -1, "")); py_string(__s) }); } py_list(__out) })() }])), &py_str("."));
+    return op_add(&op_add(&py_str("Around 180C for most frying, 170C for chips so they cook through before they colour; with no thermometer a cube of day-old bread turns golden in about 30 seconds. Heat the oil with nothing in it and fry in small batches so it does not drop. Stay under the fat's smoke point: "), &mcall(&py_str("; "), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&op_add(&slice_or_raise(&g_OIL_SMOKE_POINTS(), &Py::None, &Py::Int(1), &Py::None), &slice_or_raise(&g_OIL_SMOKE_POINTS(), &Py::Int(2), &Py::Int(4), &Py::None))) { let __unpk4384 = py_unpack(&__item.clone(), 2, None); let mut name: Py = __unpk4384[0].clone(); let mut temp: Py = __unpk4384[1].clone(); __out.push({ let mut __s = String::new(); __s.push_str(&fstr(&name.clone(), -1, "")); __s.push_str(" "); __s.push_str(&fstr(&temp.clone(), -1, "")); py_string(__s) }); } py_list(__out) })() }])), &py_str("."));
     }
     _fat_named = _says(&[text.clone(), py_tuple(vec![py_str("oil"), py_str("fat"), py_str("dripping"), py_str("lard"), py_str("ghee"), py_str("grease"), py_str("butter")])]);
     if py_truthy(&{ let __b = _fat_named.clone(); if !py_truthy(&__b) { __b } else { _says(&[text.clone(), py_tuple(vec![py_str("down the sink"), py_str("down the drain"), py_str("down the toilet"), py_str("down the loo"), py_str("down the plug hole"), py_str("down the plughole")])]) } }) {
@@ -13944,7 +13944,7 @@ pub fn _bake_follow(args: &[Py]) -> Py {
     let __iter2 = py_iter_or_raise(&op_add(&py_list(vec![line.clone()]), &bakes.clone()));
     for __item in __iter2 {
     said = __item.clone();
-    let __iter3 = py_iter_or_raise(&pyrt::xrefs::xget("knowledge.bake_faults", "_BAKE_FAULT_FAMILIES"));
+    let __iter3 = py_iter_or_raise(&g__BAKE_FAULT_FAMILIES());
     for __item in __iter3 {
     candidate = __item.clone();
     if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&geti(&candidate.clone(), &Py::Int(0))) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&said.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
@@ -14022,7 +14022,7 @@ pub fn _already_cooked_is_the_question(args: &[Py]) -> Py {
     let mut word: Py = Py::None;
     let _ = py_str("True when the line is about a food that is cooked already, or asks nothing about cooking.");
     text = mcall(&py_str(" "), "join", &[mcall(&mcall(&call_builtin("str", &[{ let __b = mcall(&{ let __b = understood.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]), "split", &[])]);
-    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("knowledge.keeping_cooked", "COOKED_KEEP_ASK")) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&text.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_COOKED_KEEP_ASK()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&text.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     return Py::Bool(true);
     }
     return Py::Bool(!py_truthy(&mcall(&g_COOKING_VERBS(), "search", &[text.clone()])));
@@ -14098,7 +14098,7 @@ pub fn _leftover_meal_reply(args: &[Py]) -> Py {
     return geti(&g_LEFTOVER_IDEAS(), &named.clone());
     }
     if py_truthy(&named.clone()) {
-    idea = if py_truthy(&call_builtin("isinstance", &[mcall(&pyrt::xrefs::xget("knowledge.cooking_tables", "PANTRY"), "get", &[named.clone()]), py_func("tuple", |args: &[Py]| call_builtin("tuple", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) { geti(&mcall(&pyrt::xrefs::xget("knowledge.cooking_tables", "PANTRY"), "get", &[named.clone(), py_tuple(vec![Py::None, py_str("")])]), &Py::Int(1)) } else { py_str("") };
+    idea = if py_truthy(&call_builtin("isinstance", &[mcall(&g_PANTRY(), "get", &[named.clone()]), py_func("tuple", |args: &[Py]| call_builtin("tuple", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) { geti(&mcall(&g_PANTRY(), "get", &[named.clone(), py_tuple(vec![Py::None, py_str("")])]), &Py::Int(1)) } else { py_str("") };
     if py_truthy(&Py::Bool(!py_truthy(&mcall(&meals.clone(), "idea_is_a_dish", &[idea.clone()])))) {
     said = mcall(&meals.clone(), "use_it_up", &[named.clone()]);
     if py_truthy(&said.clone()) {
@@ -14229,19 +14229,19 @@ pub fn _fold_meal_ideas(args: &[Py]) -> Py {
     let mut word: Py = Py::None;
     let _ = py_str("Fold the older meal-ideas list into PANTRY, so one table answers every way of asking.\n\n    The list at the top of the file and the pantry below hold the same knowledge kept twice: an\n    ingredient's fuller idea there, a shorter one here, so the same ingredient was answered one\n    way by a pair (\"eggs and spinach\") and another by a single name (\"what can I make with\n    eggs\"), and an ingredient in neither table fell through to \"I don't know\" (\"got some turkey\n    mince in\"). Each row joins the pantry row that already answers for it and adds any name the\n    pantry did not have; a name that is nobody's yet becomes a row of its own. A name another\n    row already answers for is left where it is, so \"salmon\" stays salmon and never becomes fish.\n    ");
     vague = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_VAGUE()) { let mut word: Py = __item.clone(); __out.push(_fold(&[word.clone()])); } py_set(__out) })() };
-    let __iter1 = py_iter_or_raise(&call_builtin("list", &[pyrt::xrefs::xget("knowledge.cooking_tables", "PANTRY")]).unwrap_or_else(|e| exc::raise(e)));
+    let __iter1 = py_iter_or_raise(&call_builtin("list", &[g_PANTRY()]).unwrap_or_else(|e| exc::raise(e)));
     for __item in __iter1 {
     name = __item.clone();
-    let __unpk2 = py_unpack(&geti(&pyrt::xrefs::xget("knowledge.cooking_tables", "PANTRY"), &name.clone()), 2, None);
+    let __unpk2 = py_unpack(&geti(&g_PANTRY(), &name.clone()), 2, None);
     aliases = __unpk2[0].clone();
     idea = __unpk2[1].clone();
     kept = call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&aliases.clone()) { let mut alias: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&vague.clone(), &_fold(&[alias.clone()])))) {  __out.push(alias.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&{ let __b = kept.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(!py_eq(&kept.clone(), &call_builtin("tuple", &[aliases.clone()]).unwrap_or_else(|e| exc::raise(e)))) } }) {
-    let _ = py_setitem(&pyrt::xrefs::xget("knowledge.cooking_tables", "PANTRY"), &name.clone(), py_tuple(vec![kept.clone(), idea.clone()]));
+    let _ = py_setitem(&g_PANTRY(), &name.clone(), py_tuple(vec![kept.clone(), idea.clone()]));
     }
     }
     claimed = py_dict(vec![]);
-    let __iter3 = py_iter_or_raise(&mcall(&pyrt::xrefs::xget("knowledge.cooking_tables", "PANTRY"), "items", &[]));
+    let __iter3 = py_iter_or_raise(&mcall(&g_PANTRY(), "items", &[]));
     for __item in __iter3 {
     let __unpk4 = py_unpack(&__item.clone(), 2, None);
     name = __unpk4[0].clone();
@@ -14255,7 +14255,7 @@ pub fn _fold_meal_ideas(args: &[Py]) -> Py {
     let _ = mcall(&claimed.clone(), "setdefault", &[_fold(&[alias.clone()]), name.clone()]);
     }
     }
-    let __iter7 = py_iter_or_raise(&pyrt::xrefs::xget("knowledge.cooking_tables", "MEAL_IDEAS"));
+    let __iter7 = py_iter_or_raise(&g_MEAL_IDEAS());
     for __item in __iter7 {
     let __unpk8 = py_unpack(&__item.clone(), 2, None);
     names = __unpk8[0].clone();
@@ -14263,7 +14263,7 @@ pub fn _fold_meal_ideas(args: &[Py]) -> Py {
     group = call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&names.clone()) { let mut name: Py = __item.clone(); if py_truthy(&Py::Bool(py_contains(&vague.clone(), &_fold(&[name.clone()])))) {  __out.push(name.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     solid = call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&names.clone()) { let mut name: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&vague.clone(), &_fold(&[name.clone()])))) {  __out.push(name.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&{ let __b = group.clone(); if !py_truthy(&__b) { __b } else { call_builtin("all", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&solid.clone()) { let mut name: Py = __item.clone(); __out.push(Py::Bool(py_contains(&claimed.clone(), &_fold(&[name.clone()])))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }) {
-    let _ = mcall(&pyrt::xrefs::xget("knowledge.cooking_tables", "PANTRY"), "setdefault", &[_fold(&[geti(&group.clone(), &Py::Int(0))]), py_tuple(vec![group.clone(), idea.clone()])]);
+    let _ = mcall(&g_PANTRY(), "setdefault", &[_fold(&[geti(&group.clone(), &Py::Int(0))]), py_tuple(vec![group.clone(), idea.clone()])]);
     let __iter9 = py_iter_or_raise(&names.clone());
     for __item in __iter9 {
     name = __item.clone();
@@ -14284,13 +14284,13 @@ pub fn _fold_meal_ideas(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(py_is(&key.clone(), &Py::None))) {
     key = _fold(&[geti(&names.clone(), &Py::Int(0))]);
     alone = call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&names.clone()) { let mut name: Py = __item.clone(); if py_truthy(&{ let __b = Py::Bool(!py_contains(&claimed.clone(), &_fold(&[name.clone()]))); if py_truthy(&__b) { __b } else { Py::Bool(py_eq(&name.clone(), &geti(&names.clone(), &Py::Int(0)))) } }) {  __out.push(name.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
-    let _ = py_setitem(&pyrt::xrefs::xget("knowledge.cooking_tables", "PANTRY"), &key.clone(), py_tuple(vec![alone.clone(), idea.clone()]));
+    let _ = py_setitem(&g_PANTRY(), &key.clone(), py_tuple(vec![alone.clone(), idea.clone()]));
     } else {
-    let __unpk11 = py_unpack(&geti(&pyrt::xrefs::xget("knowledge.cooking_tables", "PANTRY"), &key.clone()), 2, None);
+    let __unpk11 = py_unpack(&geti(&g_PANTRY(), &key.clone()), 2, None);
     aliases = __unpk11[0].clone();
     short = __unpk11[1].clone();
     extra = call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&names.clone()) { let mut name: Py = __item.clone(); if py_truthy(&{ let __b = Py::Bool(!py_contains(&claimed.clone(), &_fold(&[name.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&vague.clone(), &_fold(&[name.clone()]))) } }) {  __out.push(name.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
-    let _ = py_setitem(&pyrt::xrefs::xget("knowledge.cooking_tables", "PANTRY"), &key.clone(), py_tuple(vec![op_add(&call_builtin("tuple", &[aliases.clone()]).unwrap_or_else(|e| exc::raise(e)), &extra.clone()), short.clone()]));
+    let _ = py_setitem(&g_PANTRY(), &key.clone(), py_tuple(vec![op_add(&call_builtin("tuple", &[aliases.clone()]).unwrap_or_else(|e| exc::raise(e)), &extra.clone()), short.clone()]));
     }
     let __iter12 = py_iter_or_raise(&names.clone());
     for __item in __iter12 {
@@ -14434,7 +14434,7 @@ pub fn _form_swap(args: &[Py]) -> Py {
     form = _form_word(&[folded.clone(), start.clone(), span.clone()]);
     if py_truthy(&{ let __b = form.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_is(&first.clone(), &Py::None)) } }) {
     first = py_tuple(vec![start.clone(), span.clone(), form.clone(), mcall(&g__ALIAS_TEXT(), "get", &[parts.clone(), mcall(&py_str(" "), "join", &[parts.clone()])]), name.clone()]);
-    head = call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_FORMS()) { let __unpk6052 = py_unpack(&__item.clone(), 2, None); let mut one: Py = __unpk6052[0].clone(); let mut names: Py = __unpk6052[1].clone(); if py_truthy(&Py::Bool(py_eq(&one.clone(), &form.clone()))) {  __out.push(names.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    head = call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_FORMS()) { let __unpk9181 = py_unpack(&__item.clone(), 2, None); let mut one: Py = __unpk9181[0].clone(); let mut names: Py = __unpk9181[1].clone(); if py_truthy(&Py::Bool(py_eq(&one.clone(), &form.clone()))) {  __out.push(names.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     }
     break;
     }
@@ -14761,7 +14761,7 @@ pub fn diet_exclusions(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&classes.clone()))) {
     return py_list(vec![]);
     }
-    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_FOOD_CLASSES(), "items", &[])) { let __unpk104 = py_unpack(&__item.clone(), 2, None); let mut name: Py = __unpk104[0].clone(); let mut kinds: Py = __unpk104[1].clone(); if py_truthy(&mcall(&classes.clone(), "intersection", &[kinds.clone()])) {  __out.push(name.clone()); } } py_list(__out) })() };
+    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_FOOD_CLASSES(), "items", &[])) { let __unpk8479 = py_unpack(&__item.clone(), 2, None); let mut name: Py = __unpk8479[0].clone(); let mut kinds: Py = __unpk8479[1].clone(); if py_truthy(&mcall(&classes.clone(), "intersection", &[kinds.clone()])) {  __out.push(name.clone()); } } py_list(__out) })() };
     Py::None
 }
 pub fn _is_food_list(args: &[Py]) -> Py {
@@ -15271,7 +15271,7 @@ pub fn _dishes_without(args: &[Py]) -> Py {
     let _ = py_str("The whole meals that have none of the foods in `banned`, the biggest first.");
     banned = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&banned.clone()) { let mut name: Py = __item.clone(); __out.push(call_builtin("str", &[name.clone()]).unwrap_or_else(|e| exc::raise(e))); } py_set(__out) })() };
     found = py_list(vec![]);
-    let __iter1 = py_iter_or_raise(&pyrt::xrefs::xget("knowledge.cooking_tables", "DISHES"));
+    let __iter1 = py_iter_or_raise(&g_DISHES());
     for __item in __iter1 {
     dish = __item.clone();
     uses = call_builtin("tuple", &[{ let __b = mcall(&dish.clone(), "get", &[py_str("uses")]); if py_truthy(&__b) { __b } else { py_tuple(vec![]) } }]).unwrap_or_else(|e| exc::raise(e));
@@ -15325,7 +15325,7 @@ pub fn _best_dish(args: &[Py]) -> Py {
     best = __unpk1[0].clone();
     best_uses = __unpk1[1].clone();
     trimmed = Py::None;
-    let __iter2 = py_iter_or_raise(&pyrt::xrefs::xget("knowledge.cooking_tables", "DISHES"));
+    let __iter2 = py_iter_or_raise(&g_DISHES());
     for __item in __iter2 {
     candidate = __item.clone();
     uses = geti(&candidate.clone(), &py_str("uses"));
@@ -15492,7 +15492,7 @@ pub fn _any_food_text(args: &[Py]) -> Py {
     let mut names: Py = Py::None;
     let _ = py_str("Every name the pantry answers to, longest first, as one alternation for the \"or\" test.");
     if py_truthy(&Py::Bool(py_is(&g__ANY_FOOD_TEXT(), &Py::None))) {
-    names = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&pyrt::xrefs::xget("knowledge.cooking_tables", "PANTRY"), "values", &[])) { let __unpk3558 = py_unpack(&__item.clone(), 2, None); let mut aliases: Py = __unpk3558[0].clone(); let mut _idea: Py = __unpk3558[1].clone(); for __item in py_iter_or_raise(&aliases.clone()) { let mut alias: Py = __item.clone(); __out.push(_fold(&[call_builtin("str", &[alias.clone()]).unwrap_or_else(|e| exc::raise(e))])); } } py_set(__out) })() }); __kws.extend(vec![("key".to_string(), py_func("len", |args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e)))), ("reverse".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sorted", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
+    names = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_PANTRY(), "values", &[])) { let __unpk9699 = py_unpack(&__item.clone(), 2, None); let mut aliases: Py = __unpk9699[0].clone(); let mut _idea: Py = __unpk9699[1].clone(); for __item in py_iter_or_raise(&aliases.clone()) { let mut alias: Py = __item.clone(); __out.push(_fold(&[call_builtin("str", &[alias.clone()]).unwrap_or_else(|e| exc::raise(e))])); } } py_set(__out) })() }); __kws.extend(vec![("key".to_string(), py_func("len", |args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e)))), ("reverse".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sorted", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
     s__ANY_FOOD_TEXT(mcall(&py_str("|"), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&names.clone()) { let mut name: Py = __item.clone(); if py_truthy(&name.clone()) {  __out.push(stdlib_call("re", "escape", &[name.clone()]).unwrap_or_else(|e| exc::raise(e))); } } py_list(__out) })() }]));
     }
     return g__ANY_FOOD_TEXT();
@@ -15830,7 +15830,7 @@ pub fn meal(args: &[Py]) -> Py {
     let __iter6 = py_iter_or_raise(&found.clone());
     for __item in __iter6 {
     name = __item.clone();
-    row = mcall(&pyrt::xrefs::xget("knowledge.cooking_tables", "PANTRY"), "get", &[name.clone()]);
+    row = mcall(&g_PANTRY(), "get", &[name.clone()]);
     idea = if py_truthy(&row.clone()) { geti(&row.clone(), &Py::Int(1)) } else { py_str("") };
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&idea.clone())); if py_truthy(&__b) { __b } else { { let __b = _mentions(&[idea.clone(), missing.clone()]); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&avoid.clone(), &idea.clone())) } } } }) {
     continue;
@@ -15868,7 +15868,7 @@ pub fn meal(args: &[Py]) -> Py {
     if py_truthy(&_a_choice_of_foods(&[clean.clone()])) {
     return Py::None;
     }
-    ideas = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&slice_or_raise(&found.clone(), &Py::None, &Py::Int(2), &Py::None)) { let mut name: Py = __item.clone(); if py_truthy(&{ let __b = Py::Bool(!py_truthy(&_mentions(&[geti(&geti(&pyrt::xrefs::xget("knowledge.cooking_tables", "PANTRY"), &name.clone()), &Py::Int(1)), missing.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&avoid.clone(), &geti(&geti(&pyrt::xrefs::xget("knowledge.cooking_tables", "PANTRY"), &name.clone()), &Py::Int(1)))) } }) {  __out.push(geti(&geti(&pyrt::xrefs::xget("knowledge.cooking_tables", "PANTRY"), &name.clone()), &Py::Int(1))); } } py_list(__out) })() };
+    ideas = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&slice_or_raise(&found.clone(), &Py::None, &Py::Int(2), &Py::None)) { let mut name: Py = __item.clone(); if py_truthy(&{ let __b = Py::Bool(!py_truthy(&_mentions(&[geti(&geti(&g_PANTRY(), &name.clone()), &Py::Int(1)), missing.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&avoid.clone(), &geti(&geti(&g_PANTRY(), &name.clone()), &Py::Int(1)))) } }) {  __out.push(geti(&geti(&g_PANTRY(), &name.clone()), &Py::Int(1))); } } py_list(__out) })() };
     if py_truthy(&Py::Bool(!py_truthy(&ideas.clone()))) {
     ideas = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&slice_or_raise(&found.clone(), &Py::None, &Py::Int(2), &Py::None)) { let mut name: Py = __item.clone(); if py_truthy(&{ let __b = Py::Bool(py_contains(&g_WITHOUT(), &name.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&_mentions(&[geti(&g_WITHOUT(), &name.clone()), missing.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&avoid.clone(), &geti(&g_WITHOUT(), &name.clone()))) } } } }) {  __out.push(geti(&g_WITHOUT(), &name.clone())); } } py_list(__out) })() };
     }
@@ -15894,11 +15894,11 @@ pub fn _meal_texts(args: &[Py]) -> Py {
     let mut text: Py = Py::None;
     let mut texts: Py = Py::None;
     let _ = py_str("Every whole-meal answer this table can give, so a follow-up can tell one from an entry.");
-    texts = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("knowledge.cooking_tables", "DISHES")) { let mut dish: Py = __item.clone(); if py_truthy(&mcall(&dish.clone(), "get", &[py_str("text")])) {  __out.push(geti(&dish.clone(), &py_str("text"))); } } py_list(__out) })() };
-    let __iter1 = py_iter_or_raise(&pyrt::xrefs::xget("knowledge.cooking_tables", "PANTRY"));
+    texts = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_DISHES()) { let mut dish: Py = __item.clone(); if py_truthy(&mcall(&dish.clone(), "get", &[py_str("text")])) {  __out.push(geti(&dish.clone(), &py_str("text"))); } } py_list(__out) })() };
+    let __iter1 = py_iter_or_raise(&g_PANTRY());
     for __item in __iter1 {
     name = __item.clone();
-    let _ = mcall(&texts.clone(), "extend", &[py_list(vec![geti(&geti(&pyrt::xrefs::xget("knowledge.cooking_tables", "PANTRY"), &name.clone()), &Py::Int(1)), mcall(&g_LEFTOVER_IDEAS(), "get", &[name.clone(), py_str("")]), mcall(&g_WITHOUT(), "get", &[name.clone(), py_str("")])])]);
+    let _ = mcall(&texts.clone(), "extend", &[py_list(vec![geti(&geti(&g_PANTRY(), &name.clone()), &Py::Int(1)), mcall(&g_LEFTOVER_IDEAS(), "get", &[name.clone(), py_str("")]), mcall(&g_WITHOUT(), "get", &[name.clone(), py_str("")])])]);
     }
     let _ = mcall(&texts.clone(), "extend", &[{ let mut __v: Vec<Py> = Vec::new(); __v.push(g_EMPTY_KITCHEN()); __v.extend(py_iter_or_raise(&g_EMPTY_ASK_PHRASES())); py_list(__v) }]);
     return call_builtin("frozenset", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&texts.clone()) { let mut text: Py = __item.clone(); if py_truthy(&text.clone()) {  __out.push(mcall(&text.clone(), "strip", &[])); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
@@ -16358,7 +16358,7 @@ pub fn names_a_dish(args: &[Py]) -> Py {
     words = mcall(&call_builtin("str", &[{ let __b = mcall(&understood.clone(), "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "split", &[]);
     }
     folded = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); if py_truthy(&mcall(&call_builtin("str", &[word.clone()]).unwrap_or_else(|e| exc::raise(e)), "strip", &[])) {  __out.push(_fold(&[word.clone()])); } } py_list(__out) })() };
-    let __iter1 = py_iter_or_raise(&pyrt::xrefs::xget("knowledge.cooking_tables", "RECIPES"));
+    let __iter1 = py_iter_or_raise(&g_RECIPES());
     for __item in __iter1 {
     let __unpk2 = py_unpack(&__item.clone(), 4, None);
     aliases = __unpk2[0].clone();

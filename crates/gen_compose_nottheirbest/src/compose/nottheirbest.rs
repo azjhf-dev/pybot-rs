@@ -154,7 +154,7 @@ pub fn answer_for(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&_may_replace(&[reply.clone()])))) {
     return Py::None;
     }
-    return pyrt::xrefs::xcall("compose", "pick", &[pyrt::xrefs::xget("compose.fallback_data", "BAD_STRETCH_REPLIES"), if py_truthy(&call_builtin("isinstance", &[memory.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) { memory.clone() } else { py_dict(vec![]) }, text.clone()]);
+    return pyrt::xrefs::xcall("compose", "pick", &[g_BAD_STRETCH_REPLIES(), if py_truthy(&call_builtin("isinstance", &[memory.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) { memory.clone() } else { py_dict(vec![]) }, text.clone()]);
     Py::None
 }
 pub fn module_obj() -> Py {

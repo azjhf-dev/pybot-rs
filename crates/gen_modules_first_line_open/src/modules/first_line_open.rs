@@ -105,11 +105,11 @@ pub fn respond(args: &[Py]) -> Py {
     }
     if let Some(__e) = __unhandled4 { exc::raise(__e); }
     if py_truthy(&__ret2) { return __val3; }
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&reply.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback_data", "A_RECEIPT_OF_NOTHING"), "search", &[call_builtin("str", &[reply.clone()]).unwrap_or_else(|e| exc::raise(e))]))) } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&reply.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_A_RECEIPT_OF_NOTHING(), "search", &[call_builtin("str", &[reply.clone()]).unwrap_or_else(|e| exc::raise(e))]))) } }) {
     return Py::None;
     }
     clean = mcall(&py_str(" "), "join", &[mcall(&call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "split", &[])]);
-    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[pyrt::xrefs::xget("compose.fallback_data", "COLD_OPEN"), memory.clone(), clean.clone()]);
+    return py_call(&pyrt::xrefs::xget("compose.fallback", "_choose"), &[g_COLD_OPEN(), memory.clone(), clean.clone()]);
     Py::None
 }
 pub fn module_obj() -> Py {

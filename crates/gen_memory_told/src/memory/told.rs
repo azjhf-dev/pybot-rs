@@ -1354,7 +1354,7 @@ pub fn _the_words_of_the_kind(args: &[Py]) -> Py {
     return call_builtin("set", &[]).unwrap_or_else(|e| exc::raise(e));
     }
     kind = mcall(&kinds.clone(), "pop", &[]);
-    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_A_KIND(), "items", &[])) { let __unpk114 = py_unpack(&__item.clone(), 2, None); let mut word: Py = __unpk114[0].clone(); let mut key: Py = __unpk114[1].clone(); if py_truthy(&Py::Bool(py_eq(&key.clone(), &kind.clone()))) {  __out.push(word.clone()); } } py_set(__out) })() };
+    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_A_KIND(), "items", &[])) { let __unpk6241 = py_unpack(&__item.clone(), 2, None); let mut word: Py = __unpk6241[0].clone(); let mut key: Py = __unpk6241[1].clone(); if py_truthy(&Py::Bool(py_eq(&key.clone(), &kind.clone()))) {  __out.push(word.clone()); } } py_set(__out) })() };
     Py::None
 }
 pub fn _yours(args: &[Py]) -> Py {

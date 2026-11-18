@@ -672,7 +672,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.units.PIECE_GRAMS"); }
     s_PIECE_GRAMS(__data6());
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.units._WHOLE_PIECE"); }
-    s__WHOLE_PIECE(call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_PIECE_GRAMS()) { let __unpk3041 = py_unpack(&__item.clone(), 2, None); let mut name: Py = __unpk3041[0].clone(); let mut _grams: Py = __unpk3041[1].clone(); if py_truthy(&Py::Bool(py_contains(&name.clone(), &py_str(" of ")))) {  __out.push(name.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
+    s__WHOLE_PIECE(call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_PIECE_GRAMS()) { let __unpk9020 = py_unpack(&__item.clone(), 2, None); let mut name: Py = __unpk9020[0].clone(); let mut _grams: Py = __unpk9020[1].clone(); if py_truthy(&Py::Bool(py_contains(&name.clone(), &py_str(" of ")))) {  __out.push(name.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.units._DISH_AFTER"); }
     s__DISH_AFTER(stdlib_call("re", "compile", &[py_str("\\s+(?:pie|pies|bread|soup|soups|sandwich|sandwiches|curry|curries|salad|salads|sauce|sauces|cake|cakes|tart|tarts|crumble|smoothie|smoothies|juice|juices|jam|chutney|toast|stew|stews|casserole|risotto|pizza|pizzas|burger|burgers|wrap|wraps|muffin|muffins|pancake|pancakes|batter|filling|topping|chips|mash|puree|dip|dressing|mayo|stock|broth|crisps|pickle|relish|ketchup|crust|pastry|dough|flour|powder|extract|oil|wine|cordial|squash|tea|coffee|milkshake|yoghurt|yogurt)\\b")]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.units._MEASURE_AFTER_PIECE"); }
@@ -956,7 +956,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.units._WHOLE_WEIGHT"); }
     s__WHOLE_WEIGHT(stdlib_call("re", "compile", &[py_str("\\b(\\d+(?:\\.\\d+)?)\\s*(kg|kilo|kilos|kilogram|kilograms)\\b")]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.units._PLURAL_BIRDS"); }
-    s__PLURAL_BIRDS(mcall(&py_str("|"), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_WHOLE_THING_SERVES()) { let __unpk9821 = py_unpack(&__item.clone(), 2, None); let mut names: Py = __unpk9821[0].clone(); for __item in py_iter_or_raise(&names.clone()) { let mut name: Py = __item.clone(); if py_truthy(&mcall(&name.clone(), "endswith", &[py_str("s")])) {  __out.push(name.clone()); } } } py_list(__out) })() }]));
+    s__PLURAL_BIRDS(mcall(&py_str("|"), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_WHOLE_THING_SERVES()) { let __unpk6202 = py_unpack(&__item.clone(), 2, Some(1)); let mut names: Py = __unpk6202[0].clone(); for __item in py_iter_or_raise(&names.clone()) { let mut name: Py = __item.clone(); if py_truthy(&mcall(&name.clone(), "endswith", &[py_str("s")])) {  __out.push(name.clone()); } } } py_list(__out) })() }]));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.units._PEOPLE_WORD_TO_TWENTY"); }
     s__PEOPLE_WORD_TO_TWENTY(py_dict(vec![(Py::Int(13), py_str("thirteen")), (Py::Int(14), py_str("fourteen")), (Py::Int(15), py_str("fifteen")), (Py::Int(16), py_str("sixteen")), (Py::Int(17), py_str("seventeen")), (Py::Int(18), py_str("eighteen")), (Py::Int(19), py_str("nineteen")), (Py::Int(20), py_str("twenty"))]));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.units._COUNT_OF_BIRDS"); }
@@ -1861,7 +1861,7 @@ pub fn _singular(args: &[Py]) -> Py {
     swap = __unpk2[1].clone();
     if py_truthy(&{ let __b = mcall(&name.clone(), "endswith", &[ending.clone()]); if !py_truthy(&__b) { __b } else { op_gt(&call_builtin("len", &[name.clone()]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("len", &[ending.clone()]).unwrap_or_else(|e| exc::raise(e))) } }) {
     gone = op_add(&slice_or_raise(&name.clone(), &Py::None, &op_neg(&call_builtin("len", &[ending.clone()]).unwrap_or_else(|e| exc::raise(e))), &Py::None), &swap.clone());
-    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_PIECE_GRAMS()) { let __unpk7332 = py_unpack(&__item.clone(), 2, None); let mut key: Py = __unpk7332[0].clone(); let mut _g: Py = __unpk7332[1].clone(); __out.push(Py::Bool(py_contains(&py_tuple(vec![key.clone(), _plural_of(&[key.clone()])]), &gone.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_PIECE_GRAMS()) { let __unpk1724 = py_unpack(&__item.clone(), 2, None); let mut key: Py = __unpk1724[0].clone(); let mut _g: Py = __unpk1724[1].clone(); __out.push(Py::Bool(py_contains(&py_tuple(vec![key.clone(), _plural_of(&[key.clone()])]), &gone.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     return gone.clone();
     }
     }
@@ -2277,8 +2277,8 @@ pub fn _a_dish_for_a_table(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&found.clone()))) {
     return Py::None;
     }
-    each = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&found.clone()) { let __unpk8602 = py_unpack(&__item.clone(), 2, None); let mut amount: Py = __unpk8602[0].clone(); let mut noun: Py = __unpk8602[1].clone(); __out.push({ let mut __s = String::new(); __s.push_str(&fstr(&amount.clone(), -1, &"g")); __s.push_str(" g of "); __s.push_str(&fstr(&noun.clone(), -1, "")); py_string(__s) }); } py_list(__out) })() };
-    total = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&found.clone()) { let __unpk7642 = py_unpack(&__item.clone(), 2, None); let mut amount: Py = __unpk7642[0].clone(); let mut noun: Py = __unpk7642[1].clone(); __out.push({ let mut __s = String::new(); __s.push_str(&fstr(&_a_weight(&[op_mul(&amount.clone(), &people.clone())]), -1, "")); __s.push_str(" of "); __s.push_str(&fstr(&noun.clone(), -1, "")); py_string(__s) }); } py_list(__out) })() };
+    each = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&found.clone()) { let __unpk4662 = py_unpack(&__item.clone(), 2, None); let mut amount: Py = __unpk4662[0].clone(); let mut noun: Py = __unpk4662[1].clone(); __out.push({ let mut __s = String::new(); __s.push_str(&fstr(&amount.clone(), -1, &"g")); __s.push_str(" g of "); __s.push_str(&fstr(&noun.clone(), -1, "")); py_string(__s) }); } py_list(__out) })() };
+    total = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&found.clone()) { let __unpk3748 = py_unpack(&__item.clone(), 2, None); let mut amount: Py = __unpk3748[0].clone(); let mut noun: Py = __unpk3748[1].clone(); __out.push({ let mut __s = String::new(); __s.push_str(&fstr(&_a_weight(&[op_mul(&amount.clone(), &people.clone())]), -1, "")); __s.push_str(" of "); __s.push_str(&fstr(&noun.clone(), -1, "")); py_string(__s) }); } py_list(__out) })() };
     dish = _name.clone();
     if py_truthy(&Py::Bool(py_eq(&call_builtin("len", &[each.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1)))) {
     per_head = geti(&each.clone(), &Py::Int(0));
@@ -2945,7 +2945,7 @@ pub fn _land_in_pictures(args: &[Py]) -> Py {
     let mut square_metres: Py = Py::None;
     let mut table: Py = Py::None;
     let _ = py_str("A number of acres asked *whether it is big*: the size, then the nearest picture of it.");
-    table = { (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&geti(&g_UNITS(), &py_str("area"))) { let __unpk4063 = py_unpack(&__item.clone(), 3, None); let mut name: Py = __unpk4063[0].clone(); let mut _u: Py = __unpk4063[1].clone(); let mut size: Py = __unpk4063[2].clone(); __out.push((name.clone(), size.clone())); } py_dict(__out) })() };
+    table = { (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&geti(&g_UNITS(), &py_str("area"))) { let __unpk9152 = py_unpack(&__item.clone(), 3, None); let mut name: Py = __unpk9152[0].clone(); let mut _u: Py = __unpk9152[1].clone(); let mut size: Py = __unpk9152[2].clone(); __out.push((name.clone(), size.clone())); } py_dict(__out) })() };
     square_metres = op_mul(&value.clone(), &geti(&table.clone(), &unit.clone()));
     if py_truthy(&op_lt(&square_metres.clone(), &Py::Int(1))) {
     return Py::None;
@@ -3050,7 +3050,7 @@ pub fn _height(args: &[Py]) -> Py {
     let mut total: Py = Py::None;
     let mut unit: Py = Py::None;
     let _ = py_str("A height typed the way people type it: 5'6, 5ft 6, or 1.8m asked for in feet and inches.");
-    if py_truthy(&Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mentions.clone()) { let __unpk5297 = py_unpack(&__item.clone(), 4, None); let mut _u: Py = __unpk5297[0].clone(); let mut _u: Py = __unpk5297[1].clone(); let mut _u: Py = __unpk5297[2].clone(); let mut unit: Py = __unpk5297[3].clone(); __out.push(Py::Bool(py_contains(&py_tuple(vec![py_str("cm"), py_str("m")]), &unit.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))))) {
+    if py_truthy(&Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mentions.clone()) { let __unpk1355 = py_unpack(&__item.clone(), 4, None); let mut _u: Py = __unpk1355[0].clone(); let mut _u: Py = __unpk1355[1].clone(); let mut _u: Py = __unpk1355[2].clone(); let mut unit: Py = __unpk1355[3].clone(); __out.push(Py::Bool(py_contains(&py_tuple(vec![py_str("cm"), py_str("m")]), &unit.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))))) {
     return Py::None;
     }
     match_ = { let __b = stdlib_call("re", "search", &[py_str("(\\d)\\s*(?:'|’|ft|foot|feet)\\s*(\\d{1,2})\\s*(?:\\\"|''|in|inch|inches)?"), clean.clone()]).unwrap_or_else(|e| exc::raise(e)); if py_truthy(&__b) { __b } else { stdlib_call("re", "search", &[py_str("(\\d)\\s*(?:ft|foot|feet)\\s+(\\d{1,2})\\b"), clean.clone()]).unwrap_or_else(|e| exc::raise(e)) } };
@@ -3306,7 +3306,7 @@ pub fn _cup_of_something(args: &[Py]) -> Py {
     }
     text = op_add(&py_str("a "), &measure.clone());
     if py_truthy(&Py::Bool(py_contains(&py_tuple(vec![py_str("tablespoon"), py_str("teaspoon"), py_str("dessertspoon")]), &measure.clone()))) {
-    spoon = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_GRAMS_PER_TSP()) { let __unpk9003 = py_unpack(&__item.clone(), 2, None); let mut food: Py = __unpk9003[0].clone(); let mut grams: Py = __unpk9003[1].clone(); if py_truthy(&stdlib_call("re", "search", &[{ let mut __s = String::new(); __s.push_str("\\b"); __s.push_str(&fstr(&stdlib_call("re", "escape", &[food.clone()]).unwrap_or_else(|e| exc::raise(e)), -1, "")); __s.push_str("\\b"); py_string(__s) }, clean.clone()]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(py_tuple(vec![food.clone(), grams.clone()])); } } py_list(__out) })() };
+    spoon = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_GRAMS_PER_TSP()) { let __unpk8739 = py_unpack(&__item.clone(), 2, None); let mut food: Py = __unpk8739[0].clone(); let mut grams: Py = __unpk8739[1].clone(); if py_truthy(&stdlib_call("re", "search", &[{ let mut __s = String::new(); __s.push_str("\\b"); __s.push_str(&fstr(&stdlib_call("re", "escape", &[food.clone()]).unwrap_or_else(|e| exc::raise(e)), -1, "")); __s.push_str("\\b"); py_string(__s) }, clean.clone()]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(py_tuple(vec![food.clone(), grams.clone()])); } } py_list(__out) })() };
     if py_truthy(&spoon.clone()) {
     let __unpk6 = py_unpack(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(spoon.clone()); __kws.extend(vec![("key".to_string(), { let amount = amount.clone(); let clean = clean.clone(); let food = food.clone(); let grams = grams.clone(); let measure = measure.clone(); let named = named.clone(); let said = said.clone(); let share = share.clone(); let spoon = spoon.clone(); let text = text.clone(); py_func("lambda", move |args: &[Py]| { let amount = amount.clone(); let clean = clean.clone(); let food = food.clone(); let grams = grams.clone(); let measure = measure.clone(); let named = named.clone(); let said = said.clone(); let share = share.clone(); let spoon = spoon.clone(); let text = text.clone(); let row: Py = __kwp(args, 0, "row").unwrap_or(Py::None); call_builtin("len", &[geti(&row.clone(), &Py::Int(0))]).unwrap_or_else(|e| exc::raise(e)) }) })]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("max", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }, 2, None);
     food = __unpk6[0].clone();
@@ -3704,7 +3704,7 @@ pub fn _how_to_convert(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&mcall(&g__HOW_TO(), "search", &[clean.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_is_bare_pair(&[clean.clone(), mentions.clone()]))) } }) {
     return Py::None;
     }
-    if py_truthy(&{ let __b = mcall(&g__NUMBER(), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mentions.clone()) { let __unpk8525 = py_unpack(&__item.clone(), 4, None); let mut start: Py = __unpk8525[0].clone(); let mut _end: Py = __unpk8525[1].clone(); let mut _f: Py = __unpk8525[2].clone(); let mut _u: Py = __unpk8525[3].clone(); __out.push(Py::Bool(!py_is(&_number_before(&[clean.clone(), start.clone()]), &Py::None))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }) {
+    if py_truthy(&{ let __b = mcall(&g__NUMBER(), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mentions.clone()) { let __unpk5567 = py_unpack(&__item.clone(), 4, None); let mut start: Py = __unpk5567[0].clone(); let mut _end: Py = __unpk5567[1].clone(); let mut _f: Py = __unpk5567[2].clone(); let mut _u: Py = __unpk5567[3].clone(); __out.push(Py::Bool(!py_is(&_number_before(&[clean.clone(), start.clone()]), &Py::None))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }) {
     return Py::None;
     }
     let __iter1 = py_iter_or_raise(&call_builtin("enumerate", &[mentions.clone()]).unwrap_or_else(|e| exc::raise(e)));
@@ -5063,7 +5063,7 @@ pub fn _answer(args: &[Py]) -> Py {
     wanted_match = stdlib_call("re", "search", &[py_str("how (?:many|much)\\s+(?P<want>[a-z/'’ ]+?)\\s+(?:are there\\s+)?(?:in|to|into|is|as)\\s+(?P<rest>.+)$"), clean.clone()]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&wanted_match.clone()) {
     want = _named_unit(&[mcall(&wanted_match.clone(), "group", &[py_str("want")])]);
-    source = call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&measured.clone()) { let __unpk2981 = py_unpack(&__item.clone(), 4, None); let mut value: Py = __unpk2981[0].clone(); let mut family: Py = __unpk2981[1].clone(); let mut unit: Py = __unpk2981[2].clone(); let mut end: Py = __unpk2981[3].clone(); if py_truthy(&op_gt(&end.clone(), &mcall(&wanted_match.clone(), "start", &[py_str("rest")]))) {  __out.push(py_tuple(vec![value.clone(), family.clone(), unit.clone(), end.clone()])); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e));
+    source = call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&measured.clone()) { let __unpk2439 = py_unpack(&__item.clone(), 4, None); let mut value: Py = __unpk2439[0].clone(); let mut family: Py = __unpk2439[1].clone(); let mut unit: Py = __unpk2439[2].clone(); let mut end: Py = __unpk2439[3].clone(); if py_truthy(&op_gt(&end.clone(), &mcall(&wanted_match.clone(), "start", &[py_str("rest")]))) {  __out.push(py_tuple(vec![value.clone(), family.clone(), unit.clone(), end.clone()])); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&{ let __b = source.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_tail_is_about_the_measure(&[slice_or_raise(&clean.clone(), &geti(&source.clone(), &Py::Int(3)), &Py::None, &Py::None)]))) } }) {
     source = Py::None;
     }
@@ -5782,7 +5782,7 @@ pub fn _named_ingredient(args: &[Py]) -> Py {
     food_name = __unpk1[0].clone();
     grams_per_cup = __unpk1[1].clone();
     said_food = mcall(&g_AS_KITCHEN_SAYS(), "get", &[food_name.clone(), food_name.clone()]);
-    wanted = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mentions.clone()) { let __unpk3184 = py_unpack(&__item.clone(), 4, None); let mut _u: Py = __unpk3184[0].clone(); let mut _u: Py = __unpk3184[1].clone(); let mut family: Py = __unpk3184[2].clone(); let mut unit: Py = __unpk3184[3].clone(); if py_truthy(&Py::Bool(py_contains(&g__SHARE_OF_CUP(), &unit.clone()))) {  __out.push(unit.clone()); } } py_list(__out) })() };
+    wanted = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mentions.clone()) { let __unpk4477 = py_unpack(&__item.clone(), 4, None); let mut _u: Py = __unpk4477[0].clone(); let mut _u: Py = __unpk4477[1].clone(); let mut family: Py = __unpk4477[2].clone(); let mut unit: Py = __unpk4477[3].clone(); if py_truthy(&Py::Bool(py_contains(&g__SHARE_OF_CUP(), &unit.clone()))) {  __out.push(unit.clone()); } } py_list(__out) })() };
     if py_truthy(&Py::Bool(!py_truthy(&wanted.clone()))) {
     return Py::None;
     }
@@ -5797,7 +5797,7 @@ pub fn _named_ingredient(args: &[Py]) -> Py {
     grams = op_mul(&op_mul(&value.clone(), &grams_per_cup.clone()), &geti(&g__SHARE_OF_CUP(), &unit.clone()));
     source = op_add(&_amount_phrase(&[value.clone(), unit.clone()]), &{ let mut __s = String::new(); __s.push_str(" of "); __s.push_str(&fstr(&said_food.clone(), -1, "")); py_string(__s) });
     source = op_add(&mcall(&geti(&source.clone(), &Py::Int(0)), "upper", &[]), &slice_or_raise(&source.clone(), &Py::Int(1), &Py::None, &Py::None));
-    wanted_mass = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mentions.clone()) { let __unpk6304 = py_unpack(&__item.clone(), 4, None); let mut _u: Py = __unpk6304[0].clone(); let mut _u: Py = __unpk6304[1].clone(); let mut fam: Py = __unpk6304[2].clone(); let mut u: Py = __unpk6304[3].clone(); if py_truthy(&Py::Bool(py_eq(&fam.clone(), &py_str("mass")))) {  __out.push(u.clone()); } } py_list(__out) })() };
+    wanted_mass = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mentions.clone()) { let __unpk7597 = py_unpack(&__item.clone(), 4, None); let mut _u: Py = __unpk7597[0].clone(); let mut _u: Py = __unpk7597[1].clone(); let mut fam: Py = __unpk7597[2].clone(); let mut u: Py = __unpk7597[3].clone(); if py_truthy(&Py::Bool(py_eq(&fam.clone(), &py_str("mass")))) {  __out.push(u.clone()); } } py_list(__out) })() };
     if py_truthy(&Py::Bool(!py_truthy(&wanted_mass.clone()))) {
     continue;
     }

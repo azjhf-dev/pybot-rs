@@ -76,17 +76,17 @@ fn module_body() {
     s_ROUTINE_SAY_BACK(pyrt::xrefs::xget("memory.store_lines", "ROUTINE_SAY_BACK"));
     s_ROUTINE_SUBJECT(pyrt::xrefs::xget("memory.store_lines", "ROUTINE_SUBJECT"));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.times.ROUTINE_CLAIM"); }
-    s_ROUTINE_CLAIM(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&py_str("\\b"), &pyrt::xrefs::xget("memory.store_lines", "ROUTINE_SUBJECT")), &py_str("\\b(?P<mid>[a-z' ,]{1,26}?)\\b(?:at|around|about|round|by)\\s+(?P<at>")), &pyrt::xrefs::xget("memory.store_lines", "CLOCK_SAID")), &py_str(")\\b")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s_ROUTINE_CLAIM(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&py_str("\\b"), &g_ROUTINE_SUBJECT()), &py_str("\\b(?P<mid>[a-z' ,]{1,26}?)\\b(?:at|around|about|round|by)\\s+(?P<at>")), &g_CLOCK_SAID()), &py_str(")\\b")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.times.ROUTINE_SHIFT"); }
-    s_ROUTINE_SHIFT(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("\\bmy (?P<thing>shift|work|job|hours)\\s+(?P<verb>starts?|begins?|ends?|finishes?)\\s+(?:at|around|about)\\s+(?P<at>"), &pyrt::xrefs::xget("memory.store_lines", "CLOCK_SAID")), &py_str(")\\b")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s_ROUTINE_SHIFT(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("\\bmy (?P<thing>shift|work|job|hours)\\s+(?P<verb>starts?|begins?|ends?|finishes?)\\s+(?:at|around|about)\\s+(?P<at>"), &g_CLOCK_SAID()), &py_str(")\\b")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.times.ROUTINE_WORK_START"); }
     s_ROUTINE_WORK_START(stdlib_call("re", "compile", &[py_str("\\b(?:start|starts|started|starting|begin|begins|beginning|clock in|clocking in|get in|gets in|arrive|arrives)\\b")]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.times.ROUTINE_WORK_END"); }
     s_ROUTINE_WORK_END(stdlib_call("re", "compile", &[py_str("\\b(?:finish|finishes|finishing|leave|leaves|leaving|get off|getting off|clock out|clocking out|end|ends|ending)\\b")]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.times.ROUTINE_MORE"); }
-    s_ROUTINE_MORE(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("^(?:and |it |that |then )*(?P<verb>ends?|finishes?|starts?|begins?)\\s+(?:at|around|about)\\s+(?P<at>"), &pyrt::xrefs::xget("memory.store_lines", "CLOCK_SAID")), &py_str(")[\\s.!]*$")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s_ROUTINE_MORE(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("^(?:and |it |that |then )*(?P<verb>ends?|finishes?|starts?|begins?)\\s+(?:at|around|about)\\s+(?P<at>"), &g_CLOCK_SAID()), &py_str(")[\\s.!]*$")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.times.TIME_FIX"); }
-    s_TIME_FIX(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&py_str("^(?:(?:ok|okay|oh|sorry|no|nope|nah|wait|actually|rather|i mean|i meant|meant|i said|make that|make it|hmm|erm)[ ,]+)*(?:at |more like |it's |its )?(?P<at>"), &pyrt::xrefs::xget("memory.store_lines", "CLOCK_SAID")), &py_str(")(?:\\s*(?:instead|o'clock|oclock|sorry|then))*(?:\\s+not\\s+(?P<was>")), &pyrt::xrefs::xget("memory.store_lines", "CLOCK_SAID")), &py_str("))?[\\s.!?]*$")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s_TIME_FIX(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&py_str("^(?:(?:ok|okay|oh|sorry|no|nope|nah|wait|actually|rather|i mean|i meant|meant|i said|make that|make it|hmm|erm)[ ,]+)*(?:at |more like |it's |its )?(?P<at>"), &g_CLOCK_SAID()), &py_str(")(?:\\s*(?:instead|o'clock|oclock|sorry|then))*(?:\\s+not\\s+(?P<was>")), &g_CLOCK_SAID()), &py_str("))?[\\s.!?]*$")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.times.ROUTINE_ASK"); }
     s_ROUTINE_ASK(stdlib_call("re", "compile", &[py_str("^\\s*(?:and |so |ok |okay |oh |but |also |then )*(?:at what time|what time|what's the time|when)\\b(?P<rest>.*)$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.times.ROUTINE_ASK_FILLER"); }
@@ -363,7 +363,7 @@ pub fn answer(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&at.clone()))) {
     return Py::None;
     }
-    said_back = { let __b = mcall(&pyrt::xrefs::xget("memory.store_lines", "ROUTINE_SAY_BACK"), "get", &[what.clone()]); if py_truthy(&__b) { __b } else { py_str("You {what} at {at}.") } };
+    said_back = { let __b = mcall(&g_ROUTINE_SAY_BACK(), "get", &[what.clone()]); if py_truthy(&__b) { __b } else { py_str("You {what} at {at}.") } };
     return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("at".to_string(), at.clone()), ("what".to_string(), what.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&said_back.clone(), "format", args))(&__args) };
     Py::None
 }

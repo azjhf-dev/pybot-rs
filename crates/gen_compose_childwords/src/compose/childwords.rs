@@ -169,7 +169,7 @@ pub fn a_death_in_the_thread(args: &[Py]) -> Py {
     for __item in __iter1 {
     turn = __item.clone();
     said = mcall(&py_str(" "), "join", &[mcall(&mcall(&call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("user")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]), "split", &[])]);
-    if py_truthy(&{ let __b = said.clone(); if !py_truthy(&__b) { __b } else { mcall(&pyrt::xrefs::xget("compose.fallback", "A_DEATH_IN_THE_LINE"), "search", &[said.clone()]) } }) {
+    if py_truthy(&{ let __b = said.clone(); if !py_truthy(&__b) { __b } else { mcall(&g_A_DEATH_IN_THE_LINE(), "search", &[said.clone()]) } }) {
     return Py::Bool(true);
     }
     }
@@ -226,10 +226,10 @@ pub fn asks_the_words_for_a_child(args: &[Py]) -> Py {
     }
     if let Some(__e) = __unhandled4 { exc::raise(__e); }
     if py_truthy(&__ret2) { return __val3; }
-    if py_truthy(&{ let __b = mcall(&pyrt::xrefs::xget("compose.fallback", "A_SUICIDE_IN_THE_LINE"), "search", &[thread.clone()]); if py_truthy(&__b) { __b } else { mcall(&pyrt::xrefs::xget("compose.fallback", "A_SUICIDE_IN_THE_LINE"), "search", &[text.clone()]) } }) {
+    if py_truthy(&{ let __b = mcall(&g_A_SUICIDE_IN_THE_LINE(), "search", &[thread.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_A_SUICIDE_IN_THE_LINE(), "search", &[text.clone()]) } }) {
     return Py::Bool(false);
     }
-    if py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback", "A_CHILD_DIED"), "search", &[text.clone()])) {
+    if py_truthy(&mcall(&g_A_CHILD_DIED(), "search", &[text.clone()])) {
     return Py::Bool(false);
     }
     tail = _the_tail_after_the_child(&[text.clone()]);

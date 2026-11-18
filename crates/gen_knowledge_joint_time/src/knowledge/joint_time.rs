@@ -86,7 +86,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.joint_time.ANSWERS"); }
     s_ANSWERS(py_tuple(vec![py_str("cooking"), py_str("food-and-drink")]));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.joint_time._BOTH"); }
-    s__BOTH(op_add(&op_add(&pyrt::xrefs::xget("knowledge.cooking", "JOINT_BEEF"), &py_str(" ")), &pyrt::xrefs::xget("knowledge.cooking", "JOINT_PORK")));
+    s__BOTH(op_add(&op_add(&g_JOINT_BEEF(), &py_str(" ")), &g_JOINT_PORK()));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.joint_time._PORK_IN_SHORT"); }
     s__PORK_IN_SHORT(py_str("Pork is 30 minutes a 500g at 180C (160C fan) and 70C in the middle."));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.joint_time._SLOW_COOKER"); }
@@ -126,7 +126,7 @@ pub fn _joint_by_weight(args: &[Py]) -> Py {
     let _ = py_str("The timetables come from cooking.py, so the two rows cannot drift apart.");
     said = pyrt::xrefs::xcall("knowledge.cooking", "_roast_joint", &[memory.clone(), understood.clone()]);
     if py_truthy(&Py::Bool(py_eq(&said.clone(), &g__BOTH()))) {
-    return op_add(&op_add(&pyrt::xrefs::xget("knowledge.cooking", "JOINT_BEEF"), &py_str(" ")), &g__PORK_IN_SHORT());
+    return op_add(&op_add(&g_JOINT_BEEF(), &py_str(" ")), &g__PORK_IN_SHORT());
     }
     return said.clone();
     Py::None

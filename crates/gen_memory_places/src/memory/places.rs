@@ -307,7 +307,7 @@ pub fn _other_place(args: &[Py]) -> Py {
     let mut want: Py = Py::None;
     let _ = py_str("The last place the user gave for this person, said back as a line.");
     want = mcall(&mcall(&{ let __b = who.clone(); if py_truthy(&__b) { __b } else { py_str("") } }, "lower", &[]), "rstrip", &[py_str("s")]);
-    found = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&_said_places(&[memory.clone()])) { let __unpk5758 = py_unpack(&__item.clone(), 2, None); let mut said: Py = __unpk5758[0].clone(); let mut place: Py = __unpk5758[1].clone(); if py_truthy(&{ let __b = Py::Bool(!py_truthy(&want.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_eq(&mcall(&mcall(&said.clone(), "lower", &[]), "rstrip", &[py_str("s")]), &want.clone())) } }) {  __out.push(py_tuple(vec![said.clone(), place.clone()])); } } py_list(__out) })() };
+    found = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&_said_places(&[memory.clone()])) { let __unpk8940 = py_unpack(&__item.clone(), 2, None); let mut said: Py = __unpk8940[0].clone(); let mut place: Py = __unpk8940[1].clone(); if py_truthy(&{ let __b = Py::Bool(!py_truthy(&want.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_eq(&mcall(&mcall(&said.clone(), "lower", &[]), "rstrip", &[py_str("s")]), &want.clone())) } }) {  __out.push(py_tuple(vec![said.clone(), place.clone()])); } } py_list(__out) })() };
     if py_truthy(&Py::Bool(!py_truthy(&found.clone()))) {
     return Py::None;
     }
@@ -344,11 +344,11 @@ pub fn _asked_person(args: &[Py]) -> Py {
     let mut who: Py = Py::None;
     let mut word: Py = Py::None;
     let _ = py_str("Who a place ask is about, when it is about somebody other than the user.\n\n    \"where does my sister live\" names her, \"and where does she live\" leaves her to the pronoun\n    the chat has just been about, and \"where does jane live\" names her rather than her relation.\n    All three ask the same thing, so all three are read here and answered from the chat.\n    ");
-    named = stdlib_call("re", "search", &[op_add(&op_add(&op_add(&op_add(&py_str("\\b"), &pyrt::xrefs::xget("memory.store_lines", "WHERE_ASK")), &py_str(" (?:does|do) my (\\w+) (?:live|come from)\\b|\\b")), &pyrt::xrefs::xget("memory.store_lines", "WHERE_ASK")), &py_str(" is my (\\w+) (?:living|based)\\b")), low.clone()]).unwrap_or_else(|e| exc::raise(e));
+    named = stdlib_call("re", "search", &[op_add(&op_add(&op_add(&op_add(&py_str("\\b"), &g_WHERE_ASK()), &py_str(" (?:does|do) my (\\w+) (?:live|come from)\\b|\\b")), &g_WHERE_ASK()), &py_str(" is my (\\w+) (?:living|based)\\b")), low.clone()]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&named.clone()) {
     return { let __b = mcall(&named.clone(), "group", &[Py::Int(1)]); if py_truthy(&__b) { __b } else { { let __b = mcall(&named.clone(), "group", &[Py::Int(2)]); if py_truthy(&__b) { __b } else { py_str("") } } } };
     }
-    if py_truthy(&stdlib_call("re", "search", &[op_add(&op_add(&op_add(&op_add(&py_str("\\b"), &pyrt::xrefs::xget("memory.store_lines", "WHERE_ASK")), &py_str(" (?:does|do) (?:he|she|they) (?:live|come from)\\b|\\b")), &pyrt::xrefs::xget("memory.store_lines", "WHERE_ASK")), &py_str(" is (?:he|she|they) (?:living|based)\\b")), low.clone()]).unwrap_or_else(|e| exc::raise(e))) {
+    if py_truthy(&stdlib_call("re", "search", &[op_add(&op_add(&op_add(&op_add(&py_str("\\b"), &g_WHERE_ASK()), &py_str(" (?:does|do) (?:he|she|they) (?:live|come from)\\b|\\b")), &g_WHERE_ASK()), &py_str(" is (?:he|she|they) (?:living|based)\\b")), low.clone()]).unwrap_or_else(|e| exc::raise(e))) {
     person = mcall(&memory.clone(), "get", &[py_str("person")]);
     who = if py_truthy(&call_builtin("isinstance", &[person.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) { mcall(&person.clone(), "get", &[py_str("who")]) } else { py_str("") };
     if py_truthy(&who.clone()) {
@@ -357,7 +357,7 @@ pub fn _asked_person(args: &[Py]) -> Py {
     said = _said_places(&[memory.clone()]);
     return if py_truthy(&said.clone()) { mcall(&call_builtin("str", &[geti(&geti(&said.clone(), &op_neg(&Py::Int(1))), &Py::Int(0))]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]) } else { py_str("") };
     }
-    plain = stdlib_call("re", "search", &[op_add(&op_add(&py_str("\\b"), &pyrt::xrefs::xget("memory.store_lines", "WHERE_ASK")), &py_str(" (?:is|are|was|were) (?:my|our) ([a-z]+)\\b")), low.clone()]).unwrap_or_else(|e| exc::raise(e));
+    plain = stdlib_call("re", "search", &[op_add(&op_add(&py_str("\\b"), &g_WHERE_ASK()), &py_str(" (?:is|are|was|were) (?:my|our) ([a-z]+)\\b")), low.clone()]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&plain.clone()) {
     word = mcall(&mcall(&plain.clone(), "group", &[Py::Int(1)]), "lower", &[]);
     if py_truthy(&{ let __b = mcall(&word.clone(), "endswith", &[py_str("s")]); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("memory.facts", "KIN_WORDS"), &slice_or_raise(&word.clone(), &Py::None, &op_neg(&Py::Int(1)), &Py::None))) } }) {
@@ -367,7 +367,7 @@ pub fn _asked_person(args: &[Py]) -> Py {
     return word.clone();
     }
     }
-    by_name = stdlib_call("re", "search", &[op_add(&op_add(&py_str("\\b"), &pyrt::xrefs::xget("memory.store_lines", "WHERE_ASK")), &py_str(" (?:does|do) ([a-z][a-z'-]{1,}) (?:live|come from)\\b")), low.clone()]).unwrap_or_else(|e| exc::raise(e));
+    by_name = stdlib_call("re", "search", &[op_add(&op_add(&py_str("\\b"), &g_WHERE_ASK()), &py_str(" (?:does|do) ([a-z][a-z'-]{1,}) (?:live|come from)\\b")), low.clone()]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&by_name.clone()) {
     word = mcall(&mcall(&by_name.clone(), "group", &[Py::Int(1)]), "lower", &[]);
     if py_truthy(&Py::Bool(py_contains(&py_tuple(vec![py_str("he"), py_str("she"), py_str("they"), py_str("my"), py_str("your"), py_str("i"), py_str("we"), py_str("it"), py_str("the"), py_str("a")]), &word.clone()))) {

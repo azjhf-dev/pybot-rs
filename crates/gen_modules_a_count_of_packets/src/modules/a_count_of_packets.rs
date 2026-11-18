@@ -72,7 +72,7 @@ pub fn respond(args: &[Py]) -> Py {
     let _ = py_setitem(&memory.clone(), &py_str("safety_case"), py_str("poison"));
     let _ = py_setitem(&memory.clone(), &py_str("safety_safe"), Py::Bool(false));
     }
-    return pyrt::xrefs::xcall("modules.safety", "_fit", &[pyrt::xrefs::xcall("compose", "pick", &[geti(&pyrt::xrefs::xget("knowledge.crisis_replies", "REPLIES"), &py_str("poison")), memory.clone()]), text.clone(), py_str("poison")]);
+    return pyrt::xrefs::xcall("modules.safety", "_fit", &[pyrt::xrefs::xcall("compose", "pick", &[geti(&g_REPLIES(), &py_str("poison")), memory.clone()]), text.clone(), py_str("poison")]);
     Py::None
 }
 pub fn module_obj() -> Py {

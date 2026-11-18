@@ -1150,7 +1150,7 @@ fn module_body() {
     s_THE_RELATION_LINES(py_tuple(vec![py_str("That is a hard place to be. What has changed with {who}?"), py_str("Sorry to hear it. What has gone wrong with {who} lately?"), py_str("That is a heavy thing to carry. What does a bad week look like for {pair}?")]));
     fn __data18() -> Py { py_tuple(vec![py_str("it"), py_str("this"), py_str("that"), py_str("them"), py_str("they"), py_str("everything"), py_str("anything"), py_str("nothing"), py_str("myself"), py_str("me"), py_str("him"), py_str("her"), py_str("past"), py_str("life"), py_str("death"), py_str("everything"), py_str("people"), py_str("someone"), py_str("somebody"), py_str("anyone"), py_str("anybody"), py_str("childhood"), py_str("then"), py_str("before")]) }
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.remark.THOUGHT_OBJECT"); }
-    s_THOUGHT_OBJECT(op_bitor(&call_builtin("frozenset", &[__data18()]).unwrap_or_else(|e| exc::raise(e)), &pyrt::xrefs::xget("understanding.kinds", "OTHER_PEOPLE")));
+    s_THOUGHT_OBJECT(op_bitor(&call_builtin("frozenset", &[__data18()]).unwrap_or_else(|e| exc::raise(e)), &g_OTHER_PEOPLE()));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.remark.ARRANGED"); }
     s_ARRANGED(stdlib_call("re", "compile", &[py_str("\\b(?:i|we|i'?ve|we'?ve|ive|weve)\\s+(?:(?:have|had|just|finally|only|already)\\s+)*booked\\b|\\b(?:i'?m|im|we'?re|were)\\s+booking\\b|\\b(?:is|are|was|were|it's|its)\\s+(?:now\\s+|all\\s+|already\\s+|finally\\s+)?booked\\b|\\b[a-z][a-z'\\u2019-]*(?:\\s+[a-z][a-z'\\u2019-]*){0,2}\\s+booked\\s+(?:for|on|at|in|next|this|tomorrow|today|tonight|yesterday|[0-9])\\b")]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.remark.DOUBLE_BOOKED"); }
@@ -1274,7 +1274,7 @@ pub fn _the_loss_was_asked(args: &[Py]) -> Py {
     let _ = py_str("True when the bot's last reply was the loss pool asking its question.");
     turns = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let __b = mcall(&{ let __b = memory.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[py_str("turns")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }) { let mut t: Py = __item.clone(); if py_truthy(&call_builtin("isinstance", &[t.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(t.clone()); } } py_list(__out) })() };
     last = mcall(&call_builtin("str", &[{ let __b = mcall(&if py_truthy(&turns.clone()) { geti(&turns.clone(), &op_neg(&Py::Int(1))) } else { py_dict(vec![]) }, "get", &[py_str("bot")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "strip", &[]);
-    return Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "A_THING_TAKEN"), &last.clone()));
+    return Py::Bool(py_contains(&g_A_THING_TAKEN(), &last.clone()));
     Py::None
 }
 pub fn _the_answers_take_it(args: &[Py]) -> Py {
@@ -1333,7 +1333,7 @@ pub fn _missed_a_person(args: &[Py]) -> Py {
     let __iter1 = py_iter_or_raise(&mcall(&g_MISSED(), "finditer", &[clean.clone()]));
     for __item in __iter1 {
     match_ = __item.clone();
-    if py_truthy(&Py::Bool(py_contains(&pyrt::xrefs::xget("understanding.kinds", "OTHER_PEOPLE"), &mcall(&match_.clone(), "group", &[Py::Int(1)])))) {
+    if py_truthy(&Py::Bool(py_contains(&g_OTHER_PEOPLE(), &mcall(&match_.clone(), "group", &[Py::Int(1)])))) {
     return Py::Bool(true);
     }
     }
@@ -1529,7 +1529,7 @@ pub fn report_reply_for(args: &[Py]) -> Py {
     return break_in_reply_for(&[clean.clone(), words.clone(), memory.clone()]);
     }
     if py_truthy(&{ let __b = _a_thing_taken(&[clean.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_the_answers_take_it(&[clean.clone()]))) } }) {
-    return pyrt::xrefs::xcall("compose", "pick", &[pyrt::xrefs::xget("compose.fallback_data", "A_THING_TAKEN"), memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose", "pick", &[g_A_THING_TAKEN(), memory.clone(), clean.clone()]);
     }
     if py_truthy(&{ let __b = _the_loss_was_asked(&[memory.clone()]); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&op_bitand(&call_builtin("set", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &g_ASKS()))); if !py_truthy(&__b) { __b } else { mcall(&g_LOSS_FOLLOW(), "search", &[clean.clone()]) } } } }) {
     return pyrt::xrefs::xcall("compose", "pick", &[g_LOSS_FOLLOW_REPLIES(), memory.clone(), clean.clone()]);

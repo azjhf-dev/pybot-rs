@@ -8302,7 +8302,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.SORE_ONLY_A_BODY"); }
     s_SORE_ONLY_A_BODY(stdlib_call("re", "compile", &[py_str("\\b(?:squeeze|squeezing|squeezed|pop|popping|popped|lance|lancing|prick|pricking|burst|bursting|drain|draining|scratch|scratching)\\b")]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.PLASTER_ON"); }
-    s_PLASTER_ON(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&py_str("\\b(?:put |a |some )?plaster\\b[^.]{0,18}?\\bon (?:it|this|that|there|them|my \\w+)\\b|\\b(?:put |a |some )?(?:bandage|dressing|antiseptic|compress)\\b[^.]{0,18}?\\bon (?:it|this|that|there|them|my "), &pyrt::xrefs::xget("compose.fallback_data", "_WOUND")), &py_str(")\\b|\\b(?:cover|cover it|covering)[^.]{0,16}\\b(?:plaster|bandage|dressing)\\b|\\b(?:bandage|dressing|antiseptic|compress|plaster)\\b[^.]{0,6}?\\b(?:on|over) ")), &pyrt::xrefs::xget("compose.fallback_data", "_WOUND")), &py_str("\\b"))]).unwrap_or_else(|e| exc::raise(e)));
+    s_PLASTER_ON(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&py_str("\\b(?:put |a |some )?plaster\\b[^.]{0,18}?\\bon (?:it|this|that|there|them|my \\w+)\\b|\\b(?:put |a |some )?(?:bandage|dressing|antiseptic|compress)\\b[^.]{0,18}?\\bon (?:it|this|that|there|them|my "), &g__WOUND()), &py_str(")\\b|\\b(?:cover|cover it|covering)[^.]{0,16}\\b(?:plaster|bandage|dressing)\\b|\\b(?:bandage|dressing|antiseptic|compress|plaster)\\b[^.]{0,6}?\\b(?:on|over) ")), &g__WOUND()), &py_str("\\b"))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback._PAY_DEBT"); }
     s__PAY_DEBT(stdlib_call("re", "compile", &[py_str("\\bpay(?:s|ing|ed)?\\s+(?:it\\s+|them\\s+|that\\s+)?(?:off|back|down|into|up)\\b")]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback._CARD_MONEY"); }
@@ -8376,7 +8376,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.AN_A_HARM_VERB"); }
     s_AN_A_HARM_VERB(stdlib_call("re", "compile", &[py_str("\\b(?:bit|bites|bitten|scratch|scratches|scratched|sting|stings|stung|kicked|attacks?|attacked|mauled|nipped|gouged|trampled|lashed out at|went for|snapped at)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.AN_ANIMAL_WORD"); }
-    s_AN_ANIMAL_WORD(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("\\b(?:"), &mcall(&py_str("|"), "join", &[call_builtin("sorted", &[pyrt::xrefs::xget("compose.fallback_data", "ANIMALS")]).unwrap_or_else(|e| exc::raise(e))])), &py_str(")\\b")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s_AN_ANIMAL_WORD(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("\\b(?:"), &mcall(&py_str("|"), "join", &[call_builtin("sorted", &[g_ANIMALS()]).unwrap_or_else(|e| exc::raise(e))])), &py_str(")\\b")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.ASKED_ABOUT"); }
     s_ASKED_ABOUT(stdlib_call("re", "compile", &[py_str("(?:he|she|they|(?:my|our|his|her|their)\\s+(?:poor\\s+|old\\s+|little\\s+|eldest\\s+)?(?:mum|mom|mother|dad|father|son|daughter|husband|wife|partner|boyfriend|girlfriend|sister|brother|nan|nana|gran|granny|grandma|grandad|grandpa|baby|kid|kids|child|children|friend|mate|neighbour|neighbor|aunt|uncle|cousin|little one|lad|lass|boy|girl|dog|cat|puppy|kitten|pup|rabbit|hamster|horse|budgie|parrot|fish|pet))")]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.WHETHER_IT_GOES_WELL"); }
@@ -8643,7 +8643,7 @@ fn module_body() {
     for __item in __iter6 {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback._word"); }
     s__word(__item.clone());
-    let _ = mcall(&pyrt::xrefs::xget("compose.fallback_data", "SELF_GROUP"), "setdefault", &[g__word(), g__group()]);
+    let _ = mcall(&g_SELF_GROUP(), "setdefault", &[g__word(), g__group()]);
     }
     }
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.HAPPENING_NOW"); }
@@ -8681,7 +8681,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.NOT_LEAVING_ANYONE"); }
     s_NOT_LEAVING_ANYONE(stdlib_call("re", "compile", &[py_str("\\bhow\\s+(?:do|can|should|could|would|might|shall)\\s+i\\b|\\bhow\\s+to\\b|\\bwhat\\s+should\\s+i\\b|\\bany\\s+(?:tips|advice|ideas)\\b|\\bany\\s+idea\\b|\\bwhat\\s+do\\s+you\\s+think\\b|\\bwhat\\s+would\\s+you\\b|\\bmoving\\s+in\\s+with\\b|\\b(?:coming|moved|moving)\\s+(?:in|back)\\b|\\bstaying\\s+with\\s+(?:us|me)\\b|\\bstay(?:ing|s|ed)?\\s+with\\b|\\b(?:starts?|starting|started)\\s+(?:school|nursery|reception|primary|year\\s+one)\\b"), stdlib_attr("re", "IGNORECASE").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.FORGETS_AGAIN"); }
-    s_FORGETS_AGAIN(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&py_str("\\b(?:i|im|ive)\\b[^.?!]*\\b(?:keep|keeps|always|constantly|still|never remember|cant remember to|forget to)\\b[^.?!]*\\b"), &pyrt::xrefs::xget("compose.fallback_data", "FORGET_A_THING")), &py_str("|\\b(?:i|im|ive)\\s+(?:always|constantly|keep)\\s+")), &pyrt::xrefs::xget("compose.fallback_data", "FORGET_A_THING")), &py_str("|\\bi\\s+never\\s+remember\\s+(?:to\\s+\\w+|my\\b|the\\b)"))]).unwrap_or_else(|e| exc::raise(e)));
+    s_FORGETS_AGAIN(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&py_str("\\b(?:i|im|ive)\\b[^.?!]*\\b(?:keep|keeps|always|constantly|still|never remember|cant remember to|forget to)\\b[^.?!]*\\b"), &g_FORGET_A_THING()), &py_str("|\\b(?:i|im|ive)\\s+(?:always|constantly|keep)\\s+")), &g_FORGET_A_THING()), &py_str("|\\bi\\s+never\\s+remember\\s+(?:to\\s+\\w+|my\\b|the\\b)"))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.FORGET_A_DATE"); }
     s_FORGET_A_DATE(stdlib_call("re", "compile", &[py_str("\\b(?:i|im|ive|we|were)\\b[^.?!]*\\b(?:forget|forgets|forgetting|forgot|never remember|(?:keep|keeps|kept) missing|miss|misses|missing)\\b[^.?!]*\\b(?:appointments?|birthdays?|meetings?|the dentist|deadlines?|due dates?|renewals?|anniversar(?:y|ies)|plans?)\\b")]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.FORGETS_A_CLASH"); }
@@ -8701,7 +8701,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback._ILL"); }
     s__ILL(stdlib_call("re", "compile", &[py_str("\\b(?:cold|cough|coughing|flu|throat|chest|temperature|virus|sniffles?|sneez\\w*|head cold)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.SYMPTOM_LINGERS"); }
-    s_SYMPTOM_LINGERS(pyrt::xrefs::xget("compose", "LINGERED_LINE"));
+    s_SYMPTOM_LINGERS(g_LINGERED_LINE());
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback._LUMP"); }
     s__LUMP(stdlib_call("re", "compile", &[py_str("\\b(?:lumps?|growths?)\\b(?!\\s+in\\s+(?:my|your|the)\\s+throat)(?!\\s*-?\\s*sums?\\b)"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback._CAUGHT"); }
@@ -8709,7 +8709,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback._RESULT"); }
     s__RESULT(stdlib_call("re", "compile", &[py_str("\\b(?:pass|passed|passes|fail|failed|fails|results?|exam|exams|test|tests|interviews?|offers?|application|applied|audition|trial shift|probation|scan|biopsy|referral|hearing|decision|verdict|grades?|mark|marks|got (?:the|a) (?:job|place|part|role|offer|position)|get (?:the|a) (?:job|place|part|role)|got in)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback._WAITING"); }
-    s__WAITING(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&py_str("\\b(?:(?:i|we) (?:find|finds) out|find out (?:next|on|tomorrow|in|at the end)|(?:i|we) (?:hear|hearing) back|(?:i|we|im|i'm|i am|we|were|we're|we are)\\s+(?:still\\s+)?(?:havent|hasnt|haven't|hasn't|not|never)\\s+heard\\s+back|(?:i|we|im|i'm|i am)\\s+(?:still\\s+)?(?:havent|hasnt|haven't|hasn't) heard\\s+(?:back|anything|a thing|yet|from (?:the |my |our )?"), &pyrt::xrefs::xget("compose.fallback_data", "_ISSUER")), &py_str(")|(?:i|im|i'm|i am|we|were|we're|we are)\\s+(?:still\\s+)?waiting\\s+to hear|(?:i|im|i'm|i am|we|were|we're|we are)\\s+(?:still\\s+)?waiting\\s+on\\s+(?:(?:the |my |our )?(?:(?:exam |test |scan |interview |blood test )?(?:results?|outcome|decision|news|answer|reply|offer|scan|tests?|exam|interview))|(?:the |my |our )?")), &pyrt::xrefs::xget("compose.fallback_data", "_ISSUER")), &py_str(")|(?:i|we) (?:should|will|would) know|(?:i|we) (?:am|are|'m|'re) out of|out of (?:my|our) hands)\\b")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s__WAITING(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&py_str("\\b(?:(?:i|we) (?:find|finds) out|find out (?:next|on|tomorrow|in|at the end)|(?:i|we) (?:hear|hearing) back|(?:i|we|im|i'm|i am|we|were|we're|we are)\\s+(?:still\\s+)?(?:havent|hasnt|haven't|hasn't|not|never)\\s+heard\\s+back|(?:i|we|im|i'm|i am)\\s+(?:still\\s+)?(?:havent|hasnt|haven't|hasn't) heard\\s+(?:back|anything|a thing|yet|from (?:the |my |our )?"), &g__ISSUER()), &py_str(")|(?:i|im|i'm|i am|we|were|we're|we are)\\s+(?:still\\s+)?waiting\\s+to hear|(?:i|im|i'm|i am|we|were|we're|we are)\\s+(?:still\\s+)?waiting\\s+on\\s+(?:(?:the |my |our )?(?:(?:exam |test |scan |interview |blood test )?(?:results?|outcome|decision|news|answer|reply|offer|scan|tests?|exam|interview))|(?:the |my |our )?")), &g__ISSUER()), &py_str(")|(?:i|we) (?:should|will|would) know|(?:i|we) (?:am|are|'m|'re) out of|out of (?:my|our) hands)\\b")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback._DOUBT"); }
     s__DOUBT(stdlib_call("re", "compile", &[py_str("\\b(?:dont think|do not think|didnt think|not sure|unsure|no idea|dont know|do not know|may have|maybe|probably|might|hopefully)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback._GUESSED_RESULT"); }
@@ -8829,15 +8829,15 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.INVITE_WHEN"); }
     s_INVITE_WHEN(stdlib_call("re", "compile", &[py_str("^(?:when|if|whether|whenever|unless)\\b")]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.ONLY_FAR"); }
-    s_ONLY_FAR(stdlib_call("re", "compile", &[op_add(&pyrt::xrefs::xget("compose.fallback_data", "ONLY_FRONT"), &py_str("(?:(?:somewhere|something|some place|a place|a bit|a little|much|quite|really|fairly|more|less|not|too|this|that|thats|that's|which is|its|it's|is)\\s+)*(?:far|near|nearby|nearer|close|closer|local|walkable|in the area|round the corner)(?:\\s+(?:away|out|by|enough|either|though|from here|to home|from the \\w+))?$")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s_ONLY_FAR(stdlib_call("re", "compile", &[op_add(&g_ONLY_FRONT(), &py_str("(?:(?:somewhere|something|some place|a place|a bit|a little|much|quite|really|fairly|more|less|not|too|this|that|thats|that's|which is|its|it's|is)\\s+)*(?:far|near|nearby|nearer|close|closer|local|walkable|in the area|round the corner)(?:\\s+(?:away|out|by|enough|either|though|from here|to home|from the \\w+))?$")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.ONLY_PRICE"); }
-    s_ONLY_PRICE(stdlib_call("re", "compile", &[op_add(&pyrt::xrefs::xget("compose.fallback_data", "ONLY_FRONT"), &py_str("(?:(?:a bit|much|more|a little|something|somewhere|the|ones?)\\s+)*(?:cheaper|cheap|pricier|dearer|not too (?:expensive|dear|pricey|much)|budget|affordable|free|nothing (?:too )?(?:pricey|dear)|(?:under|below|less than|no more than|max|maximum|up to|about|around)\\s+[\\u00a3$\\u20ac]?\\d+\\s*(?:pounds?|quid|grand|k|thousand|dollars?|euros?)?(?:\\s*(?:or so|ish|max|tops))?|[\\u00a3$\\u20ac]?\\d+\\s*(?:pounds?|quid|grand|max|or so|ish))$")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s_ONLY_PRICE(stdlib_call("re", "compile", &[op_add(&g_ONLY_FRONT(), &py_str("(?:(?:a bit|much|more|a little|something|somewhere|the|ones?)\\s+)*(?:cheaper|cheap|pricier|dearer|not too (?:expensive|dear|pricey|much)|budget|affordable|free|nothing (?:too )?(?:pricey|dear)|(?:under|below|less than|no more than|max|maximum|up to|about|around)\\s+[\\u00a3$\\u20ac]?\\d+\\s*(?:pounds?|quid|grand|k|thousand|dollars?|euros?)?(?:\\s*(?:or so|ish|max|tops))?|[\\u00a3$\\u20ac]?\\d+\\s*(?:pounds?|quid|grand|max|or so|ish))$")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.ONLY_TIME"); }
-    s_ONLY_TIME(stdlib_call("re", "compile", &[op_add(&pyrt::xrefs::xget("compose.fallback_data", "ONLY_FRONT"), &py_str("(?:(?:a bit|much|more|a little|something|somewhere|the|ones?)\\s+)*(?:quick|quickly|quicker|fast|faster|soon|sooner|later|earlier|not long|no time|not too long|in a (?:bit|minute|hour|day|week)|in an? \\w+|an? (?:hour|minute|day|week|moment|min)|(?:under|below|less than) an? (?:hour|minute|day|week|moment|min)|(?:under|below|less than|no more than|max|maximum|up to|about|around|in)\\s+\\d+\\s*(?:mins?|minutes?|hours?|hrs?)|\\d+\\s*(?:mins?|minutes?|hours?|hrs?)(?:\\s*(?:or so|max|tops))?)$")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s_ONLY_TIME(stdlib_call("re", "compile", &[op_add(&g_ONLY_FRONT(), &py_str("(?:(?:a bit|much|more|a little|something|somewhere|the|ones?)\\s+)*(?:quick|quickly|quicker|fast|faster|soon|sooner|later|earlier|not long|no time|not too long|in a (?:bit|minute|hour|day|week)|in an? \\w+|an? (?:hour|minute|day|week|moment|min)|(?:under|below|less than) an? (?:hour|minute|day|week|moment|min)|(?:under|below|less than|no more than|max|maximum|up to|about|around|in)\\s+\\d+\\s*(?:mins?|minutes?|hours?|hrs?)|\\d+\\s*(?:mins?|minutes?|hours?|hrs?)(?:\\s*(?:or so|max|tops))?)$")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.ONLY_EFFORT"); }
-    s_ONLY_EFFORT(stdlib_call("re", "compile", &[op_add(&pyrt::xrefs::xget("compose.fallback_data", "ONLY_FRONT"), &py_str("(?:(?:a bit|much|more|a little|something|somewhere|the|ones?)\\s+)*(?:easy|easier|simple|simpler|no fuss|not much fuss|low effort|minimal effort|not too much (?:work|effort|faff)|no faff|quick and easy|nothing (?:fiddly|complicated))$")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s_ONLY_EFFORT(stdlib_call("re", "compile", &[op_add(&g_ONLY_FRONT(), &py_str("(?:(?:a bit|much|more|a little|something|somewhere|the|ones?)\\s+)*(?:easy|easier|simple|simpler|no fuss|not much fuss|low effort|minimal effort|not too much (?:work|effort|faff)|no faff|quick and easy|nothing (?:fiddly|complicated))$")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.ONLY_SIZE"); }
-    s_ONLY_SIZE(stdlib_call("re", "compile", &[op_add(&pyrt::xrefs::xget("compose.fallback_data", "ONLY_FRONT"), &py_str("(?:(?:a bit|much|more|a little|something|somewhere|the|ones?)\\s+)*(?:small|smaller|big|bigger|tiny|compact|roomy|not too (?:big|small|large)|on the small side|on the big side)$")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s_ONLY_SIZE(stdlib_call("re", "compile", &[op_add(&g_ONLY_FRONT(), &py_str("(?:(?:a bit|much|more|a little|something|somewhere|the|ones?)\\s+)*(?:small|smaller|big|bigger|tiny|compact|roomy|not too (?:big|small|large)|on the small side|on the big side)$")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.NARROW_AXES"); }
     s_NARROW_AXES(py_tuple(vec![py_tuple(vec![py_str("time"), g_ONLY_TIME()]), py_tuple(vec![py_str("price"), g_ONLY_PRICE()]), py_tuple(vec![py_str("far"), g_ONLY_FAR()]), py_tuple(vec![py_str("effort"), g_ONLY_EFFORT()]), py_tuple(vec![py_str("size"), g_ONLY_SIZE()])]));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.BOUND_SAID"); }
@@ -8853,26 +8853,26 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.LAUGHING_AT"); }
     s_LAUGHING_AT(stdlib_call("re", "compile", &[py_str("\\b(?:laugh(?:s|ed|ing)?|giggl(?:e|es|ed|ing)|snigger\\w*|snicker\\w*|titter\\w*|a laugh)\\s+(?:at|about)\\s+(?:me|us|him|her|them|you|my|his|her|their|our|your)\\b|\\b(?:laugh(?:s|ed|ing)?|giggl(?:e|es|ed|ing))\\s+(?:when|after|because)\\s+i\\b|\\bnot (?:even |that |remotely )?funny\\b|\\b(?:nobody|no one|no-one|nobodys|no ones)(?:'s)? (?:is |was |did |has )?(?:laughing|laughed|laugh)\\b|\\bno laughing matter\\b|\\b(?:could do with|could use|needs?|needed|want(?:s|ed)?|in need of|short of) (?:a|a bit of a|a good|a right) laugh\\b|\\bi(?:'m|m| am)\\b\\s+(?:so |really |very |quite |well |proper )*funny\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.FLAT_LINE"); }
-    s_FLAT_LINE(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&py_str("^\\W*"), &pyrt::xrefs::xget("compose.fallback_data", "FLAT_LEAD")), &pyrt::xrefs::xget("compose.fallback_data", "FLAT_CORE")), &py_str("\\W*$"))]).unwrap_or_else(|e| exc::raise(e)));
-    let __aug9 = op_add(&pyrt::xrefs::xget("compose.fallback_data", "REACTION_LEAD"), &py_str("but|ok|okay|bloody|hell|damn|fucking)\\s+)*"));
+    s_FLAT_LINE(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&py_str("^\\W*"), &g_FLAT_LEAD()), &g_FLAT_CORE()), &py_str("\\W*$"))]).unwrap_or_else(|e| exc::raise(e)));
+    let __aug9 = op_add(&g_REACTION_LEAD(), &py_str("but|ok|okay|bloody|hell|damn|fucking)\\s+)*"));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.REACTION_LEAD"); }
     s_REACTION_LEAD(__aug9);
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.REACTION_LINE"); }
-    s_REACTION_LINE(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&py_str("^\\W*"), &pyrt::xrefs::xget("compose.fallback_data", "REACTION_LEAD")), &py_str("(?:")), &pyrt::xrefs::xget("compose.fallback_data", "REACTION_WORD")), &py_str(")(?:[\\s,]+(?:and\\s+)?")), &pyrt::xrefs::xget("compose.fallback_data", "REACTION_WORD")), &py_str("){0,6}\\W*$"))]).unwrap_or_else(|e| exc::raise(e)));
+    s_REACTION_LINE(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&py_str("^\\W*"), &g_REACTION_LEAD()), &py_str("(?:")), &g_REACTION_WORD()), &py_str(")(?:[\\s,]+(?:and\\s+)?")), &g_REACTION_WORD()), &py_str("){0,6}\\W*$"))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.REACTION_SIGNS"); }
-    s_REACTION_SIGNS(py_tuple(vec![py_tuple(vec![pyrt::xrefs::xget("compose.fallback_data", "REACTION_RELIEF"), stdlib_call("re", "compile", &[py_str("\\b(?:phew|finally|thank (?:god|goodness|heavens|christ|fuck))\\b")]).unwrap_or_else(|e| exc::raise(e))]), py_tuple(vec![pyrt::xrefs::xget("compose.fallback_data", "REACTION_OUCH"), stdlib_call("re", "compile", &[py_str("\\b(?:ouch\\w*|ow+|yikes|eek|oof|yowch|sucks|brutal|awful|terrible|horrible|rough|dammit|damn it|bugger|crap|shoot)\\b")]).unwrap_or_else(|e| exc::raise(e))]), py_tuple(vec![pyrt::xrefs::xget("compose.fallback_data", "REACTION_MISHAP"), stdlib_call("re", "compile", &[py_str("\\b(?:oops|whoops|oh (?:no|dear)|dear me)\\b")]).unwrap_or_else(|e| exc::raise(e))]), py_tuple(vec![pyrt::xrefs::xget("compose.fallback_data", "REACTION_DISBELIEF"), stdlib_call("re", "compile", &[py_str("\\b(?:seriously|are you serious|you(?:'?re| are)? (?:joking|kidding)|for real|no way|no chance|surely|really|honestly|wtf|what the (?:hell|heck|devil|fuck|blazes|dickens)|what (?:on|in) (?:earth|the world)|why (?:on|in) (?:earth|the world)|get out|you what|come on|wow+|woah|whoa|omg|oh my (?:god|word)|blimey|crikey)\\b")]).unwrap_or_else(|e| exc::raise(e))]), py_tuple(vec![pyrt::xrefs::xget("compose.fallback_data", "REACTION_REPEAT"), stdlib_call("re", "compile", &[py_str("\\b(?:huh|eh|pardon)\\b")]).unwrap_or_else(|e| exc::raise(e))])]));
+    s_REACTION_SIGNS(py_tuple(vec![py_tuple(vec![g_REACTION_RELIEF(), stdlib_call("re", "compile", &[py_str("\\b(?:phew|finally|thank (?:god|goodness|heavens|christ|fuck))\\b")]).unwrap_or_else(|e| exc::raise(e))]), py_tuple(vec![g_REACTION_OUCH(), stdlib_call("re", "compile", &[py_str("\\b(?:ouch\\w*|ow+|yikes|eek|oof|yowch|sucks|brutal|awful|terrible|horrible|rough|dammit|damn it|bugger|crap|shoot)\\b")]).unwrap_or_else(|e| exc::raise(e))]), py_tuple(vec![g_REACTION_MISHAP(), stdlib_call("re", "compile", &[py_str("\\b(?:oops|whoops|oh (?:no|dear)|dear me)\\b")]).unwrap_or_else(|e| exc::raise(e))]), py_tuple(vec![g_REACTION_DISBELIEF(), stdlib_call("re", "compile", &[py_str("\\b(?:seriously|are you serious|you(?:'?re| are)? (?:joking|kidding)|for real|no way|no chance|surely|really|honestly|wtf|what the (?:hell|heck|devil|fuck|blazes|dickens)|what (?:on|in) (?:earth|the world)|why (?:on|in) (?:earth|the world)|get out|you what|come on|wow+|woah|whoa|omg|oh my (?:god|word)|blimey|crikey)\\b")]).unwrap_or_else(|e| exc::raise(e))]), py_tuple(vec![g_REACTION_REPEAT(), stdlib_call("re", "compile", &[py_str("\\b(?:huh|eh|pardon)\\b")]).unwrap_or_else(|e| exc::raise(e))])]));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.BABY_LOSS"); }
     s_BABY_LOSS(stdlib_call("re", "compile", &[py_str("\\bmiscarriage(?:s)?\\b(?! of justice)|\\bmiscarried\\b|\\bstillborn\\b|\\bstillbirth\\b"), stdlib_attr("re", "IGNORECASE").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.VERDICT_SAID"); }
-    s_VERDICT_SAID(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&py_str("^\\W*"), &pyrt::xrefs::xget("compose.fallback_data", "_VERDICT_LEAD")), &pyrt::xrefs::xget("compose.fallback_data", "_VERDICT_DET")), &py_str("(?P<noun>")), &pyrt::xrefs::xget("compose.fallback_data", "VERDICT_BAD")), &py_str(")\\b")), &py_str("(?:\\s+(?:honestly|really|though|today|now|again|here|seriously|mate|man))*\\W*$"))]).unwrap_or_else(|e| exc::raise(e)));
+    s_VERDICT_SAID(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&py_str("^\\W*"), &g__VERDICT_LEAD()), &g__VERDICT_DET()), &py_str("(?P<noun>")), &g_VERDICT_BAD()), &py_str(")\\b")), &py_str("(?:\\s+(?:honestly|really|though|today|now|again|here|seriously|mate|man))*\\W*$"))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.VERDICT_BARE"); }
-    s_VERDICT_BARE(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("^\\W*"), &pyrt::xrefs::xget("compose.fallback_data", "_VERDICT_LEAD")), &py_str("(?:a|an|the|right|proper|absolute|total|complete|right old)?\\s*(?P<noun>nightmare|mess|disaster|shambles|farce|palaver|shower)\\W*$"))]).unwrap_or_else(|e| exc::raise(e)));
+    s_VERDICT_BARE(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("^\\W*"), &g__VERDICT_LEAD()), &py_str("(?:a|an|the|right|proper|absolute|total|complete|right old)?\\s*(?P<noun>nightmare|mess|disaster|shambles|farce|palaver|shower)\\W*$"))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.JOKE_WANTED"); }
     s_JOKE_WANTED(stdlib_call("re", "compile", &[py_str("\\b(?:tell|say|make|give|got|know|another|more|one more)\\b[^.]{0,24}\\b(?:joke|jokes|pun|puns|funny|riddle|limerick|meme)\\b|\\bmake me laugh\\b|\\bcheer me up\\b|\\banything funny\\b|\\bjoke please\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.JOKE_UNWANTED"); }
     s_JOKE_UNWANTED(stdlib_call("re", "compile", &[py_str("\\b(?:dont|don't|do not|stop|no more|enough|pack it in)\\b")]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.VERDICT_LINE"); }
-    s_VERDICT_LINE(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("^\\W*(?:(?:that|thats|that'?s|this|it|it'?s|how|so|very|really|bloody|just)\\s+(?:is\\s+)?)?(?:"), &pyrt::xrefs::xget("compose.fallback_data", "VERDICT_WORD")), &py_str(")(?:\\W+(?:isnt\\s+it|innit|though|honestly|really|mate|god|ugh))?\\W*$|^\\W*(?:it|it'?s|that|thats|that'?s|this)\\s+(?:is\\s+)?(?:rubbish|pants|crap|a\\s+nightmare|a\\s+mess|a\\s+joke)(?:\\W+(?:isnt\\s+it|innit|though|honestly|really|mate))?\\W*$|^\\W*(?:typical(?:\\s+(?:isnt\\s+it|innit|that|again|honestly))?|just\\s+my\\s+luck|that\\s+figures|figures|sod'?s\\s+law|of\\s+course\\s+it\\s+(?:did|was|is)|what\\s+a\\s+(?:pain|hassle|shame|nightmare|joke|mess|headache|letdown))\\W*$"))]).unwrap_or_else(|e| exc::raise(e)));
+    s_VERDICT_LINE(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("^\\W*(?:(?:that|thats|that'?s|this|it|it'?s|how|so|very|really|bloody|just)\\s+(?:is\\s+)?)?(?:"), &g_VERDICT_WORD()), &py_str(")(?:\\W+(?:isnt\\s+it|innit|though|honestly|really|mate|god|ugh))?\\W*$|^\\W*(?:it|it'?s|that|thats|that'?s|this)\\s+(?:is\\s+)?(?:rubbish|pants|crap|a\\s+nightmare|a\\s+mess|a\\s+joke)(?:\\W+(?:isnt\\s+it|innit|though|honestly|really|mate))?\\W*$|^\\W*(?:typical(?:\\s+(?:isnt\\s+it|innit|that|again|honestly))?|just\\s+my\\s+luck|that\\s+figures|figures|sod'?s\\s+law|of\\s+course\\s+it\\s+(?:did|was|is)|what\\s+a\\s+(?:pain|hassle|shame|nightmare|joke|mess|headache|letdown))\\W*$"))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.STATE_ABOVE"); }
     s_STATE_ABOVE(stdlib_call("re", "compile", &[py_str("\\b(?:can'?t\\s+sleep|cant\\s+sleep|not\\s+sleeping|no\\s+sleep|keep\\s+waking|hurts?|hurting|ache|aches|aching|sore|in\\s+pain|pain\\s+in|ill|sick|poorly|a\\s+temperature|migraine|dizzy|shaking|shivery|no\\s+energy|worn\\s+out|exhausted|knackered|burnt?\\s+out)\\b")]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.WAITING_NEWS"); }
@@ -8940,7 +8940,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.HARM_ON_ME"); }
     s_HARM_ON_ME(stdlib_call("re", "compile", &[py_str("\\b(?:chopped|sliced|cut|stabbed|burned|burnt|scalded|slashed|gashed|split|hit|knocked|chopping|slicing|cutting|stabbing|burning|scalding|slashing|gashing)\\b[^.!?]{0,20}?\\b(?:my|myself)\\b[^.!?]{0,16}?\\b(?:finger|fingers|thumb|hand|hands|arm|arms|leg|legs|foot|feet|toe|toes|wrist|head|eye|eyes|knee|face|shoulder|skin|chest|stomach)\\b|\\bi\\s+(?:chopped|sliced|cut|stabbed|burned|burnt|scalded|slashed|gashed)\\s+myself\\b")]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.KNOCK_ON_ME"); }
-    s_KNOCK_ON_ME(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&py_str("\\bi\\s+(?:just\\s+|already\\s+|then\\s+|also\\s+)?(?:hit|dropped|knocked|banged|stubbed|trapped|caught|whacked|smashed|slammed|clonked|smacked|bashed|pinched|nipped|grazed|scraped|trod|stood)\\b[^.!?]{0,26}?\\b(?:my|myself)\\b[^.!?]{0,18}?\\b(?:"), &pyrt::xrefs::xget("compose.fallback_data", "KNOCKED_SPOTS")), &py_str(")\\b|\\bi\\s+(?:got|had)\\s+(?:my|a)\\s+(?:")), &pyrt::xrefs::xget("compose.fallback_data", "KNOCKED_SPOTS")), &py_str(")\\s+(?:stuck|caught|trapped|nipped|slammed|squashed|crushed)\\b|\\bi\\s+(?:shut|slammed|squashed|crushed)\\s+my\\s+(?:")), &pyrt::xrefs::xget("compose.fallback_data", "KNOCKED_SPOTS")), &py_str(")\\s+in\\b"))]).unwrap_or_else(|e| exc::raise(e)));
+    s_KNOCK_ON_ME(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&py_str("\\bi\\s+(?:just\\s+|already\\s+|then\\s+|also\\s+)?(?:hit|dropped|knocked|banged|stubbed|trapped|caught|whacked|smashed|slammed|clonked|smacked|bashed|pinched|nipped|grazed|scraped|trod|stood)\\b[^.!?]{0,26}?\\b(?:my|myself)\\b[^.!?]{0,18}?\\b(?:"), &g_KNOCKED_SPOTS()), &py_str(")\\b|\\bi\\s+(?:got|had)\\s+(?:my|a)\\s+(?:")), &g_KNOCKED_SPOTS()), &py_str(")\\s+(?:stuck|caught|trapped|nipped|slammed|squashed|crushed)\\b|\\bi\\s+(?:shut|slammed|squashed|crushed)\\s+my\\s+(?:")), &g_KNOCKED_SPOTS()), &py_str(")\\s+in\\b"))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.A_SPAN_OF_TIME"); }
     s_A_SPAN_OF_TIME(stdlib_call("re", "compile", &[py_str("\\b(?:all\\s+(?:day|morning|afternoon|evening|week)|for\\s+(?:hours|a\\s+while|days)|hours|again|every\\s+day|tomorrow|next\\s+week)\\b")]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.WALKED_INTO"); }
@@ -8962,7 +8962,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.NEGATIVE_LINE"); }
     s_NEGATIVE_LINE(stdlib_call("re", "compile", &[py_str("\\b(?:ruined|wasted|broke|broken|failed|went wrong|couldn'?t|couldnt|didn'?t|didnt|forgot|messed|gave up|hate[sd]?|awful|terrible|useless|a waste|nobody|no one|horrib\\w*|miserab\\w*|dreadful|soaked|drenched|freezing)\\b")]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.NOT_ENOUGH"); }
-    s_NOT_ENOUGH(stdlib_call("re", "compile", &[{ let mut __s = String::new(); __s.push_str("\\b"); __s.push_str(&fstr(&pyrt::xrefs::xget("compose.fallback_data", "MYSELF"), -1, "")); __s.push_str("\\s+(?:am\\s+)?(?:just\\s+|still\\s+|really\\s+|always\\s+)?(?:not|never)\\s+(?:\\w+\\s+){0,2}(?:enough|good enough)\\b|\\bmy (?:"); __s.push_str(&fstr(&pyrt::xrefs::xget("compose.fallback_data", "MY_DOING"), -1, "")); __s.push_str(")\\s+(?:is|was|isnt|isn'?t|wasnt|wasn'?t)?\\s*(?:just\\s+|never\\s+|still\\s+|always\\s+)?(?:not\\s+)?(?:good\\s+)?enough\\b|\\bfeel (?:like )?(?:im|i'?m|i am)?\\s*(?:a )?(?:failure|fraud|useless|a waste|letting (?:people|everyone|my family) down)|\\b(?:im|i'?m|i am)\\s+(?:such\\s+)?(?:a failure|a fraud|useless|a burden|a waste of space)\\b|\\b(?:letting|never there for) (?:people|everyone|my family|everybody) down\\b|\\bbehind (?:everyone|in life|on everything)\\b|\\bwasting my (?:life|time|twenties|thirties|20s|30s)\\b|\\b(?:cant|cannot|can'?t) keep up (?:at|in) (?:work|school|uni|university|college|class|my course|my job|my studies)\\b|\\b(?:cant|cannot|can'?t) keep up with (?:everything|it all|the lot|the work|everyone|my classmates|the others)\\b|\\b(?:cant|cannot|can'?t) (?:cope|do this anymore)\\b"); py_string(__s) }]).unwrap_or_else(|e| exc::raise(e)));
+    s_NOT_ENOUGH(stdlib_call("re", "compile", &[{ let mut __s = String::new(); __s.push_str("\\b"); __s.push_str(&fstr(&g_MYSELF(), -1, "")); __s.push_str("\\s+(?:am\\s+)?(?:just\\s+|still\\s+|really\\s+|always\\s+)?(?:not|never)\\s+(?:\\w+\\s+){0,2}(?:enough|good enough)\\b|\\bmy (?:"); __s.push_str(&fstr(&g_MY_DOING(), -1, "")); __s.push_str(")\\s+(?:is|was|isnt|isn'?t|wasnt|wasn'?t)?\\s*(?:just\\s+|never\\s+|still\\s+|always\\s+)?(?:not\\s+)?(?:good\\s+)?enough\\b|\\bfeel (?:like )?(?:im|i'?m|i am)?\\s*(?:a )?(?:failure|fraud|useless|a waste|letting (?:people|everyone|my family) down)|\\b(?:im|i'?m|i am)\\s+(?:such\\s+)?(?:a failure|a fraud|useless|a burden|a waste of space)\\b|\\b(?:letting|never there for) (?:people|everyone|my family|everybody) down\\b|\\bbehind (?:everyone|in life|on everything)\\b|\\bwasting my (?:life|time|twenties|thirties|20s|30s)\\b|\\b(?:cant|cannot|can'?t) keep up (?:at|in) (?:work|school|uni|university|college|class|my course|my job|my studies)\\b|\\b(?:cant|cannot|can'?t) keep up with (?:everything|it all|the lot|the work|everyone|my classmates|the others)\\b|\\b(?:cant|cannot|can'?t) (?:cope|do this anymore)\\b"); py_string(__s) }]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.NO_DIRECTION"); }
     s_NO_DIRECTION(stdlib_call("re", "compile", &[py_str("\\b(?:dont|don'?t|never)\\s+know what (?:i\\s+)?want\\b(?=\\s*(?:to do\\b|with my life|out of|from (?:life|work|mine)\\b|$))|\\b(?:dont|don'?t|never)\\s+know what to do\\b(?=\\s*(?:with my life|with myself|out of|from (?:life|work|mine)\\b|with the rest of it\\b))|\\b(?:dont|don'?t|never)\\s+know what (?:im|i'?m|i am) (?:doing|supposed to be doing)\\b|\\bno idea what (?:im|i'?m|i am) doing\\b|\\b(?:im|i'?m|i am) \\d{2} and i (?:still )?(?:dont|don'?t) know\\b|\\b(?:nothing|no plan|no idea) (?:feels|seems) right\\b")]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.LOST_QUESTION"); }
@@ -9080,7 +9080,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.PLAN_DECIDED"); }
     s_PLAN_DECIDED(stdlib_call("re", "compile", &[py_str("^(?:ok(?:ay)?|alright|right|so|well|thanks|cheers|anyway|honestly|tbh|yeah)?[\\s,]*(?:(?:i think|i reckon|i guess|i feel like|maybe|perhaps|probably)\\s+)?(?:i\\s+(?:(?:really|probably|definitely|just|still|actually|honestly|so)\\s+)?(?:should|ought to|oughta|had better|better)\\b|i'?d better\\b|id better\\b)\\s+(?!be\\b|have\\b|hav\\b|never\\b|not\\b|n'?t\\b|think\\b|hope\\b|say\\b|know\\b|imagine\\b|expect\\b|worry\\b|care\\b|bother\\b)(?:probably|really|definitely|just|still|maybe|perhaps|actually|now|then)?\\s*\\w+")]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.RELATIONSHIP_ENDING"); }
-    s_RELATIONSHIP_ENDING(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("\\b(?:leaving|leave|left|walking out on|walk out on|walked out on|divorce|divorcing|dump|dumping|dumped|splitting up with|split up with|broke up with|break up with|breaking up with|ending it with|end it with|ended it with)\\s+"), &pyrt::xrefs::xget("compose.fallback_data", "A_PERSON")), &py_str("(?=\\s*(?:[.!?,;]|$|(?:\\s+(?:for good|behind|tomorrow|tonight|next week|this week|finally|now|today))\\s*(?:[.!?,;]|$)))"))]).unwrap_or_else(|e| exc::raise(e)));
+    s_RELATIONSHIP_ENDING(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("\\b(?:leaving|leave|left|walking out on|walk out on|walked out on|divorce|divorcing|dump|dumping|dumped|splitting up with|split up with|broke up with|break up with|breaking up with|ending it with|end it with|ended it with)\\s+"), &g_A_PERSON()), &py_str("(?=\\s*(?:[.!?,;]|$|(?:\\s+(?:for good|behind|tomorrow|tonight|next week|this week|finally|now|today))\\s*(?:[.!?,;]|$)))"))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.A_CROWD_SUBJECT"); }
     s_A_CROWD_SUBJECT(stdlib_call("re", "compile", &[py_str("\\b(?:everyone|everybody|most people|people|folk|others|no ?one|nobody|all (?:of )?my (?:friends|mates|siblings|cousins)|my (?:friends|mates)|the people (?:i know|around me|at work|on my course))\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.A_MARKER_OF_STANDING"); }
@@ -9142,9 +9142,9 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.TRIED_HELPED"); }
     s_TRIED_HELPED(stdlib_call("re", "compile", &[py_str("\\b(?:(?:it|that|this|they)s? (?:is |are |seems? )?(?:actually |really |definitely |properly |still )?(?:helping|helped|working|works|help a bit|doing the trick)|helped (?:a (?:bit|little|lot|load))|(?:a bit|lots|much|loads) better|feeling better|helps a bit)\\b")]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.TRIED_IT"); }
-    s_TRIED_IT(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("\\b(?:(?:i|we|ive|i've|weve|we've|i have|we have|i had|we had) (?:did|tried|gave|used|started|have tried|had tried|went with) (?:what you (?:said|suggested)|that|this|it)"), &pyrt::xrefs::xget("compose.fallback_data", "WHOLE_LIST_AFTER")), &py_str("|did what you (?:said|suggested|told me)|(?:been|keep|still) (?:doing|trying|taking|walking|using) (?:it|that|this|them))\\b"))]).unwrap_or_else(|e| exc::raise(e)));
+    s_TRIED_IT(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("\\b(?:(?:i|we|ive|i've|weve|we've|i have|we have|i had|we had) (?:did|tried|gave|used|started|have tried|had tried|went with) (?:what you (?:said|suggested)|that|this|it)"), &g_WHOLE_LIST_AFTER()), &py_str("|did what you (?:said|suggested|told me)|(?:been|keep|still) (?:doing|trying|taking|walking|using) (?:it|that|this|them))\\b"))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.TRIED_THAT_ONLY"); }
-    s_TRIED_THAT_ONLY(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("^(?:(?:ok|okay|alright|right|so|well|yeah|yep|yes|cool|fine|and|but|then|i|we|ive|i've|weve|we've)\\s+)*(?:(?:have|had)\\s+)?(?:tried|been trying)\\s+(?:it|that|this|them)"), &pyrt::xrefs::xget("compose.fallback_data", "WHOLE_LIST_AFTER")), &py_str("\\b"))]).unwrap_or_else(|e| exc::raise(e)));
+    s_TRIED_THAT_ONLY(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("^(?:(?:ok|okay|alright|right|so|well|yeah|yep|yes|cool|fine|and|but|then|i|we|ive|i've|weve|we've)\\s+)*(?:(?:have|had)\\s+)?(?:tried|been trying)\\s+(?:it|that|this|them)"), &g_WHOLE_LIST_AFTER()), &py_str("\\b"))]).unwrap_or_else(|e| exc::raise(e)));
     s_ADVICE_AGAIN_ASK(pyrt::xrefs::xget("compose.fallback_words", "ADVICE_AGAIN_ASK"));
     s_ADVICE_COOL_ASK(pyrt::xrefs::xget("compose.fallback_words", "ADVICE_COOL_ASK"));
     s_ADVICE_TIME_ASK(pyrt::xrefs::xget("compose.fallback_words", "ADVICE_TIME_ASK"));
@@ -9333,7 +9333,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.MY_OWN_STATE"); }
     s_MY_OWN_STATE(stdlib_call("re", "compile", &[py_str("\\b(?:have|has)\\s+i\\s+been\\s+(?:paid|approved|accepted|registered|booked|confirmed|granted|refused|rejected|shortlisted|interviewed|offered|told|sent|given|taken\\s+on|picked|placed|invited|added|approved\\s+for)\\b|\\bam\\s+i\\s+(?:on\\s+the\\s+list|in\\s+the\\s+running|registered|booked\\s+in|signed\\s+up|enrolled|shortlisted|selected)\\b")]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.RECORD_THINGS"); }
-    s_RECORD_THINGS(call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "MY_RECORDS")) { let __unpk8449 = py_unpack(&__item.clone(), 3, None); let mut _u: Py = __unpk8449[0].clone(); let mut things: Py = __unpk8449[1].clone(); let mut _u: Py = __unpk8449[2].clone(); for __item in py_iter_or_raise(&things.clone()) { let mut thing: Py = __item.clone(); __out.push(thing.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
+    s_RECORD_THINGS(call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_MY_RECORDS()) { let __unpk957 = py_unpack(&__item.clone(), 3, None); let mut _u: Py = __unpk957[0].clone(); let mut things: Py = __unpk957[1].clone(); let mut _u: Py = __unpk957[2].clone(); for __item in py_iter_or_raise(&things.clone()) { let mut thing: Py = __item.clone(); __out.push(thing.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.CARD_VALIDITY_ASK"); }
     s_CARD_VALIDITY_ASK(stdlib_call("re", "compile", &[py_str("\\b(?:valid|expire|expires|expired|expiry|run\\s+out|runs\\s+out|ran\\s+out|out\\s+of\\s+date|still\\s+(?:use|work|spend|spent)|still\\s+good)\\b")]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.CARD_BALANCE_ASK"); }
@@ -9341,11 +9341,11 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.CARD_NOT_A_BALANCE"); }
     s_CARD_NOT_A_BALANCE(stdlib_call("re", "compile", &[py_str("\\b(?:worth|value|declined|refused|cloned|stolen|blocked|cancel|replace|expire|expires|expired)\\b")]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.MY_CARD_ROW"); }
-    s_MY_CARD_ROW(call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "MY_RECORDS")) { let __unpk6769 = py_unpack(&__item.clone(), 3, None); let mut name: Py = __unpk6769[0].clone(); let mut things: Py = __unpk6769[1].clone(); let mut options: Py = __unpk6769[2].clone(); if py_truthy(&Py::Bool(py_eq(&name.clone(), &py_str("card")))) {  __out.push(options.clone()); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e)));
+    s_MY_CARD_ROW(call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_MY_RECORDS()) { let __unpk9276 = py_unpack(&__item.clone(), 3, None); let mut name: Py = __unpk9276[0].clone(); let mut things: Py = __unpk9276[1].clone(); let mut options: Py = __unpk9276[2].clone(); if py_truthy(&Py::Bool(py_eq(&name.clone(), &py_str("card")))) {  __out.push(options.clone()); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.MY_MONEY_ROW"); }
-    s_MY_MONEY_ROW(call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "MY_RECORDS")) { let __unpk5953 = py_unpack(&__item.clone(), 3, None); let mut name: Py = __unpk5953[0].clone(); let mut things: Py = __unpk5953[1].clone(); let mut options: Py = __unpk5953[2].clone(); if py_truthy(&Py::Bool(py_eq(&name.clone(), &py_str("money")))) {  __out.push(options.clone()); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e)));
+    s_MY_MONEY_ROW(call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_MY_RECORDS()) { let __unpk8460 = py_unpack(&__item.clone(), 3, None); let mut name: Py = __unpk8460[0].clone(); let mut things: Py = __unpk8460[1].clone(); let mut options: Py = __unpk8460[2].clone(); if py_truthy(&Py::Bool(py_eq(&name.clone(), &py_str("money")))) {  __out.push(options.clone()); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.MY_APPLICATION_ROW"); }
-    s_MY_APPLICATION_ROW(call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "MY_RECORDS")) { let __unpk5137 = py_unpack(&__item.clone(), 3, None); let mut name: Py = __unpk5137[0].clone(); let mut things: Py = __unpk5137[1].clone(); let mut options: Py = __unpk5137[2].clone(); if py_truthy(&Py::Bool(py_eq(&name.clone(), &py_str("application")))) {  __out.push(options.clone()); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e)));
+    s_MY_APPLICATION_ROW(call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_MY_RECORDS()) { let __unpk9750 = py_unpack(&__item.clone(), 3, None); let mut name: Py = __unpk9750[0].clone(); let mut things: Py = __unpk9750[1].clone(); let mut options: Py = __unpk9750[2].clone(); if py_truthy(&Py::Bool(py_eq(&name.clone(), &py_str("application")))) {  __out.push(options.clone()); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.POINTS_SCHEME"); }
     s_POINTS_SCHEME(stdlib_call("re", "compile", &[py_str("\\b(?:loyalty\\s+(?:points?|cards?|scheme)|nectar|clubcard|club\\s?card|avios|airmiles|reward\\s+(?:points?|cards?|scheme)|store\\s+points?|points\\s+cards?|(?:my|our)\\s+points|(?:my|our)\\s+stamps|stamps?\\s+on\\s+(?:my|the)\\s+card|points\\s+(?:balance|total))\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.POINTS_ASK"); }
@@ -9412,13 +9412,13 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.OWN_LIFE"); }
     s_OWN_LIFE(stdlib_call("re", "compile", &[py_str("\\b(?:my|our|his|her|their)\\b")]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.JUDGE_ASK"); }
-    s_JUDGE_ASK(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&py_str("(?:^|\\b(?:ok|okay|so|and|but|hmm|well|wait|honestly|seriously)\\b )(?:is|was|would|will)\\s+(?:that|this|it)\\s+(?:be\\s+)?(?:such\\s+)?(?:a\\s+|an\\s+)?(?P<face>"), &pyrt::xrefs::xget("compose.fallback_data", "JUDGE_ASKS_SLIGHT")), &py_str("|")), &pyrt::xrefs::xget("compose.fallback_data", "JUDGE_ASKS_FINE")), &py_str("|")), &pyrt::xrefs::xget("compose.fallback_data", "JUDGE_ASKS_MAD")), &py_str(")(?:\\s+")), &pyrt::xrefs::xget("compose.fallback_data", "JUDGE_NOUN")), &py_str(")?(?:\\s+(?:or\\s+not|then|though|tho|or\\s+what|at\\s+all))?$|(?:^|\\b(?:ok|okay|so|and|but|hmm|well)\\b )does\\s+(?:that|this|it)\\s+(?:sound|seem|look)\\s+(?:like\\s+)?(?:a\\s+|an\\s+)?(?P<face2>")), &pyrt::xrefs::xget("compose.fallback_data", "JUDGE_ASKS_SLIGHT")), &py_str("|")), &pyrt::xrefs::xget("compose.fallback_data", "JUDGE_ASKS_FINE")), &py_str("|")), &pyrt::xrefs::xget("compose.fallback_data", "JUDGE_ASKS_MAD")), &py_str(")(?:\\s+")), &pyrt::xrefs::xget("compose.fallback_data", "JUDGE_NOUN")), &py_str(")?$|(?:^|\\b(?:ok|okay|so|and|but|hmm|well)\\b )am\\s+i\\s+(?:being\\s+)?(?P<face3>")), &pyrt::xrefs::xget("compose.fallback_data", "JUDGE_ASKS_MAD")), &py_str("|")), &pyrt::xrefs::xget("compose.fallback_data", "JUDGE_ASKS_SLIGHT")), &py_str(")$"))]).unwrap_or_else(|e| exc::raise(e)));
+    s_JUDGE_ASK(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&py_str("(?:^|\\b(?:ok|okay|so|and|but|hmm|well|wait|honestly|seriously)\\b )(?:is|was|would|will)\\s+(?:that|this|it)\\s+(?:be\\s+)?(?:such\\s+)?(?:a\\s+|an\\s+)?(?P<face>"), &g_JUDGE_ASKS_SLIGHT()), &py_str("|")), &g_JUDGE_ASKS_FINE()), &py_str("|")), &g_JUDGE_ASKS_MAD()), &py_str(")(?:\\s+")), &g_JUDGE_NOUN()), &py_str(")?(?:\\s+(?:or\\s+not|then|though|tho|or\\s+what|at\\s+all))?$|(?:^|\\b(?:ok|okay|so|and|but|hmm|well)\\b )does\\s+(?:that|this|it)\\s+(?:sound|seem|look)\\s+(?:like\\s+)?(?:a\\s+|an\\s+)?(?P<face2>")), &g_JUDGE_ASKS_SLIGHT()), &py_str("|")), &g_JUDGE_ASKS_FINE()), &py_str("|")), &g_JUDGE_ASKS_MAD()), &py_str(")(?:\\s+")), &g_JUDGE_NOUN()), &py_str(")?$|(?:^|\\b(?:ok|okay|so|and|but|hmm|well)\\b )am\\s+i\\s+(?:being\\s+)?(?P<face3>")), &g_JUDGE_ASKS_MAD()), &py_str("|")), &g_JUDGE_ASKS_SLIGHT()), &py_str(")$"))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.JUDGE_ASK_BARE"); }
-    s_JUDGE_ASK_BARE(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&py_str("^(?:(?:ok|okay|so|and|but|hmm|well|honestly|seriously)\\s+)?(?:(?:does|would|is|was)\\s+(?:that|this|it)\\s+)?(?:(?:sound|seem|look)\\s+(?:like\\s+)?)?(?:(?:a|an)\\s+)?(?P<face>"), &pyrt::xrefs::xget("compose.fallback_data", "JUDGE_ASKS_SLIGHT")), &py_str("|")), &pyrt::xrefs::xget("compose.fallback_data", "JUDGE_ASKS_FINE")), &py_str("|")), &pyrt::xrefs::xget("compose.fallback_data", "JUDGE_ASKS_MAD")), &py_str(")(?:\\s+(?P<bare_noun>")), &pyrt::xrefs::xget("compose.fallback_data", "JUDGE_NOUN")), &py_str("))?$"))]).unwrap_or_else(|e| exc::raise(e)));
+    s_JUDGE_ASK_BARE(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&py_str("^(?:(?:ok|okay|so|and|but|hmm|well|honestly|seriously)\\s+)?(?:(?:does|would|is|was)\\s+(?:that|this|it)\\s+)?(?:(?:sound|seem|look)\\s+(?:like\\s+)?)?(?:(?:a|an)\\s+)?(?P<face>"), &g_JUDGE_ASKS_SLIGHT()), &py_str("|")), &g_JUDGE_ASKS_FINE()), &py_str("|")), &g_JUDGE_ASKS_MAD()), &py_str(")(?:\\s+(?P<bare_noun>")), &g_JUDGE_NOUN()), &py_str("))?$"))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.JUDGE_PLAN_OPENING"); }
-    s_JUDGE_PLAN_OPENING(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&pyrt::xrefs::xget("compose.fallback_data", "JUDGE_LEAD"), &py_str("(?:im|i am|i)\\s+(?:going to|gonna|off to|out to|away to|heading to|heading off to|planning to|planning on|thinking of|thinking about|about to|want to|wanna|might|will|intend to|intending to|decided to|have decided to|plan to|hoping to|hope to|looking to|keen to|aiming to|thinking i(?:d| would) like to|think i(?:ll| will)|reckon i(?:ll| will))\\s+(?P<plan>\\S.{1,58})$|")), &pyrt::xrefs::xget("compose.fallback_data", "JUDGE_LEAD")), &py_str("i\\s+(?:have\\s+)?decided\\s+(?:to|i(?:'ll| will))\\s+(?P<plan9>\\S.{1,58})$|")), &pyrt::xrefs::xget("compose.fallback_data", "JUDGE_LEAD")), &py_str("(?:my|the)\\s+plan\\s+is\\s+to\\s+(?P<plan2>\\S.{1,58})$|")), &pyrt::xrefs::xget("compose.fallback_data", "JUDGE_LEAD")), &py_str("(?:im|i am)\\s+(?:nearly\\s+|about\\s+)?\\d{2}\\s*,?\\s+and\\s+(?:want|need|plan)\\s+to\\s+(?P<plan3>\\S.{1,58})$"))]).unwrap_or_else(|e| exc::raise(e)));
+    s_JUDGE_PLAN_OPENING(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&g_JUDGE_LEAD(), &py_str("(?:im|i am|i)\\s+(?:going to|gonna|off to|out to|away to|heading to|heading off to|planning to|planning on|thinking of|thinking about|about to|want to|wanna|might|will|intend to|intending to|decided to|have decided to|plan to|hoping to|hope to|looking to|keen to|aiming to|thinking i(?:d| would) like to|think i(?:ll| will)|reckon i(?:ll| will))\\s+(?P<plan>\\S.{1,58})$|")), &g_JUDGE_LEAD()), &py_str("i\\s+(?:have\\s+)?decided\\s+(?:to|i(?:'ll| will))\\s+(?P<plan9>\\S.{1,58})$|")), &g_JUDGE_LEAD()), &py_str("(?:my|the)\\s+plan\\s+is\\s+to\\s+(?P<plan2>\\S.{1,58})$|")), &g_JUDGE_LEAD()), &py_str("(?:im|i am)\\s+(?:nearly\\s+|about\\s+)?\\d{2}\\s*,?\\s+and\\s+(?:want|need|plan)\\s+to\\s+(?P<plan3>\\S.{1,58})$"))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.JUDGE_SHOULD_OPENING"); }
-    s_JUDGE_SHOULD_OPENING(stdlib_call("re", "compile", &[op_add(&pyrt::xrefs::xget("compose.fallback_data", "JUDGE_LEAD"), &py_str("(?:should\\s+(?:i|we)|(?:i|we)\\s+(?:should|ought to))\\s+(?P<plan>\\S.{1,58})$"))]).unwrap_or_else(|e| exc::raise(e)));
+    s_JUDGE_SHOULD_OPENING(stdlib_call("re", "compile", &[op_add(&g_JUDGE_LEAD(), &py_str("(?:should\\s+(?:i|we)|(?:i|we)\\s+(?:should|ought to))\\s+(?P<plan>\\S.{1,58})$"))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.JUDGE_HOPED_FOR"); }
     s_JUDGE_HOPED_FOR(stdlib_call("re", "compile", &[py_str("\\b(?:hoping|hope|looking|keen|aiming|intending|planning on)\\b|\\bthinking i(?:d| would) like to\\b"), stdlib_attr("re", "IGNORECASE").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.MIND_WORRY"); }
@@ -9444,7 +9444,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.JUDGE_WISHES_HARM"); }
     s_JUDGE_WISHES_HARM(stdlib_call("re", "compile", &[py_str("\\b(?:stop|stopping|quit|quitting|give\\s+up|giving\\s+up|cut\\s+out|cutting\\s+out)\\s+(?:eating|food|meals)\\b|\\b(?:eat|eating|ate)\\s+nothing\\b|\\bstarve\\s+myself\\b|\\bmake\\s+myself\\s+sick\\b|\\bpayday\\s+loan\\b|\\bloan\\s+shark\\b|\\bgambl(?:e|ing)\\b|\\bbet\\s+(?:my|our|the)\\b|\\bborrow\\s+(?:a\\s+)?[\\u00a3$\\u20ac]?\\d{3,}"), stdlib_attr("re", "IGNORECASE").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.JUDGE_JUDGES_A_NOUN"); }
-    s_JUDGE_JUDGES_A_NOUN(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("\\b(?:bad|terrible|awful|dreadful|wrong)\\s+"), &pyrt::xrefs::xget("compose.fallback_data", "JUDGE_NOUN")), &py_str("\\b")), stdlib_attr("re", "IGNORECASE").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s_JUDGE_JUDGES_A_NOUN(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("\\b(?:bad|terrible|awful|dreadful|wrong)\\s+"), &g_JUDGE_NOUN()), &py_str("\\b")), stdlib_attr("re", "IGNORECASE").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.JUDGE_DECISION_LEAD"); }
     s_JUDGE_DECISION_LEAD(stdlib_call("re", "compile", &[py_str("^(?:if|unless|so|then|otherwise|either|worth)\\b"), stdlib_attr("re", "IGNORECASE").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.JUDGE_HOLE_SAFETY"); }
@@ -9511,7 +9511,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.LIVE_ANY_ACCIDENT"); }
     s_LIVE_ANY_ACCIDENT(stdlib_call("re", "compile", &[py_str("\\b(?:any|an?)\\s+accidents?\\b|\\baccidents?\\s+(?:on|at)\\b")]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.LIVE_NEWS_LINES"); }
-    s_LIVE_NEWS_LINES(py_tuple(vec![pyrt::xrefs::xget("compose.fallback_data", "LIVE_NEWS_REPLY")]));
+    s_LIVE_NEWS_LINES(py_tuple(vec![g_LIVE_NEWS_REPLY()]));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.LIVE_LISTING_LINES"); }
     s_LIVE_LISTING_LINES(py_tuple(vec![py_str("No live listings here, sorry. The TV guide on the box or the channel's own app has what is on and when, and the club's page has the kick-off and which side it is on.")]));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.LIVE_WHICH_RESULTS"); }
@@ -9676,12 +9676,12 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.VIEW_NAMES_SOMEBODY"); }
     s_VIEW_NAMES_SOMEBODY(stdlib_call("re", "compile", &[py_str("\\b(?:me|my|mine|myself|us|our|ours|i|im|i'm)\\b")]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.HEDGE_HEADS"); }
-    s_HEDGE_HEADS(call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "HEDGE_POOL")) { let mut pool: Py = __item.clone(); for __item in py_iter_or_raise(&pool.clone()) { let mut line: Py = __item.clone(); __out.push(slice_or_raise(&line.clone(), &Py::None, &Py::Int(40), &Py::None)); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
+    s_HEDGE_HEADS(call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_HEDGE_POOL()) { let mut pool: Py = __item.clone(); for __item in py_iter_or_raise(&pool.clone()) { let mut line: Py = __item.clone(); __out.push(slice_or_raise(&line.clone(), &Py::None, &Py::Int(40), &Py::None)); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.HEDGE_PREFIXES"); }
-    s_HEDGE_PREFIXES(call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "HEDGE_POOL")) { let mut pool: Py = __item.clone(); for __item in py_iter_or_raise(&pool.clone()) { let mut line: Py = __item.clone(); if py_truthy(&Py::Bool(py_contains(&line.clone(), &py_str("{")))) {  __out.push(geti(&mcall(&line.clone(), "split", &[py_str("{")]), &Py::Int(0))); } } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
+    s_HEDGE_PREFIXES(call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_HEDGE_POOL()) { let mut pool: Py = __item.clone(); for __item in py_iter_or_raise(&pool.clone()) { let mut line: Py = __item.clone(); if py_truthy(&Py::Bool(py_contains(&line.clone(), &py_str("{")))) {  __out.push(geti(&mcall(&line.clone(), "split", &[py_str("{")]), &Py::Int(0))); } } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
     s__RULE_HEADS(pyrt::xrefs::xget("compose.the_rule_for_it", "RULE_HEADS"));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.HEDGE_HEADS"); }
-    s_HEDGE_HEADS(op_add(&g_HEDGE_HEADS(), &pyrt::xrefs::xget("compose.the_rule_for_it", "RULE_HEADS")));
+    s_HEDGE_HEADS(op_add(&g_HEDGE_HEADS(), &g__RULE_HEADS()));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.is_an_ask_which_bit"); }
     s_is_an_ask_which_bit(py_func("_is_an_ask_which_bit", |args: &[Py]| _is_an_ask_which_bit(args)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.is_a_hedge"); }
@@ -9709,7 +9709,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.TIPS_SPOKEN"); }
     s_TIPS_SPOKEN(py_tuple(vec![py_tuple(vec![stdlib_call("re", "compile", &[py_str("(?<![a-z0-9])4(?![a-z0-9])")]).unwrap_or_else(|e| exc::raise(e)), py_str("for")]), py_tuple(vec![stdlib_call("re", "compile", &[py_str("(?<![a-z0-9])2(?![a-z0-9])")]).unwrap_or_else(|e| exc::raise(e)), py_str("to")]), py_tuple(vec![stdlib_call("re", "compile", &[py_str("(?<![a-z0-9])u(?![a-z0-9])")]).unwrap_or_else(|e| exc::raise(e)), py_str("you")]), py_tuple(vec![stdlib_call("re", "compile", &[py_str("(?<![a-z0-9])ur(?![a-z0-9])")]).unwrap_or_else(|e| exc::raise(e)), py_str("your")]), py_tuple(vec![stdlib_call("re", "compile", &[py_str("(?<![a-z0-9])ne(?![a-z0-9])")]).unwrap_or_else(|e| exc::raise(e)), py_str("any")]), py_tuple(vec![stdlib_call("re", "compile", &[py_str("(?<![a-z0-9])pls(?![a-z0-9])")]).unwrap_or_else(|e| exc::raise(e)), py_str("please")])]));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.TIPS_NUMBER_TAIL"); }
-    s_TIPS_NUMBER_TAIL(stdlib_call("re", "compile", &[op_modulo(&py_str("\\s*(?:%s)\\b"), &mcall(&py_str("|"), "join", &[call_builtin("sorted", &[pyrt::xrefs::xget("compose.fallback_data", "TIPS_UNIT")]).unwrap_or_else(|e| exc::raise(e))]))]).unwrap_or_else(|e| exc::raise(e)));
+    s_TIPS_NUMBER_TAIL(stdlib_call("re", "compile", &[op_modulo(&py_str("\\s*(?:%s)\\b"), &mcall(&py_str("|"), "join", &[call_builtin("sorted", &[g_TIPS_UNIT()]).unwrap_or_else(|e| exc::raise(e))]))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback._ASKS_DEFINITION"); }
     s__ASKS_DEFINITION(stdlib_call("re", "compile", &[py_str("^\\s*what(?:'s|s| is| are| was| does| do)\\b|\\bdifference between\\b|\\bwhat does .* (?:do|mean)\\b|\\bmeaning of\\b")]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback._ASKS_WHERE"); }
@@ -9786,7 +9786,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback._THE_WAY_OUT"); }
     s__THE_WAY_OUT(stdlib_call("re", "compile", &[py_str("\\b(?:get|gets|getting|got|come|comes|coming|clear|clearing|climb|climbing|stagger\\w*)\\s+out\\s+of\\s+(?:a|an|the|my|our|his|her|their)?\\s*(?:house|home|flat|building|block|room|car|van|vehicle|bed|bath|bathroom|kitchen|lift|elevator|road|water)\\b|(?:\\b(?:should|shall|do|can|could)\\s+(?:i|we)\\b|\\bis\\s+it\\s+(?:safe|ok|okay|alright|best|wise)\\b|\\bwould\\s+it\\s+be\\s+(?:better|safer|ok|okay)\\b)[^.?!]{0,20}\\b(?:go|going|get|leave|leaving|stay|staying|move|moving|open|opening|close|closing|shut|shutting|ventilate)\\b[^.?!]{0,20}\\b(?:outside|outdoors|upstairs|downstairs|up\\s+stairs|down\\s+stairs|home|house|flat|building|room|away|clear|fresh\\s+air|window|windows|door|garden|corridor|landing|down|up|out\\b(?!\\s+of)|back\\s+in|back\\s+inside|in\\s+there)\\b|\\b(?:should|shall|do|can|could|must)\\s+(?:i|we)\\s+(?:just\\s+)?(?:stay|wait|sit|hold)\\b[^.?!]{0,20}\\b(?:where\\s+(?:i|we)\\s+am|where\\s+(?:i|we)\\s+are|put\\b|here|inside|in\\s+the\\s+(?:house|flat|room|car|building)|for\\s+(?:help|the\\s+(?:ambulance|fire|paramedics|doctor)|them|someone))\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback._HAZARD_WORD"); }
-    s__HAZARD_WORD(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("\\b(?:"), &mcall(&py_str("|"), "join", &[call_builtin("sorted", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "HAZARD_WORDS")) { let mut w: Py = __item.clone(); __out.push(stdlib_call("re", "escape", &[w.clone()]).unwrap_or_else(|e| exc::raise(e))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))])), &py_str(")\\b")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s__HAZARD_WORD(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("\\b(?:"), &mcall(&py_str("|"), "join", &[call_builtin("sorted", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_HAZARD_WORDS()) { let mut w: Py = __item.clone(); __out.push(stdlib_call("re", "escape", &[w.clone()]).unwrap_or_else(|e| exc::raise(e))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))])), &py_str(")\\b")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback._FETCH_FROM_INSIDE"); }
     s__FETCH_FROM_INSIDE(stdlib_call("re", "compile", &[py_str("\\b(?:can|could|should|shall|do|may)\\s+(?:i|we)\\s+(?:just\\s+|quickly\\s+)?(?:go\\s+(?:and\\s+|to\\s+)?)?(?:back\\s+in|get|grab|fetch|collect|save|rescue|nip\\s+in|run\\s+in)\\b[^.?!]{0,30}\\b(?:my|our|the|his|her|their)\\s+\\w+"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback._GAS_WORD"); }
@@ -9819,7 +9819,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.A_FEELING_OF"); }
     s_A_FEELING_OF(__data20());
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.THE_CALL_POOLS"); }
-    s_THE_CALL_POOLS(op_add(&call_builtin("tuple", &[pyrt::xrefs::xget("compose.fallback_data", "THRESHOLD_CROSSED")]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("tuple", &[pyrt::xrefs::xget("compose.fallback_data", "THE_CALL_STANDS")]).unwrap_or_else(|e| exc::raise(e))));
+    s_THE_CALL_POOLS(op_add(&call_builtin("tuple", &[g_THRESHOLD_CROSSED()]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("tuple", &[g_THE_CALL_STANDS()]).unwrap_or_else(|e| exc::raise(e))));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.IMMEDIATE_CALL"); }
     s_IMMEDIATE_CALL(stdlib_call("re", "compile", &[py_str("\\b(?:ring|call|phone|dial)\\s+(?:999|911|112|an\\s+ambulance)\\b|\\b999\\s+(?:or\\s+911\\s+)?(?:now|straight|immediately|first)\\b|\\bstraight\\s+away\\b|\\bright\\s+now\\b|\\bthere\\s+and\\s+then\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.CONDITIONAL_OPENING"); }
@@ -9909,7 +9909,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.AM_I_A_NUISANCE"); }
     s_AM_I_A_NUISANCE(stdlib_call("re", "compile", &[py_str("(?<![a-z])(?:am|are|is)\\s+(?:i|we|this|it)(?![a-z])[^.?!]{0,25}?(?<![a-z])(?:bother\\w*|bugging|annoy\\w*|irritat\\w*|pester\\w*|in the way|too much|a waste of|taking (?:up )?(?:too much|your)|keeping you|too many questions|asking a lot)(?![a-z])|(?<![a-z])(?:do|would|will|did)\\s+you\\s+mind(?![a-z])[^.?!]{0,25}?(?<![a-z])(?:me asking|my asking|if i ask|i ask)(?![a-z])|(?<![a-z])(?:should|shall|do) i (?:stop|quit) asking(?![a-z])")]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.NUISANCE_ONLY"); }
-    s_NUISANCE_ONLY(op_bitor(&pyrt::xrefs::xget("compose.fallback_data", "MANNERS_ONLY"), &call_builtin("frozenset", &[mcall(&py_str("\n    am are is was were bugging bug annoy annoying annoyed irritating irritated irritate\n    pester pestering way waste mind minding stop quit should shall if ask asking\n    taking take up long much many too lot lots questions question time in way at all\n    "), "split", &[])]).unwrap_or_else(|e| exc::raise(e))));
+    s_NUISANCE_ONLY(op_bitor(&g_MANNERS_ONLY(), &call_builtin("frozenset", &[mcall(&py_str("\n    am are is was were bugging bug annoy annoying annoyed irritating irritated irritate\n    pester pestering way waste mind minding stop quit should shall if ask asking\n    taking take up long much many too lot lots questions question time in way at all\n    "), "split", &[])]).unwrap_or_else(|e| exc::raise(e))));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.THANKS_OPENS"); }
     s_THANKS_OPENS(stdlib_call("re", "compile", &[py_str("^(?:(?:ok|okay|ah|oh|right|great|brilliant|nice|lovely|perfect)\\b[\\s,!.]*)?(?:thanks|thank\\s+you|thankyou|thank-you|cheers|ta)\\b[\\s,!.]*(?P<said>.*)$")]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.THANKS_WENT_BADLY"); }
@@ -10103,7 +10103,7 @@ fn module_body() {
     s_takes_as_it_comes(py_func("takes_as_it_comes", |args: &[Py]| pyrt::xrefs::xcall("compose.fallback_chain", "takes_as_it_comes", args)));
     s__a_part_in_a_state(py_func("_a_part_in_a_state", |args: &[Py]| pyrt::xrefs::xcall("compose.fallback_chain", "_a_part_in_a_state", args)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback.REPORT_REPLY_LINES"); }
-    s_REPORT_REPLY_LINES(call_builtin("frozenset", &[op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&call_builtin("tuple", &[pyrt::xrefs::xget("compose.fallback_data", "TRIED_WORSE_REPLIES")]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("tuple", &[pyrt::xrefs::xget("compose.fallback_data", "TRIED_NO_CHANGE_REPLIES")]).unwrap_or_else(|e| exc::raise(e))), &call_builtin("tuple", &[pyrt::xrefs::xget("compose.fallback_data", "TRIED_NO_CHANGE_ELSEWHERE")]).unwrap_or_else(|e| exc::raise(e))), &call_builtin("tuple", &[pyrt::xrefs::xget("compose.fallback_data", "TRIED_HELPED_REPLIES")]).unwrap_or_else(|e| exc::raise(e))), &call_builtin("tuple", &[pyrt::xrefs::xget("compose.fallback_data", "TRIED_HELPED_ELSEWHERE")]).unwrap_or_else(|e| exc::raise(e))), &call_builtin("tuple", &[pyrt::xrefs::xget("compose.fallback_data", "TRIED_IT_REPLIES")]).unwrap_or_else(|e| exc::raise(e))), &call_builtin("tuple", &[pyrt::xrefs::xget("compose.fallback_data", "TRIED_SORTED_REPLIES")]).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e)));
+    s_REPORT_REPLY_LINES(call_builtin("frozenset", &[op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&call_builtin("tuple", &[g_TRIED_WORSE_REPLIES()]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("tuple", &[g_TRIED_NO_CHANGE_REPLIES()]).unwrap_or_else(|e| exc::raise(e))), &call_builtin("tuple", &[g_TRIED_NO_CHANGE_ELSEWHERE()]).unwrap_or_else(|e| exc::raise(e))), &call_builtin("tuple", &[g_TRIED_HELPED_REPLIES()]).unwrap_or_else(|e| exc::raise(e))), &call_builtin("tuple", &[g_TRIED_HELPED_ELSEWHERE()]).unwrap_or_else(|e| exc::raise(e))), &call_builtin("tuple", &[g_TRIED_IT_REPLIES()]).unwrap_or_else(|e| exc::raise(e))), &call_builtin("tuple", &[g_TRIED_SORTED_REPLIES()]).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback._REPORT_LINES_FLAT"); }
     s__REPORT_LINES_FLAT(_flat_pools(&[]));
     s_A_DAY_SAID_BADLY(pyrt::xrefs::xget("compose.fallback_chain", "A_DAY_SAID_BADLY"));
@@ -10158,10 +10158,10 @@ pub fn _bounded(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: phrase"))) };
     let mut pattern: Py = Py::None;
     let _ = py_str("A phrase matched as whole words, so \"raining\" is not \"training\".");
-    pattern = mcall(&pyrt::xrefs::xget("compose.fallback_data", "_BOUNDED"), "get", &[phrase.clone()]);
+    pattern = mcall(&g__BOUNDED(), "get", &[phrase.clone()]);
     if py_truthy(&Py::Bool(py_is(&pattern.clone(), &Py::None))) {
     pattern = stdlib_call("re", "compile", &[op_add(&op_add(&py_str("(?<![a-z])"), &stdlib_call("re", "escape", &[phrase.clone()]).unwrap_or_else(|e| exc::raise(e))), &py_str("(?![a-z])"))]).unwrap_or_else(|e| exc::raise(e));
-    let _ = py_setitem(&pyrt::xrefs::xget("compose.fallback_data", "_BOUNDED"), &phrase.clone(), stdlib_call("re", "compile", &[op_add(&op_add(&py_str("(?<![a-z])"), &stdlib_call("re", "escape", &[phrase.clone()]).unwrap_or_else(|e| exc::raise(e))), &py_str("(?![a-z])"))]).unwrap_or_else(|e| exc::raise(e)));
+    let _ = py_setitem(&g__BOUNDED(), &phrase.clone(), stdlib_call("re", "compile", &[op_add(&op_add(&py_str("(?<![a-z])"), &stdlib_call("re", "escape", &[phrase.clone()]).unwrap_or_else(|e| exc::raise(e))), &py_str("(?![a-z])"))]).unwrap_or_else(|e| exc::raise(e)));
     }
     return pattern.clone();
     Py::None
@@ -10209,7 +10209,7 @@ pub fn _plain__dup1(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: clean"))) };
     let mut word: Py = Py::None;
     let _ = py_str("The line without filler words, for phrase matching.");
-    return mcall(&py_str(" "), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&clean.clone(), "split", &[])) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&pyrt::xrefs::xget("compose.fallback_data", "FILLERS"), &word.clone()))) {  __out.push(word.clone()); } } py_list(__out) })() }]);
+    return mcall(&py_str(" "), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&clean.clone(), "split", &[])) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&g_FILLERS(), &word.clone()))) {  __out.push(word.clone()); } } py_list(__out) })() }]);
     Py::None
 }
 pub fn _matchable(args: &[Py]) -> Py {
@@ -10268,7 +10268,7 @@ pub fn _asks_how_are_you(args: &[Py]) -> Py {
     return Py::Bool(true);
     }
     }
-    let __iter3 = py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "HOW_ARE_YOU_ASKS"));
+    let __iter3 = py_iter_or_raise(&g_HOW_ARE_YOU_ASKS());
     for __item in __iter3 {
     phrase = __item.clone();
     let __iter4 = py_iter_or_raise(&mcall(&_bounded(&[_matchable(&[phrase.clone()])]), "finditer", &[form.clone()]));
@@ -10279,7 +10279,7 @@ pub fn _asks_how_are_you(args: &[Py]) -> Py {
     }
     }
     }
-    let __iter5 = py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "HOW_ARE_YOU_GOING_ON"));
+    let __iter5 = py_iter_or_raise(&g_HOW_ARE_YOU_GOING_ON());
     for __item in __iter5 {
     phrase = __item.clone();
     let __iter6 = py_iter_or_raise(&mcall(&_bounded(&[_matchable(&[phrase.clone()])]), "finditer", &[form.clone()]));
@@ -10290,7 +10290,7 @@ pub fn _asks_how_are_you(args: &[Py]) -> Py {
     continue;
     }
     after = mcall(&py_str(" "), "join", &[stdlib_call("re", "findall", &[py_str("[a-z']+"), tail.clone()]).unwrap_or_else(|e| exc::raise(e))]);
-    if py_truthy(&Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "HOW_ARE_YOU_GOING_ON_AFTER"), &after.clone()))) {
+    if py_truthy(&Py::Bool(py_contains(&g_HOW_ARE_YOU_GOING_ON_AFTER(), &after.clone()))) {
     return Py::Bool(true);
     }
     }
@@ -10328,7 +10328,7 @@ pub fn _nothing_but_tags(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: end"))) };
     let mut word: Py = Py::None;
     let _ = py_str("True when what follows the phrase is only a tag, so the phrase is the whole question.");
-    return call_builtin("all", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&stdlib_call("re", "findall", &[py_str("[a-z']+"), slice_or_raise(&form.clone(), &end.clone(), &Py::None, &Py::None)]).unwrap_or_else(|e| exc::raise(e))) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "HOW_ARE_YOU_TAGS"), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("all", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&stdlib_call("re", "findall", &[py_str("[a-z']+"), slice_or_raise(&form.clone(), &end.clone(), &Py::None, &Py::None)]).unwrap_or_else(|e| exc::raise(e))) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&g_HOW_ARE_YOU_TAGS(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn _the_person_ends_the_ask(args: &[Py]) -> Py {
@@ -10544,7 +10544,7 @@ pub fn _a_question_about_the_person(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&who.clone()))) {
     return Py::None;
     }
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "DITHER_ABOUT_A_PERSON")) { let mut line: Py = __item.clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("who".to_string(), who.clone()), ("Who".to_string(), op_add(&mcall(&slice_or_raise(&who.clone(), &Py::None, &Py::Int(1), &Py::None), "upper", &[]), &slice_or_raise(&who.clone(), &Py::Int(1), &Py::None, &Py::None)))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&line.clone(), "format", args))(&__args) }); } py_list(__out) })() }, memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_DITHER_ABOUT_A_PERSON()) { let mut line: Py = __item.clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("who".to_string(), who.clone()), ("Who".to_string(), op_add(&mcall(&slice_or_raise(&who.clone(), &Py::None, &Py::Int(1), &Py::None), "upper", &[]), &slice_or_raise(&who.clone(), &Py::Int(1), &Py::None, &Py::None)))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&line.clone(), "format", args))(&__args) }); } py_list(__out) })() }, memory.clone(), clean.clone()]);
     Py::None
 }
 pub fn _nothing_to_choose(args: &[Py]) -> Py {
@@ -10567,7 +10567,7 @@ pub fn _nothing_to_choose(args: &[Py]) -> Py {
     return Py::Bool(true);
     }
     words = stdlib_call("re", "findall", &[py_str("[a-z0-9']+"), mcall(&call_builtin("str", &[{ let __b = rest.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[])]).unwrap_or_else(|e| exc::raise(e));
-    return Py::Bool(!py_truthy(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut w: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&pyrt::xrefs::xget("compose.fallback_data", "HOW_TO_DECIDE_FILLER"), &w.clone()))) {  __out.push(w.clone()); } } py_list(__out) })() }));
+    return Py::Bool(!py_truthy(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut w: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&g_HOW_TO_DECIDE_FILLER(), &w.clone()))) {  __out.push(w.clone()); } } py_list(__out) })() }));
     Py::None
 }
 pub fn _the_stretch_of_time(args: &[Py]) -> Py {
@@ -10590,7 +10590,7 @@ pub fn _the_stretch_of_time(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&mcall(&g_A_STRETCH_OF_TIME(), "search", &[{ let __b = clean.clone(); if py_truthy(&__b) { __b } else { py_str("") } }])))) {
     return Py::None;
     }
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[pyrt::xrefs::xget("compose.fallback_data", "A_FREE_TIME_ASK"), memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[g_A_FREE_TIME_ASK(), memory.clone(), clean.clone()]);
     Py::None
 }
 pub fn _weighs_a_choice(args: &[Py]) -> Py {
@@ -10645,7 +10645,7 @@ pub fn _reads_as_dither(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = mcall(&g_PERSON_NOT_A_DECISION(), "search", &[line.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_PRONOUN_NOT_A_DECISION(), "search", &[line.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_HELP_SERVICE(), "search", &[line.clone()]) } } } }) {
     continue;
     }
-    if py_truthy(&{ let __b = mcall(&g_DITHER(), "search", &[line.clone()]); if !py_truthy(&__b) { __b } else { { let __b = mcall(&g_DITHER_STRONG(), "search", &[line.clone()]); if py_truthy(&__b) { __b } else { mcall(&pyrt::xrefs::xget("compose.fallback_data", "DITHER_SUBJECT"), "search", &[line.clone()]) } } } }) {
+    if py_truthy(&{ let __b = mcall(&g_DITHER(), "search", &[line.clone()]); if !py_truthy(&__b) { __b } else { { let __b = mcall(&g_DITHER_STRONG(), "search", &[line.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_DITHER_SUBJECT(), "search", &[line.clone()]) } } } }) {
     return Py::Bool(true);
     }
     }
@@ -10797,7 +10797,7 @@ pub fn _worry_is_about_the_body(args: &[Py]) -> Py {
     let mut phrase: Py = Py::None;
     let _ = py_str("True when the worry names a body part, a symptom or a health service.");
     words = call_builtin("set", &[words.clone()]).unwrap_or_else(|e| exc::raise(e));
-    return call_builtin("bool", &[{ let __b = op_bitand(&words.clone(), &pyrt::xrefs::xget("compose.fallback_data", "BODY_PARTS")); if py_truthy(&__b) { __b } else { { let __b = op_bitand(&words.clone(), &pyrt::xrefs::xget("compose.fallback_data", "HEALTH_WORDS")); if py_truthy(&__b) { __b } else { { let __b = op_bitand(&words.clone(), &pyrt::xrefs::xget("compose.fallback_data", "SYMPTOM_WORDS")); if py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "CHECK_PHRASES")) { let mut phrase: Py = __item.clone(); __out.push(Py::Bool(py_contains(&clean.clone(), &phrase.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } } } } } }]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("bool", &[{ let __b = op_bitand(&words.clone(), &g_BODY_PARTS()); if py_truthy(&__b) { __b } else { { let __b = op_bitand(&words.clone(), &g_HEALTH_WORDS()); if py_truthy(&__b) { __b } else { { let __b = op_bitand(&words.clone(), &g_SYMPTOM_WORDS()); if py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_CHECK_PHRASES()) { let mut phrase: Py = __item.clone(); __out.push(Py::Bool(py_contains(&clean.clone(), &phrase.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } } } } } }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn _somebody_to_visit(args: &[Py]) -> Py {
@@ -10823,7 +10823,7 @@ pub fn _somebody_to_visit(args: &[Py]) -> Py {
     let mut said: Py = Py::None;
     let mut turn: Py = Py::None;
     let _ = py_str("True when the line or the last few turns name a person the visit could be to.");
-    people = op_bitor(&pyrt::xrefs::xget("understanding.topics", "THE_PEOPLE"), &pyrt::xrefs::xget("compose.fallback_data", "VISIT_PRONOUNS"));
+    people = op_bitor(&g_THE_PEOPLE(), &g_VISIT_PRONOUNS());
     if py_truthy(&op_bitand(&call_builtin("set", &[stdlib_call("re", "findall", &[py_str("[a-z']+"), clean.clone()]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)), &people.clone())) {
     return Py::Bool(true);
     }
@@ -10859,13 +10859,13 @@ pub fn _someone_is_a_patient(args: &[Py]) -> Py {
     else { Py::Int(4) };
     let mut turn: Py = Py::None;
     let _ = py_str("True when the line or the last few turns name a place that keeps someone in.\n\n    The visit pools differ only in whether a ward is somewhere to go: \"ask whoever is on the\n    ward\" is right after \"my mum is in hospital\" and wrong after \"i cut my hand badly\".\n    ");
-    if py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback_words", "IN_HOSPITAL"), "search", &[clean.clone()])) {
+    if py_truthy(&mcall(&g_IN_HOSPITAL(), "search", &[clean.clone()])) {
     return Py::Bool(true);
     }
     let __iter1 = py_iter_or_raise(&slice_or_raise(&turns.clone(), &op_neg(&look_back.clone()), &Py::None, &Py::None));
     for __item in __iter1 {
     turn = __item.clone();
-    if py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback_words", "IN_HOSPITAL"), "search", &[mcall(&call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("user")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[])])) {
+    if py_truthy(&mcall(&g_IN_HOSPITAL(), "search", &[mcall(&call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("user")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[])])) {
     return Py::Bool(true);
     }
     }
@@ -10904,7 +10904,7 @@ pub fn _the_animal_is_the_patient(args: &[Py]) -> Py {
     return Py::Bool(false);
     }
     tail = call_builtin("set", &[stdlib_call("re", "findall", &[py_str("[a-z']+"), slice_or_raise(&text.clone(), &mcall(&verb.clone(), "end", &[]), &Py::None, &Py::None)]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e));
-    return Py::Bool(!py_truthy(&op_bitand(&tail.clone(), &op_sub(&pyrt::xrefs::xget("understanding.topics", "THE_PEOPLE"), &pyrt::xrefs::xget("compose.fallback_data", "ANIMALS")))));
+    return Py::Bool(!py_truthy(&op_bitand(&tail.clone(), &op_sub(&g_THE_PEOPLE(), &g_ANIMALS()))));
     Py::None
 }
 pub fn _the_person_is_the_patient(args: &[Py]) -> Py {
@@ -10958,10 +10958,10 @@ pub fn _the_thread_is_an_animal(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = _the_person_is_the_patient(&[said.clone()]); if py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&recent.clone()) { let mut x: Py = __item.clone(); __out.push(_the_person_is_the_patient(&[x.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }) {
     return Py::Bool(false);
     }
-    if py_truthy(&op_bitand(&call_builtin("set", &[stdlib_call("re", "findall", &[py_str("[a-z']+"), said.clone()]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)), &pyrt::xrefs::xget("compose.fallback_data", "NOT_PEOPLE_WORDS"))) {
+    if py_truthy(&op_bitand(&call_builtin("set", &[stdlib_call("re", "findall", &[py_str("[a-z']+"), said.clone()]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)), &g_NOT_PEOPLE_WORDS())) {
     return Py::Bool(true);
     }
-    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&recent.clone()) { let mut x: Py = __item.clone(); __out.push(op_bitand(&call_builtin("set", &[stdlib_call("re", "findall", &[py_str("[a-z']+"), x.clone()]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)), &pyrt::xrefs::xget("compose.fallback_data", "NOT_PEOPLE_WORDS"))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&recent.clone()) { let mut x: Py = __item.clone(); __out.push(op_bitand(&call_builtin("set", &[stdlib_call("re", "findall", &[py_str("[a-z']+"), x.clone()]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)), &g_NOT_PEOPLE_WORDS())); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn _thread_is_about_someone_else(args: &[Py]) -> Py {
@@ -10993,7 +10993,7 @@ pub fn _thread_is_about_someone_else(args: &[Py]) -> Py {
     turn = __item.clone();
     said = mcall(&call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("user")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]);
     words = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&stdlib_call("re", "findall", &[py_str("[a-z']+"), said.clone()]).unwrap_or_else(|e| exc::raise(e))) { let mut w: Py = __item.clone(); __out.push(if py_truthy(&mcall(&w.clone(), "endswith", &[py_str("'s")])) { slice_or_raise(&w.clone(), &Py::None, &op_neg(&Py::Int(2)), &Py::None) } else { w.clone() }); } py_set(__out) })() };
-    if py_truthy(&op_sub(&op_bitand(&words.clone(), &pyrt::xrefs::xget("compose.trouble", "OTHERS")), &pyrt::xrefs::xget("compose.fallback_data", "NOT_PEOPLE_WORDS"))) {
+    if py_truthy(&op_sub(&op_bitand(&words.clone(), &pyrt::xrefs::xget("compose.trouble", "OTHERS")), &g_NOT_PEOPLE_WORDS())) {
     return Py::Bool(true);
     }
     }
@@ -11030,14 +11030,14 @@ pub fn _thread_is_about_a_pet(args: &[Py]) -> Py {
     turn = __item.clone();
     said = mcall(&call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("user")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]);
     words = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&stdlib_call("re", "findall", &[py_str("[a-z']+"), said.clone()]).unwrap_or_else(|e| exc::raise(e))) { let mut w: Py = __item.clone(); __out.push(if py_truthy(&mcall(&w.clone(), "endswith", &[py_str("'s")])) { slice_or_raise(&w.clone(), &Py::None, &op_neg(&Py::Int(2)), &Py::None) } else { w.clone() }); } py_set(__out) })() };
-    animals = op_bitand(&words.clone(), &pyrt::xrefs::xget("compose.fallback_data", "ANIMALS"));
+    animals = op_bitand(&words.clone(), &g_ANIMALS());
     if py_truthy(&Py::Bool(!py_truthy(&animals.clone()))) {
     if py_truthy(&_the_speaker_is_the_subject(&[said.clone()])) {
     return Py::Bool(false);
     }
     continue;
     }
-    if py_truthy(&{ let __b = op_le(&animals.clone(), &pyrt::xrefs::xget("compose.fallback_data", "WILD_BIRDS")); if !py_truthy(&__b) { __b } else { op_bitand(&words.clone(), &pyrt::xrefs::xget("compose.fallback_data", "MESS_PLACES")) } }) {
+    if py_truthy(&{ let __b = op_le(&animals.clone(), &g_WILD_BIRDS()); if !py_truthy(&__b) { __b } else { op_bitand(&words.clone(), &g_MESS_PLACES()) } }) {
     continue;
     }
     if py_truthy(&{ let __b = pyrt::xrefs::xcall("compose.loss", "reads_as_loss", &[said.clone()]); if py_truthy(&__b) { __b } else { pyrt::xrefs::xcall("compose.badnews", "reads_as_sudden_loss", &[said.clone()]) } }) {
@@ -11202,7 +11202,7 @@ pub fn _the_pool_for_a_worry_about_them(args: &[Py]) -> Py {
     }
     subject = mcall(&g_ASKED_ABOUT(), "search", &[line.clone()]);
     named = if py_truthy(&subject.clone()) { mcall(&subject.clone(), "group", &[Py::Int(0)]) } else { py_str("") };
-    if py_truthy(&op_bitand(&call_builtin("set", &[mcall(&named.clone(), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), &op_bitor(&pyrt::xrefs::xget("compose.fallback_data", "ANIMALS"), &pyrt::xrefs::xget("compose.fallback_data", "NOT_PEOPLE_WORDS")))) {
+    if py_truthy(&op_bitand(&call_builtin("set", &[mcall(&named.clone(), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), &op_bitor(&g_ANIMALS(), &g_NOT_PEOPLE_WORDS()))) {
     return g_UNKNOWN_HOW_IT_GOES_FOR_A_PET();
     }
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&named.clone())); if py_truthy(&__b) { __b } else { stdlib_call("re", "match", &[py_str("(?:he|she|they)\\b"), named.clone()]).unwrap_or_else(|e| exc::raise(e)) } }) {
@@ -11344,10 +11344,10 @@ pub fn _the_weird_ask_pool(args: &[Py]) -> Py {
     return Py::None;
     }
     if py_truthy(&{ let __b = mcall(&g_FEELING_SAID(), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_FEELING_SAID(), "search", &[_the_line_before(&[memory.clone()])]) } }) {
-    return pyrt::xrefs::xget("compose.fallback_data", "UNKNOWN_WORRY");
+    return g_UNKNOWN_WORRY();
     }
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&_the_line_before(&[memory.clone()]))); if !py_truthy(&__b) { __b } else { _nothing_but_the_ask(&[clean.clone(), found.clone()]) } }) {
-    return pyrt::xrefs::xget("compose.fallback_data", "UNKNOWN_WEIRD_BARE");
+    return g_UNKNOWN_WEIRD_BARE();
     }
     return Py::None;
     Py::None
@@ -11399,7 +11399,7 @@ pub fn _without_the_idioms(args: &[Py]) -> Py {
     return call_builtin("set", &[]).unwrap_or_else(|e| exc::raise(e));
     }
     taken = call_builtin("set", &[]).unwrap_or_else(|e| exc::raise(e));
-    let __iter1 = py_iter_or_raise(&pyrt::xrefs::xget("understanding.topics", "IDIOM_PHRASES"));
+    let __iter1 = py_iter_or_raise(&g_IDIOM_PHRASES());
     for __item in __iter1 {
     phrase = __item.clone();
     size = call_builtin("len", &[phrase.clone()]).unwrap_or_else(|e| exc::raise(e));
@@ -11411,7 +11411,7 @@ pub fn _without_the_idioms(args: &[Py]) -> Py {
     }
     }
     }
-    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk5619 = py_unpack(&__item.clone(), 2, None); let mut at: Py = __unpk5619[0].clone(); let mut word: Py = __unpk5619[1].clone(); if py_truthy(&Py::Bool(!py_contains(&taken.clone(), &at.clone()))) {  __out.push(word.clone()); } } py_set(__out) })() };
+    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk7061 = py_unpack(&__item.clone(), 2, None); let mut at: Py = __unpk7061[0].clone(); let mut word: Py = __unpk7061[1].clone(); if py_truthy(&Py::Bool(!py_contains(&taken.clone(), &at.clone()))) {  __out.push(word.clone()); } } py_set(__out) })() };
     Py::None
 }
 pub fn _thread_is_about_the_body(args: &[Py]) -> Py {
@@ -11446,7 +11446,7 @@ pub fn _thread_is_about_the_body(args: &[Py]) -> Py {
     }
     said = _without_the_things_named_after_a_body(&[_without_the_forecast_verb(&[said.clone()])]);
     words = _without_the_idioms(&[said.clone()]);
-    if py_truthy(&{ let __b = op_bitand(&words.clone(), &pyrt::xrefs::xget("compose.fallback_data", "SYMPTOM_WORDS")); if py_truthy(&__b) { __b } else { { let __b = op_bitand(&words.clone(), &pyrt::xrefs::xget("compose.fallback_data", "BODY_PARTS")); if py_truthy(&__b) { __b } else { op_bitand(&words.clone(), &pyrt::xrefs::xget("compose.fallback_data", "HEALTH_WORDS")) } } } }) {
+    if py_truthy(&{ let __b = op_bitand(&words.clone(), &g_SYMPTOM_WORDS()); if py_truthy(&__b) { __b } else { { let __b = op_bitand(&words.clone(), &g_BODY_PARTS()); if py_truthy(&__b) { __b } else { op_bitand(&words.clone(), &g_HEALTH_WORDS()) } } } }) {
     return Py::Bool(true);
     }
     }
@@ -11486,7 +11486,7 @@ pub fn _the_threads_who(args: &[Py]) -> Py {
     continue;
     }
     who = _who_for(&[mcall(&said.clone(), "strip", &[]), said.clone(), words.clone(), Py::None]);
-    if py_truthy(&{ let __b = who.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(!py_eq(&who.clone(), &pyrt::xrefs::xget("compose.fallback_data", "HEALTH_WHO"))) } }) {
+    if py_truthy(&{ let __b = who.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(!py_eq(&who.clone(), &g_HEALTH_WHO())) } }) {
     return who.clone();
     }
     }
@@ -11544,11 +11544,11 @@ pub fn the_threads_answer(args: &[Py]) -> Py {
     }
     who = _the_threads_who(&[memory.clone()]);
     if py_truthy(&who.clone()) {
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "UNKNOWN_WHO")) { let mut line: Py = __item.clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("who".to_string(), who.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&line.clone(), "format", args))(&__args) }); } py_list(__out) })() }, memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_UNKNOWN_WHO()) { let mut line: Py = __item.clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("who".to_string(), who.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&line.clone(), "format", args))(&__args) }); } py_list(__out) })() }, memory.clone(), clean.clone()]);
     }
     leans = mcall(&{ let __b = mcall(&understood.clone(), "get", &[py_str("leans_on")]); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[py_str("topic")]);
     if py_truthy(&{ let __b = Py::Bool(py_eq(&leans.clone(), &py_str("health"))); if py_truthy(&__b) { __b } else { { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(memory.clone()); __kws.extend(vec![("look_back".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _thread_is_about_the_body(args))(&__args) } } }) {
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[pyrt::xrefs::xget("compose.fallback_data", "UNKNOWN_HEALTH"), memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[g_UNKNOWN_HEALTH(), memory.clone(), clean.clone()]);
     }
     return Py::None;
     Py::None
@@ -11584,14 +11584,14 @@ pub fn _thread_names_a_machine(args: &[Py]) -> Py {
     for __item in __iter1 {
     turn = __item.clone();
     tokens = stdlib_call("re", "findall", &[py_str("[a-z']+"), mcall(&{ let __b = mcall(&turn.clone(), "get", &[py_str("user")]); if py_truthy(&__b) { __b } else { py_str("") } }, "lower", &[])]).unwrap_or_else(|e| exc::raise(e));
-    machine_at = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[tokens.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk9410 = py_unpack(&__item.clone(), 2, None); let mut i: Py = __unpk9410[0].clone(); let mut word: Py = __unpk9410[1].clone(); if py_truthy(&Py::Bool(py_contains(&g__THREAD_MACHINES(), &word.clone()))) {  __out.push(i.clone()); } } py_list(__out) })() };
+    machine_at = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[tokens.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk1642 = py_unpack(&__item.clone(), 2, None); let mut i: Py = __unpk1642[0].clone(); let mut word: Py = __unpk1642[1].clone(); if py_truthy(&Py::Bool(py_contains(&g__THREAD_MACHINES(), &word.clone()))) {  __out.push(i.clone()); } } py_list(__out) })() };
     if py_truthy(&Py::Bool(!py_truthy(&machine_at.clone()))) {
-    if py_truthy(&op_bitand(&call_builtin("set", &[tokens.clone()]).unwrap_or_else(|e| exc::raise(e)), &op_bitor(&op_bitor(&pyrt::xrefs::xget("compose.fallback_data", "BODY_PARTS"), &pyrt::xrefs::xget("compose.fallback_data", "SYMPTOM_WORDS")), &pyrt::xrefs::xget("compose.fallback_data", "HEALTH_WORDS")))) {
+    if py_truthy(&op_bitand(&call_builtin("set", &[tokens.clone()]).unwrap_or_else(|e| exc::raise(e)), &op_bitor(&op_bitor(&g_BODY_PARTS(), &g_SYMPTOM_WORDS()), &g_HEALTH_WORDS()))) {
     return Py::Bool(false);
     }
     continue;
     }
-    body_at = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[tokens.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk9297 = py_unpack(&__item.clone(), 2, None); let mut i: Py = __unpk9297[0].clone(); let mut word: Py = __unpk9297[1].clone(); if py_truthy(&{ let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "BODY_PARTS"), &word.clone())); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "SYMPTOM_WORDS"), &word.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "HEALTH_WORDS"), &word.clone())) } } } }) {  __out.push(i.clone()); } } py_list(__out) })() };
+    body_at = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[tokens.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk2857 = py_unpack(&__item.clone(), 2, None); let mut i: Py = __unpk2857[0].clone(); let mut word: Py = __unpk2857[1].clone(); if py_truthy(&{ let __b = Py::Bool(py_contains(&g_BODY_PARTS(), &word.clone())); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&g_SYMPTOM_WORDS(), &word.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_HEALTH_WORDS(), &word.clone())) } } } }) {  __out.push(i.clone()); } } py_list(__out) })() };
     if py_truthy(&call_builtin("all", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&body_at.clone()) { let mut i: Py = __item.clone(); __out.push(call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&machine_at.clone()) { let mut j: Py = __item.clone(); __out.push(Py::Bool(py_eq(&call_builtin("abs", &[op_sub(&i.clone(), &j.clone())]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1)))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     return Py::Bool(true);
     }
@@ -11616,7 +11616,7 @@ pub fn _the_ask_is_the_threads(args: &[Py]) -> Py {
     else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "understood") { v.clone() }
     else { exc::raise(type_err(&format!("missing required argument: understood"))) };
     let _ = py_str("True when the line asks something about a thing it only points at.");
-    if py_truthy(&Py::Bool(!py_truthy(&{ let __b = mcall(&pyrt::xrefs::xget("compose.fallback_chain", "ASK_SHAPE"), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { mcall(&g__LEANS_ON_THE_THREAD(), "search", &[clean.clone()]) } }))) {
+    if py_truthy(&Py::Bool(!py_truthy(&{ let __b = mcall(&g_ASK_SHAPE(), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { mcall(&g__LEANS_ON_THE_THREAD(), "search", &[clean.clone()]) } }))) {
     return Py::Bool(false);
     }
     if py_truthy(&mcall(&g__A_CANDIDATE_OF_ITS_OWN(), "search", &[mcall(&clean.clone(), "lower", &[])])) {
@@ -11651,7 +11651,7 @@ pub fn _thread_is_about_a_person(args: &[Py]) -> Py {
     for __item in __iter1 {
     turn = __item.clone();
     words = call_builtin("set", &[stdlib_call("re", "findall", &[py_str("[a-z']+"), mcall(&{ let __b = mcall(&turn.clone(), "get", &[py_str("user")]); if py_truthy(&__b) { __b } else { py_str("") } }, "lower", &[])]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e));
-    if py_truthy(&{ let __b = op_bitand(&words.clone(), &pyrt::xrefs::xget("compose.fallback_data", "_THREAD_PEOPLE")); if py_truthy(&__b) { __b } else { mcall(&pyrt::xrefs::xget("compose.fallback_words", "REPAIR_PERSON"), "search", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("user")]); if py_truthy(&__b) { __b } else { py_str("") } }]) } }) {
+    if py_truthy(&{ let __b = op_bitand(&words.clone(), &g__THREAD_PEOPLE()); if py_truthy(&__b) { __b } else { mcall(&g_REPAIR_PERSON(), "search", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("user")]); if py_truthy(&__b) { __b } else { py_str("") } }]) } }) {
     return Py::Bool(true);
     }
     }
@@ -11717,20 +11717,20 @@ pub fn _names_its_own_thing(args: &[Py]) -> Py {
     let mut match_: Py = Py::None;
     let mut word: Py = Py::None;
     let _ = py_str("True when the repair line names the thing it is about, so the thread is not the subject.\n\n    \"is it worth fixing\" names nothing and belongs to the thread. \"is it worth fixing the garden\n    gate\" names the gate, and a gate is not the person the thread was about.\n    ");
-    match_ = mcall(&pyrt::xrefs::xget("compose.fallback_words", "REPAIR_DECISION"), "search", &[clean.clone()]);
+    match_ = mcall(&g_REPAIR_DECISION(), "search", &[clean.clone()]);
     if py_truthy(&Py::Bool(!py_truthy(&match_.clone()))) {
     return Py::Bool(false);
     }
     let __iter1 = py_iter_or_raise(&stdlib_call("re", "findall", &[py_str("[a-z']+"), slice_or_raise(&clean.clone(), &mcall(&match_.clone(), "end", &[]), &Py::None, &Py::None)]).unwrap_or_else(|e| exc::raise(e)));
     for __item in __iter1 {
     word = __item.clone();
-    if py_truthy(&Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "_NOT_AN_OWN_THING"), &word.clone()))) {
+    if py_truthy(&Py::Bool(py_contains(&g__NOT_AN_OWN_THING(), &word.clone()))) {
     continue;
     }
-    if py_truthy(&{ let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "BODY_PARTS"), &word.clone())); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "HEALTH_WORDS"), &word.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "SYMPTOM_WORDS"), &word.clone())) } } } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_BODY_PARTS(), &word.clone())); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&g_HEALTH_WORDS(), &word.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_SYMPTOM_WORDS(), &word.clone())) } } } }) {
     continue;
     }
-    if py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback_words", "REPAIR_PERSON"), "search", &[word.clone()])) {
+    if py_truthy(&mcall(&g_REPAIR_PERSON(), "search", &[word.clone()])) {
     continue;
     }
     return Py::Bool(true);
@@ -11754,10 +11754,10 @@ pub fn _money_decision(args: &[Py]) -> Py {
     let mut said: Py = Py::None;
     let _ = py_str("Whether the line decides something about money rather than about what a thing is worth.");
     said = call_builtin("set", &[stdlib_call("re", "findall", &[py_str("[a-z']+"), clean.clone()]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e));
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&op_bitand(&said.clone(), &pyrt::xrefs::xget("compose.fallback_data", "MONEY_WORDS")))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&mcall(&g__PAY_DEBT(), "search", &[clean.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g__CARD_MONEY(), "search", &[clean.clone()]))) } } } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&op_bitand(&said.clone(), &g_MONEY_WORDS()))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&mcall(&g__PAY_DEBT(), "search", &[clean.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g__CARD_MONEY(), "search", &[clean.clone()]))) } } } }) {
     return Py::Bool(false);
     }
-    if py_truthy(&{ let __b = mcall(&g__VALUE_OF_THING(), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&op_bitand(&said.clone(), &pyrt::xrefs::xget("compose.fallback_data", "_MONEY_NOUN")))) } }) {
+    if py_truthy(&{ let __b = mcall(&g__VALUE_OF_THING(), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&op_bitand(&said.clone(), &g__MONEY_NOUN()))) } }) {
     return Py::Bool(false);
     }
     return Py::Bool(true);
@@ -11784,11 +11784,11 @@ pub fn _about_a_sore(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&mcall(&g_SORE_DOING(), "search", &[clean.clone()])))) {
     return Py::Bool(false);
     }
-    named = op_bitand(&call_builtin("set", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &pyrt::xrefs::xget("compose.fallback_data", "SORE_WORDS"));
+    named = op_bitand(&call_builtin("set", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &g_SORE_WORDS());
     if py_truthy(&Py::Bool(!py_truthy(&named.clone()))) {
     return Py::Bool(false);
     }
-    if py_truthy(&op_sub(&named.clone(), &pyrt::xrefs::xget("compose.fallback_data", "SORE_AMBIGUOUS"))) {
+    if py_truthy(&op_sub(&named.clone(), &g_SORE_AMBIGUOUS())) {
     return Py::Bool(true);
     }
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&mcall(&g_SORE_PICKING(), "search", &[clean.clone()]))); if py_truthy(&__b) { __b } else { mcall(&g_SORE_ONLY_A_BODY(), "search", &[clean.clone()]) } }) {
@@ -11816,21 +11816,21 @@ pub fn _a_call_for_help(args: &[Py]) -> Py {
     }
     if py_truthy(&{ let __b = mcall(&g__A_PLACE_TO_BE_SEEN(), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g__A_CALL_WORD(), "search", &[clean.clone()]))) } }) {
     if py_truthy(&mcall(&g_DANGER_SYMPTOM(), "search", &[clean.clone()])) {
-    return pyrt::xrefs::xget("compose.fallback_data", "RING_FOR_HELP");
+    return g_RING_FOR_HELP();
     }
     if py_truthy(&mcall(&g_MINOR_HARM(), "search", &[clean.clone()])) {
     return Py::None;
     }
-    return pyrt::xrefs::xget("compose.fallback_data", "GO_TO_BE_SEEN");
+    return g_GO_TO_BE_SEEN();
     }
     if py_truthy(&mcall(&g_EMERGENCY_CALL(), "search", &[clean.clone()])) {
     if py_truthy(&{ let __b = mcall(&g_MINOR_HARM(), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_DANGER_SYMPTOM(), "search", &[clean.clone()]))) } }) {
     return Py::None;
     }
-    return pyrt::xrefs::xget("compose.fallback_data", "RING_FOR_HELP");
+    return g_RING_FOR_HELP();
     }
     if py_truthy(&{ let __b = mcall(&g_POLICE_CALL(), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { { let __b = mcall(&g_REACHING_THE_POLICE(), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&g__ASKING_FOR_THE_POLICE(), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_SOMETHING_HAPPENING(), "search", &[clean.clone()]) } } } } } }) {
-    return pyrt::xrefs::xget("compose.fallback_data", "RING_THE_POLICE");
+    return g_RING_THE_POLICE();
     }
     return Py::None;
     Py::None
@@ -11854,20 +11854,20 @@ pub fn _a_small_social_decide(args: &[Py]) -> Py {
     let mut said: Py = Py::None;
     let _ = py_str("The pool for an everyday social decision, or None when the line is a different question.");
     if py_truthy(&mcall(&g_ASKED_OUT(), "search", &[clean.clone()])) {
-    return pyrt::xrefs::xget("compose.fallback_data", "ASK_OUT_ANSWER");
+    return g_ASK_OUT_ANSWER();
     }
     if py_truthy(&mcall(&g_AN_APOLOGY(), "search", &[clean.clone()])) {
-    return pyrt::xrefs::xget("compose.fallback_data", "APOLOGY_ANSWER");
+    return g_APOLOGY_ANSWER();
     }
     said = call_builtin("set", &[words.clone()]).unwrap_or_else(|e| exc::raise(e));
-    if py_truthy(&{ let __b = mcall(&g__CONTACT(), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { op_bitand(&said.clone(), &pyrt::xrefs::xget("compose.fallback_data", "_A_PERSON")) } }) {
+    if py_truthy(&{ let __b = mcall(&g__CONTACT(), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { op_bitand(&said.clone(), &g__A_PERSON()) } }) {
     if py_truthy(&mcall(&g__CALLING(), "search", &[clean.clone()])) {
-    return pyrt::xrefs::xget("compose.fallback_data", "CALL_ANSWER");
+    return g_CALL_ANSWER();
     }
-    return pyrt::xrefs::xget("compose.fallback_data", "CONTACT_ANSWER");
+    return g_CONTACT_ANSWER();
     }
-    if py_truthy(&{ let __b = op_bitand(&said.clone(), &pyrt::xrefs::xget("compose.fallback_data", "_A_SOCIAL_THING")); if !py_truthy(&__b) { __b } else { { let __b = mcall(&g__GOING(), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g__NOT_INVITED(), "search", &[clean.clone()]))) } } } }) {
-    return pyrt::xrefs::xget("compose.fallback_data", "GO_ANSWER");
+    if py_truthy(&{ let __b = op_bitand(&said.clone(), &g__A_SOCIAL_THING()); if !py_truthy(&__b) { __b } else { { let __b = mcall(&g__GOING(), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g__NOT_INVITED(), "search", &[clean.clone()]))) } } } }) {
+    return g_GO_ANSWER();
     }
     return Py::None;
     Py::None
@@ -11902,9 +11902,9 @@ pub fn method_ask_pool(args: &[Py]) -> Py {
     return Py::None;
     }
     if py_truthy(&_answered_already(&[if py_truthy(&call_builtin("isinstance", &[memory.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) { memory.clone() } else { py_dict(vec![]) }])) {
-    return pyrt::xrefs::xget("compose.fallback_data", "HELP_ALREADY");
+    return g_HELP_ALREADY();
     }
-    return pyrt::xrefs::xget("compose.fallback_data", "TIPS_LINES");
+    return g_TIPS_LINES();
     Py::None
 }
 pub fn unknown_pool(args: &[Py]) -> Py {
@@ -11929,45 +11929,45 @@ pub fn unknown_pool(args: &[Py]) -> Py {
     let _ = py_str("The pool for a question the bot cannot answer, chosen by the kind of question it is.");
     words = { let __b = words.clone(); if py_truthy(&__b) { __b } else { mcall(&clean.clone(), "split", &[]) } };
     if py_truthy(&mcall(&g_HANDS_IT_BACK(), "match", &[clean.clone()])) {
-    return pyrt::xrefs::xget("compose.fallback_data", "HANDS_BACK");
+    return g_HANDS_BACK();
     }
     calling = _a_call_for_help(&[clean.clone()]);
     if py_truthy(&calling.clone()) {
     return calling.clone();
     }
-    if py_truthy(&{ let __b = mcall(&g_REPAIR_HOW(), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { op_bitand(&call_builtin("set", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &pyrt::xrefs::xget("compose.fallback_data", "_A_PERSON")) } }) {
+    if py_truthy(&{ let __b = mcall(&g_REPAIR_HOW(), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { op_bitand(&call_builtin("set", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &g__A_PERSON()) } }) {
     return g_REPAIR_ANSWER();
     }
     if py_truthy(&_reads_as_worry(&[clean.clone(), words.clone()])) {
-    return pyrt::xrefs::xget("compose.fallback_data", "UNKNOWN_WORRY");
+    return g_UNKNOWN_WORRY();
     }
     if py_truthy(&_about_a_sore(&[clean.clone(), words.clone()])) {
-    if py_truthy(&op_bitand(&call_builtin("set", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &pyrt::xrefs::xget("compose.fallback_data", "SORE_SERIOUS"))) {
-    return pyrt::xrefs::xget("compose.fallback_data", "UNKNOWN_HEALTH");
+    if py_truthy(&op_bitand(&call_builtin("set", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &g_SORE_SERIOUS())) {
+    return g_UNKNOWN_HEALTH();
     }
-    return pyrt::xrefs::xget("compose.fallback_data", "SORE_HANDS");
+    return g_SORE_HANDS();
     }
     if py_truthy(&mcall(&g_PLASTER_ON(), "search", &[clean.clone()])) {
-    return pyrt::xrefs::xget("compose.fallback_data", "PLASTER_IT");
+    return g_PLASTER_IT();
     }
-    if py_truthy(&{ let __b = call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "WORD_ANYWHERE")) { let mut phrase: Py = __item.clone(); __out.push(Py::Bool(py_contains(&clean.clone(), &phrase.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&op_bitand(&pyrt::xrefs::xget("compose.fallback_data", "_CREATIVE"), &call_builtin("set", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))))) } }) {
-    return pyrt::xrefs::xget("compose.fallback_data", "UNKNOWN_WORD");
+    if py_truthy(&{ let __b = call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_WORD_ANYWHERE()) { let mut phrase: Py = __item.clone(); __out.push(Py::Bool(py_contains(&clean.clone(), &phrase.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&op_bitand(&g__CREATIVE(), &call_builtin("set", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))))) } }) {
+    return g_UNKNOWN_WORD();
     }
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&mcall(&g__DEFINITION(), "search", &[clean.clone()]))); if !py_truthy(&__b) { __b } else { _an_order_of_work(&[_choice_sides(&[clean.clone()]), clean.clone()]) } }) {
     return g_ORDER_OF_WORK();
     }
     if py_truthy(&{ let __b = { let __b = mcall(&g_DECIDE_OPENING(), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_DECIDE_SANITY(), "search", &[clean.clone()]) } }; if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g__DEFINITION(), "search", &[clean.clone()]))) } }) {
-    if py_truthy(&{ let __b = op_bitand(&call_builtin("set", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &op_bitor(&pyrt::xrefs::xget("compose.fallback_data", "HEALTH_WORDS"), &pyrt::xrefs::xget("compose.fallback_data", "SORE_SERIOUS"))); if py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "CHECK_PHRASES")) { let mut phrase: Py = __item.clone(); __out.push(Py::Bool(py_contains(&clean.clone(), &phrase.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }) {
-    return pyrt::xrefs::xget("compose.fallback_data", "UNKNOWN_HEALTH");
+    if py_truthy(&{ let __b = op_bitand(&call_builtin("set", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &op_bitor(&g_HEALTH_WORDS(), &g_SORE_SERIOUS())); if py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_CHECK_PHRASES()) { let mut phrase: Py = __item.clone(); __out.push(Py::Bool(py_contains(&clean.clone(), &phrase.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }) {
+    return g_UNKNOWN_HEALTH();
     }
     if py_truthy(&_money_decision(&[clean.clone()])) {
-    return pyrt::xrefs::xget("compose.fallback_data", "UNKNOWN_MONEY");
+    return g_UNKNOWN_MONEY();
     }
     social = _a_small_social_decide(&[clean.clone(), words.clone()]);
     if py_truthy(&social.clone()) {
     return social.clone();
     }
-    return pyrt::xrefs::xget("compose.fallback_data", "UNKNOWN_DECIDE");
+    return g_UNKNOWN_DECIDE();
     }
     return g_UNKNOWN();
     Py::None
@@ -11994,10 +11994,10 @@ pub fn _the_thing_is_choking(args: &[Py]) -> Py {
     let mut tokens: Py = Py::None;
     let mut word: Py = Py::None;
     let _ = py_str("True when a choking state belongs to a thing: the engine, the drain, the bike chain.\n\n    Only the choking phrases are read this way: an engine chokes and so can a drain, but a thing\n    does not stop breathing or go unconscious. Two halves make the test, and both are needed:\n    a thing named right beside the state word, and no person anywhere in the line. A real\n    choking emergency names a person (\"my son\", \"she\") or names nobody at all (\"choking\"),\n    and both of those keep the ambulance.\n\n    The thing has to be the **subject** of the state, the word just before \"is choking\" or\n    \"choking on\", not merely a word in the window. gray-palm on #2088: `hes choking on a car key`\n    has no token from `BODY_SUBJECT` (it has `hes`) and the window picks up `car`, so a window\n    rule loses a child choking to the thing in his mouth. Reading the subject makes an unknown\n    word - a name, a contraction, \"the drain in the kitchen\" - keep the ambulance, which is the\n    right cost: a missed ambulance is the one thing this guard must not do.\n    ");
-    if py_truthy(&Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "THING_STATES")) { let mut phrase: Py = __item.clone(); __out.push(Py::Bool(py_contains(&clean.clone(), &phrase.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))))) {
+    if py_truthy(&Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_THING_STATES()) { let mut phrase: Py = __item.clone(); __out.push(Py::Bool(py_contains(&clean.clone(), &phrase.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))))) {
     return Py::Bool(false);
     }
-    if py_truthy(&op_bitand(&call_builtin("set", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &pyrt::xrefs::xget("compose.fallback_data", "BODY_SUBJECT"))) {
+    if py_truthy(&op_bitand(&call_builtin("set", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &g_BODY_SUBJECT())) {
     return Py::Bool(false);
     }
     tokens = mcall(&mcall(&clean.clone(), "replace", &[py_str("'"), py_str("")]), "split", &[]);
@@ -12010,10 +12010,10 @@ pub fn _the_thing_is_choking(args: &[Py]) -> Py {
     continue;
     }
     before = slice_or_raise(&tokens.clone(), &call_builtin("max", &[Py::Int(0), op_sub(&i.clone(), &Py::Int(4))]).unwrap_or_else(|e| exc::raise(e)), &i.clone(), &Py::None);
-    while py_truthy(&{ let __b = before.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "_COPULA"), &geti(&before.clone(), &op_neg(&Py::Int(1))))) } }) {
+    while py_truthy(&{ let __b = before.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g__COPULA(), &geti(&before.clone(), &op_neg(&Py::Int(1))))) } }) {
     let _ = mcall(&before.clone(), "pop", &[]);
     }
-    if py_truthy(&{ let __b = before.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "THING_SUBJECT"), &geti(&before.clone(), &op_neg(&Py::Int(1))))) } }) {
+    if py_truthy(&{ let __b = before.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_THING_SUBJECT(), &geti(&before.clone(), &op_neg(&Py::Int(1))))) } }) {
     return Py::Bool(true);
     }
     }
@@ -12261,7 +12261,7 @@ pub fn _a_lost_ask(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: clean"))) };
     let _ = py_str("True for the bare \"i dont know what to do\" family: nothing named, a hand asked for.");
     clean = { let __b = clean.clone(); if py_truthy(&__b) { __b } else { py_str("") } };
-    return call_builtin("bool", &[{ let __b = mcall(&pyrt::xrefs::xget("compose.fallback_data", "BARE_PICK_LOST"), "match", &[clean.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_BARE_PICK_LOST_FIRST(), "match", &[clean.clone()]) } }]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("bool", &[{ let __b = mcall(&g_BARE_PICK_LOST(), "match", &[clean.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_BARE_PICK_LOST_FIRST(), "match", &[clean.clone()]) } }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn _a_start_ask(args: &[Py]) -> Py {
@@ -12331,7 +12331,7 @@ pub fn the_pool_for_a_lost_ask(args: &[Py]) -> Py {
     else { py_str("") };
     let _ = py_str("Which offer \"i dont know what to do\" gets: the news one, the thread one, or the bare one.");
     if py_truthy(&_news_above(&[memory.clone()])) {
-    return pyrt::xrefs::xget("compose.fallback_data", "BARE_PICK_AFTER_NEWS");
+    return g_BARE_PICK_AFTER_NEWS();
     }
     if py_truthy(&_a_start_ask(&[clean.clone()])) {
     return g_START_ASK();
@@ -12339,7 +12339,7 @@ pub fn the_pool_for_a_lost_ask(args: &[Py]) -> Py {
     if py_truthy(&_said_what_it_is_about(&[memory.clone()])) {
     return g_LOST_IN_A_THREAD();
     }
-    return pyrt::xrefs::xget("compose.fallback_data", "BARE_PICK_DO");
+    return g_BARE_PICK_DO();
     Py::None
 }
 pub fn the_lost_ask_reply(args: &[Py]) -> Py {
@@ -12666,36 +12666,36 @@ pub fn _bare_pick(args: &[Py]) -> Py {
     return Py::None;
     }
     if py_truthy(&mcall(&mcall(&mcall(&mcall(&found.clone(), "group", &[Py::Int(0)]), "strip", &[]), "lower", &[]), "startswith", &[py_str("which")])) {
-    return pyrt::xrefs::xget("compose.fallback_data", "BARE_PICK_WHICH");
+    return g_BARE_PICK_WHICH();
     }
     verb = mcall(&py_str(" "), "join", &[mcall(&mcall(&mcall(&found.clone(), "group", &[py_str("verb")]), "lower", &[]), "split", &[])]);
-    pool = mcall(&pyrt::xrefs::xget("compose.fallback_data", "BARE_PICK_KIND"), "get", &[verb.clone(), pyrt::xrefs::xget("compose.fallback_data", "BARE_PICK_DO")]);
+    pool = mcall(&g_BARE_PICK_KIND(), "get", &[verb.clone(), g_BARE_PICK_DO()]);
     if py_truthy(&{ let __b = from_the_clause.clone(); if !py_truthy(&__b) { __b } else { { let __b = mcall(&g_OCCASION_ABOVE(), "search", &[call_builtin("str", &[{ let __b = clean.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))]); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_THE_DAY_IS_NAMED(), "search", &[call_builtin("str", &[{ let __b = clean.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))]); if py_truthy(&__b) { __b } else { _an_occasion_in_the_thread(&[memory.clone()]) } } } } } }) {
     return Py::None;
     }
-    if py_truthy(&{ let __b = from_the_clause.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_is(&pool.clone(), &pyrt::xrefs::xget("compose.fallback_data", "BARE_PICK_DO"))) } }) {
+    if py_truthy(&{ let __b = from_the_clause.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_is(&pool.clone(), &g_BARE_PICK_DO())) } }) {
     return Py::None;
     }
     if py_truthy(&{ let __b = Py::Bool(py_contains(&g_BARE_PICK_NEEDS_THE_THING(), &verb.clone())); if !py_truthy(&__b) { __b } else { _a_subject_above(&[memory.clone()]) } }) {
     return Py::None;
     }
-    if py_truthy(&{ let __b = Py::Bool(py_is(&pool.clone(), &pyrt::xrefs::xget("compose.fallback_data", "BARE_PICK_WEAR"))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_an_occasion_above(&[memory.clone()]))) } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_is(&pool.clone(), &g_BARE_PICK_WEAR())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_an_occasion_above(&[memory.clone()]))) } }) {
     weather = _weather_above(&[memory.clone()]);
     if py_truthy(&Py::Bool(py_eq(&weather.clone(), &py_str("wet")))) {
-    return pyrt::xrefs::xget("compose.fallback_data", "BARE_PICK_WEAR_WET");
+    return g_BARE_PICK_WEAR_WET();
     }
     if py_truthy(&Py::Bool(py_eq(&weather.clone(), &py_str("cold")))) {
-    return pyrt::xrefs::xget("compose.fallback_data", "BARE_PICK_WEAR_COLD");
+    return g_BARE_PICK_WEAR_COLD();
     }
     if py_truthy(&Py::Bool(py_eq(&weather.clone(), &py_str("hot")))) {
-    return pyrt::xrefs::xget("compose.fallback_data", "BARE_PICK_WEAR_HOT");
+    return g_BARE_PICK_WEAR_HOT();
     }
     }
-    if py_truthy(&{ let __b = Py::Bool(py_is(&pool.clone(), &pyrt::xrefs::xget("compose.fallback_data", "BARE_PICK_BRING"))); if !py_truthy(&__b) { __b } else { _a_trip_above(&[memory.clone()]) } }) {
-    return pyrt::xrefs::xget("compose.fallback_data", "BARE_PICK_TAKE");
+    if py_truthy(&{ let __b = Py::Bool(py_is(&pool.clone(), &g_BARE_PICK_BRING())); if !py_truthy(&__b) { __b } else { _a_trip_above(&[memory.clone()]) } }) {
+    return g_BARE_PICK_TAKE();
     }
-    if py_truthy(&{ let __b = Py::Bool(py_is(&pool.clone(), &pyrt::xrefs::xget("compose.fallback_data", "BARE_PICK_DO"))); if !py_truthy(&__b) { __b } else { { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(memory.clone()); __kws.extend(vec![("heavy".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _news_above(args))(&__args) } } }) {
-    return pyrt::xrefs::xget("compose.fallback_data", "BARE_PICK_AFTER_NEWS");
+    if py_truthy(&{ let __b = Py::Bool(py_is(&pool.clone(), &g_BARE_PICK_DO())); if !py_truthy(&__b) { __b } else { { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(memory.clone()); __kws.extend(vec![("heavy".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _news_above(args))(&__args) } } }) {
+    return g_BARE_PICK_AFTER_NEWS();
     }
     return pool.clone();
     Py::None
@@ -12714,7 +12714,7 @@ pub fn _opens_the_line(args: &[Py]) -> Py {
     else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "prefix") { v.clone() }
     else { exc::raise(type_err(&format!("missing required argument: prefix"))) };
     let _ = py_str("True when what comes before the human/person ask is only a greeting or a question opener.");
-    return { let __b = call_builtin("bool", &[mcall(&pyrt::xrefs::xget("compose.fallback_words", "HUMAN_LEAD"), "match", &[prefix.clone()])]).unwrap_or_else(|e| exc::raise(e)); if py_truthy(&__b) { __b } else { call_builtin("bool", &[mcall(&pyrt::xrefs::xget("compose.fallback_words", "HUMAN_QUOTED"), "search", &[prefix.clone()])]).unwrap_or_else(|e| exc::raise(e)) } };
+    return { let __b = call_builtin("bool", &[mcall(&g_HUMAN_LEAD(), "match", &[prefix.clone()])]).unwrap_or_else(|e| exc::raise(e)); if py_truthy(&__b) { __b } else { call_builtin("bool", &[mcall(&g_HUMAN_QUOTED(), "search", &[prefix.clone()])]).unwrap_or_else(|e| exc::raise(e)) } };
     Py::None
 }
 pub fn _asks_elsewhere(args: &[Py]) -> Py {
@@ -12732,16 +12732,16 @@ pub fn _asks_elsewhere(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: tail"))) };
     let mut word: Py = Py::None;
     let _ = py_str("True when what comes after the human/person words asks about somebody other than us.");
-    if py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback_words", "HUMAN_HELPS"), "match", &[{ let __b = tail.clone(); if py_truthy(&__b) { __b } else { py_str("") } }])) {
+    if py_truthy(&mcall(&g_HUMAN_HELPS(), "match", &[{ let __b = tail.clone(); if py_truthy(&__b) { __b } else { py_str("") } }])) {
     return Py::Bool(false);
     }
-    if py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback_words", "HUMAN_TAIL"), "match", &[{ let __b = tail.clone(); if py_truthy(&__b) { __b } else { py_str("") } }])) {
+    if py_truthy(&mcall(&g_HUMAN_TAIL(), "match", &[{ let __b = tail.clone(); if py_truthy(&__b) { __b } else { py_str("") } }])) {
     return Py::Bool(false);
     }
     if py_truthy(&mcall(&g_HUMAN_OTHER_END(), "match", &[{ let __b = tail.clone(); if py_truthy(&__b) { __b } else { py_str("") } }])) {
     return Py::Bool(false);
     }
-    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&stdlib_call("re", "findall", &[py_str("[a-z]+"), mcall(&{ let __b = tail.clone(); if py_truthy(&__b) { __b } else { py_str("") } }, "lower", &[])]).unwrap_or_else(|e| exc::raise(e))) { let mut word: Py = __item.clone(); __out.push(Py::Bool(!py_contains(&pyrt::xrefs::xget("compose.fallback_data", "HUMAN_EMPTY"), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&stdlib_call("re", "findall", &[py_str("[a-z]+"), mcall(&{ let __b = tail.clone(); if py_truthy(&__b) { __b } else { py_str("") } }, "lower", &[])]).unwrap_or_else(|e| exc::raise(e))) { let mut word: Py = __item.clone(); __out.push(Py::Bool(!py_contains(&g_HUMAN_EMPTY(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn _asks_for_a_person_to_talk_to(args: &[Py]) -> Py {
@@ -12765,7 +12765,7 @@ pub fn _asks_for_a_person_to_talk_to(args: &[Py]) -> Py {
     return Py::Bool(false);
     }
     tail = slice_or_raise(&clean.clone(), &mcall(&matched.clone(), "end", &[]), &Py::None, &Py::None);
-    return call_builtin("bool", &[{ let __b = mcall(&pyrt::xrefs::xget("compose.fallback_words", "HUMAN_TAIL"), "match", &[tail.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_HUMAN_TO_ME(), "match", &[tail.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_HUMAN_OTHER_END(), "match", &[tail.clone()]) } } } }]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("bool", &[{ let __b = mcall(&g_HUMAN_TAIL(), "match", &[tail.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_HUMAN_TO_ME(), "match", &[tail.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_HUMAN_OTHER_END(), "match", &[tail.clone()]) } } } }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn _asks_for_help(args: &[Py]) -> Py {
@@ -12846,7 +12846,7 @@ pub fn __nested__unsupported_0(args: &[Py]) -> Py {
     let mut phrase: Py = Py::None;
     let mut support: Py = Py::None;
     let mut word: Py = Py::None;
-    let __iter1 = py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "DETAILS_IN_A_WARM_LINE"));
+    let __iter1 = py_iter_or_raise(&g_DETAILS_IN_A_WARM_LINE());
     for __item in __iter1 {
     let __unpk2 = py_unpack(&__item.clone(), 2, None);
     phrase = __unpk2[0].clone();
@@ -12931,7 +12931,7 @@ pub fn _occasion_pool(args: &[Py]) -> Py {
     let mut pronoun: Py = Py::None;
     let _ = py_str("The lines for this occasion, without the ones that look forward to today's occasion.");
     if py_truthy(&pyrt::xrefs::xcall("compose.goodnews", "someone_elses_occasion", &[clean.clone()])) {
-    pool = mcall(&pyrt::xrefs::xget("compose.fallback_data", "SOMEONE_ELSES_DAY"), "get", &[occasion.clone()]);
+    pool = mcall(&g_SOMEONE_ELSES_DAY(), "get", &[occasion.clone()]);
     if py_truthy(&pool.clone()) {
     apart = call_builtin("bool", &[mcall(&g__APART(), "search", &[call_builtin("str", &[{ let __b = clean.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))])]).unwrap_or_else(|e| exc::raise(e));
     kept = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pool.clone()) { let mut line: Py = __item.clone(); if py_truthy(&{ let __b = apart.clone(); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g__PLACES_THEM(), "search", &[line.clone()]))) } }) {  __out.push(line.clone()); } } py_list(__out) })() };
@@ -12942,7 +12942,7 @@ pub fn _occasion_pool(args: &[Py]) -> Py {
     return call_builtin("tuple", &[{ let __b = kept.clone(); if py_truthy(&__b) { __b } else { pool.clone() } }]).unwrap_or_else(|e| exc::raise(e));
     }
     }
-    pool = geti(&pyrt::xrefs::xget("compose.fallback_data", "OCCASION"), &occasion.clone());
+    pool = geti(&g_OCCASION(), &occasion.clone());
     drop = py_list(vec![]);
     if py_truthy(&mcall(&g_HAPPENING_NOW(), "search", &[clean.clone()])) {
     let _ = mcall(&drop.clone(), "append", &[py_str("when it comes")]);
@@ -12979,10 +12979,10 @@ pub fn _their_own_slip(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = mcall(&g_HEAVY_ABOVE(), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_SERIOUS_NEWS(), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_BABY_LOSS(), "search", &[clean.clone()]) } } } }) {
     return Py::None;
     }
-    if py_truthy(&{ let __b = mcall(&pyrt::xrefs::xget("compose.fallback_data", "SELF_BLAME_ASKS"), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { mcall(&pyrt::xrefs::xget("compose.fallback_data", "A_VERDICT_ON_THE_PERSON"), "search", &[clean.clone()]) } }) {
+    if py_truthy(&{ let __b = mcall(&g_SELF_BLAME_ASKS(), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_A_VERDICT_ON_THE_PERSON(), "search", &[clean.clone()]) } }) {
     return Py::None;
     }
-    if py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback_data", "GOING_TO_DIE"), "search", &[clean.clone()])) {
+    if py_truthy(&mcall(&g_GOING_TO_DIE(), "search", &[clean.clone()])) {
     return Py::None;
     }
     if py_truthy(&{ let __b = mcall(&g_HARM_IN_A_LAUGH(), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_LAUGH_STOPPED(), "search", &[clean.clone()]) } }) {
@@ -12991,29 +12991,29 @@ pub fn _their_own_slip(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = call_builtin("isinstance", &[memory.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { _in_a_care_thread(&[memory.clone()]) } }) {
     return Py::None;
     }
-    if py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback_data", "A_CROWD_LAUGHED"), "search", &[clean.clone()])) {
-    return pyrt::xrefs::xget("compose.fallback_data", "LAUGHED_AT");
+    if py_truthy(&mcall(&g_A_CROWD_LAUGHED(), "search", &[clean.clone()])) {
+    return g_LAUGHED_AT();
     }
-    if py_truthy(&{ let __b = mcall(&pyrt::xrefs::xget("compose.fallback_data", "A_PERSON_LAUGHED"), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_A_OWN_LAUGH(), "search", &[clean.clone()]) } }) {
+    if py_truthy(&{ let __b = mcall(&g_A_PERSON_LAUGHED(), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_A_OWN_LAUGH(), "search", &[clean.clone()]) } }) {
     return Py::None;
     }
-    if py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback_data", "LAUGHED_AT_THEM"), "search", &[clean.clone()])) {
-    return pyrt::xrefs::xget("compose.fallback_data", "LAUGHED_AT");
+    if py_truthy(&mcall(&g_LAUGHED_AT_THEM(), "search", &[clean.clone()])) {
+    return g_LAUGHED_AT();
     }
-    if py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback_data", "SOMEONE_ELSES_SHAME"), "search", &[clean.clone()])) {
+    if py_truthy(&mcall(&g_SOMEONE_ELSES_SHAME(), "search", &[clean.clone()])) {
     return Py::None;
     }
-    if py_truthy(&{ let __b = mcall(&pyrt::xrefs::xget("compose.fallback_data", "DIE_OF_IT"), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { mcall(&pyrt::xrefs::xget("compose.fallback_data", "THE_GROUND_OPENS"), "search", &[clean.clone()]) } }) {
-    return pyrt::xrefs::xget("compose.fallback_data", "EMBARRASSED");
+    if py_truthy(&{ let __b = mcall(&g_DIE_OF_IT(), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_THE_GROUND_OPENS(), "search", &[clean.clone()]) } }) {
+    return g_EMBARRASSED();
     }
-    if py_truthy(&{ let __b = mcall(&pyrt::xrefs::xget("compose.fallback_data", "EMBARRASSMENT_WORD"), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { mcall(&pyrt::xrefs::xget("compose.fallback_data", "THE_MOMENT_IS_THEIRS"), "search", &[clean.clone()]) } }) {
-    return pyrt::xrefs::xget("compose.fallback_data", "EMBARRASSED");
+    if py_truthy(&{ let __b = mcall(&g_EMBARRASSMENT_WORD(), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { mcall(&g_THE_MOMENT_IS_THEIRS(), "search", &[clean.clone()]) } }) {
+    return g_EMBARRASSED();
     }
-    if py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback_data", "A_SLIP_IS_NOT_A_FALL"), "search", &[clean.clone()])) {
+    if py_truthy(&mcall(&g_A_SLIP_IS_NOT_A_FALL(), "search", &[clean.clone()])) {
     return Py::None;
     }
-    if py_truthy(&{ let __b = mcall(&pyrt::xrefs::xget("compose.fallback_data", "A_SOCIAL_SLIP"), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&pyrt::xrefs::xget("compose.fallback_data", "A_SLIP"), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { mcall(&pyrt::xrefs::xget("compose.fallback_data", "IN_A_ROOM"), "search", &[clean.clone()]) } } } }) {
-    return pyrt::xrefs::xget("compose.fallback_data", "EMBARRASSED");
+    if py_truthy(&{ let __b = mcall(&g_A_SOCIAL_SLIP(), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_A_SLIP(), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { mcall(&g_IN_A_ROOM(), "search", &[clean.clone()]) } } } }) {
+    return g_EMBARRASSED();
     }
     return Py::None;
     Py::None
@@ -13126,7 +13126,7 @@ pub fn _the_news_landed(args: &[Py]) -> Py {
     else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "clean") { v.clone() }
     else { exc::raise(type_err(&format!("missing required argument: clean"))) };
     let _ = py_str("'good' when the answer came back and it was good, 'landed' when it came back unread.\n\n    The wait and the answer are the two halves of one thread, and the reply to each is different:\n    a person still waiting wants to be asked when, and a person who has heard wants to say what\n    was said. Until this, the second half got the nod, which reads as though the bot had stopped\n    listening just as the news arrived.\n    ");
-    if py_truthy(&Py::Bool(!py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback_data", "_LANDED"), "search", &[clean.clone()])))) {
+    if py_truthy(&Py::Bool(!py_truthy(&mcall(&g__LANDED(), "search", &[clean.clone()])))) {
     return Py::None;
     }
     if py_truthy(&mcall(&g__ANSWER_BAD(), "search", &[clean.clone()])) {
@@ -13306,7 +13306,7 @@ pub fn _the_day_described(args: &[Py]) -> Py {
     if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_DAY_TO_COME_PAST()) { let mut phrase: Py = __item.clone(); __out.push(Py::Bool(py_contains(&line.clone(), &phrase.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     return Py::None;
     }
-    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk7853 = py_unpack(&__item.clone(), 2, None); let mut index: Py = __unpk7853[0].clone(); let mut word: Py = __unpk7853[1].clone(); if py_truthy(&{ let __b = op_gt(&index.clone(), &Py::Int(0)); if !py_truthy(&__b) { __b } else { { let __b = op_lt(&op_add(&index.clone(), &Py::Int(1)), &call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))); if !py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_DAY_WORDS(), "values", &[])) { let mut pool: Py = __item.clone(); __out.push(Py::Bool(py_contains(&pool.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } } } }) {  __out.push({ let __b = Py::Bool(py_eq(&geti(&words.clone(), &op_sub(&index.clone(), &Py::Int(1))), &py_str("the"))); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&py_tuple(vec![py_list(vec![py_str("one")]), py_list(vec![py_str("ones")])]), &slice_or_raise(&words.clone(), &op_add(&index.clone(), &Py::Int(1)), &op_add(&index.clone(), &Py::Int(2)), &Py::None))) } }); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk3108 = py_unpack(&__item.clone(), 2, None); let mut index: Py = __unpk3108[0].clone(); let mut word: Py = __unpk3108[1].clone(); if py_truthy(&{ let __b = op_gt(&index.clone(), &Py::Int(0)); if !py_truthy(&__b) { __b } else { { let __b = op_lt(&op_add(&index.clone(), &Py::Int(1)), &call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))); if !py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_DAY_WORDS(), "values", &[])) { let mut pool: Py = __item.clone(); __out.push(Py::Bool(py_contains(&pool.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } } } }) {  __out.push({ let __b = Py::Bool(py_eq(&geti(&words.clone(), &op_sub(&index.clone(), &Py::Int(1))), &py_str("the"))); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&py_tuple(vec![py_list(vec![py_str("one")]), py_list(vec![py_str("ones")])]), &slice_or_raise(&words.clone(), &op_add(&index.clone(), &Py::Int(1)), &op_add(&index.clone(), &Py::Int(2)), &Py::None))) } }); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     return Py::None;
     }
     day_words = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_DAY_WORDS(), "values", &[])) { let mut pool: Py = __item.clone(); __out.push(Py::Bool(py_contains(&pool.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(word.clone()); } } py_list(__out) })() };
@@ -13360,13 +13360,13 @@ pub fn __nested_ruled_out_4(args: &[Py]) -> Py {
     let __unpk9 = py_unpack(&__item.clone(), 2, None);
     kind = __unpk9[0].clone();
     pool = __unpk9[1].clone();
-    count = call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk653 = py_unpack(&__item.clone(), 2, None); let mut index: Py = __unpk653[0].clone(); let mut word: Py = __unpk653[1].clone(); if py_truthy(&{ let __b = Py::Bool(py_contains(&pool.clone(), &word.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&py_call(&ruled_out, &[index.clone()]))) } }) {  __out.push(Py::Int(1)); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    count = call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk5907 = py_unpack(&__item.clone(), 2, None); let mut index: Py = __unpk5907[0].clone(); let mut word: Py = __unpk5907[1].clone(); if py_truthy(&{ let __b = Py::Bool(py_contains(&pool.clone(), &word.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&py_call(&ruled_out, &[index.clone()]))) } }) {  __out.push(Py::Int(1)); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&op_gt(&count.clone(), &best_count.clone())) {
     let __unpk10 = py_unpack(&py_tuple(vec![kind.clone(), count.clone()]), 2, None);
     best = __unpk10[0].clone();
     best_count = __unpk10[1].clone();
     }
-    cleared = call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk9068 = py_unpack(&__item.clone(), 2, None); let mut index: Py = __unpk9068[0].clone(); let mut word: Py = __unpk9068[1].clone(); if py_truthy(&{ let __b = Py::Bool(py_contains(&pool.clone(), &word.clone())); if !py_truthy(&__b) { __b } else { py_call(&ruled_out, &[index.clone()]) } }) {  __out.push(Py::Int(1)); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    cleared = call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk8958 = py_unpack(&__item.clone(), 2, None); let mut index: Py = __unpk8958[0].clone(); let mut word: Py = __unpk8958[1].clone(); if py_truthy(&{ let __b = Py::Bool(py_contains(&pool.clone(), &word.clone())); if !py_truthy(&__b) { __b } else { py_call(&ruled_out, &[index.clone()]) } }) {  __out.push(Py::Int(1)); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&op_gt(&cleared.clone(), &ruled_count.clone())) {
     let __unpk11 = py_unpack(&py_tuple(vec![kind.clone(), cleared.clone()]), 2, None);
     ruled = __unpk11[0].clone();
@@ -13375,14 +13375,14 @@ pub fn __nested_ruled_out_4(args: &[Py]) -> Py {
     }
     if py_truthy(&Py::Bool(!py_truthy(&best.clone()))) {
     if py_truthy(&ruled.clone()) {
-    return mcall(&pyrt::xrefs::xget("compose.fallback_data", "THE_DAY"), "get", &[py_str("mild")]);
+    return mcall(&g_THE_DAY(), "get", &[py_str("mild")]);
     }
     return Py::None;
     }
     if py_truthy(&{ let __b = call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&g_DAY_TO_COME(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)); if py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_DAY_TO_COME_PHRASES()) { let mut phrase: Py = __item.clone(); __out.push(Py::Bool(py_contains(&line.clone(), &phrase.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }) {
-    return { let __b = mcall(&pyrt::xrefs::xget("compose.fallback_data", "THE_DAY_AHEAD"), "get", &[best.clone()]); if py_truthy(&__b) { __b } else { mcall(&pyrt::xrefs::xget("compose.fallback_data", "THE_DAY"), "get", &[best.clone()]) } };
+    return { let __b = mcall(&g_THE_DAY_AHEAD(), "get", &[best.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_THE_DAY(), "get", &[best.clone()]) } };
     }
-    return mcall(&pyrt::xrefs::xget("compose.fallback_data", "THE_DAY"), "get", &[best.clone()]);
+    return mcall(&g_THE_DAY(), "get", &[best.clone()]);
     Py::None
 }
 pub fn the_day_remarked(args: &[Py]) -> Py {
@@ -13431,7 +13431,7 @@ pub fn _the_reason_is_on_the_body(args: &[Py]) -> Py {
     return Py::Bool(false);
     }
     words = call_builtin("set", &[stdlib_call("re", "findall", &[py_str("[a-z']+"), text.clone()]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e));
-    return call_builtin("bool", &[{ let __b = op_bitand(&words.clone(), &pyrt::xrefs::xget("compose.fallback_data", "BODY_SAYS_WHY")); if py_truthy(&__b) { __b } else { { let __b = _worry_is_about_the_body(&[text.clone(), words.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_LATE_NOT_A_TIME(), "search", &[text.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_BABY_ON_THE_WAY(), "search", &[text.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_BODY_SAYS_WHY_PHRASE(), "search", &[text.clone()]) } } } } } } } }]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("bool", &[{ let __b = op_bitand(&words.clone(), &g_BODY_SAYS_WHY()); if py_truthy(&__b) { __b } else { { let __b = _worry_is_about_the_body(&[text.clone(), words.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_LATE_NOT_A_TIME(), "search", &[text.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_BABY_ON_THE_WAY(), "search", &[text.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_BODY_SAYS_WHY_PHRASE(), "search", &[text.clone()]) } } } } } } } }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn _the_line_cancels(args: &[Py]) -> Py {
@@ -13744,18 +13744,18 @@ pub fn _no_words(args: &[Py]) -> Py {
     return Py::None;
     }
     if py_truthy(&mcall(&g_NO_WORDS_ASK(), "search", &[clean.clone()])) {
-    return pyrt::xrefs::xget("compose.fallback_data", "NO_WORDS_ASKING");
+    return g_NO_WORDS_ASKING();
     }
     if py_truthy(&mcall(&g_NO_WORDS_CARE(), "search", &[clean.clone()])) {
-    return pyrt::xrefs::xget("compose.fallback_data", "NO_WORDS_AT_THE_CARE");
+    return g_NO_WORDS_AT_THE_CARE();
     }
     if py_truthy(&{ let __b = mcall(&g_NO_WORDS_TO(), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_NO_WORDS_SHE(), "search", &[clean.clone()]) } }) {
     if py_truthy(&{ let __b = mcall(&g_NO_WORDS_CROWD(), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_NO_WORDS_ONE(), "search", &[clean.clone()]))) } }) {
     return Py::None;
     }
-    return pyrt::xrefs::xget("compose.fallback_data", "NO_WORDS_SOMEONE");
+    return g_NO_WORDS_SOMEONE();
     }
-    return pyrt::xrefs::xget("compose.fallback_data", "NO_WORDS_STUCK");
+    return g_NO_WORDS_STUCK();
     Py::None
 }
 pub fn _an_invitation(args: &[Py]) -> Py {
@@ -13781,7 +13781,7 @@ pub fn _an_invitation(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&line.clone())); if py_truthy(&__b) { __b } else { op_lt(&call_builtin("len", &[mcall(&line.clone(), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)) } }) {
     return Py::None;
     }
-    if py_truthy(&op_bitand(&call_builtin("set", &[mcall(&line.clone(), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), &pyrt::xrefs::xget("compose.fallback_data", "INVITE_NEVER"))) {
+    if py_truthy(&op_bitand(&call_builtin("set", &[mcall(&line.clone(), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), &g_INVITE_NEVER())) {
     return Py::None;
     }
     if py_truthy(&mcall(&g_INVITE_COMPANY(), "match", &[line.clone()])) {
@@ -13791,7 +13791,7 @@ pub fn _an_invitation(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&found.clone()))) {
     return Py::None;
     }
-    tail = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&mcall(&found.clone(), "group", &[Py::Int(1)]), "split", &[])) { let mut w: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&pyrt::xrefs::xget("compose.fallback_data", "INVITE_FILLER"), &w.clone()))) {  __out.push(w.clone()); } } py_list(__out) })() };
+    tail = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&mcall(&found.clone(), "group", &[Py::Int(1)]), "split", &[])) { let mut w: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&g_INVITE_FILLER(), &w.clone()))) {  __out.push(w.clone()); } } py_list(__out) })() };
     if py_truthy(&Py::Bool(!py_truthy(&tail.clone()))) {
     tail = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&mcall(&found.clone(), "group", &[Py::Int(1)]), "split", &[])) { let mut w: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&py_tuple(vec![py_str("tonight"), py_str("today"), py_str("tomorrow"), py_str("later"), py_str("now"), py_str("soon"), py_str("after")]), &w.clone()))) {  __out.push(w.clone()); } } py_list(__out) })() };
     }
@@ -13799,10 +13799,10 @@ pub fn _an_invitation(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&tail.clone())); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_INVITE_NOT_A_DOING(), "match", &[said.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_INVITE_WHEN(), "match", &[said.clone()]) } } } }) {
     return Py::None;
     }
-    if py_truthy(&call_builtin("all", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&tail.clone()) { let mut w: Py = __item.clone(); __out.push(Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "INVITE_PRONOUN"), &w.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    if py_truthy(&call_builtin("all", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&tail.clone()) { let mut w: Py = __item.clone(); __out.push(Py::Bool(py_contains(&g_INVITE_PRONOUN(), &w.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     return Py::None;
     }
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&op_bitand(&call_builtin("set", &[tail.clone()]).unwrap_or_else(|e| exc::raise(e)), &pyrt::xrefs::xget("compose.fallback_data", "INVITE_ACTIVITY")))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_INVITE_TALK(), "search", &[line.clone()]))) } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&op_bitand(&call_builtin("set", &[tail.clone()]).unwrap_or_else(|e| exc::raise(e)), &g_INVITE_ACTIVITY()))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_INVITE_TALK(), "search", &[line.clone()]))) } }) {
     return Py::None;
     }
     return if py_truthy(&mcall(&g_INVITE_TALK(), "search", &[line.clone()])) { py_str("talk") } else { py_str("go") };
@@ -13878,7 +13878,7 @@ pub fn the_limits_said(args: &[Py]) -> Py {
     let mut without: Py = Py::None;
     let _ = py_str("The limits a line of joined limits names, in the order a reply should try them.\n\n    \"cheap and not too far\" and \"under 500 pounds and not too far\" are one line with two limits in\n    it, and the reply has to pick one to ask about. The part that carries a bound comes first: the\n    person has already answered the question that part asks - \"under 500 pounds\" - so saying it\n    back and pointing it at the things on the screen is the most the reply can do. The other parts\n    follow, the last said first, because the limit said last is the one the next answer has to\n    meet. The parts are tried in that order against the answer above, and the first one the answer\n    can be cut on is the one the reply asks about: \"under 500 pounds each and not too far\" after\n    four destinations that quote no prices is a distance to cut, not a price.\n\n    Returns [(axis, part), ...] and nothing when the line is not only limits - a line with a part\n    that is not one (\"cheap and cheerful\", \"something not too far from the station\") keeps\n    whatever the composers after this one make of it.\n    ");
     line = mcall(&py_str(" "), "join", &[mcall(&mcall(&call_builtin("str", &[{ let __b = clean.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "strip", &[]), "split", &[])]);
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&line.clone())); if py_truthy(&__b) { __b } else { { let __b = mcall(&mcall(&line.clone(), "rstrip", &[]), "endswith", &[py_str("?")]); if py_truthy(&__b) { __b } else { op_gt(&call_builtin("len", &[mcall(&line.clone(), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), &pyrt::xrefs::xget("compose.fallback_data", "NARROW_WORDS")) } } } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&line.clone())); if py_truthy(&__b) { __b } else { { let __b = mcall(&mcall(&line.clone(), "rstrip", &[]), "endswith", &[py_str("?")]); if py_truthy(&__b) { __b } else { op_gt(&call_builtin("len", &[mcall(&line.clone(), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), &g_NARROW_WORDS()) } } } }) {
     return py_list(vec![]);
     }
     parts = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_NARROW_JOIN(), "split", &[line.clone()])) { let mut part: Py = __item.clone(); if py_truthy(&part.clone()) {  __out.push(part.clone()); } } py_list(__out) })() };
@@ -13889,8 +13889,8 @@ pub fn the_limits_said(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&call_builtin("all", &[axes.clone()]).unwrap_or_else(|e| exc::raise(e))))) {
     return py_list(vec![]);
     }
-    with_bound = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[axes.clone(), parts.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk3362 = py_unpack(&__item.clone(), 2, None); let mut axis: Py = __unpk3362[0].clone(); let mut part: Py = __unpk3362[1].clone(); if py_truthy(&the_bound_said(&[part.clone()])) {  __out.push(py_tuple(vec![axis.clone(), part.clone()])); } } py_list(__out) })() };
-    without = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[axes.clone(), parts.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk2498 = py_unpack(&__item.clone(), 2, None); let mut axis: Py = __unpk2498[0].clone(); let mut part: Py = __unpk2498[1].clone(); if py_truthy(&Py::Bool(!py_truthy(&the_bound_said(&[part.clone()])))) {  __out.push(py_tuple(vec![axis.clone(), part.clone()])); } } py_list(__out) })() };
+    with_bound = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[axes.clone(), parts.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk6470 = py_unpack(&__item.clone(), 2, None); let mut axis: Py = __unpk6470[0].clone(); let mut part: Py = __unpk6470[1].clone(); if py_truthy(&the_bound_said(&[part.clone()])) {  __out.push(py_tuple(vec![axis.clone(), part.clone()])); } } py_list(__out) })() };
+    without = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[axes.clone(), parts.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk5606 = py_unpack(&__item.clone(), 2, None); let mut axis: Py = __unpk5606[0].clone(); let mut part: Py = __unpk5606[1].clone(); if py_truthy(&Py::Bool(!py_truthy(&the_bound_said(&[part.clone()])))) {  __out.push(py_tuple(vec![axis.clone(), part.clone()])); } } py_list(__out) })() };
     return op_add(&slice_or_raise(&with_bound.clone(), &Py::None, &Py::None, &op_neg(&Py::Int(1))), &slice_or_raise(&without.clone(), &Py::None, &Py::None, &op_neg(&Py::Int(1))));
     Py::None
 }
@@ -13995,11 +13995,11 @@ pub fn the_answer_to_cut(args: &[Py]) -> Py {
     return py_dict(vec![]);
     }
     last = geti(&turns.clone(), &op_neg(&Py::Int(1)));
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&call_builtin("isinstance", &[last.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e)))); if py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&pyrt::xrefs::xget("compose.fallback_data", "NARROW_ANSWERED"), &mcall(&last.clone(), "get", &[py_str("module")]))) } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&call_builtin("isinstance", &[last.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e)))); if py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&g_NARROW_ANSWERED(), &mcall(&last.clone(), "get", &[py_str("module")]))) } }) {
     return py_dict(vec![]);
     }
     said = mcall(&last.clone(), "get", &[py_str("bot")]);
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&call_builtin("isinstance", &[said.clone(), py_func("str", |args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e)))); if py_truthy(&__b) { __b } else { op_lt(&call_builtin("len", &[mcall(&said.clone(), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), &pyrt::xrefs::xget("compose.fallback_data", "NARROW_SUBSTANCE")) } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&call_builtin("isinstance", &[said.clone(), py_func("str", |args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e)))); if py_truthy(&__b) { __b } else { op_lt(&call_builtin("len", &[mcall(&said.clone(), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), &g_NARROW_SUBSTANCE()) } }) {
     return py_dict(vec![]);
     }
     if py_truthy(&mcall(&mcall(&said.clone(), "rstrip", &[]), "endswith", &[py_str("?")])) {
@@ -14007,7 +14007,7 @@ pub fn the_answer_to_cut(args: &[Py]) -> Py {
     }
     if py_truthy(&axis.clone()) {
     raised = mcall(&mcall(&g_AXIS_SAID(), "get", &[axis.clone(), stdlib_call("re", "compile", &[py_str("(?!)")]).unwrap_or_else(|e| exc::raise(e))]), "findall", &[said.clone()]);
-    if py_truthy(&{ let __b = op_lt(&call_builtin("len", &[raised.clone()]).unwrap_or_else(|e| exc::raise(e)), &mcall(&pyrt::xrefs::xget("compose.fallback_data", "AXIS_MIN"), "get", &[axis.clone(), Py::Int(1)])); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_names_things_to_choose(&[said.clone()]))) } }) {
+    if py_truthy(&{ let __b = op_lt(&call_builtin("len", &[raised.clone()]).unwrap_or_else(|e| exc::raise(e)), &mcall(&g_AXIS_MIN(), "get", &[axis.clone(), Py::Int(1)])); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_names_things_to_choose(&[said.clone()]))) } }) {
     return py_dict(vec![]);
     }
     }
@@ -14149,7 +14149,7 @@ pub fn _a_verdict_line(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = found.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_eq(&mcall(&found.clone(), "group", &[py_str("noun")]), &py_str("joke"))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_is(&memory.clone(), &Py::None)); if !py_truthy(&__b) { __b } else { _the_answer_above_was_a_joke(&[memory.clone()]) } } } } } }) {
     return Py::None;
     }
-    return pyrt::xrefs::xget("compose.fallback_data", "REACTION_OUCH");
+    return g_REACTION_OUCH();
     Py::None
 }
 pub fn a_death_just_said(args: &[Py]) -> Py {
@@ -14374,15 +14374,15 @@ pub fn _the_heavy_pool(args: &[Py]) -> Py {
     else { Py::None };
     let _ = py_str("The pool for a verdict on news with no repair in it: a loss, a queue or a setback.");
     if py_truthy(&a_death_just_said(&[memory.clone()])) {
-    return pyrt::xrefs::xget("compose.fallback_data", "VERDICT_NUMB");
+    return g_VERDICT_NUMB();
     }
     if py_truthy(&a_wait_with_no_loss(&[memory.clone()])) {
-    return pyrt::xrefs::xget("compose.fallback_data", "VERDICT_QUEUE");
+    return g_VERDICT_QUEUE();
     }
     if py_truthy(&a_setback_with_no_loss(&[memory.clone()])) {
-    return pyrt::xrefs::xget("compose.fallback_data", "VERDICT_SETBACK");
+    return g_VERDICT_SETBACK();
     }
-    return pyrt::xrefs::xget("compose.fallback_data", "VERDICT_HEAVY");
+    return g_VERDICT_HEAVY();
     Py::None
 }
 pub fn a_heavy_verdict(args: &[Py]) -> Py {
@@ -14520,15 +14520,15 @@ pub fn _verdict_pool(args: &[Py]) -> Py {
     }
     }
     if py_truthy(&stdlib_call("re", "search", &[py_str("\\b(?:shame|letdown)\\b"), text.clone()]).unwrap_or_else(|e| exc::raise(e))) {
-    return pyrt::xrefs::xget("compose.fallback_data", "VERDICT_SHAME");
+    return g_VERDICT_SHAME();
     }
     if py_truthy(&stdlib_call("re", "search", &[py_str("\\b(?:typical|figures|luck|law|of course)\\b"), text.clone()]).unwrap_or_else(|e| exc::raise(e))) {
-    return pyrt::xrefs::xget("compose.fallback_data", "VERDICT_LUCK");
+    return g_VERDICT_LUCK();
     }
     if py_truthy(&a_verdict_on_the_person(&[memory.clone()])) {
-    return pyrt::xrefs::xget("compose.fallback_data", "VERDICT_ROUGH");
+    return g_VERDICT_ROUGH();
     }
-    return pyrt::xrefs::xget("compose.fallback_data", "VERDICT_ANNOY");
+    return g_VERDICT_ANNOY();
     Py::None
 }
 pub fn a_heavy_news(args: &[Py]) -> Py {
@@ -14555,7 +14555,7 @@ pub fn a_heavy_news(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&line.clone()))) {
     continue;
     }
-    if py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback_data", "HEAVY_NEWS"), "search", &[line.clone()])) {
+    if py_truthy(&mcall(&g_HEAVY_NEWS(), "search", &[line.clone()])) {
     return Py::Bool(true);
     }
     let __try2 = exc::catch(|| {
@@ -14806,7 +14806,7 @@ pub fn _reaction_pool(args: &[Py]) -> Py {
     return verdict.clone();
     }
     if py_truthy(&{ let __b = mcall(&g_FIRST_TURN_VERDICT(), "match", &[text.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&{ let __b = mcall(&{ let __b = memory.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[py_str("turns")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } })) } }) {
-    return pyrt::xrefs::xget("compose.fallback_data", "VERDICT_FIRST");
+    return g_VERDICT_FIRST();
     }
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&text.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_REACTION_LINE(), "match", &[text.clone()]))) } }) {
     return Py::None;
@@ -14822,9 +14822,9 @@ pub fn _reaction_pool(args: &[Py]) -> Py {
     }
     if py_truthy(&stdlib_call("re", "fullmatch", &[py_str("[\\w']*\\s*(?:what|pardon)\\W*"), text.clone()]).unwrap_or_else(|e| exc::raise(e))) {
     if py_truthy(&{ let __b = Py::Bool(!py_is(&memory.clone(), &Py::None)); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&pyrt::xrefs::xcall("memory", "last_bot", &[memory.clone()]))) } }) {
-    return pyrt::xrefs::xget("compose.fallback_data", "REACTION_REPEAT_FIRST");
+    return g_REACTION_REPEAT_FIRST();
     }
-    return pyrt::xrefs::xget("compose.fallback_data", "REACTION_REPEAT");
+    return g_REACTION_REPEAT();
     }
     return Py::None;
     Py::None
@@ -14855,10 +14855,10 @@ pub fn reaction_line(args: &[Py]) -> Py {
     return Py::None;
     }
     if py_truthy(&_a_care_thread_to_leave_alone(&[memory.clone()])) {
-    pool = pyrt::xrefs::xget("compose.fallback_data", "REACTIONS_CARE");
+    pool = g_REACTIONS_CARE();
     } else {
     if py_truthy(&_the_person_already_said_it(&[memory.clone()])) {
-    pool = mcall(&pyrt::xrefs::xget("compose.fallback_data", "REACTIONS_SAID"), "get", &[pool.clone(), pool.clone()]);
+    pool = mcall(&g_REACTIONS_SAID(), "get", &[pool.clone(), pool.clone()]);
     }
     }
     return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[pool.clone(), memory.clone(), clean.clone()]);
@@ -14926,27 +14926,27 @@ pub fn _thing_done_pool(args: &[Py]) -> Py {
     return Py::None;
     }
     if py_truthy(&Py::Bool(py_eq(&shape.clone(), &py_str("going")))) {
-    return pyrt::xrefs::xget("compose.fallback_data", "A_THING_ON");
+    return g_A_THING_ON();
     }
     if py_truthy(&Py::Bool(py_contains(&py_tuple(vec![py_str("soon"), py_str("at")]), &shape.clone()))) {
-    return pyrt::xrefs::xget("compose.fallback_data", "A_THING_AHEAD");
+    return g_A_THING_AHEAD();
     }
-    if py_truthy(&Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "GONE_VERB"), &done_verb.clone()))) {
-    return pyrt::xrefs::xget("compose.fallback_data", "A_THING_GONE");
+    if py_truthy(&Py::Bool(py_contains(&g_GONE_VERB(), &done_verb.clone()))) {
+    return g_A_THING_GONE();
     }
-    if py_truthy(&Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "BOUGHT_VERB"), &done_verb.clone()))) {
-    if py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback_data", "ALIVE"), "intersection", &[mcall(&clean.clone(), "split", &[])])) {
+    if py_truthy(&Py::Bool(py_contains(&g_BOUGHT_VERB(), &done_verb.clone()))) {
+    if py_truthy(&mcall(&g_ALIVE(), "intersection", &[mcall(&clean.clone(), "split", &[])])) {
     return Py::None;
     }
-    if py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback_data", "NOT_CHOSEN"), "intersection", &[mcall(&clean.clone(), "split", &[])])) {
-    return pyrt::xrefs::xget("compose.fallback_data", "A_THING_SEEN_TO");
+    if py_truthy(&mcall(&g_NOT_CHOSEN(), "intersection", &[mcall(&clean.clone(), "split", &[])])) {
+    return g_A_THING_SEEN_TO();
     }
-    return pyrt::xrefs::xget("compose.fallback_data", "A_THING_BOUGHT");
+    return g_A_THING_BOUGHT();
     }
-    if py_truthy(&Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "SEEN_TO_VERB"), &done_verb.clone()))) {
-    return pyrt::xrefs::xget("compose.fallback_data", "A_THING_SEEN_TO");
+    if py_truthy(&Py::Bool(py_contains(&g_SEEN_TO_VERB(), &done_verb.clone()))) {
+    return g_A_THING_SEEN_TO();
     }
-    return pyrt::xrefs::xget("compose.fallback_data", "A_THING_DONE");
+    return g_A_THING_DONE();
     Py::None
 }
 pub fn _tail_complains(args: &[Py]) -> Py {
@@ -15000,7 +15000,7 @@ pub fn _thing_done_scan(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = Py::Bool(py_contains(&clean.clone(), &py_str("?"))); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&clean.clone(), &py_str(" but "))); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_TAIL_ASK(), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_TAIL_GRUMBLE(), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_TAIL_TROUBLE(), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { _tail_complains(&[clean.clone()]) } } } } } } } } } }) {
     return py_tuple(vec![Py::None, py_str("")]);
     }
-    if py_truthy(&Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "QUESTION_OPENERS"), &geti(&{ let __b = mcall(&clean.clone(), "split", &[]); if py_truthy(&__b) { __b } else { py_list(vec![py_str("")]) } }, &Py::Int(0))))) {
+    if py_truthy(&Py::Bool(py_contains(&g_QUESTION_OPENERS(), &geti(&{ let __b = mcall(&clean.clone(), "split", &[]); if py_truthy(&__b) { __b } else { py_list(vec![py_str("")]) } }, &Py::Int(0))))) {
     return py_tuple(vec![Py::None, py_str("")]);
     }
     if py_truthy(&mcall(&g_NEGATIVE_LINE(), "search", &[clean.clone()])) {
@@ -15033,21 +15033,21 @@ pub fn _thing_done_scan(args: &[Py]) -> Py {
     let __aug2 = op_add(&j.clone(), &Py::Int(1));
     j = __aug2;
     }
-    if py_truthy(&{ let __b = op_ge(&j.clone(), &call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))); if py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&pyrt::xrefs::xget("compose.fallback_data", "DONE_VERB"), &geti(&words.clone(), &j.clone()))) } }) {
+    if py_truthy(&{ let __b = op_ge(&j.clone(), &call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))); if py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&g_DONE_VERB(), &geti(&words.clone(), &j.clone()))) } }) {
     continue;
     }
     rest = slice_or_raise(&words.clone(), &op_add(&j.clone(), &Py::Int(1)), &op_add(&j.clone(), &Py::Int(3)), &Py::None);
-    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&rest.clone()) { let mut w: Py = __item.clone(); __out.push(Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "DONE_NOT_THIS"), &w.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&rest.clone()) { let mut w: Py = __item.clone(); __out.push(Py::Bool(py_contains(&g_DONE_NOT_THIS(), &w.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     return py_tuple(vec![Py::None, py_str("")]);
     }
-    if py_truthy(&{ let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "DONE_ONLY_A_THING"), &geti(&words.clone(), &j.clone()))); if !py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&slice_or_raise(&words.clone(), &op_add(&j.clone(), &Py::Int(1)), &op_add(&j.clone(), &Py::Int(4)), &Py::None)) { let mut w: Py = __item.clone(); __out.push(Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "DONE_NOT_A_PERSON"), &w.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_DONE_ONLY_A_THING(), &geti(&words.clone(), &j.clone()))); if !py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&slice_or_raise(&words.clone(), &op_add(&j.clone(), &Py::Int(1)), &op_add(&j.clone(), &Py::Int(4)), &Py::None)) { let mut w: Py = __item.clone(); __out.push(Py::Bool(py_contains(&g_DONE_NOT_A_PERSON(), &w.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }) {
     return py_tuple(vec![Py::None, py_str("")]);
     }
     return py_tuple(vec![py_str("done"), geti(&words.clone(), &j.clone())]);
     }
-    if py_truthy(&{ let __b = words.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "DONE_VERB"), &geti(&words.clone(), &Py::Int(0)))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_HARM_ANYWHERE(), "search", &[clean.clone()]))) } } } }) {
+    if py_truthy(&{ let __b = words.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&g_DONE_VERB(), &geti(&words.clone(), &Py::Int(0)))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_HARM_ANYWHERE(), "search", &[clean.clone()]))) } } } }) {
     rest = slice_or_raise(&words.clone(), &Py::Int(1), &Py::Int(3), &Py::None);
-    if py_truthy(&Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&rest.clone()) { let mut w: Py = __item.clone(); __out.push(Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "DONE_NOT_THIS"), &w.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))))) {
+    if py_truthy(&Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&rest.clone()) { let mut w: Py = __item.clone(); __out.push(Py::Bool(py_contains(&g_DONE_NOT_THIS(), &w.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))))) {
     return py_tuple(vec![py_str("done"), geti(&words.clone(), &Py::Int(0))]);
     }
     }
@@ -15068,12 +15068,12 @@ pub fn _thing_done_scan(args: &[Py]) -> Py {
     return py_tuple(vec![py_str("going"), mcall(&been.clone(), "group", &[Py::Int(1)])]);
     }
     at_it = mcall(&g_AT_IT(), "search", &[text.clone()]);
-    if py_truthy(&{ let __b = at_it.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&g_DONE_ING(), &mcall(&at_it.clone(), "group", &[Py::Int(1)]))); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "AT_IT_EXTRA"), &mcall(&at_it.clone(), "group", &[Py::Int(1)]))) } } } }) {
+    if py_truthy(&{ let __b = at_it.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&g_DONE_ING(), &mcall(&at_it.clone(), "group", &[Py::Int(1)]))); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_AT_IT_EXTRA(), &mcall(&at_it.clone(), "group", &[Py::Int(1)]))) } } } }) {
     rest = slice_or_raise(&text.clone(), &mcall(&at_it.clone(), "end", &[]), &Py::None, &Py::None);
-    if py_truthy(&{ let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "BECOMING"), &mcall(&at_it.clone(), "group", &[Py::Int(1)]))); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "BECOMING_STATE"), &geti(&{ let __b = mcall(&rest.clone(), "split", &[]); if py_truthy(&__b) { __b } else { py_list(vec![py_str("")]) } }, &Py::Int(0)))) } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_BECOMING(), &mcall(&at_it.clone(), "group", &[Py::Int(1)]))); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_BECOMING_STATE(), &geti(&{ let __b = mcall(&rest.clone(), "split", &[]); if py_truthy(&__b) { __b } else { py_list(vec![py_str("")]) } }, &Py::Int(0)))) } }) {
     return py_tuple(vec![Py::None, py_str("")]);
     }
-    if py_truthy(&{ let __b = _a_thing_after(&[rest.clone()]); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&mcall(&g_HABIT_TIME(), "search", &[rest.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&stdlib_call("re", "findall", &[py_str("[a-z']+"), rest.clone()]).unwrap_or_else(|e| exc::raise(e))) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "AT_IT_NOT"), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)))) } } } }) {
+    if py_truthy(&{ let __b = _a_thing_after(&[rest.clone()]); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&mcall(&g_HABIT_TIME(), "search", &[rest.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&stdlib_call("re", "findall", &[py_str("[a-z']+"), rest.clone()]).unwrap_or_else(|e| exc::raise(e))) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&g_AT_IT_NOT(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)))) } } } }) {
     return py_tuple(vec![if py_truthy(&mcall(&g_FUTURE_TIME(), "search", &[rest.clone()])) { py_str("soon") } else { py_str("at") }, mcall(&at_it.clone(), "group", &[Py::Int(1)])]);
     }
     }
@@ -15095,7 +15095,7 @@ pub fn _a_thing_after(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: rest"))) };
     let mut word: Py = Py::None;
     let _ = py_str("True when the words after the verb name the thing the person is working on.");
-    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&stdlib_call("re", "findall", &[py_str("[a-z']+"), rest.clone()]).unwrap_or_else(|e| exc::raise(e))) { let mut word: Py = __item.clone(); __out.push({ let __b = Py::Bool(!py_contains(&pyrt::xrefs::xget("compose.fallback_data", "THING_AFTER"), &word.clone())); if !py_truthy(&__b) { __b } else { op_gt(&call_builtin("len", &[word.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&stdlib_call("re", "findall", &[py_str("[a-z']+"), rest.clone()]).unwrap_or_else(|e| exc::raise(e))) { let mut word: Py = __item.clone(); __out.push({ let __b = Py::Bool(!py_contains(&g_THING_AFTER(), &word.clone())); if !py_truthy(&__b) { __b } else { op_gt(&call_builtin("len", &[word.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn _done_ing(args: &[Py]) -> Py {
@@ -15113,7 +15113,7 @@ pub fn _done_ing(args: &[Py]) -> Py {
     let mut verb: Py = Py::None;
     let _ = py_str("The \"-ing\" forms of DONE_VERB, which is how the same afternoon is said with a time span.");
     out = call_builtin("set", &[]).unwrap_or_else(|e| exc::raise(e));
-    let __iter1 = py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "DONE_VERB"));
+    let __iter1 = py_iter_or_raise(&g_DONE_VERB());
     for __item in __iter1 {
     verb = __item.clone();
     stem = if py_truthy(&mcall(&verb.clone(), "endswith", &[py_str("ed")])) { slice_or_raise(&verb.clone(), &Py::None, &op_neg(&Py::Int(2)), &Py::None) } else { verb.clone() };
@@ -15308,10 +15308,10 @@ pub fn _own_feeling(args: &[Py]) -> Py {
     return Py::None;
     }
     if py_truthy(&mcall(&g_NOT_ENOUGH(), "search", &[clean.clone()])) {
-    return pyrt::xrefs::xget("compose.fallback_data", "NOT_ENOUGH_REPLY");
+    return g_NOT_ENOUGH_REPLY();
     }
     if py_truthy(&mcall(&g_NO_DIRECTION(), "search", &[clean.clone()])) {
-    return pyrt::xrefs::xget("compose.fallback_data", "NO_DIRECTION_REPLY");
+    return g_NO_DIRECTION_REPLY();
     }
     return Py::None;
     Py::None
@@ -15337,14 +15337,14 @@ pub fn _summons_pool(args: &[Py]) -> Py {
     shape = if py_truthy(&call_builtin("isinstance", &[summons.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) { mcall(&summons.clone(), "get", &[py_str("shape")]) } else { Py::None };
     if py_truthy(&Py::Bool(py_eq(&shape.clone(), &py_str("written")))) {
     if py_truthy(&mcall(&g_SUMMONS_ASKS_A_CALL(), "search", &[line.clone()])) {
-    return pyrt::xrefs::xget("compose.fallback_data", "SUMMONS_RANG");
+    return g_SUMMONS_RANG();
     }
-    return pyrt::xrefs::xget("compose.fallback_data", "SUMMONS_WRITTEN");
+    return g_SUMMONS_WRITTEN();
     }
     if py_truthy(&Py::Bool(py_eq(&shape.clone(), &py_str("rang")))) {
-    return pyrt::xrefs::xget("compose.fallback_data", "SUMMONS_RANG");
+    return g_SUMMONS_RANG();
     }
-    return pyrt::xrefs::xget("compose.fallback_data", "SUMMONS_SEEN");
+    return g_SUMMONS_SEEN();
     Py::None
 }
 pub fn _a_promise_that_keeps_moving(args: &[Py]) -> Py {
@@ -15376,7 +15376,7 @@ pub fn _a_promise_that_keeps_moving(args: &[Py]) -> Py {
     }
     said = call_builtin("set", &[stdlib_call("re", "findall", &[py_str("[a-z']+"), mcall(&clean.clone(), "replace", &[py_str("’"), py_str("'")])]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e));
     office_subject = { let __b = call_builtin("bool", &[mcall(&g_PROMISE_OFFICE(), "search", &[clean.clone()])]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&mcall(&g_PROMISE_A_HE_OR_SHE(), "search", &[clean.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_PROMISE_A_PERSON_NAMED(), "search", &[clean.clone()]))) } } } };
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&office_subject.clone())); if !py_truthy(&__b) { __b } else { { let __b = op_bitand(&said.clone(), &pyrt::xrefs::xget("compose.fallback_data", "GRIEVANCE_HEALTH")); if py_truthy(&__b) { __b } else { op_bitand(&said.clone(), &pyrt::xrefs::xget("compose.fallback_data", "GRIEVANCE_HARM")) } } } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&office_subject.clone())); if !py_truthy(&__b) { __b } else { { let __b = op_bitand(&said.clone(), &g_GRIEVANCE_HEALTH()); if py_truthy(&__b) { __b } else { op_bitand(&said.clone(), &g_GRIEVANCE_HARM()) } } } }) {
     return Py::None;
     }
     broken = mcall(&g_PROMISE_BUT_NEVER(), "search", &[clean.clone()]);
@@ -15536,7 +15536,7 @@ pub fn _plan_reported(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = Py::Bool(py_eq(&mood.clone(), &py_str("negative"))); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_PLAN_NOT(), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_PLAN_IDIOM(), "search", &[clean.clone()]) } } } }) {
     return Py::Bool(false);
     }
-    return { let __b = call_builtin("bool", &[mcall(&g_PLAN_OPENING(), "match", &[clean.clone()])]).unwrap_or_else(|e| exc::raise(e)); if py_truthy(&__b) { __b } else { { let __b = call_builtin("bool", &[mcall(&g_PLAN_DECIDED(), "match", &[clean.clone()])]).unwrap_or_else(|e| exc::raise(e)); if py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "PLAN_DONE")) { let mut phrase: Py = __item.clone(); __out.push(Py::Bool(py_contains(&clean.clone(), &phrase.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } } } };
+    return { let __b = call_builtin("bool", &[mcall(&g_PLAN_OPENING(), "match", &[clean.clone()])]).unwrap_or_else(|e| exc::raise(e)); if py_truthy(&__b) { __b } else { { let __b = call_builtin("bool", &[mcall(&g_PLAN_DECIDED(), "match", &[clean.clone()])]).unwrap_or_else(|e| exc::raise(e)); if py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_PLAN_DONE()) { let mut phrase: Py = __item.clone(); __out.push(Py::Bool(py_contains(&clean.clone(), &phrase.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } } } };
     Py::None
 }
 pub fn a_comparison_of_standing(args: &[Py]) -> Py {
@@ -15708,20 +15708,20 @@ pub fn _asks_about_the_advice(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: last"))) };
     let mut word: Py = Py::None;
     let _ = py_str("The pool for a question about the advice just given, or None.\n\n    Read only inside a care thread, after the bot has said what to do. Two gates and an order:\n    the cooling pool needs an answer that cooled something, and the other three need an answer\n    that gave a time. A line that asks what to do if it does not work (\"what if it doesnt stop\")\n    is read before the time ask, which can share its words without being the question.\n    ");
-    if py_truthy(&{ let __b = mcall(&pyrt::xrefs::xget("compose.fallback_words", "ADVICE_COOL_ASK"), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "ADVICE_COOL_WORDS")) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&last.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }) {
-    return pyrt::xrefs::xget("compose.fallback_data", "ADVICE_COOL");
+    if py_truthy(&{ let __b = mcall(&g_ADVICE_COOL_ASK(), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_ADVICE_COOL_WORDS()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&last.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }) {
+    return g_ADVICE_COOL();
     }
-    if py_truthy(&Py::Bool(!py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback_words", "ADVICE_TIME_WORDS"), "search", &[last.clone()])))) {
+    if py_truthy(&Py::Bool(!py_truthy(&mcall(&g_ADVICE_TIME_WORDS(), "search", &[last.clone()])))) {
     return Py::None;
     }
-    if py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback_words", "ADVICE_WORSE_ASK"), "search", &[clean.clone()])) {
-    return pyrt::xrefs::xget("compose.fallback_data", "ADVICE_WORSE");
+    if py_truthy(&mcall(&g_ADVICE_WORSE_ASK(), "search", &[clean.clone()])) {
+    return g_ADVICE_WORSE();
     }
-    if py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback_words", "ADVICE_TIME_ASK"), "search", &[clean.clone()])) {
-    return pyrt::xrefs::xget("compose.fallback_data", "ADVICE_TIME");
+    if py_truthy(&mcall(&g_ADVICE_TIME_ASK(), "search", &[clean.clone()])) {
+    return g_ADVICE_TIME();
     }
-    if py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback_words", "ADVICE_AGAIN_ASK"), "search", &[clean.clone()])) {
-    return pyrt::xrefs::xget("compose.fallback_data", "ADVICE_AGAIN");
+    if py_truthy(&mcall(&g_ADVICE_AGAIN_ASK(), "search", &[clean.clone()])) {
+    return g_ADVICE_AGAIN();
     }
     return Py::None;
     Py::None
@@ -15741,16 +15741,16 @@ pub fn _feels_better(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: clean"))) };
     let mut word: Py = Py::None;
     let _ = py_str("True for a line that says they are easing, and says nothing else.\n\n    \"i feel a bit better now\" is a report on the emergency; \"im ok now, where do i get a tetanus\n    jab\" is a question that happens to carry an easing, and answering it with \"that's a relief\"\n    drops what the person asked. So the easing words and the thing that was easing are taken out\n    and anything with content left means the line is about that instead.\n    ");
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback_words", "FEELS_BETTER"), "search", &[clean.clone()]))); if py_truthy(&__b) { __b } else { mcall(&pyrt::xrefs::xget("compose.fallback_words", "FEELS_NOT_BETTER"), "search", &[clean.clone()]) } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&mcall(&g_FEELS_BETTER(), "search", &[clean.clone()]))); if py_truthy(&__b) { __b } else { mcall(&g_FEELS_NOT_BETTER(), "search", &[clean.clone()]) } }) {
     return Py::Bool(false);
     }
-    if py_truthy(&{ let __b = Py::Bool(py_contains(&clean.clone(), &py_str("?"))); if py_truthy(&__b) { __b } else { mcall(&pyrt::xrefs::xget("compose.fallback_words", "MOVE_ON"), "search", &[clean.clone()]) } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&clean.clone(), &py_str("?"))); if py_truthy(&__b) { __b } else { mcall(&g_MOVE_ON(), "search", &[clean.clone()]) } }) {
     return Py::Bool(false);
     }
     let __iter1 = py_iter_or_raise(&stdlib_call("re", "findall", &[py_str("[a-z']+"), clean.clone()]).unwrap_or_else(|e| exc::raise(e)));
     for __item in __iter1 {
     word = __item.clone();
-    if py_truthy(&{ let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "EASING_FILLER"), &word.clone())); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "SYMPTOM_WORDS"), &word.clone())); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "BODY_PARTS"), &word.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "HEALTH_WORDS"), &word.clone())) } } } } } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_EASING_FILLER(), &word.clone())); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&g_SYMPTOM_WORDS(), &word.clone())); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&g_BODY_PARTS(), &word.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_HEALTH_WORDS(), &word.clone())) } } } } } }) {
     continue;
     }
     return Py::Bool(false);
@@ -15800,7 +15800,7 @@ pub fn _no_relief(args: &[Py]) -> Py {
     continue;
     }
     said = call_builtin("str", &[{ let __b = mcall(&past.clone(), "get", &[py_str("bot")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e));
-    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "CRISIS_WORDS")) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&mcall(&said.clone(), "lower", &[]), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_CRISIS_WORDS()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&mcall(&said.clone(), "lower", &[]), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     continue;
     }
     opening = mcall(&geti(&stdlib_call("re", "split", &[py_str("(?<=[.?!])\\s"), mcall(&said.clone(), "strip", &[]), Py::Int(1)]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(0)), "lower", &[]);
@@ -15853,7 +15853,7 @@ pub fn _is_presence_check(args: &[Py]) -> Py {
     return Py::Bool(false);
     }
     rest = stdlib_call("re", "findall", &[py_str("[a-z']+"), op_add(&op_add(&slice_or_raise(&clean.clone(), &Py::None, &mcall(&match_.clone(), "start", &[]), &Py::None), &py_str(" ")), &slice_or_raise(&clean.clone(), &mcall(&match_.clone(), "end", &[]), &Py::None, &Py::None))]).unwrap_or_else(|e| exc::raise(e));
-    return { let __b = op_le(&call_builtin("len", &[rest.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)); if !py_truthy(&__b) { __b } else { call_builtin("all", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&rest.clone()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "PRESENCE_LEFTOVER"), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } };
+    return { let __b = op_le(&call_builtin("len", &[rest.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)); if !py_truthy(&__b) { __b } else { call_builtin("all", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&rest.clone()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&g_PRESENCE_LEFTOVER(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } };
     Py::None
 }
 pub fn _the_store_takes_it(args: &[Py]) -> Py {
@@ -15928,7 +15928,7 @@ pub fn _free_tail(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: tail"))) };
     let mut word: Py = Py::None;
     let _ = py_str("True when nothing but subject-free words follow the offer.");
-    return call_builtin("all", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&stdlib_call("re", "findall", &[py_str("[a-z']+"), { let __b = tail.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "HELP_TAIL"), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("all", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&stdlib_call("re", "findall", &[py_str("[a-z']+"), { let __b = tail.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&g_HELP_TAIL(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn _choice_advice(args: &[Py]) -> Py {
@@ -16122,7 +16122,7 @@ pub fn _named(args: &[Py]) -> Py {
     let __iter1 = py_iter_or_raise(&{ let __b = mcall(&understood.clone(), "get", &[py_str("entities")]); if py_truthy(&__b) { __b } else { py_tuple(vec![]) } });
     for __item in __iter1 {
     entity = __item.clone();
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&call_builtin("isinstance", &[entity.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e)))); if py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&pyrt::xrefs::xget("compose.fallback_data", "NAMED_TYPES"), &mcall(&entity.clone(), "get", &[py_str("type")]))) } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&call_builtin("isinstance", &[entity.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e)))); if py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&g_NAMED_TYPES(), &mcall(&entity.clone(), "get", &[py_str("type")]))) } }) {
     continue;
     }
     name = mcall(&call_builtin("str", &[{ let __b = mcall(&entity.clone(), "get", &[py_str("text")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "strip", &[]);
@@ -16191,7 +16191,7 @@ pub fn _between_people(args: &[Py]) -> Py {
     let __iter1 = py_iter_or_raise(&{ let __b = sides.clone(); if py_truthy(&__b) { __b } else { py_tuple(vec![]) } });
     for __item in __iter1 {
     side = __item.clone();
-    if py_truthy(&op_bitand(&call_builtin("set", &[mcall(&side.clone(), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), &pyrt::xrefs::xget("compose.fallback_data", "CHOICE_PEOPLE"))) {
+    if py_truthy(&op_bitand(&call_builtin("set", &[mcall(&side.clone(), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), &g_CHOICE_PEOPLE())) {
     return Py::Bool(true);
     }
     }
@@ -16221,15 +16221,15 @@ pub fn _choice_light(args: &[Py]) -> Py {
     let _ = py_str("The pool for a light choice: a side when the line names two things, the quieter lines when\n    it does not (a line with one side missing is not a pick anybody can make).");
     sides = _choice_sides(&[clean.clone()]);
     if py_truthy(&Py::Bool(py_is(&sides.clone(), &Py::None))) {
-    return pyrt::xrefs::xget("compose.fallback_data", "CHOICE_LIGHT");
+    return g_CHOICE_LIGHT();
     }
     if py_truthy(&_between_people(&[sides.clone(), clean.clone()])) {
-    return pyrt::xrefs::xget("compose.fallback_data", "CHOICE_BETWEEN_PEOPLE");
+    return g_CHOICE_BETWEEN_PEOPLE();
     }
     let __unpk1 = py_unpack(&_a_pick(&[sides.clone(), clean.clone(), memory.clone()]), 2, None);
     take = __unpk1[0].clone();
     other = __unpk1[1].clone();
-    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "CHOICE_LIGHT_PICK")) { let mut line: Py = __item.clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("pick".to_string(), take.clone()), ("other".to_string(), other.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&line.clone(), "format", args))(&__args) }); } py_list(__out) })() };
+    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_CHOICE_LIGHT_PICK()) { let mut line: Py = __item.clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("pick".to_string(), take.clone()), ("other".to_string(), other.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&line.clone(), "format", args))(&__args) }); } py_list(__out) })() };
     Py::None
 }
 pub fn _choice_pool(args: &[Py]) -> Py {
@@ -16251,17 +16251,17 @@ pub fn _choice_pool(args: &[Py]) -> Py {
     let mut words: Py = Py::None;
     let _ = py_str("A bare \"x or y\" is a light choice unless the line names something at stake: a medicine\n    (ask a pharmacist), or money, a repair, a commitment (name what decides it).");
     words = call_builtin("set", &[mcall(&clean.clone(), "split", &[])]).unwrap_or_else(|e| exc::raise(e));
-    if py_truthy(&op_bitand(&words.clone(), &pyrt::xrefs::xget("compose.fallback_data", "CHOICE_HEALTH"))) {
-    if py_truthy(&op_bitand(&words.clone(), &pyrt::xrefs::xget("compose.fallback_data", "CHOICE_THERAPY"))) {
-    return pyrt::xrefs::xget("compose.fallback_data", "CHOICE_WEIGH");
+    if py_truthy(&op_bitand(&words.clone(), &g_CHOICE_HEALTH())) {
+    if py_truthy(&op_bitand(&words.clone(), &g_CHOICE_THERAPY())) {
+    return g_CHOICE_WEIGH();
     }
-    return pyrt::xrefs::xget("compose.fallback_data", "CHOICE_PHARMACIST");
+    return g_CHOICE_PHARMACIST();
     }
     if py_truthy(&_an_order_of_work(&[_choice_sides(&[clean.clone()]), clean.clone()])) {
     return g_ORDER_OF_WORK();
     }
-    if py_truthy(&op_bitand(&words.clone(), &pyrt::xrefs::xget("compose.fallback_data", "CHOICE_STAKES"))) {
-    return pyrt::xrefs::xget("compose.fallback_data", "CHOICE_WEIGH");
+    if py_truthy(&op_bitand(&words.clone(), &g_CHOICE_STAKES())) {
+    return g_CHOICE_WEIGH();
     }
     return _choice_light(&[clean.clone(), memory.clone()]);
     Py::None
@@ -16289,10 +16289,10 @@ pub fn _their_own_phrase(args: &[Py]) -> Py {
     let __iter1 = py_iter_or_raise(&things.clone());
     for __item in __iter1 {
     thing = __item.clone();
-    pattern = mcall(&pyrt::xrefs::xget("compose.fallback_data", "MY_OWN"), "get", &[thing.clone()]);
+    pattern = mcall(&g_MY_OWN(), "get", &[thing.clone()]);
     if py_truthy(&Py::Bool(py_is(&pattern.clone(), &Py::None))) {
     pattern = stdlib_call("re", "compile", &[op_add(&op_add(&py_str("\\b(?:my|our)\\s+(?:[a-z']+\\s+){0,2}"), &stdlib_call("re", "escape", &[thing.clone()]).unwrap_or_else(|e| exc::raise(e))), &py_str("(?![a-z])"))]).unwrap_or_else(|e| exc::raise(e));
-    let _ = py_setitem(&pyrt::xrefs::xget("compose.fallback_data", "MY_OWN"), &thing.clone(), stdlib_call("re", "compile", &[op_add(&op_add(&py_str("\\b(?:my|our)\\s+(?:[a-z']+\\s+){0,2}"), &stdlib_call("re", "escape", &[thing.clone()]).unwrap_or_else(|e| exc::raise(e))), &py_str("(?![a-z])"))]).unwrap_or_else(|e| exc::raise(e)));
+    let _ = py_setitem(&g_MY_OWN(), &thing.clone(), stdlib_call("re", "compile", &[op_add(&op_add(&py_str("\\b(?:my|our)\\s+(?:[a-z']+\\s+){0,2}"), &stdlib_call("re", "escape", &[thing.clone()]).unwrap_or_else(|e| exc::raise(e))), &py_str("(?![a-z])"))]).unwrap_or_else(|e| exc::raise(e)));
     }
     match_ = mcall(&pattern.clone(), "search", &[clean.clone()]);
     if py_truthy(&match_.clone()) {
@@ -16347,7 +16347,7 @@ pub fn _their_own_bill(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&mcall(&g_MY_BILL_ASK(), "search", &[clean.clone()]))); if py_truthy(&__b) { __b } else { mcall(&g_MY_BILL_NOT(), "search", &[clean.clone()]) } }) {
     return Py::None;
     }
-    return pyrt::xrefs::xget("compose.fallback_data", "MY_BILL_LINES");
+    return g_MY_BILL_LINES();
     Py::None
 }
 pub fn _their_own_points(args: &[Py]) -> Py {
@@ -16370,7 +16370,7 @@ pub fn _their_own_points(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&mcall(&g_POINTS_ASK(), "search", &[clean.clone()])))) {
     return Py::None;
     }
-    return pyrt::xrefs::xget("compose.fallback_data", "POINTS_LINES");
+    return g_POINTS_LINES();
     Py::None
 }
 pub fn _an_office_record(args: &[Py]) -> Py {
@@ -16394,13 +16394,13 @@ pub fn _an_office_record(args: &[Py]) -> Py {
     return Py::None;
     }
     if py_truthy(&mcall(&g_A_TILL_ASK(), "search", &[clean.clone()])) {
-    return pyrt::xrefs::xget("compose.fallback_data", "AT_THE_TILL");
+    return g_AT_THE_TILL();
     }
     if py_truthy(&_a_person_is_the_thing(&[clean.clone()])) {
     return Py::None;
     }
     if py_truthy(&{ let __b = mcall(&g_OFFICE_STATE(), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { mcall(&g_MY_ANY_THING(), "search", &[clean.clone()]) } }) {
-    return pyrt::xrefs::xget("compose.fallback_data", "OFFICE_RECORD_LINES");
+    return g_OFFICE_RECORD_LINES();
     }
     if py_truthy(&mcall(&g_MY_OWN_STATE(), "search", &[clean.clone()])) {
     if py_truthy(&_has(&[clean.clone(), py_tuple(vec![py_str("paid"), py_str("pay"), py_str("wages"), py_str("salary"), py_str("money"), py_str("expenses")])])) {
@@ -16454,14 +16454,14 @@ pub fn _their_own_record(args: &[Py]) -> Py {
     return Py::None;
     }
     if py_truthy(&validity.clone()) {
-    return pyrt::xrefs::xget("compose.fallback_data", "CARD_VALIDITY");
+    return g_CARD_VALIDITY();
     }
     if py_truthy(&Py::Bool(!py_truthy(&{ let __b = mcall(&g_RECORD_STATE(), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { checking.clone() } }))) {
     return _an_office_record(&[clean.clone(), asking.clone()]);
     }
-    rows = pyrt::xrefs::xget("compose.fallback_data", "MY_RECORDS");
+    rows = g_MY_RECORDS();
     if py_truthy(&_their_own_phrase(&[clean.clone(), g_CARD_RECORD_THINGS()])) {
-    rows = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(pyrt::xrefs::xget("compose.fallback_data", "MY_RECORDS")); __kws.extend(vec![("key".to_string(), { let asking = asking.clone(); let checking = checking.clone(); let clean = clean.clone(); let name = name.clone(); let options = options.clone(); let phrase = phrase.clone(); let rows = rows.clone(); let said = said.clone(); let things = things.clone(); let validity = validity.clone(); py_func("lambda", move |args: &[Py]| { let asking = asking.clone(); let checking = checking.clone(); let clean = clean.clone(); let name = name.clone(); let options = options.clone(); let phrase = phrase.clone(); let rows = rows.clone(); let said = said.clone(); let things = things.clone(); let validity = validity.clone(); let row: Py = __kwp(args, 0, "row").unwrap_or(Py::None); Py::Bool(!py_eq(&geti(&row.clone(), &Py::Int(0)), &py_str("card"))) }) })]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sorted", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
+    rows = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(g_MY_RECORDS()); __kws.extend(vec![("key".to_string(), { let asking = asking.clone(); let checking = checking.clone(); let clean = clean.clone(); let name = name.clone(); let options = options.clone(); let phrase = phrase.clone(); let rows = rows.clone(); let said = said.clone(); let things = things.clone(); let validity = validity.clone(); py_func("lambda", move |args: &[Py]| { let asking = asking.clone(); let checking = checking.clone(); let clean = clean.clone(); let name = name.clone(); let options = options.clone(); let phrase = phrase.clone(); let rows = rows.clone(); let said = said.clone(); let things = things.clone(); let validity = validity.clone(); let row: Py = __kwp(args, 0, "row").unwrap_or(Py::None); Py::Bool(!py_eq(&geti(&row.clone(), &Py::Int(0)), &py_str("card"))) }) })]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sorted", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
     }
     let __iter1 = py_iter_or_raise(&rows.clone());
     for __item in __iter1 {
@@ -16477,10 +16477,10 @@ pub fn _their_own_record(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = Py::Bool(!py_is(&g_MY_CARD_ROW(), &Py::None)); if !py_truthy(&__b) { __b } else { { let __b = mcall(&g_CARD_BALANCE_ASK(), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&mcall(&g_CARD_NOT_A_BALANCE(), "search", &[clean.clone()]))); if !py_truthy(&__b) { __b } else { _their_own_phrase(&[clean.clone(), py_tuple(vec![py_str("card")])]) } } } } } }) {
     return g_MY_CARD_ROW();
     }
-    phrase = _their_own_phrase(&[clean.clone(), pyrt::xrefs::xget("compose.fallback_data", "HEALTH_RECORD")]);
+    phrase = _their_own_phrase(&[clean.clone(), g_HEALTH_RECORD()]);
     if py_truthy(&{ let __b = phrase.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_RECORD_QUALIFIED(), "match", &[clean.clone(), mcall(&phrase.clone(), "end", &[])]))) } }) {
-    if py_truthy(&_has(&[clean.clone(), pyrt::xrefs::xget("compose.fallback_data", "HEALTH_WORLD")])) {
-    return pyrt::xrefs::xget("compose.fallback_data", "HEALTH_RECORD_LINES");
+    if py_truthy(&_has(&[clean.clone(), g_HEALTH_WORLD()])) {
+    return g_HEALTH_RECORD_LINES();
     }
     }
     return _an_office_record(&[clean.clone(), asking.clone()]);
@@ -16576,7 +16576,7 @@ pub fn _their_contact_number(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = mcall(&g_NUMBER_OF(), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_NUMBER_OF_PHONE(), "search", &[clean.clone()]))) } }) {
     return Py::None;
     }
-    let __iter1 = py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "NUMBER_PLACES"));
+    let __iter1 = py_iter_or_raise(&g_NUMBER_PLACES());
     for __item in __iter1 {
     let __unpk2 = py_unpack(&__item.clone(), 2, None);
     places = __unpk2[0].clone();
@@ -16620,7 +16620,7 @@ pub fn _their_own_day(args: &[Py]) -> Py {
     return Py::None;
     }
     }
-    return pyrt::xrefs::xget("compose.fallback_data", "MY_OWN_DAY");
+    return g_MY_OWN_DAY();
     Py::None
 }
 pub fn _a_bare_wear_ask(args: &[Py]) -> Py {
@@ -16641,12 +16641,12 @@ pub fn _a_bare_wear_ask(args: &[Py]) -> Py {
     let mut word: Py = Py::None;
     let _ = py_str("True when a take/wear ask is the whole of the line and nothing else is attached.");
     text = clean.clone();
-    let __iter1 = py_iter_or_raise(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(pyrt::xrefs::xget("compose.fallback_data", "LIVE_TAKE_ASK")); __kws.extend(vec![("key".to_string(), py_func("len", |args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e)))), ("reverse".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sorted", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
+    let __iter1 = py_iter_or_raise(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(g_LIVE_TAKE_ASK()); __kws.extend(vec![("key".to_string(), py_func("len", |args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e)))), ("reverse".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sorted", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
     for __item in __iter1 {
     phrase = __item.clone();
     text = mcall(&text.clone(), "replace", &[phrase.clone(), py_str(" ")]);
     }
-    let __iter2 = py_iter_or_raise(&op_add(&call_builtin("tuple", &[pyrt::xrefs::xget("compose.fallback_data", "LIVE_WEAR")]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("tuple", &[pyrt::xrefs::xget("compose.fallback_data", "LIVE_SOON")]).unwrap_or_else(|e| exc::raise(e))));
+    let __iter2 = py_iter_or_raise(&op_add(&call_builtin("tuple", &[g_LIVE_WEAR()]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("tuple", &[g_LIVE_SOON()]).unwrap_or_else(|e| exc::raise(e))));
     for __item in __iter2 {
     word = __item.clone();
     text = mcall(&text.clone(), "replace", &[word.clone(), py_str(" ")]);
@@ -16654,7 +16654,7 @@ pub fn _a_bare_wear_ask(args: &[Py]) -> Py {
     let __iter3 = py_iter_or_raise(&stdlib_call("re", "findall", &[py_str("[a-z']+"), text.clone()]).unwrap_or_else(|e| exc::raise(e)));
     for __item in __iter3 {
     word = __item.clone();
-    if py_truthy(&Py::Bool(!py_contains(&pyrt::xrefs::xget("compose.fallback_data", "LIVE_TAKE_ALLOWED"), &word.clone()))) {
+    if py_truthy(&Py::Bool(!py_contains(&g_LIVE_TAKE_ALLOWED(), &word.clone()))) {
     return Py::Bool(false);
     }
     }
@@ -16678,7 +16678,7 @@ pub fn _asks_for_something(args: &[Py]) -> Py {
     let mut lower: Py = Py::None;
     let _ = py_str("True when the line is more than a greeting: it wants an answer.");
     lower = mcall(&text.clone(), "lower", &[]);
-    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "REQUEST_CUES")) { let mut cue: Py = __item.clone(); __out.push(Py::Bool(py_contains(&lower.clone(), &cue.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_REQUEST_CUES()) { let mut cue: Py = __item.clone(); __out.push(Py::Bool(py_contains(&lower.clone(), &cue.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn _reads_as_why(args: &[Py]) -> Py {
@@ -16733,14 +16733,14 @@ pub fn _in_a_care_thread(args: &[Py]) -> Py {
     let mut turns: Py = Py::None;
     let _ = py_str("True when the bot's last answer, reading past its own continuations, was care.\n\n    A pick is not the reply to a bereavement or a crisis: \"my mum died last month\" / \"what would\n    you pick\" asking for the list invites one where nothing blithe belongs, and \"i want to kill\n    myself\" / \"which would you pick\" reads as asking which way out. The walk goes on past this\n    fallback's own lines, because a grief thread is often several of them in a row.\n    ");
     turns = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let __b = mcall(&memory.clone(), "get", &[py_str("turns")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }) { let mut turn: Py = __item.clone(); if py_truthy(&call_builtin("isinstance", &[turn.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(turn.clone()); } } py_list(__out) })() };
-    let __iter1 = py_iter_or_raise(&call_builtin("reversed", &[slice_or_raise(&turns.clone(), &op_neg(&pyrt::xrefs::xget("compose.fallback_data", "THREAD_TURNS")), &Py::None, &Py::None)]).unwrap_or_else(|e| exc::raise(e)));
+    let __iter1 = py_iter_or_raise(&call_builtin("reversed", &[slice_or_raise(&turns.clone(), &op_neg(&g_THREAD_TURNS()), &Py::None, &Py::None)]).unwrap_or_else(|e| exc::raise(e)));
     for __item in __iter1 {
     turn = __item.clone();
     module = mcall(&turn.clone(), "get", &[py_str("module")]);
-    if py_truthy(&Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "CARE_MODULES"), &module.clone()))) {
+    if py_truthy(&Py::Bool(py_contains(&g_CARE_MODULES(), &module.clone()))) {
     return Py::Bool(true);
     }
-    if py_truthy(&Py::Bool(!py_contains(&pyrt::xrefs::xget("compose.fallback_data", "QUIET_MODULES"), &module.clone()))) {
+    if py_truthy(&Py::Bool(!py_contains(&g_QUIET_MODULES(), &module.clone()))) {
     return Py::Bool(false);
     }
     }
@@ -16762,7 +16762,7 @@ pub fn _a_lean_only_line(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: clean"))) };
     let mut word: Py = Py::None;
     let _ = py_str("True when the line is only the ask, so the trade-off is what it is about.");
-    return Py::Bool(!py_truthy(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_PICK_WORD(), "findall", &[clean.clone()])) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&pyrt::xrefs::xget("compose.fallback_data", "PICK_ONLY_WORDS"), &word.clone()))) {  __out.push(word.clone()); } } py_list(__out) })() }));
+    return Py::Bool(!py_truthy(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_PICK_WORD(), "findall", &[clean.clone()])) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&g_PICK_ONLY_WORDS(), &word.clone()))) {  __out.push(word.clone()); } } py_list(__out) })() }));
     Py::None
 }
 pub fn _a_bare_pick(args: &[Py]) -> Py {
@@ -16786,10 +16786,10 @@ pub fn _a_bare_pick(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(py_contains(&clean.clone(), &py_str(" or ")))) {
     return Py::Bool(false);
     }
-    if py_truthy(&_has(&[clean.clone(), pyrt::xrefs::xget("compose.fallback_data", "OPINION_ASKS")])) {
+    if py_truthy(&_has(&[clean.clone(), g_OPINION_ASKS()])) {
     return Py::Bool(false);
     }
-    return Py::Bool(!py_truthy(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_PICK_WORD(), "findall", &[clean.clone()])) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&pyrt::xrefs::xget("compose.fallback_data", "PICK_ONLY_WORDS"), &word.clone()))) {  __out.push(word.clone()); } } py_list(__out) })() }));
+    return Py::Bool(!py_truthy(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_PICK_WORD(), "findall", &[clean.clone()])) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&g_PICK_ONLY_WORDS(), &word.clone()))) {  __out.push(word.clone()); } } py_list(__out) })() }));
     Py::None
 }
 pub fn _the_side_taken(args: &[Py]) -> Py {
@@ -16874,10 +16874,10 @@ pub fn _offered(args: &[Py]) -> Py {
     continue;
     }
     said = mcall(&g_PICK_WORD(), "findall", &[mcall(&call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("user")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[])]);
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&said.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&said.clone()) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&pyrt::xrefs::xget("compose.fallback_data", "PICK_ONLY_WORDS"), &word.clone()))) {  __out.push(word.clone()); } } py_list(__out) })() })) } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&said.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&said.clone()) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&g_PICK_ONLY_WORDS(), &word.clone()))) {  __out.push(word.clone()); } } py_list(__out) })() })) } }) {
     continue;
     }
-    if py_truthy(&{ let __b = Py::Bool(py_eq(&mcall(&turn.clone(), "get", &[py_str("module")]), &pyrt::xrefs::xget("compose.fallback_data", "FALLBACK_MODULE"))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_picked_a_side(&[call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("bot")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), _choice_sides(&[mcall(&py_str(" "), "join", &[said.clone()])])]))) } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_eq(&mcall(&turn.clone(), "get", &[py_str("module")]), &g_FALLBACK_MODULE())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_picked_a_side(&[call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("bot")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), _choice_sides(&[mcall(&py_str(" "), "join", &[said.clone()])])]))) } }) {
     return py_list(vec![]);
     }
     found = _titles(&[call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("bot")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))]);
@@ -16952,7 +16952,7 @@ pub fn _names_in(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: said"))) };
     let mut word: Py = Py::None;
     let _ = py_str("The words of a line that name something, with the plumbing and the ask taken out.");
-    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_PICK_WORD(), "findall", &[mcall(&said.clone(), "lower", &[])])) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&pyrt::xrefs::xget("compose.fallback_data", "PICK_ONLY_WORDS"), &word.clone()))) {  __out.push(word.clone()); } } py_set(__out) })() };
+    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_PICK_WORD(), "findall", &[mcall(&said.clone(), "lower", &[])])) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&g_PICK_ONLY_WORDS(), &word.clone()))) {  __out.push(word.clone()); } } py_set(__out) })() };
     Py::None
 }
 pub fn _a_named_side(args: &[Py]) -> Py {
@@ -17051,7 +17051,7 @@ pub fn _a_trade_off(args: &[Py]) -> Py {
     }
     said = mcall(&py_str(" "), "join", &[mcall(&call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("user")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "split", &[])]);
     found = mcall(&g_PICK_WORD(), "findall", &[mcall(&said.clone(), "lower", &[])]);
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&found.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&found.clone()) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&pyrt::xrefs::xget("compose.fallback_data", "PICK_ONLY_WORDS"), &word.clone()))) {  __out.push(word.clone()); } } py_list(__out) })() })) } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&found.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&found.clone()) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&g_PICK_ONLY_WORDS(), &word.clone()))) {  __out.push(word.clone()); } } py_list(__out) })() })) } }) {
     continue;
     }
     match_ = mcall(&g_TRADE_OFF(), "search", &[said.clone()]);
@@ -17099,7 +17099,7 @@ pub fn _is_a_body_or_care_trade_off(args: &[Py]) -> Py {
     let mut words: Py = Py::None;
     let _ = py_str("True when the trade-off is about their health, their mood or somebody in care.\n\n    The health sets are the bot's own reading of a body, and they are read here for the same\n    reason: a side taken on \"the pain is worse at night but i dont want to bother the doctor\" is\n    a side taken on going to the doctor, which is nobody's pick to make.\n    ");
     words = call_builtin("set", &[stdlib_call("re", "findall", &[py_str("[a-z']+"), mcall(&said.clone(), "lower", &[])]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e));
-    if py_truthy(&op_bitand(&words.clone(), &op_bitor(&op_bitor(&op_bitor(&op_bitor(&pyrt::xrefs::xget("compose.fallback_data", "BODY_PARTS"), &pyrt::xrefs::xget("compose.fallback_data", "SYMPTOM_WORDS")), &pyrt::xrefs::xget("compose.fallback_data", "HEALTH_WORDS")), &pyrt::xrefs::xget("compose.fallback_data", "CHOICE_HEALTH")), &pyrt::xrefs::xget("compose.fallback_data", "WORRY_WORDS")))) {
+    if py_truthy(&op_bitand(&words.clone(), &op_bitor(&op_bitor(&op_bitor(&op_bitor(&g_BODY_PARTS(), &g_SYMPTOM_WORDS()), &g_HEALTH_WORDS()), &g_CHOICE_HEALTH()), &g_WORRY_WORDS()))) {
     return Py::Bool(true);
     }
     return call_builtin("bool", &[mcall(&g_LEAN_NOT(), "search", &[said.clone()])]).unwrap_or_else(|e| exc::raise(e));
@@ -17136,7 +17136,7 @@ pub fn _a_leaning_side(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&side.clone()))) {
     return Py::None;
     }
-    return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("side".to_string(), side.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[pyrt::xrefs::xget("compose.fallback_data", "TRADE_OFF_LEAN"), memory.clone(), clean.clone()]), "format", args))(&__args) };
+    return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("side".to_string(), side.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[g_TRADE_OFF_LEAN(), memory.clone(), clean.clone()]), "format", args))(&__args) };
     Py::None
 }
 pub fn _my_pick(args: &[Py]) -> Py {
@@ -17176,16 +17176,16 @@ pub fn _my_pick(args: &[Py]) -> Py {
     name = __unpk1[0].clone();
     note = __unpk1[1].clone();
     if py_truthy(&note.clone()) {
-    pool = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "MY_PICK_NOTE")) { let mut line: Py = __item.clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("name".to_string(), name.clone()), ("note".to_string(), note.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&line.clone(), "format", args))(&__args) }); } py_list(__out) })() };
+    pool = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_MY_PICK_NOTE()) { let mut line: Py = __item.clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("name".to_string(), name.clone()), ("note".to_string(), note.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&line.clone(), "format", args))(&__args) }); } py_list(__out) })() };
     } else {
-    pool = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "MY_PICK")) { let mut line: Py = __item.clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("name".to_string(), name.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&line.clone(), "format", args))(&__args) }); } py_list(__out) })() };
+    pool = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_MY_PICK()) { let mut line: Py = __item.clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("name".to_string(), name.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&line.clone(), "format", args))(&__args) }); } py_list(__out) })() };
     }
     return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[pool.clone(), memory.clone(), clean.clone()]);
     }
     if py_truthy(&mcall(&g_PICK_ADVICE(), "search", &[clean.clone()])) {
     return Py::None;
     }
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[pyrt::xrefs::xget("compose.fallback_data", "MY_PICK_ASK"), memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[g_MY_PICK_ASK(), memory.clone(), clean.clone()]);
     Py::None
 }
 pub fn _the_opening_before(args: &[Py]) -> Py {
@@ -17228,7 +17228,7 @@ pub fn _a_gerund(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: word"))) };
     let _ = py_str("True when the word is an \"-ing\" form a sentence can open on (\"getting\", \"moving\").");
     word = mcall(&word.clone(), "strip", &[py_str(".,!?;:'\"")]);
-    return { let __b = op_ge(&call_builtin("len", &[word.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(5)); if !py_truthy(&__b) { __b } else { { let __b = mcall(&word.clone(), "endswith", &[py_str("ing")]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&pyrt::xrefs::xget("compose.fallback_data", "JUDGE_NOT_A_GERUND"), &word.clone())) } } } };
+    return { let __b = op_ge(&call_builtin("len", &[word.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(5)); if !py_truthy(&__b) { __b } else { { let __b = mcall(&word.clone(), "endswith", &[py_str("ing")]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&g_JUDGE_NOT_A_GERUND(), &word.clone())) } } } };
     Py::None
 }
 pub fn _a_plan_said_back(args: &[Py]) -> Py {
@@ -17275,7 +17275,7 @@ pub fn _a_plan_phrase(args: &[Py]) -> Py {
     match_ = mcall(&g_JUDGE_PLAN_OPENING(), "search", &[text.clone()]);
     if py_truthy(&match_.clone()) {
     words = mcall(&{ let __b = mcall(&match_.clone(), "group", &[py_str("plan")]); if py_truthy(&__b) { __b } else { { let __b = mcall(&match_.clone(), "group", &[py_str("plan2")]); if py_truthy(&__b) { __b } else { { let __b = mcall(&match_.clone(), "group", &[py_str("plan3")]); if py_truthy(&__b) { __b } else { { let __b = mcall(&match_.clone(), "group", &[py_str("plan9")]); if py_truthy(&__b) { __b } else { py_str("") } } } } } } } }, "split", &[]);
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&words.clone())); if py_truthy(&__b) { __b } else { { let __b = op_gt(&call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(7)); if py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "JUDGE_PLAN_STOP"), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } } } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&words.clone())); if py_truthy(&__b) { __b } else { { let __b = op_gt(&call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(7)); if py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&g_JUDGE_PLAN_STOP(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } } } }) {
     return py_str("");
     }
     phrase = mcall(&py_str(" "), "join", &[words.clone()]);
@@ -17293,7 +17293,7 @@ pub fn _a_plan_phrase(args: &[Py]) -> Py {
     match_ = mcall(&g_JUDGE_SHOULD_OPENING(), "search", &[text.clone()]);
     if py_truthy(&match_.clone()) {
     words = mcall(&mcall(&match_.clone(), "group", &[py_str("plan")]), "split", &[]);
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&words.clone())); if py_truthy(&__b) { __b } else { { let __b = op_gt(&call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(7)); if py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "JUDGE_PLAN_STOP"), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } } } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&words.clone())); if py_truthy(&__b) { __b } else { { let __b = op_gt(&call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(7)); if py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&g_JUDGE_PLAN_STOP(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } } } }) {
     return py_str("");
     }
     if py_truthy(&Py::Bool(!py_truthy(&stdlib_call("re", "search", &[py_str("[a-z]{3}"), mcall(&py_str(" "), "join", &[words.clone()])]).unwrap_or_else(|e| exc::raise(e))))) {
@@ -17318,7 +17318,7 @@ pub fn _yours(args: &[Py]) -> Py {
     else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "phrase") { v.clone() }
     else { exc::raise(type_err(&format!("missing required argument: phrase"))) };
     let _ = py_str("The person's own phrase turned to face them: \"quit my job\" -> \"quit your job\".");
-    return mcall(&g_MINE(), "sub", &[{ let phrase = phrase.clone(); py_func("lambda", move |args: &[Py]| { let phrase = phrase.clone(); let found: Py = __kwp(args, 0, "found").unwrap_or(Py::None); mcall(&pyrt::xrefs::xget("compose.fallback_data", "YOURS"), "get", &[mcall(&mcall(&found.clone(), "group", &[Py::Int(1)]), "lower", &[]), mcall(&found.clone(), "group", &[Py::Int(1)])]) }) }, phrase.clone()]);
+    return mcall(&g_MINE(), "sub", &[{ let phrase = phrase.clone(); py_func("lambda", move |args: &[Py]| { let phrase = phrase.clone(); let found: Py = __kwp(args, 0, "found").unwrap_or(Py::None); mcall(&g_YOURS(), "get", &[mcall(&mcall(&found.clone(), "group", &[Py::Int(1)]), "lower", &[]), mcall(&found.clone(), "group", &[Py::Int(1)])]) }) }, phrase.clone()]);
     Py::None
 }
 pub fn _the_plan_on_the_table(args: &[Py]) -> Py {
@@ -17364,7 +17364,7 @@ pub fn _the_plan_is_the_last_thing_said(args: &[Py]) -> Py {
     let _ = py_str("True when nothing but a nod has been said since the plan was named.\n\n    The plan is read from the last few turns, so a subject put down in between is read past:\n    \"im thinking of getting a cat\" / \"my knee is clicking\" / \"is that a good idea\" is a question\n    about the knee, and the pool's confident \"yes, getting a cat is a reasonable thing to aim at\"\n    rules on the cat. The reading is right; it is the remembering that reaches back past the\n    change of subject. So a verdict is given while the person has said nothing else since: a nod\n    (\"ok then\", \"right\") keeps the plan, and a turn with a subject of its own ends it. A turn\n    that shares a word with the plan (\"i had a sugar craving\" after a plan to give up sugar) is\n    still about the plan, so lunch is a new subject but the craving is not.\n    ");
     said = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let __b = mcall(&memory.clone(), "get", &[py_str("turns")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }) { let mut turn: Py = __item.clone(); if py_truthy(&call_builtin("isinstance", &[turn.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(_matchable(&[mcall(&turn.clone(), "get", &[py_str("user")])])); } } py_list(__out) })() };
     said = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&said.clone()) { let mut line: Py = __item.clone(); if py_truthy(&line.clone()) {  __out.push(line.clone()); } } py_list(__out) })() };
-    about = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&stdlib_call("re", "sub", &[py_str("[^a-z0-9 ]"), py_str(" "), plan_line.clone()]).unwrap_or_else(|e| exc::raise(e)), "split", &[])) { let mut word: Py = __item.clone(); if py_truthy(&{ let __b = op_gt(&call_builtin("len", &[word.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&pyrt::xrefs::xget("compose.fallback_data", "JUDGE_NOD_WORDS"), &word.clone())) } }) {  __out.push(word.clone()); } } py_set(__out) })() };
+    about = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&stdlib_call("re", "sub", &[py_str("[^a-z0-9 ]"), py_str(" "), plan_line.clone()]).unwrap_or_else(|e| exc::raise(e)), "split", &[])) { let mut word: Py = __item.clone(); if py_truthy(&{ let __b = op_gt(&call_builtin("len", &[word.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&g_JUDGE_NOD_WORDS(), &word.clone())) } }) {  __out.push(word.clone()); } } py_set(__out) })() };
     let __iter1 = py_iter_or_raise(&call_builtin("range", &[op_sub(&call_builtin("len", &[said.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1)), op_neg(&Py::Int(1)), op_neg(&Py::Int(1))]).unwrap_or_else(|e| exc::raise(e)));
     let mut __else2 = false;
     for __item in __iter1 {
@@ -17377,7 +17377,7 @@ pub fn _the_plan_is_the_last_thing_said(args: &[Py]) -> Py {
     let __iter3 = py_iter_or_raise(&slice_or_raise(&said.clone(), &op_add(&stop.clone(), &Py::Int(1)), &Py::None, &Py::None));
     for __item in __iter3 {
     line = __item.clone();
-    content = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&stdlib_call("re", "sub", &[py_str("[^a-z0-9 ]"), py_str(" "), line.clone()]).unwrap_or_else(|e| exc::raise(e)), "split", &[])) { let mut word: Py = __item.clone(); if py_truthy(&{ let __b = op_gt(&call_builtin("len", &[word.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&pyrt::xrefs::xget("compose.fallback_data", "JUDGE_NOD_WORDS"), &word.clone())) } }) {  __out.push(word.clone()); } } py_list(__out) })() };
+    content = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&stdlib_call("re", "sub", &[py_str("[^a-z0-9 ]"), py_str(" "), line.clone()]).unwrap_or_else(|e| exc::raise(e)), "split", &[])) { let mut word: Py = __item.clone(); if py_truthy(&{ let __b = op_gt(&call_builtin("len", &[word.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&g_JUDGE_NOD_WORDS(), &word.clone())) } }) {  __out.push(word.clone()); } } py_list(__out) })() };
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&content.clone())); if py_truthy(&__b) { __b } else { op_bitand(&about.clone(), &call_builtin("set", &[content.clone()]).unwrap_or_else(|e| exc::raise(e))) } }) {
     continue;
     }
@@ -17410,7 +17410,7 @@ pub fn _the_plan_and_its_line(args: &[Py]) -> Py {
     for __item in __iter1 {
     turn = __item.clone();
     said = _matchable(&[mcall(&turn.clone(), "get", &[py_str("user")])]);
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&said.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&said.clone(), "split", &[])) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&pyrt::xrefs::xget("compose.fallback_data", "JUDGE_NOD_WORDS"), &word.clone()))) {  __out.push(word.clone()); } } py_list(__out) })() })) } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&said.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&said.clone(), "split", &[])) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&g_JUDGE_NOD_WORDS(), &word.clone()))) {  __out.push(word.clone()); } } py_list(__out) })() })) } }) {
     continue;
     }
     plan = _a_plan_phrase(&[said.clone()]);
@@ -17507,13 +17507,13 @@ pub fn _a_place_asked_about(args: &[Py]) -> Py {
     for __item in __iter1 {
     turn = __item.clone();
     mentioned = _matchable(&[mcall(&turn.clone(), "get", &[py_str("user")])]);
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&mentioned.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&mentioned.clone(), "split", &[])) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&pyrt::xrefs::xget("compose.fallback_data", "JUDGE_NOD_WORDS"), &word.clone()))) {  __out.push(word.clone()); } } py_list(__out) })() })) } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&mentioned.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&mentioned.clone(), "split", &[])) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&g_JUDGE_NOD_WORDS(), &word.clone()))) {  __out.push(word.clone()); } } py_list(__out) })() })) } }) {
     continue;
     }
     if py_truthy(&mcall(&g_NOT_A_PLACE(), "search", &[mentioned.clone()])) {
     return Py::None;
     }
-    return if py_truthy(&mcall(&g_TRIP_NAMED(), "search", &[mentioned.clone()])) { call_builtin("list", &[pyrt::xrefs::xget("compose.fallback_data", "A_PLACE_I_DONT_KNOW")]).unwrap_or_else(|e| exc::raise(e)) } else { Py::None };
+    return if py_truthy(&mcall(&g_TRIP_NAMED(), "search", &[mentioned.clone()])) { call_builtin("list", &[g_A_PLACE_I_DONT_KNOW()]).unwrap_or_else(|e| exc::raise(e)) } else { Py::None };
     }
     return Py::None;
     Py::None
@@ -17577,7 +17577,7 @@ pub fn _a_verdict_on_their_plan(args: &[Py]) -> Py {
     asked = mcall(&g_JUDGE_ASK(), "match", &[said.clone()]);
     if py_truthy(&Py::Bool(!py_truthy(&asked.clone()))) {
     bare = mcall(&g_JUDGE_ASK_BARE(), "match", &[said.clone()]);
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&bare.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&{ let __b = mcall(&bare.clone(), "group", &[py_str("bare_noun")]); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "JUDGE_BARE_FACES"), &mcall(&bare.clone(), "group", &[py_str("face")]))) } })) } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&bare.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&{ let __b = mcall(&bare.clone(), "group", &[py_str("bare_noun")]); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_JUDGE_BARE_FACES(), &mcall(&bare.clone(), "group", &[py_str("face")]))) } })) } }) {
     return Py::None;
     }
     if py_truthy(&Py::Bool(!py_truthy(&_the_plan_on_the_table(&[memory.clone()])))) {
@@ -17589,7 +17589,7 @@ pub fn _a_verdict_on_their_plan(args: &[Py]) -> Py {
     return Py::None;
     }
     face = mcall(&{ let __b = mcall(&asked.clone(), "group", &[py_str("face")]); if py_truthy(&__b) { __b } else { { let __b = mcall(&asked.clone(), "group", &[py_str("face2")]); if py_truthy(&__b) { __b } else { { let __b = mcall(&asked.clone(), "group", &[py_str("face3")]); if py_truthy(&__b) { __b } else { py_str("") } } } } } }, "lower", &[]);
-    if py_truthy(&{ let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "JUDGE_NOT_A_VERDICT"), &face.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_JUDGE_JUDGES_A_NOUN(), "search", &[said.clone()]))) } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_JUDGE_NOT_A_VERDICT(), &face.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_JUDGE_JUDGES_A_NOUN(), "search", &[said.clone()]))) } }) {
     return Py::None;
     }
     let __unpk1 = py_unpack(&_the_plan_and_its_line(&[memory.clone()]), 2, None);
@@ -17606,7 +17606,7 @@ pub fn _a_verdict_on_their_plan(args: &[Py]) -> Py {
     return Py::None;
     }
     if py_truthy(&Py::Bool(py_contains(&g_JUDGE_ASKING_FOR_A_CAUTION(), &face.clone()))) {
-    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "JUDGE_PLAN_HAS_A_HOLE")) { let mut line: Py = __item.clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("plan".to_string(), plan.clone()), ("Plan".to_string(), op_add(&mcall(&slice_or_raise(&plan.clone(), &Py::None, &Py::Int(1), &Py::None), "upper", &[]), &slice_or_raise(&plan.clone(), &Py::Int(1), &Py::None, &Py::None)))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&line.clone(), "format", args))(&__args) }); } py_list(__out) })() };
+    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_JUDGE_PLAN_HAS_A_HOLE()) { let mut line: Py = __item.clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("plan".to_string(), plan.clone()), ("Plan".to_string(), op_add(&mcall(&slice_or_raise(&plan.clone(), &Py::None, &Py::Int(1), &Py::None), "upper", &[]), &slice_or_raise(&plan.clone(), &Py::Int(1), &Py::None, &Py::None)))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&line.clone(), "format", args))(&__args) }); } py_list(__out) })() };
     }
     return Py::None;
     }
@@ -17614,7 +17614,7 @@ pub fn _a_verdict_on_their_plan(args: &[Py]) -> Py {
     wish = mcall(&py_str(" "), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&py_tuple(vec![plan.clone(), plan_line.clone()])) { let mut part: Py = __item.clone(); if py_truthy(&part.clone()) {  __out.push(part.clone()); } } py_list(__out) })() }]);
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&mcall(&g_JUDGE_A_TARGET(), "search", &[wish.clone()]))); if !py_truthy(&__b) { __b } else { { let __b = mcall(&g_JUDGE_ACT_AT_SOMEONE(), "search", &[wish.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_JUDGE_TAKING(), "search", &[wish.clone()]) } } } }) {
     said_back = if py_truthy(&plan_line.clone()) { pyrt::xrefs::xcall("compose.harm", "reply_for", &[plan_line.clone(), memory.clone()]) } else { Py::None };
-    return if py_truthy(&said_back.clone()) { py_list(vec![said_back.clone()]) } else { call_builtin("list", &[pyrt::xrefs::xget("compose.fallback_data", "JUDGE_WISH_ANGRY")]).unwrap_or_else(|e| exc::raise(e)) };
+    return if py_truthy(&said_back.clone()) { py_list(vec![said_back.clone()]) } else { call_builtin("list", &[g_JUDGE_WISH_ANGRY()]).unwrap_or_else(|e| exc::raise(e)) };
     }
     if py_truthy(&{ let __b = mcall(&g_JUDGE_WISHES_HARM(), "search", &[wish.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_JUDGE_TAKING_SOMETHING(), "search", &[wish.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_JUDGE_LYING(), "search", &[wish.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_JUDGE_NOT_A_PLAN_TO_BLESS(), "search", &[wish.clone()]) } } } } } }) {
     return Py::None;
@@ -17631,23 +17631,23 @@ pub fn _a_verdict_on_their_plan(args: &[Py]) -> Py {
     }
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&plan.clone())); if !py_truthy(&__b) { __b } else { mcall(&asked.clone(), "group", &[py_str("face3")]) } }) {
     if py_truthy(&mcall(&g_MIND_WORRY(), "search", &[_matchable(&[mcall(&geti(&mcall(&memory.clone(), "get", &[py_str("turns"), py_list(vec![py_dict(vec![])])]), &op_neg(&Py::Int(1))), "get", &[py_str("user"), py_str("")])])])) {
-    return pyrt::xrefs::xget("compose.fallback_data", "JUDGE_NO_PLAN_MIND");
+    return g_JUDGE_NO_PLAN_MIND();
     }
-    return if py_truthy(&stale.clone()) { pyrt::xrefs::xget("compose.fallback_data", "JUDGE_NO_PLAN_MAD") } else { Py::None };
+    return if py_truthy(&stale.clone()) { g_JUDGE_NO_PLAN_MAD() } else { Py::None };
     }
     if py_truthy(&Py::Bool(!py_truthy(&plan.clone()))) {
-    if py_truthy(&Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "JUDGE_SELF_JUDGING"), &face.clone()))) {
-    return pyrt::xrefs::xget("compose.fallback_data", "JUDGE_NO_PLAN_MAD");
+    if py_truthy(&Py::Bool(py_contains(&g_JUDGE_SELF_JUDGING(), &face.clone()))) {
+    return g_JUDGE_NO_PLAN_MAD();
     }
-    if py_truthy(&Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "JUDGE_ONLY_A_PLAN"), &face.clone()))) {
-    return pyrt::xrefs::xget("compose.fallback_data", "JUDGE_NO_PLAN");
+    if py_truthy(&Py::Bool(py_contains(&g_JUDGE_ONLY_A_PLAN(), &face.clone()))) {
+    return g_JUDGE_NO_PLAN();
     }
-    if py_truthy(&Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "JUDGE_SOUNDS_FINE"), &face.clone()))) {
-    return pyrt::xrefs::xget("compose.fallback_data", "JUDGE_NO_PLAN_FINE");
+    if py_truthy(&Py::Bool(py_contains(&g_JUDGE_SOUNDS_FINE(), &face.clone()))) {
+    return g_JUDGE_NO_PLAN_FINE();
     }
     return Py::None;
     }
-    pool = if py_truthy(&Py::Bool(py_contains(&py_tuple(vec![py_str("mad"), py_str("crazy"), py_str("insane"), py_str("nuts"), py_str("mental"), py_str("unhinged")]), &face.clone()))) { pyrt::xrefs::xget("compose.fallback_data", "JUDGE_SANE") } else { if py_truthy(&Py::Bool(py_contains(&py_tuple(vec![py_str("good"), py_str("great"), py_str("sensible"), py_str("wise"), py_str("smart"), py_str("clever"), py_str("reasonable")]), &face.clone()))) { pyrt::xrefs::xget("compose.fallback_data", "JUDGE_FINE") } else { pyrt::xrefs::xget("compose.fallback_data", "JUDGE_WORTH") } };
+    pool = if py_truthy(&Py::Bool(py_contains(&py_tuple(vec![py_str("mad"), py_str("crazy"), py_str("insane"), py_str("nuts"), py_str("mental"), py_str("unhinged")]), &face.clone()))) { g_JUDGE_SANE() } else { if py_truthy(&Py::Bool(py_contains(&py_tuple(vec![py_str("good"), py_str("great"), py_str("sensible"), py_str("wise"), py_str("smart"), py_str("clever"), py_str("reasonable")]), &face.clone()))) { g_JUDGE_FINE() } else { g_JUDGE_WORTH() } };
     return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pool.clone()) { let mut line: Py = __item.clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("plan".to_string(), plan.clone()), ("Plan".to_string(), op_add(&mcall(&slice_or_raise(&plan.clone(), &Py::None, &Py::Int(1), &Py::None), "upper", &[]), &slice_or_raise(&plan.clone(), &Py::Int(1), &Py::None, &Py::None)))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&line.clone(), "format", args))(&__args) }); } py_list(__out) })() };
     Py::None
 }
@@ -17746,7 +17746,7 @@ pub fn _taste(args: &[Py]) -> Py {
     let mut value: Py = Py::None;
     let _ = py_str("The bot's own answer to a question about its tastes, or None if it is not one.\n    `was_taste` says the bot's last reply was one, so \"why that one?\" has something to explain.\n\n    `repaired` is the same line with its chat-speak put right (\"whats ur favourite food\" ->\n    \"whats your favourite food\"), read only when the typed line is not this shape at all: the\n    repair is what makes the question about the bot, and without it the line reached the search\n    hedge while the identical line with \"your\" spelled out got a taste.\n    ");
     if py_truthy(&{ let __b = was_taste.clone(); if !py_truthy(&__b) { __b } else { _reads_as_why(&[clean.clone()]) } }) {
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[pyrt::xrefs::xget("compose.fallback_data", "WHY_AFTER_TASTE"), memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[g_WHY_AFTER_TASTE(), memory.clone(), clean.clone()]);
     }
     if py_truthy(&{ let __b = asking.clone(); if !py_truthy(&__b) { __b } else { mcall(&g_OWN_FAVOURITE(), "search", &[clean.clone()]) } }) {
     found = mcall(&g_OWN_FAVOURITE(), "search", &[clean.clone()]);
@@ -17757,17 +17757,17 @@ pub fn _taste(args: &[Py]) -> Py {
     }
     return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[g_OWN_FAVOURITE_LINES(), memory.clone(), clean.clone()]);
     }
-    if py_truthy(&{ let __b = repaired.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_eq(&repaired.clone(), &clean.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&_has(&[clean.clone(), pyrt::xrefs::xget("compose.fallback_data", "OPINION_ASKS")]))); if !py_truthy(&__b) { __b } else { _has(&[repaired.clone(), pyrt::xrefs::xget("compose.fallback_data", "OPINION_ASKS")]) } } } } } }) {
+    if py_truthy(&{ let __b = repaired.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_eq(&repaired.clone(), &clean.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&_has(&[clean.clone(), g_OPINION_ASKS()]))); if !py_truthy(&__b) { __b } else { _has(&[repaired.clone(), g_OPINION_ASKS()]) } } } } } }) {
     clean = repaired.clone();
     }
-    asked = _has(&[clean.clone(), pyrt::xrefs::xget("compose.fallback_data", "OPINION_ASKS")]);
+    asked = _has(&[clean.clone(), g_OPINION_ASKS()]);
     if py_truthy(&{ let __b = asked.clone(); if !py_truthy(&__b) { __b } else { _is_about_the_persons_own_life(&[clean.clone()]) } }) {
     return Py::None;
     }
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&asked.clone())); if !py_truthy(&__b) { __b } else { { let __b = _is_a_choice(&[clean.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_has(&[_choice_advice(&[clean.clone()]), pyrt::xrefs::xget("compose.fallback_data", "ADVICE_WORDS")]))) } } } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&asked.clone())); if !py_truthy(&__b) { __b } else { { let __b = _is_a_choice(&[clean.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_has(&[_choice_advice(&[clean.clone()]), g_ADVICE_WORDS()]))) } } } }) {
     asked = Py::Bool(true);
     }
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&asked.clone())); if !py_truthy(&__b) { __b } else { { let __b = asking.clone(); if !py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "TASTES")) { let __unpk2858 = py_unpack(&__item.clone(), 2, None); let mut phrases: Py = __unpk2858[0].clone(); let mut _u: Py = __unpk2858[1].clone(); __out.push(_has(&[clean.clone(), phrases.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } } } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&asked.clone())); if !py_truthy(&__b) { __b } else { { let __b = asking.clone(); if !py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_TASTES()) { let __unpk1488 = py_unpack(&__item.clone(), 2, None); let mut phrases: Py = __unpk1488[0].clone(); let mut _u: Py = __unpk1488[1].clone(); __out.push(_has(&[clean.clone(), phrases.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } } } }) {
     asked = Py::Bool(true);
     }
     if py_truthy(&Py::Bool(!py_truthy(&asked.clone()))) {
@@ -17776,7 +17776,7 @@ pub fn _taste(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = _is_about_the_persons_own_life(&[clean.clone()]); if !py_truthy(&__b) { __b } else { _has(&[clean.clone(), g_FAVOURITE_WORDS()]) } }) {
     return Py::None;
     }
-    let __iter1 = py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "TASTES"));
+    let __iter1 = py_iter_or_raise(&g_TASTES());
     for __item in __iter1 {
     let __unpk2 = py_unpack(&__item.clone(), 2, None);
     phrases = __unpk2[0].clone();
@@ -17789,9 +17789,9 @@ pub fn _taste(args: &[Py]) -> Py {
     return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[_choice_pool(&[clean.clone(), memory.clone()]), memory.clone(), clean.clone()]);
     }
     if py_truthy(&_has(&[clean.clone(), g_FAVOURITE_WORDS()])) {
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[pyrt::xrefs::xget("compose.fallback_data", "FAVOURITE_GENERAL"), memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[g_FAVOURITE_GENERAL(), memory.clone(), clean.clone()]);
     }
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[pyrt::xrefs::xget("compose.fallback_data", "TASTE_GENERAL"), memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[g_TASTE_GENERAL(), memory.clone(), clean.clone()]);
     Py::None
 }
 pub fn _names_a_venue(args: &[Py]) -> Py {
@@ -17811,7 +17811,7 @@ pub fn _names_a_venue(args: &[Py]) -> Py {
     let mut word: Py = Py::None;
     let _ = py_str("True when the line names one of the places in `LIVE_VENUE`, singular or plural.");
     if py_truthy(&Py::Bool(!py_truthy(&g__VENUE_RE()))) {
-    joined = mcall(&py_str("|"), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(pyrt::xrefs::xget("compose.fallback_data", "LIVE_VENUE")); __kws.extend(vec![("key".to_string(), py_func("len", |args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e)))), ("reverse".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sorted", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }) { let mut word: Py = __item.clone(); __out.push(stdlib_call("re", "escape", &[word.clone()]).unwrap_or_else(|e| exc::raise(e))); } py_list(__out) })() }]);
+    joined = mcall(&py_str("|"), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(g_LIVE_VENUE()); __kws.extend(vec![("key".to_string(), py_func("len", |args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e)))), ("reverse".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sorted", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }) { let mut word: Py = __item.clone(); __out.push(stdlib_call("re", "escape", &[word.clone()]).unwrap_or_else(|e| exc::raise(e))); } py_list(__out) })() }]);
     let _ = mcall(&g__VENUE_RE(), "append", &[stdlib_call("re", "compile", &[op_add(&op_add(&py_str("(?<![a-z])(?:"), &joined.clone()), &py_str(")(?:s|es)?(?![a-z])"))]).unwrap_or_else(|e| exc::raise(e))]);
     }
     return call_builtin("bool", &[mcall(&geti(&g__VENUE_RE(), &Py::Int(0)), "search", &[clean.clone()])]).unwrap_or_else(|e| exc::raise(e));
@@ -17839,10 +17839,10 @@ pub fn venue_hours(args: &[Py]) -> Py {
     let mut options: Py = Py::None;
     let _ = py_str("True when the line asks when a named place opens, closes or is open.\n\n    The composer's own reading, published for the arbiter, so that which lines are a question\n    about a venue's hours is decided beside the pools that answer them. A place has to be named\n    and open or close has to be in the line, and the composer's own pool has to be the hours\n    one: \"what time do hospitals let visitors in\" is the visiting-hours answer's (no open or\n    close in it), and \"how do i open a bank account\" reaches a different pool.\n    ");
     clean = mcall(&mcall(&call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "strip", &[]), "lower", &[]);
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&_names_a_venue(&[clean.clone()]))); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_has(&[clean.clone(), pyrt::xrefs::xget("compose.fallback_data", "LIVE_OPEN_CLOSE")]))) } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&_names_a_venue(&[clean.clone()]))); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_has(&[clean.clone(), g_LIVE_OPEN_CLOSE()]))) } }) {
     return Py::Bool(false);
     }
-    let __iter1 = py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "LIVE_KINDS"));
+    let __iter1 = py_iter_or_raise(&g_LIVE_KINDS());
     for __item in __iter1 {
     let __unpk2 = py_unpack(&__item.clone(), 3, None);
     kind = __unpk2[0].clone();
@@ -17869,7 +17869,7 @@ pub fn venue_hours_lines(args: &[Py]) -> Py {
     let mut kind: Py = Py::None;
     let mut options: Py = Py::None;
     let _ = py_str("The composer's honest lines for a venue's opening hours.");
-    let __iter1 = py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "LIVE_KINDS"));
+    let __iter1 = py_iter_or_raise(&g_LIVE_KINDS());
     for __item in __iter1 {
     let __unpk2 = py_unpack(&__item.clone(), 3, None);
     kind = __unpk2[0].clone();
@@ -18043,7 +18043,7 @@ pub fn _the_live_thing_named(args: &[Py]) -> Py {
     kind = __unpk2[0].clone();
     words = __unpk2[1].clone();
     if py_truthy(&_has(&[clean.clone(), words.clone()])) {
-    let __iter3 = py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "LIVE_KINDS"));
+    let __iter3 = py_iter_or_raise(&g_LIVE_KINDS());
     for __item in __iter3 {
     let __unpk4 = py_unpack(&__item.clone(), 3, None);
     name = __unpk4[0].clone();
@@ -18090,8 +18090,8 @@ pub fn _taste_lines(args: &[Py]) -> Py {
     let mut phrase: Py = Py::None;
     let mut phrases: Py = Py::None;
     let _ = py_str("The taste lines that may take a favourite question off a card (see `reads_as_a_taste`).\n\n    Only the entries asked for with the word favourite, and the honest \"no favourite\" pool. The\n    choice pools are left out on purpose: \"do you like dogs\" is answered better by the chat\n    module's own line than by the taste shrug (\"No strong view on that one, honestly\"), and \"what\n    do you like watching\" better by the viewing picks than by the same shrug, so neither is a line\n    to claim a turn with.\n    ");
-    lines = call_builtin("set", &[pyrt::xrefs::xget("compose.fallback_data", "FAVOURITE_GENERAL")]).unwrap_or_else(|e| exc::raise(e));
-    let __iter1 = py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "TASTES"));
+    lines = call_builtin("set", &[g_FAVOURITE_GENERAL()]).unwrap_or_else(|e| exc::raise(e));
+    let __iter1 = py_iter_or_raise(&g_TASTES());
     for __item in __iter1 {
     let __unpk2 = py_unpack(&__item.clone(), 2, None);
     phrases = __unpk2[0].clone();
@@ -18126,7 +18126,7 @@ pub fn reads_as_a_taste(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&clean.clone()))) {
     return Py::Bool(false);
     }
-    if py_truthy(&Py::Bool(!py_truthy(&_has(&[clean.clone(), pyrt::xrefs::xget("compose.fallback_data", "OPINION_ASKS")])))) {
+    if py_truthy(&Py::Bool(!py_truthy(&_has(&[clean.clone(), g_OPINION_ASKS()])))) {
     let __try1 = exc::catch(|| {
     clean = _matchable(&[{ let __b = mcall(&{ let __b = pyrt::xrefs::xcall("understanding", "understand", &[text.clone(), if py_truthy(&call_builtin("isinstance", &[memory.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) { memory.clone() } else { py_dict(vec![]) }]); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[py_str("plain")]); if py_truthy(&__b) { __b } else { py_str("") } }]);
         py_tuple(vec![Py::Bool(false), Py::None])
@@ -18147,7 +18147,7 @@ pub fn reads_as_a_taste(args: &[Py]) -> Py {
     }
     if let Some(__e) = __unhandled4 { exc::raise(__e); }
     if py_truthy(&__ret2) { return __val3; }
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&clean.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_has(&[clean.clone(), pyrt::xrefs::xget("compose.fallback_data", "OPINION_ASKS")]))) } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&clean.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_has(&[clean.clone(), g_OPINION_ASKS()]))) } }) {
     return Py::Bool(false);
     }
     }
@@ -18268,7 +18268,7 @@ pub fn _the_sky_and_nothing_else(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(py_contains(&g_LIVE_SKY_WORDS(), &word.clone()))) {
     continue;
     }
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&after_place.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "LIVE_INDOOR"), &word.clone())) } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&after_place.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_LIVE_INDOOR(), &word.clone())) } }) {
     return Py::Bool(false);
     }
     let __aug3 = op_add(&unknown.clone(), &Py::Int(1));
@@ -18294,7 +18294,7 @@ pub fn _a_road_named_with_traffic(args: &[Py]) -> Py {
     else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "clean") { v.clone() }
     else { exc::raise(type_err(&format!("missing required argument: clean"))) };
     let _ = py_str("True when the line names a road and asks what the traffic on it is doing.");
-    if py_truthy(&Py::Bool(!py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback_data", "LIVE_ROAD_NAME"), "search", &[clean.clone()])))) {
+    if py_truthy(&Py::Bool(!py_truthy(&mcall(&g_LIVE_ROAD_NAME(), "search", &[clean.clone()])))) {
     return Py::Bool(false);
     }
     if py_truthy(&mcall(&g_A_REPORT_OF_WHAT_HAPPENED(), "search", &[clean.clone()])) {
@@ -18317,7 +18317,7 @@ pub fn _their_own_count(args: &[Py]) -> Py {
     else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "clean") { v.clone() }
     else { exc::raise(type_err(&format!("missing required argument: clean"))) };
     let _ = py_str("True when the line asks for a number of the person's own with the question left off.\n\n    \"how much web traffic does my site get\" and \"where do i see my footfall\" are asks, and the\n    asking gate would drop them to the nod because the verb is not in front. The number is in\n    their own analytics, so it is read here and answered by the site-stats note rather than by\n    the nod.\n\n    A line that says how the day went, or names the figure they already have, is not asking where\n    the figure lives: \"my shop had footfall all day\" wants a word about the day, not a note\n    pointing at the analytics page.\n    ");
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&_has(&[clean.clone(), pyrt::xrefs::xget("compose.fallback_data", "LIVE_SITE_THING")]))); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_has(&[clean.clone(), g_THEIR_OWN_COUNT_WORDS()]))) } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&_has(&[clean.clone(), g_LIVE_SITE_THING()]))); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_has(&[clean.clone(), g_THEIR_OWN_COUNT_WORDS()]))) } }) {
     return Py::Bool(false);
     }
     if py_truthy(&mcall(&g_A_COUNT_ASKED(), "search", &[clean.clone()])) {
@@ -18360,7 +18360,7 @@ pub fn _their_own_count_fell(args: &[Py]) -> Py {
     if py_truthy(&mcall(&g_A_COUNT_ASKED(), "search", &[clean.clone()])) {
     return Py::Bool(false);
     }
-    return { let __b = _has(&[clean.clone(), pyrt::xrefs::xget("compose.fallback_data", "LIVE_SITE_THING")]); if !py_truthy(&__b) { __b } else { { let __b = _has(&[clean.clone(), op_add(&g_THEIR_OWN_COUNT_WORDS(), &py_tuple(vec![py_str("sales"), py_str("orders")]))]); if !py_truthy(&__b) { __b } else { call_builtin("bool", &[mcall(&g_A_COUNT_FELL(), "search", &[clean.clone()])]).unwrap_or_else(|e| exc::raise(e)) } } } };
+    return { let __b = _has(&[clean.clone(), g_LIVE_SITE_THING()]); if !py_truthy(&__b) { __b } else { { let __b = _has(&[clean.clone(), op_add(&g_THEIR_OWN_COUNT_WORDS(), &py_tuple(vec![py_str("sales"), py_str("orders")]))]); if !py_truthy(&__b) { __b } else { call_builtin("bool", &[mcall(&g_A_COUNT_FELL(), "search", &[clean.clone()])]).unwrap_or_else(|e| exc::raise(e)) } } } };
     Py::None
 }
 pub fn _live(args: &[Py]) -> Py {
@@ -18402,7 +18402,7 @@ pub fn _live(args: &[Py]) -> Py {
     if py_truthy(&place.clone()) {
     return place.clone();
     }
-    if py_truthy(&_has(&[clean.clone(), pyrt::xrefs::xget("compose.fallback_data", "LIVE_NOT")])) {
+    if py_truthy(&_has(&[clean.clone(), g_LIVE_NOT()])) {
     return Py::None;
     }
     understood = if py_truthy(&call_builtin("isinstance", &[memory.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) { mcall(&{ let __b = memory.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[py_str("understood")]) } else { Py::None };
@@ -18420,7 +18420,7 @@ pub fn _live(args: &[Py]) -> Py {
     if py_truthy(&mcall(&news_ask.clone(), "reads_as_an_ask_for_the_news", &[clean.clone()])) {
     return g_LIVE_NEWS_LINES();
     }
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&asking.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&_has(&[clean.clone(), pyrt::xrefs::xget("compose.fallback_data", "LIVE_STRONG")]))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&mcall(&g_LIVE_ANY_ACCIDENT(), "search", &[clean.clone()]))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&mcall(&g_LIVE_A_BARE_WINNING(), "search", &[clean.clone()]))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&_the_sky_and_nothing_else(&[clean.clone()]))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&_a_road_named_with_traffic(&[clean.clone()]))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&_their_own_count(&[clean.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_their_own_count_fell(&[clean.clone()]))) } } } } } } } } } } } } } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&asking.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&_has(&[clean.clone(), g_LIVE_STRONG()]))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&mcall(&g_LIVE_ANY_ACCIDENT(), "search", &[clean.clone()]))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&mcall(&g_LIVE_A_BARE_WINNING(), "search", &[clean.clone()]))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&_the_sky_and_nothing_else(&[clean.clone()]))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&_a_road_named_with_traffic(&[clean.clone()]))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&_their_own_count(&[clean.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_their_own_count_fell(&[clean.clone()]))) } } } } } } } } } } } } } }) {
     if py_truthy(&{ let __b = mcall(&g_RECORD_CHECK(), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { _their_own_phrase(&[clean.clone(), g_RECORD_THINGS()]) } }) {
     record = _their_own_record(&[clean.clone(), Py::Bool(false)]);
     if py_truthy(&record.clone()) {
@@ -18433,7 +18433,7 @@ pub fn _live(args: &[Py]) -> Py {
     if py_truthy(&mine.clone()) {
     return mine.clone();
     }
-    let __iter1 = py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "LIVE_KINDS"));
+    let __iter1 = py_iter_or_raise(&g_LIVE_KINDS());
     for __item in __iter1 {
     let __unpk2 = py_unpack(&__item.clone(), 3, None);
     kind = __unpk2[0].clone();
@@ -18452,10 +18452,10 @@ pub fn _live(args: &[Py]) -> Py {
     continue;
     }
     if py_truthy(&Py::Bool(py_eq(&kind.clone(), &py_str("weather")))) {
-    if py_truthy(&{ let __b = _has(&[clean.clone(), pyrt::xrefs::xget("compose.fallback_data", "LIVE_INDOOR")]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_has(&[clean.clone(), pyrt::xrefs::xget("compose.fallback_data", "LIVE_WEATHER_WORDS")]))) } }) {
+    if py_truthy(&{ let __b = _has(&[clean.clone(), g_LIVE_INDOOR()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_has(&[clean.clone(), g_LIVE_WEATHER_WORDS()]))) } }) {
     continue;
     }
-    if py_truthy(&{ let __b = _has(&[clean.clone(), phrases.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_LIVE_WEATHER_DAY(), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { { let __b = { let __b = _has(&[clean.clone(), pyrt::xrefs::xget("compose.fallback_data", "LIVE_SKY")]); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&_has(&[clean.clone(), pyrt::xrefs::xget("compose.fallback_data", "LIVE_SKY_OFF")]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback_data", "LIVE_SKY_WHY"), "search", &[clean.clone()]))) } } } }; if py_truthy(&__b) { __b } else { { let __b = _has(&[clean.clone(), pyrt::xrefs::xget("compose.fallback_data", "LIVE_WEAR")]); if !py_truthy(&__b) { __b } else { { let __b = if py_truthy(&_has(&[clean.clone(), pyrt::xrefs::xget("compose.fallback_data", "LIVE_TAKE_ASK")])) { _a_bare_wear_ask(&[clean.clone()]) } else { _has(&[clean.clone(), pyrt::xrefs::xget("compose.fallback_data", "LIVE_SOON")]) }; if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_has(&[clean.clone(), pyrt::xrefs::xget("compose.fallback_data", "LIVE_SETTING")]))) } } } } } } } } } }) {
+    if py_truthy(&{ let __b = _has(&[clean.clone(), phrases.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_LIVE_WEATHER_DAY(), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { { let __b = { let __b = _has(&[clean.clone(), g_LIVE_SKY()]); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&_has(&[clean.clone(), g_LIVE_SKY_OFF()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_LIVE_SKY_WHY(), "search", &[clean.clone()]))) } } } }; if py_truthy(&__b) { __b } else { { let __b = _has(&[clean.clone(), g_LIVE_WEAR()]); if !py_truthy(&__b) { __b } else { { let __b = if py_truthy(&_has(&[clean.clone(), g_LIVE_TAKE_ASK()])) { _a_bare_wear_ask(&[clean.clone()]) } else { _has(&[clean.clone(), g_LIVE_SOON()]) }; if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_has(&[clean.clone(), g_LIVE_SETTING()]))) } } } } } } } } } }) {
     return options.clone();
     }
     continue;
@@ -18467,30 +18467,30 @@ pub fn _live(args: &[Py]) -> Py {
     continue;
     }
     if py_truthy(&Py::Bool(py_eq(&kind.clone(), &py_str("roads")))) {
-    if py_truthy(&_has(&[clean.clone(), pyrt::xrefs::xget("compose.fallback_data", "LIVE_ROADS_NOT")])) {
+    if py_truthy(&_has(&[clean.clone(), g_LIVE_ROADS_NOT()])) {
     continue;
     }
-    if py_truthy(&{ let __b = _has(&[clean.clone(), phrases.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&pyrt::xrefs::xget("compose.fallback_data", "LIVE_ROAD_NAME"), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_has(&[clean.clone(), pyrt::xrefs::xget("compose.fallback_data", "LIVE_PAPER_WORDS")]))) } } } }) {
+    if py_truthy(&{ let __b = _has(&[clean.clone(), phrases.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_LIVE_ROAD_NAME(), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_has(&[clean.clone(), g_LIVE_PAPER_WORDS()]))) } } } }) {
     return options.clone();
     }
-    if py_truthy(&{ let __b = _has(&[clean.clone(), pyrt::xrefs::xget("compose.fallback_data", "LIVE_ROAD_WORDS")]); if !py_truthy(&__b) { __b } else { _has(&[clean.clone(), pyrt::xrefs::xget("compose.fallback_data", "LIVE_DELAY_WORDS")]) } }) {
+    if py_truthy(&{ let __b = _has(&[clean.clone(), g_LIVE_ROAD_WORDS()]); if !py_truthy(&__b) { __b } else { _has(&[clean.clone(), g_LIVE_DELAY_WORDS()]) } }) {
     return options.clone();
     }
     }
     if py_truthy(&Py::Bool(py_eq(&kind.clone(), &py_str("journey")))) {
-    if py_truthy(&{ let __b = _has(&[clean.clone(), phrases.clone()]); if !py_truthy(&__b) { __b } else { { let __b = _has(&[clean.clone(), pyrt::xrefs::xget("compose.fallback_data", "LIVE_JOURNEY_ENDS")]); if py_truthy(&__b) { __b } else { _a_trip_is_on_the_table(&[memory.clone()]) } } } }) {
+    if py_truthy(&{ let __b = _has(&[clean.clone(), phrases.clone()]); if !py_truthy(&__b) { __b } else { { let __b = _has(&[clean.clone(), g_LIVE_JOURNEY_ENDS()]); if py_truthy(&__b) { __b } else { _a_trip_is_on_the_table(&[memory.clone()]) } } } }) {
     return options.clone();
     }
     continue;
     }
     if py_truthy(&Py::Bool(py_eq(&kind.clone(), &py_str("travel")))) {
-    if py_truthy(&_has(&[clean.clone(), pyrt::xrefs::xget("compose.fallback_data", "LIVE_ROADS_NOT")])) {
+    if py_truthy(&_has(&[clean.clone(), g_LIVE_ROADS_NOT()])) {
     continue;
     }
-    if py_truthy(&{ let __b = _has(&[clean.clone(), phrases.clone()]); if py_truthy(&__b) { __b } else { { let __b = _has(&[clean.clone(), pyrt::xrefs::xget("compose.fallback_data", "LIVE_TRAVEL_WORDS")]); if !py_truthy(&__b) { __b } else { _has(&[clean.clone(), pyrt::xrefs::xget("compose.fallback_data", "LIVE_DELAY_WORDS")]) } } } }) {
+    if py_truthy(&{ let __b = _has(&[clean.clone(), phrases.clone()]); if py_truthy(&__b) { __b } else { { let __b = _has(&[clean.clone(), g_LIVE_TRAVEL_WORDS()]); if !py_truthy(&__b) { __b } else { _has(&[clean.clone(), g_LIVE_DELAY_WORDS()]) } } } }) {
     return options.clone();
     }
-    if py_truthy(&{ let __b = _has(&[clean.clone(), pyrt::xrefs::xget("compose.fallback_data", "LIVE_TRAVEL_WORDS")]); if !py_truthy(&__b) { __b } else { { let __b = mcall(&g_OWN_TIME_ASK(), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_MY_TIME_ASK(), "search", &[clean.clone()]) } } } }) {
+    if py_truthy(&{ let __b = _has(&[clean.clone(), g_LIVE_TRAVEL_WORDS()]); if !py_truthy(&__b) { __b } else { { let __b = mcall(&g_OWN_TIME_ASK(), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_MY_TIME_ASK(), "search", &[clean.clone()]) } } } }) {
     return options.clone();
     }
     continue;
@@ -18515,14 +18515,14 @@ pub fn _live(args: &[Py]) -> Py {
     continue;
     }
     if py_truthy(&Py::Bool(py_eq(&kind.clone(), &py_str("hours")))) {
-    if py_truthy(&_has(&[clean.clone(), pyrt::xrefs::xget("compose.fallback_data", "LIVE_NOT_HOURS")])) {
+    if py_truthy(&_has(&[clean.clone(), g_LIVE_NOT_HOURS()])) {
     continue;
     }
-    if py_truthy(&{ let __b = _names_a_venue(&[clean.clone()]); if !py_truthy(&__b) { __b } else { { let __b = mcall(&pyrt::xrefs::xget("compose.fallback_data", "LIVE_HOURS_ASK"), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { mcall(&pyrt::xrefs::xget("compose.fallback_data", "LIVE_YES_NO_OPEN"), "search", &[clean.clone()]) } } } }) {
+    if py_truthy(&{ let __b = _names_a_venue(&[clean.clone()]); if !py_truthy(&__b) { __b } else { { let __b = mcall(&g_LIVE_HOURS_ASK(), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_LIVE_YES_NO_OPEN(), "search", &[clean.clone()]) } } } }) {
     return options.clone();
     }
     if py_truthy(&mcall(&g_OWN_TIME_ASK(), "search", &[clean.clone()])) {
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&{ let __b = _has(&[clean.clone(), pyrt::xrefs::xget("compose.fallback_data", "OWN_PLACE")]); if py_truthy(&__b) { __b } else { mcall(&g_OWN_VERB_OPEN(), "search", &[clean.clone()]) } })); if py_truthy(&__b) { __b } else { _has(&[clean.clone(), pyrt::xrefs::xget("compose.fallback_data", "OWN_PERSON")]) } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&{ let __b = _has(&[clean.clone(), g_OWN_PLACE()]); if py_truthy(&__b) { __b } else { mcall(&g_OWN_VERB_OPEN(), "search", &[clean.clone()]) } })); if py_truthy(&__b) { __b } else { _has(&[clean.clone(), g_OWN_PERSON()]) } }) {
     continue;
     }
     }
@@ -18568,7 +18568,7 @@ pub fn _the_ask_for_words_behind_a_doubt(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = Py::Bool(py_eq(&said.clone(), &clean.clone())); if py_truthy(&__b) { __b } else { mcall(&g_TELL_NOT_WORDS(), "search", &[said.clone()]) } }) {
     return Py::Bool(false);
     }
-    return call_builtin("bool", &[{ let __b = mcall(&g_WORDING_ASKS(), "search", &[said.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&pyrt::xrefs::xget("compose.fallback_data", "WORDING_SOMEONE"), "search", &[said.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_WORDING_TELL(), "search", &[said.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_WORDING_SAYS(), "search", &[said.clone()]); if !py_truthy(&__b) { __b } else { mcall(&g_WORDING_WHERE(), "search", &[said.clone()]) } } } } } } } }]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("bool", &[{ let __b = mcall(&g_WORDING_ASKS(), "search", &[said.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_WORDING_SOMEONE(), "search", &[said.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_WORDING_TELL(), "search", &[said.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_WORDING_SAYS(), "search", &[said.clone()]); if !py_truthy(&__b) { __b } else { mcall(&g_WORDING_WHERE(), "search", &[said.clone()]) } } } } } } } }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn _asks_for_words(args: &[Py]) -> Py {
@@ -18588,7 +18588,7 @@ pub fn _asks_for_words(args: &[Py]) -> Py {
     else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "words") { v.clone() }
     else { exc::raise(type_err(&format!("missing required argument: words"))) };
     let _ = py_str("True when this line is a person asking for the words to say.\n\n    Read off the whole line: the ask can be a question shape, somebody to say it to, or a doubt\n    about how to put it. Nothing about the spelling is decided here, so the same test answers for\n    the line as typed and for the line as repaired - which is what lets a slip in the key verb\n    keep its ask (`bot.compose.fallback_chain` asks it of both).\n    ");
-    return call_builtin("bool", &[{ let __b = mcall(&g_WORDING_ASKS(), "search", &[said.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&pyrt::xrefs::xget("compose.fallback_data", "WORDING_SOMEONE"), "search", &[said.clone()]); if py_truthy(&__b) { __b } else { { let __b = { let __b = mcall(&g_WORDING_TELL(), "search", &[said.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_TELL_NOT_WORDS(), "search", &[said.clone()]))) } }; if py_truthy(&__b) { __b } else { { let __b = _the_ask_for_words_behind_a_doubt(&[said.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_WORDING_SAYS(), "search", &[said.clone()]); if !py_truthy(&__b) { __b } else { { let __b = mcall(&g_WORDING_WHERE(), "search", &[said.clone()]); if py_truthy(&__b) { __b } else { op_le(&call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(6)) } } } } } } } } } } } }]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("bool", &[{ let __b = mcall(&g_WORDING_ASKS(), "search", &[said.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_WORDING_SOMEONE(), "search", &[said.clone()]); if py_truthy(&__b) { __b } else { { let __b = { let __b = mcall(&g_WORDING_TELL(), "search", &[said.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_TELL_NOT_WORDS(), "search", &[said.clone()]))) } }; if py_truthy(&__b) { __b } else { { let __b = _the_ask_for_words_behind_a_doubt(&[said.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_WORDING_SAYS(), "search", &[said.clone()]); if !py_truthy(&__b) { __b } else { { let __b = mcall(&g_WORDING_WHERE(), "search", &[said.clone()]); if py_truthy(&__b) { __b } else { op_le(&call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(6)) } } } } } } } } } } } }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn _reads_as_greeting(args: &[Py]) -> Py {
@@ -18614,7 +18614,7 @@ pub fn _reads_as_greeting(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&plain.clone()))) {
     return Py::Bool(false);
     }
-    if py_truthy(&Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "GREETING_WORDS"), &geti(&plain.clone(), &Py::Int(0))))) {
+    if py_truthy(&Py::Bool(py_contains(&g_GREETING_WORDS(), &geti(&plain.clone(), &Py::Int(0))))) {
     return Py::Bool(true);
     }
     if py_truthy(&mcall(&g_GREETING_OPEN(), "match", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { mcall(&py_str(" "), "join", &[plain.clone()]) } }])) {
@@ -18647,7 +18647,7 @@ pub fn _reads_as_taste(args: &[Py]) -> Py {
     if py_truthy(&op_gt(&call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(6))) {
     return Py::Bool(false);
     }
-    return Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "QUESTION_WORDS")) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&mcall(&clean.clone(), "split", &[]), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))));
+    return Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_QUESTION_WORDS()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&mcall(&clean.clone(), "split", &[]), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))));
     Py::None
 }
 pub fn _blackout_words(args: &[Py]) -> Py {
@@ -18673,11 +18673,11 @@ pub fn _blackout_words(args: &[Py]) -> Py {
     let mut shape: Py = Py::None;
     let mut someone: Py = Py::None;
     let _ = py_str("True when the line describes a faint in words other than \"blacked out\".\n\n    \"everything went black and i hit the floor\" and \"my vision went black for a second\" are the\n    same thing \"i blacked out\" says, and they were getting a shrug, or worse, the washing card:\n    a colour run reads \"everything\" and \"went\" as a load of laundry.\n    ");
-    if py_truthy(&{ let __b = _names(&[words.clone(), said.clone(), pyrt::xrefs::xget("compose.fallback_data", "DARK_THING")]); if py_truthy(&__b) { __b } else { mcall(&g_BLACKED_OUT_A_THING(), "search", &[clean.clone()]) } }) {
+    if py_truthy(&{ let __b = _names(&[words.clone(), said.clone(), g_DARK_THING()]); if py_truthy(&__b) { __b } else { mcall(&g_BLACKED_OUT_A_THING(), "search", &[clean.clone()]) } }) {
     return Py::Bool(false);
     }
     someone = call_builtin("bool", &[mcall(&g_BLACKOUT_PERSON(), "search", &[clean.clone()])]).unwrap_or_else(|e| exc::raise(e));
-    let __iter1 = py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "BLACKED_OUT_SIGHT"));
+    let __iter1 = py_iter_or_raise(&g_BLACKED_OUT_SIGHT());
     for __item in __iter1 {
     let __unpk2 = py_unpack(&__item.clone(), 2, None);
     shape = __unpk2[0].clone();
@@ -18719,30 +18719,30 @@ pub fn _action(args: &[Py]) -> Py {
     words = mcall(&mcall(&said.clone(), "replace", &[py_str("'"), py_str("")]), "split", &[]);
     routine = call_builtin("bool", &[mcall(&g_ROUTINE_WAKE(), "search", &[clean.clone()])]).unwrap_or_else(|e| exc::raise(e));
     story = pyrt::xrefs::xcall("compose.urgent", "reads_as_a_story", &[clean.clone()]);
-    if py_truthy(&{ let __b = mcall(&g_CANT_WAKE(), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&_names(&[words.clone(), said.clone(), pyrt::xrefs::xget("compose.fallback_data", "GADGET_WORDS")]))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&routine.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&story.clone())) } } } } } }) {
-    return pyrt::xrefs::xget("compose.fallback_data", "EMERGENCY_ANSWER");
+    if py_truthy(&{ let __b = mcall(&g_CANT_WAKE(), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&_names(&[words.clone(), said.clone(), g_GADGET_WORDS()]))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&routine.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&story.clone())) } } } } } }) {
+    return g_EMERGENCY_ANSWER();
     }
     tail_only = { let __b = mcall(&g_UNRESPONSIVE_TAIL(), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_FEED_TAIL(), "search", &[clean.clone()]))) } };
     choking_thing = { let __b = mcall(&g_CHOKE_MACHINE(), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_CHOKE_BODY(), "search", &[clean.clone()]))) } };
-    if py_truthy(&{ let __b = _names(&[words.clone(), said.clone(), pyrt::xrefs::xget("compose.fallback_data", "EMERGENCY_WORDS")]); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&_names(&[words.clone(), said.clone(), pyrt::xrefs::xget("compose.fallback_data", "GADGET_WORDS")]))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&choking_thing.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&tail_only.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&routine.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&story.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&{ let __b = mcall(&g_OVERDOSE_FOOD(), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_OVERDOSE_DRUG(), "search", &[clean.clone()]))) } })); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&mcall(&g_CHOKE_ON_A_WORD(), "search", &[clean.clone()]))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&{ let __b = mcall(&g_OVERDOSE_OF_A_TREAT(), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_OVERDOSE_A_PILL(), "search", &[clean.clone()]))) } })); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_the_thing_is_choking(&[clean.clone(), words.clone()]))) } } } } } } } } } } } } } } } } } }) {
-    return pyrt::xrefs::xget("compose.fallback_data", "EMERGENCY_ANSWER");
+    if py_truthy(&{ let __b = _names(&[words.clone(), said.clone(), g_EMERGENCY_WORDS()]); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&_names(&[words.clone(), said.clone(), g_GADGET_WORDS()]))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&choking_thing.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&tail_only.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&routine.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&story.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&{ let __b = mcall(&g_OVERDOSE_FOOD(), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_OVERDOSE_DRUG(), "search", &[clean.clone()]))) } })); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&mcall(&g_CHOKE_ON_A_WORD(), "search", &[clean.clone()]))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&{ let __b = mcall(&g_OVERDOSE_OF_A_TREAT(), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_OVERDOSE_A_PILL(), "search", &[clean.clone()]))) } })); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_the_thing_is_choking(&[clean.clone(), words.clone()]))) } } } } } } } } } } } } } } } } } }) {
+    return g_EMERGENCY_ANSWER();
     }
-    if py_truthy(&{ let __b = _names(&[words.clone(), said.clone(), pyrt::xrefs::xget("compose.fallback_data", "FLOPPY_WAKE")]); if !py_truthy(&__b) { __b } else { { let __b = _names(&[words.clone(), said.clone(), pyrt::xrefs::xget("compose.fallback_data", "TIRED")]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_names(&[words.clone(), said.clone(), pyrt::xrefs::xget("compose.fallback_data", "GADGET_WORDS")]))) } } } }) {
-    return pyrt::xrefs::xget("compose.fallback_data", "EMERGENCY_ANSWER");
+    if py_truthy(&{ let __b = _names(&[words.clone(), said.clone(), g_FLOPPY_WAKE()]); if !py_truthy(&__b) { __b } else { { let __b = _names(&[words.clone(), said.clone(), g_TIRED()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_names(&[words.clone(), said.clone(), g_GADGET_WORDS()]))) } } } }) {
+    return g_EMERGENCY_ANSWER();
     }
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&_names(&[words.clone(), said.clone(), pyrt::xrefs::xget("compose.fallback_data", "LANGUAGE_FLUENCY")]))); if !py_truthy(&__b) { __b } else { { let __b = { let __b = _names(&[words.clone(), said.clone(), pyrt::xrefs::xget("compose.fallback_data", "GAS_WORDS")]); if py_truthy(&__b) { __b } else { { let __b = _names(&[words.clone(), said.clone(), pyrt::xrefs::xget("compose.fallback_data", "FUME_WORDS")]); if !py_truthy(&__b) { __b } else { _names(&[words.clone(), said.clone(), pyrt::xrefs::xget("compose.fallback_data", "FUEL_WORDS")]) } } } }; if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_names(&[words.clone(), said.clone(), pyrt::xrefs::xget("compose.fallback_data", "PETROL_WORDS")]))) } } } }) {
-    return pyrt::xrefs::xget("compose.fallback_data", "GAS_ANSWER");
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&_names(&[words.clone(), said.clone(), g_LANGUAGE_FLUENCY()]))); if !py_truthy(&__b) { __b } else { { let __b = { let __b = _names(&[words.clone(), said.clone(), g_GAS_WORDS()]); if py_truthy(&__b) { __b } else { { let __b = _names(&[words.clone(), said.clone(), g_FUME_WORDS()]); if !py_truthy(&__b) { __b } else { _names(&[words.clone(), said.clone(), g_FUEL_WORDS()]) } } } }; if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_names(&[words.clone(), said.clone(), g_PETROL_WORDS()]))) } } } }) {
+    return g_GAS_ANSWER();
     }
-    animal = call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); __out.push({ let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "ANIMALS"), &word.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "ANIMALS"), &mcall(&word.clone(), "rstrip", &[py_str("s")]))) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
-    went_under = { let __b = { let __b = mcall(&pyrt::xrefs::xget("compose.fallback_data", "PASSED_OUT"), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&mcall(&g_BLACKED_OUT_A_THING(), "search", &[clean.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback_data", "PASSING_OUT_A_THING"), "search", &[clean.clone()]))) } } } }; if py_truthy(&__b) { __b } else { _blackout_words(&[clean.clone(), words.clone(), said.clone()]) } };
-    if py_truthy(&{ let __b = went_under.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&animal.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_names(&[words.clone(), said.clone(), pyrt::xrefs::xget("compose.fallback_data", "LAUGHING_WORDS")]))) } } } }) {
-    if py_truthy(&_names(&[words.clone(), said.clone(), pyrt::xrefs::xget("compose.fallback_data", "CHILD_FAINT")])) {
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[py_list(vec![pyrt::xrefs::xget("compose.fallback_data", "CHILD_FAINT_ANSWER")]), memory.clone(), clean.clone()]);
+    animal = call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); __out.push({ let __b = Py::Bool(py_contains(&g_ANIMALS(), &word.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_ANIMALS(), &mcall(&word.clone(), "rstrip", &[py_str("s")]))) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    went_under = { let __b = { let __b = mcall(&g_PASSED_OUT(), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&mcall(&g_BLACKED_OUT_A_THING(), "search", &[clean.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_PASSING_OUT_A_THING(), "search", &[clean.clone()]))) } } } }; if py_truthy(&__b) { __b } else { _blackout_words(&[clean.clone(), words.clone(), said.clone()]) } };
+    if py_truthy(&{ let __b = went_under.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&animal.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_names(&[words.clone(), said.clone(), g_LAUGHING_WORDS()]))) } } } }) {
+    if py_truthy(&_names(&[words.clone(), said.clone(), g_CHILD_FAINT()])) {
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[py_list(vec![g_CHILD_FAINT_ANSWER()]), memory.clone(), clean.clone()]);
     }
     if py_truthy(&mcall(&g_FAINT_COMING(), "search", &[clean.clone()])) {
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[py_list(vec![op_add(&pyrt::xrefs::xget("compose.fallback_data", "FAINT_COMING_ANSWER"), &py_str("."))]), memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[py_list(vec![op_add(&g_FAINT_COMING_ANSWER(), &py_str("."))]), memory.clone(), clean.clone()]);
     }
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[py_list(vec![op_add(&pyrt::xrefs::xget("compose.fallback_data", "PASSED_OUT_ANSWER"), &py_str("."))]), memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[py_list(vec![op_add(&g_PASSED_OUT_ANSWER(), &py_str("."))]), memory.clone(), clean.clone()]);
     }
     return Py::None;
     Py::None
@@ -18784,7 +18784,7 @@ pub fn _name_given_before(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&turns.clone()))) {
     return py_str("");
     }
-    asked = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&stdlib_call("re", "sub", &[py_str("[^a-z0-9 ]"), py_str(" "), mcall(&call_builtin("str", &[{ let __b = clean.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[])]).unwrap_or_else(|e| exc::raise(e)), "split", &[])) { let mut w: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&pyrt::xrefs::xget("compose.fallback_data", "ASK_ONLY"), &w.clone()))) {  __out.push(w.clone()); } } py_set(__out) })() };
+    asked = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&stdlib_call("re", "sub", &[py_str("[^a-z0-9 ]"), py_str(" "), mcall(&call_builtin("str", &[{ let __b = clean.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[])]).unwrap_or_else(|e| exc::raise(e)), "split", &[])) { let mut w: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&g_ASK_ONLY(), &w.clone()))) {  __out.push(w.clone()); } } py_set(__out) })() };
     let __iter1 = py_iter_or_raise(&call_builtin("reversed", &[turns.clone()]).unwrap_or_else(|e| exc::raise(e)));
     for __item in __iter1 {
     turn = __item.clone();
@@ -18823,7 +18823,7 @@ pub fn _name_given_before(args: &[Py]) -> Py {
     break;
     }
     lowered = stdlib_call("re", "sub", &[py_str("[^a-z]"), py_str(""), mcall(&name.clone(), "lower", &[])]).unwrap_or_else(|e| exc::raise(e));
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&name.clone())); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&g_NOT_A_NAME(), &lowered.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "ASK_ONLY"), &lowered.clone())) } } } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&name.clone())); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&g_NOT_A_NAME(), &lowered.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_ASK_ONLY(), &lowered.clone())) } } } }) {
     continue;
     }
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&asked.clone())); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&subject.clone())); if py_truthy(&__b) { __b } else { op_bitand(&asked.clone(), &subject.clone()) } } } }) {
@@ -18866,7 +18866,7 @@ pub fn _asks_a_name_back(args: &[Py]) -> Py {
     if py_truthy(&op_bitand(&call_builtin("set", &[mine.clone()]).unwrap_or_else(|e| exc::raise(e)), &py_set(vec![py_str("should"), py_str("shall"), py_str("could")]))) {
     return Py::Bool(false);
     }
-    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "WORD_ANYWHERE")) { let mut phrase: Py = __item.clone(); __out.push(Py::Bool(py_contains(&text.clone(), &phrase.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_WORD_ANYWHERE()) { let mut phrase: Py = __item.clone(); __out.push(Py::Bool(py_contains(&text.clone(), &phrase.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     return Py::Bool(false);
     }
     if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_RECALL_NAME()) { let mut rule: Py = __item.clone(); __out.push(mcall(&rule.clone(), "search", &[text.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
@@ -18926,11 +18926,11 @@ pub fn _says_it_already(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&words.clone())); if py_truthy(&__b) { __b } else { op_gt(&call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(10)) } }) {
     return Py::Bool(false);
     }
-    said = call_builtin("set", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&_flat_words(&[_the_answer_above(&[memory.clone()])])) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&pyrt::xrefs::xget("compose.fallback_data", "POINTING"), &word.clone()))) {  __out.push(word.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    said = call_builtin("set", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&_flat_words(&[_the_answer_above(&[memory.clone()])])) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&g_POINTING(), &word.clone()))) {  __out.push(word.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&Py::Bool(!py_truthy(&said.clone()))) {
     return Py::Bool(false);
     }
-    mine = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); if py_truthy(&{ let __b = Py::Bool(!py_contains(&pyrt::xrefs::xget("compose.fallback_data", "POINTING"), &word.clone())); if !py_truthy(&__b) { __b } else { op_gt(&call_builtin("len", &[word.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)) } }) {  __out.push(word.clone()); } } py_list(__out) })() };
+    mine = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); if py_truthy(&{ let __b = Py::Bool(!py_contains(&g_POINTING(), &word.clone())); if !py_truthy(&__b) { __b } else { op_gt(&call_builtin("len", &[word.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)) } }) {  __out.push(word.clone()); } } py_list(__out) })() };
     if py_truthy(&Py::Bool(!py_truthy(&mine.clone()))) {
     return Py::Bool(false);
     }
@@ -18975,7 +18975,7 @@ pub fn _names_a_new_thing(args: &[Py]) -> Py {
     }
     before = if py_truthy(&i.clone()) { geti(&words.clone(), &op_sub(&i.clone(), &Py::Int(1))) } else { py_str("") };
     after = if py_truthy(&op_lt(&op_add(&i.clone(), &Py::Int(1)), &call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)))) { geti(&words.clone(), &op_add(&i.clone(), &Py::Int(1))) } else { py_str("") };
-    if py_truthy(&{ let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "RULED_OUT_DETERMINER"), &before.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&pyrt::xrefs::xget("compose.fallback_data", "PARTICLE"), &after.clone())) } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_RULED_OUT_DETERMINER(), &before.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&g_PARTICLE(), &after.clone())) } }) {
     return Py::Bool(true);
     }
     if py_truthy(&{ let __b = mcall(&here.clone(), "endswith", &[py_str("s")]); if !py_truthy(&__b) { __b } else { { let __b = op_gt(&call_builtin("len", &[here.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(3)); if !py_truthy(&__b) { __b } else { Py::Bool(!py_eq(&here.clone(), &geti(&words.clone(), &Py::Int(0)))) } } } }) {
@@ -19002,7 +19002,7 @@ pub fn content_words(args: &[Py]) -> Py {
     let mut words: Py = Py::None;
     let _ = py_str("The words a line actually asks with: no pointing words, nothing of three letters or less.");
     words = _flat_words(&[text.clone()]);
-    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); if py_truthy(&{ let __b = Py::Bool(!py_contains(&pyrt::xrefs::xget("compose.fallback_data", "POINTING"), &word.clone())); if !py_truthy(&__b) { __b } else { op_gt(&call_builtin("len", &[word.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)) } }) {  __out.push(word.clone()); } } py_list(__out) })() };
+    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); if py_truthy(&{ let __b = Py::Bool(!py_contains(&g_POINTING(), &word.clone())); if !py_truthy(&__b) { __b } else { op_gt(&call_builtin("len", &[word.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)) } }) {  __out.push(word.clone()); } } py_list(__out) })() };
     Py::None
 }
 pub fn _flat_words(args: &[Py]) -> Py {
@@ -19146,7 +19146,7 @@ pub fn is_said_it_already(args: &[Py]) -> Py {
     let mut line: Py = Py::None;
     let _ = py_str("True when `reply` is one of the said-it-already lines, in any of its wordings.");
     flat = mcall(&py_str(" "), "join", &[_flat_words(&[reply.clone()])]);
-    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&op_add(&pyrt::xrefs::xget("compose.fallback_data", "HELP_ALREADY"), &pyrt::xrefs::xget("compose.fallback_data", "SAME_AGAIN"))) { let mut line: Py = __item.clone(); __out.push(Py::Bool(py_eq(&flat.clone(), &mcall(&py_str(" "), "join", &[_flat_words(&[line.clone()])])))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&op_add(&g_HELP_ALREADY(), &g_SAME_AGAIN())) { let mut line: Py = __item.clone(); __out.push(Py::Bool(py_eq(&flat.clone(), &mcall(&py_str(" "), "join", &[_flat_words(&[line.clone()])])))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn _points_at_nothing(args: &[Py]) -> Py {
@@ -19296,7 +19296,7 @@ pub fn is_a_forecast(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&head.clone()))) {
     return Py::Bool(false);
     }
-    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "FORECAST_POOLS")) { let mut pool: Py = __item.clone(); for __item in py_iter_or_raise(&pool.clone()) { let mut line: Py = __item.clone(); __out.push(mcall(&head.clone(), "startswith", &[geti(&mcall(&line.clone(), "split", &[py_str("{")]), &Py::Int(0))])); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_FORECAST_POOLS()) { let mut pool: Py = __item.clone(); for __item in py_iter_or_raise(&pool.clone()) { let mut line: Py = __item.clone(); __out.push(mcall(&head.clone(), "startswith", &[geti(&mcall(&line.clone(), "split", &[py_str("{")]), &Py::Int(0))])); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn _the_forecast_subject(args: &[Py]) -> Py {
@@ -19324,14 +19324,14 @@ pub fn _the_forecast_subject(args: &[Py]) -> Py {
     let mut whose: Py = Py::None;
     let _ = py_str("('person'|'self'|'pet', \"your dad\") for the one a forecast is about, or (None, \"\").\n\n    Whose body it is decides which building the answer sends them to, so it is read before the\n    reply: a pet keeps its own doctor, a person's health is theirs and not the speaker's, and\n    only a thread about the speaker's own body takes the GP line. \"they\" is left out on purpose:\n    \"will they come back next year\" about the slugs is not somebody with a doctor.\n    ");
     recent = slice_or_raise(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let __b = mcall(&{ let __b = memory.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[py_str("turns")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }) { let mut t: Py = __item.clone(); if py_truthy(&call_builtin("isinstance", &[t.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(mcall(&call_builtin("str", &[{ let __b = mcall(&t.clone(), "get", &[py_str("user")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[])); } } py_list(__out) })() }, &op_neg(&Py::Int(3)), &Py::None, &Py::None);
-    asked_about_self = call_builtin("bool", &[mcall(&pyrt::xrefs::xget("compose.fallback_data", "FORECAST_I_ASK"), "search", &[{ let __b = clean.clone(); if py_truthy(&__b) { __b } else { py_str("") } }])]).unwrap_or_else(|e| exc::raise(e));
+    asked_about_self = call_builtin("bool", &[mcall(&g_FORECAST_I_ASK(), "search", &[{ let __b = clean.clone(); if py_truthy(&__b) { __b } else { py_str("") } }])]).unwrap_or_else(|e| exc::raise(e));
     let __iter1 = py_iter_or_raise(&op_add(&py_list(vec![clean.clone()]), &if py_truthy(&asked_about_self.clone()) { py_list(vec![]) } else { call_builtin("list", &[call_builtin("reversed", &[recent.clone()]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)) }));
     for __item in __iter1 {
     said = __item.clone();
-    found = mcall(&pyrt::xrefs::xget("compose.fallback_data", "FORECAST_RELATION"), "search", &[{ let __b = said.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]);
+    found = mcall(&g_FORECAST_RELATION(), "search", &[{ let __b = said.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]);
     if py_truthy(&found.clone()) {
     relation = mcall(&found.clone(), "group", &[Py::Int(1)]);
-    return py_tuple(vec![if py_truthy(&Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "ANIMALS"), &relation.clone()))) { py_str("pet") } else { py_str("person") }, op_add(&py_str("your "), &relation.clone())]);
+    return py_tuple(vec![if py_truthy(&Py::Bool(py_contains(&g_ANIMALS(), &relation.clone()))) { py_str("pet") } else { py_str("person") }, op_add(&py_str("your "), &relation.clone())]);
     }
     }
     if py_truthy(&asked_about_self.clone()) {
@@ -19347,7 +19347,7 @@ pub fn _the_forecast_subject(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(py_eq(&whose.clone(), &py_str("theirs")))) {
     return py_tuple(vec![py_str("person"), py_str("them")]);
     }
-    if py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback_data", "FORECAST_HE_SHE"), "search", &[{ let __b = clean.clone(); if py_truthy(&__b) { __b } else { py_str("") } }])) {
+    if py_truthy(&mcall(&g_FORECAST_HE_SHE(), "search", &[{ let __b = clean.clone(); if py_truthy(&__b) { __b } else { py_str("") } }])) {
     return py_tuple(vec![py_str("person"), py_str("them")]);
     }
     if py_truthy(&_a_body_in_the_thread(&[memory.clone()])) {
@@ -19373,7 +19373,7 @@ pub fn _without_the_things_named_after_a_body(args: &[Py]) -> Py {
     else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "text") { v.clone() }
     else { exc::raise(type_err(&format!("missing required argument: text"))) };
     let _ = py_str("The line with \"back door\" and \"foot of the stairs\" taken out before a body is read.");
-    return mcall(&pyrt::xrefs::xget("compose.fallback_data", "BODY_WORD_FOR_A_THING"), "sub", &[py_str(" "), call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))]);
+    return mcall(&g_BODY_WORD_FOR_A_THING(), "sub", &[py_str(" "), call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))]);
     Py::None
 }
 pub fn _whose_body(args: &[Py]) -> Py {
@@ -19406,11 +19406,11 @@ pub fn _whose_body(args: &[Py]) -> Py {
     let __unpk3 = py_unpack(&__item.clone(), 2, None);
     at = __unpk3[0].clone();
     token = __unpk3[1].clone();
-    if py_truthy(&{ let __b = Py::Bool(py_eq(&token.clone(), &py_str("my"))); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "FORECAST_BODY_WORDS"), &geti(&tokens.clone(), &op_add(&at.clone(), &Py::Int(1))))) } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_eq(&token.clone(), &py_str("my"))); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_FORECAST_BODY_WORDS(), &geti(&tokens.clone(), &op_add(&at.clone(), &Py::Int(1))))) } }) {
     return py_str("mine");
     }
     }
-    if py_truthy(&{ let __b = op_bitand(&call_builtin("set", &[tokens.clone()]).unwrap_or_else(|e| exc::raise(e)), &pyrt::xrefs::xget("compose.fallback_data", "FORECAST_BODY_WORDS")); if !py_truthy(&__b) { __b } else { { let __b = op_bitand(&call_builtin("set", &[tokens.clone()]).unwrap_or_else(|e| exc::raise(e)), &pyrt::xrefs::xget("compose.fallback_data", "_THREAD_PEOPLE")); if py_truthy(&__b) { __b } else { mcall(&pyrt::xrefs::xget("compose.fallback_data", "FORECAST_HE_SHE"), "search", &[{ let __b = said.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]) } } } }) {
+    if py_truthy(&{ let __b = op_bitand(&call_builtin("set", &[tokens.clone()]).unwrap_or_else(|e| exc::raise(e)), &g_FORECAST_BODY_WORDS()); if !py_truthy(&__b) { __b } else { { let __b = op_bitand(&call_builtin("set", &[tokens.clone()]).unwrap_or_else(|e| exc::raise(e)), &g__THREAD_PEOPLE()); if py_truthy(&__b) { __b } else { mcall(&g_FORECAST_HE_SHE(), "search", &[{ let __b = said.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]) } } } }) {
     return py_str("theirs");
     }
     }
@@ -19432,7 +19432,7 @@ pub fn _without_the_forecast_verb(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: line"))) };
     let mut found: Py = Py::None;
     let _ = py_str("The line with the forecast's own words taken out, so they cannot pass for a subject.\n\n    \"will they come back next year\" about the slugs is a question about a garden, and \"back\"\n    is a body part: read with the verb in, the line named a spine and sent a gardener to a\n    physio. What is left after the verb is the thing the forecast is about.\n    ");
-    found = mcall(&pyrt::xrefs::xget("compose.fallback_data", "FORECAST"), "search", &[{ let __b = line.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]);
+    found = mcall(&g_FORECAST(), "search", &[{ let __b = line.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]);
     if py_truthy(&Py::Bool(!py_truthy(&found.clone()))) {
     return { let __b = line.clone(); if py_truthy(&__b) { __b } else { py_str("") } };
     }
@@ -19490,7 +19490,7 @@ pub fn _a_body_in_the_thread(args: &[Py]) -> Py {
     said = mcall(&call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("user")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]);
     said = _without_the_things_named_after_a_body(&[_without_the_forecast_verb(&[said.clone()])]);
     words = _without_the_idioms(&[said.clone()]);
-    if py_truthy(&{ let __b = op_bitand(&words.clone(), &pyrt::xrefs::xget("compose.fallback_data", "BODY_PARTS")); if py_truthy(&__b) { __b } else { { let __b = op_bitand(&words.clone(), &pyrt::xrefs::xget("compose.fallback_data", "SYMPTOM_WORDS")); if py_truthy(&__b) { __b } else { { let __b = op_bitand(&words.clone(), &pyrt::xrefs::xget("compose.fallback_data", "HEALTH_WORDS")); if py_truthy(&__b) { __b } else { { let __b = op_bitand(&words.clone(), &pyrt::xrefs::xget("compose.fallback_data", "FORECAST_ILL")); if py_truthy(&__b) { __b } else { { let __b = mcall(&pyrt::xrefs::xget("compose.fallback_data", "FORECAST_OFF_THEIR_FOOD"), "search", &[said.clone()]); if py_truthy(&__b) { __b } else { mcall(&pyrt::xrefs::xget("compose.fallback_data", "FORECAST_A_FALL"), "search", &[said.clone()]) } } } } } } } } } }) {
+    if py_truthy(&{ let __b = op_bitand(&words.clone(), &g_BODY_PARTS()); if py_truthy(&__b) { __b } else { { let __b = op_bitand(&words.clone(), &g_SYMPTOM_WORDS()); if py_truthy(&__b) { __b } else { { let __b = op_bitand(&words.clone(), &g_HEALTH_WORDS()); if py_truthy(&__b) { __b } else { { let __b = op_bitand(&words.clone(), &g_FORECAST_ILL()); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_FORECAST_OFF_THEIR_FOOD(), "search", &[said.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_FORECAST_A_FALL(), "search", &[said.clone()]) } } } } } } } } } }) {
     return Py::Bool(true);
     }
     }
@@ -19523,7 +19523,7 @@ pub fn _a_hard_patch_in_the_thread(args: &[Py]) -> Py {
     said = py_list(vec![mcall(&call_builtin("str", &[{ let __b = clean.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[])]);
     let __aug1 = op_add(&said.clone(), &slice_or_raise(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let __b = mcall(&{ let __b = memory.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[py_str("turns")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }) { let mut t: Py = __item.clone(); if py_truthy(&call_builtin("isinstance", &[t.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(mcall(&call_builtin("str", &[{ let __b = mcall(&t.clone(), "get", &[py_str("user")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[])); } } py_list(__out) })() }, &op_neg(&look_back.clone()), &Py::None, &Py::None));
     said = __aug1;
-    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&said.clone()) { let mut line: Py = __item.clone(); if py_truthy(&line.clone()) {  __out.push(mcall(&pyrt::xrefs::xget("compose.fallback_data", "FORECAST_STRUGGLE"), "search", &[line.clone()])); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&said.clone()) { let mut line: Py = __item.clone(); if py_truthy(&line.clone()) {  __out.push(mcall(&g_FORECAST_STRUGGLE(), "search", &[line.clone()])); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn _forecast_pool(args: &[Py]) -> Py {
@@ -19554,8 +19554,8 @@ pub fn _forecast_pool(args: &[Py]) -> Py {
     let mut turn: Py = Py::None;
     let mut who: Py = Py::None;
     let _ = py_str("The pool for a line asking how something will turn out, or None when it is not one.");
-    line = call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&py_tuple(vec![clean.clone(), repaired.clone()])) { let mut said: Py = __item.clone(); if py_truthy(&{ let __b = said.clone(); if !py_truthy(&__b) { __b } else { mcall(&pyrt::xrefs::xget("compose.fallback_data", "FORECAST"), "search", &[said.clone()]) } }) {  __out.push(said.clone()); } } py_list(__out) })() }, py_str("")]).unwrap_or_else(|e| exc::raise(e));
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&line.clone())); if py_truthy(&__b) { __b } else { { let __b = mcall(&pyrt::xrefs::xget("compose.fallback_data", "FORECAST_PERMISSION"), "search", &[line.clone()]); if py_truthy(&__b) { __b } else { mcall(&pyrt::xrefs::xget("compose.fallback_data", "FORECAST_DURATION"), "search", &[line.clone()]) } } } }) {
+    line = call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&py_tuple(vec![clean.clone(), repaired.clone()])) { let mut said: Py = __item.clone(); if py_truthy(&{ let __b = said.clone(); if !py_truthy(&__b) { __b } else { mcall(&g_FORECAST(), "search", &[said.clone()]) } }) {  __out.push(said.clone()); } } py_list(__out) })() }, py_str("")]).unwrap_or_else(|e| exc::raise(e));
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&line.clone())); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_FORECAST_PERMISSION(), "search", &[line.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_FORECAST_DURATION(), "search", &[line.clone()]) } } } }) {
     return Py::None;
     }
     if py_truthy(&{ let __b = _in_a_loss_thread(&[memory.clone()]); if py_truthy(&__b) { __b } else { _grief_thread(&[memory.clone()]) } }) {
@@ -19565,27 +19565,27 @@ pub fn _forecast_pool(args: &[Py]) -> Py {
     kind = __unpk1[0].clone();
     who = __unpk1[1].clone();
     if py_truthy(&in_a_safety_thread(&[memory.clone()])) {
-    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "FORECAST_AFTER_SAFETY")) { let mut phrase: Py = __item.clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("who".to_string(), { let __b = who.clone(); if py_truthy(&__b) { __b } else { py_str("you") } })]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&phrase.clone(), "format", args))(&__args) }); } py_list(__out) })() };
+    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_FORECAST_AFTER_SAFETY()) { let mut phrase: Py = __item.clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("who".to_string(), { let __b = who.clone(); if py_truthy(&__b) { __b } else { py_str("you") } })]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&phrase.clone(), "format", args))(&__args) }); } py_list(__out) })() };
     }
     if py_truthy(&Py::Bool(py_eq(&kind.clone(), &py_str("pet")))) {
-    if py_truthy(&Py::Bool(!py_truthy(&{ let __b = _a_body_in_the_thread(&[memory.clone()]); if py_truthy(&__b) { __b } else { mcall(&pyrt::xrefs::xget("compose.fallback_data", "FORECAST_PET_HARM"), "search", &[_thread_said(&[memory.clone()])]) } }))) {
+    if py_truthy(&Py::Bool(!py_truthy(&{ let __b = _a_body_in_the_thread(&[memory.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_FORECAST_PET_HARM(), "search", &[_thread_said(&[memory.clone()])]) } }))) {
     return Py::None;
     }
-    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "FORECAST_PET")) { let mut phrase: Py = __item.clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("who".to_string(), who.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&phrase.clone(), "format", args))(&__args) }); } py_list(__out) })() };
+    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_FORECAST_PET()) { let mut phrase: Py = __item.clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("who".to_string(), who.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&phrase.clone(), "format", args))(&__args) }); } py_list(__out) })() };
     }
     if py_truthy(&Py::Bool(py_eq(&kind.clone(), &py_str("person")))) {
     if py_truthy(&an_outcome_asked_about_someone(&[clean.clone(), memory.clone()])) {
     return Py::None;
     }
     if py_truthy(&_a_body_in_the_thread(&[memory.clone()])) {
-    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "FORECAST_PERSON")) { let mut phrase: Py = __item.clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("who".to_string(), who.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&phrase.clone(), "format", args))(&__args) }); } py_list(__out) })() };
+    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_FORECAST_PERSON()) { let mut phrase: Py = __item.clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("who".to_string(), who.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&phrase.clone(), "format", args))(&__args) }); } py_list(__out) })() };
     }
     if py_truthy(&_a_hard_patch_in_the_thread(&[line.clone(), memory.clone()])) {
     later = mcall(&call_builtin("globals", &[]).unwrap_or_else(|e| exc::raise(e)), "get", &[py_str("_a_hard_time_and_not_a_body")]);
     if py_truthy(&{ let __b = later.clone(); if !py_truthy(&__b) { __b } else { py_call(&later, &[memory.clone(), line.clone()]) } }) {
     return Py::None;
     }
-    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "FORECAST_SOMEONE_STRUGGLING")) { let mut phrase: Py = __item.clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("who".to_string(), who.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&phrase.clone(), "format", args))(&__args) }); } py_list(__out) })() };
+    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_FORECAST_SOMEONE_STRUGGLING()) { let mut phrase: Py = __item.clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("who".to_string(), who.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&phrase.clone(), "format", args))(&__args) }); } py_list(__out) })() };
     }
     return Py::None;
     }
@@ -19595,9 +19595,9 @@ pub fn _forecast_pool(args: &[Py]) -> Py {
     return Py::None;
     }
     if py_truthy(&{ let __b = Py::Bool(!py_eq(&_whose_body(&[clean.clone(), slice_or_raise(&recent.clone(), &op_neg(&Py::Int(1)), &Py::None, &Py::None)]), &py_str("mine"))); if !py_truthy(&__b) { __b } else { { let __b = _a_hard_patch_in_the_thread(&[line.clone(), memory.clone()]); if py_truthy(&__b) { __b } else { _thread_is_about_someone_else(&[memory.clone()]) } } } }) {
-    return call_builtin("list", &[pyrt::xrefs::xget("compose.fallback_data", "FORECAST_SELF_STRUGGLING")]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("list", &[g_FORECAST_SELF_STRUGGLING()]).unwrap_or_else(|e| exc::raise(e));
     }
-    return call_builtin("list", &[pyrt::xrefs::xget("compose.fallback_data", "FORECAST_SELF")]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("list", &[g_FORECAST_SELF()]).unwrap_or_else(|e| exc::raise(e));
     }
     return Py::None;
     Py::None
@@ -19647,7 +19647,7 @@ pub fn _unknown(args: &[Py]) -> Py {
     if py_truthy(&no_subject.clone()) {
     return no_subject.clone();
     }
-    lead = if py_truthy(&{ let __b = mcall(&pyrt::xrefs::xget("compose.not_knowing", "POINTER_HEDGE"), "search", &[{ let __b = reply.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&pyrt::xrefs::xget("compose.not_knowing", "NAMES_WHERE_TO_ASK"), "search", &[{ let __b = reply.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]))) } }) { pyrt::xrefs::xcall("compose.not_knowing", "_the_lead_and_the_route", &[clean.clone(), memory.clone()]) } else { py_str("") };
+    lead = if py_truthy(&{ let __b = mcall(&g_POINTER_HEDGE(), "search", &[{ let __b = reply.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_NAMES_WHERE_TO_ASK(), "search", &[{ let __b = reply.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]))) } }) { pyrt::xrefs::xcall("compose.not_knowing", "_the_lead_and_the_route", &[clean.clone(), memory.clone()]) } else { py_str("") };
     if py_truthy(&lead.clone()) {
     return lead.clone();
     }
@@ -19703,7 +19703,7 @@ pub fn _hedged_recently(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = said.clone(); if !py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_UNKNOWN()) { let mut line: Py = __item.clone(); __out.push(Py::Bool(py_eq(&slice_or_raise(&said.clone(), &Py::None, &Py::Int(40), &Py::None), &slice_or_raise(&line.clone(), &Py::None, &Py::Int(40), &Py::None)))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }) {
     return Py::Bool(true);
     }
-    if py_truthy(&{ let __b = said.clone(); if !py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "PUNT")) { let mut punt: Py = __item.clone(); __out.push(Py::Bool(py_contains(&mcall(&said.clone(), "lower", &[]), &punt.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }) {
+    if py_truthy(&{ let __b = said.clone(); if !py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_PUNT()) { let mut punt: Py = __item.clone(); __out.push(Py::Bool(py_contains(&mcall(&said.clone(), "lower", &[]), &punt.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }) {
     return Py::Bool(true);
     }
     }
@@ -19725,7 +19725,7 @@ pub fn _in_a_pool(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: text"))) };
     let mut pools: Py = if __pos.len() > 1 { __pos[1].clone() }
     else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "pools") { v.clone() }
-    else { py_tuple(vec![pyrt::xrefs::xget("compose.fallback_data", "NOT_AN_ANSWER")]) };
+    else { py_tuple(vec![g_NOT_AN_ANSWER()]) };
     let mut line: Py = Py::None;
     let mut pool: Py = Py::None;
     let mut said: Py = Py::None;
@@ -19790,7 +19790,7 @@ pub fn _what_to_do_about(args: &[Py]) -> Py {
     return py_str("");
     }
     words = call_builtin("set", &[stdlib_call("re", "findall", &[py_str("[a-z']+"), mcall(&line.clone(), "lower", &[])]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e));
-    if py_truthy(&{ let __b = op_bitand(&words.clone(), &pyrt::xrefs::xget("compose.fallback_data", "SYMPTOM_WORDS")); if py_truthy(&__b) { __b } else { { let __b = op_bitand(&words.clone(), &pyrt::xrefs::xget("compose.fallback_data", "BODY_PARTS")); if py_truthy(&__b) { __b } else { { let __b = op_bitand(&words.clone(), &pyrt::xrefs::xget("compose.fallback_data", "HEALTH_WORDS")); if py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut w: Py = __item.clone(); __out.push(mcall(&w.clone(), "startswith", &[g_HEALTH_STEMS()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } } } } } }) {
+    if py_truthy(&{ let __b = op_bitand(&words.clone(), &g_SYMPTOM_WORDS()); if py_truthy(&__b) { __b } else { { let __b = op_bitand(&words.clone(), &g_BODY_PARTS()); if py_truthy(&__b) { __b } else { { let __b = op_bitand(&words.clone(), &g_HEALTH_WORDS()); if py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut w: Py = __item.clone(); __out.push(mcall(&w.clone(), "startswith", &[g_HEALTH_STEMS()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } } } } } }) {
     return py_str("");
     }
     if py_truthy(&Py::Bool(py_contains(&g_NOT_A_THING_ASKED(), &geti(&mcall(&mcall(&thing.clone(), "lower", &[]), "split", &[]), &Py::Int(0))))) {
@@ -19801,7 +19801,7 @@ pub fn _what_to_do_about(args: &[Py]) -> Py {
     }
     named = _capital(&[_the_thing_alone(&[thing.clone()])]);
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&named.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_NOT_A_THING_ASKED(), &geti(&mcall(&mcall(&named.clone(), "lower", &[]), "split", &[]), &Py::Int(0)))) } }) {
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[pyrt::xrefs::xget("compose.fallback_data", "DITHER_OPEN_LINES"), memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[g_DITHER_OPEN_LINES(), memory.clone(), clean.clone()]);
     }
     lines = call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_WHAT_TO_DO_ABOUT_FRAMES()) { let mut frame: Py = __item.clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("thing".to_string(), if py_truthy(&mcall(&frame.clone(), "startswith", &[py_str("{thing}")])) { named.clone() } else { mcall(&named.clone(), "lower", &[]) })]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&frame.clone(), "format", args))(&__args) }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[lines.clone(), memory.clone(), clean.clone()]);
@@ -19942,7 +19942,7 @@ pub fn _the_words(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: text"))) };
     let mut word: Py = Py::None;
     let _ = py_str("The words of a line that say something about its subject.");
-    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&stdlib_call("re", "findall", &[py_str("[a-z']+"), mcall(&call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[])]).unwrap_or_else(|e| exc::raise(e))) { let mut word: Py = __item.clone(); if py_truthy(&{ let __b = Py::Bool(!py_contains(&pyrt::xrefs::xget("compose.fallback_data", "_ECHO_FILLER"), &word.clone())); if !py_truthy(&__b) { __b } else { op_gt(&call_builtin("len", &[word.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)) } }) {  __out.push(word.clone()); } } py_set(__out) })() };
+    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&stdlib_call("re", "findall", &[py_str("[a-z']+"), mcall(&call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[])]).unwrap_or_else(|e| exc::raise(e))) { let mut word: Py = __item.clone(); if py_truthy(&{ let __b = Py::Bool(!py_contains(&g__ECHO_FILLER(), &word.clone())); if !py_truthy(&__b) { __b } else { op_gt(&call_builtin("len", &[word.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)) } }) {  __out.push(word.clone()); } } py_set(__out) })() };
     Py::None
 }
 pub fn _an_echo_of(args: &[Py]) -> Py {
@@ -19996,7 +19996,7 @@ pub fn _only_a_reaction(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&mcall(&said.clone(), "endswith", &[py_str("?")]))); if py_truthy(&__b) { __b } else { op_gt(&call_builtin("len", &[mcall(&said.clone(), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(14)) } }) {
     return Py::Bool(false);
     }
-    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "PRAISE")) { let mut phrase: Py = __item.clone(); __out.push(Py::Bool(py_contains(&mcall(&said.clone(), "lower", &[]), &phrase.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_PRAISE()) { let mut phrase: Py = __item.clone(); __out.push(Py::Bool(py_contains(&mcall(&said.clone(), "lower", &[]), &phrase.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn _the_answer_in_reply(args: &[Py]) -> Py {
@@ -20088,7 +20088,7 @@ pub fn _nothing_to_stand_behind(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: said"))) };
     let _ = py_str("True when the bot's line left the answer where it was, so the view is the one behind it.\n\n    A receipt (\"Got it - but your mum says it's too soon\") and a neutral line both put nothing on\n    the table, and neither does the floor: \"Go on - I'm listening.\" is the bot saying it is ready\n    to hear more. Walking past them is what keeps \"what's your take\" on the answer the bot\n    actually gave instead of quoting the offer to listen back at the person.\n    ");
     said = mcall(&call_builtin("str", &[{ let __b = said.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "strip", &[]);
-    return { let __b = call_builtin("bool", &[said.clone()]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { { let __b = pyrt::xrefs::xcall("memory.ack", "reads_as_a_receipt", &[said.clone()]); if py_truthy(&__b) { __b } else { { let __b = _in_a_pool(&[said.clone(), py_tuple(vec![pyrt::xrefs::xget("compose.fallback_data", "NEUTRAL")])]); if py_truthy(&__b) { __b } else { _only_the_floor(&[said.clone()]) } } } } } };
+    return { let __b = call_builtin("bool", &[said.clone()]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { { let __b = pyrt::xrefs::xcall("memory.ack", "reads_as_a_receipt", &[said.clone()]); if py_truthy(&__b) { __b } else { { let __b = _in_a_pool(&[said.clone(), py_tuple(vec![g_NEUTRAL()])]); if py_truthy(&__b) { __b } else { _only_the_floor(&[said.clone()]) } } } } } };
     Py::None
 }
 pub fn _is_a_view_ask(args: &[Py]) -> Py {
@@ -20111,7 +20111,7 @@ pub fn _is_a_view_ask(args: &[Py]) -> Py {
     return Py::Bool(false);
     }
     words = stdlib_call("re", "findall", &[py_str("[a-z']+"), clean.clone()]).unwrap_or_else(|e| exc::raise(e));
-    return { let __b = call_builtin("bool", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(!py_contains(&pyrt::xrefs::xget("compose.fallback_data", "VIEW_ONLY_WORDS"), &mcall(&word.clone(), "strip", &[py_str("'")])))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)))) } };
+    return { let __b = call_builtin("bool", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(!py_contains(&g_VIEW_ONLY_WORDS(), &mcall(&word.clone(), "strip", &[py_str("'")])))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)))) } };
     Py::None
 }
 pub fn _the_view_asked_for(args: &[Py]) -> Py {
@@ -20171,7 +20171,7 @@ pub fn _is_an_ask_which_bit(args: &[Py]) -> Py {
     let mut head: Py = Py::None;
     let _ = py_str("True when a reply is the \"tell me which bit\" line rather than an answer or a hedge.");
     head = mcall(&{ let __b = said.clone(); if py_truthy(&__b) { __b } else { py_str("") } }, "strip", &[]);
-    return { let __b = call_builtin("bool", &[head.clone()]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "BARE_FOLLOW_UP_REPLIES"), &head.clone())) } };
+    return { let __b = call_builtin("bool", &[head.clone()]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_BARE_FOLLOW_UP_REPLIES(), &head.clone())) } };
     Py::None
 }
 pub fn _is_a_hedge(args: &[Py]) -> Py {
@@ -20236,14 +20236,14 @@ pub fn an_outcome_asked_about_someone(args: &[Py]) -> Py {
     return Py::None;
     }
     last = call_builtin("str", &[{ let __b = mcall(&geti(&turns.clone(), &op_neg(&Py::Int(1))), "get", &[py_str("bot")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e));
-    if py_truthy(&{ let __b = last.clone(); if !py_truthy(&__b) { __b } else { { let __b = call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "CRISIS_WORDS")) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&mcall(&last.clone(), "lower", &[]), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)); if py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "SAFETY_WORDS")) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&mcall(&last.clone(), "lower", &[]), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } } } }) {
+    if py_truthy(&{ let __b = last.clone(); if !py_truthy(&__b) { __b } else { { let __b = call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_CRISIS_WORDS()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&mcall(&last.clone(), "lower", &[]), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)); if py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_SAFETY_WORDS()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&mcall(&last.clone(), "lower", &[]), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } } } }) {
     return Py::None;
     }
     said = mcall(&py_str(" "), "join", &[op_add(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&turns.clone()) { let mut turn: Py = __item.clone(); __out.push(call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("user")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))); } py_list(__out) })() }, &py_list(vec![last.clone()]))]);
     if py_truthy(&Py::Bool(!py_truthy(&mcall(&g_WHO_IS_ILL(), "search", &[said.clone()])))) {
     return Py::None;
     }
-    return pyrt::xrefs::xcall("compose", "pick", &[pyrt::xrefs::xget("compose.fallback_data", "OUTCOME_LINES"), memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose", "pick", &[g_OUTCOME_LINES(), memory.clone(), clean.clone()]);
     Py::None
 }
 pub fn is_a_hedge__wrapped(args: &[Py]) -> Py {
@@ -20302,7 +20302,7 @@ pub fn _the_view_of(args: &[Py]) -> Py {
     tail = __unpk2[2].clone();
     if py_truthy(&{ let __b = colon.clone(); if !py_truthy(&__b) { __b } else { mcall(&tail.clone(), "strip", &[]) } }) {
     words = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&head.clone(), "split", &[])) { let mut w: Py = __item.clone(); __out.push(mcall(&mcall(&w.clone(), "strip", &[py_str(",.")]), "lower", &[])); } py_list(__out) })() };
-    if py_truthy(&{ let __b = { let __b = op_lt(&call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(7)); if !py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "VIEW_LEAD_IN"), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }; if py_truthy(&__b) { __b } else { { let __b = op_le(&call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(3)); if py_truthy(&__b) { __b } else { mcall(&g_VIEW_A_CASE(), "match", &[mcall(&mcall(&head.clone(), "strip", &[]), "lower", &[])]) } } } }) {
+    if py_truthy(&{ let __b = { let __b = op_lt(&call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(7)); if !py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&g_VIEW_LEAD_IN(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }; if py_truthy(&__b) { __b } else { { let __b = op_le(&call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(3)); if py_truthy(&__b) { __b } else { mcall(&g_VIEW_A_CASE(), "match", &[mcall(&mcall(&head.clone(), "strip", &[]), "lower", &[])]) } } } }) {
     let __unpk3 = py_unpack(&py_tuple(vec![tail.clone(), head.clone()]), 2, None);
     head = __unpk3[0].clone();
     tail = __unpk3[1].clone();
@@ -20469,7 +20469,7 @@ pub fn _answered_recently(args: &[Py]) -> Py {
     index = __aug1;
     }
     last = geti(&turns.clone(), &index.clone());
-    if py_truthy(&Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "NO_MORE_OF"), &call_builtin("str", &[{ let __b = mcall(&last.clone(), "get", &[py_str("module")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))))) {
+    if py_truthy(&Py::Bool(py_contains(&g_NO_MORE_OF(), &call_builtin("str", &[{ let __b = mcall(&last.clone(), "get", &[py_str("module")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))))) {
     return Py::Bool(false);
     }
     if py_truthy(&Py::Bool(!py_truthy(&_told_them_something(&[call_builtin("str", &[{ let __b = mcall(&last.clone(), "get", &[py_str("bot")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))])))) {
@@ -20650,14 +20650,14 @@ pub fn _tips_subject(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&subject.clone())); if py_truthy(&__b) { __b } else { { let __b = mcall(&subject.clone(), "startswith", &[py_str("to ")]); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&py_tuple(vec![py_str("it"), py_str("that"), py_str("this"), py_str("some"), py_str("anything"), py_str("something"), py_str("a"), py_str("an"), py_str("the"), py_str("advice"), py_str("tips"), py_str("help")]), &subject.clone())) } } } }) {
     return Py::None;
     }
-    kept = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&subject.clone(), "split", &[])) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&pyrt::xrefs::xget("compose.fallback_data", "FILLERS"), &word.clone()))) {  __out.push(word.clone()); } } py_list(__out) })() };
+    kept = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&subject.clone(), "split", &[])) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&g_FILLERS(), &word.clone()))) {  __out.push(word.clone()); } } py_list(__out) })() };
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&kept.clone())); if py_truthy(&__b) { __b } else { { let __b = op_gt(&call_builtin("len", &[kept.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(6)); if py_truthy(&__b) { __b } else { op_gt(&call_builtin("len", &[mcall(&py_str(" "), "join", &[kept.clone()])]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(40)) } } } }) {
     return Py::None;
     }
-    if py_truthy(&{ let __b = op_bitand(&call_builtin("set", &[kept.clone()]).unwrap_or_else(|e| exc::raise(e)), &pyrt::xrefs::xget("compose.fallback_data", "TIPS_CLAUSE")); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "TIPS_VERB"), &geti(&kept.clone(), &Py::Int(0)))) } }) {
+    if py_truthy(&{ let __b = op_bitand(&call_builtin("set", &[kept.clone()]).unwrap_or_else(|e| exc::raise(e)), &g_TIPS_CLAUSE()); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_TIPS_VERB(), &geti(&kept.clone(), &Py::Int(0)))) } }) {
     return Py::None;
     }
-    return mcall(&py_str(" "), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&kept.clone()) { let mut word: Py = __item.clone(); __out.push(mcall(&pyrt::xrefs::xget("compose.fallback_data", "TIPS_OWNER"), "get", &[word.clone(), word.clone()])); } py_list(__out) })() }]);
+    return mcall(&py_str(" "), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&kept.clone()) { let mut word: Py = __item.clone(); __out.push(mcall(&g_TIPS_OWNER(), "get", &[word.clone(), word.clone()])); } py_list(__out) })() }]);
     Py::None
 }
 pub fn _tips(args: &[Py]) -> Py {
@@ -20691,7 +20691,7 @@ pub fn _tips(args: &[Py]) -> Py {
     if py_truthy(&_who_for(&[mcall(&call_builtin("str", &[{ let __b = clean.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]), said.clone(), mcall(&mcall(&said.clone(), "replace", &[py_str("'"), py_str("")]), "split", &[])])) {
     return py_str("");
     }
-    pool = if py_truthy(&mcall(&g_TIPS_SOON(), "search", &[subject.clone()])) { pyrt::xrefs::xget("compose.fallback_data", "TIPS_AHEAD") } else { pyrt::xrefs::xget("compose.fallback_data", "TIPS_THING") };
+    pool = if py_truthy(&mcall(&g_TIPS_SOON(), "search", &[subject.clone()])) { g_TIPS_AHEAD() } else { g_TIPS_THING() };
     return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[call_builtin("list", &[pool.clone()]).unwrap_or_else(|e| exc::raise(e)), memory.clone(), clean.clone()]);
     Py::None
 }
@@ -20790,12 +20790,12 @@ pub fn _a_grown_up_asks(args: &[Py]) -> Py {
     let mut left: Py = Py::None;
     let mut name: Py = Py::None;
     let _ = py_str("True when the baby in the line is a food's name or the line is about a grown-up.\n\n    \"can adults have baby rice\" says the person outright. \"can i eat baby food\" names no child\n    except inside the food's own name, so the food names come out first and the rest of the line\n    is asked again for a child - \"my baby wont eat baby food\" keeps its baby, and \"is baby food ok\n    for a 7 month old\" is a parent because the age is still there.\n    ");
-    if py_truthy(&_names(&[words.clone(), said.clone(), pyrt::xrefs::xget("compose.fallback_data", "GROWN_UP_WORDS")])) {
+    if py_truthy(&_names(&[words.clone(), said.clone(), g_GROWN_UP_WORDS()])) {
     return Py::Bool(true);
     }
     left = op_modulo(&py_str(" %s "), &clean.clone());
     dropped = Py::Bool(false);
-    let __iter1 = py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "BABY_FOOD_NAMES"));
+    let __iter1 = py_iter_or_raise(&g_BABY_FOOD_NAMES());
     for __item in __iter1 {
     name = __item.clone();
     if py_truthy(&Py::Bool(py_contains(&left.clone(), &op_modulo(&py_str(" %s "), &name.clone())))) {
@@ -20803,10 +20803,10 @@ pub fn _a_grown_up_asks(args: &[Py]) -> Py {
     dropped = Py::Bool(true);
     }
     }
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&dropped.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_names(&[words.clone(), said.clone(), pyrt::xrefs::xget("compose.fallback_data", "SELF_EATING_WORDS")]))) } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&dropped.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_names(&[words.clone(), said.clone(), g_SELF_EATING_WORDS()]))) } }) {
     return Py::Bool(false);
     }
-    return Py::Bool(!py_truthy(&_names(&[call_builtin("set", &[mcall(&left.clone(), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), left.clone(), pyrt::xrefs::xget("compose.fallback_data", "CHILD_AT_HOME")])));
+    return Py::Bool(!py_truthy(&_names(&[call_builtin("set", &[mcall(&left.clone(), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), left.clone(), g_CHILD_AT_HOME()])));
     Py::None
 }
 pub fn _who_for(args: &[Py]) -> Py {
@@ -20849,83 +20849,83 @@ pub fn _who_for(args: &[Py]) -> Py {
     gift = _names(&[words.clone(), said.clone(), g_GIFT_WORDS()]);
     meds = _names(&[words.clone(), said.clone(), g_MEDS_WORDS()]);
     buying = _names(&[words.clone(), said.clone(), g_BUYING_WORDS()]);
-    if py_truthy(&{ let __b = _names(&[words.clone(), said.clone(), pyrt::xrefs::xget("compose.fallback_data", "SCHOOL_WORDS")]); if !py_truthy(&__b) { __b } else { _names(&[words.clone(), said.clone(), pyrt::xrefs::xget("compose.fallback_data", "SCHOOL_TROUBLE")]) } }) {
-    return pyrt::xrefs::xget("compose.fallback_data", "SCHOOL_WHO");
+    if py_truthy(&{ let __b = _names(&[words.clone(), said.clone(), g_SCHOOL_WORDS()]); if !py_truthy(&__b) { __b } else { _names(&[words.clone(), said.clone(), g_SCHOOL_TROUBLE()]) } }) {
+    return g_SCHOOL_WHO();
     }
-    if py_truthy(&{ let __b = _names(&[words.clone(), said.clone(), py_tuple(vec![py_str("password")])]); if !py_truthy(&__b) { __b } else { _names(&[words.clone(), said.clone(), pyrt::xrefs::xget("compose.fallback_data", "PASSWORD_TROUBLE")]) } }) {
-    return pyrt::xrefs::xget("compose.fallback_data", "DEVICE_WHO");
+    if py_truthy(&{ let __b = _names(&[words.clone(), said.clone(), py_tuple(vec![py_str("password")])]); if !py_truthy(&__b) { __b } else { _names(&[words.clone(), said.clone(), g_PASSWORD_TROUBLE()]) } }) {
+    return g_DEVICE_WHO();
     }
-    if py_truthy(&{ let __b = _names(&[words.clone(), said.clone(), pyrt::xrefs::xget("compose.fallback_data", "COMPLAINT_WORDS")]); if !py_truthy(&__b) { __b } else { _names(&[words.clone(), said.clone(), pyrt::xrefs::xget("compose.fallback_data", "TRADER_WORDS")]) } }) {
-    return pyrt::xrefs::xget("compose.fallback_data", "COMPLAIN_WHO");
+    if py_truthy(&{ let __b = _names(&[words.clone(), said.clone(), g_COMPLAINT_WORDS()]); if !py_truthy(&__b) { __b } else { _names(&[words.clone(), said.clone(), g_TRADER_WORDS()]) } }) {
+    return g_COMPLAIN_WHO();
     }
-    animal = call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); __out.push({ let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "ANIMALS"), &word.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "ANIMALS"), &mcall(&word.clone(), "rstrip", &[py_str("s")]))) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
-    if py_truthy(&{ let __b = animal.clone(); if !py_truthy(&__b) { __b } else { { let __b = _names(&[words.clone(), said.clone(), pyrt::xrefs::xget("compose.fallback_data", "WILD_BIRDS")]); if !py_truthy(&__b) { __b } else { _names(&[words.clone(), said.clone(), pyrt::xrefs::xget("compose.fallback_data", "MESS_PLACES")]) } } } }) {
+    animal = call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); __out.push({ let __b = Py::Bool(py_contains(&g_ANIMALS(), &word.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_ANIMALS(), &mcall(&word.clone(), "rstrip", &[py_str("s")]))) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    if py_truthy(&{ let __b = animal.clone(); if !py_truthy(&__b) { __b } else { { let __b = _names(&[words.clone(), said.clone(), g_WILD_BIRDS()]); if !py_truthy(&__b) { __b } else { _names(&[words.clone(), said.clone(), g_MESS_PLACES()]) } } } }) {
     animal = Py::Bool(false);
     }
     machine_mouse = pyrt::xrefs::xcall("understanding.topics", "is_a_machine_word", &[clean.clone()]);
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&animal.clone())); if !py_truthy(&__b) { __b } else { meds.clone() } }) {
-    return pyrt::xrefs::xget("compose.fallback_data", "HEALTH_WHO");
+    return g_HEALTH_WHO();
     }
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&animal.clone())); if !py_truthy(&__b) { __b } else { { let __b = _names(&[words.clone(), said.clone(), pyrt::xrefs::xget("compose.fallback_data", "FILLING_WORDS")]); if !py_truthy(&__b) { __b } else { { let __b = _names(&[words.clone(), said.clone(), pyrt::xrefs::xget("compose.fallback_data", "MOUTH_WORDS")]); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&{ let __b = Py::Bool(py_contains(&g_FOOD_TOPICS(), &topic.clone())); if py_truthy(&__b) { __b } else { _names(&[words.clone(), said.clone(), pyrt::xrefs::xget("compose.fallback_data", "FILLING_FOODS")]) } })) } } } } } }) {
-    return pyrt::xrefs::xget("compose.fallback_data", "DENTIST_WHO");
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&animal.clone())); if !py_truthy(&__b) { __b } else { { let __b = _names(&[words.clone(), said.clone(), g_FILLING_WORDS()]); if !py_truthy(&__b) { __b } else { { let __b = _names(&[words.clone(), said.clone(), g_MOUTH_WORDS()]); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&{ let __b = Py::Bool(py_contains(&g_FOOD_TOPICS(), &topic.clone())); if py_truthy(&__b) { __b } else { _names(&[words.clone(), said.clone(), g_FILLING_FOODS()]) } })) } } } } } }) {
+    return g_DENTIST_WHO();
     }
-    where_is_a_thing = { let __b = call_builtin("bool", &[mcall(&g__ASKS_WHERE(), "search", &[clean.clone()])]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_names(&[words.clone(), said.clone(), pyrt::xrefs::xget("compose.fallback_data", "WHERE_SOMETHING_WRONG")]))) } };
-    let __iter1 = py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "WHO_TO_ASK"));
+    where_is_a_thing = { let __b = call_builtin("bool", &[mcall(&g__ASKS_WHERE(), "search", &[clean.clone()])]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_names(&[words.clone(), said.clone(), g_WHERE_SOMETHING_WRONG()]))) } };
+    let __iter1 = py_iter_or_raise(&g_WHO_TO_ASK());
     for __item in __iter1 {
     let __unpk2 = py_unpack(&__item.clone(), 2, None);
     evidence = __unpk2[0].clone();
     who = __unpk2[1].clone();
-    if py_truthy(&{ let __b = where_is_a_thing.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&py_tuple(vec![pyrt::xrefs::xget("compose.fallback_data", "BABY_WHO"), pyrt::xrefs::xget("compose.fallback_data", "HEALTH_WHO")]), &who.clone())) } }) {
+    if py_truthy(&{ let __b = where_is_a_thing.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&py_tuple(vec![g_BABY_WHO(), g_HEALTH_WHO()]), &who.clone())) } }) {
     continue;
     }
-    if py_truthy(&{ let __b = machine_mouse.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_eq(&who.clone(), &pyrt::xrefs::xget("compose.fallback_data", "PEST_WHO"))) } }) {
+    if py_truthy(&{ let __b = machine_mouse.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_eq(&who.clone(), &g_PEST_WHO())) } }) {
     continue;
     }
-    if py_truthy(&{ let __b = animal.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_eq(&who.clone(), &pyrt::xrefs::xget("compose.fallback_data", "VET_WHO"))); if !py_truthy(&__b) { __b } else { op_bitand(&evidence.clone(), &pyrt::xrefs::xget("compose.fallback_data", "SICKNESS")) } } } }) {
+    if py_truthy(&{ let __b = animal.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_eq(&who.clone(), &g_VET_WHO())); if !py_truthy(&__b) { __b } else { op_bitand(&evidence.clone(), &g_SICKNESS()) } } } }) {
     continue;
     }
-    if py_truthy(&{ let __b = animal.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_eq(&who.clone(), &pyrt::xrefs::xget("compose.fallback_data", "DENTIST_WHO"))) } }) {
+    if py_truthy(&{ let __b = animal.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_eq(&who.clone(), &g_DENTIST_WHO())) } }) {
     continue;
     }
-    if py_truthy(&{ let __b = Py::Bool(py_eq(&who.clone(), &pyrt::xrefs::xget("compose.fallback_data", "HEALTH_WHO"))); if !py_truthy(&__b) { __b } else { mcall(&g__SCHEDULING(), "search", &[clean.clone()]) } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_eq(&who.clone(), &g_HEALTH_WHO())); if !py_truthy(&__b) { __b } else { mcall(&g__SCHEDULING(), "search", &[clean.clone()]) } }) {
     continue;
     }
-    if py_truthy(&{ let __b = Py::Bool(py_eq(&who.clone(), &pyrt::xrefs::xget("compose.fallback_data", "HEALTH_WHO"))); if !py_truthy(&__b) { __b } else { mcall(&pyrt::xrefs::xget("compose.fallback_data", "_CHOOSING_BETWEEN_TWO"), "search", &[clean.clone()]) } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_eq(&who.clone(), &g_HEALTH_WHO())); if !py_truthy(&__b) { __b } else { mcall(&g__CHOOSING_BETWEEN_TWO(), "search", &[clean.clone()]) } }) {
     continue;
     }
-    if py_truthy(&{ let __b = Py::Bool(py_eq(&who.clone(), &pyrt::xrefs::xget("compose.fallback_data", "HEALTH_WHO"))); if !py_truthy(&__b) { __b } else { { let __b = _names(&[words.clone(), said.clone(), pyrt::xrefs::xget("compose.fallback_data", "JOINT_WORDS")]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&{ let __b = _names(&[words.clone(), said.clone(), op_sub(&evidence.clone(), &pyrt::xrefs::xget("compose.fallback_data", "JOINT_WORDS"))]); if py_truthy(&__b) { __b } else { mcall(&pyrt::xrefs::xget("compose.fallback_data", "_ASKS_ABOUT_THE_JOINT"), "search", &[clean.clone()]) } })) } } } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_eq(&who.clone(), &g_HEALTH_WHO())); if !py_truthy(&__b) { __b } else { { let __b = _names(&[words.clone(), said.clone(), g_JOINT_WORDS()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&{ let __b = _names(&[words.clone(), said.clone(), op_sub(&evidence.clone(), &g_JOINT_WORDS())]); if py_truthy(&__b) { __b } else { mcall(&g__ASKS_ABOUT_THE_JOINT(), "search", &[clean.clone()]) } })) } } } }) {
     continue;
     }
-    if py_truthy(&{ let __b = diy.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&py_tuple(vec![pyrt::xrefs::xget("compose.fallback_data", "TRADES_WHO"), pyrt::xrefs::xget("compose.fallback_data", "DEVICE_WHO")]), &who.clone())) } }) {
+    if py_truthy(&{ let __b = diy.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&py_tuple(vec![g_TRADES_WHO(), g_DEVICE_WHO()]), &who.clone())) } }) {
     continue;
     }
-    if py_truthy(&{ let __b = Py::Bool(py_eq(&who.clone(), &pyrt::xrefs::xget("compose.fallback_data", "BABY_WHO"))); if !py_truthy(&__b) { __b } else { _a_grown_up_asks(&[clean.clone(), words.clone(), said.clone()]) } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_eq(&who.clone(), &g_BABY_WHO())); if !py_truthy(&__b) { __b } else { _a_grown_up_asks(&[clean.clone(), words.clone(), said.clone()]) } }) {
     continue;
     }
-    if py_truthy(&{ let __b = Py::Bool(py_eq(&who.clone(), &pyrt::xrefs::xget("compose.fallback_data", "BABY_WHO"))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_names(&[words.clone(), said.clone(), pyrt::xrefs::xget("compose.fallback_data", "CHILD_AT_HOME")]))) } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_eq(&who.clone(), &g_BABY_WHO())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_names(&[words.clone(), said.clone(), g_CHILD_AT_HOME()]))) } }) {
     continue;
     }
-    if py_truthy(&{ let __b = gift.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&py_tuple(vec![pyrt::xrefs::xget("compose.fallback_data", "BABY_WHO"), pyrt::xrefs::xget("compose.fallback_data", "HEALTH_WHO")]), &who.clone())) } }) {
+    if py_truthy(&{ let __b = gift.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&py_tuple(vec![g_BABY_WHO(), g_HEALTH_WHO()]), &who.clone())) } }) {
     continue;
     }
-    if py_truthy(&{ let __b = meds.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_eq(&who.clone(), &pyrt::xrefs::xget("compose.fallback_data", "DEVICE_WHO"))) } }) {
+    if py_truthy(&{ let __b = meds.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_eq(&who.clone(), &g_DEVICE_WHO())) } }) {
     continue;
     }
-    if py_truthy(&{ let __b = Py::Bool(py_eq(&who.clone(), &pyrt::xrefs::xget("compose.fallback_data", "DEVICE_WHO"))); if !py_truthy(&__b) { __b } else { _names(&[words.clone(), said.clone(), g_NETWORK_WORDS()]) } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_eq(&who.clone(), &g_DEVICE_WHO())); if !py_truthy(&__b) { __b } else { _names(&[words.clone(), said.clone(), g_NETWORK_WORDS()]) } }) {
     continue;
     }
-    if py_truthy(&{ let __b = buying.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_eq(&who.clone(), &pyrt::xrefs::xget("compose.fallback_data", "TENANT_WHO"))) } }) {
+    if py_truthy(&{ let __b = buying.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_eq(&who.clone(), &g_TENANT_WHO())) } }) {
     continue;
     }
-    if py_truthy(&{ let __b = Py::Bool(py_eq(&who.clone(), &pyrt::xrefs::xget("compose.fallback_data", "WORK_WHO"))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_names(&[words.clone(), said.clone(), pyrt::xrefs::xget("compose.fallback_data", "WORK_ABOUT")]))) } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_eq(&who.clone(), &g_WORK_WHO())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_names(&[words.clone(), said.clone(), g_WORK_ABOUT()]))) } }) {
     continue;
     }
     if py_truthy(&_names(&[words.clone(), said.clone(), evidence.clone()])) {
     return who.clone();
     }
     }
-    if py_truthy(&{ let __b = animal.clone(); if !py_truthy(&__b) { __b } else { { let __b = meds.clone(); if py_truthy(&__b) { __b } else { _names(&[words.clone(), said.clone(), pyrt::xrefs::xget("compose.fallback_data", "SICKNESS")]) } } } }) {
-    return pyrt::xrefs::xget("compose.fallback_data", "VET_WHO");
+    if py_truthy(&{ let __b = animal.clone(); if !py_truthy(&__b) { __b } else { { let __b = meds.clone(); if py_truthy(&__b) { __b } else { _names(&[words.clone(), said.clone(), g_SICKNESS()]) } } } }) {
+    return g_VET_WHO();
     }
     return Py::None;
     Py::None
@@ -20995,7 +20995,7 @@ pub fn _advisor(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&who.clone()))) {
     return Py::None;
     }
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "UNKNOWN_WHO")) { let mut line: Py = __item.clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("who".to_string(), who.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&line.clone(), "format", args))(&__args) }); } py_list(__out) })() }, memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_UNKNOWN_WHO()) { let mut line: Py = __item.clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("who".to_string(), who.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&line.clone(), "format", args))(&__args) }); } py_list(__out) })() }, memory.clone(), clean.clone()]);
     Py::None
 }
 pub fn _a_bad_stretch_above(args: &[Py]) -> Py {
@@ -21084,7 +21084,7 @@ pub fn _in_a_crisis_thread(args: &[Py]) -> Py {
     let mut word: Py = Py::None;
     let _ = py_str("True when the bot's own last word in this stretch named a crisis line.\n\n    `in_a_safety_thread` is true for any safety answer, and most of those are ordinary comfort:\n    \"my mum says im lazy\" gets one, and offering a person at Samaritans on the next line - with\n    999 behind it - treats a bad week as an emergency. The line meant here is the one where the\n    bot has already said a crisis line out loud (`CRISIS_WORDS`), because that is the thread the\n    person is already in.\n    ");
     answer = _thread_answer(&[memory.clone()]);
-    return { let __b = call_builtin("bool", &[answer.clone()]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "CRISIS_WORDS")) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&answer.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } };
+    return { let __b = call_builtin("bool", &[answer.clone()]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_CRISIS_WORDS()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&answer.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } };
     Py::None
 }
 pub fn _who_for_the_thread(args: &[Py]) -> Py {
@@ -21121,20 +21121,20 @@ pub fn _who_for_the_thread(args: &[Py]) -> Py {
     let _ = py_str("The person to take a bare \"who do i call about it\" to, or a reply asking what it is.\n\n    Read only in `_unknown`, so a line with a subject of its own never gets here and the looser\n    reading costs nothing: what it replaces is the shrug. Three rungs, in the order of how much\n    they know about this person: the trouble they named a turn ago (the same reading that names a\n    person for a line that says it outright), then the actor the bot's own answer named a moment\n    ago (\"report it to the council\"). With neither, the honest reply is the route list for a call\n    and the talk-to lines for a person to talk to, plus the one question that would settle it.\n    ");
     typed = if py_truthy(&call_builtin("isinstance", &[understood.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) { call_builtin("str", &[{ let __b = mcall(&{ let __b = understood.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[py_str("text")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)) } else { py_str("") };
     line = { let __b = typed.clone(); if py_truthy(&__b) { __b } else { { let __b = clean.clone(); if py_truthy(&__b) { __b } else { py_str("") } } } };
-    a_voice = { let __b = call_builtin("bool", &[mcall(&pyrt::xrefs::xget("compose.fallback_words", "WHO_TO_TALK_ASK"), "search", &[line.clone()])]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&stdlib_call("re", "search", &[py_str("\\babout\\s+(?!it\\b|that\\b|this\\b|them\\b)\\w|\\b(?:talk|speak|chat)\\s+(?:to|with)\\s+(?:the|a|an|my|your|his|her|their)\\b"), line.clone()]).unwrap_or_else(|e| exc::raise(e)))) } };
-    a_call = if py_truthy(&Py::Bool(!py_truthy(&a_voice.clone()))) { call_builtin("bool", &[mcall(&pyrt::xrefs::xget("compose.fallback_words", "WHO_FOR_IT"), "match", &[line.clone()])]).unwrap_or_else(|e| exc::raise(e)) } else { Py::Bool(false) };
+    a_voice = { let __b = call_builtin("bool", &[mcall(&g_WHO_TO_TALK_ASK(), "search", &[line.clone()])]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&stdlib_call("re", "search", &[py_str("\\babout\\s+(?!it\\b|that\\b|this\\b|them\\b)\\w|\\b(?:talk|speak|chat)\\s+(?:to|with)\\s+(?:the|a|an|my|your|his|her|their)\\b"), line.clone()]).unwrap_or_else(|e| exc::raise(e)))) } };
+    a_call = if py_truthy(&Py::Bool(!py_truthy(&a_voice.clone()))) { call_builtin("bool", &[mcall(&g_WHO_FOR_IT(), "match", &[line.clone()])]).unwrap_or_else(|e| exc::raise(e)) } else { Py::Bool(false) };
     if py_truthy(&Py::Bool(!py_truthy(&{ let __b = a_call.clone(); if py_truthy(&__b) { __b } else { a_voice.clone() } }))) {
     return Py::None;
     }
     answer = mcall(&call_builtin("str", &[{ let __b = pyrt::xrefs::xcall("memory", "last_bot", &[memory.clone()]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]);
     if py_truthy(&answer.clone()) {
-    let __iter1 = py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "NAMED_BODIES"));
+    let __iter1 = py_iter_or_raise(&g_NAMED_BODIES());
     for __item in __iter1 {
     let __unpk2 = py_unpack(&__item.clone(), 2, None);
     word = __unpk2[0].clone();
     name = __unpk2[1].clone();
     if py_truthy(&stdlib_call("re", "search", &[op_add(&op_add(&py_str("\\b"), &stdlib_call("re", "escape", &[word.clone()]).unwrap_or_else(|e| exc::raise(e))), &py_str("\\b")), answer.clone()]).unwrap_or_else(|e| exc::raise(e))) {
-    shapes = if py_truthy(&a_voice.clone()) { pyrt::xrefs::xget("compose.fallback_words", "WHO_FOR_IT_SAID_VOICE") } else { pyrt::xrefs::xget("compose.fallback_words", "WHO_NAMED_BEFORE") };
+    shapes = if py_truthy(&a_voice.clone()) { g_WHO_FOR_IT_SAID_VOICE() } else { g_WHO_NAMED_BEFORE() };
     return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&shapes.clone()) { let mut shape: Py = __item.clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("who".to_string(), name.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&shape.clone(), "format", args))(&__args) }); } py_list(__out) })() };
     }
     }
@@ -21166,17 +21166,17 @@ pub fn _who_for_the_thread(args: &[Py]) -> Py {
     if let Some(__e) = __unhandled7 { exc::raise(__e); }
     if py_truthy(&__ret5) { return __val6; }
     if py_truthy(&who.clone()) {
-    shapes = if py_truthy(&a_voice.clone()) { pyrt::xrefs::xget("compose.fallback_words", "WHO_FOR_IT_SAID_VOICE") } else { pyrt::xrefs::xget("compose.fallback_words", "WHO_FOR_IT_SAID") };
+    shapes = if py_truthy(&a_voice.clone()) { g_WHO_FOR_IT_SAID_VOICE() } else { g_WHO_FOR_IT_SAID() };
     return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&shapes.clone()) { let mut shape: Py = __item.clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("who".to_string(), who.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&shape.clone(), "format", args))(&__args) }); } py_list(__out) })() };
     }
     }
     if py_truthy(&{ let __b = a_call.clone(); if !py_truthy(&__b) { __b } else { { let __b = _thread_is_about_the_body(&[memory.clone()]); if py_truthy(&__b) { __b } else { _thread_has_a_health_visit(&[memory.clone()]) } } } }) {
-    return call_builtin("list", &[pyrt::xrefs::xget("compose.fallback_words", "WHO_FOR_IT_BODY")]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("list", &[g_WHO_FOR_IT_BODY()]).unwrap_or_else(|e| exc::raise(e));
     }
     if py_truthy(&a_call.clone()) {
-    return call_builtin("list", &[pyrt::xrefs::xget("compose.fallback_words", "WHO_FOR_IT_ROUTES")]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("list", &[g_WHO_FOR_IT_ROUTES()]).unwrap_or_else(|e| exc::raise(e));
     }
-    return call_builtin("list", &[if py_truthy(&_a_bad_stretch_above(&[memory.clone()])) { pyrt::xrefs::xget("compose.fallback_words", "WHO_TO_TALK_TO_A_BAD_STRETCH") } else { pyrt::xrefs::xget("compose.fallback_words", "WHO_TO_TALK_TO") }]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("list", &[if py_truthy(&_a_bad_stretch_above(&[memory.clone()])) { g_WHO_TO_TALK_TO_A_BAD_STRETCH() } else { g_WHO_TO_TALK_TO() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn _trouble(args: &[Py]) -> Py {
@@ -21205,13 +21205,13 @@ pub fn _trouble(args: &[Py]) -> Py {
     let mut word: Py = Py::None;
     let _ = py_str("A statement of trouble (\"my landlord wont fix the damp\") still deserves the person who\n    can settle it. Only with a trouble cue in the line: \"i paid off my mortgage\" is not a\n    money problem, so the plain nod stays.\n\n    A grown-up's plain symptom is not one of those: \"ive got a sore throat\" wants the care line\n    the composer already has (rest, warm drinks), not a queue for the GP, so that row is only\n    named when the line asks something (\"should i worry\", \"how long does it last\"). A baby's\n    symptom is different: \"my baby has a cough\" is the health visitor's, question or not.\n    ");
     said = op_add(&op_add(&py_str(" "), &mcall(&py_str(" "), "join", &[words.clone()])), &py_str(" "));
-    if py_truthy(&Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "TROUBLE_CUES")) { let mut cue: Py = __item.clone(); __out.push(mcall(&word.clone(), "startswith", &[cue.clone()])); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))))) {
+    if py_truthy(&Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); for __item in py_iter_or_raise(&g_TROUBLE_CUES()) { let mut cue: Py = __item.clone(); __out.push(mcall(&word.clone(), "startswith", &[cue.clone()])); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))))) {
     return Py::None;
     }
     if py_truthy(&Py::Bool(!py_truthy(&_reads_as_question(&[clean.clone(), words.clone()])))) {
     topic = if py_truthy(&call_builtin("isinstance", &[memory.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) { mcall(&{ let __b = mcall(&memory.clone(), "get", &[py_str("understood")]); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[py_str("topic")]) } else { Py::None };
     who = _who_for(&[clean.clone(), said.clone(), words.clone(), topic.clone()]);
-    if py_truthy(&Py::Bool(py_eq(&who.clone(), &pyrt::xrefs::xget("compose.fallback_data", "HEALTH_WHO")))) {
+    if py_truthy(&Py::Bool(py_eq(&who.clone(), &g_HEALTH_WHO()))) {
     return Py::None;
     }
     }
@@ -21240,13 +21240,13 @@ pub fn _is_a_form(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&tail.clone()))) {
     return Py::Bool(true);
     }
-    if py_truthy(&Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "NOT_A_FORM"), &word.clone()))) {
+    if py_truthy(&Py::Bool(py_contains(&g_NOT_A_FORM(), &word.clone()))) {
     return Py::Bool(false);
     }
-    if py_truthy(&Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "ENDINGS"), &tail.clone()))) {
+    if py_truthy(&Py::Bool(py_contains(&g_ENDINGS(), &tail.clone()))) {
     return Py::Bool(true);
     }
-    return { let __b = op_gt(&call_builtin("len", &[tail.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1)); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_eq(&geti(&tail.clone(), &Py::Int(0)), &geti(&evidence_word.clone(), &op_neg(&Py::Int(1))))); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "ENDINGS"), &slice_or_raise(&tail.clone(), &Py::Int(1), &Py::None, &Py::None))) } } } };
+    return { let __b = op_gt(&call_builtin("len", &[tail.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1)); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_eq(&geti(&tail.clone(), &Py::Int(0)), &geti(&evidence_word.clone(), &op_neg(&Py::Int(1))))); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_ENDINGS(), &slice_or_raise(&tail.clone(), &Py::Int(1), &Py::None, &Py::None))) } } } };
     Py::None
 }
 pub fn _names(args: &[Py]) -> Py {
@@ -21312,7 +21312,7 @@ pub fn _reads_as_question(args: &[Py]) -> Py {
     return Py::Bool(true);
     }
     plain = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut w: Py = __item.clone(); __out.push(mcall(&w.clone(), "replace", &[py_str("'"), py_str("")])); } py_list(__out) })() };
-    if py_truthy(&{ let __b = plain.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "QUESTION_WORDS"), &mcall(&pyrt::xrefs::xget("compose.fallback_data", "WORD_FIXES"), "get", &[geti(&plain.clone(), &Py::Int(0)), geti(&plain.clone(), &Py::Int(0))]))) } }) {
+    if py_truthy(&{ let __b = plain.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_QUESTION_WORDS(), &mcall(&g_WORD_FIXES(), "get", &[geti(&plain.clone(), &Py::Int(0)), geti(&plain.clone(), &Py::Int(0))]))) } }) {
     return Py::Bool(true);
     }
     joined = mcall(&g_INDIRECT(), "sub", &[py_str(" "), op_add(&op_add(&py_str(" "), &mcall(&py_str(" "), "join", &[plain.clone()])), &py_str(" "))]);
@@ -21337,7 +21337,7 @@ pub fn _reads_as_a_question_when_repaired(args: &[Py]) -> Py {
     let mut word: Py = Py::None;
     let _ = py_str("The opening shape of the repaired line: a question word first, or an inversion.\n\n    \"hw much sleep do kids need\" and \"wdyt about leeds\" are questions whose first word the\n    person shortened, and the repair puts the question word back. This is the second reading,\n    so it is deliberately the narrow half of `_reads_as_question`: a question word that only\n    arrives later in the line is not enough, because \"dont know why\" repairs to \"do not know\n    why\" and the late \"why\" would turn a follow-up into a search hedge.\n    ");
     plain = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "split", &[])) { let mut word: Py = __item.clone(); __out.push(mcall(&word.clone(), "replace", &[py_str("'"), py_str("")])); } py_list(__out) })() };
-    if py_truthy(&{ let __b = plain.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "_OPENING_QUESTIONS"), &mcall(&pyrt::xrefs::xget("compose.fallback_data", "WORD_FIXES"), "get", &[geti(&plain.clone(), &Py::Int(0)), geti(&plain.clone(), &Py::Int(0))]))) } }) {
+    if py_truthy(&{ let __b = plain.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g__OPENING_QUESTIONS(), &mcall(&g_WORD_FIXES(), "get", &[geti(&plain.clone(), &Py::Int(0)), geti(&plain.clone(), &Py::Int(0))]))) } }) {
     return Py::Bool(true);
     }
     return call_builtin("bool", &[mcall(&g_ASK_SHAPES(), "search", &[op_add(&op_add(&py_str(" "), &mcall(&py_str(" "), "join", &[plain.clone()])), &py_str(" "))])]).unwrap_or_else(|e| exc::raise(e));
@@ -21368,7 +21368,7 @@ pub fn _help_topic(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&topic.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&py_tuple(vec![py_str("about-the-bot"), py_str("small-talk"), py_str("opinions")]), &topic.clone())) } }) {
     return Py::None;
     }
-    return { let __b = mcall(&pyrt::xrefs::xget("compose.fallback_data", "HELP_TOPIC"), "get", &[topic.clone()]); if py_truthy(&__b) { __b } else { pyrt::xrefs::xget("compose.fallback_data", "HELP_TOPIC_ANY") } };
+    return { let __b = mcall(&g_HELP_TOPIC(), "get", &[topic.clone()]); if py_truthy(&__b) { __b } else { g_HELP_TOPIC_ANY() } };
     Py::None
 }
 pub fn reads_as_about_itself(args: &[Py]) -> Py {
@@ -21390,7 +21390,7 @@ pub fn reads_as_about_itself(args: &[Py]) -> Py {
     let mut clean: Py = Py::None;
     let _ = py_str("True when the line is a question about the bot itself, for the arbiter's use.\n\n    A topic entry matches a word or a topic id, so \"are you connected to the internet\" reached\n    the guest-wifi card and \"what model do you run\" reached the search hedge: the line is about\n    the bot, and no entry about the world can answer it. The module that carries this file\n    declares `TAKES_AS_IT_COMES` with this, so on these lines the composer's own line takes the\n    turn whatever else proposed - and every one of the readings is narrow, so an ordinary\n    question that happens to use the same words (\"can you think of a name for my cat\", \"how do\n    i connect to the internet\") is not claimed.\n    ");
     clean = _self_line(&[text.clone()]);
-    return { let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "ABOUT_ITSELF_KINDS"), &_about(&[clean.clone(), Py::None]))); if py_truthy(&__b) { __b } else { call_builtin("bool", &[mcall(&g_FORGETTING_ASK(), "search", &[clean.clone()])]).unwrap_or_else(|e| exc::raise(e)) } };
+    return { let __b = Py::Bool(py_contains(&g_ABOUT_ITSELF_KINDS(), &_about(&[clean.clone(), Py::None]))); if py_truthy(&__b) { __b } else { call_builtin("bool", &[mcall(&g_FORGETTING_ASK(), "search", &[clean.clone()])]).unwrap_or_else(|e| exc::raise(e)) } };
     Py::None
 }
 pub fn reads_as_a_tight_week(args: &[Py]) -> Py {
@@ -21543,7 +21543,7 @@ pub fn a_continuation_of_the_tight_week(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&turns.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&call_builtin("isinstance", &[geti(&turns.clone(), &op_neg(&Py::Int(1))), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e)))) } }) {
     return Py::Bool(false);
     }
-    return Py::Bool(py_contains(&op_add(&pyrt::xrefs::xget("compose.fallback_data", "TIGHT_MONEY"), &pyrt::xrefs::xget("compose.fallback_data", "TIGHT_MONEY_MORE")), &mcall(&call_builtin("str", &[{ let __b = mcall(&geti(&turns.clone(), &op_neg(&Py::Int(1))), "get", &[py_str("bot")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "strip", &[])));
+    return Py::Bool(py_contains(&op_add(&g_TIGHT_MONEY(), &g_TIGHT_MONEY_MORE()), &mcall(&call_builtin("str", &[{ let __b = mcall(&geti(&turns.clone(), &op_neg(&Py::Int(1))), "get", &[py_str("bot")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "strip", &[])));
     Py::None
 }
 pub fn reads_as_small_talk(args: &[Py]) -> Py {
@@ -21770,7 +21770,7 @@ pub fn _about(args: &[Py]) -> Py {
     let _ = py_str("Which about-the-bot question this is, or None.\n\n    The reading says which kind the line is, so \"what can you do with leftover rice\" is not\n    answered as a question about the bot: the engine sees what follows the question and calls\n    it about the rice. The phrase lists stay as a floor for lines the engine does not label.\n\n    The lead-in goes first (`_self_line`, `LEAD_IN`): every list below is anchored at the start of\n    the line, so \"ok random question, do you ever make mistakes\" was read as a line with no ask\n    in it at all, and a tomato chat answered it with a tomato sauce recipe.\n    ");
     clean = _self_line(&[clean.clone()]);
     _self = _self_line(&[clean.clone()]);
-    if py_truthy(&{ let __b = { let __b = mcall(&pyrt::xrefs::xget("compose.fallback_data", "PRIVACY_ASK"), "search", &[_self.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&pyrt::xrefs::xget("compose.fallback_data", "PRIVACY_SHAPES"), "search", &[_self.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_BETWEEN_US_ASK(), "search", &[_self.clone()]) } } } }; if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback_data", "NOT_WHAT_I_SAID"), "search", &[_self.clone()]))) } }) {
+    if py_truthy(&{ let __b = { let __b = mcall(&g_PRIVACY_ASK(), "search", &[_self.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_PRIVACY_SHAPES(), "search", &[_self.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_BETWEEN_US_ASK(), "search", &[_self.clone()]) } } } }; if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_NOT_WHAT_I_SAID(), "search", &[_self.clone()]))) } }) {
     return py_str("privacy");
     }
     if py_truthy(&mcall(&g_TRUST_ASK(), "search", &[_self.clone()])) {
@@ -21782,16 +21782,16 @@ pub fn _about(args: &[Py]) -> Py {
     if py_truthy(&mcall(&g_JUDGING_ASK(), "search", &[_self.clone()])) {
     return py_str("judging");
     }
-    if py_truthy(&{ let __b = mcall(&pyrt::xrefs::xget("compose.fallback_data", "PRIVACY_ASK"), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback_words", "PRIVACY_NOT_THIS"), "search", &[clean.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback_data", "NOT_WHAT_I_SAID"), "search", &[clean.clone()]))) } } } }) {
+    if py_truthy(&{ let __b = mcall(&g_PRIVACY_ASK(), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&mcall(&g_PRIVACY_NOT_THIS(), "search", &[clean.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_NOT_WHAT_I_SAID(), "search", &[clean.clone()]))) } } } }) {
     return py_str("privacy");
     }
-    if py_truthy(&{ let __b = mcall(&g_TRUST_ASK(), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback_words", "PRIVACY_NOT_THIS"), "search", &[clean.clone()]))) } }) {
+    if py_truthy(&{ let __b = mcall(&g_TRUST_ASK(), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_PRIVACY_NOT_THIS(), "search", &[clean.clone()]))) } }) {
     return py_str("trust");
     }
     if py_truthy(&mcall(&g_LIMITS_ASK(), "search", &[_self_line(&[clean.clone()])])) {
     return py_str("limits");
     }
-    if py_truthy(&{ let __b = mcall(&pyrt::xrefs::xget("compose.fallback_data", "ONLINE_ASK"), "search", &[_self_line(&[clean.clone()])]); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&mcall(&g_OWN_DEVICE(), "search", &[_self_line(&[clean.clone()])]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_A_BARE_ONLINE(), "search", &[clean.clone()]))) } } } }) {
+    if py_truthy(&{ let __b = mcall(&g_ONLINE_ASK(), "search", &[_self_line(&[clean.clone()])]); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&mcall(&g_OWN_DEVICE(), "search", &[_self_line(&[clean.clone()])]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_A_BARE_ONLINE(), "search", &[clean.clone()]))) } } } }) {
     return py_str("online");
     }
     if py_truthy(&pyrt::xrefs::xcall("understanding.kinds", "the_manners_question", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&_self_line(&[clean.clone()]), "split", &[])) { let mut word: Py = __item.clone(); __out.push(mcall(&word.clone(), "strip", &[stdlib_attr("string", "punctuation").unwrap_or_else(|e| exc::raise(e))])); } py_list(__out) })() }])) {
@@ -21825,7 +21825,7 @@ pub fn _about(args: &[Py]) -> Py {
     if py_truthy(&mcall(&g_ASKING_ASK(), "search", &[_self.clone()])) {
     return py_str("asking");
     }
-    let __iter1 = py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "IDENTITY"));
+    let __iter1 = py_iter_or_raise(&g_IDENTITY());
     for __item in __iter1 {
     phrase = __item.clone();
     if py_truthy(&{ let __b = Py::Bool(py_contains(&clean.clone(), &phrase.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&spelled.clone(), &phrase.clone())) } }) {
@@ -21835,7 +21835,7 @@ pub fn _about(args: &[Py]) -> Py {
     if py_truthy(&mcall(&g_FORGETTING_ASK(), "search", &[clean.clone()])) {
     return py_str("memory");
     }
-    let __iter2 = py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "MEMORY"));
+    let __iter2 = py_iter_or_raise(&g_MEMORY());
     for __item in __iter2 {
     phrase = __item.clone();
     if py_truthy(&{ let __b = Py::Bool(py_contains(&clean.clone(), &phrase.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&spelled.clone(), &phrase.clone())) } }) {
@@ -21847,11 +21847,11 @@ pub fn _about(args: &[Py]) -> Py {
     }
     if py_truthy(&call_builtin("isinstance", &[understood.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) {
     kind = mcall(&understood.clone(), "get", &[py_str("about_bot_kind")]);
-    if py_truthy(&{ let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "ABOUT"), &kind.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "ABOUT_SELF"), &kind.clone())) } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_ABOUT(), &kind.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_ABOUT_SELF(), &kind.clone())) } }) {
     return kind.clone();
     }
     }
-    asked = mcall(&pyrt::xrefs::xget("compose.fallback_words", "HUMAN_ASK"), "search", &[clean.clone()]);
+    asked = mcall(&g_HUMAN_ASK(), "search", &[clean.clone()]);
     if py_truthy(&{ let __b = asked.clone(); if !py_truthy(&__b) { __b } else { { let __b = _opens_the_line(&[slice_or_raise(&clean.clone(), &Py::None, &mcall(&asked.clone(), "start", &[]), &Py::None)]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_asks_elsewhere(&[slice_or_raise(&clean.clone(), &mcall(&asked.clone(), "end", &[]), &Py::None, &Py::None)]))) } } } }) {
     return py_str("identity");
     }
@@ -21884,7 +21884,7 @@ pub fn _names_the_make(args: &[Py]) -> Py {
     let mut said: Py = Py::None;
     let _ = py_str("Whether the line names what the bot is made of, in a line short enough to be only that.");
     said = stdlib_call("re", "findall", &[py_str("[a-z0-9']+"), mcall(&call_builtin("str", &[{ let __b = clean.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[])]).unwrap_or_else(|e| exc::raise(e));
-    return { let __b = op_le(&call_builtin("len", &[said.clone()]).unwrap_or_else(|e| exc::raise(e)), &pyrt::xrefs::xget("compose.fallback_data", "MODEL_NAMED_WORDS")); if !py_truthy(&__b) { __b } else { call_builtin("bool", &[mcall(&g_MODEL_NAMED(), "search", &[mcall(&py_str(" "), "join", &[said.clone()])])]).unwrap_or_else(|e| exc::raise(e)) } };
+    return { let __b = op_le(&call_builtin("len", &[said.clone()]).unwrap_or_else(|e| exc::raise(e)), &g_MODEL_NAMED_WORDS()); if !py_truthy(&__b) { __b } else { call_builtin("bool", &[mcall(&g_MODEL_NAMED(), "search", &[mcall(&py_str(" "), "join", &[said.clone()])])]).unwrap_or_else(|e| exc::raise(e)) } };
     Py::None
 }
 pub fn about_the_bot(args: &[Py]) -> Py {
@@ -21988,7 +21988,7 @@ pub fn _about_itself(args: &[Py]) -> Py {
     let mut w: Py = Py::None;
     let mut word: Py = Py::None;
     let _ = py_str("Which question about the bot's own nature this is, or None.\n\n    Nothing on the line but the bot and a word for a mind or a machine is a question about the\n    bot; the same shape with something else on the end is about that thing, so \"can you think\n    of a name for my cat\" and \"can you learn this song for me\" are not answered here.\n    ");
-    if py_truthy(&{ let __b = mcall(&pyrt::xrefs::xget("compose.fallback_words", "REFERS_BACK"), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback_words", "NAMES_THE_BOT"), "search", &[clean.clone()]))) } }) {
+    if py_truthy(&{ let __b = mcall(&g_REFERS_BACK(), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_NAMES_THE_BOT(), "search", &[clean.clone()]))) } }) {
     return Py::None;
     }
     said = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&clean.clone(), "split", &[])) { let mut word: Py = __item.clone(); __out.push(mcall(&word.clone(), "strip", &[py_str("?!.,;:\"'()")])); } py_list(__out) })() };
@@ -22007,20 +22007,20 @@ pub fn _about_itself(args: &[Py]) -> Py {
     if py_truthy(&mcall(&g_LIMITS_ASK(), "search", &[_self_line(&[clean.clone()])])) {
     return py_str("limits");
     }
-    if py_truthy(&{ let __b = mcall(&pyrt::xrefs::xget("compose.fallback_data", "ONLINE_ASK"), "search", &[_self_line(&[clean.clone()])]); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&mcall(&g_OWN_DEVICE(), "search", &[_self_line(&[clean.clone()])]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_A_BARE_ONLINE(), "search", &[clean.clone()]))) } } } }) {
+    if py_truthy(&{ let __b = mcall(&g_ONLINE_ASK(), "search", &[_self_line(&[clean.clone()])]); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&mcall(&g_OWN_DEVICE(), "search", &[_self_line(&[clean.clone()])]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_A_BARE_ONLINE(), "search", &[clean.clone()]))) } } } }) {
     return py_str("online");
     }
-    if py_truthy(&Py::Bool(!py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback_words", "SELF_ASK"), "search", &[clean.clone()])))) {
+    if py_truthy(&Py::Bool(!py_truthy(&mcall(&g_SELF_ASK(), "search", &[clean.clone()])))) {
     return Py::None;
     }
-    view = mcall(&pyrt::xrefs::xget("compose.fallback_words", "A_VIEW_ASKED_FOR"), "match", &[clean.clone()]);
+    view = mcall(&g_A_VIEW_ASKED_FOR(), "match", &[clean.clone()]);
     if py_truthy(&{ let __b = view.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&stdlib_call("re", "match", &[py_str("\\s*(?:you|u|youre|you're|ur|yourself|for\\s+yourself|about\\s+yourself|by\\s+yourself|on\\s+your\\s+own)\\b"), mcall(&view.clone(), "group", &[Py::Int(1)])]).unwrap_or_else(|e| exc::raise(e)))) } }) {
     return Py::None;
     }
     if py_truthy(&mcall(&g_ABOUT_THE_PERSON(), "search", &[clean.clone()])) {
     return Py::None;
     }
-    rest = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&said.clone()) { let mut w: Py = __item.clone(); if py_truthy(&{ let __b = Py::Bool(!py_contains(&pyrt::xrefs::xget("compose.fallback_data", "SELF_FILLER"), &w.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&py_tuple(vec![py_str("you"), py_str("u"), py_str("youre"), py_str("you're"), py_str("ur")]), &w.clone())) } }) {  __out.push(w.clone()); } } py_list(__out) })() };
+    rest = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&said.clone()) { let mut w: Py = __item.clone(); if py_truthy(&{ let __b = Py::Bool(!py_contains(&g_SELF_FILLER(), &w.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&py_tuple(vec![py_str("you"), py_str("u"), py_str("youre"), py_str("you're"), py_str("ur")]), &w.clone())) } }) {  __out.push(w.clone()); } } py_list(__out) })() };
     if py_truthy(&Py::Bool(!py_truthy(&rest.clone()))) {
     if py_truthy(&stdlib_call("re", "search", &[py_str("\\bwhy\\b"), clean.clone()]).unwrap_or_else(|e| exc::raise(e))) {
     return py_str("purpose");
@@ -22033,10 +22033,10 @@ pub fn _about_itself(args: &[Py]) -> Py {
     let __iter1 = py_iter_or_raise(&rest.clone());
     for __item in __iter1 {
     word = __item.clone();
-    if py_truthy(&{ let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "PICKS_A_MECHANISM"), &word.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&stdlib_call("re", "search", &[py_str("\\bhow\\b"), clean.clone()]).unwrap_or_else(|e| exc::raise(e)))) } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_PICKS_A_MECHANISM(), &word.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&stdlib_call("re", "search", &[py_str("\\bhow\\b"), clean.clone()]).unwrap_or_else(|e| exc::raise(e)))) } }) {
     continue;
     }
-    group = mcall(&pyrt::xrefs::xget("compose.fallback_data", "SELF_GROUP"), "get", &[word.clone()]);
+    group = mcall(&g_SELF_GROUP(), "get", &[word.clone()]);
     if py_truthy(&{ let __b = Py::Bool(py_eq(&group.clone(), &py_str("where"))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&py_tuple(vec![py_str("here"), py_str("there")]), &word.clone())); if !py_truthy(&__b) { __b } else { stdlib_call("re", "search", &[py_str("\\bwhy\\b"), clean.clone()]).unwrap_or_else(|e| exc::raise(e)) } } } }) {
     return py_str("purpose");
     }
@@ -22064,13 +22064,13 @@ pub fn _burn_line(args: &[Py]) -> Py {
     else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "thread") { v.clone() }
     else { py_str("") };
     let _ = py_str("True for a line inside a burn thread that is about the burn: what to put on it, or the\n    blister. A bare \"cream\"/\"ice\" only counts when the line is a question, because a shopping\n    list and a bowl of ice cream are not questions about a burn.\n\n    A bare \"it\" is the blister when the thread is a burn: \"can i pop it\" names nothing, and\n    letting it go hands the person a search hedge.");
-    if py_truthy(&{ let __b = mcall(&pyrt::xrefs::xget("compose.fallback_words", "BURN_BLISTER_LINE"), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { mcall(&pyrt::xrefs::xget("compose.fallback_words", "BURN_ON_IT"), "search", &[clean.clone()]) } }) {
+    if py_truthy(&{ let __b = mcall(&g_BURN_BLISTER_LINE(), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_BURN_ON_IT(), "search", &[clean.clone()]) } }) {
     return Py::Bool(true);
     }
-    if py_truthy(&{ let __b = mcall(&pyrt::xrefs::xget("compose.fallback_words", "POP_A_BARE_IT"), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { { let __b = mcall(&pyrt::xrefs::xget("compose.fallback_words", "BURN_WORD"), "search", &[mcall(&call_builtin("str", &[{ let __b = thread.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[])]); if py_truthy(&__b) { __b } else { mcall(&pyrt::xrefs::xget("compose.fallback_words", "BURN_WORD"), "search", &[clean.clone()]) } } } }) {
+    if py_truthy(&{ let __b = mcall(&g_POP_A_BARE_IT(), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { { let __b = mcall(&g_BURN_WORD(), "search", &[mcall(&call_builtin("str", &[{ let __b = thread.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[])]); if py_truthy(&__b) { __b } else { mcall(&g_BURN_WORD(), "search", &[clean.clone()]) } } } }) {
     return Py::Bool(true);
     }
-    return call_builtin("bool", &[{ let __b = mcall(&pyrt::xrefs::xget("compose.fallback_words", "BURN_THING"), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { mcall(&pyrt::xrefs::xget("compose.fallback_words", "BURN_ASK"), "search", &[clean.clone()]) } }]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("bool", &[{ let __b = mcall(&g_BURN_THING(), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { mcall(&g_BURN_ASK(), "search", &[clean.clone()]) } }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn _the_hazard_is_gas(args: &[Py]) -> Py {
@@ -22141,7 +22141,7 @@ pub fn _names_a_new_part(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&part.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&pyrt::xrefs::xcall("compose.trouble", "reads_as_trouble", &[clean.clone(), words.clone()]))) } }) {
     return Py::Bool(false);
     }
-    if py_truthy(&op_bitand(&words.clone(), &op_bitor(&g_CARE_POINTER(), &pyrt::xrefs::xget("compose.fallback_data", "CARE_PRONOUNS")))) {
+    if py_truthy(&op_bitand(&words.clone(), &op_bitor(&g_CARE_POINTER(), &g_CARE_PRONOUNS()))) {
     return Py::Bool(false);
     }
     seen = call_builtin("set", &[stdlib_call("re", "findall", &[py_str("[a-z0-9']+"), mcall(&call_builtin("str", &[{ let __b = thread.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[])]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e));
@@ -22198,23 +22198,23 @@ pub fn _keeps_thread(args: &[Py]) -> Py {
     if py_truthy(&op_bitand(&words.clone(), &g_CARE_HURTS())) {
     return Py::Bool(true);
     }
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&crisis.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&op_bitand(&words.clone(), &pyrt::xrefs::xget("compose.fallback_data", "CARE_INJURY")))); if !py_truthy(&__b) { __b } else { mcall(&g_HOUSE_FAULT(), "search", &[clean.clone()]) } } } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&crisis.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&op_bitand(&words.clone(), &g_CARE_INJURY()))); if !py_truthy(&__b) { __b } else { mcall(&g_HOUSE_FAULT(), "search", &[clean.clone()]) } } } }) {
     return Py::Bool(false);
     }
     if py_truthy(&{ let __b = op_sub(&op_bitand(&words.clone(), &g_CARE_WORDS()), &g_CARE_POINTER()); if py_truthy(&__b) { __b } else { mcall(&g_CARE_ASKS(), "search", &[clean.clone()]) } }) {
     return Py::Bool(true);
     }
     own = mcall(&understood.clone(), "get", &[py_str("topic_own")]);
-    if py_truthy(&{ let __b = op_bitand(&words.clone(), &pyrt::xrefs::xget("compose.fallback_data", "CARE_RESOLVED")); if !py_truthy(&__b) { __b } else { { let __b = op_bitand(&words.clone(), &pyrt::xrefs::xget("compose.fallback_data", "CARE_NOT_RESOLVED")); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&py_tuple(vec![Py::None, py_str("feelings"), py_str("health")]), &own.clone())) } } } }) {
+    if py_truthy(&{ let __b = op_bitand(&words.clone(), &g_CARE_RESOLVED()); if !py_truthy(&__b) { __b } else { { let __b = op_bitand(&words.clone(), &g_CARE_NOT_RESOLVED()); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&py_tuple(vec![Py::None, py_str("feelings"), py_str("health")]), &own.clone())) } } } }) {
     return Py::Bool(true);
     }
-    if py_truthy(&op_bitand(&words.clone(), &pyrt::xrefs::xget("compose.fallback_data", "REACTION_WORDS"))) {
+    if py_truthy(&op_bitand(&words.clone(), &g_REACTION_WORDS())) {
     return Py::Bool(true);
     }
     if py_truthy(&{ let __b = op_bitand(&words.clone(), &g_CARE_POINTER()); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&mcall(&understood.clone(), "get", &[py_str("topic_own")]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g__POINTER_OWN_OBJECT(), "search", &[clean.clone()]))) } } } }) {
     return Py::Bool(true);
     }
-    if py_truthy(&{ let __b = call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "CARE_PHRASES")) { let mut phrase: Py = __item.clone(); __out.push(Py::Bool(py_contains(&clean.clone(), &phrase.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)); if py_truthy(&__b) { __b } else { mcall(&pyrt::xrefs::xget("compose.fallback_words", "CARE_SEEN_ASKS"), "search", &[clean.clone()]) } }) {
+    if py_truthy(&{ let __b = call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_CARE_PHRASES()) { let mut phrase: Py = __item.clone(); __out.push(Py::Bool(py_contains(&clean.clone(), &phrase.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)); if py_truthy(&__b) { __b } else { mcall(&g_CARE_SEEN_ASKS(), "search", &[clean.clone()]) } }) {
     return Py::Bool(true);
     }
     if py_truthy(&_someone_is_arriving(&[clean.clone()])) {
@@ -22237,13 +22237,13 @@ pub fn _keeps_thread(args: &[Py]) -> Py {
     }
     if py_truthy(&{ let __b = Py::Bool(py_eq(&mcall(&understood.clone(), "get", &[py_str("kind")]), &py_str("question"))); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&clean.clone(), &py_str("?"))) } }) {
     keywords = { let __b = mcall(&understood.clone(), "get", &[py_str("keywords")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } };
-    return call_builtin("all", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&keywords.clone()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "GENERIC_WORDS"), &mcall(&call_builtin("str", &[word.clone()]).unwrap_or_else(|e| exc::raise(e)), "lower", &[])))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("all", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&keywords.clone()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&g_GENERIC_WORDS(), &mcall(&call_builtin("str", &[word.clone()]).unwrap_or_else(|e| exc::raise(e)), "lower", &[])))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     }
-    if py_truthy(&{ let __b = op_le(&call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)); if !py_truthy(&__b) { __b } else { op_bitand(&words.clone(), &pyrt::xrefs::xget("compose.fallback_data", "AGREEMENTS")) } }) {
+    if py_truthy(&{ let __b = op_le(&call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)); if !py_truthy(&__b) { __b } else { op_bitand(&words.clone(), &g_AGREEMENTS()) } }) {
     return Py::Bool(true);
     }
     if py_truthy(&Py::Bool(!py_truthy(&mcall(&understood.clone(), "get", &[py_str("topic_own")])))) {
-    mine = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut w: Py = __item.clone(); if py_truthy(&{ let __b = op_gt(&call_builtin("len", &[w.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(3)); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&pyrt::xrefs::xget("compose.fallback_data", "ASKING_WORDS"), &w.clone())) } }) {  __out.push(w.clone()); } } py_set(__out) })() };
+    mine = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut w: Py = __item.clone(); if py_truthy(&{ let __b = op_gt(&call_builtin("len", &[w.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(3)); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&g_ASKING_WORDS(), &w.clone())) } }) {  __out.push(w.clone()); } } py_set(__out) })() };
     thread_words = call_builtin("set", &[stdlib_call("re", "findall", &[py_str("[a-z0-9']+"), mcall(&call_builtin("str", &[{ let __b = thread.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[])]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e));
     return { let __b = call_builtin("bool", &[op_bitand(&mine.clone(), &thread_words.clone())]).unwrap_or_else(|e| exc::raise(e)); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mine.clone())) } };
     }
@@ -22308,10 +22308,10 @@ pub fn _only_a_worry(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&words.clone())); if py_truthy(&__b) { __b } else { op_gt(&call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(6)) } }) {
     return Py::Bool(false);
     }
-    if py_truthy(&Py::Bool(!py_truthy(&op_bitand(&pyrt::xrefs::xget("compose.fallback_data", "WORRY_WORDS"), &call_builtin("set", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)))))) {
+    if py_truthy(&Py::Bool(!py_truthy(&op_bitand(&g_WORRY_WORDS(), &call_builtin("set", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)))))) {
     return Py::Bool(false);
     }
-    return call_builtin("all", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); __out.push({ let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "WORRY_FILLER"), &word.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "WORRY_WORDS"), &word.clone())) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("all", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); __out.push({ let __b = Py::Bool(py_contains(&g_WORRY_FILLER(), &word.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_WORRY_WORDS(), &word.clone())) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn _about_somebody_else(args: &[Py]) -> Py {
@@ -22733,7 +22733,7 @@ pub fn _a_newer_answer_asked_them_to_call(args: &[Py]) -> Py {
     let mut said: Py = Py::None;
     let mut turn: Py = Py::None;
     let _ = py_str("True when this fallback's own later line already told them to ring, so the route is stale.\n\n    `last` is the thread's last safety answer, and the route hand-back reads the place that answer\n    named - the chest-on-effort answer names 111. But the fallback can have spoken after it: \"now\n    my arm hurts too\" is the answer's own 999 threshold, and the line after that was handed \"111\n    is still the one to ring\" - a possible heart attack walked down to a phone call in the morning\n    (close-pipe on #8509, six of twelve third lines).\n\n    Every line of this file's own since the answer is read, not just the newest: the half of this\n    thread that says \"Keep the line open and follow what they tell you\" is a hold on a call that\n    was already asked for, so a hold must not put the stale 111 back. The walk stops at the\n    answer itself and at any other module's line, because that is the thread's own last word.\n    ");
-    let __iter1 = py_iter_or_raise(&call_builtin("reversed", &[slice_or_raise(&turns.clone(), &op_neg(&pyrt::xrefs::xget("compose.fallback_data", "THREAD_TURNS")), &Py::None, &Py::None)]).unwrap_or_else(|e| exc::raise(e)));
+    let __iter1 = py_iter_or_raise(&call_builtin("reversed", &[slice_or_raise(&turns.clone(), &op_neg(&g_THREAD_TURNS()), &Py::None, &Py::None)]).unwrap_or_else(|e| exc::raise(e)));
     for __item in __iter1 {
     turn = __item.clone();
     if py_truthy(&Py::Bool(!py_truthy(&call_builtin("isinstance", &[turn.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))))) {
@@ -22746,7 +22746,7 @@ pub fn _a_newer_answer_asked_them_to_call(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(py_eq(&mcall(&mcall(&said.clone(), "strip", &[]), "lower", &[]), &mcall(&mcall(&call_builtin("str", &[{ let __b = last.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "strip", &[]), "lower", &[])))) {
     return Py::Bool(false);
     }
-    if py_truthy(&Py::Bool(!py_eq(&mcall(&turn.clone(), "get", &[py_str("module")]), &pyrt::xrefs::xget("compose.fallback_data", "FALLBACK_MODULE")))) {
+    if py_truthy(&Py::Bool(!py_eq(&mcall(&turn.clone(), "get", &[py_str("module")]), &g_FALLBACK_MODULE()))) {
     return Py::Bool(false);
     }
     if py_truthy(&{ let __b = _the_answer_asked_them_to_call(&[said.clone()]); if py_truthy(&__b) { __b } else { _it_is_this_files_call(&[said.clone()]) } }) {
@@ -22871,14 +22871,14 @@ pub fn _releasable(args: &[Py]) -> Py {
     let mut turn: Py = Py::None;
     let mut word: Py = Py::None;
     let _ = py_str("True when the thread the composer is holding can be let go by a new subject.\n\n    Only a care answer can be. An emergency line that names the emergency services or a crisis\n    line is a crisis thread, and it holds every part of itself: \"my head is hurting\" after an\n    overdose, or a new ache while the person is still in danger, is the emergency still going,\n    not a second complaint. The line that decides it is the safety answer, not this turn's, and\n    it is one function so a rule about letting go of a thread cannot be written twice.\n    ");
-    let __iter1 = py_iter_or_raise(&call_builtin("reversed", &[slice_or_raise(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let __b = mcall(&memory.clone(), "get", &[py_str("turns")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }) { let mut t: Py = __item.clone(); if py_truthy(&call_builtin("isinstance", &[t.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(t.clone()); } } py_list(__out) })() }, &op_neg(&pyrt::xrefs::xget("compose.fallback_data", "THREAD_TURNS")), &Py::None, &Py::None)]).unwrap_or_else(|e| exc::raise(e)));
+    let __iter1 = py_iter_or_raise(&call_builtin("reversed", &[slice_or_raise(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let __b = mcall(&memory.clone(), "get", &[py_str("turns")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }) { let mut t: Py = __item.clone(); if py_truthy(&call_builtin("isinstance", &[t.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(t.clone()); } } py_list(__out) })() }, &op_neg(&g_THREAD_TURNS()), &Py::None, &Py::None)]).unwrap_or_else(|e| exc::raise(e)));
     for __item in __iter1 {
     turn = __item.clone();
     if py_truthy(&Py::Bool(py_eq(&mcall(&turn.clone(), "get", &[py_str("module")]), &py_str("safety")))) {
     last = mcall(&call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("bot")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]);
-    return Py::Bool(!py_truthy(&{ let __b = call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "CRISIS_WORDS")) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&last.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)); if py_truthy(&__b) { __b } else { _the_answer_asked_them_to_call(&[last.clone()]) } }));
+    return Py::Bool(!py_truthy(&{ let __b = call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_CRISIS_WORDS()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&last.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)); if py_truthy(&__b) { __b } else { _the_answer_asked_them_to_call(&[last.clone()]) } }));
     }
-    if py_truthy(&Py::Bool(!py_eq(&mcall(&turn.clone(), "get", &[py_str("module")]), &pyrt::xrefs::xget("compose.fallback_data", "FALLBACK_MODULE")))) {
+    if py_truthy(&Py::Bool(!py_eq(&mcall(&turn.clone(), "get", &[py_str("module")]), &g_FALLBACK_MODULE()))) {
     return Py::Bool(false);
     }
     }
@@ -22972,7 +22972,7 @@ pub fn _after_safety(args: &[Py]) -> Py {
     let _ = py_str("A careful continuation when the bot has just answered an emergency, or None.\n\n    A follow-up line during a fire, a crisis or a bad bleed must never be met with \"search\n    online\" or a neutral nod: the bot stays with the person and the real help. It holds while\n    the turns since the safety answer are this fallback's own and the line is still about it,\n    and lets go as soon as any other module answers or the person changes the subject.\n    ");
     turns = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let __b = mcall(&memory.clone(), "get", &[py_str("turns")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }) { let mut t: Py = __item.clone(); if py_truthy(&call_builtin("isinstance", &[t.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(t.clone()); } } py_list(__out) })() };
     safety = Py::None;
-    window = slice_or_raise(&turns.clone(), &op_neg(&pyrt::xrefs::xget("compose.fallback_data", "THREAD_TURNS")), &Py::None, &Py::None);
+    window = slice_or_raise(&turns.clone(), &op_neg(&g_THREAD_TURNS()), &Py::None, &Py::None);
     let __iter1 = py_iter_or_raise(&call_builtin("range", &[op_sub(&call_builtin("len", &[window.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1)), op_neg(&Py::Int(1)), op_neg(&Py::Int(1))]).unwrap_or_else(|e| exc::raise(e)));
     for __item in __iter1 {
     index = __item.clone();
@@ -22993,7 +22993,7 @@ pub fn _after_safety(args: &[Py]) -> Py {
     let __iter2 = py_iter_or_raise(&window.clone());
     for __item in __iter2 {
     turn = __item.clone();
-    if py_truthy(&Py::Bool(py_eq(&mcall(&turn.clone(), "get", &[py_str("module")]), &pyrt::xrefs::xget("compose.fallback_data", "FALLBACK_MODULE")))) {
+    if py_truthy(&Py::Bool(py_eq(&mcall(&turn.clone(), "get", &[py_str("module")]), &g_FALLBACK_MODULE()))) {
     continue;
     }
     if py_truthy(&pyrt::xrefs::xcall("memory.history", "not_a_subject", &[call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("user")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))])) {
@@ -23004,32 +23004,32 @@ pub fn _after_safety(args: &[Py]) -> Py {
     }
     return Py::None;
     }
-    if py_truthy(&{ let __b = _reads_as_fear(&[read.clone(), clean.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "CRISIS_WORDS")) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&last.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)))) } }) {
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[pyrt::xrefs::xget("compose.fallback_data", "AFRAID_AFTER"), memory.clone(), clean.clone()]);
+    if py_truthy(&{ let __b = _reads_as_fear(&[read.clone(), clean.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_CRISIS_WORDS()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&last.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)))) } }) {
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[g_AFRAID_AFTER(), memory.clone(), clean.clone()]);
     }
     words = mcall(&read.clone(), "get", &[py_str("words")]);
     if py_truthy(&Py::Bool(!py_truthy(&call_builtin("isinstance", &[words.clone(), py_func("list", |args: &[Py]| call_builtin("list", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))))) {
     words = stdlib_call("re", "findall", &[py_str("[a-z0-9']+"), clean.clone()]).unwrap_or_else(|e| exc::raise(e));
     }
-    in_crisis = call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "CRISIS_WORDS")) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&last.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    in_crisis = call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_CRISIS_WORDS()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&last.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     live = { let __b = in_crisis.clone(); if py_truthy(&__b) { __b } else { { let __b = _the_answer_asked_them_to_call(&[last.clone()]); if py_truthy(&__b) { __b } else { _raises_the_stakes(&[clean.clone(), last.clone()]) } } } };
     if py_truthy(&{ let __b = Py::Bool(py_eq(&mcall(&read.clone(), "get", &[py_str("kind")]), &py_str("greeting"))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&op_bitand(&call_builtin("set", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &g_CARE_WORDS()))) } }) {
     if py_truthy(&live.clone()) {
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[if py_truthy(&in_crisis.clone()) { pyrt::xrefs::xget("compose.fallback_data", "HELLO_WITH_YOU") } else { pyrt::xrefs::xget("compose.fallback_data", "HELLO_STILL_THERE") }, memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[if py_truthy(&in_crisis.clone()) { g_HELLO_WITH_YOU() } else { g_HELLO_STILL_THERE() }, memory.clone(), clean.clone()]);
     }
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[pyrt::xrefs::xget("compose.fallback_data", "GREETING_AFTER"), memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[g_GREETING_AFTER(), memory.clone(), clean.clone()]);
     }
     if py_truthy(&{ let __b = _asks_how_are_you(&[clean.clone(), { let __b = mcall(&read.clone(), "get", &[py_str("plain")]); if py_truthy(&__b) { __b } else { clean.clone() } }]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_burn_line(&[clean.clone()]))) } }) {
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[pyrt::xrefs::xget("compose.fallback_data", "CARE_HERE"), memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[g_CARE_HERE(), memory.clone(), clean.clone()]);
     }
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&live.clone())); if !py_truthy(&__b) { __b } else { mcall(&g_A_BACK_AGAIN(), "match", &[mcall(&clean.clone(), "strip", &[])]) } }) {
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[pyrt::xrefs::xget("compose.fallback_data", "GREETING_AFTER"), memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[g_GREETING_AFTER(), memory.clone(), clean.clone()]);
     }
     if py_truthy(&{ let __b = _short_ack(&[words.clone()]); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&live.clone())); if !py_truthy(&__b) { __b } else { _thread_was_closed(&[turns.clone()]) } } } }) {
     return Py::None;
     }
-    if py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback_words", "MOVE_ON"), "search", &[clean.clone()])) {
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[pyrt::xrefs::xget("compose.fallback_data", "MOVE_ON_AFTER"), memory.clone(), clean.clone()]);
+    if py_truthy(&mcall(&g_MOVE_ON(), "search", &[clean.clone()])) {
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[g_MOVE_ON_AFTER(), memory.clone(), clean.clone()]);
     }
     if py_truthy(&Py::Bool(!py_truthy(&in_crisis.clone()))) {
     advice = _asks_about_the_advice(&[clean.clone(), last.clone()]);
@@ -23039,27 +23039,27 @@ pub fn _after_safety(args: &[Py]) -> Py {
     }
     if py_truthy(&pyrt::xrefs::xcall("compose.outlook", "asks_the_outlook", &[clean.clone()])) {
     cards = _the_safety_cards(&[turns.clone()]);
-    in_a_crisis = call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&cards.clone()) { let mut card: Py = __item.clone(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "CRISIS_WORDS")) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&card.clone(), &word.clone()))); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    in_a_crisis = call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&cards.clone()) { let mut card: Py = __item.clone(); for __item in py_iter_or_raise(&g_CRISIS_WORDS()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&card.clone(), &word.clone()))); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     told_to_call = call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&cards.clone()) { let mut card: Py = __item.clone(); __out.push(_the_answer_asked_them_to_call(&[card.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     abuse = call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&cards.clone()) { let mut card: Py = __item.clone(); __out.push(_the_answer_was_an_abuse_card(&[card.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     pool = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(in_a_crisis.clone()); __args.push(_somebody_is_coming(&[turns.clone(), clean.clone()])); __args.push(told_to_call.clone()); __kws.extend(vec![("abuse".to_string(), abuse.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("compose.outlook", "the_pool", args))(&__args) };
     if py_truthy(&Py::Bool(py_is(&pool.clone(), &Py::None))) {
-    pool = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "FORECAST_AFTER_SAFETY")) { let mut phrase: Py = __item.clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("who".to_string(), py_str("you"))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&phrase.clone(), "format", args))(&__args) }); } py_list(__out) })() };
+    pool = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_FORECAST_AFTER_SAFETY()) { let mut phrase: Py = __item.clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("who".to_string(), py_str("you"))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&phrase.clone(), "format", args))(&__args) }); } py_list(__out) })() };
     }
     return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[pool.clone(), memory.clone(), clean.clone()]);
     }
     them = _about_somebody_else(&[safety.clone(), memory.clone()]);
     if py_truthy(&{ let __b = _the_answer_was_an_abuse_card(&[last.clone()]); if !py_truthy(&__b) { __b } else { { let __b = mcall(&g__THE_WAY_OUT(), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { mcall(&g__ASKS_TO_LEAVE(), "search", &[clean.clone()]) } } } }) {
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[pyrt::xrefs::xget("compose.fallback_data", "ABUSE_AFTER"), memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[g_ABUSE_AFTER(), memory.clone(), clean.clone()]);
     }
-    if py_truthy(&{ let __b = live.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&py_tuple(vec![g_TRIED_NO_CHANGE(), pyrt::xrefs::xget("compose.fallback_data", "TRIED_NO_CHANGE_ELSEWHERE"), g_TRIED_WORSE(), pyrt::xrefs::xget("compose.fallback_data", "TRIED_WORSE_ELSEWHERE")]), &_a_report_on_the_advice(&[clean.clone(), words.clone(), Py::Bool(false)]))) } }) {
+    if py_truthy(&{ let __b = live.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&py_tuple(vec![g_TRIED_NO_CHANGE(), g_TRIED_NO_CHANGE_ELSEWHERE(), g_TRIED_WORSE(), g_TRIED_WORSE_ELSEWHERE()]), &_a_report_on_the_advice(&[clean.clone(), words.clone(), Py::Bool(false)]))) } }) {
     if py_truthy(&{ let __b = in_crisis.clone(); if !py_truthy(&__b) { __b } else { them.clone() } }) {
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[_wrote_for_them(&[pyrt::xrefs::xget("compose.fallback_data", "CRISIS_AFTER_THEM"), them.clone()]), memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[_wrote_for_them(&[g_CRISIS_AFTER_THEM(), them.clone()]), memory.clone(), clean.clone()]);
     }
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[if py_truthy(&in_crisis.clone()) { pyrt::xrefs::xget("compose.fallback_data", "CRISIS_AFTER") } else { pyrt::xrefs::xget("compose.fallback_data", "EMERGENCY_NOT_WORKED") }, memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[if py_truthy(&in_crisis.clone()) { g_CRISIS_AFTER() } else { g_EMERGENCY_NOT_WORKED() }, memory.clone(), clean.clone()]);
     }
     if py_truthy(&mcall(&g_THING_SORTED(), "search", &[clean.clone()])) {
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[if py_truthy(&in_crisis.clone()) { pyrt::xrefs::xget("compose.fallback_data", "CRISIS_AFTER") } else { { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(turns.clone()); __args.push(clean.clone()); __args.push(last.clone()); __kws.extend(vec![("done_report".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _hold_pool(args))(&__args) } }, memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[if py_truthy(&in_crisis.clone()) { g_CRISIS_AFTER() } else { { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(turns.clone()); __args.push(clean.clone()); __args.push(last.clone()); __kws.extend(vec![("done_report".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _hold_pool(args))(&__args) } }, memory.clone(), clean.clone()]);
     }
     if py_truthy(&Py::Bool(!py_truthy(&in_crisis.clone()))) {
     verdict = pyrt::xrefs::xmodule("compose.verdict");
@@ -23069,124 +23069,124 @@ pub fn _after_safety(args: &[Py]) -> Py {
     }
     }
     if py_truthy(&{ let __b = in_crisis.clone(); if !py_truthy(&__b) { __b } else { { let __b = _a_lost_ask(&[clean.clone()]); if py_truthy(&__b) { __b } else { _a_start_ask(&[clean.clone()]) } } } }) {
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[pyrt::xrefs::xget("compose.fallback_data", "CRISIS_AFTER"), memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[g_CRISIS_AFTER(), memory.clone(), clean.clone()]);
     }
     if py_truthy(&{ let __b = _the_hazard_is_gas(&[mcall(&safety.clone(), "get", &[py_str("user")])]); if !py_truthy(&__b) { __b } else { { let __b = mcall(&g__THE_WAY_OUT(), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { _goes_back_for(&[clean.clone(), { let __b = mcall(&safety.clone(), "get", &[py_str("user")]); if py_truthy(&__b) { __b } else { py_str("") } }]) } } } }) {
-    return pyrt::xrefs::xget("compose.fallback_data", "GAS_ANSWER");
+    return g_GAS_ANSWER();
     }
     if py_truthy(&_the_threshold_was_crossed(&[last.clone(), clean.clone(), turns.clone()])) {
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[pyrt::xrefs::xget("compose.fallback_data", "THRESHOLD_CROSSED"), memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[g_THRESHOLD_CROSSED(), memory.clone(), clean.clone()]);
     }
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&_feels_better(&[clean.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&{ let __b = _goes_back_for(&[clean.clone(), { let __b = mcall(&safety.clone(), "get", &[py_str("user")]); if py_truthy(&__b) { __b } else { py_str("") } }]); if py_truthy(&__b) { __b } else { { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(read.clone()); __args.push(clean.clone()); __args.push({ let __b = mcall(&safety.clone(), "get", &[py_str("user")]); if py_truthy(&__b) { __b } else { py_str("") } }); __kws.extend(vec![("crisis".to_string(), { let __b = Py::Bool(!py_truthy(&_releasable(&[memory.clone()]))); if py_truthy(&__b) { __b } else { _raises_the_stakes(&[clean.clone(), last.clone()]) } })]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _keeps_thread(args))(&__args) } } })) } }) {
     return Py::None;
     }
-    if py_truthy(&{ let __b = { let __b = Py::Bool(py_eq(&mcall(&read.clone(), "get", &[py_str("kind")]), &py_str("thanks"))); if py_truthy(&__b) { __b } else { op_bitand(&call_builtin("set", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &pyrt::xrefs::xget("compose.fallback_data", "THANKS_WORDS")) } }; if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_thanks_carries_emergency(&[words.clone(), clean.clone()]))) } }) {
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[pyrt::xrefs::xget("compose.fallback_data", "THANKS_AFTER"), memory.clone(), clean.clone()]);
+    if py_truthy(&{ let __b = { let __b = Py::Bool(py_eq(&mcall(&read.clone(), "get", &[py_str("kind")]), &py_str("thanks"))); if py_truthy(&__b) { __b } else { op_bitand(&call_builtin("set", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &g_THANKS_WORDS()) } }; if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_thanks_carries_emergency(&[words.clone(), clean.clone()]))) } }) {
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[g_THANKS_AFTER(), memory.clone(), clean.clone()]);
     }
     if py_truthy(&_short_ack(&[words.clone()])) {
     if py_truthy(&in_crisis.clone()) {
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[pyrt::xrefs::xget("compose.fallback_data", "CRISIS_AFTER"), memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[g_CRISIS_AFTER(), memory.clone(), clean.clone()]);
     }
     return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[_hold_pool(&[turns.clone(), clean.clone(), last.clone()]), memory.clone(), clean.clone()]);
     }
     last = mcall(&call_builtin("str", &[{ let __b = mcall(&safety.clone(), "get", &[py_str("bot")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]);
     asked = { let __b = Py::Bool(py_eq(&mcall(&read.clone(), "get", &[py_str("kind")]), &py_str("question"))); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&clean.clone(), &py_str("?"))) } };
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&_reads_as_fear(&[read.clone(), clean.clone()]))); if !py_truthy(&__b) { __b } else { { let __b = op_bitand(&call_builtin("set", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &pyrt::xrefs::xget("compose.fallback_data", "REACTION_WORDS")); if !py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&slice_or_raise(&turns.clone(), &op_neg(&Py::Int(2)), &Py::None, &Py::None)) { let mut t: Py = __item.clone(); __out.push(Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "RESOLVED_AFTER"), &call_builtin("str", &[{ let __b = mcall(&t.clone(), "get", &[py_str("bot")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } } } }) {
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[pyrt::xrefs::xget("compose.fallback_data", "AFTER_RESOLVED"), memory.clone(), clean.clone()]);
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&_reads_as_fear(&[read.clone(), clean.clone()]))); if !py_truthy(&__b) { __b } else { { let __b = op_bitand(&call_builtin("set", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &g_REACTION_WORDS()); if !py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&slice_or_raise(&turns.clone(), &op_neg(&Py::Int(2)), &Py::None, &Py::None)) { let mut t: Py = __item.clone(); __out.push(Py::Bool(py_contains(&g_RESOLVED_AFTER(), &call_builtin("str", &[{ let __b = mcall(&t.clone(), "get", &[py_str("bot")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } } } }) {
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[g_AFTER_RESOLVED(), memory.clone(), clean.clone()]);
     }
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&asked.clone())); if !py_truthy(&__b) { __b } else { { let __b = mcall(&g_RESOLVED(), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&mcall(&g_NEEDS_SEEN(), "search", &[clean.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_someone_is_arriving(&[clean.clone()]))) } } } } } }) {
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&them.clone())); if !py_truthy(&__b) { __b } else { { let __b = _a_newer_answer_asked_them_to_call(&[last.clone(), turns.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_ALREADY_RANG(), "search", &[clean.clone()]))) } } } }) {
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[pyrt::xrefs::xget("compose.fallback_data", "THE_CALL_STANDS_ANYWAY"), memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[g_THE_CALL_STANDS_ANYWAY(), memory.clone(), clean.clone()]);
     }
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[if py_truthy(&them.clone()) { _wrote_for_them(&[pyrt::xrefs::xget("compose.fallback_data", "RESOLVED_AFTER_THEM"), them.clone()]) } else { pyrt::xrefs::xget("compose.fallback_data", "RESOLVED_AFTER") }, memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[if py_truthy(&them.clone()) { _wrote_for_them(&[g_RESOLVED_AFTER_THEM(), them.clone()]) } else { g_RESOLVED_AFTER() }, memory.clone(), clean.clone()]);
     }
     if py_truthy(&mcall(&g_ALREADY_RANG(), "search", &[clean.clone()])) {
     if py_truthy(&mcall(&g_A_HELPLINE(), "search", &[clean.clone()])) {
-    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "CRISIS_WORDS")) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&last.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[if py_truthy(&them.clone()) { _wrote_for_them(&[pyrt::xrefs::xget("compose.fallback_data", "CRISIS_AFTER_THEM"), them.clone()]) } else { pyrt::xrefs::xget("compose.fallback_data", "CRISIS_AFTER") }, memory.clone(), clean.clone()]);
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_CRISIS_WORDS()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&last.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[if py_truthy(&them.clone()) { _wrote_for_them(&[g_CRISIS_AFTER_THEM(), them.clone()]) } else { g_CRISIS_AFTER() }, memory.clone(), clean.clone()]);
     }
-    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "SAFETY_WORDS")) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&last.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[pyrt::xrefs::xget("compose.fallback_data", "HELPLINE_NOT_AN_AMBULANCE"), memory.clone(), clean.clone()]);
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_SAFETY_WORDS()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&last.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[g_HELPLINE_NOT_AN_AMBULANCE(), memory.clone(), clean.clone()]);
     }
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[pyrt::xrefs::xget("compose.fallback_data", "STILL_HERE_AFTER"), memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[g_STILL_HERE_AFTER(), memory.clone(), clean.clone()]);
     }
-    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "CRISIS_WORDS")) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&last.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[if py_truthy(&them.clone()) { _wrote_for_them(&[pyrt::xrefs::xget("compose.fallback_data", "CRISIS_AFTER_THEM"), them.clone()]) } else { pyrt::xrefs::xget("compose.fallback_data", "CRISIS_AFTER") }, memory.clone(), clean.clone()]);
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_CRISIS_WORDS()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&last.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[if py_truthy(&them.clone()) { _wrote_for_them(&[g_CRISIS_AFTER_THEM(), them.clone()]) } else { g_CRISIS_AFTER() }, memory.clone(), clean.clone()]);
     }
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[pyrt::xrefs::xget("compose.fallback_data", "HOLD_AFTER"), memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[g_HOLD_AFTER(), memory.clone(), clean.clone()]);
     }
-    if py_truthy(&{ let __b = _reads_as_fear(&[read.clone(), clean.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "CRISIS_WORDS")) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&last.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)))) } }) {
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[pyrt::xrefs::xget("compose.fallback_data", "AFRAID_AFTER"), memory.clone(), clean.clone()]);
+    if py_truthy(&{ let __b = _reads_as_fear(&[read.clone(), clean.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_CRISIS_WORDS()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&last.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)))) } }) {
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[g_AFRAID_AFTER(), memory.clone(), clean.clone()]);
     }
-    if py_truthy(&op_bitand(&call_builtin("set", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &pyrt::xrefs::xget("compose.fallback_data", "REACTION_WORDS"))) {
-    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "CRISIS_WORDS")) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&last.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[if py_truthy(&them.clone()) { _wrote_for_them(&[pyrt::xrefs::xget("compose.fallback_data", "CRISIS_AFTER_THEM"), them.clone()]) } else { pyrt::xrefs::xget("compose.fallback_data", "CRISIS_AFTER") }, memory.clone(), clean.clone()]);
+    if py_truthy(&op_bitand(&call_builtin("set", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &g_REACTION_WORDS())) {
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_CRISIS_WORDS()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&last.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[if py_truthy(&them.clone()) { _wrote_for_them(&[g_CRISIS_AFTER_THEM(), them.clone()]) } else { g_CRISIS_AFTER() }, memory.clone(), clean.clone()]);
     }
     return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[_hold_pool(&[turns.clone(), clean.clone(), last.clone()]), memory.clone(), clean.clone()]);
     }
-    if py_truthy(&{ let __b = mcall(&pyrt::xrefs::xget("compose.fallback_words", "VISIT_ASK"), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback_words", "MEDICAL_PLACE"), "search", &[clean.clone()]))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback_words", "NOT_A_VISIT"), "search", &[clean.clone()]))); if !py_truthy(&__b) { __b } else { _somebody_to_visit(&[clean.clone(), turns.clone()]) } } } } } }) {
-    pool = if py_truthy(&_someone_is_a_patient(&[clean.clone(), turns.clone()])) { pyrt::xrefs::xget("compose.fallback_data", "CARE_VISIT_WARD") } else { pyrt::xrefs::xget("compose.fallback_data", "CARE_VISIT") };
+    if py_truthy(&{ let __b = mcall(&g_VISIT_ASK(), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&mcall(&g_MEDICAL_PLACE(), "search", &[clean.clone()]))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&mcall(&g_NOT_A_VISIT(), "search", &[clean.clone()]))); if !py_truthy(&__b) { __b } else { _somebody_to_visit(&[clean.clone(), turns.clone()]) } } } } } }) {
+    pool = if py_truthy(&_someone_is_a_patient(&[clean.clone(), turns.clone()])) { g_CARE_VISIT_WARD() } else { g_CARE_VISIT() };
     return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[pool.clone(), memory.clone(), clean.clone()]);
     }
-    if py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback_words", "CARE_SEEN_ASKS"), "search", &[clean.clone()])) {
+    if py_truthy(&mcall(&g_CARE_SEEN_ASKS(), "search", &[clean.clone()])) {
     if py_truthy(&_the_thread_is_an_animal(&[clean.clone(), turns.clone()])) {
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[pyrt::xrefs::xget("compose.fallback_data", "CARE_SEEN_ANIMAL"), memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[g_CARE_SEEN_ANIMAL(), memory.clone(), clean.clone()]);
     }
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[pyrt::xrefs::xget("compose.fallback_data", "CARE_SEEN"), memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[g_CARE_SEEN(), memory.clone(), clean.clone()]);
     }
     if py_truthy(&_feels_better(&[clean.clone()])) {
     if py_truthy(&_no_relief(&[memory.clone(), last.clone()])) {
     if py_truthy(&them.clone()) {
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[_wrote_for_them(&[pyrt::xrefs::xget("compose.fallback_data", "EMERGENCY_BETTER_THEM"), them.clone()]), memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[_wrote_for_them(&[g_EMERGENCY_BETTER_THEM(), them.clone()]), memory.clone(), clean.clone()]);
     }
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[pyrt::xrefs::xget("compose.fallback_data", "EMERGENCY_BETTER"), memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[g_EMERGENCY_BETTER(), memory.clone(), clean.clone()]);
     }
-    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "CRISIS_WORDS")) { let mut w: Py = __item.clone(); __out.push(Py::Bool(py_contains(&last.clone(), &w.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_CRISIS_WORDS()) { let mut w: Py = __item.clone(); __out.push(Py::Bool(py_contains(&last.clone(), &w.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     if py_truthy(&them.clone()) {
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[_wrote_for_them(&[pyrt::xrefs::xget("compose.fallback_data", "CRISIS_BETTER_THEM"), them.clone()]), memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[_wrote_for_them(&[g_CRISIS_BETTER_THEM(), them.clone()]), memory.clone(), clean.clone()]);
     }
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[pyrt::xrefs::xget("compose.fallback_data", "CRISIS_BETTER"), memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[g_CRISIS_BETTER(), memory.clone(), clean.clone()]);
     }
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[pyrt::xrefs::xget("compose.fallback_data", "CARE_BETTER"), memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[g_CARE_BETTER(), memory.clone(), clean.clone()]);
     }
     opener = mcall(&call_builtin("str", &[{ let __b = mcall(&safety.clone(), "get", &[py_str("user")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]);
-    if py_truthy(&{ let __b = mcall(&pyrt::xrefs::xget("compose.fallback_words", "BURN_WORD"), "search", &[last.clone()]); if py_truthy(&__b) { __b } else { mcall(&pyrt::xrefs::xget("compose.fallback_words", "BURN_WORD"), "search", &[opener.clone()]) } }) {
-    if py_truthy(&{ let __b = mcall(&pyrt::xrefs::xget("compose.fallback_words", "BURN_BLISTER_LINE"), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { mcall(&pyrt::xrefs::xget("compose.fallback_words", "POP_A_BARE_IT"), "search", &[clean.clone()]) } }) {
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[pyrt::xrefs::xget("compose.fallback_data", "BURN_BLISTER"), memory.clone(), clean.clone()]);
+    if py_truthy(&{ let __b = mcall(&g_BURN_WORD(), "search", &[last.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_BURN_WORD(), "search", &[opener.clone()]) } }) {
+    if py_truthy(&{ let __b = mcall(&g_BURN_BLISTER_LINE(), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_POP_A_BARE_IT(), "search", &[clean.clone()]) } }) {
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[g_BURN_BLISTER(), memory.clone(), clean.clone()]);
     }
-    if py_truthy(&{ let __b = mcall(&pyrt::xrefs::xget("compose.fallback_words", "BURN_ON_IT"), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&pyrt::xrefs::xget("compose.fallback_words", "BURN_THING"), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { mcall(&pyrt::xrefs::xget("compose.fallback_words", "BURN_ASK"), "search", &[clean.clone()]) } } } }) {
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[pyrt::xrefs::xget("compose.fallback_data", "BURN_AFTER"), memory.clone(), clean.clone()]);
+    if py_truthy(&{ let __b = mcall(&g_BURN_ON_IT(), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_BURN_THING(), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { mcall(&g_BURN_ASK(), "search", &[clean.clone()]) } } } }) {
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[g_BURN_AFTER(), memory.clone(), clean.clone()]);
     }
     }
-    if py_truthy(&{ let __b = them.clone(); if !py_truthy(&__b) { __b } else { mcall(&pyrt::xrefs::xget("compose.badnews", "DEATH_SAID"), "search", &[clean.clone()]) } }) {
+    if py_truthy(&{ let __b = them.clone(); if !py_truthy(&__b) { __b } else { mcall(&g_SAID_AS_A_DEATH(), "search", &[clean.clone()]) } }) {
     return Py::None;
     }
-    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "CRISIS_WORDS")) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&last.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[if py_truthy(&them.clone()) { _wrote_for_them(&[pyrt::xrefs::xget("compose.fallback_data", "CRISIS_AFTER_THEM"), them.clone()]) } else { pyrt::xrefs::xget("compose.fallback_data", "CRISIS_AFTER") }, memory.clone(), clean.clone()]);
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_CRISIS_WORDS()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&last.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[if py_truthy(&them.clone()) { _wrote_for_them(&[g_CRISIS_AFTER_THEM(), them.clone()]) } else { g_CRISIS_AFTER() }, memory.clone(), clean.clone()]);
     }
     if py_truthy(&_someone_is_arriving(&[clean.clone()])) {
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[pyrt::xrefs::xget("compose.fallback_data", "WITH_YOU_AFTER"), memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[g_WITH_YOU_AFTER(), memory.clone(), clean.clone()]);
     }
     if py_truthy(&_already_rang(&[turns.clone()])) {
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[pyrt::xrefs::xget("compose.fallback_data", "HOLD_AFTER"), memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[g_HOLD_AFTER(), memory.clone(), clean.clone()]);
     }
     if py_truthy(&{ let __b = _the_answer_asked_them_to_call(&[last.clone()]); if py_truthy(&__b) { __b } else { _raises_the_stakes(&[clean.clone(), last.clone()]) } }) {
     if py_truthy(&_is_a_hazard(&[last.clone()])) {
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[pyrt::xrefs::xget("compose.fallback_data", "HAZARD_AFTER"), memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[g_HAZARD_AFTER(), memory.clone(), clean.clone()]);
     }
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[pyrt::xrefs::xget("compose.fallback_data", "EMERGENCY_AFTER"), memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[g_EMERGENCY_AFTER(), memory.clone(), clean.clone()]);
     }
     if py_truthy(&_the_thread_is_an_animal(&[clean.clone(), turns.clone()])) {
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[if py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback_words", "STILL_GOING"), "search", &[clean.clone()])) { pyrt::xrefs::xget("compose.fallback_data", "CARE_AFTER_ANIMAL_STILL") } else { pyrt::xrefs::xget("compose.fallback_data", "CARE_AFTER_ANIMAL") }, memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[if py_truthy(&mcall(&g_STILL_GOING(), "search", &[clean.clone()])) { g_CARE_AFTER_ANIMAL_STILL() } else { g_CARE_AFTER_ANIMAL() }, memory.clone(), clean.clone()]);
     }
     if py_truthy(&_a_newer_answer_asked_them_to_call(&[last.clone(), turns.clone()])) {
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[pyrt::xrefs::xget("compose.fallback_data", "THE_CALL_STANDS"), memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[g_THE_CALL_STANDS(), memory.clone(), clean.clone()]);
     }
     route = _the_route_the_answer_named(&[last.clone()]);
     if py_truthy(&{ let __b = route.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_THE_THING_ITSELF_LOOKS_FINE(), "search", &[clean.clone()]))) } }) {
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[geti(&pyrt::xrefs::xget("compose.fallback_data", "CARE_ROUTE_BACK"), &route.clone()), memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[geti(&g_CARE_ROUTE_BACK(), &route.clone()), memory.clone(), clean.clone()]);
     }
-    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[if py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback_words", "STILL_GOING"), "search", &[clean.clone()])) { pyrt::xrefs::xget("compose.fallback_data", "CARE_AFTER_STILL") } else { pyrt::xrefs::xget("compose.fallback_data", "CARE_AFTER") }, memory.clone(), clean.clone()]);
+    return pyrt::xrefs::xcall("compose.fallback_chain", "_choose", &[if py_truthy(&mcall(&g_STILL_GOING(), "search", &[clean.clone()])) { g_CARE_AFTER_STILL() } else { g_CARE_AFTER() }, memory.clone(), clean.clone()]);
     Py::None
 }
 pub fn _is_a_hazard(args: &[Py]) -> Py {
@@ -23221,7 +23221,7 @@ pub fn _the_safety_cards(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: turns"))) };
     let mut turn: Py = Py::None;
     let _ = py_str("The safety answers still in the thread window, newest last.\n\n    The thread can run several turns and the safety module answers some of them itself, so the\n    card is not always the last reply: the one that started the thread is what says whether this\n    is a crisis line, a call to make now, or somebody being hurt.\n    ");
-    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&slice_or_raise(&call_builtin("list", &[{ let __b = turns.clone(); if py_truthy(&__b) { __b } else { py_list(vec![]) } }]).unwrap_or_else(|e| exc::raise(e)), &op_neg(&pyrt::xrefs::xget("compose.fallback_data", "THREAD_TURNS")), &Py::None, &Py::None)) { let mut turn: Py = __item.clone(); if py_truthy(&Py::Bool(py_eq(&call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("module")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), &py_str("safety")))) {  __out.push(mcall(&call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("bot")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[])); } } py_list(__out) })() };
+    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&slice_or_raise(&call_builtin("list", &[{ let __b = turns.clone(); if py_truthy(&__b) { __b } else { py_list(vec![]) } }]).unwrap_or_else(|e| exc::raise(e)), &op_neg(&g_THREAD_TURNS()), &Py::None, &Py::None)) { let mut turn: Py = __item.clone(); if py_truthy(&Py::Bool(py_eq(&call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("module")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), &py_str("safety")))) {  __out.push(mcall(&call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("bot")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[])); } } py_list(__out) })() };
     Py::None
 }
 pub fn _somebody_is_coming(args: &[Py]) -> Py {
@@ -23243,7 +23243,7 @@ pub fn _somebody_is_coming(args: &[Py]) -> Py {
     let mut said: Py = Py::None;
     let mut turn: Py = Py::None;
     let _ = py_str("True when the person has rung, or help is with them, anywhere in the thread.");
-    let __iter1 = py_iter_or_raise(&slice_or_raise(&call_builtin("list", &[{ let __b = turns.clone(); if py_truthy(&__b) { __b } else { py_list(vec![]) } }]).unwrap_or_else(|e| exc::raise(e)), &op_neg(&pyrt::xrefs::xget("compose.fallback_data", "THREAD_TURNS")), &Py::None, &Py::None));
+    let __iter1 = py_iter_or_raise(&slice_or_raise(&call_builtin("list", &[{ let __b = turns.clone(); if py_truthy(&__b) { __b } else { py_list(vec![]) } }]).unwrap_or_else(|e| exc::raise(e)), &op_neg(&g_THREAD_TURNS()), &Py::None, &Py::None));
     for __item in __iter1 {
     turn = __item.clone();
     said = mcall(&call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("user")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]);
@@ -23287,13 +23287,13 @@ pub fn _thread_was_closed(args: &[Py]) -> Py {
     let mut line: Py = Py::None;
     let mut turn: Py = Py::None;
     let _ = py_str("True when this fallback's last line in the thread was a close, not advice.\n\n    \"thanks, its stopped\" is answered from THANKS_AFTER (\"Any time. Take care — ring again if\n    anything changes\"), and that is the end of it: the next bare \"ok\" is a nod on the way out,\n    not a line that needs the advice again.\n    ");
-    let __iter1 = py_iter_or_raise(&call_builtin("reversed", &[slice_or_raise(&turns.clone(), &op_neg(&pyrt::xrefs::xget("compose.fallback_data", "THREAD_TURNS")), &Py::None, &Py::None)]).unwrap_or_else(|e| exc::raise(e)));
+    let __iter1 = py_iter_or_raise(&call_builtin("reversed", &[slice_or_raise(&turns.clone(), &op_neg(&g_THREAD_TURNS()), &Py::None, &Py::None)]).unwrap_or_else(|e| exc::raise(e)));
     for __item in __iter1 {
     turn = __item.clone();
-    if py_truthy(&Py::Bool(!py_eq(&mcall(&turn.clone(), "get", &[py_str("module")]), &pyrt::xrefs::xget("compose.fallback_data", "FALLBACK_MODULE")))) {
+    if py_truthy(&Py::Bool(!py_eq(&mcall(&turn.clone(), "get", &[py_str("module")]), &g_FALLBACK_MODULE()))) {
     continue;
     }
-    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "THANKS_AFTER")) { let mut line: Py = __item.clone(); __out.push(mcall(&call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("bot")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "startswith", &[slice_or_raise(&line.clone(), &Py::None, &Py::Int(24), &Py::None)])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_THANKS_AFTER()) { let mut line: Py = __item.clone(); __out.push(mcall(&call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("bot")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "startswith", &[slice_or_raise(&line.clone(), &Py::None, &Py::Int(24), &Py::None)])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     }
     return Py::Bool(false);
     Py::None
@@ -23322,12 +23322,12 @@ pub fn _hold_pool(args: &[Py]) -> Py {
     else { Py::Bool(false) };
     let _ = py_str("The hold pool: one that may promise a call only when this thread already has one.\n\n    \"the operator\", \"the crew are on their way\" and \"keep the line open\" are true after a 999\n    call and a lie after a burn under the tap, so a care thread gets the plain hold instead\n    (cobalt-panther and gray-cypress, #820).\n\n    A done report is a third case: \"i sorted it\" says the person thinks the thing is handled, and\n    not that anybody was rung, so a line that names an operator or a crew needs their own words to\n    say somebody was (chief-umbrella and fancy-penguin, #7230).\n    ");
     if py_truthy(&Py::Bool(!py_truthy(&_a_call_is_known(&[turns.clone(), clean.clone(), last.clone()])))) {
-    return pyrt::xrefs::xget("compose.fallback_data", "STILL_HERE_AFTER");
+    return g_STILL_HERE_AFTER();
     }
     if py_truthy(&{ let __b = done_report.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&{ let __b = mcall(&g_ALREADY_RANG(), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { _already_rang(&[turns.clone()]) } })) } }) {
-    return pyrt::xrefs::xget("compose.fallback_data", "SORTED_AND_NO_CALL_YET");
+    return g_SORTED_AND_NO_CALL_YET();
     }
-    return pyrt::xrefs::xget("compose.fallback_data", "HOLD_AFTER");
+    return g_HOLD_AFTER();
     Py::None
 }
 pub fn _a_call_is_known(args: &[Py]) -> Py {
@@ -23356,7 +23356,7 @@ pub fn _a_call_is_known(args: &[Py]) -> Py {
     return Py::Bool(true);
     }
     text = call_builtin("str", &[{ let __b = last.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e));
-    if py_truthy(&Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "CALL_WORDS")) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&text.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))))) {
+    if py_truthy(&Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_CALL_WORDS()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&text.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))))) {
     return Py::Bool(false);
     }
     if py_truthy(&{ let __b = Py::Bool(py_contains(&text.clone(), &py_str("111"))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_IMMEDIATE_CALL(), "search", &[text.clone()]))) } }) {
@@ -23382,7 +23382,7 @@ pub fn _the_call_is_conditional(args: &[Py]) -> Py {
     let mut sentence: Py = Py::None;
     let mut word: Py = Py::None;
     let _ = py_str("True when every sentence of the answer that names a call puts it behind a condition.");
-    carrying = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&stdlib_call("re", "split", &[py_str("(?<=[.!?])\\s+"), call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e))) { let mut sentence: Py = __item.clone(); if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "CALL_WORDS")) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&mcall(&sentence.clone(), "lower", &[]), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(sentence.clone()); } } py_list(__out) })() };
+    carrying = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&stdlib_call("re", "split", &[py_str("(?<=[.!?])\\s+"), call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e))) { let mut sentence: Py = __item.clone(); if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_CALL_WORDS()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&mcall(&sentence.clone(), "lower", &[]), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(sentence.clone()); } } py_list(__out) })() };
     if py_truthy(&Py::Bool(!py_truthy(&carrying.clone()))) {
     return Py::Bool(false);
     }
@@ -23428,14 +23428,14 @@ pub fn _thanks_carries_emergency(args: &[Py]) -> Py {
     let mut said: Py = Py::None;
     let _ = py_str("True when a thanks also says the emergency is still going on.\n\n    The thanks pools are a close, so they must not answer \"thanks, its still soaking through\".\n    Any care word other than \"thanks\", a pronoun or a pointer (\"still\", \"call\", \"there\") counts,\n    as does a mid-emergency ask (\"is it safe to go down\"); a bare \"ok thanks\" has none of these\n    and closes. A thanks that also says it is over (\"the doctor came\", \"the bleeding stopped\",\n    \"its fine now\") is a close, unless it also says it is still going on.\n    ");
     said = call_builtin("set", &[words.clone()]).unwrap_or_else(|e| exc::raise(e));
-    content = op_sub(&op_sub(&op_sub(&op_bitand(&said.clone(), &g_CARE_WORDS()), &pyrt::xrefs::xget("compose.fallback_data", "THANKS_WORDS")), &pyrt::xrefs::xget("compose.fallback_data", "CARE_PRONOUNS")), &g_CARE_POINTER());
-    if py_truthy(&{ let __b = content.clone(); if !py_truthy(&__b) { __b } else { op_bitand(&said.clone(), &pyrt::xrefs::xget("compose.fallback_data", "ONGOING_WORDS")) } }) {
+    content = op_sub(&op_sub(&op_sub(&op_bitand(&said.clone(), &g_CARE_WORDS()), &g_THANKS_WORDS()), &g_CARE_PRONOUNS()), &g_CARE_POINTER());
+    if py_truthy(&{ let __b = content.clone(); if !py_truthy(&__b) { __b } else { op_bitand(&said.clone(), &g_ONGOING_WORDS()) } }) {
     return Py::Bool(true);
     }
-    if py_truthy(&op_bitand(&said.clone(), &pyrt::xrefs::xget("compose.fallback_data", "CARE_RESOLVED"))) {
-    return call_builtin("bool", &[op_bitand(&said.clone(), &pyrt::xrefs::xget("compose.fallback_data", "CARE_NOT_RESOLVED"))]).unwrap_or_else(|e| exc::raise(e));
+    if py_truthy(&op_bitand(&said.clone(), &g_CARE_RESOLVED())) {
+    return call_builtin("bool", &[op_bitand(&said.clone(), &g_CARE_NOT_RESOLVED())]).unwrap_or_else(|e| exc::raise(e));
     }
-    return call_builtin("bool", &[{ let __b = content.clone(); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_CARE_ASKS(), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&pyrt::xrefs::xget("compose.fallback_words", "CARE_SEEN_ASKS"), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "CARE_PHRASES")) { let mut phrase: Py = __item.clone(); __out.push(Py::Bool(py_contains(&clean.clone(), &phrase.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } } } } } }]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("bool", &[{ let __b = content.clone(); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_CARE_ASKS(), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_CARE_SEEN_ASKS(), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_CARE_PHRASES()) { let mut phrase: Py = __item.clone(); __out.push(Py::Bool(py_contains(&clean.clone(), &phrase.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } } } } } }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn a_date_of_ours_forgotten(args: &[Py]) -> Py {
@@ -23484,20 +23484,20 @@ pub fn _impact_said(args: &[Py]) -> Py {
     let __unpk2 = py_unpack(&__item.clone(), 2, None);
     position = __unpk2[0].clone();
     token = __unpk2[1].clone();
-    if py_truthy(&Py::Bool(!py_contains(&pyrt::xrefs::xget("compose.fallback_data", "GRIEVANCE_IMPACT"), &token.clone()))) {
+    if py_truthy(&Py::Bool(!py_contains(&g_GRIEVANCE_IMPACT(), &token.clone()))) {
     continue;
     }
     before = slice_or_raise(&tokens.clone(), &call_builtin("max", &[Py::Int(0), op_sub(&position.clone(), &Py::Int(2))]).unwrap_or_else(|e| exc::raise(e)), &position.clone(), &Py::None);
-    if py_truthy(&{ let __b = before.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "NOT_THEIR_VERB"), &geti(&before.clone(), &op_neg(&Py::Int(1))))) } }) {
+    if py_truthy(&{ let __b = before.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_NOT_THEIR_VERB(), &geti(&before.clone(), &op_neg(&Py::Int(1))))) } }) {
     continue;
     }
-    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&before.clone()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "FIRST_PERSON"), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&before.clone()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&g_FIRST_PERSON(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     continue;
     }
-    if py_truthy(&{ let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "FORGETTING"), &token.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&op_bitand(&call_builtin("set", &[slice_or_raise(&tokens.clone(), &op_add(&position.clone(), &Py::Int(1)), &op_add(&position.clone(), &Py::Int(4)), &Py::None)]).unwrap_or_else(|e| exc::raise(e)), &pyrt::xrefs::xget("compose.fallback_data", "OURS")))) } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_FORGETTING(), &token.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&op_bitand(&call_builtin("set", &[slice_or_raise(&tokens.clone(), &op_add(&position.clone(), &Py::Int(1)), &op_add(&position.clone(), &Py::Int(4)), &Py::None)]).unwrap_or_else(|e| exc::raise(e)), &g_OURS()))) } }) {
     continue;
     }
-    if py_truthy(&{ let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "EATING"), &token.clone())); if !py_truthy(&__b) { __b } else { { let __b = slice_or_raise(&tokens.clone(), &op_add(&position.clone(), &Py::Int(1)), &op_add(&position.clone(), &Py::Int(2)), &Py::None); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "EATEN_KIND"), &geti(&tokens.clone(), &op_add(&position.clone(), &Py::Int(1))))) } } } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_EATING(), &token.clone())); if !py_truthy(&__b) { __b } else { { let __b = slice_or_raise(&tokens.clone(), &op_add(&position.clone(), &Py::Int(1)), &op_add(&position.clone(), &Py::Int(2)), &Py::None); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_EATEN_KIND(), &geti(&tokens.clone(), &op_add(&position.clone(), &Py::Int(1))))) } } } }) {
     continue;
     }
     let _ = mcall(&found.clone(), "add", &[token.clone()]);
@@ -23525,7 +23525,7 @@ pub fn _grief_thread(args: &[Py]) -> Py {
     let mut turns: Py = Py::None;
     let _ = py_str("True when the last thing the bot said about this was a condolence.\n\n    \"we lost the baby in february\" then \"my partner wont talk about it\": the partner is part of\n    the grief, so the line keeps the thread rather than treating it as somebody's bad manners.\n    ");
     turns = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let __b = mcall(&memory.clone(), "get", &[py_str("turns")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }) { let mut t: Py = __item.clone(); if py_truthy(&call_builtin("isinstance", &[t.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(t.clone()); } } py_list(__out) })() };
-    let __iter1 = py_iter_or_raise(&call_builtin("reversed", &[slice_or_raise(&turns.clone(), &op_neg(&pyrt::xrefs::xget("compose.fallback_data", "THREAD_TURNS")), &Py::None, &Py::None)]).unwrap_or_else(|e| exc::raise(e)));
+    let __iter1 = py_iter_or_raise(&call_builtin("reversed", &[slice_or_raise(&turns.clone(), &op_neg(&g_THREAD_TURNS()), &Py::None, &Py::None)]).unwrap_or_else(|e| exc::raise(e)));
     for __item in __iter1 {
     turn = __item.clone();
     line = call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("bot")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e));
@@ -23557,14 +23557,14 @@ pub fn _grievance_thread(args: &[Py]) -> Py {
     let mut turns: Py = Py::None;
     let _ = py_str("True when the last thing the bot said about this was the offer to talk it over.\n\n    \"my friend drains me\" then \"she rings me every night as well\": the second line names the\n    person only as \"she\", and the reader wants a person word (\"my sister\") or something of theirs\n    in the way, so the follow-up fell through to \"Thanks for telling me - I'm here if you want to\n    dig into any of that\" - the line that fits any message, said to somebody who is still\n    complaining about the same person.\n    ");
     turns = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let __b = mcall(&memory.clone(), "get", &[py_str("turns")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }) { let mut t: Py = __item.clone(); if py_truthy(&call_builtin("isinstance", &[t.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(t.clone()); } } py_list(__out) })() };
-    let __iter1 = py_iter_or_raise(&call_builtin("reversed", &[slice_or_raise(&turns.clone(), &op_neg(&pyrt::xrefs::xget("compose.fallback_data", "THREAD_TURNS")), &Py::None, &Py::None)]).unwrap_or_else(|e| exc::raise(e)));
+    let __iter1 = py_iter_or_raise(&call_builtin("reversed", &[slice_or_raise(&turns.clone(), &op_neg(&g_THREAD_TURNS()), &Py::None, &Py::None)]).unwrap_or_else(|e| exc::raise(e)));
     for __item in __iter1 {
     turn = __item.clone();
     line = call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("bot")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&Py::Bool(!py_truthy(&line.clone()))) {
     continue;
     }
-    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "GRIEVANCE")) { let mut reply: Py = __item.clone(); __out.push(mcall(&line.clone(), "startswith", &[slice_or_raise(&reply.clone(), &Py::None, &Py::Int(30), &Py::None)])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_GRIEVANCE()) { let mut reply: Py = __item.clone(); __out.push(mcall(&line.clone(), "startswith", &[slice_or_raise(&reply.clone(), &Py::None, &Py::Int(30), &Py::None)])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     }
     return Py::Bool(false);
     Py::None
@@ -23596,13 +23596,13 @@ pub fn _someone_else_minding(args: &[Py]) -> Py {
     let mut word: Py = Py::None;
     let _ = py_str("True when the line is about what another person keeps doing, and the person minds it.\n\n    The person has to be in the line as somebody else (\"my sister\", \"the landlord\", \"someone\")\n    and the line has to say it keeps happening (\"keeps\", \"always\", \"never\", \"again\", \"without\n    asking\"). Asked only about the person's own line, never about the bot: \"you never listen\"\n    is a complaint about the bot and gets a different reply.\n    ");
     said = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut w: Py = __item.clone(); if py_truthy(&{ let __b = mcall(&w.clone(), "isalpha", &[]); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&w.clone(), &py_str("'"))) } }) {  __out.push(w.clone()); } } py_set(__out) })() };
-    a_person_pronoun = call_builtin("bool", &[mcall(&pyrt::xrefs::xget("compose.fallback_data", "GRIEVANCE_PRONOUN"), "search", &[clean.clone()])]).unwrap_or_else(|e| exc::raise(e));
-    if py_truthy(&op_bitand(&said.clone(), &pyrt::xrefs::xget("compose.fallback_data", "GRIEVANCE_PEOPLE"))) {
+    a_person_pronoun = call_builtin("bool", &[mcall(&g_GRIEVANCE_PRONOUN(), "search", &[clean.clone()])]).unwrap_or_else(|e| exc::raise(e));
+    if py_truthy(&op_bitand(&said.clone(), &g_GRIEVANCE_PEOPLE())) {
     if py_truthy(&Py::Bool(!py_truthy(&op_bitand(&py_set(vec![py_str("my"), py_str("our"), py_str("the")]), &said.clone())))) {
     return Py::Bool(false);
     }
     } else {
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&{ let __b = after.clone(); if !py_truthy(&__b) { __b } else { op_bitand(&said.clone(), &pyrt::xrefs::xget("compose.fallback_data", "THREAD_PEOPLE")) } })); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&a_person_pronoun.clone())) } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&{ let __b = after.clone(); if !py_truthy(&__b) { __b } else { op_bitand(&said.clone(), &g_THREAD_PEOPLE()) } })); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&a_person_pronoun.clone())) } }) {
     return Py::Bool(false);
     }
     }
@@ -23610,15 +23610,15 @@ pub fn _someone_else_minding(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(py_contains(&op_add(&op_add(&py_str(" "), &spare.clone()), &py_str(" ")), &py_str(" you ")))) {
     return Py::Bool(false);
     }
-    if py_truthy(&{ let __b = op_bitand(&said.clone(), &pyrt::xrefs::xget("compose.fallback_data", "GRIEVANCE_HEALTH")); if py_truthy(&__b) { __b } else { op_bitand(&said.clone(), &pyrt::xrefs::xget("compose.fallback_data", "GRIEVANCE_HARM")) } }) {
-    if py_truthy(&Py::Bool(!py_truthy(&{ let __b = a_date_of_ours_forgotten(&[clean.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&op_bitand(&said.clone(), &pyrt::xrefs::xget("compose.fallback_data", "GRIEVANCE_HARM")))) } }))) {
+    if py_truthy(&{ let __b = op_bitand(&said.clone(), &g_GRIEVANCE_HEALTH()); if py_truthy(&__b) { __b } else { op_bitand(&said.clone(), &g_GRIEVANCE_HARM()) } }) {
+    if py_truthy(&Py::Bool(!py_truthy(&{ let __b = a_date_of_ours_forgotten(&[clean.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&op_bitand(&said.clone(), &g_GRIEVANCE_HARM()))) } }))) {
     return Py::Bool(false);
     }
     }
-    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "GRIEVANCE_HARM_PHRASES")) { let mut phrase: Py = __item.clone(); __out.push(Py::Bool(py_contains(&clean.clone(), &phrase.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_GRIEVANCE_HARM_PHRASES()) { let mut phrase: Py = __item.clone(); __out.push(Py::Bool(py_contains(&clean.clone(), &phrase.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     return Py::Bool(false);
     }
-    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "GRIEVANCE_HEALTH_PHRASES")) { let mut phrase: Py = __item.clone(); __out.push(Py::Bool(py_contains(&clean.clone(), &phrase.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_GRIEVANCE_HEALTH_PHRASES()) { let mut phrase: Py = __item.clone(); __out.push(Py::Bool(py_contains(&clean.clone(), &phrase.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     return Py::Bool(false);
     }
     if py_truthy(&op_sub(&_impact_said(&[clean.clone()]), &call_builtin("set", &[mcall(&g_GRIEVANCE_MINE(), "findall", &[clean.clone()])]).unwrap_or_else(|e| exc::raise(e)))) {
@@ -23628,17 +23628,17 @@ pub fn _someone_else_minding(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = after.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_GRIEVANCE_MINE(), "search", &[clean.clone()]))) } }) {
     return Py::Bool(true);
     }
-    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_GRIEVANCE_MINE_THINGS(), "findall", &[clean.clone()])) { let mut word: Py = __item.clone(); __out.push({ let __b = Py::Bool(!py_contains(&pyrt::xrefs::xget("compose.fallback_data", "GRIEVANCE_PEOPLE"), &word.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&pyrt::xrefs::xget("compose.fallback_data", "GRIEVANCE_NOT_A_THING"), &word.clone())) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_GRIEVANCE_MINE_THINGS(), "findall", &[clean.clone()])) { let mut word: Py = __item.clone(); __out.push({ let __b = Py::Bool(!py_contains(&g_GRIEVANCE_PEOPLE(), &word.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&g_GRIEVANCE_NOT_A_THING(), &word.clone())) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     return Py::Bool(true);
     }
     }
-    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "GRIEVANCE_PHRASES")) { let mut phrase: Py = __item.clone(); __out.push(Py::Bool(py_contains(&clean.clone(), &phrase.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_GRIEVANCE_PHRASES()) { let mut phrase: Py = __item.clone(); __out.push(Py::Bool(py_contains(&clean.clone(), &phrase.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     return Py::Bool(true);
     }
-    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "GRIEVANCE_STRAIN")) { let mut phrase: Py = __item.clone(); __out.push(Py::Bool(py_contains(&clean.clone(), &phrase.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_GRIEVANCE_STRAIN()) { let mut phrase: Py = __item.clone(); __out.push(Py::Bool(py_contains(&clean.clone(), &phrase.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     return Py::Bool(true);
     }
-    return call_builtin("bool", &[mcall(&pyrt::xrefs::xget("compose.fallback_data", "GRIEVANCE_STRAIN_SAID"), "search", &[clean.clone()])]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("bool", &[mcall(&g_GRIEVANCE_STRAIN_SAID(), "search", &[clean.clone()])]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn _short_ack(args: &[Py]) -> Py {
@@ -23655,7 +23655,7 @@ pub fn _short_ack(args: &[Py]) -> Py {
     else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "words") { v.clone() }
     else { exc::raise(type_err(&format!("missing required argument: words"))) };
     let _ = py_str("True for a bare \"ok\", \"right\", \"got it\" — a nod, not a new subject.");
-    return { let __b = op_le(&call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)); if !py_truthy(&__b) { __b } else { call_builtin("bool", &[op_bitand(&call_builtin("set", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &pyrt::xrefs::xget("compose.fallback_data", "ACKS"))]).unwrap_or_else(|e| exc::raise(e)) } };
+    return { let __b = op_le(&call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)); if !py_truthy(&__b) { __b } else { call_builtin("bool", &[op_bitand(&call_builtin("set", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &g_ACKS())]).unwrap_or_else(|e| exc::raise(e)) } };
     Py::None
 }
 pub fn _hard_week_in_the_thread(args: &[Py]) -> Py {
@@ -23721,10 +23721,10 @@ pub fn _a_verdict(args: &[Py]) -> Py {
     }
     said = mcall(&mcall(&mcall(&found.clone(), "group", &[py_str("subject")]), "lower", &[]), "split", &[]);
     head = if py_truthy(&op_gt(&call_builtin("len", &[said.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1))) { geti(&said.clone(), &Py::Int(1)) } else { geti(&said.clone(), &Py::Int(0)) };
-    if py_truthy(&{ let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "GRIEVANCE_PEOPLE"), &head.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("compose.trouble", "OTHERS"), &head.clone())) } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_GRIEVANCE_PEOPLE(), &head.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("compose.trouble", "OTHERS"), &head.clone())) } }) {
     return Py::Bool(false);
     }
-    if py_truthy(&Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "NOT_A_VERDICT_SUBJECT"), &head.clone()))) {
+    if py_truthy(&Py::Bool(py_contains(&g_NOT_A_VERDICT_SUBJECT(), &head.clone()))) {
     return Py::Bool(false);
     }
     return Py::Bool(true);
@@ -23803,10 +23803,10 @@ pub fn _a_day_ahead(args: &[Py]) -> Py {
     return Py::None;
     }
     if py_truthy(&mcall(&g_AHEAD_TENSE(), "search", &[text.clone()])) {
-    return pyrt::xrefs::xget("compose.fallback_data", "A_DAY_AHEAD_TENSE");
+    return g_A_DAY_AHEAD_TENSE();
     }
     if py_truthy(&mcall(&g_AHEAD_NICE(), "search", &[text.clone()])) {
-    return pyrt::xrefs::xget("compose.fallback_data", "A_DAY_AHEAD");
+    return g_A_DAY_AHEAD();
     }
     return Py::None;
     Py::None
@@ -23913,7 +23913,7 @@ pub fn _a_good_time(args: &[Py]) -> Py {
     if py_truthy(&_a_verdict(&[clean.clone(), memory.clone()])) {
     return Py::Bool(true);
     }
-    if py_truthy(&Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "QUESTION_OPENERS"), &geti(&{ let __b = mcall(&clean.clone(), "split", &[]); if py_truthy(&__b) { __b } else { py_list(vec![py_str("")]) } }, &Py::Int(0))))) {
+    if py_truthy(&Py::Bool(py_contains(&g_QUESTION_OPENERS(), &geti(&{ let __b = mcall(&clean.clone(), "split", &[]); if py_truthy(&__b) { __b } else { py_list(vec![py_str("")]) } }, &Py::Int(0))))) {
     return Py::Bool(false);
     }
     if py_truthy(&mcall(&g_GOOD_TIME_OURS(), "search", &[clean.clone()])) {
@@ -23922,7 +23922,7 @@ pub fn _a_good_time(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&mcall(&g_GOOD_TIME_SUBJECT(), "search", &[clean.clone()])))) {
     return Py::Bool(false);
     }
-    return call_builtin("bool", &[op_bitand(&call_builtin("set", &[stdlib_call("re", "findall", &[py_str("[a-z]+"), clean.clone()]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)), &pyrt::xrefs::xget("compose.fallback_data", "GOOD_TIME_WORDS"))]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("bool", &[op_bitand(&call_builtin("set", &[stdlib_call("re", "findall", &[py_str("[a-z]+"), clean.clone()]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)), &g_GOOD_TIME_WORDS())]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn _something_funny(args: &[Py]) -> Py {
@@ -23998,7 +23998,7 @@ pub fn _the_gap_is_all_there_is(args: &[Py]) -> Py {
     }
     errand = call_builtin("bool", &[mcall(&g_STEPPED_AWAY(), "search", &[text.clone()])]).unwrap_or_else(|e| exc::raise(e));
     spare = if py_truthy(&errand.clone()) { Py::Int(1) } else { Py::Int(0) };
-    let __iter1 = py_iter_or_raise(&py_tuple(vec![g_STEPPED_AWAY(), pyrt::xrefs::xget("compose.fallback_data", "ABSENCE"), g_GOT_DRAWN_AWAY(), g__SORRY_LEAD()]));
+    let __iter1 = py_iter_or_raise(&py_tuple(vec![g_STEPPED_AWAY(), g_ABSENCE(), g_GOT_DRAWN_AWAY(), g__SORRY_LEAD()]));
     for __item in __iter1 {
     pattern = __item.clone();
     let __iter2 = py_iter_or_raise(&call_builtin("range", &[Py::Int(4)]).unwrap_or_else(|e| exc::raise(e)));
@@ -24018,15 +24018,15 @@ pub fn _the_gap_is_all_there_is(args: &[Py]) -> Py {
     return Py::Bool(false);
     }
     }
-    left = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&stdlib_call("re", "findall", &[py_str("[a-z']+"), text.clone()]).unwrap_or_else(|e| exc::raise(e))) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&pyrt::xrefs::xget("compose.fallback_data", "A_PAUSE_WORD"), &word.clone()))) {  __out.push(word.clone()); } } py_list(__out) })() };
+    left = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&stdlib_call("re", "findall", &[py_str("[a-z']+"), text.clone()]).unwrap_or_else(|e| exc::raise(e))) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&g_A_PAUSE_WORD(), &word.clone()))) {  __out.push(word.clone()); } } py_list(__out) })() };
     rest = slice_or_raise(&left.clone(), &spare.clone(), &Py::None, &Py::None);
     if py_truthy(&Py::Bool(!py_truthy(&rest.clone()))) {
     return Py::Bool(true);
     }
-    if py_truthy(&Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&rest.clone()) { let mut word: Py = __item.clone(); __out.push({ let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "A_HOW_THE_TIME_WENT"), &word.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_A_GAP_FOR_ILLNESS(), &word.clone())) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))))) {
+    if py_truthy(&Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&rest.clone()) { let mut word: Py = __item.clone(); __out.push({ let __b = Py::Bool(py_contains(&g_A_HOW_THE_TIME_WENT(), &word.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_A_GAP_FOR_ILLNESS(), &word.clone())) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))))) {
     return Py::Bool(false);
     }
-    return { let __b = op_le(&call_builtin("len", &[left.clone()]).unwrap_or_else(|e| exc::raise(e)), &op_add(&spare.clone(), &Py::Int(6))); if !py_truthy(&__b) { __b } else { call_builtin("all", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&rest.clone()) { let mut word: Py = __item.clone(); __out.push({ let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "A_HOW_THE_TIME_WENT"), &word.clone())); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&g_A_GAP_FOR_ILLNESS(), &word.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_A_GAP_NAMED_PERSON(), &word.clone())) } } } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } };
+    return { let __b = op_le(&call_builtin("len", &[left.clone()]).unwrap_or_else(|e| exc::raise(e)), &op_add(&spare.clone(), &Py::Int(6))); if !py_truthy(&__b) { __b } else { call_builtin("all", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&rest.clone()) { let mut word: Py = __item.clone(); __out.push({ let __b = Py::Bool(py_contains(&g_A_HOW_THE_TIME_WENT(), &word.clone())); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&g_A_GAP_FOR_ILLNESS(), &word.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_A_GAP_NAMED_PERSON(), &word.clone())) } } } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } };
     Py::None
 }
 pub fn reads_as_pause(args: &[Py]) -> Py {
@@ -24048,7 +24048,7 @@ pub fn reads_as_pause(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = mcall(&g_STEPPED_AWAY(), "search", &[text.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_GOT_DRAWN_AWAY(), "search", &[text.clone()]) } }) {
     return _the_gap_is_all_there_is(&[text.clone()]);
     }
-    if py_truthy(&{ let __b = mcall(&g_AN_APOLOGY_IN_THE_LINE(), "search", &[text.clone()]); if !py_truthy(&__b) { __b } else { mcall(&pyrt::xrefs::xget("compose.fallback_data", "ABSENCE"), "search", &[text.clone()]) } }) {
+    if py_truthy(&{ let __b = mcall(&g_AN_APOLOGY_IN_THE_LINE(), "search", &[text.clone()]); if !py_truthy(&__b) { __b } else { mcall(&g_ABSENCE(), "search", &[text.clone()]) } }) {
     return _the_gap_is_all_there_is(&[text.clone()]);
     }
     if py_truthy(&mcall(&g_SPEAKER_ABSENCE(), "search", &[text.clone()])) {
@@ -24119,7 +24119,7 @@ pub fn nothing_yet_line(args: &[Py]) -> Py {
         }
     }
     let _ = py_str("The line for a first line whose every candidate answers a turn that never happened.");
-    return if py_truthy(&pyrt::xrefs::xget("compose.fallback_data", "RETURNED_TO_IT_FIRST")) { geti(&pyrt::xrefs::xget("compose.fallback_data", "RETURNED_TO_IT_FIRST"), &Py::Int(0)) } else { py_str("") };
+    return if py_truthy(&g_RETURNED_TO_IT_FIRST()) { geti(&g_RETURNED_TO_IT_FIRST(), &Py::Int(0)) } else { py_str("") };
     Py::None
 }
 pub fn brings_nothing_of_its_own(args: &[Py]) -> Py {
@@ -24194,7 +24194,7 @@ pub fn reads_as_a_return(args: &[Py]) -> Py {
     left = mcall(&op_add(&op_add(&slice_or_raise(&left.clone(), &Py::None, &mcall(&match_.clone(), "start", &[]), &Py::None), &py_str(" ")), &slice_or_raise(&left.clone(), &mcall(&match_.clone(), "end", &[]), &Py::None, &Py::None)), "strip", &[]);
     }
     tokens = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&left.clone(), "split", &[])) { let mut word: Py = __item.clone(); __out.push(stdlib_call("re", "sub", &[py_str("[^a-z0-9']"), py_str(""), word.clone()]).unwrap_or_else(|e| exc::raise(e))); } py_list(__out) })() }) { let mut word: Py = __item.clone(); if py_truthy(&word.clone()) {  __out.push(word.clone()); } } py_list(__out) })() };
-    marker = call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[tokens.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk5637 = py_unpack(&__item.clone(), 2, None); let mut i: Py = __unpk5637[0].clone(); let mut word: Py = __unpk5637[1].clone(); if py_truthy(&Py::Bool(py_contains(&g_A_THING_MARKER(), &word.clone()))) {  __out.push(i.clone()); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e));
+    marker = call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[tokens.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk1896 = py_unpack(&__item.clone(), 2, None); let mut i: Py = __unpk1896[0].clone(); let mut word: Py = __unpk1896[1].clone(); if py_truthy(&Py::Bool(py_contains(&g_A_THING_MARKER(), &word.clone()))) {  __out.push(i.clone()); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&Py::Bool(py_is(&marker.clone(), &Py::None))) {
     return if py_truthy(&call_builtin("all", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&tokens.clone()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&g_A_POINTING_FILLER(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) { py_str("") } else { Py::None };
     }
@@ -24247,7 +24247,7 @@ pub fn _sorry_for_asking(args: &[Py]) -> Py {
     let mut text: Py = Py::None;
     let _ = py_str("True when the line is an apology for asking and nothing else.");
     text = mcall(&clean.clone(), "lower", &[]);
-    return { let __b = call_builtin("bool", &[mcall(&g_SORRY_ASKING(), "search", &[text.clone()])]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { _only_manners(&[text.clone(), pyrt::xrefs::xget("compose.fallback_data", "MANNERS_ONLY")]) } };
+    return { let __b = call_builtin("bool", &[mcall(&g_SORRY_ASKING(), "search", &[text.clone()])]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { _only_manners(&[text.clone(), g_MANNERS_ONLY()]) } };
     Py::None
 }
 pub fn _am_i_a_nuisance(args: &[Py]) -> Py {
@@ -24364,10 +24364,10 @@ pub fn _thanks_with_more(args: &[Py]) -> Py {
     return Py::Bool(false);
     }
     words = call_builtin("set", &[stdlib_call("re", "findall", &[py_str("[a-z']+"), text.clone()]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e));
-    if py_truthy(&Py::Bool(!py_truthy(&op_bitand(&words.clone(), &pyrt::xrefs::xget("compose.fallback_data", "THANK_WORDS"))))) {
+    if py_truthy(&Py::Bool(!py_truthy(&op_bitand(&words.clone(), &g_THANK_WORDS())))) {
     return Py::Bool(false);
     }
-    return _only_manners(&[text.clone(), pyrt::xrefs::xget("compose.fallback_data", "THANKS_ONLY")]);
+    return _only_manners(&[text.clone(), g_THANKS_ONLY()]);
     Py::None
 }
 pub fn reading(args: &[Py]) -> Py {
@@ -24409,7 +24409,7 @@ pub fn reading(args: &[Py]) -> Py {
     if let Some(__e) = __unhandled4 { exc::raise(__e); }
     if py_truthy(&__ret2) { return __val3; }
     if py_truthy(&continuation.clone()) {
-    return py_tuple(vec![if py_truthy(&_a_care_thread(&[memory.clone()])) { pyrt::xrefs::xget("compose.fallback_data", "CARE_THREAD") } else { pyrt::xrefs::xget("compose.fallback_data", "THREAD") }, py_tuple(vec![continuation.clone()])]);
+    return py_tuple(vec![if py_truthy(&_a_care_thread(&[memory.clone()])) { g_CARE_THREAD() } else { g_THREAD() }, py_tuple(vec![continuation.clone()])]);
     }
     let __try6 = exc::catch(|| {
     if py_truthy(&pyrt::xrefs::xcall("compose.leaving", "reads_as_leaving", &[mcall(&py_str(" "), "join", &[mcall(&mcall(&call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]), "split", &[])])])) {
@@ -24435,10 +24435,10 @@ pub fn reading(args: &[Py]) -> Py {
     if py_truthy(&__ret7) { return __val8; }
     let __try11 = exc::catch(|| {
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&_grief_thread(&[memory.clone()]))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&in_a_safety_thread(&[memory.clone()]))); if !py_truthy(&__b) { __b } else { reads_as_pause(&[mcall(&py_str(" "), "join", &[mcall(&mcall(&call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]), "split", &[])])]) } } } }) {
-    return py_tuple(vec![Py::Bool(true), py_tuple(vec![pyrt::xrefs::xget("compose.fallback_data", "PAUSE"), py_tuple(vec![])])]);
+    return py_tuple(vec![Py::Bool(true), py_tuple(vec![g_PAUSE(), py_tuple(vec![])])]);
     }
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&_grief_thread(&[memory.clone()]))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&in_a_safety_thread(&[memory.clone()]))); if !py_truthy(&__b) { __b } else { { let __b = _a_chat_behind_it(&[memory.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_is(&reads_as_a_return(&[text.clone()]), &Py::None)) } } } } } }) {
-    return py_tuple(vec![Py::Bool(true), py_tuple(vec![pyrt::xrefs::xget("compose.fallback_data", "PAUSE"), py_tuple(vec![])])]);
+    return py_tuple(vec![Py::Bool(true), py_tuple(vec![g_PAUSE(), py_tuple(vec![])])]);
     }
         py_tuple(vec![Py::Bool(false), Py::None])
     });
@@ -24554,21 +24554,21 @@ pub fn _a_report_on_the_advice(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = Py::Bool(py_contains(&clean.clone(), &py_str("?"))); if py_truthy(&__b) { __b } else { op_gt(&call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(14)) } }) {
     return Py::None;
     }
-    if py_truthy(&op_bitand(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); __out.push(mcall(&call_builtin("str", &[word.clone()]).unwrap_or_else(|e| exc::raise(e)), "strip", &[py_str(".,!?;:-—'")])); } py_set(__out) })() }, &pyrt::xrefs::xget("compose.fallback_data", "THANKS_WORDS"))) {
+    if py_truthy(&op_bitand(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); __out.push(mcall(&call_builtin("str", &[word.clone()]).unwrap_or_else(|e| exc::raise(e)), "strip", &[py_str(".,!?;:-—'")])); } py_set(__out) })() }, &g_THANKS_WORDS())) {
     return Py::None;
     }
     let __iter1 = py_iter_or_raise(&words.clone());
     for __item in __iter1 {
     word = __item.clone();
     bare = mcall(&mcall(&call_builtin("str", &[word.clone()]).unwrap_or_else(|e| exc::raise(e)), "replace", &[py_str("'"), py_str("")]), "strip", &[py_str(".,!?;:-—")]);
-    if py_truthy(&{ let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "REPORT_FILLER"), &bare.clone())); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&steps.clone(), &bare.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_REPORT_VERDICT_WORD(), &bare.clone())) } } } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_REPORT_FILLER(), &bare.clone())); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&steps.clone(), &bare.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_REPORT_VERDICT_WORD(), &bare.clone())) } } } }) {
     continue;
     }
     return Py::None;
     }
-    pools = py_tuple(vec![py_tuple(vec![g_TRIED_NO_CHANGE(), pyrt::xrefs::xget("compose.fallback_data", "TRIED_NO_CHANGE_REPLIES"), pyrt::xrefs::xget("compose.fallback_data", "TRIED_NO_CHANGE_ELSEWHERE")]), py_tuple(vec![g_TRIED_WORSE(), pyrt::xrefs::xget("compose.fallback_data", "TRIED_WORSE_REPLIES"), pyrt::xrefs::xget("compose.fallback_data", "TRIED_WORSE_ELSEWHERE")]), py_tuple(vec![g_REPORT_NOW_FINE(), pyrt::xrefs::xget("compose.fallback_data", "TRIED_SORTED_REPLIES"), pyrt::xrefs::xget("compose.fallback_data", "TRIED_SORTED_REPLIES")]), py_tuple(vec![g_TRIED_HELPED(), pyrt::xrefs::xget("compose.fallback_data", "TRIED_HELPED_REPLIES"), pyrt::xrefs::xget("compose.fallback_data", "TRIED_HELPED_ELSEWHERE")]), py_tuple(vec![g_STILL_THE_TROUBLE(), pyrt::xrefs::xget("compose.fallback_data", "TRIED_NO_CHANGE_REPLIES"), pyrt::xrefs::xget("compose.fallback_data", "TRIED_NO_CHANGE_ELSEWHERE")]), py_tuple(vec![g_TRIED_IT(), pyrt::xrefs::xget("compose.fallback_data", "TRIED_IT_REPLIES"), pyrt::xrefs::xget("compose.fallback_data", "TRIED_IT_REPLIES")]), py_tuple(vec![g_TRIED_THAT_ONLY(), pyrt::xrefs::xget("compose.fallback_data", "TRIED_IT_REPLIES"), pyrt::xrefs::xget("compose.fallback_data", "TRIED_IT_REPLIES")]), py_tuple(vec![pyrt::xrefs::xget("compose.fallback_words", "DONE_IT"), pyrt::xrefs::xget("compose.fallback_data", "TRIED_IT_REPLIES"), pyrt::xrefs::xget("compose.fallback_data", "TRIED_IT_REPLIES")])]);
+    pools = py_tuple(vec![py_tuple(vec![g_TRIED_NO_CHANGE(), g_TRIED_NO_CHANGE_REPLIES(), g_TRIED_NO_CHANGE_ELSEWHERE()]), py_tuple(vec![g_TRIED_WORSE(), g_TRIED_WORSE_REPLIES(), g_TRIED_WORSE_ELSEWHERE()]), py_tuple(vec![g_REPORT_NOW_FINE(), g_TRIED_SORTED_REPLIES(), g_TRIED_SORTED_REPLIES()]), py_tuple(vec![g_TRIED_HELPED(), g_TRIED_HELPED_REPLIES(), g_TRIED_HELPED_ELSEWHERE()]), py_tuple(vec![g_STILL_THE_TROUBLE(), g_TRIED_NO_CHANGE_REPLIES(), g_TRIED_NO_CHANGE_ELSEWHERE()]), py_tuple(vec![g_TRIED_IT(), g_TRIED_IT_REPLIES(), g_TRIED_IT_REPLIES()]), py_tuple(vec![g_TRIED_THAT_ONLY(), g_TRIED_IT_REPLIES(), g_TRIED_IT_REPLIES()]), py_tuple(vec![g_DONE_IT(), g_TRIED_IT_REPLIES(), g_TRIED_IT_REPLIES()])]);
     if py_truthy(&the_lot_ok.clone()) {
-    pools = op_add(&pools.clone(), &py_tuple(vec![py_tuple(vec![pyrt::xrefs::xget("compose.fallback_words", "TRIED_THE_LOT"), pyrt::xrefs::xget("compose.fallback_data", "TRIED_NO_CHANGE_REPLIES"), pyrt::xrefs::xget("compose.fallback_data", "TRIED_NO_CHANGE_ELSEWHERE")])]));
+    pools = op_add(&pools.clone(), &py_tuple(vec![py_tuple(vec![g_TRIED_THE_LOT(), g_TRIED_NO_CHANGE_REPLIES(), g_TRIED_NO_CHANGE_ELSEWHERE()])]));
     }
     let __iter2 = py_iter_or_raise(&pools.clone());
     for __item in __iter2 {
@@ -24615,7 +24615,7 @@ pub fn _the_outcome_of_the_advice(args: &[Py]) -> Py {
     let _ = py_str("The pool for a report on the advice in the last answer, or None.\n\n    The answer has to have been a long one - that is what makes it advice a person could act on\n    and report back on - and the thread must not be a loss, where \"i tried that\" is about the\n    person who died and the outcome pools would be grotesque. Read in one place, because the\n    reply and the presence of a reply have to agree: the arbiter asks the same question through\n    `takes_as_it_comes` before a module that would answer the report with a stock line gets the\n    turn (\"its not helping\" was answered \"Alright then - good luck with it.\").\n    ");
     turns = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let __b = mcall(&memory.clone(), "get", &[py_str("turns")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }) { let mut t: Py = __item.clone(); if py_truthy(&call_builtin("isinstance", &[t.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(t.clone()); } } py_list(__out) })() };
     last = if py_truthy(&turns.clone()) { call_builtin("str", &[{ let __b = mcall(&geti(&turns.clone(), &op_neg(&Py::Int(1))), "get", &[py_str("bot")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)) } else { py_str("") };
-    seen = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&slice_or_raise(&turns.clone(), &op_neg(&pyrt::xrefs::xget("compose.fallback_data", "ADVICE_TURNS")), &Py::None, &Py::None)) { let mut turn: Py = __item.clone(); __out.push(call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("bot")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))); } py_list(__out) })() };
+    seen = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&slice_or_raise(&turns.clone(), &op_neg(&g_ADVICE_TURNS()), &Py::None, &Py::None)) { let mut turn: Py = __item.clone(); __out.push(call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("bot")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))); } py_list(__out) })() };
     if py_truthy(&Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&seen.clone()) { let mut line: Py = __item.clone(); __out.push(_advice_in(&[line.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))))) {
     return Py::None;
     }
@@ -24648,7 +24648,7 @@ pub fn the_advice(args: &[Py]) -> Py {
     let mut t: Py = Py::None;
     let mut turn: Py = Py::None;
     let _ = py_str("The bot's own advice this thread is reporting on, lower case, or \"\" when there is none.");
-    let __iter1 = py_iter_or_raise(&call_builtin("reversed", &[slice_or_raise(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let __b = mcall(&memory.clone(), "get", &[py_str("turns")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }) { let mut t: Py = __item.clone(); if py_truthy(&call_builtin("isinstance", &[t.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(t.clone()); } } py_list(__out) })() }, &op_neg(&pyrt::xrefs::xget("compose.fallback_data", "ADVICE_TURNS")), &Py::None, &Py::None)]).unwrap_or_else(|e| exc::raise(e)));
+    let __iter1 = py_iter_or_raise(&call_builtin("reversed", &[slice_or_raise(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let __b = mcall(&memory.clone(), "get", &[py_str("turns")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }) { let mut t: Py = __item.clone(); if py_truthy(&call_builtin("isinstance", &[t.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(t.clone()); } } py_list(__out) })() }, &op_neg(&g_ADVICE_TURNS()), &Py::None, &Py::None)]).unwrap_or_else(|e| exc::raise(e)));
     for __item in __iter1 {
     turn = __item.clone();
     reply = mcall(&call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("bot")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]);
@@ -24760,7 +24760,7 @@ pub fn a_report_that_says_something(args: &[Py]) -> Py {
     let mut reply: Py = Py::None;
     let _ = py_str("Does the composer answer a report on the advice with something other than a status question?\n\n    The pool that asks \"How is it going with it so far?\" is the lightest of the report replies,\n    and it is the one case where the composer should not take the turn off a module above it: \"ok\n    done that\" after the energy bill entry is answered with the next part of that entry (\"Ask your\n    supplier in writing for the standing charge and unit rate ... cheapest tariff\"), and asking\n    the person how it is going instead is the same fault as a goodbye. A report that is answered\n    with an outcome - worse, no change, sorted - does say something, and keeps the turn.\n    ");
     reply = the_report_reply(&[text.clone(), memory.clone()]);
-    return { let __b = call_builtin("bool", &[reply.clone()]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&pyrt::xrefs::xget("compose.fallback_data", "TRIED_IT_REPLIES"), &reply.clone())) } };
+    return { let __b = call_builtin("bool", &[reply.clone()]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&g_TRIED_IT_REPLIES(), &reply.clone())) } };
     Py::None
 }
 pub fn _after_advice(args: &[Py]) -> Py {
@@ -24819,7 +24819,7 @@ pub fn _the_answer_above_already_says_what_to_do(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&{ let __b = mcall(&memory.clone(), "get", &[py_str("entry_answer")]); if py_truthy(&__b) { __b } else { mcall(&memory.clone(), "get", &[py_str("entry_answers")]) } }))) {
     return Py::Bool(false);
     }
-    return call_builtin("bool", &[mcall(&pyrt::xrefs::xget("compose.fallback_words", "AN_ANSWER_ABOUT_A_NO"), "search", &[call_builtin("str", &[{ let __b = mcall(&geti(&turns.clone(), &op_neg(&Py::Int(1))), "get", &[py_str("bot")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))])]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("bool", &[mcall(&g_AN_ANSWER_ABOUT_A_NO(), "search", &[call_builtin("str", &[{ let __b = mcall(&geti(&turns.clone(), &op_neg(&Py::Int(1))), "get", &[py_str("bot")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))])]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn _a_thread_about_how_somebody_treats_them(args: &[Py]) -> Py {
@@ -24842,7 +24842,7 @@ pub fn _a_thread_about_how_somebody_treats_them(args: &[Py]) -> Py {
     for __item in __iter1 {
     turn = __item.clone();
     said = call_builtin("set", &[stdlib_call("re", "findall", &[py_str("[a-z']+"), mcall(&call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("user")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[])]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e));
-    if py_truthy(&op_bitand(&pyrt::xrefs::xget("compose.fallback_data", "TREATMENT_HARM"), &said.clone())) {
+    if py_truthy(&op_bitand(&g_TREATMENT_HARM(), &said.clone())) {
     return Py::Bool(true);
     }
     }
@@ -24894,14 +24894,14 @@ pub fn _a_refusal_to_answer(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(py_contains(&call_builtin("str", &[{ let __b = clean.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), &py_str("?")))) {
     return Py::None;
     }
-    if py_truthy(&Py::Bool(!py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback_words", "REFUSED"), "search", &[clean.clone()])))) {
+    if py_truthy(&Py::Bool(!py_truthy(&mcall(&g_REFUSED(), "search", &[clean.clone()])))) {
     return Py::None;
     }
-    if py_truthy(&{ let __b = mcall(&pyrt::xrefs::xget("compose.fallback_words", "OWN_NO"), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { mcall(&pyrt::xrefs::xget("compose.fallback_words", "ASKS_WHY"), "search", &[clean.clone()]) } }) {
+    if py_truthy(&{ let __b = mcall(&g_OWN_NO(), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_ASKS_WHY(), "search", &[clean.clone()]) } }) {
     return Py::None;
     }
-    matched = mcall(&pyrt::xrefs::xget("compose.fallback_words", "REFUSED"), "search", &[clean.clone()]);
-    if py_truthy(&{ let __b = matched.clone(); if !py_truthy(&__b) { __b } else { mcall(&pyrt::xrefs::xget("compose.fallback_words", "HYPOTHETICAL"), "search", &[slice_or_raise(&call_builtin("str", &[{ let __b = clean.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), &Py::None, &mcall(&matched.clone(), "start", &[]), &Py::None)]) } }) {
+    matched = mcall(&g_REFUSED(), "search", &[clean.clone()]);
+    if py_truthy(&{ let __b = matched.clone(); if !py_truthy(&__b) { __b } else { mcall(&g_HYPOTHETICAL(), "search", &[slice_or_raise(&call_builtin("str", &[{ let __b = clean.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), &Py::None, &mcall(&matched.clone(), "start", &[]), &Py::None)]) } }) {
     return Py::None;
     }
     words = if py_truthy(&Py::Bool(py_is(&words.clone(), &Py::None))) { mcall(&clean.clone(), "split", &[]) } else { words.clone() };
@@ -24909,13 +24909,13 @@ pub fn _a_refusal_to_answer(args: &[Py]) -> Py {
     return Py::None;
     }
     turns = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let __b = mcall(&memory.clone(), "get", &[py_str("turns")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }) { let mut t: Py = __item.clone(); if py_truthy(&call_builtin("isinstance", &[t.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(t.clone()); } } py_list(__out) })() };
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback_words", "REFUSED_PARTY"), "search", &[clean.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_an_answer_above(&[turns.clone()]))) } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&mcall(&g_REFUSED_PARTY(), "search", &[clean.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_an_answer_above(&[turns.clone()]))) } }) {
     return Py::None;
     }
-    if py_truthy(&{ let __b = mcall(&pyrt::xrefs::xget("compose.fallback_words", "REFUSED_NOT"), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { mcall(&pyrt::xrefs::xget("compose.fallback_words", "REFUSED_FAMILY"), "search", &[clean.clone()]) } }) {
+    if py_truthy(&{ let __b = mcall(&g_REFUSED_NOT(), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_REFUSED_FAMILY(), "search", &[clean.clone()]) } }) {
     return Py::None;
     }
-    if py_truthy(&mcall(&pyrt::xrefs::xget("compose.fallback_words", "REFUSED_NO_OBJECT"), "search", &[clean.clone()])) {
+    if py_truthy(&mcall(&g_REFUSED_NO_OBJECT(), "search", &[clean.clone()])) {
     return Py::None;
     }
     if py_truthy(&_the_answer_above_already_says_what_to_do(&[turns.clone(), memory.clone()])) {
@@ -24949,10 +24949,10 @@ pub fn _a_refusal_to_answer(args: &[Py]) -> Py {
     }
     if let Some(__e) = __unhandled4 { exc::raise(__e); }
     if py_truthy(&__ret2) { return __val3; }
-    if py_truthy(&{ let __b = turns.clone(); if !py_truthy(&__b) { __b } else { _in_a_pool(&[call_builtin("str", &[{ let __b = mcall(&geti(&turns.clone(), &op_neg(&Py::Int(1))), "get", &[py_str("bot")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), py_tuple(vec![pyrt::xrefs::xget("compose.fallback_data", "REFUSED_REPLIES")])]) } }) {
+    if py_truthy(&{ let __b = turns.clone(); if !py_truthy(&__b) { __b } else { _in_a_pool(&[call_builtin("str", &[{ let __b = mcall(&geti(&turns.clone(), &op_neg(&Py::Int(1))), "get", &[py_str("bot")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), py_tuple(vec![g_REFUSED_REPLIES()])]) } }) {
     return Py::None;
     }
-    return pyrt::xrefs::xget("compose.fallback_data", "REFUSED_REPLIES");
+    return g_REFUSED_REPLIES();
     Py::None
 }
 pub fn reads_as_a_refusal(args: &[Py]) -> Py {
@@ -25018,7 +25018,7 @@ pub fn _the_next_move_after_the_advice(args: &[Py]) -> Py {
     let mut pool: Py = Py::None;
     let _ = py_str("The step the answer itself named, for a report that the advice did not work, or None.\n\n    \"Then stop doing more of the same and change one thing instead\" is advice to change, told to\n    somebody who has just changed and reported back. When the answer ends on who to go to if the\n    advice is not enough (\"ask a GP\", \"call a Gas Safe engineer\"), that sentence is the next move\n    and the only thing left to say. bot/memory/repeat owns the reading of what was said, so the\n    sentence comes from there; with no step to give, the pools below stand as they are.\n\n    The length gate the outcome pools use is not applied here: an answer of thirty words that ends\n    on a next step is still advice with a next step, and it is the sentence that matters.\n    ");
     pool = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(clean.clone()); __args.push(words.clone()); __args.push(_advice_thread_is_about_the_body(&[memory.clone()])); __kws.extend(vec![("the_lot_ok".to_string(), Py::Bool(!py_truthy(&pyrt::xrefs::xcall("memory.reject", "offers_a_choice", &[memory.clone()])))), ("steps".to_string(), _the_words_in(&[the_advice(&[memory.clone()])]))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _a_report_on_the_advice(args))(&__args) };
-    if py_truthy(&Py::Bool(!py_contains(&py_tuple(vec![g_TRIED_NO_CHANGE(), pyrt::xrefs::xget("compose.fallback_data", "TRIED_NO_CHANGE_ELSEWHERE")]), &pool.clone()))) {
+    if py_truthy(&Py::Bool(!py_contains(&py_tuple(vec![g_TRIED_NO_CHANGE(), g_TRIED_NO_CHANGE_ELSEWHERE()]), &pool.clone()))) {
     return Py::None;
     }
     if py_truthy(&{ let __b = _in_a_loss_thread(&[memory.clone()]); if py_truthy(&__b) { __b } else { _grief_thread(&[memory.clone()]) } }) {
@@ -25066,7 +25066,7 @@ pub fn _a_care_thread(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&answer.clone()))) {
     return Py::Bool(false);
     }
-    return Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "CRISIS_WORDS")) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&answer.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))));
+    return Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_CRISIS_WORDS()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&answer.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))));
     Py::None
 }
 pub fn in_a_safety_thread(args: &[Py]) -> Py {
@@ -25105,7 +25105,7 @@ pub fn _thread_answer(args: &[Py]) -> Py {
     let mut turn: Py = Py::None;
     let mut window: Py = Py::None;
     let _ = py_str("The bot's safety answer this thread continues, lower case, or \"\" when there is none.\n\n    A thread holds across the composer's own continuations and across an entry answer that is\n    still about the emergency - the burn's own blister line after \"should i pop the blister\" -\n    because that entry is the thread going on, and losing the thread there took the next line\n    off it: \"can i put cream on it\" was answered from the measles entry once the burn's answer\n    was no longer in hand. Any answer that says nothing of the emergency ends it.\n    ");
-    window = slice_or_raise(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let __b = mcall(&memory.clone(), "get", &[py_str("turns")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }) { let mut t: Py = __item.clone(); if py_truthy(&call_builtin("isinstance", &[t.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(t.clone()); } } py_list(__out) })() }, &op_neg(&pyrt::xrefs::xget("compose.fallback_data", "THREAD_TURNS")), &Py::None, &Py::None);
+    window = slice_or_raise(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let __b = mcall(&memory.clone(), "get", &[py_str("turns")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }) { let mut t: Py = __item.clone(); if py_truthy(&call_builtin("isinstance", &[t.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(t.clone()); } } py_list(__out) })() }, &op_neg(&g_THREAD_TURNS()), &Py::None, &Py::None);
     answer = py_str("");
     let __iter1 = py_iter_or_raise(&call_builtin("range", &[op_sub(&call_builtin("len", &[window.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1)), op_neg(&Py::Int(1)), op_neg(&Py::Int(1))]).unwrap_or_else(|e| exc::raise(e)));
     for __item in __iter1 {
@@ -25115,7 +25115,7 @@ pub fn _thread_answer(args: &[Py]) -> Py {
     window = slice_or_raise(&window.clone(), &op_add(&index.clone(), &Py::Int(1)), &Py::None, &Py::None);
     break;
     }
-    if py_truthy(&Py::Bool(py_eq(&mcall(&geti(&window.clone(), &index.clone()), "get", &[py_str("module")]), &pyrt::xrefs::xget("compose.fallback_data", "FALLBACK_MODULE")))) {
+    if py_truthy(&Py::Bool(py_eq(&mcall(&geti(&window.clone(), &index.clone()), "get", &[py_str("module")]), &g_FALLBACK_MODULE()))) {
     continue;
     }
     }
@@ -25125,7 +25125,7 @@ pub fn _thread_answer(args: &[Py]) -> Py {
     let __iter2 = py_iter_or_raise(&window.clone());
     for __item in __iter2 {
     turn = __item.clone();
-    if py_truthy(&Py::Bool(py_eq(&mcall(&turn.clone(), "get", &[py_str("module")]), &pyrt::xrefs::xget("compose.fallback_data", "FALLBACK_MODULE")))) {
+    if py_truthy(&Py::Bool(py_eq(&mcall(&turn.clone(), "get", &[py_str("module")]), &g_FALLBACK_MODULE()))) {
     continue;
     }
     if py_truthy(&op_ge(&_words_kept(&[mcall(&turn.clone(), "get", &[py_str("bot")]), answer.clone()]), &g_THE_THREAD_KEPT())) {
@@ -25177,7 +25177,7 @@ pub fn asks_about_the_last_answer(args: &[Py]) -> Py {
     let __iter1 = py_iter_or_raise(&pyrt::xrefs::xcall("compose.fallback_chain", "_words", &[text.clone()]));
     for __item in __iter1 {
     word = __item.clone();
-    if py_truthy(&{ let __b = op_lt(&call_builtin("len", &[word.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(5)); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "PLAIN_WORDS"), &word.clone())) } }) {
+    if py_truthy(&{ let __b = op_lt(&call_builtin("len", &[word.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(5)); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_PLAIN_WORDS(), &word.clone())) } }) {
     continue;
     }
     if py_truthy(&Py::Bool(!py_contains(&last.clone(), &word.clone()))) {
@@ -25195,7 +25195,7 @@ pub fn asks_about_the_last_answer(args: &[Py]) -> Py {
     continue;
     }
     thing = mcall(&brought_in.clone(), "group", &[Py::Int(1)]);
-    if py_truthy(&{ let __b = op_ge(&call_builtin("len", &[thing.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(4)); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_contains(&pyrt::xrefs::xget("compose.fallback_data", "PLAIN_WORDS"), &thing.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&last.clone(), &thing.clone())) } } } }) {
+    if py_truthy(&{ let __b = op_ge(&call_builtin("len", &[thing.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(4)); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_contains(&g_PLAIN_WORDS(), &thing.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&last.clone(), &thing.clone())) } } } }) {
     return Py::Bool(false);
     }
     }
@@ -25587,7 +25587,7 @@ pub fn _in_sudden_loss_thread(args: &[Py]) -> Py {
     return Py::Bool(false);
     }
     last = call_builtin("str", &[{ let __b = mcall(&geti(&turns.clone(), &op_neg(&Py::Int(1))), "get", &[py_str("bot")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e));
-    return { let __b = call_builtin("bool", &[last.clone()]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&py_tuple(vec![pyrt::xrefs::xget("compose.fallback_data", "SUDDEN_LOSS"), pyrt::xrefs::xget("compose.fallback_data", "PREGNANCY_BLEEDING"), pyrt::xrefs::xget("compose.fallback_data", "THE_FIRST_HOUR_AND_A_CHILD")])) { let mut pool: Py = __item.clone(); __out.push(Py::Bool(py_contains(&pool.clone(), &last.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } };
+    return { let __b = call_builtin("bool", &[last.clone()]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&py_tuple(vec![g_SUDDEN_LOSS(), g_PREGNANCY_BLEEDING(), g_THE_FIRST_HOUR_AND_A_CHILD()])) { let mut pool: Py = __item.clone(); __out.push(Py::Bool(py_contains(&pool.clone(), &last.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } };
     Py::None
 }
 pub fn _reads_as_illness(args: &[Py]) -> Py {
@@ -25619,16 +25619,16 @@ pub fn _reads_as_illness(args: &[Py]) -> Py {
     continue;
     }
     before = if py_truthy(&n.clone()) { geti(&words.clone(), &op_sub(&n.clone(), &Py::Int(1))) } else { py_str("") };
-    if py_truthy(&Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "ILL_SAID_OF_A_BODY"), &before.clone()))) {
+    if py_truthy(&Py::Bool(py_contains(&g_ILL_SAID_OF_A_BODY(), &before.clone()))) {
     return Py::Bool(true);
     }
-    if py_truthy(&{ let __b = op_lt(&op_add(&n.clone(), &Py::Int(1)), &call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "ILL_WILL_VERBS"), &mcall(&geti(&words.clone(), &op_add(&n.clone(), &Py::Int(1))), "strip", &[py_str(".,!?;:'\"")]))) } }) {
+    if py_truthy(&{ let __b = op_lt(&op_add(&n.clone(), &Py::Int(1)), &call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_ILL_WILL_VERBS(), &mcall(&geti(&words.clone(), &op_add(&n.clone(), &Py::Int(1))), "strip", &[py_str(".,!?;:'\"")]))) } }) {
     continue;
     }
-    if py_truthy(&{ let __b = n.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "ILL_BEFORE"), &before.clone())) } }) {
+    if py_truthy(&{ let __b = n.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_ILL_BEFORE(), &before.clone())) } }) {
     return Py::Bool(true);
     }
-    if py_truthy(&{ let __b = Py::Bool(py_eq(&n.clone(), &op_sub(&call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1)))); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "ILL_AFTER"), &geti(&words.clone(), &op_add(&n.clone(), &Py::Int(1))))) } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_eq(&n.clone(), &op_sub(&call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1)))); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_ILL_AFTER(), &geti(&words.clone(), &op_add(&n.clone(), &Py::Int(1))))) } }) {
     return Py::Bool(true);
     }
     }
@@ -25671,11 +25671,11 @@ pub fn _in_an_aim(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&mcall(&g_AIM_BEFORE(), "search", &[before.clone()])))) {
     return Py::Bool(false);
     }
-    if py_truthy(&op_bitand(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&slice_or_raise(&mcall(&before.clone(), "split", &[]), &op_neg(&Py::Int(3)), &Py::None, &Py::None)) { let mut w: Py = __item.clone(); __out.push(mcall(&w.clone(), "strip", &[py_str(".,!?")])); } py_set(__out) })() }, &pyrt::xrefs::xget("compose.fallback_data", "AIM_NEGATORS"))) {
+    if py_truthy(&op_bitand(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&slice_or_raise(&mcall(&before.clone(), "split", &[]), &op_neg(&Py::Int(3)), &Py::None, &Py::None)) { let mut w: Py = __item.clone(); __out.push(mcall(&w.clone(), "strip", &[py_str(".,!?")])); } py_set(__out) })() }, &g_AIM_NEGATORS())) {
     return Py::Bool(false);
     }
     after = mcall(&match_.clone(), "end", &[]);
-    if py_truthy(&op_bitand(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&slice_or_raise(&clean.clone(), &after.clone(), &Py::None, &Py::None), "split", &[])) { let mut w: Py = __item.clone(); __out.push(mcall(&w.clone(), "strip", &[py_str(".,!?")])); } py_set(__out) })() }, &pyrt::xrefs::xget("compose.fallback_data", "AIM_FAILING"))) {
+    if py_truthy(&op_bitand(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&slice_or_raise(&clean.clone(), &after.clone(), &Py::None, &Py::None), "split", &[])) { let mut w: Py = __item.clone(); __out.push(mcall(&w.clone(), "strip", &[py_str(".,!?")])); } py_set(__out) })() }, &g_AIM_FAILING())) {
     return Py::Bool(false);
     }
     }
@@ -25715,15 +25715,15 @@ pub fn _a_mood_word(args: &[Py]) -> Py {
     }
     before = if py_truthy(&index.clone()) { geti(&words.clone(), &op_sub(&index.clone(), &Py::Int(1))) } else { py_str("") };
     after = if py_truthy(&op_lt(&op_add(&index.clone(), &Py::Int(1)), &call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)))) { geti(&words.clone(), &op_add(&index.clone(), &Py::Int(1))) } else { py_str("") };
-    if py_truthy(&Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "COPULA"), &before.clone()))) {
+    if py_truthy(&Py::Bool(py_contains(&g_COPULA(), &before.clone()))) {
     subject = slice_or_raise(&words.clone(), &Py::None, &op_sub(&index.clone(), &Py::Int(1)), &Py::None);
     last = if py_truthy(&subject.clone()) { geti(&subject.clone(), &op_neg(&Py::Int(1))) } else { py_str("") };
-    if py_truthy(&{ let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "ABOUT_THEM_BEFORE_COPULA"), &last.clone())); if py_truthy(&__b) { __b } else { { let __b = op_bitand(&call_builtin("set", &[subject.clone()]).unwrap_or_else(|e| exc::raise(e)), &pyrt::xrefs::xget("compose.fallback_data", "STRETCH_OF_TIME")); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&subject.clone())); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_eq(&call_builtin("len", &[subject.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1))); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&py_tuple(vec![py_str("it"), py_str("this"), py_str("today")]), &last.clone())) } } } } } } } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_ABOUT_THEM_BEFORE_COPULA(), &last.clone())); if py_truthy(&__b) { __b } else { { let __b = op_bitand(&call_builtin("set", &[subject.clone()]).unwrap_or_else(|e| exc::raise(e)), &g_STRETCH_OF_TIME()); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&subject.clone())); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_eq(&call_builtin("len", &[subject.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1))); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&py_tuple(vec![py_str("it"), py_str("this"), py_str("today")]), &last.clone())) } } } } } } } }) {
     return Py::Bool(true);
     }
     continue;
     }
-    if py_truthy(&{ let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "MOOD_BEFORE"), &before.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "MOOD_AFTER"), &after.clone())) } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_MOOD_BEFORE(), &before.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_MOOD_AFTER(), &after.clone())) } }) {
     return Py::Bool(true);
     }
     }
@@ -25764,13 +25764,13 @@ pub fn _opens_a_question(args: &[Py]) -> Py {
     else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "words") { v.clone() }
     else { exc::raise(type_err(&format!("missing required argument: words"))) };
     let _ = py_str("True when the line opens like a question rather than a report of a state.\n\n    \"am\" is the one opener that is also the person with their subject left off - \"am hungry\", \"am\n    freezing\" - and it only asks when the pronoun is back in the line (\"am i hungry\"). Read as a\n    question, those lines got the neutral nod: \"am hungry\" was \"I'm listening - say more if it\n    helps\" where \"im hungry\" has its answer. Every other opener (\"why\", \"is\", \"was\") asks\n    whatever follows it, so it is left as it was.\n    ");
-    if py_truthy(&Py::Bool(!py_contains(&pyrt::xrefs::xget("compose.fallback_data", "QUESTION_OPENERS"), &geti(&words.clone(), &Py::Int(0))))) {
+    if py_truthy(&Py::Bool(!py_contains(&g_QUESTION_OPENERS(), &geti(&words.clone(), &Py::Int(0))))) {
     return Py::Bool(false);
     }
     if py_truthy(&Py::Bool(!py_eq(&geti(&words.clone(), &Py::Int(0)), &py_str("am")))) {
     return Py::Bool(true);
     }
-    return { let __b = op_gt(&call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1)); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "_SUBJECT_AFTER_AM"), &geti(&words.clone(), &Py::Int(1)))) } };
+    return { let __b = op_gt(&call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1)); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g__SUBJECT_AFTER_AM(), &geti(&words.clone(), &Py::Int(1)))) } };
     Py::None
 }
 pub fn is_a_report_reply(args: &[Py]) -> Py {

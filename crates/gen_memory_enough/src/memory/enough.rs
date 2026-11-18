@@ -122,7 +122,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.enough._A_TEMPERATURE"); }
     s__A_TEMPERATURE(stdlib_call("re", "compile", &[py_str("\\b\\d{2,3}\\s*(?:\\u00b0\\s*)?(?:c|degrees?|gas mark)\\b|\\buntil (?:the juices|it is cooked|browned|piping hot)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.enough._HOURS_AND_MINUTES"); }
-    s__HOURS_AND_MINUTES(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&py_str("("), &pyrt::xrefs::xget("memory.store_lines", "_COUNT_WORD")), &py_str(")\\s*(?:hours?|hrs?)\\s+(")), &pyrt::xrefs::xget("memory.store_lines", "_COUNT_WORD")), &py_str(")\\s*(?:minutes?|mins?)\\b")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s__HOURS_AND_MINUTES(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&py_str("("), &g__COUNT_WORD()), &py_str(")\\s*(?:hours?|hrs?)\\s+(")), &g__COUNT_WORD()), &py_str(")\\s*(?:minutes?|mins?)\\b")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.enough._A_PERIOD"); }
     s__A_PERIOD(stdlib_call("re", "compile", &[py_str("\\s*(?:a|an|per|each|every|most)\\s+(day|week|night|month)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.enough._TOO_FAR_ABOVE"); }
@@ -154,7 +154,7 @@ pub fn _a_value(args: &[Py]) -> Py {
     if py_truthy(&stdlib_call("re", "fullmatch", &[py_str("\\d+(?:,\\d{3})*(?:\\.\\d+)?"), word.clone()]).unwrap_or_else(|e| exc::raise(e))) {
     return call_builtin("float", &[mcall(&word.clone(), "replace", &[py_str(","), py_str("")])]).unwrap_or_else(|e| exc::raise(e));
     }
-    return call_builtin("float", &[mcall(&pyrt::xrefs::xget("memory.store_lines", "_AMOUNT_WORDS"), "get", &[word.clone(), Py::Int(0)])]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("float", &[mcall(&g__AMOUNT_WORDS(), "get", &[word.clone(), Py::Int(0)])]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn _amount_family(args: &[Py]) -> Py {
@@ -173,7 +173,7 @@ pub fn _amount_family(args: &[Py]) -> Py {
     let mut family: Py = Py::None;
     let mut pattern: Py = Py::None;
     let _ = py_str("The family a unit word belongs to, or \"\" when it is not one we can compare.");
-    let __iter1 = py_iter_or_raise(&pyrt::xrefs::xget("memory.store_lines", "_AMOUNTS"));
+    let __iter1 = py_iter_or_raise(&g__AMOUNTS());
     for __item in __iter1 {
     let __unpk2 = py_unpack(&__item.clone(), 2, None);
     family = __unpk2[0].clone();
@@ -207,7 +207,7 @@ pub fn _period_after(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&match_.clone()))) {
     return Py::None;
     }
-    return if py_truthy(&Py::Bool(py_eq(&mcall(&mcall(&match_.clone(), "group", &[Py::Int(1)]), "lower", &[]), &py_str("week")))) { pyrt::xrefs::xget("memory.store_lines", "_WEEKLY") } else { py_str("a day") };
+    return if py_truthy(&Py::Bool(py_eq(&mcall(&mcall(&match_.clone(), "group", &[Py::Int(1)]), "lower", &[]), &py_str("week")))) { g__WEEKLY() } else { py_str("a day") };
     Py::None
 }
 pub fn _a_period_near(args: &[Py]) -> Py {
@@ -253,7 +253,7 @@ pub fn _the_period_of_the_answer(args: &[Py]) -> Py {
     let __iter1 = py_iter_or_raise(&stdlib_call("re", "finditer", &[py_str("(?:a|per|each|every)\\s+(day|week|night)\\b"), { let __b = answer.clone(); if py_truthy(&__b) { __b } else { py_str("") } }, stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     for __item in __iter1 {
     match_ = __item.clone();
-    return if py_truthy(&Py::Bool(py_eq(&mcall(&mcall(&match_.clone(), "group", &[Py::Int(1)]), "lower", &[]), &py_str("week")))) { pyrt::xrefs::xget("memory.store_lines", "_WEEKLY") } else { py_str("a day") };
+    return if py_truthy(&Py::Bool(py_eq(&mcall(&mcall(&match_.clone(), "group", &[Py::Int(1)]), "lower", &[]), &py_str("week")))) { g__WEEKLY() } else { py_str("a day") };
     }
     return Py::None;
     Py::None
@@ -280,7 +280,7 @@ pub fn _the_periods_the_answer_says(args: &[Py]) -> Py {
     for __item in __iter1 {
     match_ = __item.clone();
     word = mcall(&mcall(&match_.clone(), "group", &[Py::Int(1)]), "lower", &[]);
-    let _ = mcall(&out.clone(), "add", &[mcall(&py_dict(vec![(py_str("week"), pyrt::xrefs::xget("memory.store_lines", "_WEEKLY")), (py_str("day"), py_str("a day")), (py_str("night"), py_str("a day"))]), "get", &[word.clone(), op_add(&py_str("a "), &word.clone())])]);
+    let _ = mcall(&out.clone(), "add", &[mcall(&py_dict(vec![(py_str("week"), g__WEEKLY()), (py_str("day"), py_str("a day")), (py_str("night"), py_str("a day"))]), "get", &[word.clone(), op_add(&py_str("a "), &word.clone())])]);
     }
     return out.clone();
     Py::None
@@ -312,7 +312,7 @@ pub fn _periods_disagree(args: &[Py]) -> Py {
     return Py::Bool(false);
     }
     if py_truthy(&Py::Bool(py_is(&theirs.clone(), &Py::None))) {
-    return Py::Bool(py_eq(&mine.clone(), &pyrt::xrefs::xget("memory.store_lines", "_WEEKLY")));
+    return Py::Bool(py_eq(&mine.clone(), &g__WEEKLY()));
     }
     return Py::Bool(!py_eq(&mine.clone(), &theirs.clone()));
     Py::None
@@ -389,7 +389,7 @@ pub fn _amounts(args: &[Py]) -> Py {
     let _ = mcall(&found.clone(), "append", &[py_tuple(vec![op_add(&op_mul(&hours.clone(), &Py::Int(60)), &minutes.clone()), py_str("minutes"), mcall(&mcall(&match_.clone(), "group", &[Py::Int(0)]), "strip", &[py_str(" .,!?")])])]);
     let _ = mcall(&spans.clone(), "append", &[py_tuple(vec![mcall(&match_.clone(), "start", &[]), mcall(&match_.clone(), "end", &[])])]);
     }
-    pattern = op_add(&op_add(&op_add(&op_add(&op_add(&py_str("("), &pyrt::xrefs::xget("memory.store_lines", "_COUNT_WORD")), &py_str(")\\s*(?:x\\s*)?")), &py_str("(")), &mcall(&py_str("|"), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("memory.store_lines", "_AMOUNTS")) { let __unpk3689 = py_unpack(&__item.clone(), 2, None); let mut _u: Py = __unpk3689[0].clone(); let mut p: Py = __unpk3689[1].clone(); __out.push(p.clone()); } py_list(__out) })() }])), &py_str(")"));
+    pattern = op_add(&op_add(&op_add(&op_add(&op_add(&py_str("("), &g__COUNT_WORD()), &py_str(")\\s*(?:x\\s*)?")), &py_str("(")), &mcall(&py_str("|"), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g__AMOUNTS()) { let __unpk4117 = py_unpack(&__item.clone(), 2, None); let mut _u: Py = __unpk4117[0].clone(); let mut p: Py = __unpk4117[1].clone(); __out.push(p.clone()); } py_list(__out) })() }])), &py_str(")"));
     let __iter3 = py_iter_or_raise(&stdlib_call("re", "finditer", &[pattern.clone(), text.clone(), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     for __item in __iter3 {
     match_ = __item.clone();
@@ -397,7 +397,7 @@ pub fn _amounts(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&value.clone()))) {
     continue;
     }
-    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&spans.clone()) { let __unpk5801 = py_unpack(&__item.clone(), 2, None); let mut start: Py = __unpk5801[0].clone(); let mut end: Py = __unpk5801[1].clone(); __out.push({ let __b = op_le(&start.clone(), &mcall(&match_.clone(), "start", &[])); if !py_truthy(&__b) { __b } else { op_le(&mcall(&match_.clone(), "end", &[]), &end.clone()) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&spans.clone()) { let __unpk118 = py_unpack(&__item.clone(), 2, None); let mut start: Py = __unpk118[0].clone(); let mut end: Py = __unpk118[1].clone(); __out.push({ let __b = op_le(&start.clone(), &mcall(&match_.clone(), "start", &[])); if !py_truthy(&__b) { __b } else { op_le(&mcall(&match_.clone(), "end", &[]), &end.clone()) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     continue;
     }
     let _ = mcall(&found.clone(), "append", &[py_tuple(vec![value.clone(), _amount_family(&[mcall(&match_.clone(), "group", &[Py::Int(2)])]), mcall(&mcall(&match_.clone(), "group", &[Py::Int(0)]), "strip", &[py_str(" .,!?")])])]);
@@ -467,12 +467,12 @@ pub fn _target(args: &[Py]) -> Py {
     let mut value: Py = Py::None;
     let _ = py_str("The figure the last answer named in the same family: (low, high, as it was said).\n\n    A guideline often opens by saying the person's own figure back - \"Five hours is on the short\n    side: most adults need seven to nine\" - and that opening is not the figure to aim at, it is\n    the answer measuring them against it. When the first figure in the answer is the number they\n    gave, the range the answer names is the target, unit or no unit.\n\n    `period` is the period the person's own figure is said on (\"a week\" for \"two and a half hours\n    a week\"). An answer often says the same aim twice in two periods - \"Aim for about 150 minutes\n    a week, which is around 20 minutes a day\" - and read as one family that is two figures, which\n    is no figure to aim at, so the ones said on the person's own period are the ones to read.\n    ");
     answer = pyrt::xrefs::xcall("memory.spoken", "_spoken_as_numbers", &[answer.clone()]);
-    units = mcall(&py_str("|"), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("memory.store_lines", "_AMOUNTS")) { let __unpk9449 = py_unpack(&__item.clone(), 2, None); let mut _u: Py = __unpk9449[0].clone(); let mut p: Py = __unpk9449[1].clone(); __out.push(p.clone()); } py_list(__out) })() }]);
+    units = mcall(&py_str("|"), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g__AMOUNTS()) { let __unpk2038 = py_unpack(&__item.clone(), 2, None); let mut _u: Py = __unpk2038[0].clone(); let mut p: Py = __unpk2038[1].clone(); __out.push(p.clone()); } py_list(__out) })() }]);
     let __unpk1 = py_unpack(&py_tuple(vec![py_list(vec![]), py_list(vec![])]), 2, None);
     ranges = __unpk1[0].clone();
     singles = __unpk1[1].clone();
     long_spans = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g__HOURS_AND_MINUTES(), "finditer", &[answer.clone()])) { let mut match_: Py = __item.clone(); __out.push(mcall(&match_.clone(), "span", &[])); } py_list(__out) })() };
-    let __iter2 = py_iter_or_raise(&stdlib_call("re", "finditer", &[op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&py_str("("), &pyrt::xrefs::xget("memory.store_lines", "_COUNT_WORD")), &py_str(")\\s*(?:to|-|\\u2013|and)\\s*(")), &pyrt::xrefs::xget("memory.store_lines", "_COUNT_WORD")), &py_str(")\\s*(?:-\\s*)?(")), &units.clone()), &py_str(")")), answer.clone(), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    let __iter2 = py_iter_or_raise(&stdlib_call("re", "finditer", &[op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&py_str("("), &g__COUNT_WORD()), &py_str(")\\s*(?:to|-|\\u2013|and)\\s*(")), &g__COUNT_WORD()), &py_str(")\\s*(?:-\\s*)?(")), &units.clone()), &py_str(")")), answer.clone(), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     for __item in __iter2 {
     match_ = __item.clone();
     if py_truthy(&Py::Bool(!py_eq(&_amount_family(&[mcall(&match_.clone(), "group", &[Py::Int(3)])]), &family.clone()))) {
@@ -485,8 +485,8 @@ pub fn _target(args: &[Py]) -> Py {
     let _ = mcall(&ranges.clone(), "append", &[py_tuple(vec![mcall(&match_.clone(), "start", &[]), py_tuple(vec![low.clone(), high.clone(), mcall(&mcall(&match_.clone(), "group", &[Py::Int(0)]), "strip", &[py_str(" .,!?")])])])]);
     }
     }
-    spans = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&stdlib_call("re", "finditer", &[op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&py_str("("), &pyrt::xrefs::xget("memory.store_lines", "_COUNT_WORD")), &py_str(")\\s*(?:to|-|\\u2013|and)\\s*(")), &pyrt::xrefs::xget("memory.store_lines", "_COUNT_WORD")), &py_str(")\\s*(?:-\\s*)?(")), &units.clone()), &py_str(")")), answer.clone(), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e))) { let mut m: Py = __item.clone(); __out.push(py_tuple(vec![m.clone(), Py::None])); } py_list(__out) })() }) { let __unpk1786 = py_unpack(&__item.clone(), 2, None); let mut match_: Py = __unpk1786[0].clone(); let mut _u: Py = __unpk1786[1].clone(); __out.push(py_tuple(vec![mcall(&match_.clone(), "start", &[]), mcall(&match_.clone(), "end", &[])])); } py_list(__out) })() };
-    let __iter4 = py_iter_or_raise(&stdlib_call("re", "finditer", &[op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&py_str("("), &pyrt::xrefs::xget("memory.store_lines", "_COUNT_WORD")), &py_str(")\\s*(")), &units.clone()), &py_str(")\\s*(?:to|-|\\u2013|and)\\s*(")), &pyrt::xrefs::xget("memory.store_lines", "_COUNT_WORD")), &py_str(")\\s*(")), &units.clone()), &py_str(")")), answer.clone(), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    spans = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&stdlib_call("re", "finditer", &[op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&py_str("("), &g__COUNT_WORD()), &py_str(")\\s*(?:to|-|\\u2013|and)\\s*(")), &g__COUNT_WORD()), &py_str(")\\s*(?:-\\s*)?(")), &units.clone()), &py_str(")")), answer.clone(), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e))) { let mut m: Py = __item.clone(); __out.push(py_tuple(vec![m.clone(), Py::None])); } py_list(__out) })() }) { let __unpk8917 = py_unpack(&__item.clone(), 2, None); let mut match_: Py = __unpk8917[0].clone(); let mut _u: Py = __unpk8917[1].clone(); __out.push(py_tuple(vec![mcall(&match_.clone(), "start", &[]), mcall(&match_.clone(), "end", &[])])); } py_list(__out) })() };
+    let __iter4 = py_iter_or_raise(&stdlib_call("re", "finditer", &[op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&py_str("("), &g__COUNT_WORD()), &py_str(")\\s*(")), &units.clone()), &py_str(")\\s*(?:to|-|\\u2013|and)\\s*(")), &g__COUNT_WORD()), &py_str(")\\s*(")), &units.clone()), &py_str(")")), answer.clone(), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     for __item in __iter4 {
     match_ = __item.clone();
     let __unpk5 = py_unpack(&py_tuple(vec![_amount_family(&[mcall(&match_.clone(), "group", &[Py::Int(2)])]), _amount_family(&[mcall(&match_.clone(), "group", &[Py::Int(4)])])]), 2, None);
@@ -504,16 +504,16 @@ pub fn _target(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_contains(&py_tuple(vec![low_family.clone(), high_family.clone()]), &family.clone()))) {
     continue;
     }
-    low_in = op_mul(&low.clone(), &mcall(&pyrt::xrefs::xget("memory.store_lines", "_CONVERT"), "get", &[py_tuple(vec![family.clone(), low_family.clone()]), if py_truthy(&Py::Bool(py_eq(&low_family.clone(), &family.clone()))) { Py::Float(1.0) } else { Py::Int(0) }]));
-    high_in = op_mul(&high.clone(), &mcall(&pyrt::xrefs::xget("memory.store_lines", "_CONVERT"), "get", &[py_tuple(vec![family.clone(), high_family.clone()]), if py_truthy(&Py::Bool(py_eq(&high_family.clone(), &family.clone()))) { Py::Float(1.0) } else { Py::Int(0) }]));
+    low_in = op_mul(&low.clone(), &mcall(&g__CONVERT(), "get", &[py_tuple(vec![family.clone(), low_family.clone()]), if py_truthy(&Py::Bool(py_eq(&low_family.clone(), &family.clone()))) { Py::Float(1.0) } else { Py::Int(0) }]));
+    high_in = op_mul(&high.clone(), &mcall(&g__CONVERT(), "get", &[py_tuple(vec![family.clone(), high_family.clone()]), if py_truthy(&Py::Bool(py_eq(&high_family.clone(), &family.clone()))) { Py::Float(1.0) } else { Py::Int(0) }]));
     if py_truthy(&Py::Bool(!py_truthy(&{ let __b = low_in.clone(); if !py_truthy(&__b) { __b } else { high_in.clone() } }))) {
     continue;
     }
-    said = op_modulo(&py_str("%s to %s %s"), &py_tuple(vec![_the_number(&[if py_truthy(&mcall(&call_builtin("float", &[low_in.clone()]).unwrap_or_else(|e| exc::raise(e)), "is_integer", &[])) { call_builtin("int", &[low_in.clone()]).unwrap_or_else(|e| exc::raise(e)) } else { low_in.clone() }]), _the_number(&[if py_truthy(&mcall(&call_builtin("float", &[high_in.clone()]).unwrap_or_else(|e| exc::raise(e)), "is_integer", &[])) { call_builtin("int", &[high_in.clone()]).unwrap_or_else(|e| exc::raise(e)) } else { high_in.clone() }]), geti(&mcall(&pyrt::xrefs::xget("memory.store_lines", "_UNIT_SAID"), "get", &[family.clone(), py_tuple(vec![family.clone(), family.clone()])]), &Py::Int(1))]));
+    said = op_modulo(&py_str("%s to %s %s"), &py_tuple(vec![_the_number(&[if py_truthy(&mcall(&call_builtin("float", &[low_in.clone()]).unwrap_or_else(|e| exc::raise(e)), "is_integer", &[])) { call_builtin("int", &[low_in.clone()]).unwrap_or_else(|e| exc::raise(e)) } else { low_in.clone() }]), _the_number(&[if py_truthy(&mcall(&call_builtin("float", &[high_in.clone()]).unwrap_or_else(|e| exc::raise(e)), "is_integer", &[])) { call_builtin("int", &[high_in.clone()]).unwrap_or_else(|e| exc::raise(e)) } else { high_in.clone() }]), geti(&mcall(&g__UNIT_SAID(), "get", &[family.clone(), py_tuple(vec![family.clone(), family.clone()])]), &Py::Int(1))]));
     let _ = mcall(&ranges.clone(), "append", &[py_tuple(vec![mcall(&match_.clone(), "start", &[]), py_tuple(vec![low_in.clone(), high_in.clone(), said.clone()])])]);
     let _ = mcall(&spans.clone(), "append", &[py_tuple(vec![mcall(&match_.clone(), "start", &[]), mcall(&match_.clone(), "end", &[])])]);
     }
-    let __iter7 = py_iter_or_raise(&stdlib_call("re", "finditer", &[op_add(&op_add(&op_add(&op_add(&py_str("("), &pyrt::xrefs::xget("memory.store_lines", "_COUNT_WORD")), &py_str(")\\s*(?:-\\s*)?(")), &units.clone()), &py_str(")")), answer.clone(), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    let __iter7 = py_iter_or_raise(&stdlib_call("re", "finditer", &[op_add(&op_add(&op_add(&op_add(&py_str("("), &g__COUNT_WORD()), &py_str(")\\s*(?:-\\s*)?(")), &units.clone()), &py_str(")")), answer.clone(), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     for __item in __iter7 {
     match_ = __item.clone();
     if py_truthy(&Py::Bool(!py_eq(&_amount_family(&[mcall(&match_.clone(), "group", &[Py::Int(2)])]), &family.clone()))) {
@@ -522,7 +522,7 @@ pub fn _target(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(py_contains(&mcall(&match_.clone(), "group", &[Py::Int(0)]), &py_str("-")))) {
     continue;
     }
-    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&op_add(&spans.clone(), &long_spans.clone())) { let __unpk8400 = py_unpack(&__item.clone(), 2, None); let mut start: Py = __unpk8400[0].clone(); let mut end: Py = __unpk8400[1].clone(); __out.push({ let __b = op_le(&start.clone(), &mcall(&match_.clone(), "start", &[])); if !py_truthy(&__b) { __b } else { op_le(&mcall(&match_.clone(), "end", &[]), &end.clone()) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&op_add(&spans.clone(), &long_spans.clone())) { let __unpk3190 = py_unpack(&__item.clone(), 2, None); let mut start: Py = __unpk3190[0].clone(); let mut end: Py = __unpk3190[1].clone(); __out.push({ let __b = op_le(&start.clone(), &mcall(&match_.clone(), "start", &[])); if !py_truthy(&__b) { __b } else { op_le(&mcall(&match_.clone(), "end", &[]), &end.clone()) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     continue;
     }
     value = _a_value(&[mcall(&match_.clone(), "group", &[Py::Int(1)])]);
@@ -594,16 +594,16 @@ pub fn __nested_is_their_number_9(args: &[Py]) -> Py {
     Py::None
 }
     is_their_number = {{ let _u = _u.clone(); let answer = answer.clone(); let at = at.clone(); let bare = bare.clone(); let bare_ok = bare_ok.clone(); let best = best.clone(); let each = each.clone(); let end = end.clone(); let family = family.clone(); let figure = figure.clone(); let figures = figures.clone(); let high = high.clone(); let high_family = high_family.clone(); let high_in = high_in.clone(); let hours = hours.clone(); let is_their_number = is_their_number.clone(); let long_spans = long_spans.clone(); let low = low.clone(); let low_family = low_family.clone(); let low_in = low_in.clone(); let m = m.clone(); let match_ = match_.clone(); let mine = mine.clone(); let minutes = minutes.clone(); let p = p.clone(); let pair = pair.clone(); let period = period.clone(); let ranges = ranges.clone(); let ranges_on = ranges_on.clone(); let said = said.clone(); let said_on = said_on.clone(); let singles = singles.clone(); let spans = spans.clone(); let start = start.clone(); let total = total.clone(); let units = units.clone(); let useful = useful.clone(); let useful_on = useful_on.clone(); let value = value.clone(); py_func("is_their_number", move |args: &[Py]| { let mut full = vec![_u.clone(), answer.clone(), at.clone(), bare.clone(), bare_ok.clone(), best.clone(), each.clone(), end.clone(), family.clone(), figure.clone(), figures.clone(), high.clone(), high_family.clone(), high_in.clone(), hours.clone(), is_their_number.clone(), long_spans.clone(), low.clone(), low_family.clone(), low_in.clone(), m.clone(), match_.clone(), mine.clone(), minutes.clone(), p.clone(), pair.clone(), period.clone(), ranges.clone(), ranges_on.clone(), said.clone(), said_on.clone(), singles.clone(), spans.clone(), start.clone(), total.clone(), units.clone(), useful.clone(), useful_on.clone(), value.clone()]; full.extend_from_slice(args); __nested_is_their_number_9(&full) }) }};
-    useful = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&singles.clone()) { let __unpk500 = py_unpack(&__item.clone(), 2, None); let mut at: Py = __unpk500[0].clone(); let mut figure: Py = __unpk500[1].clone(); if py_truthy(&Py::Bool(!py_truthy(&{ let __b = ranges.clone(); if !py_truthy(&__b) { __b } else { py_call(&is_their_number, &[figure.clone()]) } }))) {  __out.push(py_tuple(vec![at.clone(), figure.clone()])); } } py_list(__out) })() };
-    figures = op_add(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&ranges.clone()) { let __unpk9573 = py_unpack(&__item.clone(), 2, None); let mut _u: Py = __unpk9573[0].clone(); let mut figure: Py = __unpk9573[1].clone(); __out.push(figure.clone()); } py_list(__out) })() }, &{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&useful.clone()) { let __unpk7908 = py_unpack(&__item.clone(), 2, None); let mut _u: Py = __unpk7908[0].clone(); let mut figure: Py = __unpk7908[1].clone(); __out.push(figure.clone()); } py_list(__out) })() });
+    useful = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&singles.clone()) { let __unpk3841 = py_unpack(&__item.clone(), 2, None); let mut at: Py = __unpk3841[0].clone(); let mut figure: Py = __unpk3841[1].clone(); if py_truthy(&Py::Bool(!py_truthy(&{ let __b = ranges.clone(); if !py_truthy(&__b) { __b } else { py_call(&is_their_number, &[figure.clone()]) } }))) {  __out.push(py_tuple(vec![at.clone(), figure.clone()])); } } py_list(__out) })() };
+    figures = op_add(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&ranges.clone()) { let __unpk481 = py_unpack(&__item.clone(), 2, None); let mut _u: Py = __unpk481[0].clone(); let mut figure: Py = __unpk481[1].clone(); __out.push(figure.clone()); } py_list(__out) })() }, &{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&useful.clone()) { let __unpk2752 = py_unpack(&__item.clone(), 2, None); let mut _u: Py = __unpk2752[0].clone(); let mut figure: Py = __unpk2752[1].clone(); __out.push(figure.clone()); } py_list(__out) })() });
     if py_truthy(&{ let __b = period.clone(); if !py_truthy(&__b) { __b } else { op_gt(&call_builtin("len", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&figures.clone()) { let mut figure: Py = __item.clone(); __out.push(slice_or_raise(&figure.clone(), &Py::None, &Py::Int(2), &Py::None)); } py_set(__out) })() }]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1)) } }) {
     ranges_on = _the_periods_of(&[answer.clone(), ranges.clone()]);
     useful_on = _the_periods_of(&[answer.clone(), useful.clone()]);
     said_on = op_add(&ranges_on.clone(), &useful_on.clone());
     if py_truthy(&{ let __b = call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&said_on.clone()) { let mut each: Py = __item.clone(); __out.push(Py::Bool(py_eq(&each.clone(), &period.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&said_on.clone()) { let mut each: Py = __item.clone(); __out.push({ let __b = each.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(!py_eq(&each.clone(), &period.clone())) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }) {
-    ranges = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[ranges.clone(), ranges_on.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk7726 = py_unpack(&__item.clone(), 2, None); let mut pair: Py = __unpk7726[0].clone(); let mut each: Py = __unpk7726[1].clone(); if py_truthy(&Py::Bool(py_eq(&each.clone(), &period.clone()))) {  __out.push(pair.clone()); } } py_list(__out) })() };
-    useful = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[useful.clone(), useful_on.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk2767 = py_unpack(&__item.clone(), 2, None); let mut pair: Py = __unpk2767[0].clone(); let mut each: Py = __unpk2767[1].clone(); if py_truthy(&Py::Bool(py_eq(&each.clone(), &period.clone()))) {  __out.push(pair.clone()); } } py_list(__out) })() };
-    figures = op_add(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&ranges.clone()) { let __unpk8830 = py_unpack(&__item.clone(), 2, None); let mut _u: Py = __unpk8830[0].clone(); let mut figure: Py = __unpk8830[1].clone(); __out.push(figure.clone()); } py_list(__out) })() }, &{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&useful.clone()) { let __unpk5407 = py_unpack(&__item.clone(), 2, None); let mut _u: Py = __unpk5407[0].clone(); let mut figure: Py = __unpk5407[1].clone(); __out.push(figure.clone()); } py_list(__out) })() });
+    ranges = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[ranges.clone(), ranges_on.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk49 = py_unpack(&__item.clone(), 2, None); let mut pair: Py = __unpk49[0].clone(); let mut each: Py = __unpk49[1].clone(); if py_truthy(&Py::Bool(py_eq(&each.clone(), &period.clone()))) {  __out.push(pair.clone()); } } py_list(__out) })() };
+    useful = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[useful.clone(), useful_on.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk8785 = py_unpack(&__item.clone(), 2, None); let mut pair: Py = __unpk8785[0].clone(); let mut each: Py = __unpk8785[1].clone(); if py_truthy(&Py::Bool(py_eq(&each.clone(), &period.clone()))) {  __out.push(pair.clone()); } } py_list(__out) })() };
+    figures = op_add(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&ranges.clone()) { let __unpk8305 = py_unpack(&__item.clone(), 2, None); let mut _u: Py = __unpk8305[0].clone(); let mut figure: Py = __unpk8305[1].clone(); __out.push(figure.clone()); } py_list(__out) })() }, &{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&useful.clone()) { let __unpk1249 = py_unpack(&__item.clone(), 2, None); let mut _u: Py = __unpk1249[0].clone(); let mut figure: Py = __unpk1249[1].clone(); __out.push(figure.clone()); } py_list(__out) })() });
     }
     }
     if py_truthy(&op_gt(&call_builtin("len", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&figures.clone()) { let mut figure: Py = __item.clone(); __out.push(slice_or_raise(&figure.clone(), &Py::None, &Py::Int(2), &Py::None)); } py_set(__out) })() }]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1))) {
@@ -656,8 +656,8 @@ pub fn _the_aim_that_is_their_number(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&mine.clone()))) {
     return Py::None;
     }
-    units = mcall(&py_str("|"), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("memory.store_lines", "_AMOUNTS")) { let __unpk9790 = py_unpack(&__item.clone(), 2, None); let mut _u: Py = __unpk9790[0].clone(); let mut p: Py = __unpk9790[1].clone(); __out.push(p.clone()); } py_list(__out) })() }]);
-    let __iter1 = py_iter_or_raise(&stdlib_call("re", "finditer", &[op_add(&op_add(&op_add(&op_add(&py_str("("), &pyrt::xrefs::xget("memory.store_lines", "_COUNT_WORD")), &py_str(")\\s*(?:-\\s*)?(")), &units.clone()), &py_str(")")), { let __b = answer.clone(); if py_truthy(&__b) { __b } else { py_str("") } }, stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    units = mcall(&py_str("|"), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g__AMOUNTS()) { let __unpk4144 = py_unpack(&__item.clone(), 2, None); let mut _u: Py = __unpk4144[0].clone(); let mut p: Py = __unpk4144[1].clone(); __out.push(p.clone()); } py_list(__out) })() }]);
+    let __iter1 = py_iter_or_raise(&stdlib_call("re", "finditer", &[op_add(&op_add(&op_add(&op_add(&py_str("("), &g__COUNT_WORD()), &py_str(")\\s*(?:-\\s*)?(")), &units.clone()), &py_str(")")), { let __b = answer.clone(); if py_truthy(&__b) { __b } else { py_str("") } }, stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     for __item in __iter1 {
     match_ = __item.clone();
     if py_truthy(&Py::Bool(!py_eq(&_amount_family(&[mcall(&match_.clone(), "group", &[Py::Int(2)])]), &family.clone()))) {
@@ -673,7 +673,7 @@ pub fn _the_aim_that_is_their_number(args: &[Py]) -> Py {
     said = mcall(&mcall(&match_.clone(), "group", &[Py::Int(0)]), "strip", &[py_str(" .,!?")]);
     period = _period_after(&[{ let __b = answer.clone(); if py_truthy(&__b) { __b } else { py_str("") } }, mcall(&match_.clone(), "end", &[])]);
     if py_truthy(&period.clone()) {
-    let __aug2 = op_add(&said.clone(), &op_add(&py_str(" "), &if py_truthy(&Py::Bool(py_eq(&period.clone(), &pyrt::xrefs::xget("memory.store_lines", "_WEEKLY")))) { py_str("a week") } else { py_str("a day") }));
+    let __aug2 = op_add(&said.clone(), &op_add(&py_str(" "), &if py_truthy(&Py::Bool(py_eq(&period.clone(), &g__WEEKLY()))) { py_str("a week") } else { py_str("a day") }));
     said = __aug2;
     }
     return py_tuple(vec![mine.clone(), mine.clone(), said.clone()]);
@@ -715,7 +715,7 @@ pub fn _with_its_period(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&match_.clone()))) {
     return figure.clone();
     }
-    said = if py_truthy(&Py::Bool(py_eq(&mcall(&mcall(&match_.clone(), "group", &[Py::Int(1)]), "lower", &[]), &py_str("week")))) { pyrt::xrefs::xget("memory.store_lines", "_WEEKLY") } else { py_str("a day") };
+    said = if py_truthy(&Py::Bool(py_eq(&mcall(&mcall(&match_.clone(), "group", &[Py::Int(1)]), "lower", &[]), &py_str("week")))) { g__WEEKLY() } else { py_str("a day") };
     if py_truthy(&Py::Bool(!py_eq(&said.clone(), &period.clone()))) {
     return figure.clone();
     }
@@ -754,7 +754,7 @@ pub fn _the_periods_of(args: &[Py]) -> Py {
     let _ = mcall(&out.clone(), "append", &[Py::None]);
     continue;
     }
-    let _ = mcall(&out.clone(), "append", &[if py_truthy(&Py::Bool(py_eq(&mcall(&mcall(&match_.clone(), "group", &[Py::Int(1)]), "lower", &[]), &py_str("week")))) { pyrt::xrefs::xget("memory.store_lines", "_WEEKLY") } else { py_str("a day") }]);
+    let _ = mcall(&out.clone(), "append", &[if py_truthy(&Py::Bool(py_eq(&mcall(&mcall(&match_.clone(), "group", &[Py::Int(1)]), "lower", &[]), &py_str("week")))) { g__WEEKLY() } else { py_str("a day") }]);
     }
     return out.clone();
     Py::None
@@ -791,11 +791,11 @@ pub fn _aims_named(args: &[Py]) -> Py {
     let mut units: Py = Py::None;
     let mut value: Py = Py::None;
     let _ = py_str("The distinct figures of this kind the answer names, a range counting as one figure.\n\n    \"Lower eggs into already boiling water: 6 minutes for a runny yolk, 7 for jammy, 9 to 10 for\n    hard boiled\" names three timings, and reading one of them as the figure to aim at answered\n    \"is 6 minutes enough\" with \"short of the 9 to 10 minutes\". A guideline names one figure or one\n    range - \"seven to nine hours\", \"2,000 to 2,500 calories\" - and not a list of choices.\n    ");
-    units = mcall(&py_str("|"), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("memory.store_lines", "_AMOUNTS")) { let __unpk4821 = py_unpack(&__item.clone(), 2, None); let mut _f: Py = __unpk4821[0].clone(); let mut p: Py = __unpk4821[1].clone(); __out.push(p.clone()); } py_list(__out) })() }]);
+    units = mcall(&py_str("|"), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g__AMOUNTS()) { let __unpk6299 = py_unpack(&__item.clone(), 2, None); let mut _f: Py = __unpk6299[0].clone(); let mut p: Py = __unpk6299[1].clone(); __out.push(p.clone()); } py_list(__out) })() }]);
     let __unpk1 = py_unpack(&py_tuple(vec![call_builtin("set", &[]).unwrap_or_else(|e| exc::raise(e)), py_list(vec![])]), 2, None);
     found = __unpk1[0].clone();
     spans = __unpk1[1].clone();
-    let __iter2 = py_iter_or_raise(&stdlib_call("re", "finditer", &[op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&py_str("("), &pyrt::xrefs::xget("memory.store_lines", "_COUNT_WORD")), &py_str(")\\s*(?:to|and|or|\\u2013|-)\\s*(")), &pyrt::xrefs::xget("memory.store_lines", "_COUNT_WORD")), &py_str(")\\s*(?:-\\s*)?(")), &units.clone()), &py_str(")?")), answer.clone(), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    let __iter2 = py_iter_or_raise(&stdlib_call("re", "finditer", &[op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&py_str("("), &g__COUNT_WORD()), &py_str(")\\s*(?:to|and|or|\\u2013|-)\\s*(")), &g__COUNT_WORD()), &py_str(")\\s*(?:-\\s*)?(")), &units.clone()), &py_str(")?")), answer.clone(), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     for __item in __iter2 {
     match_ = __item.clone();
     let __unpk3 = py_unpack(&py_tuple(vec![_a_value(&[mcall(&match_.clone(), "group", &[Py::Int(1)])]), _a_value(&[mcall(&match_.clone(), "group", &[Py::Int(2)])])]), 2, None);
@@ -811,10 +811,10 @@ pub fn _aims_named(args: &[Py]) -> Py {
     }
     let _ = mcall(&found.clone(), "add", &[py_tuple(vec![low.clone(), high.clone()])]);
     }
-    let __iter4 = py_iter_or_raise(&stdlib_call("re", "finditer", &[op_add(&op_add(&op_add(&op_add(&py_str("("), &pyrt::xrefs::xget("memory.store_lines", "_COUNT_WORD")), &py_str(")\\s*(?:-\\s*)?(")), &units.clone()), &py_str(")")), answer.clone(), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    let __iter4 = py_iter_or_raise(&stdlib_call("re", "finditer", &[op_add(&op_add(&op_add(&op_add(&py_str("("), &g__COUNT_WORD()), &py_str(")\\s*(?:-\\s*)?(")), &units.clone()), &py_str(")")), answer.clone(), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     for __item in __iter4 {
     match_ = __item.clone();
-    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&spans.clone()) { let __unpk3382 = py_unpack(&__item.clone(), 2, None); let mut start: Py = __unpk3382[0].clone(); let mut end: Py = __unpk3382[1].clone(); __out.push({ let __b = op_le(&start.clone(), &mcall(&match_.clone(), "start", &[])); if !py_truthy(&__b) { __b } else { op_le(&mcall(&match_.clone(), "end", &[]), &end.clone()) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&spans.clone()) { let __unpk8121 = py_unpack(&__item.clone(), 2, None); let mut start: Py = __unpk8121[0].clone(); let mut end: Py = __unpk8121[1].clone(); __out.push({ let __b = op_le(&start.clone(), &mcall(&match_.clone(), "start", &[])); if !py_truthy(&__b) { __b } else { op_le(&mcall(&match_.clone(), "end", &[]), &end.clone()) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     continue;
     }
     let _ = mcall(&spans.clone(), "append", &[mcall(&match_.clone(), "span", &[])]);
@@ -826,10 +826,10 @@ pub fn _aims_named(args: &[Py]) -> Py {
     let _ = mcall(&found.clone(), "add", &[py_tuple(vec![value.clone(), value.clone()])]);
     }
     }
-    let __iter5 = py_iter_or_raise(&stdlib_call("re", "finditer", &[op_add(&op_add(&py_str("("), &pyrt::xrefs::xget("memory.store_lines", "_COUNT_WORD")), &py_str(")")), answer.clone(), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    let __iter5 = py_iter_or_raise(&stdlib_call("re", "finditer", &[op_add(&op_add(&py_str("("), &g__COUNT_WORD()), &py_str(")")), answer.clone(), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     for __item in __iter5 {
     match_ = __item.clone();
-    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&spans.clone()) { let __unpk4693 = py_unpack(&__item.clone(), 2, None); let mut start: Py = __unpk4693[0].clone(); let mut end: Py = __unpk4693[1].clone(); __out.push({ let __b = op_le(&start.clone(), &mcall(&match_.clone(), "start", &[])); if !py_truthy(&__b) { __b } else { op_le(&mcall(&match_.clone(), "end", &[]), &end.clone()) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&spans.clone()) { let __unpk2457 = py_unpack(&__item.clone(), 2, None); let mut start: Py = __unpk2457[0].clone(); let mut end: Py = __unpk2457[1].clone(); __out.push({ let __b = op_le(&start.clone(), &mcall(&match_.clone(), "start", &[])); if !py_truthy(&__b) { __b } else { op_le(&mcall(&match_.clone(), "end", &[]), &end.clone()) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     continue;
     }
     value = _a_value(&[mcall(&match_.clone(), "group", &[Py::Int(1)])]);
@@ -907,8 +907,8 @@ pub fn _figures_in(args: &[Py]) -> Py {
     let mut match_: Py = Py::None;
     let mut value: Py = Py::None;
     let _ = py_str("Every number in the answer, with or without a unit: \"20 minutes\", \"seven to nine\".\n\n    Used to tell an answer that is only saying the person's own figure back from one that names\n    another figure for them to reach.\n    ");
-    found = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&_amounts(&[answer.clone()])) { let __unpk4933 = py_unpack(&__item.clone(), 3, None); let mut value: Py = __unpk4933[0].clone(); let mut _family: Py = __unpk4933[1].clone(); let mut _said: Py = __unpk4933[2].clone(); __out.push(value.clone()); } py_list(__out) })() };
-    let __iter1 = py_iter_or_raise(&stdlib_call("re", "finditer", &[op_add(&op_add(&op_add(&op_add(&py_str("("), &pyrt::xrefs::xget("memory.store_lines", "_COUNT_WORD")), &py_str(")\\s*(?:to|and|or|\\u2013|-)\\s*(")), &pyrt::xrefs::xget("memory.store_lines", "_COUNT_WORD")), &py_str(")\\b")), answer.clone(), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    found = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&_amounts(&[answer.clone()])) { let __unpk520 = py_unpack(&__item.clone(), 3, None); let mut value: Py = __unpk520[0].clone(); let mut _family: Py = __unpk520[1].clone(); let mut _said: Py = __unpk520[2].clone(); __out.push(value.clone()); } py_list(__out) })() };
+    let __iter1 = py_iter_or_raise(&stdlib_call("re", "finditer", &[op_add(&op_add(&op_add(&op_add(&py_str("("), &g__COUNT_WORD()), &py_str(")\\s*(?:to|and|or|\\u2013|-)\\s*(")), &g__COUNT_WORD()), &py_str(")\\b")), answer.clone(), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     for __item in __iter1 {
     match_ = __item.clone();
     let __unpk2 = py_unpack(&py_tuple(vec![_a_value(&[mcall(&match_.clone(), "group", &[Py::Int(1)])]), _a_value(&[mcall(&match_.clone(), "group", &[Py::Int(2)])])]), 2, None);
@@ -965,7 +965,7 @@ pub fn _another_kind_follows(args: &[Py]) -> Py {
     let mut following: Py = Py::None;
     let mut p: Py = Py::None;
     let _ = py_str("A unit of another kind sits right after the figure, so the figure is not this kind's.\n\n    \"three or four runs a week\" is a count of runs; read as kilometres it turned \"i run 10k every\n    day\" into \"more than the three or four km that answer named\".\n    ");
-    following = stdlib_call("re", "match", &[op_add(&op_add(&py_str("\\s*("), &mcall(&py_str("|"), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("memory.store_lines", "_AMOUNTS")) { let __unpk1039 = py_unpack(&__item.clone(), 2, None); let mut _f: Py = __unpk1039[0].clone(); let mut p: Py = __unpk1039[1].clone(); __out.push(p.clone()); } py_list(__out) })() }])), &py_str(")\\b")), slice_or_raise(&answer.clone(), &end.clone(), &Py::None, &Py::None), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e));
+    following = stdlib_call("re", "match", &[op_add(&op_add(&py_str("\\s*("), &mcall(&py_str("|"), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g__AMOUNTS()) { let __unpk8806 = py_unpack(&__item.clone(), 2, None); let mut _f: Py = __unpk8806[0].clone(); let mut p: Py = __unpk8806[1].clone(); __out.push(p.clone()); } py_list(__out) })() }])), &py_str(")\\b")), slice_or_raise(&answer.clone(), &end.clone(), &Py::None, &Py::None), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e));
     return { let __b = call_builtin("bool", &[following.clone()]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { Py::Bool(!py_eq(&_amount_family(&[mcall(&following.clone(), "group", &[Py::Int(1)])]), &family.clone())) } };
     Py::None
 }
@@ -992,7 +992,7 @@ pub fn _near_bare_range(args: &[Py]) -> Py {
     let mut low: Py = Py::None;
     let mut match_: Py = Py::None;
     let _ = py_str("A range of numbers said without a unit, near enough their own figure to be about it.\n\n    \"most adults need seven to nine\" is the range a line about five hours is measured against.\n    \"7,000 to 8,000 steps\" in an answer about walking is a range in another unit entirely, and a\n    range that far from their own number is not the figure they are being compared with.\n    ");
-    let __iter1 = py_iter_or_raise(&stdlib_call("re", "finditer", &[op_add(&op_add(&op_add(&op_add(&py_str("("), &pyrt::xrefs::xget("memory.store_lines", "_COUNT_WORD")), &py_str(")\\s*(?:to|and|or|\\u2013|-)\\s*(")), &pyrt::xrefs::xget("memory.store_lines", "_COUNT_WORD")), &py_str(")\\b")), answer.clone(), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    let __iter1 = py_iter_or_raise(&stdlib_call("re", "finditer", &[op_add(&op_add(&op_add(&op_add(&py_str("("), &g__COUNT_WORD()), &py_str(")\\s*(?:to|and|or|\\u2013|-)\\s*(")), &g__COUNT_WORD()), &py_str(")\\b")), answer.clone(), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     for __item in __iter1 {
     match_ = __item.clone();
     let __unpk2 = py_unpack(&py_tuple(vec![_a_value(&[mcall(&match_.clone(), "group", &[Py::Int(1)])]), _a_value(&[mcall(&match_.clone(), "group", &[Py::Int(2)])])]), 2, None);
@@ -1041,7 +1041,7 @@ pub fn _with_its_unit(args: &[Py]) -> Py {
     let mut pattern: Py = Py::None;
     let mut units: Py = Py::None;
     let _ = py_str("The aim with its unit said, when the answer named the range without one.\n\n    \"most adults need seven to nine\" is a range about hours, and answering \"you are short of the\n    seven to nine that answer named\" leaves out the thing that is counted. A range that is\n    followed by a unit of another kind is that other kind's range: \"three or four runs a week\" is\n    a count of runs, and saying it in kilometres turned a 10k a day into \"more than the three or\n    four km that answer named\".\n    ");
-    pattern = mcall(&call_builtin("dict", &[pyrt::xrefs::xget("memory.store_lines", "_AMOUNTS")]).unwrap_or_else(|e| exc::raise(e)), "get", &[family.clone()]);
+    pattern = mcall(&call_builtin("dict", &[g__AMOUNTS()]).unwrap_or_else(|e| exc::raise(e)), "get", &[family.clone()]);
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&pattern.clone())); if py_truthy(&__b) { __b } else { stdlib_call("re", "search", &[pattern.clone(), aim.clone(), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)) } }) {
     return aim.clone();
     }
@@ -1052,7 +1052,7 @@ pub fn _with_its_unit(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = op_ge(&at.clone(), &Py::Int(0)); if !py_truthy(&__b) { __b } else { _another_kind_follows(&[answer.clone(), op_add(&at.clone(), &call_builtin("len", &[aim.clone()]).unwrap_or_else(|e| exc::raise(e))), family.clone()]) } }) {
     return aim.clone();
     }
-    units = mcall(&pyrt::xrefs::xget("memory.store_lines", "_UNIT_SAID"), "get", &[family.clone()]);
+    units = mcall(&g__UNIT_SAID(), "get", &[family.clone()]);
     if py_truthy(&Py::Bool(!py_truthy(&units.clone()))) {
     return aim.clone();
     }
@@ -1147,7 +1147,7 @@ pub fn enough_reply(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&given.clone()))) {
     return _enough_bare(&[turns.clone(), text.clone(), more.clone(), too_much.clone()]);
     }
-    mine_values = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&given.clone()) { let __unpk7155 = py_unpack(&__item.clone(), 3, None); let mut value: Py = __unpk7155[0].clone(); let mut _family: Py = __unpk7155[1].clone(); let mut _said: Py = __unpk7155[2].clone(); __out.push(value.clone()); } py_set(__out) })() };
+    mine_values = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&given.clone()) { let __unpk453 = py_unpack(&__item.clone(), 3, None); let mut value: Py = __unpk453[0].clone(); let mut _family: Py = __unpk453[1].clone(); let mut _said: Py = __unpk453[2].clone(); __out.push(value.clone()); } py_set(__out) })() };
     reply = _enough_against(&[_candidate_answers(&[turns.clone(), mine_values.clone()]), given.clone(), mine_values.clone(), said.clone(), more.clone(), too_much.clone()]);
     return reply.clone();
     Py::None
@@ -1255,8 +1255,8 @@ pub fn _range_near(args: &[Py]) -> Py {
     let mut pattern: Py = Py::None;
     let mut units: Py = Py::None;
     let _ = py_str("The range in the answer near enough their number to be about it, its unit included.\n\n    \"7,000 to 8,000 steps\" is not the figure a line about 1,200 calories is measured against, so\n    a range three times away from their number either side is passed over. A range said with its\n    unit (\"2,000 to 2,500 calories\") is read before one said without (\"seven to nine\").\n    ");
-    units = mcall(&py_str("|"), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("memory.store_lines", "_AMOUNTS")) { let __unpk545 = py_unpack(&__item.clone(), 2, None); let mut _family: Py = __unpk545[0].clone(); let mut pattern: Py = __unpk545[1].clone(); __out.push(pattern.clone()); } py_list(__out) })() }]);
-    let __iter1 = py_iter_or_raise(&py_tuple(vec![op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&py_str("("), &pyrt::xrefs::xget("memory.store_lines", "_COUNT_WORD")), &py_str(")\\s*(?:to|and|or|\\u2013|-)\\s*(")), &pyrt::xrefs::xget("memory.store_lines", "_COUNT_WORD")), &py_str(")\\s*(?:")), &units.clone()), &py_str(")\\b")), op_add(&op_add(&op_add(&op_add(&py_str("("), &pyrt::xrefs::xget("memory.store_lines", "_COUNT_WORD")), &py_str(")\\s*(?:to|and|or|\\u2013|-)\\s*(")), &pyrt::xrefs::xget("memory.store_lines", "_COUNT_WORD")), &py_str(")\\b"))]));
+    units = mcall(&py_str("|"), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g__AMOUNTS()) { let __unpk4090 = py_unpack(&__item.clone(), 2, None); let mut _family: Py = __unpk4090[0].clone(); let mut pattern: Py = __unpk4090[1].clone(); __out.push(pattern.clone()); } py_list(__out) })() }]);
+    let __iter1 = py_iter_or_raise(&py_tuple(vec![op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&py_str("("), &g__COUNT_WORD()), &py_str(")\\s*(?:to|and|or|\\u2013|-)\\s*(")), &g__COUNT_WORD()), &py_str(")\\s*(?:")), &units.clone()), &py_str(")\\b")), op_add(&op_add(&op_add(&op_add(&py_str("("), &g__COUNT_WORD()), &py_str(")\\s*(?:to|and|or|\\u2013|-)\\s*(")), &g__COUNT_WORD()), &py_str(")\\b"))]));
     for __item in __iter1 {
     pattern = __item.clone();
     let __iter2 = py_iter_or_raise(&stdlib_call("re", "finditer", &[pattern.clone(), answer.clone(), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
@@ -1299,12 +1299,12 @@ pub fn _bare_figures(args: &[Py]) -> Py {
     let mut value: Py = Py::None;
     let mut with_unit: Py = Py::None;
     let _ = py_str("Every number in the line that is not part of an amount with a unit.");
-    with_unit = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&stdlib_call("re", "finditer", &[op_add(&op_add(&op_add(&op_add(&py_str("("), &pyrt::xrefs::xget("memory.store_lines", "_COUNT_WORD")), &py_str(")\\s*(?:-\\s*)?(?:")), &mcall(&py_str("|"), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("memory.store_lines", "_AMOUNTS")) { let __unpk6912 = py_unpack(&__item.clone(), 2, None); let mut _family: Py = __unpk6912[0].clone(); let mut pattern: Py = __unpk6912[1].clone(); __out.push(pattern.clone()); } py_list(__out) })() }])), &py_str(")")), { let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }, stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e))) { let mut match_: Py = __item.clone(); __out.push(py_tuple(vec![mcall(&match_.clone(), "start", &[]), mcall(&match_.clone(), "end", &[])])); } py_list(__out) })() };
+    with_unit = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&stdlib_call("re", "finditer", &[op_add(&op_add(&op_add(&op_add(&py_str("("), &g__COUNT_WORD()), &py_str(")\\s*(?:-\\s*)?(?:")), &mcall(&py_str("|"), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g__AMOUNTS()) { let __unpk5073 = py_unpack(&__item.clone(), 2, None); let mut _family: Py = __unpk5073[0].clone(); let mut pattern: Py = __unpk5073[1].clone(); __out.push(pattern.clone()); } py_list(__out) })() }])), &py_str(")")), { let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }, stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e))) { let mut match_: Py = __item.clone(); __out.push(py_tuple(vec![mcall(&match_.clone(), "start", &[]), mcall(&match_.clone(), "end", &[])])); } py_list(__out) })() };
     out = py_list(vec![]);
-    let __iter1 = py_iter_or_raise(&stdlib_call("re", "finditer", &[op_add(&op_add(&py_str("("), &pyrt::xrefs::xget("memory.store_lines", "_COUNT_WORD")), &py_str(")")), { let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }, stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    let __iter1 = py_iter_or_raise(&stdlib_call("re", "finditer", &[op_add(&op_add(&py_str("("), &g__COUNT_WORD()), &py_str(")")), { let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }, stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     for __item in __iter1 {
     match_ = __item.clone();
-    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&with_unit.clone()) { let __unpk336 = py_unpack(&__item.clone(), 2, None); let mut start: Py = __unpk336[0].clone(); let mut end: Py = __unpk336[1].clone(); __out.push({ let __b = op_le(&start.clone(), &mcall(&match_.clone(), "start", &[])); if !py_truthy(&__b) { __b } else { op_le(&mcall(&match_.clone(), "end", &[]), &end.clone()) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&with_unit.clone()) { let __unpk8880 = py_unpack(&__item.clone(), 2, None); let mut start: Py = __unpk8880[0].clone(); let mut end: Py = __unpk8880[1].clone(); __out.push({ let __b = op_le(&start.clone(), &mcall(&match_.clone(), "start", &[])); if !py_truthy(&__b) { __b } else { op_le(&mcall(&match_.clone(), "end", &[]), &end.clone()) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     continue;
     }
     value = _a_value(&[mcall(&match_.clone(), "group", &[Py::Int(1)])]);
@@ -1437,7 +1437,7 @@ pub fn _enough_against(args: &[Py]) -> Py {
     target = _the_aim_that_is_their_number(&[answer.clone(), family.clone(), value.clone()]);
     }
     if py_truthy(&Py::Bool(!py_truthy(&target.clone()))) {
-    let __iter5 = py_iter_or_raise(&mcall(&pyrt::xrefs::xget("memory.store_lines", "_CONVERT"), "items", &[]));
+    let __iter5 = py_iter_or_raise(&mcall(&g__CONVERT(), "items", &[]));
     for __item in __iter5 {
     let __unpk6 = py_unpack(&__item.clone(), 2, None);
     let __unpk7 = py_unpack(&__unpk6[0].clone(), 2, None);
@@ -1491,7 +1491,7 @@ pub fn _enough_against(args: &[Py]) -> Py {
     if py_truthy(&op_le(&gap.clone(), &Py::Int(0))) {
     return op_modulo(&py_str("None - %s is already %s the %s that answer named."), &py_tuple(vec![spoken.clone(), if py_truthy(&op_le(&value.clone(), &high.clone())) { py_str("at") } else { py_str("past") }, aim.clone()]));
     }
-    units = mcall(&pyrt::xrefs::xget("memory.store_lines", "_UNIT_SAID"), "get", &[family.clone()]);
+    units = mcall(&g__UNIT_SAID(), "get", &[family.clone()]);
     if py_truthy(&Py::Bool(!py_truthy(&units.clone()))) {
     continue;
     }
@@ -1501,7 +1501,7 @@ pub fn _enough_against(args: &[Py]) -> Py {
     amount = py_str("one");
     } else {
     if py_truthy(&Py::Bool(py_contains(&py_tuple(vec![py_str("2"), py_str("3"), py_str("4"), py_str("5"), py_str("6"), py_str("7"), py_str("8"), py_str("9"), py_str("10")]), &amount.clone()))) {
-    amount = mcall(&pyrt::xrefs::xget("memory.store_lines", "NUMBER_WORDS"), "get", &[call_builtin("int", &[amount.clone()]).unwrap_or_else(|e| exc::raise(e)), amount.clone()]);
+    amount = mcall(&g_NUMBER_WORDS(), "get", &[call_builtin("int", &[amount.clone()]).unwrap_or_else(|e| exc::raise(e)), amount.clone()]);
     }
     }
     if py_truthy(&Py::Bool(py_contains(&py_tuple(vec![py_str("a week"), py_str("a day")]), &family.clone()))) {

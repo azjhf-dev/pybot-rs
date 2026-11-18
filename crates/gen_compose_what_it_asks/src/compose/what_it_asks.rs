@@ -159,14 +159,14 @@ pub fn the_shape_it_asks(args: &[Py]) -> Py {
     return want.clone();
     }
     if py_truthy(&mcall(&g_SPEND_IT_ON(), "search", &[line.clone()])) {
-    return pyrt::xrefs::xget("compose.fit", "PICK");
+    return g_PICK();
     }
     money = mcall(&g_MONEY_VERB_ASK(), "search", &[line.clone()]);
     if py_truthy(&{ let __b = money.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_names_alternatives(&[line.clone(), money.clone()]))) } }) {
-    return pyrt::xrefs::xget("compose.fit", "AMOUNT");
+    return g_AMOUNT();
     }
     if py_truthy(&{ let __b = Py::Bool(py_is(&want.clone(), &Py::None)); if !py_truthy(&__b) { __b } else { { let __b = mcall(&g_PRESENT_LOOKING(), "search", &[line.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_NOT_A_PRESENT_ASK(), "search", &[line.clone()]))) } } } }) {
-    return pyrt::xrefs::xget("compose.fit", "OPTIONS");
+    return g_OPTIONS();
     }
     return want.clone();
     Py::None

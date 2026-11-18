@@ -147,7 +147,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_pastime.PRIORITY"); }
     s_PRIORITY(Py::Int(300));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_pastime.THEIR_ANY"); }
-    s_THEIR_ANY(op_add(&op_add(&py_str("(?:"), &pyrt::xrefs::xget("compose.remark", "THEIR_PERSON")), &py_str("|father in law|mother in law|son in law|daughter in law|sister in law|brother in law|friend|best friend|neighbour|neighbor|mate|boss|aunty|auntie|boyfriend|girlfriend|other half|flatmate|housemate|fella|missus|stepmum|stepdad|grandson|granddaughter)")));
+    s_THEIR_ANY(op_add(&op_add(&py_str("(?:"), &g_THEIR_PERSON()), &py_str("|father in law|mother in law|son in law|daughter in law|sister in law|brother in law|friend|best friend|neighbour|neighbor|mate|boss|aunty|auntie|boyfriend|girlfriend|other half|flatmate|housemate|fella|missus|stepmum|stepdad|grandson|granddaughter)")));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_pastime.WHAT_THEY_ARE_INTO"); }
     s_WHAT_THEY_ARE_INTO(py_str("(?:loves|adores|likes|is obsessed with|is mad about|is nuts about)"));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_pastime.WHAT_THEY_DO"); }

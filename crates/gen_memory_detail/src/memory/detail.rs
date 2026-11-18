@@ -632,7 +632,7 @@ pub fn the_detail(args: &[Py]) -> Py {
     if py_truthy(&like_head.clone()) {
     body_words = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&_words(&[slice_or_raise(&said.clone(), &mcall(&like_head.clone(), "end", &[]), &Py::None, &Py::None)])) { let mut w: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&py_tuple(vec![py_str("is"), py_str("are"), py_str("was"), py_str("were"), py_str("be"), py_str("been")]), &w.clone()))) {  __out.push(w.clone()); } } py_list(__out) })() };
     }
-    if py_truthy(&{ let __b = Py::Bool(py_is(&counted_rest.clone(), &Py::None)); if !py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[op_add(&py_list(vec![py_str("")]), &body_words.clone()), body_words.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk8575 = py_unpack(&__item.clone(), 2, None); let mut before: Py = __unpk8575[0].clone(); let mut w: Py = __unpk8575[1].clone(); __out.push(_a_verb(&[w.clone(), before.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_is(&counted_rest.clone(), &Py::None)); if !py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[op_add(&py_list(vec![py_str("")]), &body_words.clone()), body_words.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk857 = py_unpack(&__item.clone(), 2, None); let mut before: Py = __unpk857[0].clone(); let mut w: Py = __unpk857[1].clone(); __out.push(_a_verb(&[w.clone(), before.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }) {
     return Py::None;
     }
     opener = Py::None;
@@ -944,7 +944,7 @@ pub fn the_time_in_the_line(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&words.clone())); if py_truthy(&__b) { __b } else { op_gt(&call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &g_MOST_WORDS()) } }) {
     return Py::None;
     }
-    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[op_add(&py_list(vec![py_str("")]), &words.clone()), words.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk2311 = py_unpack(&__item.clone(), 2, None); let mut before: Py = __unpk2311[0].clone(); let mut word: Py = __unpk2311[1].clone(); __out.push(_a_verb(&[word.clone(), before.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[op_add(&py_list(vec![py_str("")]), &words.clone()), words.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk2566 = py_unpack(&__item.clone(), 2, None); let mut before: Py = __unpk2566[0].clone(); let mut word: Py = __unpk2566[1].clone(); __out.push(_a_verb(&[word.clone(), before.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     return Py::None;
     }
     if py_truthy(&mcall(&g_A_GREETING(), "match", &[mcall(&body.clone(), "strip", &[py_str(" .,!;:")])])) {

@@ -1333,7 +1333,7 @@ pub fn answer(args: &[Py]) -> Py {
     number = __unpk4[1].clone();
     many = if py_truthy(&Py::Bool(py_eq(&number.clone(), &Py::Int(1)))) { thing.clone() } else { op_add(&thing.clone(), &py_str("s")) };
     if py_truthy(&{ let __b = Py::Bool(py_contains(&mcall(&g_IRREGULAR(), "values", &[]), &thing.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_eq(&number.clone(), &Py::Int(1))) } }) {
-    many = geti(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_IRREGULAR(), "items", &[])) { let __unpk6262 = py_unpack(&__item.clone(), 2, None); let mut plural: Py = __unpk6262[0].clone(); let mut one: Py = __unpk6262[1].clone(); if py_truthy(&Py::Bool(py_eq(&one.clone(), &thing.clone()))) {  __out.push(plural.clone()); } } py_list(__out) })() }, &Py::Int(0));
+    many = geti(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_IRREGULAR(), "items", &[])) { let __unpk9042 = py_unpack(&__item.clone(), 2, None); let mut plural: Py = __unpk9042[0].clone(); let mut one: Py = __unpk9042[1].clone(); if py_truthy(&Py::Bool(py_eq(&one.clone(), &thing.clone()))) {  __out.push(plural.clone()); } } py_list(__out) })() }, &Py::Int(0));
     }
     let _ = mcall(&parts.clone(), "append", &[op_add(&op_add(&_many(&[number.clone()]), &py_str(" ")), &many.clone())]);
     }

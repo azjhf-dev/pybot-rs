@@ -659,7 +659,7 @@ pub fn follow_up(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&call_builtin("isinstance", &[memory.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e)))); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&call_builtin("isinstance", &[text.clone(), py_func("str", |args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e)))) } }) {
     return Py::None;
     }
-    if py_truthy(&mcall(&pyrt::xrefs::xget("memory.when", "CALENDAR_NOW"), "match", &[mcall(&mcall(&py_str(" "), "join", &[mcall(&text.clone(), "split", &[])]), "strip", &[py_str(" .!?;,")])])) {
+    if py_truthy(&mcall(&g_CALENDAR_NOW(), "match", &[mcall(&mcall(&py_str(" "), "join", &[mcall(&text.clone(), "split", &[])]), "strip", &[py_str(" .!?;,")])])) {
     return Py::None;
     }
     turns = mcall(&memory.clone(), "get", &[py_str("turns")]);

@@ -682,7 +682,7 @@ pub fn respond(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = asked.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&mcall(&g_ANSWERED(), "match", &[clean.clone()]))); if !py_truthy(&__b) { __b } else { _reads_as_easing(&[clean.clone()]) } } } }) {
     return _pick(&[g_BEFORE_THE_ANSWER(), forms.clone(), clean.clone(), memory.clone()]);
     }
-    in_crisis = call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "CRISIS_WORDS")) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&last.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    in_crisis = call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_CRISIS_WORDS()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&last.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&in_crisis.clone()) {
     if py_truthy(&mcall(&g_THEY_SAY_ITS_FINE(), "search", &[clean.clone()])) {
     return _pick(&[g_ITS_FINE(), forms.clone(), clean.clone(), memory.clone()]);
@@ -694,7 +694,7 @@ pub fn respond(args: &[Py]) -> Py {
     if py_truthy(&mcall(&g_SWALLOWED_NOT_RELIEF(), "search", &[_the_thread(&[memory.clone(), last.clone()])])) {
     return _pick(&[g_SWALLOWED_BETTER(), forms.clone(), clean.clone(), memory.clone()]);
     }
-    return _pick(&[pyrt::xrefs::xget("compose.fallback_data", "CRISIS_BETTER_THEM"), forms.clone(), clean.clone(), memory.clone()]);
+    return _pick(&[g_CRISIS_BETTER_THEM(), forms.clone(), clean.clone(), memory.clone()]);
     }
     return Py::None;
     }

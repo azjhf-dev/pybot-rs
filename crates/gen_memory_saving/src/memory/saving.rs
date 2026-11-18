@@ -369,7 +369,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.saving.NAMED_WHEN"); }
     s_NAMED_WHEN(__data1());
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.saving.WHEN_WORDS"); }
-    s_WHEN_WORDS(op_add(&op_add(&mcall(&py_str("|"), "join", &[g_MONTHS()]), &py_str("|")), &mcall(&py_str("|"), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_NAMED_WHEN()) { let __unpk1265 = py_unpack(&__item.clone(), 2, None); let mut word: Py = __unpk1265[0].clone(); let mut _month: Py = __unpk1265[1].clone(); __out.push(word.clone()); } py_list(__out) })() }])));
+    s_WHEN_WORDS(op_add(&op_add(&mcall(&py_str("|"), "join", &[g_MONTHS()]), &py_str("|")), &mcall(&py_str("|"), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_NAMED_WHEN()) { let __unpk614 = py_unpack(&__item.clone(), 2, None); let mut word: Py = __unpk614[0].clone(); let mut _month: Py = __unpk614[1].clone(); __out.push(word.clone()); } py_list(__out) })() }])));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.saving.END_OF"); }
     s_END_OF(py_str("(?:(?:at\\s+)?the\\s+end\\s+of\\s+|end\\s+of\\s+)?"));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.saving.DATE"); }
