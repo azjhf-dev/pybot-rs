@@ -1,0 +1,2 @@
+use pybot_rs::pyrt::{self,value::*,exc};
+fn main(){std::thread::Builder::new().stack_size(64*1024*1024).spawn(||{pyrt::install_hook();gen_meta::register_all();let text="what is 2 plus 2";for (f,a) in [("_expression",vec![py_str(text)]),("solve",vec![py_str(text),py_dict(vec![(py_str("clean"),py_str(text))]),py_dict(vec![])])]{match exc::catch(||pyrt::xrefs::xcall("knowledge.maths",f,&a)){Ok(v)=>println!("{} {}",f,py_repr(&v)),Err(e)=>println!("{} ERROR {} {}",f,e.class_name,e.message)}}}).unwrap().join().unwrap();}

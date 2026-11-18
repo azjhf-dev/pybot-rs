@@ -92,6 +92,11 @@ fn opening() {
 }
 
 fn main() {
+    std::thread::Builder::new().name("pybot".into()).stack_size(64 * 1024 * 1024)
+        .spawn(run).expect("start chatbot thread").join().expect("chatbot thread");
+}
+
+fn run() {
     pyrt::install_hook();
     let args = parse_args();
     if let Some(seed) = args.seed {
