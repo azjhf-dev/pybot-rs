@@ -394,7 +394,7 @@ class Gen:
         # `from M import G as A` at module level binds A as a module global
         self.import_globals = {}
         for alias, pair in self.info.func.items():
-            if alias not in mod_globals and alias not in fn_names:
+            if alias not in fn_names:
                 self.import_globals[alias] = pair
         mod_globals |= set(self.import_globals)
         for name in sorted(mod_globals):
@@ -571,7 +571,7 @@ class Gen:
             kp = rust_ident(node.args.kwarg.arg)
             pnames = ', '.join(rust_string(p) for p in params)
             self.emit(f"    let mut {kp}: Py = py_dict(__kw.iter().filter(|(n, _)| ![{pnames}].contains(&n.as_str())).map(|(n, v)| (py_str(n), v.clone())).collect());")
-        for name in sorted(ctx.locals - set(params)):
+        for name in sorted(ctx.locals - set(params) - ({node.args.vararg.arg} if node.args.vararg else set()) - ({node.args.kwarg.arg} if node.args.kwarg else set())):
             self.emit(f"    let mut {rust_ident(name)}: Py = Py::None;")
         for stmt in node.body:
             self.gen_stmt(stmt, ctx)
@@ -866,7 +866,7 @@ class Gen:
             kp = rust_ident(node.args.kwarg.arg)
             pnames = ', '.join(rust_string(p) for p in params)
             self.emit(f"    let mut {kp}: Py = py_dict(__kw.iter().filter(|(n, _)| ![{pnames}].contains(&n.as_str())).map(|(n, v)| (py_str(n), v.clone())).collect());")
-        for name in sorted(locals_ - set(captures) - set(params)):
+        for name in sorted(locals_ - set(captures) - set(params) - ({node.args.vararg.arg} if node.args.vararg else set()) - ({node.args.kwarg.arg} if node.args.kwarg else set())):
             self.emit(f"    let mut {rust_ident(name)}: Py = Py::None;")
         for s in node.body:
             self.gen_stmt(s, inner_ctx)

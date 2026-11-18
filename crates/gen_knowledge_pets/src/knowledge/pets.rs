@@ -4376,7 +4376,7 @@ pub fn _lifespan_entries(args: &[Py]) -> Py {
     let mut out: Py = Py::None;
     let mut reply: Py = Py::None;
     let _ = py_str("One entry per animal, so a second animal in the same conversation is a new subject.\n\n    A single entry for the whole table was answered, but the composer reads a follow-up as a\n    part of the last answer and narrows it: \"how long do dogs live\", then \"how long does a cat\n    live\" came back as \"10 to 13 years.\" - the dog's figure, about a cat. An entry of its own\n    for each animal is what makes the line with a different animal in it answer itself.\n    ");
-    out = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g__PET_LIFESPAN()) { let __unpk1643 = py_unpack(&__item.clone(), 2, None); let mut names: Py = __unpk1643[0].clone(); let mut reply: Py = __unpk1643[1].clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(op_add(&py_str("pet-lifespan-"), &mcall(&geti(&names.clone(), &Py::Int(0)), "replace", &[py_str(" "), py_str("-")]))); __args.push(py_tuple(vec![g__LIFESPAN_ASK(), names.clone()])); __args.push(if py_truthy(&Py::Bool(py_contains(&g__BIRD_ALSO_MEAT(), &geti(&names.clone(), &Py::Int(0))))) { _bird_lifespan(&[reply.clone()]) } else { reply.clone() }); __kws.extend(vec![("avoid".to_string(), g__LIFESPAN_AVOID()), ("bias".to_string(), Py::Int(1)), ("guard".to_string(), py_func("_not_a_weight_of_food", |args: &[Py]| _not_a_weight_of_food(args)))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }); } py_list(__out) })() };
+    out = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g__PET_LIFESPAN()) { let __unpk739 = py_unpack(&__item.clone(), 2, None); let mut names: Py = __unpk739[0].clone(); let mut reply: Py = __unpk739[1].clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(op_add(&py_str("pet-lifespan-"), &mcall(&geti(&names.clone(), &Py::Int(0)), "replace", &[py_str(" "), py_str("-")]))); __args.push(py_tuple(vec![g__LIFESPAN_ASK(), names.clone()])); __args.push(if py_truthy(&Py::Bool(py_contains(&g__BIRD_ALSO_MEAT(), &geti(&names.clone(), &Py::Int(0))))) { _bird_lifespan(&[reply.clone()]) } else { reply.clone() }); __kws.extend(vec![("avoid".to_string(), g__LIFESPAN_AVOID()), ("bias".to_string(), Py::Int(1)), ("guard".to_string(), py_func("_not_a_weight_of_food", |args: &[Py]| _not_a_weight_of_food(args)))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }); } py_list(__out) })() };
     let _ = mcall(&out.clone(), "append", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("pet-lifespan")); __args.push(py_tuple(vec![g__LIFESPAN_ASK(), py_tuple(vec![py_str("pet"), py_str("pets"), py_str("animal"), py_str("animals")])])); __args.push(g__LIFESPAN_UNKNOWN()); __kws.extend(vec![("avoid".to_string(), g__LIFESPAN_AVOID()), ("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }]);
     return out.clone();
     Py::None
@@ -4996,7 +4996,6 @@ pub fn __nested_has_0(args: &[Py]) -> Py {
     let mut years: Py = __pos.get(6).cloned().unwrap_or(Py::None);
     let mut wanted: Py = py_list(__pos.get(7..).unwrap_or(&[]).to_vec());
     let mut want: Py = Py::None;
-    let mut wanted: Py = Py::None;
     return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&wanted.clone()) { let mut want: Py = __item.clone(); __out.push(Py::Bool(py_contains(&said.clone(), &op_modulo(&py_str(" %s "), &want.clone())))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
@@ -5058,7 +5057,6 @@ pub fn __nested_has_0(args: &[Py]) -> Py {
     let mut words: Py = __pos.get(8).cloned().unwrap_or(Py::None);
     let mut wanted: Py = py_list(__pos.get(9..).unwrap_or(&[]).to_vec());
     let mut want: Py = Py::None;
-    let mut wanted: Py = Py::None;
     return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&wanted.clone()) { let mut want: Py = __item.clone(); __out.push(Py::Bool(py_contains(&said.clone(), &op_modulo(&py_str(" %s "), &want.clone())))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }

@@ -7477,6 +7477,8 @@ fn module_body() {
     s_ADVICE_AGAIN(pyrt::xrefs::xget("compose.fallback_data", "ADVICE_AGAIN"));
     s_ADVICE_COOL(pyrt::xrefs::xget("compose.fallback_data", "ADVICE_COOL"));
     s_ADVICE_COOL_WORDS(pyrt::xrefs::xget("compose.fallback_data", "ADVICE_COOL_WORDS"));
+    s_ADVICE_LENGTH(pyrt::xrefs::xget("compose.fallback_data", "ADVICE_LENGTH"));
+    s_ADVICE_LENGTH_BARE(pyrt::xrefs::xget("compose.fallback_data", "ADVICE_LENGTH_BARE"));
     s_ADVICE_TIME(pyrt::xrefs::xget("compose.fallback_data", "ADVICE_TIME"));
     s_ADVICE_TURNS(pyrt::xrefs::xget("compose.fallback_data", "ADVICE_TURNS"));
     s_ADVICE_WORDS(pyrt::xrefs::xget("compose.fallback_data", "ADVICE_WORDS"));
@@ -7583,6 +7585,7 @@ fn module_body() {
     s_BOUND_FOR(pyrt::xrefs::xget("compose.fallback_data", "BOUND_FOR"));
     s_BURN_AFTER(pyrt::xrefs::xget("compose.fallback_data", "BURN_AFTER"));
     s_BURN_BLISTER(pyrt::xrefs::xget("compose.fallback_data", "BURN_BLISTER"));
+    s_BUYING_WORDS(pyrt::xrefs::xget("compose.fallback_data", "BUYING_WORDS"));
     s_CALL_ANSWER(pyrt::xrefs::xget("compose.fallback_data", "CALL_ANSWER"));
     s_CALL_WORDS(pyrt::xrefs::xget("compose.fallback_data", "CALL_WORDS"));
     s_CAME_BACK(pyrt::xrefs::xget("compose.fallback_data", "CAME_BACK"));
@@ -7594,10 +7597,12 @@ fn module_body() {
     s_CARE_AFTER_STILL(pyrt::xrefs::xget("compose.fallback_data", "CARE_AFTER_STILL"));
     s_CARE_BETTER(pyrt::xrefs::xget("compose.fallback_data", "CARE_BETTER"));
     s_CARE_HERE(pyrt::xrefs::xget("compose.fallback_data", "CARE_HERE"));
+    s_CARE_HURTS(pyrt::xrefs::xget("compose.fallback_data", "CARE_HURTS"));
     s_CARE_INJURY(pyrt::xrefs::xget("compose.fallback_data", "CARE_INJURY"));
     s_CARE_MODULES(pyrt::xrefs::xget("compose.fallback_data", "CARE_MODULES"));
     s_CARE_NOT_RESOLVED(pyrt::xrefs::xget("compose.fallback_data", "CARE_NOT_RESOLVED"));
     s_CARE_PHRASES(pyrt::xrefs::xget("compose.fallback_data", "CARE_PHRASES"));
+    s_CARE_POINTER(pyrt::xrefs::xget("compose.fallback_data", "CARE_POINTER"));
     s_CARE_PRONOUNS(pyrt::xrefs::xget("compose.fallback_data", "CARE_PRONOUNS"));
     s_CARE_RESOLVED(pyrt::xrefs::xget("compose.fallback_data", "CARE_RESOLVED"));
     s_CARE_ROUTE_BACK(pyrt::xrefs::xget("compose.fallback_data", "CARE_ROUTE_BACK"));
@@ -7606,6 +7611,7 @@ fn module_body() {
     s_CARE_THREAD(pyrt::xrefs::xget("compose.fallback_data", "CARE_THREAD"));
     s_CARE_VISIT(pyrt::xrefs::xget("compose.fallback_data", "CARE_VISIT"));
     s_CARE_VISIT_WARD(pyrt::xrefs::xget("compose.fallback_data", "CARE_VISIT_WARD"));
+    s_CARE_WORDS(pyrt::xrefs::xget("compose.fallback_data", "CARE_WORDS"));
     s_CARING(pyrt::xrefs::xget("compose.fallback_data", "CARING"));
     s_CARING_FOR_A_BODY(pyrt::xrefs::xget("compose.fallback_data", "CARING_FOR_A_BODY"));
     s_CHECK_PHRASES(pyrt::xrefs::xget("compose.fallback_data", "CHECK_PHRASES"));
@@ -7621,6 +7627,7 @@ fn module_body() {
     s_CHOICE_STAKES(pyrt::xrefs::xget("compose.fallback_data", "CHOICE_STAKES"));
     s_CHOICE_THERAPY(pyrt::xrefs::xget("compose.fallback_data", "CHOICE_THERAPY"));
     s_CHOICE_WEIGH(pyrt::xrefs::xget("compose.fallback_data", "CHOICE_WEIGH"));
+    s_CLOSED_DOOR(pyrt::xrefs::xget("compose.fallback_data", "CLOSED_DOOR"));
     s_COMFORT_SAID(pyrt::xrefs::xget("compose.fallback_data", "COMFORT_SAID"));
     s_COMPLAINT_WORDS(pyrt::xrefs::xget("compose.fallback_data", "COMPLAINT_WORDS"));
     s_COMPLAIN_WHO(pyrt::xrefs::xget("compose.fallback_data", "COMPLAIN_WHO"));
@@ -7669,6 +7676,7 @@ fn module_body() {
     s_FAINT_COMING_ANSWER(pyrt::xrefs::xget("compose.fallback_data", "FAINT_COMING_ANSWER"));
     s_FALLBACK_MODULE(pyrt::xrefs::xget("compose.fallback_data", "FALLBACK_MODULE"));
     s_FAVOURITE_GENERAL(pyrt::xrefs::xget("compose.fallback_data", "FAVOURITE_GENERAL"));
+    s_FAVOURITE_WORDS(pyrt::xrefs::xget("compose.fallback_data", "FAVOURITE_WORDS"));
     s_FILLERS(pyrt::xrefs::xget("compose.fallback_data", "FILLERS"));
     s_FILLING_FOODS(pyrt::xrefs::xget("compose.fallback_data", "FILLING_FOODS"));
     s_FILLING_WORDS(pyrt::xrefs::xget("compose.fallback_data", "FILLING_WORDS"));
@@ -7706,6 +7714,7 @@ fn module_body() {
     s_GAS_ANSWER(pyrt::xrefs::xget("compose.fallback_data", "GAS_ANSWER"));
     s_GAS_WORDS(pyrt::xrefs::xget("compose.fallback_data", "GAS_WORDS"));
     s_GENERIC_WORDS(pyrt::xrefs::xget("compose.fallback_data", "GENERIC_WORDS"));
+    s_GIFT_WORDS(pyrt::xrefs::xget("compose.fallback_data", "GIFT_WORDS"));
     s_GONE_VERB(pyrt::xrefs::xget("compose.fallback_data", "GONE_VERB"));
     s_GOOD_TIME_WORDS(pyrt::xrefs::xget("compose.fallback_data", "GOOD_TIME_WORDS"));
     s_GO_ANSWER(pyrt::xrefs::xget("compose.fallback_data", "GO_ANSWER"));
@@ -7760,6 +7769,8 @@ fn module_body() {
     s_HOW_TO_DECIDE_LINES(pyrt::xrefs::xget("compose.fallback_data", "HOW_TO_DECIDE_LINES"));
     s_HUMAN_EMPTY(pyrt::xrefs::xget("compose.fallback_data", "HUMAN_EMPTY"));
     s_IDENTITY(pyrt::xrefs::xget("compose.fallback_data", "IDENTITY"));
+    s_IDIOM_GLAD(pyrt::xrefs::xget("compose.fallback_data", "IDIOM_GLAD"));
+    s_IDIOM_SHY(pyrt::xrefs::xget("compose.fallback_data", "IDIOM_SHY"));
     s_ILL_AFTER(pyrt::xrefs::xget("compose.fallback_data", "ILL_AFTER"));
     s_ILL_BEFORE(pyrt::xrefs::xget("compose.fallback_data", "ILL_BEFORE"));
     s_ILL_SAID_OF_A_BODY(pyrt::xrefs::xget("compose.fallback_data", "ILL_SAID_OF_A_BODY"));
@@ -7842,6 +7853,7 @@ fn module_body() {
     s_LOW_DAY_REPLIES(pyrt::xrefs::xget("compose.fallback_data", "LOW_DAY_REPLIES"));
     s_LUMP(pyrt::xrefs::xget("compose.fallback_data", "LUMP"));
     s_MANNERS_ONLY(pyrt::xrefs::xget("compose.fallback_data", "MANNERS_ONLY"));
+    s_MEDS_WORDS(pyrt::xrefs::xget("compose.fallback_data", "MEDS_WORDS"));
     s_MEMORY(pyrt::xrefs::xget("compose.fallback_data", "MEMORY"));
     s_MESS_PLACES(pyrt::xrefs::xget("compose.fallback_data", "MESS_PLACES"));
     s_MILESTONE(pyrt::xrefs::xget("compose.fallback_data", "MILESTONE"));
@@ -7866,18 +7878,22 @@ fn module_body() {
     s_AT_THE_TILL(pyrt::xrefs::xget("compose.fallback_data", "AT_THE_TILL"));
     s_POINTS_LINES(pyrt::xrefs::xget("compose.fallback_data", "POINTS_LINES"));
     s_MY_WORKINGS(pyrt::xrefs::xget("compose.fallback_data", "MY_WORKINGS"));
+    s_NAMED_NEGATIVE(pyrt::xrefs::xget("compose.fallback_data", "NAMED_NEGATIVE"));
     s_NAMED_TYPES(pyrt::xrefs::xget("compose.fallback_data", "NAMED_TYPES"));
     s_NARROW_ANSWERED(pyrt::xrefs::xget("compose.fallback_data", "NARROW_ANSWERED"));
     s_NARROW_SUBSTANCE(pyrt::xrefs::xget("compose.fallback_data", "NARROW_SUBSTANCE"));
     s_NARROW_WORDS(pyrt::xrefs::xget("compose.fallback_data", "NARROW_WORDS"));
+    s_NEGATIVE(pyrt::xrefs::xget("compose.fallback_data", "NEGATIVE"));
     s_NEGATIVE_CUES(pyrt::xrefs::xget("compose.fallback_data", "NEGATIVE_CUES"));
     s_NEGATORS(pyrt::xrefs::xget("compose.fallback_data", "NEGATORS"));
+    s_NETWORK_WORDS(pyrt::xrefs::xget("compose.fallback_data", "NETWORK_WORDS"));
     s_NEUTRAL(pyrt::xrefs::xget("compose.fallback_data", "NEUTRAL"));
     s_NEVER_MIND(pyrt::xrefs::xget("compose.fallback_data", "NEVER_MIND"));
     s_A_CORRECTION_TAKEN(pyrt::xrefs::xget("compose.fallback_data", "A_CORRECTION_TAKEN"));
     s_NEWS_TO_COME(pyrt::xrefs::xget("compose.fallback_data", "NEWS_TO_COME"));
     s_NOT_AN_ANSWER(pyrt::xrefs::xget("compose.fallback_data", "NOT_AN_ANSWER"));
     s_NOT_A_FORM(pyrt::xrefs::xget("compose.fallback_data", "NOT_A_FORM"));
+    s_NOT_A_NAME(pyrt::xrefs::xget("compose.fallback_data", "NOT_A_NAME"));
     s_NOT_A_VERDICT_SUBJECT(pyrt::xrefs::xget("compose.fallback_data", "NOT_A_VERDICT_SUBJECT"));
     s_NOT_CHOSEN(pyrt::xrefs::xget("compose.fallback_data", "NOT_CHOSEN"));
     s_NOT_ENOUGH_REPLY(pyrt::xrefs::xget("compose.fallback_data", "NOT_ENOUGH_REPLY"));
@@ -7920,6 +7936,7 @@ fn module_body() {
     s_PICKS_A_MECHANISM(pyrt::xrefs::xget("compose.fallback_data", "PICKS_A_MECHANISM"));
     s_PICK_ONLY_WORDS(pyrt::xrefs::xget("compose.fallback_data", "PICK_ONLY_WORDS"));
     s_PLAIN_WORDS(pyrt::xrefs::xget("compose.fallback_data", "PLAIN_WORDS"));
+    s_PLAN(pyrt::xrefs::xget("compose.fallback_data", "PLAN"));
     s_PLAN_DONE(pyrt::xrefs::xget("compose.fallback_data", "PLAN_DONE"));
     s_PLAN_DONE_ACK(pyrt::xrefs::xget("compose.fallback_data", "PLAN_DONE_ACK"));
     s_PLAN_KNOCKED(pyrt::xrefs::xget("compose.fallback_data", "PLAN_KNOCKED"));
@@ -8059,6 +8076,7 @@ fn module_body() {
     s_TRIED_WORSE_ELSEWHERE(pyrt::xrefs::xget("compose.fallback_data", "TRIED_WORSE_ELSEWHERE"));
     s_TRIED_WORSE_REPLIES(pyrt::xrefs::xget("compose.fallback_data", "TRIED_WORSE_REPLIES"));
     s_TROUBLE_CUES(pyrt::xrefs::xget("compose.fallback_data", "TROUBLE_CUES"));
+    s_UNKNOWN(pyrt::xrefs::xget("compose.fallback_data", "UNKNOWN"));
     s_UNKNOWN_ABOUT_A_PET(pyrt::xrefs::xget("compose.fallback_data", "UNKNOWN_ABOUT_A_PET"));
     s_UNKNOWN_ABOUT_SOMEONE(pyrt::xrefs::xget("compose.fallback_data", "UNKNOWN_ABOUT_SOMEONE"));
     s_UNKNOWN_DECIDE(pyrt::xrefs::xget("compose.fallback_data", "UNKNOWN_DECIDE"));
@@ -8384,6 +8402,7 @@ fn module_body() {
     s_REPAIR_WHETHER(pyrt::xrefs::xget("compose.fallback_words", "REPAIR_WHETHER"));
     s_SELF_ASK(pyrt::xrefs::xget("compose.fallback_words", "SELF_ASK"));
     s_A_VIEW_ASKED_FOR(pyrt::xrefs::xget("compose.fallback_words", "A_VIEW_ASKED_FOR"));
+    s_TRUST_ASK(pyrt::xrefs::xget("compose.fallback_words", "TRUST_ASK"));
     s_WHO_FOR_IT(pyrt::xrefs::xget("compose.fallback_words", "WHO_FOR_IT"));
     s_WHO_FOR_IT_BODY(pyrt::xrefs::xget("compose.fallback_words", "WHO_FOR_IT_BODY"));
     s_WHO_FOR_IT_ROUTES(pyrt::xrefs::xget("compose.fallback_words", "WHO_FOR_IT_ROUTES"));
@@ -8786,13 +8805,13 @@ fn module_body() {
     s_NOT_AN_OFFICE(stdlib_call("re", "compile", &[py_str("\\b(?:cake|cakes|bread|dough|sourdough|pastry|dinner|tea|lunch|breakfast|supper|roast|soup|sauce|stock|washing|laundry|wash|load|hair|nails|beard|leg|legs|arm|arms|back|knee|shoulder|eyes|ears|teeth|skin|tattoo|car|cars|bike|bikes|van|boiler|heating|fence|shed|plant|plants|garden|lawn|wall|walls|roof|paint|grout|silicone|sealant|floor|tiles|shelf|door|window|gutter|drive|pond|allotment|chickens|hens|dog|cat|baby|nappy|sleep|diet)\\b")]).unwrap_or_else(|e| exc::raise(e)));
     s_RECORD_CHECK(stdlib_call("re", "compile", &[py_str("\\b(?:check|checking|confirm|look\\s+up|track|trace)\\b")]).unwrap_or_else(|e| exc::raise(e)));
     s_MY_OWN_STATE(stdlib_call("re", "compile", &[py_str("\\b(?:have|has)\\s+i\\s+been\\s+(?:paid|approved|accepted|registered|booked|confirmed|granted|refused|rejected|shortlisted|interviewed|offered|told|sent|given|taken\\s+on|picked|placed|invited|added|approved\\s+for)\\b|\\bam\\s+i\\s+(?:on\\s+the\\s+list|in\\s+the\\s+running|registered|booked\\s+in|signed\\s+up|enrolled|shortlisted|selected)\\b")]).unwrap_or_else(|e| exc::raise(e)));
-    s_RECORD_THINGS(call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "MY_RECORDS")) { let __unpk9420 = py_unpack(&__item.clone(), 3, None); let mut _u: Py = __unpk9420[0].clone(); let mut things: Py = __unpk9420[1].clone(); let mut _u: Py = __unpk9420[2].clone(); for __item in py_iter_or_raise(&things.clone()) { let mut thing: Py = __item.clone(); __out.push(thing.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
+    s_RECORD_THINGS(call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "MY_RECORDS")) { let __unpk8621 = py_unpack(&__item.clone(), 3, None); let mut _u: Py = __unpk8621[0].clone(); let mut things: Py = __unpk8621[1].clone(); let mut _u: Py = __unpk8621[2].clone(); for __item in py_iter_or_raise(&things.clone()) { let mut thing: Py = __item.clone(); __out.push(thing.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
     s_CARD_VALIDITY_ASK(stdlib_call("re", "compile", &[py_str("\\b(?:valid|expire|expires|expired|expiry|run\\s+out|runs\\s+out|ran\\s+out|out\\s+of\\s+date|still\\s+(?:use|work|spend|spent)|still\\s+good)\\b")]).unwrap_or_else(|e| exc::raise(e)));
     s_CARD_BALANCE_ASK(stdlib_call("re", "compile", &[py_str("\\b(?:how\\s+much|balance|left|remaining|still\\s+on)\\b")]).unwrap_or_else(|e| exc::raise(e)));
     s_CARD_NOT_A_BALANCE(stdlib_call("re", "compile", &[py_str("\\b(?:worth|value|declined|refused|cloned|stolen|blocked|cancel|replace|expire|expires|expired)\\b")]).unwrap_or_else(|e| exc::raise(e)));
-    s_MY_CARD_ROW(call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "MY_RECORDS")) { let __unpk7740 = py_unpack(&__item.clone(), 3, None); let mut name: Py = __unpk7740[0].clone(); let mut things: Py = __unpk7740[1].clone(); let mut options: Py = __unpk7740[2].clone(); if py_truthy(&Py::Bool(py_eq(&name.clone(), &py_str("card")))) {  __out.push(options.clone()); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e)));
-    s_MY_MONEY_ROW(call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "MY_RECORDS")) { let __unpk6924 = py_unpack(&__item.clone(), 3, None); let mut name: Py = __unpk6924[0].clone(); let mut things: Py = __unpk6924[1].clone(); let mut options: Py = __unpk6924[2].clone(); if py_truthy(&Py::Bool(py_eq(&name.clone(), &py_str("money")))) {  __out.push(options.clone()); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e)));
-    s_MY_APPLICATION_ROW(call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "MY_RECORDS")) { let __unpk6108 = py_unpack(&__item.clone(), 3, None); let mut name: Py = __unpk6108[0].clone(); let mut things: Py = __unpk6108[1].clone(); let mut options: Py = __unpk6108[2].clone(); if py_truthy(&Py::Bool(py_eq(&name.clone(), &py_str("application")))) {  __out.push(options.clone()); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e)));
+    s_MY_CARD_ROW(call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "MY_RECORDS")) { let __unpk6941 = py_unpack(&__item.clone(), 3, None); let mut name: Py = __unpk6941[0].clone(); let mut things: Py = __unpk6941[1].clone(); let mut options: Py = __unpk6941[2].clone(); if py_truthy(&Py::Bool(py_eq(&name.clone(), &py_str("card")))) {  __out.push(options.clone()); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e)));
+    s_MY_MONEY_ROW(call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "MY_RECORDS")) { let __unpk6125 = py_unpack(&__item.clone(), 3, None); let mut name: Py = __unpk6125[0].clone(); let mut things: Py = __unpk6125[1].clone(); let mut options: Py = __unpk6125[2].clone(); if py_truthy(&Py::Bool(py_eq(&name.clone(), &py_str("money")))) {  __out.push(options.clone()); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e)));
+    s_MY_APPLICATION_ROW(call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "MY_RECORDS")) { let __unpk5309 = py_unpack(&__item.clone(), 3, None); let mut name: Py = __unpk5309[0].clone(); let mut things: Py = __unpk5309[1].clone(); let mut options: Py = __unpk5309[2].clone(); if py_truthy(&Py::Bool(py_eq(&name.clone(), &py_str("application")))) {  __out.push(options.clone()); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e)));
     s_POINTS_SCHEME(stdlib_call("re", "compile", &[py_str("\\b(?:loyalty\\s+(?:points?|cards?|scheme)|nectar|clubcard|club\\s?card|avios|airmiles|reward\\s+(?:points?|cards?|scheme)|store\\s+points?|points\\s+cards?|(?:my|our)\\s+points|(?:my|our)\\s+stamps|stamps?\\s+on\\s+(?:my|the)\\s+card|points\\s+(?:balance|total))\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     s_POINTS_ASK(stdlib_call("re", "compile", &[py_str("\\b(?:how\\s+many|how\\s+much|how\\s+do|how\\s+does|how\\s+can|what(?:'s|\\s+is)?|do|does|did|are|is|when|where|worth|expire|expires|expired|expiring|left|balance|collect|collected|redeem|redeemed|spend|spent)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     s_POINTS_NOT(stdlib_call("re", "compile", &[py_str("\\b(?:licence|license|driving|car|insurance|court|ban|visa|school|university|course|grade|exam|game|match|score|league|rugby|football|quiz|test)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
@@ -9150,6 +9169,7 @@ fn module_body() {
     s_CLOCK_THE_DEPARTURE(pyrt::xrefs::xget("compose.fallback_chain", "CLOCK_THE_DEPARTURE"));
     s_CROWD_ORDER(pyrt::xrefs::xget("compose.fallback_chain", "CROWD_ORDER"));
     s_DAY_PAST(pyrt::xrefs::xget("compose.fallback_chain", "DAY_PAST"));
+    s_FOOD_TOPICS(pyrt::xrefs::xget("compose.fallback_chain", "FOOD_TOPICS"));
     s_FRAME_PREFIX(pyrt::xrefs::xget("compose.fallback_chain", "FRAME_PREFIX"));
     s_HABIT_MIND_IT(pyrt::xrefs::xget("compose.fallback_chain", "HABIT_MIND_IT"));
     s_HABIT_NOT(pyrt::xrefs::xget("compose.fallback_chain", "HABIT_NOT"));
@@ -9171,6 +9191,7 @@ fn module_body() {
     s_NOT_A_REGRET(pyrt::xrefs::xget("compose.fallback_chain", "NOT_A_REGRET"));
     s_NOT_A_THING_TO_GET(pyrt::xrefs::xget("compose.fallback_chain", "NOT_A_THING_TO_GET"));
     s_OPTION_ON_THE_TABLE(pyrt::xrefs::xget("compose.fallback_chain", "OPTION_ON_THE_TABLE"));
+    s_OWN_THING(pyrt::xrefs::xget("compose.fallback_chain", "OWN_THING"));
     s_PAST_DOING(pyrt::xrefs::xget("compose.fallback_chain", "PAST_DOING"));
     s_POLITE_ASK(pyrt::xrefs::xget("compose.fallback_chain", "POLITE_ASK"));
     s_REMIND_ME(pyrt::xrefs::xget("compose.fallback_chain", "REMIND_ME"));
@@ -9239,6 +9260,7 @@ fn module_body() {
     s__the_store_has_the_recall(py_func("_the_store_has_the_recall", |args: &[Py]| pyrt::xrefs::xcall("compose.fallback_chain", "_the_store_has_the_recall", args)));
     s__the_time_said(py_func("_the_time_said", |args: &[Py]| pyrt::xrefs::xcall("compose.fallback_chain", "_the_time_said", args)));
     s__the_win_is_someone_elses(py_func("_the_win_is_someone_elses", |args: &[Py]| pyrt::xrefs::xcall("compose.fallback_chain", "_the_win_is_someone_elses", args)));
+    s__words(py_func("_words", |args: &[Py]| pyrt::xrefs::xcall("compose.fallback_chain", "_words", args)));
     s_reads_as_a_flat_habit(py_func("reads_as_a_flat_habit", |args: &[Py]| pyrt::xrefs::xcall("compose.fallback_chain", "reads_as_a_flat_habit", args)));
     s_reply_for(py_func("reply_for", |args: &[Py]| pyrt::xrefs::xcall("compose.fallback_chain", "reply_for", args)));
     s_takes_as_it_comes(py_func("takes_as_it_comes", |args: &[Py]| pyrt::xrefs::xcall("compose.fallback_chain", "takes_as_it_comes", args)));
@@ -10550,7 +10572,7 @@ pub fn _without_the_idioms(args: &[Py]) -> Py {
     }
     }
     }
-    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk7995 = py_unpack(&__item.clone(), 2, None); let mut at: Py = __unpk7995[0].clone(); let mut word: Py = __unpk7995[1].clone(); if py_truthy(&Py::Bool(!py_contains(&taken.clone(), &at.clone()))) {  __out.push(word.clone()); } } py_set(__out) })() };
+    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk7028 = py_unpack(&__item.clone(), 2, None); let mut at: Py = __unpk7028[0].clone(); let mut word: Py = __unpk7028[1].clone(); if py_truthy(&Py::Bool(!py_contains(&taken.clone(), &at.clone()))) {  __out.push(word.clone()); } } py_set(__out) })() };
     Py::None
 }
 pub fn _thread_is_about_the_body(args: &[Py]) -> Py {
@@ -10723,14 +10745,14 @@ pub fn _thread_names_a_machine(args: &[Py]) -> Py {
     for __item in __iter1 {
     turn = __item.clone();
     tokens = stdlib_call("re", "findall", &[py_str("[a-z']+"), mcall(&{ let __b = mcall(&turn.clone(), "get", &[py_str("user")]); if py_truthy(&__b) { __b } else { py_str("") } }, "lower", &[])]).unwrap_or_else(|e| exc::raise(e));
-    machine_at = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[tokens.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk3330 = py_unpack(&__item.clone(), 2, None); let mut i: Py = __unpk3330[0].clone(); let mut word: Py = __unpk3330[1].clone(); if py_truthy(&Py::Bool(py_contains(&g__THREAD_MACHINES(), &word.clone()))) {  __out.push(i.clone()); } } py_list(__out) })() };
+    machine_at = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[tokens.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk8706 = py_unpack(&__item.clone(), 2, None); let mut i: Py = __unpk8706[0].clone(); let mut word: Py = __unpk8706[1].clone(); if py_truthy(&Py::Bool(py_contains(&g__THREAD_MACHINES(), &word.clone()))) {  __out.push(i.clone()); } } py_list(__out) })() };
     if py_truthy(&Py::Bool(!py_truthy(&machine_at.clone()))) {
     if py_truthy(&op_bitand(&call_builtin("set", &[tokens.clone()]).unwrap_or_else(|e| exc::raise(e)), &op_bitor(&op_bitor(&pyrt::xrefs::xget("compose.fallback_data", "BODY_PARTS"), &pyrt::xrefs::xget("compose.fallback_data", "SYMPTOM_WORDS")), &pyrt::xrefs::xget("compose.fallback_data", "HEALTH_WORDS")))) {
     return Py::Bool(false);
     }
     continue;
     }
-    body_at = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[tokens.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk7824 = py_unpack(&__item.clone(), 2, None); let mut i: Py = __unpk7824[0].clone(); let mut word: Py = __unpk7824[1].clone(); if py_truthy(&{ let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "BODY_PARTS"), &word.clone())); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "SYMPTOM_WORDS"), &word.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "HEALTH_WORDS"), &word.clone())) } } } }) {  __out.push(i.clone()); } } py_list(__out) })() };
+    body_at = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[tokens.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk1890 = py_unpack(&__item.clone(), 2, None); let mut i: Py = __unpk1890[0].clone(); let mut word: Py = __unpk1890[1].clone(); if py_truthy(&{ let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "BODY_PARTS"), &word.clone())); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "SYMPTOM_WORDS"), &word.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("compose.fallback_data", "HEALTH_WORDS"), &word.clone())) } } } }) {  __out.push(i.clone()); } } py_list(__out) })() };
     if py_truthy(&call_builtin("all", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&body_at.clone()) { let mut i: Py = __item.clone(); __out.push(call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&machine_at.clone()) { let mut j: Py = __item.clone(); __out.push(Py::Bool(py_eq(&call_builtin("abs", &[op_sub(&i.clone(), &j.clone())]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1)))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     return Py::Bool(true);
     }
@@ -12445,7 +12467,7 @@ pub fn _the_day_described(args: &[Py]) -> Py {
     if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_DAY_TO_COME_PAST()) { let mut phrase: Py = __item.clone(); __out.push(Py::Bool(py_contains(&line.clone(), &phrase.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     return Py::None;
     }
-    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk2564 = py_unpack(&__item.clone(), 2, None); let mut index: Py = __unpk2564[0].clone(); let mut word: Py = __unpk2564[1].clone(); if py_truthy(&{ let __b = op_gt(&index.clone(), &Py::Int(0)); if !py_truthy(&__b) { __b } else { { let __b = op_lt(&op_add(&index.clone(), &Py::Int(1)), &call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))); if !py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_DAY_WORDS(), "values", &[])) { let mut pool: Py = __item.clone(); __out.push(Py::Bool(py_contains(&pool.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } } } }) {  __out.push({ let __b = Py::Bool(py_eq(&geti(&words.clone(), &op_sub(&index.clone(), &Py::Int(1))), &py_str("the"))); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&py_tuple(vec![py_list(vec![py_str("one")]), py_list(vec![py_str("ones")])]), &slice_or_raise(&words.clone(), &op_add(&index.clone(), &Py::Int(1)), &op_add(&index.clone(), &Py::Int(2)), &Py::None))) } }); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk7634 = py_unpack(&__item.clone(), 2, None); let mut index: Py = __unpk7634[0].clone(); let mut word: Py = __unpk7634[1].clone(); if py_truthy(&{ let __b = op_gt(&index.clone(), &Py::Int(0)); if !py_truthy(&__b) { __b } else { { let __b = op_lt(&op_add(&index.clone(), &Py::Int(1)), &call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))); if !py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_DAY_WORDS(), "values", &[])) { let mut pool: Py = __item.clone(); __out.push(Py::Bool(py_contains(&pool.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } } } }) {  __out.push({ let __b = Py::Bool(py_eq(&geti(&words.clone(), &op_sub(&index.clone(), &Py::Int(1))), &py_str("the"))); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&py_tuple(vec![py_list(vec![py_str("one")]), py_list(vec![py_str("ones")])]), &slice_or_raise(&words.clone(), &op_add(&index.clone(), &Py::Int(1)), &op_add(&index.clone(), &Py::Int(2)), &Py::None))) } }); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     return Py::None;
     }
     day_words = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_DAY_WORDS(), "values", &[])) { let mut pool: Py = __item.clone(); __out.push(Py::Bool(py_contains(&pool.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(word.clone()); } } py_list(__out) })() };
@@ -12499,13 +12521,13 @@ pub fn __nested_ruled_out_4(args: &[Py]) -> Py {
     let __unpk9 = py_unpack(&__item.clone(), 2, None);
     kind = __unpk9[0].clone();
     pool = __unpk9[1].clone();
-    count = call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk7102 = py_unpack(&__item.clone(), 2, None); let mut index: Py = __unpk7102[0].clone(); let mut word: Py = __unpk7102[1].clone(); if py_truthy(&{ let __b = Py::Bool(py_contains(&pool.clone(), &word.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&py_call(&ruled_out, &[index.clone()]))) } }) {  __out.push(Py::Int(1)); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    count = call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk434 = py_unpack(&__item.clone(), 2, None); let mut index: Py = __unpk434[0].clone(); let mut word: Py = __unpk434[1].clone(); if py_truthy(&{ let __b = Py::Bool(py_contains(&pool.clone(), &word.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&py_call(&ruled_out, &[index.clone()]))) } }) {  __out.push(Py::Int(1)); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&op_gt(&count.clone(), &best_count.clone())) {
     let __unpk10 = py_unpack(&py_tuple(vec![kind.clone(), count.clone()]), 2, None);
     best = __unpk10[0].clone();
     best_count = __unpk10[1].clone();
     }
-    cleared = call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk5518 = py_unpack(&__item.clone(), 2, None); let mut index: Py = __unpk5518[0].clone(); let mut word: Py = __unpk5518[1].clone(); if py_truthy(&{ let __b = Py::Bool(py_contains(&pool.clone(), &word.clone())); if !py_truthy(&__b) { __b } else { py_call(&ruled_out, &[index.clone()]) } }) {  __out.push(Py::Int(1)); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    cleared = call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk8849 = py_unpack(&__item.clone(), 2, None); let mut index: Py = __unpk8849[0].clone(); let mut word: Py = __unpk8849[1].clone(); if py_truthy(&{ let __b = Py::Bool(py_contains(&pool.clone(), &word.clone())); if !py_truthy(&__b) { __b } else { py_call(&ruled_out, &[index.clone()]) } }) {  __out.push(Py::Int(1)); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&op_gt(&cleared.clone(), &ruled_count.clone())) {
     let __unpk11 = py_unpack(&py_tuple(vec![kind.clone(), cleared.clone()]), 2, None);
     ruled = __unpk11[0].clone();
@@ -13028,8 +13050,8 @@ pub fn the_limits_said(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&call_builtin("all", &[axes.clone()]).unwrap_or_else(|e| exc::raise(e))))) {
     return py_list(vec![]);
     }
-    with_bound = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[axes.clone(), parts.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk4987 = py_unpack(&__item.clone(), 2, None); let mut axis: Py = __unpk4987[0].clone(); let mut part: Py = __unpk4987[1].clone(); if py_truthy(&the_bound_said(&[part.clone()])) {  __out.push(py_tuple(vec![axis.clone(), part.clone()])); } } py_list(__out) })() };
-    without = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[axes.clone(), parts.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk4123 = py_unpack(&__item.clone(), 2, None); let mut axis: Py = __unpk4123[0].clone(); let mut part: Py = __unpk4123[1].clone(); if py_truthy(&Py::Bool(!py_truthy(&the_bound_said(&[part.clone()])))) {  __out.push(py_tuple(vec![axis.clone(), part.clone()])); } } py_list(__out) })() };
+    with_bound = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[axes.clone(), parts.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk380 = py_unpack(&__item.clone(), 2, None); let mut axis: Py = __unpk380[0].clone(); let mut part: Py = __unpk380[1].clone(); if py_truthy(&the_bound_said(&[part.clone()])) {  __out.push(py_tuple(vec![axis.clone(), part.clone()])); } } py_list(__out) })() };
+    without = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[axes.clone(), parts.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk9515 = py_unpack(&__item.clone(), 2, None); let mut axis: Py = __unpk9515[0].clone(); let mut part: Py = __unpk9515[1].clone(); if py_truthy(&Py::Bool(!py_truthy(&the_bound_said(&[part.clone()])))) {  __out.push(py_tuple(vec![axis.clone(), part.clone()])); } } py_list(__out) })() };
     return op_add(&slice_or_raise(&with_bound.clone(), &Py::None, &Py::None, &op_neg(&Py::Int(1))), &slice_or_raise(&without.clone(), &Py::None, &Py::None, &op_neg(&Py::Int(1))));
     Py::None
 }
@@ -16906,7 +16928,7 @@ pub fn _taste(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&asked.clone())); if !py_truthy(&__b) { __b } else { { let __b = _is_a_choice(&[clean.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_has(&[_choice_advice(&[clean.clone()]), pyrt::xrefs::xget("compose.fallback_data", "ADVICE_WORDS")]))) } } } }) {
     asked = Py::Bool(true);
     }
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&asked.clone())); if !py_truthy(&__b) { __b } else { { let __b = asking.clone(); if !py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "TASTES")) { let __unpk7334 = py_unpack(&__item.clone(), 2, None); let mut phrases: Py = __unpk7334[0].clone(); let mut _u: Py = __unpk7334[1].clone(); __out.push(_has(&[clean.clone(), phrases.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } } } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&asked.clone())); if !py_truthy(&__b) { __b } else { { let __b = asking.clone(); if !py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "TASTES")) { let __unpk7091 = py_unpack(&__item.clone(), 2, None); let mut phrases: Py = __unpk7091[0].clone(); let mut _u: Py = __unpk7091[1].clone(); __out.push(_has(&[clean.clone(), phrases.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } } } }) {
     asked = Py::Bool(true);
     }
     if py_truthy(&Py::Bool(!py_truthy(&asked.clone()))) {
@@ -23333,7 +23355,7 @@ pub fn reads_as_a_return(args: &[Py]) -> Py {
     left = mcall(&op_add(&op_add(&slice_or_raise(&left.clone(), &Py::None, &mcall(&match_.clone(), "start", &[]), &Py::None), &py_str(" ")), &slice_or_raise(&left.clone(), &mcall(&match_.clone(), "end", &[]), &Py::None, &Py::None)), "strip", &[]);
     }
     tokens = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&left.clone(), "split", &[])) { let mut word: Py = __item.clone(); __out.push(stdlib_call("re", "sub", &[py_str("[^a-z0-9']"), py_str(""), word.clone()]).unwrap_or_else(|e| exc::raise(e))); } py_list(__out) })() }) { let mut word: Py = __item.clone(); if py_truthy(&word.clone()) {  __out.push(word.clone()); } } py_list(__out) })() };
-    marker = call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[tokens.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk6008 = py_unpack(&__item.clone(), 2, None); let mut i: Py = __unpk6008[0].clone(); let mut word: Py = __unpk6008[1].clone(); if py_truthy(&Py::Bool(py_contains(&g_A_THING_MARKER(), &word.clone()))) {  __out.push(i.clone()); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e));
+    marker = call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[tokens.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk3003 = py_unpack(&__item.clone(), 2, None); let mut i: Py = __unpk3003[0].clone(); let mut word: Py = __unpk3003[1].clone(); if py_truthy(&Py::Bool(py_contains(&g_A_THING_MARKER(), &word.clone()))) {  __out.push(i.clone()); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&Py::Bool(py_is(&marker.clone(), &Py::None))) {
     return if py_truthy(&call_builtin("all", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&tokens.clone()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&g_A_POINTING_FILLER(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) { py_str("") } else { Py::None };
     }

@@ -94,7 +94,6 @@ pub fn __nested_has_0(args: &[Py]) -> Py {
     let mut words: Py = __pos.get(6).cloned().unwrap_or(Py::None);
     let mut wanted: Py = py_list(__pos.get(7..).unwrap_or(&[]).to_vec());
     let mut want: Py = Py::None;
-    let mut wanted: Py = Py::None;
     return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); for __item in py_iter_or_raise(&wanted.clone()) { let mut want: Py = __item.clone(); __out.push({ let __b = Py::Bool(py_eq(&word.clone(), &want.clone())); if py_truthy(&__b) { __b } else { mcall(&word.clone(), "startswith", &[want.clone()]) } }); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
@@ -115,7 +114,6 @@ pub fn __nested_says_1(args: &[Py]) -> Py {
     let mut words: Py = __pos.get(6).cloned().unwrap_or(Py::None);
     let mut phrases: Py = py_list(__pos.get(7..).unwrap_or(&[]).to_vec());
     let mut phrase: Py = Py::None;
-    let mut phrases: Py = Py::None;
     return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&phrases.clone()) { let mut phrase: Py = __item.clone(); __out.push(Py::Bool(py_contains(&said.clone(), &phrase.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }

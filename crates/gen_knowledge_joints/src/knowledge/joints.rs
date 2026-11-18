@@ -489,9 +489,7 @@ pub fn _a_replacement(args: &[Py]) -> Py {
     }
     let mut args: Py = py_list(__pos.get(0..).unwrap_or(&[]).to_vec());
     let mut kwargs: Py = py_dict(__kw.iter().filter(|(n, _)| ![].contains(&n.as_str())).map(|(n, v)| (py_str(n), v.clone())).collect());
-    let mut args: Py = Py::None;
     let mut asked: Py = Py::None;
-    let mut kwargs: Py = Py::None;
     let _ = py_str("One of the cards about a joint that was replaced, which a road line must not reach.");
     asked = mcall(&kwargs.clone(), "pop", &[py_str("guard"), Py::None]);
     if py_truthy(&Py::Bool(py_is(&asked.clone(), &Py::None))) {

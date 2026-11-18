@@ -1945,7 +1945,6 @@ pub fn __nested_has_0(args: &[Py]) -> Py {
     let mut words: Py = __pos.get(2).cloned().unwrap_or(Py::None);
     let mut items: Py = py_list(__pos.get(3..).unwrap_or(&[]).to_vec());
     let mut item: Py = Py::None;
-    let mut items: Py = Py::None;
     return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&items.clone()) { let mut item: Py = __item.clone(); __out.push(Py::Bool(py_contains(&said.clone(), &op_modulo(&py_str(" %s "), &item.clone())))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }

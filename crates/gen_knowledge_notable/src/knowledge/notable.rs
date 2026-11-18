@@ -231,8 +231,6 @@ pub fn _row(args: &[Py]) -> Py {
     }
     let mut args: Py = py_list(__pos.get(0..).unwrap_or(&[]).to_vec());
     let mut kwargs: Py = py_dict(__kw.iter().filter(|(n, _)| ![].contains(&n.as_str())).map(|(n, v)| (py_str(n), v.clone())).collect());
-    let mut args: Py = Py::None;
-    let mut kwargs: Py = Py::None;
     let _ = py_str("Keep one entry. `entry()` builds it and returns it; the domain needs the list.");
     let _ = mcall(&g_ENTRIES(), "append", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.extend(py_iter_or_raise(&args.clone())); for (k, v) in kw_pairs(&kwargs.clone()) { __kws.push((k, v)); } if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }]);
     Py::None

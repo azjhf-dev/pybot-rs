@@ -1001,7 +1001,6 @@ pub fn _entry(args: &[Py]) -> Py {
     let mut kw: Py = py_dict(__kw.iter().filter(|(n, _)| !["name", "keys", "reply", "avoid"].contains(&n.as_str())).map(|(n, v)| (py_str(n), v.clone())).collect());
     let mut ask: Py = Py::None;
     let mut bike_words: Py = Py::None;
-    let mut kw: Py = Py::None;
     ask = mcall(&kw.clone(), "get", &[py_str("ask")]);
     if py_truthy(&ask.clone()) {
     let _ = py_setitem(&kw.clone(), &py_str("ask"), op_add(&call_builtin("tuple", &[ask.clone()]).unwrap_or_else(|e| exc::raise(e)), &g_MODELS()));

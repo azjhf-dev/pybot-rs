@@ -2896,6 +2896,7 @@ fn module_body() {
     s_OTHERS(pyrt::xrefs::xget("modules.safety_phrases", "OTHERS"));
     s_PARTNER_CLOSE(pyrt::xrefs::xget("modules.safety_phrases", "PARTNER_CLOSE"));
     s_PEOPLE(pyrt::xrefs::xget("modules.safety_phrases", "PEOPLE"));
+    s_PERSON(pyrt::xrefs::xget("modules.safety_phrases", "PERSON"));
     s_PLAY_FACE_REPLIES(pyrt::xrefs::xget("modules.safety_phrases", "PLAY_FACE_REPLIES"));
     s_PURSUIT(pyrt::xrefs::xget("modules.safety_phrases", "PURSUIT"));
     s_PURSUIT_FEAR(pyrt::xrefs::xget("modules.safety_phrases", "PURSUIT_FEAR"));

@@ -550,11 +550,11 @@ pub fn the_earlier_turn(args: &[Py]) -> Py {
     return geti(&earlier.clone(), &op_neg(&Py::Int(1)));
     }
     scored = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&earlier.clone()) { let mut row: Py = __item.clone(); __out.push(py_tuple(vec![call_builtin("len", &[op_bitand(&wanted.clone(), &_the_forms(&[pyrt::xrefs::xcall("memory.topics", "content", &[{ let __b = mcall(&row.clone(), "get", &[py_str("user")]); if py_truthy(&__b) { __b } else { py_str("") } }])]))]).unwrap_or_else(|e| exc::raise(e)), row.clone()])); } py_list(__out) })() };
-    best = call_builtin("max", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&scored.clone()) { let __unpk4504 = py_unpack(&__item.clone(), 2, None); let mut hit: Py = __unpk4504[0].clone(); let mut _row: Py = __unpk4504[1].clone(); __out.push(hit.clone()); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    best = call_builtin("max", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&scored.clone()) { let __unpk2153 = py_unpack(&__item.clone(), 2, None); let mut hit: Py = __unpk2153[0].clone(); let mut _row: Py = __unpk2153[1].clone(); __out.push(hit.clone()); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&Py::Bool(!py_truthy(&best.clone()))) {
     return geti(&earlier.clone(), &op_neg(&Py::Int(1)));
     }
-    return geti(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&scored.clone()) { let __unpk1465 = py_unpack(&__item.clone(), 2, None); let mut hit: Py = __unpk1465[0].clone(); let mut row: Py = __unpk1465[1].clone(); if py_truthy(&Py::Bool(py_eq(&hit.clone(), &best.clone()))) {  __out.push(row.clone()); } } py_list(__out) })() }, &op_neg(&Py::Int(1)));
+    return geti(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&scored.clone()) { let __unpk3545 = py_unpack(&__item.clone(), 2, None); let mut hit: Py = __unpk3545[0].clone(); let mut row: Py = __unpk3545[1].clone(); if py_truthy(&Py::Bool(py_eq(&hit.clone(), &best.clone()))) {  __out.push(row.clone()); } } py_list(__out) })() }, &op_neg(&Py::Int(1)));
     Py::None
 }
 pub fn first_line(args: &[Py]) -> Py {
@@ -905,8 +905,6 @@ pub fn __nested_guarded_0(args: &[Py]) -> Py {
     let mut memory: Py = __pos.get(2).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "memory").map(|(_, v)| v.clone())).unwrap_or(Py::None);
     let mut args: Py = py_list(__pos.get(3..).unwrap_or(&[]).to_vec());
     let mut kwargs: Py = py_dict(__kw.iter().filter(|(n, _)| !["memory"].contains(&n.as_str())).map(|(n, v)| (py_str(n), v.clone())).collect());
-    let mut args: Py = Py::None;
-    let mut kwargs: Py = Py::None;
     if py_truthy(&nothing_said_before(&[memory.clone()])) {
     return Py::None;
     }

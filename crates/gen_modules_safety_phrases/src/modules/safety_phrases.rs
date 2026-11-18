@@ -412,7 +412,6 @@ pub fn _both_here(args: &[Py]) -> Py {
     }
     let mut groups: Py = py_list(__pos.get(0..).unwrap_or(&[]).to_vec());
     let mut group: Py = Py::None;
-    let mut groups: Py = Py::None;
     let mut parts: Py = Py::None;
     let _ = py_str("One thing from each group, all in the line, in whichever order.");
     parts = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&groups.clone()) { let mut group: Py = __item.clone(); __out.push(op_add(&op_add(&py_str("(?=.*(?:"), &mcall(&py_str("|"), "join", &[group.clone()])), &py_str("))"))); } py_list(__out) })() };

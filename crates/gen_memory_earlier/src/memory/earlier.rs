@@ -405,7 +405,7 @@ pub fn carried(args: &[Py]) -> Py {
     if py_truthy(&after.clone()) {
     lines = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&lines.clone()) { let mut pair: Py = __item.clone(); if py_truthy(&op_gt(&geti(&pair.clone(), &Py::Int(0)), &after.clone())) {  __out.push(pair.clone()); } } py_list(__out) })() };
     }
-    hits = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&lines.clone()) { let __unpk2925 = py_unpack(&__item.clone(), 2, None); let mut number: Py = __unpk2925[0].clone(); let mut line: Py = __unpk2925[1].clone(); if py_truthy(&carries(&[kind.clone(), line.clone()])) {  __out.push(py_tuple(vec![number.clone(), line.clone()])); } } py_list(__out) })() };
+    hits = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&lines.clone()) { let __unpk1604 = py_unpack(&__item.clone(), 2, None); let mut number: Py = __unpk1604[0].clone(); let mut line: Py = __unpk1604[1].clone(); if py_truthy(&carries(&[kind.clone(), line.clone()])) {  __out.push(py_tuple(vec![number.clone(), line.clone()])); } } py_list(__out) })() };
     if py_truthy(&Py::Bool(!py_truthy(&hits.clone()))) {
     return Py::None;
     }
@@ -470,7 +470,7 @@ pub fn _pointing_back(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&about.clone()))) {
     return Py::Bool(false);
     }
-    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&said_lines(&[memory.clone()])) { let __unpk204 = py_unpack(&__item.clone(), 2, None); let mut _u: Py = __unpk204[0].clone(); let mut line: Py = __unpk204[1].clone(); __out.push(_mentions(&[line.clone(), about.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&said_lines(&[memory.clone()])) { let __unpk8419 = py_unpack(&__item.clone(), 2, None); let mut _u: Py = __unpk8419[0].clone(); let mut line: Py = __unpk8419[1].clone(); __out.push(_mentions(&[line.clone(), about.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn carried_alone(args: &[Py]) -> Py {
@@ -493,7 +493,7 @@ pub fn carried_alone(args: &[Py]) -> Py {
     let mut hits: Py = Py::None;
     let mut line: Py = Py::None;
     let _ = py_str("The one line of the chat that carries a value of this kind, when there is exactly one.\n\n    A chat that has said one size and nothing else has answered \"what size was it again\" whatever\n    the ask calls the thing - the wallpaper chat's \"back to the bedroom, what size was it again\" is\n    about the 3 metres by 4 it gave a few turns before. Two values of the kind and there is nothing\n    to hand back, so nothing is guessed.\n    ");
-    hits = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&said_lines(&[memory.clone()])) { let __unpk2124 = py_unpack(&__item.clone(), 2, None); let mut _u: Py = __unpk2124[0].clone(); let mut line: Py = __unpk2124[1].clone(); if py_truthy(&carries(&[kind.clone(), line.clone()])) {  __out.push(line.clone()); } } py_list(__out) })() };
+    hits = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&said_lines(&[memory.clone()])) { let __unpk1972 = py_unpack(&__item.clone(), 2, None); let mut _u: Py = __unpk1972[0].clone(); let mut line: Py = __unpk1972[1].clone(); if py_truthy(&carries(&[kind.clone(), line.clone()])) {  __out.push(line.clone()); } } py_list(__out) })() };
     return if py_truthy(&Py::Bool(py_eq(&call_builtin("len", &[hits.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1)))) { geti(&hits.clone(), &Py::Int(0)) } else { Py::None };
     Py::None
 }
@@ -908,7 +908,7 @@ pub fn put_right(args: &[Py]) -> Py {
     }
     } else {
     if py_truthy(&named.clone()) {
-    introduced = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&said_lines(&[memory.clone()])) { let __unpk1832 = py_unpack(&__item.clone(), 2, None); let mut number: Py = __unpk1832[0].clone(); let mut line: Py = __unpk1832[1].clone(); if py_truthy(&_mentions(&[line.clone(), named.clone()])) {  __out.push(number.clone()); } } py_list(__out) })() };
+    introduced = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&said_lines(&[memory.clone()])) { let __unpk7432 = py_unpack(&__item.clone(), 2, None); let mut number: Py = __unpk7432[0].clone(); let mut line: Py = __unpk7432[1].clone(); if py_truthy(&_mentions(&[line.clone(), named.clone()])) {  __out.push(number.clone()); } } py_list(__out) })() };
     found = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(memory.clone()); __args.push(kind.clone()); __args.push(py_tuple(vec![py_str("she"), py_str("he"), py_str("they")])); __kws.extend(vec![("after".to_string(), if py_truthy(&named_here.clone()) { call_builtin("max", &[{ let __b = introduced.clone(); if py_truthy(&__b) { __b } else { py_list(vec![Py::Int(0)]) } }]).unwrap_or_else(|e| exc::raise(e)) } else { Py::Int(0) })]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| carried(args))(&__args) };
     if py_truthy(&found.clone()) {
     return hand_back(&[geti(&found.clone(), &Py::Int(1)), memory.clone(), claim.clone()]);

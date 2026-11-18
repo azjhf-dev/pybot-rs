@@ -139,7 +139,6 @@ pub fn _other_way_round(args: &[Py]) -> Py {
         }
     }
     let mut others: Py = py_list(__pos.get(0..).unwrap_or(&[]).to_vec());
-    let mut others: Py = Py::None;
     let mut phrase: Py = Py::None;
     let mut word: Py = Py::None;
     let _ = py_str("The phrases a line uses when the *other* ingredient is the one being replaced.\n\n    \"Can I use oil instead of butter\" is a question about the pair, and cooking.py already\n    answers those pairs one by one with its own verdict rows (\"yes, use three-quarters of the\n    weight and expect a denser crumb\"). A row here is the answer to a missing ingredient, so it\n    stands down whenever the line names another ingredient as the one being swapped out - which\n    is the only reading of \"instead of X\" when X is not this row's own word.\n    ");

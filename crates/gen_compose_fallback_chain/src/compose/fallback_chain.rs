@@ -5755,6 +5755,7 @@ fn module_body() {
     s_EXPERT_WORDS(pyrt::xrefs::xget("compose.fallback", "EXPERT_WORDS"));
     s_FLAT(pyrt::xrefs::xget("compose.fallback", "FLAT"));
     s_FLAT_LINE(pyrt::xrefs::xget("compose.fallback", "FLAT_LINE"));
+    s_FOOD_TOPICS(pyrt::xrefs::xget("compose.fallback", "FOOD_TOPICS"));
     s_FORGETS_AGAIN(pyrt::xrefs::xget("compose.fallback", "FORGETS_AGAIN"));
     s_FORGETS_A_CLASH(pyrt::xrefs::xget("compose.fallback", "FORGETS_A_CLASH"));
     s_FORGET_A_DATE(pyrt::xrefs::xget("compose.fallback", "FORGET_A_DATE"));
@@ -5834,6 +5835,7 @@ fn module_body() {
     s_NOT_TOO_OLD(pyrt::xrefs::xget("compose.fallback", "NOT_TOO_OLD"));
     s_NO_DIRECTION_REPLY(pyrt::xrefs::xget("compose.fallback", "NO_DIRECTION_REPLY"));
     s_ONE_SKILL_RATED(pyrt::xrefs::xget("compose.fallback", "ONE_SKILL_RATED"));
+    s_OWN_THING(pyrt::xrefs::xget("compose.fallback", "OWN_THING"));
     s_PAST_STATE_CUES(pyrt::xrefs::xget("compose.fallback", "PAST_STATE_CUES"));
     s_PENDING_DOUBT(pyrt::xrefs::xget("compose.fallback", "PENDING_DOUBT"));
     s_PENDING_LANDED(pyrt::xrefs::xget("compose.fallback", "PENDING_LANDED"));
