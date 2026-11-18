@@ -1,0 +1,10 @@
+[package]
+name = "pyrt"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+regex = "1"
+fancy-regex = "0.14"
+indexmap = "2"
+unicode-normalization = "0.1"

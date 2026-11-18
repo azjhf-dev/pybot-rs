@@ -1,0 +1,578 @@
+#![allow(non_snake_case, non_upper_case_globals, dead_code, unused_mut, unused_variables, unused_assignments, unused_parens, unused_imports, clippy::all)]
+use pyrt::builtins::*;
+use pyrt::pybuiltins::*;
+use pyrt::stdlib::*;
+use pyrt::value::*;
+use pyrt::exc;
+use pyrt::{pystr, pyre, pyrandom, pydatetime};
+use std::sync::{LazyLock as Lazy, RwLock, Once};
+use std::cell::{Cell, RefCell};
+use std::rc::Rc;
+use indexmap::IndexMap;
+
+
+thread_local! { static G_BEEN_ON_A_STRETCH: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G_CARING_STRETCH: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G_CARING_STRETCH_SAID_BACK: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G_EFFORT_STRETCH: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G_EFFORT_STRETCH_SAID_BACK: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G_NOT_A_SPENT_JOB: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G_NOT_A_STRETCH_JOB: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G_POINTER_STRETCH: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G_QUEUE_STRETCH: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G_QUEUE_STRETCH_SAID_BACK: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G_SOMEBODY_ELSE_IN_IT: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G_SPENT_ON_A_STRETCH: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G_STRETCH_IS_FINISHED: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G_STRETCH_STARTS_UPPER: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G_TAKEN_A_STRETCH: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G_TALKING_STRETCH_SAID_BACK: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G_TALKING_TO_A_PLACE: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G_UP_WITH_A_PERSON: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G_VIGIL: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G_VISITING_SOMEBODY_SAID_BACK: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G_VISITING_STRETCH: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G_VISITING_STRETCH_SAID_BACK: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G_WAITING_AFTER_THE_STRETCH: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G_WAITING_FOR_A_PERSON: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G_WAITING_ON_THEIR_OWN: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G_WAITING_ON_THEIR_OWN_SAID_BACK: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G_WAITING_STRETCH: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G_WAITING_STRETCH_SAID_BACK: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G_WAITING_TO_TALK: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G_WITH_THEIR_OWN: RefCell<Py> = const { RefCell::new(Py::None) }; }
+static INIT: Once = Once::new();
+thread_local! { static INITIALIZING: Cell<bool> = const { Cell::new(false) }; }
+pub fn ensure_init() {
+    if INITIALIZING.with(|c| c.get()) { return; }
+    INIT.call_once(|| {
+        INITIALIZING.with(|c| c.set(true));
+        let _ = exc::catch(|| { module_body(); Py::None });
+        INITIALIZING.with(|c| c.set(false));
+    });
+}
+pub fn g_BEEN_ON_A_STRETCH() -> Py { ensure_init(); G_BEEN_ON_A_STRETCH.with(|c| c.borrow().clone()) }
+#[allow(non_snake_case)]
+pub fn s_BEEN_ON_A_STRETCH(v: Py) { ensure_init(); G_BEEN_ON_A_STRETCH.with(|c| *c.borrow_mut() = v); }
+pub fn g_CARING_STRETCH() -> Py { ensure_init(); G_CARING_STRETCH.with(|c| c.borrow().clone()) }
+#[allow(non_snake_case)]
+pub fn s_CARING_STRETCH(v: Py) { ensure_init(); G_CARING_STRETCH.with(|c| *c.borrow_mut() = v); }
+pub fn g_CARING_STRETCH_SAID_BACK() -> Py { ensure_init(); G_CARING_STRETCH_SAID_BACK.with(|c| c.borrow().clone()) }
+#[allow(non_snake_case)]
+pub fn s_CARING_STRETCH_SAID_BACK(v: Py) { ensure_init(); G_CARING_STRETCH_SAID_BACK.with(|c| *c.borrow_mut() = v); }
+pub fn g_EFFORT_STRETCH() -> Py { ensure_init(); G_EFFORT_STRETCH.with(|c| c.borrow().clone()) }
+#[allow(non_snake_case)]
+pub fn s_EFFORT_STRETCH(v: Py) { ensure_init(); G_EFFORT_STRETCH.with(|c| *c.borrow_mut() = v); }
+pub fn g_EFFORT_STRETCH_SAID_BACK() -> Py { ensure_init(); G_EFFORT_STRETCH_SAID_BACK.with(|c| c.borrow().clone()) }
+#[allow(non_snake_case)]
+pub fn s_EFFORT_STRETCH_SAID_BACK(v: Py) { ensure_init(); G_EFFORT_STRETCH_SAID_BACK.with(|c| *c.borrow_mut() = v); }
+pub fn g_NOT_A_SPENT_JOB() -> Py { ensure_init(); G_NOT_A_SPENT_JOB.with(|c| c.borrow().clone()) }
+#[allow(non_snake_case)]
+pub fn s_NOT_A_SPENT_JOB(v: Py) { ensure_init(); G_NOT_A_SPENT_JOB.with(|c| *c.borrow_mut() = v); }
+pub fn g_NOT_A_STRETCH_JOB() -> Py { ensure_init(); G_NOT_A_STRETCH_JOB.with(|c| c.borrow().clone()) }
+#[allow(non_snake_case)]
+pub fn s_NOT_A_STRETCH_JOB(v: Py) { ensure_init(); G_NOT_A_STRETCH_JOB.with(|c| *c.borrow_mut() = v); }
+pub fn g_POINTER_STRETCH() -> Py { ensure_init(); G_POINTER_STRETCH.with(|c| c.borrow().clone()) }
+#[allow(non_snake_case)]
+pub fn s_POINTER_STRETCH(v: Py) { ensure_init(); G_POINTER_STRETCH.with(|c| *c.borrow_mut() = v); }
+pub fn g_QUEUE_STRETCH() -> Py { ensure_init(); G_QUEUE_STRETCH.with(|c| c.borrow().clone()) }
+#[allow(non_snake_case)]
+pub fn s_QUEUE_STRETCH(v: Py) { ensure_init(); G_QUEUE_STRETCH.with(|c| *c.borrow_mut() = v); }
+pub fn g_QUEUE_STRETCH_SAID_BACK() -> Py { ensure_init(); G_QUEUE_STRETCH_SAID_BACK.with(|c| c.borrow().clone()) }
+#[allow(non_snake_case)]
+pub fn s_QUEUE_STRETCH_SAID_BACK(v: Py) { ensure_init(); G_QUEUE_STRETCH_SAID_BACK.with(|c| *c.borrow_mut() = v); }
+pub fn g_SOMEBODY_ELSE_IN_IT() -> Py { ensure_init(); G_SOMEBODY_ELSE_IN_IT.with(|c| c.borrow().clone()) }
+#[allow(non_snake_case)]
+pub fn s_SOMEBODY_ELSE_IN_IT(v: Py) { ensure_init(); G_SOMEBODY_ELSE_IN_IT.with(|c| *c.borrow_mut() = v); }
+pub fn g_SPENT_ON_A_STRETCH() -> Py { ensure_init(); G_SPENT_ON_A_STRETCH.with(|c| c.borrow().clone()) }
+#[allow(non_snake_case)]
+pub fn s_SPENT_ON_A_STRETCH(v: Py) { ensure_init(); G_SPENT_ON_A_STRETCH.with(|c| *c.borrow_mut() = v); }
+pub fn g_STRETCH_IS_FINISHED() -> Py { ensure_init(); G_STRETCH_IS_FINISHED.with(|c| c.borrow().clone()) }
+#[allow(non_snake_case)]
+pub fn s_STRETCH_IS_FINISHED(v: Py) { ensure_init(); G_STRETCH_IS_FINISHED.with(|c| *c.borrow_mut() = v); }
+pub fn g_STRETCH_STARTS_UPPER() -> Py { ensure_init(); G_STRETCH_STARTS_UPPER.with(|c| c.borrow().clone()) }
+#[allow(non_snake_case)]
+pub fn s_STRETCH_STARTS_UPPER(v: Py) { ensure_init(); G_STRETCH_STARTS_UPPER.with(|c| *c.borrow_mut() = v); }
+pub fn g_TAKEN_A_STRETCH() -> Py { ensure_init(); G_TAKEN_A_STRETCH.with(|c| c.borrow().clone()) }
+#[allow(non_snake_case)]
+pub fn s_TAKEN_A_STRETCH(v: Py) { ensure_init(); G_TAKEN_A_STRETCH.with(|c| *c.borrow_mut() = v); }
+pub fn g_TALKING_STRETCH_SAID_BACK() -> Py { ensure_init(); G_TALKING_STRETCH_SAID_BACK.with(|c| c.borrow().clone()) }
+#[allow(non_snake_case)]
+pub fn s_TALKING_STRETCH_SAID_BACK(v: Py) { ensure_init(); G_TALKING_STRETCH_SAID_BACK.with(|c| *c.borrow_mut() = v); }
+pub fn g_TALKING_TO_A_PLACE() -> Py { ensure_init(); G_TALKING_TO_A_PLACE.with(|c| c.borrow().clone()) }
+#[allow(non_snake_case)]
+pub fn s_TALKING_TO_A_PLACE(v: Py) { ensure_init(); G_TALKING_TO_A_PLACE.with(|c| *c.borrow_mut() = v); }
+pub fn g_UP_WITH_A_PERSON() -> Py { ensure_init(); G_UP_WITH_A_PERSON.with(|c| c.borrow().clone()) }
+#[allow(non_snake_case)]
+pub fn s_UP_WITH_A_PERSON(v: Py) { ensure_init(); G_UP_WITH_A_PERSON.with(|c| *c.borrow_mut() = v); }
+pub fn g_VIGIL() -> Py { ensure_init(); G_VIGIL.with(|c| c.borrow().clone()) }
+#[allow(non_snake_case)]
+pub fn s_VIGIL(v: Py) { ensure_init(); G_VIGIL.with(|c| *c.borrow_mut() = v); }
+pub fn g_VISITING_SOMEBODY_SAID_BACK() -> Py { ensure_init(); G_VISITING_SOMEBODY_SAID_BACK.with(|c| c.borrow().clone()) }
+#[allow(non_snake_case)]
+pub fn s_VISITING_SOMEBODY_SAID_BACK(v: Py) { ensure_init(); G_VISITING_SOMEBODY_SAID_BACK.with(|c| *c.borrow_mut() = v); }
+pub fn g_VISITING_STRETCH() -> Py { ensure_init(); G_VISITING_STRETCH.with(|c| c.borrow().clone()) }
+#[allow(non_snake_case)]
+pub fn s_VISITING_STRETCH(v: Py) { ensure_init(); G_VISITING_STRETCH.with(|c| *c.borrow_mut() = v); }
+pub fn g_VISITING_STRETCH_SAID_BACK() -> Py { ensure_init(); G_VISITING_STRETCH_SAID_BACK.with(|c| c.borrow().clone()) }
+#[allow(non_snake_case)]
+pub fn s_VISITING_STRETCH_SAID_BACK(v: Py) { ensure_init(); G_VISITING_STRETCH_SAID_BACK.with(|c| *c.borrow_mut() = v); }
+pub fn g_WAITING_AFTER_THE_STRETCH() -> Py { ensure_init(); G_WAITING_AFTER_THE_STRETCH.with(|c| c.borrow().clone()) }
+#[allow(non_snake_case)]
+pub fn s_WAITING_AFTER_THE_STRETCH(v: Py) { ensure_init(); G_WAITING_AFTER_THE_STRETCH.with(|c| *c.borrow_mut() = v); }
+pub fn g_WAITING_FOR_A_PERSON() -> Py { ensure_init(); G_WAITING_FOR_A_PERSON.with(|c| c.borrow().clone()) }
+#[allow(non_snake_case)]
+pub fn s_WAITING_FOR_A_PERSON(v: Py) { ensure_init(); G_WAITING_FOR_A_PERSON.with(|c| *c.borrow_mut() = v); }
+pub fn g_WAITING_ON_THEIR_OWN() -> Py { ensure_init(); G_WAITING_ON_THEIR_OWN.with(|c| c.borrow().clone()) }
+#[allow(non_snake_case)]
+pub fn s_WAITING_ON_THEIR_OWN(v: Py) { ensure_init(); G_WAITING_ON_THEIR_OWN.with(|c| *c.borrow_mut() = v); }
+pub fn g_WAITING_ON_THEIR_OWN_SAID_BACK() -> Py { ensure_init(); G_WAITING_ON_THEIR_OWN_SAID_BACK.with(|c| c.borrow().clone()) }
+#[allow(non_snake_case)]
+pub fn s_WAITING_ON_THEIR_OWN_SAID_BACK(v: Py) { ensure_init(); G_WAITING_ON_THEIR_OWN_SAID_BACK.with(|c| *c.borrow_mut() = v); }
+pub fn g_WAITING_STRETCH() -> Py { ensure_init(); G_WAITING_STRETCH.with(|c| c.borrow().clone()) }
+#[allow(non_snake_case)]
+pub fn s_WAITING_STRETCH(v: Py) { ensure_init(); G_WAITING_STRETCH.with(|c| *c.borrow_mut() = v); }
+pub fn g_WAITING_STRETCH_SAID_BACK() -> Py { ensure_init(); G_WAITING_STRETCH_SAID_BACK.with(|c| c.borrow().clone()) }
+#[allow(non_snake_case)]
+pub fn s_WAITING_STRETCH_SAID_BACK(v: Py) { ensure_init(); G_WAITING_STRETCH_SAID_BACK.with(|c| *c.borrow_mut() = v); }
+pub fn g_WAITING_TO_TALK() -> Py { ensure_init(); G_WAITING_TO_TALK.with(|c| c.borrow().clone()) }
+#[allow(non_snake_case)]
+pub fn s_WAITING_TO_TALK(v: Py) { ensure_init(); G_WAITING_TO_TALK.with(|c| *c.borrow_mut() = v); }
+pub fn g_WITH_THEIR_OWN() -> Py { ensure_init(); G_WITH_THEIR_OWN.with(|c| c.borrow().clone()) }
+#[allow(non_snake_case)]
+pub fn s_WITH_THEIR_OWN(v: Py) { ensure_init(); G_WITH_THEIR_OWN.with(|c| *c.borrow_mut() = v); }
+fn module_body() {
+    let _ = py_str("A stretch of the day already spent on one thing, said while it is still going on.\n\n\"ive been waiting for the plumber since nine\" was answered \"Got it. Is there anything you'd like a\nhand with?\", \"ive been chasing the bank for two weeks\" was filed with \"Noted: you've been chasing\nthe bank for two weeks.\", and \"ive been painting the fence all morning\" got the receipt that asks\nfor the one thing the line had just given: \"You've been painting the fence all morning, how long\nhave you been at it?\" (bot/memory/ack.py, GOING_TAIL). None of those is a friend's reply to\nsomebody who has been kept waiting, or who is halfway through a job.\n\nThe reading is the shape of the line rather than its words: first person, `been`, a doing, and a\nstretch of time in the same line. What the doing is decides the reply -- waiting on other people,\na job of their own, or looking after somebody -- and a state of the body or the mood is left to\nthe readers that already own it. The reply names the stretch the person gave and never the\nactivity, so one pool covers a fence, a loft and a pile of marking, and the question it asks is\nthe only one left open: how close to done, whether anyone has answered, or whether anybody gives\nthem a break.\n\nIt is asked from bot/modules/greeting.py, and only ever in place of a placeholder -- the three\nstock lines, a receipt, a search hedge or the person's own words said back -- so a line the\ncomposer has an answer of its own for keeps it. It lives in its own file because\nbot/compose/fallback.py is at the world's size cap.\n");
+    s_BEEN_ON_A_STRETCH({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("\\b(?:ive|i've|i\\u2019ve|i have|i had|weve|we've|we\\u2019ve|we have|i)\\s+been\\b(?P<doing>[a-z' ]{3,60}?)(?P<when>\\ball (?:day|night|morning|afternoon|evening|week|weekend|month|year|shift|term)\\b|\\b(?:most of the|the whole|the entire)\\s+(?:day|morning|afternoon|evening|week|weekend)\\b|\\bfor (?:ages|ever|hours|days|weeks|months|years|minutes|a while|half an hour|(?:a|an|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|twenty|thirty|forty|fifteen|\\d+)\\s*(?:hour|hours|minute|minutes|day|days|week|weeks|month|months|year|years))\\b|\\b(?:ever since|since (?:this |last |the )?(?:morning|afternoon|evening|night|week|weekend|month|year|monday|tuesday|wednesday|thursday|friday|saturday|sunday|january|february|march|april|may|june|july|august|september|october|november|december|christmas|easter|yesterday|noon|midnight|half (?:past )?(?:one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve)|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|\\d+(?::\\d+)?\\s*(?:am|pm)?))\\b|\\b(?:hours|days|weeks|months|years|ages)\\s+now\\b\\s*)")); __args.push(stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "compile", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
+    s_POINTER_STRETCH(py_tuple(vec![py_str("at this"), py_str("on this"), py_str("at it"), py_str("on it"), py_str("at that"), py_str("on that"), py_str("at these"), py_str("on these"), py_str("with this"), py_str("with it"), py_str("the thing")]));
+    s_SPENT_ON_A_STRETCH({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("\\b(?:ive|i've|i\\u2019ve|i have|i|weve|we've|we\\u2019ve|we have|we)\\s+(?:spent|wasted)\\b(?P<doing>[a-z' ]{0,40}?)\\s*(?P<when>\\ball (?:day|night|morning|afternoon|evening|weekend|week)\\b|\\b(?:most of the|the whole|the entire)\\s+(?:day|morning|afternoon|evening|weekend|week)\\b|\\bfor (?:ages|hours|days|weeks|months|years)\\b|\\b(?:hours|days|weeks|months|years)\\s+now\\b)")); __args.push(stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "compile", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
+    s_TAKEN_A_STRETCH({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("\\b(?:this|that|it)(?:'s|s|\\u2019s|\\s+has|\\s+had)\\s+taken\\s+(?:me|us)\\s+(?P<when>\\ball (?:day|night|morning|afternoon|evening|weekend|week)\\b|\\b(?:most of the|the whole|the entire)\\s+(?:day|morning|afternoon|evening|weekend|week)\\b|\\bfor (?:ages|hours|days|weeks|months|years)\\b|\\b(?:hours|days|weeks|months|years)\\s+now\\b)")); __args.push(stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "compile", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
+    s_VISITING_STRETCH(py_tuple(vec![py_str("at the hospital"), py_str("in hospital"), py_str("at hospital"), py_str("in the hospital"), py_str("at a&e"), py_str("in a&e"), py_str("at the a&e"), py_str("in the a&e"), py_str("at the clinic"), py_str("at the doctors"), py_str("at the doctor's"), py_str("at the surgery"), py_str("at the care home"), py_str("at the hospice"), py_str("at the nursing home"), py_str("at the vets"), py_str("at the vet")]));
+    s_STRETCH_IS_FINISHED(py_tuple(vec![py_str("finished"), py_str("finished it"), py_str("done it"), py_str("all done"), py_str("got it done"), py_str("sorted it"), py_str("sorted now"), py_str("got there"), py_str("finally done"), py_str("managed it"), py_str("got it finished"), py_str("its done"), py_str("it's done")]));
+    s_QUEUE_STRETCH(py_tuple(vec![py_str("queueing"), py_str("queuing"), py_str("queued"), py_str("in a queue"), py_str("sat here"), py_str("standing here"), py_str("sat in the car"), py_str("waiting for the bus"), py_str("waiting for a bus"), py_str("waiting for the train"), py_str("waiting for a taxi"), py_str("waiting at the tip"), py_str("at the tip"), py_str("at the dump"), py_str("recycling centre")]));
+    s_WITH_THEIR_OWN(py_tuple(vec![py_str("with my mum"), py_str("with my mom"), py_str("with my mother"), py_str("with my dad"), py_str("with my father"), py_str("with my nan"), py_str("with my gran"), py_str("with my grandma"), py_str("with my grandad"), py_str("with my granny"), py_str("with my son"), py_str("with my daughter"), py_str("with my kids"), py_str("with my child"), py_str("with my husband"), py_str("with my wife"), py_str("with my partner"), py_str("with my sister"), py_str("with my brother"), py_str("with my friend"), py_str("with my mate"), py_str("at my mum's"), py_str("at my mom's"), py_str("at my dad's"), py_str("at my nan's")]));
+    s_WAITING_AFTER_THE_STRETCH(py_tuple(vec![py_str("waiting"), py_str("waited"), py_str("on hold"), py_str("in a queue"), py_str("queueing"), py_str("queuing"), py_str("on the phone")]));
+    s_VIGIL({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("\\bwait(?:ing|ed)?\\s+(?:for|on|by|at|with)\\b[^.]{0,24}?\\b(?:die|dying|death|pass|passing|go|wake|wake up|come round|come back|pull through|make it|breathe|survive)\\b|\\b(?:by|at|beside)\\s+(?:his|her|their|my (?:mum|mom|dad|nan|gran|son|daughter|wife|husband|partner|sister|brother|friend)'?s?)\\s+(?:bed|bedside)\\b|\\b(?:his|her|their)\\s+bedside\\b")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "compile", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
+    s_NOT_A_SPENT_JOB(py_tuple(vec![py_str("to get here"), py_str("to get there"), py_str("to drive"), py_str("to come"), py_str("to travel"), py_str("to walk"), py_str("the bus"), py_str("the train"), py_str("the traffic"), py_str("at work"), py_str("at the office"), py_str("in work"), py_str("at school"), py_str("at college"), py_str("at uni"), py_str("on a course")]));
+    s_WAITING_STRETCH(py_tuple(vec![py_str("waiting"), py_str("waited"), py_str("chasing"), py_str("chased"), py_str("chase"), py_str("ringing"), py_str("phoning"), py_str("phoned"), py_str("calling"), py_str("emailing"), py_str("emailed"), py_str("messaging"), py_str("queuing"), py_str("queueing"), py_str("queued"), py_str("hounding"), py_str("pestering"), py_str("chasing it"), py_str("on hold"), py_str("on the phone"), py_str("in a queue"), py_str("on a waiting list"), py_str("on a waiting list"), py_str("back and forth"), py_str("trying to get through"), py_str("trying to speak"), py_str("trying to cancel"), py_str("hunting"), py_str("searching"), py_str("applying"), py_str("job hunting")]));
+    s_CARING_STRETCH(py_tuple(vec![py_str("looking after"), py_str("caring for"), py_str("sitting with"), py_str("nursing"), py_str("minding"), py_str("cleaning up after"), py_str("running after"), py_str("running round after"), py_str("feeding"), py_str("settling"), py_str("carrying")]));
+    s_UP_WITH_A_PERSON({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("\\bup with\\s+(?:my|her|his|their|our|the|a)\\s+\\w+|\\bup with\\s+(?:him|her|them|mum|dad|nan|gran|the kids|someone)\\b")); __args.push(stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "compile", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
+    s_EFFORT_STRETCH(py_tuple(vec![py_str("painting"), py_str("decorating"), py_str("wallpapering"), py_str("tiling"), py_str("plastering"), py_str("sanding"), py_str("stripping"), py_str("cleaning"), py_str("tidying"), py_str("sorting"), py_str("clearing"), py_str("hoovering"), py_str("vacuuming"), py_str("scrubbing"), py_str("washing"), py_str("ironing"), py_str("dusting"), py_str("unloading"), py_str("loading"), py_str("packing"), py_str("unpacking"), py_str("moving"), py_str("digging"), py_str("weeding"), py_str("mowing"), py_str("pruning"), py_str("building"), py_str("fixing"), py_str("mending"), py_str("repairing"), py_str("renovating"), py_str("assembling"), py_str("filing"), py_str("shredding"), py_str("decluttering"), py_str("boxing"), py_str("shifting"), py_str("polishing"), py_str("hanging"), py_str("hammering")]));
+    s_NOT_A_STRETCH_JOB(py_tuple(vec![py_str("feeling"), py_str("felt"), py_str("low"), py_str("flat"), py_str("tired"), py_str("exhausted"), py_str("knackered"), py_str("shattered"), py_str("sleeping"), py_str("slept"), py_str("waking"), py_str("hurting"), py_str("aching"), py_str("sore"), py_str("sick"), py_str("puking"), py_str("vomiting"), py_str("throwing up"), py_str("bleeding"), py_str("coughing"), py_str("sneezing"), py_str("crying"), py_str("shaking"), py_str("dizzy"), py_str("worried"), py_str("anxious"), py_str("stressing"), py_str("stressed"), py_str("panicking"), py_str("missing"), py_str("thinking"), py_str("going over"), py_str("dreaming"), py_str("eating"), py_str("drinking"), py_str("smoking"), py_str("scratching"), py_str("itching"), py_str("out of breath"), py_str("breathless"), py_str("sweating"), py_str("on my feet"), py_str("in bed"), py_str("off work"), py_str("off sick"), py_str("off ill"), py_str("signed off"), py_str("on the sick")]));
+    s_WAITING_STRETCH_SAID_BACK(py_tuple(vec![py_str("{When} - that is a long time to be kept waiting. Has anyone given you an answer yet?"), py_str("{When} and still no answer - who is left to try?"), py_str("{When} chasing the same thing. Has it moved at all?"), py_str("{When} and it is all waiting on other people. Is there a name you can ask for?")]));
+    s_EFFORT_STRETCH_SAID_BACK(py_tuple(vec![py_str("{When} - that is a lot of it on one job. How close is it to done?"), py_str("{When} and still at it - what is left of it?"), py_str("{When} - jobs like that always take longer than they look. What is left?"), py_str("{When} at the same thing - is the end in sight?")]));
+    s_CARING_STRETCH_SAID_BACK(py_tuple(vec![py_str("{When} - that is a lot of looking after someone, on your own. Does anyone give you a break?"), py_str("{When} being needed and nothing else. Who is looking after you in it?"), py_str("{When} of somebody else's week taking yours. Have you got any help with it?")]));
+    s_QUEUE_STRETCH_SAID_BACK(py_tuple(vec![py_str("{When} in a queue - did it move at all?"), py_str("{When} of it and no sign of it moving. Is there another way round it, or is this the only one?"), py_str("{When} of it with nothing to show for it. How much more of it is there?")]));
+    s_VISITING_STRETCH_SAID_BACK(py_tuple(vec![py_str("{When} in that place - those are mostly waiting about, whichever end of it you are on. How is it looking?"), py_str("{When}, and it is all waiting. How are things there?"), py_str("{When} of it. Nobody plans a day like that - how is it going?")]));
+    s_VISITING_SOMEBODY_SAID_BACK(py_tuple(vec![py_str("{When} sitting with somebody. That is a long day for you as well - is anyone spelling you?"), py_str("{When} and no let up - how are they doing, and how are you doing with it?"), py_str("{When} of it. Is there anyone sitting with them so you can get a break?")]));
+    s_SOMEBODY_ELSE_IN_IT(py_tuple(vec![py_str("with my mum"), py_str("with my mom"), py_str("with my mother"), py_str("with my dad"), py_str("with my father"), py_str("with my nan"), py_str("with my gran"), py_str("with my grandma"), py_str("with my grandad"), py_str("with my granny"), py_str("with my son"), py_str("with my daughter"), py_str("with my kids"), py_str("with my child"), py_str("with my husband"), py_str("with my wife"), py_str("with my partner"), py_str("with my sister"), py_str("with my brother"), py_str("with my friend"), py_str("with my mate"), py_str("to see my mum"), py_str("to see my mom"), py_str("to see my dad"), py_str("to see my nan"), py_str("to see my gran"), py_str("to see my son"), py_str("to see my daughter"), py_str("to see my wife"), py_str("to see my husband"), py_str("to see my partner"), py_str("to see my sister"), py_str("to see my brother"), py_str("to see my friend"), py_str("visiting my"), py_str("at my mum's"), py_str("at my mom's"), py_str("at my dad's"), py_str("at my nan's"), py_str("my mum is in"), py_str("my dad is in"), py_str("my nan is in"), py_str("my son is in"), py_str("my daughter is in"), py_str("my wife is in"), py_str("my husband is in"), py_str("my sister is in"), py_str("my brother is in"), py_str("my friend is in"), py_str("hes in hospital"), py_str("shes in hospital"), py_str("theyre in hospital"), py_str("with him"), py_str("with her"), py_str("with them")]));
+    s_WAITING_ON_THEIR_OWN(py_tuple(vec![py_str("my mum"), py_str("my mom"), py_str("my dad"), py_str("my nan"), py_str("my gran"), py_str("my son"), py_str("my daughter"), py_str("my kids"), py_str("my husband"), py_str("my wife"), py_str("my partner"), py_str("my sister"), py_str("my brother"), py_str("my friend"), py_str("my mate"), py_str("my lad"), py_str("my girl"), py_str("the kids")]));
+    s_WAITING_FOR_A_PERSON({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("\\b(?:for|on)\\s+(?:him|her|them)\\s+(?:to|about)\\b")); __args.push(stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "compile", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
+    s_WAITING_ON_THEIR_OWN_SAID_BACK(py_tuple(vec![py_str("{When} waiting on somebody of your own. Have they been in touch at all?"), py_str("{When} of it, and no word. Is this how they usually are?"), py_str("{When} waiting on them. That is a long time to be kept hanging about.")]));
+    s_WAITING_TO_TALK(py_tuple(vec![py_str("to talk to someone"), py_str("to talk to somebody"), py_str("to talk to anyone"), py_str("for someone to talk to"), py_str("for somebody to talk to"), py_str("to have someone to talk to"), py_str("to have somebody to talk to"), py_str("to speak to someone"), py_str("to speak to somebody"), py_str("someone to talk to"), py_str("somebody to talk to")]));
+    s_TALKING_TO_A_PLACE({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("\\b(?:talk to|speak to|get through to|get hold of)\\s+(?:someone|somebody|a person)\\s+(?:at|from|in)\\b")); __args.push(stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "compile", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
+    s_TALKING_STRETCH_SAID_BACK(py_tuple(vec![py_str("{When} with nobody to talk to. That is a long stretch to carry on your own - what have you been doing with it?"), py_str("{When} of it, and no company. What is the day like where you are?"), py_str("{When} waiting for someone to talk to - well, you have my attention now. What is on your mind?")]));
+    s_STRETCH_STARTS_UPPER({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_tuple(vec![py_str("monday"), py_str("tuesday"), py_str("wednesday"), py_str("thursday"), py_str("friday"), py_str("saturday"), py_str("sunday"), py_str("january"), py_str("february"), py_str("march"), py_str("april"), py_str("may"), py_str("june"), py_str("july"), py_str("august"), py_str("september"), py_str("october"), py_str("november"), py_str("december"), py_str("christmas"), py_str("easter")])); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("frozenset", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
+}
+pub fn _the_stretch_said_back(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut phrase: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "phrase") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: phrase"))) };
+    let mut lead: Py = Py::None;
+    let mut rest: Py = Py::None;
+    let mut said: Py = Py::None;
+    let mut w: Py = Py::None;
+    let mut words: Py = Py::None;
+    let _ = py_str("The person's own stretch, written the way the reply says it back.");
+    words = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str(" .,!?;:")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&phrase.clone(), "split", args))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&py_str(" "), "join", args))(&__args) }, "strip", args))(&__args) }, "split", args))(&__args) }) { let mut w: Py = __item.clone(); if py_truthy(&w.clone()) {  __out.push(w.clone()); } } py_list(__out) })() };
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&py_tuple(vec![py_list(vec![py_str("for")]), py_list(vec![py_str("since")]), py_list(vec![py_str("all")]), py_list(vec![py_str("most")]), py_list(vec![py_str("the")])]), &slice_or_raise(&words.clone(), &Py::None, &Py::Int(1), &Py::None))); if !py_truthy(&__b) { __b } else { op_gt(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(words.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }, &Py::Int(1)) } }) {
+    let __unpk1 = py_unpack(&py_tuple(vec![geti(&words.clone(), &Py::Int(0)), slice_or_raise(&words.clone(), &Py::Int(1), &Py::None, &Py::None)]), 2, None);
+    lead = __unpk1[0].clone();
+    rest = __unpk1[1].clone();
+    words = op_add(&py_list(vec![lead.clone()]), &{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&rest.clone()) { let mut w: Py = __item.clone(); __out.push(if py_truthy(&Py::Bool(py_contains(&g_STRETCH_STARTS_UPPER(), &{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&w.clone(), "lower", args))(&__args) }))) { { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&w.clone(), "capitalize", args))(&__args) } } else { w.clone() }); } py_list(__out) })() });
+    }
+    if py_truthy(&Py::Bool(!py_truthy(&words.clone()))) {
+    return py_str("");
+    }
+    said = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(words.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&py_str(" "), "join", args))(&__args) };
+    return op_add(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&slice_or_raise(&said.clone(), &Py::None, &Py::Int(1), &Py::None), "upper", args))(&__args) }, &slice_or_raise(&said.clone(), &Py::Int(1), &Py::None, &Py::None));
+    Py::None
+}
+pub fn _names_one_of(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut doing: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "doing") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: doing"))) };
+    let mut phrases: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "phrases") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: phrases"))) };
+    let mut phrase: Py = Py::None;
+    let mut words: Py = Py::None;
+    let _ = py_str("Whether the doing holds one of the phrases, as whole words.");
+    words = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&doing.clone(), "split", args))(&__args) };
+    return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&phrases.clone()) { let mut phrase: Py = __item.clone(); __out.push({ let __b = { let __b = Py::Bool(py_contains(&phrase.clone(), &py_str(" "))); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&doing.clone(), &phrase.clone())) } }; if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&words.clone(), &phrase.clone())) } }); } py_list(__out) })() }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("any", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
+    Py::None
+}
+pub fn _the_shape(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut doing: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "doing") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: doing"))) };
+    let mut said: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "said") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: said"))) };
+    let mut after: Py = if __pos.len() > 2 { __pos[2].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "after") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: after"))) };
+    let _ = py_str("Which pool this stretch belongs in, or None when it is not one of them.\n\n    The doing decides first, because a job is the most specific thing in the line; the words after\n    the stretch come next, which is where \"ive been sat here for two hours waiting\" keeps its\n    wait; and a doing that only points at the job (\"at this\", \"on it\") is a job of their own.\n    ");
+    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(doing.clone()); __args.push(g_NOT_A_STRETCH_JOB()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _names_one_of(args))(&__args) }) {
+    return Py::None;
+    }
+    if py_truthy(&{ let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(doing.clone()); __args.push(g_CARING_STRETCH()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _names_one_of(args))(&__args) }; if py_truthy(&__b) { __b } else { { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(said.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g_UP_WITH_A_PERSON(), "search", args))(&__args) } } }) {
+    return py_str("caring");
+    }
+    if py_truthy(&{ let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(doing.clone()); __args.push(g_QUEUE_STRETCH()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _names_one_of(args))(&__args) }; if py_truthy(&__b) { __b } else { { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(said.clone()); __args.push(g_QUEUE_STRETCH()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _names_one_of(args))(&__args) } } }) {
+    return py_str("queueing");
+    }
+    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(doing.clone()); __args.push(g_WAITING_STRETCH()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _names_one_of(args))(&__args) }) {
+    if py_truthy(&{ let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(said.clone()); __args.push(g_WAITING_TO_TALK()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _names_one_of(args))(&__args) }; if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(said.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g_TALKING_TO_A_PLACE(), "search", args))(&__args) })) } }) {
+    return py_str("talking");
+    }
+    if py_truthy(&{ let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(doing.clone()); __args.push(g_WAITING_ON_THEIR_OWN()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _names_one_of(args))(&__args) }; if py_truthy(&__b) { __b } else { { let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(after.clone()); __args.push(g_WAITING_ON_THEIR_OWN()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _names_one_of(args))(&__args) }; if py_truthy(&__b) { __b } else { { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(said.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g_WAITING_FOR_A_PERSON(), "search", args))(&__args) } } } } }) {
+    return py_str("waiting_on_their_own");
+    }
+    return py_str("waiting");
+    }
+    if py_truthy(&{ let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(said.clone()); __args.push(g_VISITING_STRETCH()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _names_one_of(args))(&__args) }; if py_truthy(&__b) { __b } else { { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(said.clone()); __args.push(g_WITH_THEIR_OWN()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _names_one_of(args))(&__args) } } }) {
+    return py_str("visiting");
+    }
+    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(doing.clone()); __args.push(g_EFFORT_STRETCH()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _names_one_of(args))(&__args) }) {
+    return py_str("effort");
+    }
+    if py_truthy(&{ let __b = doing.clone(); if !py_truthy(&__b) { __b } else { { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(doing.clone()); __args.push(g_POINTER_STRETCH()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _names_one_of(args))(&__args) } } }) {
+    return py_str("effort");
+    }
+    if py_truthy(&{ let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(after.clone()); __args.push(g_WAITING_AFTER_THE_STRETCH()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _names_one_of(args))(&__args) }; if py_truthy(&__b) { __b } else { { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(said.clone()); __args.push(g_WAITING_AFTER_THE_STRETCH()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _names_one_of(args))(&__args) } } }) {
+    return if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(said.clone()); __args.push(g_QUEUE_STRETCH()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _names_one_of(args))(&__args) }) { py_str("queueing") } else { py_str("waiting") };
+    }
+    return Py::None;
+    Py::None
+}
+pub fn reads_as_a_long_stretch(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut clean: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "clean") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: clean"))) };
+    let mut doing: Py = Py::None;
+    let mut met: Py = Py::None;
+    let mut pattern: Py = Py::None;
+    let mut said: Py = Py::None;
+    let mut shape: Py = Py::None;
+    let mut spent: Py = Py::None;
+    let mut when: Py = Py::None;
+    let _ = py_str("(shape, the stretch to say back) for a stretch the person is still inside, or None.\n\n    shape is \"waiting\", \"effort\", \"caring\" or \"visiting\". Only a first-person line with a\"\n    stretch of time in it counts - \"i've been <doing> since nine\", \"ive spent all day on this\n    form\", \"this has taken me all afternoon\" - and only where the doing is one of those kinds:\n    anything else has its own reader above, and a state of the body or the mood is somebody\n    else's question.\n    ");
+    said = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let __b = clean.clone(); if py_truthy(&__b) { __b } else { py_str("") } }, "lower", args))(&__args) }, "split", args))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&py_str(" "), "join", args))(&__args) };
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&said.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&said.clone(), &py_str("?"))) } }) {
+    return Py::None;
+    }
+    let __iter1 = py_iter_or_raise(&py_tuple(vec![py_tuple(vec![g_BEEN_ON_A_STRETCH(), Py::Bool(false)]), py_tuple(vec![g_SPENT_ON_A_STRETCH(), Py::Bool(true)])]));
+    for __item in __iter1 {
+    let __unpk2 = py_unpack(&__item.clone(), 2, None);
+    pattern = __unpk2[0].clone();
+    spent = __unpk2[1].clone();
+    let __iter3 = py_iter_or_raise(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(said.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&pattern.clone(), "finditer", args))(&__args) });
+    for __item in __iter3 {
+    met = __item.clone();
+    doing = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str(" ,.;:")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("doing")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&met.clone(), "group", args))(&__args) }; if py_truthy(&__b) { __b } else { py_str("") } }, "strip", args))(&__args) };
+    if py_truthy(&{ let __b = op_gt(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&doing.clone(), "split", args))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }, &Py::Int(8)); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&doing.clone(), &py_str(" and "))) } }) {
+    continue;
+    }
+    when = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("when")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&met.clone(), "group", args))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _the_stretch_said_back(args))(&__args) };
+    if py_truthy(&Py::Bool(!py_truthy(&when.clone()))) {
+    continue;
+    }
+    if py_truthy(&{ let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(said.clone()); __args.push(g_NOT_A_STRETCH_JOB()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _names_one_of(args))(&__args) }; if py_truthy(&__b) { __b } else { { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(said.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g_VIGIL(), "search", args))(&__args) } } }) {
+    continue;
+    }
+    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(said.clone()); __args.push(g_STRETCH_IS_FINISHED()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _names_one_of(args))(&__args) }) {
+    continue;
+    }
+    if py_truthy(&{ let __b = spent.clone(); if !py_truthy(&__b) { __b } else { { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(said.clone()); __args.push(g_NOT_A_SPENT_JOB()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _names_one_of(args))(&__args) } } }) {
+    continue;
+    }
+    shape = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(doing.clone()); __args.push(said.clone()); __args.push(slice_or_raise(&said.clone(), &{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&met.clone(), "end", args))(&__args) }, &Py::None, &Py::None)); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _the_shape(args))(&__args) };
+    if py_truthy(&{ let __b = shape.clone(); if py_truthy(&__b) { __b } else { spent.clone() } }) {
+    return py_tuple(vec![{ let __b = shape.clone(); if py_truthy(&__b) { __b } else { py_str("effort") } }, when.clone()]);
+    }
+    }
+    }
+    let __iter4 = py_iter_or_raise(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(said.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g_TAKEN_A_STRETCH(), "finditer", args))(&__args) });
+    for __item in __iter4 {
+    met = __item.clone();
+    when = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("when")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&met.clone(), "group", args))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _the_stretch_said_back(args))(&__args) };
+    if py_truthy(&Py::Bool(!py_truthy(&when.clone()))) {
+    continue;
+    }
+    if py_truthy(&{ let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(said.clone()); __args.push(g_NOT_A_STRETCH_JOB()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _names_one_of(args))(&__args) }; if py_truthy(&__b) { __b } else { { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(said.clone()); __args.push(g_NOT_A_SPENT_JOB()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _names_one_of(args))(&__args) } } }) {
+    continue;
+    }
+    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(said.clone()); __args.push(g_STRETCH_IS_FINISHED()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _names_one_of(args))(&__args) }) {
+    continue;
+    }
+    return py_tuple(vec![py_str("effort"), when.clone()]);
+    }
+    return Py::None;
+    Py::None
+}
+pub fn the_stretch_pool(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut shape: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "shape") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: shape"))) };
+    let mut when: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "when") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: when"))) };
+    let mut said: Py = if __pos.len() > 2 { __pos[2].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "said") { v.clone() }
+    else { py_str("") };
+    let mut line: Py = Py::None;
+    let mut pool: Py = Py::None;
+    let _ = py_str("The three lines for this kind of stretch, with the person's own time in them.\n\n    Two of the shapes are split by who the line is about rather than by what was being done: a day\n    at a hospital with somebody is not a day in the bed, and a wait for your sister to ring is not\n    a wait for a bank. `said` is the person's own line, and it decides which half.\n    ");
+    if py_truthy(&Py::Bool(py_eq(&shape.clone(), &py_str("visiting")))) {
+    shape = if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(said.clone()); __args.push(g_SOMEBODY_ELSE_IN_IT()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _names_one_of(args))(&__args) }) { py_str("visiting_somebody") } else { py_str("visiting") };
+    }
+    pool = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(shape.clone()); __args.push(py_tuple(vec![])); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&py_dict(vec![(py_str("waiting"), g_WAITING_STRETCH_SAID_BACK()), (py_str("effort"), g_EFFORT_STRETCH_SAID_BACK()), (py_str("caring"), g_CARING_STRETCH_SAID_BACK()), (py_str("queueing"), g_QUEUE_STRETCH_SAID_BACK()), (py_str("visiting"), g_VISITING_STRETCH_SAID_BACK()), (py_str("visiting_somebody"), g_VISITING_SOMEBODY_SAID_BACK()), (py_str("waiting_on_their_own"), g_WAITING_ON_THEIR_OWN_SAID_BACK()), (py_str("talking"), g_TALKING_STRETCH_SAID_BACK())]), "get", args))(&__args) };
+    return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pool.clone()) { let mut line: Py = __item.clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("{When}")); __args.push(when.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&line.clone(), "replace", args))(&__args) }); } py_list(__out) })() }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("tuple", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
+    Py::None
+}
+pub fn _only_a_placeholder(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut text: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "text") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: text"))) };
+    let mut said: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "said") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: said"))) };
+    let mut mine: Py = Py::None;
+    let mut shared: Py = Py::None;
+    let mut theirs: Py = Py::None;
+    let _ = py_str("True when the reply tells the person nothing of its own about the line.\n\n    Three ways a reply says nothing back: the composer's three stock lines, which fit any message;\n    a search hedge or the shrug; and a receipt -- the person's own line handed back with a frame\n    around it (\"Noted: ...\", \"Got it - you've been painting the fence all morning, how long have\n    you been at it?\"), which asks what the line has already said. The last of those is read by\n    the words the two share, so a frame this module has never seen counts as well.\n    ");
+    said = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let __b = said.clone(); if py_truthy(&__b) { __b } else { py_str("") } }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }, "split", args))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&py_str(" "), "join", args))(&__args) };
+    if py_truthy(&Py::Bool(!py_truthy(&said.clone()))) {
+    return Py::Bool(true);
+    }
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&crate::compose::fallback::g_NEUTRAL(), &said.clone())); if py_truthy(&__b) { __b } else { { let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(said.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| crate::compose::fallback::_is_a_hedge(args))(&__args) }; if py_truthy(&__b) { __b } else { { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(said.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| gen_memory::memory::ack::reads_as_a_receipt(args))(&__args) } } } } }) {
+    return Py::Bool(true);
+    }
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&crate::compose::fallback_data::g_A_SMALL_DAY(), &said.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&crate::compose::fallback_data::g_A_DAY_ASKED_PLAIN(), &said.clone())) } }) {
+    return Py::Bool(true);
+    }
+    mine = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("[a-z']+")); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }, "lower", args))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "findall", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("set", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
+    theirs = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("[a-z']+")); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&said.clone(), "lower", args))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "findall", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("set", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
+    if py_truthy(&op_lt(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(mine.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }, &Py::Int(2))) {
+    return Py::Bool(false);
+    }
+    shared = op_bitand(&mine.clone(), &theirs.clone());
+    return { let __b = op_ge(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(shared.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }, &Py::Int(3)); if !py_truthy(&__b) { __b } else { op_ge(&op_truediv(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(shared.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }, &{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(mine.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }), &Py::Float(0.6)) } };
+    Py::None
+}
+pub fn the_stretch_said_back(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut text: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "text") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: text"))) };
+    let mut memory: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "memory") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: memory"))) };
+    let mut said: Py = if __pos.len() > 2 { __pos[2].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "said") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: said"))) };
+    let mut clean: Py = Py::None;
+    let mut stretch: Py = Py::None;
+    let _ = py_str("The reply for a stretch the person is still inside, or \"\" when this is not that line.\n\n    Only a placeholder is replaced: a line the composer answered with something of its own, or\n    that another reader here has already picked up, keeps its reply. The stretch is said back in\n    the person's own time and then one question is asked of it.\n    ");
+    if py_truthy(&Py::Bool(!py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __args.push(said.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _only_a_placeholder(args))(&__args) }))) {
+    return py_str("");
+    }
+    stretch = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| reads_as_a_long_stretch(args))(&__args) };
+    if py_truthy(&Py::Bool(!py_truthy(&stretch.clone()))) {
+    return py_str("");
+    }
+    clean = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }, "lower", args))(&__args) }, "split", args))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&py_str(" "), "join", args))(&__args) };
+    return { let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(geti(&stretch.clone(), &Py::Int(0))); __args.push(geti(&stretch.clone(), &Py::Int(1))); __args.push(clean.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| the_stretch_pool(args))(&__args) }); __args.push(memory.clone()); __args.push(clean.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| py_call(&crate::compose::fallback::g__choose(), args))(&__args) }; if py_truthy(&__b) { __b } else { py_str("") } };
+    Py::None
+}
+pub fn module_obj() -> Py {
+    ensure_init();
+    Py::Module(Rc::new(PyModule { name: "bot.compose.stretches".to_string(),
+        get: Rc::new(|attr: &str| match attr {
+            "BEEN_ON_A_STRETCH" => Some(g_BEEN_ON_A_STRETCH()),
+            "CARING_STRETCH" => Some(g_CARING_STRETCH()),
+            "CARING_STRETCH_SAID_BACK" => Some(g_CARING_STRETCH_SAID_BACK()),
+            "EFFORT_STRETCH" => Some(g_EFFORT_STRETCH()),
+            "EFFORT_STRETCH_SAID_BACK" => Some(g_EFFORT_STRETCH_SAID_BACK()),
+            "NOT_A_SPENT_JOB" => Some(g_NOT_A_SPENT_JOB()),
+            "NOT_A_STRETCH_JOB" => Some(g_NOT_A_STRETCH_JOB()),
+            "POINTER_STRETCH" => Some(g_POINTER_STRETCH()),
+            "QUEUE_STRETCH" => Some(g_QUEUE_STRETCH()),
+            "QUEUE_STRETCH_SAID_BACK" => Some(g_QUEUE_STRETCH_SAID_BACK()),
+            "SOMEBODY_ELSE_IN_IT" => Some(g_SOMEBODY_ELSE_IN_IT()),
+            "SPENT_ON_A_STRETCH" => Some(g_SPENT_ON_A_STRETCH()),
+            "STRETCH_IS_FINISHED" => Some(g_STRETCH_IS_FINISHED()),
+            "STRETCH_STARTS_UPPER" => Some(g_STRETCH_STARTS_UPPER()),
+            "TAKEN_A_STRETCH" => Some(g_TAKEN_A_STRETCH()),
+            "TALKING_STRETCH_SAID_BACK" => Some(g_TALKING_STRETCH_SAID_BACK()),
+            "TALKING_TO_A_PLACE" => Some(g_TALKING_TO_A_PLACE()),
+            "UP_WITH_A_PERSON" => Some(g_UP_WITH_A_PERSON()),
+            "VIGIL" => Some(g_VIGIL()),
+            "VISITING_SOMEBODY_SAID_BACK" => Some(g_VISITING_SOMEBODY_SAID_BACK()),
+            "VISITING_STRETCH" => Some(g_VISITING_STRETCH()),
+            "VISITING_STRETCH_SAID_BACK" => Some(g_VISITING_STRETCH_SAID_BACK()),
+            "WAITING_AFTER_THE_STRETCH" => Some(g_WAITING_AFTER_THE_STRETCH()),
+            "WAITING_FOR_A_PERSON" => Some(g_WAITING_FOR_A_PERSON()),
+            "WAITING_ON_THEIR_OWN" => Some(g_WAITING_ON_THEIR_OWN()),
+            "WAITING_ON_THEIR_OWN_SAID_BACK" => Some(g_WAITING_ON_THEIR_OWN_SAID_BACK()),
+            "WAITING_STRETCH" => Some(g_WAITING_STRETCH()),
+            "WAITING_STRETCH_SAID_BACK" => Some(g_WAITING_STRETCH_SAID_BACK()),
+            "WAITING_TO_TALK" => Some(g_WAITING_TO_TALK()),
+            "WITH_THEIR_OWN" => Some(g_WITH_THEIR_OWN()),
+            "_names_one_of" => Some(py_func("_names_one_of", |args: &[Py]| _names_one_of(args))),
+            "_only_a_placeholder" => Some(py_func("_only_a_placeholder", |args: &[Py]| _only_a_placeholder(args))),
+            "_the_shape" => Some(py_func("_the_shape", |args: &[Py]| _the_shape(args))),
+            "_the_stretch_said_back" => Some(py_func("_the_stretch_said_back", |args: &[Py]| _the_stretch_said_back(args))),
+            "reads_as_a_long_stretch" => Some(py_func("reads_as_a_long_stretch", |args: &[Py]| reads_as_a_long_stretch(args))),
+            "the_stretch_pool" => Some(py_func("the_stretch_pool", |args: &[Py]| the_stretch_pool(args))),
+            "the_stretch_said_back" => Some(py_func("the_stretch_said_back", |args: &[Py]| the_stretch_said_back(args))),
+            _ => None,
+        }),
+        set: Some(Rc::new(|attr: &str, v: Py| match attr {
+            "BEEN_ON_A_STRETCH" => s_BEEN_ON_A_STRETCH(v),
+            "CARING_STRETCH" => s_CARING_STRETCH(v),
+            "CARING_STRETCH_SAID_BACK" => s_CARING_STRETCH_SAID_BACK(v),
+            "EFFORT_STRETCH" => s_EFFORT_STRETCH(v),
+            "EFFORT_STRETCH_SAID_BACK" => s_EFFORT_STRETCH_SAID_BACK(v),
+            "NOT_A_SPENT_JOB" => s_NOT_A_SPENT_JOB(v),
+            "NOT_A_STRETCH_JOB" => s_NOT_A_STRETCH_JOB(v),
+            "POINTER_STRETCH" => s_POINTER_STRETCH(v),
+            "QUEUE_STRETCH" => s_QUEUE_STRETCH(v),
+            "QUEUE_STRETCH_SAID_BACK" => s_QUEUE_STRETCH_SAID_BACK(v),
+            "SOMEBODY_ELSE_IN_IT" => s_SOMEBODY_ELSE_IN_IT(v),
+            "SPENT_ON_A_STRETCH" => s_SPENT_ON_A_STRETCH(v),
+            "STRETCH_IS_FINISHED" => s_STRETCH_IS_FINISHED(v),
+            "STRETCH_STARTS_UPPER" => s_STRETCH_STARTS_UPPER(v),
+            "TAKEN_A_STRETCH" => s_TAKEN_A_STRETCH(v),
+            "TALKING_STRETCH_SAID_BACK" => s_TALKING_STRETCH_SAID_BACK(v),
+            "TALKING_TO_A_PLACE" => s_TALKING_TO_A_PLACE(v),
+            "UP_WITH_A_PERSON" => s_UP_WITH_A_PERSON(v),
+            "VIGIL" => s_VIGIL(v),
+            "VISITING_SOMEBODY_SAID_BACK" => s_VISITING_SOMEBODY_SAID_BACK(v),
+            "VISITING_STRETCH" => s_VISITING_STRETCH(v),
+            "VISITING_STRETCH_SAID_BACK" => s_VISITING_STRETCH_SAID_BACK(v),
+            "WAITING_AFTER_THE_STRETCH" => s_WAITING_AFTER_THE_STRETCH(v),
+            "WAITING_FOR_A_PERSON" => s_WAITING_FOR_A_PERSON(v),
+            "WAITING_ON_THEIR_OWN" => s_WAITING_ON_THEIR_OWN(v),
+            "WAITING_ON_THEIR_OWN_SAID_BACK" => s_WAITING_ON_THEIR_OWN_SAID_BACK(v),
+            "WAITING_STRETCH" => s_WAITING_STRETCH(v),
+            "WAITING_STRETCH_SAID_BACK" => s_WAITING_STRETCH_SAID_BACK(v),
+            "WAITING_TO_TALK" => s_WAITING_TO_TALK(v),
+            "WITH_THEIR_OWN" => s_WITH_THEIR_OWN(v),
+            _ => {},
+        })),
+    }))
+}
+pub fn register() {
+    pyrt::xrefs::reg_module("compose.stretches", module_obj);
+    pyrt::xrefs::reg_fn("compose.stretches", "_the_stretch_said_back", py_func("_the_stretch_said_back", |args: &[Py]| _the_stretch_said_back(args)));
+    pyrt::xrefs::reg_fn("compose.stretches", "_names_one_of", py_func("_names_one_of", |args: &[Py]| _names_one_of(args)));
+    pyrt::xrefs::reg_fn("compose.stretches", "_the_shape", py_func("_the_shape", |args: &[Py]| _the_shape(args)));
+    pyrt::xrefs::reg_fn("compose.stretches", "reads_as_a_long_stretch", py_func("reads_as_a_long_stretch", |args: &[Py]| reads_as_a_long_stretch(args)));
+    pyrt::xrefs::reg_fn("compose.stretches", "the_stretch_pool", py_func("the_stretch_pool", |args: &[Py]| the_stretch_pool(args)));
+    pyrt::xrefs::reg_fn("compose.stretches", "_only_a_placeholder", py_func("_only_a_placeholder", |args: &[Py]| _only_a_placeholder(args)));
+    pyrt::xrefs::reg_fn("compose.stretches", "the_stretch_said_back", py_func("the_stretch_said_back", |args: &[Py]| the_stretch_said_back(args)));
+    pyrt::xrefs::reg_access("compose.stretches", "BEEN_ON_A_STRETCH", g_BEEN_ON_A_STRETCH, s_BEEN_ON_A_STRETCH);
+    pyrt::xrefs::reg_access("compose.stretches", "CARING_STRETCH", g_CARING_STRETCH, s_CARING_STRETCH);
+    pyrt::xrefs::reg_access("compose.stretches", "CARING_STRETCH_SAID_BACK", g_CARING_STRETCH_SAID_BACK, s_CARING_STRETCH_SAID_BACK);
+    pyrt::xrefs::reg_access("compose.stretches", "EFFORT_STRETCH", g_EFFORT_STRETCH, s_EFFORT_STRETCH);
+    pyrt::xrefs::reg_access("compose.stretches", "EFFORT_STRETCH_SAID_BACK", g_EFFORT_STRETCH_SAID_BACK, s_EFFORT_STRETCH_SAID_BACK);
+    pyrt::xrefs::reg_access("compose.stretches", "NOT_A_SPENT_JOB", g_NOT_A_SPENT_JOB, s_NOT_A_SPENT_JOB);
+    pyrt::xrefs::reg_access("compose.stretches", "NOT_A_STRETCH_JOB", g_NOT_A_STRETCH_JOB, s_NOT_A_STRETCH_JOB);
+    pyrt::xrefs::reg_access("compose.stretches", "POINTER_STRETCH", g_POINTER_STRETCH, s_POINTER_STRETCH);
+    pyrt::xrefs::reg_access("compose.stretches", "QUEUE_STRETCH", g_QUEUE_STRETCH, s_QUEUE_STRETCH);
+    pyrt::xrefs::reg_access("compose.stretches", "QUEUE_STRETCH_SAID_BACK", g_QUEUE_STRETCH_SAID_BACK, s_QUEUE_STRETCH_SAID_BACK);
+    pyrt::xrefs::reg_access("compose.stretches", "SOMEBODY_ELSE_IN_IT", g_SOMEBODY_ELSE_IN_IT, s_SOMEBODY_ELSE_IN_IT);
+    pyrt::xrefs::reg_access("compose.stretches", "SPENT_ON_A_STRETCH", g_SPENT_ON_A_STRETCH, s_SPENT_ON_A_STRETCH);
+    pyrt::xrefs::reg_access("compose.stretches", "STRETCH_IS_FINISHED", g_STRETCH_IS_FINISHED, s_STRETCH_IS_FINISHED);
+    pyrt::xrefs::reg_access("compose.stretches", "STRETCH_STARTS_UPPER", g_STRETCH_STARTS_UPPER, s_STRETCH_STARTS_UPPER);
+    pyrt::xrefs::reg_access("compose.stretches", "TAKEN_A_STRETCH", g_TAKEN_A_STRETCH, s_TAKEN_A_STRETCH);
+    pyrt::xrefs::reg_access("compose.stretches", "TALKING_STRETCH_SAID_BACK", g_TALKING_STRETCH_SAID_BACK, s_TALKING_STRETCH_SAID_BACK);
+    pyrt::xrefs::reg_access("compose.stretches", "TALKING_TO_A_PLACE", g_TALKING_TO_A_PLACE, s_TALKING_TO_A_PLACE);
+    pyrt::xrefs::reg_access("compose.stretches", "UP_WITH_A_PERSON", g_UP_WITH_A_PERSON, s_UP_WITH_A_PERSON);
+    pyrt::xrefs::reg_access("compose.stretches", "VIGIL", g_VIGIL, s_VIGIL);
+    pyrt::xrefs::reg_access("compose.stretches", "VISITING_SOMEBODY_SAID_BACK", g_VISITING_SOMEBODY_SAID_BACK, s_VISITING_SOMEBODY_SAID_BACK);
+    pyrt::xrefs::reg_access("compose.stretches", "VISITING_STRETCH", g_VISITING_STRETCH, s_VISITING_STRETCH);
+    pyrt::xrefs::reg_access("compose.stretches", "VISITING_STRETCH_SAID_BACK", g_VISITING_STRETCH_SAID_BACK, s_VISITING_STRETCH_SAID_BACK);
+    pyrt::xrefs::reg_access("compose.stretches", "WAITING_AFTER_THE_STRETCH", g_WAITING_AFTER_THE_STRETCH, s_WAITING_AFTER_THE_STRETCH);
+    pyrt::xrefs::reg_access("compose.stretches", "WAITING_FOR_A_PERSON", g_WAITING_FOR_A_PERSON, s_WAITING_FOR_A_PERSON);
+    pyrt::xrefs::reg_access("compose.stretches", "WAITING_ON_THEIR_OWN", g_WAITING_ON_THEIR_OWN, s_WAITING_ON_THEIR_OWN);
+    pyrt::xrefs::reg_access("compose.stretches", "WAITING_ON_THEIR_OWN_SAID_BACK", g_WAITING_ON_THEIR_OWN_SAID_BACK, s_WAITING_ON_THEIR_OWN_SAID_BACK);
+    pyrt::xrefs::reg_access("compose.stretches", "WAITING_STRETCH", g_WAITING_STRETCH, s_WAITING_STRETCH);
+    pyrt::xrefs::reg_access("compose.stretches", "WAITING_STRETCH_SAID_BACK", g_WAITING_STRETCH_SAID_BACK, s_WAITING_STRETCH_SAID_BACK);
+    pyrt::xrefs::reg_access("compose.stretches", "WAITING_TO_TALK", g_WAITING_TO_TALK, s_WAITING_TO_TALK);
+    pyrt::xrefs::reg_access("compose.stretches", "WITH_THEIR_OWN", g_WITH_THEIR_OWN, s_WITH_THEIR_OWN);
+}

@@ -1,0 +1,10 @@
+[package]
+name = "gen_knowledge"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+pyrt = { path = "../pyrt" }
+gen_memory = { path = "../gen_memory" }
+gen_understanding = { path = "../gen_understanding" }
+indexmap = "2"

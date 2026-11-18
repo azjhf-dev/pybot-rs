@@ -103,7 +103,8 @@ fn main() {
         eprint!("Loading PyBot...");
         std::io::stderr().flush().ok();
     }
-    let rt = Runtime::new();
+    gen_meta::register_all();
+    let rt = Runtime::new(gen_meta::registry(), gen_meta::arbiter_choose());
     if interactive {
         eprint!("\r                \r");
         opening();

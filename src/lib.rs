@@ -4,9 +4,8 @@
 //! Python module under bot/ is transpiled to Rust under src/gen/, running on a
 //! Python-semantics runtime (src/pyrt/). See README.md.
 
-pub mod gen;
 pub mod memory;
-pub mod pyrt;
 pub mod runtime;
 
+pub use pyrt;
 pub use runtime::Runtime;

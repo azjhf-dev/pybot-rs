@@ -5,8 +5,9 @@
 //! then after. A module that fails is skipped; a turn never fails.
 
 use crate::memory::Memory;
-use crate::pyrt::exc;
-use crate::pyrt::value::*;
+use pyrt::exc;
+use pyrt::module_entry::ModuleEntry;
+use pyrt::value::*;
 
 pub const FALLBACK: &str = "Hello!";
 
@@ -22,27 +23,15 @@ pub struct Turn {
     pub candidates: Vec<Candidate>,
 }
 
-pub struct ModuleEntry {
-    pub name: &'static str,
-    pub priority: fn() -> i64,
-    pub observe: Option<fn(&[Py]) -> Py>,
-    pub respond: Option<fn(&[Py]) -> Py>,
-    pub after: Option<fn(&[Py]) -> Py>,
-}
-
 pub struct Runtime {
     modules: Vec<ModuleEntry>,
-}
-
-impl Default for Runtime {
-    fn default() -> Self { Self::new() }
+    arbiter: Option<fn(&[Py]) -> Py>,
 }
 
 impl Runtime {
-    pub fn new() -> Self {
-        let mut modules = crate::gen::registry();
+    pub fn new(mut modules: Vec<ModuleEntry>, arbiter: Option<fn(&[Py]) -> Py>) -> Self {
         modules.sort_by(|a, b| (b.priority)().cmp(&(a.priority)()).then(a.name.cmp(b.name)));
-        Runtime { modules }
+        Runtime { modules, arbiter }
     }
 
     pub fn turn(&self, text: &str, memory: &mut Memory) -> Turn {
@@ -50,8 +39,7 @@ impl Runtime {
         for m in &self.modules {
             if let Some(observe) = m.observe {
                 let mem = memory.clone();
-                let tp = text_py.clone();
-                let _ = exc::catch(move || observe(&[tp, mem]));
+                let _ = exc::catch(move || observe(&[text_py.clone(), mem]));
             }
         }
 
@@ -59,7 +47,7 @@ impl Runtime {
         let mut copies: Vec<Memory> = Vec::new();
         for m in &self.modules {
             if let Some(respond) = m.respond {
-                let mut mine = crate::pyrt::builtins::py_deepcopy(memory);
+                let mut mine = pyrt::builtins::py_deepcopy(memory);
                 let name = m.name;
                 let answer = exc::catch({
                     let text_py = text_py.clone();
@@ -84,7 +72,7 @@ impl Runtime {
         let (reply, module) = if candidates.is_empty() {
             (FALLBACK.to_string(), None)
         } else {
-            let index = choose(text, memory, &candidates);
+            let index = choose(text, memory, &candidates, self.arbiter);
             let reply = candidates[index].reply.clone();
             let module = candidates[index].module.clone();
             let chosen = copies.swap_remove(index);
@@ -113,9 +101,9 @@ impl Runtime {
 
 /// The arbiter's pick, as an index into candidates; 0 when it fails or
 /// returns nonsense (mirrors runtime.py `_choose`).
-fn choose(text: &str, memory: &Memory, candidates: &[Candidate]) -> usize {
+fn choose(text: &str, memory: &Memory, candidates: &[Candidate], arbiter: Option<fn(&[Py]) -> Py>) -> usize {
     if candidates.len() < 2 { return 0; }
-    let arbiter = match crate::gen::arbiter_choose() {
+    let arbiter = match arbiter {
         Some(f) => f,
         None => return 0,
     };

@@ -1,5 +1,5 @@
 //! Conversation memory: a plain Python dict in the transpiled world.
-use crate::pyrt::value::*;
+use pyrt::value::*;
 
 pub type Memory = Py;
 

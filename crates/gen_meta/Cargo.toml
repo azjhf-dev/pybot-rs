@@ -1,0 +1,13 @@
+[package]
+name = "gen_meta"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+pyrt = { path = "../pyrt" }
+gen_understanding = { path = "../gen_understanding" }
+gen_memory = { path = "../gen_memory" }
+gen_knowledge = { path = "../gen_knowledge" }
+gen_compose = { path = "../gen_compose" }
+gen_modules = { path = "../gen_modules" }
+gen_core = { path = "../gen_core" }

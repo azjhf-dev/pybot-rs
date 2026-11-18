@@ -1,3 +1,6 @@
+[workspace]
+members = ["crates/*"]
+
 [package]
 name = "pybot-rs"
 version = "0.2.0"
@@ -6,11 +9,9 @@ description = "A Rust port of PyBot: a chatbot written in plain rules. No weight
 license = "Apache-2.0"
 
 [dependencies]
-regex = "1"
-fancy-regex = "0.14"
-once_cell = "1"
+pyrt = { path = "crates/pyrt" }
+gen_meta = { path = "crates/gen_meta" }
 indexmap = "2"
-unicode-normalization = "0.1"
 
 [profile.dev]
 opt-level = 0
