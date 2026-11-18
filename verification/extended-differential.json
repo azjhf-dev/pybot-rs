@@ -160,5 +160,27 @@
       "diagnostics": "[module: greeting | 52312 ms]\n"
     },
     "exact": true
+  },
+  {
+    "binary_sha256": "d4cabea0451fe30ff4ca24c455750b4e0d45833b59a77fa13bf5c230bb078a33",
+    "case": 7,
+    "inputs": [
+      "how do I make pancakes"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "For about 12 thin pancakes, whisk 100g plain flour, 2 eggs and 300ml milk with a pinch of salt, then let the batter rest 20 minutes. Cook them in a hot non-stick pan with a little butter, about a minute a side, until bubbles pop on top and the edges look dry. The rest is what stops them tearing; American ones want a teaspoon of baking powder and a thicker batter. Flat ones are a batter that was too thin, or an old raising agent."
+      ],
+      "diagnostics": "[module: answers | 1223 ms]\n"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "For about 12 thin pancakes, whisk 100g plain flour, 2 eggs and 300ml milk with a pinch of salt, then let the batter rest 20 minutes. Cook them in a hot non-stick pan with a little butter, about a minute a side, until bubbles pop on top and the edges look dry. The rest is what stops them tearing; American ones want a teaspoon of baking powder and a thicker batter. Flat ones are a batter that was too thin, or an old raising agent."
+      ],
+      "diagnostics": "[module: answers | 34085 ms]\n"
+    },
+    "exact": true
   }
 ]
