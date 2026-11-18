@@ -1,0 +1,32 @@
+[
+  {
+    "case": 0,
+    "inputs": [
+      "hello",
+      "how are you",
+      "what is your name",
+      "goodbye"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "Hi there \u2014 what do you need?",
+        "Still here, thanks \u2014 how are you getting on?",
+        "No name of my own \u2014 call me whatever you like, I'll answer to it. What can I help with?",
+        "See you \u2014 good luck with it."
+      ],
+      "diagnostics": "[module: chat | 621 ms]\n[module: chat | 578 ms]\n[module: chat | 5306 ms]\n[module: chat | 71 ms]\n"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "Hi there \u2014 what do you need?",
+        "Still here, thanks \u2014 how are you getting on?",
+        "No name of my own \u2014 call me whatever you like, I'll answer to it. What can I help with?",
+        "See you \u2014 good luck with it."
+      ],
+      "diagnostics": "[module: chat | 26076 ms]\n[module: chat | 2705 ms]\n[module: chat | 13746 ms]\n[module: chat | 355 ms]\n"
+    },
+    "exact": true
+  }
+]
