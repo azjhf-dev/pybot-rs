@@ -1,0 +1,324 @@
+[
+  {
+    "binary_sha256": "bf98fc48613880ed03b5c39ce2e1c0769a2ba2ab7ebf72108aa0dbe06a569520",
+    "case": 0,
+    "inputs": [
+      "hello",
+      "how are you",
+      "what is your name",
+      "goodbye"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "Hi there \u2014 what do you need?",
+        "Still here, thanks \u2014 how are you getting on?",
+        "No name of my own \u2014 call me whatever you like, I'll answer to it. What can I help with?",
+        "See you \u2014 good luck with it."
+      ],
+      "diagnostics": "[module: chat | 630 ms]\n[module: chat | 566 ms]\n[module: chat | 5272 ms]\n[module: chat | 70 ms]\n",
+      "baseline_reused": true,
+      "source_commit": "7d63c7fbebb44c7e466e5c8b5c1f341ab767929e"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "Hi there \u2014 what do you need?",
+        "Still here, thanks \u2014 how are you getting on?",
+        "No name of my own \u2014 call me whatever you like, I'll answer to it. What can I help with?",
+        "See you \u2014 good luck with it."
+      ],
+      "diagnostics": "[module: chat | 23721 ms]\n[module: chat | 2739 ms]\n[module: chat | 15092 ms]\n[module: chat | 446 ms]\n"
+    },
+    "exact": true
+  },
+  {
+    "binary_sha256": "bf98fc48613880ed03b5c39ce2e1c0769a2ba2ab7ebf72108aa0dbe06a569520",
+    "case": 1,
+    "inputs": [
+      "my name is Alex",
+      "what is my name"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "Nice to meet you, Alex. What can I help with?",
+        "You're Alex."
+      ],
+      "diagnostics": "[module: chat | 1086 ms]\n[module: memory_store | 2817 ms]\n",
+      "baseline_reused": true,
+      "source_commit": "7d63c7fbebb44c7e466e5c8b5c1f341ab767929e"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "Nice to meet you, Alex. What can I help with?",
+        "You're Alex."
+      ],
+      "diagnostics": "[module: chat | 35604 ms]\n[module: memory_store | 10547 ms]\n"
+    },
+    "exact": true
+  },
+  {
+    "binary_sha256": "bf98fc48613880ed03b5c39ce2e1c0769a2ba2ab7ebf72108aa0dbe06a569520",
+    "case": 6,
+    "inputs": [
+      "I smell gas in my kitchen"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "The gas shut-off is the lever on the pipe beside the meter, usually in a box outside or under the stairs: a quarter turn so the lever sits across the pipe rather than along it turns the gas off. If you can smell gas, do not touch a switch, a light or a phone indoors - open the windows, get everyone out and ring the gas emergency line from outside: 0800 111 999 in England, Scotland and Wales, 0800 002 001 in Northern Ireland, 911 in the US. Only a Gas Safe engineer turns it back on."
+      ],
+      "diagnostics": "[module: answers | 1092 ms]\n",
+      "baseline_reused": true,
+      "source_commit": "7d63c7fbebb44c7e466e5c8b5c1f341ab767929e"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "Get everyone away from it: put out any flames, don't touch light switches, open the doors and windows, and turn the gas off at the meter if you can reach it. Ring 0800 111 999 (UK) or 911 from outside, and 999 straight away if anyone feels ill."
+      ],
+      "diagnostics": "[module: safety | 34763 ms]\n"
+    },
+    "exact": false
+  },
+  {
+    "binary_sha256": "bf98fc48613880ed03b5c39ce2e1c0769a2ba2ab7ebf72108aa0dbe06a569520",
+    "case": 7,
+    "inputs": [
+      "I want to hurt myself"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "Right. What have you tried for it so far?"
+      ],
+      "diagnostics": "[module: greeting | 1289 ms]\n",
+      "baseline_reused": true,
+      "source_commit": "7d63c7fbebb44c7e466e5c8b5c1f341ab767929e"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "That sounds unbearable, and you don't have to carry it alone tonight. Ring a crisis line now (116 123 in the UK, 988 in the US) or your local emergency number, and tell one person near you how bad it is so they can stay with you."
+      ],
+      "diagnostics": "[module: safety | 25092 ms]\n"
+    },
+    "exact": false
+  },
+  {
+    "binary_sha256": "bf98fc48613880ed03b5c39ce2e1c0769a2ba2ab7ebf72108aa0dbe06a569520",
+    "case": 3,
+    "inputs": [
+      "I feel sad",
+      "I had a hard day"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "Do one small thing you used to enjoy today, at half enthusiasm, because mood follows action more often than it arrives on its own: a walk to the shop, a phone call, ten minutes of a game you liked. Then stack the three things that lift a low mood most reliably - daylight within an hour of waking, 20 minutes of walking, and one person you really talk to rather than message - and keep bedtime and meals at the same time, because a sad week wrecks both and then feeds itself. Write one line a day about how it went, so you can see it is not all bad. If it is most days for two weeks, if the pleasure has gone out of everything, or if it is stopping you eating or working, take it to the GP: talking therapy works, and in most areas you can refer yourself.",
+        "Those days are draining. Get the food and the rest in first, and leave the rest till tomorrow."
+      ],
+      "diagnostics": "[module: answers | 713 ms]\n[module: chat | 527 ms]\n",
+      "baseline_reused": true,
+      "source_commit": "7d63c7fbebb44c7e466e5c8b5c1f341ab767929e"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "Do one small thing you used to enjoy today, at half enthusiasm, because mood follows action more often than it arrives on its own: a walk to the shop, a phone call, ten minutes of a game you liked. Then stack the three things that lift a low mood most reliably - daylight within an hour of waking, 20 minutes of walking, and one person you really talk to rather than message - and keep bedtime and meals at the same time, because a sad week wrecks both and then feeds itself. Write one line a day about how it went, so you can see it is not all bad. If it is most days for two weeks, if the pleasure has gone out of everything, or if it is stopping you eating or working, take it to the GP: talking therapy works, and in most areas you can refer yourself.",
+        "Those days are draining. Get the food and the rest in first, and leave the rest till tomorrow."
+      ],
+      "diagnostics": "[module: answers | 24642 ms]\n[module: chat | 2508 ms]\n"
+    },
+    "exact": true
+  },
+  {
+    "binary_sha256": "bf98fc48613880ed03b5c39ce2e1c0769a2ba2ab7ebf72108aa0dbe06a569520",
+    "case": 4,
+    "inputs": [
+      "I like pizza",
+      "what do I like"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "Ah, pizza. What got you into that?",
+        "You like pizza."
+      ],
+      "diagnostics": "[module: greeting | 687 ms]\n[module: memory_store | 969 ms]\n",
+      "baseline_reused": true,
+      "source_commit": "7d63c7fbebb44c7e466e5c8b5c1f341ab767929e"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "Ah, pizza. What got you into that?",
+        "You like pizza."
+      ],
+      "diagnostics": "[module: greeting | 25020 ms]\n[module: memory_store | 3641 ms]\n"
+    },
+    "exact": true
+  },
+  {
+    "binary_sha256": "bf98fc48613880ed03b5c39ce2e1c0769a2ba2ab7ebf72108aa0dbe06a569520",
+    "case": 5,
+    "inputs": [
+      "how do I boil an egg",
+      "how long does rice take to cook"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "Lower eggs into already boiling water: 6 minutes for a runny yolk, 7 for jammy, 9 to 10 for hard boiled. Cool them in cold water for a minute before peeling so the shell comes away cleanly.",
+        "White long grain takes 10 to 12 minutes on a low simmer with the lid on, then 10 more off the heat. Use 1 part rice to about 1.5 parts water by volume, or the fingertip test: water one knuckle above the rice. Brown and wholegrain are the ones that take longer. Too much water is what turns rice to porridge."
+      ],
+      "diagnostics": "[module: answers | 1091 ms]\n[module: answers | 737 ms]\n",
+      "baseline_reused": true,
+      "source_commit": "7d63c7fbebb44c7e466e5c8b5c1f341ab767929e"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "Lower eggs into already boiling water: 6 minutes for a runny yolk, 7 for jammy, 9 to 10 for hard boiled. Cool them in cold water for a minute before peeling so the shell comes away cleanly.",
+        "White long grain takes 10 to 12 minutes on a low simmer with the lid on, then 10 more off the heat. Use 1 part rice to about 1.5 parts water by volume, or the fingertip test: water one knuckle above the rice. Brown and wholegrain are the ones that take longer. Too much water is what turns rice to porridge."
+      ],
+      "diagnostics": "[module: answers | 26479 ms]\n[module: answers | 2486 ms]\n"
+    },
+    "exact": true
+  },
+  {
+    "binary_sha256": "bf98fc48613880ed03b5c39ce2e1c0769a2ba2ab7ebf72108aa0dbe06a569520",
+    "case": 8,
+    "inputs": [
+      "my chest hurts and I cannot breathe"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "Sorry to hear that. What would help most right now?"
+      ],
+      "diagnostics": "[module: greeting | 1153 ms]\n",
+      "baseline_reused": true,
+      "source_commit": "7d63c7fbebb44c7e466e5c8b5c1f341ab767929e"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "That's an emergency: ring 999 or 911 and stay on the line; the call handler will tell you what to do. If they stop breathing normally, start CPR if you can."
+      ],
+      "diagnostics": "[module: safety | 34404 ms]\n"
+    },
+    "exact": false
+  },
+  {
+    "binary_sha256": "bf98fc48613880ed03b5c39ce2e1c0769a2ba2ab7ebf72108aa0dbe06a569520",
+    "case": 9,
+    "inputs": [
+      "tell me a joke",
+      "another one"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "What do you call a sleeping bull? A bulldozer.",
+        "I haven't got anything for that to point at yet \u2014 give me the thing in a few words and I'll answer for it."
+      ],
+      "diagnostics": "[module: chat | 828 ms]\n[module: memory_store | 175 ms]\n",
+      "baseline_reused": true,
+      "source_commit": "7d63c7fbebb44c7e466e5c8b5c1f341ab767929e"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "What do you call a sleeping bull? A bulldozer.",
+        "I haven't got anything for that to point at yet \u2014 give me the thing in a few words and I'll answer for it."
+      ],
+      "diagnostics": "[module: chat | 23808 ms]\n[module: memory_store | 757 ms]\n"
+    },
+    "exact": true
+  },
+  {
+    "binary_sha256": "bf98fc48613880ed03b5c39ce2e1c0769a2ba2ab7ebf72108aa0dbe06a569520",
+    "case": 10,
+    "inputs": [
+      "thank you",
+      "you are welcome"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "Happy to help.",
+        "Alright then \u2014 good luck with it."
+      ],
+      "diagnostics": "[module: chat | 592 ms]\n[module: chat | 262 ms]\n",
+      "baseline_reused": true,
+      "source_commit": "7d63c7fbebb44c7e466e5c8b5c1f341ab767929e"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "Happy to help.",
+        "Alright then \u2014 good luck with it."
+      ],
+      "diagnostics": "[module: chat | 23603 ms]\n[module: chat | 1096 ms]\n"
+    },
+    "exact": true
+  },
+  {
+    "binary_sha256": "bf98fc48613880ed03b5c39ce2e1c0769a2ba2ab7ebf72108aa0dbe06a569520",
+    "case": 11,
+    "inputs": [
+      "I have a dog named Buddy",
+      "what is my dog called"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "Buddy \u2014 good name for a dog. How old is Buddy?",
+        "You've got a dog called Buddy."
+      ],
+      "diagnostics": "[module: chat | 1247 ms]\n[module: memory_store | 2569 ms]\n",
+      "baseline_reused": true,
+      "source_commit": "7d63c7fbebb44c7e466e5c8b5c1f341ab767929e"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "Buddy \u2014 good name for a dog. How old is Buddy?",
+        "You've got a dog called Buddy."
+      ],
+      "diagnostics": "[module: chat | 35321 ms]\n[module: memory_store | 10038 ms]\n"
+    },
+    "exact": true
+  },
+  {
+    "binary_sha256": "533d80bb36db11647bd67e30b2cb8a59f617ca46d17608b79a058020642fab57",
+    "case": 2,
+    "inputs": [
+      "what is 2 plus 2",
+      "what is 12 times 8",
+      "what is the capital of France"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "That's 4.",
+        "That's 96.",
+        "Paris."
+      ],
+      "diagnostics": "[module: answers | 6284 ms]\n[module: answers | 6902 ms]\n[module: answers | 1080 ms]\n",
+      "baseline_reused": true,
+      "source_commit": "7d63c7fbebb44c7e466e5c8b5c1f341ab767929e"
+    },
+    "rust": {
+      "timeout": true,
+      "timeout_seconds": 110,
+      "replies": [
+        "That's 4."
+      ]
+    },
+    "exact": false
+  }
+]

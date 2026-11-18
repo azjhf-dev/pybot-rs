@@ -1,6 +1,35 @@
 [
   {
     "binary_sha256": "bf98fc48613880ed03b5c39ce2e1c0769a2ba2ab7ebf72108aa0dbe06a569520",
+    "case": 2,
+    "inputs": [
+      "what is 2 plus 2",
+      "what is 12 times 8",
+      "what is the capital of France"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "That's 4.",
+        "That's 96.",
+        "Paris."
+      ],
+      "diagnostics": "[module: answers | 6284 ms]\n[module: answers | 6902 ms]\n[module: answers | 1080 ms]\n",
+      "baseline_reused": true,
+      "source_commit": "7d63c7fbebb44c7e466e5c8b5c1f341ab767929e"
+    },
+    "rust": {
+      "timeout": true,
+      "timeout_seconds": 110,
+      "replies": [
+        "That's 4.",
+        "That's 96."
+      ]
+    },
+    "exact": false
+  },
+  {
+    "binary_sha256": "bf98fc48613880ed03b5c39ce2e1c0769a2ba2ab7ebf72108aa0dbe06a569520",
     "case": 0,
     "inputs": [
       "hello",
@@ -292,33 +321,5 @@
       "diagnostics": "[module: chat | 35321 ms]\n[module: memory_store | 10038 ms]\n"
     },
     "exact": true
-  },
-  {
-    "binary_sha256": "533d80bb36db11647bd67e30b2cb8a59f617ca46d17608b79a058020642fab57",
-    "case": 2,
-    "inputs": [
-      "what is 2 plus 2",
-      "what is 12 times 8",
-      "what is the capital of France"
-    ],
-    "python": {
-      "returncode": 0,
-      "replies": [
-        "That's 4.",
-        "That's 96.",
-        "Paris."
-      ],
-      "diagnostics": "[module: answers | 6284 ms]\n[module: answers | 6902 ms]\n[module: answers | 1080 ms]\n",
-      "baseline_reused": true,
-      "source_commit": "7d63c7fbebb44c7e466e5c8b5c1f341ab767929e"
-    },
-    "rust": {
-      "timeout": true,
-      "timeout_seconds": 110,
-      "replies": [
-        "That's 4."
-      ]
-    },
-    "exact": false
   }
 ]
