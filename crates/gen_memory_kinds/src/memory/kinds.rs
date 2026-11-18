@@ -28,7 +28,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT memory.kinds: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -251,7 +251,7 @@ pub fn the_kind_asked(args: &[Py]) -> Py {
     let mut pattern: Py = Py::None;
     let _ = py_str("The kinds of detail the line asks for, in the order the table reads them.");
     low = _flat(&[text.clone()]);
-    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_ASKS()) { let __unpk1842 = py_unpack(&__item.clone(), 2, None); let mut kind: Py = __unpk1842[0].clone(); let mut pattern: Py = __unpk1842[1].clone(); if py_truthy(&mcall(&pattern.clone(), "search", &[low.clone()])) {  __out.push(kind.clone()); } } py_list(__out) })() };
+    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_ASKS()) { let __unpk8365 = py_unpack(&__item.clone(), 2, None); let mut kind: Py = __unpk8365[0].clone(); let mut pattern: Py = __unpk8365[1].clone(); if py_truthy(&mcall(&pattern.clone(), "search", &[low.clone()])) {  __out.push(kind.clone()); } } py_list(__out) })() };
     Py::None
 }
 pub fn the_line_that_gives(args: &[Py]) -> Py {
@@ -350,6 +350,7 @@ pub fn module_obj() -> Py {
             "_words" => Some(py_func("_words", |args: &[Py]| _words(args))),
             "the_kind_asked" => Some(py_func("the_kind_asked", |args: &[Py]| the_kind_asked(args))),
             "the_line_that_gives" => Some(py_func("the_line_that_gives", |args: &[Py]| the_line_that_gives(args))),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

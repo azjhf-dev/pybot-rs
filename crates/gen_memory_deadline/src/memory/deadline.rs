@@ -21,7 +21,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT memory.deadline: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -151,6 +151,8 @@ pub fn module_obj() -> Py {
             "_a_plan" => Some(py_func("_a_plan", |args: &[Py]| _a_plan(args))),
             "follow_up" => Some(py_func("follow_up", |args: &[Py]| follow_up(args))),
             "the_deadline" => Some(py_func("the_deadline", |args: &[Py]| the_deadline(args))),
+            "topics" => Some(pyrt::xrefs::xmodule("memory.topics")),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

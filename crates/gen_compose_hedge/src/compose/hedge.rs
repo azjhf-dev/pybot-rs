@@ -20,7 +20,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT compose.hedge: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -126,6 +126,10 @@ pub fn module_obj() -> Py {
             "OUT_OF_THEIR_HANDS" => Some(g_OUT_OF_THEIR_HANDS()),
             "only_a_shrug" => Some(py_func("only_a_shrug", |args: &[Py]| only_a_shrug(args))),
             "what_the_composer_would_say" => Some(py_func("what_the_composer_would_say", |args: &[Py]| what_the_composer_would_say(args))),
+            "fallback" => Some(pyrt::xrefs::xmodule("compose.fallback")),
+            "copy" => Some(stdlib_module("copy")),
+            "random" => Some(stdlib_module("random")),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

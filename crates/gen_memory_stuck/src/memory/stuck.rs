@@ -59,7 +59,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT memory.stuck: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -589,6 +589,8 @@ pub fn module_obj() -> Py {
             "reads_as_bad_news" => Some(g_reads_as_bad_news()),
             "the_advice_was_to_get_seen" => Some(py_func("the_advice_was_to_get_seen", |args: &[Py]| the_advice_was_to_get_seen(args))),
             "the_ask_in" => Some(py_func("the_ask_in", |args: &[Py]| the_ask_in(args))),
+            "topics" => Some(pyrt::xrefs::xmodule("memory.topics")),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

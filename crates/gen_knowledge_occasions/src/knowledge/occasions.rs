@@ -38,7 +38,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT knowledge.occasions: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -133,7 +133,7 @@ fn module_body() {
     fn __data7() -> Py { py_tuple(vec![py_str("birthday"), py_str("birthdays"), py_str("housewarming"), py_str("house warming"), py_str("engagement"), py_str("baby shower"), py_str("wedding"), py_str("christening present"), py_str("present"), py_str("presents"), py_str("gift"), py_str("gifts"), py_str("interview"), py_str("work"), py_str("office"), py_str("fridge"), py_str("freezer"), py_str("on the plane"), py_str("on a plane"), py_str("flight"), py_str("through security"), py_str("hand luggage"), py_str("cabin bag"), py_str("restaurant"), py_str("restaurants"), py_str("cafe"), py_str("cafes"), py_str("the pub"), py_str("takeaway"), py_str("ferry"), py_str("on the ferry"), py_str("on a ferry"), py_str("on the train"), py_str("on a train"), py_str("on the coach"), py_str("on the bus")]) }
     s__NOT_A_DISH_TO_CARRY(__data7());
     s__ANY_DISH(py_str("Take something that needs nothing from anyone else's kitchen: a big bowl of pasta salad, a tray of sausages or a quiche, cheese and crackers, or a traybake cut into squares. Nothing with cream in it if it will sit out, and take it in a dish you do not need back. If the host says not to bring anything, take a bottle or something for after - and ask what is already coming so you are not the third pasta bake."));
-    s_OCCASION_NAMES(op_add(&call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_BRING_DISH()) { let __unpk8986 = py_unpack(&__item.clone(), 2, None); let mut names: Py = __unpk8986[0].clone(); let mut _hint: Py = __unpk8986[1].clone(); for __item in py_iter_or_raise(&names.clone()) { let mut name: Py = __item.clone(); __out.push(name.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)), &g_GENERIC_FOOD()));
+    s_OCCASION_NAMES(op_add(&call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_BRING_DISH()) { let __unpk8455 = py_unpack(&__item.clone(), 2, None); let mut names: Py = __unpk8455[0].clone(); let mut _hint: Py = __unpk8455[1].clone(); for __item in py_iter_or_raise(&names.clone()) { let mut name: Py = __item.clone(); __out.push(name.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)), &g_GENERIC_FOOD()));
     s_ENTRIES(py_list(vec![{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("bring-dish")); __args.push(py_tuple(vec![g_BRING_WORDS(), g_OCCASION_NAMES()])); __args.push(py_func("what_to_bring", |args: &[Py]| what_to_bring(args))); __kws.extend(vec![("ask".to_string(), g_BRING_ASKS()), ("avoid".to_string(), g_BRING_NOT_FOOD()), ("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }]));
 }
 pub fn _same(args: &[Py]) -> Py {
@@ -292,6 +292,7 @@ pub fn module_obj() -> Py {
             "crosses_a_border" => Some(g_crosses_a_border()),
             "entry" => Some(g_entry()),
             "what_to_bring" => Some(py_func("what_to_bring", |args: &[Py]| what_to_bring(args))),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

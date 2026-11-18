@@ -24,7 +24,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT compose.safety_doubt: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -199,6 +199,9 @@ pub fn module_obj() -> Py {
             "_a_bare_verdict_ask" => Some(py_func("_a_bare_verdict_ask", |args: &[Py]| _a_bare_verdict_ask(args))),
             "_the_answer_behind" => Some(py_func("_the_answer_behind", |args: &[Py]| _the_answer_behind(args))),
             "reply_for" => Some(py_func("reply_for", |args: &[Py]| reply_for(args))),
+            "fallback" => Some(pyrt::xrefs::xmodule("compose.fallback")),
+            "random" => Some(stdlib_module("random")),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

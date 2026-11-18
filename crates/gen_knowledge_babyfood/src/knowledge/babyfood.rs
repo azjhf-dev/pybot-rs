@@ -105,7 +105,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT knowledge.babyfood: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -422,7 +422,7 @@ fn module_body() {
     fn __data21() -> Py { py_tuple(vec![py_str("what can"), py_str("what should"), py_str("what do"), py_str("what to"), py_str("what shall"), py_str("what could"), py_str("what will"), py_str("what food"), py_str("what foods"), py_str("what food do i"), py_str("how much"), py_str("how many"), py_str("how often"), py_str("when can"), py_str("when should"), py_str("when do"), py_str("is it ok to"), py_str("can i give"), py_str("can i feed"), py_str("can i start"), py_str("can they have"), py_str("can she have"), py_str("can he have"), py_str("where do i start")]) }
     s__WHAT_TO_FEED(__data21());
     s__AGE_FIGURE(stdlib_call("re", "compile", &[py_str("\\b(\\d{1,2})\\s*-?\\s*(month|months|mth|mths|year|years|yr|yrs)\\b")]).unwrap_or_else(|e| exc::raise(e)));
-    s__NUMBER_WORDS_AT({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[g__NUMBER_WORDS()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk562 = py_unpack(&__item.clone(), 2, None); let mut index: Py = __unpk562[0].clone(); let mut word: Py = __unpk562[1].clone(); __out.push((word.clone(), op_add(&index.clone(), &Py::Int(1)))); } py_dict(__out) })() });
+    s__NUMBER_WORDS_AT({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[g__NUMBER_WORDS()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk1352 = py_unpack(&__item.clone(), 2, None); let mut index: Py = __unpk1352[0].clone(); let mut word: Py = __unpk1352[1].clone(); __out.push((word.clone(), op_add(&index.clone(), &Py::Int(1)))); } py_dict(__out) })() });
     s__MILK_WORDS(py_tuple(vec![py_str("milk"), py_str("breastmilk"), py_str("breast milk"), py_str("expressed milk"), py_str("expressed")]));
     fn __data22() -> Py { py_tuple(vec![py_str("how much"), py_str("how many"), py_str("how often"), py_str("much milk"), py_str("much breastmilk"), py_str("many ounces"), py_str("how many oz"), py_str("what milk"), py_str("which milk"), py_str("what kind of milk"), py_str("what type of milk"), py_str("best milk"), py_str("right milk")]) }
     s__MILK_HOW_MUCH(__data22());
@@ -1379,7 +1379,7 @@ pub fn _the_pronoun_is_an_animal(args: &[Py]) -> Py {
     places = py_list(vec![]);
     ref_ = mcall(&understood.clone(), "get", &[py_str("ref")]);
     if py_truthy(&call_builtin("isinstance", &[ref_.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) {
-    let _ = mcall(&places.clone(), "extend", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&ref_.clone(), "items", &[])) { let __unpk2966 = py_unpack(&__item.clone(), 2, None); let mut key: Py = __unpk2966[0].clone(); let mut value: Py = __unpk2966[1].clone(); if py_truthy(&{ let __b = Py::Bool(py_contains(&py_tuple(vec![py_str("he"), py_str("she"), py_str("they"), py_str("him"), py_str("her")]), &key.clone())); if !py_truthy(&__b) { __b } else { call_builtin("isinstance", &[value.clone(), py_func("str", |args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e)) } }) {  __out.push(value.clone()); } } py_list(__out) })() }]);
+    let _ = mcall(&places.clone(), "extend", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&ref_.clone(), "items", &[])) { let __unpk9292 = py_unpack(&__item.clone(), 2, None); let mut key: Py = __unpk9292[0].clone(); let mut value: Py = __unpk9292[1].clone(); if py_truthy(&{ let __b = Py::Bool(py_contains(&py_tuple(vec![py_str("he"), py_str("she"), py_str("they"), py_str("him"), py_str("her")]), &key.clone())); if !py_truthy(&__b) { __b } else { call_builtin("isinstance", &[value.clone(), py_func("str", |args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e)) } }) {  __out.push(value.clone()); } } py_list(__out) })() }]);
     }
     leans = mcall(&understood.clone(), "get", &[py_str("leans_on")]);
     if py_truthy(&call_builtin("isinstance", &[leans.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) {
@@ -1775,6 +1775,7 @@ pub fn module_obj() -> Py {
             "_what_a_baby_drinks" => Some(py_func("_what_a_baby_drinks", |args: &[Py]| _what_a_baby_drinks(args))),
             "entry" => Some(g_entry()),
             "not_the_heat_of_an_argument" => Some(g_not_the_heat_of_an_argument()),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

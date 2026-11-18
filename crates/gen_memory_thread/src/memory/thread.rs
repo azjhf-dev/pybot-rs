@@ -112,7 +112,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT memory.thread: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -1362,7 +1362,7 @@ pub fn about(args: &[Py]) -> Py {
     let mut reading: Py = Py::None;
     let mut text: Py = Py::None;
     let _ = py_str("The thing the conversation is on, as a phrase (\"the birthday cake\", \"Lisbon\"), or None.\n\n    The newest line that carries a subject wins, so a return to something said earlier is\n    named before the small talk that followed it. A line that names something beats one that\n    only carries a content word, so \"and can I make it the day before?\" never becomes the\n    subject of a conversation about a cake.\n\n    When no line carries a subject of its own it defers to `topics.subject`, so this module\n    adds a reader on top of the store's answer instead of a second answer to the same\n    question.\n    ");
-    lines = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&user_lines(&[memory.clone()])) { let __unpk8215 = py_unpack(&__item.clone(), 2, None); let mut text: Py = __unpk8215[0].clone(); let mut reading: Py = __unpk8215[1].clone(); if py_truthy(&{ let __b = Py::Bool(!py_truthy(&_is_thin(&[reading.clone()]))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&_is_memory_line(&[reading.clone()]))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&_asks_about_the_chat(&[text.clone(), memory.clone(), skip.clone()]))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&_asks_about_the_bot(&[reading.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&signs_off(&[text.clone()]))) } } } } } } } }) {  __out.push(py_tuple(vec![text.clone(), reading.clone()])); } } py_list(__out) })() };
+    lines = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&user_lines(&[memory.clone()])) { let __unpk4354 = py_unpack(&__item.clone(), 2, None); let mut text: Py = __unpk4354[0].clone(); let mut reading: Py = __unpk4354[1].clone(); if py_truthy(&{ let __b = Py::Bool(!py_truthy(&_is_thin(&[reading.clone()]))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&_is_memory_line(&[reading.clone()]))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&_asks_about_the_chat(&[text.clone(), memory.clone(), skip.clone()]))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&_asks_about_the_bot(&[reading.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&signs_off(&[text.clone()]))) } } } } } } } }) {  __out.push(py_tuple(vec![text.clone(), reading.clone()])); } } py_list(__out) })() };
     let __iter1 = py_iter_or_raise(&py_tuple(vec![py_str("entity"), py_str("statement"), py_str("any")]));
     for __item in __iter1 {
     pass_kind = __item.clone();
@@ -3372,6 +3372,8 @@ pub fn module_obj() -> Py {
             "user_lines" => Some(py_func("user_lines", |args: &[Py]| user_lines(args))),
             "went" => Some(py_func("went", |args: &[Py]| went(args))),
             "your_words" => Some(py_func("your_words", |args: &[Py]| your_words(args))),
+            "detail" => Some(pyrt::xrefs::xmodule("memory.detail")),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

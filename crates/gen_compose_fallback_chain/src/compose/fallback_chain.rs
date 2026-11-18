@@ -1231,7 +1231,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT compose.fallback_chain: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -12311,6 +12311,17 @@ pub fn module_obj() -> Py {
             "why" => Some(g_why()),
             "worn" => Some(g_worn()),
             "worry_on_the_table" => Some(g_worry_on_the_table()),
+            "history" => Some(pyrt::xrefs::xmodule("memory.history")),
+            "obstacle" => Some(pyrt::xrefs::xmodule("memory.obstacle")),
+            "reject" => Some(pyrt::xrefs::xmodule("memory.reject")),
+            "repeat" => Some(pyrt::xrefs::xmodule("memory.repeat")),
+            "understanding_kinds" => Some(pyrt::xrefs::xmodule("understanding.kinds")),
+            "badnews" => Some(pyrt::xrefs::xmodule("compose.badnews")),
+            "harm" => Some(pyrt::xrefs::xmodule("compose.harm")),
+            "morning_after" => Some(pyrt::xrefs::xmodule("compose.morning_after")),
+            "prices" => Some(pyrt::xrefs::xmodule("compose.prices")),
+            "safetyask" => Some(pyrt::xrefs::xmodule("compose.safetyask")),
+            "string" => Some(stdlib_module("string")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

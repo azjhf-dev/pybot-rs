@@ -20,7 +20,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT modules.the_shape_of_the_answer: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -167,7 +167,7 @@ pub fn _a_copy_of(args: &[Py]) -> Py {
     let _ = py_str("Memory as a module may read it: everything copied, the turns shared, as the runtime does.");
     let __try1 = exc::catch(|| {
     copy = stdlib_module("copy");
-    return py_tuple(vec![Py::Bool(true), { (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&memory.clone(), "items", &[])) { let __unpk773 = py_unpack(&__item.clone(), 2, None); let mut key: Py = __unpk773[0].clone(); let mut value: Py = __unpk773[1].clone(); __out.push((key.clone(), if py_truthy(&Py::Bool(py_eq(&key.clone(), &py_str("turns")))) { value.clone() } else { mcall(&copy.clone(), "deepcopy", &[value.clone()]) })); } py_dict(__out) })() }]);
+    return py_tuple(vec![Py::Bool(true), { (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&memory.clone(), "items", &[])) { let __unpk9360 = py_unpack(&__item.clone(), 2, None); let mut key: Py = __unpk9360[0].clone(); let mut value: Py = __unpk9360[1].clone(); __out.push((key.clone(), if py_truthy(&Py::Bool(py_eq(&key.clone(), &py_str("turns")))) { value.clone() } else { mcall(&copy.clone(), "deepcopy", &[value.clone()]) })); } py_dict(__out) })() }]);
         py_tuple(vec![Py::Bool(false), Py::None])
     });
     let mut __ret2: Py = Py::Bool(false);
@@ -288,6 +288,7 @@ pub fn module_obj() -> Py {
             "_the_reply_is_only_a_placeholder" => Some(py_func("_the_reply_is_only_a_placeholder", |args: &[Py]| _the_reply_is_only_a_placeholder(args))),
             "respond" => Some(py_func("respond", |args: &[Py]| respond(args))),
             "the_shape_without_the_fact" => Some(g_the_shape_without_the_fact()),
+            "fallback" => Some(pyrt::xrefs::xmodule("compose.fallback")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

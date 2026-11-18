@@ -31,7 +31,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT memory.aboutthem: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -91,7 +91,7 @@ fn module_body() {
     s_SPOKEN(__data1());
     s_AHEAD_ASK(stdlib_call("re", "compile", &[py_str("\\b(?:how\\s+old|what\\s+age)\\s+(?:will|would|is|does)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     s_AHEAD_TIME(stdlib_call("re", "compile", &[py_str("\\bnext\\s+(?P<next>year|summer|birthday)\\b|\\bthis\\s+time\\s+next\\s+year\\b|\\bin\\s+(?P<years>\\d{1,2}|a|one|two|three|four|five|six|seven|eight|nine|ten)\\s+years?\\b|\\bin\\s+(?P<year>(?:19|20)\\d\\d)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
-    s_COUNT({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[py_tuple(vec![py_str("zero"), py_str("one"), py_str("two"), py_str("three"), py_str("four"), py_str("five"), py_str("six"), py_str("seven"), py_str("eight"), py_str("nine"), py_str("ten"), py_str("eleven"), py_str("twelve")]), Py::Int(0)]).unwrap_or_else(|e| exc::raise(e))) { let __unpk8034 = py_unpack(&__item.clone(), 2, None); let mut number: Py = __unpk8034[0].clone(); let mut word: Py = __unpk8034[1].clone(); __out.push((word.clone(), number.clone())); } py_dict(__out) })() });
+    s_COUNT({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[py_tuple(vec![py_str("zero"), py_str("one"), py_str("two"), py_str("three"), py_str("four"), py_str("five"), py_str("six"), py_str("seven"), py_str("eight"), py_str("nine"), py_str("ten"), py_str("eleven"), py_str("twelve")]), Py::Int(0)]).unwrap_or_else(|e| exc::raise(e))) { let __unpk5801 = py_unpack(&__item.clone(), 2, None); let mut number: Py = __unpk5801[0].clone(); let mut word: Py = __unpk5801[1].clone(); __out.push((word.clone(), number.clone())); } py_dict(__out) })() });
     s_KIN(stdlib_call("re", "compile", &[py_str("\\bmy\\s+(?:little\\s+|big\\s+|eldest\\s+|youngest\\s+)?(?P<who>son|daughter|boy|girl|child|kid|lad|little one)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     s_KIN_SAME(py_dict(vec![(py_str("son"), py_tuple(vec![py_str("son"), py_str("boy")])), (py_str("boy"), py_tuple(vec![py_str("boy"), py_str("son")])), (py_str("lad"), py_tuple(vec![py_str("lad"), py_str("boy"), py_str("son")])), (py_str("daughter"), py_tuple(vec![py_str("daughter"), py_str("girl")])), (py_str("girl"), py_tuple(vec![py_str("girl"), py_str("daughter")])), (py_str("child"), py_tuple(vec![py_str("child"), py_str("kid"), py_str("son"), py_str("daughter"), py_str("boy"), py_str("girl")])), (py_str("kid"), py_tuple(vec![py_str("kid"), py_str("child"), py_str("son"), py_str("daughter"), py_str("boy"), py_str("girl")])), (py_str("little one"), py_tuple(vec![py_str("little one"), py_str("child"), py_str("kid"), py_str("son"), py_str("daughter"), py_str("boy"), py_str("girl")]))]));
 }
@@ -534,6 +534,9 @@ pub fn module_obj() -> Py {
             "_the_years_ahead" => Some(py_func("_the_years_ahead", |args: &[Py]| _the_years_ahead(args))),
             "an_age_ahead" => Some(py_func("an_age_ahead", |args: &[Py]| an_age_ahead(args))),
             "with_the_age" => Some(py_func("with_the_age", |args: &[Py]| with_the_age(args))),
+            "topics" => Some(pyrt::xrefs::xmodule("memory.topics")),
+            "datetime" => Some(stdlib_module("datetime")),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

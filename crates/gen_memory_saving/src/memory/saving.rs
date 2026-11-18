@@ -100,7 +100,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT memory.saving: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -362,7 +362,7 @@ fn module_body() {
     s_MONTHS(py_tuple(vec![py_str("january"), py_str("february"), py_str("march"), py_str("april"), py_str("may"), py_str("june"), py_str("july"), py_str("august"), py_str("september"), py_str("october"), py_str("november"), py_str("december")]));
     fn __data1() -> Py { py_tuple(vec![py_tuple(vec![py_str("christmas"), py_str("december")]), py_tuple(vec![py_str("xmas"), py_str("december")]), py_tuple(vec![py_str("new year"), py_str("december")]), py_tuple(vec![py_str("hogmanay"), py_str("december")]), py_tuple(vec![py_str("halloween"), py_str("october")]), py_tuple(vec![py_str("valentine"), py_str("february")]), py_tuple(vec![py_str("easter"), py_str("april")]), py_tuple(vec![py_str("black friday"), py_str("november")]), py_tuple(vec![py_str("spring"), py_str("march")]), py_tuple(vec![py_str("summer"), py_str("june")]), py_tuple(vec![py_str("autumn"), py_str("september")]), py_tuple(vec![py_str("fall"), py_str("october")]), py_tuple(vec![py_str("winter"), py_str("december")]), py_tuple(vec![py_str("the year"), py_str("december")])]) }
     s_NAMED_WHEN(__data1());
-    s_WHEN_WORDS(op_add(&op_add(&mcall(&py_str("|"), "join", &[g_MONTHS()]), &py_str("|")), &mcall(&py_str("|"), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_NAMED_WHEN()) { let __unpk1924 = py_unpack(&__item.clone(), 2, None); let mut word: Py = __unpk1924[0].clone(); let mut _month: Py = __unpk1924[1].clone(); __out.push(word.clone()); } py_list(__out) })() }])));
+    s_WHEN_WORDS(op_add(&op_add(&mcall(&py_str("|"), "join", &[g_MONTHS()]), &py_str("|")), &mcall(&py_str("|"), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_NAMED_WHEN()) { let __unpk5367 = py_unpack(&__item.clone(), 2, None); let mut word: Py = __unpk5367[0].clone(); let mut _month: Py = __unpk5367[1].clone(); __out.push(word.clone()); } py_list(__out) })() }])));
     s_END_OF(py_str("(?:(?:at\\s+)?the\\s+end\\s+of\\s+|end\\s+of\\s+)?"));
     s_DATE(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&py_str("\\b(?:by|before|until|till|for|in|at the end of|end of)\\s+"), &g_END_OF()), &py_str("(?:next\\s+|this\\s+|early\\s+|late\\s+)?(")), &g_WHEN_WORDS()), &py_str(")\\b")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     s_CORRECTING(stdlib_call("re", "compile", &[py_str("^\\s*(?:(?:actually|no|sorry|nope|rather|instead|oh)\\b[\\s,]*(?:(?:its|it's|it\\s+is|it\\s+was|thats|that's|that\\s+is)\\b[\\s,]*)?|(?:make|change)\\s+(?:that|it)\\s+(?:to\\s+)?|i\\s+mean\\b[\\s,]*)*"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
@@ -3877,6 +3877,7 @@ pub fn module_obj() -> Py {
             "the_same_figure_a_month" => Some(py_func("the_same_figure_a_month", |args: &[Py]| the_same_figure_a_month(args))),
             "without_the_pot_opener" => Some(py_func("without_the_pot_opener", |args: &[Py]| without_the_pot_opener(args))),
             "without_what_was_just_said" => Some(py_func("without_what_was_just_said", |args: &[Py]| without_what_was_just_said(args))),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

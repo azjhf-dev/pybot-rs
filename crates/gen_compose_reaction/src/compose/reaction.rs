@@ -32,7 +32,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT compose.reaction: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -282,7 +282,7 @@ pub fn reply_for(args: &[Py]) -> Py {
     seen = call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&turns.clone()) { let mut turn: Py = __item.clone(); if py_truthy(&call_builtin("isinstance", &[turn.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(Py::Int(1)); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     above = mcall(&py_str(" "), "join", &[mcall(&mcall(&call_builtin("str", &[{ let __b = mcall(&last.clone(), "get", &[py_str("bot")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]), "split", &[])]);
     seed = op_add(&op_add(&op_add(&op_add(&mcall(&py_str(" "), "join", &[mcall(&mcall(&call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]), "split", &[])]), &py_str("|")), &call_builtin("str", &[seen.clone()]).unwrap_or_else(|e| exc::raise(e))), &py_str("|")), &above.clone());
-    index = op_modulo(&call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[seed.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk8482 = py_unpack(&__item.clone(), 2, None); let mut i: Py = __unpk8482[0].clone(); let mut letter: Py = __unpk8482[1].clone(); __out.push(op_mul(&op_add(&i.clone(), &Py::Int(1)), &call_builtin("ord", &[letter.clone()]).unwrap_or_else(|e| exc::raise(e)))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("len", &[pool.clone()]).unwrap_or_else(|e| exc::raise(e)));
+    index = op_modulo(&call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[seed.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk5482 = py_unpack(&__item.clone(), 2, None); let mut i: Py = __unpk5482[0].clone(); let mut letter: Py = __unpk5482[1].clone(); __out.push(op_mul(&op_add(&i.clone(), &Py::Int(1)), &call_builtin("ord", &[letter.clone()]).unwrap_or_else(|e| exc::raise(e)))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("len", &[pool.clone()]).unwrap_or_else(|e| exc::raise(e)));
     return geti(&pool.clone(), &index.clone());
     Py::None
 }
@@ -343,6 +343,7 @@ pub fn module_obj() -> Py {
             "_checking" => Some(py_func("_checking", |args: &[Py]| _checking(args))),
             "main" => Some(py_func("main", |args: &[Py]| main(args))),
             "reply_for" => Some(py_func("reply_for", |args: &[Py]| reply_for(args))),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

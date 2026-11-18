@@ -33,7 +33,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT memory.outfit: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -349,7 +349,7 @@ pub fn _names_an_occasion(args: &[Py]) -> Py {
     let mut _key: Py = Py::None;
     let mut _phrase: Py = Py::None;
     let mut pattern: Py = Py::None;
-    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_OCCASIONS()) { let __unpk337 = py_unpack(&__item.clone(), 3, None); let mut pattern: Py = __unpk337[0].clone(); let mut _key: Py = __unpk337[1].clone(); let mut _phrase: Py = __unpk337[2].clone(); __out.push(mcall(&pattern.clone(), "search", &[text.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_OCCASIONS()) { let __unpk3287 = py_unpack(&__item.clone(), 3, None); let mut pattern: Py = __unpk3287[0].clone(); let mut _key: Py = __unpk3287[1].clone(); let mut _phrase: Py = __unpk3287[2].clone(); __out.push(mcall(&pattern.clone(), "search", &[text.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn _names_its_own_outing(args: &[Py]) -> Py {
@@ -466,6 +466,7 @@ pub fn module_obj() -> Py {
             "the_occasion" => Some(py_func("the_occasion", |args: &[Py]| the_occasion(args))),
             "the_sentence_answered" => Some(py_func("the_sentence_answered", |args: &[Py]| the_sentence_answered(args))),
             "written_out" => Some(py_func("written_out", |args: &[Py]| written_out(args))),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

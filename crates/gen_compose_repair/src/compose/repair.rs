@@ -39,7 +39,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT compose.repair: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -371,6 +371,7 @@ pub fn module_obj() -> Py {
             "line_of" => Some(py_func("line_of", |args: &[Py]| line_of(args))),
             "owns_the_deed" => Some(py_func("owns_the_deed", |args: &[Py]| owns_the_deed(args))),
             "with_the_feeling_named" => Some(py_func("with_the_feeling_named", |args: &[Py]| with_the_feeling_named(args))),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

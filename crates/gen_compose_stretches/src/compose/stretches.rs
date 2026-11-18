@@ -47,7 +47,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT compose.stretches: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -510,6 +510,10 @@ pub fn module_obj() -> Py {
             "reads_as_a_long_stretch" => Some(py_func("reads_as_a_long_stretch", |args: &[Py]| reads_as_a_long_stretch(args))),
             "the_stretch_pool" => Some(py_func("the_stretch_pool", |args: &[Py]| the_stretch_pool(args))),
             "the_stretch_said_back" => Some(py_func("the_stretch_said_back", |args: &[Py]| the_stretch_said_back(args))),
+            "fallback" => Some(pyrt::xrefs::xmodule("compose.fallback")),
+            "fallback_data" => Some(pyrt::xrefs::xmodule("compose.fallback_data")),
+            "ack" => Some(pyrt::xrefs::xmodule("memory.ack")),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

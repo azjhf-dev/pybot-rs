@@ -42,7 +42,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT compose.a_wait_about_a_body: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -513,6 +513,7 @@ pub fn module_obj() -> Py {
             "reads_as_the_wait_of_their_own" => Some(py_func("reads_as_the_wait_of_their_own", |args: &[Py]| reads_as_the_wait_of_their_own(args))),
             "reply_for" => Some(py_func("reply_for", |args: &[Py]| reply_for(args))),
             "tells_of_a_condition_of_their_own" => Some(py_func("tells_of_a_condition_of_their_own", |args: &[Py]| tells_of_a_condition_of_their_own(args))),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

@@ -25,7 +25,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT understanding.breeds: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -267,6 +267,7 @@ pub fn module_obj() -> Py {
             "the_animal_a_breed_is" => Some(py_func("the_animal_a_breed_is", |args: &[Py]| the_animal_a_breed_is(args))),
             "the_breed_named" => Some(py_func("the_breed_named", |args: &[Py]| the_breed_named(args))),
             "the_kind_of" => Some(py_func("the_kind_of", |args: &[Py]| the_kind_of(args))),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

@@ -36,7 +36,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT memory.setback: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -448,6 +448,7 @@ pub fn module_obj() -> Py {
             "_thing" => Some(py_func("_thing", |args: &[Py]| _thing(args))),
             "pool" => Some(py_func("pool", |args: &[Py]| pool(args))),
             "reading" => Some(py_func("reading", |args: &[Py]| reading(args))),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

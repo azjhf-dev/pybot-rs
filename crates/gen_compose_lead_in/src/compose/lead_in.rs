@@ -23,7 +23,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT compose.lead_in: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -147,7 +147,7 @@ pub fn _a_copy(args: &[Py]) -> Py {
     let mut value: Py = Py::None;
     let _ = py_str("A copy of memory to ask a question of, the way the runtime makes one for a module.");
     let __try1 = exc::catch(|| {
-    return py_tuple(vec![Py::Bool(true), { (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&memory.clone(), "items", &[])) { let __unpk4258 = py_unpack(&__item.clone(), 2, None); let mut key: Py = __unpk4258[0].clone(); let mut value: Py = __unpk4258[1].clone(); __out.push((key.clone(), if py_truthy(&Py::Bool(py_eq(&key.clone(), &py_str("turns")))) { value.clone() } else { stdlib_call("copy", "deepcopy", &[value.clone()]).unwrap_or_else(|e| exc::raise(e)) })); } py_dict(__out) })() }]);
+    return py_tuple(vec![Py::Bool(true), { (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&memory.clone(), "items", &[])) { let __unpk4613 = py_unpack(&__item.clone(), 2, None); let mut key: Py = __unpk4613[0].clone(); let mut value: Py = __unpk4613[1].clone(); __out.push((key.clone(), if py_truthy(&Py::Bool(py_eq(&key.clone(), &py_str("turns")))) { value.clone() } else { stdlib_call("copy", "deepcopy", &[value.clone()]).unwrap_or_else(|e| exc::raise(e)) })); } py_dict(__out) })() }]);
         py_tuple(vec![Py::Bool(false), Py::None])
     });
     let mut __ret2: Py = Py::Bool(false);
@@ -290,7 +290,7 @@ pub fn the_answer_the_lead_in_hid(args: &[Py]) -> Py {
     }
     without = py_call(&pyrt::xrefs::xget("compose.fallback", "reply_for"), &[rest.clone(), _read_as_its_own_line(&[rest.clone(), memory.clone()])]);
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&_a_reply_of_its_own(&[without.clone()]))); if py_truthy(&__b) { __b } else { Py::Bool(py_eq(&without.clone(), &whole.clone())) } }) {
-    alone = { (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&memory.clone(), "items", &[])) { let __unpk9298 = py_unpack(&__item.clone(), 2, None); let mut key: Py = __unpk9298[0].clone(); let mut value: Py = __unpk9298[1].clone(); if py_truthy(&Py::Bool(!py_eq(&key.clone(), &py_str("turns")))) {  __out.push((key.clone(), value.clone())); } } py_dict(__out) })() };
+    alone = { (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&memory.clone(), "items", &[])) { let __unpk74 = py_unpack(&__item.clone(), 2, None); let mut key: Py = __unpk74[0].clone(); let mut value: Py = __unpk74[1].clone(); if py_truthy(&Py::Bool(!py_eq(&key.clone(), &py_str("turns")))) {  __out.push((key.clone(), value.clone())); } } py_dict(__out) })() };
     fresh = py_call(&pyrt::xrefs::xget("compose.fallback", "reply_for"), &[rest.clone(), _read_as_its_own_line(&[rest.clone(), alone.clone()])]);
     if py_truthy(&{ let __b = fresh.clone(); if !py_truthy(&__b) { __b } else { { let __b = _a_reply_of_its_own(&[fresh.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_eq(&fresh.clone(), &whole.clone())) } } } }) {
     without = fresh.clone();
@@ -328,6 +328,10 @@ pub fn module_obj() -> Py {
             "_read_as_its_own_line" => Some(py_func("_read_as_its_own_line", |args: &[Py]| _read_as_its_own_line(args))),
             "_the_rest_after_the_lead_in" => Some(py_func("_the_rest_after_the_lead_in", |args: &[Py]| _the_rest_after_the_lead_in(args))),
             "the_answer_the_lead_in_hid" => Some(py_func("the_answer_the_lead_in_hid", |args: &[Py]| the_answer_the_lead_in_hid(args))),
+            "fallback" => Some(pyrt::xrefs::xmodule("compose.fallback")),
+            "ack" => Some(pyrt::xrefs::xmodule("memory.ack")),
+            "copy" => Some(stdlib_module("copy")),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

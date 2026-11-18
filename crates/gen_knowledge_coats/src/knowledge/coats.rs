@@ -26,7 +26,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT knowledge.coats: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -124,6 +124,7 @@ pub fn module_obj() -> Py {
             "_OUT_WHEN" => Some(g__OUT_WHEN()),
             "_a_garment_to_take" => Some(py_func("_a_garment_to_take", |args: &[Py]| _a_garment_to_take(args))),
             "entry" => Some(g_entry()),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

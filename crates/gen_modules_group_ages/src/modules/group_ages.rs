@@ -19,7 +19,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT modules.group_ages: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -166,6 +166,7 @@ pub fn module_obj() -> Py {
             "TAKES_AS_IT_COMES" => Some(py_func("TAKES_AS_IT_COMES", |args: &[Py]| TAKES_AS_IT_COMES(args))),
             "observe" => Some(py_func("observe", |args: &[Py]| observe(args))),
             "respond" => Some(py_func("respond", |args: &[Py]| respond(args))),
+            "groupages" => Some(pyrt::xrefs::xmodule("memory.groupages")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

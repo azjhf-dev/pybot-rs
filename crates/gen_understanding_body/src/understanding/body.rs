@@ -63,7 +63,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT understanding.body: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -309,7 +309,7 @@ pub fn _one_letter_apart(args: &[Py]) -> Py {
     return Py::Bool(false);
     }
     if py_truthy(&Py::Bool(py_eq(&call_builtin("len", &[typed.clone()]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("len", &[spelled.clone()]).unwrap_or_else(|e| exc::raise(e))))) {
-    return Py::Bool(py_eq(&call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[typed.clone(), spelled.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk7027 = py_unpack(&__item.clone(), 2, None); let mut typed_at: Py = __unpk7027[0].clone(); let mut spelled_at: Py = __unpk7027[1].clone(); if py_truthy(&Py::Bool(!py_eq(&typed_at.clone(), &spelled_at.clone()))) {  __out.push(Py::Int(1)); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1)));
+    return Py::Bool(py_eq(&call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[typed.clone(), spelled.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk8521 = py_unpack(&__item.clone(), 2, None); let mut typed_at: Py = __unpk8521[0].clone(); let mut spelled_at: Py = __unpk8521[1].clone(); if py_truthy(&Py::Bool(!py_eq(&typed_at.clone(), &spelled_at.clone()))) {  __out.push(Py::Int(1)); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1)));
     }
     let __unpk1 = py_unpack(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_tuple(vec![typed.clone(), spelled.clone()])); __kws.extend(vec![("key".to_string(), py_func("len", |args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e))))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sorted", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }, 2, None);
     short = __unpk1[0].clone();
@@ -958,6 +958,9 @@ pub fn module_obj() -> Py {
             "_the_speaker_is_the_subject" => Some(py_func("_the_speaker_is_the_subject", |args: &[Py]| _the_speaker_is_the_subject(args))),
             "_the_speakers" => Some(py_func("_the_speakers", |args: &[Py]| _the_speakers(args))),
             "read" => Some(py_func("read", |args: &[Py]| read(args))),
+            "kinds" => Some(pyrt::xrefs::xmodule("understanding.kinds")),
+            "lexicon" => Some(pyrt::xrefs::xmodule("understanding.lexicon")),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

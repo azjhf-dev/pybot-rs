@@ -21,7 +21,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT modules.on_record: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -90,6 +90,8 @@ pub fn module_obj() -> Py {
             "ON_RECORD" => Some(g_ON_RECORD()),
             "_gives_before_this_module" => Some(g__gives_before_this_module()),
             "gives" => Some(py_func("gives", |args: &[Py]| gives(args))),
+            "fit" => Some(pyrt::xrefs::xmodule("compose.fit")),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

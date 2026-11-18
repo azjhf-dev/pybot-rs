@@ -25,7 +25,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT compose.a_document_lives_with_an_office: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -224,6 +224,7 @@ pub fn module_obj() -> Py {
             "a_map_app_line" => Some(py_func("a_map_app_line", |args: &[Py]| a_map_app_line(args))),
             "answer_for" => Some(py_func("answer_for", |args: &[Py]| answer_for(args))),
             "pick" => Some(g_pick()),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

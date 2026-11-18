@@ -24,7 +24,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT memory.asked_about: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -157,7 +157,7 @@ pub fn _the_part_that_answers(args: &[Py]) -> Py {
     index = geti(&best.clone(), &Py::Int(2));
     } else {
     if py_truthy(&geti(&best.clone(), &Py::Int(0))) {
-    index = call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[parts.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk1677 = py_unpack(&__item.clone(), 2, None); let mut i: Py = __unpk1677[0].clone(); let mut part: Py = __unpk1677[1].clone(); if py_truthy(&Py::Bool(!py_truthy(&mcall(&g__A_CONTINUATION(), "match", &[part.clone()])))) {  __out.push(i.clone()); } } py_list(__out) })() }, geti(&best.clone(), &Py::Int(2))]).unwrap_or_else(|e| exc::raise(e));
+    index = call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[parts.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk1958 = py_unpack(&__item.clone(), 2, None); let mut i: Py = __unpk1958[0].clone(); let mut part: Py = __unpk1958[1].clone(); if py_truthy(&Py::Bool(!py_truthy(&mcall(&g__A_CONTINUATION(), "match", &[part.clone()])))) {  __out.push(i.clone()); } } py_list(__out) })() }, geti(&best.clone(), &Py::Int(2))]).unwrap_or_else(|e| exc::raise(e));
     } else {
     return py_str("");
     }
@@ -243,6 +243,8 @@ pub fn module_obj() -> Py {
             "_the_part_that_answers" => Some(py_func("_the_part_that_answers", |args: &[Py]| _the_part_that_answers(args))),
             "_the_words_asked" => Some(py_func("_the_words_asked", |args: &[Py]| _the_words_asked(args))),
             "the_answer_this_chat_gave" => Some(py_func("the_answer_this_chat_gave", |args: &[Py]| the_answer_this_chat_gave(args))),
+            "topics" => Some(pyrt::xrefs::xmodule("memory.topics")),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

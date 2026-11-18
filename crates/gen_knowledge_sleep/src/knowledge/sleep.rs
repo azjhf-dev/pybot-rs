@@ -35,7 +35,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT knowledge.sleep: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -430,6 +430,7 @@ pub fn module_obj() -> Py {
             "_the_clock_i_go_to_bed" => Some(py_func("_the_clock_i_go_to_bed", |args: &[Py]| _the_clock_i_go_to_bed(args))),
             "entry" => Some(g_entry()),
             "not_the_heat_of_an_argument" => Some(g_not_the_heat_of_an_argument()),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

@@ -33,7 +33,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT knowledge.caring: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -185,6 +185,7 @@ pub fn module_obj() -> Py {
             "_an_animal_is_the_one_cared_for" => Some(py_func("_an_animal_is_the_one_cared_for", |args: &[Py]| _an_animal_is_the_one_cared_for(args))),
             "_the_care_is_for_a_grown_up" => Some(py_func("_the_care_is_for_a_grown_up", |args: &[Py]| _the_care_is_for_a_grown_up(args))),
             "entry" => Some(g_entry()),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

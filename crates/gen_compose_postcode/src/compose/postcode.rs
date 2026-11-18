@@ -19,7 +19,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT compose.postcode: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -75,6 +75,7 @@ pub fn module_obj() -> Py {
             "POSTCODE_LOOKUPS" => Some(g_POSTCODE_LOOKUPS()),
             "POSTCODE_NOT" => Some(g_POSTCODE_NOT()),
             "a_postcode_lookup" => Some(py_func("a_postcode_lookup", |args: &[Py]| a_postcode_lookup(args))),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

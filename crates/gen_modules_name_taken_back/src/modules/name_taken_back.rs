@@ -23,7 +23,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT modules.name_taken_back: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -217,6 +217,7 @@ pub fn module_obj() -> Py {
             "respond" => Some(py_func("respond", |args: &[Py]| respond(args))),
             "takes_as_it_comes" => Some(py_func("takes_as_it_comes", |args: &[Py]| takes_as_it_comes(args))),
             "user" => Some(g_user()),
+            "extract" => Some(pyrt::xrefs::xmodule("memory.facts")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

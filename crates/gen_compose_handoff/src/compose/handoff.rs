@@ -29,7 +29,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT compose.handoff: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -208,6 +208,7 @@ pub fn module_obj() -> Py {
             "reads_as_handoff_about_a_thing" => Some(py_func("reads_as_handoff_about_a_thing", |args: &[Py]| reads_as_handoff_about_a_thing(args))),
             "reply_for" => Some(py_func("reply_for", |args: &[Py]| reply_for(args))),
             "takes_as_it_comes" => Some(py_func("takes_as_it_comes", |args: &[Py]| takes_as_it_comes(args))),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

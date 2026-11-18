@@ -25,7 +25,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT memory.goals: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -278,6 +278,7 @@ pub fn module_obj() -> Py {
             "_tidy" => Some(py_func("_tidy", |args: &[Py]| _tidy(args))),
             "a_progress_asked" => Some(py_func("a_progress_asked", |args: &[Py]| a_progress_asked(args))),
             "the_loss_that_was_the_plan" => Some(py_func("the_loss_that_was_the_plan", |args: &[Py]| the_loss_that_was_the_plan(args))),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

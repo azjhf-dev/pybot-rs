@@ -158,7 +158,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT knowledge.meals: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -782,7 +782,7 @@ fn module_body() {
     s_NOT_FOOD_LIMITS(__data56());
     s_WITHOUT_WORD(stdlib_call("re", "compile", &[py_str("\\bwithout\\s+(?:the\\s+|any\\s+|a\\s+|much\\s+|so\\s+much\\s+)?(?P<food>[a-z][a-z'-]{1,24})"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     s_TAKEOUT_PICKS(py_tuple(vec![py_tuple(vec![py_tuple(vec![py_str("pizza place"), py_str("pizza shop"), py_str("pizza parlour"), py_str("pizza parlor"), py_str("pizza"), py_str("pizzas"), py_str("dominos"), py_str("domino's")]), py_str("One pizza each and a garlic bread to share: a 12-inch is one hungry person and a 9-inch a light one, so a 12-inch between two plus a side is the cheaper way to feed a pair. A plain margherita and one with a topping beats two fully loaded ones, which are the ones left half eaten.")]), py_tuple(vec![py_tuple(vec![py_str("bakery"), py_str("bakers"), py_str("baker"), py_str("patisserie"), py_str("bakery shop")]), py_str("Buy the loaf that is still warm and one pastry to eat before you get home: a sourdough or a tin loaf keeps two days on the board and a week sliced in the freezer, and a cheese twist or a croissant is what a bakery is for. Ask which loaf is today's rather than yesterday's - it is the one question they are always happy to answer.")]), py_tuple(vec![py_tuple(vec![py_str("sandwich shop"), py_str("deli"), py_str("deli counter"), py_str("subway"), py_str("baguette shop"), py_str("sandwich bar")]), py_str("The filling that is made fresh, in a baguette or a sub rather than sliced bread, and ask for the salad on the side if it has to travel back to a desk: wet salad in the sandwich is what makes it collapse. A hot filling - meatballs, a toastie, a chicken escalope - is the one worth ordering out, because it is the one that will not be as good made at home.")])]));
-    s_TAKEOUT_PLACES(call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_TAKEOUT_PICKS()) { let __unpk7181 = py_unpack(&__item.clone(), 2, None); let mut names: Py = __unpk7181[0].clone(); let mut _u: Py = __unpk7181[1].clone(); for __item in py_iter_or_raise(&names.clone()) { let mut name: Py = __item.clone(); __out.push(name.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
+    s_TAKEOUT_PLACES(call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_TAKEOUT_PICKS()) { let __unpk7505 = py_unpack(&__item.clone(), 2, None); let mut names: Py = __unpk7505[0].clone(); let mut _u: Py = __unpk7505[1].clone(); for __item in py_iter_or_raise(&names.clone()) { let mut name: Py = __item.clone(); __out.push(name.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
     fn __data57() -> Py { py_tuple(vec![py_str("what"), py_str("whats"), py_str("what is"), py_str("what are"), py_str("nice"), py_str("good"), py_str("best"), py_str("better"), py_str("recommend"), py_str("order"), py_str("get"), py_str("have"), py_str("should i"), py_str("should we"), py_str("do i"), py_str("do we"), py_str("worth"), py_str("idea"), py_str("ideas"), py_str("how many")]) }
     s_TAKEOUT_ASK(__data57());
     s_DEFINITION_SHAPE(stdlib_call("re", "compile", &[py_str("\\bwhat(?:'s| is| are|s)?\\s+(?:a|an|the)\\s+([a-z']+)")]).unwrap_or_else(|e| exc::raise(e)));
@@ -3302,6 +3302,10 @@ pub fn module_obj() -> Py {
             "unknown_food" => Some(py_func("unknown_food", |args: &[Py]| unknown_food(args))),
             "use_it_up" => Some(py_func("use_it_up", |args: &[Py]| use_it_up(args))),
             "use_up" => Some(py_func("use_up", |args: &[Py]| use_up(args))),
+            "fit" => Some(pyrt::xrefs::xmodule("compose.fit")),
+            "functools" => Some(stdlib_module("functools")),
+            "random" => Some(stdlib_module("random")),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

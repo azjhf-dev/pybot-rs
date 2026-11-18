@@ -493,7 +493,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| eprintln!("INIT compose_fit: {} {}", e.class_name, e.message));
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT compose.fit: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -2421,7 +2421,7 @@ fn module_body() {
     s_HALF_A_UNIT(stdlib_call("re", "compile", &[py_str("^half\\s+(?:a|an|the)?\\s*(?:hour|hours|minute|minutes|second|seconds|day|days|week|weeks|month|months|year|years|cup|cups|glass|glasses|pint|pints|litre|litres|liter|liters|kilo|kilos|kilogram|kilograms|pound|pounds|mile|miles|metre|metres|meter|meters|inch|inches|teaspoon|teaspoons|tablespoon|tablespoons|tsp|tbsp|degree|degrees)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     s__steps_by_the_verb_list(py_func("_steps", |args: &[Py]| _steps(args)));
     let _ = py_setitem(&g__CHECKS(), &g_STEPS(), py_func("_steps", |args: &[Py]| _steps(args)));
-    s__CLEAR(call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g__CLEAR()) { let __unpk3552 = py_unpack(&__item.clone(), 2, None); let mut want: Py = __unpk3552[0].clone(); let mut check: Py = __unpk3552[1].clone(); __out.push(if py_truthy(&Py::Bool(py_eq(&want.clone(), &g_STEPS()))) { py_tuple(vec![want.clone(), py_func("_steps", |args: &[Py]| _steps(args))]) } else { py_tuple(vec![want.clone(), check.clone()]) }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
+    s__CLEAR(call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g__CLEAR()) { let __unpk203 = py_unpack(&__item.clone(), 2, None); let mut want: Py = __unpk203[0].clone(); let mut check: Py = __unpk203[1].clone(); __out.push(if py_truthy(&Py::Bool(py_eq(&want.clone(), &g_STEPS()))) { py_tuple(vec![want.clone(), py_func("_steps", |args: &[Py]| _steps(args))]) } else { py_tuple(vec![want.clone(), check.clone()]) }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
 }
 pub fn _the_rule_settles_it(args: &[Py]) -> Py {
     ensure_init();
@@ -7548,6 +7548,7 @@ pub fn module_obj() -> Py {
             "second_sentence" => Some(py_func("second_sentence", |args: &[Py]| second_sentence(args))),
             "wanted" => Some(py_func("wanted", |args: &[Py]| wanted(args))),
             "wants" => Some(py_func("wants", |args: &[Py]| wants(args))),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

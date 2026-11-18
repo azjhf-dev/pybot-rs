@@ -166,7 +166,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT compose.fallback_pools: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -1594,6 +1594,10 @@ pub fn module_obj() -> Py {
             "the_rule_for_it" => Some(g_the_rule_for_it()),
             "unknown_pool" => Some(g_unknown_pool()),
             "who_settles" => Some(g_who_settles()),
+            "findout" => Some(pyrt::xrefs::xmodule("compose.findout")),
+            "for_the_day" => Some(pyrt::xrefs::xmodule("compose.for_the_day")),
+            "waited_for" => Some(pyrt::xrefs::xmodule("compose.waited_for")),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

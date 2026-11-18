@@ -97,7 +97,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT memory.tried: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -839,7 +839,7 @@ pub fn names_a_thing(args: &[Py]) -> Py {
     return Py::Bool(false);
     }
     blob = mcall(&py_str(" "), "join", &[call_builtin("sorted", &[said.clone()]).unwrap_or_else(|e| exc::raise(e))]);
-    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_TRADES()) { let __unpk4690 = py_unpack(&__item.clone(), 3, None); let mut entry_words: Py = __unpk4690[0].clone(); let mut _u: Py = __unpk4690[1].clone(); let mut _u: Py = __unpk4690[2].clone(); __out.push(_names(&[said.clone(), blob.clone(), entry_words.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_TRADES()) { let __unpk1197 = py_unpack(&__item.clone(), 3, None); let mut entry_words: Py = __unpk1197[0].clone(); let mut _u: Py = __unpk1197[1].clone(); let mut _u: Py = __unpk1197[2].clone(); __out.push(_names(&[said.clone(), blob.clone(), entry_words.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn has_evidence(args: &[Py]) -> Py {
@@ -2611,7 +2611,7 @@ pub fn _in_care(args: &[Py]) -> Py {
     for __item in __iter1 {
     line = __item.clone();
     said = mcall(&py_str(" "), "join", &[words_of(&[line.clone()])]);
-    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_TRADES()) { let __unpk9794 = py_unpack(&__item.clone(), 3, None); let mut entry_words: Py = __unpk9794[0].clone(); let mut _u: Py = __unpk9794[1].clone(); let mut _u: Py = __unpk9794[2].clone(); __out.push(_names(&[call_builtin("set", &[mcall(&said.clone(), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), said.clone(), entry_words.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_TRADES()) { let __unpk6789 = py_unpack(&__item.clone(), 3, None); let mut entry_words: Py = __unpk6789[0].clone(); let mut _u: Py = __unpk6789[1].clone(); let mut _u: Py = __unpk6789[2].clone(); __out.push(_names(&[call_builtin("set", &[mcall(&said.clone(), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), said.clone(), entry_words.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     return Py::None;
     }
     if py_truthy(&Py::Bool(!py_truthy(&mcall(&g_IN_CARE(), "search", &[said.clone()])))) {
@@ -2832,6 +2832,7 @@ pub fn module_obj() -> Py {
             "trade_for" => Some(py_func("trade_for", |args: &[Py]| trade_for(args))),
             "words_of" => Some(py_func("words_of", |args: &[Py]| words_of(args))),
             "you" => Some(g_you()),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

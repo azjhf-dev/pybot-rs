@@ -23,7 +23,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT compose.facts: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -173,6 +173,8 @@ pub fn module_obj() -> Py {
             "holds_a_date" => Some(py_func("holds_a_date", |args: &[Py]| holds_a_date(args))),
             "the_fact_asked_for" => Some(py_func("the_fact_asked_for", |args: &[Py]| the_fact_asked_for(args))),
             "the_same_date" => Some(py_func("the_same_date", |args: &[Py]| the_same_date(args))),
+            "narrow" => Some(pyrt::xrefs::xmodule("memory.narrow")),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

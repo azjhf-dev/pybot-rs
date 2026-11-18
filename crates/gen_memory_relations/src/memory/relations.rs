@@ -82,7 +82,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT memory.relations: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -2074,7 +2074,7 @@ pub fn _the_names_of_the_group(args: &[Py]) -> Py {
     one = geti(&parts.clone(), &Py::Int(0));
     return op_add(&op_add(&mcall(&geti(&one.clone(), &Py::Int(0)), "upper", &[]), &slice_or_raise(&one.clone(), &Py::Int(1), &Py::None, &Py::None)), &py_str("."));
     }
-    if py_truthy(&{ let __b = Py::Bool(py_eq(&call_builtin("len", &[parts.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&said.clone()) { let __unpk8683 = py_unpack(&__item.clone(), 3, None); let mut _u: Py = __unpk8683[0].clone(); let mut _u: Py = __unpk8683[1].clone(); let mut paired: Py = __unpk8683[2].clone(); __out.push(paired.clone()); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)))) } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_eq(&call_builtin("len", &[parts.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&said.clone()) { let __unpk9961 = py_unpack(&__item.clone(), 3, None); let mut _u: Py = __unpk9961[0].clone(); let mut _u: Py = __unpk9961[1].clone(); let mut paired: Py = __unpk9961[2].clone(); __out.push(paired.clone()); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)))) } }) {
     return op_add(&op_add(&op_add(&op_add(&mcall(&geti(&geti(&parts.clone(), &Py::Int(0)), &Py::Int(0)), "upper", &[]), &slice_or_raise(&geti(&parts.clone(), &Py::Int(0)), &Py::Int(1), &Py::None, &Py::None)), &py_str(", and ")), &geti(&parts.clone(), &Py::Int(1))), &py_str("."));
     }
     return op_add(&mcall(&py_str(". "), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&parts.clone()) { let mut part: Py = __item.clone(); __out.push(op_add(&mcall(&geti(&part.clone(), &Py::Int(0)), "upper", &[]), &slice_or_raise(&part.clone(), &Py::Int(1), &Py::None, &Py::None))); } py_list(__out) })() }]), &py_str("."));
@@ -3304,6 +3304,10 @@ pub fn module_obj() -> Py {
             "stem" => Some(g_stem()),
             "the_pronoun_said_with_a_name" => Some(py_func("the_pronoun_said_with_a_name", |args: &[Py]| the_pronoun_said_with_a_name(args))),
             "user" => Some(g_user()),
+            "history" => Some(pyrt::xrefs::xmodule("memory.history")),
+            "extract" => Some(pyrt::xrefs::xmodule("memory.facts")),
+            "breeds" => Some(pyrt::xrefs::xmodule("understanding.breeds")),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

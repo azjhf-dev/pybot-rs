@@ -46,7 +46,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT compose.onscreen: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -718,6 +718,9 @@ pub fn module_obj() -> Py {
             "earlier_turn" => Some(py_func("earlier_turn", |args: &[Py]| earlier_turn(args))),
             "talks_about_the_conversation" => Some(py_func("talks_about_the_conversation", |args: &[Py]| talks_about_the_conversation(args))),
             "the_answer_on_screen" => Some(py_func("the_answer_on_screen", |args: &[Py]| the_answer_on_screen(args))),
+            "fallback" => Some(pyrt::xrefs::xmodule("compose.fallback")),
+            "verdict" => Some(pyrt::xrefs::xmodule("compose.verdict")),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

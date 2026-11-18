@@ -137,6 +137,12 @@ pub fn py_hasattr(v: &Py, name: &str) -> bool { py_getattr(v, name).is_ok() }
 // ---------------------------------------------------------------- method calls
 pub fn py_method_call(recv: &Py, name: &str, args: &[Py]) -> PyResult {
     match recv {
+        Py::Func(f) if f.name == "str" && name == "maketrans" => Ok(pystr::maketrans(args)),
+        Py::Func(f) if f.name == "dict" && name == "fromkeys" => {
+            let keys = py_iter(args.first().unwrap_or(&Py::None))?;
+            let value = args.get(1).cloned().unwrap_or(Py::None);
+            Ok(py_dict(keys.into_iter().map(|k| (k, value.clone())).collect()))
+        }
         Py::Str(s) => pystr::str_method(s, name, args),
         Py::List(l) => list_method(l, name, args),
         Py::Tuple(t) => tuple_method(t, name, args),
@@ -340,7 +346,7 @@ fn dict_method(d: &Rc<RefCell<IndexMap<PyKey, Py>>>, name: &str, args: &[Py]) ->
             let default = args.get(1).cloned().unwrap_or(Py::None);
             Ok(d.borrow().get(&PyKey(key.clone())).cloned().unwrap_or(default))
         }
-        "items" => Ok(py_list(d.borrow().iter().map(|(k, v)| py_tuple(vec![k.0.clone(), v.clone()])).collect())),
+        "items" => Ok(py_set(d.borrow().iter().map(|(k, v)| py_tuple(vec![k.0.clone(), v.clone()])).collect())),
         "keys" => Ok(py_set(d.borrow().keys().map(|k| k.0.clone()).collect())),
         "values" => Ok(py_list(d.borrow().values().cloned().collect())),
         "pop" => {

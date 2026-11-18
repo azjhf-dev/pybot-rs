@@ -30,7 +30,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT understanding.confusion: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -211,6 +211,7 @@ pub fn module_obj() -> Py {
             "_a_confusion_ruled_out" => Some(py_func("_a_confusion_ruled_out", |args: &[Py]| _a_confusion_ruled_out(args))),
             "_a_thing_trimmed" => Some(py_func("_a_thing_trimmed", |args: &[Py]| _a_thing_trimmed(args))),
             "confusion_of" => Some(py_func("confusion_of", |args: &[Py]| confusion_of(args))),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

@@ -20,7 +20,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT compose.whole: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -96,6 +96,7 @@ pub fn module_obj() -> Py {
             "_LAST_CLAUSE" => Some(g__LAST_CLAUSE()),
             "_MOST_AFTER" => Some(g__MOST_AFTER()),
             "a_whole_cut" => Some(py_func("a_whole_cut", |args: &[Py]| a_whole_cut(args))),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

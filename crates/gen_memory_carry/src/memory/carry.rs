@@ -42,7 +42,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT memory.carry: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -1380,6 +1380,9 @@ pub fn module_obj() -> Py {
             "the_quality_in_the_chat" => Some(py_func("the_quality_in_the_chat", |args: &[Py]| the_quality_in_the_chat(args))),
             "the_subject_in_the_condition" => Some(py_func("the_subject_in_the_condition", |args: &[Py]| the_subject_in_the_condition(args))),
             "the_verdict_in_the_chat" => Some(py_func("the_verdict_in_the_chat", |args: &[Py]| the_verdict_in_the_chat(args))),
+            "a_repair" => Some(pyrt::xrefs::xmodule("memory.repair")),
+            "topics" => Some(pyrt::xrefs::xmodule("memory.topics")),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

@@ -397,7 +397,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT modules.answers: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -1927,7 +1927,7 @@ fn module_body() {
     s_A_CALL_ASK(call_builtin("frozenset", &[mcall(&py_str("see seeing ring call contact phone gp doctor surgery nurse hospital\n    dentist vet 111 999"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
     s__FRAME(call_builtin("frozenset", &[mcall(&py_str("my our i the a an is was be been it its of on about and but so also then now ok okay right well again too"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
     s__MINE(call_builtin("frozenset", &[mcall(&py_str("my our i me mine ours"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
-    s__SLOT_KEYS(call_builtin("frozenset", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("memory.recall", "SUBJECTS")) { let __unpk9754 = py_unpack(&__item.clone(), 2, None); let mut key: Py = __unpk9754[0].clone(); let mut _u: Py = __unpk9754[1].clone(); __out.push(key.clone()); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
+    s__SLOT_KEYS(call_builtin("frozenset", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("memory.recall", "SUBJECTS")) { let __unpk3746 = py_unpack(&__item.clone(), 2, None); let mut key: Py = __unpk3746[0].clone(); let mut _u: Py = __unpk3746[1].clone(); __out.push(key.clone()); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
     s__STORED_VALUE(py_dict(vec![(py_str("budget"), call_builtin("frozenset", &[py_tuple(vec![py_str("budget-how"), py_str("budget-split"), py_str("budget-rule")])]).unwrap_or_else(|e| exc::raise(e)))]));
     s__HOW_TO(stdlib_call("re", "compile", &[py_str("\\b(?:how|help|make|sort|fix|plan|start|do)\\b")]).unwrap_or_else(|e| exc::raise(e)));
     s__COPULA(call_builtin("frozenset", &[mcall(&py_str("is are was were s"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
@@ -8020,7 +8020,7 @@ pub fn _a_figure_apart(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&mine_spans.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&their_spans.clone())) } }) {
     return Py::Bool(false);
     }
-    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mine_spans.clone()) { let __unpk138 = py_unpack(&__item.clone(), 2, None); let mut low: Py = __unpk138[0].clone(); let mut high: Py = __unpk138[1].clone(); for __item in py_iter_or_raise(&their_spans.clone()) { let __unpk426 = py_unpack(&__item.clone(), 2, None); let mut low_other: Py = __unpk426[0].clone(); let mut high_other: Py = __unpk426[1].clone(); __out.push({ let __b = op_lt(&high_other.clone(), &low.clone()); if py_truthy(&__b) { __b } else { op_lt(&high.clone(), &low_other.clone()) } }); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mine_spans.clone()) { let __unpk355 = py_unpack(&__item.clone(), 2, None); let mut low: Py = __unpk355[0].clone(); let mut high: Py = __unpk355[1].clone(); for __item in py_iter_or_raise(&their_spans.clone()) { let __unpk9504 = py_unpack(&__item.clone(), 2, None); let mut low_other: Py = __unpk9504[0].clone(); let mut high_other: Py = __unpk9504[1].clone(); __out.push({ let __b = op_lt(&high_other.clone(), &low.clone()); if py_truthy(&__b) { __b } else { op_lt(&high.clone(), &low_other.clone()) } }); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn _only_a_figure(args: &[Py]) -> Py {
@@ -8116,7 +8116,7 @@ pub fn _name_words(args: &[Py]) -> Py {
     }
     if let Some(__e) = __unhandled4 { exc::raise(__e); }
     if py_truthy(&__ret2) { return __val3; }
-    s__NAME_WORDS({ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&counted.clone(), "items", &[])) { let __unpk339 = py_unpack(&__item.clone(), 2, None); let mut word: Py = __unpk339[0].clone(); let mut seen: Py = __unpk339[1].clone(); if py_truthy(&op_le(&seen.clone(), &g_FEW_ENTRIES())) {  __out.push(word.clone()); } } py_set(__out) })() });
+    s__NAME_WORDS({ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&counted.clone(), "items", &[])) { let __unpk7569 = py_unpack(&__item.clone(), 2, None); let mut word: Py = __unpk7569[0].clone(); let mut seen: Py = __unpk7569[1].clone(); if py_truthy(&op_le(&seen.clone(), &g_FEW_ENTRIES())) {  __out.push(word.clone()); } } py_set(__out) })() });
     let _ = mcall(&g__NAME_DOMAINS(), "clear", &[]);
     let _ = mcall(&g__NAME_DOMAINS(), "update", &[{ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&g__NAME_WORDS()) { let mut word: Py = __item.clone(); __out.push((word.clone(), mcall(&domains.clone(), "get", &[word.clone(), call_builtin("set", &[]).unwrap_or_else(|e| exc::raise(e))]))); } py_dict(__out) })() }]);
     }
@@ -14424,7 +14424,7 @@ pub fn _ask_a_line_of_its_own(args: &[Py]) -> Py {
     let mut spoke: Py = Py::None;
     let mut value: Py = Py::None;
     let _ = py_str("The answer to a line asked with nothing on the table, as if it were the first thing said.\n\n    The line here is one the person did not type - it is their own line written out (\"how long\n    does it take to fit a new one\" asked as \"how long does it take to fit a new boiler\"). Read\n    with the chat's topic still in memory it reaches the entry the topic is on (how long a boiler\n    is built for) rather than the one its own words fit (how long a fitting takes), so the topic\n    the bot remembers is left out and the entry that answers the words is asked.\n    ");
-    spoke = { (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&memory.clone(), "items", &[])) { let __unpk3 = py_unpack(&__item.clone(), 2, None); let mut key: Py = __unpk3[0].clone(); let mut value: Py = __unpk3[1].clone(); if py_truthy(&Py::Bool(!py_contains(&py_tuple(vec![py_str("topic"), py_str("topics"), py_str("entry_answer"), py_str("entry_answers"), py_str("last_answer")]), &key.clone()))) {  __out.push((key.clone(), value.clone())); } } py_dict(__out) })() };
+    spoke = { (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&memory.clone(), "items", &[])) { let __unpk3265 = py_unpack(&__item.clone(), 2, None); let mut key: Py = __unpk3265[0].clone(); let mut value: Py = __unpk3265[1].clone(); if py_truthy(&Py::Bool(!py_contains(&py_tuple(vec![py_str("topic"), py_str("topics"), py_str("entry_answer"), py_str("entry_answers"), py_str("last_answer")]), &key.clone()))) {  __out.push((key.clone(), value.clone())); } } py_dict(__out) })() };
     return _ask_a_rewritten_line(&[line.clone(), spoke.clone()]);
     Py::None
 }
@@ -17293,6 +17293,58 @@ pub fn module_obj() -> Py {
             "understand" => Some(g_understand()),
             "with_name" => Some(g_with_name()),
             "words_of" => Some(g_words_of()),
+            "mem" => Some(pyrt::xrefs::xmodule("memory")),
+            "goodnews" => Some(pyrt::xrefs::xmodule("compose.goodnews")),
+            "lead" => Some(pyrt::xrefs::xmodule("compose.lead")),
+            "shapes" => Some(pyrt::xrefs::xmodule("compose.fit")),
+            "trouble_reading" => Some(pyrt::xrefs::xmodule("compose.trouble")),
+            "cooking" => Some(pyrt::xrefs::xmodule("knowledge.cooking")),
+            "dishes" => Some(pyrt::xrefs::xmodule("knowledge.dishes")),
+            "entertainment" => Some(pyrt::xrefs::xmodule("knowledge.entertainment")),
+            "freshness" => Some(pyrt::xrefs::xmodule("knowledge.freshness")),
+            "home" => Some(pyrt::xrefs::xmodule("knowledge.home")),
+            "meat_in_a_card" => Some(pyrt::xrefs::xmodule("knowledge.meat_in_a_card")),
+            "pets" => Some(pyrt::xrefs::xmodule("knowledge.pets")),
+            "shopping" => Some(pyrt::xrefs::xmodule("knowledge.shopping")),
+            "work" => Some(pyrt::xrefs::xmodule("knowledge.work")),
+            "ack" => Some(pyrt::xrefs::xmodule("memory.ack")),
+            "deadline" => Some(pyrt::xrefs::xmodule("memory.deadline")),
+            "healing" => Some(pyrt::xrefs::xmodule("memory.healing")),
+            "named" => Some(pyrt::xrefs::xmodule("memory.named")),
+            "length" => Some(pyrt::xrefs::xmodule("memory.narrow")),
+            "onset" => Some(pyrt::xrefs::xmodule("memory.onset")),
+            "prefer" => Some(pyrt::xrefs::xmodule("memory.prefer")),
+            "repeat" => Some(pyrt::xrefs::xmodule("memory.repeat")),
+            "taste" => Some(pyrt::xrefs::xmodule("memory.taste")),
+            "when" => Some(pyrt::xrefs::xmodule("memory.when")),
+            "a_wish" => Some(pyrt::xrefs::xmodule("memory.hope")),
+            "matters" => Some(pyrt::xrefs::xmodule("memory.matters")),
+            "memory_topics" => Some(pyrt::xrefs::xmodule("memory.topics")),
+            "a_year_of_birth" => Some(pyrt::xrefs::xmodule("memory.a_year_of_birth")),
+            "baking" => Some(pyrt::xrefs::xmodule("memory.baking")),
+            "doing_it" => Some(pyrt::xrefs::xmodule("memory.doing_it")),
+            "trips" => Some(pyrt::xrefs::xmodule("memory.trips")),
+            "outfit" => Some(pyrt::xrefs::xmodule("memory.outfit")),
+            "recall" => Some(pyrt::xrefs::xmodule("memory.recall")),
+            "resize" => Some(pyrt::xrefs::xmodule("memory.resize")),
+            "stuck_line" => Some(pyrt::xrefs::xmodule("memory.stuck")),
+            "same_again" => Some(pyrt::xrefs::xmodule("memory.again")),
+            "said_topic" => Some(pyrt::xrefs::xmodule("memory.topics")),
+            "kinds" => Some(pyrt::xrefs::xmodule("understanding.kinds")),
+            "tried" => Some(pyrt::xrefs::xmodule("memory.tried")),
+            "more" => Some(pyrt::xrefs::xmodule("memory.more")),
+            "returned" => Some(pyrt::xrefs::xmodule("memory.returned")),
+            "went_back" => Some(pyrt::xrefs::xmodule("memory.returns")),
+            "limit" => Some(pyrt::xrefs::xmodule("memory.limit")),
+            "whereabout" => Some(pyrt::xrefs::xmodule("memory.whereabout")),
+            "a_price" => Some(pyrt::xrefs::xmodule("memory.price")),
+            "swap" => Some(pyrt::xrefs::xmodule("memory.swap")),
+            "_never_twice" => Some(pyrt::xrefs::xmodule("memory.again")),
+            "paragraph" => Some(pyrt::xrefs::xmodule("memory.paragraph")),
+            "copy" => Some(stdlib_module("copy")),
+            "difflib" => Some(stdlib_module("difflib")),
+            "re" => Some(stdlib_module("re")),
+            "string" => Some(stdlib_module("string")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

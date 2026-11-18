@@ -54,7 +54,13 @@ pub fn xget(module: &str, name: &str) -> Py {
     }
     match lookup_func(module, name) {
         Some(f) => f,
-        None => exc::raise(PyExc::new("AttributeError", &format!("module '{}' has no attribute '{}'", module, name))),
+        None => {
+            let factory = MODULES.with(|m| m.borrow().get(module).copied());
+            if let Some(factory) = factory {
+                if let Py::Module(m) = factory() { if let Some(v) = (m.get)(name) { return v; } }
+            }
+            exc::raise(PyExc::new("AttributeError", &format!("module '{}' has no attribute '{}'", module, name)))
+        }
     }
 }
 
@@ -67,28 +73,8 @@ pub fn xset(module: &str, name: &str, v: Py) {
 }
 
 pub fn xmodule(module: &str) -> Py {
-    let known = MODULES.with(|m| m.borrow().contains_key(module));
-    if !known {
-        exc::raise(PyExc::new("ImportError", &format!("No module named '{}'", module)));
-    }
-    let owned = module.to_string();
-    let owned2 = module.to_string();
-    Py::Module(Rc::new(PyModule {
-        name: format!("bot.{}", module),
-        get: Rc::new(move |attr: &str| {
-            if let Some(f) = lookup_func(&owned, attr) {
-                return Some(f);
-            }
-            let g = GETTERS.with(|m| m.borrow().get(&(owned.clone(), attr.to_string())).copied());
-            g.map(|f| f())
-        }),
-        set: Some(Rc::new(move |attr: &str, v: Py| {
-            let s = SETTERS.with(|m| m.borrow().get(&(owned2.clone(), attr.to_string())).copied());
-            if let Some(s) = s {
-                s(v);
-            }
-        })),
-    }))
+    let factory = MODULES.with(|m| m.borrow().get(module).copied());
+    match factory { Some(f) => f(), None => exc::raise(PyExc::new("ImportError", module)) }
 }
 
 /// importlib.import_module for transpiled callers: resolves relative names

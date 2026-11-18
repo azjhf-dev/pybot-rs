@@ -51,7 +51,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT compose.their_day: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -174,7 +174,7 @@ fn module_body() {
     s__ABOUT_THE_BOT(stdlib_call("re", "compile", &[py_str("^\\s*(?:how|what)\\s+(?:was|is|were|did|does|do|has|have|'s|s|'d|d)?\\s*yours?(?:elf)?\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     s_LINES(py_tuple(vec![py_str("You tell me - {ask}?"), py_str("I wasn't there, so you know better than me - {ask}?"), py_str("Only you know that one. {Ask}?"), py_str("No way for me to know that from here - {ask}?")]));
     s_CARE_LINES(py_tuple(vec![py_str("I have no way of knowing, and I would rather ask than guess - {ask}?"), py_str("That is yours to tell me, and I am listening - {ask}?"), py_str("I hope it went as well as it could. {Ask}?")]));
-    s_WHO_TO_ASK(call_builtin("tuple", &[call_builtin("sorted", &[op_bitor(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "WHO_TO_ASK")) { let __unpk2124 = py_unpack(&__item.clone(), 2, None); let mut _words: Py = __unpk2124[0].clone(); let mut who: Py = __unpk2124[1].clone(); __out.push(who.clone()); } py_set(__out) })() }, &{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&call_builtin("vars", &[pyrt::xrefs::xmodule("compose.fallback_data")]).unwrap_or_else(|e| exc::raise(e)), "items", &[])) { let __unpk1548 = py_unpack(&__item.clone(), 2, None); let mut name: Py = __unpk1548[0].clone(); let mut value: Py = __unpk1548[1].clone(); if py_truthy(&{ let __b = mcall(&name.clone(), "endswith", &[py_str("_WHO")]); if !py_truthy(&__b) { __b } else { call_builtin("isinstance", &[value.clone(), py_func("str", |args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e)) } }) {  __out.push(value.clone()); } } py_set(__out) })() })]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s_WHO_TO_ASK(call_builtin("tuple", &[call_builtin("sorted", &[op_bitor(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "WHO_TO_ASK")) { let __unpk1458 = py_unpack(&__item.clone(), 2, None); let mut _words: Py = __unpk1458[0].clone(); let mut who: Py = __unpk1458[1].clone(); __out.push(who.clone()); } py_set(__out) })() }, &{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&call_builtin("vars", &[pyrt::xrefs::xmodule("compose.fallback_data")]).unwrap_or_else(|e| exc::raise(e)), "items", &[])) { let __unpk7809 = py_unpack(&__item.clone(), 2, None); let mut name: Py = __unpk7809[0].clone(); let mut value: Py = __unpk7809[1].clone(); if py_truthy(&{ let __b = mcall(&name.clone(), "endswith", &[py_str("_WHO")]); if !py_truthy(&__b) { __b } else { call_builtin("isinstance", &[value.clone(), py_func("str", |args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e)) } }) {  __out.push(value.clone()); } } py_set(__out) })() })]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     fn __data1() -> Py { py_tuple(vec![py_str("rent"), py_str("mortgage"), py_str("council tax"), py_str("bill"), py_str("bills"), py_str("premium"), py_str("tariff"), py_str("direct debit"), py_str("payment"), py_str("payments"), py_str("balance"), py_str("deposit"), py_str("service charge"), py_str("arrears"), py_str("fee"), py_str("fees"), py_str("subscription"), py_str("charges"), py_str("salary"), py_str("wage"), py_str("wages"), py_str("pension"), py_str("loan"), py_str("overdraft"), py_str("interest"), py_str("standing order"), py_str("outgoings")]) }
     s_OWN_FIGURE(__data1());
     fn __data2() -> Py { py_tuple(vec![py_str("holiday"), py_str("holidays"), py_str("appointment"), py_str("appointments"), py_str("booking"), py_str("bookings"), py_str("flight"), py_str("renewal"), py_str("mot"), py_str("service"), py_str("deadline"), py_str("contract"), py_str("tenancy"), py_str("delivery"), py_str("check-in"), py_str("checkin"), py_str("expiry"), py_str("expires"), py_str("collection"), py_str("pick up"), py_str("pickup"), py_str("completion"), py_str("install"), py_str("installation"), py_str("viewing"), py_str("moving date"), py_str("move date"), py_str("end"), py_str("ends"), py_str("ending"), py_str("runs out"), py_str("run out"), py_str("run out date")]) }
@@ -425,6 +425,8 @@ pub fn module_obj() -> Py {
             "pick" => Some(g_pick()),
             "pool_for" => Some(py_func("pool_for", |args: &[Py]| pool_for(args))),
             "reads" => Some(py_func("reads", |args: &[Py]| reads(args))),
+            "_data" => Some(pyrt::xrefs::xmodule("compose.fallback_data")),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

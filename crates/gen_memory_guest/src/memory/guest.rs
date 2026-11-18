@@ -30,7 +30,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT memory.guest: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -344,7 +344,7 @@ pub fn found(args: &[Py]) -> Py {
     let __iter3 = py_iter_or_raise(&pieces.clone());
     for __item in __iter3 {
     item = __item.clone();
-    if py_truthy(&{ let __b = { let __b = _is_food(&[item.clone()]); if py_truthy(&__b) { __b } else { a_pair.clone() } }; if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&out.clone()) { let __unpk7126 = py_unpack(&__item.clone(), 2, None); let mut food: Py = __unpk7126[0].clone(); let mut _at: Py = __unpk7126[1].clone(); __out.push(food.clone()); } py_list(__out) })() }, &item.clone())) } }) {
+    if py_truthy(&{ let __b = { let __b = _is_food(&[item.clone()]); if py_truthy(&__b) { __b } else { a_pair.clone() } }; if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&out.clone()) { let __unpk7722 = py_unpack(&__item.clone(), 2, None); let mut food: Py = __unpk7722[0].clone(); let mut _at: Py = __unpk7722[1].clone(); __out.push(food.clone()); } py_list(__out) })() }, &item.clone())) } }) {
     let _ = mcall(&out.clone(), "append", &[py_tuple(vec![item.clone(), mcall(&match_.clone(), "start", &[py_str("food")])])]);
     }
     }
@@ -584,6 +584,7 @@ pub fn module_obj() -> Py {
             "plain" => Some(py_func("plain", |args: &[Py]| plain(args))),
             "revise" => Some(py_func("revise", |args: &[Py]| revise(args))),
             "turned_down_alone" => Some(py_func("turned_down_alone", |args: &[Py]| turned_down_alone(args))),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

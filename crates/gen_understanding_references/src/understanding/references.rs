@@ -42,7 +42,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT understanding.references: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -422,7 +422,7 @@ pub fn _named_before(args: &[Py]) -> Py {
     let __iter1 = py_iter_or_raise(&names.clone());
     for __item in __iter1 {
     name = __item.clone();
-    at = call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk5663 = py_unpack(&__item.clone(), 2, None); let mut i: Py = __unpk5663[0].clone(); let mut word: Py = __unpk5663[1].clone(); if py_truthy(&Py::Bool(py_contains(&geti(&g_PRONOUNS(), &name.clone()), &word.clone()))) {  __out.push(i.clone()); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e));
+    at = call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk280 = py_unpack(&__item.clone(), 2, None); let mut i: Py = __unpk280[0].clone(); let mut word: Py = __unpk280[1].clone(); if py_truthy(&Py::Bool(py_contains(&geti(&g_PRONOUNS(), &name.clone()), &word.clone()))) {  __out.push(i.clone()); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&Py::Bool(py_is(&at.clone(), &Py::None))) {
     continue;
     }
@@ -770,7 +770,7 @@ pub fn resolve(args: &[Py]) -> Py {
     let _ = py_str("{\"it\", \"that\", \"they\", \"there\", \"followup\"} for the current line.");
     prev_entities = { let __b = prev_entities.clone(); if py_truthy(&__b) { __b } else { py_list(vec![]) } };
     words = call_builtin("set", &[geti(&line.clone(), &py_str("norm"))]).unwrap_or_else(|e| exc::raise(e));
-    used = { (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_PRONOUNS(), "items", &[])) { let __unpk8968 = py_unpack(&__item.clone(), 2, None); let mut name: Py = __unpk8968[0].clone(); let mut aliases: Py = __unpk8968[1].clone(); __out.push((name.clone(), call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&aliases.clone()) { let mut p: Py = __item.clone(); if py_truthy(&Py::Bool(py_contains(&words.clone(), &p.clone()))) {  __out.push(p.clone()); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e)))); } py_dict(__out) })() };
+    used = { (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_PRONOUNS(), "items", &[])) { let __unpk8029 = py_unpack(&__item.clone(), 2, None); let mut name: Py = __unpk8029[0].clone(); let mut aliases: Py = __unpk8029[1].clone(); __out.push((name.clone(), call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&aliases.clone()) { let mut p: Py = __item.clone(); if py_truthy(&Py::Bool(py_contains(&words.clone(), &p.clone()))) {  __out.push(p.clone()); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e)))); } py_dict(__out) })() };
     ref_ = py_dict(vec![(py_str("it"), Py::None), (py_str("that"), Py::None), (py_str("they"), Py::None), (py_str("there"), Py::None), (py_str("he"), Py::None), (py_str("she"), Py::None), (py_str("kind"), Py::None), (py_str("followup"), Py::Bool(false))]);
     if py_truthy(&Py::Bool(py_is(&prev_line.clone(), &Py::None))) {
     return ref_.clone();
@@ -866,6 +866,9 @@ pub fn module_obj() -> Py {
             "resolve" => Some(py_func("resolve", |args: &[Py]| resolve(args))),
             "the_animal_in_hand" => Some(py_func("the_animal_in_hand", |args: &[Py]| the_animal_in_hand(args))),
             "the_animal_the_chat_is_on" => Some(py_func("the_animal_the_chat_is_on", |args: &[Py]| the_animal_the_chat_is_on(args))),
+            "topics" => Some(pyrt::xrefs::xmodule("understanding.topics")),
+            "re" => Some(stdlib_module("re")),
+            "string" => Some(stdlib_module("string")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

@@ -35,7 +35,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT memory.condition: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -109,7 +109,7 @@ fn module_body() {
     s_A_PERSON_IN_IT(op_bitor(&call_builtin("frozenset", &[g_PERSON()]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("frozenset", &[mcall(&py_str("someone anyone somebody anybody child children\n    baby toddler guest visitor family relatives"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))));
     s_A_PLAN(stdlib_call("re", "compile", &[py_str("\\b(?:i|we)(?:m|re| am| are)?\\s+(?:want|wanna|need|plan|intend|have to|must|should|will|would like|am going|are going|going to|think i|ll|will)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     s_UNITS(call_builtin("frozenset", &[mcall(&py_str("year month week day hour minute mile km kilo stone pound percent"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
-    s_NUMBERS({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[mcall(&py_str("zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty thirty forty fifty sixty seventy eighty ninety hundred"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))) { let __unpk5957 = py_unpack(&__item.clone(), 2, None); let mut value: Py = __unpk5957[0].clone(); let mut word: Py = __unpk5957[1].clone(); __out.push((word.clone(), value.clone())); } py_dict(__out) })() });
+    s_NUMBERS({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[mcall(&py_str("zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty thirty forty fifty sixty seventy eighty ninety hundred"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))) { let __unpk7747 = py_unpack(&__item.clone(), 2, None); let mut value: Py = __unpk7747[0].clone(); let mut word: Py = __unpk7747[1].clone(); __out.push((word.clone(), value.clone())); } py_dict(__out) })() });
     s_BELOW(py_tuple(vec![py_str("under"), py_str("below"), py_str("less than"), py_str("fewer than"), py_str("up to"), py_str("at most"), py_str("no more than"), py_str("within"), py_str("younger than"), py_str("shorter than")]));
     s_ABOVE(py_tuple(vec![py_str("over"), py_str("above"), py_str("more than"), py_str("past"), py_str("older than"), py_str("longer than"), py_str("beyond"), py_str("at least"), py_str("from"), py_str("at")]));
     s_MOST_WORDS_BEFORE(Py::Int(3));
@@ -164,7 +164,7 @@ pub fn _pairs(args: &[Py]) -> Py {
     let mut first: Py = Py::None;
     let mut second: Py = Py::None;
     let _ = py_str("Every two words that sit next to each other and are not both empty ones.");
-    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[words.clone(), slice_or_raise(&words.clone(), &Py::Int(1), &Py::None, &Py::None)]).unwrap_or_else(|e| exc::raise(e))) { let __unpk2274 = py_unpack(&__item.clone(), 2, None); let mut first: Py = __unpk2274[0].clone(); let mut second: Py = __unpk2274[1].clone(); if py_truthy(&{ let __b = Py::Bool(!py_contains(&g_EMPTY(), &first.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&g_EMPTY(), &second.clone())) } }) {  __out.push(op_add(&op_add(&first.clone(), &py_str(" ")), &second.clone())); } } py_set(__out) })() };
+    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[words.clone(), slice_or_raise(&words.clone(), &Py::Int(1), &Py::None, &Py::None)]).unwrap_or_else(|e| exc::raise(e))) { let __unpk9757 = py_unpack(&__item.clone(), 2, None); let mut first: Py = __unpk9757[0].clone(); let mut second: Py = __unpk9757[1].clone(); if py_truthy(&{ let __b = Py::Bool(!py_contains(&g_EMPTY(), &first.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&g_EMPTY(), &second.clone())) } }) {  __out.push(op_add(&op_add(&first.clone(), &py_str(" ")), &second.clone())); } } py_set(__out) })() };
     Py::None
 }
 pub fn about_someone_else(args: &[Py]) -> Py {
@@ -514,7 +514,7 @@ pub fn refused(args: &[Py]) -> Py {
     let mut _u: Py = Py::None;
     let mut case: Py = Py::None;
     let _ = py_str("Whether the last answer put a test on the number this line gives, and their number fails.\n\n    The other half of the same reading: \"repair it if it is under five years old\" is answered\n    \"its 8 years old\", and the answer's verdict does not apply to them. The caller says the fact\n    back and stops, which is the honest reply - the answer itself already said what to do about\n    the two cases it named, and neither of them is this one.\n    ");
-    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&_candidates(&[text.clone(), said.clone()])) { let __unpk3548 = py_unpack(&__item.clone(), 2, None); let mut case: Py = __unpk3548[0].clone(); let mut _u: Py = __unpk3548[1].clone(); __out.push(Py::Bool(py_is(&_meets(&[case.clone(), text.clone()]), &Py::Bool(false)))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&_candidates(&[text.clone(), said.clone()])) { let __unpk3828 = py_unpack(&__item.clone(), 2, None); let mut case: Py = __unpk3828[0].clone(); let mut _u: Py = __unpk3828[1].clone(); __out.push(Py::Bool(py_is(&_meets(&[case.clone(), text.clone()]), &Py::Bool(false)))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn _carried(args: &[Py]) -> Py {
@@ -676,6 +676,8 @@ pub fn module_obj() -> Py {
             "chosen" => Some(py_func("chosen", |args: &[Py]| chosen(args))),
             "conditions" => Some(py_func("conditions", |args: &[Py]| conditions(args))),
             "refused" => Some(py_func("refused", |args: &[Py]| refused(args))),
+            "facts" => Some(pyrt::xrefs::xmodule("memory.facts")),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

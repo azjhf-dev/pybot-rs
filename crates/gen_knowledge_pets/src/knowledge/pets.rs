@@ -352,7 +352,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT knowledge.pets: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -4376,7 +4376,7 @@ pub fn _lifespan_entries(args: &[Py]) -> Py {
     let mut out: Py = Py::None;
     let mut reply: Py = Py::None;
     let _ = py_str("One entry per animal, so a second animal in the same conversation is a new subject.\n\n    A single entry for the whole table was answered, but the composer reads a follow-up as a\n    part of the last answer and narrows it: \"how long do dogs live\", then \"how long does a cat\n    live\" came back as \"10 to 13 years.\" - the dog's figure, about a cat. An entry of its own\n    for each animal is what makes the line with a different animal in it answer itself.\n    ");
-    out = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g__PET_LIFESPAN()) { let __unpk9844 = py_unpack(&__item.clone(), 2, None); let mut names: Py = __unpk9844[0].clone(); let mut reply: Py = __unpk9844[1].clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(op_add(&py_str("pet-lifespan-"), &mcall(&geti(&names.clone(), &Py::Int(0)), "replace", &[py_str(" "), py_str("-")]))); __args.push(py_tuple(vec![g__LIFESPAN_ASK(), names.clone()])); __args.push(if py_truthy(&Py::Bool(py_contains(&g__BIRD_ALSO_MEAT(), &geti(&names.clone(), &Py::Int(0))))) { _bird_lifespan(&[reply.clone()]) } else { reply.clone() }); __kws.extend(vec![("avoid".to_string(), g__LIFESPAN_AVOID()), ("bias".to_string(), Py::Int(1)), ("guard".to_string(), py_func("_not_a_weight_of_food", |args: &[Py]| _not_a_weight_of_food(args)))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }); } py_list(__out) })() };
+    out = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g__PET_LIFESPAN()) { let __unpk1643 = py_unpack(&__item.clone(), 2, None); let mut names: Py = __unpk1643[0].clone(); let mut reply: Py = __unpk1643[1].clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(op_add(&py_str("pet-lifespan-"), &mcall(&geti(&names.clone(), &Py::Int(0)), "replace", &[py_str(" "), py_str("-")]))); __args.push(py_tuple(vec![g__LIFESPAN_ASK(), names.clone()])); __args.push(if py_truthy(&Py::Bool(py_contains(&g__BIRD_ALSO_MEAT(), &geti(&names.clone(), &Py::Int(0))))) { _bird_lifespan(&[reply.clone()]) } else { reply.clone() }); __kws.extend(vec![("avoid".to_string(), g__LIFESPAN_AVOID()), ("bias".to_string(), Py::Int(1)), ("guard".to_string(), py_func("_not_a_weight_of_food", |args: &[Py]| _not_a_weight_of_food(args)))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }); } py_list(__out) })() };
     let _ = mcall(&out.clone(), "append", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("pet-lifespan")); __args.push(py_tuple(vec![g__LIFESPAN_ASK(), py_tuple(vec![py_str("pet"), py_str("pets"), py_str("animal"), py_str("animals")])])); __args.push(g__LIFESPAN_UNKNOWN()); __kws.extend(vec![("avoid".to_string(), g__LIFESPAN_AVOID()), ("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }]);
     return out.clone();
     Py::None
@@ -7124,6 +7124,7 @@ pub fn module_obj() -> Py {
             "the_animal_follow_up_line" => Some(py_func("the_animal_follow_up_line", |args: &[Py]| the_animal_follow_up_line(args))),
             "the_dog_feed_follow_up" => Some(py_func("the_dog_feed_follow_up", |args: &[Py]| the_dog_feed_follow_up(args))),
             "time_entries" => Some(g_time_entries()),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

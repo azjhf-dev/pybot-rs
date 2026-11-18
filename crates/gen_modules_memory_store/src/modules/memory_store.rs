@@ -610,7 +610,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT modules.memory_store: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -2760,7 +2760,7 @@ fn module_body() {
     s_NOT_A_NAME_BEFORE(stdlib_call("re", "compile", &[py_str("(?:\\b(?:a|an|the|some|another|his|her|their|our|your|my)\\s+)$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     s_THE_PLACE_IS_NAMED(stdlib_call("re", "compile", &[py_str("(?:^|[.!?;:]\\s+|\\n|\\b(?:to|in|into|from|at|near|of|around|through|toward|towards|via|going|coming|off|back|flying|travelling|traveling|moving|heading|headed|staying|visiting|visit|bound|left)\\s*(?:\\d+|two|three|four|five|six|seven|eight|nine|ten)?\\s*)$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     s_ASK_OPENERS(call_builtin("frozenset", &[mcall(&py_str("what whats which when where who whose why how hows\ndo does did is are was were am can could should would will shall have has had\nany anyone anything"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
-    s_AGES_IN_WORDS({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&pyrt::xrefs::xget("memory.facts", "FIGURE_WORDS"), "items", &[])) { let __unpk8488 = py_unpack(&__item.clone(), 2, None); let mut word: Py = __unpk8488[0].clone(); let mut number: Py = __unpk8488[1].clone(); __out.push((call_builtin("int", &[number.clone()]).unwrap_or_else(|e| exc::raise(e)), word.clone())); } py_dict(__out) })() });
+    s_AGES_IN_WORDS({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&pyrt::xrefs::xget("memory.facts", "FIGURE_WORDS"), "items", &[])) { let __unpk918 = py_unpack(&__item.clone(), 2, None); let mut word: Py = __unpk918[0].clone(); let mut number: Py = __unpk918[1].clone(); __out.push((call_builtin("int", &[number.clone()]).unwrap_or_else(|e| exc::raise(e)), word.clone())); } py_dict(__out) })() });
     s_NAMED_FACT_ASK(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&py_str("\\bwhat(?:'s|s| is| are| was| were)?\\s+my\\s+"), &pyrt::xrefs::xget("memory.store_lines", "_FACT_SLOT")), &py_str("\\b|\\bwhat\\s+(?:is|are|was|were)\\s+my\\s+")), &pyrt::xrefs::xget("memory.store_lines", "_FACT_SLOT")), &py_str("\\b|\\bwhere do i (?:work|live|come from)\\b(?=\\s*(?:[?.!,;:]|$)|\\s+(?:now|again|then|at|from|these|days|properly|though|honestly|anymore|either|oh|wait|sorry|hmm|actually|um|right|please|thanks)\\b)|\\bwhat do i work as\\b|\\bwho am i\\b|\\bhow old am i\\b|\\bwhat do i do for a living\\b")), stdlib_attr("re", "IGNORECASE").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     s_ASK_ABOUT_THEM(stdlib_call("re", "compile", &[py_str("^\\W*(?:is|are|does|do|did|was|were|can|could|has|have|will)\\b|\\bwhat (?:does|do|did|can|could|is|are|was|were) (?:he|she|they|your|my|his|her|their)\\b|\\bwhat(?:'s|s| is| are)\\s+(?:my|his|her|their|he|she|they)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     s_PERSON_ADVICE_ASK(stdlib_call("re", "compile", &[py_str("^\\W*(?:can|could|should|shall|would|will|may|might|is it (?:ok|okay|fine|safe)|what can|what could|what should|how (?:do|can|should)|any (?:tips|ideas|advice|suggestions|ways))\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
@@ -6932,7 +6932,7 @@ pub fn _the_figure_the_answer_names(args: &[Py]) -> Py {
     }
     continue;
     }
-    stated = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&found.clone()) { let __unpk8097 = py_unpack(&__item.clone(), 2, None); let mut figure: Py = __unpk8097[0].clone(); let mut _u: Py = __unpk8097[1].clone(); __out.push(mcall(&figure.clone(), "lower", &[])); } py_set(__out) })() };
+    stated = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&found.clone()) { let __unpk1972 = py_unpack(&__item.clone(), 2, None); let mut figure: Py = __unpk1972[0].clone(); let mut _u: Py = __unpk1972[1].clone(); __out.push(mcall(&figure.clone(), "lower", &[])); } py_set(__out) })() };
     if py_truthy(&op_gt(&call_builtin("len", &[stated.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1))) {
     return Py::None;
     }
@@ -7401,7 +7401,7 @@ pub fn _the_ask_behind_the_recall(args: &[Py]) -> Py {
     }
     rest = stdlib_call("re", "sub", &[py_str("\\s+(?:was|is|were|are)\\s*$"), py_str(""), mcall(&mcall(&wrapped.clone(), "group", &[py_str("rest")]), "strip", &[])]).unwrap_or_else(|e| exc::raise(e));
     said = mcall(&mcall(&mcall(&wrapped.clone(), "group", &[py_str("word")]), "lower", &[]), "replace", &[py_str("  "), py_str(" ")]);
-    slot = call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_RECALL_SLOTS()) { let __unpk8950 = py_unpack(&__item.clone(), 3, None); let mut pattern: Py = __unpk8950[0].clone(); let mut word: Py = __unpk8950[1].clone(); let mut name: Py = __unpk8950[2].clone(); if py_truthy(&mcall(&pattern.clone(), "search", &[rest.clone()])) {  __out.push(py_tuple(vec![word.clone(), name.clone()])); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e));
+    slot = call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_RECALL_SLOTS()) { let __unpk5774 = py_unpack(&__item.clone(), 3, None); let mut pattern: Py = __unpk5774[0].clone(); let mut word: Py = __unpk5774[1].clone(); let mut name: Py = __unpk5774[2].clone(); if py_truthy(&mcall(&pattern.clone(), "search", &[rest.clone()])) {  __out.push(py_tuple(vec![word.clone(), name.clone()])); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&Py::Bool(!py_truthy(&slot.clone()))) {
     return Py::None;
     }
@@ -8709,6 +8709,29 @@ pub fn module_obj() -> Py {
             "without_filler" => Some(g_without_filler()),
             "without_the_end_shrug" => Some(g_without_the_end_shrug()),
             "you" => Some(g_you()),
+            "a_change" => Some(pyrt::xrefs::xmodule("memory.change")),
+            "a_reason" => Some(pyrt::xrefs::xmodule("memory.cause")),
+            "pending" => Some(pyrt::xrefs::xmodule("memory.pending")),
+            "second_half" => Some(pyrt::xrefs::xmodule("memory.another")),
+            "choose" => Some(pyrt::xrefs::xmodule("memory.choice")),
+            "condition" => Some(pyrt::xrefs::xmodule("memory.condition")),
+            "spent" => Some(pyrt::xrefs::xmodule("memory.spent")),
+            "cooking" => Some(pyrt::xrefs::xmodule("knowledge.cooking")),
+            "history" => Some(pyrt::xrefs::xmodule("memory.history")),
+            "narrow" => Some(pyrt::xrefs::xmodule("memory.narrow")),
+            "hours_after" => Some(pyrt::xrefs::xmodule("memory.hours")),
+            "named_thing" => Some(pyrt::xrefs::xmodule("memory.named")),
+            "about_the_choice" => Some(pyrt::xrefs::xmodule("memory.carry")),
+            "resize" => Some(pyrt::xrefs::xmodule("memory.resize")),
+            "turned_down" => Some(pyrt::xrefs::xmodule("memory.reject")),
+            "a_repair" => Some(pyrt::xrefs::xmodule("memory.repair")),
+            "a_hurting_part" => Some(pyrt::xrefs::xmodule("memory.whathurts")),
+            "_topics" => Some(pyrt::xrefs::xmodule("memory.topics")),
+            "repeat_the_line" => Some(pyrt::xrefs::xmodule("memory.repeat")),
+            "breeds" => Some(pyrt::xrefs::xmodule("understanding.breeds")),
+            "copy" => Some(stdlib_module("copy")),
+            "datetime" => Some(stdlib_module("datetime")),
+            "random" => Some(stdlib_module("random")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

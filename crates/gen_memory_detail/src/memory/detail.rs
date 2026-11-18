@@ -94,7 +94,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT memory.detail: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -554,7 +554,7 @@ pub fn the_detail(args: &[Py]) -> Py {
     if py_truthy(&like_head.clone()) {
     body_words = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&_words(&[slice_or_raise(&said.clone(), &mcall(&like_head.clone(), "end", &[]), &Py::None, &Py::None)])) { let mut w: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&py_tuple(vec![py_str("is"), py_str("are"), py_str("was"), py_str("were"), py_str("be"), py_str("been")]), &w.clone()))) {  __out.push(w.clone()); } } py_list(__out) })() };
     }
-    if py_truthy(&{ let __b = Py::Bool(py_is(&counted_rest.clone(), &Py::None)); if !py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[op_add(&py_list(vec![py_str("")]), &body_words.clone()), body_words.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk8320 = py_unpack(&__item.clone(), 2, None); let mut before: Py = __unpk8320[0].clone(); let mut w: Py = __unpk8320[1].clone(); __out.push(_a_verb(&[w.clone(), before.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_is(&counted_rest.clone(), &Py::None)); if !py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[op_add(&py_list(vec![py_str("")]), &body_words.clone()), body_words.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk8492 = py_unpack(&__item.clone(), 2, None); let mut before: Py = __unpk8492[0].clone(); let mut w: Py = __unpk8492[1].clone(); __out.push(_a_verb(&[w.clone(), before.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }) {
     return Py::None;
     }
     opener = Py::None;
@@ -866,7 +866,7 @@ pub fn the_time_in_the_line(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&words.clone())); if py_truthy(&__b) { __b } else { op_gt(&call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &g_MOST_WORDS()) } }) {
     return Py::None;
     }
-    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[op_add(&py_list(vec![py_str("")]), &words.clone()), words.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk2800 = py_unpack(&__item.clone(), 2, None); let mut before: Py = __unpk2800[0].clone(); let mut word: Py = __unpk2800[1].clone(); __out.push(_a_verb(&[word.clone(), before.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[op_add(&py_list(vec![py_str("")]), &words.clone()), words.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk8807 = py_unpack(&__item.clone(), 2, None); let mut before: Py = __unpk8807[0].clone(); let mut word: Py = __unpk8807[1].clone(); __out.push(_a_verb(&[word.clone(), before.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     return Py::None;
     }
     if py_truthy(&mcall(&g_A_GREETING(), "match", &[mcall(&body.clone(), "strip", &[py_str(" .,!;:")])])) {
@@ -2654,6 +2654,11 @@ pub fn module_obj() -> Py {
             "the_step_for" => Some(py_func("the_step_for", |args: &[Py]| the_step_for(args))),
             "the_step_for_a_time" => Some(py_func("the_step_for_a_time", |args: &[Py]| the_step_for_a_time(args))),
             "the_time_in_the_line" => Some(py_func("the_time_in_the_line", |args: &[Py]| the_time_in_the_line(args))),
+            "kinds" => Some(pyrt::xrefs::xmodule("understanding.kinds")),
+            "again" => Some(pyrt::xrefs::xmodule("memory.again")),
+            "condition" => Some(pyrt::xrefs::xmodule("memory.condition")),
+            "repeat" => Some(pyrt::xrefs::xmodule("memory.repeat")),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

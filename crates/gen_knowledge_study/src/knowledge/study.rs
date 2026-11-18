@@ -129,7 +129,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT knowledge.study: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -1844,7 +1844,7 @@ pub fn _classes_named(args: &[Py]) -> Py {
     }
     }
     }
-    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("sorted", &[found.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk8891 = py_unpack(&__item.clone(), 2, None); let mut _u: Py = __unpk8891[0].clone(); let mut name: Py = __unpk8891[1].clone(); __out.push(name.clone()); } py_list(__out) })() };
+    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("sorted", &[found.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk1064 = py_unpack(&__item.clone(), 2, None); let mut _u: Py = __unpk1064[0].clone(); let mut name: Py = __unpk1064[1].clone(); __out.push(name.clone()); } py_list(__out) })() };
     Py::None
 }
 pub fn _half_of_class_said(args: &[Py]) -> Py {
@@ -2557,6 +2557,9 @@ pub fn module_obj() -> Py {
             "entry" => Some(g_entry()),
             "nerves_opening" => Some(g_nerves_opening()),
             "the_writing_card" => Some(py_func("the_writing_card", |args: &[Py]| the_writing_card(args))),
+            "quantity" => Some(pyrt::xrefs::xmodule("knowledge.quantity")),
+            "re" => Some(stdlib_module("re")),
+            "unicodedata" => Some(stdlib_module("unicodedata")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

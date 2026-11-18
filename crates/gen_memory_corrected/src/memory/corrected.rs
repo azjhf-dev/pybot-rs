@@ -75,7 +75,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT memory.corrected: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -527,7 +527,7 @@ pub fn _correct_other(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&who.clone()))) {
     continue;
     }
-    kept = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("memory.store_lines", "OTHER_SAID")) { let __unpk6088 = py_unpack(&__item.clone(), 2, None); let mut kind: Py = __unpk6088[0].clone(); let mut _u: Py = __unpk6088[1].clone(); if py_truthy(&mcall(&entry.clone(), "get", &[kind.clone()])) {  __out.push(kind.clone()); } } py_list(__out) })() };
+    kept = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("memory.store_lines", "OTHER_SAID")) { let __unpk6736 = py_unpack(&__item.clone(), 2, None); let mut kind: Py = __unpk6736[0].clone(); let mut _u: Py = __unpk6736[1].clone(); if py_truthy(&mcall(&entry.clone(), "get", &[kind.clone()])) {  __out.push(kind.clone()); } } py_list(__out) })() };
     let __iter4 = py_iter_or_raise(&pyrt::xrefs::xget("memory.store_lines", "OTHER_SAID"));
     for __item in __iter4 {
     let __unpk5 = py_unpack(&__item.clone(), 2, None);
@@ -3749,6 +3749,9 @@ pub fn module_obj() -> Py {
             "remember_other" => Some(g_remember_other()),
             "stem" => Some(g_stem()),
             "user" => Some(g_user()),
+            "extract" => Some(pyrt::xrefs::xmodule("memory.facts")),
+            "plans" => Some(pyrt::xrefs::xmodule("memory.plans")),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

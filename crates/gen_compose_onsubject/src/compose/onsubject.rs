@@ -71,7 +71,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT compose.onsubject: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -586,13 +586,13 @@ pub fn _the_subject(args: &[Py]) -> Py {
     return py_tuple(vec![py_str(""), py_str(""), py_str("")]);
     }
     newest = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(geti(&said_things.clone(), &Py::Int(0))); __kws.extend(vec![("skip_place_words".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _named(args))(&__args) };
-    if py_truthy(&op_gt(&call_builtin("len", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&newest.clone()) { let __unpk5510 = py_unpack(&__item.clone(), 2, None); let mut _word: Py = __unpk5510[0].clone(); let mut kind: Py = __unpk5510[1].clone(); __out.push(kind.clone()); } py_set(__out) })() }]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1))) {
+    if py_truthy(&op_gt(&call_builtin("len", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&newest.clone()) { let __unpk684 = py_unpack(&__item.clone(), 2, None); let mut _word: Py = __unpk684[0].clone(); let mut kind: Py = __unpk684[1].clone(); __out.push(kind.clone()); } py_set(__out) })() }]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1))) {
     let __iter3 = py_iter_or_raise(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(now.clone()); __kws.extend(vec![("skip_place_words".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _named(args))(&__args) });
     for __item in __iter3 {
     let __unpk4 = py_unpack(&__item.clone(), 2, None);
     word = __unpk4[0].clone();
     kind = __unpk4[1].clone();
-    if py_truthy(&Py::Bool(py_contains(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&newest.clone()) { let __unpk6341 = py_unpack(&__item.clone(), 2, None); let mut _word: Py = __unpk6341[0].clone(); let mut named_kind: Py = __unpk6341[1].clone(); __out.push(named_kind.clone()); } py_set(__out) })() }, &kind.clone()))) {
+    if py_truthy(&Py::Bool(py_contains(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&newest.clone()) { let __unpk3852 = py_unpack(&__item.clone(), 2, None); let mut _word: Py = __unpk3852[0].clone(); let mut named_kind: Py = __unpk3852[1].clone(); __out.push(named_kind.clone()); } py_set(__out) })() }, &kind.clone()))) {
     return py_tuple(vec![word.clone(), kind.clone(), now.clone()]);
     }
     }
@@ -1246,7 +1246,7 @@ pub fn pool(args: &[Py]) -> Py {
     return Py::None;
     }
     if py_truthy(&Py::Bool(!py_eq(&line.clone(), &text.clone()))) {
-    mine = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __kws.extend(vec![("skip_place_words".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _named(args))(&__args) }) { let __unpk2769 = py_unpack(&__item.clone(), 2, None); let mut _word: Py = __unpk2769[0].clone(); let mut named_kind: Py = __unpk2769[1].clone(); __out.push(named_kind.clone()); } py_list(__out) })() };
+    mine = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __kws.extend(vec![("skip_place_words".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _named(args))(&__args) }) { let __unpk6522 = py_unpack(&__item.clone(), 2, None); let mut _word: Py = __unpk6522[0].clone(); let mut named_kind: Py = __unpk6522[1].clone(); __out.push(named_kind.clone()); } py_list(__out) })() };
     if py_truthy(&{ let __b = mine.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&mine.clone(), &kind.clone())) } }) {
     return Py::None;
     }
@@ -1390,6 +1390,7 @@ pub fn module_obj() -> Py {
             "_words" => Some(py_func("_words", |args: &[Py]| _words(args))),
             "place_pool" => Some(py_func("place_pool", |args: &[Py]| place_pool(args))),
             "pool" => Some(py_func("pool", |args: &[Py]| pool(args))),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

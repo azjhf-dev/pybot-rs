@@ -148,7 +148,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT compose.goodnews: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -2180,6 +2180,9 @@ pub fn module_obj() -> Py {
             "the_reply_just_cheered" => Some(py_func("the_reply_just_cheered", |args: &[Py]| the_reply_just_cheered(args))),
             "the_tail_adds_nothing" => Some(py_func("the_tail_adds_nothing", |args: &[Py]| the_tail_adds_nothing(args))),
             "worry_on_the_table" => Some(py_func("worry_on_the_table", |args: &[Py]| worry_on_the_table(args))),
+            "datetime" => Some(stdlib_module("datetime")),
+            "re" => Some(stdlib_module("re")),
+            "sys" => Some(stdlib_module("sys")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

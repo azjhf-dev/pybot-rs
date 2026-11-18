@@ -49,7 +49,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT compose.said_about_me: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -459,6 +459,7 @@ pub fn module_obj() -> Py {
             "reads_as_reported_judgement" => Some(py_func("reads_as_reported_judgement", |args: &[Py]| reads_as_reported_judgement(args))),
             "reads_as_somebody_elses_words" => Some(py_func("reads_as_somebody_elses_words", |args: &[Py]| reads_as_somebody_elses_words(args))),
             "speaks_to_a_self_judgement" => Some(py_func("speaks_to_a_self_judgement", |args: &[Py]| speaks_to_a_self_judgement(args))),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

@@ -27,7 +27,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT memory.more: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -261,7 +261,7 @@ pub fn _the_rest(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = op_lt(&call_builtin("len", &[parts.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)); if py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&given.clone(), &_flat(&[geti(&parts.clone(), &Py::Int(0))]))) } }) {
     continue;
     }
-    left = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[parts.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk7226 = py_unpack(&__item.clone(), 2, None); let mut index: Py = __unpk7226[0].clone(); let mut part: Py = __unpk7226[1].clone(); if py_truthy(&Py::Bool(!py_contains(&given.clone(), &_flat(&[part.clone()])))) {  __out.push(index.clone()); } } py_list(__out) })() };
+    left = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[parts.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk9944 = py_unpack(&__item.clone(), 2, None); let mut index: Py = __unpk9944[0].clone(); let mut part: Py = __unpk9944[1].clone(); if py_truthy(&Py::Bool(!py_contains(&given.clone(), &_flat(&[part.clone()])))) {  __out.push(index.clone()); } } py_list(__out) })() };
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&left.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_eq(&geti(&left.clone(), &Py::Int(0)), &Py::Int(0))) } }) {
     continue;
     }
@@ -376,6 +376,8 @@ pub fn module_obj() -> Py {
             "asks_for_more" => Some(py_func("asks_for_more", |args: &[Py]| asks_for_more(args))),
             "pick" => Some(g_pick()),
             "reply_for" => Some(py_func("reply_for", |args: &[Py]| reply_for(args))),
+            "repeat" => Some(pyrt::xrefs::xmodule("memory.repeat")),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

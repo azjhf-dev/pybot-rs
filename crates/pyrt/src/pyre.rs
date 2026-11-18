@@ -94,7 +94,7 @@ fn count_groups(pattern: &str) -> (usize, Vec<String>) {
 /// Translate Python-only regex syntax the Rust engines reject.
 /// fancy-regex already supports (?P<name>...) and lookarounds, so this is a pass-through.
 fn translate_pattern(pat: &str) -> String {
-    pat.to_string()
+    pat.replace(r"\Z", r"\z")
 }
 
 pub fn compile(pattern: &str, flags: i64) -> Result<Rc<PyPattern>, PyExc> {

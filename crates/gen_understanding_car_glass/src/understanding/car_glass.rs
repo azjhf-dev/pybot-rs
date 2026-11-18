@@ -21,7 +21,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT understanding.car_glass: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -107,6 +107,7 @@ pub fn module_obj() -> Py {
             "_THE_GLASS_ITSELF" => Some(g__THE_GLASS_ITSELF()),
             "_names_one_of" => Some(py_func("_names_one_of", |args: &[Py]| _names_one_of(args))),
             "a_window_on_a_car_is_not_a_damage" => Some(py_func("a_window_on_a_car_is_not_a_damage", |args: &[Py]| a_window_on_a_car_is_not_a_damage(args))),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

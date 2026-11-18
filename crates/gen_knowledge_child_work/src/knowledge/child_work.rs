@@ -47,7 +47,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT knowledge.child_work: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -286,6 +286,8 @@ pub fn module_obj() -> Py {
             "_a_number_is_an_age" => Some(py_func("_a_number_is_an_age", |args: &[Py]| _a_number_is_an_age(args))),
             "_child_work" => Some(py_func("_child_work", |args: &[Py]| _child_work(args))),
             "entry" => Some(g_entry()),
+            "lexicon" => Some(pyrt::xrefs::xmodule("understanding.lexicon")),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

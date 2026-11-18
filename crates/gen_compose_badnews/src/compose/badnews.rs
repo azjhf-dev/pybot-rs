@@ -103,7 +103,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT compose.badnews: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -987,7 +987,7 @@ pub fn _one_edit(args: &[Py]) -> Py {
     return Py::Bool(false);
     }
     if py_truthy(&Py::Bool(py_eq(&call_builtin("len", &[left.clone()]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("len", &[right.clone()]).unwrap_or_else(|e| exc::raise(e))))) {
-    different = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[left.clone(), right.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk6790 = py_unpack(&__item.clone(), 2, None); let mut a: Py = __unpk6790[0].clone(); let mut b: Py = __unpk6790[1].clone(); if py_truthy(&Py::Bool(!py_eq(&a.clone(), &b.clone()))) {  __out.push(py_tuple(vec![a.clone(), b.clone()])); } } py_list(__out) })() };
+    different = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[left.clone(), right.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk9681 = py_unpack(&__item.clone(), 2, None); let mut a: Py = __unpk9681[0].clone(); let mut b: Py = __unpk9681[1].clone(); if py_truthy(&Py::Bool(!py_eq(&a.clone(), &b.clone()))) {  __out.push(py_tuple(vec![a.clone(), b.clone()])); } } py_list(__out) })() };
     return { let __b = Py::Bool(py_eq(&call_builtin("len", &[different.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&g_VOWELS(), &geti(&geti(&different.clone(), &Py::Int(0)), &Py::Int(0)))); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_VOWELS(), &geti(&geti(&different.clone(), &Py::Int(0)), &Py::Int(1)))) } } } };
     }
     let __unpk1 = py_unpack(&if py_truthy(&op_lt(&call_builtin("len", &[left.clone()]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("len", &[right.clone()]).unwrap_or_else(|e| exc::raise(e)))) { py_tuple(vec![left.clone(), right.clone()]) } else { py_tuple(vec![right.clone(), left.clone()]) }, 2, None);
@@ -1310,6 +1310,8 @@ pub fn module_obj() -> Py {
             "reads_for_a_pet" => Some(py_func("reads_for_a_pet", |args: &[Py]| reads_for_a_pet(args))),
             "reads_like_a_symptom" => Some(py_func("reads_like_a_symptom", |args: &[Py]| reads_like_a_symptom(args))),
             "without_the_figure_of_speech" => Some(g_without_the_figure_of_speech()),
+            "re" => Some(stdlib_module("re")),
+            "sys" => Some(stdlib_module("sys")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

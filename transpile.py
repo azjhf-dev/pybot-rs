@@ -415,7 +415,7 @@ class Gen:
         self.emit("    if INITIALIZING.with(|c| c.get()) { return; }")
         self.emit("    INIT.call_once(|| {")
         self.emit("        INITIALIZING.with(|c| c.set(true));")
-        self.emit("        let _ = exc::catch(|| { module_body(); Py::None });")
+        self.emit('        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT ' + self.dotted + ': {} {}", e.class_name, e.message); } });')
         self.emit("        INITIALIZING.with(|c| c.set(false));")
         self.emit("    });")
         self.emit("}")
@@ -490,6 +490,12 @@ class Gen:
                 self.emit(f"            {rust_string(n)} => Some(py_func({rust_string(n)}, |args: &[Py]| {r}(args))),")
             else:
                 self.emit(f"            {rust_string(n)} => Some(g_{r}()),")
+        for alias, target in self.info.mod.items():
+            if alias not in names:
+                self.emit(f'            {rust_string(alias)} => Some({self.ref_module(target)}),')
+        for alias, target in self.info.std.items():
+            if alias not in names:
+                self.emit(f'            {rust_string(alias)} => Some(stdlib_module({rust_string(target)})),')
         self.emit("            _ => None,")
         self.emit("        }),")
         self.emit("        set: Some(Rc::new(|attr: &str, v: Py| match attr {")

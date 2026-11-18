@@ -52,7 +52,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT memory.repair: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -188,7 +188,7 @@ fn module_body() {
     s_A_FIGURE(stdlib_call("re", "compile", &[py_str("\\b(?P<figure>\\d+(?:\\.\\d+)?)\\s*(?P<unit>[a-z]{0,12})"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     s_FIGURE_OR_WORD(stdlib_call("re", "compile", &[py_str("(?<![\\d.])\\d+(?:\\.\\d+)?(?![\\d])|\\b(?:one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|fifteen|twenty)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     s_SENTENCE_END(stdlib_call("re", "compile", &[py_str("(?<=[.!?])\\s+")]).unwrap_or_else(|e| exc::raise(e)));
-    s_THE_WORD_FOR({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&pyrt::xrefs::xget("memory.facts", "FIGURE_WORDS"), "items", &[])) { let __unpk6662 = py_unpack(&__item.clone(), 2, None); let mut word: Py = __unpk6662[0].clone(); let mut number: Py = __unpk6662[1].clone(); __out.push((number.clone(), word.clone())); } py_dict(__out) })() });
+    s_THE_WORD_FOR({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&pyrt::xrefs::xget("memory.facts", "FIGURE_WORDS"), "items", &[])) { let __unpk2968 = py_unpack(&__item.clone(), 2, None); let mut word: Py = __unpk2968[0].clone(); let mut number: Py = __unpk2968[1].clone(); __out.push((number.clone(), word.clone())); } py_dict(__out) })() });
     s_SWAPPED(py_tuple(vec![py_str("{thing}, then."), py_str("Got it — {thing}."), py_str("{thing} it is.")]));
     s_AN_ASK_OPENS(stdlib_call("re", "compile", &[py_str("^(?:how|what|why|when|where|which|who|whose|whom)\\b|^(?:can|could|should|would|will|shall|do|does|did|is|are|was|were|have|has|had|am|may|might|must|need)\\s+(?:i|we|you|they|it|he|she|that|this|there)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     s_HEDGE(stdlib_call("re", "compile", &[py_str("\\b(?:beyond what i know|don'?t know enough|a quick search|i'?d rather not guess|not sure about that|i don'?t know that one)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
@@ -1528,7 +1528,7 @@ pub fn _the_fact_moved_to_the_person_they_meant(args: &[Py]) -> Py {
     return py_str("");
     }
     let _ = mcall(&py_call(&others, &[memory.clone()]), "remove", &[entry.clone()]);
-    moved = { (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&entry.clone(), "items", &[])) { let __unpk8698 = py_unpack(&__item.clone(), 2, None); let mut key: Py = __unpk8698[0].clone(); let mut value: Py = __unpk8698[1].clone(); if py_truthy(&Py::Bool(!py_eq(&key.clone(), &py_str("who")))) {  __out.push((key.clone(), value.clone())); } } py_dict(__out) })() };
+    moved = { (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&entry.clone(), "items", &[])) { let __unpk7142 = py_unpack(&__item.clone(), 2, None); let mut key: Py = __unpk7142[0].clone(); let mut value: Py = __unpk7142[1].clone(); if py_truthy(&Py::Bool(!py_eq(&key.clone(), &py_str("who")))) {  __out.push((key.clone(), value.clone())); } } py_dict(__out) })() };
     let _ = py_setitem(&moved.clone(), &py_str("who"), wanted.clone());
     let _ = py_call(&remember_other, &[memory.clone(), moved.clone(), call_builtin("str", &[text.clone()]).unwrap_or_else(|e| exc::raise(e))]);
     return fact.clone();
@@ -1889,6 +1889,8 @@ pub fn module_obj() -> Py {
             "last_user" => Some(g_last_user()),
             "pick" => Some(g_pick()),
             "the_thing_they_meant" => Some(py_func("the_thing_they_meant", |args: &[Py]| the_thing_they_meant(args))),
+            "extract" => Some(pyrt::xrefs::xmodule("memory.facts")),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

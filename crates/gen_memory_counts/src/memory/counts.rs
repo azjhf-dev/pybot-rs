@@ -79,7 +79,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT memory.counts: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -1269,7 +1269,7 @@ pub fn answer(args: &[Py]) -> Py {
     number = __unpk4[1].clone();
     many = if py_truthy(&Py::Bool(py_eq(&number.clone(), &Py::Int(1)))) { thing.clone() } else { op_add(&thing.clone(), &py_str("s")) };
     if py_truthy(&{ let __b = Py::Bool(py_contains(&mcall(&g_IRREGULAR(), "values", &[]), &thing.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_eq(&number.clone(), &Py::Int(1))) } }) {
-    many = geti(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_IRREGULAR(), "items", &[])) { let __unpk786 = py_unpack(&__item.clone(), 2, None); let mut plural: Py = __unpk786[0].clone(); let mut one: Py = __unpk786[1].clone(); if py_truthy(&Py::Bool(py_eq(&one.clone(), &thing.clone()))) {  __out.push(plural.clone()); } } py_list(__out) })() }, &Py::Int(0));
+    many = geti(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_IRREGULAR(), "items", &[])) { let __unpk5422 = py_unpack(&__item.clone(), 2, None); let mut plural: Py = __unpk5422[0].clone(); let mut one: Py = __unpk5422[1].clone(); if py_truthy(&Py::Bool(py_eq(&one.clone(), &thing.clone()))) {  __out.push(plural.clone()); } } py_list(__out) })() }, &Py::Int(0));
     }
     let _ = mcall(&parts.clone(), "append", &[op_add(&op_add(&_many(&[number.clone()]), &py_str(" ")), &many.clone())]);
     }
@@ -1476,6 +1476,9 @@ pub fn module_obj() -> Py {
             "_thing_of" => Some(py_func("_thing_of", |args: &[Py]| _thing_of(args))),
             "answer" => Some(py_func("answer", |args: &[Py]| answer(args))),
             "observe" => Some(py_func("observe", |args: &[Py]| observe(args))),
+            "facts" => Some(pyrt::xrefs::xmodule("memory.facts")),
+            "re" => Some(stdlib_module("re")),
+            "string" => Some(stdlib_module("string")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

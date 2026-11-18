@@ -83,7 +83,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT compose.no_eyes: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -1016,6 +1016,7 @@ pub fn module_obj() -> Py {
             "names_the_addressee" => Some(py_func("names_the_addressee", |args: &[Py]| names_the_addressee(args))),
             "what_they_described" => Some(py_func("what_they_described", |args: &[Py]| what_they_described(args))),
             "writes_the_message" => Some(py_func("writes_the_message", |args: &[Py]| writes_the_message(args))),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

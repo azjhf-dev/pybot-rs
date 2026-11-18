@@ -32,7 +32,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT knowledge.decorating: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -173,7 +173,7 @@ pub fn _the_order_of_two_steps(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g__ORDER_WORDS()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&text.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))))) {
     return Py::Bool(false);
     }
-    return op_ge(&call_builtin("len", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g__STEPS(), "items", &[])) { let __unpk8990 = py_unpack(&__item.clone(), 2, None); let mut word: Py = __unpk8990[0].clone(); let mut step: Py = __unpk8990[1].clone(); if py_truthy(&Py::Bool(py_contains(&text.clone(), &word.clone()))) {  __out.push(step.clone()); } } py_set(__out) })() }]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2));
+    return op_ge(&call_builtin("len", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g__STEPS(), "items", &[])) { let __unpk7450 = py_unpack(&__item.clone(), 2, None); let mut word: Py = __unpk7450[0].clone(); let mut step: Py = __unpk7450[1].clone(); if py_truthy(&Py::Bool(py_contains(&text.clone(), &word.clone()))) {  __out.push(step.clone()); } } py_set(__out) })() }]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2));
     Py::None
 }
 pub fn _a_shelf_and_its_brackets(args: &[Py]) -> Py {
@@ -224,6 +224,7 @@ pub fn module_obj() -> Py {
             "_the_order_of_two_steps" => Some(py_func("_the_order_of_two_steps", |args: &[Py]| _the_order_of_two_steps(args))),
             "a_food_is_being_kept" => Some(g_a_food_is_being_kept()),
             "entry" => Some(g_entry()),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

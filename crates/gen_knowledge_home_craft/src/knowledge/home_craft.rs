@@ -62,7 +62,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT knowledge.home_craft: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -1417,6 +1417,7 @@ pub fn module_obj() -> Py {
             "_wallpaper_for_the_room" => Some(py_func("_wallpaper_for_the_room", |args: &[Py]| _wallpaper_for_the_room(args))),
             "entries" => Some(py_func("entries", |args: &[Py]| entries(args))),
             "the_bin_is_on_a_machine" => Some(g_the_bin_is_on_a_machine()),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

@@ -20,7 +20,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT modules.trip_date_said_again: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -243,6 +243,10 @@ pub fn module_obj() -> Py {
             "_the_month_taken_back" => Some(py_func("_the_month_taken_back", |args: &[Py]| _the_month_taken_back(args))),
             "_the_trip_it_moves" => Some(py_func("_the_trip_it_moves", |args: &[Py]| _the_trip_it_moves(args))),
             "observe" => Some(py_func("observe", |args: &[Py]| observe(args))),
+            "extract" => Some(pyrt::xrefs::xmodule("memory.facts")),
+            "trips" => Some(pyrt::xrefs::xmodule("memory.trips")),
+            "memory_store" => Some(pyrt::xrefs::xmodule("modules.memory_store")),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

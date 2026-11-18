@@ -53,7 +53,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT compose.how_it_went: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -459,6 +459,7 @@ pub fn module_obj() -> Py {
             "more_than_one" => Some(py_func("more_than_one", |args: &[Py]| more_than_one(args))),
             "pick" => Some(g_pick()),
             "the_answer_they_gave" => Some(py_func("the_answer_they_gave", |args: &[Py]| the_answer_they_gave(args))),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

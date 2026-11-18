@@ -24,7 +24,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT modules.talkto: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -56,7 +56,7 @@ fn module_body() {
     s_PRIORITY(op_neg(&Py::Int(500)));
     s_ANSWERS_INSTEAD(py_tuple(vec![py_str("small-talk")]));
     s__A_GENERIC_OPENER(call_builtin("frozenset", &[py_tuple(vec![py_str("conversation-openers")])]).unwrap_or_else(|e| exc::raise(e)));
-    s__ROUTES(call_builtin("tuple", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "WHO_TO_ASK")) { let __unpk6790 = py_unpack(&__item.clone(), 2, None); let mut _u: Py = __unpk6790[0].clone(); let mut who: Py = __unpk6790[1].clone(); __out.push(who.clone()); } py_set(__out) })() }); __kws.extend(vec![("key".to_string(), py_func("len", |args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e)))), ("reverse".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sorted", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }]).unwrap_or_else(|e| exc::raise(e)));
+    s__ROUTES(call_builtin("tuple", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback_data", "WHO_TO_ASK")) { let __unpk4125 = py_unpack(&__item.clone(), 2, None); let mut _u: Py = __unpk4125[0].clone(); let mut who: Py = __unpk4125[1].clone(); __out.push(who.clone()); } py_set(__out) })() }); __kws.extend(vec![("key".to_string(), py_func("len", |args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e)))), ("reverse".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sorted", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }]).unwrap_or_else(|e| exc::raise(e)));
     s__A_LIFE_AT_RISK(stdlib_call("re", "compile", &[py_str("suicid|kill(?:ing)?\\s+myself|self[\\s-]?harm|hurt(?:ing)?\\s+myself|end(?:ing)?\\s+my\\s+life|end(?:ing)?\\s+it\\s+all|take\\s+my\\s+own\\s+life|want(?:ing|ed)?\\s+to\\s+die|(?:not\\s+want(?:ing)?|do(?:n'?t|\\s+not)\\s+want(?:ing)?)\\s+to\\s+(?:be\\s+here|live|go\\s+on|carry\\s+on)|better\\s+off\\s+dead|no\\s+reason\\s+to\\s+live"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
 }
 pub fn _the_entry_for(args: &[Py]) -> Py {
@@ -328,6 +328,9 @@ pub fn module_obj() -> Py {
             "_the_entry_the_line_reached" => Some(py_func("_the_entry_the_line_reached", |args: &[Py]| _the_entry_the_line_reached(args))),
             "find_entry" => Some(g_find_entry()),
             "respond" => Some(py_func("respond", |args: &[Py]| respond(args))),
+            "talkto" => Some(pyrt::xrefs::xmodule("compose.talkto")),
+            "urgent" => Some(pyrt::xrefs::xmodule("compose.urgent")),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

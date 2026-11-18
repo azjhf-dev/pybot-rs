@@ -23,7 +23,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT compose.liveask: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -51,7 +51,7 @@ fn module_body() {
     s_LIVE_DECIDE(py_tuple(vec![py_str("I can't see the {kind} from here, sorry. {check} Then it's your call, and I can help you weigh it: what would each way cost you?"), py_str("I can't see the {kind} from here, sorry. {check} Nobody can call that but you — say what you'd lose either way and I'll lay both out with you.")]));
     s_LIVE_CHECK(py_dict(vec![(py_str("weather"), py_tuple(vec![py_str("A weather app has the next few days in one tap, with the feels-like temperature."), py_str("weather")])), (py_str("hours"), py_tuple(vec![py_str("The venue's own page or its map listing has today's hours, holiday changes and all."), py_str("opening times")])), (py_str("prices"), py_tuple(vec![py_str("What it costs turns on which one it is, where you buy it and the day, and the seller's own site has today's figure."), py_str("prices")])), (py_str("news"), py_tuple(vec![py_str("A news site has the latest."), py_str("news")])), (py_str("travel"), py_tuple(vec![py_str("The operator's app or a journey planner has the next one and any disruption."), py_str("times or delays")]))]));
     s_LIVE_DECIDE_ASKS(stdlib_call("re", "compile", &[py_str("\\b(?:should i|shall i|is it worth|is it better|would it be better|do i need|do you think i should|what would you do|not sure|unsure|dont know|do not know|no idea|cant decide|torn between|in two minds|whether to|if i can)\\b")]).unwrap_or_else(|e| exc::raise(e)));
-    s_NOTE_KIND({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback", "LIVE_KINDS")) { let __unpk5019 = py_unpack(&__item.clone(), 3, None); let mut kind: Py = __unpk5019[0].clone(); let mut _phrases: Py = __unpk5019[1].clone(); let mut pool: Py = __unpk5019[2].clone(); for __item in py_iter_or_raise(&pool.clone()) { let mut line: Py = __item.clone(); __out.push((line.clone(), kind.clone())); } } py_dict(__out) })() });
+    s_NOTE_KIND({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("compose.fallback", "LIVE_KINDS")) { let __unpk7960 = py_unpack(&__item.clone(), 3, None); let mut kind: Py = __unpk7960[0].clone(); let mut _phrases: Py = __unpk7960[1].clone(); let mut pool: Py = __unpk7960[2].clone(); for __item in py_iter_or_raise(&pool.clone()) { let mut line: Py = __item.clone(); __out.push((line.clone(), kind.clone())); } } py_dict(__out) })() });
     s_NO_MARK(stdlib_call("re", "compile", &[py_str("['\\u2019`]")]).unwrap_or_else(|e| exc::raise(e)));
 }
 pub fn answer_for(args: &[Py]) -> Py {
@@ -111,6 +111,8 @@ pub fn module_obj() -> Py {
             "NO_MARK" => Some(g_NO_MARK()),
             "answer_for" => Some(py_func("answer_for", |args: &[Py]| answer_for(args))),
             "pick" => Some(g_pick()),
+            "fallback" => Some(pyrt::xrefs::xmodule("compose.fallback")),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

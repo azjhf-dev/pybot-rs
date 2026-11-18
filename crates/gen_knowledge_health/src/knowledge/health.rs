@@ -329,7 +329,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT knowledge.health: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -2857,7 +2857,7 @@ pub fn _a_medicine_that_has_not_helped(args: &[Py]) -> Py {
     let mut start: Py = Py::None;
     let mut word: Py = Py::None;
     let _ = py_str("True when a named medicine and an \"it did not work\" phrase sit in the same short clause.\n\n    Distance, because naming the drug is not the same as asking about it. \"my naproxen isnt\n    working for my knee\" and \"ive been taking ibuprofen but its not touching it\" put the two\n    together, while \"i take ibuprofen for my arthritis and its not working\" is a line about the\n    arthritis: the arthritis card answered it before, and a medicine-only rule took it away. Six\n    words is one clause the way people write them - bounded, where an avoid word is loose.\n    ");
-    marks = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[toks.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk1282 = py_unpack(&__item.clone(), 2, None); let mut i: Py = __unpk1282[0].clone(); let mut word: Py = __unpk1282[1].clone(); if py_truthy(&Py::Bool(py_contains(&g_NAMED_MEDICINES(), &word.clone()))) {  __out.push(i.clone()); } } py_list(__out) })() };
+    marks = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[toks.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk1767 = py_unpack(&__item.clone(), 2, None); let mut i: Py = __unpk1767[0].clone(); let mut word: Py = __unpk1767[1].clone(); if py_truthy(&Py::Bool(py_contains(&g_NAMED_MEDICINES(), &word.clone()))) {  __out.push(i.clone()); } } py_list(__out) })() };
     if py_truthy(&Py::Bool(!py_truthy(&marks.clone()))) {
     return Py::Bool(false);
     }
@@ -5115,6 +5115,8 @@ pub fn module_obj() -> Py {
             "tablets_for_a_pregnancy" => Some(py_func("tablets_for_a_pregnancy", |args: &[Py]| tablets_for_a_pregnancy(args))),
             "temperature_card" => Some(py_func("temperature_card", |args: &[Py]| temperature_card(args))),
             "time_entries" => Some(g_time_entries()),
+            "pets" => Some(pyrt::xrefs::xmodule("knowledge.pets")),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

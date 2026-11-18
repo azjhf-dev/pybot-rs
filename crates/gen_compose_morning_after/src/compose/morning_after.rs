@@ -28,7 +28,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT compose.morning_after: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -140,6 +140,7 @@ pub fn module_obj() -> Py {
             "A_WEAK_STATE" => Some(g_A_WEAK_STATE()),
             "SOMEONE_ELSE" => Some(g_SOMEONE_ELSE()),
             "reads_as_a_morning_after" => Some(py_func("reads_as_a_morning_after", |args: &[Py]| reads_as_a_morning_after(args))),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

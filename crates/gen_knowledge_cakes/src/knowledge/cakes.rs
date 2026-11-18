@@ -41,7 +41,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT knowledge.cakes: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -310,8 +310,8 @@ pub fn _cake_tins(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&tins.clone())); if py_truthy(&__b) { __b } else { op_gt(&tins.clone(), &Py::Int(12)) } }) {
     continue;
     }
-    low = call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[counts.clone(), g__CAKE_SHAPES()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk8050 = py_unpack(&__item.clone(), 2, None); let mut n: Py = __unpk8050[0].clone(); let mut shape: Py = __unpk8050[1].clone(); __out.push(op_mul(&n.clone(), &geti(&shape.clone(), &Py::Int(2)))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
-    high = call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[counts.clone(), g__CAKE_SHAPES()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk2866 = py_unpack(&__item.clone(), 2, None); let mut n: Py = __unpk2866[0].clone(); let mut shape: Py = __unpk2866[1].clone(); __out.push(op_mul(&n.clone(), &geti(&shape.clone(), &Py::Int(3)))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    low = call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[counts.clone(), g__CAKE_SHAPES()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk7473 = py_unpack(&__item.clone(), 2, None); let mut n: Py = __unpk7473[0].clone(); let mut shape: Py = __unpk7473[1].clone(); __out.push(op_mul(&n.clone(), &geti(&shape.clone(), &Py::Int(2)))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    high = call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[counts.clone(), g__CAKE_SHAPES()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk7872 = py_unpack(&__item.clone(), 2, None); let mut n: Py = __unpk7872[0].clone(); let mut shape: Py = __unpk7872[1].clone(); __out.push(op_mul(&n.clone(), &geti(&shape.clone(), &Py::Int(3)))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&op_lt(&high.clone(), &count.clone())) {
     continue;
     }
@@ -423,7 +423,7 @@ pub fn cake_plan(args: &[Py]) -> Py {
     high = __unpk5[3].clone();
     }
     tins = call_builtin("sum", &[counts.clone()]).unwrap_or_else(|e| exc::raise(e));
-    parts = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[counts.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk5534 = py_unpack(&__item.clone(), 2, None); let mut i: Py = __unpk5534[0].clone(); let mut n: Py = __unpk5534[1].clone(); if py_truthy(&n.clone()) {  __out.push({ let mut __s = String::new(); __s.push_str(&fstr(&geti(&g__CAKE_NUMBERS(), &n.clone()), -1, "")); __s.push_str(" "); __s.push_str(&fstr(&if py_truthy(&Py::Bool(py_eq(&n.clone(), &Py::Int(1)))) { geti(&geti(&g__CAKE_SHAPES(), &i.clone()), &Py::Int(0)) } else { geti(&geti(&g__CAKE_SHAPES(), &i.clone()), &Py::Int(1)) }, -1, "")); py_string(__s) }); } } py_list(__out) })() };
+    parts = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[counts.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk622 = py_unpack(&__item.clone(), 2, None); let mut i: Py = __unpk622[0].clone(); let mut n: Py = __unpk622[1].clone(); if py_truthy(&n.clone()) {  __out.push({ let mut __s = String::new(); __s.push_str(&fstr(&geti(&g__CAKE_NUMBERS(), &n.clone()), -1, "")); __s.push_str(" "); __s.push_str(&fstr(&if py_truthy(&Py::Bool(py_eq(&n.clone(), &Py::Int(1)))) { geti(&geti(&g__CAKE_SHAPES(), &i.clone()), &Py::Int(0)) } else { geti(&geti(&g__CAKE_SHAPES(), &i.clone()), &Py::Int(1)) }, -1, "")); py_string(__s) }); } } py_list(__out) })() };
     if py_truthy(&Py::Bool(py_eq(&tins.clone(), &Py::Int(1)))) {
     shape = geti(&mcall(&geti(&parts.clone(), &Py::Int(0)), "split", &[py_str(" "), Py::Int(1)]), &Py::Int(1));
     if py_truthy(&Py::Bool(py_contains(&shape.clone(), &py_str("traybake")))) {
@@ -507,6 +507,7 @@ pub fn module_obj() -> Py {
             "_cake_tins" => Some(py_func("_cake_tins", |args: &[Py]| _cake_tins(args))),
             "cake_eggs" => Some(py_func("cake_eggs", |args: &[Py]| cake_eggs(args))),
             "cake_plan" => Some(py_func("cake_plan", |args: &[Py]| cake_plan(args))),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

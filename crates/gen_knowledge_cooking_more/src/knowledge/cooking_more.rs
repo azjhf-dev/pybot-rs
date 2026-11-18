@@ -163,7 +163,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT knowledge.cooking_more: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -731,7 +731,7 @@ fn module_body() {
     s_VEG_WORDS(call_builtin("frozenset", &[mcall(&py_str("vegetarian vegan veggie meatless"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
     s_MEAT_FREE_PHRASES(py_tuple(vec![py_str("no meat"), py_str("without meat"), py_str("not eat meat"), py_str("doesnt eat meat"), py_str("doesn't eat meat"), py_str("dont eat meat"), py_str("don't eat meat"), py_str("off meat"), py_str("no fish"), py_str("no chicken")]));
     s_DAIRY_FREE_PHRASES(py_tuple(vec![py_str("no dairy"), py_str("dairy free"), py_str("dairy-free"), py_str("without dairy"), py_str("milk free"), py_str("milk-free"), py_str("no milk products"), py_str("off dairy"), py_str("lactose free"), py_str("lactose-free")]));
-    s_DAIRY_FOODS(call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&pyrt::xrefs::xget("knowledge.cooking", "FOOD_CLASSES"), "items", &[])) { let __unpk8817 = py_unpack(&__item.clone(), 2, None); let mut name: Py = __unpk8817[0].clone(); let mut kinds: Py = __unpk8817[1].clone(); if py_truthy(&Py::Bool(py_contains(&kinds.clone(), &py_str("dairy")))) {  __out.push(name.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
+    s_DAIRY_FOODS(call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&pyrt::xrefs::xget("knowledge.cooking", "FOOD_CLASSES"), "items", &[])) { let __unpk9645 = py_unpack(&__item.clone(), 2, None); let mut name: Py = __unpk9645[0].clone(); let mut kinds: Py = __unpk9645[1].clone(); if py_truthy(&Py::Bool(py_contains(&kinds.clone(), &py_str("dairy")))) {  __out.push(name.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
     fn __data32() -> Py { py_tuple(vec![py_str("for dinner"), py_str("for tea"), py_str("for supper"), py_str("for lunch"), py_str("coming for"), py_str("coming over"), py_str("coming round"), py_str("coming to"), py_str("round for"), py_str("over for"), py_str("having people"), py_str("having friends"), py_str("having guests"), py_str("to cook for"), py_str("cooking for")]) }
     s_COMING_FOR(__data32());
     s_EVENT_WORDS(call_builtin("frozenset", &[mcall(&py_str("guests guest party parties buffet crowd birthday anniversary\ncelebrate celebration"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
@@ -1269,7 +1269,7 @@ pub fn wants(args: &[Py]) -> Py {
     let mut wished: Py = Py::None;
     let mut words: Py = Py::None;
     let _ = py_str("What this line says about the meal, read on top of the plan already in `old`.\n\n    Only the things a cook would keep: the food named and ruled out, the time there is, whether\n    it has to be meat-free, who is coming, and whether it has to be simple. Everything else in\n    the line belongs to the answer and not to the plan.\n    ");
-    context = { (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&{ let __b = old.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "items", &[])) { let __unpk6232 = py_unpack(&__item.clone(), 2, None); let mut key: Py = __unpk6232[0].clone(); let mut value: Py = __unpk6232[1].clone(); __out.push((key.clone(), if py_truthy(&call_builtin("isinstance", &[value.clone(), py_func("list", |args: &[Py]| call_builtin("list", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) { call_builtin("list", &[value.clone()]).unwrap_or_else(|e| exc::raise(e)) } else { value.clone() })); } py_dict(__out) })() };
+    context = { (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&{ let __b = old.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "items", &[])) { let __unpk1983 = py_unpack(&__item.clone(), 2, None); let mut key: Py = __unpk1983[0].clone(); let mut value: Py = __unpk1983[1].clone(); __out.push((key.clone(), if py_truthy(&call_builtin("isinstance", &[value.clone(), py_func("list", |args: &[Py]| call_builtin("list", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) { call_builtin("list", &[value.clone()]).unwrap_or_else(|e| exc::raise(e)) } else { value.clone() })); } py_dict(__out) })() };
     words = call_builtin("set", &[_said_words(&[understood.clone()])]).unwrap_or_else(|e| exc::raise(e));
     said_clean = _clean(&[understood.clone()]);
     named = call_builtin("list", &[pyrt::xrefs::xcall("knowledge.cooking", "ingredients", &[understood.clone()])]).unwrap_or_else(|e| exc::raise(e));
@@ -1711,7 +1711,7 @@ pub fn plan_reply(args: &[Py]) -> Py {
     if py_truthy(&mcall(&context.clone(), "get", &[py_str("only")])) {
     ideas = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(context.clone()); __kws.extend(vec![("limit".to_string(), call_builtin("bool", &[{ let __b = mcall(&context.clone(), "get", &[py_str("limit")]); if py_truthy(&__b) { __b } else { mcall(&context.clone(), "get", &[py_str("simple")]) } }]).unwrap_or_else(|e| exc::raise(e)))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _ideas(args))(&__args) };
     if py_truthy(&ideas.clone()) {
-    return mcall(&py_str(" "), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&slice_or_raise(&ideas.clone(), &Py::None, &Py::Int(2), &Py::None)) { let __unpk8310 = py_unpack(&__item.clone(), 2, None); let mut _u: Py = __unpk8310[0].clone(); let mut idea: Py = __unpk8310[1].clone(); __out.push(idea.clone()); } py_list(__out) })() }]);
+    return mcall(&py_str(" "), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&slice_or_raise(&ideas.clone(), &Py::None, &Py::Int(2), &Py::None)) { let __unpk2642 = py_unpack(&__item.clone(), 2, None); let mut _u: Py = __unpk2642[0].clone(); let mut idea: Py = __unpk2642[1].clone(); __out.push(idea.clone()); } py_list(__out) })() }]);
     }
     }
     offered = { let __b = mcall(&context.clone(), "get", &[py_str("offered")]); if py_truthy(&__b) { __b } else { py_tuple(vec![]) } };
@@ -1764,7 +1764,7 @@ pub fn plan_reply(args: &[Py]) -> Py {
     ideas = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(context.clone()); __kws.extend(vec![("limit".to_string(), Py::Bool(false))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _ideas(args))(&__args) };
     }
     if py_truthy(&ideas.clone()) {
-    return mcall(&py_str(" "), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&slice_or_raise(&ideas.clone(), &Py::None, &Py::Int(2), &Py::None)) { let __unpk3663 = py_unpack(&__item.clone(), 2, None); let mut _u: Py = __unpk3663[0].clone(); let mut idea: Py = __unpk3663[1].clone(); __out.push(idea.clone()); } py_list(__out) })() }]);
+    return mcall(&py_str(" "), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&slice_or_raise(&ideas.clone(), &Py::None, &Py::Int(2), &Py::None)) { let __unpk6563 = py_unpack(&__item.clone(), 2, None); let mut _u: Py = __unpk6563[0].clone(); let mut idea: Py = __unpk6563[1].clone(); __out.push(idea.clone()); } py_list(__out) })() }]);
     }
     return Py::None;
     Py::None
@@ -2486,7 +2486,7 @@ pub fn follow_up(args: &[Py]) -> Py {
     return Py::None;
     }
     if py_truthy(&Py::Bool(py_eq(&mcall(&reply.clone(), "strip", &[]), &mcall(&call_builtin("str", &[{ let __b = _last_reply(&[memory.clone()]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "strip", &[])))) {
-    others = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(answering.clone()); __kws.extend(vec![("limit".to_string(), Py::Bool(false))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _ideas(args))(&__args) }) { let __unpk4288 = py_unpack(&__item.clone(), 2, None); let mut _u: Py = __unpk4288[0].clone(); let mut idea: Py = __unpk4288[1].clone(); if py_truthy(&Py::Bool(!py_eq(&idea.clone(), &reply.clone()))) {  __out.push(idea.clone()); } } py_list(__out) })() };
+    others = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(answering.clone()); __kws.extend(vec![("limit".to_string(), Py::Bool(false))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _ideas(args))(&__args) }) { let __unpk3218 = py_unpack(&__item.clone(), 2, None); let mut _u: Py = __unpk3218[0].clone(); let mut idea: Py = __unpk3218[1].clone(); if py_truthy(&Py::Bool(!py_eq(&idea.clone(), &reply.clone()))) {  __out.push(idea.clone()); } } py_list(__out) })() };
     if py_truthy(&others.clone()) {
     reply = mcall(&py_str(" "), "join", &[slice_or_raise(&others.clone(), &Py::None, &Py::Int(2), &Py::None)]);
     }
@@ -3009,6 +3009,7 @@ pub fn module_obj() -> Py {
             "side_for" => Some(g_side_for()),
             "wants" => Some(py_func("wants", |args: &[Py]| wants(args))),
             "without" => Some(g_without()),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

@@ -919,7 +919,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT modules.chat: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -4014,7 +4014,7 @@ fn module_body() {
     s_BOT_ABOUT(py_tuple(vec![py_tuple(vec![stdlib_call("re", "compile", &[py_str("^(?:so |ok |okay |oh |yeah |and |but |well )*(?:(?:how|what|and) (?:about|bout) (?:you|yourself|yours)|and (?:you|yourself|yours))(?: then| though| now)*[ ?!.,;]*$|^(?:so |ok |okay |oh |yeah )*(?:you|yourself)[ ?!.,;]*\\?+$")]).unwrap_or_else(|e| exc::raise(e)), py_tuple(vec![py_str("Fine and busy, the two usual things. How's your day been?"), py_str("All good here. What's keeping you busy?"), py_str("Same as ever - helping, chatting. What about you?")])]), py_tuple(vec![stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&py_str("^(?:so |ok |okay |oh |yeah |and |but |well )*(?:(?:how|what) (?:about|bout) (?:your|ur) "), &g__BOT_DAY()), &py_str("(?: been| going| gone)?|and (?:your|ur) ")), &g__BOT_DAY()), &py_str("(?: been| going| gone)?|(?:was|were|is|are|did) (?:your|ur) ")), &g__BOT_DAY()), &py_str("(?: been| going| gone| good| ok| okay| fine| busy| alright| nice| long)?)(?: then| though| now)*[ ?!.,;]*$"))]).unwrap_or_else(|e| exc::raise(e)), py_tuple(vec![py_str("Mine's been fine - busy in patches. How's yours going?"), py_str("Quiet and busy, the usual mix. How about yours?")])]), py_tuple(vec![stdlib_call("re", "compile", &[py_str("\\b(?:do you have (?:any )?plans|what are you up to|are you busy|what are you doing|(?:have|has|were|was) you been busy|were you busy)(?: today| tonight| now| this weekend| at the moment)?\\b")]).unwrap_or_else(|e| exc::raise(e)), py_tuple(vec![py_str("Nothing planned — I'm here when you need me. What about you?"), py_str("No plans. I'm around if you want to talk something through.")])]), py_tuple(vec![stdlib_call("re", "compile", &[py_str("\\b(?:do you sleep|do you ever sleep|do you need sleep|do you eat|do you dream)\\b")]).unwrap_or_else(|e| exc::raise(e)), py_tuple(vec![py_str("None of that, no — I'm a program. I'm here to help with yours, though."), py_str("Not really — I'm a program, so no sleep, no dinner and no weekend. Just this.")])])]));
     fn __data33() -> Py { py_tuple(vec![py_str("about"), py_str("been"), py_str("before"), py_str("done"), py_str("for"), py_str("have"), py_str("like"), py_str("more"), py_str("much"), py_str("not"), py_str("out"), py_str("over"), py_str("than"), py_str("the"), py_str("there"), py_str("too"), py_str("under"), py_str("what")]) }
     s_BOT_NOT_A_FEELING(call_builtin("frozenset", &[__data33()]).unwrap_or_else(|e| exc::raise(e)));
-    s_BOT_FEELING_WORDS(op_sub(&op_bitor(&call_builtin("frozenset", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_FEELINGS()) { let __unpk5856 = py_unpack(&__item.clone(), 2, None); let mut _name: Py = __unpk5856[0].clone(); let mut words: Py = __unpk5856[1].clone(); for __item in py_iter_or_raise(&words.clone()) { let mut phrase: Py = __item.clone(); for __item in py_iter_or_raise(&mcall(&phrase.clone(), "split", &[])) { let mut word: Py = __item.clone(); if py_truthy(&{ let __b = mcall(&word.clone(), "isalpha", &[]); if !py_truthy(&__b) { __b } else { op_gt(&call_builtin("len", &[word.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)) } }) {  __out.push(word.clone()); } } } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)), &{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("understanding.lexicon", "FEELINGS")) { let mut word: Py = __item.clone(); if py_truthy(&{ let __b = mcall(&word.clone(), "isalpha", &[]); if !py_truthy(&__b) { __b } else { op_gt(&call_builtin("len", &[word.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)) } }) {  __out.push(word.clone()); } } py_set(__out) })() }), &g_BOT_NOT_A_FEELING()));
+    s_BOT_FEELING_WORDS(op_sub(&op_bitor(&call_builtin("frozenset", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_FEELINGS()) { let __unpk9761 = py_unpack(&__item.clone(), 2, None); let mut _name: Py = __unpk9761[0].clone(); let mut words: Py = __unpk9761[1].clone(); for __item in py_iter_or_raise(&words.clone()) { let mut phrase: Py = __item.clone(); for __item in py_iter_or_raise(&mcall(&phrase.clone(), "split", &[])) { let mut word: Py = __item.clone(); if py_truthy(&{ let __b = mcall(&word.clone(), "isalpha", &[]); if !py_truthy(&__b) { __b } else { op_gt(&call_builtin("len", &[word.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)) } }) {  __out.push(word.clone()); } } } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)), &{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("understanding.lexicon", "FEELINGS")) { let mut word: Py = __item.clone(); if py_truthy(&{ let __b = mcall(&word.clone(), "isalpha", &[]); if !py_truthy(&__b) { __b } else { op_gt(&call_builtin("len", &[word.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)) } }) {  __out.push(word.clone()); } } py_set(__out) })() }), &g_BOT_NOT_A_FEELING()));
     s_BOT_FREQUENCY(py_str("(?:ever |really |sometimes |honestly |actually |often |always |usually |normally |constantly |generally |every day |all the time )*"));
     s_BOT_HOW_MUCH_OR_WHEN(py_str("(?: a lot| so much| much| at all| before| previously| in the past| in the past few days| lately| recently| these days| at the moment| right now| still| any ?more| about (?:things|stuff|everything|the future|nothing in particular))?"));
     s_BOT_FEELING_ASK(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&py_str("\\b(?:(?:do|can|did|have) (?:you|u|ya) "), &g_BOT_FREQUENCY()), &py_str("(?:get|feel|be|become|been) |(?:do|did) (?:you|u|ya) ")), &g_BOT_FREQUENCY()), &py_str("(?=(?:worry|panic|fret|stress|obsess|brood|sulk|mope)\\b)|(?:are|were) (?:you|u|ya) ")), &g_BOT_FREQUENCY()), &py_str(")(?:really |very |so |quite |too |that |this |a bit )*(?P<mood>")), &mcall(&py_str("|"), "join", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(g_BOT_FEELING_WORDS()); __kws.extend(vec![("key".to_string(), py_func("len", |args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e)))), ("reverse".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sorted", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }])), &py_str(")\\b")), &g_BOT_HOW_MUCH_OR_WHEN())]).unwrap_or_else(|e| exc::raise(e)));
@@ -6897,7 +6897,7 @@ pub fn _a_care_turn(args: &[Py]) -> Py {
     let mut pattern: Py = Py::None;
     let _ = py_str("True when the turn before this one was care, so a glad line is the wrong timing in it.\n\n    \"my mum is in hospital\" / \"cant wait\" is not a person looking forward to something: the\n    answer before it was the ward and the questions to ask, and cheering over that is the bot\n    reading the wrong thread. The hospital is said in the person's own line, and the loss modules\n    say it in their own name, so both are checked.\n    ");
     last = pyrt::xrefs::xcall("memory", "last_user", &[memory.clone()]);
-    if py_truthy(&{ let __b = last.clone(); if !py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("memory", "PERSON_TROUBLE")) { let __unpk8386 = py_unpack(&__item.clone(), 2, None); let mut _u: Py = __unpk8386[0].clone(); let mut pattern: Py = __unpk8386[1].clone(); __out.push(mcall(&pattern.clone(), "search", &[mcall(&last.clone(), "lower", &[])])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }) {
+    if py_truthy(&{ let __b = last.clone(); if !py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("memory", "PERSON_TROUBLE")) { let __unpk6582 = py_unpack(&__item.clone(), 2, None); let mut _u: Py = __unpk6582[0].clone(); let mut pattern: Py = __unpk6582[1].clone(); __out.push(mcall(&pattern.clone(), "search", &[mcall(&last.clone(), "lower", &[])])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }) {
     return Py::Bool(true);
     }
     return pyrt::xrefs::xcall("compose.fallback", "_in_a_care_thread", &[memory.clone()]);
@@ -11588,7 +11588,7 @@ pub fn _names_a_kind_of_thing(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(py_contains(&articles.clone(), &geti(&words.clone(), &op_neg(&Py::Int(1)))))) {
     return Py::Bool(true);
     }
-    articles_at = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk6530 = py_unpack(&__item.clone(), 2, None); let mut index: Py = __unpk6530[0].clone(); let mut word: Py = __unpk6530[1].clone(); if py_truthy(&Py::Bool(py_contains(&articles.clone(), &word.clone()))) {  __out.push(index.clone()); } } py_list(__out) })() };
+    articles_at = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk8930 = py_unpack(&__item.clone(), 2, None); let mut index: Py = __unpk8930[0].clone(); let mut word: Py = __unpk8930[1].clone(); if py_truthy(&Py::Bool(py_contains(&articles.clone(), &word.clone()))) {  __out.push(index.clone()); } } py_list(__out) })() };
     if py_truthy(&Py::Bool(!py_truthy(&articles_at.clone()))) {
     return Py::Bool(false);
     }
@@ -13809,7 +13809,7 @@ pub fn _without_a_filler_tail(args: &[Py]) -> Py {
     let __iter2 = py_iter_or_raise(&g_FILLER_TAIL_PHRASES());
     for __item in __iter2 {
     phrase = __item.clone();
-    if py_truthy(&{ let __b = op_gt(&call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("len", &[phrase.clone()]).unwrap_or_else(|e| exc::raise(e))); if !py_truthy(&__b) { __b } else { call_builtin("all", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[slice_or_raise(&words.clone(), &op_neg(&call_builtin("len", &[phrase.clone()]).unwrap_or_else(|e| exc::raise(e))), &Py::None, &Py::None), phrase.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk2570 = py_unpack(&__item.clone(), 2, None); let mut word: Py = __unpk2570[0].clone(); let mut want: Py = __unpk2570[1].clone(); __out.push(Py::Bool(py_eq(&mcall(&mcall(&word.clone(), "lower", &[]), "strip", &[py_str(".!?")]), &want.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }) {
+    if py_truthy(&{ let __b = op_gt(&call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("len", &[phrase.clone()]).unwrap_or_else(|e| exc::raise(e))); if !py_truthy(&__b) { __b } else { call_builtin("all", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[slice_or_raise(&words.clone(), &op_neg(&call_builtin("len", &[phrase.clone()]).unwrap_or_else(|e| exc::raise(e))), &Py::None, &Py::None), phrase.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk926 = py_unpack(&__item.clone(), 2, None); let mut word: Py = __unpk926[0].clone(); let mut want: Py = __unpk926[1].clone(); __out.push(Py::Bool(py_eq(&mcall(&mcall(&word.clone(), "lower", &[]), "strip", &[py_str(".!?")]), &want.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }) {
     words = slice_or_raise(&words.clone(), &Py::None, &op_neg(&call_builtin("len", &[phrase.clone()]).unwrap_or_else(|e| exc::raise(e))), &Py::None);
     changed = Py::Bool(true);
     break;
@@ -18374,6 +18374,59 @@ pub fn module_obj() -> Py {
             "verdicts_a_thing" => Some(g_verdicts_a_thing()),
             "with_the_feeling_named" => Some(g_with_the_feeling_named()),
             "you" => Some(g_you()),
+            "badnews" => Some(pyrt::xrefs::xmodule("compose.badnews")),
+            "circumstance" => Some(pyrt::xrefs::xmodule("compose.circumstance")),
+            "fallback" => Some(pyrt::xrefs::xmodule("compose.fallback")),
+            "leaving_reading" => Some(pyrt::xrefs::xmodule("compose.leaving")),
+            "limit_line" => Some(pyrt::xrefs::xmodule("compose.limit")),
+            "hope" => Some(pyrt::xrefs::xmodule("memory.hope")),
+            "matters" => Some(pyrt::xrefs::xmodule("memory.matters")),
+            "obstacle" => Some(pyrt::xrefs::xmodule("memory.obstacle")),
+            "plan_steps" => Some(pyrt::xrefs::xmodule("memory.plan")),
+            "another_size" => Some(pyrt::xrefs::xmodule("memory.size")),
+            "breeds" => Some(pyrt::xrefs::xmodule("understanding.breeds")),
+            "topics" => Some(pyrt::xrefs::xmodule("understanding.topics")),
+            "loss_reading" => Some(pyrt::xrefs::xmodule("compose.loss")),
+            "onscreen" => Some(pyrt::xrefs::xmodule("compose.onscreen")),
+            "unseen_reading" => Some(pyrt::xrefs::xmodule("compose.unseen")),
+            "harm_reading" => Some(pyrt::xrefs::xmodule("compose.harm")),
+            "saidby_reading" => Some(pyrt::xrefs::xmodule("compose.saidby")),
+            "answer_reaction" => Some(pyrt::xrefs::xmodule("compose.reaction")),
+            "repair" => Some(pyrt::xrefs::xmodule("compose.repair")),
+            "said_about_me" => Some(pyrt::xrefs::xmodule("compose.said_about_me")),
+            "reading_reply" => Some(pyrt::xrefs::xmodule("compose.reading")),
+            "urgent_reading" => Some(pyrt::xrefs::xmodule("compose.urgent")),
+            "stepwords" => Some(pyrt::xrefs::xmodule("compose.stepwords")),
+            "verdict_reply" => Some(pyrt::xrefs::xmodule("compose.verdict")),
+            "doubt_reply" => Some(pyrt::xrefs::xmodule("compose.doubt")),
+            "occasionplan" => Some(pyrt::xrefs::xmodule("compose.occasionplan")),
+            "ack" => Some(pyrt::xrefs::xmodule("memory.ack")),
+            "remedy" => Some(pyrt::xrefs::xmodule("memory.remedy")),
+            "stuck_line" => Some(pyrt::xrefs::xmodule("memory.stuck")),
+            "thread" => Some(pyrt::xrefs::xmodule("memory.thread")),
+            "_same_again" => Some(pyrt::xrefs::xmodule("memory.again")),
+            "step_after" => Some(pyrt::xrefs::xmodule("memory.carried_on")),
+            "passing_the_time" => Some(pyrt::xrefs::xmodule("memory.passing_the_time")),
+            "the_years" => Some(pyrt::xrefs::xmodule("memory.the_years")),
+            "talked_to" => Some(pyrt::xrefs::xmodule("memory.warmth")),
+            "limits" => Some(pyrt::xrefs::xmodule("memory.limits")),
+            "portions" => Some(pyrt::xrefs::xmodule("memory.portions")),
+            "facts" => Some(pyrt::xrefs::xmodule("memory.facts")),
+            "hours_after" => Some(pyrt::xrefs::xmodule("memory.hours")),
+            "limit" => Some(pyrt::xrefs::xmodule("memory.limit")),
+            "meant" => Some(pyrt::xrefs::xmodule("memory.meant")),
+            "pile" => Some(pyrt::xrefs::xmodule("memory.pile")),
+            "repeat" => Some(pyrt::xrefs::xmodule("memory.repeat")),
+            "tried" => Some(pyrt::xrefs::xmodule("memory.tried")),
+            "more" => Some(pyrt::xrefs::xmodule("memory.more")),
+            "returned" => Some(pyrt::xrefs::xmodule("memory.returned")),
+            "topic_memory" => Some(pyrt::xrefs::xmodule("memory.topics")),
+            "lookup" => Some(pyrt::xrefs::xmodule("knowledge.lookup")),
+            "travel_kb" => Some(pyrt::xrefs::xmodule("knowledge.travel")),
+            "lexicon" => Some(pyrt::xrefs::xmodule("understanding.lexicon")),
+            "_never_twice" => Some(pyrt::xrefs::xmodule("memory.again")),
+            "copy" => Some(stdlib_module("copy")),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

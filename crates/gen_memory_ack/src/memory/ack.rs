@@ -434,7 +434,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT memory.ack: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -3016,7 +3016,7 @@ pub fn _only_a_liking(args: &[Py]) -> Py {
     let mut rest: Py = Py::None;
     let mut value: Py = Py::None;
     let _ = py_str("Whether the line filed a like and nothing else worth an answer of its own.\n\n    The same guard as `_just_a_liking`, but a pet said in the like (\"i love my dog\") is not a\n    second thing to answer: the store files the animal and then answers \"Noted: you love your\n    dog.\" A name, a job or a limit in the same line is a fact of its own and keeps its own ending.\n    ");
-    rest = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&{ let __b = found.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "items", &[])) { let __unpk9562 = py_unpack(&__item.clone(), 2, None); let mut key: Py = __unpk9562[0].clone(); let mut value: Py = __unpk9562[1].clone(); if py_truthy(&{ let __b = value.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_contains(&py_tuple(vec![py_str("tastes"), py_str("pets")]), &key.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&key.clone(), "endswith", &[py_str("_frame")]))) } } } }) {  __out.push(key.clone()); } } py_set(__out) })() };
+    rest = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&{ let __b = found.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "items", &[])) { let __unpk796 = py_unpack(&__item.clone(), 2, None); let mut key: Py = __unpk796[0].clone(); let mut value: Py = __unpk796[1].clone(); if py_truthy(&{ let __b = value.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_contains(&py_tuple(vec![py_str("tastes"), py_str("pets")]), &key.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&key.clone(), "endswith", &[py_str("_frame")]))) } } } }) {  __out.push(key.clone()); } } py_set(__out) })() };
     return { let __b = call_builtin("bool", &[mcall(&{ let __b = found.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[py_str("tastes")])]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&rest.clone())) } };
     Py::None
 }
@@ -5884,7 +5884,7 @@ pub fn _the_pets_said(args: &[Py]) -> Py {
     said = __aug13;
     }
     }
-    many = op_gt(&call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&groups.clone()) { let __unpk3310 = py_unpack(&__item.clone(), 2, None); let mut _u: Py = __unpk3310[0].clone(); let mut count: Py = __unpk3310[1].clone(); __out.push(count.clone()); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1));
+    many = op_gt(&call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&groups.clone()) { let __unpk2107 = py_unpack(&__item.clone(), 2, None); let mut _u: Py = __unpk2107[0].clone(); let mut count: Py = __unpk2107[1].clone(); __out.push(count.clone()); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1));
     return py_tuple(vec![said.clone(), many.clone()]);
     Py::None
 }
@@ -7114,7 +7114,7 @@ pub fn _a_workplace(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = heavy.clone(); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&call_builtin("isinstance", &[found.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e)))); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&found.clone(), "get", &[py_str("job")]))) } } } }) {
     return Py::Bool(false);
     }
-    rest = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&found.clone(), "items", &[])) { let __unpk9094 = py_unpack(&__item.clone(), 2, None); let mut key: Py = __unpk9094[0].clone(); let mut value: Py = __unpk9094[1].clone(); if py_truthy(&{ let __b = value.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_eq(&key.clone(), &py_str("job"))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&key.clone(), "endswith", &[py_str("_frame")]))) } } } }) {  __out.push(key.clone()); } } py_list(__out) })() };
+    rest = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&found.clone(), "items", &[])) { let __unpk687 = py_unpack(&__item.clone(), 2, None); let mut key: Py = __unpk687[0].clone(); let mut value: Py = __unpk687[1].clone(); if py_truthy(&{ let __b = value.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_eq(&key.clone(), &py_str("job"))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&key.clone(), "endswith", &[py_str("_frame")]))) } } } }) {  __out.push(key.clone()); } } py_list(__out) })() };
     if py_truthy(&rest.clone()) {
     return Py::Bool(false);
     }
@@ -7161,7 +7161,7 @@ pub fn _just_a_liking(args: &[Py]) -> Py {
     let mut rest: Py = Py::None;
     let mut value: Py = Py::None;
     let _ = py_str("Whether the only thing this line filed is a taste, which is not something that lands.\n\n    \"i love pasta\" two turns after a death was answered \"You love pasta — I'm sorry it's all coming\n    at once\", which reads as a mistake: a liking is not one more thing on a person's plate, and it\n    is not what the room of a hard week changes. Anything else in the line (an age, a pet, a job)\n    can be that, and keeps the heavy ending.\n    ");
-    rest = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&{ let __b = found.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "items", &[])) { let __unpk4423 = py_unpack(&__item.clone(), 2, None); let mut key: Py = __unpk4423[0].clone(); let mut value: Py = __unpk4423[1].clone(); if py_truthy(&{ let __b = value.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_eq(&key.clone(), &py_str("tastes"))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&key.clone(), "endswith", &[py_str("_frame")]))) } } } }) {  __out.push(key.clone()); } } py_set(__out) })() };
+    rest = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&{ let __b = found.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "items", &[])) { let __unpk6015 = py_unpack(&__item.clone(), 2, None); let mut key: Py = __unpk6015[0].clone(); let mut value: Py = __unpk6015[1].clone(); if py_truthy(&{ let __b = value.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_eq(&key.clone(), &py_str("tastes"))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&key.clone(), "endswith", &[py_str("_frame")]))) } } } }) {  __out.push(key.clone()); } } py_set(__out) })() };
     return { let __b = call_builtin("bool", &[mcall(&{ let __b = found.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[py_str("tastes")])]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&rest.clone())) } };
     Py::None
 }
@@ -7271,7 +7271,7 @@ pub fn _learned(args: &[Py]) -> Py {
     let mut value: Py = Py::None;
     let _ = py_str("The facts in the line for the store to keep, or an empty dict when there are none.\n\n    The chat-speak is folded first: the store's patterns want \"i am\", and people type \"im\", so\n    \"thanks, also im vegetarian\" is a diet like any other. A detail added to what we are already\n    on counts too: \"i work from home\" and \"i can put away about 200 a month\" store no fact of\n    their own, but they are theirs and worth answering with the thing itself rather than a stock\n    line. Those come back as {\"detail\": True}, so the caller has something to say back while the\n    store keeps its usual keys.");
     found = { let __b = pyrt::xrefs::xcall("memory.facts", "extract", &[_spoken(&[text.clone()])]); if py_truthy(&__b) { __b } else { pyrt::xrefs::xcall("memory.facts", "extract", &[text.clone()]) } };
-    kept = { (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&found.clone(), "items", &[])) { let __unpk1246 = py_unpack(&__item.clone(), 2, None); let mut key: Py = __unpk1246[0].clone(); let mut value: Py = __unpk1246[1].clone(); if py_truthy(&{ let __b = Py::Bool(py_contains(&g_FACTS(), &key.clone())); if !py_truthy(&__b) { __b } else { value.clone() } }) {  __out.push((key.clone(), value.clone())); } } py_dict(__out) })() };
+    kept = { (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&found.clone(), "items", &[])) { let __unpk7896 = py_unpack(&__item.clone(), 2, None); let mut key: Py = __unpk7896[0].clone(); let mut value: Py = __unpk7896[1].clone(); if py_truthy(&{ let __b = Py::Bool(py_contains(&g_FACTS(), &key.clone())); if !py_truthy(&__b) { __b } else { value.clone() } }) {  __out.push((key.clone(), value.clone())); } } py_dict(__out) })() };
     if py_truthy(&kept.clone()) {
     return kept.clone();
     }
@@ -9323,6 +9323,18 @@ pub fn module_obj() -> Py {
             "without_filler" => Some(g_without_filler()),
             "without_the_frame" => Some(py_func("without_the_frame", |args: &[Py]| without_the_frame(args))),
             "worry_on_the_table" => Some(g_worry_on_the_table()),
+            "loss" => Some(pyrt::xrefs::xmodule("compose.loss")),
+            "trouble" => Some(pyrt::xrefs::xmodule("compose.trouble")),
+            "opening" => Some(pyrt::xrefs::xmodule("memory.opening")),
+            "facts" => Some(pyrt::xrefs::xmodule("memory.facts")),
+            "hours_after" => Some(pyrt::xrefs::xmodule("memory.hours")),
+            "named" => Some(pyrt::xrefs::xmodule("memory.named")),
+            "narrow" => Some(pyrt::xrefs::xmodule("memory.narrow")),
+            "not_a_trip" => Some(pyrt::xrefs::xmodule("memory.not_a_trip")),
+            "taste" => Some(pyrt::xrefs::xmodule("memory.taste")),
+            "topics" => Some(pyrt::xrefs::xmodule("memory.topics")),
+            "stuck_line" => Some(pyrt::xrefs::xmodule("memory.stuck")),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

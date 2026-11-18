@@ -50,7 +50,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT memory.taste: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -183,7 +183,7 @@ fn module_body() {
     s_ASKS_FOR_TASTES(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&g__ASK_START(), &py_str("(?:(?:what|which)\\b[^?.!]*?\\bdo\\s+(?:i|we)\\s+")), &g__ASK_ADVERB()), &py_str("(?:like|love|enjoy|eat|drink)\\b|(?:what|which)\\s+(?:are|were)\\s+my\\s+(?:favou?rite|best)\\s+\\w+|do\\s+you\\s+(?:know|remember)\\s+what\\s+(?:i|we)\\s+(?:like|love)\\b|what\\s+do\\s+you\\s+know\\s+(?:that\\s+)?i\\s+(?:like|love)\\b)")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     s__OTHER_OWNER(stdlib_call("re", "compile", &[py_str("^(?:(?:my|our)\\s+(?P<who>[a-z][a-z'\\u2019-]{1,20})|(?P<pronoun>she|he|they))(?:'?s|'?re)?\\s+(?P<rest>.*)$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     s__OTHER_SAYS(py_tuple(vec![py_tuple(vec![py_str("(?:isn'?t|is\\s+not|wasn'?t|was\\s+not)\\s+(?:that\\s+|really\\s+|very\\s+|all\\s+that\\s+)?(?:into|keen\\s+on|a\\s+fan\\s+of|mad\\s+about|fussed\\s+on|big\\s+on)"), py_str("don't like")]), py_tuple(vec![py_str("(?:doesn'?t|does\\s+not|doesnt|won'?t|will\\s+not|never|can'?t|cannot|can\\s+not)\\s+(?:really\\s+|actually\\s+|ever\\s+)?(?:like|love|eat|drink|stand|touch|want|have|be\\s+keen\\s+on)"), py_str("don't like")]), py_tuple(vec![py_str("(?:hates?|loathes?|detests?|dislikes?|can'?t\\s+stand|cannot\\s+stand)"), py_str("hate")]), py_tuple(vec![py_str("is\\s+(?:really\\s+|absolutely\\s+|just\\s+|very\\s+)?(?:into|keen\\s+on|mad\\s+about|a\\s+fan\\s+of|big\\s+on|fussed\\s+on|fond\\s+of)"), py_str("like")]), py_tuple(vec![py_str("(?:loves?|likes?|adores?|prefers?|enjoys?)"), py_str("love")])]));
-    s__OTHER_VERB(mcall(&py_str("|"), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g__OTHER_SAYS()) { let __unpk5933 = py_unpack(&__item.clone(), 2, None); let mut pattern: Py = __unpk5933[0].clone(); let mut _u: Py = __unpk5933[1].clone(); __out.push(op_modulo(&py_str("(?:%s)"), &pattern.clone())); } py_list(__out) })() }]));
+    s__OTHER_VERB(mcall(&py_str("|"), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g__OTHER_SAYS()) { let __unpk772 = py_unpack(&__item.clone(), 2, None); let mut pattern: Py = __unpk772[0].clone(); let mut _u: Py = __unpk772[1].clone(); __out.push(op_modulo(&py_str("(?:%s)"), &pattern.clone())); } py_list(__out) })() }]));
     s__OTHER_CLAUSE(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("\\s*;\\s*|\\s*,\\s*|\\s+(?:but|and|so|though|whereas|while)\\s+(?=(?:[a-z][a-z'\\u2019-]{1,20}\\s+)?(?:"), &g__OTHER_VERB()), &py_str(")\\b)")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     s__A_CLAUSE_AFTER(stdlib_call("re", "compile", &[py_str("^\\s*[,;:]?\\s*(?:so|but|and|because|cos|cause|though|although|whereas|yet|if|then|when|while|as)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     s__ASKS_SOMETHING(stdlib_call("re", "compile", &[py_str("\\b(?:what|how|why|when|where|which|who|whose|whats|what's|should|shall|could|would|any ideas|any tips|recommend)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
@@ -258,7 +258,7 @@ pub fn _clean(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&kept.clone()))) {
     return Py::None;
     }
-    words = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&kept.clone()) { let __unpk5697 = py_unpack(&__item.clone(), 2, None); let mut _u: Py = __unpk5697[0].clone(); let mut word: Py = __unpk5697[1].clone(); __out.push(word.clone()); } py_list(__out) })() };
+    words = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&kept.clone()) { let __unpk7420 = py_unpack(&__item.clone(), 2, None); let mut _u: Py = __unpk7420[0].clone(); let mut word: Py = __unpk7420[1].clone(); __out.push(word.clone()); } py_list(__out) })() };
     if py_truthy(&Py::Bool(py_contains(&py_tuple(vec![py_str("my"), py_str("our")]), &mcall(&geti(&words.clone(), &Py::Int(0)), "lower", &[])))) {
     let _ = py_setitem(&words.clone(), &Py::Int(0), py_str("your"));
     }
@@ -670,6 +670,7 @@ pub fn module_obj() -> Py {
             "read_all" => Some(py_func("read_all", |args: &[Py]| read_all(args))),
             "read_other" => Some(py_func("read_other", |args: &[Py]| read_other(args))),
             "said_about" => Some(py_func("said_about", |args: &[Py]| said_about(args))),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

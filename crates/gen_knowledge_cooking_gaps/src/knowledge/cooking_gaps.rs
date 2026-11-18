@@ -93,7 +93,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT knowledge.cooking_gaps: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -577,7 +577,7 @@ fn module_body() {
     s__ALLOWED_ASKS(py_tuple(vec![py_str("is it ok"), py_str("is it okay"), py_str("is it alright"), py_str("allowed"), py_str("ok for"), py_str("okay for"), py_str("bad for"), py_str("good for"), py_str("fine for"), py_str("suitable for")]));
     s__EATING_VERBS(py_tuple(vec![py_str(" eat "), py_str(" have "), py_str(" drink ")]));
     let _ = mcall(&g_ENTRIES(), "append", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("a-bake-for-a-diabetic")); __args.push(py_tuple(vec![g_DIABETES_WORDS(), g_SWEET_ASK()])); __args.push(g_DIABETIC_BAKE()); __kws.extend(vec![("bias".to_string(), Py::Int(2)), ("guard".to_string(), py_func("_a_bake_is_the_ask", |args: &[Py]| _a_bake_is_the_ask(args)))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }]);
-    s_MEAL_SITUATION_WORDS(call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_MEAL_SITUATIONS()) { let __unpk8034 = py_unpack(&__item.clone(), 2, None); let mut words: Py = __unpk8034[0].clone(); let mut _reply: Py = __unpk8034[1].clone(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); __out.push(word.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
+    s_MEAL_SITUATION_WORDS(call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_MEAL_SITUATIONS()) { let __unpk9573 = py_unpack(&__item.clone(), 2, None); let mut words: Py = __unpk9573[0].clone(); let mut _reply: Py = __unpk9573[1].clone(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); __out.push(word.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
     s_MEAL_ASK_WORDS(call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_MEAL_ASK()) { let mut phrase: Py = __item.clone(); __out.push(mcall(&py_str(" "), "join", &[mcall(&phrase.clone(), "split", &[])])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
     fn __data128() -> Py { py_tuple(vec![py_str("gone off"), py_str("is it safe"), py_str("still ok"), py_str("eat the"), py_str("freezer broke"), py_str("nothing to eat"), py_str("should i eat"), py_str("how long does"), py_str("thaw"), py_str("defrost"), py_str("allergic"), py_str("allergy"), py_str("intolerant"), py_str("poisoning"), py_str("recipe for"), py_str("how do i make a")]) }
     let _ = mcall(&g_ENTRIES(), "append", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("meal-for-the-situation")); __args.push(py_tuple(vec![g_MEAL_SITUATION_WORDS(), g_MEAL_ASK()])); __args.push(py_func("_meal_for_the_situation", |args: &[Py]| _meal_for_the_situation(args))); __kws.extend(vec![("avoid".to_string(), __data128()), ("bias".to_string(), Py::Int(3))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }]);
@@ -1305,6 +1305,7 @@ pub fn module_obj() -> Py {
             "entry_starter_smell" => Some(g_entry_starter_smell()),
             "not_ruled_out" => Some(g_not_ruled_out()),
             "the_table_of_people" => Some(py_func("the_table_of_people", |args: &[Py]| the_table_of_people(args))),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

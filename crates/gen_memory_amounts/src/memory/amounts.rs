@@ -24,7 +24,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT memory.amounts: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -250,7 +250,7 @@ pub fn _the_figure_named(args: &[Py]) -> Py {
     }
     ranges = call_builtin("list", &[stdlib_call("re", "finditer", &[op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&py_str("("), &g__COUNT()), &py_str(")\\s*(?:to|-|\\u2013|and|or)\\s*(")), &g__COUNT()), &py_str(")\\s*(?:-\\s*)?(?:")), &pattern.clone()), &py_str(")\\b")), answer.clone(), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e));
     spans = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&ranges.clone()) { let mut match_: Py = __item.clone(); __out.push(mcall(&match_.clone(), "span", &[])); } py_list(__out) })() };
-    singles = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&stdlib_call("re", "finditer", &[op_add(&op_add(&op_add(&op_add(&py_str("("), &g__COUNT()), &py_str(")\\s*(?:-\\s*)?(?:")), &pattern.clone()), &py_str(")\\b")), answer.clone(), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e))) { let mut match_: Py = __item.clone(); if py_truthy(&Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&spans.clone()) { let __unpk4663 = py_unpack(&__item.clone(), 2, None); let mut start: Py = __unpk4663[0].clone(); let mut end: Py = __unpk4663[1].clone(); __out.push({ let __b = op_le(&start.clone(), &mcall(&match_.clone(), "start", &[])); if !py_truthy(&__b) { __b } else { op_le(&mcall(&match_.clone(), "end", &[]), &end.clone()) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))))) {  __out.push(match_.clone()); } } py_list(__out) })() };
+    singles = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&stdlib_call("re", "finditer", &[op_add(&op_add(&op_add(&op_add(&py_str("("), &g__COUNT()), &py_str(")\\s*(?:-\\s*)?(?:")), &pattern.clone()), &py_str(")\\b")), answer.clone(), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e))) { let mut match_: Py = __item.clone(); if py_truthy(&Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&spans.clone()) { let __unpk7397 = py_unpack(&__item.clone(), 2, None); let mut start: Py = __unpk7397[0].clone(); let mut end: Py = __unpk7397[1].clone(); __out.push({ let __b = op_le(&start.clone(), &mcall(&match_.clone(), "start", &[])); if !py_truthy(&__b) { __b } else { op_le(&mcall(&match_.clone(), "end", &[]), &end.clone()) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))))) {  __out.push(match_.clone()); } } py_list(__out) })() };
     figures = py_list(vec![]);
     let __iter1 = py_iter_or_raise(&ranges.clone());
     for __item in __iter1 {
@@ -479,6 +479,7 @@ pub fn module_obj() -> Py {
             "a_count_they_report" => Some(py_func("a_count_they_report", |args: &[Py]| a_count_they_report(args))),
             "against_the_last_answer" => Some(py_func("against_the_last_answer", |args: &[Py]| against_the_last_answer(args))),
             "the_comparison" => Some(py_func("the_comparison", |args: &[Py]| the_comparison(args))),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

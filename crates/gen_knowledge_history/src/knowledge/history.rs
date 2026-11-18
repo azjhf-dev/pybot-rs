@@ -49,7 +49,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT knowledge.history: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -707,6 +707,7 @@ pub fn module_obj() -> Py {
             "names_a_row_or_a_question_after_one" => Some(py_func("names_a_row_or_a_question_after_one", |args: &[Py]| names_a_row_or_a_question_after_one(args))),
             "the_inventor" => Some(py_func("the_inventor", |args: &[Py]| the_inventor(args))),
             "the_past_named" => Some(py_func("the_past_named", |args: &[Py]| the_past_named(args))),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

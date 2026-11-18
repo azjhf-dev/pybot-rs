@@ -124,7 +124,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT compose.reading: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -3622,6 +3622,9 @@ pub fn module_obj() -> Py {
             "reply_for" => Some(py_func("reply_for", |args: &[Py]| reply_for(args))),
             "reply_to_a_bare_doubt" => Some(py_func("reply_to_a_bare_doubt", |args: &[Py]| reply_to_a_bare_doubt(args))),
             "reply_to_a_doubt" => Some(py_func("reply_to_a_doubt", |args: &[Py]| reply_to_a_doubt(args))),
+            "_topics" => Some(pyrt::xrefs::xmodule("memory.topics")),
+            "_verdict" => Some(pyrt::xrefs::xmodule("compose.verdict")),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

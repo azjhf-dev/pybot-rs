@@ -20,7 +20,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT modules.favourites: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -211,7 +211,7 @@ pub fn _said_back(args: &[Py]) -> Py {
     held = pyrt::xrefs::xcall("memory.favourite", "the_favourites", &[memory.clone()]);
     if py_truthy(&held.clone()) {
     last = slice_or_raise(&held.clone(), &op_neg(&Py::Int(4)), &Py::None, &Py::None);
-    parts = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&last.clone()) { let __unpk9922 = py_unpack(&__item.clone(), 2, None); let mut thing: Py = __unpk9922[0].clone(); let mut value: Py = __unpk9922[1].clone(); __out.push(op_add(&op_add(&op_add(&py_str("your favourite "), &call_builtin("str", &[thing.clone()]).unwrap_or_else(|e| exc::raise(e))), &py_str(" is ")), &call_builtin("str", &[value.clone()]).unwrap_or_else(|e| exc::raise(e)))); } py_list(__out) })() };
+    parts = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&last.clone()) { let __unpk6124 = py_unpack(&__item.clone(), 2, None); let mut thing: Py = __unpk6124[0].clone(); let mut value: Py = __unpk6124[1].clone(); __out.push(op_add(&op_add(&op_add(&py_str("your favourite "), &call_builtin("str", &[thing.clone()]).unwrap_or_else(|e| exc::raise(e))), &py_str(" is ")), &call_builtin("str", &[value.clone()]).unwrap_or_else(|e| exc::raise(e)))); } py_list(__out) })() };
     if py_truthy(&Py::Bool(py_eq(&call_builtin("len", &[parts.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1)))) {
     said_all = op_add(&op_add(&py_str("You have told me one: "), &geti(&parts.clone(), &Py::Int(0))), &py_str("."));
     } else {
@@ -281,6 +281,8 @@ pub fn module_obj() -> Py {
             "pick" => Some(g_pick()),
             "read_tastes" => Some(g_read_tastes()),
             "respond" => Some(py_func("respond", |args: &[Py]| respond(args))),
+            "lookup" => Some(pyrt::xrefs::xmodule("knowledge.lookup")),
+            "favourite" => Some(pyrt::xrefs::xmodule("memory.favourite")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

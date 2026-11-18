@@ -69,7 +69,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| eprintln!("INIT lexicon {} {}",e.class_name,e.message));
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT understanding.lexicon: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -531,6 +531,7 @@ pub fn module_obj() -> Py {
             "_words" => Some(py_func("_words", |args: &[Py]| _words(args))),
             "every_word" => Some(py_func("every_word", |args: &[Py]| every_word(args))),
             "is_a_laugh" => Some(py_func("is_a_laugh", |args: &[Py]| is_a_laugh(args))),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {

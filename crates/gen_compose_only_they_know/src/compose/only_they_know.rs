@@ -69,7 +69,7 @@ pub fn ensure_init() {
     if INITIALIZING.with(|c| c.get()) { return; }
     INIT.call_once(|| {
         INITIALIZING.with(|c| c.set(true));
-        let _ = exc::catch(|| { module_body(); Py::None });
+        let _ = exc::catch(|| { module_body(); Py::None }).map_err(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("INIT compose.only_they_know: {} {}", e.class_name, e.message); } });
         INITIALIZING.with(|c| c.set(false));
     });
 }
@@ -603,6 +603,8 @@ pub fn module_obj() -> Py {
             "_feeling_subject" => Some(py_func("_feeling_subject", |args: &[Py]| _feeling_subject(args))),
             "_said_person" => Some(py_func("_said_person", |args: &[Py]| _said_person(args))),
             "answer_for" => Some(py_func("answer_for", |args: &[Py]| answer_for(args))),
+            "fallback" => Some(pyrt::xrefs::xmodule("compose.fallback")),
+            "re" => Some(stdlib_module("re")),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {
