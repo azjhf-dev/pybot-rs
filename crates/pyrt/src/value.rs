@@ -904,3 +904,23 @@ mod slice_tests {
         assert_eq!(slice_indices(0,None,None,-1),Vec::<i64>::new());
     }
 }
+
+/// Python list slice assignment, including in-place alias preservation.
+pub fn py_setslice(v:&Py,start:&Py,stop:&Py,step:&Py,replacement:&Py)->Result<(),PyExc>{
+ let items=py_iter(replacement)?;
+ let list=match v { Py::List(l)=>l, _=>return Err(type_err("slice assignment requires list")) };
+ let mut b=list.borrow_mut(); let len=b.len() as i64;
+ let st=step.as_i64().unwrap_or(1); if st==0{return Err(value_err("slice step cannot be zero"));}
+ if st==1 {
+  let bound=|x:&Py,default:i64| {let n=x.as_i64().unwrap_or(default); (if n<0 {n+len}else{n}).clamp(0,len) as usize};
+  let a=bound(start,0);let z=bound(stop,len).max(a);b.splice(a..z,items);
+ }else{
+  let indices=slice_indices(len,start.as_i64(),stop.as_i64(),st);
+  if indices.len()!=items.len(){return Err(value_err("extended slice assignment size mismatch"));}
+  for (i,x) in indices.into_iter().zip(items){b[i as usize]=x;}
+ } Ok(())
+}
+#[cfg(test)] mod slice_assignment_tests {
+ use super::*;
+ #[test] fn full_slice_replaces_not_nests(){ let a=py_list(vec![Py::Int(1)]);let alias=a.clone();py_setslice(&a,&Py::None,&Py::None,&Py::None,&py_list(vec![Py::Int(2),Py::Int(3)])).unwrap();assert!(py_eq(&alias,&py_list(vec![Py::Int(2),Py::Int(3)]))); }
+}

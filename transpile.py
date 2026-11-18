@@ -849,8 +849,10 @@ class Gen:
             self.gen_assign(target.value, val, ctx)
         elif isinstance(target, ast.Subscript):
             if isinstance(target.slice, ast.Slice):
-                self.warn("slice assignment approximated", target)
-                E(f"    let _ = py_setitem(&{self.gen_expr(target.value, ctx)}, &Py::Int(0), {val});")
+                lo = self.gen_expr(target.slice.lower, ctx)
+                hi = self.gen_expr(target.slice.upper, ctx)
+                step = self.gen_expr(target.slice.step, ctx)
+                E(f"    py_setslice(&{self.gen_expr(target.value, ctx)}, &{lo}, &{hi}, &{step}, &{val}).unwrap_or_else(|e| exc::raise(e));")
             else:
                 E(f"    let _ = py_setitem(&{self.gen_expr(target.value, ctx)}, &{self.gen_expr(target.slice, ctx)}, {val});")
         elif isinstance(target, ast.Attribute):
