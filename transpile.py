@@ -775,6 +775,14 @@ class Gen:
         elif isinstance(node, (ast.Import, ast.ImportFrom)):
             if ctx.kind != 'module':
                 self.gen_local_import(node, ctx)
+            else:
+                aliases = [a.asname or (a.name.split('.')[0] if isinstance(node, ast.Import) else a.name) for a in node.names]
+                for alias in aliases:
+                    if alias in self.import_globals:
+                        full, item = self.import_globals[alias]
+                        expr = self.ref_fn_value(full, item) if item in self.fns.get(full,set()) else self.ref_global_read(full,item)
+                        E(f'    s_{rust_ident(alias)}({expr});')
+
         elif isinstance(node, ast.FunctionDef):
             # nested function: bind a closure capturing current locals
             self.gen_nested_fn(node, ctx)
