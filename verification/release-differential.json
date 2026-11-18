@@ -24,36 +24,6 @@
     "exact": true
   },
   {
-    "case": 0,
-    "inputs": [
-      "hello",
-      "how are you",
-      "what is your name",
-      "goodbye"
-    ],
-    "python": {
-      "returncode": 0,
-      "replies": [
-        "Hi there \u2014 what do you need?",
-        "Still here, thanks \u2014 how are you getting on?",
-        "No name of my own \u2014 call me whatever you like, I'll answer to it. What can I help with?",
-        "See you \u2014 good luck with it."
-      ],
-      "diagnostics": "[module: chat | 630 ms]\n[module: chat | 566 ms]\n[module: chat | 5272 ms]\n[module: chat | 70 ms]\n"
-    },
-    "rust": {
-      "returncode": 0,
-      "replies": [
-        "Hi there \u2014 what do you need?",
-        "Still here, thanks \u2014 how are you getting on?",
-        "No name of my own \u2014 call me whatever you like, I'll answer to it. What can I help with?",
-        "See you \u2014 good luck with it."
-      ],
-      "diagnostics": "[module: chat | 25049 ms]\n[module: chat | 2915 ms]\n[module: chat | 15535 ms]\n[module: chat | 454 ms]\n"
-    },
-    "exact": true
-  },
-  {
     "case": 3,
     "inputs": [
       "I feel sad",
@@ -289,5 +259,38 @@
       ]
     },
     "exact": false
+  },
+  {
+    "binary_sha256": "bf98fc48613880ed03b5c39ce2e1c0769a2ba2ab7ebf72108aa0dbe06a569520",
+    "case": 0,
+    "inputs": [
+      "hello",
+      "how are you",
+      "what is your name",
+      "goodbye"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "Hi there \u2014 what do you need?",
+        "Still here, thanks \u2014 how are you getting on?",
+        "No name of my own \u2014 call me whatever you like, I'll answer to it. What can I help with?",
+        "See you \u2014 good luck with it."
+      ],
+      "diagnostics": "[module: chat | 630 ms]\n[module: chat | 566 ms]\n[module: chat | 5272 ms]\n[module: chat | 70 ms]\n",
+      "baseline_reused": true,
+      "source_commit": "7d63c7fbebb44c7e466e5c8b5c1f341ab767929e"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "Hi there \u2014 what do you need?",
+        "Still here, thanks \u2014 how are you getting on?",
+        "No name of my own \u2014 call me whatever you like, I'll answer to it. What can I help with?",
+        "See you \u2014 good luck with it."
+      ],
+      "diagnostics": "[module: chat | 23721 ms]\n[module: chat | 2739 ms]\n[module: chat | 15092 ms]\n[module: chat | 446 ms]\n"
+    },
+    "exact": true
   }
 ]
