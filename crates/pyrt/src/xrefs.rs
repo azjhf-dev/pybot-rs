@@ -11,19 +11,19 @@ use crate::exc::{self, PyExc};
 use crate::value::*;
 
 thread_local! {
-    static FUNCS: RefCell<HashMap<(String, String), Py>> = RefCell::new(HashMap::new());
-    static GETTERS: RefCell<HashMap<(String, String), fn() -> Py>> = RefCell::new(HashMap::new());
-    static SETTERS: RefCell<HashMap<(String, String), fn(Py)>> = RefCell::new(HashMap::new());
+    static FUNCS: RefCell<HashMap<String, HashMap<String, Py>>> = RefCell::new(HashMap::new());
+    static GETTERS: RefCell<HashMap<String, HashMap<String, fn() -> Py>>> = RefCell::new(HashMap::new());
+    static SETTERS: RefCell<HashMap<String, HashMap<String, fn(Py)>>> = RefCell::new(HashMap::new());
     static MODULES: RefCell<HashMap<String, fn() -> Py>> = RefCell::new(HashMap::new());
 }
 
 pub fn reg_fn(module: &str, name: &str, f: Py) {
-    FUNCS.with(|m| m.borrow_mut().insert((module.to_string(), name.to_string()), f));
+    FUNCS.with(|m| m.borrow_mut().entry(module.to_string()).or_default().insert(name.to_string(), f));
 }
 
 pub fn reg_access(module: &str, name: &str, get: fn() -> Py, set: fn(Py)) {
-    GETTERS.with(|m| m.borrow_mut().insert((module.to_string(), name.to_string()), get));
-    SETTERS.with(|m| m.borrow_mut().insert((module.to_string(), name.to_string()), set));
+    GETTERS.with(|m| m.borrow_mut().entry(module.to_string()).or_default().insert(name.to_string(), get));
+    SETTERS.with(|m| m.borrow_mut().entry(module.to_string()).or_default().insert(name.to_string(), set));
 }
 
 pub fn reg_module(module: &str, f: fn() -> Py) {
@@ -31,12 +31,12 @@ pub fn reg_module(module: &str, f: fn() -> Py) {
 }
 
 fn lookup_func(module: &str, name: &str) -> Option<Py> {
-    let direct = FUNCS.with(|m| m.borrow().get(&(module.to_string(), name.to_string())).cloned());
+    let direct = FUNCS.with(|m| m.borrow().get(module).and_then(|names| names.get(name)).cloned());
     if direct.is_some() {
         return direct;
     }
     // fall back to a registered global (it may hold a callable)
-    let g = GETTERS.with(|m| m.borrow().get(&(module.to_string(), name.to_string())).copied());
+    let g = GETTERS.with(|m| m.borrow().get(module).and_then(|names| names.get(name)).copied());
     g.map(|f| f())
 }
 
@@ -48,7 +48,7 @@ pub fn xcall(module: &str, name: &str, args: &[Py]) -> Py {
 }
 
 pub fn xget(module: &str, name: &str) -> Py {
-    let g = GETTERS.with(|m| m.borrow().get(&(module.to_string(), name.to_string())).copied());
+    let g = GETTERS.with(|m| m.borrow().get(module).and_then(|names| names.get(name)).copied());
     if let Some(g) = g {
         return g();
     }
@@ -65,7 +65,7 @@ pub fn xget(module: &str, name: &str) -> Py {
 }
 
 pub fn xset(module: &str, name: &str, v: Py) {
-    let s = SETTERS.with(|m| m.borrow().get(&(module.to_string(), name.to_string())).copied());
+    let s = SETTERS.with(|m| m.borrow().get(module).and_then(|names| names.get(name)).copied());
     match s {
         Some(s) => s(v),
         None => exc::raise(PyExc::new("AttributeError", &format!("module '{}' has no attribute '{}'", module, name))),
