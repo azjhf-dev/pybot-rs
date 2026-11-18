@@ -1,0 +1,27 @@
+[
+  {
+    "binary_sha256": "d4cabea0451fe30ff4ca24c455750b4e0d45833b59a77fa13bf5c230bb078a33",
+    "case": 0,
+    "inputs": [
+      "I am allergic to peanuts",
+      "what am I allergic to"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "Plenty: meat, fish, eggs, rice, pasta, potatoes and plain fruit and veg are all nut-free, so pasta with tomato sauce or roast chicken and potatoes works. Check the labels on chocolate, muesli, pesto and satay, and anything marked 'may contain nuts'.",
+        "You told me you're allergic to peanuts."
+      ],
+      "diagnostics": "[module: answers | 1115 ms]\n[module: memory_store | 658 ms]\n"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "Plenty: meat, fish, eggs, rice, pasta, potatoes and plain fruit and veg are all nut-free, so pasta with tomato sauce or roast chicken and potatoes works. Check the labels on chocolate, muesli, pesto and satay, and anything marked 'may contain nuts'.",
+        "You told me you're allergic to peanuts."
+      ],
+      "diagnostics": "[module: answers | 34905 ms]\n[module: memory_store | 2687 ms]\n"
+    },
+    "exact": true
+  }
+]
