@@ -107,3 +107,67 @@ codegen-units = 256
 [profile.release.package.gen_modules_safety]
 opt-level = 0
 codegen-units = 256
+
+[profile.release.package.gen_compose_fallback_data]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_fit]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_verdict]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_dishes]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_garden]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_home_craft]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_maths]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_technology]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_work]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_ack]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_repeat]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_arbiter]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_memory_store]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_safety_tables]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_understanding_kinds]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_understanding_normalize]
+opt-level = 0
+codegen-units = 256
