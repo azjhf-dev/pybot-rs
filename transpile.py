@@ -967,21 +967,27 @@ class Gen:
                 st = self.gen_expr(node.slice.step, ctx)
                 return f'slice_or_raise(&{self.gen_expr(node.value, ctx)}, &{lo}, &{hi}, &{st})'
             return f'geti(&{self.gen_expr(node.value, ctx)}, &{self.gen_expr(node.slice, ctx)})'
-        if isinstance(node, ast.List):
-            return 'py_list(vec![' + ', '.join(self.gen_expr(e, ctx) for e in node.elts) + '])'
-        if isinstance(node, ast.Tuple):
-            return 'py_tuple(vec![' + ', '.join(self.gen_expr(e, ctx) for e in node.elts) + '])'
-        if isinstance(node, ast.Set):
-            return 'py_set(vec![' + ', '.join(self.gen_expr(e, ctx) for e in node.elts) + '])'
+        if isinstance(node, (ast.List, ast.Tuple, ast.Set)):
+            builder = {ast.List: 'py_list', ast.Tuple: 'py_tuple', ast.Set: 'py_set'}[type(node)]
+            if any(isinstance(e, ast.Starred) for e in node.elts):
+                parts = []
+                for e in node.elts:
+                    if isinstance(e, ast.Starred):
+                        parts.append('__v.extend(py_iter_or_raise(&' + self.gen_expr(e.value, ctx) + '));')
+                    else:
+                        parts.append('__v.push(' + self.gen_expr(e, ctx) + ');')
+                return '{ let mut __v: Vec<Py> = Vec::new(); ' + ' '.join(parts) + ' ' + builder + '(__v) }'
+            return builder + '(vec![' + ', '.join(self.gen_expr(e, ctx) for e in node.elts) + '])'
         if isinstance(node, ast.Dict):
-            pairs = []
-            for k, v in zip(node.keys, node.values):
-                if k is None:
-                    # {**d}
-                    pairs.append(f'/*spread*/(Py::None, {self.gen_expr(v, ctx)})')
-                    return f'dict_spread(&[{", ".join(self.gen_expr(vv, ctx) for vv in node.values)}])'
-                pairs.append(f'({self.gen_expr(k, ctx)}, {self.gen_expr(v, ctx)})')
-            return 'py_dict(vec![' + ', '.join(pairs) + '])'
+            if any(k is None for k in node.keys):
+                parts = []
+                for k, v in zip(node.keys, node.values):
+                    if k is None:
+                        parts.append(self.gen_expr(v, ctx))
+                    else:
+                        parts.append('py_dict(vec![(' + self.gen_expr(k, ctx) + ', ' + self.gen_expr(v, ctx) + ')])')
+                return 'dict_spread(&[' + ', '.join(parts) + '])'
+            return 'py_dict(vec![' + ', '.join('(' + self.gen_expr(k, ctx) + ', ' + self.gen_expr(v, ctx) + ')' for k,v in zip(node.keys,node.values)) + '])'
         if isinstance(node, ast.Starred):
             return self.gen_expr(node.value, ctx)
         if isinstance(node, ast.JoinedStr):

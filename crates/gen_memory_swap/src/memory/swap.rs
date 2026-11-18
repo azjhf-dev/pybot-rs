@@ -733,7 +733,7 @@ pub fn candidates(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&line.clone())); if py_truthy(&__b) { __b } else { _a_second_place(&[question.clone(), line.clone(), new.clone()]) } }) {
     continue;
     }
-    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&found.clone()) { let __unpk6286 = py_unpack(&__item.clone(), 2, None); let mut had: Py = __unpk6286[0].clone(); let mut _old: Py = __unpk6286[1].clone(); __out.push(Py::Bool(py_eq(&line.clone(), &had.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&found.clone()) { let __unpk6917 = py_unpack(&__item.clone(), 2, None); let mut had: Py = __unpk6917[0].clone(); let mut _old: Py = __unpk6917[1].clone(); __out.push(Py::Bool(py_eq(&line.clone(), &had.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     continue;
     }
     let _ = mcall(&found.clone(), "append", &[py_tuple(vec![line.clone(), word.clone()])]);
@@ -782,8 +782,8 @@ pub fn rewritten(args: &[Py]) -> Py {
     }
     new_words = call_builtin("set", &[stdlib_call("re", "split", &[py_str("[ ']"), new.clone()]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e));
     earlier = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(memory.clone()); __args.push(text.clone()); __kws.extend(vec![("wide".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _earlier(args))(&__args) };
-    asked = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&earlier.clone()) { let __unpk9070 = py_unpack(&__item.clone(), 2, None); let mut line: Py = __unpk9070[0].clone(); let mut answer: Py = __unpk9070[1].clone(); if py_truthy(&_reads_as_a_question(&[line.clone()])) {  __out.push(py_tuple(vec![line.clone(), answer.clone()])); } } py_list(__out) })() };
-    told = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&earlier.clone()) { let __unpk5518 = py_unpack(&__item.clone(), 2, None); let mut line: Py = __unpk5518[0].clone(); let mut answer: Py = __unpk5518[1].clone(); if py_truthy(&Py::Bool(!py_truthy(&_reads_as_a_question(&[line.clone()])))) {  __out.push(py_tuple(vec![line.clone(), answer.clone()])); } } py_list(__out) })() };
+    asked = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&earlier.clone()) { let __unpk4262 = py_unpack(&__item.clone(), 2, None); let mut line: Py = __unpk4262[0].clone(); let mut answer: Py = __unpk4262[1].clone(); if py_truthy(&_reads_as_a_question(&[line.clone()])) {  __out.push(py_tuple(vec![line.clone(), answer.clone()])); } } py_list(__out) })() };
+    told = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&earlier.clone()) { let __unpk4373 = py_unpack(&__item.clone(), 2, None); let mut line: Py = __unpk4373[0].clone(); let mut answer: Py = __unpk4373[1].clone(); if py_truthy(&Py::Bool(!py_truthy(&_reads_as_a_question(&[line.clone()])))) {  __out.push(py_tuple(vec![line.clone(), answer.clone()])); } } py_list(__out) })() };
     let __iter1 = py_iter_or_raise(&py_tuple(vec![Py::Bool(true), Py::Bool(false)]));
     for __item in __iter1 {
     taken_up = __item.clone();
@@ -1130,7 +1130,7 @@ pub fn placed(args: &[Py]) -> Py {
     let _ = py_str("The earlier question with the old thing taken out and the new one in its place, or None.\n\n    A new thing that carries its own preposition (\"and in the freezer too\", \"what about under the\n    sink\") goes where the old place was whole: the preposition in front of the old thing, any\n    \"my\"/\"the\" in between, and the thing itself come out together, so the question is asked again\n    as \"the smell in my freezer\" or \"the smell under the sink\". Where the earlier question has no\n    preposition in front of the thing (\"how do i clean the oven\") there is no place to put the\n    new one, and None is returned: a hedge, not \"the smell in my under the sink\".\n    ");
     words = mcall(&question.clone(), "split", &[]);
     new_words = mcall(&new.clone(), "split", &[]);
-    at = call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk4787 = py_unpack(&__item.clone(), 2, None); let mut i: Py = __unpk4787[0].clone(); let mut word: Py = __unpk4787[1].clone(); if py_truthy(&Py::Bool(py_eq(&mcall(&word.clone(), "strip", &[py_str("?.!,;:")]), &old.clone()))) {  __out.push(i.clone()); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e));
+    at = call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk863 = py_unpack(&__item.clone(), 2, None); let mut i: Py = __unpk863[0].clone(); let mut word: Py = __unpk863[1].clone(); if py_truthy(&Py::Bool(py_eq(&mcall(&word.clone(), "strip", &[py_str("?.!,;:")]), &old.clone()))) {  __out.push(i.clone()); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&{ let __b = Py::Bool(py_is(&at.clone(), &Py::None)); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&new_words.clone())) } }) {
     return Py::None;
     }

@@ -251,7 +251,7 @@ pub fn the_kind_asked(args: &[Py]) -> Py {
     let mut pattern: Py = Py::None;
     let _ = py_str("The kinds of detail the line asks for, in the order the table reads them.");
     low = _flat(&[text.clone()]);
-    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_ASKS()) { let __unpk1057 = py_unpack(&__item.clone(), 2, None); let mut kind: Py = __unpk1057[0].clone(); let mut pattern: Py = __unpk1057[1].clone(); if py_truthy(&mcall(&pattern.clone(), "search", &[low.clone()])) {  __out.push(kind.clone()); } } py_list(__out) })() };
+    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_ASKS()) { let __unpk6804 = py_unpack(&__item.clone(), 2, None); let mut kind: Py = __unpk6804[0].clone(); let mut pattern: Py = __unpk6804[1].clone(); if py_truthy(&mcall(&pattern.clone(), "search", &[low.clone()])) {  __out.push(kind.clone()); } } py_list(__out) })() };
     Py::None
 }
 pub fn the_line_that_gives(args: &[Py]) -> Py {
