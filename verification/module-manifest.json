@@ -1,0 +1,4228 @@
+{
+  "source_commit": "7d63c7fbebb44c7e466e5c8b5c1f341ab767929e",
+  "module_count": 527,
+  "translated_python_lines": 636550,
+  "root_initializer": {
+    "path": "bot/__init__.py",
+    "lines": 1,
+    "content_kind": "documentation-only module docstring"
+  },
+  "modules": [
+    {
+      "module": "__main__",
+      "python": "bot/__main__.py",
+      "python_lines": 19,
+      "source_sha256": "7aaa530a8723ff2088ad321a6360157dfd9fcb0c2cf530df42bd2a42fd332697",
+      "rust": "crates/gen___main__/src/__main__.rs",
+      "rust_lines": 96
+    },
+    {
+      "module": "compose",
+      "python": "bot/compose/__init__.py",
+      "python_lines": 523,
+      "source_sha256": "5c8635547a8c8811cd5f0229e5e18234cbf355685d58fcd3f569bc742d9842e2",
+      "rust": "crates/gen_compose/src/compose/mod.rs",
+      "rust_lines": 854
+    },
+    {
+      "module": "compose.a_count_of_packets",
+      "python": "bot/compose/a_count_of_packets.py",
+      "python_lines": 100,
+      "source_sha256": "5ee107b5d9c2acc67239a8373c3719ea87f1c341255a61ce7c64e60820d1d572",
+      "rust": "crates/gen_compose_a_count_of_packets/src/compose/a_count_of_packets.rs",
+      "rust_lines": 179
+    },
+    {
+      "module": "compose.a_detail_dropped",
+      "python": "bot/compose/a_detail_dropped.py",
+      "python_lines": 381,
+      "source_sha256": "055aab8410f9a881fcb40e9b9dfef1ab1f4a0af42b2bd310ea99d735b6b7a182",
+      "rust": "crates/gen_compose_a_detail_dropped/src/compose/a_detail_dropped.rs",
+      "rust_lines": 586
+    },
+    {
+      "module": "compose.a_document_lives_with_an_office",
+      "python": "bot/compose/a_document_lives_with_an_office.py",
+      "python_lines": 241,
+      "source_sha256": "758c200edbe546f245694055c527fe8e8b3c32c3b0504204afefc5b7d79c5fde",
+      "rust": "crates/gen_compose_a_document_lives_with_an_office/src/compose/a_document_lives_with_an_office.rs",
+      "rust_lines": 265
+    },
+    {
+      "module": "compose.a_first_time",
+      "python": "bot/compose/a_first_time.py",
+      "python_lines": 88,
+      "source_sha256": "8bb8f71639c8541ef373c398940764525cd1eb6e6879f35699aae3e78de2cfc1",
+      "rust": "crates/gen_compose_a_first_time/src/compose/a_first_time.rs",
+      "rust_lines": 161
+    },
+    {
+      "module": "compose.a_number_the_bot_knows",
+      "python": "bot/compose/a_number_the_bot_knows.py",
+      "python_lines": 233,
+      "source_sha256": "26bf2d050fb6d0dc673d4e09b22813567f2f0a4b6641b81ceaa3cee0e669fd35",
+      "rust": "crates/gen_compose_a_number_the_bot_knows/src/compose/a_number_the_bot_knows.rs",
+      "rust_lines": 410
+    },
+    {
+      "module": "compose.a_place_nobody_can_see",
+      "python": "bot/compose/a_place_nobody_can_see.py",
+      "python_lines": 496,
+      "source_sha256": "b038ff0b8eaaa87a389c750b641ec05534fc4b0cecadb0900ba818df801983ef",
+      "rust": "crates/gen_compose_a_place_nobody_can_see/src/compose/a_place_nobody_can_see.rs",
+      "rust_lines": 1009
+    },
+    {
+      "module": "compose.a_thing_being_weighed",
+      "python": "bot/compose/a_thing_being_weighed.py",
+      "python_lines": 325,
+      "source_sha256": "3a0de01daea4ff3c83aa9d08b63adea7930dd1d53fbc237a1b10491fa5b1cba6",
+      "rust": "crates/gen_compose_a_thing_being_weighed/src/compose/a_thing_being_weighed.rs",
+      "rust_lines": 643
+    },
+    {
+      "module": "compose.a_thing_wants_doing",
+      "python": "bot/compose/a_thing_wants_doing.py",
+      "python_lines": 81,
+      "source_sha256": "36d4ad28b90ad693508f7e42729f37483abc9e0a409eefea3a56377e33fd7e72",
+      "rust": "crates/gen_compose_a_thing_wants_doing/src/compose/a_thing_wants_doing.rs",
+      "rust_lines": 166
+    },
+    {
+      "module": "compose.a_trouble",
+      "python": "bot/compose/a_trouble.py",
+      "python_lines": 237,
+      "source_sha256": "249b46557370650a5fd0c0ab092de8d5e9754257be254e651c38c5c22141956b",
+      "rust": "crates/gen_compose_a_trouble/src/compose/a_trouble.rs",
+      "rust_lines": 417
+    },
+    {
+      "module": "compose.a_wait_about_a_body",
+      "python": "bot/compose/a_wait_about_a_body.py",
+      "python_lines": 338,
+      "source_sha256": "e365b24fc19b62ab37d8f2c6f3697059acc4d0a34e8ae8f8a0d13fe8a0bcbc86",
+      "rust": "crates/gen_compose_a_wait_about_a_body/src/compose/a_wait_about_a_body.rs",
+      "rust_lines": 611
+    },
+    {
+      "module": "compose.aboutness",
+      "python": "bot/compose/aboutness.py",
+      "python_lines": 153,
+      "source_sha256": "74cbe74a378e56d7de49a4b4d76e716b449b60540625200f03c321fc8a4ea0b7",
+      "rust": "crates/gen_compose_aboutness/src/compose/aboutness.rs",
+      "rust_lines": 332
+    },
+    {
+      "module": "compose.badnews",
+      "python": "bot/compose/badnews.py",
+      "python_lines": 1354,
+      "source_sha256": "71eae92e7b848d305e2c27929b5e1b5e6ecee58bcd0e2cebe0ec5f62791f8538",
+      "rust": "crates/gen_compose_badnews/src/compose/badnews.rs",
+      "rust_lines": 1608
+    },
+    {
+      "module": "compose.breakup",
+      "python": "bot/compose/breakup.py",
+      "python_lines": 74,
+      "source_sha256": "27b9e74e4d8c7719b81e9666a573ae55353aa2968e263fe08e314c553bad0bb0",
+      "rust": "crates/gen_compose_breakup/src/compose/breakup.rs",
+      "rust_lines": 148
+    },
+    {
+      "module": "compose.check_with_you",
+      "python": "bot/compose/check_with_you.py",
+      "python_lines": 112,
+      "source_sha256": "46a0bf5092d564feafc652818e6e356a56889cbfb62a13912afe4c6e27ae817e",
+      "rust": "crates/gen_compose_check_with_you/src/compose/check_with_you.rs",
+      "rust_lines": 205
+    },
+    {
+      "module": "compose.checking",
+      "python": "bot/compose/checking.py",
+      "python_lines": 1417,
+      "source_sha256": "bf71187be2a6dc9f5421fb5a181cb6f1011ef3d0bdcb761346b88f23b1d52599",
+      "rust": "crates/gen_compose_checking/src/compose/checking.rs",
+      "rust_lines": 1989
+    },
+    {
+      "module": "compose.childwords",
+      "python": "bot/compose/childwords.py",
+      "python_lines": 163,
+      "source_sha256": "6d2ada5ab7b874a0c2a2a9b404f26aafd765578058466aec4c420fbd2752bdfc",
+      "rust": "crates/gen_compose_childwords/src/compose/childwords.rs",
+      "rust_lines": 328
+    },
+    {
+      "module": "compose.circumstance",
+      "python": "bot/compose/circumstance.py",
+      "python_lines": 156,
+      "source_sha256": "f6b5144e3686cb9e1d7e2e2def2f2f3e7a40ba9305466b2f4abd714e61213ce6",
+      "rust": "crates/gen_compose_circumstance/src/compose/circumstance.rs",
+      "rust_lines": 177
+    },
+    {
+      "module": "compose.clause",
+      "python": "bot/compose/clause.py",
+      "python_lines": 111,
+      "source_sha256": "9ed8e382a16592a32a9151cbc35d0c7f75c72365973aad00c11c70a9488b6b85",
+      "rust": "crates/gen_compose_clause/src/compose/clause.rs",
+      "rust_lines": 209
+    },
+    {
+      "module": "compose.colour_on_the_body",
+      "python": "bot/compose/colour_on_the_body.py",
+      "python_lines": 269,
+      "source_sha256": "3003eed26439ffa4a05332a253bb429033d9c3e129beb6308e17f51ab019be30",
+      "rust": "crates/gen_compose_colour_on_the_body/src/compose/colour_on_the_body.rs",
+      "rust_lines": 400
+    },
+    {
+      "module": "compose.doubt",
+      "python": "bot/compose/doubt.py",
+      "python_lines": 138,
+      "source_sha256": "8e691b805200f68eb2066df964be86fd90717d2cbfef2d299d109ad29ff0563f",
+      "rust": "crates/gen_compose_doubt/src/compose/doubt.rs",
+      "rust_lines": 259
+    },
+    {
+      "module": "compose.draft",
+      "python": "bot/compose/draft.py",
+      "python_lines": 764,
+      "source_sha256": "ecfa17e248b76ac12b529f2db591fd90aa37ab34f5717f1c666bf11a3191affe",
+      "rust": "crates/gen_compose_draft/src/compose/draft.rs",
+      "rust_lines": 1242
+    },
+    {
+      "module": "compose.facts",
+      "python": "bot/compose/facts.py",
+      "python_lines": 96,
+      "source_sha256": "2f4bc524155e0d5f8bb736613f84b2e3c7f476965181a2267d4eec120ae5fa47",
+      "rust": "crates/gen_compose_facts/src/compose/facts.rs",
+      "rust_lines": 210
+    },
+    {
+      "module": "compose.fallback",
+      "python": "bot/compose/fallback.py",
+      "python_lines": 16939,
+      "source_sha256": "6275b817674bcb662f0235667cd77156b393fdbd6d693a66b81960622e3cf175",
+      "rust": "crates/gen_compose_fallback/src/compose/fallback.rs",
+      "rust_lines": 33554
+    },
+    {
+      "module": "compose.fallback_chain",
+      "python": "bot/compose/fallback_chain.py",
+      "python_lines": 6851,
+      "source_sha256": "e69b1267296e6909d014369e514015617e011fff14ec70de82f5efc68dcd15fd",
+      "rust": "crates/gen_compose_fallback_chain/src/compose/fallback_chain.rs",
+      "rust_lines": 15061
+    },
+    {
+      "module": "compose.fallback_data",
+      "python": "bot/compose/fallback_data.py",
+      "python_lines": 8736,
+      "source_sha256": "30060dd8e19d524ebef63bffd5745eb468ae53af92de7c7126187fd83201d0bf",
+      "rust": "crates/gen_compose_fallback_data/src/compose/fallback_data.rs",
+      "rust_lines": 7277
+    },
+    {
+      "module": "compose.fallback_pools",
+      "python": "bot/compose/fallback_pools.py",
+      "python_lines": 817,
+      "source_sha256": "064b95552340f5bd7e4faf9f019b90e28ba537e2e877afe1e0f80a8c148fa5eb",
+      "rust": "crates/gen_compose_fallback_pools/src/compose/fallback_pools.rs",
+      "rust_lines": 1920
+    },
+    {
+      "module": "compose.fallback_words",
+      "python": "bot/compose/fallback_words.py",
+      "python_lines": 514,
+      "source_sha256": "503f192847f5e84f0e075bda545a3fe32e421f67cd0b637c82c6d7796455affa",
+      "rust": "crates/gen_compose_fallback_words/src/compose/fallback_words.rs",
+      "rust_lines": 590
+    },
+    {
+      "module": "compose.find_a_place",
+      "python": "bot/compose/find_a_place.py",
+      "python_lines": 352,
+      "source_sha256": "36798f5b859553eb95c942acffe06dce475df508e73769485b03fd1cf2c175ce",
+      "rust": "crates/gen_compose_find_a_place/src/compose/find_a_place.rs",
+      "rust_lines": 517
+    },
+    {
+      "module": "compose.finding_out",
+      "python": "bot/compose/finding_out.py",
+      "python_lines": 1014,
+      "source_sha256": "c24bda032aea8562af4d95bef5ec32c700e3be1be39e5d92cc25bf1606af594c",
+      "rust": "crates/gen_compose_finding_out/src/compose/finding_out.rs",
+      "rust_lines": 1675
+    },
+    {
+      "module": "compose.findout",
+      "python": "bot/compose/findout.py",
+      "python_lines": 1227,
+      "source_sha256": "a218b8675c07481f293494706415d4b8ceb5b992cb2c7a17f52c228aae322867",
+      "rust": "crates/gen_compose_findout/src/compose/findout.rs",
+      "rust_lines": 1597
+    },
+    {
+      "module": "compose.fit",
+      "python": "bot/compose/fit.py",
+      "python_lines": 7391,
+      "source_sha256": "5637ecad4592e063063a3dedc454bef2bdd74ebae06e0eb2275ac2b41a26a5ef",
+      "rust": "crates/gen_compose_fit/src/compose/fit.rs",
+      "rust_lines": 9126
+    },
+    {
+      "module": "compose.for_the_day",
+      "python": "bot/compose/for_the_day.py",
+      "python_lines": 66,
+      "source_sha256": "106476157e50dd23530a4fdc11d36542237a5b9750f314ad610ed7cad2449514",
+      "rust": "crates/gen_compose_for_the_day/src/compose/for_the_day.rs",
+      "rust_lines": 130
+    },
+    {
+      "module": "compose.gap",
+      "python": "bot/compose/gap.py",
+      "python_lines": 684,
+      "source_sha256": "3d615710b3e2d3d325d2909449f84a417a3f21e3a5b9a1a90bc4de3f815837bc",
+      "rust": "crates/gen_compose_gap/src/compose/gap.rs",
+      "rust_lines": 952
+    },
+    {
+      "module": "compose.goodnews",
+      "python": "bot/compose/goodnews.py",
+      "python_lines": 1876,
+      "source_sha256": "68265ca54a60f314cf364fe0db66245a3796b547b0724b324b4f41b9fc1cae13",
+      "rust": "crates/gen_compose_goodnews/src/compose/goodnews.rs",
+      "rust_lines": 2625
+    },
+    {
+      "module": "compose.griefplea",
+      "python": "bot/compose/griefplea.py",
+      "python_lines": 85,
+      "source_sha256": "db4ae4229caf4ebdb64578183d1eb078b53381ebd1d056911f00808f523c77eb",
+      "rust": "crates/gen_compose_griefplea/src/compose/griefplea.rs",
+      "rust_lines": 137
+    },
+    {
+      "module": "compose.habit",
+      "python": "bot/compose/habit.py",
+      "python_lines": 736,
+      "source_sha256": "c4a118328498e23eb5c1f294ee2f53bd75d782b013b1427546a0bbeb03b6455b",
+      "rust": "crates/gen_compose_habit/src/compose/habit.rs",
+      "rust_lines": 989
+    },
+    {
+      "module": "compose.handoff",
+      "python": "bot/compose/handoff.py",
+      "python_lines": 149,
+      "source_sha256": "e241c948ac7937e78940070e408b985d54ffdddbd30d4cac768a51e78ddfc463",
+      "rust": "crates/gen_compose_handoff/src/compose/handoff.rs",
+      "rust_lines": 260
+    },
+    {
+      "module": "compose.hands",
+      "python": "bot/compose/hands.py",
+      "python_lines": 258,
+      "source_sha256": "e6159753a703f3d3aaf199c4d1aa4183f4417e1d2167644c35643d9d02b88ae5",
+      "rust": "crates/gen_compose_hands/src/compose/hands.rs",
+      "rust_lines": 318
+    },
+    {
+      "module": "compose.harm",
+      "python": "bot/compose/harm.py",
+      "python_lines": 340,
+      "source_sha256": "8ebb87135ab001728a297091e9722605b8765871dc941fd7c1a761f27361cf30",
+      "rust": "crates/gen_compose_harm/src/compose/harm.rs",
+      "rust_lines": 525
+    },
+    {
+      "module": "compose.hedge",
+      "python": "bot/compose/hedge.py",
+      "python_lines": 75,
+      "source_sha256": "0a5f580349c2499498ff2130abd036ef1252c5e4cd2eac7a98b9862b3e631abb",
+      "rust": "crates/gen_compose_hedge/src/compose/hedge.rs",
+      "rust_lines": 153
+    },
+    {
+      "module": "compose.how_it_went",
+      "python": "bot/compose/how_it_went.py",
+      "python_lines": 325,
+      "source_sha256": "f4f2d372951ebac842b8e65ab0c33f57f45689c8157bd389cd1ae4f4843416a8",
+      "rust": "crates/gen_compose_how_it_went/src/compose/how_it_went.rs",
+      "rust_lines": 585
+    },
+    {
+      "module": "compose.invitation",
+      "python": "bot/compose/invitation.py",
+      "python_lines": 206,
+      "source_sha256": "5d7ff6169c0cf563c79a14363eac00ab7d1e8b0ac3ec5ac83d266591049e85e3",
+      "rust": "crates/gen_compose_invitation/src/compose/invitation.rs",
+      "rust_lines": 229
+    },
+    {
+      "module": "compose.is_it_worth_it",
+      "python": "bot/compose/is_it_worth_it.py",
+      "python_lines": 410,
+      "source_sha256": "481dc3ec4b74138fee326e82f1834177805d3311488d8831311c534b9c11737a",
+      "rust": "crates/gen_compose_is_it_worth_it/src/compose/is_it_worth_it.rs",
+      "rust_lines": 642
+    },
+    {
+      "module": "compose.judgement",
+      "python": "bot/compose/judgement.py",
+      "python_lines": 41,
+      "source_sha256": "1cef1028ed1731f96ecc49306d5b9e80e611b57a66ee6171505797a551e05fe1",
+      "rust": "crates/gen_compose_judgement/src/compose/judgement.rs",
+      "rust_lines": 136
+    },
+    {
+      "module": "compose.kept_nearby",
+      "python": "bot/compose/kept_nearby.py",
+      "python_lines": 204,
+      "source_sha256": "1936bdcad090c3e2b92850cb69ee5a45e691927a650868520c02de5ddef45e89",
+      "rust": "crates/gen_compose_kept_nearby/src/compose/kept_nearby.rs",
+      "rust_lines": 345
+    },
+    {
+      "module": "compose.lead",
+      "python": "bot/compose/lead.py",
+      "python_lines": 590,
+      "source_sha256": "5f07e563ac9a44206d4d8f0a4efee6bff378fb4b0e0b93b576404099fb573aef",
+      "rust": "crates/gen_compose_lead/src/compose/lead.rs",
+      "rust_lines": 958
+    },
+    {
+      "module": "compose.lead_in",
+      "python": "bot/compose/lead_in.py",
+      "python_lines": 211,
+      "source_sha256": "9e8761d0f03477b8da5ec35ffc58dcd70379283a295b03d4c201b0d49c50d19e",
+      "rust": "crates/gen_compose_lead_in/src/compose/lead_in.rs",
+      "rust_lines": 369
+    },
+    {
+      "module": "compose.leaving",
+      "python": "bot/compose/leaving.py",
+      "python_lines": 992,
+      "source_sha256": "f69261a9697bfaf92370b253517a7eb4531e7ba5af67fdd1d011593e681e4f86",
+      "rust": "crates/gen_compose_leaving/src/compose/leaving.rs",
+      "rust_lines": 1254
+    },
+    {
+      "module": "compose.limit",
+      "python": "bot/compose/limit.py",
+      "python_lines": 357,
+      "source_sha256": "89954783808b522bb854d691858e7c2ffddea43898537de0d4515b6ab51b22fd",
+      "rust": "crates/gen_compose_limit/src/compose/limit.rs",
+      "rust_lines": 681
+    },
+    {
+      "module": "compose.liveask",
+      "python": "bot/compose/liveask.py",
+      "python_lines": 93,
+      "source_sha256": "1cb0fc2b755345cc8840c877c24b558bd517132c93cb462742c33e5764585f1e",
+      "rust": "crates/gen_compose_liveask/src/compose/liveask.rs",
+      "rust_lines": 143
+    },
+    {
+      "module": "compose.loss",
+      "python": "bot/compose/loss.py",
+      "python_lines": 5359,
+      "source_sha256": "f17458aa398a0360440e83f9859fa973ed0bea7cf78d61adff065b00ca57f4ce",
+      "rust": "crates/gen_compose_loss/src/compose/loss.rs",
+      "rust_lines": 7426
+    },
+    {
+      "module": "compose.missing_half",
+      "python": "bot/compose/missing_half.py",
+      "python_lines": 296,
+      "source_sha256": "3f15572575aa2f413833c6126a09e4be15ab99a9059c9642327283625d644989",
+      "rust": "crates/gen_compose_missing_half/src/compose/missing_half.rs",
+      "rust_lines": 577
+    },
+    {
+      "module": "compose.morning_after",
+      "python": "bot/compose/morning_after.py",
+      "python_lines": 142,
+      "source_sha256": "08f464997ad882ed909fab8fb70defb65edafc84d38e5a36edc45ea2257e2c74",
+      "rust": "crates/gen_compose_morning_after/src/compose/morning_after.rs",
+      "rust_lines": 187
+    },
+    {
+      "module": "compose.moving",
+      "python": "bot/compose/moving.py",
+      "python_lines": 119,
+      "source_sha256": "97fb95454287650b31651c2f947d2733e43084e9e8dcd701318397bd3dec5f30",
+      "rust": "crates/gen_compose_moving/src/compose/moving.rs",
+      "rust_lines": 226
+    },
+    {
+      "module": "compose.nearby_one",
+      "python": "bot/compose/nearby_one.py",
+      "python_lines": 274,
+      "source_sha256": "8f941e3bbd1365dfb0ca26864f87cc483a3e75d6784ac8134afd4b211d723d3e",
+      "rust": "crates/gen_compose_nearby_one/src/compose/nearby_one.rs",
+      "rust_lines": 404
+    },
+    {
+      "module": "compose.news_ask",
+      "python": "bot/compose/news_ask.py",
+      "python_lines": 66,
+      "source_sha256": "30bf3b86f3dfe2b97b2f8bbd0c5ef1edf3e7fd5064bf478f0e82d2f3390e8351",
+      "rust": "crates/gen_compose_news_ask/src/compose/news_ask.rs",
+      "rust_lines": 125
+    },
+    {
+      "module": "compose.no_advice",
+      "python": "bot/compose/no_advice.py",
+      "python_lines": 249,
+      "source_sha256": "b635e637f78da2afda9f4bf4ac235622337ba4a9395c93f90ac3e14ba1760abd",
+      "rust": "crates/gen_compose_no_advice/src/compose/no_advice.rs",
+      "rust_lines": 370
+    },
+    {
+      "module": "compose.no_eyes",
+      "python": "bot/compose/no_eyes.py",
+      "python_lines": 1110,
+      "source_sha256": "4736c439dfd9a290307ecfdba1f16d6ab12ab3aaebc5f1ccc06206dd1da7f2e5",
+      "rust": "crates/gen_compose_no_eyes/src/compose/no_eyes.rs",
+      "rust_lines": 1243
+    },
+    {
+      "module": "compose.no_page",
+      "python": "bot/compose/no_page.py",
+      "python_lines": 229,
+      "source_sha256": "73231207a135aad56f5e6e3cbee6e8c89fc7d2dd8c7a7bc4905215ceb9426179",
+      "rust": "crates/gen_compose_no_page/src/compose/no_page.rs",
+      "rust_lines": 351
+    },
+    {
+      "module": "compose.not_knowing",
+      "python": "bot/compose/not_knowing.py",
+      "python_lines": 657,
+      "source_sha256": "500823bf5dd20d3e3ac98be5f892c991b720517c8b399aa9b84da5ac02f76f72",
+      "rust": "crates/gen_compose_not_knowing/src/compose/not_knowing.rs",
+      "rust_lines": 1026
+    },
+    {
+      "module": "compose.nottheirbest",
+      "python": "bot/compose/nottheirbest.py",
+      "python_lines": 117,
+      "source_sha256": "e3d35c064e498da6f2e6aaa5abca812c56b621748b334d1df9cf4f92e01dd40f",
+      "rust": "crates/gen_compose_nottheirbest/src/compose/nottheirbest.rs",
+      "rust_lines": 207
+    },
+    {
+      "module": "compose.occasionplan",
+      "python": "bot/compose/occasionplan.py",
+      "python_lines": 460,
+      "source_sha256": "eb6cf7016afd5e12c3094d7def6fda5ee6a924910160e11e995767e0867db7ec",
+      "rust": "crates/gen_compose_occasionplan/src/compose/occasionplan.rs",
+      "rust_lines": 769
+    },
+    {
+      "module": "compose.onething",
+      "python": "bot/compose/onething.py",
+      "python_lines": 609,
+      "source_sha256": "d07b61eca003cca2086cd877d789fbb2369d43db063f229cb56f7856f056f7fe",
+      "rust": "crates/gen_compose_onething/src/compose/onething.rs",
+      "rust_lines": 623
+    },
+    {
+      "module": "compose.only_they_know",
+      "python": "bot/compose/only_they_know.py",
+      "python_lines": 577,
+      "source_sha256": "c0e476a8673c2c202b5708ac41442c648085e8145e9169f59e59f30e10030162",
+      "rust": "crates/gen_compose_only_they_know/src/compose/only_they_know.rs",
+      "rust_lines": 779
+    },
+    {
+      "module": "compose.onmybehalf",
+      "python": "bot/compose/onmybehalf.py",
+      "python_lines": 264,
+      "source_sha256": "c9ebcbedc57091ded1458783996ea0177bc80ae2ba57c952b8438455f9a74749",
+      "rust": "crates/gen_compose_onmybehalf/src/compose/onmybehalf.rs",
+      "rust_lines": 410
+    },
+    {
+      "module": "compose.onscreen",
+      "python": "bot/compose/onscreen.py",
+      "python_lines": 575,
+      "source_sha256": "07f1aafc4ba400528ae52c88ea8f9516a4652645fd2594ad0b899915b4403aac",
+      "rust": "crates/gen_compose_onscreen/src/compose/onscreen.rs",
+      "rust_lines": 831
+    },
+    {
+      "module": "compose.onsubject",
+      "python": "bot/compose/onsubject.py",
+      "python_lines": 892,
+      "source_sha256": "8e276a38ebb0c7d5b4db8ac7cc1f23d167789813620b5f60d67b3a7f1c95c517",
+      "rust": "crates/gen_compose_onsubject/src/compose/onsubject.rs",
+      "rust_lines": 1586
+    },
+    {
+      "module": "compose.outlook",
+      "python": "bot/compose/outlook.py",
+      "python_lines": 168,
+      "source_sha256": "923e09eef891e39314f8598da0b6ba37b1cd4f71e10b92a7e52bf8dae560c1a3",
+      "rust": "crates/gen_compose_outlook/src/compose/outlook.rs",
+      "rust_lines": 250
+    },
+    {
+      "module": "compose.own_ask",
+      "python": "bot/compose/own_ask.py",
+      "python_lines": 253,
+      "source_sha256": "279a0c87321f341d1b14c69b59034bef79ac5e975fe91b202af1a048f97e8c84",
+      "rust": "crates/gen_compose_own_ask/src/compose/own_ask.rs",
+      "rust_lines": 352
+    },
+    {
+      "module": "compose.own_facts",
+      "python": "bot/compose/own_facts.py",
+      "python_lines": 592,
+      "source_sha256": "3e0f82fa5284ff871e53299b9876c72e3cc720716e88656137715710cbcdf427",
+      "rust": "crates/gen_compose_own_facts/src/compose/own_facts.rs",
+      "rust_lines": 1079
+    },
+    {
+      "module": "compose.pace",
+      "python": "bot/compose/pace.py",
+      "python_lines": 504,
+      "source_sha256": "09f2403942da8ec5630e65f4908edbf2de736bcc033fd058ccfcec8599b0849e",
+      "rust": "crates/gen_compose_pace/src/compose/pace.rs",
+      "rust_lines": 1105
+    },
+    {
+      "module": "compose.place_facts",
+      "python": "bot/compose/place_facts.py",
+      "python_lines": 354,
+      "source_sha256": "9751bb9876a20c7e724aa380bde0fab9d898efd759740a810931bd33174fb75c",
+      "rust": "crates/gen_compose_place_facts/src/compose/place_facts.rs",
+      "rust_lines": 455
+    },
+    {
+      "module": "compose.plan_ask",
+      "python": "bot/compose/plan_ask.py",
+      "python_lines": 178,
+      "source_sha256": "f45e6323260f685726a0eeca87550ba3cb75c90676be772f4ba516df1def2767",
+      "rust": "crates/gen_compose_plan_ask/src/compose/plan_ask.rs",
+      "rust_lines": 316
+    },
+    {
+      "module": "compose.plans",
+      "python": "bot/compose/plans.py",
+      "python_lines": 212,
+      "source_sha256": "f07a66f59c7921f9f00aa4c83334f39edf77a3866c8b7b1283f5f4a3a68afc0c",
+      "rust": "crates/gen_compose_plans/src/compose/plans.rs",
+      "rust_lines": 430
+    },
+    {
+      "module": "compose.pleased",
+      "python": "bot/compose/pleased.py",
+      "python_lines": 103,
+      "source_sha256": "01aca07e2c4170354cd99132a3c9d6112d48726736cd9ef18995cab23315fa98",
+      "rust": "crates/gen_compose_pleased/src/compose/pleased.rs",
+      "rust_lines": 237
+    },
+    {
+      "module": "compose.postcode",
+      "python": "bot/compose/postcode.py",
+      "python_lines": 392,
+      "source_sha256": "4f026bef64796609d9a0fff651bccc4625b8ae52a35cb8993d3fe540557fc0b1",
+      "rust": "crates/gen_compose_postcode/src/compose/postcode.rs",
+      "rust_lines": 95
+    },
+    {
+      "module": "compose.prices",
+      "python": "bot/compose/prices.py",
+      "python_lines": 300,
+      "source_sha256": "a219fe98ad9efe20db66f6a43f0205a871852d22c72e3c489faea69d24b5d153",
+      "rust": "crates/gen_compose_prices/src/compose/prices.rs",
+      "rust_lines": 341
+    },
+    {
+      "module": "compose.quantity",
+      "python": "bot/compose/quantity.py",
+      "python_lines": 1332,
+      "source_sha256": "0d0740b67e892d29e06a9d6c397b34238ca5731f563368810efdb4f3a8e140e2",
+      "rust": "crates/gen_compose_quantity/src/compose/quantity.rs",
+      "rust_lines": 2307
+    },
+    {
+      "module": "compose.reaction",
+      "python": "bot/compose/reaction.py",
+      "python_lines": 291,
+      "source_sha256": "d3fe5e18d90ad751e7c3fc72b52446c0b9c1aefece0771271ca74c34cea16137",
+      "rust": "crates/gen_compose_reaction/src/compose/reaction.rs",
+      "rust_lines": 406
+    },
+    {
+      "module": "compose.reading",
+      "python": "bot/compose/reading.py",
+      "python_lines": 2263,
+      "source_sha256": "df324b2b42acb6012322dc9f6ac6a2142fbe9950c4ab01b13caf4270928949d9",
+      "rust": "crates/gen_compose_reading/src/compose/reading.rs",
+      "rust_lines": 4022
+    },
+    {
+      "module": "compose.recall",
+      "python": "bot/compose/recall.py",
+      "python_lines": 112,
+      "source_sha256": "e6e32c23b2ec6327eb1ebf6f0dd8d01ba894f61b68ce168ff634708747bbbd81",
+      "rust": "crates/gen_compose_recall/src/compose/recall.rs",
+      "rust_lines": 187
+    },
+    {
+      "module": "compose.receiving_end",
+      "python": "bot/compose/receiving_end.py",
+      "python_lines": 207,
+      "source_sha256": "66642fa907fc552ea8f9524d62fcb230d8112397f1791630e269590a666e2368",
+      "rust": "crates/gen_compose_receiving_end/src/compose/receiving_end.rs",
+      "rust_lines": 342
+    },
+    {
+      "module": "compose.remark",
+      "python": "bot/compose/remark.py",
+      "python_lines": 2475,
+      "source_sha256": "492a6bd7296fcb9dabeecfb933d592342b15b793afed0eae9c8685e3bcc536f7",
+      "rust": "crates/gen_compose_remark/src/compose/remark.rs",
+      "rust_lines": 3646
+    },
+    {
+      "module": "compose.repair",
+      "python": "bot/compose/repair.py",
+      "python_lines": 418,
+      "source_sha256": "cf364b249fe6cce3f8ec725d2b51c584ab461e7c2b39458d82d69a7b331ce396",
+      "rust": "crates/gen_compose_repair/src/compose/repair.rs",
+      "rust_lines": 456
+    },
+    {
+      "module": "compose.rotten_luck",
+      "python": "bot/compose/rotten_luck.py",
+      "python_lines": 719,
+      "source_sha256": "fe59a5aface0634cc176f303551f95275598c37d665178c9ae40336f28b5dbe7",
+      "rust": "crates/gen_compose_rotten_luck/src/compose/rotten_luck.rs",
+      "rust_lines": 955
+    },
+    {
+      "module": "compose.routes",
+      "python": "bot/compose/routes.py",
+      "python_lines": 632,
+      "source_sha256": "0fca54dd34ad539a544abc8a087bbaad8e7c549b8cc1c6af347fc35bd2f15d59",
+      "rust": "crates/gen_compose_routes/src/compose/routes.rs",
+      "rust_lines": 763
+    },
+    {
+      "module": "compose.rule",
+      "python": "bot/compose/rule.py",
+      "python_lines": 224,
+      "source_sha256": "e7e7ecdd858e4fbe20a091d9b87ced0d2b5a8a56004d8949fe03caaf54cb3bf8",
+      "rust": "crates/gen_compose_rule/src/compose/rule.rs",
+      "rust_lines": 390
+    },
+    {
+      "module": "compose.ruledout",
+      "python": "bot/compose/ruledout.py",
+      "python_lines": 707,
+      "source_sha256": "15aa2b42c13e950ecf6753ca069b93f85f93735fddf72b19587dc24f5c1eb9eb",
+      "rust": "crates/gen_compose_ruledout/src/compose/ruledout.rs",
+      "rust_lines": 1175
+    },
+    {
+      "module": "compose.safety_doubt",
+      "python": "bot/compose/safety_doubt.py",
+      "python_lines": 167,
+      "source_sha256": "b89abd42b0afa9b8cf1942bf7862a928bb9494583440ad61958235a866efd0e3",
+      "rust": "crates/gen_compose_safety_doubt/src/compose/safety_doubt.rs",
+      "rust_lines": 238
+    },
+    {
+      "module": "compose.safetyask",
+      "python": "bot/compose/safetyask.py",
+      "python_lines": 215,
+      "source_sha256": "0c35c80e022f4997c4fee69d0f617d182ac5000e8d8b840c0845b4eb20d554ef",
+      "rust": "crates/gen_compose_safetyask/src/compose/safetyask.rs",
+      "rust_lines": 345
+    },
+    {
+      "module": "compose.said_about_me",
+      "python": "bot/compose/said_about_me.py",
+      "python_lines": 311,
+      "source_sha256": "57afc117b8af7969e2a627bea6acb55ab16be010325525779595d48c19afcb52",
+      "rust": "crates/gen_compose_said_about_me/src/compose/said_about_me.rs",
+      "rust_lines": 575
+    },
+    {
+      "module": "compose.saidby",
+      "python": "bot/compose/saidby.py",
+      "python_lines": 238,
+      "source_sha256": "c1f5b2b06fef8d22b5b69b0fcc069993d62c08300782a71eaa9ada4168bfb9fd",
+      "rust": "crates/gen_compose_saidby/src/compose/saidby.rs",
+      "rust_lines": 489
+    },
+    {
+      "module": "compose.setting_off",
+      "python": "bot/compose/setting_off.py",
+      "python_lines": 241,
+      "source_sha256": "8d6a4da6df7cd92df5b61041a8a39a4574544bcb37f0dc1bc137c5b168c74552",
+      "rust": "crates/gen_compose_setting_off/src/compose/setting_off.rs",
+      "rust_lines": 381
+    },
+    {
+      "module": "compose.stepwords",
+      "python": "bot/compose/stepwords.py",
+      "python_lines": 99,
+      "source_sha256": "d19d7776bd36d54bdc5c4fdb72003dd9b1051bf16d2ab4e2d5b26d0f11d079c2",
+      "rust": "crates/gen_compose_stepwords/src/compose/stepwords.rs",
+      "rust_lines": 164
+    },
+    {
+      "module": "compose.still",
+      "python": "bot/compose/still.py",
+      "python_lines": 290,
+      "source_sha256": "f725d179055afc0fa7d3eb23bcb2ce885b8f6b945bc0ef3c56be518dfc3550af",
+      "rust": "crates/gen_compose_still/src/compose/still.rs",
+      "rust_lines": 564
+    },
+    {
+      "module": "compose.stretches",
+      "python": "bot/compose/stretches.py",
+      "python_lines": 432,
+      "source_sha256": "cdbc518051b357cdb273232f0c898cc2692979a3263ec809ef235f9c6bee2b49",
+      "rust": "crates/gen_compose_stretches/src/compose/stretches.rs",
+      "rust_lines": 623
+    },
+    {
+      "module": "compose.talktime",
+      "python": "bot/compose/talktime.py",
+      "python_lines": 122,
+      "source_sha256": "2114f4bbe26ea253c983623b9c231b30c4c3f9308e68abf86a995a7245c883a1",
+      "rust": "crates/gen_compose_talktime/src/compose/talktime.rs",
+      "rust_lines": 158
+    },
+    {
+      "module": "compose.talkto",
+      "python": "bot/compose/talkto.py",
+      "python_lines": 224,
+      "source_sha256": "e15e9d49d10da16675acdb245d04155267698e133a392b00b86acadc91ae2b06",
+      "rust": "crates/gen_compose_talkto/src/compose/talkto.rs",
+      "rust_lines": 431
+    },
+    {
+      "module": "compose.taste",
+      "python": "bot/compose/taste.py",
+      "python_lines": 619,
+      "source_sha256": "62af047d4ca0a00bb08b8e72094fbe3fcc9b5ff2c3c54993b5021214eb205dd9",
+      "rust": "crates/gen_compose_taste/src/compose/taste.rs",
+      "rust_lines": 1031
+    },
+    {
+      "module": "compose.the_course_of_it",
+      "python": "bot/compose/the_course_of_it.py",
+      "python_lines": 564,
+      "source_sha256": "8047f0c67f2772324065f78e9eb6efdf4d573df1f6c877345845e34bfa2be6c2",
+      "rust": "crates/gen_compose_the_course_of_it/src/compose/the_course_of_it.rs",
+      "rust_lines": 801
+    },
+    {
+      "module": "compose.the_rule_for_it",
+      "python": "bot/compose/the_rule_for_it.py",
+      "python_lines": 482,
+      "source_sha256": "90289d5cf51263963409802c89e39f0dfbd6aafcf7f001dd306cee3cf8abb1f6",
+      "rust": "crates/gen_compose_the_rule_for_it/src/compose/the_rule_for_it.rs",
+      "rust_lines": 458
+    },
+    {
+      "module": "compose.the_shape_without_the_fact",
+      "python": "bot/compose/the_shape_without_the_fact.py",
+      "python_lines": 638,
+      "source_sha256": "0bb34245d321681edd6ffc884164de66c580eac6b84325f03452100278625311",
+      "rust": "crates/gen_compose_the_shape_without_the_fact/src/compose/the_shape_without_the_fact.rs",
+      "rust_lines": 1029
+    },
+    {
+      "module": "compose.the_trouble_named",
+      "python": "bot/compose/the_trouble_named.py",
+      "python_lines": 162,
+      "source_sha256": "10772f55718b7b2697870d25b0d6e7753be1463324fcc4f580418910439345bd",
+      "rust": "crates/gen_compose_the_trouble_named/src/compose/the_trouble_named.rs",
+      "rust_lines": 311
+    },
+    {
+      "module": "compose.the_turn_after",
+      "python": "bot/compose/the_turn_after.py",
+      "python_lines": 157,
+      "source_sha256": "a7799038d7a1f8473e004c75cd48704751eb686a7d72169b3ac1c70e565bba74",
+      "rust": "crates/gen_compose_the_turn_after/src/compose/the_turn_after.rs",
+      "rust_lines": 328
+    },
+    {
+      "module": "compose.their_day",
+      "python": "bot/compose/their_day.py",
+      "python_lines": 436,
+      "source_sha256": "94cb27975405b34f46bcef0926b1d092c12b23c9ccbeae60113e1716b58973b6",
+      "rust": "crates/gen_compose_their_day/src/compose/their_day.rs",
+      "rust_lines": 544
+    },
+    {
+      "module": "compose.their_detail",
+      "python": "bot/compose/their_detail.py",
+      "python_lines": 193,
+      "source_sha256": "3e1938dffd5d53e24cdcb7097a45b2086ac970501acde03058e014fe76966fc2",
+      "rust": "crates/gen_compose_their_detail/src/compose/their_detail.rs",
+      "rust_lines": 378
+    },
+    {
+      "module": "compose.their_life",
+      "python": "bot/compose/their_life.py",
+      "python_lines": 222,
+      "source_sha256": "24f9bf16b6380fc3e71511dfee5bd719f607a4fc1d42c0c41b6ea27396f20b5d",
+      "rust": "crates/gen_compose_their_life/src/compose/their_life.rs",
+      "rust_lines": 386
+    },
+    {
+      "module": "compose.theirperson",
+      "python": "bot/compose/theirperson.py",
+      "python_lines": 283,
+      "source_sha256": "66ebb6c43c7f23c6b068c036929ca264e24309b4e6c89d3a648ced2b8dc0652b",
+      "rust": "crates/gen_compose_theirperson/src/compose/theirperson.rs",
+      "rust_lines": 326
+    },
+    {
+      "module": "compose.thread_detail",
+      "python": "bot/compose/thread_detail.py",
+      "python_lines": 234,
+      "source_sha256": "c2069a9f088ddf5a017de8411a6c1499313b92e50284d42959f9a5d43ffcd8be",
+      "rust": "crates/gen_compose_thread_detail/src/compose/thread_detail.rs",
+      "rust_lines": 451
+    },
+    {
+      "module": "compose.toknow",
+      "python": "bot/compose/toknow.py",
+      "python_lines": 139,
+      "source_sha256": "81ee6f964cec154104c703e3ed247cf9f68bd5a0de42e59d38c4f20b07d8ca16",
+      "rust": "crates/gen_compose_toknow/src/compose/toknow.rs",
+      "rust_lines": 275
+    },
+    {
+      "module": "compose.tone_again",
+      "python": "bot/compose/tone_again.py",
+      "python_lines": 324,
+      "source_sha256": "c7e8bc77a58523042ed3d4f4a0302d334eb69902103626aab76928c76c53c331",
+      "rust": "crates/gen_compose_tone_again/src/compose/tone_again.rs",
+      "rust_lines": 651
+    },
+    {
+      "module": "compose.trouble",
+      "python": "bot/compose/trouble.py",
+      "python_lines": 1291,
+      "source_sha256": "f46a88aac2045187fb88c15e1805e91611e03ef003863ea0b69a57f49c462468",
+      "rust": "crates/gen_compose_trouble/src/compose/trouble.rs",
+      "rust_lines": 1712
+    },
+    {
+      "module": "compose.unseen",
+      "python": "bot/compose/unseen.py",
+      "python_lines": 208,
+      "source_sha256": "153bc9010adf76c82bbc4a87264aaa633898d3cf46ccffbc0042eeed88ee3d63",
+      "rust": "crates/gen_compose_unseen/src/compose/unseen.rs",
+      "rust_lines": 252
+    },
+    {
+      "module": "compose.urgent",
+      "python": "bot/compose/urgent.py",
+      "python_lines": 694,
+      "source_sha256": "70058d3821291079b9897396ac196eb318ad64dda626d560ec83be5b61a4ed2f",
+      "rust": "crates/gen_compose_urgent/src/compose/urgent.rs",
+      "rust_lines": 1100
+    },
+    {
+      "module": "compose.verdict",
+      "python": "bot/compose/verdict.py",
+      "python_lines": 6764,
+      "source_sha256": "6e98c4f77088d772327732840394c076a7d4ce96908511c7c83f1c61816584b1",
+      "rust": "crates/gen_compose_verdict/src/compose/verdict.rs",
+      "rust_lines": 8724
+    },
+    {
+      "module": "compose.waited_for",
+      "python": "bot/compose/waited_for.py",
+      "python_lines": 236,
+      "source_sha256": "3d13cc2a0b13fcf9dd46e792f2508b4c09c620917ffa9bcb5997333fed578b3f",
+      "rust": "crates/gen_compose_waited_for/src/compose/waited_for.rs",
+      "rust_lines": 339
+    },
+    {
+      "module": "compose.ward",
+      "python": "bot/compose/ward.py",
+      "python_lines": 188,
+      "source_sha256": "f7f7152595c274382b44707cb42d1063acca1dbae650a4c6c57aeaa96c55298c",
+      "rust": "crates/gen_compose_ward/src/compose/ward.rs",
+      "rust_lines": 259
+    },
+    {
+      "module": "compose.what_decides_it",
+      "python": "bot/compose/what_decides_it.py",
+      "python_lines": 179,
+      "source_sha256": "da3a6e3c1a83817e1c437cf805ff067908a62117d64ed05bbc5da8d39c36dbe9",
+      "rust": "crates/gen_compose_what_decides_it/src/compose/what_decides_it.rs",
+      "rust_lines": 434
+    },
+    {
+      "module": "compose.what_i_do_know",
+      "python": "bot/compose/what_i_do_know.py",
+      "python_lines": 836,
+      "source_sha256": "09ff70babf8ee1ca74fae0f95329a3bae42490fb5f0ce0e9d5cf6ac900300d69",
+      "rust": "crates/gen_compose_what_i_do_know/src/compose/what_i_do_know.rs",
+      "rust_lines": 917
+    },
+    {
+      "module": "compose.what_it_asks",
+      "python": "bot/compose/what_it_asks.py",
+      "python_lines": 102,
+      "source_sha256": "b6ce82a9b29ef95084e7a0cd1e37c3ddb276408ce4f9ff61cf8e9c4b0400694d",
+      "rust": "crates/gen_compose_what_it_asks/src/compose/what_it_asks.rs",
+      "rust_lines": 218
+    },
+    {
+      "module": "compose.who",
+      "python": "bot/compose/who.py",
+      "python_lines": 385,
+      "source_sha256": "31842dc51ffae1720d33a10e86a2ff099ff2d943b1c95522204f075febbac71e",
+      "rust": "crates/gen_compose_who/src/compose/who.rs",
+      "rust_lines": 796
+    },
+    {
+      "module": "compose.who_to_see",
+      "python": "bot/compose/who_to_see.py",
+      "python_lines": 307,
+      "source_sha256": "c4f3e8bf244c3120bdd40c07b343a03fe2b7e1d4c8085ef3cccdcce046302de2",
+      "rust": "crates/gen_compose_who_to_see/src/compose/who_to_see.rs",
+      "rust_lines": 561
+    },
+    {
+      "module": "compose.whole",
+      "python": "bot/compose/whole.py",
+      "python_lines": 57,
+      "source_sha256": "246aaea30604dd07c68de2b95eb456acba23aa0c6569b0b161b0723c4170dde2",
+      "rust": "crates/gen_compose_whole/src/compose/whole.rs",
+      "rust_lines": 119
+    },
+    {
+      "module": "compose.why",
+      "python": "bot/compose/why.py",
+      "python_lines": 2202,
+      "source_sha256": "223e936977398af2b2ec970deeab1d7ae087a193096ce978ef4fbb63dff04308",
+      "rust": "crates/gen_compose_why/src/compose/why.rs",
+      "rust_lines": 2999
+    },
+    {
+      "module": "compose.worn",
+      "python": "bot/compose/worn.py",
+      "python_lines": 226,
+      "source_sha256": "a620eb6a6c5f0f102cb77377e12516a9559cd97ef8351322af100c80087c12b6",
+      "rust": "crates/gen_compose_worn/src/compose/worn.rs",
+      "rust_lines": 353
+    },
+    {
+      "module": "knowledge",
+      "python": "bot/knowledge/__init__.py",
+      "python_lines": 181,
+      "source_sha256": "5cc944fb26c8b530673357c3df93dd30fc32198b00953ca1f049e8e3a0d75505",
+      "rust": "crates/gen_knowledge/src/knowledge/mod.rs",
+      "rust_lines": 331
+    },
+    {
+      "module": "knowledge.a_plain_noise_word_on_a_machine",
+      "python": "bot/knowledge/a_plain_noise_word_on_a_machine.py",
+      "python_lines": 59,
+      "source_sha256": "c09d0d0b99377bc9e9d137d164efcedb96d3899db4faf96d336a39332d6b662a",
+      "rust": "crates/gen_knowledge_a_plain_noise_word_on_a_machine/src/knowledge/a_plain_noise_word_on_a_machine.rs",
+      "rust_lines": 96
+    },
+    {
+      "module": "knowledge.affording",
+      "python": "bot/knowledge/affording.py",
+      "python_lines": 96,
+      "source_sha256": "e25612f91f995f5fc4dc23896bb575d38970248f139f17cd9866dd34fd6723c6",
+      "rust": "crates/gen_knowledge_affording/src/knowledge/affording.rs",
+      "rust_lines": 135
+    },
+    {
+      "module": "knowledge.animals",
+      "python": "bot/knowledge/animals.py",
+      "python_lines": 1020,
+      "source_sha256": "fba7eedcaf48ef0c44ea2a295d7dc56dee7548840bf14d4f34dc66650022d819",
+      "rust": "crates/gen_knowledge_animals/src/knowledge/animals.rs",
+      "rust_lines": 582
+    },
+    {
+      "module": "knowledge.appointments",
+      "python": "bot/knowledge/appointments.py",
+      "python_lines": 324,
+      "source_sha256": "957c8d9b4fde9c3809b1d344536d7dffc247d3b628b05e08a55ffbdfe9ee0889",
+      "rust": "crates/gen_knowledge_appointments/src/knowledge/appointments.rs",
+      "rust_lines": 466
+    },
+    {
+      "module": "knowledge.babyfood",
+      "python": "bot/knowledge/babyfood.py",
+      "python_lines": 2333,
+      "source_sha256": "234404c693aca8d22248a2c3bf57cd865f61d592512befa4fce9faa4b78aca72",
+      "rust": "crates/gen_knowledge_babyfood/src/knowledge/babyfood.rs",
+      "rust_lines": 2081
+    },
+    {
+      "module": "knowledge.bake_faults",
+      "python": "bot/knowledge/bake_faults.py",
+      "python_lines": 221,
+      "source_sha256": "13c9ada238c060c8cdf1d734e6cc3f7462732246e103b32056741dfc0beee8e7",
+      "rust": "crates/gen_knowledge_bake_faults/src/knowledge/bake_faults.rs",
+      "rust_lines": 256
+    },
+    {
+      "module": "knowledge.bikes",
+      "python": "bot/knowledge/bikes.py",
+      "python_lines": 1214,
+      "source_sha256": "7f897befb8e982533c3da83b8605e8ee1f83801e08570426d7b7915ac484a8d4",
+      "rust": "crates/gen_knowledge_bikes/src/knowledge/bikes.rs",
+      "rust_lines": 611
+    },
+    {
+      "module": "knowledge.body",
+      "python": "bot/knowledge/body.py",
+      "python_lines": 5105,
+      "source_sha256": "fe41121d914fd7e513f7faeff9d4ca0afdbbc12ad076ccb029e2d4a22c577cc4",
+      "rust": "crates/gen_knowledge_body/src/knowledge/body.rs",
+      "rust_lines": 4435
+    },
+    {
+      "module": "knowledge.body_energy",
+      "python": "bot/knowledge/body_energy.py",
+      "python_lines": 79,
+      "source_sha256": "6d86e70b7ab7ef828d4dbb283be31a5b916f40bbff9e685c07f38b6c0425303b",
+      "rust": "crates/gen_knowledge_body_energy/src/knowledge/body_energy.rs",
+      "rust_lines": 122
+    },
+    {
+      "module": "knowledge.build_jobs",
+      "python": "bot/knowledge/build_jobs.py",
+      "python_lines": 186,
+      "source_sha256": "1ffcd559d9cdc3ed7756498a64ee4f759071712c0cd90ba1b3f3f12971f52141",
+      "rust": "crates/gen_knowledge_build_jobs/src/knowledge/build_jobs.rs",
+      "rust_lines": 233
+    },
+    {
+      "module": "knowledge.business",
+      "python": "bot/knowledge/business.py",
+      "python_lines": 494,
+      "source_sha256": "412ac54e968209930ad5583089172622405de2b800800479bdfb5d061d2716f5",
+      "rust": "crates/gen_knowledge_business/src/knowledge/business.rs",
+      "rust_lines": 227
+    },
+    {
+      "module": "knowledge.cakes",
+      "python": "bot/knowledge/cakes.py",
+      "python_lines": 298,
+      "source_sha256": "5b17da1ca52f4e1f84a8ec651183b356a9f9e03be02a1f85b2020c68a429d573",
+      "rust": "crates/gen_knowledge_cakes/src/knowledge/cakes.rs",
+      "rust_lines": 599
+    },
+    {
+      "module": "knowledge.caring",
+      "python": "bot/knowledge/caring.py",
+      "python_lines": 296,
+      "source_sha256": "ef747d75b239f0d7b455fc16d274daadc8bfe43285564cc06a8a2a46f7772d93",
+      "rust": "crates/gen_knowledge_caring/src/knowledge/caring.rs",
+      "rust_lines": 249
+    },
+    {
+      "module": "knowledge.cars",
+      "python": "bot/knowledge/cars.py",
+      "python_lines": 4900,
+      "source_sha256": "ddd59a43b86e33635ea805d2641efa4b42a80ac3697516c114278e0a5e59fe03",
+      "rust": "crates/gen_knowledge_cars/src/knowledge/cars.rs",
+      "rust_lines": 2153
+    },
+    {
+      "module": "knowledge.child_work",
+      "python": "bot/knowledge/child_work.py",
+      "python_lines": 233,
+      "source_sha256": "90e23cf4c81c91485ecaa345897e92ea34cf2adffcda2985bd0cf26f560472ec",
+      "rust": "crates/gen_knowledge_child_work/src/knowledge/child_work.rs",
+      "rust_lines": 391
+    },
+    {
+      "module": "knowledge.chilli",
+      "python": "bot/knowledge/chilli.py",
+      "python_lines": 454,
+      "source_sha256": "4347313c8de8470c4ec057edfff9ca27d83dec3c3057109c35f7b784953712f3",
+      "rust": "crates/gen_knowledge_chilli/src/knowledge/chilli.rs",
+      "rust_lines": 482
+    },
+    {
+      "module": "knowledge.cleaning",
+      "python": "bot/knowledge/cleaning.py",
+      "python_lines": 5502,
+      "source_sha256": "a5035a21d374b97eb61eac63da7931efdb66b8c72c17ee3aa391e9be8523fa51",
+      "rust": "crates/gen_knowledge_cleaning/src/knowledge/cleaning.rs",
+      "rust_lines": 2192
+    },
+    {
+      "module": "knowledge.clothing",
+      "python": "bot/knowledge/clothing.py",
+      "python_lines": 6036,
+      "source_sha256": "356ebb3c23b498774ddd6f40638c265e852234291b3709e18bd5faadbb4d731e",
+      "rust": "crates/gen_knowledge_clothing/src/knowledge/clothing.rs",
+      "rust_lines": 3267
+    },
+    {
+      "module": "knowledge.coats",
+      "python": "bot/knowledge/coats.py",
+      "python_lines": 157,
+      "source_sha256": "88fdc6606f0eddbe138e20dc23a4bf44c0941e019d2139ba5524edcb06d481c5",
+      "rust": "crates/gen_knowledge_coats/src/knowledge/coats.rs",
+      "rust_lines": 164
+    },
+    {
+      "module": "knowledge.comeback",
+      "python": "bot/knowledge/comeback.py",
+      "python_lines": 255,
+      "source_sha256": "f119093c3c2dfceb78c6ac0fc117c1eba4115b191ed95f2f0ca9252338d883eb",
+      "rust": "crates/gen_knowledge_comeback/src/knowledge/comeback.rs",
+      "rust_lines": 207
+    },
+    {
+      "module": "knowledge.complaints",
+      "python": "bot/knowledge/complaints.py",
+      "python_lines": 1276,
+      "source_sha256": "36da10b4b1683cb94abd6f5b329c32de50f74c08e0361183c560d9249e55ddb4",
+      "rust": "crates/gen_knowledge_complaints/src/knowledge/complaints.rs",
+      "rust_lines": 695
+    },
+    {
+      "module": "knowledge.conditions",
+      "python": "bot/knowledge/conditions.py",
+      "python_lines": 203,
+      "source_sha256": "c2647430b5f40666dcebeff5213c51af79e40612277936e21c1385c3d3a29163",
+      "rust": "crates/gen_knowledge_conditions/src/knowledge/conditions.rs",
+      "rust_lines": 121
+    },
+    {
+      "module": "knowledge.consumer",
+      "python": "bot/knowledge/consumer.py",
+      "python_lines": 5730,
+      "source_sha256": "7faa1db67b046936c104241a80e615c8725a0c8c8c397290f587eb5fa7b25e29",
+      "rust": "crates/gen_knowledge_consumer/src/knowledge/consumer.rs",
+      "rust_lines": 2513
+    },
+    {
+      "module": "knowledge.containers_frost",
+      "python": "bot/knowledge/containers_frost.py",
+      "python_lines": 88,
+      "source_sha256": "7cc44057f1a613138ed553e54ba1aa3214d71c99240d2514a03c86dbfa0fde2d",
+      "rust": "crates/gen_knowledge_containers_frost/src/knowledge/containers_frost.rs",
+      "rust_lines": 146
+    },
+    {
+      "module": "knowledge.cook_kit",
+      "python": "bot/knowledge/cook_kit.py",
+      "python_lines": 792,
+      "source_sha256": "bc39cf2a2953e965d8e87240422c2105108b2677c9f8ead54706d8c977024075",
+      "rust": "crates/gen_knowledge_cook_kit/src/knowledge/cook_kit.rs",
+      "rust_lines": 713
+    },
+    {
+      "module": "knowledge.cooking",
+      "python": "bot/knowledge/cooking.py",
+      "python_lines": 12887,
+      "source_sha256": "a5197bc8e266fc2e387d91aa165d1517f12118110189fa046979ad38cfea290b",
+      "rust": "crates/gen_knowledge_cooking/src/knowledge/cooking.rs",
+      "rust_lines": 19252
+    },
+    {
+      "module": "knowledge.cooking_entries",
+      "python": "bot/knowledge/cooking_entries.py",
+      "python_lines": 12071,
+      "source_sha256": "50852d94e0c9a1bf9b5972112b525b6df795c428f3a262d13315e4266cc20882",
+      "rust": "crates/gen_knowledge_cooking_entries/src/knowledge/cooking_entries.rs",
+      "rust_lines": 5462
+    },
+    {
+      "module": "knowledge.cooking_fats",
+      "python": "bot/knowledge/cooking_fats.py",
+      "python_lines": 133,
+      "source_sha256": "67d7ff51d02695d463e48737168c29d4034d5488469191adead33c028fc9f376",
+      "rust": "crates/gen_knowledge_cooking_fats/src/knowledge/cooking_fats.rs",
+      "rust_lines": 241
+    },
+    {
+      "module": "knowledge.cooking_gaps",
+      "python": "bot/knowledge/cooking_gaps.py",
+      "python_lines": 2755,
+      "source_sha256": "c6c08d8a2631f72c876bc5bd25c92f62391a4f3723118166a689896de0a007c7",
+      "rust": "crates/gen_knowledge_cooking_gaps/src/knowledge/cooking_gaps.rs",
+      "rust_lines": 1559
+    },
+    {
+      "module": "knowledge.cooking_more",
+      "python": "bot/knowledge/cooking_more.py",
+      "python_lines": 2376,
+      "source_sha256": "be14ae6d4c534226c29ba994c1fdfccfbc2d03b89363bf384e3a65073c12c497",
+      "rust": "crates/gen_knowledge_cooking_more/src/knowledge/cooking_more.rs",
+      "rust_lines": 3479
+    },
+    {
+      "module": "knowledge.cooking_tables",
+      "python": "bot/knowledge/cooking_tables.py",
+      "python_lines": 3282,
+      "source_sha256": "62563c267a6cde583b12f36a2b7afae6ccc54b6e06f783db57b7dffaca66ab43",
+      "rust": "crates/gen_knowledge_cooking_tables/src/knowledge/cooking_tables.rs",
+      "rust_lines": 218
+    },
+    {
+      "module": "knowledge.cooling",
+      "python": "bot/knowledge/cooling.py",
+      "python_lines": 110,
+      "source_sha256": "1e595aa7443f1e3f3cf807cd4025deaf70909038daa633803c463fe3e448d049",
+      "rust": "crates/gen_knowledge_cooling/src/knowledge/cooling.rs",
+      "rust_lines": 102
+    },
+    {
+      "module": "knowledge.costs",
+      "python": "bot/knowledge/costs.py",
+      "python_lines": 1930,
+      "source_sha256": "20d138bbb9b4f7acf32059c45a30ee20b2667c01ffcc8a8c606d5bf3f0be31c4",
+      "rust": "crates/gen_knowledge_costs/src/knowledge/costs.rs",
+      "rust_lines": 945
+    },
+    {
+      "module": "knowledge.creative",
+      "python": "bot/knowledge/creative.py",
+      "python_lines": 213,
+      "source_sha256": "da8d5e289f9513a5cd09fdaa648081cfa493f494bbcbb259847ee58857cf449b",
+      "rust": "crates/gen_knowledge_creative/src/knowledge/creative.rs",
+      "rust_lines": 253
+    },
+    {
+      "module": "knowledge.crisis_replies",
+      "python": "bot/knowledge/crisis_replies.py",
+      "python_lines": 2298,
+      "source_sha256": "bd9c153785fcbce66b38e2df9fdc1d9d0024fc52043bda8b8a3efffde8e7a9d6",
+      "rust": "crates/gen_knowledge_crisis_replies/src/knowledge/crisis_replies.rs",
+      "rust_lines": 81
+    },
+    {
+      "module": "knowledge.dates",
+      "python": "bot/knowledge/dates.py",
+      "python_lines": 162,
+      "source_sha256": "76879871a0760839d0b24b08c3a513a10a159583e35ad08bbc687edc47e9163a",
+      "rust": "crates/gen_knowledge_dates/src/knowledge/dates.rs",
+      "rust_lines": 243
+    },
+    {
+      "module": "knowledge.decorating",
+      "python": "bot/knowledge/decorating.py",
+      "python_lines": 337,
+      "source_sha256": "e2f98cba594779aee8fe1d0a0d6a9fcf5a3fbd1dd064bc9cb32bb998f564008e",
+      "rust": "crates/gen_knowledge_decorating/src/knowledge/decorating.rs",
+      "rust_lines": 283
+    },
+    {
+      "module": "knowledge.desk_setup",
+      "python": "bot/knowledge/desk_setup.py",
+      "python_lines": 48,
+      "source_sha256": "add8cbabb48d8056221f9ab88f7192db233e9d1d238dc711f7fe7f3c5022e95e",
+      "rust": "crates/gen_knowledge_desk_setup/src/knowledge/desk_setup.rs",
+      "rust_lines": 87
+    },
+    {
+      "module": "knowledge.devices",
+      "python": "bot/knowledge/devices.py",
+      "python_lines": 800,
+      "source_sha256": "75ec0187b8202bd71c36c4bc3e7bd9b5f3edf63e4549a33d83ed5340d892efd6",
+      "rust": "crates/gen_knowledge_devices/src/knowledge/devices.rs",
+      "rust_lines": 1165
+    },
+    {
+      "module": "knowledge.differences",
+      "python": "bot/knowledge/differences.py",
+      "python_lines": 304,
+      "source_sha256": "a93416c8a3b847a196bd38145708d1cc6b2c0ac9b870f0c880a14691f2b54fa6",
+      "rust": "crates/gen_knowledge_differences/src/knowledge/differences.rs",
+      "rust_lines": 160
+    },
+    {
+      "module": "knowledge.dish_verdicts",
+      "python": "bot/knowledge/dish_verdicts.py",
+      "python_lines": 437,
+      "source_sha256": "2e9b370e7b973fb52c816f8feadd4cf253ca27a85aae90653394ae485acd4488",
+      "rust": "crates/gen_knowledge_dish_verdicts/src/knowledge/dish_verdicts.rs",
+      "rust_lines": 248
+    },
+    {
+      "module": "knowledge.dishes",
+      "python": "bot/knowledge/dishes.py",
+      "python_lines": 6325,
+      "source_sha256": "4203ededbe3e8fa31a2487dbbfdb37acffa941fc6e202e4e5ddfcebdd63c767d",
+      "rust": "crates/gen_knowledge_dishes/src/knowledge/dishes.rs",
+      "rust_lines": 6722
+    },
+    {
+      "module": "knowledge.drinks",
+      "python": "bot/knowledge/drinks.py",
+      "python_lines": 826,
+      "source_sha256": "2567041d098e0157ef50b8010327d5160d4233fa154075cabe9972482f87f24d",
+      "rust": "crates/gen_knowledge_drinks/src/knowledge/drinks.rs",
+      "rust_lines": 525
+    },
+    {
+      "module": "knowledge.eithers",
+      "python": "bot/knowledge/eithers.py",
+      "python_lines": 520,
+      "source_sha256": "87eec3789447010c54939f67be2f25234120a821aca67214ca3c08db2235ccf6",
+      "rust": "crates/gen_knowledge_eithers/src/knowledge/eithers.rs",
+      "rust_lines": 129
+    },
+    {
+      "module": "knowledge.entertainment",
+      "python": "bot/knowledge/entertainment.py",
+      "python_lines": 10586,
+      "source_sha256": "1eda63913f7c06413d15a45350c7e49951b23416e71cd2d147528f04809d864a",
+      "rust": "crates/gen_knowledge_entertainment/src/knowledge/entertainment.rs",
+      "rust_lines": 11466
+    },
+    {
+      "module": "knowledge.everyday_lines",
+      "python": "bot/knowledge/everyday_lines.py",
+      "python_lines": 82,
+      "source_sha256": "21c54589162ed8b9e1fca19e9c6295a2ce537d3961aebcc5a40185a19baa5ed7",
+      "rust": "crates/gen_knowledge_everyday_lines/src/knowledge/everyday_lines.rs",
+      "rust_lines": 74
+    },
+    {
+      "module": "knowledge.explains",
+      "python": "bot/knowledge/explains.py",
+      "python_lines": 3423,
+      "source_sha256": "b6d2181858e30e4dfa07b60f28f0473e85590441134fd1f9fe088444dd834b58",
+      "rust": "crates/gen_knowledge_explains/src/knowledge/explains.rs",
+      "rust_lines": 1476
+    },
+    {
+      "module": "knowledge.fabrics",
+      "python": "bot/knowledge/fabrics.py",
+      "python_lines": 179,
+      "source_sha256": "3b0bca30e6df1e3b2390ad2f2ada614a9ace30589a5e30642690558269387bf6",
+      "rust": "crates/gen_knowledge_fabrics/src/knowledge/fabrics.rs",
+      "rust_lines": 152
+    },
+    {
+      "module": "knowledge.family",
+      "python": "bot/knowledge/family.py",
+      "python_lines": 14013,
+      "source_sha256": "837fee89af1001fbfeebe7a87f5713417b74aa083f241875e40ab1d08ff977d1",
+      "rust": "crates/gen_knowledge_family/src/knowledge/family.rs",
+      "rust_lines": 6376
+    },
+    {
+      "module": "knowledge.family_more",
+      "python": "bot/knowledge/family_more.py",
+      "python_lines": 1270,
+      "source_sha256": "1fd148c22a106e1c018d686e4b623c6b580e227ef49bf4bf68f93e1c89cb5408",
+      "rust": "crates/gen_knowledge_family_more/src/knowledge/family_more.rs",
+      "rust_lines": 1181
+    },
+    {
+      "module": "knowledge.fears",
+      "python": "bot/knowledge/fears.py",
+      "python_lines": 285,
+      "source_sha256": "00249bbe58a32e9c76a97f4ea8f27311ff46b26811a32dd3ee7323dbeb6be2a3",
+      "rust": "crates/gen_knowledge_fears/src/knowledge/fears.rs",
+      "rust_lines": 302
+    },
+    {
+      "module": "knowledge.fitness",
+      "python": "bot/knowledge/fitness.py",
+      "python_lines": 1831,
+      "source_sha256": "2693c8b72f74182b164d1866222ab700d694787016cedbe2e332d46715921f89",
+      "rust": "crates/gen_knowledge_fitness/src/knowledge/fitness.rs",
+      "rust_lines": 722
+    },
+    {
+      "module": "knowledge.fitweek",
+      "python": "bot/knowledge/fitweek.py",
+      "python_lines": 298,
+      "source_sha256": "f3464488bb0baebee8c4dc54d7d5b1eb74e0a350d400d2a6c9ad03869267c5bb",
+      "rust": "crates/gen_knowledge_fitweek/src/knowledge/fitweek.rs",
+      "rust_lines": 136
+    },
+    {
+      "module": "knowledge.food_left_out",
+      "python": "bot/knowledge/food_left_out.py",
+      "python_lines": 75,
+      "source_sha256": "872340059efbbcfdc0c6c6813d92e9d8d3752f5c520a13a3b9077b00d5baddbd",
+      "rust": "crates/gen_knowledge_food_left_out/src/knowledge/food_left_out.rs",
+      "rust_lines": 106
+    },
+    {
+      "module": "knowledge.freshness",
+      "python": "bot/knowledge/freshness.py",
+      "python_lines": 1431,
+      "source_sha256": "3302735e8a35fc7152f6976205762adbebecc6f37298cdd3b9f90b48f0a53457",
+      "rust": "crates/gen_knowledge_freshness/src/knowledge/freshness.rs",
+      "rust_lines": 1567
+    },
+    {
+      "module": "knowledge.friends",
+      "python": "bot/knowledge/friends.py",
+      "python_lines": 1300,
+      "source_sha256": "367a70fa478bef78fdf44b96c00f62b1f416c3863810f5137bc26bcceb297214",
+      "rust": "crates/gen_knowledge_friends/src/knowledge/friends.rs",
+      "rust_lines": 356
+    },
+    {
+      "module": "knowledge.fruit",
+      "python": "bot/knowledge/fruit.py",
+      "python_lines": 702,
+      "source_sha256": "753cfb794a39d17927038a268d097e27b5dff8184a29b8761a436868b04cbf02",
+      "rust": "crates/gen_knowledge_fruit/src/knowledge/fruit.rs",
+      "rust_lines": 532
+    },
+    {
+      "module": "knowledge.fun",
+      "python": "bot/knowledge/fun.py",
+      "python_lines": 990,
+      "source_sha256": "f756c0472c7420847555d7b305237363d5c46851695204a27e7bf043eb6acf4c",
+      "rust": "crates/gen_knowledge_fun/src/knowledge/fun.rs",
+      "rust_lines": 825
+    },
+    {
+      "module": "knowledge.garden",
+      "python": "bot/knowledge/garden.py",
+      "python_lines": 7109,
+      "source_sha256": "c86f1ee00aa3ac65f07230f0527303e7729b131e425fcd5f401f6ca41d824337",
+      "rust": "crates/gen_knowledge_garden/src/knowledge/garden.rs",
+      "rust_lines": 3914
+    },
+    {
+      "module": "knowledge.garden_tools",
+      "python": "bot/knowledge/garden_tools.py",
+      "python_lines": 429,
+      "source_sha256": "62fc2dbc5da15bbf2ba7537ef5f1efc8d58d79fa0578989736238dfcca62c524",
+      "rust": "crates/gen_knowledge_garden_tools/src/knowledge/garden_tools.rs",
+      "rust_lines": 448
+    },
+    {
+      "module": "knowledge.geography",
+      "python": "bot/knowledge/geography.py",
+      "python_lines": 1957,
+      "source_sha256": "db8936be3e25c399384486c0c06ae278c636f3bb4a5be5f85687cff2c8c04332",
+      "rust": "crates/gen_knowledge_geography/src/knowledge/geography.rs",
+      "rust_lines": 1840
+    },
+    {
+      "module": "knowledge.habits",
+      "python": "bot/knowledge/habits.py",
+      "python_lines": 1061,
+      "source_sha256": "608f498f0d576b389586ecf862dd9622b41edafd6d8526a3f2d6dcf3889e592a",
+      "rust": "crates/gen_knowledge_habits/src/knowledge/habits.rs",
+      "rust_lines": 668
+    },
+    {
+      "module": "knowledge.health",
+      "python": "bot/knowledge/health.py",
+      "python_lines": 11960,
+      "source_sha256": "ecfe6936e98c05cbf9e9b7968465e4cc2127c379992d0fd600f1e0b592cf8590",
+      "rust": "crates/gen_knowledge_health/src/knowledge/health.rs",
+      "rust_lines": 6131
+    },
+    {
+      "module": "knowledge.history",
+      "python": "bot/knowledge/history.py",
+      "python_lines": 2069,
+      "source_sha256": "14b70a55a79664f65ee1d500c943fd3b4f9ab8099236f9ccadfa8f1b2cd0a053",
+      "rust": "crates/gen_knowledge_history/src/knowledge/history.rs",
+      "rust_lines": 830
+    },
+    {
+      "module": "knowledge.home",
+      "python": "bot/knowledge/home.py",
+      "python_lines": 9579,
+      "source_sha256": "40b8a675ef93c24e62ab412a737f2640e5381d423d91536887f987676327efc0",
+      "rust": "crates/gen_knowledge_home/src/knowledge/home.rs",
+      "rust_lines": 9088
+    },
+    {
+      "module": "knowledge.home_craft",
+      "python": "bot/knowledge/home_craft.py",
+      "python_lines": 11846,
+      "source_sha256": "c24c414ae25412851e9a76100d39810fbef4d94ca990794656f2348dfbf126e5",
+      "rust": "crates/gen_knowledge_home_craft/src/knowledge/home_craft.rs",
+      "rust_lines": 1596
+    },
+    {
+      "module": "knowledge.house_odds",
+      "python": "bot/knowledge/house_odds.py",
+      "python_lines": 508,
+      "source_sha256": "36267f1d3f4b3777ff6becb2f7920e32aedc7f7b271f996346366bd5933a1d57",
+      "rust": "crates/gen_knowledge_house_odds/src/knowledge/house_odds.rs",
+      "rust_lines": 247
+    },
+    {
+      "module": "knowledge.how_it_works",
+      "python": "bot/knowledge/how_it_works.py",
+      "python_lines": 151,
+      "source_sha256": "370706240b6ffad88e241260ec6726bbf0b2e8ea8e325c488fc418f47001b3b0",
+      "rust": "crates/gen_knowledge_how_it_works/src/knowledge/how_it_works.rs",
+      "rust_lines": 159
+    },
+    {
+      "module": "knowledge.icing",
+      "python": "bot/knowledge/icing.py",
+      "python_lines": 90,
+      "source_sha256": "fd1f2ce64bcf27b6913948fa48416f63be7a66f2a35560148ea4703ccbf6b4a9",
+      "rust": "crates/gen_knowledge_icing/src/knowledge/icing.rs",
+      "rust_lines": 134
+    },
+    {
+      "module": "knowledge.idioms",
+      "python": "bot/knowledge/idioms.py",
+      "python_lines": 465,
+      "source_sha256": "975d7c5e8c07bfb1d5451c2097f5b501c85740a83cde2bdc47c0bb337d3760c0",
+      "rust": "crates/gen_knowledge_idioms/src/knowledge/idioms.rs",
+      "rust_lines": 157
+    },
+    {
+      "module": "knowledge.income_periods",
+      "python": "bot/knowledge/income_periods.py",
+      "python_lines": 306,
+      "source_sha256": "76b925c11cea0913d374a45e4602b8ad7ad4a3192ec46619023008e12f6b7a16",
+      "rust": "crates/gen_knowledge_income_periods/src/knowledge/income_periods.rs",
+      "rust_lines": 596
+    },
+    {
+      "module": "knowledge.ingredient_swaps",
+      "python": "bot/knowledge/ingredient_swaps.py",
+      "python_lines": 63,
+      "source_sha256": "fdc2fcd07bdb567f046d598550aff21adf932e4a6a0e805ef966759f94b67f8b",
+      "rust": "crates/gen_knowledge_ingredient_swaps/src/knowledge/ingredient_swaps.rs",
+      "rust_lines": 114
+    },
+    {
+      "module": "knowledge.job_times",
+      "python": "bot/knowledge/job_times.py",
+      "python_lines": 19,
+      "source_sha256": "798a11c6c2a7ecf10895bce56947eddef1d6f326715ecbe6194a586f796ac4ab",
+      "rust": "crates/gen_knowledge_job_times/src/knowledge/job_times.rs",
+      "rust_lines": 66
+    },
+    {
+      "module": "knowledge.joint_time",
+      "python": "bot/knowledge/joint_time.py",
+      "python_lines": 131,
+      "source_sha256": "ea7c63c24551be21b4e087391984aa9bc904d09adab807de8b986fc5da3fc7ce",
+      "rust": "crates/gen_knowledge_joint_time/src/knowledge/joint_time.rs",
+      "rust_lines": 245
+    },
+    {
+      "module": "knowledge.joints",
+      "python": "bot/knowledge/joints.py",
+      "python_lines": 591,
+      "source_sha256": "40f0ab3c877dece6c529c61c2e59924ecc950d3dc19575f046f199e5ce3fac71",
+      "rust": "crates/gen_knowledge_joints/src/knowledge/joints.rs",
+      "rust_lines": 769
+    },
+    {
+      "module": "knowledge.keeping",
+      "python": "bot/knowledge/keeping.py",
+      "python_lines": 2118,
+      "source_sha256": "c448bb8db4ef4be9a434e548c68ebdc38fee8e5bdba222340d84e6158949e432",
+      "rust": "crates/gen_knowledge_keeping/src/knowledge/keeping.rs",
+      "rust_lines": 1910
+    },
+    {
+      "module": "knowledge.keeping_cooked",
+      "python": "bot/knowledge/keeping_cooked.py",
+      "python_lines": 115,
+      "source_sha256": "93f0bd5735b56560ba6c4d51850a47e8a6faf1eb078fc0658cfc4b1f399f11d4",
+      "rust": "crates/gen_knowledge_keeping_cooked/src/knowledge/keeping_cooked.rs",
+      "rust_lines": 115
+    },
+    {
+      "module": "knowledge.kept_animals",
+      "python": "bot/knowledge/kept_animals.py",
+      "python_lines": 144,
+      "source_sha256": "0bb6f19f680297955d8149932ecc13c6a6a6428ee37b61cae77b2338953ca952",
+      "rust": "crates/gen_knowledge_kept_animals/src/knowledge/kept_animals.rs",
+      "rust_lines": 150
+    },
+    {
+      "module": "knowledge.kit_lists",
+      "python": "bot/knowledge/kit_lists.py",
+      "python_lines": 212,
+      "source_sha256": "c3c43ce3840a22e9d921ac8459efed4aeec343ee0eaf248943a772a696e3c39a",
+      "rust": "crates/gen_knowledge_kit_lists/src/knowledge/kit_lists.rs",
+      "rust_lines": 193
+    },
+    {
+      "module": "knowledge.kitchen",
+      "python": "bot/knowledge/kitchen.py",
+      "python_lines": 146,
+      "source_sha256": "861e5764854ede6cd731b04e82a1adee84e51a57c4ac56d6069ad685fbef6abf",
+      "rust": "crates/gen_knowledge_kitchen/src/knowledge/kitchen.rs",
+      "rust_lines": 179
+    },
+    {
+      "module": "knowledge.kitchen_odds",
+      "python": "bot/knowledge/kitchen_odds.py",
+      "python_lines": 529,
+      "source_sha256": "a0b1e47639c95315f760d8eae501deeb5bdc1b00cfb5a2d528af586219594a3c",
+      "rust": "crates/gen_knowledge_kitchen_odds/src/knowledge/kitchen_odds.rs",
+      "rust_lines": 206
+    },
+    {
+      "module": "knowledge.kitchen_prep",
+      "python": "bot/knowledge/kitchen_prep.py",
+      "python_lines": 433,
+      "source_sha256": "3ab2886af9272e7e4f9525043902c8efb48eca5b77b392e6a185cf2e2576665f",
+      "rust": "crates/gen_knowledge_kitchen_prep/src/knowledge/kitchen_prep.rs",
+      "rust_lines": 739
+    },
+    {
+      "module": "knowledge.kits_and_claims",
+      "python": "bot/knowledge/kits_and_claims.py",
+      "python_lines": 83,
+      "source_sha256": "0fa18616f8660b1b991d574b7c7c7bfead3b20ecd7b1ff636a5ac917633b33c8",
+      "rust": "crates/gen_knowledge_kits_and_claims/src/knowledge/kits_and_claims.rs",
+      "rust_lines": 61
+    },
+    {
+      "module": "knowledge.land",
+      "python": "bot/knowledge/land.py",
+      "python_lines": 47,
+      "source_sha256": "3f3ffd67b7a71bbf215107a7748f8c5ebe8fba47cc73661fa9fbdf4863d11a40",
+      "rust": "crates/gen_knowledge_land/src/knowledge/land.rs",
+      "rust_lines": 69
+    },
+    {
+      "module": "knowledge.language",
+      "python": "bot/knowledge/language.py",
+      "python_lines": 3995,
+      "source_sha256": "4b54af54c0eb6022882c57f59f00d374a45919b213dd1d5617c252cdf6869978",
+      "rust": "crates/gen_knowledge_language/src/knowledge/language.rs",
+      "rust_lines": 2780
+    },
+    {
+      "module": "knowledge.left_on",
+      "python": "bot/knowledge/left_on.py",
+      "python_lines": 271,
+      "source_sha256": "38a94c86b053c51f6e45b9f88a98e09eb285fe31964990809ee8ef75f10f5f82",
+      "rust": "crates/gen_knowledge_left_on/src/knowledge/left_on.rs",
+      "rust_lines": 299
+    },
+    {
+      "module": "knowledge.lifeadmin",
+      "python": "bot/knowledge/lifeadmin.py",
+      "python_lines": 5087,
+      "source_sha256": "8bab39730003c85d7a704be8b5f5257f84cfc3d724dc640ed0fd0a56342aaff6",
+      "rust": "crates/gen_knowledge_lifeadmin/src/knowledge/lifeadmin.rs",
+      "rust_lines": 2012
+    },
+    {
+      "module": "knowledge.lookup",
+      "python": "bot/knowledge/lookup.py",
+      "python_lines": 7989,
+      "source_sha256": "1d28c0c108c9ffd75b798fae98f8aac7f361b4cce540ed17e020a278977b3817",
+      "rust": "crates/gen_knowledge_lookup/src/knowledge/lookup.rs",
+      "rust_lines": 13111
+    },
+    {
+      "module": "knowledge.machine_door",
+      "python": "bot/knowledge/machine_door.py",
+      "python_lines": 90,
+      "source_sha256": "0aded0ffe1bcfa5530f669f31d97d6d9b47a80ab4938b567658f110724a3415e",
+      "rust": "crates/gen_knowledge_machine_door/src/knowledge/machine_door.rs",
+      "rust_lines": 128
+    },
+    {
+      "module": "knowledge.materials",
+      "python": "bot/knowledge/materials.py",
+      "python_lines": 711,
+      "source_sha256": "e32685daa1ca195849e24520ade768fcd1fedf82bb4beede855b5546e79b6226",
+      "rust": "crates/gen_knowledge_materials/src/knowledge/materials.rs",
+      "rust_lines": 1095
+    },
+    {
+      "module": "knowledge.maths",
+      "python": "bot/knowledge/maths.py",
+      "python_lines": 6110,
+      "source_sha256": "940004ac5ea1c26b5399a5f8c454ed97af4a8aa022ff857fc86c420f47330ee5",
+      "rust": "crates/gen_knowledge_maths/src/knowledge/maths.rs",
+      "rust_lines": 10131
+    },
+    {
+      "module": "knowledge.meals",
+      "python": "bot/knowledge/meals.py",
+      "python_lines": 2794,
+      "source_sha256": "1ed2c1b0d96f379189890198104b5b7b1643ea616ca1d72b8a2e65f6f215a750",
+      "rust": "crates/gen_knowledge_meals/src/knowledge/meals.rs",
+      "rust_lines": 3788
+    },
+    {
+      "module": "knowledge.measures",
+      "python": "bot/knowledge/measures.py",
+      "python_lines": 636,
+      "source_sha256": "5fe2816ee583f50ce9734d8c5224c5ab4a0b67ffc5ef67b11dcf755830024a1d",
+      "rust": "crates/gen_knowledge_measures/src/knowledge/measures.rs",
+      "rust_lines": 526
+    },
+    {
+      "module": "knowledge.meat_in_a_card",
+      "python": "bot/knowledge/meat_in_a_card.py",
+      "python_lines": 72,
+      "source_sha256": "00aee62dc49be24f3266cb46a15c927d989e5a9187162d367812d5b3e0e77850",
+      "rust": "crates/gen_knowledge_meat_in_a_card/src/knowledge/meat_in_a_card.rs",
+      "rust_lines": 117
+    },
+    {
+      "module": "knowledge.microwave_methods",
+      "python": "bot/knowledge/microwave_methods.py",
+      "python_lines": 80,
+      "source_sha256": "67220fbd2ec528d4403ae39c8111489799e9e06c8bb2f544c471d3374c5f3e16",
+      "rust": "crates/gen_knowledge_microwave_methods/src/knowledge/microwave_methods.rs",
+      "rust_lines": 86
+    },
+    {
+      "module": "knowledge.money",
+      "python": "bot/knowledge/money.py",
+      "python_lines": 11643,
+      "source_sha256": "97dd4186133fd52d9338cec939a903406001445ba2d1246a2bc7a6f640ddd092",
+      "rust": "crates/gen_knowledge_money/src/knowledge/money.rs",
+      "rust_lines": 6860
+    },
+    {
+      "module": "knowledge.money_words",
+      "python": "bot/knowledge/money_words.py",
+      "python_lines": 405,
+      "source_sha256": "b3a377b2af474fe5c32ad66ecd76931dc127bbaa4b47b7fc875030fff7377a7e",
+      "rust": "crates/gen_knowledge_money_words/src/knowledge/money_words.rs",
+      "rust_lines": 115
+    },
+    {
+      "module": "knowledge.music",
+      "python": "bot/knowledge/music.py",
+      "python_lines": 411,
+      "source_sha256": "a37ea4e75930c68a69d6e7624d0c338c2fdb8e3d73151b37ad983bdbdc7e6bce",
+      "rust": "crates/gen_knowledge_music/src/knowledge/music.rs",
+      "rust_lines": 319
+    },
+    {
+      "module": "knowledge.nature",
+      "python": "bot/knowledge/nature.py",
+      "python_lines": 957,
+      "source_sha256": "2685d5d84500ecc3ae0dc9fbfa6a3564b6acbccc9051a671d844e9d9ec0c74e7",
+      "rust": "crates/gen_knowledge_nature/src/knowledge/nature.rs",
+      "rust_lines": 715
+    },
+    {
+      "module": "knowledge.newborn",
+      "python": "bot/knowledge/newborn.py",
+      "python_lines": 263,
+      "source_sha256": "0cdebd61a97c95bbbccb91c210c98e8b445af24df95cc86ed0e0af060730617a",
+      "rust": "crates/gen_knowledge_newborn/src/knowledge/newborn.rs",
+      "rust_lines": 376
+    },
+    {
+      "module": "knowledge.no_kit",
+      "python": "bot/knowledge/no_kit.py",
+      "python_lines": 340,
+      "source_sha256": "60d0c662e584774f9e4392b8cd4390ad655f3d24f3123d704b4c5e18f229cbc4",
+      "rust": "crates/gen_knowledge_no_kit/src/knowledge/no_kit.rs",
+      "rust_lines": 247
+    },
+    {
+      "module": "knowledge.notable",
+      "python": "bot/knowledge/notable.py",
+      "python_lines": 765,
+      "source_sha256": "9387ce89692f6e3f841f4cb499b4c09c68995898f665fe66371e60d6935cbd8f",
+      "rust": "crates/gen_knowledge_notable/src/knowledge/notable.rs",
+      "rust_lines": 353
+    },
+    {
+      "module": "knowledge.nursing",
+      "python": "bot/knowledge/nursing.py",
+      "python_lines": 54,
+      "source_sha256": "ebf14a7964ce2b63e60a9a880f088fd2d350fbb5906482fcb0d9f9a40197586a",
+      "rust": "crates/gen_knowledge_nursing/src/knowledge/nursing.rs",
+      "rust_lines": 94
+    },
+    {
+      "module": "knowledge.nutrition",
+      "python": "bot/knowledge/nutrition.py",
+      "python_lines": 3292,
+      "source_sha256": "05145069c0740bfeb0b2826679f297aa6192c35b66b90b1b7dc495ac40f8b79c",
+      "rust": "crates/gen_knowledge_nutrition/src/knowledge/nutrition.rs",
+      "rust_lines": 1700
+    },
+    {
+      "module": "knowledge.occasions",
+      "python": "bot/knowledge/occasions.py",
+      "python_lines": 269,
+      "source_sha256": "9515c01b33edb2a063d5c0091a4cf57fd0638a5ee6c4ee2dfccd35e7a8c20150",
+      "rust": "crates/gen_knowledge_occasions/src/knowledge/occasions.rs",
+      "rust_lines": 369
+    },
+    {
+      "module": "knowledge.odours",
+      "python": "bot/knowledge/odours.py",
+      "python_lines": 283,
+      "source_sha256": "853a6cae1bb4fd78dc2d98c8c21740ad995b707ffb07e76b62177f73f5d8d7e3",
+      "rust": "crates/gen_knowledge_odours/src/knowledge/odours.rs",
+      "rust_lines": 218
+    },
+    {
+      "module": "knowledge.opinions",
+      "python": "bot/knowledge/opinions.py",
+      "python_lines": 1694,
+      "source_sha256": "2020345a7fec1263994cdba85d6ffbb842bfa4bf9d063479b9d2e2231ad54a13",
+      "rust": "crates/gen_knowledge_opinions/src/knowledge/opinions.rs",
+      "rust_lines": 1676
+    },
+    {
+      "module": "knowledge.painting_faults",
+      "python": "bot/knowledge/painting_faults.py",
+      "python_lines": 328,
+      "source_sha256": "1e603ed0b9c71767ca79ab9ce8f8cf95b60805d8ee569c7e9534ae827002d1e6",
+      "rust": "crates/gen_knowledge_painting_faults/src/knowledge/painting_faults.rs",
+      "rust_lines": 373
+    },
+    {
+      "module": "knowledge.panic_talk",
+      "python": "bot/knowledge/panic_talk.py",
+      "python_lines": 211,
+      "source_sha256": "0779fd250437e3e09c8206affb22bf6f36738153c15bdddbd0f7a5f9cee59467",
+      "rust": "crates/gen_knowledge_panic_talk/src/knowledge/panic_talk.rs",
+      "rust_lines": 378
+    },
+    {
+      "module": "knowledge.parking",
+      "python": "bot/knowledge/parking.py",
+      "python_lines": 45,
+      "source_sha256": "40341d8b2434c88df6a3e01cca10a14d4a59ed35be70caa013a73a52c6dec400",
+      "rust": "crates/gen_knowledge_parking/src/knowledge/parking.rs",
+      "rust_lines": 69
+    },
+    {
+      "module": "knowledge.pasta",
+      "python": "bot/knowledge/pasta.py",
+      "python_lines": 343,
+      "source_sha256": "499acfd15efd4ef7660249c1b065582cb1c974417e16cc3722291304b18b6627",
+      "rust": "crates/gen_knowledge_pasta/src/knowledge/pasta.rs",
+      "rust_lines": 315
+    },
+    {
+      "module": "knowledge.pay",
+      "python": "bot/knowledge/pay.py",
+      "python_lines": 248,
+      "source_sha256": "54bf73ecc852583009604ec55af8068bab38201e3546c43706704abdee9f356d",
+      "rust": "crates/gen_knowledge_pay/src/knowledge/pay.rs",
+      "rust_lines": 256
+    },
+    {
+      "module": "knowledge.pensions",
+      "python": "bot/knowledge/pensions.py",
+      "python_lines": 119,
+      "source_sha256": "ad23b8c02ecb79de5b7b82f9e8def386a133a10af4c4074a47737c96c0f2890c",
+      "rust": "crates/gen_knowledge_pensions/src/knowledge/pensions.rs",
+      "rust_lines": 130
+    },
+    {
+      "module": "knowledge.pets",
+      "python": "bot/knowledge/pets.py",
+      "python_lines": 12315,
+      "source_sha256": "5921912933eaefb326efaf410d1e252f7cebcfe309e669c600a894a0c14792a2",
+      "rust": "crates/gen_knowledge_pets/src/knowledge/pets.rs",
+      "rust_lines": 8283
+    },
+    {
+      "module": "knowledge.pets_health",
+      "python": "bot/knowledge/pets_health.py",
+      "python_lines": 90,
+      "source_sha256": "e3ea142091f9975e759d44837614f9510e7aa8846320049d92d13910f07c5ed1",
+      "rust": "crates/gen_knowledge_pets_health/src/knowledge/pets_health.rs",
+      "rust_lines": 125
+    },
+    {
+      "module": "knowledge.pharmacy",
+      "python": "bot/knowledge/pharmacy.py",
+      "python_lines": 414,
+      "source_sha256": "1f611303d1f9e5a247dfcd2e5cfbbe7da9cac205bfe4919cd428ff0f0ea95089",
+      "rust": "crates/gen_knowledge_pharmacy/src/knowledge/pharmacy.rs",
+      "rust_lines": 824
+    },
+    {
+      "module": "knowledge.phone_use",
+      "python": "bot/knowledge/phone_use.py",
+      "python_lines": 132,
+      "source_sha256": "490f86324e233fd6af96c51dc5ca6f07e2208a2afbb88bffc4896af81664fd6b",
+      "rust": "crates/gen_knowledge_phone_use/src/knowledge/phone_use.rs",
+      "rust_lines": 244
+    },
+    {
+      "module": "knowledge.photography",
+      "python": "bot/knowledge/photography.py",
+      "python_lines": 199,
+      "source_sha256": "c24439efc734067b709f2ef403f831fa46389ff37348ca7258dbd12dbb546ebf",
+      "rust": "crates/gen_knowledge_photography/src/knowledge/photography.rs",
+      "rust_lines": 89
+    },
+    {
+      "module": "knowledge.picking",
+      "python": "bot/knowledge/picking.py",
+      "python_lines": 446,
+      "source_sha256": "456b87eaa4b7b98228e262c2cd21347a0fdafd7b8677d4eed8a8950ba091dba4",
+      "rust": "crates/gen_knowledge_picking/src/knowledge/picking.rs",
+      "rust_lines": 425
+    },
+    {
+      "module": "knowledge.picks",
+      "python": "bot/knowledge/picks.py",
+      "python_lines": 164,
+      "source_sha256": "7d7b7d33db47609b45668c11145dac46598f134a2a1ce26fc1fb5d71fef424e6",
+      "rust": "crates/gen_knowledge_picks/src/knowledge/picks.rs",
+      "rust_lines": 399
+    },
+    {
+      "module": "knowledge.plans",
+      "python": "bot/knowledge/plans.py",
+      "python_lines": 3444,
+      "source_sha256": "f48a54e160d9dfe0a3e52bf3c2d4ce3a49ce40416430e54c566839adae9db328",
+      "rust": "crates/gen_knowledge_plans/src/knowledge/plans.rs",
+      "rust_lines": 2776
+    },
+    {
+      "module": "knowledge.power_heat",
+      "python": "bot/knowledge/power_heat.py",
+      "python_lines": 43,
+      "source_sha256": "0eba9afc8aad1210099f59ed0caa722ffcfa0f35c3a12ba17188ad465a7b14ab",
+      "rust": "crates/gen_knowledge_power_heat/src/knowledge/power_heat.rs",
+      "rust_lines": 96
+    },
+    {
+      "module": "knowledge.pregnancy",
+      "python": "bot/knowledge/pregnancy.py",
+      "python_lines": 1669,
+      "source_sha256": "758d388c194096d78ed23b33bc47bee6a5bfc10d4db98844994a21c55e004b70",
+      "rust": "crates/gen_knowledge_pregnancy/src/knowledge/pregnancy.rs",
+      "rust_lines": 1306
+    },
+    {
+      "module": "knowledge.prices",
+      "python": "bot/knowledge/prices.py",
+      "python_lines": 277,
+      "source_sha256": "b48ade83c0933b598e57411c910e0c84b998e7711c15d6ddd8f8ed85bc9796f7",
+      "rust": "crates/gen_knowledge_prices/src/knowledge/prices.rs",
+      "rust_lines": 303
+    },
+    {
+      "module": "knowledge.procedures",
+      "python": "bot/knowledge/procedures.py",
+      "python_lines": 241,
+      "source_sha256": "e1dc00e4089302ef5d0921b028c71173bdf3870e37271468b96fb2cfca2959df",
+      "rust": "crates/gen_knowledge_procedures/src/knowledge/procedures.rs",
+      "rust_lines": 161
+    },
+    {
+      "module": "knowledge.quantity",
+      "python": "bot/knowledge/quantity.py",
+      "python_lines": 37,
+      "source_sha256": "b03d7ba9d944287b2ce83924a09fb946cc478b5e42e4666c22545f62608faac4",
+      "rust": "crates/gen_knowledge_quantity/src/knowledge/quantity.rs",
+      "rust_lines": 98
+    },
+    {
+      "module": "knowledge.rice",
+      "python": "bot/knowledge/rice.py",
+      "python_lines": 350,
+      "source_sha256": "04243f44632588948f4f3ea62ae3ab8081375b5ea99d54b28a68f78b6d26b1ca",
+      "rust": "crates/gen_knowledge_rice/src/knowledge/rice.rs",
+      "rust_lines": 436
+    },
+    {
+      "module": "knowledge.routines",
+      "python": "bot/knowledge/routines.py",
+      "python_lines": 582,
+      "source_sha256": "aafed1219e91c7cc927f9c69273cc6bffec450922a1effd803a532d9e9aa51d3",
+      "rust": "crates/gen_knowledge_routines/src/knowledge/routines.rs",
+      "rust_lines": 296
+    },
+    {
+      "module": "knowledge.rubbish",
+      "python": "bot/knowledge/rubbish.py",
+      "python_lines": 909,
+      "source_sha256": "3d53cc1ae59010b285359731789057e633d0d3e7badef3fa90bb8abf87f6782a",
+      "rust": "crates/gen_knowledge_rubbish/src/knowledge/rubbish.rs",
+      "rust_lines": 512
+    },
+    {
+      "module": "knowledge.sauces",
+      "python": "bot/knowledge/sauces.py",
+      "python_lines": 310,
+      "source_sha256": "076a60f06d83b4cc1d2a7c43b3007e1d413a08d58f07d8a6368861fdcf5339fd",
+      "rust": "crates/gen_knowledge_sauces/src/knowledge/sauces.rs",
+      "rust_lines": 336
+    },
+    {
+      "module": "knowledge.school_day",
+      "python": "bot/knowledge/school_day.py",
+      "python_lines": 60,
+      "source_sha256": "78f531809dbc4942c6ac15d4bf13d9b1c5246a2670f5cd3fa578c9fd23749820",
+      "rust": "crates/gen_knowledge_school_day/src/knowledge/school_day.rs",
+      "rust_lines": 69
+    },
+    {
+      "module": "knowledge.school_days",
+      "python": "bot/knowledge/school_days.py",
+      "python_lines": 75,
+      "source_sha256": "cf25ea1d7a4400ea1779326a0c7c1e42937c51fa3aa7a679fecd005104db524f",
+      "rust": "crates/gen_knowledge_school_days/src/knowledge/school_days.rs",
+      "rust_lines": 71
+    },
+    {
+      "module": "knowledge.schoolmaths",
+      "python": "bot/knowledge/schoolmaths.py",
+      "python_lines": 217,
+      "source_sha256": "993f6b3cbc00c0313f5d44000323c62b71343a1df6fc7a524049f958ef0e86c2",
+      "rust": "crates/gen_knowledge_schoolmaths/src/knowledge/schoolmaths.rs",
+      "rust_lines": 117
+    },
+    {
+      "module": "knowledge.science",
+      "python": "bot/knowledge/science.py",
+      "python_lines": 12703,
+      "source_sha256": "87e0f0a4c61c67e95f736b20fb34211f46678c2b5c1c5128f274d62e147caab1",
+      "rust": "crates/gen_knowledge_science/src/knowledge/science.rs",
+      "rust_lines": 6692
+    },
+    {
+      "module": "knowledge.seasoning",
+      "python": "bot/knowledge/seasoning.py",
+      "python_lines": 277,
+      "source_sha256": "df6e41fed6149381fe522ea0867b3289a562b4a25c63ffc24636166dd32ee0f1",
+      "rust": "crates/gen_knowledge_seasoning/src/knowledge/seasoning.rs",
+      "rust_lines": 176
+    },
+    {
+      "module": "knowledge.shopping",
+      "python": "bot/knowledge/shopping.py",
+      "python_lines": 4488,
+      "source_sha256": "a3a80aad7bf891a269c10f1f2a6ef4369284f9f66848a697eb8ed17352a22f65",
+      "rust": "crates/gen_knowledge_shopping/src/knowledge/shopping.rs",
+      "rust_lines": 3311
+    },
+    {
+      "module": "knowledge.sleep",
+      "python": "bot/knowledge/sleep.py",
+      "python_lines": 1137,
+      "source_sha256": "c9dd38769de5a76adc0020f73a51685dc3952c6bcc12c8ee099d29bfc11b7b5a",
+      "rust": "crates/gen_knowledge_sleep/src/knowledge/sleep.rs",
+      "rust_lines": 501
+    },
+    {
+      "module": "knowledge.sleep_aids",
+      "python": "bot/knowledge/sleep_aids.py",
+      "python_lines": 206,
+      "source_sha256": "faba90d606c4445d70d2f9213037796eb9807c2789fc4d29541bd353daf6a775",
+      "rust": "crates/gen_knowledge_sleep_aids/src/knowledge/sleep_aids.rs",
+      "rust_lines": 572
+    },
+    {
+      "module": "knowledge.spice_heat",
+      "python": "bot/knowledge/spice_heat.py",
+      "python_lines": 246,
+      "source_sha256": "fbabde4709a381b1bec93568ab48c384fb628ca8df2ac974e20327467a7c1f27",
+      "rust": "crates/gen_knowledge_spice_heat/src/knowledge/spice_heat.rs",
+      "rust_lines": 135
+    },
+    {
+      "module": "knowledge.sport",
+      "python": "bot/knowledge/sport.py",
+      "python_lines": 4750,
+      "source_sha256": "acdb6ca59bdf3e4ff9196a40a007c8bd43b0e39461919ec7a9cd3b8563e7d7be",
+      "rust": "crates/gen_knowledge_sport/src/knowledge/sport.rs",
+      "rust_lines": 2271
+    },
+    {
+      "module": "knowledge.still_ok",
+      "python": "bot/knowledge/still_ok.py",
+      "python_lines": 1247,
+      "source_sha256": "9ae8218ead6c518e9af332dd3faf0f697aabdf8b3496ec01af9f04c177de397c",
+      "rust": "crates/gen_knowledge_still_ok/src/knowledge/still_ok.rs",
+      "rust_lines": 834
+    },
+    {
+      "module": "knowledge.study",
+      "python": "bot/knowledge/study.py",
+      "python_lines": 4998,
+      "source_sha256": "762b896c779c802ea42aef722a4d1c9af94edf43fb5a4fd66a7945e01e2281f1",
+      "rust": "crates/gen_knowledge_study/src/knowledge/study.rs",
+      "rust_lines": 2955
+    },
+    {
+      "module": "knowledge.swaps",
+      "python": "bot/knowledge/swaps.py",
+      "python_lines": 1217,
+      "source_sha256": "fa0260d74513a7e68d724d5825a80d31da84da1e1d6f5eb6b52b7d2d0ecef791",
+      "rust": "crates/gen_knowledge_swaps/src/knowledge/swaps.rs",
+      "rust_lines": 589
+    },
+    {
+      "module": "knowledge.takes",
+      "python": "bot/knowledge/takes.py",
+      "python_lines": 329,
+      "source_sha256": "1ddbe6ba3bb91bf7f295c816436db561a818ea6b3b512cb48dd2aa15444ddc1a",
+      "rust": "crates/gen_knowledge_takes/src/knowledge/takes.rs",
+      "rust_lines": 208
+    },
+    {
+      "module": "knowledge.technology",
+      "python": "bot/knowledge/technology.py",
+      "python_lines": 8525,
+      "source_sha256": "0840d74cc36c6d30e2e581a11f84a0f66f9e74a3f7f8df153c9c304d349b99d7",
+      "rust": "crates/gen_knowledge_technology/src/knowledge/technology.rs",
+      "rust_lines": 2758
+    },
+    {
+      "module": "knowledge.tenancy",
+      "python": "bot/knowledge/tenancy.py",
+      "python_lines": 108,
+      "source_sha256": "4e36acff3ad37cd3e59cb5f2bc20f1902eaaedee4f937e5afe17e279c23ac1ca",
+      "rust": "crates/gen_knowledge_tenancy/src/knowledge/tenancy.rs",
+      "rust_lines": 189
+    },
+    {
+      "module": "knowledge.trades",
+      "python": "bot/knowledge/trades.py",
+      "python_lines": 40,
+      "source_sha256": "cd8571de8d92ec42cab139df5a64e4eb53313902e0287fc94e3a412ca2f9dfc9",
+      "rust": "crates/gen_knowledge_trades/src/knowledge/trades.rs",
+      "rust_lines": 69
+    },
+    {
+      "module": "knowledge.travel",
+      "python": "bot/knowledge/travel.py",
+      "python_lines": 12560,
+      "source_sha256": "93af8415c36eee7b2c171ded948d506cf90de27321996d8f8ea484d4fc8d26e3",
+      "rust": "crates/gen_knowledge_travel/src/knowledge/travel.rs",
+      "rust_lines": 9973
+    },
+    {
+      "module": "knowledge.travel_health",
+      "python": "bot/knowledge/travel_health.py",
+      "python_lines": 320,
+      "source_sha256": "e9c48f2c3493faaa79b02a642510d2ba459a84aea373cd4031fa131e78de90a2",
+      "rust": "crates/gen_knowledge_travel_health/src/knowledge/travel_health.rs",
+      "rust_lines": 419
+    },
+    {
+      "module": "knowledge.units",
+      "python": "bot/knowledge/units.py",
+      "python_lines": 3689,
+      "source_sha256": "f97c5bb48811a6c4b7f478cbb67689cfb7a89eb1ec601661e92f5d4a0d8956c7",
+      "rust": "crates/gen_knowledge_units/src/knowledge/units.rs",
+      "rust_lines": 6790
+    },
+    {
+      "module": "knowledge.vaccines",
+      "python": "bot/knowledge/vaccines.py",
+      "python_lines": 226,
+      "source_sha256": "5baa41e518c7664b4f01a89f506a8dea3c5f7cfc82f834400de035700de417e8",
+      "rust": "crates/gen_knowledge_vaccines/src/knowledge/vaccines.rs",
+      "rust_lines": 327
+    },
+    {
+      "module": "knowledge.vegetables",
+      "python": "bot/knowledge/vegetables.py",
+      "python_lines": 961,
+      "source_sha256": "be8c2b29bc20b51dc8b8468a681be189060315a25a1f6bea0f2abb09905f23c1",
+      "rust": "crates/gen_knowledge_vegetables/src/knowledge/vegetables.rs",
+      "rust_lines": 958
+    },
+    {
+      "module": "knowledge.warm_food",
+      "python": "bot/knowledge/warm_food.py",
+      "python_lines": 161,
+      "source_sha256": "4f00a4a2aea2b3d85fb80513471f731f562109d7d652eb896b4928c731a6118d",
+      "rust": "crates/gen_knowledge_warm_food/src/knowledge/warm_food.rs",
+      "rust_lines": 289
+    },
+    {
+      "module": "knowledge.water_out",
+      "python": "bot/knowledge/water_out.py",
+      "python_lines": 188,
+      "source_sha256": "959fa08545b727884580d6f9329b43e15ba2e49851cea9083cf102683915e1f9",
+      "rust": "crates/gen_knowledge_water_out/src/knowledge/water_out.rs",
+      "rust_lines": 132
+    },
+    {
+      "module": "knowledge.what_damages_what",
+      "python": "bot/knowledge/what_damages_what.py",
+      "python_lines": 392,
+      "source_sha256": "d3e08294ddfd99b4625ad0e1034952fe6c0fdcdab991f4e360e4b26d143e47be",
+      "rust": "crates/gen_knowledge_what_damages_what/src/knowledge/what_damages_what.rs",
+      "rust_lines": 435
+    },
+    {
+      "module": "knowledge.whenbuy",
+      "python": "bot/knowledge/whenbuy.py",
+      "python_lines": 454,
+      "source_sha256": "4ecf6ac8497fb7d4b2fd7b851a3e72b5a700564d599ef4e35b9b89f0846caf95",
+      "rust": "crates/gen_knowledge_whenbuy/src/knowledge/whenbuy.rs",
+      "rust_lines": 528
+    },
+    {
+      "module": "knowledge.wording",
+      "python": "bot/knowledge/wording.py",
+      "python_lines": 2979,
+      "source_sha256": "100f3f523f9f303f9cf05d9b523a92d7f10405e290a319067d0382d94286f8ae",
+      "rust": "crates/gen_knowledge_wording/src/knowledge/wording.rs",
+      "rust_lines": 2018
+    },
+    {
+      "module": "knowledge.work",
+      "python": "bot/knowledge/work.py",
+      "python_lines": 9201,
+      "source_sha256": "61ee51b343e3aa24074e189e106c018602aa81fb892921eed0aa74a268d90436",
+      "rust": "crates/gen_knowledge_work/src/knowledge/work.rs",
+      "rust_lines": 3639
+    },
+    {
+      "module": "memory",
+      "python": "bot/memory/__init__.py",
+      "python_lines": 1339,
+      "source_sha256": "b17dcd4da4c6b005d16c5e40ff3c8e54b33986de86609a5bdab1186fad4dc8dc",
+      "rust": "crates/gen_memory/src/memory/mod.rs",
+      "rust_lines": 2627
+    },
+    {
+      "module": "memory.a_year_of_birth",
+      "python": "bot/memory/a_year_of_birth.py",
+      "python_lines": 122,
+      "source_sha256": "b96515af943e1e8747b5c9262cef6017a1bee9c86684d8d312d6f568f6913dc2",
+      "rust": "crates/gen_memory_a_year_of_birth/src/memory/a_year_of_birth.rs",
+      "rust_lines": 315
+    },
+    {
+      "module": "memory.aboutthem",
+      "python": "bot/memory/aboutthem.py",
+      "python_lines": 254,
+      "source_sha256": "2b165693d9e9ee438ef2e55d9f4a7498886f855cd1570fc4c683e8aabbe3ec64",
+      "rust": "crates/gen_memory_aboutthem/src/memory/aboutthem.rs",
+      "rust_lines": 599
+    },
+    {
+      "module": "memory.ack",
+      "python": "bot/memory/ack.py",
+      "python_lines": 6917,
+      "source_sha256": "cf7a0ac2ec1c1a8c17e2bb88ee9fbc0b20b542329c484be1e47817895ae10e49",
+      "rust": "crates/gen_memory_ack/src/memory/ack.rs",
+      "rust_lines": 10737
+    },
+    {
+      "module": "memory.again",
+      "python": "bot/memory/again.py",
+      "python_lines": 1326,
+      "source_sha256": "6ffa11d9f66bf751ccc233c890e32847a1d74be051218c5fbf268a18f174ef8f",
+      "rust": "crates/gen_memory_again/src/memory/again.rs",
+      "rust_lines": 2279
+    },
+    {
+      "module": "memory.already",
+      "python": "bot/memory/already.py",
+      "python_lines": 1141,
+      "source_sha256": "a0ff4a104768ecb64e49f13220b9ba93f81e5012c6897d643034216a1efb44b7",
+      "rust": "crates/gen_memory_already/src/memory/already.rs",
+      "rust_lines": 2069
+    },
+    {
+      "module": "memory.amounts",
+      "python": "bot/memory/amounts.py",
+      "python_lines": 260,
+      "source_sha256": "383c6dd361a1d4c5a071ff667a24042abe5c17295f6b21baa8e1d534bc2d3139",
+      "rust": "crates/gen_memory_amounts/src/memory/amounts.rs",
+      "rust_lines": 525
+    },
+    {
+      "module": "memory.another",
+      "python": "bot/memory/another.py",
+      "python_lines": 512,
+      "source_sha256": "6cb681e1ad0e38fc7ad0e87434efa063e71f6a4825c56efa57c3ea88f46a7222",
+      "rust": "crates/gen_memory_another/src/memory/another.rs",
+      "rust_lines": 879
+    },
+    {
+      "module": "memory.asked_about",
+      "python": "bot/memory/asked_about.py",
+      "python_lines": 155,
+      "source_sha256": "ab02b815cbd0b19e1c2b236df49893a5d5a53a13e92b5a67dbc8465488d43683",
+      "rust": "crates/gen_memory_asked_about/src/memory/asked_about.rs",
+      "rust_lines": 282
+    },
+    {
+      "module": "memory.asleep",
+      "python": "bot/memory/asleep.py",
+      "python_lines": 263,
+      "source_sha256": "0928a2d7587aa4548deac9172791ec18ab5a630164a81ed9dcf38e7c41a66223",
+      "rust": "crates/gen_memory_asleep/src/memory/asleep.rs",
+      "rust_lines": 544
+    },
+    {
+      "module": "memory.back_again",
+      "python": "bot/memory/back_again.py",
+      "python_lines": 260,
+      "source_sha256": "4bb8179ee94c6b3bdb01aa9ba06b7aca060092e6251b32265dade38188132320",
+      "rust": "crates/gen_memory_back_again/src/memory/back_again.rs",
+      "rust_lines": 497
+    },
+    {
+      "module": "memory.baking",
+      "python": "bot/memory/baking.py",
+      "python_lines": 107,
+      "source_sha256": "d6d4cd330f69015af9c88e29089470574713fb90e4d69963355dc12cb5cb45d8",
+      "rust": "crates/gen_memory_baking/src/memory/baking.rs",
+      "rust_lines": 207
+    },
+    {
+      "module": "memory.callback",
+      "python": "bot/memory/callback.py",
+      "python_lines": 240,
+      "source_sha256": "93a96970f39ea12ae6088a032cbf10829512781195edde48c2592036ffac9a62",
+      "rust": "crates/gen_memory_callback/src/memory/callback.rs",
+      "rust_lines": 449
+    },
+    {
+      "module": "memory.carried_on",
+      "python": "bot/memory/carried_on.py",
+      "python_lines": 344,
+      "source_sha256": "69c0dfc83f0724ec682ba07aa7d3fc65153da8750587f5a25bb9f8ff505ec165",
+      "rust": "crates/gen_memory_carried_on/src/memory/carried_on.rs",
+      "rust_lines": 556
+    },
+    {
+      "module": "memory.carry",
+      "python": "bot/memory/carry.py",
+      "python_lines": 783,
+      "source_sha256": "4eafabbd5bacf55638db6201e9384101cf6bea87df1f91033ccd20a91a4e2141",
+      "rust": "crates/gen_memory_carry/src/memory/carry.rs",
+      "rust_lines": 1496
+    },
+    {
+      "module": "memory.cause",
+      "python": "bot/memory/cause.py",
+      "python_lines": 721,
+      "source_sha256": "e299be96d081e2303224cdf7993e5ddfc7dcb4a1b7386046eddc557ca8133dd3",
+      "rust": "crates/gen_memory_cause/src/memory/cause.rs",
+      "rust_lines": 1246
+    },
+    {
+      "module": "memory.change",
+      "python": "bot/memory/change.py",
+      "python_lines": 153,
+      "source_sha256": "2f7ededa041602244d714c7ed09fc78e6a1020a8378d2d765561b9d57a7303ac",
+      "rust": "crates/gen_memory_change/src/memory/change.rs",
+      "rust_lines": 311
+    },
+    {
+      "module": "memory.choice",
+      "python": "bot/memory/choice.py",
+      "python_lines": 663,
+      "source_sha256": "7d4bf71fe49ba4b91cc9def0758fba8a5a950f0428b45e7f391fd4fc3fd60d0c",
+      "rust": "crates/gen_memory_choice/src/memory/choice.rs",
+      "rust_lines": 1293
+    },
+    {
+      "module": "memory.company",
+      "python": "bot/memory/company.py",
+      "python_lines": 407,
+      "source_sha256": "b1b72e9e32a97dbb04068b8e1266fdf679ce07086762567b4360126547e519e1",
+      "rust": "crates/gen_memory_company/src/memory/company.rs",
+      "rust_lines": 757
+    },
+    {
+      "module": "memory.condition",
+      "python": "bot/memory/condition.py",
+      "python_lines": 364,
+      "source_sha256": "6fbd628e25f0a53a2b51e3498c95fff7b3e3cfa66ed153a62cd512168881d3b5",
+      "rust": "crates/gen_memory_condition/src/memory/condition.rs",
+      "rust_lines": 760
+    },
+    {
+      "module": "memory.corrected",
+      "python": "bot/memory/corrected.py",
+      "python_lines": 2101,
+      "source_sha256": "f9b55b9547578f4aac8468930871203b29dbe2f2045871cb006caffc5fbc81d3",
+      "rust": "crates/gen_memory_corrected/src/memory/corrected.rs",
+      "rust_lines": 3982
+    },
+    {
+      "module": "memory.counts",
+      "python": "bot/memory/counts.py",
+      "python_lines": 1037,
+      "source_sha256": "be1182a831e254930e4378cefc336a936f63577232aa1c62ef6c5ab2e94a6722",
+      "rust": "crates/gen_memory_counts/src/memory/counts.rs",
+      "rust_lines": 1706
+    },
+    {
+      "module": "memory.deadline",
+      "python": "bot/memory/deadline.py",
+      "python_lines": 103,
+      "source_sha256": "0c97467f4ec736ceeba1e78c4f2cd764b07406ab0dbbcb27e6cde36c2d5cb6a3",
+      "rust": "crates/gen_memory_deadline/src/memory/deadline.rs",
+      "rust_lines": 180
+    },
+    {
+      "module": "memory.decided",
+      "python": "bot/memory/decided.py",
+      "python_lines": 744,
+      "source_sha256": "aad816bcedf77be2560bc3db609e8e0d69539d1c454bb2e9a87014826793ea9d",
+      "rust": "crates/gen_memory_decided/src/memory/decided.rs",
+      "rust_lines": 1258
+    },
+    {
+      "module": "memory.detail",
+      "python": "bot/memory/detail.py",
+      "python_lines": 1793,
+      "source_sha256": "02210bc2d61200667d1f020aa08ac0d871582a93e323ababf39afc7ea3c76cf9",
+      "rust": "crates/gen_memory_detail/src/memory/detail.rs",
+      "rust_lines": 2956
+    },
+    {
+      "module": "memory.doing_it",
+      "python": "bot/memory/doing_it.py",
+      "python_lines": 175,
+      "source_sha256": "7c96410a7dd9f92e3182078ff62c8f5b106ebbf317b920e79e14099f14113875",
+      "rust": "crates/gen_memory_doing_it/src/memory/doing_it.rs",
+      "rust_lines": 322
+    },
+    {
+      "module": "memory.doubt",
+      "python": "bot/memory/doubt.py",
+      "python_lines": 155,
+      "source_sha256": "608be6a8c83c88f03ba9ef2e905553ba6661d12cd77e28c734eb67b3e0f76032",
+      "rust": "crates/gen_memory_doubt/src/memory/doubt.rs",
+      "rust_lines": 241
+    },
+    {
+      "module": "memory.dream",
+      "python": "bot/memory/dream.py",
+      "python_lines": 216,
+      "source_sha256": "5434b13375a3f40523940b7656f6ea46f3804779e37770dfee54ff03ecce7639",
+      "rust": "crates/gen_memory_dream/src/memory/dream.rs",
+      "rust_lines": 363
+    },
+    {
+      "module": "memory.earlier",
+      "python": "bot/memory/earlier.py",
+      "python_lines": 596,
+      "source_sha256": "9c36bc58a93c4a2662160b6df9b31aa3b8a1141e4f1b87d49b5c6190adc01562",
+      "rust": "crates/gen_memory_earlier/src/memory/earlier.rs",
+      "rust_lines": 1068
+    },
+    {
+      "module": "memory.enough",
+      "python": "bot/memory/enough.py",
+      "python_lines": 866,
+      "source_sha256": "50bf1922eb6b7d21a4aec86072725700580515a5ed86f010447f43863a6cb3dd",
+      "rust": "crates/gen_memory_enough/src/memory/enough.rs",
+      "rust_lines": 1675
+    },
+    {
+      "module": "memory.facts",
+      "python": "bot/memory/facts.py",
+      "python_lines": 11301,
+      "source_sha256": "ff62a1a3cd3cdd70f8e100021947b1b5ef0aa9ebf3d46931b1aea2376229deac",
+      "rust": "crates/gen_memory_facts/src/memory/facts.rs",
+      "rust_lines": 17467
+    },
+    {
+      "module": "memory.favourite",
+      "python": "bot/memory/favourite.py",
+      "python_lines": 519,
+      "source_sha256": "f1141d74cb12e946df43d1f4049226b6e7af3a54829ea94989886b6b708b4b70",
+      "rust": "crates/gen_memory_favourite/src/memory/favourite.rs",
+      "rust_lines": 928
+    },
+    {
+      "module": "memory.filler",
+      "python": "bot/memory/filler.py",
+      "python_lines": 90,
+      "source_sha256": "d9c1b87ede97e65ed325b229f60722840662481fcbd3bd6c57b31f72f03df714",
+      "rust": "crates/gen_memory_filler/src/memory/filler.rs",
+      "rust_lines": 194
+    },
+    {
+      "module": "memory.goals",
+      "python": "bot/memory/goals.py",
+      "python_lines": 154,
+      "source_sha256": "0bbf5ab6084782ed6ab536add90307d00c2b399a588cdec5b8a9153252c60323",
+      "rust": "crates/gen_memory_goals/src/memory/goals.rs",
+      "rust_lines": 321
+    },
+    {
+      "module": "memory.groupages",
+      "python": "bot/memory/groupages.py",
+      "python_lines": 242,
+      "source_sha256": "8cbc9a05509919f61de99945bff82dedf6882ab9f62b77871e8a0f6c11234c57",
+      "rust": "crates/gen_memory_groupages/src/memory/groupages.rs",
+      "rust_lines": 503
+    },
+    {
+      "module": "memory.guest",
+      "python": "bot/memory/guest.py",
+      "python_lines": 312,
+      "source_sha256": "e42152d66f44d7d551347ed8e893c3dd8e9bba099fba90042a915e7080a9a719",
+      "rust": "crates/gen_memory_guest/src/memory/guest.rs",
+      "rust_lines": 650
+    },
+    {
+      "module": "memory.healing",
+      "python": "bot/memory/healing.py",
+      "python_lines": 341,
+      "source_sha256": "d461d6ba5395657330853bba78ef2b834d64785cefadf458e8bf363800e22508",
+      "rust": "crates/gen_memory_healing/src/memory/healing.rs",
+      "rust_lines": 606
+    },
+    {
+      "module": "memory.history",
+      "python": "bot/memory/history.py",
+      "python_lines": 697,
+      "source_sha256": "b0eb48240b30fdced791dc03baa297c6b47ea793497bec4b6394577e26b8f22a",
+      "rust": "crates/gen_memory_history/src/memory/history.rs",
+      "rust_lines": 1258
+    },
+    {
+      "module": "memory.holds",
+      "python": "bot/memory/holds.py",
+      "python_lines": 114,
+      "source_sha256": "c56b8794a32506a8838c8a3b3ad76cd7aba8b35c984ca74b0428065d69c5f13c",
+      "rust": "crates/gen_memory_holds/src/memory/holds.rs",
+      "rust_lines": 317
+    },
+    {
+      "module": "memory.hope",
+      "python": "bot/memory/hope.py",
+      "python_lines": 144,
+      "source_sha256": "7f195881b3ba1ac2872d53cf33873dc561465c26d1c724e9b14a6ba35b3a6f7d",
+      "rust": "crates/gen_memory_hope/src/memory/hope.rs",
+      "rust_lines": 204
+    },
+    {
+      "module": "memory.hours",
+      "python": "bot/memory/hours.py",
+      "python_lines": 150,
+      "source_sha256": "8758385ec0984f7251eebb4f0bc580ae6849786affd595c850de889769134ffc",
+      "rust": "crates/gen_memory_hours/src/memory/hours.rs",
+      "rust_lines": 281
+    },
+    {
+      "module": "memory.household",
+      "python": "bot/memory/household.py",
+      "python_lines": 411,
+      "source_sha256": "6c6595063ae733585f8479501783f0d9005a93200f8d8f0201d5ae02174a478d",
+      "rust": "crates/gen_memory_household/src/memory/household.rs",
+      "rust_lines": 678
+    },
+    {
+      "module": "memory.kidcount",
+      "python": "bot/memory/kidcount.py",
+      "python_lines": 131,
+      "source_sha256": "a2178cf8e415ce4278b5d2e37e3cc657d1658242cb679b66af56fb30f906920c",
+      "rust": "crates/gen_memory_kidcount/src/memory/kidcount.rs",
+      "rust_lines": 325
+    },
+    {
+      "module": "memory.kinds",
+      "python": "bot/memory/kinds.py",
+      "python_lines": 293,
+      "source_sha256": "0e2c8cd22f9c1392c4526ef8bf87db1eea6a011a07a09df4302ac2a492933b6d",
+      "rust": "crates/gen_memory_kinds/src/memory/kinds.rs",
+      "rust_lines": 403
+    },
+    {
+      "module": "memory.limit",
+      "python": "bot/memory/limit.py",
+      "python_lines": 916,
+      "source_sha256": "e71c78ecb13e9808c8ca5aaeb0539cbc35f6c15b627be46f0159f6078d57db38",
+      "rust": "crates/gen_memory_limit/src/memory/limit.rs",
+      "rust_lines": 1860
+    },
+    {
+      "module": "memory.limits",
+      "python": "bot/memory/limits.py",
+      "python_lines": 300,
+      "source_sha256": "994be286d809b8d253168c17af60742754385452e80f26dfb569acd7dac31bd9",
+      "rust": "crates/gen_memory_limits/src/memory/limits.rs",
+      "rust_lines": 466
+    },
+    {
+      "module": "memory.lineback",
+      "python": "bot/memory/lineback.py",
+      "python_lines": 496,
+      "source_sha256": "7ea069d5a8ee33b0f4b6220c94fba54fd9dc5a9d4c60518bb670ae409b89eda6",
+      "rust": "crates/gen_memory_lineback/src/memory/lineback.rs",
+      "rust_lines": 924
+    },
+    {
+      "module": "memory.matters",
+      "python": "bot/memory/matters.py",
+      "python_lines": 308,
+      "source_sha256": "957e1bfa1bd8ceeb616b40011b3dc3a87c4a4e0bf800e39bc7b1171cb9dffc01",
+      "rust": "crates/gen_memory_matters/src/memory/matters.rs",
+      "rust_lines": 555
+    },
+    {
+      "module": "memory.meant",
+      "python": "bot/memory/meant.py",
+      "python_lines": 845,
+      "source_sha256": "9a838d6a6efc5ab2a8c9227eb05c2689a7b84a3df29543d0df31f09f48bed9d7",
+      "rust": "crates/gen_memory_meant/src/memory/meant.rs",
+      "rust_lines": 1179
+    },
+    {
+      "module": "memory.measure",
+      "python": "bot/memory/measure.py",
+      "python_lines": 260,
+      "source_sha256": "dbda212bf7aa6c9f9d62ed82f57b0746b3816aadd51fffba693ff6da4131f377",
+      "rust": "crates/gen_memory_measure/src/memory/measure.rs",
+      "rust_lines": 491
+    },
+    {
+      "module": "memory.more",
+      "python": "bot/memory/more.py",
+      "python_lines": 220,
+      "source_sha256": "0bec5af80aa63b804a8464045c8cf28e85a10de2dcac1f8f5f424a4958e9cf74",
+      "rust": "crates/gen_memory_more/src/memory/more.rs",
+      "rust_lines": 428
+    },
+    {
+      "module": "memory.named",
+      "python": "bot/memory/named.py",
+      "python_lines": 2850,
+      "source_sha256": "edafefc3f29b05d6f3bf24f46b0bdf857af28e32104344a063710a83df6112e6",
+      "rust": "crates/gen_memory_named/src/memory/named.rs",
+      "rust_lines": 4576
+    },
+    {
+      "module": "memory.narrow",
+      "python": "bot/memory/narrow.py",
+      "python_lines": 2899,
+      "source_sha256": "a882076e1b20aa41efb7d8e4b026a7bbd7da0d2cd61308e673ce8ba9035c8834",
+      "rust": "crates/gen_memory_narrow/src/memory/narrow.rs",
+      "rust_lines": 4693
+    },
+    {
+      "module": "memory.newborn",
+      "python": "bot/memory/newborn.py",
+      "python_lines": 90,
+      "source_sha256": "3e823e586c319194f41fcce9836fa33c813cd050e4f1cd4526709ee4e105c7f6",
+      "rust": "crates/gen_memory_newborn/src/memory/newborn.rs",
+      "rust_lines": 224
+    },
+    {
+      "module": "memory.not_a_trip",
+      "python": "bot/memory/not_a_trip.py",
+      "python_lines": 216,
+      "source_sha256": "a7d88a6e30e73ada90912d938e75f3306dc4e7d3af70b01ccbb07ca12e32522b",
+      "rust": "crates/gen_memory_not_a_trip/src/memory/not_a_trip.rs",
+      "rust_lines": 318
+    },
+    {
+      "module": "memory.not_this",
+      "python": "bot/memory/not_this.py",
+      "python_lines": 251,
+      "source_sha256": "4c69010b248a16727a194904b9f4cf43d8afa4ed1b337529da68039651fc7d26",
+      "rust": "crates/gen_memory_not_this/src/memory/not_this.rs",
+      "rust_lines": 485
+    },
+    {
+      "module": "memory.obstacle",
+      "python": "bot/memory/obstacle.py",
+      "python_lines": 747,
+      "source_sha256": "0407aacb8ef438a3285aaacb3cf040867b26603ceefaaa3eaad012d33fd9fe22",
+      "rust": "crates/gen_memory_obstacle/src/memory/obstacle.rs",
+      "rust_lines": 1218
+    },
+    {
+      "module": "memory.onset",
+      "python": "bot/memory/onset.py",
+      "python_lines": 378,
+      "source_sha256": "8c2391a7eeb516a8f4de2ed1c0803ddbf3d7049597c5c524e46fe84fcd803a41",
+      "rust": "crates/gen_memory_onset/src/memory/onset.rs",
+      "rust_lines": 673
+    },
+    {
+      "module": "memory.opening",
+      "python": "bot/memory/opening.py",
+      "python_lines": 241,
+      "source_sha256": "1e440656ff1fa0d50d7405d26f4e6e234ee55354eb5e6db4efc0250f8806124f",
+      "rust": "crates/gen_memory_opening/src/memory/opening.rs",
+      "rust_lines": 456
+    },
+    {
+      "module": "memory.outfit",
+      "python": "bot/memory/outfit.py",
+      "python_lines": 346,
+      "source_sha256": "9e030e3cfda25ec04aecae29d3d7be92152db6d90cc1ffd7e33843d58b3cdeb9",
+      "rust": "crates/gen_memory_outfit/src/memory/outfit.rs",
+      "rust_lines": 536
+    },
+    {
+      "module": "memory.outgoings",
+      "python": "bot/memory/outgoings.py",
+      "python_lines": 690,
+      "source_sha256": "93d8849ef1c8fd07d171f97494c2953d20948ba43fef99d1d4cf1872c70c24a2",
+      "rust": "crates/gen_memory_outgoings/src/memory/outgoings.rs",
+      "rust_lines": 1396
+    },
+    {
+      "module": "memory.paragraph",
+      "python": "bot/memory/paragraph.py",
+      "python_lines": 105,
+      "source_sha256": "24e61c6f618bd83c631cdbb96bbdf6057c46a3e6fec9ea3b77a74867f9e18b90",
+      "rust": "crates/gen_memory_paragraph/src/memory/paragraph.rs",
+      "rust_lines": 191
+    },
+    {
+      "module": "memory.passing_the_time",
+      "python": "bot/memory/passing_the_time.py",
+      "python_lines": 313,
+      "source_sha256": "7882fe9a274a3d739639004c145a18703d70cd0a8408af56bc6693ecc69c1914",
+      "rust": "crates/gen_memory_passing_the_time/src/memory/passing_the_time.rs",
+      "rust_lines": 412
+    },
+    {
+      "module": "memory.pending",
+      "python": "bot/memory/pending.py",
+      "python_lines": 172,
+      "source_sha256": "2fced6762951942ce7812a58f29acb15642df59c03e74a53a0d61afa73b46ac5",
+      "rust": "crates/gen_memory_pending/src/memory/pending.rs",
+      "rust_lines": 359
+    },
+    {
+      "module": "memory.people",
+      "python": "bot/memory/people.py",
+      "python_lines": 249,
+      "source_sha256": "7b75a53caad2402958b0cc1fc53f05bbaa367239dc80b1afdcf4d0ae8f96d738",
+      "rust": "crates/gen_memory_people/src/memory/people.rs",
+      "rust_lines": 465
+    },
+    {
+      "module": "memory.pile",
+      "python": "bot/memory/pile.py",
+      "python_lines": 124,
+      "source_sha256": "a6416c72b96d39209786872973b2478e0fb5eb1aac07c9fa0f664c251371160a",
+      "rust": "crates/gen_memory_pile/src/memory/pile.rs",
+      "rust_lines": 216
+    },
+    {
+      "module": "memory.places",
+      "python": "bot/memory/places.py",
+      "python_lines": 249,
+      "source_sha256": "05226f3aaadc42a283026561aaa701354f4671ea75e504d0710901a93665dc49",
+      "rust": "crates/gen_memory_places/src/memory/places.rs",
+      "rust_lines": 438
+    },
+    {
+      "module": "memory.plan",
+      "python": "bot/memory/plan.py",
+      "python_lines": 468,
+      "source_sha256": "e5ce358990469b9e7d6a4adedb1e75bf069ca6c31a995e98f3685f4fb3e9d6fc",
+      "rust": "crates/gen_memory_plan/src/memory/plan.rs",
+      "rust_lines": 801
+    },
+    {
+      "module": "memory.plans",
+      "python": "bot/memory/plans.py",
+      "python_lines": 450,
+      "source_sha256": "318b11361fe0d54970fc116413a1947e09c71bfb9ace05f8386bcc881aa02505",
+      "rust": "crates/gen_memory_plans/src/memory/plans.rs",
+      "rust_lines": 866
+    },
+    {
+      "module": "memory.portions",
+      "python": "bot/memory/portions.py",
+      "python_lines": 470,
+      "source_sha256": "28fff388b9c13a3bafd5880e75fddd6d8ccd069d9026df009d441a6b8d3bce7c",
+      "rust": "crates/gen_memory_portions/src/memory/portions.rs",
+      "rust_lines": 911
+    },
+    {
+      "module": "memory.prefer",
+      "python": "bot/memory/prefer.py",
+      "python_lines": 190,
+      "source_sha256": "243f9ca2734c86b09c65651063dc38b56a516b55cf92c91cce61701c8c2fcde9",
+      "rust": "crates/gen_memory_prefer/src/memory/prefer.rs",
+      "rust_lines": 408
+    },
+    {
+      "module": "memory.price",
+      "python": "bot/memory/price.py",
+      "python_lines": 684,
+      "source_sha256": "892eb22cc09707de2586a588d291bf53066d8bb8f87cb999710f9acd425fd051",
+      "rust": "crates/gen_memory_price/src/memory/price.rs",
+      "rust_lines": 1379
+    },
+    {
+      "module": "memory.purse",
+      "python": "bot/memory/purse.py",
+      "python_lines": 173,
+      "source_sha256": "8e78409f4a69d0e405198bcb75d55a449dc42d9c733e938ea6417e582e6945b0",
+      "rust": "crates/gen_memory_purse/src/memory/purse.rs",
+      "rust_lines": 326
+    },
+    {
+      "module": "memory.quotes",
+      "python": "bot/memory/quotes.py",
+      "python_lines": 105,
+      "source_sha256": "4ce317c133ec52262d75c034f6825d33b718455916ffbc4916a20fe5ac62d93b",
+      "rust": "crates/gen_memory_quotes/src/memory/quotes.rs",
+      "rust_lines": 210
+    },
+    {
+      "module": "memory.rates",
+      "python": "bot/memory/rates.py",
+      "python_lines": 366,
+      "source_sha256": "ce56a2e8c8a347871164c67ff936378bcb36298d7c0c565ce36fae718ee4eb59",
+      "rust": "crates/gen_memory_rates/src/memory/rates.rs",
+      "rust_lines": 645
+    },
+    {
+      "module": "memory.recall",
+      "python": "bot/memory/recall.py",
+      "python_lines": 725,
+      "source_sha256": "735dd93c25806ba882d536b1221b411caf8e7b39096fd5311468518caa6c9b57",
+      "rust": "crates/gen_memory_recall/src/memory/recall.rs",
+      "rust_lines": 958
+    },
+    {
+      "module": "memory.reject",
+      "python": "bot/memory/reject.py",
+      "python_lines": 718,
+      "source_sha256": "95997bf39751df9ddd7c3033f4bf7485ff479c16b73e5ceef12b0b26310a4ae5",
+      "rust": "crates/gen_memory_reject/src/memory/reject.rs",
+      "rust_lines": 1124
+    },
+    {
+      "module": "memory.relations",
+      "python": "bot/memory/relations.py",
+      "python_lines": 1972,
+      "source_sha256": "afd712462d8efe09e3c160094c5e44df1fae0243109a86ae5adc9e15e8381138",
+      "rust": "crates/gen_memory_relations/src/memory/relations.rs",
+      "rust_lines": 3568
+    },
+    {
+      "module": "memory.remedy",
+      "python": "bot/memory/remedy.py",
+      "python_lines": 184,
+      "source_sha256": "a96a37fbbcb43a9fe056cb8fe4530e7a622b706e0090be05ace4df3da4868496",
+      "rust": "crates/gen_memory_remedy/src/memory/remedy.rs",
+      "rust_lines": 339
+    },
+    {
+      "module": "memory.reminded",
+      "python": "bot/memory/reminded.py",
+      "python_lines": 224,
+      "source_sha256": "88a7e46519d7ad850bc5d0eb85a17d48ae374d48412bf7bf3060aba51acb4962",
+      "rust": "crates/gen_memory_reminded/src/memory/reminded.rs",
+      "rust_lines": 461
+    },
+    {
+      "module": "memory.rename",
+      "python": "bot/memory/rename.py",
+      "python_lines": 108,
+      "source_sha256": "364a9a48789189a8d8ee3013232be0fde01f881d7a07a7e44e023b2df595379a",
+      "rust": "crates/gen_memory_rename/src/memory/rename.rs",
+      "rust_lines": 187
+    },
+    {
+      "module": "memory.repair",
+      "python": "bot/memory/repair.py",
+      "python_lines": 1183,
+      "source_sha256": "b91236e1ec83b76141b9a7f9e068f88d4982400fcdc263ad28b0bfc25f2cd5f3",
+      "rust": "crates/gen_memory_repair/src/memory/repair.rs",
+      "rust_lines": 2040
+    },
+    {
+      "module": "memory.repeat",
+      "python": "bot/memory/repeat.py",
+      "python_lines": 6120,
+      "source_sha256": "015b207204937be0568b463af88f4c88c6341f6759b2bfc0f962dd889bb863e8",
+      "rust": "crates/gen_memory_repeat/src/memory/repeat.rs",
+      "rust_lines": 10076
+    },
+    {
+      "module": "memory.resize",
+      "python": "bot/memory/resize.py",
+      "python_lines": 379,
+      "source_sha256": "5f8c86540bb00ea46d0ecd4d9e34cc9a7090f8c6455d98435e4af245bf5a04fd",
+      "rust": "crates/gen_memory_resize/src/memory/resize.rs",
+      "rust_lines": 778
+    },
+    {
+      "module": "memory.returned",
+      "python": "bot/memory/returned.py",
+      "python_lines": 251,
+      "source_sha256": "37915b0a79d4ef6da918e4ef4de152fddf1eb39b088143744fabc811303ac806",
+      "rust": "crates/gen_memory_returned/src/memory/returned.rs",
+      "rust_lines": 417
+    },
+    {
+      "module": "memory.returns",
+      "python": "bot/memory/returns.py",
+      "python_lines": 293,
+      "source_sha256": "b807cc6efa1e74bb8a0d90e0d59d062dacafb596f38619762ec35bca7588a12e",
+      "rust": "crates/gen_memory_returns/src/memory/returns.rs",
+      "rust_lines": 546
+    },
+    {
+      "module": "memory.saving",
+      "python": "bot/memory/saving.py",
+      "python_lines": 2228,
+      "source_sha256": "fadb36a785894584c1b970ab354d86f35fc341e8b4f840f31dc46b8d282f9d82",
+      "rust": "crates/gen_memory_saving/src/memory/saving.rs",
+      "rust_lines": 4224
+    },
+    {
+      "module": "memory.setback",
+      "python": "bot/memory/setback.py",
+      "python_lines": 318,
+      "source_sha256": "36a102eae555efb9b686939eb0a04b8378b2abc1a824a14e06f40d37762c2799",
+      "rust": "crates/gen_memory_setback/src/memory/setback.rs",
+      "rust_lines": 527
+    },
+    {
+      "module": "memory.size",
+      "python": "bot/memory/size.py",
+      "python_lines": 232,
+      "source_sha256": "28d25a9564a200f350aaf1142bf58c569abaab50ad4cf65bf21908433e7964c9",
+      "rust": "crates/gen_memory_size/src/memory/size.rs",
+      "rust_lines": 479
+    },
+    {
+      "module": "memory.spent",
+      "python": "bot/memory/spent.py",
+      "python_lines": 776,
+      "source_sha256": "43b31f1e23e5cbbb2563f2f052a27bcf0ba47c11be2b94c6afc7ce2c3d218fe6",
+      "rust": "crates/gen_memory_spent/src/memory/spent.rs",
+      "rust_lines": 1508
+    },
+    {
+      "module": "memory.spoken",
+      "python": "bot/memory/spoken.py",
+      "python_lines": 137,
+      "source_sha256": "d3085b6ff92f5cb216384b3bab99b64594c1710da8c1c44eb6c0f423aa20b51c",
+      "rust": "crates/gen_memory_spoken/src/memory/spoken.rs",
+      "rust_lines": 403
+    },
+    {
+      "module": "memory.stands",
+      "python": "bot/memory/stands.py",
+      "python_lines": 537,
+      "source_sha256": "4e9ea0f2ee7a70174a83f90505cb0d59497809d409385541d5ca0a90099e3c64",
+      "rust": "crates/gen_memory_stands/src/memory/stands.rs",
+      "rust_lines": 1034
+    },
+    {
+      "module": "memory.store_lines",
+      "python": "bot/memory/store_lines.py",
+      "python_lines": 1075,
+      "source_sha256": "637721f7428979396634bde178572dbb2d4d8358ba13f78f010b8a7766b052db",
+      "rust": "crates/gen_memory_store_lines/src/memory/store_lines.rs",
+      "rust_lines": 1332
+    },
+    {
+      "module": "memory.store_replies",
+      "python": "bot/memory/store_replies.py",
+      "python_lines": 13236,
+      "source_sha256": "9a513a36bee73c65aa0a582caf6e0febbbacd1eebda7182129f7dd886b4c68f3",
+      "rust": "crates/gen_memory_store_replies/src/memory/store_replies.rs",
+      "rust_lines": 25878
+    },
+    {
+      "module": "memory.stuck",
+      "python": "bot/memory/stuck.py",
+      "python_lines": 503,
+      "source_sha256": "625c7fe30fde2ac7835cdcd0035bcec8c5bbdd8911e1b527e212eb8ca5eb0d3f",
+      "rust": "crates/gen_memory_stuck/src/memory/stuck.rs",
+      "rust_lines": 736
+    },
+    {
+      "module": "memory.surname",
+      "python": "bot/memory/surname.py",
+      "python_lines": 321,
+      "source_sha256": "c319eb0429b8ecbb8b86ad9f7860d07b5be15ebedd8226402e0fdc5f689c7d9f",
+      "rust": "crates/gen_memory_surname/src/memory/surname.rs",
+      "rust_lines": 652
+    },
+    {
+      "module": "memory.swap",
+      "python": "bot/memory/swap.py",
+      "python_lines": 784,
+      "source_sha256": "01ff9407c98fd1b29a19b0b355457e68dd620ffecbb7e8938fd7806213b31bf7",
+      "rust": "crates/gen_memory_swap/src/memory/swap.rs",
+      "rust_lines": 1407
+    },
+    {
+      "module": "memory.taking",
+      "python": "bot/memory/taking.py",
+      "python_lines": 409,
+      "source_sha256": "0dae6fb350f0c022dcbbb8cbce9109e58bd0477fb7ee02e50ac40d4353ee6c14",
+      "rust": "crates/gen_memory_taking/src/memory/taking.rs",
+      "rust_lines": 930
+    },
+    {
+      "module": "memory.taste",
+      "python": "bot/memory/taste.py",
+      "python_lines": 509,
+      "source_sha256": "2150caeb81ba2066c6841ab0ddbd0ba08dd50b8a27cf0ddaf1cafb31a4283789",
+      "rust": "crates/gen_memory_taste/src/memory/taste.rs",
+      "rust_lines": 793
+    },
+    {
+      "module": "memory.the_verdict",
+      "python": "bot/memory/the_verdict.py",
+      "python_lines": 495,
+      "source_sha256": "d7461446cc6dde9fd30d227fdc5618837a98cb7cb975dfef99d20c54f21e0293",
+      "rust": "crates/gen_memory_the_verdict/src/memory/the_verdict.rs",
+      "rust_lines": 627
+    },
+    {
+      "module": "memory.the_years",
+      "python": "bot/memory/the_years.py",
+      "python_lines": 213,
+      "source_sha256": "a1d973473a87b377a7d5bebfa60666799f42cf7a106d5f4f49a467f15fb49274",
+      "rust": "crates/gen_memory_the_years/src/memory/the_years.rs",
+      "rust_lines": 315
+    },
+    {
+      "module": "memory.their_feeling",
+      "python": "bot/memory/their_feeling.py",
+      "python_lines": 200,
+      "source_sha256": "60a903112e9eeed607060ce442c6982a8d627421775df1674fc1f03fbd58b5c7",
+      "rust": "crates/gen_memory_their_feeling/src/memory/their_feeling.rs",
+      "rust_lines": 411
+    },
+    {
+      "module": "memory.thread",
+      "python": "bot/memory/thread.py",
+      "python_lines": 1918,
+      "source_sha256": "90540f9a8225f3a463197a214a187b543d8924aa8a0572e5d961497eb8a56964",
+      "rust": "crates/gen_memory_thread/src/memory/thread.rs",
+      "rust_lines": 3733
+    },
+    {
+      "module": "memory.times",
+      "python": "bot/memory/times.py",
+      "python_lines": 223,
+      "source_sha256": "ad83732cb78fbc72538e672dfa1b3c52c47fcfc13c0dd9b85c693206862b4072",
+      "rust": "crates/gen_memory_times/src/memory/times.rs",
+      "rust_lines": 476
+    },
+    {
+      "module": "memory.told",
+      "python": "bot/memory/told.py",
+      "python_lines": 1570,
+      "source_sha256": "a5bca45a037dd0c48346155c33dac2c1ad46c3c740d5bc8892dd62b95dd39639",
+      "rust": "crates/gen_memory_told/src/memory/told.rs",
+      "rust_lines": 2928
+    },
+    {
+      "module": "memory.too_late",
+      "python": "bot/memory/too_late.py",
+      "python_lines": 174,
+      "source_sha256": "16e58fe681e994451035dff86b78879a48c721f2445728f6a6aa558ec9b815e2",
+      "rust": "crates/gen_memory_too_late/src/memory/too_late.rs",
+      "rust_lines": 257
+    },
+    {
+      "module": "memory.topics",
+      "python": "bot/memory/topics.py",
+      "python_lines": 8522,
+      "source_sha256": "b75e8bf248b2ea588dc7337469a2ad2c2ca8a173819a76e77e28fd8ecc011b2a",
+      "rust": "crates/gen_memory_topics/src/memory/topics.rs",
+      "rust_lines": 14328
+    },
+    {
+      "module": "memory.tried",
+      "python": "bot/memory/tried.py",
+      "python_lines": 1922,
+      "source_sha256": "16e610cbab23a0fa6bf08d18ce07479488bf38c5d205ec40f7b314e838486ed3",
+      "rust": "crates/gen_memory_tried/src/memory/tried.rs",
+      "rust_lines": 3140
+    },
+    {
+      "module": "memory.trips",
+      "python": "bot/memory/trips.py",
+      "python_lines": 1835,
+      "source_sha256": "e048e1c8f81fb3dca0dc87e6093b89ec085fb11143c3c49a124f2b682a198115",
+      "rust": "crates/gen_memory_trips/src/memory/trips.rs",
+      "rust_lines": 3381
+    },
+    {
+      "module": "memory.warmth",
+      "python": "bot/memory/warmth.py",
+      "python_lines": 554,
+      "source_sha256": "429df1a6a9198e3be947fb50a58df13fe51c92b196e8eda6300ba669ab77d930",
+      "rust": "crates/gen_memory_warmth/src/memory/warmth.rs",
+      "rust_lines": 559
+    },
+    {
+      "module": "memory.whathurts",
+      "python": "bot/memory/whathurts.py",
+      "python_lines": 163,
+      "source_sha256": "6f8ed1f53ff1fa6948798dbc2285156d51811058bc285fa42bd437da3e1c480a",
+      "rust": "crates/gen_memory_whathurts/src/memory/whathurts.rs",
+      "rust_lines": 360
+    },
+    {
+      "module": "memory.when",
+      "python": "bot/memory/when.py",
+      "python_lines": 2256,
+      "source_sha256": "4ce560533f4fc5e4abe6f1633aa7747c8333a94aea5065fd51231597f6b046db",
+      "rust": "crates/gen_memory_when/src/memory/when.rs",
+      "rust_lines": 4357
+    },
+    {
+      "module": "memory.whereabout",
+      "python": "bot/memory/whereabout.py",
+      "python_lines": 140,
+      "source_sha256": "0f440d62f469cecbe406381ad6840306b534f8b1ccc848d4937c0ea5c2ac4f1d",
+      "rust": "crates/gen_memory_whereabout/src/memory/whereabout.rs",
+      "rust_lines": 176
+    },
+    {
+      "module": "memory.whose_body",
+      "python": "bot/memory/whose_body.py",
+      "python_lines": 76,
+      "source_sha256": "3e7fa90df4439862ac1823c266f463a6ff522d3e663d36efea474c5cc02f7ac3",
+      "rust": "crates/gen_memory_whose_body/src/memory/whose_body.rs",
+      "rust_lines": 191
+    },
+    {
+      "module": "memory.will_it_work",
+      "python": "bot/memory/will_it_work.py",
+      "python_lines": 142,
+      "source_sha256": "fdb8ae3b3715796b02145df3e467cef52565e2cadd138431b2813010c8ec4885",
+      "rust": "crates/gen_memory_will_it_work/src/memory/will_it_work.rs",
+      "rust_lines": 284
+    },
+    {
+      "module": "memory.workplace",
+      "python": "bot/memory/workplace.py",
+      "python_lines": 198,
+      "source_sha256": "2c56d33f1960db75ddbb4129a842c993884bcc9bfc3e2ba5b234c034a21e9b2d",
+      "rust": "crates/gen_memory_workplace/src/memory/workplace.rs",
+      "rust_lines": 376
+    },
+    {
+      "module": "memory.years_in",
+      "python": "bot/memory/years_in.py",
+      "python_lines": 309,
+      "source_sha256": "f90f29d47942500a51b750b8ca1557f08f206ec95c58bf4eea16629036ac61ca",
+      "rust": "crates/gen_memory_years_in/src/memory/years_in.rs",
+      "rust_lines": 699
+    },
+    {
+      "module": "modules",
+      "python": "bot/modules/__init__.py",
+      "python_lines": 1,
+      "source_sha256": "08580265cc615ce515c04a826b0cb35e75322b1dd61f442f0b99e94eb2c91232",
+      "rust": "crates/gen_modules/src/modules/mod.rs",
+      "rust_lines": 40
+    },
+    {
+      "module": "modules.a_cake_between_its_layers",
+      "python": "bot/modules/a_cake_between_its_layers.py",
+      "python_lines": 104,
+      "source_sha256": "694e945cb0952654a06029b6217fe3458b0c6241cf43d263f73b2125418b7190",
+      "rust": "crates/gen_modules_a_cake_between_its_layers/src/modules/a_cake_between_its_layers.rs",
+      "rust_lines": 229
+    },
+    {
+      "module": "modules.a_check_with_you",
+      "python": "bot/modules/a_check_with_you.py",
+      "python_lines": 19,
+      "source_sha256": "d9bbd05818b214a92963ab4f10f43d8fc1a6e0dca16632e10ff75d3078575106",
+      "rust": "crates/gen_modules_a_check_with_you/src/modules/a_check_with_you.rs",
+      "rust_lines": 72
+    },
+    {
+      "module": "modules.a_count_of_packets",
+      "python": "bot/modules/a_count_of_packets.py",
+      "python_lines": 34,
+      "source_sha256": "f29851c6d6548f8918379c6e6ff401cbc1a7c15a5eb9c07c59fc27b7cf5cce3f",
+      "rust": "crates/gen_modules_a_count_of_packets/src/modules/a_count_of_packets.rs",
+      "rust_lines": 107
+    },
+    {
+      "module": "modules.a_count_said",
+      "python": "bot/modules/a_count_said.py",
+      "python_lines": 40,
+      "source_sha256": "6eebd1e028dc2e3c1cf00951acec1c944802b36581944655f4971f60cdca6469",
+      "rust": "crates/gen_modules_a_count_said/src/modules/a_count_said.rs",
+      "rust_lines": 111
+    },
+    {
+      "module": "modules.a_day_somebody_else_keeps",
+      "python": "bot/modules/a_day_somebody_else_keeps.py",
+      "python_lines": 121,
+      "source_sha256": "3feb054503e03c168030063896382cfb6918973db3ed0120acd04ede33537272",
+      "rust": "crates/gen_modules_a_day_somebody_else_keeps/src/modules/a_day_somebody_else_keeps.rs",
+      "rust_lines": 203
+    },
+    {
+      "module": "modules.a_debt_said_flat",
+      "python": "bot/modules/a_debt_said_flat.py",
+      "python_lines": 223,
+      "source_sha256": "62d4e15e49c5c2fbc39f5378c17e42cb92a2ef94af8d3dd3b8f508ee681c3cb5",
+      "rust": "crates/gen_modules_a_debt_said_flat/src/modules/a_debt_said_flat.rs",
+      "rust_lines": 347
+    },
+    {
+      "module": "modules.a_fact_asked_again",
+      "python": "bot/modules/a_fact_asked_again.py",
+      "python_lines": 194,
+      "source_sha256": "598aca057ad1b4f370f8c9e7a93f785477516af99fc87a38544cfdda62c7869c",
+      "rust": "crates/gen_modules_a_fact_asked_again/src/modules/a_fact_asked_again.rs",
+      "rust_lines": 453
+    },
+    {
+      "module": "modules.a_figure_beside_the_state",
+      "python": "bot/modules/a_figure_beside_the_state.py",
+      "python_lines": 138,
+      "source_sha256": "527f25804d027fc6ac31d28de863efdf41cd4b1668047c8c8fdfd5ce9bf0bf15",
+      "rust": "crates/gen_modules_a_figure_beside_the_state/src/modules/a_figure_beside_the_state.rs",
+      "rust_lines": 325
+    },
+    {
+      "module": "modules.a_figure_of_a_dish",
+      "python": "bot/modules/a_figure_of_a_dish.py",
+      "python_lines": 59,
+      "source_sha256": "f4ae146dacd39c5b4b52f128728c5378841ed8c034e7c79a61e1052dd38e2f8e",
+      "rust": "crates/gen_modules_a_figure_of_a_dish/src/modules/a_figure_of_a_dish.rs",
+      "rust_lines": 118
+    },
+    {
+      "module": "modules.a_first_time",
+      "python": "bot/modules/a_first_time.py",
+      "python_lines": 15,
+      "source_sha256": "fda1ab58b2aec850caa7d547d081d652818152e56a10eecd276c0bb55998d857",
+      "rust": "crates/gen_modules_a_first_time/src/modules/a_first_time.rs",
+      "rust_lines": 72
+    },
+    {
+      "module": "modules.a_habit_is_raised",
+      "python": "bot/modules/a_habit_is_raised.py",
+      "python_lines": 42,
+      "source_sha256": "f1bd33052a01c43cbbc589a95bebbd42334946a363d75e6086e7210e23187181",
+      "rust": "crates/gen_modules_a_habit_is_raised/src/modules/a_habit_is_raised.rs",
+      "rust_lines": 87
+    },
+    {
+      "module": "modules.a_job_that_is_not_a_diy_job",
+      "python": "bot/modules/a_job_that_is_not_a_diy_job.py",
+      "python_lines": 200,
+      "source_sha256": "43d3ab8264cde98b40d9fb8e5ecbd6c08a4ad46a954763bc267c83d9be6b0d52",
+      "rust": "crates/gen_modules_a_job_that_is_not_a_diy_job/src/modules/a_job_that_is_not_a_diy_job.rs",
+      "rust_lines": 283
+    },
+    {
+      "module": "modules.a_letter_about_money",
+      "python": "bot/modules/a_letter_about_money.py",
+      "python_lines": 196,
+      "source_sha256": "4356271fda25c73770e3a17c5b534df6f14682055d1f8a62aab6a405ce168441",
+      "rust": "crates/gen_modules_a_letter_about_money/src/modules/a_letter_about_money.rs",
+      "rust_lines": 289
+    },
+    {
+      "module": "modules.a_limit_over_the_answer",
+      "python": "bot/modules/a_limit_over_the_answer.py",
+      "python_lines": 359,
+      "source_sha256": "d6439c8e22b54953e0b52568095e399d1bfae08515c8007f98ccae2468857a88",
+      "rust": "crates/gen_modules_a_limit_over_the_answer/src/modules/a_limit_over_the_answer.rs",
+      "rust_lines": 529
+    },
+    {
+      "module": "modules.a_measure_asked_again",
+      "python": "bot/modules/a_measure_asked_again.py",
+      "python_lines": 37,
+      "source_sha256": "dda6cdd523a117c6ac2ebe0c041fb153875ef39d1f3d8ab86c255b25db2d8f6c",
+      "rust": "crates/gen_modules_a_measure_asked_again/src/modules/a_measure_asked_again.rs",
+      "rust_lines": 141
+    },
+    {
+      "module": "modules.a_number_the_bot_knows",
+      "python": "bot/modules/a_number_the_bot_knows.py",
+      "python_lines": 31,
+      "source_sha256": "5c7f59e49f83c271bad30767c8e0acca59bd49ad7d4bfcf7d535565f8ebc6a55",
+      "rust": "crates/gen_modules_a_number_the_bot_knows/src/modules/a_number_the_bot_knows.rs",
+      "rust_lines": 72
+    },
+    {
+      "module": "modules.a_plan_the_thread_holds",
+      "python": "bot/modules/a_plan_the_thread_holds.py",
+      "python_lines": 39,
+      "source_sha256": "1ff207d76dbdf491197846319cb28a540d2415971b4f6701e248d96f8720881f",
+      "rust": "crates/gen_modules_a_plan_the_thread_holds/src/modules/a_plan_the_thread_holds.rs",
+      "rust_lines": 94
+    },
+    {
+      "module": "modules.a_question_about_somebody",
+      "python": "bot/modules/a_question_about_somebody.py",
+      "python_lines": 126,
+      "source_sha256": "5855df00a57eaac006e2b493371f45c6794e7870ee646077448fcafd43a074f6",
+      "rust": "crates/gen_modules_a_question_about_somebody/src/modules/a_question_about_somebody.rs",
+      "rust_lines": 264
+    },
+    {
+      "module": "modules.a_return_brings_back_the_advice",
+      "python": "bot/modules/a_return_brings_back_the_advice.py",
+      "python_lines": 228,
+      "source_sha256": "6642a7c6ee38efe5937ccfd96acb6007b78755e2d84cfe05f4ed0c9db50b594c",
+      "rust": "crates/gen_modules_a_return_brings_back_the_advice/src/modules/a_return_brings_back_the_advice.rs",
+      "rust_lines": 454
+    },
+    {
+      "module": "modules.a_shock_at_a_bill",
+      "python": "bot/modules/a_shock_at_a_bill.py",
+      "python_lines": 414,
+      "source_sha256": "25b80860ecc6ac2f636f580e81c435357edd059e28e2e1e9c924667f55611cb6",
+      "rust": "crates/gen_modules_a_shock_at_a_bill/src/modules/a_shock_at_a_bill.rs",
+      "rust_lines": 685
+    },
+    {
+      "module": "modules.a_thing_being_weighed",
+      "python": "bot/modules/a_thing_being_weighed.py",
+      "python_lines": 52,
+      "source_sha256": "06f00b3e3edcdd7da155b48c500d0909d19b5e22b6ebde800adcaf670ed7e101",
+      "rust": "crates/gen_modules_a_thing_being_weighed/src/modules/a_thing_being_weighed.rs",
+      "rust_lines": 99
+    },
+    {
+      "module": "modules.a_thing_wants_doing",
+      "python": "bot/modules/a_thing_wants_doing.py",
+      "python_lines": 48,
+      "source_sha256": "1bb53c957e45556bbdaae13a57417d0179ff8646a4909eddc738d0c9a00775d2",
+      "rust": "crates/gen_modules_a_thing_wants_doing/src/modules/a_thing_wants_doing.rs",
+      "rust_lines": 112
+    },
+    {
+      "module": "modules.a_will_it_work",
+      "python": "bot/modules/a_will_it_work.py",
+      "python_lines": 38,
+      "source_sha256": "be0924ec278f602c10f3518b32770ef2f75b30f0029281f260f837b293b5b662",
+      "rust": "crates/gen_modules_a_will_it_work/src/modules/a_will_it_work.rs",
+      "rust_lines": 141
+    },
+    {
+      "module": "modules.aboutachild",
+      "python": "bot/modules/aboutachild.py",
+      "python_lines": 39,
+      "source_sha256": "8148cec2e4fedf700dcdde35edfe518a0a34c3f15291513869656b3b3c8330d4",
+      "rust": "crates/gen_modules_aboutachild/src/modules/aboutachild.rs",
+      "rust_lines": 119
+    },
+    {
+      "module": "modules.after_a_lead_in",
+      "python": "bot/modules/after_a_lead_in.py",
+      "python_lines": 28,
+      "source_sha256": "8911b786fce7daa6ddbbca9bdfc2b5fcaaefe6e72291612695c857823483ba09",
+      "rust": "crates/gen_modules_after_a_lead_in/src/modules/after_a_lead_in.rs",
+      "rust_lines": 71
+    },
+    {
+      "module": "modules.already",
+      "python": "bot/modules/already.py",
+      "python_lines": 26,
+      "source_sha256": "3cd7031306f93003f27093eb4779f8125f9a2584a013cbbb5d5224134a080b05",
+      "rust": "crates/gen_modules_already/src/modules/already.rs",
+      "rust_lines": 80
+    },
+    {
+      "module": "modules.an_age_ahead",
+      "python": "bot/modules/an_age_ahead.py",
+      "python_lines": 34,
+      "source_sha256": "d8e73c2520e5b5b38ec9cae1826c57ee5e7a7cb9ad99b4a24893b2adbf783b47",
+      "rust": "crates/gen_modules_an_age_ahead/src/modules/an_age_ahead.rs",
+      "rust_lines": 118
+    },
+    {
+      "module": "modules.answers",
+      "python": "bot/modules/answers.py",
+      "python_lines": 12268,
+      "source_sha256": "5ff2e426774f2daeb862c40fda31ddbf61d9e21d57525eed485445e57faedb6c",
+      "rust": "crates/gen_modules_answers/src/modules/answers.rs",
+      "rust_lines": 18746
+    },
+    {
+      "module": "modules.arbiter",
+      "python": "bot/modules/arbiter.py",
+      "python_lines": 5532,
+      "source_sha256": "47dedb851fd091a90e249fbd82dc0f0bc84d1e14d312445b1fe46b9cc5805ef7",
+      "rust": "crates/gen_modules_arbiter/src/modules/arbiter.rs",
+      "rust_lines": 10299
+    },
+    {
+      "module": "modules.attribute_said_again",
+      "python": "bot/modules/attribute_said_again.py",
+      "python_lines": 905,
+      "source_sha256": "35af84e165aa76b5c9544573105b67cde167ed3b24c7370e064967f14b6aa7d1",
+      "rust": "crates/gen_modules_attribute_said_again/src/modules/attribute_said_again.rs",
+      "rust_lines": 1724
+    },
+    {
+      "module": "modules.bulky",
+      "python": "bot/modules/bulky.py",
+      "python_lines": 153,
+      "source_sha256": "37ca4349512835c6c11841c8331657bb86a1dc6903fc4c155c2ed5ef425d7e5d",
+      "rust": "crates/gen_modules_bulky/src/modules/bulky.rs",
+      "rust_lines": 320
+    },
+    {
+      "module": "modules.callback_about",
+      "python": "bot/modules/callback_about.py",
+      "python_lines": 39,
+      "source_sha256": "fd14c334d654ada905eb2a742754cce45ecad83d20e6247f1db89c60803df9e4",
+      "rust": "crates/gen_modules_callback_about/src/modules/callback_about.rs",
+      "rust_lines": 102
+    },
+    {
+      "module": "modules.carers_turn",
+      "python": "bot/modules/carers_turn.py",
+      "python_lines": 651,
+      "source_sha256": "703cc6703f0b0895c78c6239efe810ad89ccbfa71a1d09ce26d47bf33ffc6e5e",
+      "rust": "crates/gen_modules_carers_turn/src/modules/carers_turn.rs",
+      "rust_lines": 897
+    },
+    {
+      "module": "modules.chasing_a_body",
+      "python": "bot/modules/chasing_a_body.py",
+      "python_lines": 609,
+      "source_sha256": "c90cca9185ce132daed97b2daf75bf4ccecabbc423b8e2f49485a0611f646f95",
+      "rust": "crates/gen_modules_chasing_a_body/src/modules/chasing_a_body.rs",
+      "rust_lines": 788
+    },
+    {
+      "module": "modules.chat",
+      "python": "bot/modules/chat.py",
+      "python_lines": 16737,
+      "source_sha256": "d7c4029f125887f14e38967e69b7e399d50d3967f901e1a85c054b212bbf012b",
+      "rust": "crates/gen_modules_chat/src/modules/chat.rs",
+      "rust_lines": 21386
+    },
+    {
+      "module": "modules.chat_replies",
+      "python": "bot/modules/chat_replies.py",
+      "python_lines": 1105,
+      "source_sha256": "b246ba144ff5982eca49ac90bd523adaef9f3201ef68b5711e6c204aa04533d4",
+      "rust": "crates/gen_modules_chat_replies/src/modules/chat_replies.rs",
+      "rust_lines": 51
+    },
+    {
+      "module": "modules.colour_on_the_body",
+      "python": "bot/modules/colour_on_the_body.py",
+      "python_lines": 27,
+      "source_sha256": "7cdbb06c2040fef082f317b1149f587e7620f60b251bdfe9e604966eaf350070",
+      "rust": "crates/gen_modules_colour_on_the_body/src/modules/colour_on_the_body.rs",
+      "rust_lines": 91
+    },
+    {
+      "module": "modules.confusing",
+      "python": "bot/modules/confusing.py",
+      "python_lines": 90,
+      "source_sha256": "f12096fd6ec0f47065d65c7b3f8461a825e3150b4f0f67b2551dc7db93cb92e9",
+      "rust": "crates/gen_modules_confusing/src/modules/confusing.rs",
+      "rust_lines": 166
+    },
+    {
+      "module": "modules.detail_question",
+      "python": "bot/modules/detail_question.py",
+      "python_lines": 20,
+      "source_sha256": "8246668dd31f619a6ae3852373f7614c21cf1d7aba820bccd2173a9193983861",
+      "rust": "crates/gen_modules_detail_question/src/modules/detail_question.rs",
+      "rust_lines": 72
+    },
+    {
+      "module": "modules.done_ask",
+      "python": "bot/modules/done_ask.py",
+      "python_lines": 240,
+      "source_sha256": "c743b4d615f0bd4a98dfa26bba93f8940ca2b4f2def8a36c30867e949b8a00b8",
+      "rust": "crates/gen_modules_done_ask/src/modules/done_ask.rs",
+      "rust_lines": 520
+    },
+    {
+      "module": "modules.doubt",
+      "python": "bot/modules/doubt.py",
+      "python_lines": 43,
+      "source_sha256": "1bb552982ae494010221c9e7d82a8fb6f683d210d179a47f3bf5849ec972c018",
+      "rust": "crates/gen_modules_doubt/src/modules/doubt.rs",
+      "rust_lines": 111
+    },
+    {
+      "module": "modules.dreams",
+      "python": "bot/modules/dreams.py",
+      "python_lines": 278,
+      "source_sha256": "0d718e63c6feeb15f2fc9d49fa3279c0a17e020944486329d43ba35f68b4a8fb",
+      "rust": "crates/gen_modules_dreams/src/modules/dreams.rs",
+      "rust_lines": 444
+    },
+    {
+      "module": "modules.familyask",
+      "python": "bot/modules/familyask.py",
+      "python_lines": 283,
+      "source_sha256": "06dd36f13c4132e42dc2f5ea09d37332d8cd153cf83d088f355d6654bf54356f",
+      "rust": "crates/gen_modules_familyask/src/modules/familyask.rs",
+      "rust_lines": 513
+    },
+    {
+      "module": "modules.favourites",
+      "python": "bot/modules/favourites.py",
+      "python_lines": 161,
+      "source_sha256": "1d8f36579faf6bab433b62fec481c3d05e1208bc950bfd1d769ecb2f3fe23cd8",
+      "rust": "crates/gen_modules_favourites/src/modules/favourites.rs",
+      "rust_lines": 306
+    },
+    {
+      "module": "modules.figure_asked_again",
+      "python": "bot/modules/figure_asked_again.py",
+      "python_lines": 46,
+      "source_sha256": "84e5399726ec04e062e8a9ec1b73ad1e7aa0be24b161a4a09437060792a471e3",
+      "rust": "crates/gen_modules_figure_asked_again/src/modules/figure_asked_again.rs",
+      "rust_lines": 122
+    },
+    {
+      "module": "modules.first_line_open",
+      "python": "bot/modules/first_line_open.py",
+      "python_lines": 42,
+      "source_sha256": "53102a2a30b5e939000de5855e163b710d1a86949fd8e1543acafd7a89156899",
+      "rust": "crates/gen_modules_first_line_open/src/modules/first_line_open.rs",
+      "rust_lines": 143
+    },
+    {
+      "module": "modules.greeting",
+      "python": "bot/modules/greeting.py",
+      "python_lines": 1280,
+      "source_sha256": "d2b1aab9cb9adf68a885e51db84a2b08203ddec6b84fd7a2cea957b73cefd171",
+      "rust": "crates/gen_modules_greeting/src/modules/greeting.rs",
+      "rust_lines": 1224
+    },
+    {
+      "module": "modules.grief",
+      "python": "bot/modules/grief.py",
+      "python_lines": 925,
+      "source_sha256": "fbe0bee16bd45fd48a2465d70207a4fa23a56009e5631248bf3754edd6d351a5",
+      "rust": "crates/gen_modules_grief/src/modules/grief.rs",
+      "rust_lines": 1558
+    },
+    {
+      "module": "modules.group_ages",
+      "python": "bot/modules/group_ages.py",
+      "python_lines": 62,
+      "source_sha256": "a93314cf500fc17aa63a5f54c3b93a9b3b479e4e451782534191adedc6055d05",
+      "rust": "crates/gen_modules_group_ages/src/modules/group_ages.rs",
+      "rust_lines": 188
+    },
+    {
+      "module": "modules.hardpast",
+      "python": "bot/modules/hardpast.py",
+      "python_lines": 202,
+      "source_sha256": "c18c9cf6cbb102b369c3e990d363605435115a85d440af5494e97cde1f42bf4e",
+      "rust": "crates/gen_modules_hardpast/src/modules/hardpast.rs",
+      "rust_lines": 323
+    },
+    {
+      "module": "modules.household",
+      "python": "bot/modules/household.py",
+      "python_lines": 47,
+      "source_sha256": "15c70ea91dfdcd5b75c539fdd06faef642ce818d67d1b922fd2adc6fe691c56e",
+      "rust": "crates/gen_modules_household/src/modules/household.rs",
+      "rust_lines": 182
+    },
+    {
+      "module": "modules.how_long_a_stay",
+      "python": "bot/modules/how_long_a_stay.py",
+      "python_lines": 205,
+      "source_sha256": "1822dc9ee7ebe42d9e1c0f0cb679965689085721b02289a80b758756ecffc414",
+      "rust": "crates/gen_modules_how_long_a_stay/src/modules/how_long_a_stay.rs",
+      "rust_lines": 359
+    },
+    {
+      "module": "modules.intent",
+      "python": "bot/modules/intent.py",
+      "python_lines": 43,
+      "source_sha256": "31b80f00016b5f3be068c810a17c388db3936c69904f2d681d0a4fc3fd46d4bb",
+      "rust": "crates/gen_modules_intent/src/modules/intent.rs",
+      "rust_lines": 91
+    },
+    {
+      "module": "modules.invitation",
+      "python": "bot/modules/invitation.py",
+      "python_lines": 48,
+      "source_sha256": "8dc0097e8a86d6687abf8363128198fa1d41beac28dea2dafbd460ddb0d33423",
+      "rust": "crates/gen_modules_invitation/src/modules/invitation.rs",
+      "rust_lines": 106
+    },
+    {
+      "module": "modules.judge_ask",
+      "python": "bot/modules/judge_ask.py",
+      "python_lines": 131,
+      "source_sha256": "72bd104e0dfb3909ba1b4b191d9dd0e90826c4769232cf5d10a382db13ecd247",
+      "rust": "crates/gen_modules_judge_ask/src/modules/judge_ask.rs",
+      "rust_lines": 234
+    },
+    {
+      "module": "modules.keeping",
+      "python": "bot/modules/keeping.py",
+      "python_lines": 178,
+      "source_sha256": "95fca03bb670f7671ed8a056918e56784bcfcb9463008f283ae6a87e1c842233",
+      "rust": "crates/gen_modules_keeping/src/modules/keeping.rs",
+      "rust_lines": 363
+    },
+    {
+      "module": "modules.kid_tally",
+      "python": "bot/modules/kid_tally.py",
+      "python_lines": 28,
+      "source_sha256": "b8c401528d468fd053d3d31bccd05336d129362ff5f9d5cef4c23b47db8a99e6",
+      "rust": "crates/gen_modules_kid_tally/src/modules/kid_tally.rs",
+      "rust_lines": 100
+    },
+    {
+      "module": "modules.live_source",
+      "python": "bot/modules/live_source.py",
+      "python_lines": 294,
+      "source_sha256": "1841ec0ee421da24e515c612af7c354294eb07958b4d502f024eb3999f4988f0",
+      "rust": "crates/gen_modules_live_source/src/modules/live_source.rs",
+      "rust_lines": 551
+    },
+    {
+      "module": "modules.live_times",
+      "python": "bot/modules/live_times.py",
+      "python_lines": 265,
+      "source_sha256": "37dac7b3a35bd0788cd39d22b5f7408db624254cf4acc7099e3d1963f18251ce",
+      "rust": "crates/gen_modules_live_times/src/modules/live_times.rs",
+      "rust_lines": 510
+    },
+    {
+      "module": "modules.loss",
+      "python": "bot/modules/loss.py",
+      "python_lines": 155,
+      "source_sha256": "bd6c289a541dfcc1007e79670bd37dbee7580dc835257d7d9e1b4cb7208d14ea",
+      "rust": "crates/gen_modules_loss/src/modules/loss.rs",
+      "rust_lines": 380
+    },
+    {
+      "module": "modules.memory_store",
+      "python": "bot/modules/memory_store.py",
+      "python_lines": 6419,
+      "source_sha256": "981c66c436bc3c595abe232314a4b451698517f24f41f6ada2700bb52a595db4",
+      "rust": "crates/gen_modules_memory_store/src/modules/memory_store.rs",
+      "rust_lines": 10091
+    },
+    {
+      "module": "modules.memory_tables",
+      "python": "bot/modules/memory_tables.py",
+      "python_lines": 483,
+      "source_sha256": "05b9e9c3781a99e8b51aaa41d27439eca9ef5c32051252fd0cdc19f9034893a6",
+      "rust": "crates/gen_modules_memory_tables/src/modules/memory_tables.rs",
+      "rust_lines": 1500
+    },
+    {
+      "module": "modules.my_work",
+      "python": "bot/modules/my_work.py",
+      "python_lines": 26,
+      "source_sha256": "fc4c8c97b3a2171b3963ca426f53933b0d375c6ab64c026214e3febc48b91fbd",
+      "rust": "crates/gen_modules_my_work/src/modules/my_work.rs",
+      "rust_lines": 96
+    },
+    {
+      "module": "modules.name_taken_back",
+      "python": "bot/modules/name_taken_back.py",
+      "python_lines": 107,
+      "source_sha256": "aaa33ddd7067dac06def01fed0031b5ab3128d5909b3c4ba519053437cd61430",
+      "rust": "crates/gen_modules_name_taken_back/src/modules/name_taken_back.rs",
+      "rust_lines": 252
+    },
+    {
+      "module": "modules.near_me",
+      "python": "bot/modules/near_me.py",
+      "python_lines": 25,
+      "source_sha256": "ef80312fcf2c7733003ad18914fec774639e7725733e909ec154f6a2653cce58",
+      "rust": "crates/gen_modules_near_me/src/modules/near_me.rs",
+      "rust_lines": 91
+    },
+    {
+      "module": "modules.night",
+      "python": "bot/modules/night.py",
+      "python_lines": 40,
+      "source_sha256": "7db722f7e013a0bc09f0d3ce5a5f5b3d42cb7ac6be350edc873a61dc0ca6584d",
+      "rust": "crates/gen_modules_night/src/modules/night.rs",
+      "rust_lines": 81
+    },
+    {
+      "module": "modules.no_advice",
+      "python": "bot/modules/no_advice.py",
+      "python_lines": 65,
+      "source_sha256": "73b81aac3270601640e95a0ab8a2b92d3ff4f39cda04214d31916a1d31a69b5d",
+      "rust": "crates/gen_modules_no_advice/src/modules/no_advice.rs",
+      "rust_lines": 162
+    },
+    {
+      "module": "modules.nudge",
+      "python": "bot/modules/nudge.py",
+      "python_lines": 56,
+      "source_sha256": "815ae7074b3d90aa844f33dc70c50d500b6c1b3c1d93cf0a981d921726ac632e",
+      "rust": "crates/gen_modules_nudge/src/modules/nudge.rs",
+      "rust_lines": 141
+    },
+    {
+      "module": "modules.on_record",
+      "python": "bot/modules/on_record.py",
+      "python_lines": 62,
+      "source_sha256": "fd540d3d1f656bd62d74e3a81b6ed0754f32dd33d470a73a95d6db2a06d08687",
+      "rust": "crates/gen_modules_on_record/src/modules/on_record.rs",
+      "rust_lines": 117
+    },
+    {
+      "module": "modules.onsubject",
+      "python": "bot/modules/onsubject.py",
+      "python_lines": 52,
+      "source_sha256": "b0e3a208ad9d901729bcc265488830a50bdd4e3d5835ac4716d04f1d50537c5b",
+      "rust": "crates/gen_modules_onsubject/src/modules/onsubject.rs",
+      "rust_lines": 104
+    },
+    {
+      "module": "modules.pace",
+      "python": "bot/modules/pace.py",
+      "python_lines": 45,
+      "source_sha256": "503b628b0f76350e996dbd65e59b33b4b4c7056a136defcfc805a4f32dfd361d",
+      "rust": "crates/gen_modules_pace/src/modules/pace.rs",
+      "rust_lines": 141
+    },
+    {
+      "module": "modules.particles",
+      "python": "bot/modules/particles.py",
+      "python_lines": 47,
+      "source_sha256": "e60356fb2937ef98119650e37096b54e21880f8ef995654e55a94ab742aed879",
+      "rust": "crates/gen_modules_particles/src/modules/particles.rs",
+      "rust_lines": 102
+    },
+    {
+      "module": "modules.recap",
+      "python": "bot/modules/recap.py",
+      "python_lines": 150,
+      "source_sha256": "f339dc681b6f791c04c6279573eb8013f1383b65d6ff501fc3dfd6cde39b54fa",
+      "rust": "crates/gen_modules_recap/src/modules/recap.rs",
+      "rust_lines": 321
+    },
+    {
+      "module": "modules.receiving_end",
+      "python": "bot/modules/receiving_end.py",
+      "python_lines": 23,
+      "source_sha256": "e4da2866113e0b608a3479223cf49af96fc2ba4da168487a010d154e03c9a79e",
+      "rust": "crates/gen_modules_receiving_end/src/modules/receiving_end.rs",
+      "rust_lines": 81
+    },
+    {
+      "module": "modules.record_due",
+      "python": "bot/modules/record_due.py",
+      "python_lines": 171,
+      "source_sha256": "2f3dec00f6b2c4c6b9c7c75dddf50ec85141d603722e68fc912702e009673bc8",
+      "rust": "crates/gen_modules_record_due/src/modules/record_due.rs",
+      "rust_lines": 377
+    },
+    {
+      "module": "modules.ruled_out",
+      "python": "bot/modules/ruled_out.py",
+      "python_lines": 42,
+      "source_sha256": "c209d8bf06d6634287dff575c337773535df8b9db1275ebac61dc63fa1600b32",
+      "rust": "crates/gen_modules_ruled_out/src/modules/ruled_out.rs",
+      "rust_lines": 141
+    },
+    {
+      "module": "modules.safety",
+      "python": "bot/modules/safety.py",
+      "python_lines": 12018,
+      "source_sha256": "c9325dc56f9a103cfaebeeaae106691b43ebe3d11b5cb270fadf929b6bcc195d",
+      "rust": "crates/gen_modules_safety/src/modules/safety.rs",
+      "rust_lines": 17270
+    },
+    {
+      "module": "modules.safety_cards",
+      "python": "bot/modules/safety_cards.py",
+      "python_lines": 2527,
+      "source_sha256": "884dd5a7d4a186e7756b4b435276b3f77ee44ddc2c50d170b610eb0616b20a6a",
+      "rust": "crates/gen_modules_safety_cards/src/modules/safety_cards.rs",
+      "rust_lines": 1080
+    },
+    {
+      "module": "modules.safety_phrases",
+      "python": "bot/modules/safety_phrases.py",
+      "python_lines": 1324,
+      "source_sha256": "e70e4392bafed0d79bc67676cbfc9b7c8cb7c6e453f4cbbfb619f2c89f52d9be",
+      "rust": "crates/gen_modules_safety_phrases/src/modules/safety_phrases.rs",
+      "rust_lines": 733
+    },
+    {
+      "module": "modules.safety_tables",
+      "python": "bot/modules/safety_tables.py",
+      "python_lines": 7807,
+      "source_sha256": "13bee1e67ac405891693b226ef48fc074ef4ccd1a88e4ffbe5b11f5524e9aae9",
+      "rust": "crates/gen_modules_safety_tables/src/modules/safety_tables.rs",
+      "rust_lines": 6158
+    },
+    {
+      "module": "modules.said_back",
+      "python": "bot/modules/said_back.py",
+      "python_lines": 28,
+      "source_sha256": "d6d2529d3aa185f6f47cdb6d58060c1b704031705d4a48a2c4ffa33c196a88e0",
+      "rust": "crates/gen_modules_said_back/src/modules/said_back.rs",
+      "rust_lines": 71
+    },
+    {
+      "module": "modules.said_fact_back",
+      "python": "bot/modules/said_fact_back.py",
+      "python_lines": 172,
+      "source_sha256": "e8838371c542d0dfdc657369081ca90ea53b790de545b7753be60150d5fe17eb",
+      "rust": "crates/gen_modules_said_fact_back/src/modules/said_fact_back.rs",
+      "rust_lines": 384
+    },
+    {
+      "module": "modules.saving_followup",
+      "python": "bot/modules/saving_followup.py",
+      "python_lines": 305,
+      "source_sha256": "c7421cf77defb5b2292feada11b1da0c93cced4a2ce9b983d92cff498abb0668",
+      "rust": "crates/gen_modules_saving_followup/src/modules/saving_followup.rs",
+      "rust_lines": 462
+    },
+    {
+      "module": "modules.since_it_began",
+      "python": "bot/modules/since_it_began.py",
+      "python_lines": 37,
+      "source_sha256": "2b2444117e2a75d31317a05d892c2a857f2c4bcc37723d3cf81a63fc0e186f89",
+      "rust": "crates/gen_modules_since_it_began/src/modules/since_it_began.rs",
+      "rust_lines": 101
+    },
+    {
+      "module": "modules.steps",
+      "python": "bot/modules/steps.py",
+      "python_lines": 23,
+      "source_sha256": "0026e1508e3e72165ec962a31e91c06484023be777dd2ecb552f13a958b34515",
+      "rust": "crates/gen_modules_steps/src/modules/steps.rs",
+      "rust_lines": 74
+    },
+    {
+      "module": "modules.taking_asked_again",
+      "python": "bot/modules/taking_asked_again.py",
+      "python_lines": 45,
+      "source_sha256": "95fd6c498a0c5eef80d6db4115762b366a5f2d07ce103c5cc5fdfbecfd1b2203",
+      "rust": "crates/gen_modules_taking_asked_again/src/modules/taking_asked_again.rs",
+      "rust_lines": 122
+    },
+    {
+      "module": "modules.talkto",
+      "python": "bot/modules/talkto.py",
+      "python_lines": 159,
+      "source_sha256": "533d3cc945119b3364ba26ba2d2a9077c6e9597fa9117938b42fbdcef4dbe1d8",
+      "rust": "crates/gen_modules_talkto/src/modules/talkto.rs",
+      "rust_lines": 369
+    },
+    {
+      "module": "modules.the_detail_the_thread_adds",
+      "python": "bot/modules/the_detail_the_thread_adds.py",
+      "python_lines": 30,
+      "source_sha256": "31095cc16f23f8849648865d525911fb75a351e0f2432c13b3ce9d6500e85a4e",
+      "rust": "crates/gen_modules_the_detail_the_thread_adds/src/modules/the_detail_the_thread_adds.rs",
+      "rust_lines": 85
+    },
+    {
+      "module": "modules.the_kind_one_line_up",
+      "python": "bot/modules/the_kind_one_line_up.py",
+      "python_lines": 56,
+      "source_sha256": "7b05940406a5f495d3a63621cdf0889fd1b622e459daa3a39a82e1f4e3844bb2",
+      "rust": "crates/gen_modules_the_kind_one_line_up/src/modules/the_kind_one_line_up.rs",
+      "rust_lines": 132
+    },
+    {
+      "module": "modules.the_month_they_have",
+      "python": "bot/modules/the_month_they_have.py",
+      "python_lines": 33,
+      "source_sha256": "ac11cae033fe2ea474827db60ab1b3a8eb61965e6063021a737fde662168ceea",
+      "rust": "crates/gen_modules_the_month_they_have/src/modules/the_month_they_have.rs",
+      "rust_lines": 99
+    },
+    {
+      "module": "modules.the_shape_of_the_answer",
+      "python": "bot/modules/the_shape_of_the_answer.py",
+      "python_lines": 130,
+      "source_sha256": "27fbdf04c579b094d99e664a151867d51f58af1c3d6d75ccb44a0653823907c2",
+      "rust": "crates/gen_modules_the_shape_of_the_answer/src/modules/the_shape_of_the_answer.rs",
+      "rust_lines": 315
+    },
+    {
+      "module": "modules.the_trouble_it_has",
+      "python": "bot/modules/the_trouble_it_has.py",
+      "python_lines": 27,
+      "source_sha256": "34d900ca88b856708358a979f0194613b7d1f720e397d6e858ed35665e58458c",
+      "rust": "crates/gen_modules_the_trouble_it_has/src/modules/the_trouble_it_has.rs",
+      "rust_lines": 85
+    },
+    {
+      "module": "modules.the_trouble_named",
+      "python": "bot/modules/the_trouble_named.py",
+      "python_lines": 30,
+      "source_sha256": "a98e9062e061764acb49304519ed9fb04881677c2e8d7540ae362faa0a75a7ef",
+      "rust": "crates/gen_modules_the_trouble_named/src/modules/the_trouble_named.rs",
+      "rust_lines": 93
+    },
+    {
+      "module": "modules.the_wait_about_a_body",
+      "python": "bot/modules/the_wait_about_a_body.py",
+      "python_lines": 94,
+      "source_sha256": "40e2fcd2bcd32f8e3e31cb35d097e53d3a9936b150c7b5a5823a055e9adf0768",
+      "rust": "crates/gen_modules_the_wait_about_a_body/src/modules/the_wait_about_a_body.rs",
+      "rust_lines": 207
+    },
+    {
+      "module": "modules.their_life",
+      "python": "bot/modules/their_life.py",
+      "python_lines": 450,
+      "source_sha256": "159963aba1ae7c73c4aab6d77a37f922f316162fda96db3e77a14a03365d5b40",
+      "rust": "crates/gen_modules_their_life/src/modules/their_life.rs",
+      "rust_lines": 802
+    },
+    {
+      "module": "modules.their_pastime",
+      "python": "bot/modules/their_pastime.py",
+      "python_lines": 358,
+      "source_sha256": "28def5d8c99cd920178529296add1be944f68f1dfe1baea733b0fabdb66f2600",
+      "rust": "crates/gen_modules_their_pastime/src/modules/their_pastime.rs",
+      "rust_lines": 701
+    },
+    {
+      "module": "modules.their_taste",
+      "python": "bot/modules/their_taste.py",
+      "python_lines": 330,
+      "source_sha256": "c4f1c46d5ee2a47e4f16dc2f7b66b744d7787ee1183590d78d2b12eb86005f50",
+      "rust": "crates/gen_modules_their_taste/src/modules/their_taste.rs",
+      "rust_lines": 705
+    },
+    {
+      "module": "modules.theirperson",
+      "python": "bot/modules/theirperson.py",
+      "python_lines": 31,
+      "source_sha256": "889651094d60922f9c935b358da730836dc28bac4cba098083979403ac92d82d",
+      "rust": "crates/gen_modules_theirperson/src/modules/theirperson.rs",
+      "rust_lines": 80
+    },
+    {
+      "module": "modules.thing_i_did_with",
+      "python": "bot/modules/thing_i_did_with.py",
+      "python_lines": 194,
+      "source_sha256": "0b42ed6058360f4768b25edb1672e22c0097418371dd13a389c32b3548737761",
+      "rust": "crates/gen_modules_thing_i_did_with/src/modules/thing_i_did_with.rs",
+      "rust_lines": 411
+    },
+    {
+      "module": "modules.trip_date_said_again",
+      "python": "bot/modules/trip_date_said_again.py",
+      "python_lines": 158,
+      "source_sha256": "0582152bf106d519b9e7a308b4b2afe3754d33d3b831118b511a35fe684da405",
+      "rust": "crates/gen_modules_trip_date_said_again/src/modules/trip_date_said_again.rs",
+      "rust_lines": 274
+    },
+    {
+      "module": "modules.understand",
+      "python": "bot/modules/understand.py",
+      "python_lines": 28,
+      "source_sha256": "59c9b443a0f06ccac9d262205ab80f64e105dd2fcb0779713ebcc7c0ebee2f50",
+      "rust": "crates/gen_modules_understand/src/modules/understand.rs",
+      "rust_lines": 97
+    },
+    {
+      "module": "modules.urgent",
+      "python": "bot/modules/urgent.py",
+      "python_lines": 30,
+      "source_sha256": "b2de327ebff3aba4cb3855736ea763055a2bf25f57c89ec5b907fa512432f94b",
+      "rust": "crates/gen_modules_urgent/src/modules/urgent.rs",
+      "rust_lines": 89
+    },
+    {
+      "module": "modules.ward",
+      "python": "bot/modules/ward.py",
+      "python_lines": 20,
+      "source_sha256": "b0ccb4f0b418355d2409950b7e24818c98c482a999e08ad6c8599c67cdfd1ccf",
+      "rust": "crates/gen_modules_ward/src/modules/ward.rs",
+      "rust_lines": 71
+    },
+    {
+      "module": "modules.what_decides_it",
+      "python": "bot/modules/what_decides_it.py",
+      "python_lines": 30,
+      "source_sha256": "ac71ebd86b084dcddecc5d5c07c9dae32a3d60a6d4bb140e5b70133f386344a5",
+      "rust": "crates/gen_modules_what_decides_it/src/modules/what_decides_it.rs",
+      "rust_lines": 91
+    },
+    {
+      "module": "modules.what_they_said",
+      "python": "bot/modules/what_they_said.py",
+      "python_lines": 216,
+      "source_sha256": "1b12ad99f2060e68832fa23f9caf964619e192815e69a51e5067ab0fb25eae49",
+      "rust": "crates/gen_modules_what_they_said/src/modules/what_they_said.rs",
+      "rust_lines": 346
+    },
+    {
+      "module": "modules.where_it_answers",
+      "python": "bot/modules/where_it_answers.py",
+      "python_lines": 163,
+      "source_sha256": "b85c9aa8d9132e80f25bc0ac4366e50214004efe037b6b1560d4b3b5be408193",
+      "rust": "crates/gen_modules_where_it_answers/src/modules/where_it_answers.rs",
+      "rust_lines": 281
+    },
+    {
+      "module": "modules.who_to_see",
+      "python": "bot/modules/who_to_see.py",
+      "python_lines": 40,
+      "source_sha256": "fc19ad64cd88f4c8ed853cf79232c237fe43824265754ccff4fa1a324bd70ab4",
+      "rust": "crates/gen_modules_who_to_see/src/modules/who_to_see.rs",
+      "rust_lines": 141
+    },
+    {
+      "module": "modules.words",
+      "python": "bot/modules/words.py",
+      "python_lines": 197,
+      "source_sha256": "dd782e4a6476ef740241f86eb834ac2d488296fc45a792f6e7241fca6d967d5c",
+      "rust": "crates/gen_modules_words/src/modules/words.rs",
+      "rust_lines": 286
+    },
+    {
+      "module": "modules.years_in",
+      "python": "bot/modules/years_in.py",
+      "python_lines": 46,
+      "source_sha256": "c77043b5747a6333e04b5e5fcc11fa42e73effbad9593b48e8851c7f1bcb754b",
+      "rust": "crates/gen_modules_years_in/src/modules/years_in.rs",
+      "rust_lines": 109
+    },
+    {
+      "module": "runtime",
+      "python": "bot/runtime.py",
+      "python_lines": 120,
+      "source_sha256": "2b97af50f028856fdea64133c0c524cd6f10f0c875784ed9a331e3b8a1697b55",
+      "rust": "crates/gen_runtime/src/runtime.rs",
+      "rust_lines": 455
+    },
+    {
+      "module": "understanding",
+      "python": "bot/understanding/__init__.py",
+      "python_lines": 2379,
+      "source_sha256": "7475074ff8330479a9afa68ec31af078e0900558f2fa7aa50a2f76010ae6c057",
+      "rust": "crates/gen_understanding/src/understanding/mod.rs",
+      "rust_lines": 3691
+    },
+    {
+      "module": "understanding.attempts",
+      "python": "bot/understanding/attempts.py",
+      "python_lines": 204,
+      "source_sha256": "a401c6cc59edb0f0b1876f125467b3ade1c0fb35bed07822595e89756bda495d",
+      "rust": "crates/gen_understanding_attempts/src/understanding/attempts.rs",
+      "rust_lines": 383
+    },
+    {
+      "module": "understanding.body",
+      "python": "bot/understanding/body.py",
+      "python_lines": 671,
+      "source_sha256": "6199ffe87a9fdb72508efabc3b0bcd25a81662f1c7ef109032e04c937ce4264c",
+      "rust": "crates/gen_understanding_body/src/understanding/body.rs",
+      "rust_lines": 1131
+    },
+    {
+      "module": "understanding.breeds",
+      "python": "bot/understanding/breeds.py",
+      "python_lines": 171,
+      "source_sha256": "b507699094651371d5cc31a495a8f4b228b04b69a97d973eb6649bcd71f32cf4",
+      "rust": "crates/gen_understanding_breeds/src/understanding/breeds.rs",
+      "rust_lines": 310
+    },
+    {
+      "module": "understanding.car_glass",
+      "python": "bot/understanding/car_glass.py",
+      "python_lines": 79,
+      "source_sha256": "dda0f3e6d1052ff10dcf1d0aa41ff40ea296fa680bbd089764a6e66d926017e5",
+      "rust": "crates/gen_understanding_car_glass/src/understanding/car_glass.rs",
+      "rust_lines": 134
+    },
+    {
+      "module": "understanding.cars",
+      "python": "bot/understanding/cars.py",
+      "python_lines": 144,
+      "source_sha256": "ef6a213a150f32118adac041e25426f924f93f1fae5f4fc97e1a5db44567a89b",
+      "rust": "crates/gen_understanding_cars/src/understanding/cars.rs",
+      "rust_lines": 267
+    },
+    {
+      "module": "understanding.confusion",
+      "python": "bot/understanding/confusion.py",
+      "python_lines": 159,
+      "source_sha256": "d91a5bed802c3c3a1c17f2e5db433ebed7cf7e91828ed2c931436150b868ba5f",
+      "rust": "crates/gen_understanding_confusion/src/understanding/confusion.rs",
+      "rust_lines": 265
+    },
+    {
+      "module": "understanding.kinds",
+      "python": "bot/understanding/kinds.py",
+      "python_lines": 7294,
+      "source_sha256": "019ba6d023245ced4488d6ed0c3129ba58fec22be9d454e9c6e3259591d080ba",
+      "rust": "crates/gen_understanding_kinds/src/understanding/kinds.rs",
+      "rust_lines": 11822
+    },
+    {
+      "module": "understanding.lexicon",
+      "python": "bot/understanding/lexicon.py",
+      "python_lines": 2012,
+      "source_sha256": "ba0ae58cf1cddf5e927d44befca654ec50ef5ae7226a2f1cf5a888cc222c398c",
+      "rust": "crates/gen_understanding_lexicon/src/understanding/lexicon.rs",
+      "rust_lines": 686
+    },
+    {
+      "module": "understanding.normalize",
+      "python": "bot/understanding/normalize.py",
+      "python_lines": 7093,
+      "source_sha256": "eb09c2364877c9c3efe26b07329a0d2a94f43f06adc704930e097622d6b51e22",
+      "rust": "crates/gen_understanding_normalize/src/understanding/normalize.rs",
+      "rust_lines": 11574
+    },
+    {
+      "module": "understanding.references",
+      "python": "bot/understanding/references.py",
+      "python_lines": 486,
+      "source_sha256": "e27ecc89a75ab2fe57a58c479765701003e3d48d33e11e0a475229ed7b5402a9",
+      "rust": "crates/gen_understanding_references/src/understanding/references.rs",
+      "rust_lines": 974
+    },
+    {
+      "module": "understanding.senses",
+      "python": "bot/understanding/senses.py",
+      "python_lines": 220,
+      "source_sha256": "b3853370033cf5d72924063daf927f4bc4ddc26dd57cf2e1aaa2da32fadcb81a",
+      "rust": "crates/gen_understanding_senses/src/understanding/senses.rs",
+      "rust_lines": 248
+    },
+    {
+      "module": "understanding.topics",
+      "python": "bot/understanding/topics.py",
+      "python_lines": 4114,
+      "source_sha256": "350be63124854339228b521c1aff7f4b1fd296bb9a89f09f98b1a05900a366b0",
+      "rust": "crates/gen_understanding_topics/src/understanding/topics.rs",
+      "rust_lines": 6492
+    }
+  ]
+}
