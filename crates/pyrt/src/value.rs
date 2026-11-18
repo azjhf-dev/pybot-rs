@@ -198,16 +198,15 @@ impl Hash for PyKey {
 fn py_hash_into<H: Hasher>(v: &Py, state: &mut H) {
     match v {
         Py::None => { 0u8.hash(state); }
-        Py::Bool(b) => { 1u8.hash(state); (*b as i64).hash(state); }
+        Py::Bool(b) => { 2u8.hash(state); (*b as i64).hash(state); }
         Py::Int(i) => { 2u8.hash(state); i.hash(state); }
         Py::Float(f) => {
-            3u8.hash(state);
             if f.fract() == 0.0 && f.is_finite() && *f >= i64::MIN as f64 && *f <= i64::MAX as f64 {
-                (*f as i64).hash(state);
+                2u8.hash(state); (*f as i64).hash(state);
             } else if f.is_nan() {
-                0u32.hash(state);
+                3u8.hash(state); 0u32.hash(state);
             } else {
-                f.to_bits().hash(state);
+                3u8.hash(state); f.to_bits().hash(state);
             }
         }
         Py::Str(s) => { 4u8.hash(state); s.hash(state); }
@@ -219,7 +218,7 @@ fn py_hash_into<H: Hasher>(v: &Py, state: &mut H) {
             for h in hs { h.hash(state); }
         }
         Py::Bytes(b) => { 7u8.hash(state); b.hash(state); }
-        _ => { 255u8.hash(state); (v as *const Py as usize).hash(state); }
+        _ => { 255u8.hash(state); py_identity(v).hash(state); }
     }
 }
 pub fn py_hash(v: &Py) -> i64 {
@@ -953,4 +952,10 @@ pub fn py_delslice(v:&Py,start:&Py,stop:&Py,step:&Py)->Result<(),PyExc>{
  let st=step.as_i64().unwrap_or(1);if st==0{return Err(value_err("slice step cannot be zero"));}
  let mut b=list.borrow_mut();let mut indices=slice_indices(b.len() as i64,start.as_i64(),stop.as_i64(),st);
  indices.sort_unstable();for i in indices.into_iter().rev(){b.remove(i as usize);}Ok(())
+}
+
+#[cfg(test)] mod identity_tests {
+ use super::*;
+ #[test] fn identity_hash_survives_clone(){let a=Py::Instance(Rc::new(PyInstance{class_name:"object".into(),attrs:Rc::new(RefCell::new(IndexMap::new()))}));assert_eq!(py_hash(&a),py_hash(&a.clone()));}
+ #[test] fn numeric_equal_keys_hash_equally(){assert_eq!(py_hash(&Py::Int(1)),py_hash(&Py::Bool(true)));assert_eq!(py_hash(&Py::Int(1)),py_hash(&Py::Float(1.0)));}
 }

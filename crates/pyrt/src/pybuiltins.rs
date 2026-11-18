@@ -234,7 +234,7 @@ pub fn call_builtin(name: &str, args: &[Py]) -> PyResult {
             }
         }
         "iter" => Ok(args.first().cloned().unwrap_or(Py::None)),
-        "object" => Ok(Py::None),
+        "object" => Ok(Py::Instance(Rc::new(PyInstance { class_name:"object".into(), attrs:Rc::new(std::cell::RefCell::new(indexmap::IndexMap::new())) }))),
         "Exception" | "ValueError" | "TypeError" | "KeyError" | "IndexError" | "AttributeError"
         | "RuntimeError" | "StopIteration" | "ZeroDivisionError" | "ImportError" | "SyntaxError"
         | "NameError" | "LookupError" | "ArithmeticError" | "OverflowError" | "OSError"
