@@ -416,7 +416,7 @@ fn set_method(s: &Py, name: &str, args: &[Py]) -> PyResult {
         }
         "remove" => {
             if let Some(m) = mutable {
-                if m.borrow_mut().shift_remove(&PyKey(args.first().cloned().unwrap_or(Py::None))).is_none() {
+                if !m.borrow_mut().shift_remove(&PyKey(args.first().cloned().unwrap_or(Py::None))) {
                     return Err(key_err(args.first().unwrap_or(&Py::None)));
                 }
             }
@@ -566,7 +566,7 @@ pub fn mcall(recv: &Py, name: &str, args: &[Py]) -> Py {
 }
 pub fn kw_pairs(v: &Py) -> Vec<(String, Py)> {
     match v {
-        Py::Dict(d) => d.borrow().iter().map(|(k, val)| (py_str_of(k), val.clone())).collect(),
+        Py::Dict(d) => d.borrow().iter().map(|(k, val)| (py_str_of(&k.0), val.clone())).collect(),
         _ => Vec::new(),
     }
 }
@@ -613,7 +613,7 @@ pub fn dict_spread(vals: &[Py]) -> Py {
     let mut out: Vec<(Py, Py)> = Vec::new();
     for v in vals {
         match v {
-            Py::Dict(d) => out.extend(d.borrow().iter().map(|(k, val)| (k.clone(), val.clone()))),
+            Py::Dict(d) => out.extend(d.borrow().iter().map(|(k, val)| (k.0.clone(), val.clone()))),
             _ => { exc::raise(type_err("argument is not a mapping")); }
         }
     }

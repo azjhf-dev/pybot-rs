@@ -137,7 +137,7 @@ fn module_body() {
     s__MACHINE(py_tuple(vec![py_str("dishwasher"), py_str("dish washers"), py_str("dishwasher tablets"), py_str("dishwasher tablet")]));
     s__ANY_MACHINE(op_add(&g__MACHINE(), &py_tuple(vec![py_str("washing machine"), py_str("washing machines"), py_str("washer"), py_str("tumble dryer"), py_str("dryer")])));
     s__NOT_WASHABLE(py_tuple(vec![py_str("wooden spoon"), py_str("wooden spoons"), py_str("wooden spatula"), py_str("wooden spatulas"), py_str("wooden board"), py_str("wooden chopping board"), py_str("chopping board"), py_str("wooden handle"), py_str("wooden handles"), py_str("knife"), py_str("knives"), py_str("chefs knife"), py_str("chef's knife"), py_str("kitchen knife"), py_str("carving knife"), py_str("bread knife"), py_str("aluminium"), py_str("aluminum"), py_str("cast iron"), py_str("carbon steel"), py_str("copper"), py_str("crystal"), py_str("crystal glass"), py_str("gold rim"), py_str("gold rimmed"), py_str("gold-rimmed"), py_str("fine china"), py_str("bone china"), py_str("thermos"), py_str("vacuum flask"), py_str("garlic press"), py_str("cheese grater"), py_str("non stick"), py_str("non-stick"), py_str("nonstick"), py_str("silver cutlery"), py_str("silver"), py_str("pewter")]));
-    s__HOW_ASK({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("\\b(?:can|could|should|may|is it|is|are|will|would|safe|ok|okay|alright)\\b")); __args.push(stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "compile", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
+    s__HOW_ASK(stdlib_call("re", "compile", &[py_str("\\b(?:can|could|should|may|is it|is|are|will|would|safe|ok|okay|alright)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     s__WOOD(py_tuple(vec![py_str("wood"), py_str("wooden"), py_str("bamboo"), py_str("teak"), py_str("board"), py_str("boards"), py_str("chopping board"), py_str("spoon"), py_str("spoons"), py_str("spatula"), py_str("spatulas"), py_str("utensil"), py_str("utensils"), py_str("handle"), py_str("handles"), py_str("mug tree"), py_str("bowl"), py_str("bowls"), py_str("rolling pin")]));
     s__KNIFE(py_tuple(vec![py_str("knife"), py_str("knives"), py_str("blade"), py_str("blades"), py_str("chef's knife"), py_str("chefs knife"), py_str("carving knife"), py_str("bread knife"), py_str("kitchen knife"), py_str("steak knife"), py_str("steak knives")]));
     s__IRON(py_tuple(vec![py_str("cast iron"), py_str("carbon steel"), py_str("skillet"), py_str("griddle pan"), py_str("seasoned pan")]));
@@ -167,8 +167,8 @@ pub fn _bleach_on_bedding(args: &[Py]) -> Py {
     else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "understood") { v.clone() }
     else { exc::raise(type_err(&format!("missing required argument: understood"))) };
     let mut text: Py = Py::None;
-    text = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("text")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&understood.clone(), "get", args))(&__args) }; if py_truthy(&__b) { __b } else { py_str("") } }, "lower", args))(&__args) };
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __args.push(g__MATTRESS()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _names(args))(&__args) }) {
+    text = mcall(&{ let __b = mcall(&understood.clone(), "get", &[py_str("text")]); if py_truthy(&__b) { __b } else { py_str("") } }, "lower", &[]);
+    if py_truthy(&_names(&[text.clone(), g__MATTRESS()])) {
     return py_str("No: the cover yellows and the foam keeps the smell of it, and bleach does not reach the sweat and the mites you are after. Vacuum both sides, dust it with bicarbonate of soda for an hour and vacuum again, and dab a stain with cool water and a little washing-up liquid. Air it with the bed stripped, and a washable protector saves the next one.");
     }
     return py_str("Not neat bleach: the cotton weakens and goes yellow, and a synthetic duvet or pillow clogs and holds the smell of it. A white cotton cover takes a laundry bleach in a hot wash at the label's temperature; anything else wants detergent at 60 and a long dry. Pillows and duvets go in a big drum with a couple of towels to balance it.");
@@ -191,7 +191,7 @@ pub fn _names(args: &[Py]) -> Py {
     else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "words") { v.clone() }
     else { exc::raise(type_err(&format!("missing required argument: words"))) };
     let mut word: Py = Py::None;
-    return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(op_modulo(&py_str("\\b%s\\b"), &{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(word.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "escape", args).unwrap_or_else(|e| exc::raise(e)))(&__args) })); __args.push(text.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "search", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }); } py_list(__out) })() }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("any", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
+    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); __out.push(stdlib_call("re", "search", &[op_modulo(&py_str("\\b%s\\b"), &stdlib_call("re", "escape", &[word.clone()]).unwrap_or_else(|e| exc::raise(e))), text.clone()]).unwrap_or_else(|e| exc::raise(e))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn _acid_on_stone(args: &[Py]) -> Py {
@@ -212,17 +212,17 @@ pub fn _acid_on_stone(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: understood"))) };
     let mut acid: Py = Py::None;
     let mut text: Py = Py::None;
-    text = op_add(&op_add(&py_str(" "), &{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("text")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let __b = understood.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", args))(&__args) }; if py_truthy(&__b) { __b } else { py_str("") } }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }, "lower", args))(&__args) }), &py_str(" "));
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __args.push(py_tuple(vec![py_str("descaler"), py_str("descaling"), py_str("limescale remover")])); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _names(args))(&__args) }) {
+    text = op_add(&op_add(&py_str(" "), &mcall(&call_builtin("str", &[{ let __b = mcall(&{ let __b = understood.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[py_str("text")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[])), &py_str(" "));
+    if py_truthy(&_names(&[text.clone(), py_tuple(vec![py_str("descaler"), py_str("descaling"), py_str("limescale remover")])])) {
     acid = py_str("descaler");
     } else {
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __args.push(py_tuple(vec![py_str("lemon juice"), py_str("lemon")])); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _names(args))(&__args) }) {
+    if py_truthy(&_names(&[text.clone(), py_tuple(vec![py_str("lemon juice"), py_str("lemon")])])) {
     acid = py_str("lemon juice");
     } else {
     acid = py_str("vinegar");
     }
     }
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __args.push(g__HARD_STONE()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _names(args))(&__args) }) {
+    if py_truthy(&_names(&[text.clone(), g__HARD_STONE()])) {
     return op_add(&op_add(&py_str("That one stands it: quartz and a sealed granite or slate surface take an acid splash — "), &acid.clone()), &py_str(" — so wipe it off rather than leave it standing. Marble, limestone, travertine and onyx are the ones that etch, and the dull patch they leave never comes back. Warm water and a drop of washing-up liquid is all any of them needs."));
     }
     return op_add(&op_add(&py_str("That one etches: acid dulls a marble, limestone, travertine or onyx surface and the patch never comes back, so a wipe with "), &acid.clone()), &py_str(" is the wrong cleaner. Granite and quartz stand one now and then but do not need it. Warm water with a drop of washing-up liquid, dried off, and a pH-neutral stone cleaner for the rest."));
@@ -247,30 +247,30 @@ pub fn _what_the_machine_ruins(args: &[Py]) -> Py {
     let mut after: Py = Py::None;
     let mut text: Py = Py::None;
     let _ = py_str("The reason the thing in the person's hand cannot go in the machine.\n\n    The row answers every \"can i put X in the dishwasher\" line, and a reply that lists wood, steel\n    aluminium and crystal answers none of them well. The line is read for the material it names\n    and the reply is about that one, with the by-hand rule after it.\n    ");
-    text = op_add(&op_add(&py_str(" "), &{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("clean")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let __b = understood.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", args))(&__args) }; if py_truthy(&__b) { __b } else { { let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("text")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let __b = understood.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", args))(&__args) }; if py_truthy(&__b) { __b } else { py_str("") } } } }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }, "lower", args))(&__args) }), &py_str(" "));
+    text = op_add(&op_add(&py_str(" "), &mcall(&call_builtin("str", &[{ let __b = mcall(&{ let __b = understood.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { { let __b = mcall(&{ let __b = understood.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[py_str("text")]); if py_truthy(&__b) { __b } else { py_str("") } } } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[])), &py_str(" "));
     after = py_str("By hand in hot water, and dried straight away. Stainless steel, glass, plastic boards and everyday china are fine in the machine.");
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __args.push(g__IRON()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _names(args))(&__args) }) {
+    if py_truthy(&_names(&[text.clone(), g__IRON()])) {
     return py_str("Not a seasoned pan: the wash strips the seasoning and the heat dries it to rust, so it comes out grey and sticks. Scrub it with hot water and a stiff brush while it is warm, dry it on the hob, and wipe a little oil over it. Stainless steel and glass are fine in the machine.");
     }
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __args.push(g__WOOD()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _names(args))(&__args) }) {
+    if py_truthy(&_names(&[text.clone(), g__WOOD()])) {
     return py_str("Not a wooden one: it swells, splits along the grain and the glue in a board lets go, and a wooden handle soon feels rough. Wash it by hand in hot soapy water, stand it up to dry rather than flat, and rub food-safe oil into a board or a spoon now and then. Plastic boards are fine in the machine.");
     }
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __args.push(g__KNIFE()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _names(args))(&__args) }) {
+    if py_truthy(&_names(&[text.clone(), g__KNIFE()])) {
     return py_str("Not a knife: the edge knocks against the basket and the other cutlery, the handle can swell or lift, and the point comes out blunt. Wash it by hand in hot soapy water, dry it at once, and put it back in a block or on a magnetic strip. Stainless steel and everyday china are fine in the machine.");
     }
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __args.push(g__SOFT_METAL()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _names(args))(&__args) }) {
+    if py_truthy(&_names(&[text.clone(), g__SOFT_METAL()])) {
     return py_str("Not bare aluminium or copper: the salt and the drying cycle leave it grey, pitted and chalky, and a tinned baking tray comes up patchy. By hand in hot soapy water is all it needs, and dry it at once. Stainless steel, glass and china are fine in the machine.");
     }
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __args.push(g__TRAPPED()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _names(args))(&__args) }) {
+    if py_truthy(&_names(&[text.clone(), g__TRAPPED()])) {
     return py_str("Not that one: the water gets into a space it cannot drain out of, and it comes out rusty, chalky or sour, or with the soap still in it. Rinse it by hand in hot water and leave it to drain upside down. Plain crockery, stainless steel, glass and plastic boards are fine in the machine.");
     }
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __args.push(g__STONEWARE()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _names(args))(&__args) }) {
+    if py_truthy(&_names(&[text.clone(), g__STONEWARE()])) {
     return py_str("Not stone: the detergent and the drying cycle take the surface off a marble mortar or a slate board and leave it dull and chalky, and a pizza stone soaks up water and can split in the oven next time. Rinse it in warm water and a stiff brush, no soap if you can, and dry it slowly. Plain crockery, stainless steel and glass are fine in the machine.");
     }
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __args.push(g__DELICATE()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _names(args))(&__args) }) {
+    if py_truthy(&_names(&[text.clone(), g__DELICATE()])) {
     return py_str("Not that: crystal clouds and can chip, a gold rim or a printed pattern comes off in the hot water, and anything with a trapped space holds water that rusts or smells. Wash it by hand in warm water with a drop of washing-up liquid and dry it with a cloth. Plain glass, stainless steel and everyday china are fine in the machine.");
     }
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __args.push(g__COATING()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _names(args))(&__args) }) {
+    if py_truthy(&_names(&[text.clone(), g__COATING()])) {
     return py_str("Not a coated one: the hot water and the detergent dull the coating and it starts to flake, and the same goes for an air fryer basket or a rice cooker bowl. Wash it with the soft side of a sponge and dry it before it goes back. Stainless steel, glass and china are fine in the machine.");
     }
     return py_str("Look for the dishwasher-safe mark on the base or the handle first, and wash by hand anything without one: wood swells, thin metal and a sharp edge suffer, and china with a gold rim loses it. Stainless steel, glass and everyday china are fine in the machine.");

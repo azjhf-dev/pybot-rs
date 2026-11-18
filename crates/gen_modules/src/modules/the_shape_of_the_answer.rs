@@ -49,14 +49,14 @@ pub fn _the_reply_is_only_a_placeholder(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: reply"))) };
     let mut line: Py = Py::None;
     let mut said: Py = Py::None;
-    said = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let __b = reply.clone(); if py_truthy(&__b) { __b } else { py_str("") } }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }, "lower", args))(&__args) }, "split", args))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&py_str(" "), "join", args))(&__args) };
+    said = mcall(&py_str(" "), "join", &[mcall(&mcall(&call_builtin("str", &[{ let __b = reply.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]), "split", &[])]);
     if py_truthy(&Py::Bool(!py_truthy(&said.clone()))) {
     return Py::Bool(false);
     }
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(reply.clone()); __args.push(py_tuple(vec![gen_compose::compose::fallback::g_NEUTRAL()])); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| gen_compose::compose::fallback::_in_a_pool(args))(&__args) }) {
+    if py_truthy(&gen_compose::compose::fallback::_in_a_pool(&[reply.clone(), py_tuple(vec![gen_compose::compose::fallback::g_NEUTRAL()])])) {
     return Py::Bool(true);
     }
-    return Py::Bool(py_contains(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&gen_compose::compose::fallback::g_UNKNOWN()) { let mut line: Py = __item.clone(); __out.push(slice_or_raise(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&line.clone(), "lower", args))(&__args) }, &Py::None, &g__A_HEADS(), &Py::None)); } py_list(__out) })() }, &slice_or_raise(&said.clone(), &Py::None, &g__A_HEADS(), &Py::None)));
+    return Py::Bool(py_contains(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&gen_compose::compose::fallback::g_UNKNOWN()) { let mut line: Py = __item.clone(); __out.push(slice_or_raise(&mcall(&line.clone(), "lower", &[]), &Py::None, &g__A_HEADS(), &Py::None)); } py_list(__out) })() }, &slice_or_raise(&said.clone(), &Py::None, &g__A_HEADS(), &Py::None)));
     Py::None
 }
 pub fn _the_composer_would_hedge(args: &[Py]) -> Py {
@@ -78,7 +78,7 @@ pub fn _the_composer_would_hedge(args: &[Py]) -> Py {
     let mut reply: Py = Py::None;
     let _ = py_str("True when the composer's own line for this turn is a placeholder, not an answer.");
     let __try1 = exc::catch(|| {
-    reply = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| py_call(&gen_compose::compose::fallback::g_reply_for(), args))(&__args) };
+    reply = py_call(&gen_compose::compose::fallback::g_reply_for(), &[text.clone(), memory.clone()]);
         py_tuple(vec![Py::Bool(false), Py::None])
     });
     let mut __ret2: Py = Py::Bool(false);
@@ -97,7 +97,7 @@ pub fn _the_composer_would_hedge(args: &[Py]) -> Py {
     }
     if let Some(__e) = __unhandled4 { exc::raise(__e); }
     if py_truthy(&__ret2) { return __val3; }
-    return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(reply.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _the_reply_is_only_a_placeholder(args))(&__args) };
+    return _the_reply_is_only_a_placeholder(&[reply.clone()]);
     Py::None
 }
 pub fn _the_floor_would_say_a_placeholder(args: &[Py]) -> Py {
@@ -120,7 +120,7 @@ pub fn _the_floor_would_say_a_placeholder(args: &[Py]) -> Py {
     let _ = py_str("True when `greeting` - the module that says the hedge - would say a placeholder this turn.\n\n    The composer is only part of what the floor does: `greeting` also hands back a step of the\n    answer above, and a follow-up like \"what about the containers\" is that step, not a hedge. A\n    rule read off the composer alone took the turn from it - twice on a 200-chat sample - so the\n    module that would otherwise answer is asked, on a copy of memory, and its own line decides.\n    ");
     let __try1 = exc::catch(|| {
     let mut greeting: Py = crate::modules::greeting::module_obj();
-    reply = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _a_copy_of(args))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&greeting.clone(), "respond", args))(&__args) };
+    reply = mcall(&greeting.clone(), "respond", &[text.clone(), _a_copy_of(&[memory.clone()])]);
         py_tuple(vec![Py::Bool(false), Py::None])
     });
     let mut __ret2: Py = Py::Bool(false);
@@ -139,7 +139,7 @@ pub fn _the_floor_would_say_a_placeholder(args: &[Py]) -> Py {
     }
     if let Some(__e) = __unhandled4 { exc::raise(__e); }
     if py_truthy(&__ret2) { return __val3; }
-    return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(reply.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _the_reply_is_only_a_placeholder(args))(&__args) };
+    return _the_reply_is_only_a_placeholder(&[reply.clone()]);
     Py::None
 }
 pub fn _a_copy_of(args: &[Py]) -> Py {
@@ -160,7 +160,7 @@ pub fn _a_copy_of(args: &[Py]) -> Py {
     let _ = py_str("Memory as a module may read it: everything copied, the turns shared, as the runtime does.");
     let __try1 = exc::catch(|| {
     let mut copy: Py = stdlib_module("copy");
-    return py_tuple(vec![Py::Bool(true), { (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&memory.clone(), "items", args))(&__args) }) { let __unpk9444 = py_unpack(&__item.clone(), 2, None); let mut key: Py = __unpk9444[0].clone(); let mut value: Py = __unpk9444[1].clone(); __out.push((key.clone(), if py_truthy(&Py::Bool(py_eq(&key.clone(), &py_str("turns")))) { value.clone() } else { { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(value.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&copy.clone(), "deepcopy", args))(&__args) } })); } py_dict(__out) })() }]);
+    return py_tuple(vec![Py::Bool(true), { (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&memory.clone(), "items", &[])) { let __unpk8671 = py_unpack(&__item.clone(), 2, None); let mut key: Py = __unpk8671[0].clone(); let mut value: Py = __unpk8671[1].clone(); __out.push((key.clone(), if py_truthy(&Py::Bool(py_eq(&key.clone(), &py_str("turns")))) { value.clone() } else { mcall(&copy.clone(), "deepcopy", &[value.clone()]) })); } py_dict(__out) })() }]);
         py_tuple(vec![Py::Bool(false), Py::None])
     });
     let mut __ret2: Py = Py::Bool(false);
@@ -172,7 +172,7 @@ pub fn _a_copy_of(args: &[Py]) -> Py {
             let mut __handled5 = false;
             if !__handled5 && exc::matches_any(&__e, &["Exception"]) {
                 __handled5 = true;
-    return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
+    return call_builtin("dict", &[memory.clone()]).unwrap_or_else(|e| exc::raise(e));
             }
             if !__handled5 { __unhandled4 = Some(__e); }
         }
@@ -200,7 +200,7 @@ pub fn _a_thread_with_a_person_in_trouble(args: &[Py]) -> Py {
     for __item in __iter1 {
     reader = __item.clone();
     let __try2 = exc::catch(|| {
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| py_call(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(gen_compose::compose::fallback::module_obj()); __args.push(reader.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("getattr", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }, args))(&__args) }) {
+    if py_truthy(&py_call(&call_builtin("getattr", &[gen_compose::compose::fallback::module_obj(), reader.clone()]).unwrap_or_else(|e| exc::raise(e)), &[memory.clone()])) {
     return py_tuple(vec![Py::Bool(true), Py::Bool(true)]);
     }
         py_tuple(vec![Py::Bool(false), Py::None])
@@ -244,28 +244,28 @@ pub fn respond(args: &[Py]) -> Py {
     let mut clean: Py = Py::None;
     let mut pool: Py = Py::None;
     let mut understood: Py = Py::None;
-    if py_truthy(&Py::Bool(!py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(memory.clone()); __args.push(py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("isinstance", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }))) {
+    if py_truthy(&Py::Bool(!py_truthy(&call_builtin("isinstance", &[memory.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))))) {
     return Py::None;
     }
-    understood = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("understood")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&memory.clone(), "get", args))(&__args) };
-    if py_truthy(&Py::Bool(!py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(understood.clone()); __args.push(py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("isinstance", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }))) {
+    understood = mcall(&memory.clone(), "get", &[py_str("understood")]);
+    if py_truthy(&Py::Bool(!py_truthy(&call_builtin("isinstance", &[understood.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))))) {
     return Py::None;
     }
-    pool = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(understood.clone()); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| gen_compose::compose::the_shape_without_the_fact::the_shape_without_the_fact(args))(&__args) };
+    pool = gen_compose::compose::the_shape_without_the_fact::the_shape_without_the_fact(&[understood.clone(), memory.clone()]);
     if py_truthy(&Py::Bool(py_is(&pool.clone(), &Py::None))) {
     return Py::None;
     }
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _a_thread_with_a_person_in_trouble(args))(&__args) }) {
+    if py_truthy(&_a_thread_with_a_person_in_trouble(&[memory.clone()])) {
     return Py::None;
     }
-    if py_truthy(&Py::Bool(!py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _the_composer_would_hedge(args))(&__args) }))) {
+    if py_truthy(&Py::Bool(!py_truthy(&_the_composer_would_hedge(&[text.clone(), memory.clone()])))) {
     return Py::None;
     }
-    if py_truthy(&Py::Bool(!py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _the_floor_would_say_a_placeholder(args))(&__args) }))) {
+    if py_truthy(&Py::Bool(!py_truthy(&_the_floor_would_say_a_placeholder(&[text.clone(), memory.clone()])))) {
     return Py::None;
     }
-    clean = { let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("clean")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&understood.clone(), "get", args))(&__args) }; if py_truthy(&__b) { __b } else { { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }, "lower", args))(&__args) }, "split", args))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&py_str(" "), "join", args))(&__args) } } };
-    return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(pool.clone()); __args.push(memory.clone()); __args.push(clean.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| py_call(&gen_compose::compose::fallback::g__choose(), args))(&__args) };
+    clean = { let __b = mcall(&understood.clone(), "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { mcall(&py_str(" "), "join", &[mcall(&mcall(&call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]), "split", &[])]) } };
+    return py_call(&gen_compose::compose::fallback::g__choose(), &[pool.clone(), memory.clone(), clean.clone()]);
     Py::None
 }
 pub fn module_obj() -> Py {

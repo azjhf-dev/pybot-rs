@@ -48,7 +48,7 @@ pub fn respond(args: &[Py]) -> Py {
     let mut pool: Py = Py::None;
     let _ = py_str("The listening line, or None on every other line.");
     let __try1 = exc::catch(|| {
-    pool = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| gen_compose::compose::no_advice::pool_name(args))(&__args) };
+    pool = gen_compose::compose::no_advice::pool_name(&[text.clone()]);
         py_tuple(vec![Py::Bool(false), Py::None])
     });
     let mut __ret2: Py = Py::Bool(false);
@@ -70,11 +70,11 @@ pub fn respond(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&pool.clone()))) {
     return Py::None;
     }
-    if py_truthy(&Py::Bool(!py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| TAKES_AS_IT_COMES(args))(&__args) }))) {
+    if py_truthy(&Py::Bool(!py_truthy(&TAKES_AS_IT_COMES(&[text.clone(), memory.clone()])))) {
     return Py::None;
     }
     let __try6 = exc::catch(|| {
-    return py_tuple(vec![Py::Bool(true), { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(pool.clone()); __args.push(text.clone()); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| gen_compose::compose::no_advice::reply_for(args))(&__args) }]);
+    return py_tuple(vec![Py::Bool(true), gen_compose::compose::no_advice::reply_for(&[pool.clone(), text.clone(), memory.clone()])]);
         py_tuple(vec![Py::Bool(false), Py::None])
     });
     let mut __ret7: Py = Py::Bool(false);
@@ -113,10 +113,10 @@ pub fn TAKES_AS_IT_COMES(args: &[Py]) -> Py {
     else { Py::None };
     let _ = py_str("The lines this module read whole and no entry has any business answering.");
     let __try1 = exc::catch(|| {
-    if py_truthy(&Py::Bool(!py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| gen_compose::compose::no_advice::says_no_advice(args))(&__args) }))) {
+    if py_truthy(&Py::Bool(!py_truthy(&gen_compose::compose::no_advice::says_no_advice(&[text.clone()])))) {
     return py_tuple(vec![Py::Bool(true), Py::Bool(false)]);
     }
-    return py_tuple(vec![Py::Bool(true), Py::Bool(!py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| gen_compose::compose::no_advice::says_a_death(args))(&__args) }))]);
+    return py_tuple(vec![Py::Bool(true), Py::Bool(!py_truthy(&gen_compose::compose::no_advice::says_a_death(&[text.clone()])))]);
         py_tuple(vec![Py::Bool(false), Py::None])
     });
     let mut __ret2: Py = Py::Bool(false);

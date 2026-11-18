@@ -32,7 +32,7 @@ pub fn s_PRIORITY(v: Py) { ensure_init(); G_PRIORITY.with(|c| *c.borrow_mut() = 
 fn module_body() {
     let _ = py_str("A follow-up that names nothing of its own takes the kind of answer the line above named.\n\n    my order hasnt come        \"Book a bulky waste collection with your council - most charge\n                                twenty to forty pounds and collect from the doorstep.\"\n    and how long               the hedge (\"I'm not sure about that one, sorry - I'd rather not\n                                guess. A quick search online will get you a solid answer\")\n\n    im on benefits             the Universal Credit card\n    can i save anything        the hedge again\n\nThe second line is the same *kind* of question as the first line of each pair - how long it takes,\nwhat you are allowed while you claim - and the answer is not in a card, because the card above\nanswered a question about a different subject. A friend keeps the kind and says what that kind of\nthing turns on, or names the one place it is written down, in the same breath.\n\nThe reading and the wording live in `bot/compose/kept_nearby.py`. It is deliberately narrow: the\nline must lean on what is above it (`and how long`, `what about the cost`), must name no thing of\nits own, and the person's own earlier line must be one the table has a kind for. A follow-up that\nbrings a subject decides its own turn, so it is not this reading's (white-peach's three guards on\n#12543: a measure word is a kind of ask, a `how do i ...` is a method and not the kind above it,\nand two lines back is only in thread when the line between them leaned on it too).\n\nThe band is why this is a module and not a branch in the greeting's hook: **-999**, above the\ngreeting fallback (-1000) and under every module that has a real answer for the line. It reads the\nbot's own last reply to stay in that seat: the turn it replaces is a hedge or a receipt, so the\nmodule stands down when the last reply came from anything but the fallback (`greeting`, `chat`).\nThat is the same reading the hedge gate made in `bot/modules/greeting.py`, done where a module can\ndeclare its own priority instead of editing the file every other reader hooks into.\n");
     s_PRIORITY(op_neg(&Py::Int(999)));
-    s_FALLBACK_MODULES({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_tuple(vec![py_str("greeting"), py_str("chat")])); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("frozenset", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
+    s_FALLBACK_MODULES(call_builtin("frozenset", &[py_tuple(vec![py_str("greeting"), py_str("chat")])]).unwrap_or_else(|e| exc::raise(e)));
 }
 pub fn _answered_by_the_fallback(args: &[Py]) -> Py {
     ensure_init();
@@ -48,11 +48,11 @@ pub fn _answered_by_the_fallback(args: &[Py]) -> Py {
     else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "memory") { v.clone() }
     else { exc::raise(type_err(&format!("missing required argument: memory"))) };
     let mut turns: Py = Py::None;
-    turns = { let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("turns")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let __b = memory.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", args))(&__args) }; if py_truthy(&__b) { __b } else { py_list(vec![]) } };
+    turns = { let __b = mcall(&{ let __b = memory.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[py_str("turns")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } };
     if py_truthy(&Py::Bool(!py_truthy(&turns.clone()))) {
     return Py::Bool(false);
     }
-    return Py::Bool(py_contains(&g_FALLBACK_MODULES(), &{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("module")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&geti(&turns.clone(), &op_neg(&Py::Int(1))), "get", args))(&__args) }; if py_truthy(&__b) { __b } else { py_str("") } }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }));
+    return Py::Bool(py_contains(&g_FALLBACK_MODULES(), &call_builtin("str", &[{ let __b = mcall(&geti(&turns.clone(), &op_neg(&Py::Int(1))), "get", &[py_str("module")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))));
     Py::None
 }
 pub fn respond(args: &[Py]) -> Py {
@@ -74,14 +74,14 @@ pub fn respond(args: &[Py]) -> Py {
     let mut nearby: Py = Py::None;
     let _ = py_str("The kind of answer the earlier line named, or None on every other line.");
     let __try1 = exc::catch(|| {
-    if py_truthy(&Py::Bool(!py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _answered_by_the_fallback(args))(&__args) }))) {
+    if py_truthy(&Py::Bool(!py_truthy(&_answered_by_the_fallback(&[memory.clone()])))) {
     return py_tuple(vec![Py::Bool(true), Py::None]);
     }
-    nearby = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| gen_compose::compose::kept_nearby::answer_for(args))(&__args) };
+    nearby = gen_compose::compose::kept_nearby::answer_for(&[text.clone(), memory.clone()]);
     if py_truthy(&Py::Bool(!py_truthy(&nearby.clone()))) {
     return py_tuple(vec![Py::Bool(true), Py::None]);
     }
-    return py_tuple(vec![Py::Bool(true), { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(nearby.clone()); __args.push(memory.clone()); __args.push(text.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| py_call(&gen_compose::compose::fallback::g__choose(), args))(&__args) }]);
+    return py_tuple(vec![Py::Bool(true), py_call(&gen_compose::compose::fallback::g__choose(), &[nearby.clone(), memory.clone(), text.clone()])]);
         py_tuple(vec![Py::Bool(false), Py::None])
     });
     let mut __ret2: Py = Py::Bool(false);

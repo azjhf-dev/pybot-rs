@@ -52,7 +52,7 @@ pub fn observe(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: memory"))) };
     let _ = py_str("File who lives with them, on the chat's own memory.");
     let __try1 = exc::catch(|| {
-    let _ = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| gen_memory::memory::household::observe(args))(&__args) };
+    let _ = gen_memory::memory::household::observe(&[text.clone(), memory.clone()]);
         py_tuple(vec![Py::Bool(false), Py::None])
     });
     let mut __ret2: Py = Py::Bool(false);
@@ -91,7 +91,7 @@ pub fn respond(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: memory"))) };
     let _ = py_str("The household said back, or the ask answered, or None.");
     let __try1 = exc::catch(|| {
-    return py_tuple(vec![Py::Bool(true), { let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| gen_memory::memory::household::answer(args))(&__args) }; if py_truthy(&__b) { __b } else { Py::None } }]);
+    return py_tuple(vec![Py::Bool(true), { let __b = gen_memory::memory::household::answer(&[text.clone(), memory.clone()]); if py_truthy(&__b) { __b } else { Py::None } }]);
         py_tuple(vec![Py::Bool(false), Py::None])
     });
     let mut __ret2: Py = Py::Bool(false);
@@ -130,7 +130,7 @@ pub fn takes_as_it_comes(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: memory"))) };
     let _ = py_str("Only on a line that is nothing but the household.");
     let __try1 = exc::catch(|| {
-    return py_tuple(vec![Py::Bool(true), { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| gen_memory::memory::household::takes_as_it_comes(args))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("bool", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }]);
+    return py_tuple(vec![Py::Bool(true), call_builtin("bool", &[gen_memory::memory::household::takes_as_it_comes(&[text.clone(), memory.clone()])]).unwrap_or_else(|e| exc::raise(e))]);
         py_tuple(vec![Py::Bool(false), Py::None])
     });
     let mut __ret2: Py = Py::Bool(false);

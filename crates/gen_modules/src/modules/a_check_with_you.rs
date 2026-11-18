@@ -46,7 +46,7 @@ pub fn respond(args: &[Py]) -> Py {
     else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "memory") { v.clone() }
     else { exc::raise(type_err(&format!("missing required argument: memory"))) };
     let _ = py_str("The agreement line, or None when this is not a check-with-you question.");
-    return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| gen_compose::compose::check_with_you::answer_for(args))(&__args) };
+    return gen_compose::compose::check_with_you::answer_for(&[text.clone(), memory.clone()]);
     Py::None
 }
 pub fn module_obj() -> Py {

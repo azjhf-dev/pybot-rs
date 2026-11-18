@@ -45,7 +45,7 @@ pub fn respond(args: &[Py]) -> Py {
     let mut memory: Py = if __pos.len() > 1 { __pos[1].clone() }
     else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "memory") { v.clone() }
     else { exc::raise(type_err(&format!("missing required argument: memory"))) };
-    return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| gen_compose::compose::the_trouble_named::reply_for(args))(&__args) };
+    return gen_compose::compose::the_trouble_named::reply_for(&[text.clone(), memory.clone()]);
     Py::None
 }
 pub fn TAKES_AS_IT_COMES(args: &[Py]) -> Py {
@@ -65,7 +65,7 @@ pub fn TAKES_AS_IT_COMES(args: &[Py]) -> Py {
     else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "memory") { v.clone() }
     else { Py::None };
     let _ = py_str("This module read the line whole as a thing named as the trouble, so it takes it as it comes.");
-    return Py::Bool(!py_is(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| respond(args))(&__args) }, &Py::None));
+    return Py::Bool(!py_is(&respond(&[text.clone(), memory.clone()]), &Py::None));
     Py::None
 }
 pub fn module_obj() -> Py {

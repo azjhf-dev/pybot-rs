@@ -240,7 +240,7 @@ pub fn call_builtin(name: &str, args: &[Py]) -> PyResult {
         | "NameError" | "LookupError" | "ArithmeticError" | "OverflowError" | "OSError"
         | "FileNotFoundError" | "UnicodeDecodeError" | "NotImplementedError" | "RecursionError" => {
             let msg = args.first().map_or(String::new(), |v| py_str_of(v));
-            Ok(Py::Exc(Rc::new(PyExc::with_value(name, &msg, args.first().cloned().unwrap_or(Py::None)))))
+            Ok(Py::Exc(Rc::new(PyExc::with_value(name, &msg, args.first().map_or(String::new(), |v| py_repr(v))))))
         }
         "vars" => {
             if let Some(Py::Instance(i)) = args.first() {
@@ -319,7 +319,7 @@ pub fn py_isinstance(v: &Py, spec: &Py) -> PyResult {
     match spec {
         Py::Tuple(t) => {
             for item in t.iter() {
-                if py_isinstance(v, item)? { return Ok(Py::Bool(true)); }
+                if py_isinstance(v, item)?.is_truthy() { return Ok(Py::Bool(true)); }
             }
             Ok(Py::Bool(false))
         }

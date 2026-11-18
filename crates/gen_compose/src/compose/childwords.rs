@@ -66,12 +66,12 @@ fn module_body() {
     s_A_CHILD_DIED(crate::compose::fallback::g_A_CHILD_DIED());
     s_A_DEATH_IN_THE_LINE(crate::compose::fallback::g_A_DEATH_IN_THE_LINE());
     s_A_SUICIDE_IN_THE_LINE(crate::compose::fallback::g_A_SUICIDE_IN_THE_LINE());
-    s_TELL_ASK({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("\\b(?:how|what)\\s+(?:do|should|can|would|will)\\s+(?:i|we)\\s+(?:tell|say|word|phrase|put it|put)\\b|\\bhow do i put (?:it|this)\\b|\\bwhat do i tell\\b")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "compile", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
-    s_A_CHILD_IN_THE_ASK({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("\\b(?:kid|kids|child|children|son|daughter|boy|boys|girl|girls|toddler|little one|teenager|teen|baby|niece|nephew|grandson|granddaughter|(?:two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|\\d{1,2})[- ](?:year|yr)s?[- ]old)\\b")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "compile", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
-    s_TAIL_FILLER({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&py_str("please now then too ok okay soon gently first properly exactly tonight\ntoday tomorrow at bedtime the a an this that it and but so just really here you i we my"), "split", args))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("frozenset", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
-    s_TAIL_ABOUT_THE_ONE_WHO_DIED({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&py_str("about his her their them of on with dad daddy mum mummy\nmom mommy mother father gran granny grandma grandad grandpa nana nan brother sister uncle aunt dog\ncat pet name what happened truth"), "split", args))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("frozenset", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
-    s__A_PERSON_IN_THE_TAIL({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("\\b(?:dad|daddy|mum|mummy|mom|mommy|mother|father|gran|granny|grandma|grandad|grandpa|nana|nan|brother|sister|uncle|aunt|dog|cat|pet)\\b")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "compile", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
-    s_A_DEATH_IN_THE_TAIL({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("\\b(?:died|dead|dying|dies|death|passed|passing|gone|killed|funeral|buried|cremated)\\b")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "compile", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
+    s_TELL_ASK(stdlib_call("re", "compile", &[py_str("\\b(?:how|what)\\s+(?:do|should|can|would|will)\\s+(?:i|we)\\s+(?:tell|say|word|phrase|put it|put)\\b|\\bhow do i put (?:it|this)\\b|\\bwhat do i tell\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    s_A_CHILD_IN_THE_ASK(stdlib_call("re", "compile", &[py_str("\\b(?:kid|kids|child|children|son|daughter|boy|boys|girl|girls|toddler|little one|teenager|teen|baby|niece|nephew|grandson|granddaughter|(?:two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|\\d{1,2})[- ](?:year|yr)s?[- ]old)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    s_TAIL_FILLER(call_builtin("frozenset", &[mcall(&py_str("please now then too ok okay soon gently first properly exactly tonight\ntoday tomorrow at bedtime the a an this that it and but so just really here you i we my"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_TAIL_ABOUT_THE_ONE_WHO_DIED(call_builtin("frozenset", &[mcall(&py_str("about his her their them of on with dad daddy mum mummy\nmom mommy mother father gran granny grandma grandad grandpa nana nan brother sister uncle aunt dog\ncat pet name what happened truth"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s__A_PERSON_IN_THE_TAIL(stdlib_call("re", "compile", &[py_str("\\b(?:dad|daddy|mum|mummy|mom|mommy|mother|father|gran|granny|grandma|grandad|grandpa|nana|nan|brother|sister|uncle|aunt|dog|cat|pet)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    s_A_DEATH_IN_THE_TAIL(stdlib_call("re", "compile", &[py_str("\\b(?:died|dead|dying|dies|death|passed|passing|gone|killed|funeral|buried|cremated)\\b")]).unwrap_or_else(|e| exc::raise(e)));
     s_THE_WORDS_FOR_A_CHILD(py_tuple(vec![py_str("Keep it to a sentence or two, with their name and the plain word: they died, and they are not coming back. Then answer whatever the child asks, in the same words, and if they ask again next week - they will - say the same thing again."), py_str("Say it plainly and soon: their name, and that they died. Not asleep, not gone away, and not \"lost\" - a child takes those words literally, and then waits for them to wake up. What follows can come from their questions."), py_str("The words are the ones you would use to an adult, just shorter: their name, that they died, and that they will not be coming back. It is all right for the child to see you cry - that is how they learn it is all right to be sad.")]));
 }
 pub fn _the_tail_after_the_child(args: &[Py]) -> Py {
@@ -91,7 +91,7 @@ pub fn _the_tail_after_the_child(args: &[Py]) -> Py {
     let mut match_: Py = Py::None;
     let _ = py_str("The words after the last child named in the ask, or None when no child is named.");
     last = Py::None;
-    let __iter1 = py_iter_or_raise(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g_A_CHILD_IN_THE_ASK(), "finditer", args))(&__args) });
+    let __iter1 = py_iter_or_raise(&mcall(&g_A_CHILD_IN_THE_ASK(), "finditer", &[text.clone()]));
     for __item in __iter1 {
     match_ = __item.clone();
     last = match_.clone();
@@ -99,7 +99,7 @@ pub fn _the_tail_after_the_child(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(py_is(&last.clone(), &Py::None))) {
     return Py::None;
     }
-    return slice_or_raise(&text.clone(), &{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&last.clone(), "end", args))(&__args) }, &Py::None, &Py::None);
+    return slice_or_raise(&text.clone(), &mcall(&last.clone(), "end", &[]), &Py::None, &Py::None);
     Py::None
 }
 pub fn _the_tail_is_about_the_death(args: &[Py]) -> Py {
@@ -118,12 +118,12 @@ pub fn _the_tail_is_about_the_death(args: &[Py]) -> Py {
     let mut word: Py = Py::None;
     let mut words: Py = Py::None;
     let _ = py_str("True when what follows the child leaves the ask about the death, and not about something else.");
-    words = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("[a-z']+")); __args.push({ let __b = tail.clone(); if py_truthy(&__b) { __b } else { py_str("") } }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "findall", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
+    words = stdlib_call("re", "findall", &[py_str("[a-z']+"), { let __b = tail.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&Py::Bool(!py_truthy(&words.clone()))) {
     return Py::Bool(true);
     }
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(tail.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g_A_DEATH_IN_THE_TAIL(), "search", args))(&__args) }) {
-    return Py::Bool(!py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(tail.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g__A_PERSON_IN_THE_TAIL(), "search", args))(&__args) }));
+    if py_truthy(&mcall(&g_A_DEATH_IN_THE_TAIL(), "search", &[tail.clone()])) {
+    return Py::Bool(!py_truthy(&mcall(&g__A_PERSON_IN_THE_TAIL(), "search", &[tail.clone()])));
     }
     let __iter1 = py_iter_or_raise(&words.clone());
     for __item in __iter1 {
@@ -157,12 +157,12 @@ pub fn a_death_in_the_thread(args: &[Py]) -> Py {
     let mut turn: Py = Py::None;
     let mut turns: Py = Py::None;
     let _ = py_str("True when the person said a death in one of their last few lines.\n\n    The bot's own last line is not enough to go on: the condolence for \"my mum died yesterday\"\n    comes from another module's pool (bot/compose/loss.py, LOSS_REPLIES), so a death said one\n    turn ago reads as no thread at all when only the composer's own pools are checked, and the\n    ask after it went to the search hedge. The person's own lines say what the conversation is\n    about, and two asks in a row (\"how do i tell a 4 year old\", then \"what about my son\") both\n    still have the death behind them.\n    ");
-    turns = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("turns")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&memory.clone(), "get", args))(&__args) }; if py_truthy(&__b) { __b } else { py_list(vec![]) } }) { let mut t: Py = __item.clone(); if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(t.clone()); __args.push(py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("isinstance", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }) {  __out.push(t.clone()); } } py_list(__out) })() };
+    turns = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let __b = mcall(&memory.clone(), "get", &[py_str("turns")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }) { let mut t: Py = __item.clone(); if py_truthy(&call_builtin("isinstance", &[t.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(t.clone()); } } py_list(__out) })() };
     let __iter1 = py_iter_or_raise(&slice_or_raise(&turns.clone(), &op_neg(&look_back.clone()), &Py::None, &Py::None));
     for __item in __iter1 {
     turn = __item.clone();
-    said = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("user")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&turn.clone(), "get", args))(&__args) }; if py_truthy(&__b) { __b } else { py_str("") } }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }, "lower", args))(&__args) }, "split", args))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&py_str(" "), "join", args))(&__args) };
-    if py_truthy(&{ let __b = said.clone(); if !py_truthy(&__b) { __b } else { { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(said.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&crate::compose::fallback::g_A_DEATH_IN_THE_LINE(), "search", args))(&__args) } } }) {
+    said = mcall(&py_str(" "), "join", &[mcall(&mcall(&call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("user")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]), "split", &[])]);
+    if py_truthy(&{ let __b = said.clone(); if !py_truthy(&__b) { __b } else { mcall(&crate::compose::fallback::g_A_DEATH_IN_THE_LINE(), "search", &[said.clone()]) } }) {
     return Py::Bool(true);
     }
     }
@@ -189,18 +189,18 @@ pub fn asks_the_words_for_a_child(args: &[Py]) -> Py {
     let mut text: Py = Py::None;
     let mut thread: Py = Py::None;
     let _ = py_str("A how-do-I-tell ask about a child, in a thread where somebody has died.\n\n    Narrow on purpose. Both halves are needed: the ask shape and the thread. A line inside a\n    loss thread that is not this ask keeps its own answer, and this ask outside a loss thread is\n    an everyday how-to. A suicide among the people they know is left to the safety readings, and\n    a line whose speaker names the child who died is not the same telling (\"my son died and I\n    have to tell my daughter\" is the condolence's turn, which the readings above already give).\n    ");
-    text = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let __b = clean.clone(); if py_truthy(&__b) { __b } else { py_str("") } }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }, "lower", args))(&__args) }, "split", args))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&py_str(" "), "join", args))(&__args) };
+    text = mcall(&py_str(" "), "join", &[mcall(&mcall(&call_builtin("str", &[{ let __b = clean.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]), "split", &[])]);
     if py_truthy(&Py::Bool(!py_truthy(&text.clone()))) {
     return Py::Bool(false);
     }
-    if py_truthy(&Py::Bool(!py_truthy(&{ let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g_TELL_ASK(), "search", args))(&__args) }; if !py_truthy(&__b) { __b } else { { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g_A_CHILD_IN_THE_ASK(), "search", args))(&__args) } } }))) {
+    if py_truthy(&Py::Bool(!py_truthy(&{ let __b = mcall(&g_TELL_ASK(), "search", &[text.clone()]); if !py_truthy(&__b) { __b } else { mcall(&g_A_CHILD_IN_THE_ASK(), "search", &[text.clone()]) } }))) {
     return Py::Bool(false);
     }
     let __try1 = exc::catch(|| {
-    if py_truthy(&Py::Bool(!py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| a_death_in_the_thread(args))(&__args) }))) {
+    if py_truthy(&Py::Bool(!py_truthy(&a_death_in_the_thread(&[memory.clone()])))) {
     return py_tuple(vec![Py::Bool(true), Py::Bool(false)]);
     }
-    thread = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _the_last_few_lines(args))(&__args) };
+    thread = _the_last_few_lines(&[memory.clone()]);
         py_tuple(vec![Py::Bool(false), Py::None])
     });
     let mut __ret2: Py = Py::Bool(false);
@@ -219,14 +219,14 @@ pub fn asks_the_words_for_a_child(args: &[Py]) -> Py {
     }
     if let Some(__e) = __unhandled4 { exc::raise(__e); }
     if py_truthy(&__ret2) { return __val3; }
-    if py_truthy(&{ let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(thread.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&crate::compose::fallback::g_A_SUICIDE_IN_THE_LINE(), "search", args))(&__args) }; if py_truthy(&__b) { __b } else { { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&crate::compose::fallback::g_A_SUICIDE_IN_THE_LINE(), "search", args))(&__args) } } }) {
+    if py_truthy(&{ let __b = mcall(&crate::compose::fallback::g_A_SUICIDE_IN_THE_LINE(), "search", &[thread.clone()]); if py_truthy(&__b) { __b } else { mcall(&crate::compose::fallback::g_A_SUICIDE_IN_THE_LINE(), "search", &[text.clone()]) } }) {
     return Py::Bool(false);
     }
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&crate::compose::fallback::g_A_CHILD_DIED(), "search", args))(&__args) }) {
+    if py_truthy(&mcall(&crate::compose::fallback::g_A_CHILD_DIED(), "search", &[text.clone()])) {
     return Py::Bool(false);
     }
-    tail = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _the_tail_after_the_child(args))(&__args) };
-    if py_truthy(&{ let __b = Py::Bool(py_is(&tail.clone(), &Py::None)); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(tail.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _the_tail_is_about_the_death(args))(&__args) })) } }) {
+    tail = _the_tail_after_the_child(&[text.clone()]);
+    if py_truthy(&{ let __b = Py::Bool(py_is(&tail.clone(), &Py::None)); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_the_tail_is_about_the_death(&[tail.clone()]))) } }) {
     return Py::Bool(false);
     }
     return Py::Bool(true);
@@ -253,15 +253,15 @@ pub fn _the_last_few_lines(args: &[Py]) -> Py {
     let mut turn: Py = Py::None;
     let mut turns: Py = Py::None;
     let _ = py_str("The recent lines of the conversation, the person's and the bot's, as one string.");
-    turns = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("turns")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&memory.clone(), "get", args))(&__args) }; if py_truthy(&__b) { __b } else { py_list(vec![]) } }) { let mut t: Py = __item.clone(); if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(t.clone()); __args.push(py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("isinstance", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }) {  __out.push(t.clone()); } } py_list(__out) })() };
+    turns = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let __b = mcall(&memory.clone(), "get", &[py_str("turns")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }) { let mut t: Py = __item.clone(); if py_truthy(&call_builtin("isinstance", &[t.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(t.clone()); } } py_list(__out) })() };
     lines = py_list(vec![]);
     let __iter1 = py_iter_or_raise(&slice_or_raise(&turns.clone(), &op_neg(&look_back.clone()), &Py::None, &Py::None));
     for __item in __iter1 {
     turn = __item.clone();
-    let _ = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("user")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&turn.clone(), "get", args))(&__args) }; if py_truthy(&__b) { __b } else { py_str("") } }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&lines.clone(), "append", args))(&__args) };
-    let _ = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("bot")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&turn.clone(), "get", args))(&__args) }; if py_truthy(&__b) { __b } else { py_str("") } }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&lines.clone(), "append", args))(&__args) };
+    let _ = mcall(&lines.clone(), "append", &[call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("user")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))]);
+    let _ = mcall(&lines.clone(), "append", &[call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("bot")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))]);
     }
-    return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(lines.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&py_str(" "), "join", args))(&__args) }, "lower", args))(&__args) };
+    return mcall(&mcall(&py_str(" "), "join", &[lines.clone()]), "lower", &[]);
     Py::None
 }
 pub fn module_obj() -> Py {

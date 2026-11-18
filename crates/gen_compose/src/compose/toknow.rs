@@ -55,13 +55,13 @@ pub fn g_WHAT_TO_KNOW_FIRST() -> Py { ensure_init(); G_WHAT_TO_KNOW_FIRST.with(|
 pub fn s_WHAT_TO_KNOW_FIRST(v: Py) { ensure_init(); G_WHAT_TO_KNOW_FIRST.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("What to look out for before agreeing to something, or before going somewhere.\n\n`_WAITING` in `fallback_chain.py` reads the person's own knowing as the thing they are waiting for\n- \"i should know by friday\", \"we should know next week\", \"i should know in a few days\" - and it is\nright about those. The same four words sit inside an ordinary question, and the wait reading took\nthem:\n\n    i got a job offer from the garden centre\n    anything i should know about the job\n      before  So it is out of your hands for now. When do you hear back?\n\n    we are looking at a flat to rent on saturday\n    anything i should know about the flat\n      before  Fingers crossed then. When will you know?\n\nNeither is news in the post. What separates them is the frame the words sit in, so the frame is\nwhat is read here: `anything / something / everything / nothing / what ... (i|we|you) should know`\nis a question *about a thing*, and the wait reading stands down for it.\n\nThe ask then keeps a real answer, because a pointer on its own is not one (`STYLE.md`, \"Not\nknowing, honestly\" - lead with what the bot does know, then say where the rest is):\n\n- a thing the knowledge base holds gets its card: \"about lisbon\" gets the Lisbon card, \"about a\n  heat pump\" the heat pump one, \"about pregnancy\" the card about telling an employer;\n- something a person *agrees to* - a job, a flat, an offer, a mortgage, a tenancy, a loan - gets\n  the three things worth checking and the fact that all three are written down before they sign;\n- anything else is named back with the honest shape: what decides it, where the details live, and\n  one question. No fact is invented, and no absence is claimed that the bot cannot back;\n- a pronoun (\"anything i should know about it\") names nothing, so nothing fires.\n");
-    s_A_WHAT_TO_KNOW_ASKED({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("\\b(?:anything|something|everything|nothing|what)(?:\\s+else)?\\s+(?:that\\s+)?(?:i|we|you)\\s+(?:should|ought to|need to|have to|must)\\s+know\\b|\\b(?:is|are) there (?:anything|something|much)\\b[^?.!]{0,25}\\b(?:i|we)\\s+know\\b|\\bwhat\\s+(?:should|do|would)\\s+(?:i|we)\\s+know\\b")); __args.push(stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "compile", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
-    s_A_THING_YOU_AGREE_TO({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("\\b(?:job|jobs|role|position|post|offer|contract|permanent|probation|shift|rota|hours|pay|salary|apprenticeship|placement|course|uni|university|college|degree|tenancy|lease|landlord|flat|house|mortgage|rent|deposit|move|mover|buying|purchase|loan|credit|insurance|policy|car|van|bike|warranty|gym|membership|subscription|phone contract|broadband|nursery|childcare|school place|deal|signing|sign|agreement|terms)\\b")); __args.push(stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "compile", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
+    s_A_WHAT_TO_KNOW_ASKED(stdlib_call("re", "compile", &[py_str("\\b(?:anything|something|everything|nothing|what)(?:\\s+else)?\\s+(?:that\\s+)?(?:i|we|you)\\s+(?:should|ought to|need to|have to|must)\\s+know\\b|\\b(?:is|are) there (?:anything|something|much)\\b[^?.!]{0,25}\\b(?:i|we)\\s+know\\b|\\bwhat\\s+(?:should|do|would)\\s+(?:i|we)\\s+know\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s_A_THING_YOU_AGREE_TO(stdlib_call("re", "compile", &[py_str("\\b(?:job|jobs|role|position|post|offer|contract|permanent|probation|shift|rota|hours|pay|salary|apprenticeship|placement|course|uni|university|college|degree|tenancy|lease|landlord|flat|house|mortgage|rent|deposit|move|mover|buying|purchase|loan|credit|insurance|policy|car|van|bike|warranty|gym|membership|subscription|phone contract|broadband|nursery|childcare|school place|deal|signing|sign|agreement|terms)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     s_BEFORE_YOU_AGREE(py_tuple(vec![py_str("The things people are glad they checked are the money after the first month, what it commits you to, and how you get out of it - and all three are written down somewhere before you agree to anything. Which of those is the one you are unsure about?"), py_str("It is nearly always the small print that decides it: what it costs over time, what you can and cannot do, and the notice you have to give. Do you have the paperwork in front of you?"), py_str("Ask what happens if it goes wrong, because that is the part nobody mentions until it has. What is the thing you would be agreeing to?")]));
     s_WHAT_TO_KNOW_FIRST(py_tuple(vec![py_str("Tell me the part you want to get right about {thing} and I will tell you what I know. The general rule is that what you want from it and the one limit you cannot move decide everything else, and the details sit on the official page for it. Which part is it?"), py_str("What I can be useful on is the part you are unsure about, rather than a list: say which bit of {thing} you are weighing and I will take it from there. What is worrying you?")]));
     s_WHAT_THE_BOT_CAN_SAY_ABOUT_IT(py_tuple(vec![py_str("what do you know about {}"), py_str("is {} worth it"), py_str("tell me about {}")]));
-    s_A_PRONOUN_NOT_A_THING({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("^(?:it|this|that|them|those|these|him|her|me|us|you|one|ones|things|stuff)\\b")); __args.push(stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "compile", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
-    s_THE_WORDS_THAT_END_THE_THING({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("\\b(?:before|after|when|if|so|and|but|because|or|for|with|to|in|on|at|from)\\b")); __args.push(stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "compile", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
+    s_A_PRONOUN_NOT_A_THING(stdlib_call("re", "compile", &[py_str("^(?:it|this|that|them|those|these|him|her|me|us|you|one|ones|things|stuff)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s_THE_WORDS_THAT_END_THE_THING(stdlib_call("re", "compile", &[py_str("\\b(?:before|after|when|if|so|and|but|because|or|for|with|to|in|on|at|from)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     s_A_FEW_WORDS_OF_THING(Py::Int(5));
 }
 pub fn _the_thing_asked_about(args: &[Py]) -> Py {
@@ -81,22 +81,22 @@ pub fn _the_thing_asked_about(args: &[Py]) -> Py {
     let mut match_: Py = Py::None;
     let mut thing: Py = Py::None;
     let _ = py_str("\"Anything I should know about the job\" -> \"the job\", for the reply to name it back.");
-    match_ = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("\\bknow\\b[^?.!]{0,10}?\\babout\\b\\s*([^?.!]{1,60})")); __args.push(clean.clone()); __args.push(stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "search", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
+    match_ = stdlib_call("re", "search", &[py_str("\\bknow\\b[^?.!]{0,10}?\\babout\\b\\s*([^?.!]{1,60})"), clean.clone(), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&Py::Bool(!py_truthy(&match_.clone()))) {
-    match_ = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("\\babout\\b\\s*([^?.!]{1,60})\\b(?:before|first)\\b")); __args.push(clean.clone()); __args.push(stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "search", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
+    match_ = stdlib_call("re", "search", &[py_str("\\babout\\b\\s*([^?.!]{1,60})\\b(?:before|first)\\b"), clean.clone(), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e));
     }
     if py_truthy(&Py::Bool(!py_truthy(&match_.clone()))) {
     return py_str("");
     }
-    thing = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str(" ?.!,")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(Py::Int(1)); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&match_.clone(), "group", args))(&__args) }, "strip", args))(&__args) };
-    cut = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(thing.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g_THE_WORDS_THAT_END_THE_THING(), "search", args))(&__args) };
+    thing = mcall(&mcall(&match_.clone(), "group", &[Py::Int(1)]), "strip", &[py_str(" ?.!,")]);
+    cut = mcall(&g_THE_WORDS_THAT_END_THE_THING(), "search", &[thing.clone()]);
     if py_truthy(&cut.clone()) {
-    thing = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str(" ?.!,")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&slice_or_raise(&thing.clone(), &Py::None, &{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&cut.clone(), "start", args))(&__args) }, &Py::None), "strip", args))(&__args) };
+    thing = mcall(&slice_or_raise(&thing.clone(), &Py::None, &mcall(&cut.clone(), "start", &[]), &Py::None), "strip", &[py_str(" ?.!,")]);
     }
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&thing.clone())); if py_truthy(&__b) { __b } else { { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(thing.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g_A_PRONOUN_NOT_A_THING(), "match", args))(&__args) } } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&thing.clone())); if py_truthy(&__b) { __b } else { mcall(&g_A_PRONOUN_NOT_A_THING(), "match", &[thing.clone()]) } }) {
     return py_str("");
     }
-    if py_truthy(&op_gt(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&thing.clone(), "split", args))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }, &g_A_FEW_WORDS_OF_THING())) {
+    if py_truthy(&op_gt(&call_builtin("len", &[mcall(&thing.clone(), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), &g_A_FEW_WORDS_OF_THING())) {
     return py_str("");
     }
     return thing.clone();
@@ -142,7 +142,7 @@ pub fn _a_card_about(args: &[Py]) -> Py {
     for __item in __iter6 {
     frame = __item.clone();
     let __try7 = exc::catch(|| {
-    said = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(thing.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&frame.clone(), "format", args))(&__args) }); __args.push(py_dict(vec![])); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&answers.clone(), "respond", args))(&__args) };
+    said = mcall(&answers.clone(), "respond", &[mcall(&frame.clone(), "format", &[thing.clone()]), py_dict(vec![])]);
         py_tuple(vec![Py::Bool(false), Py::None])
     });
     let mut __ret8: Py = Py::Bool(false);
@@ -189,24 +189,24 @@ pub fn ask_about_what_to_look_out_for(args: &[Py]) -> Py {
     let mut said: Py = Py::None;
     let mut shaped: Py = Py::None;
     let _ = py_str("None when the line is not this ask, \"\" when it is and there is nothing to say, else a reply.\n\n    The empty string keeps the two apart: a question about a thing is not news in the post even\n    when the bot has nothing to add, so the caller lets the line go on to whatever it was before\n    this reading existed rather than answer it as a wait.\n    ");
-    said = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let __b = clean.clone(); if py_truthy(&__b) { __b } else { py_str("") } }, "lower", args))(&__args) }, "split", args))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&py_str(" "), "join", args))(&__args) };
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&said.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(said.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g_A_WHAT_TO_KNOW_ASKED(), "search", args))(&__args) })) } }) {
+    said = mcall(&py_str(" "), "join", &[mcall(&mcall(&{ let __b = clean.clone(); if py_truthy(&__b) { __b } else { py_str("") } }, "lower", &[]), "split", &[])]);
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&said.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_A_WHAT_TO_KNOW_ASKED(), "search", &[said.clone()]))) } }) {
     return Py::None;
     }
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(said.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g_A_THING_YOU_AGREE_TO(), "search", args))(&__args) }) {
-    return { let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(g_BEFORE_YOU_AGREE()); __args.push(memory.clone()); __args.push(said.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| crate::compose::pick(args))(&__args) }; if py_truthy(&__b) { __b } else { py_str("") } };
+    if py_truthy(&mcall(&g_A_THING_YOU_AGREE_TO(), "search", &[said.clone()])) {
+    return { let __b = crate::compose::pick(&[g_BEFORE_YOU_AGREE(), memory.clone(), said.clone()]); if py_truthy(&__b) { __b } else { py_str("") } };
     }
-    asked_about = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(said.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _the_thing_asked_about(args))(&__args) };
+    asked_about = _the_thing_asked_about(&[said.clone()]);
     if py_truthy(&Py::Bool(!py_truthy(&asked_about.clone()))) {
     return py_str("");
     }
-    card = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(asked_about.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _a_card_about(args))(&__args) };
+    card = _a_card_about(&[asked_about.clone()]);
     if py_truthy(&card.clone()) {
     return card.clone();
     }
-    shaped = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(g_WHAT_TO_KNOW_FIRST()); __args.push(memory.clone()); __args.push(said.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| crate::compose::pick(args))(&__args) };
+    shaped = crate::compose::pick(&[g_WHAT_TO_KNOW_FIRST(), memory.clone(), said.clone()]);
     if py_truthy(&shaped.clone()) {
-    return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("{thing}")); __args.push(asked_about.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&shaped.clone(), "replace", args))(&__args) };
+    return mcall(&shaped.clone(), "replace", &[py_str("{thing}"), asked_about.clone()]);
     }
     return py_str("");
     Py::None

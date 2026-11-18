@@ -9,15 +9,15 @@ use crate::value::Py;
 pub struct PyExc {
     pub class_name: String,
     pub message: String,
-    pub value: Option<Py>,
+    pub value_repr: Option<String>,
 }
 
 impl PyExc {
     pub fn new(class_name: &str, message: &str) -> PyExc {
-        PyExc { class_name: class_name.to_string(), message: message.to_string(), value: None }
+        PyExc { class_name: class_name.to_string(), message: message.to_string(), value_repr: None }
     }
-    pub fn with_value(class_name: &str, message: &str, value: Py) -> PyExc {
-        PyExc { class_name: class_name.to_string(), message: message.to_string(), value: Some(value) }
+    pub fn with_value(class_name: &str, message: &str, value_repr: String) -> PyExc {
+        PyExc { class_name: class_name.to_string(), message: message.to_string(), value_repr: Some(value_repr) }
     }
     /// True when this exception is caught by a handler naming `handler`.
     pub fn matches(&self, handler: &str) -> bool {

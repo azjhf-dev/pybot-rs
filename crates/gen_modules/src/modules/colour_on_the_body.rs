@@ -47,7 +47,7 @@ pub fn respond(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: memory"))) };
     let _ = py_str("The answer to a colour on the person's own body or a blush, or None.");
     let __try1 = exc::catch(|| {
-    return py_tuple(vec![Py::Bool(true), { let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| gen_compose::compose::colour_on_the_body::reply_for(args))(&__args) }; if py_truthy(&__b) { __b } else { Py::None } }]);
+    return py_tuple(vec![Py::Bool(true), { let __b = gen_compose::compose::colour_on_the_body::reply_for(&[text.clone(), memory.clone()]); if py_truthy(&__b) { __b } else { Py::None } }]);
         py_tuple(vec![Py::Bool(false), Py::None])
     });
     let mut __ret2: Py = Py::Bool(false);

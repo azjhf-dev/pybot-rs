@@ -82,14 +82,14 @@ pub fn _spice_amount(args: &[Py]) -> Py {
     let mut variants: Py = Py::None;
     let mut word: Py = Py::None;
     let _ = py_str("The figure for one spice, when the line asks how much of it goes in a dish.");
-    said = op_add(&op_add(&py_str(" "), &{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("[^a-z0-9 ]+")); __args.push(py_str(" ")); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("clean")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let __b = understood.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", args))(&__args) }; if py_truthy(&__b) { __b } else { py_str("") } }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }, "lower", args))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "sub", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }), &py_str(" "));
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g__SPICE_NOT_A_DOSE()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&said.clone(), &op_add(&op_add(&py_str(" "), &word.clone()), &py_str(" "))))); } py_list(__out) })() }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("any", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }) {
+    said = op_add(&op_add(&py_str(" "), &stdlib_call("re", "sub", &[py_str("[^a-z0-9 ]+"), py_str(" "), mcall(&call_builtin("str", &[{ let __b = mcall(&{ let __b = understood.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[])]).unwrap_or_else(|e| exc::raise(e))), &py_str(" "));
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g__SPICE_NOT_A_DOSE()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&said.clone(), &op_add(&op_add(&py_str(" "), &word.clone()), &py_str(" "))))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     return py_str("");
     }
     if py_truthy(&Py::Bool(py_contains(&said.clone(), &py_str("mulled wine")))) {
     return g__MULLED_WINE();
     }
-    if py_truthy(&{ let __b = Py::Bool(py_contains(&said.clone(), &py_str("pumpkin spice"))); if !py_truthy(&__b) { __b } else { { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&py_tuple(vec![py_str("latte"), py_str("coffee"), py_str("cappuccino"), py_str("mug"), py_str("cup")])) { let mut drink: Py = __item.clone(); __out.push(Py::Bool(py_contains(&said.clone(), &drink.clone()))); } py_list(__out) })() }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("any", args).unwrap_or_else(|e| exc::raise(e)))(&__args) } } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&said.clone(), &py_str("pumpkin spice"))); if !py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&py_tuple(vec![py_str("latte"), py_str("coffee"), py_str("cappuccino"), py_str("mug"), py_str("cup")])) { let mut drink: Py = __item.clone(); __out.push(Py::Bool(py_contains(&said.clone(), &drink.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }) {
     return g__PUMPKIN_LATTE();
     }
     let __unpk1 = py_unpack(&py_tuple(vec![Py::None, Py::Int(0), py_str("")]), 3, None);
@@ -104,13 +104,13 @@ pub fn _spice_amount(args: &[Py]) -> Py {
     let __iter4 = py_iter_or_raise(&variants.clone());
     for __item in __iter4 {
     variant = __item.clone();
-    found = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(op_add(&op_add(&py_str("\\b"), &variant.clone()), &py_str("\\b"))); __args.push(said.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "search", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
+    found = stdlib_call("re", "search", &[op_add(&op_add(&py_str("\\b"), &variant.clone()), &py_str("\\b")), said.clone()]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&Py::Bool(py_is(&found.clone(), &Py::None))) {
     continue;
     }
-    at = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&found.clone(), "start", args))(&__args) };
-    if py_truthy(&{ let __b = Py::Bool(py_is(&first_at.clone(), &Py::None)); if py_truthy(&__b) { __b } else { { let __b = op_lt(&at.clone(), &first_at.clone()); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_eq(&at.clone(), &first_at.clone())); if !py_truthy(&__b) { __b } else { op_gt(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(variant.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }, &first_len.clone()) } } } } } }) {
-    let __unpk5 = py_unpack(&py_tuple(vec![at.clone(), { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(variant.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }, reply.clone()]), 3, None);
+    at = mcall(&found.clone(), "start", &[]);
+    if py_truthy(&{ let __b = Py::Bool(py_is(&first_at.clone(), &Py::None)); if py_truthy(&__b) { __b } else { { let __b = op_lt(&at.clone(), &first_at.clone()); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_eq(&at.clone(), &first_at.clone())); if !py_truthy(&__b) { __b } else { op_gt(&call_builtin("len", &[variant.clone()]).unwrap_or_else(|e| exc::raise(e)), &first_len.clone()) } } } } } }) {
+    let __unpk5 = py_unpack(&py_tuple(vec![at.clone(), call_builtin("len", &[variant.clone()]).unwrap_or_else(|e| exc::raise(e)), reply.clone()]), 3, None);
     first_at = __unpk5[0].clone();
     first_len = __unpk5[1].clone();
     first_reply = __unpk5[2].clone();

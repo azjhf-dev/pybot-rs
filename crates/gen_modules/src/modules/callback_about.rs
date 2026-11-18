@@ -50,7 +50,7 @@ pub fn respond(args: &[Py]) -> Py {
     let mut memory: Py = if __pos.len() > 1 { __pos[1].clone() }
     else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "memory") { v.clone() }
     else { exc::raise(type_err(&format!("missing required argument: memory"))) };
-    return { let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| gen_memory::memory::callback::reply_for(args))(&__args) }; if py_truthy(&__b) { __b } else { Py::None } };
+    return { let __b = gen_memory::memory::callback::reply_for(&[text.clone(), memory.clone()]); if py_truthy(&__b) { __b } else { Py::None } };
     Py::None
 }
 pub fn CLAIMS_INSTEAD(args: &[Py]) -> Py {
@@ -70,7 +70,7 @@ pub fn CLAIMS_INSTEAD(args: &[Py]) -> Py {
     else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "memory") { v.clone() }
     else { exc::raise(type_err(&format!("missing required argument: memory"))) };
     let _ = py_str("The ask after a person the chat holds, where a module below claims the follow-up.");
-    return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| gen_memory::memory::callback::claims(args))(&__args) };
+    return gen_memory::memory::callback::claims(&[text.clone(), memory.clone()]);
     Py::None
 }
 pub fn module_obj() -> Py {

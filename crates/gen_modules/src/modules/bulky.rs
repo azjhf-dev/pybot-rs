@@ -68,16 +68,16 @@ pub fn s_REPLACING(v: Py) { ensure_init(); G_REPLACING.with(|c| *c.borrow_mut() 
 fn module_body() {
     let _ = py_str("A thing too big for the bin is a bulky waste job, and the composer had nothing for it.\n\n\"What do i do with old carpet\" and \"how do i get rid of an old trampoline\" reached nothing: the\nknowledge base has the mattress, the wardrobe, the washing machine and the paint tin, but not the\ncarpet or the trampoline, so the composer fell back to \"I'm not sure about that one, sorry - I'd\nrather not guess. A quick search online will get you a solid answer\". The person is left holding\nthe thing and a search box.\n\nThe answer is the same three routes any bulky thing takes: the council's bulky waste collection,\nthe recycling centre, or a charity that collects if the thing is still usable. The first step is\nthe one that makes it moveable - roll a carpet, take a wardrobe apart - and the fee is the\ncouncil's, so the reply says where to check it rather than inventing a number.\n\nThis sits above the greeting band (PRIORITY -1000) and below every knowledge module, so it only\never answers a line no entry reached. A mattress, a wardrobe, a washing machine and a tin of paint\nkeep their own answers. The thing can be in the line or in the line before it (\"we are replacing\nthe carpet\" / \"what do i do with the old one\"), because a pronoun names no thing on its own.\n");
     s_PRIORITY(op_neg(&Py::Int(999)));
-    s_FLOOR({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("\\b(?:carpets?|carpet\\s+tiles?|underlay|lino(?:leum)?|vinyl\\s+flooring|vinyl\\s+tiles?|flooring|doormats?)\\b")); __args.push(stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "compile", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
-    s_FURNITURE({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("\\b(?:sofas?|settees?|armchairs?|mattress(?:es)?|beds?|wardrobes?|tables?|chairs?|desks?|bookcases?|bookshelves?|shelving|cabinets?|sideboards?|chests?\\s+of\\s+drawers|furniture)\\b")); __args.push(stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "compile", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
-    s_ELECTRICAL({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("\\b(?:fridges?|freezers?|washing\\s+machines?|dishwashers?|tumble\\s+dryers?|ovens?|cookers?|microwaves?|tvs?|televisions?|monitors?|computers?|laptops?|printers?|kettles?|hoovers?|vacuum\\s+cleaners?|boilers?|radiators?)\\b")); __args.push(stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "compile", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
-    s_GARDEN({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("\\b(?:trampolines?|sheds?|fences?|patios?|slabs?|soil|bushes|bush|trees?|garden\\s+waste|green\\s+waste)\\b")); __args.push(stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "compile", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
-    s_DISPOSAL({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("\\b(?:what\\s+(?:do|should|can)\\s+(?:i|we)\\s+do\\s+with|how\\s+(?:do|can|should)\\s+(?:i|we)\\s+(?:get\\s+rid\\s+of|dispose\\s+of|throw\\s+(?:away|out))|where\\s+(?:can|do|should)\\s+(?:i|we)\\s+(?:take|put|get\\s+rid\\s+of)|get\\s+rid\\s+of|dispose\\s+of|throw\\s+(?:away|out)|take\\s+(?:it\\s+)?to\\s+the\\s+tip|goes?\\s+in\\s+the\\s+bin|recycle)\\b")); __args.push(stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "compile", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
-    s_REPLACING({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("\\b(?:replacing|pulling\\s+up|taking\\s+up|ripping\\s+up|(?:having|getting)\\s+(?:the\\s+|a\\s+)?[a-z ]{0,12}(?:replaced|lifted))\\b")); __args.push(stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "compile", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
-    s_FINISHED({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("\\b(?:old|broken|worn|worn\\s+out|tired|replaced|replacing|ripped|stained|damp|smelly|had\\s+it|no\\s+good|unwanted|spare|left\\s?over|pulled\\s+up)\\b")); __args.push(stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "compile", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
-    s_POINTING({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("\\b(?:it|that|this|one|them|those|these)\\b")); __args.push(stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "compile", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
-    s_NOT_OURS({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("\\b(?:asbestos|needles?|syringe|chemicals?|acid|gas\\s+(?:bottle|cylinder)|oil|paint|solvent|pesticide|weedkiller|medical|clinical)\\b")); __args.push(stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "compile", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
-    s_KEEPS_ITS_ANSWER({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("\\b(?:clean|cleaning|wash|washing\\s+it|stain|smell|moth|moths|remove|mend|repair|fit|lay|choose|choosing|buy|buying)\\b")); __args.push(stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "compile", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
+    s_FLOOR(stdlib_call("re", "compile", &[py_str("\\b(?:carpets?|carpet\\s+tiles?|underlay|lino(?:leum)?|vinyl\\s+flooring|vinyl\\s+tiles?|flooring|doormats?)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s_FURNITURE(stdlib_call("re", "compile", &[py_str("\\b(?:sofas?|settees?|armchairs?|mattress(?:es)?|beds?|wardrobes?|tables?|chairs?|desks?|bookcases?|bookshelves?|shelving|cabinets?|sideboards?|chests?\\s+of\\s+drawers|furniture)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s_ELECTRICAL(stdlib_call("re", "compile", &[py_str("\\b(?:fridges?|freezers?|washing\\s+machines?|dishwashers?|tumble\\s+dryers?|ovens?|cookers?|microwaves?|tvs?|televisions?|monitors?|computers?|laptops?|printers?|kettles?|hoovers?|vacuum\\s+cleaners?|boilers?|radiators?)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s_GARDEN(stdlib_call("re", "compile", &[py_str("\\b(?:trampolines?|sheds?|fences?|patios?|slabs?|soil|bushes|bush|trees?|garden\\s+waste|green\\s+waste)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s_DISPOSAL(stdlib_call("re", "compile", &[py_str("\\b(?:what\\s+(?:do|should|can)\\s+(?:i|we)\\s+do\\s+with|how\\s+(?:do|can|should)\\s+(?:i|we)\\s+(?:get\\s+rid\\s+of|dispose\\s+of|throw\\s+(?:away|out))|where\\s+(?:can|do|should)\\s+(?:i|we)\\s+(?:take|put|get\\s+rid\\s+of)|get\\s+rid\\s+of|dispose\\s+of|throw\\s+(?:away|out)|take\\s+(?:it\\s+)?to\\s+the\\s+tip|goes?\\s+in\\s+the\\s+bin|recycle)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s_REPLACING(stdlib_call("re", "compile", &[py_str("\\b(?:replacing|pulling\\s+up|taking\\s+up|ripping\\s+up|(?:having|getting)\\s+(?:the\\s+|a\\s+)?[a-z ]{0,12}(?:replaced|lifted))\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s_FINISHED(stdlib_call("re", "compile", &[py_str("\\b(?:old|broken|worn|worn\\s+out|tired|replaced|replacing|ripped|stained|damp|smelly|had\\s+it|no\\s+good|unwanted|spare|left\\s?over|pulled\\s+up)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s_POINTING(stdlib_call("re", "compile", &[py_str("\\b(?:it|that|this|one|them|those|these)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s_NOT_OURS(stdlib_call("re", "compile", &[py_str("\\b(?:asbestos|needles?|syringe|chemicals?|acid|gas\\s+(?:bottle|cylinder)|oil|paint|solvent|pesticide|weedkiller|medical|clinical)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s_KEEPS_ITS_ANSWER(stdlib_call("re", "compile", &[py_str("\\b(?:clean|cleaning|wash|washing\\s+it|stain|smell|moth|moths|remove|mend|repair|fit|lay|choose|choosing|buy|buying)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
 }
 pub fn _clean(args: &[Py]) -> Py {
     ensure_init();
@@ -92,7 +92,7 @@ pub fn _clean(args: &[Py]) -> Py {
     let mut text: Py = if __pos.len() > 0 { __pos[0].clone() }
     else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "text") { v.clone() }
     else { exc::raise(type_err(&format!("missing required argument: text"))) };
-    return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }, "lower", args))(&__args) }, "split", args))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&py_str(" "), "join", args))(&__args) };
+    return mcall(&py_str(" "), "join", &[mcall(&mcall(&call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]), "split", &[])]);
     Py::None
 }
 pub fn _group(args: &[Py]) -> Py {
@@ -116,9 +116,9 @@ pub fn _group(args: &[Py]) -> Py {
     let __unpk2 = py_unpack(&__item.clone(), 2, None);
     name = __unpk2[0].clone();
     pattern = __unpk2[1].clone();
-    found = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&pattern.clone(), "search", args))(&__args) };
+    found = mcall(&pattern.clone(), "search", &[text.clone()]);
     if py_truthy(&found.clone()) {
-    return py_tuple(vec![name.clone(), { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(Py::Int(0)); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&found.clone(), "group", args))(&__args) }, "lower", args))(&__args) }]);
+    return py_tuple(vec![name.clone(), mcall(&mcall(&found.clone(), "group", &[Py::Int(0)]), "lower", &[])]);
     }
     }
     return py_tuple(vec![py_str(""), py_str("")]);
@@ -145,26 +145,26 @@ pub fn _the_thing(args: &[Py]) -> Py {
     let mut thing: Py = Py::None;
     let mut turns: Py = Py::None;
     let _ = py_str("The thing the line is about, from this line or the one before it.");
-    let __unpk1 = py_unpack(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _group(args))(&__args) }, 2, None);
+    let __unpk1 = py_unpack(&_group(&[text.clone()]), 2, None);
     group = __unpk1[0].clone();
     thing = __unpk1[1].clone();
     if py_truthy(&thing.clone()) {
     return py_tuple(vec![group.clone(), thing.clone()]);
     }
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g_POINTING(), "search", args))(&__args) })); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(memory.clone()); __args.push(py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("isinstance", args).unwrap_or_else(|e| exc::raise(e)))(&__args) })) } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&mcall(&g_POINTING(), "search", &[text.clone()]))); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&call_builtin("isinstance", &[memory.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e)))) } }) {
     return py_tuple(vec![py_str(""), py_str("")]);
     }
-    turns = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("turns")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&memory.clone(), "get", args))(&__args) };
-    if py_truthy(&Py::Bool(!py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(turns.clone()); __args.push(py_func("list", |args: &[Py]| call_builtin("list", args).unwrap_or_else(|e| exc::raise(e)))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("isinstance", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }))) {
+    turns = mcall(&memory.clone(), "get", &[py_str("turns")]);
+    if py_truthy(&Py::Bool(!py_truthy(&call_builtin("isinstance", &[turns.clone(), py_func("list", |args: &[Py]| call_builtin("list", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))))) {
     return py_tuple(vec![py_str(""), py_str("")]);
     }
-    let __iter2 = py_iter_or_raise(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(slice_or_raise(&turns.clone(), &op_neg(&Py::Int(3)), &Py::None, &Py::None)); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("reversed", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
+    let __iter2 = py_iter_or_raise(&call_builtin("reversed", &[slice_or_raise(&turns.clone(), &op_neg(&Py::Int(3)), &Py::None, &Py::None)]).unwrap_or_else(|e| exc::raise(e)));
     for __item in __iter2 {
     said = __item.clone();
-    if py_truthy(&Py::Bool(!py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(said.clone()); __args.push(py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("isinstance", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }))) {
+    if py_truthy(&Py::Bool(!py_truthy(&call_builtin("isinstance", &[said.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))))) {
     continue;
     }
-    let __unpk3 = py_unpack(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("user")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&said.clone(), "get", args))(&__args) }; if py_truthy(&__b) { __b } else { py_str("") } }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _group(args))(&__args) }, 2, None);
+    let __unpk3 = py_unpack(&_group(&[call_builtin("str", &[{ let __b = mcall(&said.clone(), "get", &[py_str("user")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))]), 2, None);
     group = __unpk3[0].clone();
     thing = __unpk3[1].clone();
     if py_truthy(&thing.clone()) {
@@ -191,15 +191,15 @@ pub fn _reply(args: &[Py]) -> Py {
     else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "thing") { v.clone() }
     else { exc::raise(type_err(&format!("missing required argument: thing"))) };
     if py_truthy(&Py::Bool(py_eq(&group.clone(), &py_str("floor")))) {
-    return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(thing.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&py_str("Roll the {0} up and cut it into lengths you can lift, then take it to the recycling centre - most tips take {0} in the general waste skip. If it will not fit in a car, book a bulky waste collection with your council; most charge twenty to forty pounds for a doorstep pickup. Check your council's site for the fee and the booking, because I can't see your council's charges from here."), "format", args))(&__args) };
+    return mcall(&py_str("Roll the {0} up and cut it into lengths you can lift, then take it to the recycling centre - most tips take {0} in the general waste skip. If it will not fit in a car, book a bulky waste collection with your council; most charge twenty to forty pounds for a doorstep pickup. Check your council's site for the fee and the booking, because I can't see your council's charges from here."), "format", &[thing.clone()]);
     }
     if py_truthy(&Py::Bool(py_eq(&group.clone(), &py_str("furniture")))) {
-    return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(thing.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&py_str("Take the {0} apart if it will come apart, then book a bulky waste collection with your council - most charge twenty to forty pounds - or take it to the recycling centre. If it is still usable, a charity or a local reuse group may collect it; the British Heart Foundation collects furniture in many areas. Check your council's site for the fee and the collection, because I can't see your council's charges from here."), "format", args))(&__args) };
+    return mcall(&py_str("Take the {0} apart if it will come apart, then book a bulky waste collection with your council - most charge twenty to forty pounds - or take it to the recycling centre. If it is still usable, a charity or a local reuse group may collect it; the British Heart Foundation collects furniture in many areas. Check your council's site for the fee and the collection, because I can't see your council's charges from here."), "format", &[thing.clone()]);
     }
     if py_truthy(&Py::Bool(py_eq(&group.clone(), &py_str("electrical")))) {
-    return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(thing.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&py_str("Anything with a plug or a battery is electrical waste, so it cannot go in the bin: a shop that sells the same kind of thing has to take it back, and the recycling centre has an electricals point. A {0} is also a bulky collection if you cannot move it - ask the shop delivering a new one to take the old one. Check your council's site for the fee, because I can't see your council's charges from here."), "format", args))(&__args) };
+    return mcall(&py_str("Anything with a plug or a battery is electrical waste, so it cannot go in the bin: a shop that sells the same kind of thing has to take it back, and the recycling centre has an electricals point. A {0} is also a bulky collection if you cannot move it - ask the shop delivering a new one to take the old one. Check your council's site for the fee, because I can't see your council's charges from here."), "format", &[thing.clone()]);
     }
-    return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(thing.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&py_str("Dismantle the {0} as far as it will come apart and take it to the recycling centre, or book a bulky waste collection with your council; most charge twenty to forty pounds. The metal goes in the scrap metal skip and the rest in general waste, and green garden waste goes in the council's green bin. Check your council's site for the fee and any permit, because I can't see your council's charges from here."), "format", args))(&__args) };
+    return mcall(&py_str("Dismantle the {0} as far as it will come apart and take it to the recycling centre, or book a bulky waste collection with your council; most charge twenty to forty pounds. The metal goes in the scrap metal skip and the rest in general waste, and green garden waste goes in the council's green bin. Check your council's site for the fee and any permit, because I can't see your council's charges from here."), "format", &[thing.clone()]);
     Py::None
 }
 pub fn respond(args: &[Py]) -> Py {
@@ -221,32 +221,32 @@ pub fn respond(args: &[Py]) -> Py {
     let mut clean: Py = Py::None;
     let mut group: Py = Py::None;
     let mut thing: Py = Py::None;
-    clean = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _clean(args))(&__args) };
+    clean = _clean(&[text.clone()]);
     if py_truthy(&Py::Bool(!py_truthy(&clean.clone()))) {
     return Py::None;
     }
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(clean.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g_DISPOSAL(), "search", args))(&__args) })); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(clean.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g_REPLACING(), "search", args))(&__args) })) } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&mcall(&g_DISPOSAL(), "search", &[clean.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_REPLACING(), "search", &[clean.clone()]))) } }) {
     return Py::None;
     }
-    if py_truthy(&{ let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(clean.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g_NOT_OURS(), "search", args))(&__args) }; if py_truthy(&__b) { __b } else { { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(clean.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g_KEEPS_ITS_ANSWER(), "search", args))(&__args) } } }) {
+    if py_truthy(&{ let __b = mcall(&g_NOT_OURS(), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_KEEPS_ITS_ANSWER(), "search", &[clean.clone()]) } }) {
     return Py::None;
     }
-    let __unpk1 = py_unpack(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(clean.clone()); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _the_thing(args))(&__args) }, 2, None);
+    let __unpk1 = py_unpack(&_the_thing(&[clean.clone(), memory.clone()]), 2, None);
     group = __unpk1[0].clone();
     thing = __unpk1[1].clone();
     if py_truthy(&Py::Bool(!py_truthy(&thing.clone()))) {
     return Py::None;
     }
-    if py_truthy(&{ let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(clean.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g_REPLACING(), "search", args))(&__args) }; if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(clean.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g_DISPOSAL(), "search", args))(&__args) })) } }) {
+    if py_truthy(&{ let __b = mcall(&g_REPLACING(), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_DISPOSAL(), "search", &[clean.clone()]))) } }) {
     if py_truthy(&Py::Bool(!py_eq(&group.clone(), &py_str("floor")))) {
     return Py::None;
     }
     return py_str("Good. What are you doing with the old one - tip or a council collection?");
     }
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(clean.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g_FINISHED(), "search", args))(&__args) })); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(clean.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g_POINTING(), "search", args))(&__args) })) } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&mcall(&g_FINISHED(), "search", &[clean.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_POINTING(), "search", &[clean.clone()]))) } }) {
     return Py::None;
     }
-    return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(group.clone()); __args.push(thing.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _reply(args))(&__args) };
+    return _reply(&[group.clone(), thing.clone()]);
     Py::None
 }
 pub fn module_obj() -> Py {

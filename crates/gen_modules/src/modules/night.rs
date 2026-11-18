@@ -47,14 +47,14 @@ pub fn respond(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: memory"))) };
     let mut aid: Py = Py::None;
     let _ = py_str("The hours between the two ends of the night they described, or None.");
-    if py_truthy(&Py::Bool(!py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(memory.clone()); __args.push(py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("isinstance", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }))) {
+    if py_truthy(&Py::Bool(!py_truthy(&call_builtin("isinstance", &[memory.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))))) {
     return Py::None;
     }
-    aid = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| gen_knowledge::knowledge::sleep_aids::answer_for(args))(&__args) };
+    aid = gen_knowledge::knowledge::sleep_aids::answer_for(&[text.clone(), memory.clone()]);
     if py_truthy(&aid.clone()) {
     return aid.clone();
     }
-    return { let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| gen_memory::memory::asleep::answer_for(args))(&__args) }; if py_truthy(&__b) { __b } else { Py::None } };
+    return { let __b = gen_memory::memory::asleep::answer_for(&[text.clone(), memory.clone()]); if py_truthy(&__b) { __b } else { Py::None } };
     Py::None
 }
 pub fn module_obj() -> Py {

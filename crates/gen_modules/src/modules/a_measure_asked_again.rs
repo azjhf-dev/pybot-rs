@@ -52,7 +52,7 @@ pub fn respond(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: memory"))) };
     let _ = py_str("The sentence of the answer above that answers the measure again, or None.");
     let __try1 = exc::catch(|| {
-    return py_tuple(vec![Py::Bool(true), { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| gen_memory::memory::measure::reply_for(args))(&__args) }]);
+    return py_tuple(vec![Py::Bool(true), gen_memory::memory::measure::reply_for(&[text.clone(), memory.clone()])]);
         py_tuple(vec![Py::Bool(false), Py::None])
     });
     let mut __ret2: Py = Py::Bool(false);
@@ -91,7 +91,7 @@ pub fn takes_as_it_comes(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: memory"))) };
     let _ = py_str("Only on a line that is nothing but a measure, and only when the answer above has it.");
     let __try1 = exc::catch(|| {
-    return py_tuple(vec![Py::Bool(true), { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| gen_memory::memory::measure::reply_for(args))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("bool", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }]);
+    return py_tuple(vec![Py::Bool(true), call_builtin("bool", &[gen_memory::memory::measure::reply_for(&[text.clone(), memory.clone()])]).unwrap_or_else(|e| exc::raise(e))]);
         py_tuple(vec![Py::Bool(false), Py::None])
     });
     let mut __ret2: Py = Py::Bool(false);

@@ -253,3 +253,29 @@ pub fn call(name: &str, args: &[Py]) -> PyResult {
         _ => Err(attr_err(name)),
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn matches_cpython_seed42() {
+        seed(&Py::Int(42));
+        let r1 = with_rng(|r| r.random_f64());
+        assert!((r1 - 0.6394267984578837).abs() < 1e-15, "{}", r1);
+        let rr = with_rng(|r| r.randbelow(100));
+        assert_eq!(rr, 3);
+        let items = vec![py_str("a"), py_str("b"), py_str("c"), py_str("d")];
+        let c = choice(&py_list(items)).unwrap();
+        assert_eq!(c.as_str(), Some("c"));
+        let rolls: Vec<i64> = (0..3).map(|_| with_rng(|r| r.randbelow(6)) as i64 + 1).collect();
+        assert_eq!(rolls, vec![2, 2, 2]);
+    }
+    #[test]
+    fn matches_cpython_seed7() {
+        seed(&Py::Int(7));
+        let r1 = with_rng(|r| r.random_f64());
+        assert!((r1 - 0.32383276483316237).abs() < 1e-15, "{}", r1);
+        let rr = with_rng(|r| r.randbelow(1_000_000_000));
+        assert_eq!(rr, 161_973_069, "{}", rr);
+    }
+}

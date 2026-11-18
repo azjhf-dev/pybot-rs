@@ -59,20 +59,20 @@ pub fn asks_for_a_judgement(args: &[Py]) -> Py {
     let mut clean: Py = Py::None;
     let mut said: Py = Py::None;
     let _ = py_str("True when the line asks the bot to rule on the plan on the table, else False.\n\n    \"is that a good idea\", \"is that stupid\", \"am i mad to\", \"sensible?\" - the plan is on the table\n    from the line before, and the person wants it judged. A bare adjective only counts where a plan\n    is already named: \"daft\" with nothing on the table is not a question about anything.\n    ");
-    clean = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }, "lower", args))(&__args) }, "split", args))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&py_str(" "), "join", args))(&__args) };
+    clean = mcall(&py_str(" "), "join", &[mcall(&mcall(&call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]), "split", &[])]);
     let __try1 = exc::catch(|| {
-    said = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str(" ?.!,")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(clean.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| crate::compose::fallback::_matchable(args))(&__args) }, "rstrip", args))(&__args) };
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(said.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&crate::compose::fallback::g_JUDGE_ASK(), "match", args))(&__args) }) {
+    said = mcall(&crate::compose::fallback::_matchable(&[clean.clone()]), "rstrip", &[py_str(" ?.!,")]);
+    if py_truthy(&mcall(&crate::compose::fallback::g_JUDGE_ASK(), "match", &[said.clone()])) {
     return py_tuple(vec![Py::Bool(true), Py::Bool(true)]);
     }
-    bare = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(said.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&crate::compose::fallback::g_JUDGE_ASK_BARE(), "match", args))(&__args) };
+    bare = mcall(&crate::compose::fallback::g_JUDGE_ASK_BARE(), "match", &[said.clone()]);
     if py_truthy(&Py::Bool(!py_truthy(&bare.clone()))) {
     return py_tuple(vec![Py::Bool(true), Py::Bool(false)]);
     }
-    if py_truthy(&Py::Bool(!py_truthy(&{ let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("bare_noun")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&bare.clone(), "group", args))(&__args) }; if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&crate::compose::fallback_data::g_JUDGE_BARE_FACES(), &{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("face")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&bare.clone(), "group", args))(&__args) })) } }))) {
+    if py_truthy(&Py::Bool(!py_truthy(&{ let __b = mcall(&bare.clone(), "group", &[py_str("bare_noun")]); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&crate::compose::fallback_data::g_JUDGE_BARE_FACES(), &mcall(&bare.clone(), "group", &[py_str("face")]))) } }))) {
     return py_tuple(vec![Py::Bool(true), Py::Bool(false)]);
     }
-    return py_tuple(vec![Py::Bool(true), { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let __b = memory.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| crate::compose::fallback::_the_plan_on_the_table(args))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("bool", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }]);
+    return py_tuple(vec![Py::Bool(true), call_builtin("bool", &[crate::compose::fallback::_the_plan_on_the_table(&[{ let __b = memory.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }])]).unwrap_or_else(|e| exc::raise(e))]);
         py_tuple(vec![Py::Bool(false), Py::None])
     });
     let mut __ret2: Py = Py::Bool(false);

@@ -51,17 +51,17 @@ pub fn respond(args: &[Py]) -> Py {
     else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "memory") { v.clone() }
     else { exc::raise(type_err(&format!("missing required argument: memory"))) };
     let _ = py_str("The poisons card for a count of packets, or None for every other line.");
-    if py_truthy(&Py::Bool(!py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| gen_compose::compose::a_count_of_packets::is_a_dose(args))(&__args) }))) {
+    if py_truthy(&Py::Bool(!py_truthy(&gen_compose::compose::a_count_of_packets::is_a_dose(&[text.clone()])))) {
     return Py::None;
     }
-    if py_truthy(&{ let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| crate::modules::safety::respond(args))(&__args) }; if py_truthy(&__b) { __b } else { { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| crate::modules::urgent::respond(args))(&__args) } } }) {
+    if py_truthy(&{ let __b = crate::modules::safety::respond(&[text.clone(), memory.clone()]); if py_truthy(&__b) { __b } else { crate::modules::urgent::respond(&[text.clone(), memory.clone()]) } }) {
     return Py::None;
     }
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(memory.clone()); __args.push(py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("isinstance", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }) {
+    if py_truthy(&call_builtin("isinstance", &[memory.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) {
     let _ = py_setitem(&memory.clone(), &py_str("safety_case"), py_str("poison"));
     let _ = py_setitem(&memory.clone(), &py_str("safety_safe"), Py::Bool(false));
     }
-    return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(geti(&gen_knowledge::knowledge::crisis_replies::g_REPLIES(), &py_str("poison"))); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| gen_compose::compose::pick(args))(&__args) }); __args.push(text.clone()); __args.push(py_str("poison")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| crate::modules::safety::_fit(args))(&__args) };
+    return crate::modules::safety::_fit(&[gen_compose::compose::pick(&[geti(&gen_knowledge::knowledge::crisis_replies::g_REPLIES(), &py_str("poison")), memory.clone()]), text.clone(), py_str("poison")]);
     Py::None
 }
 pub fn module_obj() -> Py {

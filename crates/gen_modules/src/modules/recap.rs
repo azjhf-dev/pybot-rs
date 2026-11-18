@@ -32,7 +32,7 @@ pub fn s_WANTED_AGAIN(v: Py) { ensure_init(); G_WANTED_AGAIN.with(|c| *c.borrow_
 fn module_body() {
     let _ = py_str("A recap asked for with the wrapper still on it is still the recap.\n\nMain reads the recap as the whole line: \"what were we talking about\", \"what were we saying\",\n\"where were we\". People say it with the reminder wrapper still on, with a word in front, or\nwith the place instead of the words:\n\n    remind me what we were talking about\n    remind me where we got to\n    back to my question\n    where were we up to\n    what were we looking at\n    what were we just saying\n\nNone of those is the line the store's gate reads, so the store hands the turn on and the\npunting modules answer: \"That's a job in the world and I can't reach one\", \"Searching for it\nwill turn up better sources\", \"That's beyond what I know well, sorry\". The person asked what\nthe two of you were on and got a shrug from a bot that had just been told.\n\nNothing new is said here. The gate is wider, so the store's own recap is reached on those\nlines and the answer is the store's (\"You said you have a washer and a spanner. Want to\ncarry on?\"). It proposes at the recall band because that is what the line is: a question about\nthe conversation, not about the thing its words name. A line that ends on the ask only - \"what\nwe were talking about was the roof\" - is a statement, so every shape here has to end the line.\n");
     s_PRIORITY(Py::Int(7000));
-    s_WANTED_AGAIN({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("\\bwhat (?:were|are|was) (?:we|i|you) (?:just )?(?:talking|chatting|saying|on) about\\b|\\bwhat (?:were|are|was) (?:we|i|you) (?:just )?saying\\b|\\bwhat we were (?:just )?(?:talking|chatting|saying) about(?=\\s*(?:[?.!,]|$|again\\b|earlier\\b|before\\b|just now\\b))|\\bwhat we were (?:just )?saying(?=\\s*(?:[?.!,]|$|again\\b|earlier\\b|before\\b))|\\bwhere (?:were we|are we)(?=\\s*(?:[?.!,]|$|up to\\b|now\\b|at\\b))|\\bwhere (?:i|we) (?:were|was|are|got to|left off|ended up)\\b(?=\\s*(?:[?.!,]|$|up to\\b|now\\b|again\\b))|\\bwhat (?:were|was) (?:we|i) (?:looking at|doing)\\b(?=\\s*(?:[?.!,]|$|again\\b|earlier\\b|before\\b))|\\bwhat we were (?:just )?(?:looking at|doing)\\b(?=\\s*(?:[?.!,]|$|again\\b|earlier\\b|before\\b))|\\bback to (?:my|your|the) question\\b(?=\\s*(?:[?.!,]|$))")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "compile", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
+    s_WANTED_AGAIN(stdlib_call("re", "compile", &[py_str("\\bwhat (?:were|are|was) (?:we|i|you) (?:just )?(?:talking|chatting|saying|on) about\\b|\\bwhat (?:were|are|was) (?:we|i|you) (?:just )?saying\\b|\\bwhat we were (?:just )?(?:talking|chatting|saying) about(?=\\s*(?:[?.!,]|$|again\\b|earlier\\b|before\\b|just now\\b))|\\bwhat we were (?:just )?saying(?=\\s*(?:[?.!,]|$|again\\b|earlier\\b|before\\b))|\\bwhere (?:were we|are we)(?=\\s*(?:[?.!,]|$|up to\\b|now\\b|at\\b))|\\bwhere (?:i|we) (?:were|was|are|got to|left off|ended up)\\b(?=\\s*(?:[?.!,]|$|up to\\b|now\\b|again\\b))|\\bwhat (?:were|was) (?:we|i) (?:looking at|doing)\\b(?=\\s*(?:[?.!,]|$|again\\b|earlier\\b|before\\b))|\\bwhat we were (?:just )?(?:looking at|doing)\\b(?=\\s*(?:[?.!,]|$|again\\b|earlier\\b|before\\b))|\\bback to (?:my|your|the) question\\b(?=\\s*(?:[?.!,]|$))")]).unwrap_or_else(|e| exc::raise(e)));
 }
 pub fn _recap_shape(args: &[Py]) -> Py {
     ensure_init();
@@ -53,7 +53,7 @@ pub fn _recap_shape(args: &[Py]) -> Py {
     let mut low: Py = Py::None;
     let _ = py_str("The line, folded, when it is a recap main's own gate does not read, else \"\".");
     let __try1 = exc::catch(|| {
-    low = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| py_call(&crate::modules::memory_store::g__folded(), args))(&__args) };
+    low = py_call(&crate::modules::memory_store::g__folded(), &[text.clone(), memory.clone()]);
         py_tuple(vec![Py::Bool(false), Py::None])
     });
     let mut __ret2: Py = Py::Bool(false);
@@ -72,7 +72,7 @@ pub fn _recap_shape(args: &[Py]) -> Py {
     }
     if let Some(__e) = __unhandled4 { exc::raise(__e); }
     if py_truthy(&__ret2) { return __val3; }
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&low.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(low.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g_WANTED_AGAIN(), "search", args))(&__args) })) } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&low.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_WANTED_AGAIN(), "search", &[low.clone()]))) } }) {
     return py_str("");
     }
     return low.clone();
@@ -95,7 +95,7 @@ pub fn ASKS_ABOUT_THE_CHAT(args: &[Py]) -> Py {
     else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "memory") { v.clone() }
     else { exc::raise(type_err(&format!("missing required argument: memory"))) };
     let _ = py_str("This line asks about the conversation, whatever topic its words happen to name.");
-    return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _recap_shape(args))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("bool", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
+    return call_builtin("bool", &[_recap_shape(&[text.clone(), memory.clone()])]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn _not_a_recap(args: &[Py]) -> Py {
@@ -116,7 +116,7 @@ pub fn _not_a_recap(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: memory"))) };
     let _ = py_str("True when a line is about the conversation rather than about the world it names.\n\n    The store's own reading, widened by the shapes this module adds: a recap ask said back\n    beside the thing we were on is the machine reading its own question out - \"back to my\n    question\" came back as \"You said remind you where you were\" - so the newest line that is\n    one of these is never the thing the chat is on, and never a thing the chat said.\n    ");
     let __try1 = exc::catch(|| {
-    return py_tuple(vec![Py::Bool(true), { let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| py_call(&crate::modules::memory_store::g__about_this_chat(), args))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("bool", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }; if py_truthy(&__b) { __b } else { { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _recap_shape(args))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("bool", args).unwrap_or_else(|e| exc::raise(e)))(&__args) } } }]);
+    return py_tuple(vec![Py::Bool(true), { let __b = call_builtin("bool", &[py_call(&crate::modules::memory_store::g__about_this_chat(), &[text.clone(), memory.clone()])]).unwrap_or_else(|e| exc::raise(e)); if py_truthy(&__b) { __b } else { call_builtin("bool", &[_recap_shape(&[text.clone(), memory.clone()])]).unwrap_or_else(|e| exc::raise(e)) } }]);
         py_tuple(vec![Py::Bool(false), Py::None])
     });
     let mut __ret2: Py = Py::Bool(false);
@@ -159,17 +159,17 @@ pub fn _the_recap(args: &[Py]) -> Py {
     let mut thing: Py = Py::None;
     let _ = py_str("The thing we were on and the ask, said back in the person's own words.");
     let mut thread: Py = gen_memory::memory::thread::module_obj();
-    said = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(memory.clone()); __args.push(py_func("_not_a_recap", |args: &[Py]| _not_a_recap(args))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&thread.clone(), "last_said", args))(&__args) };
-    thing = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(memory.clone()); __args.push(py_func("_not_a_recap", |args: &[Py]| _not_a_recap(args))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&thread.clone(), "about", args))(&__args) };
-    if py_truthy(&{ let __b = thing.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(thing.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| py_call(&crate::modules::memory_store::g__a_thing(), args))(&__args) })) } }) {
+    said = mcall(&thread.clone(), "last_said", &[memory.clone(), py_func("_not_a_recap", |args: &[Py]| _not_a_recap(args))]);
+    thing = mcall(&thread.clone(), "about", &[memory.clone(), py_func("_not_a_recap", |args: &[Py]| _not_a_recap(args))]);
+    if py_truthy(&{ let __b = thing.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&py_call(&crate::modules::memory_store::g__a_thing(), &[thing.clone()]))) } }) {
     thing = Py::None;
     }
-    ask = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(memory.clone()); __args.push(py_func("_not_a_recap", |args: &[Py]| _not_a_recap(args))); __kws.extend(vec![("not_before".to_string(), { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(memory.clone()); __args.push(py_func("_not_a_recap", |args: &[Py]| _not_a_recap(args))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&thread.clone(), "topic_index", args))(&__args) })]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&thread.clone(), "last_ask", args))(&__args) };
+    ask = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(memory.clone()); __args.push(py_func("_not_a_recap", |args: &[Py]| _not_a_recap(args))); __kws.extend(vec![("not_before".to_string(), mcall(&thread.clone(), "topic_index", &[memory.clone(), py_func("_not_a_recap", |args: &[Py]| _not_a_recap(args))]))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&thread.clone(), "last_ask", args))(&__args) };
     if py_truthy(&{ let __b = thing.clone(); if !py_truthy(&__b) { __b } else { ask.clone() } }) {
     options = py_list(vec![op_add(&op_add(&op_add(&op_add(&py_str("We were on "), &thing.clone()), &py_str(" — you asked ")), &ask.clone()), &py_str(". Want to carry on?")), op_add(&op_add(&op_add(&op_add(&py_str("Still on "), &thing.clone()), &py_str(": you asked ")), &ask.clone()), &py_str(".")), op_add(&op_add(&op_add(&op_add(&py_str("The last thing we got into was "), &thing.clone()), &py_str(", and you asked ")), &ask.clone()), &py_str("."))]);
     } else {
     if py_truthy(&{ let __b = ask.clone(); if !py_truthy(&__b) { __b } else { said.clone() } }) {
-    options = py_list(vec![op_add(&op_add(&op_add(&op_add(&py_str("You said "), &said.clone()), &py_str(". You asked ")), &ask.clone()), &py_str(". Want to carry on?")), op_add(&op_add(&op_add(&op_add(&py_str("You said "), &said.clone()), &py_str(" - and you asked ")), &ask.clone()), &py_str(".")), op_add(&op_add(&op_add(&op_add(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&slice_or_raise(&said.clone(), &Py::None, &Py::Int(1), &Py::None), "upper", args))(&__args) }, &slice_or_raise(&said.clone(), &Py::Int(1), &Py::None, &Py::None)), &py_str(". Your question was ")), &ask.clone()), &py_str("."))]);
+    options = py_list(vec![op_add(&op_add(&op_add(&op_add(&py_str("You said "), &said.clone()), &py_str(". You asked ")), &ask.clone()), &py_str(". Want to carry on?")), op_add(&op_add(&op_add(&op_add(&py_str("You said "), &said.clone()), &py_str(" - and you asked ")), &ask.clone()), &py_str(".")), op_add(&op_add(&op_add(&op_add(&mcall(&slice_or_raise(&said.clone(), &Py::None, &Py::Int(1), &Py::None), "upper", &[]), &slice_or_raise(&said.clone(), &Py::Int(1), &Py::None, &Py::None)), &py_str(". Your question was ")), &ask.clone()), &py_str("."))]);
     } else {
     if py_truthy(&ask.clone()) {
     options = py_list(vec![op_add(&op_add(&py_str("You asked "), &ask.clone()), &py_str(". Want to carry on?")), op_add(&op_add(&py_str("You were asking "), &ask.clone()), &py_str("."))]);
@@ -186,7 +186,7 @@ pub fn _the_recap(args: &[Py]) -> Py {
     }
     }
     }
-    return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(options.clone()); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _fresh(args))(&__args) };
+    return _fresh(&[options.clone(), memory.clone()]);
     Py::None
 }
 pub fn _fresh(args: &[Py]) -> Py {
@@ -210,7 +210,7 @@ pub fn _fresh(args: &[Py]) -> Py {
     let mut option: Py = Py::None;
     let _ = py_str("An option that is not the line the bot has just said.\n\n    A recap is short and made of the same few words as the last one, so a second ask in a row\n    can land on the same sentence - \"where were we up to\" straight after \"what were we just\n    saying\" - and the arbiter passes over a reply that only repeats the bot's last turn. Varying\n    the words is the module's job, so the last line said is dropped here before the pick.\n    ");
     let __try1 = exc::catch(|| {
-    last = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| py_call(&crate::modules::memory_store::g_last_bot(), args))(&__args) }; if py_truthy(&__b) { __b } else { py_str("") } }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }, "strip", args))(&__args) };
+    last = mcall(&call_builtin("str", &[{ let __b = py_call(&crate::modules::memory_store::g_last_bot(), &[memory.clone()]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "strip", &[]);
         py_tuple(vec![Py::Bool(false), Py::None])
     });
     let mut __ret2: Py = Py::Bool(false);
@@ -229,8 +229,8 @@ pub fn _fresh(args: &[Py]) -> Py {
     }
     if let Some(__e) = __unhandled4 { exc::raise(__e); }
     if py_truthy(&__ret2) { return __val3; }
-    fresh = { let __b = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&options.clone()) { let mut option: Py = __item.clone(); if py_truthy(&Py::Bool(!py_eq(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&option.clone(), "strip", args))(&__args) }, &last.clone()))) {  __out.push(option.clone()); } } py_list(__out) })() }; if py_truthy(&__b) { __b } else { options.clone() } };
-    return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(fresh.clone()); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| py_call(&crate::modules::memory_store::g__vary(), args))(&__args) };
+    fresh = { let __b = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&options.clone()) { let mut option: Py = __item.clone(); if py_truthy(&Py::Bool(!py_eq(&mcall(&option.clone(), "strip", &[]), &last.clone()))) {  __out.push(option.clone()); } } py_list(__out) })() }; if py_truthy(&__b) { __b } else { options.clone() } };
+    return py_call(&crate::modules::memory_store::g__vary(), &[fresh.clone(), memory.clone()]);
     Py::None
 }
 pub fn respond(args: &[Py]) -> Py {
@@ -252,15 +252,15 @@ pub fn respond(args: &[Py]) -> Py {
     let mut low: Py = Py::None;
     let mut said: Py = Py::None;
     let _ = py_str("The recap itself, on the shapes the store's own gate does not read.");
-    low = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _recap_shape(args))(&__args) };
+    low = _recap_shape(&[text.clone(), memory.clone()]);
     if py_truthy(&Py::Bool(!py_truthy(&low.clone()))) {
     return Py::None;
     }
     let __try1 = exc::catch(|| {
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| py_call(&crate::modules::memory_store::g__about_the_bot_here(), args))(&__args) }) {
+    if py_truthy(&py_call(&crate::modules::memory_store::g__about_the_bot_here(), &[memory.clone()])) {
     return py_tuple(vec![Py::Bool(true), Py::None]);
     }
-    said = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(memory.clone()); __args.push(low.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _the_recap(args))(&__args) };
+    said = _the_recap(&[memory.clone(), low.clone()]);
         py_tuple(vec![Py::Bool(false), Py::None])
     });
     let mut __ret2: Py = Py::Bool(false);

@@ -164,31 +164,31 @@ pub fn _cake_count(args: &[Py]) -> Py {
     let mut value: Py = Py::None;
     let mut words: Py = Py::None;
     let _ = py_str("How many people the cake in this line is for, or 0 when the line names no number.");
-    text = op_add(&op_add(&py_str(" "), &{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }, "lower", args))(&__args) }), &py_str(" "));
+    text = op_add(&op_add(&py_str(" "), &mcall(&call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[])), &py_str(" "));
     found = py_list(vec![]);
     let __iter1 = py_iter_or_raise(&py_tuple(vec![py_str("\\b(\\d{1,3})\\s+(?:people|guests|kids|children|adults|persons|portions|slices|of us|head)\\b"), py_str("\\bfor\\s+(\\d{1,3})\\b"), py_str("\\b(?:feeds|feed|serves|serve)\\s+(\\d{1,3})\\b"), py_str("\\bparty\\s+of\\s+(\\d{1,3})\\b")]));
     for __item in __iter1 {
     pattern = __item.clone();
-    let __iter2 = py_iter_or_raise(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(pattern.clone()); __args.push(text.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "finditer", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
+    let __iter2 = py_iter_or_raise(&stdlib_call("re", "finditer", &[pattern.clone(), text.clone()]).unwrap_or_else(|e| exc::raise(e)));
     for __item in __iter2 {
     match_ = __item.clone();
-    after = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str(" ")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&slice_or_raise(&text.clone(), &{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&match_.clone(), "end", args))(&__args) }, &Py::None, &Py::None), "strip", args))(&__args) }, "split", args))(&__args) };
-    if py_truthy(&{ let __b = after.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g__CAKE_CLOCK(), &{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str(",.")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&geti(&after.clone(), &Py::Int(0)), "strip", args))(&__args) })) } }) {
+    after = mcall(&mcall(&slice_or_raise(&text.clone(), &mcall(&match_.clone(), "end", &[]), &Py::None, &Py::None), "strip", &[]), "split", &[py_str(" ")]);
+    if py_truthy(&{ let __b = after.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g__CAKE_CLOCK(), &mcall(&geti(&after.clone(), &Py::Int(0)), "strip", &[py_str(",.")]))) } }) {
     continue;
     }
-    let _ = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(Py::Int(1)); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&match_.clone(), "group", args))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("int", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&found.clone(), "append", args))(&__args) };
+    let _ = mcall(&found.clone(), "append", &[call_builtin("int", &[mcall(&match_.clone(), "group", &[Py::Int(1)])]).unwrap_or_else(|e| exc::raise(e))]);
     }
     }
-    let __iter3 = py_iter_or_raise(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g__CAKE_COUNTS(), "items", args))(&__args) });
+    let __iter3 = py_iter_or_raise(&mcall(&g__CAKE_COUNTS(), "items", &[]));
     for __item in __iter3 {
     let __unpk4 = py_unpack(&__item.clone(), 2, None);
     words = __unpk4[0].clone();
     value = __unpk4[1].clone();
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(op_add(&op_add(&py_str("\\b"), &words.clone()), &py_str("\\b"))); __args.push(text.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "search", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }) {
-    let _ = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(value.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&found.clone(), "append", args))(&__args) };
+    if py_truthy(&stdlib_call("re", "search", &[op_add(&op_add(&py_str("\\b"), &words.clone()), &py_str("\\b")), text.clone()]).unwrap_or_else(|e| exc::raise(e))) {
+    let _ = mcall(&found.clone(), "append", &[value.clone()]);
     }
     }
-    return if py_truthy(&found.clone()) { { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(found.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("max", args).unwrap_or_else(|e| exc::raise(e)))(&__args) } } else { Py::Int(0) };
+    return if py_truthy(&found.clone()) { call_builtin("max", &[found.clone()]).unwrap_or_else(|e| exc::raise(e)) } else { Py::Int(0) };
     Py::None
 }
 pub fn _cake_asks(args: &[Py]) -> Py {
@@ -209,7 +209,7 @@ pub fn _cake_asks(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: words"))) };
     let mut word: Py = Py::None;
     let _ = py_str("Whether the line is one of these kinds of ask - by whole words, so \"iced\" is not \"ice\".");
-    text = op_add(&op_add(&py_str(" "), &{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }, "lower", args))(&__args) }), &py_str(" "));
+    text = op_add(&op_add(&py_str(" "), &mcall(&call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[])), &py_str(" "));
     let __iter1 = py_iter_or_raise(&words.clone());
     for __item in __iter1 {
     word = __item.clone();
@@ -218,7 +218,7 @@ pub fn _cake_asks(args: &[Py]) -> Py {
     return Py::Bool(true);
     }
     } else {
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(op_add(&op_add(&py_str("\\b"), &word.clone()), &py_str("\\b"))); __args.push(text.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "search", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }) {
+    if py_truthy(&stdlib_call("re", "search", &[op_add(&op_add(&py_str("\\b"), &word.clone()), &py_str("\\b")), text.clone()]).unwrap_or_else(|e| exc::raise(e))) {
     return Py::Bool(true);
     }
     }
@@ -242,15 +242,15 @@ pub fn _cake_tin_size(args: &[Py]) -> Py {
     let mut shape: Py = Py::None;
     let mut size: Py = Py::None;
     let _ = py_str("The tin a line names on its own - \"how many will a 25cm cake serve\" - or None.\n\n    Where a line names a tin and no headcount, the number that tin feeds is the answer, so it\n    leads the reply instead of the reader being told to read a table for four shapes.\n    ");
-    text = op_add(&op_add(&py_str(" "), &{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str(" cm")); __args.push(py_str("cm")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }, "lower", args))(&__args) }, "replace", args))(&__args) }), &py_str(" "));
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("\\b30\\s*x\\s*20\\s*cm\\b")); __args.push(text.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "search", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }) {
+    text = op_add(&op_add(&py_str(" "), &mcall(&mcall(&call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]), "replace", &[py_str(" cm"), py_str("cm")])), &py_str(" "));
+    if py_truthy(&stdlib_call("re", "search", &[py_str("\\b30\\s*x\\s*20\\s*cm\\b"), text.clone()]).unwrap_or_else(|e| exc::raise(e))) {
     return geti(&g__CAKE_SHAPES(), &Py::Int(3));
     }
     let __iter1 = py_iter_or_raise(&slice_or_raise(&g__CAKE_SHAPES(), &Py::None, &Py::Int(3), &Py::None));
     for __item in __iter1 {
     shape = __item.clone();
-    size = geti(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("cm")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&geti(&shape.clone(), &Py::Int(0)), "split", args))(&__args) }, &Py::Int(0));
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(op_add(&op_add(&py_str("\\b"), &size.clone()), &py_str("\\s*cm\\b"))); __args.push(text.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "search", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }) {
+    size = geti(&mcall(&geti(&shape.clone(), &Py::Int(0)), "split", &[py_str("cm")]), &Py::Int(0));
+    if py_truthy(&stdlib_call("re", "search", &[op_add(&op_add(&py_str("\\b"), &size.clone()), &py_str("\\s*cm\\b")), text.clone()]).unwrap_or_else(|e| exc::raise(e))) {
     return shape.clone();
     }
     }
@@ -285,29 +285,29 @@ pub fn _cake_tins(args: &[Py]) -> Py {
     let mut tins: Py = Py::None;
     let _ = py_str("The fewest tins that still feed this many people, and what they feed between them.\n\n    Fewest tins first, then fewest kinds of tin, because three of the same tin is a plan someone\n    can shop for and two tins and a traybake is not. A cake has to cover the number at the\n    smallest serve it gives (18cm serves 18 to 20), never at the top of the range.\n    ");
     best = Py::None;
-    let __iter1 = py_iter_or_raise(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(Py::Int(0)); __args.push(Py::Int(9)); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("range", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
+    let __iter1 = py_iter_or_raise(&call_builtin("range", &[Py::Int(0), Py::Int(9)]).unwrap_or_else(|e| exc::raise(e)));
     for __item in __iter1 {
     n20 = __item.clone();
-    let __iter2 = py_iter_or_raise(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(Py::Int(0)); __args.push(Py::Int(9)); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("range", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
+    let __iter2 = py_iter_or_raise(&call_builtin("range", &[Py::Int(0), Py::Int(9)]).unwrap_or_else(|e| exc::raise(e)));
     for __item in __iter2 {
     n23 = __item.clone();
-    let __iter3 = py_iter_or_raise(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(Py::Int(0)); __args.push(Py::Int(9)); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("range", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
+    let __iter3 = py_iter_or_raise(&call_builtin("range", &[Py::Int(0), Py::Int(9)]).unwrap_or_else(|e| exc::raise(e)));
     for __item in __iter3 {
     n25 = __item.clone();
-    let __iter4 = py_iter_or_raise(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(Py::Int(0)); __args.push(Py::Int(9)); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("range", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
+    let __iter4 = py_iter_or_raise(&call_builtin("range", &[Py::Int(0), Py::Int(9)]).unwrap_or_else(|e| exc::raise(e)));
     for __item in __iter4 {
     ntr = __item.clone();
     counts = py_tuple(vec![n20.clone(), n23.clone(), n25.clone(), ntr.clone()]);
-    tins = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(counts.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sum", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
+    tins = call_builtin("sum", &[counts.clone()]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&tins.clone())); if py_truthy(&__b) { __b } else { op_gt(&tins.clone(), &Py::Int(12)) } }) {
     continue;
     }
-    low = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(counts.clone()); __args.push(g__CAKE_SHAPES()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("zip", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }) { let __unpk706 = py_unpack(&__item.clone(), 2, None); let mut n: Py = __unpk706[0].clone(); let mut shape: Py = __unpk706[1].clone(); __out.push(op_mul(&n.clone(), &geti(&shape.clone(), &Py::Int(2)))); } py_list(__out) })() }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sum", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
-    high = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(counts.clone()); __args.push(g__CAKE_SHAPES()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("zip", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }) { let __unpk4738 = py_unpack(&__item.clone(), 2, None); let mut n: Py = __unpk4738[0].clone(); let mut shape: Py = __unpk4738[1].clone(); __out.push(op_mul(&n.clone(), &geti(&shape.clone(), &Py::Int(3)))); } py_list(__out) })() }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sum", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
+    low = call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[counts.clone(), g__CAKE_SHAPES()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk2820 = py_unpack(&__item.clone(), 2, None); let mut n: Py = __unpk2820[0].clone(); let mut shape: Py = __unpk2820[1].clone(); __out.push(op_mul(&n.clone(), &geti(&shape.clone(), &Py::Int(2)))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    high = call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[counts.clone(), g__CAKE_SHAPES()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk6627 = py_unpack(&__item.clone(), 2, None); let mut n: Py = __unpk6627[0].clone(); let mut shape: Py = __unpk6627[1].clone(); __out.push(op_mul(&n.clone(), &geti(&shape.clone(), &Py::Int(3)))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&op_lt(&high.clone(), &count.clone())) {
     continue;
     }
-    kinds = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&counts.clone()) { let mut n: Py = __item.clone(); if py_truthy(&n.clone()) {  __out.push(n.clone()); } } py_list(__out) })() }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
+    kinds = call_builtin("len", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&counts.clone()) { let mut n: Py = __item.clone(); if py_truthy(&n.clone()) {  __out.push(n.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     score = py_tuple(vec![tins.clone(), kinds.clone(), op_sub(&high.clone(), &count.clone())]);
     if py_truthy(&{ let __b = Py::Bool(py_is(&best.clone(), &Py::None)); if py_truthy(&__b) { __b } else { op_lt(&score.clone(), &geti(&best.clone(), &Py::Int(0))) } }) {
     best = py_tuple(vec![score.clone(), counts.clone(), low.clone(), high.clone()]);
@@ -352,33 +352,33 @@ pub fn cake_plan(args: &[Py]) -> Py {
     let mut tins: Py = Py::None;
     let mut trays: Py = Py::None;
     let _ = py_str("The party cake answer: the tin for the number in the line, or the table when it names none.\n\n    Most of the lines that find this row are a birthday cake with no number in them, and those\n    keep the advice and the table. A line that does name a number gets the tin named back, which\n    is the answer to the question it asked.\n    ");
-    line = op_add(&op_add(&py_str(" "), &{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("clean")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let __b = understood.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", args))(&__args) }; if py_truthy(&__b) { __b } else { py_str("") } }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }), &py_str(" "));
-    count = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(line.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _cake_count(args))(&__args) };
+    line = op_add(&op_add(&py_str(" "), &call_builtin("str", &[{ let __b = mcall(&{ let __b = understood.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))), &py_str(" "));
+    count = _cake_count(&[line.clone()]);
     if py_truthy(&Py::Bool(!py_truthy(&count.clone()))) {
-    shape = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(line.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _cake_tin_size(args))(&__args) };
+    shape = _cake_tin_size(&[line.clone()]);
     if py_truthy(&Py::Bool(!py_is(&shape.clone(), &Py::None))) {
     if py_truthy(&Py::Bool(py_contains(&geti(&shape.clone(), &Py::Int(0)), &py_str("traybake")))) {
     said = { let mut __s = String::new(); __s.push_str("A "); __s.push_str(&fstr(&geti(&shape.clone(), &Py::Int(0)), -1, "")); __s.push_str(" cut into squares feeds "); __s.push_str(&fstr(&geti(&shape.clone(), &Py::Int(2)), -1, "")); __s.push_str(" to "); __s.push_str(&fstr(&geti(&shape.clone(), &Py::Int(3)), -1, "")); __s.push_str(". "); py_string(__s) };
     } else {
-    said = { let mut __s = String::new(); __s.push_str("A "); __s.push_str(&fstr(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str(" tin")); __args.push(py_str("")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&geti(&shape.clone(), &Py::Int(0)), "replace", args))(&__args) }, -1, "")); __s.push_str(" two-layer sponge feeds "); __s.push_str(&fstr(&geti(&shape.clone(), &Py::Int(2)), -1, "")); __s.push_str(" to "); __s.push_str(&fstr(&geti(&shape.clone(), &Py::Int(3)), -1, "")); __s.push_str("."); py_string(__s) };
+    said = { let mut __s = String::new(); __s.push_str("A "); __s.push_str(&fstr(&mcall(&geti(&shape.clone(), &Py::Int(0)), "replace", &[py_str(" tin"), py_str("")]), -1, "")); __s.push_str(" two-layer sponge feeds "); __s.push_str(&fstr(&geti(&shape.clone(), &Py::Int(2)), -1, "")); __s.push_str(" to "); __s.push_str(&fstr(&geti(&shape.clone(), &Py::Int(3)), -1, "")); __s.push_str("."); py_string(__s) };
     }
-    return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_tuple(vec![said.clone(), g__CAKE_DAY_BEFORE(), g__CAKE_DOUBLE()])); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&py_str(" "), "join", args))(&__args) }, "strip", args))(&__args) };
+    return mcall(&mcall(&py_str(" "), "join", &[py_tuple(vec![said.clone(), g__CAKE_DAY_BEFORE(), g__CAKE_DOUBLE()])]), "strip", &[]);
     }
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(line.clone()); __args.push(g__CAKE_DOUBLE_WORDS()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _cake_asks(args))(&__args) }) {
-    return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g__CAKE_DOUBLE(), "strip", args))(&__args) };
+    if py_truthy(&_cake_asks(&[line.clone(), g__CAKE_DOUBLE_WORDS()])) {
+    return mcall(&g__CAKE_DOUBLE(), "strip", &[]);
     }
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(line.clone()); __args.push(g__CAKE_DECOR_WORDS()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _cake_asks(args))(&__args) }) {
-    return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g__CAKE_DECOR(), "strip", args))(&__args) };
+    if py_truthy(&_cake_asks(&[line.clone(), g__CAKE_DECOR_WORDS()])) {
+    return mcall(&g__CAKE_DECOR(), "strip", &[]);
     }
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(line.clone()); __args.push(g__CUPCAKE_WORDS()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _cake_asks(args))(&__args) }) {
+    if py_truthy(&_cake_asks(&[line.clone(), g__CUPCAKE_WORDS()])) {
     return g__CUPCAKE_KEEP();
     }
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(line.clone()); __args.push(g__CAKE_SIZE_WORDS()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _cake_asks(args))(&__args) }) {
-    return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_tuple(vec![g__CAKE_SIZE(), g__CAKE_DAY_BEFORE(), g__CAKE_DOUBLE()])); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&py_str(" "), "join", args))(&__args) }, "strip", args))(&__args) };
+    if py_truthy(&_cake_asks(&[line.clone(), g__CAKE_SIZE_WORDS()])) {
+    return mcall(&mcall(&py_str(" "), "join", &[py_tuple(vec![g__CAKE_SIZE(), g__CAKE_DAY_BEFORE(), g__CAKE_DOUBLE()])]), "strip", &[]);
     }
     return g__CAKE_BASE();
     }
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(line.clone()); __args.push(g__CUPCAKE_WORDS()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _cake_asks(args))(&__args) }) {
+    if py_truthy(&_cake_asks(&[line.clone(), g__CUPCAKE_WORDS()])) {
     trays = op_neg(&op_floordiv(&op_mul(&op_neg(&count.clone()), &Py::Int(2)), &Py::Int(24)));
     said = { let mut __s = String::new(); __s.push_str(&fstr(&op_mul(&count.clone(), &Py::Int(2)), -1, "")); __s.push_str(" cupcakes for "); __s.push_str(&fstr(&count.clone(), -1, "")); __s.push_str(" people: two a head, baked at 180C for 12 to 18 minutes and iced on the day."); py_string(__s) };
     if py_truthy(&op_gt(&trays.clone(), &Py::Int(1))) {
@@ -390,13 +390,13 @@ pub fn cake_plan(args: &[Py]) -> Py {
     counts = Py::None;
     low = Py::None;
     high = Py::None;
-    let __iter2 = py_iter_or_raise(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(if py_truthy(&op_le(&count.clone(), &Py::Int(20))) { slice_or_raise(&g__CAKE_SHAPES(), &Py::None, &Py::Int(3), &Py::None) } else { py_tuple(vec![]) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("enumerate", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
+    let __iter2 = py_iter_or_raise(&call_builtin("enumerate", &[if py_truthy(&op_le(&count.clone(), &Py::Int(20))) { slice_or_raise(&g__CAKE_SHAPES(), &Py::None, &Py::Int(3), &Py::None) } else { py_tuple(vec![]) }]).unwrap_or_else(|e| exc::raise(e)));
     for __item in __iter2 {
     let __unpk3 = py_unpack(&__item.clone(), 2, None);
     index = __unpk3[0].clone();
     shape = __unpk3[1].clone();
     if py_truthy(&op_le(&count.clone(), &geti(&shape.clone(), &Py::Int(3)))) {
-    counts = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(Py::Int(4)); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("range", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }) { let mut i: Py = __item.clone(); __out.push(if py_truthy(&Py::Bool(py_eq(&i.clone(), &index.clone()))) { Py::Int(1) } else { Py::Int(0) }); } py_list(__out) })() }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("tuple", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
+    counts = call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("range", &[Py::Int(4)]).unwrap_or_else(|e| exc::raise(e))) { let mut i: Py = __item.clone(); __out.push(if py_truthy(&Py::Bool(py_eq(&i.clone(), &index.clone()))) { Py::Int(1) } else { Py::Int(0) }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     let __unpk4 = py_unpack(&py_tuple(vec![geti(&shape.clone(), &Py::Int(2)), geti(&shape.clone(), &Py::Int(3))]), 2, None);
     low = __unpk4[0].clone();
     high = __unpk4[1].clone();
@@ -404,7 +404,7 @@ pub fn cake_plan(args: &[Py]) -> Py {
     }
     }
     if py_truthy(&Py::Bool(py_is(&counts.clone(), &Py::None))) {
-    fit = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(count.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _cake_tins(args))(&__args) };
+    fit = _cake_tins(&[count.clone()]);
     if py_truthy(&Py::Bool(!py_truthy(&fit.clone()))) {
     return Py::None;
     }
@@ -414,21 +414,21 @@ pub fn cake_plan(args: &[Py]) -> Py {
     low = __unpk5[2].clone();
     high = __unpk5[3].clone();
     }
-    tins = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(counts.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sum", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
-    parts = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(counts.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("enumerate", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }) { let __unpk2311 = py_unpack(&__item.clone(), 2, None); let mut i: Py = __unpk2311[0].clone(); let mut n: Py = __unpk2311[1].clone(); if py_truthy(&n.clone()) {  __out.push({ let mut __s = String::new(); __s.push_str(&fstr(&geti(&g__CAKE_NUMBERS(), &n.clone()), -1, "")); __s.push_str(" "); __s.push_str(&fstr(&if py_truthy(&Py::Bool(py_eq(&n.clone(), &Py::Int(1)))) { geti(&geti(&g__CAKE_SHAPES(), &i.clone()), &Py::Int(0)) } else { geti(&geti(&g__CAKE_SHAPES(), &i.clone()), &Py::Int(1)) }, -1, "")); py_string(__s) }); } } py_list(__out) })() };
+    tins = call_builtin("sum", &[counts.clone()]).unwrap_or_else(|e| exc::raise(e));
+    parts = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[counts.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk7832 = py_unpack(&__item.clone(), 2, None); let mut i: Py = __unpk7832[0].clone(); let mut n: Py = __unpk7832[1].clone(); if py_truthy(&n.clone()) {  __out.push({ let mut __s = String::new(); __s.push_str(&fstr(&geti(&g__CAKE_NUMBERS(), &n.clone()), -1, "")); __s.push_str(" "); __s.push_str(&fstr(&if py_truthy(&Py::Bool(py_eq(&n.clone(), &Py::Int(1)))) { geti(&geti(&g__CAKE_SHAPES(), &i.clone()), &Py::Int(0)) } else { geti(&geti(&g__CAKE_SHAPES(), &i.clone()), &Py::Int(1)) }, -1, "")); py_string(__s) }); } } py_list(__out) })() };
     if py_truthy(&Py::Bool(py_eq(&tins.clone(), &Py::Int(1)))) {
-    shape = geti(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str(" ")); __args.push(Py::Int(1)); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&geti(&parts.clone(), &Py::Int(0)), "split", args))(&__args) }, &Py::Int(1));
+    shape = geti(&mcall(&geti(&parts.clone(), &Py::Int(0)), "split", &[py_str(" "), Py::Int(1)]), &Py::Int(1));
     if py_truthy(&Py::Bool(py_contains(&shape.clone(), &py_str("traybake")))) {
     said = { let mut __s = String::new(); __s.push_str("One "); __s.push_str(&fstr(&shape.clone(), -1, "")); __s.push_str(" cut into squares feeds "); __s.push_str(&fstr(&low.clone(), -1, "")); __s.push_str(" to "); __s.push_str(&fstr(&high.clone(), -1, "")); __s.push_str(", which covers "); __s.push_str(&fstr(&count.clone(), -1, "")); __s.push_str("."); py_string(__s) };
     } else {
-    said = { let mut __s = String::new(); __s.push_str("A "); __s.push_str(&fstr(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str(" tin")); __args.push(py_str("")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&shape.clone(), "replace", args))(&__args) }, -1, "")); __s.push_str(" two-layer sponge feeds "); __s.push_str(&fstr(&low.clone(), -1, "")); __s.push_str(" to "); __s.push_str(&fstr(&high.clone(), -1, "")); __s.push_str(", so one tin covers "); __s.push_str(&fstr(&count.clone(), -1, "")); __s.push_str("."); py_string(__s) };
+    said = { let mut __s = String::new(); __s.push_str("A "); __s.push_str(&fstr(&mcall(&shape.clone(), "replace", &[py_str(" tin"), py_str("")]), -1, "")); __s.push_str(" two-layer sponge feeds "); __s.push_str(&fstr(&low.clone(), -1, "")); __s.push_str(" to "); __s.push_str(&fstr(&high.clone(), -1, "")); __s.push_str(", so one tin covers "); __s.push_str(&fstr(&count.clone(), -1, "")); __s.push_str("."); py_string(__s) };
     }
     } else {
-    kinds = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(parts.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
-    said = if py_truthy(&op_gt(&kinds.clone(), &Py::Int(1))) { { let mut __s = String::new(); __s.push_str(&fstr(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(slice_or_raise(&parts.clone(), &Py::None, &op_neg(&Py::Int(1)), &Py::None)); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&py_str(", "), "join", args))(&__args) }, -1, "")); __s.push_str(" and "); __s.push_str(&fstr(&geti(&parts.clone(), &op_neg(&Py::Int(1))), -1, "")); py_string(__s) } } else { geti(&parts.clone(), &Py::Int(0)) };
-    said = { let mut __s = String::new(); __s.push_str(&fstr(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&geti(&said.clone(), &Py::Int(0)), "upper", args))(&__args) }, -1, "")); __s.push_str(&fstr(&slice_or_raise(&said.clone(), &Py::Int(1), &Py::None, &Py::None), -1, "")); __s.push_str(" "); __s.push_str(&fstr(&if py_truthy(&op_gt(&tins.clone(), &Py::Int(1))) { py_str("feed") } else { py_str("feeds") }, -1, "")); __s.push_str(" "); __s.push_str(&fstr(&low.clone(), -1, "")); __s.push_str(" to "); __s.push_str(&fstr(&high.clone(), -1, "")); __s.push_str(" between them, which covers "); __s.push_str(&fstr(&count.clone(), -1, "")); __s.push_str("."); py_string(__s) };
+    kinds = call_builtin("len", &[parts.clone()]).unwrap_or_else(|e| exc::raise(e));
+    said = if py_truthy(&op_gt(&kinds.clone(), &Py::Int(1))) { { let mut __s = String::new(); __s.push_str(&fstr(&mcall(&py_str(", "), "join", &[slice_or_raise(&parts.clone(), &Py::None, &op_neg(&Py::Int(1)), &Py::None)]), -1, "")); __s.push_str(" and "); __s.push_str(&fstr(&geti(&parts.clone(), &op_neg(&Py::Int(1))), -1, "")); py_string(__s) } } else { geti(&parts.clone(), &Py::Int(0)) };
+    said = { let mut __s = String::new(); __s.push_str(&fstr(&mcall(&geti(&said.clone(), &Py::Int(0)), "upper", &[]), -1, "")); __s.push_str(&fstr(&slice_or_raise(&said.clone(), &Py::Int(1), &Py::None, &Py::None), -1, "")); __s.push_str(" "); __s.push_str(&fstr(&if py_truthy(&op_gt(&tins.clone(), &Py::Int(1))) { py_str("feed") } else { py_str("feeds") }, -1, "")); __s.push_str(" "); __s.push_str(&fstr(&low.clone(), -1, "")); __s.push_str(" to "); __s.push_str(&fstr(&high.clone(), -1, "")); __s.push_str(" between them, which covers "); __s.push_str(&fstr(&count.clone(), -1, "")); __s.push_str("."); py_string(__s) };
     }
-    return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_tuple(vec![said.clone(), g__CAKE_DAY_BEFORE(), py_str("Double every weight and split it between the tins with the same heat and time.")])); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&py_str(" "), "join", args))(&__args) }, "strip", args))(&__args) };
+    return mcall(&mcall(&py_str(" "), "join", &[py_tuple(vec![said.clone(), g__CAKE_DAY_BEFORE(), py_str("Double every weight and split it between the tins with the same heat and time.")])]), "strip", &[]);
     Py::None
 }
 pub fn cake_eggs(args: &[Py]) -> Py {
@@ -449,17 +449,17 @@ pub fn cake_eggs(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: understood"))) };
     let mut line: Py = Py::None;
     let _ = py_str("How many eggs go in a bake: the count is the weight of everything else.");
-    line = op_add(&op_add(&py_str(" "), &{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("clean")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let __b = understood.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", args))(&__args) }; if py_truthy(&__b) { __b } else { py_str("") } }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }), &py_str(" "));
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(line.clone()); __args.push(py_tuple(vec![py_str("needed"), py_str("necessary"), py_str("essential"), py_str("required"), py_str("have to"), py_str("can i skip"), py_str("skip the egg"), py_str("skip eggs"), py_str("do without")])); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _cake_asks(args))(&__args) }) {
+    line = op_add(&op_add(&py_str(" "), &call_builtin("str", &[{ let __b = mcall(&{ let __b = understood.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))), &py_str(" "));
+    if py_truthy(&_cake_asks(&[line.clone(), py_tuple(vec![py_str("needed"), py_str("necessary"), py_str("essential"), py_str("required"), py_str("have to"), py_str("can i skip"), py_str("skip the egg"), py_str("skip eggs"), py_str("do without")])])) {
     return g__EGG_SKIP();
     }
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(line.clone()); __args.push(py_tuple(vec![py_str("yorkshire"), py_str("batter"), py_str("toad in the hole"), py_str("popover")])); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _cake_asks(args))(&__args) }) {
+    if py_truthy(&_cake_asks(&[line.clone(), py_tuple(vec![py_str("yorkshire"), py_str("batter"), py_str("toad in the hole"), py_str("popover")])])) {
     return g__EGG_BATTER();
     }
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(line.clone()); __args.push(py_tuple(vec![py_str("pancake"), py_str("pancakes"), py_str("crepe"), py_str("crepes"), py_str("drop scone")])); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _cake_asks(args))(&__args) }) {
+    if py_truthy(&_cake_asks(&[line.clone(), py_tuple(vec![py_str("pancake"), py_str("pancakes"), py_str("crepe"), py_str("crepes"), py_str("drop scone")])])) {
     return g__EGG_PANCAKE();
     }
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(line.clone()); __args.push(py_tuple(vec![py_str("meringue"), py_str("meringues"), py_str("pavlova")])); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _cake_asks(args))(&__args) }) {
+    if py_truthy(&_cake_asks(&[line.clone(), py_tuple(vec![py_str("meringue"), py_str("meringues"), py_str("pavlova")])])) {
     return g__EGG_MERINGUE();
     }
     return g__EGG_SPONGE();

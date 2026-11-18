@@ -63,10 +63,10 @@ fn module_body() {
     s__NUMBER(py_str("(?:\\d+(?:\\.\\d+)?|zero|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety|hundred)"));
     s__UNIT(py_str("(?:degrees?|deg\\b|°|celsius|centigrade|fahrenheit|c\\b|f\\b)"));
     s__LEAD(py_str("(?:its|it's|its\\s+about|about|around|only|just|currently|still|nearly|almost|minus|negative|plus|and|but|so|then|is|be)"));
-    s_FIGURE({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let mut __s = String::new(); __s.push_str("\\b"); __s.push_str(&fstr(&g__NUMBER(), -1, "")); __s.push_str("\\s*"); __s.push_str(&fstr(&g__UNIT(), -1, "")); __s.push_str("\\b"); py_string(__s) }); __args.push(stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "compile", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
-    s_MINUS_FIGURE({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("(?<![\\w-])(?:minus\\s+|[-\\u2212]\\s?)\\d+\\s*(?:degrees?)?(?:\\s*(?:outside|out\\s+there|out|in\\s+here|today|tonight|now))?")); __args.push(stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "compile", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
-    s_MINUS_WORD({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("(?<!\\w)minus\\s+\\d+")); __args.push(stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "compile", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
-    s_FIGURE_WITH_LEAD({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let mut __s = String::new(); __s.push_str("\\b(?:(?:"); __s.push_str(&fstr(&g__LEAD(), -1, "")); __s.push_str(")\\s+)*"); __s.push_str(&fstr(&g__NUMBER(), -1, "")); __s.push_str("\\s*"); __s.push_str(&fstr(&g__UNIT(), -1, "")); __s.push_str("\\b(?:\\s+(?:outside|out\\s+there|in\\s+here|here|today|tonight|now|outside|already|still))?"); py_string(__s) }); __args.push(stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "compile", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
+    s_FIGURE(stdlib_call("re", "compile", &[{ let mut __s = String::new(); __s.push_str("\\b"); __s.push_str(&fstr(&g__NUMBER(), -1, "")); __s.push_str("\\s*"); __s.push_str(&fstr(&g__UNIT(), -1, "")); __s.push_str("\\b"); py_string(__s) }, stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s_MINUS_FIGURE(stdlib_call("re", "compile", &[py_str("(?<![\\w-])(?:minus\\s+|[-\\u2212]\\s?)\\d+\\s*(?:degrees?)?(?:\\s*(?:outside|out\\s+there|out|in\\s+here|today|tonight|now))?"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s_MINUS_WORD(stdlib_call("re", "compile", &[py_str("(?<!\\w)minus\\s+\\d+"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s_FIGURE_WITH_LEAD(stdlib_call("re", "compile", &[{ let mut __s = String::new(); __s.push_str("\\b(?:(?:"); __s.push_str(&fstr(&g__LEAD(), -1, "")); __s.push_str(")\\s+)*"); __s.push_str(&fstr(&g__NUMBER(), -1, "")); __s.push_str("\\s*"); __s.push_str(&fstr(&g__UNIT(), -1, "")); __s.push_str("\\b(?:\\s+(?:outside|out\\s+there|in\\s+here|here|today|tonight|now|outside|already|still))?"); py_string(__s) }, stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     s_TAKES_AS_IT_COMES(g_takes_as_it_comes());
 }
 pub fn a_figure_of_heat(args: &[Py]) -> Py {
@@ -84,8 +84,8 @@ pub fn a_figure_of_heat(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: text"))) };
     let mut line: Py = Py::None;
     let _ = py_str("True when the line says a temperature: \"20 degrees\", \"20c\", \"minus three degrees\".");
-    line = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
-    return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(line.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g_FIGURE(), "search", args))(&__args) }; if py_truthy(&__b) { __b } else { { let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(line.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g_MINUS_WORD(), "search", args))(&__args) }; if py_truthy(&__b) { __b } else { { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(line.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g_MINUS_FIGURE(), "search", args))(&__args) } } } } }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("bool", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
+    line = call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("bool", &[{ let __b = mcall(&g_FIGURE(), "search", &[line.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_MINUS_WORD(), "search", &[line.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_MINUS_FIGURE(), "search", &[line.clone()]) } } } }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn without_the_figure(args: &[Py]) -> Py {
@@ -103,13 +103,13 @@ pub fn without_the_figure(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: text"))) };
     let mut line: Py = Py::None;
     let _ = py_str("The line with a bare figure of heat taken out, and the join left tidy.\n\n    Only the figure and the words that introduce it go, so the rest of the line reads as it did:\n    \"its 20 degrees and im freezing\" is \"and im freezing\", and \"im freezing, its 20 degrees\" is\n    \"im freezing,\". A figure inside a longer phrase (\"at 180 degrees for an hour\") is left alone\n    by the caller's own reading, because what is left of the line is not a body state.\n    ");
-    line = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str(" ")); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g_FIGURE_WITH_LEAD(), "sub", args))(&__args) };
-    line = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str(" ")); __args.push(line.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g_MINUS_FIGURE(), "sub", args))(&__args) };
-    line = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("\\s+")); __args.push(py_str(" ")); __args.push(line.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "sub", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
-    line = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("^[\\s,;:-]*(?:(?:its|it|it's|is|was|there|and|but|so|then|about|around|only|just|still|currently|be)\\b[\\s,;:-]*)+")); __args.push(py_str("")); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&line.clone(), "strip", args))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "sub", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
-    line = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("[\\s,;:-]+$")); __args.push(py_str("")); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&line.clone(), "strip", args))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "sub", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
-    line = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("[\\s,;:-]+(?:(?:its|it|it's|is|was|there|about|around|only|just|still|currently|and|but|so|then)\\b[\\s,;:-]*)+$")); __args.push(py_str("")); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&line.clone(), "strip", args))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "sub", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
-    return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&line.clone(), "strip", args))(&__args) };
+    line = mcall(&g_FIGURE_WITH_LEAD(), "sub", &[py_str(" "), call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))]);
+    line = mcall(&g_MINUS_FIGURE(), "sub", &[py_str(" "), line.clone()]);
+    line = stdlib_call("re", "sub", &[py_str("\\s+"), py_str(" "), line.clone()]).unwrap_or_else(|e| exc::raise(e));
+    line = stdlib_call("re", "sub", &[py_str("^[\\s,;:-]*(?:(?:its|it|it's|is|was|there|and|but|so|then|about|around|only|just|still|currently|be)\\b[\\s,;:-]*)+"), py_str(""), mcall(&line.clone(), "strip", &[])]).unwrap_or_else(|e| exc::raise(e));
+    line = stdlib_call("re", "sub", &[py_str("[\\s,;:-]+$"), py_str(""), mcall(&line.clone(), "strip", &[])]).unwrap_or_else(|e| exc::raise(e));
+    line = stdlib_call("re", "sub", &[py_str("[\\s,;:-]+(?:(?:its|it|it's|is|was|there|about|around|only|just|still|currently|and|but|so|then)\\b[\\s,;:-]*)+$"), py_str(""), mcall(&line.clone(), "strip", &[])]).unwrap_or_else(|e| exc::raise(e));
+    return mcall(&line.clone(), "strip", &[]);
     Py::None
 }
 pub fn a_state_said_with_a_figure(args: &[Py]) -> Py {
@@ -128,18 +128,18 @@ pub fn a_state_said_with_a_figure(args: &[Py]) -> Py {
     let mut line: Py = Py::None;
     let mut rest: Py = Py::None;
     let _ = py_str("The body state the line says beside a figure (\"cold\", \"hot\"), or None.\n\n    The composer's reader is the authority on what counts as a body state, so it is asked about\n    the line with the figure taken out. A line with no figure at all is not this module's.\n    ");
-    line = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
-    if py_truthy(&Py::Bool(!py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(line.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| a_figure_of_heat(args))(&__args) }))) {
+    line = call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e));
+    if py_truthy(&Py::Bool(!py_truthy(&a_figure_of_heat(&[line.clone()])))) {
     return Py::None;
     }
-    rest = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(line.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| without_the_figure(args))(&__args) };
+    rest = without_the_figure(&[line.clone()]);
     if py_truthy(&Py::Bool(!py_truthy(&rest.clone()))) {
     return Py::None;
     }
     let mut fallback: Py = gen_compose::compose::fallback::module_obj();
     let mut _body_state: Py = py_func("_body_state", |args: &[Py]| gen_compose::compose::fallback_chain::_body_state(args));
     let __try1 = exc::catch(|| {
-    return py_tuple(vec![Py::Bool(true), { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(rest.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| py_call(&_body_state, args))(&__args) }]);
+    return py_tuple(vec![Py::Bool(true), py_call(&_body_state, &[rest.clone()])]);
         py_tuple(vec![Py::Bool(false), Py::None])
     });
     let mut __ret2: Py = Py::Bool(false);
@@ -181,21 +181,21 @@ pub fn respond(args: &[Py]) -> Py {
     let mut state: Py = Py::None;
     let mut understood: Py = Py::None;
     let _ = py_str("The body state's own pool for a line that says a figure of heat beside it, or None.");
-    understood = { let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("understood")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&memory.clone(), "get", args))(&__args) }; if py_truthy(&__b) { __b } else { py_dict(vec![]) } };
-    clean = { let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("clean")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&understood.clone(), "get", args))(&__args) }; if py_truthy(&__b) { __b } else { text.clone() } };
-    state = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(clean.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| a_state_said_with_a_figure(args))(&__args) };
+    understood = { let __b = mcall(&memory.clone(), "get", &[py_str("understood")]); if py_truthy(&__b) { __b } else { py_dict(vec![]) } };
+    clean = { let __b = mcall(&understood.clone(), "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { text.clone() } };
+    state = a_state_said_with_a_figure(&[clean.clone()]);
     if py_truthy(&Py::Bool(!py_truthy(&state.clone()))) {
     return Py::None;
     }
     let mut fallback: Py = gen_compose::compose::fallback::module_obj();
     let mut _choose: Py = py_func("_choose", |args: &[Py]| gen_compose::compose::fallback_chain::_choose(args));
     let mut BODY_POOLS: Py = gen_compose::compose::fallback_data::g_BODY_POOLS();
-    pool = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(state.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&BODY_POOLS.clone(), "get", args))(&__args) };
+    pool = mcall(&BODY_POOLS.clone(), "get", &[state.clone()]);
     if py_truthy(&Py::Bool(!py_truthy(&pool.clone()))) {
     return Py::None;
     }
     let __try1 = exc::catch(|| {
-    return py_tuple(vec![Py::Bool(true), { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(pool.clone()); __args.push(memory.clone()); __args.push(clean.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| py_call(&_choose, args))(&__args) }]);
+    return py_tuple(vec![Py::Bool(true), py_call(&_choose, &[pool.clone(), memory.clone(), clean.clone()])]);
         py_tuple(vec![Py::Bool(false), Py::None])
     });
     let mut __ret2: Py = Py::Bool(false);
@@ -234,9 +234,9 @@ pub fn takes_as_it_comes(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: memory"))) };
     let mut understood: Py = Py::None;
     let _ = py_str("Only on a line that says a figure of heat beside a body state, and nowhere else.");
-    understood = { let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("understood")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&memory.clone(), "get", args))(&__args) }; if py_truthy(&__b) { __b } else { py_dict(vec![]) } };
+    understood = { let __b = mcall(&memory.clone(), "get", &[py_str("understood")]); if py_truthy(&__b) { __b } else { py_dict(vec![]) } };
     let __try1 = exc::catch(|| {
-    return py_tuple(vec![Py::Bool(true), { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("clean")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&understood.clone(), "get", args))(&__args) }; if py_truthy(&__b) { __b } else { text.clone() } }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| a_state_said_with_a_figure(args))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("bool", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }]);
+    return py_tuple(vec![Py::Bool(true), call_builtin("bool", &[a_state_said_with_a_figure(&[{ let __b = mcall(&understood.clone(), "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { text.clone() } }])]).unwrap_or_else(|e| exc::raise(e))]);
         py_tuple(vec![Py::Bool(false), Py::None])
     });
     let mut __ret2: Py = Py::Bool(false);

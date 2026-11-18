@@ -44,10 +44,10 @@ pub fn s_PRONOUN_BODY(v: Py) { ensure_init(); G_PRONOUN_BODY.with(|c| *c.borrow_
 fn module_body() {
     let _ = py_str("Whose body a line is about when it says \"he\", \"she\" or \"they\" and no name.\n\n\"my dad is 70\" then \"hes got a bad hip\" is one person's trouble told over two turns, and the\nsecond turn names nobody: the \"he\" is the dad the chat has just named. Read as the speaker's own\nbody it got \"Sorry to hear it - go easy on yourself today, and see someone if it's not shifting in\na few days\", which is advice for a body that is not the one that hurts, and it tells the person\ntyping to see someone about their father's hip.\n\nSo this answers one question only - is a body on this line somebody else's? - for the composer's\ncarer reading to use. It needs both halves: a third-person pronoun carrying the body, and somebody\nnamed in the chat within the last few turns. \"i told my dad about my back\" says \"my\", so the body\nis the speaker's and this says nothing.\n");
     s_KIN(py_str("(?:dad|daddy|father|mum|mummy|mother|mam|nan|nanna|gran|granny|grandma|grandad|grandpa|granddad|son|daughter|child|kid|boy|girl|baby|little one|husband|wife|partner|other half|boyfriend|girlfriend|brother|sister|niece|nephew|cousin|aunt|uncle|friend|mate|neighbour|carer|flatmate|housemate|in laws|in-law)"));
-    s_NAMED_SOMEBODY({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let mut __s = String::new(); __s.push_str("\\b(?:my|our|his|her|their)\\s+(?:poor\\s+|little\\s+|eldest\\s+|youngest\\s+|old\\s+|older\\s+|elderly\\s+|grown\\s*up\\s+)?"); __s.push_str(&fstr(&g_KIN(), -1, "")); __s.push_str("\\b"); py_string(__s) }); __args.push(stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "compile", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
-    s_PRONOUN_BODY({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("\\b(?:he|she|they|hed|shed|theyd)(?:'s|s|\\s+is|\\s+has|\\s+had|\\s+got|\\s+has\\s+got|\\s+keeps\\s+getting|\\s+was|\\s+been)\\b[^.!?]{0,26}?\\b(?:bad|sore|dodgy|gammy|weak|dicky|knackered|broken|cracked|twisted|swollen|stiff|aching|hurting|hurts?|soreness|pain|stiffness|giving\\s+him\\s+trouble)\\b|\\b(?:his|her|their)\\s+(?:[a-z]+\\s+){0,2}(?:hip|knee|back|shoulder|leg|arm|foot|feet|hand|wrist|ankle|neck|stomach|chest|head|eye|ear|joints?)\\b[^.!?]{0,18}?\\b(?:is|are|feels?|has\\s+been|keeps)\\b")); __args.push(stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "compile", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
-    s_OWN_BODY({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("\\b(?:my|our)\\s+(?:[a-z]+\\s+){0,2}(?:hip|knee|back|shoulder|leg|arm|foot|feet|hand|wrist|ankle|neck|stomach|chest|head|eye|ear|joints?)\\b")); __args.push(stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "compile", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
-    s_PET({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("\\b(?:dog|dogs|puppy|pup|cat|cats|kitten|rabbit|bunny|hamster|guinea\\s+pig|horse|pony|budgie|parrot|bird|fish|tortoise|snake|lizard|ferret|gerbil)\\b")); __args.push(stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "compile", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
+    s_NAMED_SOMEBODY(stdlib_call("re", "compile", &[{ let mut __s = String::new(); __s.push_str("\\b(?:my|our|his|her|their)\\s+(?:poor\\s+|little\\s+|eldest\\s+|youngest\\s+|old\\s+|older\\s+|elderly\\s+|grown\\s*up\\s+)?"); __s.push_str(&fstr(&g_KIN(), -1, "")); __s.push_str("\\b"); py_string(__s) }, stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s_PRONOUN_BODY(stdlib_call("re", "compile", &[py_str("\\b(?:he|she|they|hed|shed|theyd)(?:'s|s|\\s+is|\\s+has|\\s+had|\\s+got|\\s+has\\s+got|\\s+keeps\\s+getting|\\s+was|\\s+been)\\b[^.!?]{0,26}?\\b(?:bad|sore|dodgy|gammy|weak|dicky|knackered|broken|cracked|twisted|swollen|stiff|aching|hurting|hurts?|soreness|pain|stiffness|giving\\s+him\\s+trouble)\\b|\\b(?:his|her|their)\\s+(?:[a-z]+\\s+){0,2}(?:hip|knee|back|shoulder|leg|arm|foot|feet|hand|wrist|ankle|neck|stomach|chest|head|eye|ear|joints?)\\b[^.!?]{0,18}?\\b(?:is|are|feels?|has\\s+been|keeps)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s_OWN_BODY(stdlib_call("re", "compile", &[py_str("\\b(?:my|our)\\s+(?:[a-z]+\\s+){0,2}(?:hip|knee|back|shoulder|leg|arm|foot|feet|hand|wrist|ankle|neck|stomach|chest|head|eye|ear|joints?)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s_PET(stdlib_call("re", "compile", &[py_str("\\b(?:dog|dogs|puppy|pup|cat|cats|kitten|rabbit|bunny|hamster|guinea\\s+pig|horse|pony|budgie|parrot|bird|fish|tortoise|snake|lizard|ferret|gerbil)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
 }
 pub fn somebody_was_named(args: &[Py]) -> Py {
     ensure_init();
@@ -67,7 +67,7 @@ pub fn somebody_was_named(args: &[Py]) -> Py {
     let mut turns: Py = Py::None;
     let _ = py_str("True when the chat has named somebody the person looks after, in the last few turns.");
     let __try1 = exc::catch(|| {
-    turns = if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(memory.clone()); __args.push(py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("isinstance", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }) { { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("turns")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&memory.clone(), "get", args))(&__args) } } else { Py::None };
+    turns = if py_truthy(&call_builtin("isinstance", &[memory.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) { mcall(&memory.clone(), "get", &[py_str("turns")]) } else { Py::None };
         py_tuple(vec![Py::Bool(false), Py::None])
     });
     let mut __ret2: Py = Py::Bool(false);
@@ -86,20 +86,20 @@ pub fn somebody_was_named(args: &[Py]) -> Py {
     }
     if let Some(__e) = __unhandled4 { exc::raise(__e); }
     if py_truthy(&__ret2) { return __val3; }
-    if py_truthy(&Py::Bool(!py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(turns.clone()); __args.push(py_func("list", |args: &[Py]| call_builtin("list", args).unwrap_or_else(|e| exc::raise(e)))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("isinstance", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }))) {
+    if py_truthy(&Py::Bool(!py_truthy(&call_builtin("isinstance", &[turns.clone(), py_func("list", |args: &[Py]| call_builtin("list", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))))) {
     return Py::Bool(false);
     }
-    let __iter6 = py_iter_or_raise(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(slice_or_raise(&turns.clone(), &op_neg(&Py::Int(4)), &Py::None, &Py::None)); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("reversed", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
+    let __iter6 = py_iter_or_raise(&call_builtin("reversed", &[slice_or_raise(&turns.clone(), &op_neg(&Py::Int(4)), &Py::None, &Py::None)]).unwrap_or_else(|e| exc::raise(e)));
     for __item in __iter6 {
     turn = __item.clone();
-    if py_truthy(&Py::Bool(!py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(turn.clone()); __args.push(py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("isinstance", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }))) {
+    if py_truthy(&Py::Bool(!py_truthy(&call_builtin("isinstance", &[turn.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))))) {
     continue;
     }
-    said = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("user")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&turn.clone(), "get", args))(&__args) }; if py_truthy(&__b) { __b } else { py_str("") } }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(said.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g_PET(), "search", args))(&__args) }) {
+    said = call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("user")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e));
+    if py_truthy(&mcall(&g_PET(), "search", &[said.clone()])) {
     return Py::Bool(false);
     }
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(said.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g_NAMED_SOMEBODY(), "search", args))(&__args) }) {
+    if py_truthy(&mcall(&g_NAMED_SOMEBODY(), "search", &[said.clone()])) {
     return Py::Bool(true);
     }
     }
@@ -121,11 +121,11 @@ pub fn a_body_of_a_pronoun(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: clean"))) };
     let mut text: Py = Py::None;
     let _ = py_str("True when the line hangs a body or a hurt on he/she/they rather than on \"my\".");
-    text = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let __b = clean.clone(); if py_truthy(&__b) { __b } else { py_str("") } }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g_OWN_BODY(), "search", args))(&__args) }) {
+    text = call_builtin("str", &[{ let __b = clean.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e));
+    if py_truthy(&mcall(&g_OWN_BODY(), "search", &[text.clone()])) {
     return Py::Bool(false);
     }
-    return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g_PRONOUN_BODY(), "search", args))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("bool", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
+    return call_builtin("bool", &[mcall(&g_PRONOUN_BODY(), "search", &[text.clone()])]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn somebody_elses_body(args: &[Py]) -> Py {
@@ -145,7 +145,7 @@ pub fn somebody_elses_body(args: &[Py]) -> Py {
     else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "memory") { v.clone() }
     else { exc::raise(type_err(&format!("missing required argument: memory"))) };
     let _ = py_str("True when this line is somebody else's body, named earlier in the chat.");
-    return { let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(clean.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| a_body_of_a_pronoun(args))(&__args) }; if !py_truthy(&__b) { __b } else { { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| somebody_was_named(args))(&__args) } } };
+    return { let __b = a_body_of_a_pronoun(&[clean.clone()]); if !py_truthy(&__b) { __b } else { somebody_was_named(&[memory.clone()]) } };
     Py::None
 }
 pub fn module_obj() -> Py {

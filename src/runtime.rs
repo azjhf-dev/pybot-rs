@@ -39,7 +39,8 @@ impl Runtime {
         for m in &self.modules {
             if let Some(observe) = m.observe {
                 let mem = memory.clone();
-                let _ = exc::catch(move || observe(&[text_py.clone(), mem]));
+                let tp = text_py.clone();
+                let _ = exc::catch(move || observe(&[tp, mem]));
             }
         }
 

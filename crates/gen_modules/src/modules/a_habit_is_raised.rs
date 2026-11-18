@@ -48,15 +48,15 @@ pub fn respond(args: &[Py]) -> Py {
     let mut raised: Py = Py::None;
     let mut said: Py = Py::None;
     let _ = py_str("The sentence to raise it with, or None when this is not that shape.");
-    raised = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| gen_compose::compose::habit::answer_for(args))(&__args) };
+    raised = gen_compose::compose::habit::answer_for(&[text.clone(), memory.clone()]);
     if py_truthy(&Py::Bool(!py_truthy(&raised.clone()))) {
     return Py::None;
     }
-    said = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| py_call(&gen_compose::compose::fallback::g_reply_for(), args))(&__args) };
+    said = py_call(&gen_compose::compose::fallback::g_reply_for(), &[text.clone(), memory.clone()]);
     if py_truthy(&Py::Bool(!py_truthy(&said.clone()))) {
     return Py::None;
     }
-    if py_truthy(&Py::Bool(!py_truthy(&{ let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(said.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| gen_compose::compose::fallback::_is_a_hedge(args))(&__args) }; if py_truthy(&__b) { __b } else { { let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(said.clone()); __args.push(py_tuple(vec![gen_compose::compose::fallback::g_NEUTRAL()])); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| gen_compose::compose::fallback::_in_a_pool(args))(&__args) }; if py_truthy(&__b) { __b } else { { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(said.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| gen_memory::memory::ack::reads_as_a_receipt(args))(&__args) } } } } }))) {
+    if py_truthy(&Py::Bool(!py_truthy(&{ let __b = gen_compose::compose::fallback::_is_a_hedge(&[said.clone()]); if py_truthy(&__b) { __b } else { { let __b = gen_compose::compose::fallback::_in_a_pool(&[said.clone(), py_tuple(vec![gen_compose::compose::fallback::g_NEUTRAL()])]); if py_truthy(&__b) { __b } else { gen_memory::memory::ack::reads_as_a_receipt(&[said.clone()]) } } } }))) {
     return Py::None;
     }
     return raised.clone();

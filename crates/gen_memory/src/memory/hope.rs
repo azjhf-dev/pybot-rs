@@ -56,13 +56,13 @@ pub fn s__WOOD(v: Py) { ensure_init(); G__WOOD.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("A hopeful aside after the advice: \"fingers crossed\", \"with luck\", \"hope it works\".\n\nPeople end a turn about a job in hand with a wish, not a question. The bot answered them badly\nin three different ways, all of them because the line names nothing to look up:\n\n* \"fingers crossed\" after the condensation answer reached the health entry about fingers going\n  white, and the person who had just been told to open a window was told about Raynaud's;\n* \"with luck\" came back as \"The same goes for the luck: use the extractor fan ...\" - the detail\n  reader took the word as a part of the answer;\n* \"hope it works\" was filed away as a receipt: \"Got it - hope it works.\"\n\nNone of those is what a friend says. A friend says the wish back, briefly, warmly, and leaves the\ndoor open: \"Fingers crossed. Tell me how it goes.\" That is the whole reply, so this module has one\npool and no knowledge in it.\n\nThe reading is strict, because a line with something of its own in it belongs to whatever answers\nthat thing:\n\n* the whole line has to be the wish and the fillers around it (\"ok fingers crossed\", \"fingers\n  crossed for me\", \"with any luck\", \"touch wood\", \"hope so\", \"i hope it does the trick\"): a line\n  that says anything else (\"im going to rome, fingers crossed\") is left alone;\n* a hope about somebody or something named (\"hope you feel better\", \"hope the scan goes well\") is\n  a wish for a person, not an aside about the plan, so it is left to the greeting, which knows how\n  to answer a good wish;\n* asking is not hoping: a line with a question mark is a question (\"any luck?\"), and the answer is\n  what they found, not a wish back.\n\nThe wish people make most of all is \"good luck\", and it was the one shape missing: after an answer\nit fell past this module to whatever had just answered, which printed the answer again - the\nmarathon programme came back word for word under \"alright then, good luck\", \"good luck!\" and\n\"right, best of luck\". No line of that shape names anything to look up, so it belongs here with\nthe rest.\n");
     s_FILLER(py_str("(?:(?:ok|okay|well|right|alright|and|so|then|anyway|honestly|please|thanks|ta|ha|lol|x)\\b[,;\\s]+)*"));
-    s_WISH({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(op_add(&op_add(&op_add(&g_FILLER(), &py_str("(?:(?:good|best\\s+of|all\\s+the)\\s+luck(?:\\s+(?:with|on|for)\\s+(?:it|that|this|them|me|us|(?:the|your|my)\\s+[a-z']+(?:\\s+[a-z']+)?))?|all\\s+the\\s+best(?:\\s+(?:with|to)\\s+(?:it|that|this|you|them))?|(?:keep\\s+)?(?:your|my|our)?\\s*(?:fingers|fingers and toes|thumbs)(?:\\s+(?:and|n)?\\s*(?:toes))?\\s*(?:crossed|are crossed)?(?:\\s+for\\s+(?:me|us))?|(?:with\\s+)?(?:any\\s+)?luck(?:,?\\s+(?:then|anyway))?|touch\\s+wood|heres?\\s+hoping|(?:hopefully(?:,?\\s+(?:then|anyway))?(?:\\s+(?:that|it|this)(?:\\s+(?:works?|does(?:\\s+(?:the\\s+trick|it|the\\s+job))?|helps?|is\\s+enough|sorts\\s+it))?)?)|(?:i\\s+)?(?:really\\s+|do\\s+|just\\s+)?hope\\s+(?:so|it|that|this)(?:\\s+(?:works?|does(?:\\s+(?:the\\s+trick|it|the job))?|helps?|goes\\s+well|lands|is\\s+enough|comes\\s+off|holds|clears(?:\\s+up)?|sorts\\s+it))?)")), &g_FILLER()), &py_str("[!. ]*$"))); __args.push(stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "compile", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
+    s_WISH(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&g_FILLER(), &py_str("(?:(?:good|best\\s+of|all\\s+the)\\s+luck(?:\\s+(?:with|on|for)\\s+(?:it|that|this|them|me|us|(?:the|your|my)\\s+[a-z']+(?:\\s+[a-z']+)?))?|all\\s+the\\s+best(?:\\s+(?:with|to)\\s+(?:it|that|this|you|them))?|(?:keep\\s+)?(?:your|my|our)?\\s*(?:fingers|fingers and toes|thumbs)(?:\\s+(?:and|n)?\\s*(?:toes))?\\s*(?:crossed|are crossed)?(?:\\s+for\\s+(?:me|us))?|(?:with\\s+)?(?:any\\s+)?luck(?:,?\\s+(?:then|anyway))?|touch\\s+wood|heres?\\s+hoping|(?:hopefully(?:,?\\s+(?:then|anyway))?(?:\\s+(?:that|it|this)(?:\\s+(?:works?|does(?:\\s+(?:the\\s+trick|it|the\\s+job))?|helps?|is\\s+enough|sorts\\s+it))?)?)|(?:i\\s+)?(?:really\\s+|do\\s+|just\\s+)?hope\\s+(?:so|it|that|this)(?:\\s+(?:works?|does(?:\\s+(?:the\\s+trick|it|the job))?|helps?|goes\\s+well|lands|is\\s+enough|comes\\s+off|holds|clears(?:\\s+up)?|sorts\\s+it))?)")), &g_FILLER()), &py_str("[!. ]*$")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     s_GROUPS(py_dict(vec![(py_str("goodluck"), py_tuple(vec![py_str("Good luck with it — tell me how it goes."), py_str("Good luck. Say how you get on.")])), (py_str("fingers"), py_tuple(vec![py_str("Fingers crossed. Tell me how it goes."), py_str("Crossing mine as well. Say how you get on.")])), (py_str("luck"), py_tuple(vec![py_str("With luck, then. I would like to hear how it turns out."), py_str("With luck. Tell me how it goes.")])), (py_str("wood"), py_tuple(vec![py_str("Touch wood. Tell me how it goes once you know."), py_str("Touch wood, then. Say how it turns out.")])), (py_str("hope"), py_tuple(vec![py_str("Hope so too. Come back and say how it landed."), py_str("Hoping with you. Tell me how it goes.")]))]));
-    s__FINGERS({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("\\b(?:fingers|thumbs)\\b")); __args.push(stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "compile", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
-    s__WOOD({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("touch\\s+wood")); __args.push(stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "compile", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
-    s__LUCK({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("\\bluck\\b")); __args.push(stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "compile", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
-    s__GOOD_LUCK({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("\\b(?:good|best\\s+of|all\\s+the)\\s+luck\\b|\\ball\\s+the\\s+best\\b")); __args.push(stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "compile", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
-    s_FOR_SOMEONE({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("\\bhope\\s+(?:you|your|he|she|they|it\\s+goes|the|everything)\\b")); __args.push(stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "compile", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
+    s__FINGERS(stdlib_call("re", "compile", &[py_str("\\b(?:fingers|thumbs)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s__WOOD(stdlib_call("re", "compile", &[py_str("touch\\s+wood"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s__LUCK(stdlib_call("re", "compile", &[py_str("\\bluck\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s__GOOD_LUCK(stdlib_call("re", "compile", &[py_str("\\b(?:good|best\\s+of|all\\s+the)\\s+luck\\b|\\ball\\s+the\\s+best\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s_FOR_SOMEONE(stdlib_call("re", "compile", &[py_str("\\bhope\\s+(?:you|your|he|she|they|it\\s+goes|the|everything)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
 }
 pub fn _group(args: &[Py]) -> Py {
     ensure_init();
@@ -77,16 +77,16 @@ pub fn _group(args: &[Py]) -> Py {
     let mut line: Py = if __pos.len() > 0 { __pos[0].clone() }
     else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "line") { v.clone() }
     else { exc::raise(type_err(&format!("missing required argument: line"))) };
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(line.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g__GOOD_LUCK(), "search", args))(&__args) }) {
+    if py_truthy(&mcall(&g__GOOD_LUCK(), "search", &[line.clone()])) {
     return py_str("goodluck");
     }
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(line.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g__FINGERS(), "search", args))(&__args) }) {
+    if py_truthy(&mcall(&g__FINGERS(), "search", &[line.clone()])) {
     return py_str("fingers");
     }
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(line.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g__WOOD(), "search", args))(&__args) }) {
+    if py_truthy(&mcall(&g__WOOD(), "search", &[line.clone()])) {
     return py_str("wood");
     }
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(line.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g__LUCK(), "search", args))(&__args) }) {
+    if py_truthy(&mcall(&g__LUCK(), "search", &[line.clone()])) {
     return py_str("luck");
     }
     return py_str("hope");
@@ -107,14 +107,14 @@ pub fn reading(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: text"))) };
     let mut line: Py = Py::None;
     let _ = py_str("Whether the whole line is a hopeful aside about the thing in hand.");
-    line = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }, "strip", args))(&__args) };
+    line = mcall(&call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "strip", &[]);
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&line.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&line.clone(), &py_str("?"))) } }) {
     return Py::Bool(false);
     }
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(line.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g_FOR_SOMEONE(), "search", args))(&__args) }) {
+    if py_truthy(&mcall(&g_FOR_SOMEONE(), "search", &[line.clone()])) {
     return Py::Bool(false);
     }
-    return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(line.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g_WISH(), "match", args))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("bool", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
+    return call_builtin("bool", &[mcall(&g_WISH(), "match", &[line.clone()])]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn answer_for(args: &[Py]) -> Py {
@@ -136,15 +136,15 @@ pub fn answer_for(args: &[Py]) -> Py {
     let mut count: Py = Py::None;
     let mut pool: Py = Py::None;
     let _ = py_str("The brief reply to a hopeful aside, or None when the line is not one.");
-    if py_truthy(&Py::Bool(!py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| reading(args))(&__args) }))) {
+    if py_truthy(&Py::Bool(!py_truthy(&reading(&[text.clone()])))) {
     return Py::None;
     }
-    pool = geti(&g_GROUPS(), &{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _group(args))(&__args) });
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(memory.clone()); __args.push(py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("isinstance", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }) {
-    count = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("hope_said")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&memory.clone(), "get", args))(&__args) };
-    count = if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(count.clone()); __args.push(py_func("int", |args: &[Py]| call_builtin("int", args).unwrap_or_else(|e| exc::raise(e)))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("isinstance", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }) { op_add(&count.clone(), &Py::Int(1)) } else { Py::Int(1) };
+    pool = geti(&g_GROUPS(), &_group(&[call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))]));
+    if py_truthy(&call_builtin("isinstance", &[memory.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) {
+    count = mcall(&memory.clone(), "get", &[py_str("hope_said")]);
+    count = if py_truthy(&call_builtin("isinstance", &[count.clone(), py_func("int", |args: &[Py]| call_builtin("int", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) { op_add(&count.clone(), &Py::Int(1)) } else { Py::Int(1) };
     let _ = py_setitem(&memory.clone(), &py_str("hope_said"), count.clone());
-    return geti(&pool.clone(), &op_modulo(&op_sub(&count.clone(), &Py::Int(1)), &{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(pool.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }));
+    return geti(&pool.clone(), &op_modulo(&op_sub(&count.clone(), &Py::Int(1)), &call_builtin("len", &[pool.clone()]).unwrap_or_else(|e| exc::raise(e))));
     }
     return geti(&pool.clone(), &Py::Int(0));
     Py::None

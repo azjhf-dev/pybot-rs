@@ -107,7 +107,7 @@ pub fn compile(pattern: &str, flags: i64) -> Result<Rc<PyPattern>, PyExc> {
     let full = format!("{}{}", flag_prefix(flags), translated);
     match fancy_regex::Regex::new(&full) {
         Ok(re) => Ok(Rc::new(PyPattern { source: pattern.to_string(), flags, engine: Engine::Fancy(re), group_count, group_names })),
-        Err(e) => Err(crate::value::py_err("error", &format!("regex error: {}", e))),
+        Err(e) => Err(crate::exc::py_err("error", &format!("regex error: {}", e))),
     }
 }
 

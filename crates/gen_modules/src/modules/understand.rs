@@ -47,14 +47,14 @@ pub fn observe(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: memory"))) };
     let mut filled: Py = Py::None;
     let mut read: Py = Py::None;
-    read = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| gen_understanding::understanding::understand(args))(&__args) };
-    filled = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(read.clone()); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| py_call(&gen_memory::memory::g_the_thing_it_is(), args))(&__args) };
+    read = gen_understanding::understanding::understand(&[text.clone(), memory.clone()]);
+    filled = py_call(&gen_memory::memory::g_the_thing_it_is(), &[read.clone(), memory.clone()]);
     if py_truthy(&Py::Bool(py_is(&filled.clone(), &Py::None))) {
     let mut the_advice_ask_with_its_doing: Py = py_func("the_advice_ask_with_its_doing", |args: &[Py]| gen_memory::memory::topics::the_advice_ask_with_its_doing(args));
-    filled = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(read.clone()); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| py_call(&the_advice_ask_with_its_doing, args))(&__args) };
+    filled = py_call(&the_advice_ask_with_its_doing, &[read.clone(), memory.clone()]);
     }
     let _ = py_setitem(&memory.clone(), &py_str("understood"), if py_truthy(&Py::Bool(!py_is(&filled.clone(), &Py::None))) { filled.clone() } else { read.clone() });
-    let _ = py_setitem(&geti(&memory.clone(), &py_str("understood")), &py_str("looks_back"), { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(text.clone()); __args.push(memory.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| gen_memory::memory::recall::the_earlier_turn(args))(&__args) });
+    let _ = py_setitem(&geti(&memory.clone(), &py_str("understood")), &py_str("looks_back"), gen_memory::memory::recall::the_earlier_turn(&[text.clone(), memory.clone()]));
     Py::None
 }
 pub fn module_obj() -> Py {

@@ -98,7 +98,8 @@ pub enum Py {
 // ---------------------------------------------------------------- errors
 pub fn type_err(msg: &str) -> PyExc { py_err("TypeError", msg) }
 pub fn val_err(msg: &str) -> PyExc { py_err("ValueError", msg) }
-pub fn key_err(key: &Py) -> PyExc { PyExc::new("KeyError", py_repr(key)) }
+pub fn key_err(key: &Py) -> PyExc { PyExc::new("KeyError", &py_repr(key)) }
+pub fn value_err(msg: &str) -> PyExc { py_err("ValueError", msg) }
 pub fn index_err() -> PyExc { py_err("IndexError", "list index out of range") }
 pub fn attr_err(name: &str) -> PyExc { PyExc::new("AttributeError", &format!("object has no attribute '{}'", name)) }
 pub fn name_err(name: &str) -> PyExc { PyExc::new("NameError", &format!("name '{}' is not defined", name)) }
@@ -510,9 +511,13 @@ pub fn py_sub(a: &Py, b: &Py) -> PyResult {
         (Py::DateTime(d), Py::TimeDelta(t)) => Ok(Py::DateTime(Rc::new(d.add(&PyTimeDelta { days: -t.days, seconds: -t.seconds })))),
         (Py::DateTime(x), Py::DateTime(y)) => Ok(Py::TimeDelta(Rc::new(x.sub(y)))),
         (Py::TimeDelta(x), Py::TimeDelta(y)) => Ok(Py::TimeDelta(Rc::new(x.add(&PyTimeDelta { days: -y.days, seconds: -y.seconds })))),
-        (Py::Set(x), Py::Set(y)) | (Py::Set(x), Py::FrozenSet(y)) => {
+        (Py::Set(_), _) | (Py::FrozenSet(_), _) if matches!(b, Py::Set(_) | Py::FrozenSet(_)) => {
             let mut s = IndexSet::new();
-            for k in x.borrow().iter() { if !y.contains(k) { s.insert(k.clone()); } }
+            let xs: Vec<PyKey> = match a { Py::Set(v) => v.borrow().iter().cloned().collect(), Py::FrozenSet(v) => v.iter().cloned().collect(), _ => vec![] };
+            for k in xs {
+                let present = match b { Py::Set(v) => v.borrow().contains(&k), Py::FrozenSet(v) => v.contains(&k), _ => false };
+                if !present { s.insert(k); }
+            }
             Ok(Py::Set(Rc::new(RefCell::new(s))))
         }
         _ => Err(type_err(&format!("unsupported operand type(s) for -: '{}' and '{}'", a.type_name(), b.type_name()))),
@@ -630,7 +635,7 @@ pub fn py_neg(a: &Py) -> PyResult {
 // bitwise ops (Python ints)
 pub fn py_bitand(a: &Py, b: &Py) -> PyResult {
     match (a, b) {
-        (Py::Set(x), Py::Set(y)) | (Py::FrozenSet(x), Py::Set(y)) | (Py::Set(x), Py::FrozenSet(y)) | (Py::FrozenSet(x), Py::FrozenSet(y)) => {
+        (Py::Set(_), _) | (Py::FrozenSet(_), _) if matches!(b, Py::Set(_) | Py::FrozenSet(_)) => {
             let mut s = IndexSet::new();
             let xs: Vec<PyKey> = match a { Py::Set(v) => v.borrow().iter().cloned().collect(), Py::FrozenSet(v) => v.iter().cloned().collect(), _ => vec![] };
             let has = |k: &PyKey| match b { Py::Set(v) => v.borrow().contains(k), Py::FrozenSet(v) => v.contains(k), _ => false };

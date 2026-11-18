@@ -208,7 +208,7 @@ fn module_body() {
     s_NEW_JOINT_NOISE(py_tuple(vec![py_str("click"), py_str("clicks"), py_str("clicked"), py_str("clicking"), py_str("clunk"), py_str("clunks"), py_str("clunking"), py_str("pop"), py_str("pops"), py_str("popped"), py_str("popping"), py_str("grind"), py_str("grinds"), py_str("grinding"), py_str("creak"), py_str("creaks"), py_str("creaking"), py_str("catch"), py_str("catches"), py_str("catching"), py_str("noisy"), py_str("noise")]));
     s_NEW_JOINT_CARD(py_str("Clicking, clunking or a catching feeling around a new joint is usually the soft tissue moving over the new parts, and it is common while the muscles are still settling - keep up the exercises the team gave you and mention it at your next check. Ring the ward that did the operation, or 111, the same day if the joint is hot, red or more painful than it was, if you have a fever or the wound is weeping, or if the joint gives way or you cannot put your weight on it."));
     s_ROAD_WORDS(py_tuple(vec![py_str("road"), py_str("roads"), py_str("street"), py_str("streets"), py_str("kerb"), py_str("kerbs"), py_str("pavement"), py_str("pavements"), py_str("driveway"), py_str("driveways"), py_str("tarmac"), py_str("junction"), py_str("junctions"), py_str("carriageway"), py_str("footpath"), py_str("footpaths"), py_str("pothole"), py_str("potholes")]));
-    s_A_REPLACING_A_THING({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("\\breplac(?:e|ing|ed)\\s+(?:(?:a|an|the|my|our|your|his|her|their)\\s+)?(?P<thing>[a-z]+)")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "compile", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
+    s_A_REPLACING_A_THING(stdlib_call("re", "compile", &[py_str("\\breplac(?:e|ing|ed)\\s+(?:(?:a|an|the|my|our|your|his|her|their)\\s+)?(?P<thing>[a-z]+)")]).unwrap_or_else(|e| exc::raise(e)));
     s_THE_JOINT_WORDS(py_tuple(vec![py_str("hip"), py_str("knee"), py_str("shoulder"), py_str("joint"), py_str("joints"), py_str("resurfacing"), py_str("implant"), py_str("implanted"), py_str("replacement"), py_str("dressing"), py_str("dressings"), py_str("bandage"), py_str("bandages"), py_str("cast"), py_str("plaster")]));
     s_REPLACED_JOINT(py_tuple(vec![py_str("replacement"), py_str("replaced"), py_str("new hip"), py_str("new knee"), py_str("new joint"), py_str("new shoulder"), py_str("resurfacing"), py_str("resurfaced"), py_str("hip replacement"), py_str("knee replacement"), py_str("shoulder replacement"), py_str("partial knee"), py_str("total knee"), py_str("total hip"), py_str("had my hip done"), py_str("had my knee done"), py_str("reverse shoulder")]));
     s_SHOULDER(py_tuple(vec![py_str("shoulder"), py_str("shoulders"), py_str("new shoulder"), py_str("shoulder replacement"), py_str("reverse shoulder"), py_str("reverse shoulder replacement"), py_str("resurfaced shoulder")]));
@@ -238,7 +238,7 @@ fn module_body() {
     s_LOCK_PARTS(op_add(&g_PARTS(), &py_tuple(vec![py_str("knee"), py_str("knees"), py_str("kneecap"), py_str("leg"), py_str("legs"), py_str("thumb"), py_str("hand"), py_str("hands")])));
     s_TRIGGER_FINGER_CARD(py_str("A finger that locks or clicks and then catches as it straightens is trigger finger: the tendon that bends the finger runs through a sheath, the sheath swells, and the tendon has to jump through the tight spot - which is why it locks bent and then lets go with a click. Rest it from hard gripping for a few weeks, keep it straight at night with a finger splint from a chemist, and take ibuprofen if it is sore. See your GP if it stays locked, keeps locking during the day, or a second finger starts: a steroid injection into the sheath usually sorts it, and a small operation does if it does not."));
     s_LOCKED_CARD(py_str("A {part} that locks, catches or will not straighten has something physically in the way, so it is worth being examined this week rather than waiting for it to settle: ring your GP and say which movement brings it on, whether it lets go on its own, and whether there was a twist or a knock before it started. A knee that locks is usually a torn cartilage or a loose piece of it catching in the joint, which a physio or doctor can tell apart by hand in one appointment, so keep off twisting sports and deep squats until then rather than testing it. Go to 111 the same day if the joint swells up, is hot, or you cannot put weight on it at all."));
-    let _ = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("locked-joint")); __args.push(py_tuple(vec![g_LOCKED(), g_LOCK_PARTS()])); __args.push(g__locked_joint()); __kws.extend(vec![("avoid".to_string(), py_tuple(vec![py_str("how do i lock"), py_str("lock out"), py_str("lock my knee"), py_str("lock your knee"), py_str("locking out"), py_str("lock the knee"), py_str("jaw"), py_str("jaws"), py_str("jaw joint"), py_str("tmj"), py_str("dog"), py_str("cat"), py_str("door"), py_str("doors"), py_str("gate"), py_str("car"), py_str("cars"), py_str("bike"), py_str("bicycle"), py_str("phone"), py_str("laptop"), py_str("computer"), py_str("screen"), py_str("window"), py_str("windows"), py_str("cupboard"), py_str("cupboards"), py_str("drawer"), py_str("drawers")])), ("bias".to_string(), Py::Int(2))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| crate::knowledge::lookup::entry(args))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g_ENTRIES(), "append", args))(&__args) };
+    let _ = mcall(&g_ENTRIES(), "append", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("locked-joint")); __args.push(py_tuple(vec![g_LOCKED(), g_LOCK_PARTS()])); __args.push(g__locked_joint()); __kws.extend(vec![("avoid".to_string(), py_tuple(vec![py_str("how do i lock"), py_str("lock out"), py_str("lock my knee"), py_str("lock your knee"), py_str("locking out"), py_str("lock the knee"), py_str("jaw"), py_str("jaws"), py_str("jaw joint"), py_str("tmj"), py_str("dog"), py_str("cat"), py_str("door"), py_str("doors"), py_str("gate"), py_str("car"), py_str("cars"), py_str("bike"), py_str("bicycle"), py_str("phone"), py_str("laptop"), py_str("computer"), py_str("screen"), py_str("window"), py_str("windows"), py_str("cupboard"), py_str("cupboards"), py_str("drawer"), py_str("drawers")])), ("bias".to_string(), Py::Int(2))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| crate::knowledge::lookup::entry(args))(&__args) }]);
 }
 pub fn _timeline(args: &[Py]) -> Py {
     ensure_init();
@@ -257,7 +257,7 @@ pub fn _timeline(args: &[Py]) -> Py {
     else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "understood") { v.clone() }
     else { exc::raise(type_err(&format!("missing required argument: understood"))) };
     let _ = py_str("The healing schedule, spoken about the joint the line named.");
-    if py_truthy(&Py::Bool(py_eq(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(understood.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _joint(args))(&__args) }, &py_str("shoulder")))) {
+    if py_truthy(&Py::Bool(py_eq(&_joint(&[understood.clone()]), &py_str("shoulder")))) {
     return g_SHOULDER_TIMELINE_CARD();
     }
     return g_TIMELINE_CARD();
@@ -279,7 +279,7 @@ pub fn _implant_life(args: &[Py]) -> Py {
     let mut understood: Py = if __pos.len() > 1 { __pos[1].clone() }
     else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "understood") { v.clone() }
     else { exc::raise(type_err(&format!("missing required argument: understood"))) };
-    if py_truthy(&Py::Bool(py_eq(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(understood.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _joint(args))(&__args) }, &py_str("shoulder")))) {
+    if py_truthy(&Py::Bool(py_eq(&_joint(&[understood.clone()]), &py_str("shoulder")))) {
     return g_SHOULDER_IMPLANT_CARD();
     }
     return g_IMPLANT_CARD();
@@ -301,7 +301,7 @@ pub fn _soreness(args: &[Py]) -> Py {
     let mut understood: Py = if __pos.len() > 1 { __pos[1].clone() }
     else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "understood") { v.clone() }
     else { exc::raise(type_err(&format!("missing required argument: understood"))) };
-    if py_truthy(&Py::Bool(py_eq(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(understood.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _joint(args))(&__args) }, &py_str("shoulder")))) {
+    if py_truthy(&Py::Bool(py_eq(&_joint(&[understood.clone()]), &py_str("shoulder")))) {
     return g_SHOULDER_SORE_CARD();
     }
     return g_SORE_CARD();
@@ -323,7 +323,7 @@ pub fn _sleeping(args: &[Py]) -> Py {
     let mut understood: Py = if __pos.len() > 1 { __pos[1].clone() }
     else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "understood") { v.clone() }
     else { exc::raise(type_err(&format!("missing required argument: understood"))) };
-    if py_truthy(&Py::Bool(py_eq(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(understood.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _joint(args))(&__args) }, &py_str("shoulder")))) {
+    if py_truthy(&Py::Bool(py_eq(&_joint(&[understood.clone()]), &py_str("shoulder")))) {
     return g_SHOULDER_SLEEPING_CARD();
     }
     return g_SLEEPING_CARD();
@@ -346,18 +346,18 @@ pub fn _words(args: &[Py]) -> Py {
     let mut key: Py = Py::None;
     let mut word: Py = Py::None;
     let _ = py_str("Every word of the line, and of the turn it leans on, as a set.");
-    if py_truthy(&Py::Bool(!py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(understood.clone()); __args.push(py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("isinstance", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }))) {
-    return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("set", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
+    if py_truthy(&Py::Bool(!py_truthy(&call_builtin("isinstance", &[understood.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))))) {
+    return call_builtin("set", &[]).unwrap_or_else(|e| exc::raise(e));
     }
-    found = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("set", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
+    found = call_builtin("set", &[]).unwrap_or_else(|e| exc::raise(e));
     let __iter1 = py_iter_or_raise(&py_tuple(vec![py_str("words"), py_str("background")]));
     for __item in __iter1 {
     key = __item.clone();
-    let __iter2 = py_iter_or_raise(&{ let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(key.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&understood.clone(), "get", args))(&__args) }; if py_truthy(&__b) { __b } else { py_tuple(vec![]) } });
+    let __iter2 = py_iter_or_raise(&{ let __b = mcall(&understood.clone(), "get", &[key.clone()]); if py_truthy(&__b) { __b } else { py_tuple(vec![]) } });
     for __item in __iter2 {
     word = __item.clone();
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(word.clone()); __args.push(py_func("str", |args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("isinstance", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }) {
-    let _ = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&word.clone(), "lower", args))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&found.clone(), "add", args))(&__args) };
+    if py_truthy(&call_builtin("isinstance", &[word.clone(), py_func("str", |args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) {
+    let _ = mcall(&found.clone(), "add", &[mcall(&word.clone(), "lower", &[])]);
     }
     }
     }
@@ -397,8 +397,8 @@ pub fn _joint(args: &[Py]) -> Py {
     let mut word: Py = Py::None;
     let mut words: Py = Py::None;
     let _ = py_str("\"shoulder\" if the line named one, otherwise \"replacement\" for a hip or a knee.\n\n    The numbers in the cards below are a hip's and a knee's - sticks, driving an emergency stop,\n    kneeling, 15 to 25 years - and a shoulder shares none of them. Rather than fence the shoulder\n    out of the row entirely (which would send the person back to a shrug), the card speaks about\n    the joint they had.\n    ");
-    words = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(understood.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _words(args))(&__args) };
-    return if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_SHOULDER()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&words.clone(), &word.clone()))); } py_list(__out) })() }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("any", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }) { py_str("shoulder") } else { py_str("replacement") };
+    words = _words(&[understood.clone()]);
+    return if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_SHOULDER()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&words.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) { py_str("shoulder") } else { py_str("replacement") };
     Py::None
 }
 pub fn _not_a_road(args: &[Py]) -> Py {
@@ -417,11 +417,11 @@ pub fn _not_a_road(args: &[Py]) -> Py {
     let mut word: Py = Py::None;
     let mut words: Py = Py::None;
     let _ = py_str("True unless the line is about a road that names no joint - then a roadworks line answers.");
-    words = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(understood.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _words(args))(&__args) };
-    if py_truthy(&Py::Bool(!py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_ROAD_WORDS()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&words.clone(), &word.clone()))); } py_list(__out) })() }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("any", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }))) {
+    words = _words(&[understood.clone()]);
+    if py_truthy(&Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_ROAD_WORDS()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&words.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))))) {
     return Py::Bool(true);
     }
-    return { let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_PARTS()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&words.clone(), &word.clone()))); } py_list(__out) })() }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("any", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }; if py_truthy(&__b) { __b } else { { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&py_tuple(vec![py_str("hip"), py_str("knee"), py_str("shoulder"), py_str("surgeon"), py_str("operation"), py_str("physio"), py_str("hospital"), py_str("nurse"), py_str("ward"), py_str("recovery"), py_str("physiotherapy")])) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&words.clone(), &word.clone()))); } py_list(__out) })() }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("any", args).unwrap_or_else(|e| exc::raise(e)))(&__args) } } };
+    return { let __b = call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_PARTS()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&words.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)); if py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&py_tuple(vec![py_str("hip"), py_str("knee"), py_str("shoulder"), py_str("surgeon"), py_str("operation"), py_str("physio"), py_str("hospital"), py_str("nurse"), py_str("ward"), py_str("recovery"), py_str("physiotherapy")])) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&words.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } };
     Py::None
 }
 pub fn _not_something_else_replaced(args: &[Py]) -> Py {
@@ -441,12 +441,12 @@ pub fn _not_something_else_replaced(args: &[Py]) -> Py {
     let mut things: Py = Py::None;
     let mut word: Py = Py::None;
     let _ = py_str("True unless the line replaces a thing that is not a joint - a bath, a boiler, a road.");
-    said = if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(understood.clone()); __args.push(py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("isinstance", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }) { { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("clean")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let __b = understood.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", args))(&__args) }; if py_truthy(&__b) { __b } else { py_str("") } }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))(&__args) } } else { py_str("") };
-    things = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&said.clone(), "lower", args))(&__args) }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g_A_REPLACING_A_THING(), "findall", args))(&__args) };
+    said = if py_truthy(&call_builtin("isinstance", &[understood.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) { call_builtin("str", &[{ let __b = mcall(&{ let __b = understood.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)) } else { py_str("") };
+    things = mcall(&g_A_REPLACING_A_THING(), "findall", &[mcall(&said.clone(), "lower", &[])]);
     if py_truthy(&Py::Bool(!py_truthy(&things.clone()))) {
     return Py::Bool(true);
     }
-    return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&things.clone()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&g_THE_JOINT_WORDS(), &word.clone()))); } py_list(__out) })() }); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("any", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
+    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&things.clone()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&g_THE_JOINT_WORDS(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn _a_replacement(args: &[Py]) -> Py {
@@ -465,11 +465,11 @@ pub fn _a_replacement(args: &[Py]) -> Py {
     let mut asked: Py = Py::None;
     let mut kwargs: Py = Py::None;
     let _ = py_str("One of the cards about a joint that was replaced, which a road line must not reach.");
-    asked = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("guard")); __args.push(Py::None); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&kwargs.clone(), "pop", args))(&__args) };
+    asked = mcall(&kwargs.clone(), "pop", &[py_str("guard"), Py::None]);
     if py_truthy(&Py::Bool(py_is(&asked.clone(), &Py::None))) {
-    let _ = py_setitem(&kwargs.clone(), &py_str("guard"), { let args = args.clone(); let asked = asked.clone(); let kwargs = kwargs.clone(); py_func("lambda", move |args: &[Py]| { let args = args.clone(); let asked = asked.clone(); let kwargs = kwargs.clone(); let understood: Py = __kwp(args, 0, "understood").unwrap_or(Py::None); { let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(understood.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _not_a_road(args))(&__args) }; if !py_truthy(&__b) { __b } else { { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(understood.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _not_something_else_replaced(args))(&__args) } } } }) });
+    let _ = py_setitem(&kwargs.clone(), &py_str("guard"), { let args = args.clone(); let asked = asked.clone(); let kwargs = kwargs.clone(); py_func("lambda", move |args: &[Py]| { let args = args.clone(); let asked = asked.clone(); let kwargs = kwargs.clone(); let understood: Py = __kwp(args, 0, "understood").unwrap_or(Py::None); { let __b = _not_a_road(&[understood.clone()]); if !py_truthy(&__b) { __b } else { _not_something_else_replaced(&[understood.clone()]) } } }) });
     } else {
-    let _ = py_setitem(&kwargs.clone(), &py_str("guard"), { let args = args.clone(); let asked = asked.clone(); let kwargs = kwargs.clone(); py_func("lambda", move |args: &[Py]| { let args = args.clone(); let asked = asked.clone(); let kwargs = kwargs.clone(); let understood: Py = __kwp(args, 0, "understood").unwrap_or(Py::None); { let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(understood.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _not_a_road(args))(&__args) }; if !py_truthy(&__b) { __b } else { { let __b = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(understood.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _not_something_else_replaced(args))(&__args) }; if !py_truthy(&__b) { __b } else { { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(understood.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| py_call(&asked, args))(&__args) } } } } } }) });
+    let _ = py_setitem(&kwargs.clone(), &py_str("guard"), { let args = args.clone(); let asked = asked.clone(); let kwargs = kwargs.clone(); py_func("lambda", move |args: &[Py]| { let args = args.clone(); let asked = asked.clone(); let kwargs = kwargs.clone(); let understood: Py = __kwp(args, 0, "understood").unwrap_or(Py::None); { let __b = _not_a_road(&[understood.clone()]); if !py_truthy(&__b) { __b } else { { let __b = _not_something_else_replaced(&[understood.clone()]); if !py_truthy(&__b) { __b } else { py_call(&asked, &[understood.clone()]) } } } } }) });
     }
     return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.extend(py_iter_or_raise(&args.clone())); for (k, v) in kw_pairs(&kwargs.clone()) { __kws.push((k, v)); } if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| crate::knowledge::lookup::entry(args))(&__args) };
     Py::None
@@ -494,9 +494,9 @@ pub fn _noisy_joint(args: &[Py]) -> Py {
     let mut word: Py = Py::None;
     let mut words: Py = Py::None;
     let _ = py_str("The noise answer, about the part the line named: \"A knuckle that clicks...\".\n\n    A line with a word for hurting never reaches here: it is in AVOID, so the body-part entry\n    answers it with what the pain probably is.\n    ");
-    words = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(understood.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _words(args))(&__args) };
-    part = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_PARTS()) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(py_contains(&words.clone(), &word.clone()))) {  __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(word.clone()); __args.push(word.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g_ONE(), "get", args))(&__args) }); } } py_list(__out) })() }); __args.push(py_str("joint")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("next", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
-    return op_add(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(part.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _a(args))(&__args) }, "capitalize", args))(&__args) }, &py_str(" that clicks or pops and does not hurt is almost always harmless: a tendon flicking over a bump, or gas coming out of the joint fluid, and it needs nothing doing. Keep the muscles around it working, because clicking that turns into pain is usually a strength problem rather than the noise. If it starts to hurt, swell or lock, have a physio or your GP look at it."));
+    words = _words(&[understood.clone()]);
+    part = call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_PARTS()) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(py_contains(&words.clone(), &word.clone()))) {  __out.push(mcall(&g_ONE(), "get", &[word.clone(), word.clone()])); } } py_list(__out) })() }, py_str("joint")]).unwrap_or_else(|e| exc::raise(e));
+    return op_add(&mcall(&_a(&[part.clone()]), "capitalize", &[]), &py_str(" that clicks or pops and does not hurt is almost always harmless: a tendon flicking over a bump, or gas coming out of the joint fluid, and it needs nothing doing. Keep the muscles around it working, because clicking that turns into pain is usually a strength problem rather than the noise. If it starts to hurt, swell or lock, have a physio or your GP look at it."));
     Py::None
 }
 pub fn _locked_joint(args: &[Py]) -> Py {
@@ -519,8 +519,8 @@ pub fn _locked_joint(args: &[Py]) -> Py {
     let mut word: Py = Py::None;
     let mut words: Py = Py::None;
     let _ = py_str("The lock answer, about the part the line named, with the finger's own self-care.");
-    words = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(understood.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _words(args))(&__args) };
-    part = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_LOCK_PARTS()) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(py_contains(&words.clone(), &word.clone()))) {  __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(word.clone()); __args.push(word.clone()); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g_ONE(), "get", args))(&__args) }); } } py_list(__out) })() }); __args.push(py_str("joint")); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("next", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
+    words = _words(&[understood.clone()]);
+    part = call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_LOCK_PARTS()) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(py_contains(&words.clone(), &word.clone()))) {  __out.push(mcall(&g_ONE(), "get", &[word.clone(), word.clone()])); } } py_list(__out) })() }, py_str("joint")]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&Py::Bool(py_contains(&py_tuple(vec![py_str("finger"), py_str("fingers"), py_str("thumb"), py_str("thumbs")]), &part.clone()))) {
     return g_TRIGGER_FINGER_CARD();
     }
