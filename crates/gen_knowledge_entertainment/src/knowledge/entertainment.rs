@@ -11,6 +11,8 @@ use std::rc::Rc;
 use indexmap::IndexMap;
 
 
+thread_local! { static MODULE_DICT: RefCell<Py> = RefCell::new(py_dict(vec![])); }
+pub fn __globals() -> Py { ensure_init(); MODULE_DICT.with(|d| d.borrow().clone()) }
 thread_local! { static G_ABSTRACT: RefCell<Py> = const { RefCell::new(Py::None) }; }
 thread_local! { static G_ACTIVITY_ASKS: RefCell<Py> = const { RefCell::new(Py::None) }; }
 thread_local! { static G_ACTIVITY_OTHER_NAMES: RefCell<Py> = const { RefCell::new(Py::None) }; }
@@ -353,23 +355,198 @@ thread_local! { static G__VERSE_IN_THE_LAST_TURN: RefCell<Py> = const { RefCell:
 thread_local! { static G__WET_PHRASES: RefCell<Py> = const { RefCell::new(Py::None) }; }
 thread_local! { static G__WET_WORDS: RefCell<Py> = const { RefCell::new(Py::None) }; }
 thread_local! { static G__WORD_AGES: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__a_bridge_in_music: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__a_chess_line: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__a_child_in_the_chat: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__a_child_story_about: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__a_child_story_lead: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__a_child_who_reads_already: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__a_country_is_a_country: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__a_documentary_is_wanted: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__a_film_ask: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__a_game_pick_line: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__a_genre_is_the_taste: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__a_hardware_decision: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__a_judged_work_named: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__a_listings_ask_near_me: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__a_pick_in_any_medium: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__a_pick_of_the_other_mood: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__a_place_not_a_work: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__a_placeholder_word: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__a_programme_is_wanted: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__a_report_answered: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__a_report_of_the_habit: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__a_reservation: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__a_second_one_read_first: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__a_second_verse_is_asked_for: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__a_story_for_the_listener: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__a_story_is_asked_for: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__a_surface_is_being_painted: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__a_thing_is_being_baked: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__a_word_is_turned_down: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__about_a_person: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__activity_start: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__after_named: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__age_in: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__an_hour_or_a_day: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__an_ordinary_word: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__another_one: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__another_subject: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__article_for: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__asked_for_what_they_already_tried: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__asks_for_a_verse: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__asks_if_a_comic_suits_an_age: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__author_in: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__author_key: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__book_about: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__book_for_the_age: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__book_like: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__book_recommend: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__book_subject: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__book_thriller: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__book_title_named: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__buzz: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__card_game: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__character_name: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__chat_is_about_a_pick: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__cinema_of: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__comic_pick: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__display: RefCell<Py> = const { RefCell::new(Py::None) }; }
 thread_local! { static G__e: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__family_film: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__film_kind: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__film_kind_reply: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__film_like: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__film_list: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__film_under: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__films_within: RefCell<Py> = const { RefCell::new(Py::None) }; }
 thread_local! { static G__form_name: RefCell<Py> = const { RefCell::new(Py::None) }; }
 thread_local! { static G__form_word: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__genre_start: RefCell<Py> = const { RefCell::new(Py::None) }; }
 thread_local! { static G__haiku: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__in_tune: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__indoors: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__instrument_count: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__kind_carry: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__kind_words: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__lead: RefCell<Py> = const { RefCell::new(Py::None) }; }
 thread_local! { static G__limerick: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__limit_wanted: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__lines: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__list_words: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__listen_when: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__medium_named: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__minutes_wanted: RefCell<Py> = const { RefCell::new(Py::None) }; }
 thread_local! { static G__mood: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__mood_key_words: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__mood_of: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__mood_pick: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__mood_signals: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__music_elsewhere: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__music_practice: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__music_term: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__named_nothing: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__named_work: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__names_a_film_genre: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__names_another_form: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__names_the_evening: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__names_the_weather: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__negated: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__nickname: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__no_city_is_named: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__no_named_mood: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__no_subject_verse: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__not_a_crowd: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__not_a_reservation: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__offer: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__own_texts: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__paints_a_thing: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__party_games_for_kids: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__pick_carry: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__pick_kind: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__pick_limit: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__pick_limit_reply: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__pick_line: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__pick_list: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__pick_plain: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__pick_refused: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__pick_reply: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__pick_rows: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__pick_stands_down: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__pick_who: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__picked: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__picks_by_title: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__plain_words: RefCell<Py> = const { RefCell::new(Py::None) }; }
 thread_local! { static G__podcast_reply: RefCell<Py> = const { RefCell::new(Py::None) }; }
 thread_local! { static G__podcast_subject: RefCell<Py> = const { RefCell::new(Py::None) }; }
 thread_local! { static G__podcast_words: RefCell<Py> = const { RefCell::new(Py::None) }; }
 thread_local! { static G__poem: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__quiz_name: RefCell<Py> = const { RefCell::new(Py::None) }; }
 thread_local! { static G__rap: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__reader_named: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__rhyme: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__rows_from_cinema: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__said: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__say: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__says: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__shelf_within: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__shortest_wanted: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__show_about: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__show_subject: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__somebodys_own_thing: RefCell<Py> = const { RefCell::new(Py::None) }; }
 thread_local! { static G__song: RefCell<Py> = const { RefCell::new(Py::None) }; }
 thread_local! { static G__story: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__story_idea: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__subject: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__subject_words: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__subs_sentence: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__table_pick: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__the_chat_turned_down: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__the_form_a_repeat_ask_names: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__the_form_last_time: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__the_form_of_the_lead: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__the_game_pick: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__the_gentle_list: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__the_kind_named: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__the_last_line_reported_a_form: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__the_liked_thing_is_asked_about: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__the_line_to_read_for_a_story: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__the_listener_lead: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__the_medium: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__the_mood_the_chat_holds: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__the_mood_the_chat_turned_down: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__the_opening_not_said_yet: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__the_possessive_phrase: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__the_reader_age: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__the_scare_is_refused: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__the_scare_is_wanted: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__the_second_one_asked_for: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__the_second_one_short: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__the_solo_game: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__the_story_was_just_told: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__the_subject_from_the_ask: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__the_subject_is_wanted: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__thing: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__title: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__title_in: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__title_medium: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__titles_of: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__typed_line: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__wants_subtitles: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__who_wrote: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__with_the_detail_asked_for: RefCell<Py> = const { RefCell::new(Py::None) }; }
 thread_local! { static G__word: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__work_named: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__worth_it: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__worth_it_unnamed: RefCell<Py> = const { RefCell::new(Py::None) }; }
 thread_local! { static G_asks_for_one_more: RefCell<Py> = const { RefCell::new(Py::None) }; }
 thread_local! { static G_entry: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G_not_asking_what_to_watch_for: RefCell<Py> = const { RefCell::new(Py::None) }; }
 thread_local! { static G_owns_the_deed: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G_the_book_is_a_reservation: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G_the_next_verse: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G_the_verse_longer: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G_who_made: RefCell<Py> = const { RefCell::new(Py::None) }; }
 static INIT: Once = Once::new();
 thread_local! { static INITIALIZING: Cell<bool> = const { Cell::new(false) }; }
 pub fn ensure_init() {
@@ -380,1090 +557,1256 @@ pub fn ensure_init() {
         INITIALIZING.with(|c| c.set(false));
     });
 }
-pub fn g_ABSTRACT() -> Py { ensure_init(); G_ABSTRACT.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_ABSTRACT(v: Py) { ensure_init(); G_ABSTRACT.with(|c| *c.borrow_mut() = v); }
-pub fn g_ACTIVITY_ASKS() -> Py { ensure_init(); G_ACTIVITY_ASKS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_ACTIVITY_ASKS(v: Py) { ensure_init(); G_ACTIVITY_ASKS.with(|c| *c.borrow_mut() = v); }
-pub fn g_ACTIVITY_OTHER_NAMES() -> Py { ensure_init(); G_ACTIVITY_OTHER_NAMES.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_ACTIVITY_OTHER_NAMES(v: Py) { ensure_init(); G_ACTIVITY_OTHER_NAMES.with(|c| *c.borrow_mut() = v); }
-pub fn g_ACTIVITY_START() -> Py { ensure_init(); G_ACTIVITY_START.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_ACTIVITY_START(v: Py) { ensure_init(); G_ACTIVITY_START.with(|c| *c.borrow_mut() = v); }
-pub fn g_ACTIVITY_VERBS() -> Py { ensure_init(); G_ACTIVITY_VERBS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_ACTIVITY_VERBS(v: Py) { ensure_init(); G_ACTIVITY_VERBS.with(|c| *c.borrow_mut() = v); }
-pub fn g_AFTER_TITLE_WORDS() -> Py { ensure_init(); G_AFTER_TITLE_WORDS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_AFTER_TITLE_WORDS(v: Py) { ensure_init(); G_AFTER_TITLE_WORDS.with(|c| *c.borrow_mut() = v); }
-pub fn g_AGE_ASK() -> Py { ensure_init(); G_AGE_ASK.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_AGE_ASK(v: Py) { ensure_init(); G_AGE_ASK.with(|c| *c.borrow_mut() = v); }
-pub fn g_ANIMATION_ROWS() -> Py { ensure_init(); G_ANIMATION_ROWS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_ANIMATION_ROWS(v: Py) { ensure_init(); G_ANIMATION_ROWS.with(|c| *c.borrow_mut() = v); }
-pub fn g_ANSWERS() -> Py { ensure_init(); G_ANSWERS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_ANSWERS(v: Py) { ensure_init(); G_ANSWERS.with(|c| *c.borrow_mut() = v); }
-pub fn g_ANY_MOODS() -> Py { ensure_init(); G_ANY_MOODS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_ANY_MOODS(v: Py) { ensure_init(); G_ANY_MOODS.with(|c| *c.borrow_mut() = v); }
-pub fn g_ANY_MOOD_ASKS() -> Py { ensure_init(); G_ANY_MOOD_ASKS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_ANY_MOOD_ASKS(v: Py) { ensure_init(); G_ANY_MOOD_ASKS.with(|c| *c.borrow_mut() = v); }
-pub fn g_ASKED_WROTE() -> Py { ensure_init(); G_ASKED_WROTE.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_ASKED_WROTE(v: Py) { ensure_init(); G_ASKED_WROTE.with(|c| *c.borrow_mut() = v); }
-pub fn g_ASKING_FIRST() -> Py { ensure_init(); G_ASKING_FIRST.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_ASKING_FIRST(v: Py) { ensure_init(); G_ASKING_FIRST.with(|c| *c.borrow_mut() = v); }
-pub fn g_ASKING_TO_WATCH_FOR() -> Py { ensure_init(); G_ASKING_TO_WATCH_FOR.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_ASKING_TO_WATCH_FOR(v: Py) { ensure_init(); G_ASKING_TO_WATCH_FOR.with(|c| *c.borrow_mut() = v); }
-pub fn g_ASKS_FOR_A_STORY() -> Py { ensure_init(); G_ASKS_FOR_A_STORY.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_ASKS_FOR_A_STORY(v: Py) { ensure_init(); G_ASKS_FOR_A_STORY.with(|c| *c.borrow_mut() = v); }
-pub fn g_ASKS_FOR_ONE() -> Py { ensure_init(); G_ASKS_FOR_ONE.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_ASKS_FOR_ONE(v: Py) { ensure_init(); G_ASKS_FOR_ONE.with(|c| *c.borrow_mut() = v); }
-pub fn g_ASKS_THE_BOT() -> Py { ensure_init(); G_ASKS_THE_BOT.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_ASKS_THE_BOT(v: Py) { ensure_init(); G_ASKS_THE_BOT.with(|c| *c.borrow_mut() = v); }
-pub fn g_AUTHOR_ALSO() -> Py { ensure_init(); G_AUTHOR_ALSO.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_AUTHOR_ALSO(v: Py) { ensure_init(); G_AUTHOR_ALSO.with(|c| *c.borrow_mut() = v); }
-pub fn g_AUTHOR_KEYS() -> Py { ensure_init(); G_AUTHOR_KEYS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_AUTHOR_KEYS(v: Py) { ensure_init(); G_AUTHOR_KEYS.with(|c| *c.borrow_mut() = v); }
-pub fn g_A_LENGTH_MOOD() -> Py { ensure_init(); G_A_LENGTH_MOOD.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_A_LENGTH_MOOD(v: Py) { ensure_init(); G_A_LENGTH_MOOD.with(|c| *c.borrow_mut() = v); }
-pub fn g_A_MAKING_UP() -> Py { ensure_init(); G_A_MAKING_UP.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_A_MAKING_UP(v: Py) { ensure_init(); G_A_MAKING_UP.with(|c| *c.borrow_mut() = v); }
-pub fn g_A_NEW_ONE_ASKED_FOR() -> Py { ensure_init(); G_A_NEW_ONE_ASKED_FOR.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_A_NEW_ONE_ASKED_FOR(v: Py) { ensure_init(); G_A_NEW_ONE_ASKED_FOR.with(|c| *c.borrow_mut() = v); }
-pub fn g_A_PERSON_TO_CONSULT() -> Py { ensure_init(); G_A_PERSON_TO_CONSULT.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_A_PERSON_TO_CONSULT(v: Py) { ensure_init(); G_A_PERSON_TO_CONSULT.with(|c| *c.borrow_mut() = v); }
-pub fn g_A_PLACE_NOT_A_WORK() -> Py { ensure_init(); G_A_PLACE_NOT_A_WORK.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_A_PLACE_NOT_A_WORK(v: Py) { ensure_init(); G_A_PLACE_NOT_A_WORK.with(|c| *c.borrow_mut() = v); }
-pub fn g_A_QUESTION_BESIDE_THE_REPORT() -> Py { ensure_init(); G_A_QUESTION_BESIDE_THE_REPORT.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_A_QUESTION_BESIDE_THE_REPORT(v: Py) { ensure_init(); G_A_QUESTION_BESIDE_THE_REPORT.with(|c| *c.borrow_mut() = v); }
-pub fn g_A_READING_ROUTINE() -> Py { ensure_init(); G_A_READING_ROUTINE.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_A_READING_ROUTINE(v: Py) { ensure_init(); G_A_READING_ROUTINE.with(|c| *c.borrow_mut() = v); }
-pub fn g_A_REPEATED_REPORT() -> Py { ensure_init(); G_A_REPEATED_REPORT.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_A_REPEATED_REPORT(v: Py) { ensure_init(); G_A_REPEATED_REPORT.with(|c| *c.borrow_mut() = v); }
-pub fn g_A_STORY_ALREADY_HEARD() -> Py { ensure_init(); G_A_STORY_ALREADY_HEARD.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_A_STORY_ALREADY_HEARD(v: Py) { ensure_init(); G_A_STORY_ALREADY_HEARD.with(|c| *c.borrow_mut() = v); }
-pub fn g_A_STORY_ALREADY_TOLD() -> Py { ensure_init(); G_A_STORY_ALREADY_TOLD.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_A_STORY_ALREADY_TOLD(v: Py) { ensure_init(); G_A_STORY_ALREADY_TOLD.with(|c| *c.borrow_mut() = v); }
-pub fn g_BOOK_AS_VERB() -> Py { ensure_init(); G_BOOK_AS_VERB.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_BOOK_AS_VERB(v: Py) { ensure_init(); G_BOOK_AS_VERB.with(|c| *c.borrow_mut() = v); }
-pub fn g_BOOK_AUTHORS() -> Py { ensure_init(); G_BOOK_AUTHORS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_BOOK_AUTHORS(v: Py) { ensure_init(); G_BOOK_AUTHORS.with(|c| *c.borrow_mut() = v); }
-pub fn g_BOOK_GENRES() -> Py { ensure_init(); G_BOOK_GENRES.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_BOOK_GENRES(v: Py) { ensure_init(); G_BOOK_GENRES.with(|c| *c.borrow_mut() = v); }
-pub fn g_BOOK_LIKE_ASKS() -> Py { ensure_init(); G_BOOK_LIKE_ASKS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_BOOK_LIKE_ASKS(v: Py) { ensure_init(); G_BOOK_LIKE_ASKS.with(|c| *c.borrow_mut() = v); }
-pub fn g_BOOK_LIKE_THINGS() -> Py { ensure_init(); G_BOOK_LIKE_THINGS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_BOOK_LIKE_THINGS(v: Py) { ensure_init(); G_BOOK_LIKE_THINGS.with(|c| *c.borrow_mut() = v); }
-pub fn g_BOOK_MATCHES() -> Py { ensure_init(); G_BOOK_MATCHES.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_BOOK_MATCHES(v: Py) { ensure_init(); G_BOOK_MATCHES.with(|c| *c.borrow_mut() = v); }
-pub fn g_BOOK_MOODS() -> Py { ensure_init(); G_BOOK_MOODS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_BOOK_MOODS(v: Py) { ensure_init(); G_BOOK_MOODS.with(|c| *c.borrow_mut() = v); }
-pub fn g_BRIGHT() -> Py { ensure_init(); G_BRIGHT.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_BRIGHT(v: Py) { ensure_init(); G_BRIGHT.with(|c| *c.borrow_mut() = v); }
-pub fn g_BUZZ_ASKS() -> Py { ensure_init(); G_BUZZ_ASKS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_BUZZ_ASKS(v: Py) { ensure_init(); G_BUZZ_ASKS.with(|c| *c.borrow_mut() = v); }
-pub fn g_CALM() -> Py { ensure_init(); G_CALM.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_CALM(v: Py) { ensure_init(); G_CALM.with(|c| *c.borrow_mut() = v); }
-pub fn g_CARD() -> Py { ensure_init(); G_CARD.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_CARD(v: Py) { ensure_init(); G_CARD.with(|c| *c.borrow_mut() = v); }
-pub fn g_CARD_ASKS() -> Py { ensure_init(); G_CARD_ASKS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_CARD_ASKS(v: Py) { ensure_init(); G_CARD_ASKS.with(|c| *c.borrow_mut() = v); }
-pub fn g_CARD_GAMES() -> Py { ensure_init(); G_CARD_GAMES.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_CARD_GAMES(v: Py) { ensure_init(); G_CARD_GAMES.with(|c| *c.borrow_mut() = v); }
-pub fn g_CARD_OCCASIONS() -> Py { ensure_init(); G_CARD_OCCASIONS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_CARD_OCCASIONS(v: Py) { ensure_init(); G_CARD_OCCASIONS.with(|c| *c.borrow_mut() = v); }
-pub fn g_CHARACTER_NAME_RULES() -> Py { ensure_init(); G_CHARACTER_NAME_RULES.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_CHARACTER_NAME_RULES(v: Py) { ensure_init(); G_CHARACTER_NAME_RULES.with(|c| *c.borrow_mut() = v); }
-pub fn g_CHILD() -> Py { ensure_init(); G_CHILD.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_CHILD(v: Py) { ensure_init(); G_CHILD.with(|c| *c.borrow_mut() = v); }
-pub fn g_CHILD_STORIES() -> Py { ensure_init(); G_CHILD_STORIES.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_CHILD_STORIES(v: Py) { ensure_init(); G_CHILD_STORIES.with(|c| *c.borrow_mut() = v); }
-pub fn g_CHILD_STORY_OPENINGS() -> Py { ensure_init(); G_CHILD_STORY_OPENINGS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_CHILD_STORY_OPENINGS(v: Py) { ensure_init(); G_CHILD_STORY_OPENINGS.with(|c| *c.borrow_mut() = v); }
-pub fn g_CHILD_WORDS() -> Py { ensure_init(); G_CHILD_WORDS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_CHILD_WORDS(v: Py) { ensure_init(); G_CHILD_WORDS.with(|c| *c.borrow_mut() = v); }
-pub fn g_CINEMA() -> Py { ensure_init(); G_CINEMA.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_CINEMA(v: Py) { ensure_init(); G_CINEMA.with(|c| *c.borrow_mut() = v); }
-pub fn g_CINEMA_WORDS() -> Py { ensure_init(); G_CINEMA_WORDS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_CINEMA_WORDS(v: Py) { ensure_init(); G_CINEMA_WORDS.with(|c| *c.borrow_mut() = v); }
-pub fn g_CONNECTORS() -> Py { ensure_init(); G_CONNECTORS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_CONNECTORS(v: Py) { ensure_init(); G_CONNECTORS.with(|c| *c.borrow_mut() = v); }
-pub fn g_CONTRACTIONS() -> Py { ensure_init(); G_CONTRACTIONS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_CONTRACTIONS(v: Py) { ensure_init(); G_CONTRACTIONS.with(|c| *c.borrow_mut() = v); }
-pub fn g_DOCUMENTARY_WORDS() -> Py { ensure_init(); G_DOCUMENTARY_WORDS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_DOCUMENTARY_WORDS(v: Py) { ensure_init(); G_DOCUMENTARY_WORDS.with(|c| *c.borrow_mut() = v); }
-pub fn g_EASY_FILM_LIST() -> Py { ensure_init(); G_EASY_FILM_LIST.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_EASY_FILM_LIST(v: Py) { ensure_init(); G_EASY_FILM_LIST.with(|c| *c.borrow_mut() = v); }
-pub fn g_EMPTY_SUBJECT() -> Py { ensure_init(); G_EMPTY_SUBJECT.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_EMPTY_SUBJECT(v: Py) { ensure_init(); G_EMPTY_SUBJECT.with(|c| *c.borrow_mut() = v); }
-pub fn g_ENTRIES() -> Py { ensure_init(); G_ENTRIES.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_ENTRIES(v: Py) { ensure_init(); G_ENTRIES.with(|c| *c.borrow_mut() = v); }
-pub fn g_FILM_ASK_WORDS() -> Py { ensure_init(); G_FILM_ASK_WORDS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_FILM_ASK_WORDS(v: Py) { ensure_init(); G_FILM_ASK_WORDS.with(|c| *c.borrow_mut() = v); }
-pub fn g_FILM_GENRE_WORDS() -> Py { ensure_init(); G_FILM_GENRE_WORDS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_FILM_GENRE_WORDS(v: Py) { ensure_init(); G_FILM_GENRE_WORDS.with(|c| *c.borrow_mut() = v); }
-pub fn g_FILM_KINDS() -> Py { ensure_init(); G_FILM_KINDS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_FILM_KINDS(v: Py) { ensure_init(); G_FILM_KINDS.with(|c| *c.borrow_mut() = v); }
-pub fn g_FILM_KIND_WORDS() -> Py { ensure_init(); G_FILM_KIND_WORDS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_FILM_KIND_WORDS(v: Py) { ensure_init(); G_FILM_KIND_WORDS.with(|c| *c.borrow_mut() = v); }
-pub fn g_FILM_MATCHES() -> Py { ensure_init(); G_FILM_MATCHES.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_FILM_MATCHES(v: Py) { ensure_init(); G_FILM_MATCHES.with(|c| *c.borrow_mut() = v); }
-pub fn g_FILM_MINUTES() -> Py { ensure_init(); G_FILM_MINUTES.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_FILM_MINUTES(v: Py) { ensure_init(); G_FILM_MINUTES.with(|c| *c.borrow_mut() = v); }
-pub fn g_FILM_MOODS() -> Py { ensure_init(); G_FILM_MOODS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_FILM_MOODS(v: Py) { ensure_init(); G_FILM_MOODS.with(|c| *c.borrow_mut() = v); }
-pub fn g_FILM_RUNTIME() -> Py { ensure_init(); G_FILM_RUNTIME.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_FILM_RUNTIME(v: Py) { ensure_init(); G_FILM_RUNTIME.with(|c| *c.borrow_mut() = v); }
-pub fn g_FILM_SAID() -> Py { ensure_init(); G_FILM_SAID.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_FILM_SAID(v: Py) { ensure_init(); G_FILM_SAID.with(|c| *c.borrow_mut() = v); }
-pub fn g_FORMS() -> Py { ensure_init(); G_FORMS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_FORMS(v: Py) { ensure_init(); G_FORMS.with(|c| *c.borrow_mut() = v); }
-pub fn g_FREE_TELLS() -> Py { ensure_init(); G_FREE_TELLS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_FREE_TELLS(v: Py) { ensure_init(); G_FREE_TELLS.with(|c| *c.borrow_mut() = v); }
-pub fn g_GAME_ASKS() -> Py { ensure_init(); G_GAME_ASKS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_GAME_ASKS(v: Py) { ensure_init(); G_GAME_ASKS.with(|c| *c.borrow_mut() = v); }
-pub fn g_GAME_JUDGED() -> Py { ensure_init(); G_GAME_JUDGED.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_GAME_JUDGED(v: Py) { ensure_init(); G_GAME_JUDGED.with(|c| *c.borrow_mut() = v); }
-pub fn g_GAME_KINDS() -> Py { ensure_init(); G_GAME_KINDS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_GAME_KINDS(v: Py) { ensure_init(); G_GAME_KINDS.with(|c| *c.borrow_mut() = v); }
-pub fn g_GAME_PICKS() -> Py { ensure_init(); G_GAME_PICKS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_GAME_PICKS(v: Py) { ensure_init(); G_GAME_PICKS.with(|c| *c.borrow_mut() = v); }
-pub fn g_GAME_SOLO_ASKS() -> Py { ensure_init(); G_GAME_SOLO_ASKS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_GAME_SOLO_ASKS(v: Py) { ensure_init(); G_GAME_SOLO_ASKS.with(|c| *c.borrow_mut() = v); }
-pub fn g_GAME_SOLO_WORDS() -> Py { ensure_init(); G_GAME_SOLO_WORDS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_GAME_SOLO_WORDS(v: Py) { ensure_init(); G_GAME_SOLO_WORDS.with(|c| *c.borrow_mut() = v); }
-pub fn g_GENERIC_LIMERICK() -> Py { ensure_init(); G_GENERIC_LIMERICK.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_GENERIC_LIMERICK(v: Py) { ensure_init(); G_GENERIC_LIMERICK.with(|c| *c.borrow_mut() = v); }
-pub fn g_GENERIC_POEM() -> Py { ensure_init(); G_GENERIC_POEM.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_GENERIC_POEM(v: Py) { ensure_init(); G_GENERIC_POEM.with(|c| *c.borrow_mut() = v); }
-pub fn g_GENERIC_POEM_TWO() -> Py { ensure_init(); G_GENERIC_POEM_TWO.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_GENERIC_POEM_TWO(v: Py) { ensure_init(); G_GENERIC_POEM_TWO.with(|c| *c.borrow_mut() = v); }
-pub fn g_GENERIC_RAP() -> Py { ensure_init(); G_GENERIC_RAP.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_GENERIC_RAP(v: Py) { ensure_init(); G_GENERIC_RAP.with(|c| *c.borrow_mut() = v); }
-pub fn g_GENERIC_SONG() -> Py { ensure_init(); G_GENERIC_SONG.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_GENERIC_SONG(v: Py) { ensure_init(); G_GENERIC_SONG.with(|c| *c.borrow_mut() = v); }
-pub fn g_GENERIC_STORY_THING() -> Py { ensure_init(); G_GENERIC_STORY_THING.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_GENERIC_STORY_THING(v: Py) { ensure_init(); G_GENERIC_STORY_THING.with(|c| *c.borrow_mut() = v); }
-pub fn g_GENRE_NAMES_BEFORE() -> Py { ensure_init(); G_GENRE_NAMES_BEFORE.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_GENRE_NAMES_BEFORE(v: Py) { ensure_init(); G_GENRE_NAMES_BEFORE.with(|c| *c.borrow_mut() = v); }
-pub fn g_GENRE_NOT_DESCRIBED_BY() -> Py { ensure_init(); G_GENRE_NOT_DESCRIBED_BY.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_GENRE_NOT_DESCRIBED_BY(v: Py) { ensure_init(); G_GENRE_NOT_DESCRIBED_BY.with(|c| *c.borrow_mut() = v); }
-pub fn g_GENRE_START() -> Py { ensure_init(); G_GENRE_START.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_GENRE_START(v: Py) { ensure_init(); G_GENRE_START.with(|c| *c.borrow_mut() = v); }
-pub fn g_GENRE_WORDS_AFTER() -> Py { ensure_init(); G_GENRE_WORDS_AFTER.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_GENRE_WORDS_AFTER(v: Py) { ensure_init(); G_GENRE_WORDS_AFTER.with(|c| *c.borrow_mut() = v); }
-pub fn g_GENTLE_LIST() -> Py { ensure_init(); G_GENTLE_LIST.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_GENTLE_LIST(v: Py) { ensure_init(); G_GENTLE_LIST.with(|c| *c.borrow_mut() = v); }
-pub fn g_GRAVE() -> Py { ensure_init(); G_GRAVE.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_GRAVE(v: Py) { ensure_init(); G_GRAVE.with(|c| *c.borrow_mut() = v); }
-pub fn g_HABIT_ASKS() -> Py { ensure_init(); G_HABIT_ASKS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_HABIT_ASKS(v: Py) { ensure_init(); G_HABIT_ASKS.with(|c| *c.borrow_mut() = v); }
-pub fn g_HAIKU() -> Py { ensure_init(); G_HAIKU.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_HAIKU(v: Py) { ensure_init(); G_HAIKU.with(|c| *c.borrow_mut() = v); }
-pub fn g_HEARD_IT_ALREADY() -> Py { ensure_init(); G_HEARD_IT_ALREADY.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_HEARD_IT_ALREADY(v: Py) { ensure_init(); G_HEARD_IT_ALREADY.with(|c| *c.borrow_mut() = v); }
-pub fn g_ING_NOUNS() -> Py { ensure_init(); G_ING_NOUNS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_ING_NOUNS(v: Py) { ensure_init(); G_ING_NOUNS.with(|c| *c.borrow_mut() = v); }
-pub fn g_IN_TUNE() -> Py { ensure_init(); G_IN_TUNE.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_IN_TUNE(v: Py) { ensure_init(); G_IN_TUNE.with(|c| *c.borrow_mut() = v); }
-pub fn g_JUDGE_ASKS() -> Py { ensure_init(); G_JUDGE_ASKS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_JUDGE_ASKS(v: Py) { ensure_init(); G_JUDGE_ASKS.with(|c| *c.borrow_mut() = v); }
-pub fn g_JUDGE_WORDS() -> Py { ensure_init(); G_JUDGE_WORDS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_JUDGE_WORDS(v: Py) { ensure_init(); G_JUDGE_WORDS.with(|c| *c.borrow_mut() = v); }
-pub fn g_KIND_AVOID() -> Py { ensure_init(); G_KIND_AVOID.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_KIND_AVOID(v: Py) { ensure_init(); G_KIND_AVOID.with(|c| *c.borrow_mut() = v); }
-pub fn g_KIND_REFUSED_AFTER() -> Py { ensure_init(); G_KIND_REFUSED_AFTER.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_KIND_REFUSED_AFTER(v: Py) { ensure_init(); G_KIND_REFUSED_AFTER.with(|c| *c.borrow_mut() = v); }
-pub fn g_LIKE_A_NAMED_BOOK() -> Py { ensure_init(); G_LIKE_A_NAMED_BOOK.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_LIKE_A_NAMED_BOOK(v: Py) { ensure_init(); G_LIKE_A_NAMED_BOOK.with(|c| *c.borrow_mut() = v); }
-pub fn g_LIMERICKS() -> Py { ensure_init(); G_LIMERICKS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_LIMERICKS(v: Py) { ensure_init(); G_LIMERICKS.with(|c| *c.borrow_mut() = v); }
-pub fn g_LIMIT_WORDS() -> Py { ensure_init(); G_LIMIT_WORDS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_LIMIT_WORDS(v: Py) { ensure_init(); G_LIMIT_WORDS.with(|c| *c.borrow_mut() = v); }
-pub fn g_MAKING_UP() -> Py { ensure_init(); G_MAKING_UP.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_MAKING_UP(v: Py) { ensure_init(); G_MAKING_UP.with(|c| *c.borrow_mut() = v); }
-pub fn g_MEDIUM_WORDS() -> Py { ensure_init(); G_MEDIUM_WORDS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_MEDIUM_WORDS(v: Py) { ensure_init(); G_MEDIUM_WORDS.with(|c| *c.borrow_mut() = v); }
-pub fn g_MOODS() -> Py { ensure_init(); G_MOODS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_MOODS(v: Py) { ensure_init(); G_MOODS.with(|c| *c.borrow_mut() = v); }
-pub fn g_MOOD_BY_WORD() -> Py { ensure_init(); G_MOOD_BY_WORD.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_MOOD_BY_WORD(v: Py) { ensure_init(); G_MOOD_BY_WORD.with(|c| *c.borrow_mut() = v); }
-pub fn g_MOOD_GLUE() -> Py { ensure_init(); G_MOOD_GLUE.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_MOOD_GLUE(v: Py) { ensure_init(); G_MOOD_GLUE.with(|c| *c.borrow_mut() = v); }
-pub fn g_MOOD_ORDER() -> Py { ensure_init(); G_MOOD_ORDER.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_MOOD_ORDER(v: Py) { ensure_init(); G_MOOD_ORDER.with(|c| *c.borrow_mut() = v); }
-pub fn g_MOOD_SIGNALS() -> Py { ensure_init(); G_MOOD_SIGNALS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_MOOD_SIGNALS(v: Py) { ensure_init(); G_MOOD_SIGNALS.with(|c| *c.borrow_mut() = v); }
-pub fn g_MOOD_SIGNAL_SET() -> Py { ensure_init(); G_MOOD_SIGNAL_SET.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_MOOD_SIGNAL_SET(v: Py) { ensure_init(); G_MOOD_SIGNAL_SET.with(|c| *c.borrow_mut() = v); }
-pub fn g_MOOD_TABLES() -> Py { ensure_init(); G_MOOD_TABLES.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_MOOD_TABLES(v: Py) { ensure_init(); G_MOOD_TABLES.with(|c| *c.borrow_mut() = v); }
-pub fn g_MOOD_WORDS() -> Py { ensure_init(); G_MOOD_WORDS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_MOOD_WORDS(v: Py) { ensure_init(); G_MOOD_WORDS.with(|c| *c.borrow_mut() = v); }
-pub fn g_MUSIC_KINDS_AFTER() -> Py { ensure_init(); G_MUSIC_KINDS_AFTER.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_MUSIC_KINDS_AFTER(v: Py) { ensure_init(); G_MUSIC_KINDS_AFTER.with(|c| *c.borrow_mut() = v); }
-pub fn g_MUSIC_PAIRS() -> Py { ensure_init(); G_MUSIC_PAIRS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_MUSIC_PAIRS(v: Py) { ensure_init(); G_MUSIC_PAIRS.with(|c| *c.borrow_mut() = v); }
-pub fn g_MUSIC_START_ASKS() -> Py { ensure_init(); G_MUSIC_START_ASKS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_MUSIC_START_ASKS(v: Py) { ensure_init(); G_MUSIC_START_ASKS.with(|c| *c.borrow_mut() = v); }
-pub fn g_MUSIC_TERMS() -> Py { ensure_init(); G_MUSIC_TERMS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_MUSIC_TERMS(v: Py) { ensure_init(); G_MUSIC_TERMS.with(|c| *c.borrow_mut() = v); }
-pub fn g_NAMED_GAME_TITLES() -> Py { ensure_init(); G_NAMED_GAME_TITLES.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_NAMED_GAME_TITLES(v: Py) { ensure_init(); G_NAMED_GAME_TITLES.with(|c| *c.borrow_mut() = v); }
-pub fn g_NATIONAL_CINEMA() -> Py { ensure_init(); G_NATIONAL_CINEMA.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_NATIONAL_CINEMA(v: Py) { ensure_init(); G_NATIONAL_CINEMA.with(|c| *c.borrow_mut() = v); }
-pub fn g_NEGATORS() -> Py { ensure_init(); G_NEGATORS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_NEGATORS(v: Py) { ensure_init(); G_NEGATORS.with(|c| *c.borrow_mut() = v); }
-pub fn g_NEXT_EVIDENCE() -> Py { ensure_init(); G_NEXT_EVIDENCE.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_NEXT_EVIDENCE(v: Py) { ensure_init(); G_NEXT_EVIDENCE.with(|c| *c.borrow_mut() = v); }
-pub fn g_NICK_FIRST() -> Py { ensure_init(); G_NICK_FIRST.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_NICK_FIRST(v: Py) { ensure_init(); G_NICK_FIRST.with(|c| *c.borrow_mut() = v); }
-pub fn g_NICK_LAST() -> Py { ensure_init(); G_NICK_LAST.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_NICK_LAST(v: Py) { ensure_init(); G_NICK_LAST.with(|c| *c.borrow_mut() = v); }
-pub fn g_NOT_A_GAME_PICK() -> Py { ensure_init(); G_NOT_A_GAME_PICK.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_NOT_A_GAME_PICK(v: Py) { ensure_init(); G_NOT_A_GAME_PICK.with(|c| *c.borrow_mut() = v); }
-pub fn g_NOT_A_MOOD_PICK() -> Py { ensure_init(); G_NOT_A_MOOD_PICK.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_NOT_A_MOOD_PICK(v: Py) { ensure_init(); G_NOT_A_MOOD_PICK.with(|c| *c.borrow_mut() = v); }
-pub fn g_NOT_A_TURN_DOWN() -> Py { ensure_init(); G_NOT_A_TURN_DOWN.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_NOT_A_TURN_DOWN(v: Py) { ensure_init(); G_NOT_A_TURN_DOWN.with(|c| *c.borrow_mut() = v); }
-pub fn g_NOT_A_VERDICT() -> Py { ensure_init(); G_NOT_A_VERDICT.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_NOT_A_VERDICT(v: Py) { ensure_init(); G_NOT_A_VERDICT.with(|c| *c.borrow_mut() = v); }
-pub fn g_NOT_WATCHING() -> Py { ensure_init(); G_NOT_WATCHING.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_NOT_WATCHING(v: Py) { ensure_init(); G_NOT_WATCHING.with(|c| *c.borrow_mut() = v); }
-pub fn g_NO_RHYME() -> Py { ensure_init(); G_NO_RHYME.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_NO_RHYME(v: Py) { ensure_init(); G_NO_RHYME.with(|c| *c.borrow_mut() = v); }
-pub fn g_NO_SUBJECT_LEADING() -> Py { ensure_init(); G_NO_SUBJECT_LEADING.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_NO_SUBJECT_LEADING(v: Py) { ensure_init(); G_NO_SUBJECT_LEADING.with(|c| *c.borrow_mut() = v); }
-pub fn g_NO_SUBJECT_VERSE() -> Py { ensure_init(); G_NO_SUBJECT_VERSE.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_NO_SUBJECT_VERSE(v: Py) { ensure_init(); G_NO_SUBJECT_VERSE.with(|c| *c.borrow_mut() = v); }
-pub fn g_NO_THING_IN_A_VERSE() -> Py { ensure_init(); G_NO_THING_IN_A_VERSE.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_NO_THING_IN_A_VERSE(v: Py) { ensure_init(); G_NO_THING_IN_A_VERSE.with(|c| *c.borrow_mut() = v); }
-pub fn g_OCCASION() -> Py { ensure_init(); G_OCCASION.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_OCCASION(v: Py) { ensure_init(); G_OCCASION.with(|c| *c.borrow_mut() = v); }
-pub fn g_ORDINARY_GENRES() -> Py { ensure_init(); G_ORDINARY_GENRES.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_ORDINARY_GENRES(v: Py) { ensure_init(); G_ORDINARY_GENRES.with(|c| *c.borrow_mut() = v); }
-pub fn g_OTHER_SUBJECT() -> Py { ensure_init(); G_OTHER_SUBJECT.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_OTHER_SUBJECT(v: Py) { ensure_init(); G_OTHER_SUBJECT.with(|c| *c.borrow_mut() = v); }
-pub fn g_PEOPLE() -> Py { ensure_init(); G_PEOPLE.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_PEOPLE(v: Py) { ensure_init(); G_PEOPLE.with(|c| *c.borrow_mut() = v); }
-pub fn g_PICKS() -> Py { ensure_init(); G_PICKS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_PICKS(v: Py) { ensure_init(); G_PICKS.with(|c| *c.borrow_mut() = v); }
-pub fn g_PICK_ASK() -> Py { ensure_init(); G_PICK_ASK.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_PICK_ASK(v: Py) { ensure_init(); G_PICK_ASK.with(|c| *c.borrow_mut() = v); }
-pub fn g_PICK_ASKS() -> Py { ensure_init(); G_PICK_ASKS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_PICK_ASKS(v: Py) { ensure_init(); G_PICK_ASKS.with(|c| *c.borrow_mut() = v); }
-pub fn g_PICK_MEDIUM() -> Py { ensure_init(); G_PICK_MEDIUM.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_PICK_MEDIUM(v: Py) { ensure_init(); G_PICK_MEDIUM.with(|c| *c.borrow_mut() = v); }
-pub fn g_PICK_MOODS() -> Py { ensure_init(); G_PICK_MOODS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_PICK_MOODS(v: Py) { ensure_init(); G_PICK_MOODS.with(|c| *c.borrow_mut() = v); }
-pub fn g_PICK_OTHER_MEDIUM() -> Py { ensure_init(); G_PICK_OTHER_MEDIUM.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_PICK_OTHER_MEDIUM(v: Py) { ensure_init(); G_PICK_OTHER_MEDIUM.with(|c| *c.borrow_mut() = v); }
-pub fn g_PICK_REACT() -> Py { ensure_init(); G_PICK_REACT.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_PICK_REACT(v: Py) { ensure_init(); G_PICK_REACT.with(|c| *c.borrow_mut() = v); }
-pub fn g_PICK_SUBJECT() -> Py { ensure_init(); G_PICK_SUBJECT.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_PICK_SUBJECT(v: Py) { ensure_init(); G_PICK_SUBJECT.with(|c| *c.borrow_mut() = v); }
-pub fn g_PICK_TITLES() -> Py { ensure_init(); G_PICK_TITLES.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_PICK_TITLES(v: Py) { ensure_init(); G_PICK_TITLES.with(|c| *c.borrow_mut() = v); }
-pub fn g_PICK_WHO() -> Py { ensure_init(); G_PICK_WHO.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_PICK_WHO(v: Py) { ensure_init(); G_PICK_WHO.with(|c| *c.borrow_mut() = v); }
-pub fn g_PICK_WORDS() -> Py { ensure_init(); G_PICK_WORDS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_PICK_WORDS(v: Py) { ensure_init(); G_PICK_WORDS.with(|c| *c.borrow_mut() = v); }
-pub fn g_PLAIN_SENSE() -> Py { ensure_init(); G_PLAIN_SENSE.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_PLAIN_SENSE(v: Py) { ensure_init(); G_PLAIN_SENSE.with(|c| *c.borrow_mut() = v); }
-pub fn g_PLAIN_TITLES() -> Py { ensure_init(); G_PLAIN_TITLES.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_PLAIN_TITLES(v: Py) { ensure_init(); G_PLAIN_TITLES.with(|c| *c.borrow_mut() = v); }
-pub fn g_PODCAST_CRIME() -> Py { ensure_init(); G_PODCAST_CRIME.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_PODCAST_CRIME(v: Py) { ensure_init(); G_PODCAST_CRIME.with(|c| *c.borrow_mut() = v); }
-pub fn g_PODCAST_FUNNY() -> Py { ensure_init(); G_PODCAST_FUNNY.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_PODCAST_FUNNY(v: Py) { ensure_init(); G_PODCAST_FUNNY.with(|c| *c.borrow_mut() = v); }
-pub fn g_PODCAST_MOODS() -> Py { ensure_init(); G_PODCAST_MOODS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_PODCAST_MOODS(v: Py) { ensure_init(); G_PODCAST_MOODS.with(|c| *c.borrow_mut() = v); }
-pub fn g_POEMS() -> Py { ensure_init(); G_POEMS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_POEMS(v: Py) { ensure_init(); G_POEMS.with(|c| *c.borrow_mut() = v); }
-pub fn g_POSSESSIVE() -> Py { ensure_init(); G_POSSESSIVE.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_POSSESSIVE(v: Py) { ensure_init(); G_POSSESSIVE.with(|c| *c.borrow_mut() = v); }
-pub fn g_QUIZ_NAMES() -> Py { ensure_init(); G_QUIZ_NAMES.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_QUIZ_NAMES(v: Py) { ensure_init(); G_QUIZ_NAMES.with(|c| *c.borrow_mut() = v); }
-pub fn g_REPORTS_ON_A_FORM() -> Py { ensure_init(); G_REPORTS_ON_A_FORM.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_REPORTS_ON_A_FORM(v: Py) { ensure_init(); G_REPORTS_ON_A_FORM.with(|c| *c.borrow_mut() = v); }
-pub fn g_REPORT_BACK() -> Py { ensure_init(); G_REPORT_BACK.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_REPORT_BACK(v: Py) { ensure_init(); G_REPORT_BACK.with(|c| *c.borrow_mut() = v); }
-pub fn g_REPORT_ONCE_BACK() -> Py { ensure_init(); G_REPORT_ONCE_BACK.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_REPORT_ONCE_BACK(v: Py) { ensure_init(); G_REPORT_ONCE_BACK.with(|c| *c.borrow_mut() = v); }
-pub fn g_REPORT_ONCE_GENERIC() -> Py { ensure_init(); G_REPORT_ONCE_GENERIC.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_REPORT_ONCE_GENERIC(v: Py) { ensure_init(); G_REPORT_ONCE_GENERIC.with(|c| *c.borrow_mut() = v); }
-pub fn g_RHYMES_BY_ENDING() -> Py { ensure_init(); G_RHYMES_BY_ENDING.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_RHYMES_BY_ENDING(v: Py) { ensure_init(); G_RHYMES_BY_ENDING.with(|c| *c.borrow_mut() = v); }
-pub fn g_SCARE_REFUSED_AFTER() -> Py { ensure_init(); G_SCARE_REFUSED_AFTER.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_SCARE_REFUSED_AFTER(v: Py) { ensure_init(); G_SCARE_REFUSED_AFTER.with(|c| *c.borrow_mut() = v); }
-pub fn g_SCARE_TURNED_DOWN() -> Py { ensure_init(); G_SCARE_TURNED_DOWN.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_SCARE_TURNED_DOWN(v: Py) { ensure_init(); G_SCARE_TURNED_DOWN.with(|c| *c.borrow_mut() = v); }
-pub fn g_SCARE_WORDS() -> Py { ensure_init(); G_SCARE_WORDS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_SCARE_WORDS(v: Py) { ensure_init(); G_SCARE_WORDS.with(|c| *c.borrow_mut() = v); }
-pub fn g_SCREEN_TIME() -> Py { ensure_init(); G_SCREEN_TIME.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_SCREEN_TIME(v: Py) { ensure_init(); G_SCREEN_TIME.with(|c| *c.borrow_mut() = v); }
-pub fn g_SEEN_ALREADY() -> Py { ensure_init(); G_SEEN_ALREADY.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_SEEN_ALREADY(v: Py) { ensure_init(); G_SEEN_ALREADY.with(|c| *c.borrow_mut() = v); }
-pub fn g_SHORTEST_WORDS() -> Py { ensure_init(); G_SHORTEST_WORDS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_SHORTEST_WORDS(v: Py) { ensure_init(); G_SHORTEST_WORDS.with(|c| *c.borrow_mut() = v); }
-pub fn g_SHOW_DOC_ASK_WORDS() -> Py { ensure_init(); G_SHOW_DOC_ASK_WORDS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_SHOW_DOC_ASK_WORDS(v: Py) { ensure_init(); G_SHOW_DOC_ASK_WORDS.with(|c| *c.borrow_mut() = v); }
-pub fn g_SHOW_MEDIUM_WORDS() -> Py { ensure_init(); G_SHOW_MEDIUM_WORDS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_SHOW_MEDIUM_WORDS(v: Py) { ensure_init(); G_SHOW_MEDIUM_WORDS.with(|c| *c.borrow_mut() = v); }
-pub fn g_SHOW_SUBJECTS() -> Py { ensure_init(); G_SHOW_SUBJECTS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_SHOW_SUBJECTS(v: Py) { ensure_init(); G_SHOW_SUBJECTS.with(|c| *c.borrow_mut() = v); }
-pub fn g_SHOW_SUBJECT_AVOID() -> Py { ensure_init(); G_SHOW_SUBJECT_AVOID.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_SHOW_SUBJECT_AVOID(v: Py) { ensure_init(); G_SHOW_SUBJECT_AVOID.with(|c| *c.borrow_mut() = v); }
-pub fn g_SHOW_SUBJECT_NAMES() -> Py { ensure_init(); G_SHOW_SUBJECT_NAMES.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_SHOW_SUBJECT_NAMES(v: Py) { ensure_init(); G_SHOW_SUBJECT_NAMES.with(|c| *c.borrow_mut() = v); }
-pub fn g_SOFT() -> Py { ensure_init(); G_SOFT.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_SOFT(v: Py) { ensure_init(); G_SOFT.with(|c| *c.borrow_mut() = v); }
-pub fn g_SPORT() -> Py { ensure_init(); G_SPORT.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_SPORT(v: Py) { ensure_init(); G_SPORT.with(|c| *c.borrow_mut() = v); }
-pub fn g_STORY_IDEAS() -> Py { ensure_init(); G_STORY_IDEAS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_STORY_IDEAS(v: Py) { ensure_init(); G_STORY_IDEAS.with(|c| *c.borrow_mut() = v); }
-pub fn g_STORY_LEADING() -> Py { ensure_init(); G_STORY_LEADING.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_STORY_LEADING(v: Py) { ensure_init(); G_STORY_LEADING.with(|c| *c.borrow_mut() = v); }
-pub fn g_STORY_LONGER() -> Py { ensure_init(); G_STORY_LONGER.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_STORY_LONGER(v: Py) { ensure_init(); G_STORY_LONGER.with(|c| *c.borrow_mut() = v); }
-pub fn g_STORY_OPENINGS() -> Py { ensure_init(); G_STORY_OPENINGS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_STORY_OPENINGS(v: Py) { ensure_init(); G_STORY_OPENINGS.with(|c| *c.borrow_mut() = v); }
-pub fn g_STRICT_LIMIT() -> Py { ensure_init(); G_STRICT_LIMIT.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_STRICT_LIMIT(v: Py) { ensure_init(); G_STRICT_LIMIT.with(|c| *c.borrow_mut() = v); }
-pub fn g_SUBJECT_BOOKS() -> Py { ensure_init(); G_SUBJECT_BOOKS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_SUBJECT_BOOKS(v: Py) { ensure_init(); G_SUBJECT_BOOKS.with(|c| *c.borrow_mut() = v); }
-pub fn g_SUBJECT_BOOK_NAMES() -> Py { ensure_init(); G_SUBJECT_BOOK_NAMES.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_SUBJECT_BOOK_NAMES(v: Py) { ensure_init(); G_SUBJECT_BOOK_NAMES.with(|c| *c.borrow_mut() = v); }
-pub fn g_SUBJECT_BOOK_UNCOVERED() -> Py { ensure_init(); G_SUBJECT_BOOK_UNCOVERED.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_SUBJECT_BOOK_UNCOVERED(v: Py) { ensure_init(); G_SUBJECT_BOOK_UNCOVERED.with(|c| *c.borrow_mut() = v); }
-pub fn g_SUBJECT_END() -> Py { ensure_init(); G_SUBJECT_END.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_SUBJECT_END(v: Py) { ensure_init(); G_SUBJECT_END.with(|c| *c.borrow_mut() = v); }
-pub fn g_SUBJECT_STOP() -> Py { ensure_init(); G_SUBJECT_STOP.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_SUBJECT_STOP(v: Py) { ensure_init(); G_SUBJECT_STOP.with(|c| *c.borrow_mut() = v); }
-pub fn g_SUBJECT_TAIL() -> Py { ensure_init(); G_SUBJECT_TAIL.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_SUBJECT_TAIL(v: Py) { ensure_init(); G_SUBJECT_TAIL.with(|c| *c.borrow_mut() = v); }
-pub fn g_SUBS_KEY() -> Py { ensure_init(); G_SUBS_KEY.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_SUBS_KEY(v: Py) { ensure_init(); G_SUBS_KEY.with(|c| *c.borrow_mut() = v); }
-pub fn g_SUBS_TELLS() -> Py { ensure_init(); G_SUBS_TELLS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_SUBS_TELLS(v: Py) { ensure_init(); G_SUBS_TELLS.with(|c| *c.borrow_mut() = v); }
-pub fn g_SUBS_TURNED_DOWN() -> Py { ensure_init(); G_SUBS_TURNED_DOWN.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_SUBS_TURNED_DOWN(v: Py) { ensure_init(); G_SUBS_TURNED_DOWN.with(|c| *c.borrow_mut() = v); }
-pub fn g_SUBS_WANT() -> Py { ensure_init(); G_SUBS_WANT.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_SUBS_WANT(v: Py) { ensure_init(); G_SUBS_WANT.with(|c| *c.borrow_mut() = v); }
-pub fn g_SUBS_WANT_IF_WATCHING() -> Py { ensure_init(); G_SUBS_WANT_IF_WATCHING.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_SUBS_WANT_IF_WATCHING(v: Py) { ensure_init(); G_SUBS_WANT_IF_WATCHING.with(|c| *c.borrow_mut() = v); }
-pub fn g_S_FINAL_SINGULARS() -> Py { ensure_init(); G_S_FINAL_SINGULARS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_S_FINAL_SINGULARS(v: Py) { ensure_init(); G_S_FINAL_SINGULARS.with(|c| *c.borrow_mut() = v); }
-pub fn g_TEAM_NAMES() -> Py { ensure_init(); G_TEAM_NAMES.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_TEAM_NAMES(v: Py) { ensure_init(); G_TEAM_NAMES.with(|c| *c.borrow_mut() = v); }
-pub fn g_TITLE_AS() -> Py { ensure_init(); G_TITLE_AS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_TITLE_AS(v: Py) { ensure_init(); G_TITLE_AS.with(|c| *c.borrow_mut() = v); }
-pub fn g_TITLE_SMALL() -> Py { ensure_init(); G_TITLE_SMALL.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_TITLE_SMALL(v: Py) { ensure_init(); G_TITLE_SMALL.with(|c| *c.borrow_mut() = v); }
-pub fn g_TITLE_SPELLING() -> Py { ensure_init(); G_TITLE_SPELLING.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_TITLE_SPELLING(v: Py) { ensure_init(); G_TITLE_SPELLING.with(|c| *c.borrow_mut() = v); }
-pub fn g_TUNE_ASKS() -> Py { ensure_init(); G_TUNE_ASKS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_TUNE_ASKS(v: Py) { ensure_init(); G_TUNE_ASKS.with(|c| *c.borrow_mut() = v); }
-pub fn g_TURNED_DOWN_KEEPS_ITS_OWN() -> Py { ensure_init(); G_TURNED_DOWN_KEEPS_ITS_OWN.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_TURNED_DOWN_KEEPS_ITS_OWN(v: Py) { ensure_init(); G_TURNED_DOWN_KEEPS_ITS_OWN.with(|c| *c.borrow_mut() = v); }
-pub fn g_TURNED_DOWN_WANT() -> Py { ensure_init(); G_TURNED_DOWN_WANT.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_TURNED_DOWN_WANT(v: Py) { ensure_init(); G_TURNED_DOWN_WANT.with(|c| *c.borrow_mut() = v); }
-pub fn g_TURNS_BACK() -> Py { ensure_init(); G_TURNS_BACK.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_TURNS_BACK(v: Py) { ensure_init(); G_TURNS_BACK.with(|c| *c.borrow_mut() = v); }
-pub fn g_TURNS_IT_DOWN() -> Py { ensure_init(); G_TURNS_IT_DOWN.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_TURNS_IT_DOWN(v: Py) { ensure_init(); G_TURNS_IT_DOWN.with(|c| *c.borrow_mut() = v); }
-pub fn g_TV_MOODS() -> Py { ensure_init(); G_TV_MOODS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_TV_MOODS(v: Py) { ensure_init(); G_TV_MOODS.with(|c| *c.borrow_mut() = v); }
-pub fn g_UNNAMED_ASKS() -> Py { ensure_init(); G_UNNAMED_ASKS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_UNNAMED_ASKS(v: Py) { ensure_init(); G_UNNAMED_ASKS.with(|c| *c.borrow_mut() = v); }
-pub fn g_VERDICT_ASKS() -> Py { ensure_init(); G_VERDICT_ASKS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_VERDICT_ASKS(v: Py) { ensure_init(); G_VERDICT_ASKS.with(|c| *c.borrow_mut() = v); }
-pub fn g_VERSE_FORM_WORDS() -> Py { ensure_init(); G_VERSE_FORM_WORDS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_VERSE_FORM_WORDS(v: Py) { ensure_init(); G_VERSE_FORM_WORDS.with(|c| *c.borrow_mut() = v); }
-pub fn g_VERSE_LONGER() -> Py { ensure_init(); G_VERSE_LONGER.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_VERSE_LONGER(v: Py) { ensure_init(); G_VERSE_LONGER.with(|c| *c.borrow_mut() = v); }
-pub fn g_VIEWING() -> Py { ensure_init(); G_VIEWING.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_VIEWING(v: Py) { ensure_init(); G_VIEWING.with(|c| *c.borrow_mut() = v); }
-pub fn g_VIEWS() -> Py { ensure_init(); G_VIEWS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_VIEWS(v: Py) { ensure_init(); G_VIEWS.with(|c| *c.borrow_mut() = v); }
-pub fn g_WANTING() -> Py { ensure_init(); G_WANTING.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_WANTING(v: Py) { ensure_init(); G_WANTING.with(|c| *c.borrow_mut() = v); }
-pub fn g_WANT_ASKS() -> Py { ensure_init(); G_WANT_ASKS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_WANT_ASKS(v: Py) { ensure_init(); G_WANT_ASKS.with(|c| *c.borrow_mut() = v); }
-pub fn g_WARM_POEM() -> Py { ensure_init(); G_WARM_POEM.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_WARM_POEM(v: Py) { ensure_init(); G_WARM_POEM.with(|c| *c.borrow_mut() = v); }
-pub fn g_WATCHES_SOMETHING() -> Py { ensure_init(); G_WATCHES_SOMETHING.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_WATCHES_SOMETHING(v: Py) { ensure_init(); G_WATCHES_SOMETHING.with(|c| *c.borrow_mut() = v); }
-pub fn g_WATCHING() -> Py { ensure_init(); G_WATCHING.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_WATCHING(v: Py) { ensure_init(); G_WATCHING.with(|c| *c.borrow_mut() = v); }
-pub fn g_WHOM_IT_IS_FOR() -> Py { ensure_init(); G_WHOM_IT_IS_FOR.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_WHOM_IT_IS_FOR(v: Py) { ensure_init(); G_WHOM_IT_IS_FOR.with(|c| *c.borrow_mut() = v); }
-pub fn g_WHO_MAKERS() -> Py { ensure_init(); G_WHO_MAKERS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_WHO_MAKERS(v: Py) { ensure_init(); G_WHO_MAKERS.with(|c| *c.borrow_mut() = v); }
-pub fn g_WORKS() -> Py { ensure_init(); G_WORKS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_WORKS(v: Py) { ensure_init(); G_WORKS.with(|c| *c.borrow_mut() = v); }
-pub fn g_WORK_EVIDENCE() -> Py { ensure_init(); G_WORK_EVIDENCE.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_WORK_EVIDENCE(v: Py) { ensure_init(); G_WORK_EVIDENCE.with(|c| *c.borrow_mut() = v); }
-pub fn g__AGE_BANDS() -> Py { ensure_init(); G__AGE_BANDS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__AGE_BANDS(v: Py) { ensure_init(); G__AGE_BANDS.with(|c| *c.borrow_mut() = v); }
-pub fn g__AGE_SHAPES() -> Py { ensure_init(); G__AGE_SHAPES.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__AGE_SHAPES(v: Py) { ensure_init(); G__AGE_SHAPES.with(|c| *c.borrow_mut() = v); }
-pub fn g__ALL_ABSTRACT() -> Py { ensure_init(); G__ALL_ABSTRACT.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__ALL_ABSTRACT(v: Py) { ensure_init(); G__ALL_ABSTRACT.with(|c| *c.borrow_mut() = v); }
-pub fn g__AMBIGUOUS_CITY_WORDS() -> Py { ensure_init(); G__AMBIGUOUS_CITY_WORDS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__AMBIGUOUS_CITY_WORDS(v: Py) { ensure_init(); G__AMBIGUOUS_CITY_WORDS.with(|c| *c.borrow_mut() = v); }
-pub fn g__ANOTHER_FORM() -> Py { ensure_init(); G__ANOTHER_FORM.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__ANOTHER_FORM(v: Py) { ensure_init(); G__ANOTHER_FORM.with(|c| *c.borrow_mut() = v); }
-pub fn g__AN_HOUR() -> Py { ensure_init(); G__AN_HOUR.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__AN_HOUR(v: Py) { ensure_init(); G__AN_HOUR.with(|c| *c.borrow_mut() = v); }
-pub fn g__ASKS_ABOUT_A_STORY() -> Py { ensure_init(); G__ASKS_ABOUT_A_STORY.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__ASKS_ABOUT_A_STORY(v: Py) { ensure_init(); G__ASKS_ABOUT_A_STORY.with(|c| *c.borrow_mut() = v); }
-pub fn g__ASKS_FOR_A_FILM() -> Py { ensure_init(); G__ASKS_FOR_A_FILM.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__ASKS_FOR_A_FILM(v: Py) { ensure_init(); G__ASKS_FOR_A_FILM.with(|c| *c.borrow_mut() = v); }
-pub fn g__ASKS_FOR_A_PICK() -> Py { ensure_init(); G__ASKS_FOR_A_PICK.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__ASKS_FOR_A_PICK(v: Py) { ensure_init(); G__ASKS_FOR_A_PICK.with(|c| *c.borrow_mut() = v); }
-pub fn g__ASKS_FOR_A_PICK_WORDS() -> Py { ensure_init(); G__ASKS_FOR_A_PICK_WORDS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__ASKS_FOR_A_PICK_WORDS(v: Py) { ensure_init(); G__ASKS_FOR_A_PICK_WORDS.with(|c| *c.borrow_mut() = v); }
-pub fn g__ASKS_IF_OPEN() -> Py { ensure_init(); G__ASKS_IF_OPEN.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__ASKS_IF_OPEN(v: Py) { ensure_init(); G__ASKS_IF_OPEN.with(|c| *c.borrow_mut() = v); }
-pub fn g__ASK_POLITENESS() -> Py { ensure_init(); G__ASK_POLITENESS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__ASK_POLITENESS(v: Py) { ensure_init(); G__ASK_POLITENESS.with(|c| *c.borrow_mut() = v); }
-pub fn g__A_BOOK_I_AM_NOT_ENJOYING() -> Py { ensure_init(); G__A_BOOK_I_AM_NOT_ENJOYING.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__A_BOOK_I_AM_NOT_ENJOYING(v: Py) { ensure_init(); G__A_BOOK_I_AM_NOT_ENJOYING.with(|c| *c.borrow_mut() = v); }
-pub fn g__A_CROWD() -> Py { ensure_init(); G__A_CROWD.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__A_CROWD(v: Py) { ensure_init(); G__A_CROWD.with(|c| *c.borrow_mut() = v); }
-pub fn g__A_DAY() -> Py { ensure_init(); G__A_DAY.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__A_DAY(v: Py) { ensure_init(); G__A_DAY.with(|c| *c.borrow_mut() = v); }
-pub fn g__A_DETERMINER_JUST_BEFORE() -> Py { ensure_init(); G__A_DETERMINER_JUST_BEFORE.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__A_DETERMINER_JUST_BEFORE(v: Py) { ensure_init(); G__A_DETERMINER_JUST_BEFORE.with(|c| *c.borrow_mut() = v); }
-pub fn g__A_FORM_IN_THE_REPORT() -> Py { ensure_init(); G__A_FORM_IN_THE_REPORT.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__A_FORM_IN_THE_REPORT(v: Py) { ensure_init(); G__A_FORM_IN_THE_REPORT.with(|c| *c.borrow_mut() = v); }
-pub fn g__A_LISTENER_IS_NAMED() -> Py { ensure_init(); G__A_LISTENER_IS_NAMED.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__A_LISTENER_IS_NAMED(v: Py) { ensure_init(); G__A_LISTENER_IS_NAMED.with(|c| *c.borrow_mut() = v); }
-pub fn g__A_MUSIC_WORD() -> Py { ensure_init(); G__A_MUSIC_WORD.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__A_MUSIC_WORD(v: Py) { ensure_init(); G__A_MUSIC_WORD.with(|c| *c.borrow_mut() = v); }
-pub fn g__A_SECOND_ONE() -> Py { ensure_init(); G__A_SECOND_ONE.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__A_SECOND_ONE(v: Py) { ensure_init(); G__A_SECOND_ONE.with(|c| *c.borrow_mut() = v); }
-pub fn g__A_SHORT_TIME() -> Py { ensure_init(); G__A_SHORT_TIME.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__A_SHORT_TIME(v: Py) { ensure_init(); G__A_SHORT_TIME.with(|c| *c.borrow_mut() = v); }
-pub fn g__A_STORY_WORD() -> Py { ensure_init(); G__A_STORY_WORD.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__A_STORY_WORD(v: Py) { ensure_init(); G__A_STORY_WORD.with(|c| *c.borrow_mut() = v); }
-pub fn g__A_THING_IS_BEING_BAKED() -> Py { ensure_init(); G__A_THING_IS_BEING_BAKED.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__A_THING_IS_BEING_BAKED(v: Py) { ensure_init(); G__A_THING_IS_BEING_BAKED.with(|c| *c.borrow_mut() = v); }
-pub fn g__A_THING_OF_THEIRS() -> Py { ensure_init(); G__A_THING_OF_THEIRS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__A_THING_OF_THEIRS(v: Py) { ensure_init(); G__A_THING_OF_THEIRS.with(|c| *c.borrow_mut() = v); }
-pub fn g__A_VERSE_LEAD() -> Py { ensure_init(); G__A_VERSE_LEAD.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__A_VERSE_LEAD(v: Py) { ensure_init(); G__A_VERSE_LEAD.with(|c| *c.borrow_mut() = v); }
-pub fn g__BARE_COUNT_AGAIN() -> Py { ensure_init(); G__BARE_COUNT_AGAIN.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__BARE_COUNT_AGAIN(v: Py) { ensure_init(); G__BARE_COUNT_AGAIN.with(|c| *c.borrow_mut() = v); }
-pub fn g__BEGINNER_WORDS() -> Py { ensure_init(); G__BEGINNER_WORDS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__BEGINNER_WORDS(v: Py) { ensure_init(); G__BEGINNER_WORDS.with(|c| *c.borrow_mut() = v); }
-pub fn g__BOOK_ANCHOR() -> Py { ensure_init(); G__BOOK_ANCHOR.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__BOOK_ANCHOR(v: Py) { ensure_init(); G__BOOK_ANCHOR.with(|c| *c.borrow_mut() = v); }
-pub fn g__BOOK_SUBJECT_BEFORE() -> Py { ensure_init(); G__BOOK_SUBJECT_BEFORE.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__BOOK_SUBJECT_BEFORE(v: Py) { ensure_init(); G__BOOK_SUBJECT_BEFORE.with(|c| *c.borrow_mut() = v); }
-pub fn g__BOOK_VERB_AFTER() -> Py { ensure_init(); G__BOOK_VERB_AFTER.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__BOOK_VERB_AFTER(v: Py) { ensure_init(); G__BOOK_VERB_AFTER.with(|c| *c.borrow_mut() = v); }
-pub fn g__BOOK_VERB_BEFORE() -> Py { ensure_init(); G__BOOK_VERB_BEFORE.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__BOOK_VERB_BEFORE(v: Py) { ensure_init(); G__BOOK_VERB_BEFORE.with(|c| *c.borrow_mut() = v); }
-pub fn g__BUYING_THE_MACHINE() -> Py { ensure_init(); G__BUYING_THE_MACHINE.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__BUYING_THE_MACHINE(v: Py) { ensure_init(); G__BUYING_THE_MACHINE.with(|c| *c.borrow_mut() = v); }
-pub fn g__CASTLING_VERB() -> Py { ensure_init(); G__CASTLING_VERB.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__CASTLING_VERB(v: Py) { ensure_init(); G__CASTLING_VERB.with(|c| *c.borrow_mut() = v); }
-pub fn g__CHESS_WORDS() -> Py { ensure_init(); G__CHESS_WORDS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__CHESS_WORDS(v: Py) { ensure_init(); G__CHESS_WORDS.with(|c| *c.borrow_mut() = v); }
-pub fn g__CHILD_OF_THEIRS() -> Py { ensure_init(); G__CHILD_OF_THEIRS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__CHILD_OF_THEIRS(v: Py) { ensure_init(); G__CHILD_OF_THEIRS.with(|c| *c.borrow_mut() = v); }
-pub fn g__CHILD_WORDS() -> Py { ensure_init(); G__CHILD_WORDS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__CHILD_WORDS(v: Py) { ensure_init(); G__CHILD_WORDS.with(|c| *c.borrow_mut() = v); }
-pub fn g__COMIC_BEGINNER() -> Py { ensure_init(); G__COMIC_BEGINNER.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__COMIC_BEGINNER(v: Py) { ensure_init(); G__COMIC_BEGINNER.with(|c| *c.borrow_mut() = v); }
-pub fn g__COMIC_DC() -> Py { ensure_init(); G__COMIC_DC.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__COMIC_DC(v: Py) { ensure_init(); G__COMIC_DC.with(|c| *c.borrow_mut() = v); }
-pub fn g__COMIC_FOR_A_CHILD() -> Py { ensure_init(); G__COMIC_FOR_A_CHILD.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__COMIC_FOR_A_CHILD(v: Py) { ensure_init(); G__COMIC_FOR_A_CHILD.with(|c| *c.borrow_mut() = v); }
-pub fn g__COMIC_FOR_A_GROWN_UP() -> Py { ensure_init(); G__COMIC_FOR_A_GROWN_UP.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__COMIC_FOR_A_GROWN_UP(v: Py) { ensure_init(); G__COMIC_FOR_A_GROWN_UP.with(|c| *c.borrow_mut() = v); }
-pub fn g__COMIC_FOR_A_TEEN() -> Py { ensure_init(); G__COMIC_FOR_A_TEEN.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__COMIC_FOR_A_TEEN(v: Py) { ensure_init(); G__COMIC_FOR_A_TEEN.with(|c| *c.borrow_mut() = v); }
-pub fn g__COMIC_MANGA() -> Py { ensure_init(); G__COMIC_MANGA.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__COMIC_MANGA(v: Py) { ensure_init(); G__COMIC_MANGA.with(|c| *c.borrow_mut() = v); }
-pub fn g__COMIC_MARVEL() -> Py { ensure_init(); G__COMIC_MARVEL.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__COMIC_MARVEL(v: Py) { ensure_init(); G__COMIC_MARVEL.with(|c| *c.borrow_mut() = v); }
-pub fn g__COMIC_MEANING() -> Py { ensure_init(); G__COMIC_MEANING.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__COMIC_MEANING(v: Py) { ensure_init(); G__COMIC_MEANING.with(|c| *c.borrow_mut() = v); }
-pub fn g__COMIC_MEANING_ASK() -> Py { ensure_init(); G__COMIC_MEANING_ASK.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__COMIC_MEANING_ASK(v: Py) { ensure_init(); G__COMIC_MEANING_ASK.with(|c| *c.borrow_mut() = v); }
-pub fn g__COMIC_SUITABILITY() -> Py { ensure_init(); G__COMIC_SUITABILITY.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__COMIC_SUITABILITY(v: Py) { ensure_init(); G__COMIC_SUITABILITY.with(|c| *c.borrow_mut() = v); }
-pub fn g__COUNTRY_AFTER_A_LITTLE_WORD() -> Py { ensure_init(); G__COUNTRY_AFTER_A_LITTLE_WORD.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__COUNTRY_AFTER_A_LITTLE_WORD(v: Py) { ensure_init(); G__COUNTRY_AFTER_A_LITTLE_WORD.with(|c| *c.borrow_mut() = v); }
-pub fn g__COUNTRY_BEFORE_A_THING() -> Py { ensure_init(); G__COUNTRY_BEFORE_A_THING.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__COUNTRY_BEFORE_A_THING(v: Py) { ensure_init(); G__COUNTRY_BEFORE_A_THING.with(|c| *c.borrow_mut() = v); }
-pub fn g__COUNT_ASKS() -> Py { ensure_init(); G__COUNT_ASKS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__COUNT_ASKS(v: Py) { ensure_init(); G__COUNT_ASKS.with(|c| *c.borrow_mut() = v); }
-pub fn g__EVENING_WORDS() -> Py { ensure_init(); G__EVENING_WORDS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__EVENING_WORDS(v: Py) { ensure_init(); G__EVENING_WORDS.with(|c| *c.borrow_mut() = v); }
-pub fn g__FISH_IS_DINNER() -> Py { ensure_init(); G__FISH_IS_DINNER.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__FISH_IS_DINNER(v: Py) { ensure_init(); G__FISH_IS_DINNER.with(|c| *c.borrow_mut() = v); }
-pub fn g__FISH_VERBS() -> Py { ensure_init(); G__FISH_VERBS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__FISH_VERBS(v: Py) { ensure_init(); G__FISH_VERBS.with(|c| *c.borrow_mut() = v); }
-pub fn g__FIXED_COUNT_FORM() -> Py { ensure_init(); G__FIXED_COUNT_FORM.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__FIXED_COUNT_FORM(v: Py) { ensure_init(); G__FIXED_COUNT_FORM.with(|c| *c.borrow_mut() = v); }
-pub fn g__FORM_OF_A_WORD() -> Py { ensure_init(); G__FORM_OF_A_WORD.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__FORM_OF_A_WORD(v: Py) { ensure_init(); G__FORM_OF_A_WORD.with(|c| *c.borrow_mut() = v); }
-pub fn g__FRESH_LIST() -> Py { ensure_init(); G__FRESH_LIST.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__FRESH_LIST(v: Py) { ensure_init(); G__FRESH_LIST.with(|c| *c.borrow_mut() = v); }
-pub fn g__GLIB() -> Py { ensure_init(); G__GLIB.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__GLIB(v: Py) { ensure_init(); G__GLIB.with(|c| *c.borrow_mut() = v); }
-pub fn g__HOUR_MINUTES() -> Py { ensure_init(); G__HOUR_MINUTES.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__HOUR_MINUTES(v: Py) { ensure_init(); G__HOUR_MINUTES.with(|c| *c.borrow_mut() = v); }
-pub fn g__HOUR_WORDS() -> Py { ensure_init(); G__HOUR_WORDS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__HOUR_WORDS(v: Py) { ensure_init(); G__HOUR_WORDS.with(|c| *c.borrow_mut() = v); }
-pub fn g__INSTRUMENT_COUNTS() -> Py { ensure_init(); G__INSTRUMENT_COUNTS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__INSTRUMENT_COUNTS(v: Py) { ensure_init(); G__INSTRUMENT_COUNTS.with(|c| *c.borrow_mut() = v); }
-pub fn g__KIND_ASKS() -> Py { ensure_init(); G__KIND_ASKS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__KIND_ASKS(v: Py) { ensure_init(); G__KIND_ASKS.with(|c| *c.borrow_mut() = v); }
-pub fn g__KIND_WORDS() -> Py { ensure_init(); G__KIND_WORDS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__KIND_WORDS(v: Py) { ensure_init(); G__KIND_WORDS.with(|c| *c.borrow_mut() = v); }
-pub fn g__LENGTH_AVOID() -> Py { ensure_init(); G__LENGTH_AVOID.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__LENGTH_AVOID(v: Py) { ensure_init(); G__LENGTH_AVOID.with(|c| *c.borrow_mut() = v); }
-pub fn g__LIKE_A_GENRE() -> Py { ensure_init(); G__LIKE_A_GENRE.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__LIKE_A_GENRE(v: Py) { ensure_init(); G__LIKE_A_GENRE.with(|c| *c.borrow_mut() = v); }
-pub fn g__LIKING() -> Py { ensure_init(); G__LIKING.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__LIKING(v: Py) { ensure_init(); G__LIKING.with(|c| *c.borrow_mut() = v); }
-pub fn g__LIMIT_CUE() -> Py { ensure_init(); G__LIMIT_CUE.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__LIMIT_CUE(v: Py) { ensure_init(); G__LIMIT_CUE.with(|c| *c.borrow_mut() = v); }
-pub fn g__LONGER_ASK() -> Py { ensure_init(); G__LONGER_ASK.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__LONGER_ASK(v: Py) { ensure_init(); G__LONGER_ASK.with(|c| *c.borrow_mut() = v); }
-pub fn g__LONGER_NOT_THIS() -> Py { ensure_init(); G__LONGER_NOT_THIS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__LONGER_NOT_THIS(v: Py) { ensure_init(); G__LONGER_NOT_THIS.with(|c| *c.borrow_mut() = v); }
-pub fn g__LOOKING_FOR_THE_THING() -> Py { ensure_init(); G__LOOKING_FOR_THE_THING.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__LOOKING_FOR_THE_THING(v: Py) { ensure_init(); G__LOOKING_FOR_THE_THING.with(|c| *c.borrow_mut() = v); }
-pub fn g__MACHINE_SHAPES() -> Py { ensure_init(); G__MACHINE_SHAPES.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__MACHINE_SHAPES(v: Py) { ensure_init(); G__MACHINE_SHAPES.with(|c| *c.borrow_mut() = v); }
-pub fn g__MINUTES() -> Py { ensure_init(); G__MINUTES.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__MINUTES(v: Py) { ensure_init(); G__MINUTES.with(|c| *c.borrow_mut() = v); }
-pub fn g__MUSIC_ALL() -> Py { ensure_init(); G__MUSIC_ALL.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__MUSIC_ALL(v: Py) { ensure_init(); G__MUSIC_ALL.with(|c| *c.borrow_mut() = v); }
-pub fn g__MUSIC_ASKS() -> Py { ensure_init(); G__MUSIC_ASKS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__MUSIC_ASKS(v: Py) { ensure_init(); G__MUSIC_ASKS.with(|c| *c.borrow_mut() = v); }
-pub fn g__MUSIC_ELSEWHERE() -> Py { ensure_init(); G__MUSIC_ELSEWHERE.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__MUSIC_ELSEWHERE(v: Py) { ensure_init(); G__MUSIC_ELSEWHERE.with(|c| *c.borrow_mut() = v); }
-pub fn g__MUSIC_GEAR() -> Py { ensure_init(); G__MUSIC_GEAR.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__MUSIC_GEAR(v: Py) { ensure_init(); G__MUSIC_GEAR.with(|c| *c.borrow_mut() = v); }
-pub fn g__MUSIC_TERM_KEY() -> Py { ensure_init(); G__MUSIC_TERM_KEY.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__MUSIC_TERM_KEY(v: Py) { ensure_init(); G__MUSIC_TERM_KEY.with(|c| *c.borrow_mut() = v); }
-pub fn g__MUSIC_WORD_BESIDE() -> Py { ensure_init(); G__MUSIC_WORD_BESIDE.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__MUSIC_WORD_BESIDE(v: Py) { ensure_init(); G__MUSIC_WORD_BESIDE.with(|c| *c.borrow_mut() = v); }
-pub fn g__NEAR_ME() -> Py { ensure_init(); G__NEAR_ME.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__NEAR_ME(v: Py) { ensure_init(); G__NEAR_ME.with(|c| *c.borrow_mut() = v); }
-pub fn g__NEEDS_A_MUSIC_WORD() -> Py { ensure_init(); G__NEEDS_A_MUSIC_WORD.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__NEEDS_A_MUSIC_WORD(v: Py) { ensure_init(); G__NEEDS_A_MUSIC_WORD.with(|c| *c.borrow_mut() = v); }
-pub fn g__NOTHING_TO_BAKE() -> Py { ensure_init(); G__NOTHING_TO_BAKE.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__NOTHING_TO_BAKE(v: Py) { ensure_init(); G__NOTHING_TO_BAKE.with(|c| *c.borrow_mut() = v); }
-pub fn g__NOT_A_VERSE_ASK() -> Py { ensure_init(); G__NOT_A_VERSE_ASK.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__NOT_A_VERSE_ASK(v: Py) { ensure_init(); G__NOT_A_VERSE_ASK.with(|c| *c.borrow_mut() = v); }
-pub fn g__NO_SUBJECT() -> Py { ensure_init(); G__NO_SUBJECT.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__NO_SUBJECT(v: Py) { ensure_init(); G__NO_SUBJECT.with(|c| *c.borrow_mut() = v); }
-pub fn g__OFFERED() -> Py { ensure_init(); G__OFFERED.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__OFFERED(v: Py) { ensure_init(); G__OFFERED.with(|c| *c.borrow_mut() = v); }
-pub fn g__OFFER_TAIL() -> Py { ensure_init(); G__OFFER_TAIL.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__OFFER_TAIL(v: Py) { ensure_init(); G__OFFER_TAIL.with(|c| *c.borrow_mut() = v); }
-pub fn g__OTHER_FORM_WORDS() -> Py { ensure_init(); G__OTHER_FORM_WORDS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__OTHER_FORM_WORDS(v: Py) { ensure_init(); G__OTHER_FORM_WORDS.with(|c| *c.borrow_mut() = v); }
-pub fn g__PAINTED_FAULTS() -> Py { ensure_init(); G__PAINTED_FAULTS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__PAINTED_FAULTS(v: Py) { ensure_init(); G__PAINTED_FAULTS.with(|c| *c.borrow_mut() = v); }
-pub fn g__PAINTED_PHRASES() -> Py { ensure_init(); G__PAINTED_PHRASES.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__PAINTED_PHRASES(v: Py) { ensure_init(); G__PAINTED_PHRASES.with(|c| *c.borrow_mut() = v); }
-pub fn g__PAINTED_SURFACES() -> Py { ensure_init(); G__PAINTED_SURFACES.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__PAINTED_SURFACES(v: Py) { ensure_init(); G__PAINTED_SURFACES.with(|c| *c.borrow_mut() = v); }
-pub fn g__PAINTED_THINGS() -> Py { ensure_init(); G__PAINTED_THINGS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__PAINTED_THINGS(v: Py) { ensure_init(); G__PAINTED_THINGS.with(|c| *c.borrow_mut() = v); }
-pub fn g__PAINT_AS_A_THING() -> Py { ensure_init(); G__PAINT_AS_A_THING.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__PAINT_AS_A_THING(v: Py) { ensure_init(); G__PAINT_AS_A_THING.with(|c| *c.borrow_mut() = v); }
-pub fn g__PAINT_COLOURS() -> Py { ensure_init(); G__PAINT_COLOURS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__PAINT_COLOURS(v: Py) { ensure_init(); G__PAINT_COLOURS.with(|c| *c.borrow_mut() = v); }
-pub fn g__PAINT_VERBS() -> Py { ensure_init(); G__PAINT_VERBS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__PAINT_VERBS(v: Py) { ensure_init(); G__PAINT_VERBS.with(|c| *c.borrow_mut() = v); }
-pub fn g__PARTY_ANY() -> Py { ensure_init(); G__PARTY_ANY.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__PARTY_ANY(v: Py) { ensure_init(); G__PARTY_ANY.with(|c| *c.borrow_mut() = v); }
-pub fn g__PARTY_MIDDLE() -> Py { ensure_init(); G__PARTY_MIDDLE.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__PARTY_MIDDLE(v: Py) { ensure_init(); G__PARTY_MIDDLE.with(|c| *c.borrow_mut() = v); }
-pub fn g__PARTY_OLDER() -> Py { ensure_init(); G__PARTY_OLDER.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__PARTY_OLDER(v: Py) { ensure_init(); G__PARTY_OLDER.with(|c| *c.borrow_mut() = v); }
-pub fn g__PARTY_TINY() -> Py { ensure_init(); G__PARTY_TINY.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__PARTY_TINY(v: Py) { ensure_init(); G__PARTY_TINY.with(|c| *c.borrow_mut() = v); }
-pub fn g__PICK_AVOID() -> Py { ensure_init(); G__PICK_AVOID.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__PICK_AVOID(v: Py) { ensure_init(); G__PICK_AVOID.with(|c| *c.borrow_mut() = v); }
-pub fn g__PICK_PARENT_VERB() -> Py { ensure_init(); G__PICK_PARENT_VERB.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__PICK_PARENT_VERB(v: Py) { ensure_init(); G__PICK_PARENT_VERB.with(|c| *c.borrow_mut() = v); }
-pub fn g__PLACEHOLDER_SUBJECT() -> Py { ensure_init(); G__PLACEHOLDER_SUBJECT.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__PLACEHOLDER_SUBJECT(v: Py) { ensure_init(); G__PLACEHOLDER_SUBJECT.with(|c| *c.borrow_mut() = v); }
-pub fn g__PLATFORMS() -> Py { ensure_init(); G__PLATFORMS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__PLATFORMS(v: Py) { ensure_init(); G__PLATFORMS.with(|c| *c.borrow_mut() = v); }
-pub fn g__PLAYING_NOT_WATCHING() -> Py { ensure_init(); G__PLAYING_NOT_WATCHING.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__PLAYING_NOT_WATCHING(v: Py) { ensure_init(); G__PLAYING_NOT_WATCHING.with(|c| *c.borrow_mut() = v); }
-pub fn g__PODCAST_FOR_KIDS() -> Py { ensure_init(); G__PODCAST_FOR_KIDS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__PODCAST_FOR_KIDS(v: Py) { ensure_init(); G__PODCAST_FOR_KIDS.with(|c| *c.borrow_mut() = v); }
-pub fn g__PODCAST_NOT_THIS() -> Py { ensure_init(); G__PODCAST_NOT_THIS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__PODCAST_NOT_THIS(v: Py) { ensure_init(); G__PODCAST_NOT_THIS.with(|c| *c.borrow_mut() = v); }
-pub fn g__PODCAST_SUBJECTS() -> Py { ensure_init(); G__PODCAST_SUBJECTS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__PODCAST_SUBJECTS(v: Py) { ensure_init(); G__PODCAST_SUBJECTS.with(|c| *c.borrow_mut() = v); }
-pub fn g__POEM_FORM() -> Py { ensure_init(); G__POEM_FORM.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__POEM_FORM(v: Py) { ensure_init(); G__POEM_FORM.with(|c| *c.borrow_mut() = v); }
-pub fn g__POSSESSIVE() -> Py { ensure_init(); G__POSSESSIVE.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__POSSESSIVE(v: Py) { ensure_init(); G__POSSESSIVE.with(|c| *c.borrow_mut() = v); }
-pub fn g__PRACTICE_ASKS() -> Py { ensure_init(); G__PRACTICE_ASKS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__PRACTICE_ASKS(v: Py) { ensure_init(); G__PRACTICE_ASKS.with(|c| *c.borrow_mut() = v); }
-pub fn g__PRACTICE_CORE() -> Py { ensure_init(); G__PRACTICE_CORE.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__PRACTICE_CORE(v: Py) { ensure_init(); G__PRACTICE_CORE.with(|c| *c.borrow_mut() = v); }
-pub fn g__PRACTICE_INSTRUMENTS() -> Py { ensure_init(); G__PRACTICE_INSTRUMENTS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__PRACTICE_INSTRUMENTS(v: Py) { ensure_init(); G__PRACTICE_INSTRUMENTS.with(|c| *c.borrow_mut() = v); }
-pub fn g__PRACTICE_READ_MUSIC() -> Py { ensure_init(); G__PRACTICE_READ_MUSIC.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__PRACTICE_READ_MUSIC(v: Py) { ensure_init(); G__PRACTICE_READ_MUSIC.with(|c| *c.borrow_mut() = v); }
-pub fn g__READ_MUSIC_WORDS() -> Py { ensure_init(); G__READ_MUSIC_WORDS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__READ_MUSIC_WORDS(v: Py) { ensure_init(); G__READ_MUSIC_WORDS.with(|c| *c.borrow_mut() = v); }
-pub fn g__REFUSED_KIND() -> Py { ensure_init(); G__REFUSED_KIND.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__REFUSED_KIND(v: Py) { ensure_init(); G__REFUSED_KIND.with(|c| *c.borrow_mut() = v); }
-pub fn g__RESERVING_PHRASES() -> Py { ensure_init(); G__RESERVING_PHRASES.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__RESERVING_PHRASES(v: Py) { ensure_init(); G__RESERVING_PHRASES.with(|c| *c.borrow_mut() = v); }
-pub fn g__SAYS_WHAT_IS_ON() -> Py { ensure_init(); G__SAYS_WHAT_IS_ON.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__SAYS_WHAT_IS_ON(v: Py) { ensure_init(); G__SAYS_WHAT_IS_ON.with(|c| *c.borrow_mut() = v); }
-pub fn g__SECOND_STORY() -> Py { ensure_init(); G__SECOND_STORY.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__SECOND_STORY(v: Py) { ensure_init(); G__SECOND_STORY.with(|c| *c.borrow_mut() = v); }
-pub fn g__SECOND_VERSE_ABOUT() -> Py { ensure_init(); G__SECOND_VERSE_ABOUT.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__SECOND_VERSE_ABOUT(v: Py) { ensure_init(); G__SECOND_VERSE_ABOUT.with(|c| *c.borrow_mut() = v); }
-pub fn g__SHOW_SUBJECT_LEAD() -> Py { ensure_init(); G__SHOW_SUBJECT_LEAD.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__SHOW_SUBJECT_LEAD(v: Py) { ensure_init(); G__SHOW_SUBJECT_LEAD.with(|c| *c.borrow_mut() = v); }
-pub fn g__SHOW_YES_OR_NO() -> Py { ensure_init(); G__SHOW_YES_OR_NO.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__SHOW_YES_OR_NO(v: Py) { ensure_init(); G__SHOW_YES_OR_NO.with(|c| *c.borrow_mut() = v); }
-pub fn g__SMALL() -> Py { ensure_init(); G__SMALL.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__SMALL(v: Py) { ensure_init(); G__SMALL.with(|c| *c.borrow_mut() = v); }
-pub fn g__SUBJECT_BOOK_ORDER() -> Py { ensure_init(); G__SUBJECT_BOOK_ORDER.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__SUBJECT_BOOK_ORDER(v: Py) { ensure_init(); G__SUBJECT_BOOK_ORDER.with(|c| *c.borrow_mut() = v); }
-pub fn g__SUBJECT_UNCOVERED_ORDER() -> Py { ensure_init(); G__SUBJECT_UNCOVERED_ORDER.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__SUBJECT_UNCOVERED_ORDER(v: Py) { ensure_init(); G__SUBJECT_UNCOVERED_ORDER.with(|c| *c.borrow_mut() = v); }
-pub fn g__SUITABILITY_ASK() -> Py { ensure_init(); G__SUITABILITY_ASK.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__SUITABILITY_ASK(v: Py) { ensure_init(); G__SUITABILITY_ASK.with(|c| *c.borrow_mut() = v); }
-pub fn g__TEEN_WORDS() -> Py { ensure_init(); G__TEEN_WORDS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__TEEN_WORDS(v: Py) { ensure_init(); G__TEEN_WORDS.with(|c| *c.borrow_mut() = v); }
-pub fn g__THE_COUNT_AGAIN() -> Py { ensure_init(); G__THE_COUNT_AGAIN.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__THE_COUNT_AGAIN(v: Py) { ensure_init(); G__THE_COUNT_AGAIN.with(|c| *c.borrow_mut() = v); }
-pub fn g__THE_COUNT_WORDS() -> Py { ensure_init(); G__THE_COUNT_WORDS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__THE_COUNT_WORDS(v: Py) { ensure_init(); G__THE_COUNT_WORDS.with(|c| *c.borrow_mut() = v); }
-pub fn g__THE_FORM_AFTER_THE_COUNT() -> Py { ensure_init(); G__THE_FORM_AFTER_THE_COUNT.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__THE_FORM_AFTER_THE_COUNT(v: Py) { ensure_init(); G__THE_FORM_AFTER_THE_COUNT.with(|c| *c.borrow_mut() = v); }
-pub fn g__THE_FORM_NAMED() -> Py { ensure_init(); G__THE_FORM_NAMED.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__THE_FORM_NAMED(v: Py) { ensure_init(); G__THE_FORM_NAMED.with(|c| *c.borrow_mut() = v); }
-pub fn g__THE_OFFICE_IS() -> Py { ensure_init(); G__THE_OFFICE_IS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__THE_OFFICE_IS(v: Py) { ensure_init(); G__THE_OFFICE_IS.with(|c| *c.borrow_mut() = v); }
-pub fn g__THE_SUBJECT_IN_A_LEAD() -> Py { ensure_init(); G__THE_SUBJECT_IN_A_LEAD.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__THE_SUBJECT_IN_A_LEAD(v: Py) { ensure_init(); G__THE_SUBJECT_IN_A_LEAD.with(|c| *c.borrow_mut() = v); }
-pub fn g__UNDER() -> Py { ensure_init(); G__UNDER.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__UNDER(v: Py) { ensure_init(); G__UNDER.with(|c| *c.borrow_mut() = v); }
-pub fn g__VERSE_IN_THE_LAST_TURN() -> Py { ensure_init(); G__VERSE_IN_THE_LAST_TURN.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__VERSE_IN_THE_LAST_TURN(v: Py) { ensure_init(); G__VERSE_IN_THE_LAST_TURN.with(|c| *c.borrow_mut() = v); }
-pub fn g__WET_PHRASES() -> Py { ensure_init(); G__WET_PHRASES.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__WET_PHRASES(v: Py) { ensure_init(); G__WET_PHRASES.with(|c| *c.borrow_mut() = v); }
-pub fn g__WET_WORDS() -> Py { ensure_init(); G__WET_WORDS.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__WET_WORDS(v: Py) { ensure_init(); G__WET_WORDS.with(|c| *c.borrow_mut() = v); }
-pub fn g__WORD_AGES() -> Py { ensure_init(); G__WORD_AGES.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__WORD_AGES(v: Py) { ensure_init(); G__WORD_AGES.with(|c| *c.borrow_mut() = v); }
-pub fn g__e() -> Py { ensure_init(); G__e.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__e(v: Py) { ensure_init(); G__e.with(|c| *c.borrow_mut() = v); }
-pub fn g__form_name() -> Py { ensure_init(); G__form_name.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__form_name(v: Py) { ensure_init(); G__form_name.with(|c| *c.borrow_mut() = v); }
-pub fn g__form_word() -> Py { ensure_init(); G__form_word.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__form_word(v: Py) { ensure_init(); G__form_word.with(|c| *c.borrow_mut() = v); }
-pub fn g__haiku() -> Py { ensure_init(); G__haiku.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__haiku(v: Py) { ensure_init(); G__haiku.with(|c| *c.borrow_mut() = v); }
-pub fn g__limerick() -> Py { ensure_init(); G__limerick.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__limerick(v: Py) { ensure_init(); G__limerick.with(|c| *c.borrow_mut() = v); }
-pub fn g__mood() -> Py { ensure_init(); G__mood.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__mood(v: Py) { ensure_init(); G__mood.with(|c| *c.borrow_mut() = v); }
-pub fn g__podcast_reply() -> Py { ensure_init(); G__podcast_reply.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__podcast_reply(v: Py) { ensure_init(); G__podcast_reply.with(|c| *c.borrow_mut() = v); }
-pub fn g__podcast_subject() -> Py { ensure_init(); G__podcast_subject.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__podcast_subject(v: Py) { ensure_init(); G__podcast_subject.with(|c| *c.borrow_mut() = v); }
-pub fn g__podcast_words() -> Py { ensure_init(); G__podcast_words.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__podcast_words(v: Py) { ensure_init(); G__podcast_words.with(|c| *c.borrow_mut() = v); }
-pub fn g__poem() -> Py { ensure_init(); G__poem.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__poem(v: Py) { ensure_init(); G__poem.with(|c| *c.borrow_mut() = v); }
-pub fn g__rap() -> Py { ensure_init(); G__rap.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__rap(v: Py) { ensure_init(); G__rap.with(|c| *c.borrow_mut() = v); }
-pub fn g__song() -> Py { ensure_init(); G__song.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__song(v: Py) { ensure_init(); G__song.with(|c| *c.borrow_mut() = v); }
-pub fn g__story() -> Py { ensure_init(); G__story.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__story(v: Py) { ensure_init(); G__story.with(|c| *c.borrow_mut() = v); }
-pub fn g__word() -> Py { ensure_init(); G__word.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s__word(v: Py) { ensure_init(); G__word.with(|c| *c.borrow_mut() = v); }
-pub fn g_asks_for_one_more() -> Py { ensure_init(); G_asks_for_one_more.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_asks_for_one_more(v: Py) { ensure_init(); G_asks_for_one_more.with(|c| *c.borrow_mut() = v); }
-pub fn g_entry() -> Py { ensure_init(); G_entry.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_entry(v: Py) { ensure_init(); G_entry.with(|c| *c.borrow_mut() = v); }
-pub fn g_owns_the_deed() -> Py { ensure_init(); G_owns_the_deed.with(|c| c.borrow().clone()) }
-#[allow(non_snake_case)]
-pub fn s_owns_the_deed(v: Py) { ensure_init(); G_owns_the_deed.with(|c| *c.borrow_mut() = v); }
+pub fn g_ABSTRACT() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("ABSTRACT"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_ABSTRACT(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("ABSTRACT"), v); }
+pub fn g_ACTIVITY_ASKS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("ACTIVITY_ASKS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_ACTIVITY_ASKS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("ACTIVITY_ASKS"), v); }
+pub fn g_ACTIVITY_OTHER_NAMES() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("ACTIVITY_OTHER_NAMES"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_ACTIVITY_OTHER_NAMES(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("ACTIVITY_OTHER_NAMES"), v); }
+pub fn g_ACTIVITY_START() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("ACTIVITY_START"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_ACTIVITY_START(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("ACTIVITY_START"), v); }
+pub fn g_ACTIVITY_VERBS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("ACTIVITY_VERBS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_ACTIVITY_VERBS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("ACTIVITY_VERBS"), v); }
+pub fn g_AFTER_TITLE_WORDS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("AFTER_TITLE_WORDS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_AFTER_TITLE_WORDS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("AFTER_TITLE_WORDS"), v); }
+pub fn g_AGE_ASK() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("AGE_ASK"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_AGE_ASK(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("AGE_ASK"), v); }
+pub fn g_ANIMATION_ROWS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("ANIMATION_ROWS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_ANIMATION_ROWS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("ANIMATION_ROWS"), v); }
+pub fn g_ANSWERS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("ANSWERS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_ANSWERS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("ANSWERS"), v); }
+pub fn g_ANY_MOODS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("ANY_MOODS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_ANY_MOODS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("ANY_MOODS"), v); }
+pub fn g_ANY_MOOD_ASKS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("ANY_MOOD_ASKS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_ANY_MOOD_ASKS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("ANY_MOOD_ASKS"), v); }
+pub fn g_ASKED_WROTE() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("ASKED_WROTE"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_ASKED_WROTE(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("ASKED_WROTE"), v); }
+pub fn g_ASKING_FIRST() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("ASKING_FIRST"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_ASKING_FIRST(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("ASKING_FIRST"), v); }
+pub fn g_ASKING_TO_WATCH_FOR() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("ASKING_TO_WATCH_FOR"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_ASKING_TO_WATCH_FOR(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("ASKING_TO_WATCH_FOR"), v); }
+pub fn g_ASKS_FOR_A_STORY() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("ASKS_FOR_A_STORY"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_ASKS_FOR_A_STORY(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("ASKS_FOR_A_STORY"), v); }
+pub fn g_ASKS_FOR_ONE() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("ASKS_FOR_ONE"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_ASKS_FOR_ONE(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("ASKS_FOR_ONE"), v); }
+pub fn g_ASKS_THE_BOT() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("ASKS_THE_BOT"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_ASKS_THE_BOT(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("ASKS_THE_BOT"), v); }
+pub fn g_AUTHOR_ALSO() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("AUTHOR_ALSO"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_AUTHOR_ALSO(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("AUTHOR_ALSO"), v); }
+pub fn g_AUTHOR_KEYS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("AUTHOR_KEYS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_AUTHOR_KEYS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("AUTHOR_KEYS"), v); }
+pub fn g_A_LENGTH_MOOD() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("A_LENGTH_MOOD"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_A_LENGTH_MOOD(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("A_LENGTH_MOOD"), v); }
+pub fn g_A_MAKING_UP() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("A_MAKING_UP"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_A_MAKING_UP(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("A_MAKING_UP"), v); }
+pub fn g_A_NEW_ONE_ASKED_FOR() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("A_NEW_ONE_ASKED_FOR"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_A_NEW_ONE_ASKED_FOR(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("A_NEW_ONE_ASKED_FOR"), v); }
+pub fn g_A_PERSON_TO_CONSULT() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("A_PERSON_TO_CONSULT"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_A_PERSON_TO_CONSULT(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("A_PERSON_TO_CONSULT"), v); }
+pub fn g_A_PLACE_NOT_A_WORK() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("A_PLACE_NOT_A_WORK"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_A_PLACE_NOT_A_WORK(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("A_PLACE_NOT_A_WORK"), v); }
+pub fn g_A_QUESTION_BESIDE_THE_REPORT() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("A_QUESTION_BESIDE_THE_REPORT"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_A_QUESTION_BESIDE_THE_REPORT(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("A_QUESTION_BESIDE_THE_REPORT"), v); }
+pub fn g_A_READING_ROUTINE() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("A_READING_ROUTINE"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_A_READING_ROUTINE(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("A_READING_ROUTINE"), v); }
+pub fn g_A_REPEATED_REPORT() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("A_REPEATED_REPORT"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_A_REPEATED_REPORT(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("A_REPEATED_REPORT"), v); }
+pub fn g_A_STORY_ALREADY_HEARD() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("A_STORY_ALREADY_HEARD"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_A_STORY_ALREADY_HEARD(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("A_STORY_ALREADY_HEARD"), v); }
+pub fn g_A_STORY_ALREADY_TOLD() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("A_STORY_ALREADY_TOLD"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_A_STORY_ALREADY_TOLD(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("A_STORY_ALREADY_TOLD"), v); }
+pub fn g_BOOK_AS_VERB() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("BOOK_AS_VERB"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_BOOK_AS_VERB(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("BOOK_AS_VERB"), v); }
+pub fn g_BOOK_AUTHORS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("BOOK_AUTHORS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_BOOK_AUTHORS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("BOOK_AUTHORS"), v); }
+pub fn g_BOOK_GENRES() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("BOOK_GENRES"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_BOOK_GENRES(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("BOOK_GENRES"), v); }
+pub fn g_BOOK_LIKE_ASKS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("BOOK_LIKE_ASKS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_BOOK_LIKE_ASKS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("BOOK_LIKE_ASKS"), v); }
+pub fn g_BOOK_LIKE_THINGS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("BOOK_LIKE_THINGS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_BOOK_LIKE_THINGS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("BOOK_LIKE_THINGS"), v); }
+pub fn g_BOOK_MATCHES() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("BOOK_MATCHES"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_BOOK_MATCHES(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("BOOK_MATCHES"), v); }
+pub fn g_BOOK_MOODS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("BOOK_MOODS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_BOOK_MOODS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("BOOK_MOODS"), v); }
+pub fn g_BRIGHT() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("BRIGHT"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_BRIGHT(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("BRIGHT"), v); }
+pub fn g_BUZZ_ASKS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("BUZZ_ASKS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_BUZZ_ASKS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("BUZZ_ASKS"), v); }
+pub fn g_CALM() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("CALM"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_CALM(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("CALM"), v); }
+pub fn g_CARD() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("CARD"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_CARD(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("CARD"), v); }
+pub fn g_CARD_ASKS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("CARD_ASKS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_CARD_ASKS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("CARD_ASKS"), v); }
+pub fn g_CARD_GAMES() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("CARD_GAMES"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_CARD_GAMES(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("CARD_GAMES"), v); }
+pub fn g_CARD_OCCASIONS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("CARD_OCCASIONS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_CARD_OCCASIONS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("CARD_OCCASIONS"), v); }
+pub fn g_CHARACTER_NAME_RULES() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("CHARACTER_NAME_RULES"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_CHARACTER_NAME_RULES(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("CHARACTER_NAME_RULES"), v); }
+pub fn g_CHILD() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("CHILD"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_CHILD(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("CHILD"), v); }
+pub fn g_CHILD_STORIES() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("CHILD_STORIES"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_CHILD_STORIES(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("CHILD_STORIES"), v); }
+pub fn g_CHILD_STORY_OPENINGS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("CHILD_STORY_OPENINGS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_CHILD_STORY_OPENINGS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("CHILD_STORY_OPENINGS"), v); }
+pub fn g_CHILD_WORDS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("CHILD_WORDS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_CHILD_WORDS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("CHILD_WORDS"), v); }
+pub fn g_CINEMA() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("CINEMA"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_CINEMA(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("CINEMA"), v); }
+pub fn g_CINEMA_WORDS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("CINEMA_WORDS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_CINEMA_WORDS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("CINEMA_WORDS"), v); }
+pub fn g_CONNECTORS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("CONNECTORS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_CONNECTORS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("CONNECTORS"), v); }
+pub fn g_CONTRACTIONS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("CONTRACTIONS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_CONTRACTIONS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("CONTRACTIONS"), v); }
+pub fn g_DOCUMENTARY_WORDS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("DOCUMENTARY_WORDS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_DOCUMENTARY_WORDS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("DOCUMENTARY_WORDS"), v); }
+pub fn g_EASY_FILM_LIST() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("EASY_FILM_LIST"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_EASY_FILM_LIST(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("EASY_FILM_LIST"), v); }
+pub fn g_EMPTY_SUBJECT() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("EMPTY_SUBJECT"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_EMPTY_SUBJECT(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("EMPTY_SUBJECT"), v); }
+pub fn g_ENTRIES() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("ENTRIES"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_ENTRIES(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("ENTRIES"), v); }
+pub fn g_FILM_ASK_WORDS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("FILM_ASK_WORDS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_FILM_ASK_WORDS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("FILM_ASK_WORDS"), v); }
+pub fn g_FILM_GENRE_WORDS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("FILM_GENRE_WORDS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_FILM_GENRE_WORDS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("FILM_GENRE_WORDS"), v); }
+pub fn g_FILM_KINDS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("FILM_KINDS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_FILM_KINDS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("FILM_KINDS"), v); }
+pub fn g_FILM_KIND_WORDS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("FILM_KIND_WORDS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_FILM_KIND_WORDS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("FILM_KIND_WORDS"), v); }
+pub fn g_FILM_MATCHES() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("FILM_MATCHES"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_FILM_MATCHES(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("FILM_MATCHES"), v); }
+pub fn g_FILM_MINUTES() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("FILM_MINUTES"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_FILM_MINUTES(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("FILM_MINUTES"), v); }
+pub fn g_FILM_MOODS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("FILM_MOODS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_FILM_MOODS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("FILM_MOODS"), v); }
+pub fn g_FILM_RUNTIME() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("FILM_RUNTIME"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_FILM_RUNTIME(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("FILM_RUNTIME"), v); }
+pub fn g_FILM_SAID() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("FILM_SAID"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_FILM_SAID(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("FILM_SAID"), v); }
+pub fn g_FORMS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("FORMS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_FORMS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("FORMS"), v); }
+pub fn g_FREE_TELLS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("FREE_TELLS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_FREE_TELLS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("FREE_TELLS"), v); }
+pub fn g_GAME_ASKS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("GAME_ASKS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_GAME_ASKS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("GAME_ASKS"), v); }
+pub fn g_GAME_JUDGED() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("GAME_JUDGED"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_GAME_JUDGED(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("GAME_JUDGED"), v); }
+pub fn g_GAME_KINDS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("GAME_KINDS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_GAME_KINDS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("GAME_KINDS"), v); }
+pub fn g_GAME_PICKS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("GAME_PICKS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_GAME_PICKS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("GAME_PICKS"), v); }
+pub fn g_GAME_SOLO_ASKS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("GAME_SOLO_ASKS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_GAME_SOLO_ASKS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("GAME_SOLO_ASKS"), v); }
+pub fn g_GAME_SOLO_WORDS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("GAME_SOLO_WORDS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_GAME_SOLO_WORDS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("GAME_SOLO_WORDS"), v); }
+pub fn g_GENERIC_LIMERICK() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("GENERIC_LIMERICK"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_GENERIC_LIMERICK(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("GENERIC_LIMERICK"), v); }
+pub fn g_GENERIC_POEM() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("GENERIC_POEM"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_GENERIC_POEM(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("GENERIC_POEM"), v); }
+pub fn g_GENERIC_POEM_TWO() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("GENERIC_POEM_TWO"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_GENERIC_POEM_TWO(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("GENERIC_POEM_TWO"), v); }
+pub fn g_GENERIC_RAP() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("GENERIC_RAP"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_GENERIC_RAP(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("GENERIC_RAP"), v); }
+pub fn g_GENERIC_SONG() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("GENERIC_SONG"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_GENERIC_SONG(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("GENERIC_SONG"), v); }
+pub fn g_GENERIC_STORY_THING() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("GENERIC_STORY_THING"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_GENERIC_STORY_THING(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("GENERIC_STORY_THING"), v); }
+pub fn g_GENRE_NAMES_BEFORE() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("GENRE_NAMES_BEFORE"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_GENRE_NAMES_BEFORE(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("GENRE_NAMES_BEFORE"), v); }
+pub fn g_GENRE_NOT_DESCRIBED_BY() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("GENRE_NOT_DESCRIBED_BY"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_GENRE_NOT_DESCRIBED_BY(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("GENRE_NOT_DESCRIBED_BY"), v); }
+pub fn g_GENRE_START() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("GENRE_START"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_GENRE_START(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("GENRE_START"), v); }
+pub fn g_GENRE_WORDS_AFTER() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("GENRE_WORDS_AFTER"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_GENRE_WORDS_AFTER(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("GENRE_WORDS_AFTER"), v); }
+pub fn g_GENTLE_LIST() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("GENTLE_LIST"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_GENTLE_LIST(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("GENTLE_LIST"), v); }
+pub fn g_GRAVE() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("GRAVE"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_GRAVE(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("GRAVE"), v); }
+pub fn g_HABIT_ASKS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("HABIT_ASKS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_HABIT_ASKS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("HABIT_ASKS"), v); }
+pub fn g_HAIKU() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("HAIKU"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_HAIKU(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("HAIKU"), v); }
+pub fn g_HEARD_IT_ALREADY() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("HEARD_IT_ALREADY"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_HEARD_IT_ALREADY(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("HEARD_IT_ALREADY"), v); }
+pub fn g_ING_NOUNS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("ING_NOUNS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_ING_NOUNS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("ING_NOUNS"), v); }
+pub fn g_IN_TUNE() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("IN_TUNE"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_IN_TUNE(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("IN_TUNE"), v); }
+pub fn g_JUDGE_ASKS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("JUDGE_ASKS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_JUDGE_ASKS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("JUDGE_ASKS"), v); }
+pub fn g_JUDGE_WORDS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("JUDGE_WORDS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_JUDGE_WORDS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("JUDGE_WORDS"), v); }
+pub fn g_KIND_AVOID() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("KIND_AVOID"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_KIND_AVOID(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("KIND_AVOID"), v); }
+pub fn g_KIND_REFUSED_AFTER() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("KIND_REFUSED_AFTER"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_KIND_REFUSED_AFTER(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("KIND_REFUSED_AFTER"), v); }
+pub fn g_LIKE_A_NAMED_BOOK() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("LIKE_A_NAMED_BOOK"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_LIKE_A_NAMED_BOOK(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("LIKE_A_NAMED_BOOK"), v); }
+pub fn g_LIMERICKS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("LIMERICKS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_LIMERICKS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("LIMERICKS"), v); }
+pub fn g_LIMIT_WORDS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("LIMIT_WORDS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_LIMIT_WORDS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("LIMIT_WORDS"), v); }
+pub fn g_MAKING_UP() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("MAKING_UP"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_MAKING_UP(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("MAKING_UP"), v); }
+pub fn g_MEDIUM_WORDS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("MEDIUM_WORDS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_MEDIUM_WORDS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("MEDIUM_WORDS"), v); }
+pub fn g_MOODS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("MOODS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_MOODS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("MOODS"), v); }
+pub fn g_MOOD_BY_WORD() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("MOOD_BY_WORD"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_MOOD_BY_WORD(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("MOOD_BY_WORD"), v); }
+pub fn g_MOOD_GLUE() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("MOOD_GLUE"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_MOOD_GLUE(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("MOOD_GLUE"), v); }
+pub fn g_MOOD_ORDER() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("MOOD_ORDER"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_MOOD_ORDER(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("MOOD_ORDER"), v); }
+pub fn g_MOOD_SIGNALS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("MOOD_SIGNALS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_MOOD_SIGNALS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("MOOD_SIGNALS"), v); }
+pub fn g_MOOD_SIGNAL_SET() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("MOOD_SIGNAL_SET"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_MOOD_SIGNAL_SET(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("MOOD_SIGNAL_SET"), v); }
+pub fn g_MOOD_TABLES() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("MOOD_TABLES"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_MOOD_TABLES(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("MOOD_TABLES"), v); }
+pub fn g_MOOD_WORDS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("MOOD_WORDS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_MOOD_WORDS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("MOOD_WORDS"), v); }
+pub fn g_MUSIC_KINDS_AFTER() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("MUSIC_KINDS_AFTER"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_MUSIC_KINDS_AFTER(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("MUSIC_KINDS_AFTER"), v); }
+pub fn g_MUSIC_PAIRS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("MUSIC_PAIRS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_MUSIC_PAIRS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("MUSIC_PAIRS"), v); }
+pub fn g_MUSIC_START_ASKS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("MUSIC_START_ASKS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_MUSIC_START_ASKS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("MUSIC_START_ASKS"), v); }
+pub fn g_MUSIC_TERMS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("MUSIC_TERMS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_MUSIC_TERMS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("MUSIC_TERMS"), v); }
+pub fn g_NAMED_GAME_TITLES() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("NAMED_GAME_TITLES"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_NAMED_GAME_TITLES(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("NAMED_GAME_TITLES"), v); }
+pub fn g_NATIONAL_CINEMA() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("NATIONAL_CINEMA"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_NATIONAL_CINEMA(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("NATIONAL_CINEMA"), v); }
+pub fn g_NEGATORS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("NEGATORS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_NEGATORS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("NEGATORS"), v); }
+pub fn g_NEXT_EVIDENCE() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("NEXT_EVIDENCE"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_NEXT_EVIDENCE(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("NEXT_EVIDENCE"), v); }
+pub fn g_NICK_FIRST() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("NICK_FIRST"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_NICK_FIRST(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("NICK_FIRST"), v); }
+pub fn g_NICK_LAST() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("NICK_LAST"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_NICK_LAST(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("NICK_LAST"), v); }
+pub fn g_NOT_A_GAME_PICK() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("NOT_A_GAME_PICK"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_NOT_A_GAME_PICK(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("NOT_A_GAME_PICK"), v); }
+pub fn g_NOT_A_MOOD_PICK() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("NOT_A_MOOD_PICK"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_NOT_A_MOOD_PICK(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("NOT_A_MOOD_PICK"), v); }
+pub fn g_NOT_A_TURN_DOWN() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("NOT_A_TURN_DOWN"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_NOT_A_TURN_DOWN(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("NOT_A_TURN_DOWN"), v); }
+pub fn g_NOT_A_VERDICT() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("NOT_A_VERDICT"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_NOT_A_VERDICT(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("NOT_A_VERDICT"), v); }
+pub fn g_NOT_WATCHING() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("NOT_WATCHING"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_NOT_WATCHING(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("NOT_WATCHING"), v); }
+pub fn g_NO_RHYME() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("NO_RHYME"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_NO_RHYME(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("NO_RHYME"), v); }
+pub fn g_NO_SUBJECT_LEADING() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("NO_SUBJECT_LEADING"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_NO_SUBJECT_LEADING(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("NO_SUBJECT_LEADING"), v); }
+pub fn g_NO_SUBJECT_VERSE() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("NO_SUBJECT_VERSE"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_NO_SUBJECT_VERSE(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("NO_SUBJECT_VERSE"), v); }
+pub fn g_NO_THING_IN_A_VERSE() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("NO_THING_IN_A_VERSE"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_NO_THING_IN_A_VERSE(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("NO_THING_IN_A_VERSE"), v); }
+pub fn g_OCCASION() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("OCCASION"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_OCCASION(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("OCCASION"), v); }
+pub fn g_ORDINARY_GENRES() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("ORDINARY_GENRES"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_ORDINARY_GENRES(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("ORDINARY_GENRES"), v); }
+pub fn g_OTHER_SUBJECT() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("OTHER_SUBJECT"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_OTHER_SUBJECT(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("OTHER_SUBJECT"), v); }
+pub fn g_PEOPLE() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("PEOPLE"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_PEOPLE(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("PEOPLE"), v); }
+pub fn g_PICKS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("PICKS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_PICKS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("PICKS"), v); }
+pub fn g_PICK_ASK() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("PICK_ASK"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_PICK_ASK(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("PICK_ASK"), v); }
+pub fn g_PICK_ASKS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("PICK_ASKS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_PICK_ASKS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("PICK_ASKS"), v); }
+pub fn g_PICK_MEDIUM() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("PICK_MEDIUM"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_PICK_MEDIUM(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("PICK_MEDIUM"), v); }
+pub fn g_PICK_MOODS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("PICK_MOODS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_PICK_MOODS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("PICK_MOODS"), v); }
+pub fn g_PICK_OTHER_MEDIUM() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("PICK_OTHER_MEDIUM"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_PICK_OTHER_MEDIUM(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("PICK_OTHER_MEDIUM"), v); }
+pub fn g_PICK_REACT() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("PICK_REACT"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_PICK_REACT(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("PICK_REACT"), v); }
+pub fn g_PICK_SUBJECT() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("PICK_SUBJECT"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_PICK_SUBJECT(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("PICK_SUBJECT"), v); }
+pub fn g_PICK_TITLES() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("PICK_TITLES"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_PICK_TITLES(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("PICK_TITLES"), v); }
+pub fn g_PICK_WHO() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("PICK_WHO"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_PICK_WHO(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("PICK_WHO"), v); }
+pub fn g_PICK_WORDS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("PICK_WORDS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_PICK_WORDS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("PICK_WORDS"), v); }
+pub fn g_PLAIN_SENSE() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("PLAIN_SENSE"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_PLAIN_SENSE(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("PLAIN_SENSE"), v); }
+pub fn g_PLAIN_TITLES() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("PLAIN_TITLES"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_PLAIN_TITLES(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("PLAIN_TITLES"), v); }
+pub fn g_PODCAST_CRIME() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("PODCAST_CRIME"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_PODCAST_CRIME(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("PODCAST_CRIME"), v); }
+pub fn g_PODCAST_FUNNY() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("PODCAST_FUNNY"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_PODCAST_FUNNY(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("PODCAST_FUNNY"), v); }
+pub fn g_PODCAST_MOODS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("PODCAST_MOODS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_PODCAST_MOODS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("PODCAST_MOODS"), v); }
+pub fn g_POEMS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("POEMS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_POEMS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("POEMS"), v); }
+pub fn g_POSSESSIVE() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("POSSESSIVE"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_POSSESSIVE(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("POSSESSIVE"), v); }
+pub fn g_QUIZ_NAMES() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("QUIZ_NAMES"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_QUIZ_NAMES(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("QUIZ_NAMES"), v); }
+pub fn g_REPORTS_ON_A_FORM() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("REPORTS_ON_A_FORM"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_REPORTS_ON_A_FORM(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("REPORTS_ON_A_FORM"), v); }
+pub fn g_REPORT_BACK() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("REPORT_BACK"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_REPORT_BACK(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("REPORT_BACK"), v); }
+pub fn g_REPORT_ONCE_BACK() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("REPORT_ONCE_BACK"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_REPORT_ONCE_BACK(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("REPORT_ONCE_BACK"), v); }
+pub fn g_REPORT_ONCE_GENERIC() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("REPORT_ONCE_GENERIC"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_REPORT_ONCE_GENERIC(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("REPORT_ONCE_GENERIC"), v); }
+pub fn g_RHYMES_BY_ENDING() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("RHYMES_BY_ENDING"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_RHYMES_BY_ENDING(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("RHYMES_BY_ENDING"), v); }
+pub fn g_SCARE_REFUSED_AFTER() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("SCARE_REFUSED_AFTER"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_SCARE_REFUSED_AFTER(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("SCARE_REFUSED_AFTER"), v); }
+pub fn g_SCARE_TURNED_DOWN() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("SCARE_TURNED_DOWN"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_SCARE_TURNED_DOWN(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("SCARE_TURNED_DOWN"), v); }
+pub fn g_SCARE_WORDS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("SCARE_WORDS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_SCARE_WORDS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("SCARE_WORDS"), v); }
+pub fn g_SCREEN_TIME() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("SCREEN_TIME"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_SCREEN_TIME(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("SCREEN_TIME"), v); }
+pub fn g_SEEN_ALREADY() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("SEEN_ALREADY"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_SEEN_ALREADY(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("SEEN_ALREADY"), v); }
+pub fn g_SHORTEST_WORDS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("SHORTEST_WORDS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_SHORTEST_WORDS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("SHORTEST_WORDS"), v); }
+pub fn g_SHOW_DOC_ASK_WORDS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("SHOW_DOC_ASK_WORDS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_SHOW_DOC_ASK_WORDS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("SHOW_DOC_ASK_WORDS"), v); }
+pub fn g_SHOW_MEDIUM_WORDS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("SHOW_MEDIUM_WORDS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_SHOW_MEDIUM_WORDS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("SHOW_MEDIUM_WORDS"), v); }
+pub fn g_SHOW_SUBJECTS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("SHOW_SUBJECTS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_SHOW_SUBJECTS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("SHOW_SUBJECTS"), v); }
+pub fn g_SHOW_SUBJECT_AVOID() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("SHOW_SUBJECT_AVOID"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_SHOW_SUBJECT_AVOID(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("SHOW_SUBJECT_AVOID"), v); }
+pub fn g_SHOW_SUBJECT_NAMES() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("SHOW_SUBJECT_NAMES"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_SHOW_SUBJECT_NAMES(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("SHOW_SUBJECT_NAMES"), v); }
+pub fn g_SOFT() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("SOFT"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_SOFT(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("SOFT"), v); }
+pub fn g_SPORT() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("SPORT"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_SPORT(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("SPORT"), v); }
+pub fn g_STORY_IDEAS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("STORY_IDEAS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_STORY_IDEAS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("STORY_IDEAS"), v); }
+pub fn g_STORY_LEADING() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("STORY_LEADING"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_STORY_LEADING(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("STORY_LEADING"), v); }
+pub fn g_STORY_LONGER() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("STORY_LONGER"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_STORY_LONGER(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("STORY_LONGER"), v); }
+pub fn g_STORY_OPENINGS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("STORY_OPENINGS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_STORY_OPENINGS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("STORY_OPENINGS"), v); }
+pub fn g_STRICT_LIMIT() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("STRICT_LIMIT"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_STRICT_LIMIT(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("STRICT_LIMIT"), v); }
+pub fn g_SUBJECT_BOOKS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("SUBJECT_BOOKS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_SUBJECT_BOOKS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("SUBJECT_BOOKS"), v); }
+pub fn g_SUBJECT_BOOK_NAMES() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("SUBJECT_BOOK_NAMES"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_SUBJECT_BOOK_NAMES(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("SUBJECT_BOOK_NAMES"), v); }
+pub fn g_SUBJECT_BOOK_UNCOVERED() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("SUBJECT_BOOK_UNCOVERED"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_SUBJECT_BOOK_UNCOVERED(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("SUBJECT_BOOK_UNCOVERED"), v); }
+pub fn g_SUBJECT_END() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("SUBJECT_END"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_SUBJECT_END(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("SUBJECT_END"), v); }
+pub fn g_SUBJECT_STOP() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("SUBJECT_STOP"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_SUBJECT_STOP(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("SUBJECT_STOP"), v); }
+pub fn g_SUBJECT_TAIL() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("SUBJECT_TAIL"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_SUBJECT_TAIL(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("SUBJECT_TAIL"), v); }
+pub fn g_SUBS_KEY() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("SUBS_KEY"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_SUBS_KEY(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("SUBS_KEY"), v); }
+pub fn g_SUBS_TELLS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("SUBS_TELLS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_SUBS_TELLS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("SUBS_TELLS"), v); }
+pub fn g_SUBS_TURNED_DOWN() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("SUBS_TURNED_DOWN"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_SUBS_TURNED_DOWN(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("SUBS_TURNED_DOWN"), v); }
+pub fn g_SUBS_WANT() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("SUBS_WANT"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_SUBS_WANT(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("SUBS_WANT"), v); }
+pub fn g_SUBS_WANT_IF_WATCHING() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("SUBS_WANT_IF_WATCHING"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_SUBS_WANT_IF_WATCHING(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("SUBS_WANT_IF_WATCHING"), v); }
+pub fn g_S_FINAL_SINGULARS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("S_FINAL_SINGULARS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_S_FINAL_SINGULARS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("S_FINAL_SINGULARS"), v); }
+pub fn g_TEAM_NAMES() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("TEAM_NAMES"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_TEAM_NAMES(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("TEAM_NAMES"), v); }
+pub fn g_TITLE_AS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("TITLE_AS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_TITLE_AS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("TITLE_AS"), v); }
+pub fn g_TITLE_SMALL() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("TITLE_SMALL"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_TITLE_SMALL(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("TITLE_SMALL"), v); }
+pub fn g_TITLE_SPELLING() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("TITLE_SPELLING"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_TITLE_SPELLING(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("TITLE_SPELLING"), v); }
+pub fn g_TUNE_ASKS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("TUNE_ASKS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_TUNE_ASKS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("TUNE_ASKS"), v); }
+pub fn g_TURNED_DOWN_KEEPS_ITS_OWN() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("TURNED_DOWN_KEEPS_ITS_OWN"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_TURNED_DOWN_KEEPS_ITS_OWN(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("TURNED_DOWN_KEEPS_ITS_OWN"), v); }
+pub fn g_TURNED_DOWN_WANT() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("TURNED_DOWN_WANT"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_TURNED_DOWN_WANT(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("TURNED_DOWN_WANT"), v); }
+pub fn g_TURNS_BACK() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("TURNS_BACK"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_TURNS_BACK(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("TURNS_BACK"), v); }
+pub fn g_TURNS_IT_DOWN() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("TURNS_IT_DOWN"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_TURNS_IT_DOWN(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("TURNS_IT_DOWN"), v); }
+pub fn g_TV_MOODS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("TV_MOODS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_TV_MOODS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("TV_MOODS"), v); }
+pub fn g_UNNAMED_ASKS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("UNNAMED_ASKS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_UNNAMED_ASKS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("UNNAMED_ASKS"), v); }
+pub fn g_VERDICT_ASKS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("VERDICT_ASKS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_VERDICT_ASKS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("VERDICT_ASKS"), v); }
+pub fn g_VERSE_FORM_WORDS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("VERSE_FORM_WORDS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_VERSE_FORM_WORDS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("VERSE_FORM_WORDS"), v); }
+pub fn g_VERSE_LONGER() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("VERSE_LONGER"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_VERSE_LONGER(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("VERSE_LONGER"), v); }
+pub fn g_VIEWING() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("VIEWING"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_VIEWING(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("VIEWING"), v); }
+pub fn g_VIEWS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("VIEWS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_VIEWS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("VIEWS"), v); }
+pub fn g_WANTING() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("WANTING"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_WANTING(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("WANTING"), v); }
+pub fn g_WANT_ASKS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("WANT_ASKS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_WANT_ASKS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("WANT_ASKS"), v); }
+pub fn g_WARM_POEM() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("WARM_POEM"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_WARM_POEM(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("WARM_POEM"), v); }
+pub fn g_WATCHES_SOMETHING() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("WATCHES_SOMETHING"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_WATCHES_SOMETHING(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("WATCHES_SOMETHING"), v); }
+pub fn g_WATCHING() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("WATCHING"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_WATCHING(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("WATCHING"), v); }
+pub fn g_WHOM_IT_IS_FOR() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("WHOM_IT_IS_FOR"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_WHOM_IT_IS_FOR(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("WHOM_IT_IS_FOR"), v); }
+pub fn g_WHO_MAKERS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("WHO_MAKERS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_WHO_MAKERS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("WHO_MAKERS"), v); }
+pub fn g_WORKS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("WORKS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_WORKS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("WORKS"), v); }
+pub fn g_WORK_EVIDENCE() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("WORK_EVIDENCE"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_WORK_EVIDENCE(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("WORK_EVIDENCE"), v); }
+pub fn g__AGE_BANDS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_AGE_BANDS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__AGE_BANDS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_AGE_BANDS"), v); }
+pub fn g__AGE_SHAPES() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_AGE_SHAPES"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__AGE_SHAPES(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_AGE_SHAPES"), v); }
+pub fn g__ALL_ABSTRACT() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_ALL_ABSTRACT"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__ALL_ABSTRACT(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_ALL_ABSTRACT"), v); }
+pub fn g__AMBIGUOUS_CITY_WORDS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_AMBIGUOUS_CITY_WORDS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__AMBIGUOUS_CITY_WORDS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_AMBIGUOUS_CITY_WORDS"), v); }
+pub fn g__ANOTHER_FORM() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_ANOTHER_FORM"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__ANOTHER_FORM(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_ANOTHER_FORM"), v); }
+pub fn g__AN_HOUR() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_AN_HOUR"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__AN_HOUR(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_AN_HOUR"), v); }
+pub fn g__ASKS_ABOUT_A_STORY() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_ASKS_ABOUT_A_STORY"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__ASKS_ABOUT_A_STORY(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_ASKS_ABOUT_A_STORY"), v); }
+pub fn g__ASKS_FOR_A_FILM() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_ASKS_FOR_A_FILM"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__ASKS_FOR_A_FILM(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_ASKS_FOR_A_FILM"), v); }
+pub fn g__ASKS_FOR_A_PICK() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_ASKS_FOR_A_PICK"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__ASKS_FOR_A_PICK(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_ASKS_FOR_A_PICK"), v); }
+pub fn g__ASKS_FOR_A_PICK_WORDS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_ASKS_FOR_A_PICK_WORDS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__ASKS_FOR_A_PICK_WORDS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_ASKS_FOR_A_PICK_WORDS"), v); }
+pub fn g__ASKS_IF_OPEN() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_ASKS_IF_OPEN"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__ASKS_IF_OPEN(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_ASKS_IF_OPEN"), v); }
+pub fn g__ASK_POLITENESS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_ASK_POLITENESS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__ASK_POLITENESS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_ASK_POLITENESS"), v); }
+pub fn g__A_BOOK_I_AM_NOT_ENJOYING() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_A_BOOK_I_AM_NOT_ENJOYING"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__A_BOOK_I_AM_NOT_ENJOYING(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_A_BOOK_I_AM_NOT_ENJOYING"), v); }
+pub fn g__A_CROWD() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_A_CROWD"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__A_CROWD(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_A_CROWD"), v); }
+pub fn g__A_DAY() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_A_DAY"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__A_DAY(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_A_DAY"), v); }
+pub fn g__A_DETERMINER_JUST_BEFORE() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_A_DETERMINER_JUST_BEFORE"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__A_DETERMINER_JUST_BEFORE(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_A_DETERMINER_JUST_BEFORE"), v); }
+pub fn g__A_FORM_IN_THE_REPORT() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_A_FORM_IN_THE_REPORT"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__A_FORM_IN_THE_REPORT(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_A_FORM_IN_THE_REPORT"), v); }
+pub fn g__A_LISTENER_IS_NAMED() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_A_LISTENER_IS_NAMED"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__A_LISTENER_IS_NAMED(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_A_LISTENER_IS_NAMED"), v); }
+pub fn g__A_MUSIC_WORD() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_A_MUSIC_WORD"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__A_MUSIC_WORD(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_A_MUSIC_WORD"), v); }
+pub fn g__A_SECOND_ONE() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_A_SECOND_ONE"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__A_SECOND_ONE(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_A_SECOND_ONE"), v); }
+pub fn g__A_SHORT_TIME() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_A_SHORT_TIME"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__A_SHORT_TIME(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_A_SHORT_TIME"), v); }
+pub fn g__A_STORY_WORD() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_A_STORY_WORD"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__A_STORY_WORD(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_A_STORY_WORD"), v); }
+pub fn g__A_THING_IS_BEING_BAKED() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_A_THING_IS_BEING_BAKED"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__A_THING_IS_BEING_BAKED(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_A_THING_IS_BEING_BAKED"), v); }
+pub fn g__A_THING_OF_THEIRS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_A_THING_OF_THEIRS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__A_THING_OF_THEIRS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_A_THING_OF_THEIRS"), v); }
+pub fn g__A_VERSE_LEAD() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_A_VERSE_LEAD"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__A_VERSE_LEAD(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_A_VERSE_LEAD"), v); }
+pub fn g__BARE_COUNT_AGAIN() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_BARE_COUNT_AGAIN"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__BARE_COUNT_AGAIN(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_BARE_COUNT_AGAIN"), v); }
+pub fn g__BEGINNER_WORDS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_BEGINNER_WORDS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__BEGINNER_WORDS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_BEGINNER_WORDS"), v); }
+pub fn g__BOOK_ANCHOR() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_BOOK_ANCHOR"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__BOOK_ANCHOR(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_BOOK_ANCHOR"), v); }
+pub fn g__BOOK_SUBJECT_BEFORE() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_BOOK_SUBJECT_BEFORE"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__BOOK_SUBJECT_BEFORE(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_BOOK_SUBJECT_BEFORE"), v); }
+pub fn g__BOOK_VERB_AFTER() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_BOOK_VERB_AFTER"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__BOOK_VERB_AFTER(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_BOOK_VERB_AFTER"), v); }
+pub fn g__BOOK_VERB_BEFORE() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_BOOK_VERB_BEFORE"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__BOOK_VERB_BEFORE(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_BOOK_VERB_BEFORE"), v); }
+pub fn g__BUYING_THE_MACHINE() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_BUYING_THE_MACHINE"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__BUYING_THE_MACHINE(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_BUYING_THE_MACHINE"), v); }
+pub fn g__CASTLING_VERB() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_CASTLING_VERB"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__CASTLING_VERB(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_CASTLING_VERB"), v); }
+pub fn g__CHESS_WORDS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_CHESS_WORDS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__CHESS_WORDS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_CHESS_WORDS"), v); }
+pub fn g__CHILD_OF_THEIRS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_CHILD_OF_THEIRS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__CHILD_OF_THEIRS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_CHILD_OF_THEIRS"), v); }
+pub fn g__CHILD_WORDS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_CHILD_WORDS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__CHILD_WORDS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_CHILD_WORDS"), v); }
+pub fn g__COMIC_BEGINNER() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_COMIC_BEGINNER"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__COMIC_BEGINNER(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_COMIC_BEGINNER"), v); }
+pub fn g__COMIC_DC() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_COMIC_DC"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__COMIC_DC(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_COMIC_DC"), v); }
+pub fn g__COMIC_FOR_A_CHILD() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_COMIC_FOR_A_CHILD"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__COMIC_FOR_A_CHILD(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_COMIC_FOR_A_CHILD"), v); }
+pub fn g__COMIC_FOR_A_GROWN_UP() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_COMIC_FOR_A_GROWN_UP"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__COMIC_FOR_A_GROWN_UP(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_COMIC_FOR_A_GROWN_UP"), v); }
+pub fn g__COMIC_FOR_A_TEEN() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_COMIC_FOR_A_TEEN"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__COMIC_FOR_A_TEEN(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_COMIC_FOR_A_TEEN"), v); }
+pub fn g__COMIC_MANGA() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_COMIC_MANGA"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__COMIC_MANGA(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_COMIC_MANGA"), v); }
+pub fn g__COMIC_MARVEL() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_COMIC_MARVEL"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__COMIC_MARVEL(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_COMIC_MARVEL"), v); }
+pub fn g__COMIC_MEANING() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_COMIC_MEANING"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__COMIC_MEANING(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_COMIC_MEANING"), v); }
+pub fn g__COMIC_MEANING_ASK() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_COMIC_MEANING_ASK"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__COMIC_MEANING_ASK(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_COMIC_MEANING_ASK"), v); }
+pub fn g__COMIC_SUITABILITY() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_COMIC_SUITABILITY"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__COMIC_SUITABILITY(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_COMIC_SUITABILITY"), v); }
+pub fn g__COUNTRY_AFTER_A_LITTLE_WORD() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_COUNTRY_AFTER_A_LITTLE_WORD"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__COUNTRY_AFTER_A_LITTLE_WORD(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_COUNTRY_AFTER_A_LITTLE_WORD"), v); }
+pub fn g__COUNTRY_BEFORE_A_THING() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_COUNTRY_BEFORE_A_THING"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__COUNTRY_BEFORE_A_THING(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_COUNTRY_BEFORE_A_THING"), v); }
+pub fn g__COUNT_ASKS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_COUNT_ASKS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__COUNT_ASKS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_COUNT_ASKS"), v); }
+pub fn g__EVENING_WORDS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_EVENING_WORDS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__EVENING_WORDS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_EVENING_WORDS"), v); }
+pub fn g__FISH_IS_DINNER() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_FISH_IS_DINNER"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__FISH_IS_DINNER(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_FISH_IS_DINNER"), v); }
+pub fn g__FISH_VERBS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_FISH_VERBS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__FISH_VERBS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_FISH_VERBS"), v); }
+pub fn g__FIXED_COUNT_FORM() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_FIXED_COUNT_FORM"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__FIXED_COUNT_FORM(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_FIXED_COUNT_FORM"), v); }
+pub fn g__FORM_OF_A_WORD() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_FORM_OF_A_WORD"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__FORM_OF_A_WORD(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_FORM_OF_A_WORD"), v); }
+pub fn g__FRESH_LIST() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_FRESH_LIST"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__FRESH_LIST(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_FRESH_LIST"), v); }
+pub fn g__GLIB() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_GLIB"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__GLIB(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_GLIB"), v); }
+pub fn g__HOUR_MINUTES() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_HOUR_MINUTES"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__HOUR_MINUTES(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_HOUR_MINUTES"), v); }
+pub fn g__HOUR_WORDS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_HOUR_WORDS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__HOUR_WORDS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_HOUR_WORDS"), v); }
+pub fn g__INSTRUMENT_COUNTS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_INSTRUMENT_COUNTS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__INSTRUMENT_COUNTS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_INSTRUMENT_COUNTS"), v); }
+pub fn g__KIND_ASKS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_KIND_ASKS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__KIND_ASKS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_KIND_ASKS"), v); }
+pub fn g__KIND_WORDS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_KIND_WORDS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__KIND_WORDS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_KIND_WORDS"), v); }
+pub fn g__LENGTH_AVOID() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_LENGTH_AVOID"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__LENGTH_AVOID(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_LENGTH_AVOID"), v); }
+pub fn g__LIKE_A_GENRE() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_LIKE_A_GENRE"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__LIKE_A_GENRE(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_LIKE_A_GENRE"), v); }
+pub fn g__LIKING() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_LIKING"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__LIKING(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_LIKING"), v); }
+pub fn g__LIMIT_CUE() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_LIMIT_CUE"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__LIMIT_CUE(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_LIMIT_CUE"), v); }
+pub fn g__LONGER_ASK() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_LONGER_ASK"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__LONGER_ASK(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_LONGER_ASK"), v); }
+pub fn g__LONGER_NOT_THIS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_LONGER_NOT_THIS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__LONGER_NOT_THIS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_LONGER_NOT_THIS"), v); }
+pub fn g__LOOKING_FOR_THE_THING() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_LOOKING_FOR_THE_THING"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__LOOKING_FOR_THE_THING(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_LOOKING_FOR_THE_THING"), v); }
+pub fn g__MACHINE_SHAPES() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_MACHINE_SHAPES"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__MACHINE_SHAPES(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_MACHINE_SHAPES"), v); }
+pub fn g__MINUTES() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_MINUTES"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__MINUTES(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_MINUTES"), v); }
+pub fn g__MUSIC_ALL() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_MUSIC_ALL"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__MUSIC_ALL(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_MUSIC_ALL"), v); }
+pub fn g__MUSIC_ASKS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_MUSIC_ASKS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__MUSIC_ASKS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_MUSIC_ASKS"), v); }
+pub fn g__MUSIC_ELSEWHERE() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_MUSIC_ELSEWHERE"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__MUSIC_ELSEWHERE(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_MUSIC_ELSEWHERE"), v); }
+pub fn g__MUSIC_GEAR() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_MUSIC_GEAR"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__MUSIC_GEAR(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_MUSIC_GEAR"), v); }
+pub fn g__MUSIC_TERM_KEY() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_MUSIC_TERM_KEY"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__MUSIC_TERM_KEY(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_MUSIC_TERM_KEY"), v); }
+pub fn g__MUSIC_WORD_BESIDE() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_MUSIC_WORD_BESIDE"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__MUSIC_WORD_BESIDE(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_MUSIC_WORD_BESIDE"), v); }
+pub fn g__NEAR_ME() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_NEAR_ME"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__NEAR_ME(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_NEAR_ME"), v); }
+pub fn g__NEEDS_A_MUSIC_WORD() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_NEEDS_A_MUSIC_WORD"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__NEEDS_A_MUSIC_WORD(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_NEEDS_A_MUSIC_WORD"), v); }
+pub fn g__NOTHING_TO_BAKE() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_NOTHING_TO_BAKE"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__NOTHING_TO_BAKE(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_NOTHING_TO_BAKE"), v); }
+pub fn g__NOT_A_VERSE_ASK() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_NOT_A_VERSE_ASK"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__NOT_A_VERSE_ASK(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_NOT_A_VERSE_ASK"), v); }
+pub fn g__NO_SUBJECT() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_NO_SUBJECT"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__NO_SUBJECT(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_NO_SUBJECT"), v); }
+pub fn g__OFFERED() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_OFFERED"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__OFFERED(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_OFFERED"), v); }
+pub fn g__OFFER_TAIL() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_OFFER_TAIL"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__OFFER_TAIL(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_OFFER_TAIL"), v); }
+pub fn g__OTHER_FORM_WORDS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_OTHER_FORM_WORDS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__OTHER_FORM_WORDS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_OTHER_FORM_WORDS"), v); }
+pub fn g__PAINTED_FAULTS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_PAINTED_FAULTS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__PAINTED_FAULTS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_PAINTED_FAULTS"), v); }
+pub fn g__PAINTED_PHRASES() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_PAINTED_PHRASES"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__PAINTED_PHRASES(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_PAINTED_PHRASES"), v); }
+pub fn g__PAINTED_SURFACES() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_PAINTED_SURFACES"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__PAINTED_SURFACES(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_PAINTED_SURFACES"), v); }
+pub fn g__PAINTED_THINGS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_PAINTED_THINGS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__PAINTED_THINGS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_PAINTED_THINGS"), v); }
+pub fn g__PAINT_AS_A_THING() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_PAINT_AS_A_THING"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__PAINT_AS_A_THING(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_PAINT_AS_A_THING"), v); }
+pub fn g__PAINT_COLOURS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_PAINT_COLOURS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__PAINT_COLOURS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_PAINT_COLOURS"), v); }
+pub fn g__PAINT_VERBS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_PAINT_VERBS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__PAINT_VERBS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_PAINT_VERBS"), v); }
+pub fn g__PARTY_ANY() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_PARTY_ANY"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__PARTY_ANY(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_PARTY_ANY"), v); }
+pub fn g__PARTY_MIDDLE() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_PARTY_MIDDLE"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__PARTY_MIDDLE(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_PARTY_MIDDLE"), v); }
+pub fn g__PARTY_OLDER() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_PARTY_OLDER"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__PARTY_OLDER(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_PARTY_OLDER"), v); }
+pub fn g__PARTY_TINY() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_PARTY_TINY"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__PARTY_TINY(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_PARTY_TINY"), v); }
+pub fn g__PICK_AVOID() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_PICK_AVOID"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__PICK_AVOID(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_PICK_AVOID"), v); }
+pub fn g__PICK_PARENT_VERB() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_PICK_PARENT_VERB"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__PICK_PARENT_VERB(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_PICK_PARENT_VERB"), v); }
+pub fn g__PLACEHOLDER_SUBJECT() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_PLACEHOLDER_SUBJECT"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__PLACEHOLDER_SUBJECT(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_PLACEHOLDER_SUBJECT"), v); }
+pub fn g__PLATFORMS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_PLATFORMS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__PLATFORMS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_PLATFORMS"), v); }
+pub fn g__PLAYING_NOT_WATCHING() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_PLAYING_NOT_WATCHING"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__PLAYING_NOT_WATCHING(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_PLAYING_NOT_WATCHING"), v); }
+pub fn g__PODCAST_FOR_KIDS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_PODCAST_FOR_KIDS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__PODCAST_FOR_KIDS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_PODCAST_FOR_KIDS"), v); }
+pub fn g__PODCAST_NOT_THIS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_PODCAST_NOT_THIS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__PODCAST_NOT_THIS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_PODCAST_NOT_THIS"), v); }
+pub fn g__PODCAST_SUBJECTS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_PODCAST_SUBJECTS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__PODCAST_SUBJECTS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_PODCAST_SUBJECTS"), v); }
+pub fn g__POEM_FORM() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_POEM_FORM"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__POEM_FORM(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_POEM_FORM"), v); }
+pub fn g__POSSESSIVE() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_POSSESSIVE"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__POSSESSIVE(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_POSSESSIVE"), v); }
+pub fn g__PRACTICE_ASKS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_PRACTICE_ASKS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__PRACTICE_ASKS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_PRACTICE_ASKS"), v); }
+pub fn g__PRACTICE_CORE() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_PRACTICE_CORE"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__PRACTICE_CORE(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_PRACTICE_CORE"), v); }
+pub fn g__PRACTICE_INSTRUMENTS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_PRACTICE_INSTRUMENTS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__PRACTICE_INSTRUMENTS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_PRACTICE_INSTRUMENTS"), v); }
+pub fn g__PRACTICE_READ_MUSIC() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_PRACTICE_READ_MUSIC"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__PRACTICE_READ_MUSIC(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_PRACTICE_READ_MUSIC"), v); }
+pub fn g__READ_MUSIC_WORDS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_READ_MUSIC_WORDS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__READ_MUSIC_WORDS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_READ_MUSIC_WORDS"), v); }
+pub fn g__REFUSED_KIND() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_REFUSED_KIND"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__REFUSED_KIND(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_REFUSED_KIND"), v); }
+pub fn g__RESERVING_PHRASES() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_RESERVING_PHRASES"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__RESERVING_PHRASES(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_RESERVING_PHRASES"), v); }
+pub fn g__SAYS_WHAT_IS_ON() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_SAYS_WHAT_IS_ON"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__SAYS_WHAT_IS_ON(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_SAYS_WHAT_IS_ON"), v); }
+pub fn g__SECOND_STORY() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_SECOND_STORY"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__SECOND_STORY(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_SECOND_STORY"), v); }
+pub fn g__SECOND_VERSE_ABOUT() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_SECOND_VERSE_ABOUT"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__SECOND_VERSE_ABOUT(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_SECOND_VERSE_ABOUT"), v); }
+pub fn g__SHOW_SUBJECT_LEAD() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_SHOW_SUBJECT_LEAD"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__SHOW_SUBJECT_LEAD(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_SHOW_SUBJECT_LEAD"), v); }
+pub fn g__SHOW_YES_OR_NO() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_SHOW_YES_OR_NO"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__SHOW_YES_OR_NO(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_SHOW_YES_OR_NO"), v); }
+pub fn g__SMALL() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_SMALL"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__SMALL(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_SMALL"), v); }
+pub fn g__SUBJECT_BOOK_ORDER() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_SUBJECT_BOOK_ORDER"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__SUBJECT_BOOK_ORDER(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_SUBJECT_BOOK_ORDER"), v); }
+pub fn g__SUBJECT_UNCOVERED_ORDER() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_SUBJECT_UNCOVERED_ORDER"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__SUBJECT_UNCOVERED_ORDER(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_SUBJECT_UNCOVERED_ORDER"), v); }
+pub fn g__SUITABILITY_ASK() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_SUITABILITY_ASK"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__SUITABILITY_ASK(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_SUITABILITY_ASK"), v); }
+pub fn g__TEEN_WORDS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_TEEN_WORDS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__TEEN_WORDS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_TEEN_WORDS"), v); }
+pub fn g__THE_COUNT_AGAIN() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_THE_COUNT_AGAIN"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__THE_COUNT_AGAIN(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_THE_COUNT_AGAIN"), v); }
+pub fn g__THE_COUNT_WORDS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_THE_COUNT_WORDS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__THE_COUNT_WORDS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_THE_COUNT_WORDS"), v); }
+pub fn g__THE_FORM_AFTER_THE_COUNT() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_THE_FORM_AFTER_THE_COUNT"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__THE_FORM_AFTER_THE_COUNT(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_THE_FORM_AFTER_THE_COUNT"), v); }
+pub fn g__THE_FORM_NAMED() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_THE_FORM_NAMED"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__THE_FORM_NAMED(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_THE_FORM_NAMED"), v); }
+pub fn g__THE_OFFICE_IS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_THE_OFFICE_IS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__THE_OFFICE_IS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_THE_OFFICE_IS"), v); }
+pub fn g__THE_SUBJECT_IN_A_LEAD() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_THE_SUBJECT_IN_A_LEAD"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__THE_SUBJECT_IN_A_LEAD(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_THE_SUBJECT_IN_A_LEAD"), v); }
+pub fn g__UNDER() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_UNDER"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__UNDER(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_UNDER"), v); }
+pub fn g__VERSE_IN_THE_LAST_TURN() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_VERSE_IN_THE_LAST_TURN"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__VERSE_IN_THE_LAST_TURN(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_VERSE_IN_THE_LAST_TURN"), v); }
+pub fn g__WET_PHRASES() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_WET_PHRASES"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__WET_PHRASES(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_WET_PHRASES"), v); }
+pub fn g__WET_WORDS() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_WET_WORDS"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__WET_WORDS(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_WET_WORDS"), v); }
+pub fn g__WORD_AGES() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_WORD_AGES"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__WORD_AGES(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_WORD_AGES"), v); }
+pub fn g__a_bridge_in_music() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_a_bridge_in_music"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__a_bridge_in_music(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_a_bridge_in_music"), v); }
+pub fn g__a_chess_line() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_a_chess_line"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__a_chess_line(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_a_chess_line"), v); }
+pub fn g__a_child_in_the_chat() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_a_child_in_the_chat"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__a_child_in_the_chat(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_a_child_in_the_chat"), v); }
+pub fn g__a_child_story_about() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_a_child_story_about"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__a_child_story_about(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_a_child_story_about"), v); }
+pub fn g__a_child_story_lead() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_a_child_story_lead"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__a_child_story_lead(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_a_child_story_lead"), v); }
+pub fn g__a_child_who_reads_already() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_a_child_who_reads_already"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__a_child_who_reads_already(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_a_child_who_reads_already"), v); }
+pub fn g__a_country_is_a_country() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_a_country_is_a_country"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__a_country_is_a_country(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_a_country_is_a_country"), v); }
+pub fn g__a_documentary_is_wanted() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_a_documentary_is_wanted"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__a_documentary_is_wanted(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_a_documentary_is_wanted"), v); }
+pub fn g__a_film_ask() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_a_film_ask"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__a_film_ask(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_a_film_ask"), v); }
+pub fn g__a_game_pick_line() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_a_game_pick_line"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__a_game_pick_line(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_a_game_pick_line"), v); }
+pub fn g__a_genre_is_the_taste() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_a_genre_is_the_taste"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__a_genre_is_the_taste(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_a_genre_is_the_taste"), v); }
+pub fn g__a_hardware_decision() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_a_hardware_decision"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__a_hardware_decision(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_a_hardware_decision"), v); }
+pub fn g__a_judged_work_named() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_a_judged_work_named"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__a_judged_work_named(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_a_judged_work_named"), v); }
+pub fn g__a_listings_ask_near_me() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_a_listings_ask_near_me"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__a_listings_ask_near_me(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_a_listings_ask_near_me"), v); }
+pub fn g__a_pick_in_any_medium() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_a_pick_in_any_medium"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__a_pick_in_any_medium(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_a_pick_in_any_medium"), v); }
+pub fn g__a_pick_of_the_other_mood() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_a_pick_of_the_other_mood"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__a_pick_of_the_other_mood(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_a_pick_of_the_other_mood"), v); }
+pub fn g__a_place_not_a_work() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_a_place_not_a_work"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__a_place_not_a_work(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_a_place_not_a_work"), v); }
+pub fn g__a_placeholder_word() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_a_placeholder_word"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__a_placeholder_word(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_a_placeholder_word"), v); }
+pub fn g__a_programme_is_wanted() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_a_programme_is_wanted"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__a_programme_is_wanted(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_a_programme_is_wanted"), v); }
+pub fn g__a_report_answered() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_a_report_answered"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__a_report_answered(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_a_report_answered"), v); }
+pub fn g__a_report_of_the_habit() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_a_report_of_the_habit"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__a_report_of_the_habit(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_a_report_of_the_habit"), v); }
+pub fn g__a_reservation() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_a_reservation"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__a_reservation(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_a_reservation"), v); }
+pub fn g__a_second_one_read_first() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_a_second_one_read_first"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__a_second_one_read_first(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_a_second_one_read_first"), v); }
+pub fn g__a_second_verse_is_asked_for() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_a_second_verse_is_asked_for"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__a_second_verse_is_asked_for(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_a_second_verse_is_asked_for"), v); }
+pub fn g__a_story_for_the_listener() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_a_story_for_the_listener"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__a_story_for_the_listener(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_a_story_for_the_listener"), v); }
+pub fn g__a_story_is_asked_for() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_a_story_is_asked_for"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__a_story_is_asked_for(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_a_story_is_asked_for"), v); }
+pub fn g__a_surface_is_being_painted() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_a_surface_is_being_painted"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__a_surface_is_being_painted(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_a_surface_is_being_painted"), v); }
+pub fn g__a_thing_is_being_baked() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_a_thing_is_being_baked"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__a_thing_is_being_baked(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_a_thing_is_being_baked"), v); }
+pub fn g__a_word_is_turned_down() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_a_word_is_turned_down"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__a_word_is_turned_down(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_a_word_is_turned_down"), v); }
+pub fn g__about_a_person() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_about_a_person"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__about_a_person(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_about_a_person"), v); }
+pub fn g__activity_start() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_activity_start"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__activity_start(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_activity_start"), v); }
+pub fn g__after_named() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_after_named"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__after_named(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_after_named"), v); }
+pub fn g__age_in() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_age_in"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__age_in(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_age_in"), v); }
+pub fn g__an_hour_or_a_day() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_an_hour_or_a_day"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__an_hour_or_a_day(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_an_hour_or_a_day"), v); }
+pub fn g__an_ordinary_word() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_an_ordinary_word"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__an_ordinary_word(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_an_ordinary_word"), v); }
+pub fn g__another_one() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_another_one"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__another_one(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_another_one"), v); }
+pub fn g__another_subject() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_another_subject"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__another_subject(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_another_subject"), v); }
+pub fn g__article_for() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_article_for"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__article_for(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_article_for"), v); }
+pub fn g__asked_for_what_they_already_tried() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_asked_for_what_they_already_tried"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__asked_for_what_they_already_tried(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_asked_for_what_they_already_tried"), v); }
+pub fn g__asks_for_a_verse() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_asks_for_a_verse"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__asks_for_a_verse(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_asks_for_a_verse"), v); }
+pub fn g__asks_if_a_comic_suits_an_age() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_asks_if_a_comic_suits_an_age"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__asks_if_a_comic_suits_an_age(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_asks_if_a_comic_suits_an_age"), v); }
+pub fn g__author_in() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_author_in"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__author_in(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_author_in"), v); }
+pub fn g__author_key() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_author_key"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__author_key(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_author_key"), v); }
+pub fn g__book_about() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_book_about"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__book_about(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_book_about"), v); }
+pub fn g__book_for_the_age() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_book_for_the_age"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__book_for_the_age(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_book_for_the_age"), v); }
+pub fn g__book_like() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_book_like"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__book_like(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_book_like"), v); }
+pub fn g__book_recommend() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_book_recommend"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__book_recommend(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_book_recommend"), v); }
+pub fn g__book_subject() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_book_subject"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__book_subject(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_book_subject"), v); }
+pub fn g__book_thriller() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_book_thriller"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__book_thriller(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_book_thriller"), v); }
+pub fn g__book_title_named() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_book_title_named"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__book_title_named(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_book_title_named"), v); }
+pub fn g__buzz() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_buzz"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__buzz(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_buzz"), v); }
+pub fn g__card_game() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_card_game"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__card_game(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_card_game"), v); }
+pub fn g__character_name() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_character_name"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__character_name(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_character_name"), v); }
+pub fn g__chat_is_about_a_pick() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_chat_is_about_a_pick"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__chat_is_about_a_pick(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_chat_is_about_a_pick"), v); }
+pub fn g__cinema_of() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_cinema_of"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__cinema_of(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_cinema_of"), v); }
+pub fn g__comic_pick() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_comic_pick"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__comic_pick(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_comic_pick"), v); }
+pub fn g__display() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_display"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__display(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_display"), v); }
+pub fn g__e() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_e"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__e(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_e"), v); }
+pub fn g__family_film() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_family_film"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__family_film(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_family_film"), v); }
+pub fn g__film_kind() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_film_kind"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__film_kind(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_film_kind"), v); }
+pub fn g__film_kind_reply() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_film_kind_reply"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__film_kind_reply(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_film_kind_reply"), v); }
+pub fn g__film_like() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_film_like"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__film_like(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_film_like"), v); }
+pub fn g__film_list() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_film_list"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__film_list(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_film_list"), v); }
+pub fn g__film_under() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_film_under"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__film_under(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_film_under"), v); }
+pub fn g__films_within() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_films_within"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__films_within(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_films_within"), v); }
+pub fn g__form_name() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_form_name"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__form_name(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_form_name"), v); }
+pub fn g__form_word() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_form_word"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__form_word(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_form_word"), v); }
+pub fn g__genre_start() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_genre_start"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__genre_start(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_genre_start"), v); }
+pub fn g__haiku() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_haiku"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__haiku(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_haiku"), v); }
+pub fn g__in_tune() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_in_tune"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__in_tune(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_in_tune"), v); }
+pub fn g__indoors() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_indoors"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__indoors(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_indoors"), v); }
+pub fn g__instrument_count() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_instrument_count"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__instrument_count(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_instrument_count"), v); }
+pub fn g__kind_carry() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_kind_carry"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__kind_carry(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_kind_carry"), v); }
+pub fn g__kind_words() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_kind_words"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__kind_words(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_kind_words"), v); }
+pub fn g__lead() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_lead"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__lead(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_lead"), v); }
+pub fn g__limerick() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_limerick"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__limerick(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_limerick"), v); }
+pub fn g__limit_wanted() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_limit_wanted"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__limit_wanted(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_limit_wanted"), v); }
+pub fn g__lines() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_lines"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__lines(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_lines"), v); }
+pub fn g__list_words() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_list_words"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__list_words(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_list_words"), v); }
+pub fn g__listen_when() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_listen_when"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__listen_when(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_listen_when"), v); }
+pub fn g__medium_named() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_medium_named"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__medium_named(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_medium_named"), v); }
+pub fn g__minutes_wanted() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_minutes_wanted"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__minutes_wanted(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_minutes_wanted"), v); }
+pub fn g__mood() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_mood"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__mood(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_mood"), v); }
+pub fn g__mood_key_words() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_mood_key_words"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__mood_key_words(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_mood_key_words"), v); }
+pub fn g__mood_of() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_mood_of"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__mood_of(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_mood_of"), v); }
+pub fn g__mood_pick() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_mood_pick"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__mood_pick(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_mood_pick"), v); }
+pub fn g__mood_signals() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_mood_signals"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__mood_signals(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_mood_signals"), v); }
+pub fn g__music_elsewhere() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_music_elsewhere"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__music_elsewhere(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_music_elsewhere"), v); }
+pub fn g__music_practice() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_music_practice"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__music_practice(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_music_practice"), v); }
+pub fn g__music_term() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_music_term"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__music_term(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_music_term"), v); }
+pub fn g__named_nothing() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_named_nothing"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__named_nothing(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_named_nothing"), v); }
+pub fn g__named_work() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_named_work"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__named_work(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_named_work"), v); }
+pub fn g__names_a_film_genre() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_names_a_film_genre"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__names_a_film_genre(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_names_a_film_genre"), v); }
+pub fn g__names_another_form() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_names_another_form"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__names_another_form(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_names_another_form"), v); }
+pub fn g__names_the_evening() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_names_the_evening"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__names_the_evening(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_names_the_evening"), v); }
+pub fn g__names_the_weather() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_names_the_weather"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__names_the_weather(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_names_the_weather"), v); }
+pub fn g__negated() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_negated"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__negated(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_negated"), v); }
+pub fn g__nickname() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_nickname"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__nickname(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_nickname"), v); }
+pub fn g__no_city_is_named() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_no_city_is_named"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__no_city_is_named(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_no_city_is_named"), v); }
+pub fn g__no_named_mood() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_no_named_mood"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__no_named_mood(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_no_named_mood"), v); }
+pub fn g__no_subject_verse() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_no_subject_verse"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__no_subject_verse(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_no_subject_verse"), v); }
+pub fn g__not_a_crowd() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_not_a_crowd"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__not_a_crowd(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_not_a_crowd"), v); }
+pub fn g__not_a_reservation() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_not_a_reservation"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__not_a_reservation(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_not_a_reservation"), v); }
+pub fn g__offer() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_offer"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__offer(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_offer"), v); }
+pub fn g__own_texts() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_own_texts"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__own_texts(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_own_texts"), v); }
+pub fn g__paints_a_thing() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_paints_a_thing"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__paints_a_thing(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_paints_a_thing"), v); }
+pub fn g__party_games_for_kids() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_party_games_for_kids"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__party_games_for_kids(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_party_games_for_kids"), v); }
+pub fn g__pick_carry() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_pick_carry"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__pick_carry(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_pick_carry"), v); }
+pub fn g__pick_kind() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_pick_kind"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__pick_kind(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_pick_kind"), v); }
+pub fn g__pick_limit() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_pick_limit"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__pick_limit(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_pick_limit"), v); }
+pub fn g__pick_limit_reply() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_pick_limit_reply"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__pick_limit_reply(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_pick_limit_reply"), v); }
+pub fn g__pick_line() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_pick_line"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__pick_line(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_pick_line"), v); }
+pub fn g__pick_list() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_pick_list"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__pick_list(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_pick_list"), v); }
+pub fn g__pick_plain() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_pick_plain"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__pick_plain(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_pick_plain"), v); }
+pub fn g__pick_refused() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_pick_refused"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__pick_refused(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_pick_refused"), v); }
+pub fn g__pick_reply() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_pick_reply"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__pick_reply(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_pick_reply"), v); }
+pub fn g__pick_rows() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_pick_rows"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__pick_rows(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_pick_rows"), v); }
+pub fn g__pick_stands_down() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_pick_stands_down"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__pick_stands_down(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_pick_stands_down"), v); }
+pub fn g__pick_who() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_pick_who"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__pick_who(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_pick_who"), v); }
+pub fn g__picked() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_picked"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__picked(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_picked"), v); }
+pub fn g__picks_by_title() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_picks_by_title"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__picks_by_title(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_picks_by_title"), v); }
+pub fn g__plain_words() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_plain_words"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__plain_words(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_plain_words"), v); }
+pub fn g__podcast_reply() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_podcast_reply"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__podcast_reply(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_podcast_reply"), v); }
+pub fn g__podcast_subject() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_podcast_subject"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__podcast_subject(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_podcast_subject"), v); }
+pub fn g__podcast_words() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_podcast_words"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__podcast_words(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_podcast_words"), v); }
+pub fn g__poem() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_poem"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__poem(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_poem"), v); }
+pub fn g__quiz_name() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_quiz_name"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__quiz_name(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_quiz_name"), v); }
+pub fn g__rap() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_rap"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__rap(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_rap"), v); }
+pub fn g__reader_named() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_reader_named"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__reader_named(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_reader_named"), v); }
+pub fn g__rhyme() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_rhyme"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__rhyme(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_rhyme"), v); }
+pub fn g__rows_from_cinema() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_rows_from_cinema"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__rows_from_cinema(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_rows_from_cinema"), v); }
+pub fn g__said() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_said"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__said(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_said"), v); }
+pub fn g__say() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_say"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__say(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_say"), v); }
+pub fn g__says() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_says"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__says(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_says"), v); }
+pub fn g__shelf_within() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_shelf_within"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__shelf_within(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_shelf_within"), v); }
+pub fn g__shortest_wanted() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_shortest_wanted"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__shortest_wanted(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_shortest_wanted"), v); }
+pub fn g__show_about() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_show_about"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__show_about(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_show_about"), v); }
+pub fn g__show_subject() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_show_subject"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__show_subject(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_show_subject"), v); }
+pub fn g__somebodys_own_thing() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_somebodys_own_thing"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__somebodys_own_thing(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_somebodys_own_thing"), v); }
+pub fn g__song() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_song"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__song(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_song"), v); }
+pub fn g__story() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_story"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__story(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_story"), v); }
+pub fn g__story_idea() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_story_idea"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__story_idea(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_story_idea"), v); }
+pub fn g__subject() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_subject"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__subject(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_subject"), v); }
+pub fn g__subject_words() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_subject_words"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__subject_words(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_subject_words"), v); }
+pub fn g__subs_sentence() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_subs_sentence"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__subs_sentence(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_subs_sentence"), v); }
+pub fn g__table_pick() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_table_pick"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__table_pick(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_table_pick"), v); }
+pub fn g__the_chat_turned_down() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_the_chat_turned_down"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__the_chat_turned_down(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_the_chat_turned_down"), v); }
+pub fn g__the_form_a_repeat_ask_names() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_the_form_a_repeat_ask_names"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__the_form_a_repeat_ask_names(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_the_form_a_repeat_ask_names"), v); }
+pub fn g__the_form_last_time() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_the_form_last_time"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__the_form_last_time(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_the_form_last_time"), v); }
+pub fn g__the_form_of_the_lead() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_the_form_of_the_lead"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__the_form_of_the_lead(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_the_form_of_the_lead"), v); }
+pub fn g__the_game_pick() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_the_game_pick"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__the_game_pick(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_the_game_pick"), v); }
+pub fn g__the_gentle_list() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_the_gentle_list"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__the_gentle_list(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_the_gentle_list"), v); }
+pub fn g__the_kind_named() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_the_kind_named"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__the_kind_named(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_the_kind_named"), v); }
+pub fn g__the_last_line_reported_a_form() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_the_last_line_reported_a_form"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__the_last_line_reported_a_form(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_the_last_line_reported_a_form"), v); }
+pub fn g__the_liked_thing_is_asked_about() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_the_liked_thing_is_asked_about"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__the_liked_thing_is_asked_about(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_the_liked_thing_is_asked_about"), v); }
+pub fn g__the_line_to_read_for_a_story() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_the_line_to_read_for_a_story"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__the_line_to_read_for_a_story(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_the_line_to_read_for_a_story"), v); }
+pub fn g__the_listener_lead() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_the_listener_lead"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__the_listener_lead(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_the_listener_lead"), v); }
+pub fn g__the_medium() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_the_medium"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__the_medium(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_the_medium"), v); }
+pub fn g__the_mood_the_chat_holds() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_the_mood_the_chat_holds"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__the_mood_the_chat_holds(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_the_mood_the_chat_holds"), v); }
+pub fn g__the_mood_the_chat_turned_down() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_the_mood_the_chat_turned_down"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__the_mood_the_chat_turned_down(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_the_mood_the_chat_turned_down"), v); }
+pub fn g__the_opening_not_said_yet() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_the_opening_not_said_yet"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__the_opening_not_said_yet(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_the_opening_not_said_yet"), v); }
+pub fn g__the_possessive_phrase() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_the_possessive_phrase"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__the_possessive_phrase(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_the_possessive_phrase"), v); }
+pub fn g__the_reader_age() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_the_reader_age"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__the_reader_age(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_the_reader_age"), v); }
+pub fn g__the_scare_is_refused() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_the_scare_is_refused"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__the_scare_is_refused(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_the_scare_is_refused"), v); }
+pub fn g__the_scare_is_wanted() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_the_scare_is_wanted"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__the_scare_is_wanted(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_the_scare_is_wanted"), v); }
+pub fn g__the_second_one_asked_for() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_the_second_one_asked_for"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__the_second_one_asked_for(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_the_second_one_asked_for"), v); }
+pub fn g__the_second_one_short() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_the_second_one_short"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__the_second_one_short(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_the_second_one_short"), v); }
+pub fn g__the_solo_game() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_the_solo_game"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__the_solo_game(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_the_solo_game"), v); }
+pub fn g__the_story_was_just_told() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_the_story_was_just_told"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__the_story_was_just_told(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_the_story_was_just_told"), v); }
+pub fn g__the_subject_from_the_ask() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_the_subject_from_the_ask"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__the_subject_from_the_ask(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_the_subject_from_the_ask"), v); }
+pub fn g__the_subject_is_wanted() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_the_subject_is_wanted"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__the_subject_is_wanted(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_the_subject_is_wanted"), v); }
+pub fn g__thing() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_thing"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__thing(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_thing"), v); }
+pub fn g__title() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_title"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__title(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_title"), v); }
+pub fn g__title_in() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_title_in"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__title_in(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_title_in"), v); }
+pub fn g__title_medium() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_title_medium"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__title_medium(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_title_medium"), v); }
+pub fn g__titles_of() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_titles_of"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__titles_of(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_titles_of"), v); }
+pub fn g__typed_line() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_typed_line"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__typed_line(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_typed_line"), v); }
+pub fn g__wants_subtitles() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_wants_subtitles"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__wants_subtitles(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_wants_subtitles"), v); }
+pub fn g__who_wrote() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_who_wrote"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__who_wrote(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_who_wrote"), v); }
+pub fn g__with_the_detail_asked_for() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_with_the_detail_asked_for"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__with_the_detail_asked_for(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_with_the_detail_asked_for"), v); }
+pub fn g__word() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_word"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__word(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_word"), v); }
+pub fn g__work_named() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_work_named"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__work_named(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_work_named"), v); }
+pub fn g__worth_it() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_worth_it"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__worth_it(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_worth_it"), v); }
+pub fn g__worth_it_unnamed() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("_worth_it_unnamed"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s__worth_it_unnamed(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("_worth_it_unnamed"), v); }
+pub fn g_asks_for_one_more() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("asks_for_one_more"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_asks_for_one_more(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("asks_for_one_more"), v); }
+pub fn g_entry() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("entry"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_entry(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("entry"), v); }
+pub fn g_not_asking_what_to_watch_for() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("not_asking_what_to_watch_for"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_not_asking_what_to_watch_for(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("not_asking_what_to_watch_for"), v); }
+pub fn g_owns_the_deed() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("owns_the_deed"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_owns_the_deed(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("owns_the_deed"), v); }
+pub fn g_the_book_is_a_reservation() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("the_book_is_a_reservation"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_the_book_is_a_reservation(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("the_book_is_a_reservation"), v); }
+pub fn g_the_next_verse() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("the_next_verse"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_the_next_verse(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("the_next_verse"), v); }
+pub fn g_the_verse_longer() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("the_verse_longer"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_the_verse_longer(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("the_verse_longer"), v); }
+pub fn g_who_made() -> Py { ensure_init(); let d = __globals(); if let Py::Dict(m) = d { return m.borrow().get(&PyKey(py_str("who_made"))).cloned().unwrap_or(Py::None); } Py::None }
+pub fn s_who_made(v: Py) { ensure_init(); let _ = py_setitem(&__globals(), &py_str("who_made"), v); }
 fn module_body() {
+    s__a_chess_line(py_func("_a_chess_line", |args: &[Py]| _a_chess_line__wrapped(args)));
+    s__no_city_is_named(py_func("_no_city_is_named", |args: &[Py]| _no_city_is_named__wrapped(args)));
+    s__title(py_func("_title", |args: &[Py]| _title__wrapped(args)));
+    s_who_made(py_func("who_made", |args: &[Py]| who_made__wrapped(args)));
+    s__author_key(py_func("_author_key", |args: &[Py]| _author_key__wrapped(args)));
+    s__titles_of(py_func("_titles_of", |args: &[Py]| _titles_of__wrapped(args)));
+    s__title_in(py_func("_title_in", |args: &[Py]| _title_in__wrapped(args)));
+    s__author_in(py_func("_author_in", |args: &[Py]| _author_in__wrapped(args)));
+    s__display(py_func("_display", |args: &[Py]| _display__wrapped(args)));
+    s__said(py_func("_said", |args: &[Py]| _said__wrapped(args)));
+    s__list_words(py_func("_list_words", |args: &[Py]| _list_words__wrapped(args)));
+    s__who_wrote(py_func("_who_wrote", |args: &[Py]| _who_wrote__wrapped(args)));
+    s__book_title_named(py_func("_book_title_named", |args: &[Py]| _book_title_named__wrapped(args)));
+    s__book_like(py_func("_book_like", |args: &[Py]| _book_like__wrapped(args)));
+    s__age_in(py_func("_age_in", |args: &[Py]| _age_in__wrapped(args)));
+    s__party_games_for_kids(py_func("_party_games_for_kids", |args: &[Py]| _party_games_for_kids__wrapped(args)));
+    s__indoors(py_func("_indoors", |args: &[Py]| _indoors__wrapped(args)));
+    s__listen_when(py_func("_listen_when", |args: &[Py]| _listen_when__wrapped(args)));
+    s__family_film(py_func("_family_film", |args: &[Py]| _family_film__wrapped(args)));
+    s__the_gentle_list(py_func("_the_gentle_list", |args: &[Py]| _the_gentle_list__wrapped(args)));
+    s__the_chat_turned_down(py_func("_the_chat_turned_down", |args: &[Py]| _the_chat_turned_down__wrapped(args)));
+    s__the_mood_the_chat_turned_down(py_func("_the_mood_the_chat_turned_down", |args: &[Py]| _the_mood_the_chat_turned_down__wrapped(args)));
+    s__the_mood_the_chat_holds(py_func("_the_mood_the_chat_holds", |args: &[Py]| _the_mood_the_chat_holds__wrapped(args)));
+    s__film_like(py_func("_film_like", |args: &[Py]| _film_like__wrapped(args)));
+    s__a_word_is_turned_down(py_func("_a_word_is_turned_down", |args: &[Py]| _a_word_is_turned_down__wrapped(args)));
+    s__own_texts(py_func("_own_texts", |args: &[Py]| _own_texts__wrapped(args)));
+    s__the_scare_is_refused(py_func("_the_scare_is_refused", |args: &[Py]| _the_scare_is_refused__wrapped(args)));
+    s__a_film_ask(py_func("_a_film_ask", |args: &[Py]| _a_film_ask__wrapped(args)));
+    s__the_scare_is_wanted(py_func("_the_scare_is_wanted", |args: &[Py]| _the_scare_is_wanted__wrapped(args)));
+    s__work_named(py_func("_work_named", |args: &[Py]| _work_named__wrapped(args)));
+    s__the_liked_thing_is_asked_about(py_func("_the_liked_thing_is_asked_about", |args: &[Py]| _the_liked_thing_is_asked_about__wrapped(args)));
+    s__about_a_person(py_func("_about_a_person", |args: &[Py]| _about_a_person__wrapped(args)));
+    s__a_place_not_a_work(py_func("_a_place_not_a_work", |args: &[Py]| _a_place_not_a_work__wrapped(args)));
+    s__a_thing_is_being_baked(py_func("_a_thing_is_being_baked", |args: &[Py]| _a_thing_is_being_baked__wrapped(args)));
+    s__a_surface_is_being_painted(py_func("_a_surface_is_being_painted", |args: &[Py]| _a_surface_is_being_painted__wrapped(args)));
+    s__activity_start(py_func("_activity_start", |args: &[Py]| _activity_start__wrapped(args)));
+    s__paints_a_thing(py_func("_paints_a_thing", |args: &[Py]| _paints_a_thing__wrapped(args)));
+    s__an_ordinary_word(py_func("_an_ordinary_word", |args: &[Py]| _an_ordinary_word__wrapped(args)));
+    s__genre_start(py_func("_genre_start", |args: &[Py]| _genre_start__wrapped(args)));
+    s__card_game(py_func("_card_game", |args: &[Py]| _card_game__wrapped(args)));
+    s__in_tune(py_func("_in_tune", |args: &[Py]| _in_tune__wrapped(args)));
+    s__buzz(py_func("_buzz", |args: &[Py]| _buzz__wrapped(args)));
+    s__worth_it(py_func("_worth_it", |args: &[Py]| _worth_it__wrapped(args)));
+    s__worth_it_unnamed(py_func("_worth_it_unnamed", |args: &[Py]| _worth_it_unnamed__wrapped(args)));
+    s__named_work(py_func("_named_work", |args: &[Py]| _named_work__wrapped(args)));
+    s__table_pick(py_func("_table_pick", |args: &[Py]| _table_pick__wrapped(args)));
+    s__after_named(py_func("_after_named", |args: &[Py]| _after_named__wrapped(args)));
+    s__says(py_func("_says", |args: &[Py]| _says__wrapped(args)));
+    s__book_subject(py_func("_book_subject", |args: &[Py]| _book_subject__wrapped(args)));
+    s__book_thriller(py_func("_book_thriller", |args: &[Py]| _book_thriller__wrapped(args)));
+    s__book_about(py_func("_book_about", |args: &[Py]| _book_about__wrapped(args)));
+    s__not_a_reservation(py_func("_not_a_reservation", |args: &[Py]| _not_a_reservation__wrapped(args)));
+    s__a_judged_work_named(py_func("_a_judged_work_named", |args: &[Py]| _a_judged_work_named__wrapped(args)));
+    s_the_book_is_a_reservation(py_func("the_book_is_a_reservation", |args: &[Py]| the_book_is_a_reservation__wrapped(args)));
+    s__a_reservation(py_func("_a_reservation", |args: &[Py]| _a_reservation__wrapped(args)));
+    s__a_listings_ask_near_me(py_func("_a_listings_ask_near_me", |args: &[Py]| _a_listings_ask_near_me__wrapped(args)));
+    s__book_recommend(py_func("_book_recommend", |args: &[Py]| _book_recommend__wrapped(args)));
+    s__mood_key_words(py_func("_mood_key_words", |args: &[Py]| _mood_key_words__wrapped(args)));
+    s__mood_signals(py_func("_mood_signals", |args: &[Py]| _mood_signals__wrapped(args)));
+    s__negated(py_func("_negated", |args: &[Py]| _negated__wrapped(args)));
+    s__typed_line(py_func("_typed_line", |args: &[Py]| _typed_line__wrapped(args)));
+    s__names_the_weather(py_func("_names_the_weather", |args: &[Py]| _names_the_weather__wrapped(args)));
+    s__names_the_evening(py_func("_names_the_evening", |args: &[Py]| _names_the_evening__wrapped(args)));
+    s__plain_words(py_func("_plain_words", |args: &[Py]| _plain_words__wrapped(args)));
+    s__mood_of(py_func("_mood_of", |args: &[Py]| _mood_of__wrapped(args)));
+    s__no_named_mood(py_func("_no_named_mood", |args: &[Py]| _no_named_mood__wrapped(args)));
+    s__films_within(py_func("_films_within", |args: &[Py]| _films_within__wrapped(args)));
+    s__mood_pick(py_func("_mood_pick", |args: &[Py]| _mood_pick__wrapped(args)));
+    s__medium_named(py_func("_medium_named", |args: &[Py]| _medium_named__wrapped(args)));
+    s__the_medium(py_func("_the_medium", |args: &[Py]| _the_medium__wrapped(args)));
+    s__picks_by_title(py_func("_picks_by_title", |args: &[Py]| _picks_by_title__wrapped(args)));
+    s__title_medium(py_func("_title_medium", |args: &[Py]| _title_medium__wrapped(args)));
+    s__chat_is_about_a_pick(py_func("_chat_is_about_a_pick", |args: &[Py]| _chat_is_about_a_pick__wrapped(args)));
+    s__a_pick_of_the_other_mood(py_func("_a_pick_of_the_other_mood", |args: &[Py]| _a_pick_of_the_other_mood__wrapped(args)));
+    s__a_pick_in_any_medium(py_func("_a_pick_in_any_medium", |args: &[Py]| _a_pick_in_any_medium__wrapped(args)));
+    s_not_asking_what_to_watch_for(py_func("not_asking_what_to_watch_for", |args: &[Py]| not_asking_what_to_watch_for__wrapped(args)));
+    s__the_possessive_phrase(py_func("_the_possessive_phrase", |args: &[Py]| _the_possessive_phrase__wrapped(args)));
+    s__article_for(py_func("_article_for", |args: &[Py]| _article_for__wrapped(args)));
+    s__subject_words(py_func("_subject_words", |args: &[Py]| _subject_words__wrapped(args)));
+    s__no_subject_verse(py_func("_no_subject_verse", |args: &[Py]| _no_subject_verse__wrapped(args)));
+    s__names_another_form(py_func("_names_another_form", |args: &[Py]| _names_another_form__wrapped(args)));
+    s__asks_for_a_verse(py_func("_asks_for_a_verse", |args: &[Py]| _asks_for_a_verse__wrapped(args)));
+    s__subject(py_func("_subject", |args: &[Py]| _subject__wrapped(args)));
+    s__thing(py_func("_thing", |args: &[Py]| _thing__wrapped(args)));
+    s__named_nothing(py_func("_named_nothing", |args: &[Py]| _named_nothing__wrapped(args)));
+    s__lines(py_func("_lines", |args: &[Py]| _lines__wrapped(args)));
     s__haiku(py_func("_haiku", |args: &[Py]| _haiku__wrapped(args)));
     s__limerick(py_func("_limerick", |args: &[Py]| _limerick__wrapped(args)));
     s__poem(py_func("_poem", |args: &[Py]| _poem__wrapped(args)));
+    s__rhyme(py_func("_rhyme", |args: &[Py]| _rhyme__wrapped(args)));
+    s__story_idea(py_func("_story_idea", |args: &[Py]| _story_idea__wrapped(args)));
+    s__the_form_last_time(py_func("_the_form_last_time", |args: &[Py]| _the_form_last_time__wrapped(args)));
+    s__lead(py_func("_lead", |args: &[Py]| _lead__wrapped(args)));
+    s__offer(py_func("_offer", |args: &[Py]| _offer__wrapped(args)));
+    s__say(py_func("_say", |args: &[Py]| _say__wrapped(args)));
+    s__picked(py_func("_picked", |args: &[Py]| _picked__wrapped(args)));
+    s__the_listener_lead(py_func("_the_listener_lead", |args: &[Py]| _the_listener_lead__wrapped(args)));
+    s__a_story_for_the_listener(py_func("_a_story_for_the_listener", |args: &[Py]| _a_story_for_the_listener__wrapped(args)));
+    s__a_child_story_about(py_func("_a_child_story_about", |args: &[Py]| _a_child_story_about__wrapped(args)));
+    s__a_story_is_asked_for(py_func("_a_story_is_asked_for", |args: &[Py]| _a_story_is_asked_for__wrapped(args)));
+    s__the_line_to_read_for_a_story(py_func("_the_line_to_read_for_a_story", |args: &[Py]| _the_line_to_read_for_a_story__wrapped(args)));
+    s__the_story_was_just_told(py_func("_the_story_was_just_told", |args: &[Py]| _the_story_was_just_told__wrapped(args)));
+    s__a_placeholder_word(py_func("_a_placeholder_word", |args: &[Py]| _a_placeholder_word__wrapped(args)));
+    s__a_report_of_the_habit(py_func("_a_report_of_the_habit", |args: &[Py]| _a_report_of_the_habit__wrapped(args)));
+    s__the_last_line_reported_a_form(py_func("_the_last_line_reported_a_form", |args: &[Py]| _the_last_line_reported_a_form__wrapped(args)));
+    s__a_report_answered(py_func("_a_report_answered", |args: &[Py]| _a_report_answered__wrapped(args)));
     s__story(py_func("_story", |args: &[Py]| _story__wrapped(args)));
+    s__the_opening_not_said_yet(py_func("_the_opening_not_said_yet", |args: &[Py]| _the_opening_not_said_yet__wrapped(args)));
     s__rap(py_func("_rap", |args: &[Py]| _rap__wrapped(args)));
     s__song(py_func("_song", |args: &[Py]| _song__wrapped(args)));
+    s__character_name(py_func("_character_name", |args: &[Py]| _character_name__wrapped(args)));
+    s__nickname(py_func("_nickname", |args: &[Py]| _nickname__wrapped(args)));
+    s__the_second_one_asked_for(py_func("_the_second_one_asked_for", |args: &[Py]| _the_second_one_asked_for__wrapped(args)));
+    s__another_one(py_func("_another_one", |args: &[Py]| _another_one__wrapped(args)));
+    s__quiz_name(py_func("_quiz_name", |args: &[Py]| _quiz_name__wrapped(args)));
+    s__asked_for_what_they_already_tried(py_func("_asked_for_what_they_already_tried", |args: &[Py]| _asked_for_what_they_already_tried__wrapped(args)));
+    s__with_the_detail_asked_for(py_func("_with_the_detail_asked_for", |args: &[Py]| _with_the_detail_asked_for__wrapped(args)));
+    s__a_second_one_read_first(py_func("_a_second_one_read_first", |args: &[Py]| _a_second_one_read_first__wrapped(args)));
+    s__a_country_is_a_country(py_func("_a_country_is_a_country", |args: &[Py]| _a_country_is_a_country__wrapped(args)));
+    s__kind_words(py_func("_kind_words", |args: &[Py]| _kind_words__wrapped(args)));
+    s__the_subject_is_wanted(py_func("_the_subject_is_wanted", |args: &[Py]| _the_subject_is_wanted__wrapped(args)));
+    s__a_documentary_is_wanted(py_func("_a_documentary_is_wanted", |args: &[Py]| _a_documentary_is_wanted__wrapped(args)));
+    s__names_a_film_genre(py_func("_names_a_film_genre", |args: &[Py]| _names_a_film_genre__wrapped(args)));
+    s__a_programme_is_wanted(py_func("_a_programme_is_wanted", |args: &[Py]| _a_programme_is_wanted__wrapped(args)));
+    s__show_subject(py_func("_show_subject", |args: &[Py]| _show_subject__wrapped(args)));
+    s__show_about(py_func("_show_about", |args: &[Py]| _show_about__wrapped(args)));
+    s__pick_kind(py_func("_pick_kind", |args: &[Py]| _pick_kind__wrapped(args)));
+    s__pick_refused(py_func("_pick_refused", |args: &[Py]| _pick_refused__wrapped(args)));
+    s__pick_who(py_func("_pick_who", |args: &[Py]| _pick_who__wrapped(args)));
+    s__pick_limit(py_func("_pick_limit", |args: &[Py]| _pick_limit__wrapped(args)));
+    s__wants_subtitles(py_func("_wants_subtitles", |args: &[Py]| _wants_subtitles__wrapped(args)));
+    s__cinema_of(py_func("_cinema_of", |args: &[Py]| _cinema_of__wrapped(args)));
+    s__rows_from_cinema(py_func("_rows_from_cinema", |args: &[Py]| _rows_from_cinema__wrapped(args)));
+    s__pick_rows(py_func("_pick_rows", |args: &[Py]| _pick_rows__wrapped(args)));
+    s__pick_list(py_func("_pick_list", |args: &[Py]| _pick_list__wrapped(args)));
+    s__subs_sentence(py_func("_subs_sentence", |args: &[Py]| _subs_sentence__wrapped(args)));
+    s__pick_reply(py_func("_pick_reply", |args: &[Py]| _pick_reply__wrapped(args)));
+    s__pick_carry(py_func("_pick_carry", |args: &[Py]| _pick_carry__wrapped(args)));
+    s__pick_stands_down(py_func("_pick_stands_down", |args: &[Py]| _pick_stands_down__wrapped(args)));
+    s__another_subject(py_func("_another_subject", |args: &[Py]| _another_subject__wrapped(args)));
+    s__pick_line(py_func("_pick_line", |args: &[Py]| _pick_line__wrapped(args)));
+    s__film_kind(py_func("_film_kind", |args: &[Py]| _film_kind__wrapped(args)));
+    s__limit_wanted(py_func("_limit_wanted", |args: &[Py]| _limit_wanted__wrapped(args)));
+    s__minutes_wanted(py_func("_minutes_wanted", |args: &[Py]| _minutes_wanted__wrapped(args)));
+    s__film_under(py_func("_film_under", |args: &[Py]| _film_under__wrapped(args)));
+    s__shelf_within(py_func("_shelf_within", |args: &[Py]| _shelf_within__wrapped(args)));
+    s__kind_carry(py_func("_kind_carry", |args: &[Py]| _kind_carry__wrapped(args)));
+    s__shortest_wanted(py_func("_shortest_wanted", |args: &[Py]| _shortest_wanted__wrapped(args)));
+    s__film_kind_reply(py_func("_film_kind_reply", |args: &[Py]| _film_kind_reply__wrapped(args)));
+    s__pick_plain(py_func("_pick_plain", |args: &[Py]| _pick_plain__wrapped(args)));
+    s__pick_limit_reply(py_func("_pick_limit_reply", |args: &[Py]| _pick_limit_reply__wrapped(args)));
+    s__the_reader_age(py_func("_the_reader_age", |args: &[Py]| _the_reader_age__wrapped(args)));
+    s__book_for_the_age(py_func("_book_for_the_age", |args: &[Py]| _book_for_the_age__wrapped(args)));
+    s__an_hour_or_a_day(py_func("_an_hour_or_a_day", |args: &[Py]| _an_hour_or_a_day__wrapped(args)));
+    s__a_child_who_reads_already(py_func("_a_child_who_reads_already", |args: &[Py]| _a_child_who_reads_already__wrapped(args)));
+    s__asks_if_a_comic_suits_an_age(py_func("_asks_if_a_comic_suits_an_age", |args: &[Py]| _asks_if_a_comic_suits_an_age__wrapped(args)));
+    s__the_kind_named(py_func("_the_kind_named", |args: &[Py]| _the_kind_named__wrapped(args)));
+    s__reader_named(py_func("_reader_named", |args: &[Py]| _reader_named__wrapped(args)));
+    s__comic_pick(py_func("_comic_pick", |args: &[Py]| _comic_pick__wrapped(args)));
+    s__a_genre_is_the_taste(py_func("_a_genre_is_the_taste", |args: &[Py]| _a_genre_is_the_taste__wrapped(args)));
+    s_the_verse_longer(py_func("the_verse_longer", |args: &[Py]| the_verse_longer__wrapped(args)));
+    s__a_second_verse_is_asked_for(py_func("_a_second_verse_is_asked_for", |args: &[Py]| _a_second_verse_is_asked_for__wrapped(args)));
+    s__the_subject_from_the_ask(py_func("_the_subject_from_the_ask", |args: &[Py]| _the_subject_from_the_ask__wrapped(args)));
+    s__the_second_one_short(py_func("_the_second_one_short", |args: &[Py]| _the_second_one_short__wrapped(args)));
+    s__a_child_story_lead(py_func("_a_child_story_lead", |args: &[Py]| _a_child_story_lead__wrapped(args)));
+    s__the_form_a_repeat_ask_names(py_func("_the_form_a_repeat_ask_names", |args: &[Py]| _the_form_a_repeat_ask_names__wrapped(args)));
+    s__the_form_of_the_lead(py_func("_the_form_of_the_lead", |args: &[Py]| _the_form_of_the_lead__wrapped(args)));
+    s_the_next_verse(py_func("the_next_verse", |args: &[Py]| the_next_verse__wrapped(args)));
+    s__film_list(py_func("_film_list", |args: &[Py]| _film_list__wrapped(args)));
+    s__somebodys_own_thing(py_func("_somebodys_own_thing", |args: &[Py]| _somebodys_own_thing__wrapped(args)));
+    s__music_elsewhere(py_func("_music_elsewhere", |args: &[Py]| _music_elsewhere__wrapped(args)));
+    s__music_term(py_func("_music_term", |args: &[Py]| _music_term__wrapped(args)));
+    s__a_bridge_in_music(py_func("_a_bridge_in_music", |args: &[Py]| _a_bridge_in_music__wrapped(args)));
+    s__instrument_count(py_func("_instrument_count", |args: &[Py]| _instrument_count__wrapped(args)));
+    s__music_practice(py_func("_music_practice", |args: &[Py]| _music_practice__wrapped(args)));
+    s__not_a_crowd(py_func("_not_a_crowd", |args: &[Py]| _not_a_crowd__wrapped(args)));
+    s__a_child_in_the_chat(py_func("_a_child_in_the_chat", |args: &[Py]| _a_child_in_the_chat__wrapped(args)));
+    s__the_game_pick(py_func("_the_game_pick", |args: &[Py]| _the_game_pick__wrapped(args)));
+    s__a_hardware_decision(py_func("_a_hardware_decision", |args: &[Py]| _a_hardware_decision__wrapped(args)));
+    s__a_game_pick_line(py_func("_a_game_pick_line", |args: &[Py]| _a_game_pick_line__wrapped(args)));
+    s__the_solo_game(py_func("_the_solo_game", |args: &[Py]| _the_solo_game__wrapped(args)));
     let _ = py_str("Films, TV, books, podcasts and games: what to watch, read or play next.\n\nThe answers lane owns this domain. One Entry per taste, keyed by the thing someone is\nlooking for (a funny family film, something like The Martian, a short-rule board game),\nand named works in the reply so there is always something concrete to pick up.\n");
     s_owns_the_deed(py_func("owns_the_deed", |args: &[Py]| pyrt::xrefs::xcall("compose.repair", "owns_the_deed", args)));
     s_asks_for_one_more(py_func("asks_for_one_more", |args: &[Py]| pyrt::xrefs::xcall("understanding.attempts", "asks_for_one_more", args)));
@@ -1542,7 +1885,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.entertainment.TITLE_SPELLING"); }
     s_TITLE_SPELLING(py_dict(vec![(py_str("the color purple"), py_str("the colour purple"))]));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.entertainment.AUTHOR_KEYS"); }
-    s_AUTHOR_KEYS(call_builtin("tuple", &[mcall(&py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e))), "fromkeys", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_BOOK_AUTHORS()) { let __unpk3486 = py_unpack(&__item.clone(), 2, None); let mut _title: Py = __unpk3486[0].clone(); let mut writer: Py = __unpk3486[1].clone(); __out.push(mcall(&geti(&mcall(&writer.clone(), "split", &[]), &op_neg(&Py::Int(1))), "lower", &[])); } py_list(__out) })() }])]).unwrap_or_else(|e| exc::raise(e)));
+    s_AUTHOR_KEYS(call_builtin("tuple", &[mcall(&py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e))), "fromkeys", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_BOOK_AUTHORS()) { let __unpk1 = py_unpack(&__item.clone(), 2, None); let mut _title: Py = __unpk1[0].clone(); let mut writer: Py = __unpk1[1].clone(); __out.push(mcall(&geti(&mcall(&writer.clone(), "split", &[]), &op_neg(&Py::Int(1))), "lower", &[])); } py_list(__out) })() }])]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.entertainment.AUTHOR_ALSO"); }
     s_AUTHOR_ALSO(py_dict(vec![(py_str("doyle"), py_str("conan doyle")), (py_str("rowling"), py_str("jk rowling")), (py_str("martin"), py_str("george rr martin")), (py_str("fitzgerald"), py_str("scott fitzgerald")), (py_str("lewis"), py_str("cs lewis"))]));
     fn __data16() -> Py { py_tuple(vec![py_str("write"), py_str("wrote"), py_str("written"), py_str("writes"), py_str("writing"), py_str("author"), py_str("authors"), py_str("book"), py_str("books"), py_str("novel"), py_str("novels"), py_str("play"), py_str("plays"), py_str("poem"), py_str("poems"), py_str("story"), py_str("stories"), py_str("else"), py_str("other"), py_str("also"), py_str("more"), py_str("by")]) }
@@ -1559,7 +1902,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.entertainment.BOOK_LIKE_ASKS"); }
     s_BOOK_LIKE_ASKS(__data18());
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.entertainment.BOOK_LIKE_THINGS"); }
-    s_BOOK_LIKE_THINGS(op_add(&py_tuple(vec![py_str("book"), py_str("books"), py_str("novel"), py_str("novels"), py_str("read"), py_str("reading")]), &call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_BOOK_MATCHES()) { let __unpk8157 = py_unpack(&__item.clone(), 2, None); let mut title: Py = __unpk8157[0].clone(); let mut _reply: Py = __unpk8157[1].clone(); __out.push(title.clone()); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))));
+    s_BOOK_LIKE_THINGS(op_add(&py_tuple(vec![py_str("book"), py_str("books"), py_str("novel"), py_str("novels"), py_str("read"), py_str("reading")]), &call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_BOOK_MATCHES()) { let __unpk1 = py_unpack(&__item.clone(), 2, None); let mut title: Py = __unpk1[0].clone(); let mut _reply: Py = __unpk1[1].clone(); __out.push(title.clone()); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.entertainment.LIKE_A_NAMED_BOOK"); }
     s_LIKE_A_NAMED_BOOK(stdlib_call("re", "compile", &[py_str("\\b(?:books?|novels?|reading|read)\\s+(?:like|similar to|after)\\s+([a-z0-9'&: -]{2,40})|\\b(?:something|anything)\\s+(?:like|similar to)\\s+([a-z0-9'&: -]{2,40})")]).unwrap_or_else(|e| exc::raise(e)));
     fn __data19() -> Py { py_tuple(vec![py_str("kid"), py_str("kids"), py_str("child"), py_str("children"), py_str("toddler"), py_str("toddlers"), py_str("preschooler"), py_str("preschoolers"), py_str("baby"), py_str("babies"), py_str("little one"), py_str("little ones"), py_str("school"), py_str("reception"), py_str("nursery"), py_str("year old"), py_str("year olds"), py_str("years old"), py_str("year old's"), py_str("yr old"), py_str("daughter"), py_str("son"), py_str("girl"), py_str("girls"), py_str("boy"), py_str("boys"), py_str("grandchild"), py_str("grandchildren"), py_str("1st"), py_str("2nd"), py_str("3rd"), py_str("4th"), py_str("5th"), py_str("6th"), py_str("7th"), py_str("8th"), py_str("9th"), py_str("10th")]) }
@@ -1579,7 +1922,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.entertainment.FILM_MATCHES"); }
     s_FILM_MATCHES(__data20());
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.entertainment.AFTER_TITLE_WORDS"); }
-    s_AFTER_TITLE_WORDS(call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_FILM_MATCHES()) { let __unpk4598 = py_unpack(&__item.clone(), 2, None); let mut title: Py = __unpk4598[0].clone(); let mut _u: Py = __unpk4598[1].clone(); __out.push(title.clone()); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
+    s_AFTER_TITLE_WORDS(call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_FILM_MATCHES()) { let __unpk1 = py_unpack(&__item.clone(), 2, None); let mut title: Py = __unpk1[0].clone(); let mut _u: Py = __unpk1[1].clone(); __out.push(title.clone()); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.entertainment.PLAIN_TITLES"); }
     s_PLAIN_TITLES(call_builtin("frozenset", &[py_tuple(vec![py_str("friends"), py_str("the office"), py_str("the crown"), py_str("the bear"), py_str("the wire"), py_str("get out")])]).unwrap_or_else(|e| exc::raise(e)));
     fn __data21() -> Py { py_tuple(vec![py_str("my friends"), py_str("our friends"), py_str("his friends"), py_str("her friends"), py_str("their friends"), py_str("your friends"), py_str("make friends"), py_str("new friends"), py_str("best friends"), py_str("best friend"), py_str("friends are"), py_str("friends came"), py_str("friends and family"), py_str("a few friends")]) }
@@ -1768,7 +2111,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.entertainment.MOOD_GLUE"); }
     s_MOOD_GLUE(call_builtin("frozenset", &[mcall(&py_str("a an the it its i me my im i'm you your he she him her they them we\nus our want wants wanted would like likes to of for and or but so really very much too not no\nnever nothing none dont doesnt didnt hardly barely some something that this these those there\nhere is are was were am be been being do does did have has had will can could should may might\nget gets got able one ones make makes made in on at up down out off over with by from as if\nthan then when while all night"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.entertainment.MOOD_WORDS"); }
-    s_MOOD_WORDS(_mood_key_words(&[g_MOODS()]));
+    s_MOOD_WORDS(py_call(&g__mood_key_words(), &[g_MOODS()]));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.entertainment.MOOD_BY_WORD"); }
     s_MOOD_BY_WORD(py_dict(vec![]));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.entertainment.MOOD_SIGNAL_SET"); }
@@ -1782,7 +2125,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.entertainment._EVENING_WORDS"); }
     s__EVENING_WORDS(__data53());
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.entertainment.MOOD_SIGNALS"); }
-    s_MOOD_SIGNALS(_mood_signals(&[g_MOOD_WORDS()]));
+    s_MOOD_SIGNALS(py_call(&g__mood_signals(), &[g_MOOD_WORDS()]));
     let _ = mcall(&g_MOOD_SIGNAL_SET(), "update", &[g_MOOD_SIGNALS()]);
     let __iter54 = py_iter_or_raise(&g_MOOD_ORDER());
     for __item in __iter54 {
@@ -1792,7 +2135,7 @@ fn module_body() {
     for __item in __iter55 {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.entertainment._word"); }
     s__word(__item.clone());
-    if py_truthy(&{ let __b = call_builtin("isinstance", &[g__word(), py_func("str", |args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_contains(&g__word(), &py_str(" "))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_contains(&g_MOOD_BY_WORD(), &g__word())); if !py_truthy(&__b) { __b } else { Py::Bool(py_eq(&_mood_of(&[g__word()]), &py_tuple(vec![g__mood(), Py::Bool(false)]))) } } } } } }) {
+    if py_truthy(&{ let __b = call_builtin("isinstance", &[g__word(), py_func("str", |args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_contains(&g__word(), &py_str(" "))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_contains(&g_MOOD_BY_WORD(), &g__word())); if !py_truthy(&__b) { __b } else { Py::Bool(py_eq(&py_call(&g__mood_of(), &[g__word()]), &py_tuple(vec![g__mood(), Py::Bool(false)]))) } } } } } }) {
     let _ = py_setitem(&g_MOOD_BY_WORD(), &g__word(), g__mood());
     }
     }
@@ -1801,7 +2144,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.entertainment.FILM_MINUTES"); }
     s_FILM_MINUTES(__data56());
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.entertainment.PICK_TITLES"); }
-    s_PICK_TITLES(_picks_by_title(&[]));
+    s_PICK_TITLES(py_call(&g__picks_by_title(), &[]));
     fn __data57() -> Py { py_tuple(vec![py_str("no"), py_str("not"), py_str("nothing"), py_str("dont"), py_str("don't"), py_str("rather not"), py_str("no thanks"), py_str("too much"), py_str("isnt"), py_str("isn't"), py_str("wasnt"), py_str("wasn't"), py_str("cant stand"), py_str("can't stand"), py_str("hate"), py_str("sick of"), py_str("bored of"), py_str("no more"), py_str("anything but"), py_str("not really")]) }
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.entertainment.TURNS_IT_DOWN"); }
     s_TURNS_IT_DOWN(__data57());
@@ -2000,17 +2343,17 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.entertainment._THE_FORM_NAMED"); }
     s__THE_FORM_NAMED(py_dict(vec![(py_str("story"), py_tuple(vec![py_str("story"), py_str("stories"), py_str("tale"), py_str("tales")])), (py_str("poem"), py_tuple(vec![py_str("poem"), py_str("poems"), py_str("verse"), py_str("sonnet"), py_str("ode"), py_str("couplet"), py_str("rhyme"), py_str("rhymes")])), (py_str("rhyme"), py_tuple(vec![py_str("rhyme"), py_str("rhymes"), py_str("rhyming")])), (py_str("haiku"), py_tuple(vec![py_str("haiku"), py_str("haikus")])), (py_str("limerick"), py_tuple(vec![py_str("limerick"), py_str("limericks")])), (py_str("rap"), py_tuple(vec![py_str("rap"), py_str("raps"), py_str("rapping")])), (py_str("song"), py_tuple(vec![py_str("song"), py_str("songs"), py_str("lyric"), py_str("lyrics")]))]));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.entertainment._haiku"); }
-    s__haiku(_with_the_detail_asked_for(&[py_func("_haiku", |args: &[Py]| _haiku__wrapped(args)), py_str("haiku")]));
+    s__haiku(py_call(&g__with_the_detail_asked_for(), &[py_func("_haiku", |args: &[Py]| _haiku__wrapped(args)), py_str("haiku")]));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.entertainment._limerick"); }
-    s__limerick(_with_the_detail_asked_for(&[py_func("_limerick", |args: &[Py]| _limerick__wrapped(args)), py_str("limerick")]));
+    s__limerick(py_call(&g__with_the_detail_asked_for(), &[py_func("_limerick", |args: &[Py]| _limerick__wrapped(args)), py_str("limerick")]));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.entertainment._poem"); }
-    s__poem(_with_the_detail_asked_for(&[py_func("_poem", |args: &[Py]| _poem__wrapped(args)), py_str("poem")]));
+    s__poem(py_call(&g__with_the_detail_asked_for(), &[py_func("_poem", |args: &[Py]| _poem__wrapped(args)), py_str("poem")]));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.entertainment._story"); }
-    s__story(_with_the_detail_asked_for(&[py_func("_story", |args: &[Py]| _story__wrapped(args)), py_str("story")]));
+    s__story(py_call(&g__with_the_detail_asked_for(), &[py_func("_story", |args: &[Py]| _story__wrapped(args)), py_str("story")]));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.entertainment._rap"); }
-    s__rap(_with_the_detail_asked_for(&[py_func("_rap", |args: &[Py]| _rap__wrapped(args)), py_str("rap")]));
+    s__rap(py_call(&g__with_the_detail_asked_for(), &[py_func("_rap", |args: &[Py]| _rap__wrapped(args)), py_str("rap")]));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.entertainment._song"); }
-    s__song(_with_the_detail_asked_for(&[py_func("_song", |args: &[Py]| _song__wrapped(args)), py_str("song")]));
+    s__song(py_call(&g__with_the_detail_asked_for(), &[py_func("_song", |args: &[Py]| _song__wrapped(args)), py_str("song")]));
     let __iter79 = py_iter_or_raise(&py_tuple(vec![py_tuple(vec![py_str("_haiku"), py_str("haiku")]), py_tuple(vec![py_str("_limerick"), py_str("limerick")]), py_tuple(vec![py_str("_poem"), py_str("poem")]), py_tuple(vec![py_str("_story"), py_str("story")]), py_tuple(vec![py_str("_rap"), py_str("rap")]), py_tuple(vec![py_str("_song"), py_str("song")]), py_tuple(vec![py_str("_rhyme"), py_str("rhyme")])]));
     for __item in __iter79 {
     let __unpk80 = py_unpack(&__item.clone(), 2, None);
@@ -2018,7 +2361,7 @@ fn module_body() {
     s__form_name(__unpk80[0].clone());
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.entertainment._form_word"); }
     s__form_word(__unpk80[1].clone());
-    let _ = py_setitem(&call_builtin("globals", &[]).unwrap_or_else(|e| exc::raise(e)), &g__form_name(), _a_second_one_read_first(&[geti(&call_builtin("globals", &[]).unwrap_or_else(|e| exc::raise(e)), &g__form_name()), g__form_word()]));
+    let _ = py_setitem(&__globals(), &g__form_name(), py_call(&g__a_second_one_read_first(), &[geti(&__globals(), &g__form_name()), g__form_word()]));
     }
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.entertainment._form_name"); }
     s__form_name(Py::None);
@@ -2356,7 +2699,7 @@ fn module_body() {
     fn __data224() -> Py { py_tuple(vec![py_str("not working"), py_str("wont play"), py_str("won't play"), py_str("wont load"), py_str("not loading"), py_str("no signal"), py_str("aerial"), py_str("licence"), py_str("license"), py_str("log in"), py_str("login"), py_str("password"), py_str("account"), py_str("how much"), py_str("cost"), py_str("price"), py_str("abroad"), py_str("outside the uk"), py_str("vpn"), py_str("in spain"), py_str("in france"), py_str("turn off"), py_str("turned off"), py_str("turn on"), py_str("turned on"), py_str("enable"), py_str("disable"), py_str("size"), py_str("colour"), py_str("color"), py_str("sync"), py_str("delay"), py_str("tiny"), py_str("missing"), py_str("gone"), py_str("wont turn"), py_str("won't turn"), py_str("appear"), py_str("come back")]) }
     fn __data225() -> Py { py_tuple(vec![py_str("make"), py_str("making"), py_str("made"), py_str("homemade"), py_str("home made"), py_str("at home"), py_str("last minute"), py_str("cheap"), py_str("cheaply"), py_str("diy"), py_str("ideas"), py_str("what can i"), py_str("how do i"), py_str("out of things"), py_str("from things"), py_str("no time"), py_str("quick")]) }
     fn __data226() -> Py { py_tuple(vec![py_str("buy"), py_str("buying"), py_str("bought"), py_str("shop"), py_str("hire"), py_str("hiring"), py_str("rent"), py_str("price"), py_str("cost"), py_str("how much"), py_str("where can i"), py_str("in the wash"), py_str("stain"), py_str("stains"), py_str("too small"), py_str("alter"), py_str("altering"), py_str("hem"), py_str("sew"), py_str("sewing machine"), py_str("photo"), py_str("photos")]) }
-    fn __data110() -> Py { py_list(vec![{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("make-a-card")); __args.push(py_tuple(vec![op_add(&call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_CARD_OCCASIONS()) { let mut one: Py = __item.clone(); __out.push(op_add(&one.clone(), &py_str(" card"))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)), &py_tuple(vec![py_str("homemade card"), py_str("handmade card"), py_str("make a card"), py_str("make cards"), py_str("make my own card"), py_str("card for my"), py_str("cards for")])), py_tuple(vec![py_str("make"), py_str("makes"), py_str("making"), py_str("made"), py_str("homemade"), py_str("handmade"), py_str("craft"), py_str("glue"), py_str("cut out"), py_str("design"), py_str("how do i make"), py_str("how to make")])])); __args.push(py_str("Fold a sheet of A5 thick paper in half, press the crease under a book, and write inside before you stick anything on - ink on a finished card is the usual ruin. One bold thing on the front, a cut shape or a photo or thick pen, and three lines inside naming something you did together beats a lot of stickers.")); __kws.extend(vec![("avoid".to_string(), __data111()), ("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("film-family-funny")); __args.push(py_tuple(vec![py_tuple(vec![py_str("film"), py_str("movie")]), op_add(&op_add(&py_tuple(vec![py_str("family"), py_str("kids"), py_str("children"), py_str("funny"), py_str("comedy")]), &g_CHILD()), &py_tuple(vec![py_str("teenager"), py_str("teenagers"), py_str("teen"), py_str("teens"), py_str("teenage")]))])); __args.push(py_func("_family_film", |args: &[Py]| _family_film(args))); __kws.extend(vec![("avoid".to_string(), op_add(&op_add(&g_WATCHING(), &g_SPORT()), &g_SCREEN_TIME())), ("guard".to_string(), py_func("not_asking_what_to_watch_for", |args: &[Py]| not_asking_what_to_watch_for(args))), ("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("watch-family")); __args.push(py_tuple(vec![py_tuple(vec![py_str("watch"), py_str("watching")]), op_add(&py_tuple(vec![py_str("family"), py_str("kids"), py_str("children")]), &g_CHILD())])); __args.push(py_func("_family_film", |args: &[Py]| _family_film(args))); __kws.extend(vec![("avoid".to_string(), op_add(&op_add(&g_WATCHING(), &g_SPORT()), &g_SCREEN_TIME())), ("guard".to_string(), py_func("not_asking_what_to_watch_for", |args: &[Py]| not_asking_what_to_watch_for(args))), ("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("worth-it")); __args.push(py_tuple(vec![call_builtin("tuple", &[g_VIEWS()]).unwrap_or_else(|e| exc::raise(e)), g_JUDGE_WORDS()])); __args.push(py_func("_worth_it", |args: &[Py]| _worth_it(args))); __kws.extend(vec![("bias".to_string(), Py::Int(2)), ("ask".to_string(), g_VERDICT_ASKS()), ("avoid".to_string(), __data112())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("worth-it-unnamed")); __args.push(py_tuple(vec![g_UNNAMED_ASKS(), py_tuple(vec![py_str("it"), py_str("this"), py_str("that"), py_str("one"), py_str("thing")])])); __args.push(py_func("_worth_it_unnamed", |args: &[Py]| _worth_it_unnamed(args))); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("avoid".to_string(), op_add(&op_add(&g_PICK_ASKS(), &g_HABIT_ASKS()), &__data113()))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("film-tonight")); __args.push(py_tuple(vec![py_tuple(vec![py_str("film"), py_str("movie"), py_str("watch"), py_str("watching"), py_str("netflix")]), op_add(&op_add(&__data114(), &g_WANT_ASKS()), &__data115())])); __args.push(g_EASY_FILM_LIST()); __kws.extend(vec![("avoid".to_string(), op_add(&op_add(&op_add(&op_add(&op_add(&g_SPORT(), &g_CHILD()), &g_NOT_WATCHING()), &g_WATCHING()), &__data116()), &__data117())), ("guard".to_string(), py_func("_no_named_mood", |args: &[Py]| _no_named_mood(args)))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("tv-tonight")); __args.push(py_tuple(vec![py_tuple(vec![py_str("tv"), py_str("telly"), py_str("television")]), py_tuple(vec![py_str("on"), py_str("tonight"), py_str("whats"), py_str("what's"), py_str("anything"), py_str("showing"), py_str("listings")])])); __args.push(py_str("I can't see tonight's listings, so here is what I would start instead: *Happy Valley* if you want tense, *The Detectorists* if you want gentle, or *Groundhog Day* if you want a film you can rely on. Tell me the mood and I'll narrow it.")); __kws.extend(vec![("avoid".to_string(), __data118())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("listings-at-a-venue")); __args.push(py_tuple(vec![__data119(), __data120()])); __args.push(py_str("I can't see what's on at your local venues from here, sorry. The venue's own site or a listings app has the times and the tickets, and it is the same page for a film, a play or a gig. Once you know what is on, tell me the mood or two of the names and I'll say which to go for.")); __kws.extend(vec![("avoid".to_string(), __data121()), ("guard".to_string(), py_func("_a_listings_ask_near_me", |args: &[Py]| _a_listings_ask_near_me(args)))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("listings-on-a-channel")); __args.push(py_tuple(vec![__data122(), __data123()])); __args.push(py_str("I can't see the schedule from here, sorry. The guide on the telly, or the station's own app, has the times, and the catch-up players - iPlayer, ITVX, Channel 4, BBC Sounds - keep the same list on the front page. Tell me the mood and I'll name something worth catching.")); __kws.extend(vec![("avoid".to_string(), __data124())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("pick-a-streaming-service")); __args.push(py_tuple(vec![__data125(), __data126()])); __args.push(py_str("Take one at a time, a month at a time, and cancel when the series ends: almost every service sells monthly with no contract, so a year of switching costs far less than a year of all of them. Two are worth keeping at once at most - one for the family boxsets and one for what you watch live, football or the soaps. Check the service you already pay for through the TV or broadband bundle before adding another, because that is where the cheapest month usually hides.")); __kws.extend(vec![("avoid".to_string(), __data127()), ("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("streaming-good")); __args.push(py_tuple(vec![py_tuple(vec![py_str("netflix"), py_str("iplayer"), py_str("prime"), py_str("disney"), py_str("now tv"), py_str("nowtv"), py_str("streaming"), py_str("apple tv"), py_str("all 4"), py_str("channel 4"), py_str("paramount")]), __data128()])); __args.push(py_str("On any of them: *Knives Out* for a whodunnit everyone enjoys, *Happy Valley* or *The Bear* for a series you'll finish, *Paddington 2* if children are in the room. Say which service and the mood and I'll narrow it down.")); __kws.extend(vec![("avoid".to_string(), op_add(&__data129(), &g_CHILD()))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("watch-tonight")); __args.push(py_tuple(vec![py_tuple(vec![py_str("watch"), py_str("watching")]), py_tuple(vec![py_str("tonight"), py_str("evening"), py_str("what"), py_str("should")])])); __args.push(py_str("For tonight: *Groundhog Day* (funny), *Knives Out* (a clever whodunnit) or *Arrival* (if you want to think). On a series instead, *Happy Valley* is tense and *The Detectorists* is gentle. All easy picks with no homework needed.")); __kws.extend(vec![("avoid".to_string(), op_add(&op_add(&op_add(&g_WATCHING(), &g_CHILD()), &g_SPORT()), &g_NOT_WATCHING()))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("streaming-comedy")); __args.push(py_tuple(vec![py_tuple(vec![py_str("netflix"), py_str("iplayer"), py_str("prime"), py_str("disney"), py_str("now tv"), py_str("nowtv"), py_str("streaming"), py_str("hayu"), py_str("apple tv")]), py_tuple(vec![py_str("comedy"), py_str("comedies"), py_str("funny"), py_str("sitcom"), py_str("laugh")])])); __args.push(py_str("*Schitt's Creek* is the safe pick: short episodes, funny from the first series. *Derry Girls* if you want something sharper, or *Paddington 2* if it's a film tonight rather than a series.")); __kws.extend(vec![("avoid".to_string(), op_add(&py_tuple(vec![py_str("cancel"), py_str("subscription"), py_str("how much"), py_str("cost"), py_str("worth it"), py_str("password"), py_str("account")]), &g_WATCHING()))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("film-like")); __args.push(py_tuple(vec![py_tuple(vec![py_str("film"), py_str("movie")]), py_tuple(vec![py_str("like"), py_str("liked"), py_str("likes"), py_str("similar"), py_str("loved"), py_str("loves"), py_str("enjoyed")])])); __args.push(py_func("_film_like", |args: &[Py]| _film_like(args))); __kws.extend(vec![("avoid".to_string(), op_add(&py_tuple(vec![py_str("gift"), py_str("present"), py_str("birthday"), py_str("christmas"), py_str("get my"), py_str("buy"), py_str("for my dad"), py_str("for my mum")]), &g_CHILD()))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("film-want-scary")); __args.push(py_tuple(vec![py_tuple(vec![py_str("film"), py_str("movie"), py_str("series"), py_str("watch"), py_str("watching")]), py_tuple(vec![py_str("scary"), py_str("scariest"), py_str("scare"), py_str("scares"), py_str("horror"), py_str("horrifying"), py_str("frightening"), py_str("creepy"), py_str("terrifying"), py_str("spooky"), py_str("jump scares")])])); __args.push(py_str("For a proper scare: *Get Out* is the smart one and not gory, *A Quiet Place* is jumpy from the first minute, and *Hereditary* is the genuinely unnerving one. For an old-fashioned ghost story, *The Others*.")); __kws.extend(vec![("avoid".to_string(), op_add(&__data130(), &g_CHILD())), ("ask".to_string(), __data131()), ("guard".to_string(), py_func("_the_scare_is_wanted", |args: &[Py]| _the_scare_is_wanted(args))), ("bias".to_string(), Py::Int(2))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("film-nothing-scary")); __args.push(py_tuple(vec![__data132(), py_tuple(vec![py_str("gory"), py_str("scary"), py_str("horror"), py_str("blood"), py_str("scare"), py_str("spooky"), py_str("creepy"), py_str("frightening"), py_str("terrifying"), py_str("scared"), py_str("haunted")])])); __args.push(py_func("_the_gentle_list", |args: &[Py]| _the_gentle_list(args))); __kws.extend(vec![("bias".to_string(), Py::Int(2)), ("ask".to_string(), __data133()), ("guard".to_string(), py_func("_a_film_ask", |args: &[Py]| _a_film_ask(args))), ("avoid".to_string(), g_CHILD())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("film-dont-want")); __args.push(py_tuple(vec![__data134(), __data135()])); __args.push(geti(&g_FILM_MOODS(), &py_str("light"))); __kws.extend(vec![("avoid".to_string(), op_add(&op_add(&op_add(&op_add(&__data136(), &g_CHILD()), &g_SPORT()), &g_NOT_WATCHING()), &g_WATCHING()))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, pyrt::xrefs::xcall("knowledge.lookup", "entry", &[py_str("film-space"), py_tuple(vec![py_tuple(vec![py_str("film"), py_str("movie")]), py_tuple(vec![py_str("space"), py_str("sci-fi"), py_str("sci fi"), py_str("scifi"), py_str("science fiction")])]), py_str("*Arrival* is the smartest one, *Apollo 13* the most tense, and *Interstellar* the biggest. For something lighter, *Galaxy Quest* is a lovely comedy about actors on a spaceship.")]), { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("film-mood")); __args.push(py_tuple(vec![py_tuple(vec![py_str("film"), py_str("films"), py_str("movie"), py_str("movies"), py_str("watch"), py_str("watching"), py_str("something to watch"), py_str("give me something"), py_str("give me a film"), py_str("give me a movie")]), { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&g_MOOD_ORDER()) { let mut m: Py = __item.clone(); if py_truthy(&Py::Bool(!py_eq(&m.clone(), &py_str("scary")))) {  __out.push((m.clone(), geti(&g_MOODS(), &m.clone()))); } } py_dict(__out) })() }); __kws.extend(vec![("drop".to_string(), geti(&g_MOODS(), &py_str("scary")))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _mood_key_words(args))(&__args) }])); __args.push(_mood_pick(&[g_FILM_MOODS()])); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("avoid".to_string(), op_add(&op_add(&op_add(&op_add(&op_add(&g_WATCHING(), &g_CHILD()), &g_SPORT()), &g_SCREEN_TIME()), &g_NOT_WATCHING()), &__data137()))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("who-wrote-book")); __args.push(py_tuple(vec![py_tuple(vec![py_str("who"), py_str("who's"), py_str("whos"), py_str("whose"), py_str("which author")]), __data138()])); __args.push(py_func("_who_wrote", |args: &[Py]| _who_wrote(args))); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("avoid".to_string(), __data139())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("author-other-books")); __args.push(py_tuple(vec![g_AUTHOR_KEYS(), g_ASKED_WROTE()])); __args.push(py_func("_who_wrote", |args: &[Py]| _who_wrote(args))); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("avoid".to_string(), g_MAKING_UP())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("book-like")); __args.push(py_tuple(vec![g_BOOK_LIKE_THINGS(), g_BOOK_LIKE_ASKS()])); __args.push(py_func("_book_like", |args: &[Py]| _book_like(args))); __kws.extend(vec![("bias".to_string(), Py::Int(3)), ("guard".to_string(), py_func("_a_genre_is_the_taste", |args: &[Py]| _a_genre_is_the_taste(args))), ("avoid".to_string(), op_add(&__data140(), &g_WATCHING()))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("book-recommend")); __args.push(py_tuple(vec![py_tuple(vec![py_str("book"), py_str("books"), py_str("read"), py_str("reading"), py_str("novel")]), op_add(&g_WANT_ASKS(), &__data141())])); __args.push(py_func("_book_recommend", |args: &[Py]| _book_recommend(args))); __kws.extend(vec![("guard".to_string(), py_func("lambda", move |args: &[Py]| {  let understood: Py = __kwp(args, 0, "understood").unwrap_or(Py::None); { let __b = Py::Bool(!py_truthy(&the_book_is_a_reservation(&[understood.clone()]))); if !py_truthy(&__b) { __b } else { _no_named_mood(&[understood.clone()]) } } })), ("avoid".to_string(), __data142())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("book-about-a-subject")); __args.push(py_tuple(vec![py_tuple(vec![py_str("book"), py_str("books"), py_str("novel"), py_str("read"), py_str("reading")]), __data143()])); __args.push(py_func("_book_about", |args: &[Py]| _book_about(args))); __kws.extend(vec![("bias".to_string(), Py::Int(3)), ("avoid".to_string(), __data144()), ("guard".to_string(), py_func("_not_a_reservation", |args: &[Py]| _not_a_reservation(args)))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, pyrt::xrefs::xcall("knowledge.lookup", "entry", &[py_str("book-thriller"), py_tuple(vec![py_tuple(vec![py_str("book"), py_str("novel"), py_str("read"), py_str("reading")]), py_tuple(vec![py_str("thriller"), py_str("twist"), py_str("crime"), py_str("murder")])]), py_func("_book_thriller", |args: &[Py]| _book_thriller(args))]), { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("book-mood")); __args.push(py_tuple(vec![py_tuple(vec![py_str("book"), py_str("books"), py_str("novel"), py_str("novels"), py_str("read"), py_str("reading")]), { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&g_MOOD_ORDER()) { let mut m: Py = __item.clone(); if py_truthy(&Py::Bool(!py_eq(&m.clone(), &py_str("funny")))) {  __out.push((m.clone(), geti(&g_MOODS(), &m.clone()))); } } py_dict(__out) })() }); __kws.extend(vec![("drop".to_string(), geti(&g_MOODS(), &py_str("funny")))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _mood_key_words(args))(&__args) }])); __args.push(_mood_pick(&[g_BOOK_MOODS()])); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("avoid".to_string(), op_add(&__data145(), &g_CHILD()))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("show-about-a-subject")); __args.push(py_tuple(vec![g_SHOW_MEDIUM_WORDS(), call_builtin("tuple", &[g_SHOW_SUBJECT_NAMES()]).unwrap_or_else(|e| exc::raise(e))])); __args.push(py_func("_show_about", |args: &[Py]| _show_about(args))); __kws.extend(vec![("bias".to_string(), Py::Int(2)), ("avoid".to_string(), g_SHOW_SUBJECT_AVOID()), ("guard".to_string(), py_func("_a_programme_is_wanted", |args: &[Py]| _a_programme_is_wanted(args)))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("a-documentary-pick")); __args.push(py_tuple(vec![g_SHOW_DOC_ASK_WORDS(), py_tuple(vec![py_str("documentary"), py_str("documentaries"), py_str("docuseries"), py_str("docu series")])])); __args.push(geti(&g_SHOW_SUBJECTS(), &py_str("documentary"))); __kws.extend(vec![("bias".to_string(), Py::Int(2)), ("avoid".to_string(), g_SHOW_SUBJECT_AVOID()), ("guard".to_string(), py_func("_a_documentary_is_wanted", |args: &[Py]| _a_documentary_is_wanted(args)))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("tv-mood")); __args.push(py_tuple(vec![py_tuple(vec![py_str("series"), py_str("show"), py_str("shows"), py_str("boxset"), py_str("box set"), py_str("binge"), py_str("episode"), py_str("episodes"), py_str("telly"), py_str("on tv")]), g_MOOD_SIGNALS()])); __args.push(_mood_pick(&[g_TV_MOODS()])); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("avoid".to_string(), op_add(&op_add(&op_add(&g_SCREEN_TIME(), &g_CHILD()), &g_SPORT()), &__data146()))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("podcast-mood")); __args.push(py_tuple(vec![py_tuple(vec![py_str("podcast"), py_str("podcasts")]), { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&g_MOOD_ORDER()) { let mut m: Py = __item.clone(); if py_truthy(&Py::Bool(!py_eq(&m.clone(), &py_str("funny")))) {  __out.push((m.clone(), geti(&g_MOODS(), &m.clone()))); } } py_dict(__out) })() }); __kws.extend(vec![("drop".to_string(), geti(&g_MOODS(), &py_str("funny")))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _mood_key_words(args))(&__args) }])); __args.push(_mood_pick(&[g_PODCAST_MOODS()])); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("avoid".to_string(), op_add(&py_tuple(vec![py_str("how do i"), py_str("how to"), py_str("start a"), py_str("make a"), py_str("record"), py_str("edit"), py_str("mic"), py_str("microphone"), py_str("upload"), py_str("spotify"), py_str("apple"), py_str("listen to music")]), &g_CHILD()))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("a-mood-anywhere")); __args.push(py_tuple(vec![g_MOOD_SIGNALS(), g_ANY_MOOD_ASKS()])); __args.push(py_func("_a_pick_in_any_medium", |args: &[Py]| _a_pick_in_any_medium(args))); __kws.extend(vec![("avoid".to_string(), g_NOT_A_MOOD_PICK()), ("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("a-mood-turned-down")); __args.push(py_tuple(vec![g_MOOD_SIGNALS(), g_TURNS_IT_DOWN()])); __args.push(py_func("_a_pick_of_the_other_mood", |args: &[Py]| _a_pick_of_the_other_mood(args))); __kws.extend(vec![("avoid".to_string(), g_TURNED_DOWN_KEEPS_ITS_OWN()), ("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("book-holiday")); __args.push(py_tuple(vec![py_tuple(vec![py_str("read"), py_str("reading"), py_str("novel"), py_str("book for"), py_str("books for"), py_str("book on the"), py_str("books on the"), py_str("book to"), py_str("book should i"), py_str("book recommendation"), py_str("book recommendations")]), __data147()])); __args.push(py_str("For a holiday read: *The Thursday Murder Club* (funny, short chapters), *Lessons in Chemistry* (warm and clever), or *The Midnight Library* (gentle and quick). All three are easy to pick up and put down.")); __kws.extend(vec![("ask".to_string(), py_tuple(vec![py_str("read"), py_str("reading"), py_str("reads"), py_str("recommend"), py_str("recommendation"), py_str("recommendations"), py_str("novel"), py_str("fiction"), py_str("book"), py_str("books"), py_str("should i read"), py_str("worth reading")])), ("avoid".to_string(), __data148())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("book-abandon")); __args.push(py_tuple(vec![py_tuple(vec![py_str("book"), py_str("books"), py_str("novel"), py_str("novels"), py_str("read"), py_str("reading"), py_str("audiobook"), py_str("audiobooks")]), __data149()])); __args.push(py_str("Give it about 50 pages, or a tenth of the book if it is a long one, and then stop without guilt if you still do not care: there are more books than evenings. Halfway through and dreading it is as clear a sign as you get - put it down, and keep it for a long train journey in case you come back to it. Finishing a book you dislike is not a virtue, and nobody is marking it.")); __kws.extend(vec![("ask".to_string(), py_tuple(vec![py_str("should i"), py_str("is it ok"), py_str("is it okay"), py_str("do i"), py_str("when"), py_str("how long"), py_str("how many"), py_str("worth"), py_str("or not")])), ("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("book-not-a-reader")); __args.push(py_tuple(vec![py_tuple(vec![py_str("book"), py_str("read"), py_str("reading"), py_str("into reading"), py_str("get into reading"), py_str("back into reading")]), __data150()])); __args.push(py_str("Start with something short and gripping: *Of Mice and Men* (about 100 pages), *The Curious Incident of the Dog in the Night-Time*, or any *Reacher* book by Lee Child. Short chapters and a fast plot matter more than literary prizes when you're out of the habit.")); __kws.extend(vec![("avoid".to_string(), __data151()), ("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("book-funny")); __args.push(py_tuple(vec![py_tuple(vec![py_str("book"), py_str("books"), py_str("novel"), py_str("read"), py_str("reading"), py_str("recommend")]), py_tuple(vec![py_str("funny"), py_str("comedy"), py_str("laugh"), py_str("light-hearted"), py_str("lighthearted"), py_str("cheerful"), py_str("feel-good"), py_str("feelgood")])])); __args.push(py_str("For funny, *The Thursday Murder Club* by Richard Osman is the easy pick: short chapters, a mystery that keeps moving, and jokes on every page. *Three Men in a Boat* if you want an old one that still makes people laugh out loud, or *Good Omens* by Pratchett and Gaiman for something daft and warm.")); __kws.extend(vec![("avoid".to_string(), __data152())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("book-comics")); __args.push(py_tuple(vec![__data153(), __data154()])); __args.push(py_func("_comic_pick", |args: &[Py]| _comic_pick(args))); __kws.extend(vec![("bias".to_string(), Py::Int(2)), ("guard".to_string(), py_func("lambda", move |args: &[Py]| {  let understood: Py = __kwp(args, 0, "understood").unwrap_or(Py::None); Py::Bool(!py_truthy(&_a_child_who_reads_already(&[understood.clone()]))) })), ("avoid".to_string(), __data155())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("book-sci-fi")); __args.push(py_tuple(vec![py_tuple(vec![py_str("book"), py_str("read"), py_str("novel")]), py_tuple(vec![py_str("sci-fi"), py_str("sci fi"), py_str("scifi"), py_str("science fiction"), py_str("space")])])); __args.push(py_str("*Project Hail Mary* by Andy Weir is the safest recommendation: funny, fast and full of problem-solving. *The Left Hand of Darkness* by Ursula K. Le Guin if you want something deeper.")); __kws.extend(vec![("bias".to_string(), Py::Int(2))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, pyrt::xrefs::xcall("knowledge.lookup", "entry", &[py_str("book-fantasy"), py_tuple(vec![py_tuple(vec![py_str("book"), py_str("read"), py_str("novel")]), py_tuple(vec![py_str("fantasy"), py_str("magic"), py_str("dragons")])]), py_str("*The Hobbit* is the easiest way in, *Mistborn* by Brandon Sanderson if you want a big magic system to learn, and *Piranesi* by Susanna Clarke if you'd rather have something short and strange. All three are fine for adults and teenagers.")]), { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("tv-line-of-duty")); __args.push(py_tuple(vec![py_tuple(vec![py_str("line of duty")]), py_tuple(vec![py_str("watch"), py_str("series"), py_str("next"), py_str("like"), py_str("liked")])])); __args.push(py_str("*Happy Valley* is the closest in quality: British, tense, brilliantly acted, and less gory than Line of Duty. *Sherwood* and *Bodyguard* are the other two to try next.")); __kws.extend(vec![("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("tv-series")); __args.push(py_tuple(vec![py_tuple(vec![py_str("series"), py_str("boxset"), py_str("binge"), py_str("box set"), py_str("show"), py_str("shows")]), __data156()])); __args.push(py_str("*Happy Valley* for tense British crime, *The Bear* for short, intense episodes, or *Detectorists* if you want something gentle and funny. All three are easy to watch with a partner.")); __kws.extend(vec![("avoid".to_string(), py_tuple(vec![py_str("theatre"), py_str("theater"), py_str("west end"), py_str("gig"), py_str("concert"), py_str("tickets"), py_str("on at"), py_str("cinema"), py_str("in town")]))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, pyrt::xrefs::xcall("knowledge.lookup", "entry", &[py_str("tv-background"), py_tuple(vec![py_tuple(vec![py_str("tv"), py_str("series"), py_str("watch")]), py_tuple(vec![py_str("background"), py_str("relax"), py_str("easy"), py_str("nothing"), py_str("tired")])]), py_str("*The Detectorists*, *Mortimer & Whitehouse: Gone Fishing* or *The Great British Bake Off*: all warm, low-stakes and easy to follow when you're tired. Nothing in them needs your full attention.")]), { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("podcast-history")); __args.push(py_tuple(vec![py_tuple(vec![py_str("podcast")]), py_tuple(vec![py_str("history"), py_str("historical"), py_str("true"), py_str("stories"), py_str("commute")])])); __args.push(py_str("*The Rest Is History* is the best all-round history podcast, with two hosts who are funny as well as accurate. For true stories, *Casefile* for crime and *This American Life* for real people's lives.")); __kws.extend(vec![("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("podcast-crime")); __args.push(py_tuple(vec![py_tuple(vec![py_str("podcast"), py_str("podcasts"), py_str("listen"), py_str("listening")]), __data157()])); __args.push(g_PODCAST_CRIME()); __kws.extend(vec![("avoid".to_string(), __data158()), ("bias".to_string(), Py::Int(3))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("podcast-commute")); __args.push(py_tuple(vec![py_tuple(vec![py_str("podcast"), py_str("podcasts")]), __data159()])); __args.push(py_str("For a commute: *The Rest Is History* (30 to 50 minutes, always interesting), *The Diary of a CEO* for long interviews, or *Short History Of...* for 40-minute stories. All work with one earbud in.")); __kws.extend(vec![("bias".to_string(), Py::Int(3))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("podcast-funny")); __args.push(py_tuple(vec![py_tuple(vec![py_str("podcast"), py_str("podcasts"), py_str("listen"), py_str("listening")]), py_tuple(vec![py_str("funny"), py_str("comedy"), py_str("laugh"), py_str("light-hearted"), py_str("lighthearted")])])); __args.push(g_PODCAST_FUNNY()); __kws.extend(vec![("avoid".to_string(), __data160()), ("bias".to_string(), Py::Int(2))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, pyrt::xrefs::xcall("knowledge.lookup", "entry", &[py_str("music-focus"), py_tuple(vec![py_tuple(vec![py_str("music"), py_str("playlist")]), py_tuple(vec![py_str("focus"), py_str("study"), py_str("work"), py_str("concentrate"), py_str("background")])]), py_str("Anything without words works best for focus: lo-fi hip hop, film scores by Hans Zimmer or Ólafur Arnalds, or ambient Brian Eno. Words compete with reading in a way that instrumentals don't.")]), { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("music-recommend")); __args.push(py_tuple(vec![py_tuple(vec![py_str("music"), py_str("album"), py_str("band"), py_str("artist"), py_str("listen"), py_str("songs")]), py_tuple(vec![py_str("recommend"), py_str("new"), py_str("something"), py_str("good"), py_str("albums"), py_str("records"), py_str("what"), py_str("should i"), py_str("suggest"), py_str("any"), py_str("ideas")])])); __args.push(py_str("Give *Rumours* by Fleetwood Mac a go if you've never sat with it, *Blonde* by Frank Ocean for something slower, or *The Köln Concert* by Keith Jarrett if you want piano you can work to. Tell me what you already like and I'll narrow it down.")); __kws.extend(vec![("avoid".to_string(), __data161())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("listen-when")); __args.push(py_tuple(vec![__data162(), __data163()])); __args.push(py_func("_listen_when", |args: &[Py]| _listen_when(args))); __kws.extend(vec![("avoid".to_string(), py_tuple(vec![py_str("podcast"), py_str("podcasts")])), ("bias".to_string(), Py::Int(2))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("podcast-any")); __args.push(py_tuple(vec![py_tuple(vec![py_str("podcast"), py_str("podcasts")]), op_add(&g_WANT_ASKS(), &__data164())])); __args.push(py_str("Start with *The Rest Is History* (two funny historians), *Desert Island Discs* for people talking about their lives, or *Casefile* if you want a true crime story told straight. Tell me what you usually listen to and I'll aim closer.")); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("avoid".to_string(), py_tuple(vec![py_str("want to start a podcast"), py_str("want to make a podcast"), py_str("wanna start a podcast"), py_str("thinking of starting a podcast"), py_str("thinking about starting a podcast"), py_str("should i start a podcast"), py_str("start my own podcast"), py_str("make my own podcast")]))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("podcast-language")); __args.push(py_tuple(vec![py_tuple(vec![py_str("podcast"), py_str("podcasts"), py_str("listen"), py_str("listening")]), __data165()])); __args.push(py_str("The Coffee Break series - Spanish, French, German, Italian - is the place to start: 15 to 20 minutes a lesson, from hello upwards. Then the Duolingo Spanish Podcast for real stories told slowly in Spanish with English in between, and *InnerFrench* once you can follow a two-minute story in French. News in Slow Spanish and News in Slow French come next, and playing one episode twice beats five played once.")); __kws.extend(vec![("avoid".to_string(), py_tuple(vec![py_str("history"), py_str("civil war"), py_str("war"), py_str("news"), py_str("commute"), py_str("car"), py_str("kids"), py_str("children"), py_str("crime"), py_str("murder"), py_str("comedy"), py_str("football")])), ("bias".to_string(), Py::Int(2))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("podcast-money")); __args.push(py_tuple(vec![py_tuple(vec![py_str("podcast"), py_str("podcasts")]), py_tuple(vec![py_str("money"), py_str("finance"), py_str("financial"), py_str("business"), py_str("economics"), py_str("investing"), py_str("saving"), py_str("boring"), py_str("bored")])])); __args.push(py_str("*The Money To The Masses Podcast* is the plain-English one, *Meaningful Money* for pensions and savings, and *Moneybox* for news you can use. All three skip the jargon and none of them tries to sell you anything.")); __kws.extend(vec![("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("board-game-short-rules")); __args.push(py_tuple(vec![py_tuple(vec![py_str("board game"), py_str("game")]), py_tuple(vec![py_str("rules"), py_str("easy"), py_str("learn"), py_str("quick"), py_str("adults"), py_str("simple")])])); __args.push(py_str("*Codenames* (2 minutes to learn, works with any group), *Ticket to Ride* (simple, satisfying trains) and *Sushi Go!* (fast, small, cheap) are the three to start with. All are done in under an hour.")); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("avoid".to_string(), __data166())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, pyrt::xrefs::xcall("knowledge.lookup", "entry", &[py_str("game-kids"), py_tuple(vec![py_tuple(vec![py_str("game")]), py_tuple(vec![py_str("kids"), py_str("children"), py_str("rainy"), py_str("rain"), py_str("raining"), py_str("rains"), py_str("family"), py_str("bored")])]), py_str("*Dobble*, *UNO* and *Snakes and Ladders* work for a range of ages, and *Catan Junior* if they are ready for a proper board game. For a rainy afternoon, a treasure hunt round the house costs nothing and takes the longest.")]), pyrt::xrefs::xcall("knowledge.lookup", "entry", &[py_str("game-two-people"), py_tuple(vec![py_tuple(vec![py_str("game"), py_str("games"), py_str("board game"), py_str("board games"), py_str("card game"), py_str("card games"), py_str("cards"), py_str("with cards"), py_str("something to play"), py_str("a game for"), py_str("play"), py_str("to play")]), __data167()]), py_str("*Patchwork*, *Jaipur* and *Hive* are the three best two-player games that are quick to learn. For a card game with no kit, gin rummy works just fine.")]), { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("game-pick")); __args.push(py_tuple(vec![__data168(), op_add(&g_PICK_ASK(), &py_tuple(vec![py_str("what"), py_str("which"), py_str("best"), py_str("should i get"), py_str("should we get"), py_str("to play"), py_str("to buy"), py_str("for christmas"), py_str("for a present"), py_str("for a gift"), py_str("worth")]))])); __args.push(py_str("*Codenames* is the safest buy: two teams, one grid of words, five minutes to learn, and it works from four players up. *Ticket to Ride* if you want a proper board with a bit of thinking in it, and *Just One* if the table is mixed ages and nobody wants a rulebook. Tell me how many of you there are and how long you have, and I will pick one.")); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("avoid".to_string(), __data169())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("game-kids-rainy")); __args.push(py_tuple(vec![py_tuple(vec![py_str("rainy day"), py_str("bored"), py_str("all day"), py_str("keep busy"), py_str("entertain"), py_str("afternoon"), py_str("busy"), py_str("what can i do with"), py_str("what do i do with"), py_str("what to do with"), py_str("things to do with")]), __data170()])); __args.push(py_str("A treasure hunt round the house costs nothing and takes longest: ten clues written on cards, ending in a small prize. For a quieter hour, *Dobble* or a box of felt tips and a roll of wallpaper.")); __kws.extend(vec![("avoid".to_string(), __data171())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("party-games-kids")); __args.push(py_tuple(vec![py_tuple(vec![py_str("party"), py_str("birthday")]), __data172()])); __args.push(py_func("_party_games_for_kids", |args: &[Py]| _party_games_for_kids(args))); __kws.extend(vec![("bias".to_string(), Py::Int(2)), ("guard".to_string(), py_func("lambda", move |args: &[Py]| {  let reading: Py = __kwp(args, 0, "reading").unwrap_or(Py::None); Py::Bool(!py_truthy(&pyrt::xrefs::xcall("compose.repair", "owns_the_deed", &[reading.clone()]))) })), ("avoid".to_string(), __data173())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("audiobook")); __args.push(py_tuple(vec![py_tuple(vec![py_str("audiobook"), py_str("audiobooks"), py_str("audio book"), py_str("audio books"), py_str("listen to a book"), py_str("listening to a book"), py_str("book on tape")]), __data174()])); __args.push(py_str("For a long drive, a narrator who can hold a voice for hours beats a famous book: *The Thursday Murder Club* (Lesley Manville, about 7 hours) is easy to follow with traffic about; *Project Hail Mary* (Ray Porter, about 16 hours) is the one people finish and start again; *Circe* (Perdita Weeks, about 13 hours) if they want something with a story to it. Pick something 8 hours or longer for a drive of that length, and listen to ten minutes of the sample before you commit.")); __kws.extend(vec![("avoid".to_string(), __data175())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("book-for-a-child")); __args.push(py_tuple(vec![py_tuple(vec![py_str("book"), py_str("books"), py_str("novel"), py_str("read"), py_str("reading"), py_str("story"), py_str("stories"), py_str("chapter book")]), __data176()])); __args.push(py_func("_book_for_the_age", |args: &[Py]| _book_for_the_age(args))); __kws.extend(vec![("avoid".to_string(), __data177())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("game-group")); __args.push(py_tuple(vec![py_tuple(vec![py_str("game"), py_str("games"), py_str("board game"), py_str("board games"), py_str("play"), py_str("playing")]), __data178()])); __args.push(py_str("*Codenames* is the one to bring to a group: two teams, one word grid, and it works from four players up. *Wavelength* and *Just One* are the same idea for people who do not like arguing, and for a big party *Werewolf* or *Mafia* needs nothing but a deck of cards.")); __kws.extend(vec![("ask".to_string(), __data179()), ("avoid".to_string(), py_tuple(vec![py_str("two"), py_str("couple"), py_str("partner"), py_str("kids"), py_str("children")]))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("chess-opening")); __args.push(py_tuple(vec![py_tuple(vec![py_str("chess")]), py_tuple(vec![py_str("opening"), py_str("openings"), py_str("first move"), py_str("opening moves"), py_str("best first move"), py_str("e4"), py_str("d4"), py_str("start as white"), py_str("start as black")])])); __args.push(py_str("For white, e4 or d4 - both free your pieces and give you a plan - and for black answer e4 with e5 or the Sicilian, and d4 with d5 or the King's Indian. Learn one opening each side by its ideas rather than its moves: what the pawns are doing, where the pieces belong, and which piece you are happy to trade. Ten moves you understand beat forty you cannot remember.")); __kws.extend(vec![("ask".to_string(), py_tuple(vec![py_str("what"), py_str("which"), py_str("any"), py_str("best"), py_str("good"), py_str("should"), py_str("suggest")])), ("avoid".to_string(), py_tuple(vec![py_str("book"), py_str("books"), py_str("read"), py_str("reading"), py_str("course"), py_str("set"), py_str("board"), py_str("computer")])), ("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("chess-checkmate")); __args.push(py_tuple(vec![py_tuple(vec![py_str("checkmate"), py_str("check mate"), py_str("in check"), py_str("out of check"), py_str("being in check"), py_str("check in chess"), py_str("a check in chess"), py_str("checks the king"), py_str("check the king")]), __data180()])); __args.push(py_str("Checkmate is a king in check with no legal way out: no square to move to, nothing to block with, and nothing that can take the piece giving check. Being in check is not checkmate - you can move the king, block the line or take the attacker, and only if none of those work is the game over. Stalemate is the other ending, and it is a draw: the king is not in check but has no legal move, which is why you never chase a lone king into the corner without giving it a square.")); __kws.extend(vec![("ask".to_string(), py_tuple(vec![py_str("what"), py_str("whats"), py_str("how"), py_str("can"), py_str("is"), py_str("difference"), py_str("explain")])), ("avoid".to_string(), py_tuple(vec![py_str("book"), py_str("books"), py_str("read"), py_str("reading"), py_str("opening"), py_str("openings"), py_str("grandmaster"), py_str("tournament"), py_str("club"), py_str("clock"), py_str("board game")])), ("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("chess-stalemate")); __args.push(py_tuple(vec![py_tuple(vec![py_str("stalemate")]), py_tuple(vec![py_str("what"), py_str("whats"), py_str("mean"), py_str("means"), py_str("explain"), py_str("difference"), py_str("different"), py_str("vs"), py_str("versus"), py_str("is it"), py_str("draw"), py_str("how do i")])])); __args.push(py_str("Stalemate is a draw: the side to move is not in check but has no legal move at all, and the game ends level even if they are a queen down. It usually happens with a lone king in front of the enemy king with no square to go to. If you are winning, leave the other king a square or move a pawn, and if you are losing, look for it on purpose - it is half a point from nowhere.")); __kws.extend(vec![("ask".to_string(), py_tuple(vec![py_str("what"), py_str("whats"), py_str("how"), py_str("can"), py_str("is"), py_str("explain")])), ("avoid".to_string(), py_tuple(vec![py_str("book"), py_str("books"), py_str("read"), py_str("reading"), py_str("opening"), py_str("openings"), py_str("talks"), py_str("negotiation")])), ("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("chess-castling")); __args.push(py_tuple(vec![py_tuple(vec![py_str("castle"), py_str("castles"), py_str("castling"), py_str("castled")]), __data181()])); __args.push(py_str("Castling moves the king two squares towards a rook and puts that rook on the other side of it, and it is the one move where two pieces go at once. It takes one move, it is only legal if neither the king nor that rook has moved, nothing is between them, the king is not in check, and the king does not pass through or land on a square that is attacked. Do it early, usually within the first ten moves: it puts the king behind pawns and brings the rook into the game.")); __kws.extend(vec![("ask".to_string(), py_tuple(vec![py_str("what"), py_str("whats"), py_str("how"), py_str("when"), py_str("can"), py_str("do"), py_str("should"), py_str("why"), py_str("is")])), ("avoid".to_string(), py_tuple(vec![py_str("sand"), py_str("beach"), py_str("scotland"), py_str("wales"), py_str("wedding"), py_str("visit"), py_str("hotel"), py_str("ruins"), py_str("book"), py_str("books"), py_str("read"), py_str("reading")])), ("guard".to_string(), py_func("_a_chess_line", |args: &[Py]| _a_chess_line(args))), ("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("chess-pawn-moves")); __args.push(py_tuple(vec![py_tuple(vec![py_str("pawn"), py_str("pawns"), py_str("en passant"), py_str("enpassant"), py_str("passant")]), __data182()])); __args.push(py_str("A pawn moves one square forward and takes one square diagonally forward, so a pawn never moves or captures backwards. From its starting square only it may go two squares, and that is what lets the en passant rule exist: if a pawn goes two squares and lands beside an enemy pawn, that pawn may take it as if it had moved one, on that move only. Getting to the far end promotes it to a queen, rook, bishop or knight, and a queen is almost always right.")); __kws.extend(vec![("ask".to_string(), py_tuple(vec![py_str("what"), py_str("whats"), py_str("how"), py_str("when"), py_str("can"), py_str("do"), py_str("why"), py_str("is")])), ("avoid".to_string(), py_tuple(vec![py_str("book"), py_str("books"), py_str("read"), py_str("reading"), py_str("mortgage"), py_str("loan"), py_str("car"), py_str("camera"), py_str("pawn shop"), py_str("pawnbroker"), py_str("pawnbrokers"), py_str("uncle")])), ("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("chess-improve")); __args.push(py_tuple(vec![py_tuple(vec![py_str("chess")]), py_tuple(vec![py_str("better"), py_str("improve"), py_str("learn"), py_str("start"), py_str("tips"), py_str("practise"), py_str("practice"), py_str("beginner"), py_str("good at"), py_str("get into"), py_str("getting into"), py_str("begin")])])); __args.push(py_str("Two things move the needle: fifteen minutes of tactical puzzles a day on Lichess or Chess.com, and playing long games rather than blitz, then looking at where you lost. Learn the ideas behind one opening for white and one for black instead of memorising moves, and always ask what your opponent's last move was threatening.")); __kws.extend(vec![("ask".to_string(), py_tuple(vec![py_str("how"), py_str("what"), py_str("any"), py_str("tips"), py_str("should"), py_str("best"), py_str("can")]))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("learn-guitar")); __args.push(py_tuple(vec![py_tuple(vec![py_str("guitar")]), py_tuple(vec![py_str("learn"), py_str("start"), py_str("beginner"), py_str("how long"), py_str("take"), py_str("teach"), py_str("learn to play"), py_str("hard")])])); __args.push(py_str("Ten to fifteen minutes a day beats one long session a week: learn the four chords G, C, D and Em first, then play songs that use them, since songs keep you going where scales do not. Most people can strum through a simple song in two or three months that way; sore fingertips for the first fortnight are normal.")); __kws.extend(vec![("ask".to_string(), py_tuple(vec![py_str("how"), py_str("what"), py_str("any"), py_str("should"), py_str("best"), py_str("can"), py_str("tips")])), ("avoid".to_string(), __data183())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("music-genre-start")); __args.push(py_tuple(vec![call_builtin("tuple", &[g_GENRE_START()]).unwrap_or_else(|e| exc::raise(e)), g_MUSIC_START_ASKS()])); __args.push(py_func("_genre_start", |args: &[Py]| _genre_start(args))); __kws.extend(vec![("bias".to_string(), Py::Int(2)), ("avoid".to_string(), __data184())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("card-game-rules")); __args.push(py_tuple(vec![op_add(&call_builtin("tuple", &[g_CARD_GAMES()]).unwrap_or_else(|e| exc::raise(e)), &py_tuple(vec![py_str("patience"), py_str("pontoon"), py_str("twenty one")])), g_CARD_ASKS()])); __args.push(py_func("_card_game", |args: &[Py]| _card_game(args))); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("avoid".to_string(), __data185())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("learn-to-draw")); __args.push(py_tuple(vec![py_tuple(vec![py_str("draw"), py_str("drawing"), py_str("sketch"), py_str("sketching"), py_str("sketches"), py_str("doodle"), py_str("doodling"), py_str("pencil drawing"), py_str("line drawing")]), __data186()])); __args.push(py_str("Draw what is in front of you, not from memory: a mug, your own hand, the chair opposite. Ten minutes a day beats a long session at the weekend, one object a day for a fortnight, and use a soft pencil (2B) on cheap paper so you are not afraid of it. Copy one drawing you admire every week and do not rub anything out - the wrong line next to the right one is how you learn to see.")); __kws.extend(vec![("avoid".to_string(), __data187())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("activity-start")); __args.push(py_tuple(vec![op_add(&call_builtin("tuple", &[g_ACTIVITY_START()]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("tuple", &[g_ACTIVITY_OTHER_NAMES()]).unwrap_or_else(|e| exc::raise(e))), g_ACTIVITY_ASKS()])); __args.push(py_func("_activity_start", |args: &[Py]| _activity_start(args))); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("avoid".to_string(), __data188())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("chess-play")); __args.push(py_tuple(vec![py_tuple(vec![py_str("chess")]), py_tuple(vec![py_str("how do i play"), py_str("how to play"), py_str("how do you play"), py_str("rules"), py_str("how does"), py_str("the moves"), py_str("set up"), py_str("move the pieces"), py_str("win")])])); __args.push(py_str("The aim is to trap the other king so it cannot move and cannot escape being taken - that is checkmate, and you do not capture the king. Pawns go forward one square (two on their first move) and take diagonally; knights jump in an L; bishops go diagonally any distance; rooks in straight lines; the queen both ways; the king one square. Set up with a white square at the bottom right and the queen on her own colour, then play ten games on Lichess against people at your level - the moves stick after a few losses.")); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("avoid".to_string(), __data189())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("instrument-in-tune")); __args.push(py_tuple(vec![py_tuple(vec![py_str("guitar"), py_str("ukulele"), py_str("violin"), py_str("fiddle"), py_str("bass"), py_str("cello"), py_str("banjo"), py_str("mandolin"), py_str("piano"), py_str("keyboard")]), g_TUNE_ASKS()])); __args.push(py_func("_in_tune", |args: &[Py]| _in_tune(args))); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("avoid".to_string(), py_tuple(vec![py_str("car"), py_str("engine"), py_str("radio"), py_str("station"), py_str("tv"), py_str("television"), py_str("freeview"), py_str("aerial"), py_str("sat nav"), py_str("satnav"), py_str("channel")]))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("instrument-slips")); __args.push(py_tuple(vec![py_tuple(vec![py_str("guitar"), py_str("ukulele"), py_str("violin"), py_str("fiddle"), py_str("bass"), py_str("banjo"), py_str("mandolin"), py_str("cello")]), py_tuple(vec![py_str("wont stay in tune"), py_str("won't stay in tune"), py_str("wont hold tune"), py_str("keeps going out of tune"), py_str("goes out of tune"), py_str("out of tune all"), py_str("slips"), py_str("slipping"), py_str("wont tune"), py_str("will not stay in tune"), py_str("doesnt stay in tune"), py_str("doesn't stay in tune")])])); __args.push(py_str("Nine times in ten it is the strings: new ones stretch for a week, so tune up, bend every string a little, and tune again - three or four times the first evening. Old strings go dead and stop holding pitch, so if they are more than a few months old, change them. If one string pings as it slips it is catching in the nut, and a pencil lead scribbled in the slot fixes that tonight. Still slipping with new strings is a worn peg or a tuner screw, which is a shop job.")); __kws.extend(vec![("bias".to_string(), Py::Int(3)), ("avoid".to_string(), py_tuple(vec![py_str("car"), py_str("engine"), py_str("radio"), py_str("station"), py_str("tv"), py_str("sat nav")]))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("guitar-buzz")); __args.push(py_tuple(vec![py_tuple(vec![py_str("guitar"), py_str("bass"), py_str("ukulele"), py_str("banjo"), py_str("mandolin"), py_str("violin")]), g_BUZZ_ASKS()])); __args.push(py_func("_buzz", |args: &[Py]| _buzz(args))); __kws.extend(vec![("bias".to_string(), Py::Int(2)), ("avoid".to_string(), py_tuple(vec![py_str("amp"), py_str("amplifier"), py_str("speaker"), py_str("headphones"), py_str("phone"), py_str("doorbell"), py_str("buzzer"), py_str("intercom"), py_str("bee"), py_str("bees"), py_str("wasp")]))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("who-made-it")); __args.push(py_tuple(vec![py_tuple(vec![py_str("who"), py_str("name"), py_str("band")]), g_WHO_MAKERS()])); __args.push(py_func("who_made", |args: &[Py]| who_made(args))); __kws.extend(vec![("avoid".to_string(), __data190())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("poetry-kids")); __args.push(py_tuple(vec![py_tuple(vec![py_str("poetry"), py_str("poems"), py_str("poem"), py_str("rhymes"), py_str("rhyming"), py_str("nursery rhymes")]), py_tuple(vec![py_str("kids"), py_str("children"), py_str("child"), py_str("toddler"), py_str("toddlers"), py_str("baby"), py_str("babies"), py_str("good for"), py_str("worth it"), py_str("benefit"), py_str("help them"), py_str("teach")])])); __args.push(py_str("Yes, and it is the sound that does the work: rhymes teach a child that words are made of parts, which is the same skill reading needs. Read one aloud and let them finish the rhymes, keep it to a couple of minutes, and do not ask them to explain it. Silly wins - a poem they can shout is one they will remember.")); __kws.extend(vec![("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("poem-what")); __args.push(py_tuple(vec![py_tuple(vec![py_str("poem"), py_str("poems"), py_str("poetry"), py_str("verse")]), py_tuple(vec![py_str("what"), py_str("is"), py_str("explain"), py_str("mean"), py_str("definition"), py_str("form"), py_str("rule")])])); __args.push(py_str("A poem leans on sound as well as meaning: rhythm, rhyme if you want it, and the line breaks doing some of the work. No rules you have to follow - the two forms with rules are the haiku (three lines, 5-7-5) and the limerick (five lines, aabba). Ask me for either and I'll write one.")); __kws.extend(vec![("bias".to_string(), Py::Int(2)), ("avoid".to_string(), __data191())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("haiku-what")); __args.push(py_tuple(vec![py_tuple(vec![py_str("haiku"), py_str("haikus")]), py_tuple(vec![py_str("what"), py_str("is"), py_str("explain"), py_str("mean"), py_str("definition"), py_str("form"), py_str("rule"), py_str("structure")])])); __args.push(py_str("A haiku is three lines counted in sounds: five, then seven, then five, usually about one moment rather than a story:\nRain on the window,\na hundred small taps, all night,\nand the garden drinks.")); __kws.extend(vec![("bias".to_string(), Py::Int(2)), ("avoid".to_string(), py_tuple(vec![py_str("read"), py_str("reading"), py_str("book"), py_str("books")]))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("limerick-what")); __args.push(py_tuple(vec![py_tuple(vec![py_str("limerick"), py_str("limericks")]), py_tuple(vec![py_str("what"), py_str("is"), py_str("explain"), py_str("mean"), py_str("definition"), py_str("form"), py_str("rule"), py_str("structure")])])); __args.push(py_str("A limerick is five lines that rhyme aabba, with the two in the middle short: it is a joke in verse.\nThere once was a cloud over Crewe\nthat had far too much rain to do.\nIt rained on the park\nfrom morning till dark,\nand then, just for fun, rained on you.")); __kws.extend(vec![("bias".to_string(), Py::Int(2)), ("avoid".to_string(), py_tuple(vec![py_str("read"), py_str("reading"), py_str("book"), py_str("books")]))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("haiku-on")); __args.push(py_tuple(vec![py_tuple(vec![py_str("haiku"), py_str("haikus")]), py_tuple(vec![py_str("about"), py_str("of"), py_str("on"), py_str("write"), py_str("make"), py_str("give"), py_str("one"), py_str("want"), py_str("need"), py_str("help"), py_str("me"), py_str("a")])])); __args.push(g__haiku()); __kws.extend(vec![("bias".to_string(), Py::Int(6)), ("avoid".to_string(), op_add(&op_add(&op_add(&g_GRAVE(), &g_OCCASION()), &g_CARD()), &py_tuple(vec![py_str("what is"), py_str("whats a"), py_str("what's a"), py_str("meaning"), py_str("definition"), py_str("define"), py_str("explain"), py_str("rule"), py_str("rules"), py_str("how many")])))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("limerick-on")); __args.push(py_tuple(vec![py_tuple(vec![py_str("limerick"), py_str("limericks")]), py_tuple(vec![py_str("about"), py_str("of"), py_str("on"), py_str("write"), py_str("make"), py_str("give"), py_str("one"), py_str("want"), py_str("need"), py_str("help"), py_str("me"), py_str("a")])])); __args.push(g__limerick()); __kws.extend(vec![("bias".to_string(), Py::Int(6)), ("avoid".to_string(), op_add(&op_add(&op_add(&g_GRAVE(), &g_OCCASION()), &g_CARD()), &py_tuple(vec![py_str("what is"), py_str("whats a"), py_str("what's a"), py_str("meaning"), py_str("definition"), py_str("define"), py_str("explain"), py_str("rule"), py_str("rules"), py_str("how many")])))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("rhyme-word")); __args.push(py_tuple(vec![py_tuple(vec![py_str("rhyme"), py_str("rhymes"), py_str("rhyming")]), py_tuple(vec![py_str("with"), py_str("for"), py_str("word"), py_str("does")])])); __args.push(py_func("_rhyme", |args: &[Py]| _rhyme(args))); __kws.extend(vec![("bias".to_string(), Py::Int(5))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("poem-on")); __args.push(py_tuple(vec![py_tuple(vec![py_str("poem"), py_str("poems"), py_str("verse"), py_str("sonnet"), py_str("ode"), py_str("couplet"), py_str("rhyme"), py_str("rhymes"), py_str("rhyming")]), __data192()])); __args.push(g__poem()); __kws.extend(vec![("bias".to_string(), Py::Int(3)), ("avoid".to_string(), op_add(&op_add(&op_add(&g_GRAVE(), &g_OCCASION()), &g_CARD()), &__data193()))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("poem-for-a-card")); __args.push(py_tuple(vec![py_tuple(vec![py_str("poem"), py_str("poems"), py_str("verse"), py_str("rhyme"), py_str("rhymes"), py_str("rhyming"), py_str("sonnet"), py_str("ode"), py_str("couplet")]), py_tuple(vec![py_str("about"), py_str("of"), py_str("on")])])); __args.push(g__poem()); __kws.extend(vec![("bias".to_string(), Py::Int(2)), ("ask".to_string(), py_tuple(vec![py_str("card"), py_str("cards")])), ("avoid".to_string(), op_add(&op_add(&g_GRAVE(), &g_OCCASION()), &py_tuple(vec![py_str("i'm writing"), py_str("im writing"), py_str("i am writing"), py_str("writing my"), py_str("my own"), py_str("i have to write"), py_str("i've got to write"), py_str("help me write"), py_str("book"), py_str("books"), py_str("reading"), py_str("recommend")])))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("one-more-like-that")); __args.push(py_tuple(vec![__data194(), py_tuple(vec![py_str("about"), py_str("can"), py_str("do"), py_str("another"), py_str("please"), py_str("mood"), py_str("happier"), py_str("more"), py_str("one")])])); __args.push(py_func("_another_one", |args: &[Py]| _another_one(args))); __kws.extend(vec![("avoid".to_string(), g_GRAVE())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("story-on")); __args.push(py_tuple(vec![py_tuple(vec![py_str("story"), py_str("stories"), py_str("tale"), py_str("tales"), py_str("one more about"), py_str("another one about"), py_str("and one about"), py_str("one about")]), __data195()])); __args.push(g__story()); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("avoid".to_string(), op_add(&op_add(&op_add(&g_GRAVE(), &g_PICK_WORDS()), &g_CARD()), &py_tuple(vec![py_str("story idea"), py_str("idea for a story")])))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("rap-on")); __args.push(py_tuple(vec![py_tuple(vec![py_str("rap"), py_str("raps"), py_str("rapping")]), py_tuple(vec![py_str("write"), py_str("make"), py_str("compose"), py_str("up"), py_str("sing"), py_str("one"), py_str("give me"), py_str("for me")])])); __args.push(g__rap()); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("avoid".to_string(), op_add(&op_add(&op_add(&op_add(&g_GRAVE(), &g_PICK_WORDS()), &g_OCCASION()), &g_CARD()), &py_tuple(vec![py_str("name"), py_str("names"), py_str("called")])))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("song-on")); __args.push(py_tuple(vec![py_tuple(vec![py_str("song"), py_str("songs"), py_str("lyric"), py_str("lyrics")]), py_tuple(vec![py_str("write"), py_str("make"), py_str("compose"), py_str("up"), py_str("sing"), py_str("one"), py_str("give me"), py_str("for me")])])); __args.push(g__song()); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("avoid".to_string(), op_add(&op_add(&op_add(&g_GRAVE(), &g_PICK_WORDS()), &g_OCCASION()), &g_CARD()))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("character-name")); __args.push(py_tuple(vec![py_tuple(vec![py_str("character name"), py_str("character names"), py_str("name for my character"), py_str("name for a character"), py_str("name my character"), py_str("name a character"), py_str("name my protagonist"), py_str("name for my protagonist"), py_str("protagonist name")]), __data196()])); __args.push(py_func("_character_name", |args: &[Py]| _character_name(args))); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("avoid".to_string(), __data197())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("nickname")); __args.push(py_tuple(vec![py_tuple(vec![py_str("nickname"), py_str("nicknames"), py_str("nick name"), py_str("nick names"), py_str("rap name"), py_str("stage name"), py_str("band name"), py_str("dj name")]), __data198()])); __args.push(py_func("_nickname", |args: &[Py]| _nickname(args))); __kws.extend(vec![("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("story-idea")); __args.push(py_tuple(vec![py_tuple(vec![py_str("story idea"), py_str("story ideas"), py_str("plot idea"), py_str("idea for a story"), py_str("short story idea"), py_str("idea for my story")]), py_tuple(vec![py_str("give"), py_str("need"), py_str("want"), py_str("help"), py_str("any"), py_str("what"), py_str("some"), py_str("me")])])); __args.push(py_func("_story_idea", |args: &[Py]| _story_idea(args))); __kws.extend(vec![("bias".to_string(), Py::Int(3))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("quiz-team-name")); __args.push(py_tuple(vec![py_tuple(vec![py_str("pub quiz"), py_str("quiz team"), py_str("team name"), py_str("quiz name"), py_str("quiz"), py_str("team")]), py_tuple(vec![py_str("name"), py_str("names"), py_str("called"), py_str("call"), py_str("idea")]), py_tuple(vec![py_str("team"), py_str("our team")])])); __args.push(py_func("_quiz_name", |args: &[Py]| _quiz_name(args))); __kws.extend(vec![("ask".to_string(), __data199()), ("avoid".to_string(), __data200()), ("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("band-name")); __args.push(py_tuple(vec![py_tuple(vec![py_str("band"), py_str("bands"), py_str("group"), py_str("act"), py_str("duo"), py_str("trio")]), py_tuple(vec![py_str("name"), py_str("named"), py_str("naming"), py_str("call it"), py_str("call us"), py_str("call my"), py_str("call the"), py_str("call ourselves"), py_str("come up with"), py_str("think of")])])); __args.push(py_str("Short, sayable and easy to spell is the whole brief: two words, no apostrophes, and nothing you have to explain down a phone. Say 'we are the ...' out loud and get a friend to spell it back after hearing it once, then search it and check it is not another band or a trademark, because a name you cannot print on a poster is not a name.")); __kws.extend(vec![("ask".to_string(), __data201()), ("avoid".to_string(), __data202()), ("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("gaming-platform")); __args.push(py_tuple(vec![__data203(), __data204()])); __args.push(py_str("A console is cheaper and simpler: it plays everything at good quality for years, no upgrades, and you can sell it on. A gaming PC costs more up front but gets cheaper games, higher settings and mods, and doubles as a work machine - so pick the console for a shared living room and the PC if you already sit at a desk with a monitor.")); __kws.extend(vec![("avoid".to_string(), __data205())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("read-more-books")); __args.push(py_tuple(vec![py_tuple(vec![py_str("book"), py_str("books"), py_str("read"), py_str("reading"), py_str("novel"), py_str("novels")]), py_tuple(vec![py_str("more"), py_str("habit"), py_str("regularly"), py_str("again"), py_str("start"), py_str("started"), py_str("stopped"), py_str("get back"), py_str("get into"), py_str("tips")])])); __args.push(py_str("Keep the book where you idle - beside the kettle, in your bag, by the bed - and read in the small gaps instead of waiting for a free evening. Quit a book at about 50 pages if it has not gripped you: forcing yourself to finish things you dislike is what stops the habit.")); __kws.extend(vec![("ask".to_string(), py_tuple(vec![py_str("more"), py_str("habit"), py_str("tips"), py_str("want"), py_str("wants"), py_str("get back"), py_str("get into"), py_str("again"), py_str("started"), py_str("stopped"), py_str("regularly")])), ("avoid".to_string(), __data206())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("after-named-title")); __args.push(py_tuple(vec![__data207(), op_add(&__data208(), &g_AFTER_TITLE_WORDS())])); __args.push(py_func("_after_named", |args: &[Py]| _after_named(args))); __kws.extend(vec![("ask".to_string(), g_AFTER_TITLE_WORDS()), ("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("new-hobby")); __args.push(py_tuple(vec![py_tuple(vec![py_str("hobby"), py_str("hobbies"), py_str("pastime"), py_str("something new to do")]), __data209()])); __args.push(py_str("Pick the one thing you would happily be bad at, and buy the cheapest version: a ten pound ukulele, a second-hand chess set, a supermarket sketchbook and pencils. Keep it in the room where you sit, and give it twenty minutes twice a week. The hobby that sticks is the one with the shortest walk to it, not the one you researched most.")); __kws.extend(vec![("avoid".to_string(), py_tuple(vec![py_str("no money"), py_str("broke"), py_str("skint"), py_str("friend"), py_str("friends")]))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("weekend-do")); __args.push(py_tuple(vec![py_tuple(vec![py_str("should i do"), py_str("can i do"), py_str("shall i do"), py_str("shall we do"), py_str("what do i do"), py_str("what to do"), py_str("anything to do"), py_str("something to do"), py_str("things to do")]), __data210()])); __args.push(py_func("_an_hour_or_a_day", |args: &[Py]| _an_hour_or_a_day(args))); __kws.extend(vec![("ask".to_string(), py_tuple(vec![py_str("what"), py_str("any"), py_str("ideas"), py_str("suggest"), py_str("recommend"), py_str("how")])), ("avoid".to_string(), __data211()), ("guard".to_string(), py_func("_no_city_is_named", |args: &[Py]| _no_city_is_named(args))), ("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("evening-in")); __args.push(py_tuple(vec![__data212(), __data213()])); __args.push(py_str("Three things, and the cooking is what makes it an evening rather than a sofa: a supermarket dough ball each to top yourselves, a slow thing in the oven, or a cocktail that takes two people. Then one film nobody in the house has seen, started before nine, and a game that is not a screen - cards, a jigsaw, or a quiz you write for each other.")); __kws.extend(vec![("guard".to_string(), py_func("_names_the_evening", |args: &[Py]| _names_the_evening(args))), ("avoid".to_string(), __data214())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("wet-day")); __args.push(py_tuple(vec![__data215(), __data216()])); __args.push(py_str("One thing out of the house and one long thing at home is what saves a wet day. Out: the swimming pool, the library, a free museum gallery, or a walk in proper waterproofs, because a wet park is empty. Home: something with a start and an end, a whole film, a proper cook, a board game, or the job you keep not doing. Decide both in the morning, or the afternoon goes to the sofa and a phone.")); __kws.extend(vec![("guard".to_string(), py_func("_names_the_weather", |args: &[Py]| _names_the_weather(args))), ("avoid".to_string(), __data217())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("start-a-book-club")); __args.push(py_tuple(vec![py_tuple(vec![py_str("book club"), py_str("book clubs"), py_str("reading group"), py_str("reading club"), py_str("book group"), py_str("book circle")]), __data218()])); __args.push(py_str("Ask four or five people, not a crowd, and fix the next date before the first meeting ends - a club that meets every six weeks at a set day keeps going, one that waits for everyone to be free does not. Pick short books to begin with, let whoever chose it lead for ten minutes, and bring one question rather than a summary: \"who did you believe?\", \"what would you have done?\". Rotate who chooses, keep food simple, and let people come having only read half. To join one instead of starting one, ask at the library and the independent bookshop: both keep a list, and a group of five usually has room.")); __kws.extend(vec![("ask".to_string(), __data219()), ("avoid".to_string(), __data220())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("pick-country")); __args.push(py_tuple(vec![g_CINEMA_WORDS(), op_add(&g_PICK_ASK(), &py_tuple(vec![py_str("ones"), py_str("one"), py_str("more"), py_str("another"), py_str("other")]))])); __args.push(py_func("_pick_plain", |args: &[Py]| _pick_plain(args))); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("guard".to_string(), py_func("_a_country_is_a_country", |args: &[Py]| _a_country_is_a_country(args))), ("avoid".to_string(), op_add(&g__PICK_AVOID(), &py_tuple(vec![py_str("seen"), py_str("watched"), py_str("liked"), py_str("loved")])))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("film-kind")); __args.push(py_tuple(vec![g_FILM_KIND_WORDS(), op_add(&g_PICK_MEDIUM(), &g_PICK_ASK())])); __args.push(py_func("_film_kind_reply", |args: &[Py]| _film_kind_reply(args))); __kws.extend(vec![("bias".to_string(), Py::Int(2)), ("avoid".to_string(), op_add(&op_add(&op_add(&g__PICK_AVOID(), &g_PICK_REACT()), &g_KIND_AVOID()), &__data221()))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("film-length")); __args.push(py_tuple(vec![op_add(&g_PICK_MEDIUM(), &g_LIMIT_WORDS()), py_tuple(vec![py_str("minutes"), py_str("minute"), py_str("mins"), py_str("min"), py_str("hours"), py_str("hour"), py_str("hrs"), py_str("hr")])])); __args.push(py_func("_film_under", |args: &[Py]| _film_under(args))); __kws.extend(vec![("bias".to_string(), Py::Int(3)), ("avoid".to_string(), g__LENGTH_AVOID())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("pick-plain")); __args.push(py_tuple(vec![g_PICK_MEDIUM(), op_add(&op_add(&op_add(&g_PICK_ASK(), &g_PICK_WHO()), &g_CINEMA_WORDS()), &g_SUBS_KEY())])); __args.push(py_func("_pick_plain", |args: &[Py]| _pick_plain(args))); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("guard".to_string(), py_func("_a_country_is_a_country", |args: &[Py]| _a_country_is_a_country(args))), ("avoid".to_string(), op_add(&op_add(&g__PICK_AVOID(), &g_PICK_MOODS()), &__data222()))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("pick-limit")); __args.push(py_tuple(vec![op_add(&g_FREE_TELLS(), &g_SUBS_TELLS()), __data223()])); __args.push(py_func("_pick_limit_reply", |args: &[Py]| _pick_limit_reply(args))); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("avoid".to_string(), __data224())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("costume-at-home")); __args.push(py_tuple(vec![py_tuple(vec![py_str("costume"), py_str("costumes"), py_str("fancy dress"), py_str("dress up"), py_str("dressing up"), py_str("world book day"), py_str("what can i be"), py_str("what shall i be")]), __data225()])); __args.push(py_str("Make the shape, not the whole outfit: black leggings and a black top read as almost anything, then one thing does the work - a cardboard box for a robot or a rocket, a bin bag and a belt for a cape, a paper plate and elastic for a mask, a stripy top and an eye patch for a pirate. Paint it the night before, not the morning of, and ask the party's theme first. If it is for world book day, check the school's rules, because some ban masks and face paint.")); __kws.extend(vec![("avoid".to_string(), __data226())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }]) }
+    fn __data110() -> Py { py_list(vec![{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("make-a-card")); __args.push(py_tuple(vec![op_add(&call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_CARD_OCCASIONS()) { let mut one: Py = __item.clone(); __out.push(op_add(&one.clone(), &py_str(" card"))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)), &py_tuple(vec![py_str("homemade card"), py_str("handmade card"), py_str("make a card"), py_str("make cards"), py_str("make my own card"), py_str("card for my"), py_str("cards for")])), py_tuple(vec![py_str("make"), py_str("makes"), py_str("making"), py_str("made"), py_str("homemade"), py_str("handmade"), py_str("craft"), py_str("glue"), py_str("cut out"), py_str("design"), py_str("how do i make"), py_str("how to make")])])); __args.push(py_str("Fold a sheet of A5 thick paper in half, press the crease under a book, and write inside before you stick anything on - ink on a finished card is the usual ruin. One bold thing on the front, a cut shape or a photo or thick pen, and three lines inside naming something you did together beats a lot of stickers.")); __kws.extend(vec![("avoid".to_string(), __data111()), ("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("film-family-funny")); __args.push(py_tuple(vec![py_tuple(vec![py_str("film"), py_str("movie")]), op_add(&op_add(&py_tuple(vec![py_str("family"), py_str("kids"), py_str("children"), py_str("funny"), py_str("comedy")]), &g_CHILD()), &py_tuple(vec![py_str("teenager"), py_str("teenagers"), py_str("teen"), py_str("teens"), py_str("teenage")]))])); __args.push(py_func("_family_film", |args: &[Py]| _family_film__wrapped(args))); __kws.extend(vec![("avoid".to_string(), op_add(&op_add(&g_WATCHING(), &g_SPORT()), &g_SCREEN_TIME())), ("guard".to_string(), py_func("not_asking_what_to_watch_for", |args: &[Py]| not_asking_what_to_watch_for__wrapped(args))), ("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("watch-family")); __args.push(py_tuple(vec![py_tuple(vec![py_str("watch"), py_str("watching")]), op_add(&py_tuple(vec![py_str("family"), py_str("kids"), py_str("children")]), &g_CHILD())])); __args.push(py_func("_family_film", |args: &[Py]| _family_film__wrapped(args))); __kws.extend(vec![("avoid".to_string(), op_add(&op_add(&g_WATCHING(), &g_SPORT()), &g_SCREEN_TIME())), ("guard".to_string(), py_func("not_asking_what_to_watch_for", |args: &[Py]| not_asking_what_to_watch_for__wrapped(args))), ("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("worth-it")); __args.push(py_tuple(vec![call_builtin("tuple", &[g_VIEWS()]).unwrap_or_else(|e| exc::raise(e)), g_JUDGE_WORDS()])); __args.push(py_func("_worth_it", |args: &[Py]| _worth_it__wrapped(args))); __kws.extend(vec![("bias".to_string(), Py::Int(2)), ("ask".to_string(), g_VERDICT_ASKS()), ("avoid".to_string(), __data112())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("worth-it-unnamed")); __args.push(py_tuple(vec![g_UNNAMED_ASKS(), py_tuple(vec![py_str("it"), py_str("this"), py_str("that"), py_str("one"), py_str("thing")])])); __args.push(py_func("_worth_it_unnamed", |args: &[Py]| _worth_it_unnamed__wrapped(args))); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("avoid".to_string(), op_add(&op_add(&g_PICK_ASKS(), &g_HABIT_ASKS()), &__data113()))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("film-tonight")); __args.push(py_tuple(vec![py_tuple(vec![py_str("film"), py_str("movie"), py_str("watch"), py_str("watching"), py_str("netflix")]), op_add(&op_add(&__data114(), &g_WANT_ASKS()), &__data115())])); __args.push(g_EASY_FILM_LIST()); __kws.extend(vec![("avoid".to_string(), op_add(&op_add(&op_add(&op_add(&op_add(&g_SPORT(), &g_CHILD()), &g_NOT_WATCHING()), &g_WATCHING()), &__data116()), &__data117())), ("guard".to_string(), py_func("_no_named_mood", |args: &[Py]| _no_named_mood__wrapped(args)))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("tv-tonight")); __args.push(py_tuple(vec![py_tuple(vec![py_str("tv"), py_str("telly"), py_str("television")]), py_tuple(vec![py_str("on"), py_str("tonight"), py_str("whats"), py_str("what's"), py_str("anything"), py_str("showing"), py_str("listings")])])); __args.push(py_str("I can't see tonight's listings, so here is what I would start instead: *Happy Valley* if you want tense, *The Detectorists* if you want gentle, or *Groundhog Day* if you want a film you can rely on. Tell me the mood and I'll narrow it.")); __kws.extend(vec![("avoid".to_string(), __data118())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("listings-at-a-venue")); __args.push(py_tuple(vec![__data119(), __data120()])); __args.push(py_str("I can't see what's on at your local venues from here, sorry. The venue's own site or a listings app has the times and the tickets, and it is the same page for a film, a play or a gig. Once you know what is on, tell me the mood or two of the names and I'll say which to go for.")); __kws.extend(vec![("avoid".to_string(), __data121()), ("guard".to_string(), py_func("_a_listings_ask_near_me", |args: &[Py]| _a_listings_ask_near_me__wrapped(args)))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("listings-on-a-channel")); __args.push(py_tuple(vec![__data122(), __data123()])); __args.push(py_str("I can't see the schedule from here, sorry. The guide on the telly, or the station's own app, has the times, and the catch-up players - iPlayer, ITVX, Channel 4, BBC Sounds - keep the same list on the front page. Tell me the mood and I'll name something worth catching.")); __kws.extend(vec![("avoid".to_string(), __data124())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("pick-a-streaming-service")); __args.push(py_tuple(vec![__data125(), __data126()])); __args.push(py_str("Take one at a time, a month at a time, and cancel when the series ends: almost every service sells monthly with no contract, so a year of switching costs far less than a year of all of them. Two are worth keeping at once at most - one for the family boxsets and one for what you watch live, football or the soaps. Check the service you already pay for through the TV or broadband bundle before adding another, because that is where the cheapest month usually hides.")); __kws.extend(vec![("avoid".to_string(), __data127()), ("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("streaming-good")); __args.push(py_tuple(vec![py_tuple(vec![py_str("netflix"), py_str("iplayer"), py_str("prime"), py_str("disney"), py_str("now tv"), py_str("nowtv"), py_str("streaming"), py_str("apple tv"), py_str("all 4"), py_str("channel 4"), py_str("paramount")]), __data128()])); __args.push(py_str("On any of them: *Knives Out* for a whodunnit everyone enjoys, *Happy Valley* or *The Bear* for a series you'll finish, *Paddington 2* if children are in the room. Say which service and the mood and I'll narrow it down.")); __kws.extend(vec![("avoid".to_string(), op_add(&__data129(), &g_CHILD()))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("watch-tonight")); __args.push(py_tuple(vec![py_tuple(vec![py_str("watch"), py_str("watching")]), py_tuple(vec![py_str("tonight"), py_str("evening"), py_str("what"), py_str("should")])])); __args.push(py_str("For tonight: *Groundhog Day* (funny), *Knives Out* (a clever whodunnit) or *Arrival* (if you want to think). On a series instead, *Happy Valley* is tense and *The Detectorists* is gentle. All easy picks with no homework needed.")); __kws.extend(vec![("avoid".to_string(), op_add(&op_add(&op_add(&g_WATCHING(), &g_CHILD()), &g_SPORT()), &g_NOT_WATCHING()))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("streaming-comedy")); __args.push(py_tuple(vec![py_tuple(vec![py_str("netflix"), py_str("iplayer"), py_str("prime"), py_str("disney"), py_str("now tv"), py_str("nowtv"), py_str("streaming"), py_str("hayu"), py_str("apple tv")]), py_tuple(vec![py_str("comedy"), py_str("comedies"), py_str("funny"), py_str("sitcom"), py_str("laugh")])])); __args.push(py_str("*Schitt's Creek* is the safe pick: short episodes, funny from the first series. *Derry Girls* if you want something sharper, or *Paddington 2* if it's a film tonight rather than a series.")); __kws.extend(vec![("avoid".to_string(), op_add(&py_tuple(vec![py_str("cancel"), py_str("subscription"), py_str("how much"), py_str("cost"), py_str("worth it"), py_str("password"), py_str("account")]), &g_WATCHING()))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("film-like")); __args.push(py_tuple(vec![py_tuple(vec![py_str("film"), py_str("movie")]), py_tuple(vec![py_str("like"), py_str("liked"), py_str("likes"), py_str("similar"), py_str("loved"), py_str("loves"), py_str("enjoyed")])])); __args.push(py_func("_film_like", |args: &[Py]| _film_like__wrapped(args))); __kws.extend(vec![("avoid".to_string(), op_add(&py_tuple(vec![py_str("gift"), py_str("present"), py_str("birthday"), py_str("christmas"), py_str("get my"), py_str("buy"), py_str("for my dad"), py_str("for my mum")]), &g_CHILD()))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("film-want-scary")); __args.push(py_tuple(vec![py_tuple(vec![py_str("film"), py_str("movie"), py_str("series"), py_str("watch"), py_str("watching")]), py_tuple(vec![py_str("scary"), py_str("scariest"), py_str("scare"), py_str("scares"), py_str("horror"), py_str("horrifying"), py_str("frightening"), py_str("creepy"), py_str("terrifying"), py_str("spooky"), py_str("jump scares")])])); __args.push(py_str("For a proper scare: *Get Out* is the smart one and not gory, *A Quiet Place* is jumpy from the first minute, and *Hereditary* is the genuinely unnerving one. For an old-fashioned ghost story, *The Others*.")); __kws.extend(vec![("avoid".to_string(), op_add(&__data130(), &g_CHILD())), ("ask".to_string(), __data131()), ("guard".to_string(), py_func("_the_scare_is_wanted", |args: &[Py]| _the_scare_is_wanted__wrapped(args))), ("bias".to_string(), Py::Int(2))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("film-nothing-scary")); __args.push(py_tuple(vec![__data132(), py_tuple(vec![py_str("gory"), py_str("scary"), py_str("horror"), py_str("blood"), py_str("scare"), py_str("spooky"), py_str("creepy"), py_str("frightening"), py_str("terrifying"), py_str("scared"), py_str("haunted")])])); __args.push(py_func("_the_gentle_list", |args: &[Py]| _the_gentle_list__wrapped(args))); __kws.extend(vec![("bias".to_string(), Py::Int(2)), ("ask".to_string(), __data133()), ("guard".to_string(), py_func("_a_film_ask", |args: &[Py]| _a_film_ask__wrapped(args))), ("avoid".to_string(), g_CHILD())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("film-dont-want")); __args.push(py_tuple(vec![__data134(), __data135()])); __args.push(geti(&g_FILM_MOODS(), &py_str("light"))); __kws.extend(vec![("avoid".to_string(), op_add(&op_add(&op_add(&op_add(&__data136(), &g_CHILD()), &g_SPORT()), &g_NOT_WATCHING()), &g_WATCHING()))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, pyrt::xrefs::xcall("knowledge.lookup", "entry", &[py_str("film-space"), py_tuple(vec![py_tuple(vec![py_str("film"), py_str("movie")]), py_tuple(vec![py_str("space"), py_str("sci-fi"), py_str("sci fi"), py_str("scifi"), py_str("science fiction")])]), py_str("*Arrival* is the smartest one, *Apollo 13* the most tense, and *Interstellar* the biggest. For something lighter, *Galaxy Quest* is a lovely comedy about actors on a spaceship.")]), { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("film-mood")); __args.push(py_tuple(vec![py_tuple(vec![py_str("film"), py_str("films"), py_str("movie"), py_str("movies"), py_str("watch"), py_str("watching"), py_str("something to watch"), py_str("give me something"), py_str("give me a film"), py_str("give me a movie")]), { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&g_MOOD_ORDER()) { let mut m: Py = __item.clone(); if py_truthy(&Py::Bool(!py_eq(&m.clone(), &py_str("scary")))) {  __out.push((m.clone(), geti(&g_MOODS(), &m.clone()))); } } py_dict(__out) })() }); __kws.extend(vec![("drop".to_string(), geti(&g_MOODS(), &py_str("scary")))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| py_call(&g__mood_key_words(), args))(&__args) }])); __args.push(py_call(&g__mood_pick(), &[g_FILM_MOODS()])); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("avoid".to_string(), op_add(&op_add(&op_add(&op_add(&op_add(&g_WATCHING(), &g_CHILD()), &g_SPORT()), &g_SCREEN_TIME()), &g_NOT_WATCHING()), &__data137()))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("who-wrote-book")); __args.push(py_tuple(vec![py_tuple(vec![py_str("who"), py_str("who's"), py_str("whos"), py_str("whose"), py_str("which author")]), __data138()])); __args.push(py_func("_who_wrote", |args: &[Py]| _who_wrote__wrapped(args))); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("avoid".to_string(), __data139())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("author-other-books")); __args.push(py_tuple(vec![g_AUTHOR_KEYS(), g_ASKED_WROTE()])); __args.push(py_func("_who_wrote", |args: &[Py]| _who_wrote__wrapped(args))); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("avoid".to_string(), g_MAKING_UP())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("book-like")); __args.push(py_tuple(vec![g_BOOK_LIKE_THINGS(), g_BOOK_LIKE_ASKS()])); __args.push(py_func("_book_like", |args: &[Py]| _book_like__wrapped(args))); __kws.extend(vec![("bias".to_string(), Py::Int(3)), ("guard".to_string(), py_func("_a_genre_is_the_taste", |args: &[Py]| _a_genre_is_the_taste__wrapped(args))), ("avoid".to_string(), op_add(&__data140(), &g_WATCHING()))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("book-recommend")); __args.push(py_tuple(vec![py_tuple(vec![py_str("book"), py_str("books"), py_str("read"), py_str("reading"), py_str("novel")]), op_add(&g_WANT_ASKS(), &__data141())])); __args.push(py_func("_book_recommend", |args: &[Py]| _book_recommend__wrapped(args))); __kws.extend(vec![("guard".to_string(), py_func("lambda", move |args: &[Py]| {  let understood: Py = __kwp(args, 0, "understood").unwrap_or(Py::None); { let __b = Py::Bool(!py_truthy(&py_call(&g_the_book_is_a_reservation(), &[understood.clone()]))); if !py_truthy(&__b) { __b } else { py_call(&g__no_named_mood(), &[understood.clone()]) } } })), ("avoid".to_string(), __data142())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("book-about-a-subject")); __args.push(py_tuple(vec![py_tuple(vec![py_str("book"), py_str("books"), py_str("novel"), py_str("read"), py_str("reading")]), __data143()])); __args.push(py_func("_book_about", |args: &[Py]| _book_about__wrapped(args))); __kws.extend(vec![("bias".to_string(), Py::Int(3)), ("avoid".to_string(), __data144()), ("guard".to_string(), py_func("_not_a_reservation", |args: &[Py]| _not_a_reservation__wrapped(args)))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, pyrt::xrefs::xcall("knowledge.lookup", "entry", &[py_str("book-thriller"), py_tuple(vec![py_tuple(vec![py_str("book"), py_str("novel"), py_str("read"), py_str("reading")]), py_tuple(vec![py_str("thriller"), py_str("twist"), py_str("crime"), py_str("murder")])]), py_func("_book_thriller", |args: &[Py]| _book_thriller__wrapped(args))]), { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("book-mood")); __args.push(py_tuple(vec![py_tuple(vec![py_str("book"), py_str("books"), py_str("novel"), py_str("novels"), py_str("read"), py_str("reading")]), { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&g_MOOD_ORDER()) { let mut m: Py = __item.clone(); if py_truthy(&Py::Bool(!py_eq(&m.clone(), &py_str("funny")))) {  __out.push((m.clone(), geti(&g_MOODS(), &m.clone()))); } } py_dict(__out) })() }); __kws.extend(vec![("drop".to_string(), geti(&g_MOODS(), &py_str("funny")))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| py_call(&g__mood_key_words(), args))(&__args) }])); __args.push(py_call(&g__mood_pick(), &[g_BOOK_MOODS()])); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("avoid".to_string(), op_add(&__data145(), &g_CHILD()))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("show-about-a-subject")); __args.push(py_tuple(vec![g_SHOW_MEDIUM_WORDS(), call_builtin("tuple", &[g_SHOW_SUBJECT_NAMES()]).unwrap_or_else(|e| exc::raise(e))])); __args.push(py_func("_show_about", |args: &[Py]| _show_about__wrapped(args))); __kws.extend(vec![("bias".to_string(), Py::Int(2)), ("avoid".to_string(), g_SHOW_SUBJECT_AVOID()), ("guard".to_string(), py_func("_a_programme_is_wanted", |args: &[Py]| _a_programme_is_wanted__wrapped(args)))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("a-documentary-pick")); __args.push(py_tuple(vec![g_SHOW_DOC_ASK_WORDS(), py_tuple(vec![py_str("documentary"), py_str("documentaries"), py_str("docuseries"), py_str("docu series")])])); __args.push(geti(&g_SHOW_SUBJECTS(), &py_str("documentary"))); __kws.extend(vec![("bias".to_string(), Py::Int(2)), ("avoid".to_string(), g_SHOW_SUBJECT_AVOID()), ("guard".to_string(), py_func("_a_documentary_is_wanted", |args: &[Py]| _a_documentary_is_wanted__wrapped(args)))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("tv-mood")); __args.push(py_tuple(vec![py_tuple(vec![py_str("series"), py_str("show"), py_str("shows"), py_str("boxset"), py_str("box set"), py_str("binge"), py_str("episode"), py_str("episodes"), py_str("telly"), py_str("on tv")]), g_MOOD_SIGNALS()])); __args.push(py_call(&g__mood_pick(), &[g_TV_MOODS()])); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("avoid".to_string(), op_add(&op_add(&op_add(&g_SCREEN_TIME(), &g_CHILD()), &g_SPORT()), &__data146()))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("podcast-mood")); __args.push(py_tuple(vec![py_tuple(vec![py_str("podcast"), py_str("podcasts")]), { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&g_MOOD_ORDER()) { let mut m: Py = __item.clone(); if py_truthy(&Py::Bool(!py_eq(&m.clone(), &py_str("funny")))) {  __out.push((m.clone(), geti(&g_MOODS(), &m.clone()))); } } py_dict(__out) })() }); __kws.extend(vec![("drop".to_string(), geti(&g_MOODS(), &py_str("funny")))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| py_call(&g__mood_key_words(), args))(&__args) }])); __args.push(py_call(&g__mood_pick(), &[g_PODCAST_MOODS()])); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("avoid".to_string(), op_add(&py_tuple(vec![py_str("how do i"), py_str("how to"), py_str("start a"), py_str("make a"), py_str("record"), py_str("edit"), py_str("mic"), py_str("microphone"), py_str("upload"), py_str("spotify"), py_str("apple"), py_str("listen to music")]), &g_CHILD()))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("a-mood-anywhere")); __args.push(py_tuple(vec![g_MOOD_SIGNALS(), g_ANY_MOOD_ASKS()])); __args.push(py_func("_a_pick_in_any_medium", |args: &[Py]| _a_pick_in_any_medium__wrapped(args))); __kws.extend(vec![("avoid".to_string(), g_NOT_A_MOOD_PICK()), ("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("a-mood-turned-down")); __args.push(py_tuple(vec![g_MOOD_SIGNALS(), g_TURNS_IT_DOWN()])); __args.push(py_func("_a_pick_of_the_other_mood", |args: &[Py]| _a_pick_of_the_other_mood__wrapped(args))); __kws.extend(vec![("avoid".to_string(), g_TURNED_DOWN_KEEPS_ITS_OWN()), ("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("book-holiday")); __args.push(py_tuple(vec![py_tuple(vec![py_str("read"), py_str("reading"), py_str("novel"), py_str("book for"), py_str("books for"), py_str("book on the"), py_str("books on the"), py_str("book to"), py_str("book should i"), py_str("book recommendation"), py_str("book recommendations")]), __data147()])); __args.push(py_str("For a holiday read: *The Thursday Murder Club* (funny, short chapters), *Lessons in Chemistry* (warm and clever), or *The Midnight Library* (gentle and quick). All three are easy to pick up and put down.")); __kws.extend(vec![("ask".to_string(), py_tuple(vec![py_str("read"), py_str("reading"), py_str("reads"), py_str("recommend"), py_str("recommendation"), py_str("recommendations"), py_str("novel"), py_str("fiction"), py_str("book"), py_str("books"), py_str("should i read"), py_str("worth reading")])), ("avoid".to_string(), __data148())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("book-abandon")); __args.push(py_tuple(vec![py_tuple(vec![py_str("book"), py_str("books"), py_str("novel"), py_str("novels"), py_str("read"), py_str("reading"), py_str("audiobook"), py_str("audiobooks")]), __data149()])); __args.push(py_str("Give it about 50 pages, or a tenth of the book if it is a long one, and then stop without guilt if you still do not care: there are more books than evenings. Halfway through and dreading it is as clear a sign as you get - put it down, and keep it for a long train journey in case you come back to it. Finishing a book you dislike is not a virtue, and nobody is marking it.")); __kws.extend(vec![("ask".to_string(), py_tuple(vec![py_str("should i"), py_str("is it ok"), py_str("is it okay"), py_str("do i"), py_str("when"), py_str("how long"), py_str("how many"), py_str("worth"), py_str("or not")])), ("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("book-not-a-reader")); __args.push(py_tuple(vec![py_tuple(vec![py_str("book"), py_str("read"), py_str("reading"), py_str("into reading"), py_str("get into reading"), py_str("back into reading")]), __data150()])); __args.push(py_str("Start with something short and gripping: *Of Mice and Men* (about 100 pages), *The Curious Incident of the Dog in the Night-Time*, or any *Reacher* book by Lee Child. Short chapters and a fast plot matter more than literary prizes when you're out of the habit.")); __kws.extend(vec![("avoid".to_string(), __data151()), ("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("book-funny")); __args.push(py_tuple(vec![py_tuple(vec![py_str("book"), py_str("books"), py_str("novel"), py_str("read"), py_str("reading"), py_str("recommend")]), py_tuple(vec![py_str("funny"), py_str("comedy"), py_str("laugh"), py_str("light-hearted"), py_str("lighthearted"), py_str("cheerful"), py_str("feel-good"), py_str("feelgood")])])); __args.push(py_str("For funny, *The Thursday Murder Club* by Richard Osman is the easy pick: short chapters, a mystery that keeps moving, and jokes on every page. *Three Men in a Boat* if you want an old one that still makes people laugh out loud, or *Good Omens* by Pratchett and Gaiman for something daft and warm.")); __kws.extend(vec![("avoid".to_string(), __data152())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("book-comics")); __args.push(py_tuple(vec![__data153(), __data154()])); __args.push(py_func("_comic_pick", |args: &[Py]| _comic_pick__wrapped(args))); __kws.extend(vec![("bias".to_string(), Py::Int(2)), ("guard".to_string(), py_func("lambda", move |args: &[Py]| {  let understood: Py = __kwp(args, 0, "understood").unwrap_or(Py::None); Py::Bool(!py_truthy(&py_call(&g__a_child_who_reads_already(), &[understood.clone()]))) })), ("avoid".to_string(), __data155())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("book-sci-fi")); __args.push(py_tuple(vec![py_tuple(vec![py_str("book"), py_str("read"), py_str("novel")]), py_tuple(vec![py_str("sci-fi"), py_str("sci fi"), py_str("scifi"), py_str("science fiction"), py_str("space")])])); __args.push(py_str("*Project Hail Mary* by Andy Weir is the safest recommendation: funny, fast and full of problem-solving. *The Left Hand of Darkness* by Ursula K. Le Guin if you want something deeper.")); __kws.extend(vec![("bias".to_string(), Py::Int(2))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, pyrt::xrefs::xcall("knowledge.lookup", "entry", &[py_str("book-fantasy"), py_tuple(vec![py_tuple(vec![py_str("book"), py_str("read"), py_str("novel")]), py_tuple(vec![py_str("fantasy"), py_str("magic"), py_str("dragons")])]), py_str("*The Hobbit* is the easiest way in, *Mistborn* by Brandon Sanderson if you want a big magic system to learn, and *Piranesi* by Susanna Clarke if you'd rather have something short and strange. All three are fine for adults and teenagers.")]), { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("tv-line-of-duty")); __args.push(py_tuple(vec![py_tuple(vec![py_str("line of duty")]), py_tuple(vec![py_str("watch"), py_str("series"), py_str("next"), py_str("like"), py_str("liked")])])); __args.push(py_str("*Happy Valley* is the closest in quality: British, tense, brilliantly acted, and less gory than Line of Duty. *Sherwood* and *Bodyguard* are the other two to try next.")); __kws.extend(vec![("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("tv-series")); __args.push(py_tuple(vec![py_tuple(vec![py_str("series"), py_str("boxset"), py_str("binge"), py_str("box set"), py_str("show"), py_str("shows")]), __data156()])); __args.push(py_str("*Happy Valley* for tense British crime, *The Bear* for short, intense episodes, or *Detectorists* if you want something gentle and funny. All three are easy to watch with a partner.")); __kws.extend(vec![("avoid".to_string(), py_tuple(vec![py_str("theatre"), py_str("theater"), py_str("west end"), py_str("gig"), py_str("concert"), py_str("tickets"), py_str("on at"), py_str("cinema"), py_str("in town")]))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, pyrt::xrefs::xcall("knowledge.lookup", "entry", &[py_str("tv-background"), py_tuple(vec![py_tuple(vec![py_str("tv"), py_str("series"), py_str("watch")]), py_tuple(vec![py_str("background"), py_str("relax"), py_str("easy"), py_str("nothing"), py_str("tired")])]), py_str("*The Detectorists*, *Mortimer & Whitehouse: Gone Fishing* or *The Great British Bake Off*: all warm, low-stakes and easy to follow when you're tired. Nothing in them needs your full attention.")]), { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("podcast-history")); __args.push(py_tuple(vec![py_tuple(vec![py_str("podcast")]), py_tuple(vec![py_str("history"), py_str("historical"), py_str("true"), py_str("stories"), py_str("commute")])])); __args.push(py_str("*The Rest Is History* is the best all-round history podcast, with two hosts who are funny as well as accurate. For true stories, *Casefile* for crime and *This American Life* for real people's lives.")); __kws.extend(vec![("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("podcast-crime")); __args.push(py_tuple(vec![py_tuple(vec![py_str("podcast"), py_str("podcasts"), py_str("listen"), py_str("listening")]), __data157()])); __args.push(g_PODCAST_CRIME()); __kws.extend(vec![("avoid".to_string(), __data158()), ("bias".to_string(), Py::Int(3))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("podcast-commute")); __args.push(py_tuple(vec![py_tuple(vec![py_str("podcast"), py_str("podcasts")]), __data159()])); __args.push(py_str("For a commute: *The Rest Is History* (30 to 50 minutes, always interesting), *The Diary of a CEO* for long interviews, or *Short History Of...* for 40-minute stories. All work with one earbud in.")); __kws.extend(vec![("bias".to_string(), Py::Int(3))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("podcast-funny")); __args.push(py_tuple(vec![py_tuple(vec![py_str("podcast"), py_str("podcasts"), py_str("listen"), py_str("listening")]), py_tuple(vec![py_str("funny"), py_str("comedy"), py_str("laugh"), py_str("light-hearted"), py_str("lighthearted")])])); __args.push(g_PODCAST_FUNNY()); __kws.extend(vec![("avoid".to_string(), __data160()), ("bias".to_string(), Py::Int(2))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, pyrt::xrefs::xcall("knowledge.lookup", "entry", &[py_str("music-focus"), py_tuple(vec![py_tuple(vec![py_str("music"), py_str("playlist")]), py_tuple(vec![py_str("focus"), py_str("study"), py_str("work"), py_str("concentrate"), py_str("background")])]), py_str("Anything without words works best for focus: lo-fi hip hop, film scores by Hans Zimmer or Ólafur Arnalds, or ambient Brian Eno. Words compete with reading in a way that instrumentals don't.")]), { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("music-recommend")); __args.push(py_tuple(vec![py_tuple(vec![py_str("music"), py_str("album"), py_str("band"), py_str("artist"), py_str("listen"), py_str("songs")]), py_tuple(vec![py_str("recommend"), py_str("new"), py_str("something"), py_str("good"), py_str("albums"), py_str("records"), py_str("what"), py_str("should i"), py_str("suggest"), py_str("any"), py_str("ideas")])])); __args.push(py_str("Give *Rumours* by Fleetwood Mac a go if you've never sat with it, *Blonde* by Frank Ocean for something slower, or *The Köln Concert* by Keith Jarrett if you want piano you can work to. Tell me what you already like and I'll narrow it down.")); __kws.extend(vec![("avoid".to_string(), __data161())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("listen-when")); __args.push(py_tuple(vec![__data162(), __data163()])); __args.push(py_func("_listen_when", |args: &[Py]| _listen_when__wrapped(args))); __kws.extend(vec![("avoid".to_string(), py_tuple(vec![py_str("podcast"), py_str("podcasts")])), ("bias".to_string(), Py::Int(2))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("podcast-any")); __args.push(py_tuple(vec![py_tuple(vec![py_str("podcast"), py_str("podcasts")]), op_add(&g_WANT_ASKS(), &__data164())])); __args.push(py_str("Start with *The Rest Is History* (two funny historians), *Desert Island Discs* for people talking about their lives, or *Casefile* if you want a true crime story told straight. Tell me what you usually listen to and I'll aim closer.")); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("avoid".to_string(), py_tuple(vec![py_str("want to start a podcast"), py_str("want to make a podcast"), py_str("wanna start a podcast"), py_str("thinking of starting a podcast"), py_str("thinking about starting a podcast"), py_str("should i start a podcast"), py_str("start my own podcast"), py_str("make my own podcast")]))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("podcast-language")); __args.push(py_tuple(vec![py_tuple(vec![py_str("podcast"), py_str("podcasts"), py_str("listen"), py_str("listening")]), __data165()])); __args.push(py_str("The Coffee Break series - Spanish, French, German, Italian - is the place to start: 15 to 20 minutes a lesson, from hello upwards. Then the Duolingo Spanish Podcast for real stories told slowly in Spanish with English in between, and *InnerFrench* once you can follow a two-minute story in French. News in Slow Spanish and News in Slow French come next, and playing one episode twice beats five played once.")); __kws.extend(vec![("avoid".to_string(), py_tuple(vec![py_str("history"), py_str("civil war"), py_str("war"), py_str("news"), py_str("commute"), py_str("car"), py_str("kids"), py_str("children"), py_str("crime"), py_str("murder"), py_str("comedy"), py_str("football")])), ("bias".to_string(), Py::Int(2))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("podcast-money")); __args.push(py_tuple(vec![py_tuple(vec![py_str("podcast"), py_str("podcasts")]), py_tuple(vec![py_str("money"), py_str("finance"), py_str("financial"), py_str("business"), py_str("economics"), py_str("investing"), py_str("saving"), py_str("boring"), py_str("bored")])])); __args.push(py_str("*The Money To The Masses Podcast* is the plain-English one, *Meaningful Money* for pensions and savings, and *Moneybox* for news you can use. All three skip the jargon and none of them tries to sell you anything.")); __kws.extend(vec![("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("board-game-short-rules")); __args.push(py_tuple(vec![py_tuple(vec![py_str("board game"), py_str("game")]), py_tuple(vec![py_str("rules"), py_str("easy"), py_str("learn"), py_str("quick"), py_str("adults"), py_str("simple")])])); __args.push(py_str("*Codenames* (2 minutes to learn, works with any group), *Ticket to Ride* (simple, satisfying trains) and *Sushi Go!* (fast, small, cheap) are the three to start with. All are done in under an hour.")); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("avoid".to_string(), __data166())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, pyrt::xrefs::xcall("knowledge.lookup", "entry", &[py_str("game-kids"), py_tuple(vec![py_tuple(vec![py_str("game")]), py_tuple(vec![py_str("kids"), py_str("children"), py_str("rainy"), py_str("rain"), py_str("raining"), py_str("rains"), py_str("family"), py_str("bored")])]), py_str("*Dobble*, *UNO* and *Snakes and Ladders* work for a range of ages, and *Catan Junior* if they are ready for a proper board game. For a rainy afternoon, a treasure hunt round the house costs nothing and takes the longest.")]), pyrt::xrefs::xcall("knowledge.lookup", "entry", &[py_str("game-two-people"), py_tuple(vec![py_tuple(vec![py_str("game"), py_str("games"), py_str("board game"), py_str("board games"), py_str("card game"), py_str("card games"), py_str("cards"), py_str("with cards"), py_str("something to play"), py_str("a game for"), py_str("play"), py_str("to play")]), __data167()]), py_str("*Patchwork*, *Jaipur* and *Hive* are the three best two-player games that are quick to learn. For a card game with no kit, gin rummy works just fine.")]), { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("game-pick")); __args.push(py_tuple(vec![__data168(), op_add(&g_PICK_ASK(), &py_tuple(vec![py_str("what"), py_str("which"), py_str("best"), py_str("should i get"), py_str("should we get"), py_str("to play"), py_str("to buy"), py_str("for christmas"), py_str("for a present"), py_str("for a gift"), py_str("worth")]))])); __args.push(py_str("*Codenames* is the safest buy: two teams, one grid of words, five minutes to learn, and it works from four players up. *Ticket to Ride* if you want a proper board with a bit of thinking in it, and *Just One* if the table is mixed ages and nobody wants a rulebook. Tell me how many of you there are and how long you have, and I will pick one.")); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("avoid".to_string(), __data169())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("game-kids-rainy")); __args.push(py_tuple(vec![py_tuple(vec![py_str("rainy day"), py_str("bored"), py_str("all day"), py_str("keep busy"), py_str("entertain"), py_str("afternoon"), py_str("busy"), py_str("what can i do with"), py_str("what do i do with"), py_str("what to do with"), py_str("things to do with")]), __data170()])); __args.push(py_str("A treasure hunt round the house costs nothing and takes longest: ten clues written on cards, ending in a small prize. For a quieter hour, *Dobble* or a box of felt tips and a roll of wallpaper.")); __kws.extend(vec![("avoid".to_string(), __data171())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("party-games-kids")); __args.push(py_tuple(vec![py_tuple(vec![py_str("party"), py_str("birthday")]), __data172()])); __args.push(py_func("_party_games_for_kids", |args: &[Py]| _party_games_for_kids__wrapped(args))); __kws.extend(vec![("bias".to_string(), Py::Int(2)), ("guard".to_string(), py_func("lambda", move |args: &[Py]| {  let reading: Py = __kwp(args, 0, "reading").unwrap_or(Py::None); Py::Bool(!py_truthy(&pyrt::xrefs::xcall("compose.repair", "owns_the_deed", &[reading.clone()]))) })), ("avoid".to_string(), __data173())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("audiobook")); __args.push(py_tuple(vec![py_tuple(vec![py_str("audiobook"), py_str("audiobooks"), py_str("audio book"), py_str("audio books"), py_str("listen to a book"), py_str("listening to a book"), py_str("book on tape")]), __data174()])); __args.push(py_str("For a long drive, a narrator who can hold a voice for hours beats a famous book: *The Thursday Murder Club* (Lesley Manville, about 7 hours) is easy to follow with traffic about; *Project Hail Mary* (Ray Porter, about 16 hours) is the one people finish and start again; *Circe* (Perdita Weeks, about 13 hours) if they want something with a story to it. Pick something 8 hours or longer for a drive of that length, and listen to ten minutes of the sample before you commit.")); __kws.extend(vec![("avoid".to_string(), __data175())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("book-for-a-child")); __args.push(py_tuple(vec![py_tuple(vec![py_str("book"), py_str("books"), py_str("novel"), py_str("read"), py_str("reading"), py_str("story"), py_str("stories"), py_str("chapter book")]), __data176()])); __args.push(py_func("_book_for_the_age", |args: &[Py]| _book_for_the_age__wrapped(args))); __kws.extend(vec![("avoid".to_string(), __data177())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("game-group")); __args.push(py_tuple(vec![py_tuple(vec![py_str("game"), py_str("games"), py_str("board game"), py_str("board games"), py_str("play"), py_str("playing")]), __data178()])); __args.push(py_str("*Codenames* is the one to bring to a group: two teams, one word grid, and it works from four players up. *Wavelength* and *Just One* are the same idea for people who do not like arguing, and for a big party *Werewolf* or *Mafia* needs nothing but a deck of cards.")); __kws.extend(vec![("ask".to_string(), __data179()), ("avoid".to_string(), py_tuple(vec![py_str("two"), py_str("couple"), py_str("partner"), py_str("kids"), py_str("children")]))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("chess-opening")); __args.push(py_tuple(vec![py_tuple(vec![py_str("chess")]), py_tuple(vec![py_str("opening"), py_str("openings"), py_str("first move"), py_str("opening moves"), py_str("best first move"), py_str("e4"), py_str("d4"), py_str("start as white"), py_str("start as black")])])); __args.push(py_str("For white, e4 or d4 - both free your pieces and give you a plan - and for black answer e4 with e5 or the Sicilian, and d4 with d5 or the King's Indian. Learn one opening each side by its ideas rather than its moves: what the pawns are doing, where the pieces belong, and which piece you are happy to trade. Ten moves you understand beat forty you cannot remember.")); __kws.extend(vec![("ask".to_string(), py_tuple(vec![py_str("what"), py_str("which"), py_str("any"), py_str("best"), py_str("good"), py_str("should"), py_str("suggest")])), ("avoid".to_string(), py_tuple(vec![py_str("book"), py_str("books"), py_str("read"), py_str("reading"), py_str("course"), py_str("set"), py_str("board"), py_str("computer")])), ("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("chess-checkmate")); __args.push(py_tuple(vec![py_tuple(vec![py_str("checkmate"), py_str("check mate"), py_str("in check"), py_str("out of check"), py_str("being in check"), py_str("check in chess"), py_str("a check in chess"), py_str("checks the king"), py_str("check the king")]), __data180()])); __args.push(py_str("Checkmate is a king in check with no legal way out: no square to move to, nothing to block with, and nothing that can take the piece giving check. Being in check is not checkmate - you can move the king, block the line or take the attacker, and only if none of those work is the game over. Stalemate is the other ending, and it is a draw: the king is not in check but has no legal move, which is why you never chase a lone king into the corner without giving it a square.")); __kws.extend(vec![("ask".to_string(), py_tuple(vec![py_str("what"), py_str("whats"), py_str("how"), py_str("can"), py_str("is"), py_str("difference"), py_str("explain")])), ("avoid".to_string(), py_tuple(vec![py_str("book"), py_str("books"), py_str("read"), py_str("reading"), py_str("opening"), py_str("openings"), py_str("grandmaster"), py_str("tournament"), py_str("club"), py_str("clock"), py_str("board game")])), ("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("chess-stalemate")); __args.push(py_tuple(vec![py_tuple(vec![py_str("stalemate")]), py_tuple(vec![py_str("what"), py_str("whats"), py_str("mean"), py_str("means"), py_str("explain"), py_str("difference"), py_str("different"), py_str("vs"), py_str("versus"), py_str("is it"), py_str("draw"), py_str("how do i")])])); __args.push(py_str("Stalemate is a draw: the side to move is not in check but has no legal move at all, and the game ends level even if they are a queen down. It usually happens with a lone king in front of the enemy king with no square to go to. If you are winning, leave the other king a square or move a pawn, and if you are losing, look for it on purpose - it is half a point from nowhere.")); __kws.extend(vec![("ask".to_string(), py_tuple(vec![py_str("what"), py_str("whats"), py_str("how"), py_str("can"), py_str("is"), py_str("explain")])), ("avoid".to_string(), py_tuple(vec![py_str("book"), py_str("books"), py_str("read"), py_str("reading"), py_str("opening"), py_str("openings"), py_str("talks"), py_str("negotiation")])), ("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("chess-castling")); __args.push(py_tuple(vec![py_tuple(vec![py_str("castle"), py_str("castles"), py_str("castling"), py_str("castled")]), __data181()])); __args.push(py_str("Castling moves the king two squares towards a rook and puts that rook on the other side of it, and it is the one move where two pieces go at once. It takes one move, it is only legal if neither the king nor that rook has moved, nothing is between them, the king is not in check, and the king does not pass through or land on a square that is attacked. Do it early, usually within the first ten moves: it puts the king behind pawns and brings the rook into the game.")); __kws.extend(vec![("ask".to_string(), py_tuple(vec![py_str("what"), py_str("whats"), py_str("how"), py_str("when"), py_str("can"), py_str("do"), py_str("should"), py_str("why"), py_str("is")])), ("avoid".to_string(), py_tuple(vec![py_str("sand"), py_str("beach"), py_str("scotland"), py_str("wales"), py_str("wedding"), py_str("visit"), py_str("hotel"), py_str("ruins"), py_str("book"), py_str("books"), py_str("read"), py_str("reading")])), ("guard".to_string(), py_func("_a_chess_line", |args: &[Py]| _a_chess_line__wrapped(args))), ("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("chess-pawn-moves")); __args.push(py_tuple(vec![py_tuple(vec![py_str("pawn"), py_str("pawns"), py_str("en passant"), py_str("enpassant"), py_str("passant")]), __data182()])); __args.push(py_str("A pawn moves one square forward and takes one square diagonally forward, so a pawn never moves or captures backwards. From its starting square only it may go two squares, and that is what lets the en passant rule exist: if a pawn goes two squares and lands beside an enemy pawn, that pawn may take it as if it had moved one, on that move only. Getting to the far end promotes it to a queen, rook, bishop or knight, and a queen is almost always right.")); __kws.extend(vec![("ask".to_string(), py_tuple(vec![py_str("what"), py_str("whats"), py_str("how"), py_str("when"), py_str("can"), py_str("do"), py_str("why"), py_str("is")])), ("avoid".to_string(), py_tuple(vec![py_str("book"), py_str("books"), py_str("read"), py_str("reading"), py_str("mortgage"), py_str("loan"), py_str("car"), py_str("camera"), py_str("pawn shop"), py_str("pawnbroker"), py_str("pawnbrokers"), py_str("uncle")])), ("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("chess-improve")); __args.push(py_tuple(vec![py_tuple(vec![py_str("chess")]), py_tuple(vec![py_str("better"), py_str("improve"), py_str("learn"), py_str("start"), py_str("tips"), py_str("practise"), py_str("practice"), py_str("beginner"), py_str("good at"), py_str("get into"), py_str("getting into"), py_str("begin")])])); __args.push(py_str("Two things move the needle: fifteen minutes of tactical puzzles a day on Lichess or Chess.com, and playing long games rather than blitz, then looking at where you lost. Learn the ideas behind one opening for white and one for black instead of memorising moves, and always ask what your opponent's last move was threatening.")); __kws.extend(vec![("ask".to_string(), py_tuple(vec![py_str("how"), py_str("what"), py_str("any"), py_str("tips"), py_str("should"), py_str("best"), py_str("can")]))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("learn-guitar")); __args.push(py_tuple(vec![py_tuple(vec![py_str("guitar")]), py_tuple(vec![py_str("learn"), py_str("start"), py_str("beginner"), py_str("how long"), py_str("take"), py_str("teach"), py_str("learn to play"), py_str("hard")])])); __args.push(py_str("Ten to fifteen minutes a day beats one long session a week: learn the four chords G, C, D and Em first, then play songs that use them, since songs keep you going where scales do not. Most people can strum through a simple song in two or three months that way; sore fingertips for the first fortnight are normal.")); __kws.extend(vec![("ask".to_string(), py_tuple(vec![py_str("how"), py_str("what"), py_str("any"), py_str("should"), py_str("best"), py_str("can"), py_str("tips")])), ("avoid".to_string(), __data183())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("music-genre-start")); __args.push(py_tuple(vec![call_builtin("tuple", &[g_GENRE_START()]).unwrap_or_else(|e| exc::raise(e)), g_MUSIC_START_ASKS()])); __args.push(py_func("_genre_start", |args: &[Py]| _genre_start__wrapped(args))); __kws.extend(vec![("bias".to_string(), Py::Int(2)), ("avoid".to_string(), __data184())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("card-game-rules")); __args.push(py_tuple(vec![op_add(&call_builtin("tuple", &[g_CARD_GAMES()]).unwrap_or_else(|e| exc::raise(e)), &py_tuple(vec![py_str("patience"), py_str("pontoon"), py_str("twenty one")])), g_CARD_ASKS()])); __args.push(py_func("_card_game", |args: &[Py]| _card_game__wrapped(args))); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("avoid".to_string(), __data185())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("learn-to-draw")); __args.push(py_tuple(vec![py_tuple(vec![py_str("draw"), py_str("drawing"), py_str("sketch"), py_str("sketching"), py_str("sketches"), py_str("doodle"), py_str("doodling"), py_str("pencil drawing"), py_str("line drawing")]), __data186()])); __args.push(py_str("Draw what is in front of you, not from memory: a mug, your own hand, the chair opposite. Ten minutes a day beats a long session at the weekend, one object a day for a fortnight, and use a soft pencil (2B) on cheap paper so you are not afraid of it. Copy one drawing you admire every week and do not rub anything out - the wrong line next to the right one is how you learn to see.")); __kws.extend(vec![("avoid".to_string(), __data187())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("activity-start")); __args.push(py_tuple(vec![op_add(&call_builtin("tuple", &[g_ACTIVITY_START()]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("tuple", &[g_ACTIVITY_OTHER_NAMES()]).unwrap_or_else(|e| exc::raise(e))), g_ACTIVITY_ASKS()])); __args.push(py_func("_activity_start", |args: &[Py]| _activity_start__wrapped(args))); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("avoid".to_string(), __data188())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("chess-play")); __args.push(py_tuple(vec![py_tuple(vec![py_str("chess")]), py_tuple(vec![py_str("how do i play"), py_str("how to play"), py_str("how do you play"), py_str("rules"), py_str("how does"), py_str("the moves"), py_str("set up"), py_str("move the pieces"), py_str("win")])])); __args.push(py_str("The aim is to trap the other king so it cannot move and cannot escape being taken - that is checkmate, and you do not capture the king. Pawns go forward one square (two on their first move) and take diagonally; knights jump in an L; bishops go diagonally any distance; rooks in straight lines; the queen both ways; the king one square. Set up with a white square at the bottom right and the queen on her own colour, then play ten games on Lichess against people at your level - the moves stick after a few losses.")); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("avoid".to_string(), __data189())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("instrument-in-tune")); __args.push(py_tuple(vec![py_tuple(vec![py_str("guitar"), py_str("ukulele"), py_str("violin"), py_str("fiddle"), py_str("bass"), py_str("cello"), py_str("banjo"), py_str("mandolin"), py_str("piano"), py_str("keyboard")]), g_TUNE_ASKS()])); __args.push(py_func("_in_tune", |args: &[Py]| _in_tune__wrapped(args))); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("avoid".to_string(), py_tuple(vec![py_str("car"), py_str("engine"), py_str("radio"), py_str("station"), py_str("tv"), py_str("television"), py_str("freeview"), py_str("aerial"), py_str("sat nav"), py_str("satnav"), py_str("channel")]))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("instrument-slips")); __args.push(py_tuple(vec![py_tuple(vec![py_str("guitar"), py_str("ukulele"), py_str("violin"), py_str("fiddle"), py_str("bass"), py_str("banjo"), py_str("mandolin"), py_str("cello")]), py_tuple(vec![py_str("wont stay in tune"), py_str("won't stay in tune"), py_str("wont hold tune"), py_str("keeps going out of tune"), py_str("goes out of tune"), py_str("out of tune all"), py_str("slips"), py_str("slipping"), py_str("wont tune"), py_str("will not stay in tune"), py_str("doesnt stay in tune"), py_str("doesn't stay in tune")])])); __args.push(py_str("Nine times in ten it is the strings: new ones stretch for a week, so tune up, bend every string a little, and tune again - three or four times the first evening. Old strings go dead and stop holding pitch, so if they are more than a few months old, change them. If one string pings as it slips it is catching in the nut, and a pencil lead scribbled in the slot fixes that tonight. Still slipping with new strings is a worn peg or a tuner screw, which is a shop job.")); __kws.extend(vec![("bias".to_string(), Py::Int(3)), ("avoid".to_string(), py_tuple(vec![py_str("car"), py_str("engine"), py_str("radio"), py_str("station"), py_str("tv"), py_str("sat nav")]))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("guitar-buzz")); __args.push(py_tuple(vec![py_tuple(vec![py_str("guitar"), py_str("bass"), py_str("ukulele"), py_str("banjo"), py_str("mandolin"), py_str("violin")]), g_BUZZ_ASKS()])); __args.push(py_func("_buzz", |args: &[Py]| _buzz__wrapped(args))); __kws.extend(vec![("bias".to_string(), Py::Int(2)), ("avoid".to_string(), py_tuple(vec![py_str("amp"), py_str("amplifier"), py_str("speaker"), py_str("headphones"), py_str("phone"), py_str("doorbell"), py_str("buzzer"), py_str("intercom"), py_str("bee"), py_str("bees"), py_str("wasp")]))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("who-made-it")); __args.push(py_tuple(vec![py_tuple(vec![py_str("who"), py_str("name"), py_str("band")]), g_WHO_MAKERS()])); __args.push(py_func("who_made", |args: &[Py]| who_made__wrapped(args))); __kws.extend(vec![("avoid".to_string(), __data190())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("poetry-kids")); __args.push(py_tuple(vec![py_tuple(vec![py_str("poetry"), py_str("poems"), py_str("poem"), py_str("rhymes"), py_str("rhyming"), py_str("nursery rhymes")]), py_tuple(vec![py_str("kids"), py_str("children"), py_str("child"), py_str("toddler"), py_str("toddlers"), py_str("baby"), py_str("babies"), py_str("good for"), py_str("worth it"), py_str("benefit"), py_str("help them"), py_str("teach")])])); __args.push(py_str("Yes, and it is the sound that does the work: rhymes teach a child that words are made of parts, which is the same skill reading needs. Read one aloud and let them finish the rhymes, keep it to a couple of minutes, and do not ask them to explain it. Silly wins - a poem they can shout is one they will remember.")); __kws.extend(vec![("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("poem-what")); __args.push(py_tuple(vec![py_tuple(vec![py_str("poem"), py_str("poems"), py_str("poetry"), py_str("verse")]), py_tuple(vec![py_str("what"), py_str("is"), py_str("explain"), py_str("mean"), py_str("definition"), py_str("form"), py_str("rule")])])); __args.push(py_str("A poem leans on sound as well as meaning: rhythm, rhyme if you want it, and the line breaks doing some of the work. No rules you have to follow - the two forms with rules are the haiku (three lines, 5-7-5) and the limerick (five lines, aabba). Ask me for either and I'll write one.")); __kws.extend(vec![("bias".to_string(), Py::Int(2)), ("avoid".to_string(), __data191())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("haiku-what")); __args.push(py_tuple(vec![py_tuple(vec![py_str("haiku"), py_str("haikus")]), py_tuple(vec![py_str("what"), py_str("is"), py_str("explain"), py_str("mean"), py_str("definition"), py_str("form"), py_str("rule"), py_str("structure")])])); __args.push(py_str("A haiku is three lines counted in sounds: five, then seven, then five, usually about one moment rather than a story:\nRain on the window,\na hundred small taps, all night,\nand the garden drinks.")); __kws.extend(vec![("bias".to_string(), Py::Int(2)), ("avoid".to_string(), py_tuple(vec![py_str("read"), py_str("reading"), py_str("book"), py_str("books")]))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("limerick-what")); __args.push(py_tuple(vec![py_tuple(vec![py_str("limerick"), py_str("limericks")]), py_tuple(vec![py_str("what"), py_str("is"), py_str("explain"), py_str("mean"), py_str("definition"), py_str("form"), py_str("rule"), py_str("structure")])])); __args.push(py_str("A limerick is five lines that rhyme aabba, with the two in the middle short: it is a joke in verse.\nThere once was a cloud over Crewe\nthat had far too much rain to do.\nIt rained on the park\nfrom morning till dark,\nand then, just for fun, rained on you.")); __kws.extend(vec![("bias".to_string(), Py::Int(2)), ("avoid".to_string(), py_tuple(vec![py_str("read"), py_str("reading"), py_str("book"), py_str("books")]))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("haiku-on")); __args.push(py_tuple(vec![py_tuple(vec![py_str("haiku"), py_str("haikus")]), py_tuple(vec![py_str("about"), py_str("of"), py_str("on"), py_str("write"), py_str("make"), py_str("give"), py_str("one"), py_str("want"), py_str("need"), py_str("help"), py_str("me"), py_str("a")])])); __args.push(g__haiku()); __kws.extend(vec![("bias".to_string(), Py::Int(6)), ("avoid".to_string(), op_add(&op_add(&op_add(&g_GRAVE(), &g_OCCASION()), &g_CARD()), &py_tuple(vec![py_str("what is"), py_str("whats a"), py_str("what's a"), py_str("meaning"), py_str("definition"), py_str("define"), py_str("explain"), py_str("rule"), py_str("rules"), py_str("how many")])))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("limerick-on")); __args.push(py_tuple(vec![py_tuple(vec![py_str("limerick"), py_str("limericks")]), py_tuple(vec![py_str("about"), py_str("of"), py_str("on"), py_str("write"), py_str("make"), py_str("give"), py_str("one"), py_str("want"), py_str("need"), py_str("help"), py_str("me"), py_str("a")])])); __args.push(g__limerick()); __kws.extend(vec![("bias".to_string(), Py::Int(6)), ("avoid".to_string(), op_add(&op_add(&op_add(&g_GRAVE(), &g_OCCASION()), &g_CARD()), &py_tuple(vec![py_str("what is"), py_str("whats a"), py_str("what's a"), py_str("meaning"), py_str("definition"), py_str("define"), py_str("explain"), py_str("rule"), py_str("rules"), py_str("how many")])))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("rhyme-word")); __args.push(py_tuple(vec![py_tuple(vec![py_str("rhyme"), py_str("rhymes"), py_str("rhyming")]), py_tuple(vec![py_str("with"), py_str("for"), py_str("word"), py_str("does")])])); __args.push(py_func("_rhyme", |args: &[Py]| _rhyme__wrapped(args))); __kws.extend(vec![("bias".to_string(), Py::Int(5))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("poem-on")); __args.push(py_tuple(vec![py_tuple(vec![py_str("poem"), py_str("poems"), py_str("verse"), py_str("sonnet"), py_str("ode"), py_str("couplet"), py_str("rhyme"), py_str("rhymes"), py_str("rhyming")]), __data192()])); __args.push(g__poem()); __kws.extend(vec![("bias".to_string(), Py::Int(3)), ("avoid".to_string(), op_add(&op_add(&op_add(&g_GRAVE(), &g_OCCASION()), &g_CARD()), &__data193()))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("poem-for-a-card")); __args.push(py_tuple(vec![py_tuple(vec![py_str("poem"), py_str("poems"), py_str("verse"), py_str("rhyme"), py_str("rhymes"), py_str("rhyming"), py_str("sonnet"), py_str("ode"), py_str("couplet")]), py_tuple(vec![py_str("about"), py_str("of"), py_str("on")])])); __args.push(g__poem()); __kws.extend(vec![("bias".to_string(), Py::Int(2)), ("ask".to_string(), py_tuple(vec![py_str("card"), py_str("cards")])), ("avoid".to_string(), op_add(&op_add(&g_GRAVE(), &g_OCCASION()), &py_tuple(vec![py_str("i'm writing"), py_str("im writing"), py_str("i am writing"), py_str("writing my"), py_str("my own"), py_str("i have to write"), py_str("i've got to write"), py_str("help me write"), py_str("book"), py_str("books"), py_str("reading"), py_str("recommend")])))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("one-more-like-that")); __args.push(py_tuple(vec![__data194(), py_tuple(vec![py_str("about"), py_str("can"), py_str("do"), py_str("another"), py_str("please"), py_str("mood"), py_str("happier"), py_str("more"), py_str("one")])])); __args.push(py_func("_another_one", |args: &[Py]| _another_one__wrapped(args))); __kws.extend(vec![("avoid".to_string(), g_GRAVE())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("story-on")); __args.push(py_tuple(vec![py_tuple(vec![py_str("story"), py_str("stories"), py_str("tale"), py_str("tales"), py_str("one more about"), py_str("another one about"), py_str("and one about"), py_str("one about")]), __data195()])); __args.push(g__story()); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("avoid".to_string(), op_add(&op_add(&op_add(&g_GRAVE(), &g_PICK_WORDS()), &g_CARD()), &py_tuple(vec![py_str("story idea"), py_str("idea for a story")])))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("rap-on")); __args.push(py_tuple(vec![py_tuple(vec![py_str("rap"), py_str("raps"), py_str("rapping")]), py_tuple(vec![py_str("write"), py_str("make"), py_str("compose"), py_str("up"), py_str("sing"), py_str("one"), py_str("give me"), py_str("for me")])])); __args.push(g__rap()); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("avoid".to_string(), op_add(&op_add(&op_add(&op_add(&g_GRAVE(), &g_PICK_WORDS()), &g_OCCASION()), &g_CARD()), &py_tuple(vec![py_str("name"), py_str("names"), py_str("called")])))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("song-on")); __args.push(py_tuple(vec![py_tuple(vec![py_str("song"), py_str("songs"), py_str("lyric"), py_str("lyrics")]), py_tuple(vec![py_str("write"), py_str("make"), py_str("compose"), py_str("up"), py_str("sing"), py_str("one"), py_str("give me"), py_str("for me")])])); __args.push(g__song()); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("avoid".to_string(), op_add(&op_add(&op_add(&g_GRAVE(), &g_PICK_WORDS()), &g_OCCASION()), &g_CARD()))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("character-name")); __args.push(py_tuple(vec![py_tuple(vec![py_str("character name"), py_str("character names"), py_str("name for my character"), py_str("name for a character"), py_str("name my character"), py_str("name a character"), py_str("name my protagonist"), py_str("name for my protagonist"), py_str("protagonist name")]), __data196()])); __args.push(py_func("_character_name", |args: &[Py]| _character_name__wrapped(args))); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("avoid".to_string(), __data197())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("nickname")); __args.push(py_tuple(vec![py_tuple(vec![py_str("nickname"), py_str("nicknames"), py_str("nick name"), py_str("nick names"), py_str("rap name"), py_str("stage name"), py_str("band name"), py_str("dj name")]), __data198()])); __args.push(py_func("_nickname", |args: &[Py]| _nickname__wrapped(args))); __kws.extend(vec![("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("story-idea")); __args.push(py_tuple(vec![py_tuple(vec![py_str("story idea"), py_str("story ideas"), py_str("plot idea"), py_str("idea for a story"), py_str("short story idea"), py_str("idea for my story")]), py_tuple(vec![py_str("give"), py_str("need"), py_str("want"), py_str("help"), py_str("any"), py_str("what"), py_str("some"), py_str("me")])])); __args.push(py_func("_story_idea", |args: &[Py]| _story_idea__wrapped(args))); __kws.extend(vec![("bias".to_string(), Py::Int(3))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("quiz-team-name")); __args.push(py_tuple(vec![py_tuple(vec![py_str("pub quiz"), py_str("quiz team"), py_str("team name"), py_str("quiz name"), py_str("quiz"), py_str("team")]), py_tuple(vec![py_str("name"), py_str("names"), py_str("called"), py_str("call"), py_str("idea")]), py_tuple(vec![py_str("team"), py_str("our team")])])); __args.push(py_func("_quiz_name", |args: &[Py]| _quiz_name__wrapped(args))); __kws.extend(vec![("ask".to_string(), __data199()), ("avoid".to_string(), __data200()), ("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("band-name")); __args.push(py_tuple(vec![py_tuple(vec![py_str("band"), py_str("bands"), py_str("group"), py_str("act"), py_str("duo"), py_str("trio")]), py_tuple(vec![py_str("name"), py_str("named"), py_str("naming"), py_str("call it"), py_str("call us"), py_str("call my"), py_str("call the"), py_str("call ourselves"), py_str("come up with"), py_str("think of")])])); __args.push(py_str("Short, sayable and easy to spell is the whole brief: two words, no apostrophes, and nothing you have to explain down a phone. Say 'we are the ...' out loud and get a friend to spell it back after hearing it once, then search it and check it is not another band or a trademark, because a name you cannot print on a poster is not a name.")); __kws.extend(vec![("ask".to_string(), __data201()), ("avoid".to_string(), __data202()), ("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("gaming-platform")); __args.push(py_tuple(vec![__data203(), __data204()])); __args.push(py_str("A console is cheaper and simpler: it plays everything at good quality for years, no upgrades, and you can sell it on. A gaming PC costs more up front but gets cheaper games, higher settings and mods, and doubles as a work machine - so pick the console for a shared living room and the PC if you already sit at a desk with a monitor.")); __kws.extend(vec![("avoid".to_string(), __data205())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("read-more-books")); __args.push(py_tuple(vec![py_tuple(vec![py_str("book"), py_str("books"), py_str("read"), py_str("reading"), py_str("novel"), py_str("novels")]), py_tuple(vec![py_str("more"), py_str("habit"), py_str("regularly"), py_str("again"), py_str("start"), py_str("started"), py_str("stopped"), py_str("get back"), py_str("get into"), py_str("tips")])])); __args.push(py_str("Keep the book where you idle - beside the kettle, in your bag, by the bed - and read in the small gaps instead of waiting for a free evening. Quit a book at about 50 pages if it has not gripped you: forcing yourself to finish things you dislike is what stops the habit.")); __kws.extend(vec![("ask".to_string(), py_tuple(vec![py_str("more"), py_str("habit"), py_str("tips"), py_str("want"), py_str("wants"), py_str("get back"), py_str("get into"), py_str("again"), py_str("started"), py_str("stopped"), py_str("regularly")])), ("avoid".to_string(), __data206())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("after-named-title")); __args.push(py_tuple(vec![__data207(), op_add(&__data208(), &g_AFTER_TITLE_WORDS())])); __args.push(py_func("_after_named", |args: &[Py]| _after_named__wrapped(args))); __kws.extend(vec![("ask".to_string(), g_AFTER_TITLE_WORDS()), ("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("new-hobby")); __args.push(py_tuple(vec![py_tuple(vec![py_str("hobby"), py_str("hobbies"), py_str("pastime"), py_str("something new to do")]), __data209()])); __args.push(py_str("Pick the one thing you would happily be bad at, and buy the cheapest version: a ten pound ukulele, a second-hand chess set, a supermarket sketchbook and pencils. Keep it in the room where you sit, and give it twenty minutes twice a week. The hobby that sticks is the one with the shortest walk to it, not the one you researched most.")); __kws.extend(vec![("avoid".to_string(), py_tuple(vec![py_str("no money"), py_str("broke"), py_str("skint"), py_str("friend"), py_str("friends")]))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("weekend-do")); __args.push(py_tuple(vec![py_tuple(vec![py_str("should i do"), py_str("can i do"), py_str("shall i do"), py_str("shall we do"), py_str("what do i do"), py_str("what to do"), py_str("anything to do"), py_str("something to do"), py_str("things to do")]), __data210()])); __args.push(py_func("_an_hour_or_a_day", |args: &[Py]| _an_hour_or_a_day__wrapped(args))); __kws.extend(vec![("ask".to_string(), py_tuple(vec![py_str("what"), py_str("any"), py_str("ideas"), py_str("suggest"), py_str("recommend"), py_str("how")])), ("avoid".to_string(), __data211()), ("guard".to_string(), py_func("_no_city_is_named", |args: &[Py]| _no_city_is_named__wrapped(args))), ("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("evening-in")); __args.push(py_tuple(vec![__data212(), __data213()])); __args.push(py_str("Three things, and the cooking is what makes it an evening rather than a sofa: a supermarket dough ball each to top yourselves, a slow thing in the oven, or a cocktail that takes two people. Then one film nobody in the house has seen, started before nine, and a game that is not a screen - cards, a jigsaw, or a quiz you write for each other.")); __kws.extend(vec![("guard".to_string(), py_func("_names_the_evening", |args: &[Py]| _names_the_evening__wrapped(args))), ("avoid".to_string(), __data214())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("wet-day")); __args.push(py_tuple(vec![__data215(), __data216()])); __args.push(py_str("One thing out of the house and one long thing at home is what saves a wet day. Out: the swimming pool, the library, a free museum gallery, or a walk in proper waterproofs, because a wet park is empty. Home: something with a start and an end, a whole film, a proper cook, a board game, or the job you keep not doing. Decide both in the morning, or the afternoon goes to the sofa and a phone.")); __kws.extend(vec![("guard".to_string(), py_func("_names_the_weather", |args: &[Py]| _names_the_weather__wrapped(args))), ("avoid".to_string(), __data217())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("start-a-book-club")); __args.push(py_tuple(vec![py_tuple(vec![py_str("book club"), py_str("book clubs"), py_str("reading group"), py_str("reading club"), py_str("book group"), py_str("book circle")]), __data218()])); __args.push(py_str("Ask four or five people, not a crowd, and fix the next date before the first meeting ends - a club that meets every six weeks at a set day keeps going, one that waits for everyone to be free does not. Pick short books to begin with, let whoever chose it lead for ten minutes, and bring one question rather than a summary: \"who did you believe?\", \"what would you have done?\". Rotate who chooses, keep food simple, and let people come having only read half. To join one instead of starting one, ask at the library and the independent bookshop: both keep a list, and a group of five usually has room.")); __kws.extend(vec![("ask".to_string(), __data219()), ("avoid".to_string(), __data220())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("pick-country")); __args.push(py_tuple(vec![g_CINEMA_WORDS(), op_add(&g_PICK_ASK(), &py_tuple(vec![py_str("ones"), py_str("one"), py_str("more"), py_str("another"), py_str("other")]))])); __args.push(py_func("_pick_plain", |args: &[Py]| _pick_plain__wrapped(args))); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("guard".to_string(), py_func("_a_country_is_a_country", |args: &[Py]| _a_country_is_a_country__wrapped(args))), ("avoid".to_string(), op_add(&g__PICK_AVOID(), &py_tuple(vec![py_str("seen"), py_str("watched"), py_str("liked"), py_str("loved")])))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("film-kind")); __args.push(py_tuple(vec![g_FILM_KIND_WORDS(), op_add(&g_PICK_MEDIUM(), &g_PICK_ASK())])); __args.push(py_func("_film_kind_reply", |args: &[Py]| _film_kind_reply__wrapped(args))); __kws.extend(vec![("bias".to_string(), Py::Int(2)), ("avoid".to_string(), op_add(&op_add(&op_add(&g__PICK_AVOID(), &g_PICK_REACT()), &g_KIND_AVOID()), &__data221()))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("film-length")); __args.push(py_tuple(vec![op_add(&g_PICK_MEDIUM(), &g_LIMIT_WORDS()), py_tuple(vec![py_str("minutes"), py_str("minute"), py_str("mins"), py_str("min"), py_str("hours"), py_str("hour"), py_str("hrs"), py_str("hr")])])); __args.push(py_func("_film_under", |args: &[Py]| _film_under__wrapped(args))); __kws.extend(vec![("bias".to_string(), Py::Int(3)), ("avoid".to_string(), g__LENGTH_AVOID())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("pick-plain")); __args.push(py_tuple(vec![g_PICK_MEDIUM(), op_add(&op_add(&op_add(&g_PICK_ASK(), &g_PICK_WHO()), &g_CINEMA_WORDS()), &g_SUBS_KEY())])); __args.push(py_func("_pick_plain", |args: &[Py]| _pick_plain__wrapped(args))); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("guard".to_string(), py_func("_a_country_is_a_country", |args: &[Py]| _a_country_is_a_country__wrapped(args))), ("avoid".to_string(), op_add(&op_add(&g__PICK_AVOID(), &g_PICK_MOODS()), &__data222()))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("pick-limit")); __args.push(py_tuple(vec![op_add(&g_FREE_TELLS(), &g_SUBS_TELLS()), __data223()])); __args.push(py_func("_pick_limit_reply", |args: &[Py]| _pick_limit_reply__wrapped(args))); __kws.extend(vec![("bias".to_string(), Py::Int(1)), ("avoid".to_string(), __data224())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("costume-at-home")); __args.push(py_tuple(vec![py_tuple(vec![py_str("costume"), py_str("costumes"), py_str("fancy dress"), py_str("dress up"), py_str("dressing up"), py_str("world book day"), py_str("what can i be"), py_str("what shall i be")]), __data225()])); __args.push(py_str("Make the shape, not the whole outfit: black leggings and a black top read as almost anything, then one thing does the work - a cardboard box for a robot or a rocket, a bin bag and a belt for a cape, a paper plate and elastic for a mask, a stripy top and an eye patch for a pirate. Paint it the night before, not the morning of, and ask the party's theme first. If it is for world book day, check the school's rules, because some ban masks and face paint.")); __kws.extend(vec![("avoid".to_string(), __data226())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }]) }
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.entertainment.ENTRIES"); }
     s_ENTRIES(__data110());
     let __iter227 = py_iter_or_raise(&g_ENTRIES());
@@ -2364,7 +2707,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.entertainment._e"); }
     s__e(__item.clone());
     if py_truthy(&{ let __b = call_builtin("isinstance", &[gattr(&g__e(), "reply"), py_func("str", |args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { op_ge(&call_builtin("len", &[op_bitand(&call_builtin("set", &[stdlib_call("re", "findall", &[py_str("\\*([^*]{2,60})\\*"), gattr(&g__e(), "reply")]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("set", &[g_FILM_MINUTES()]).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)) } }) {
-    let _ = py_setattr(&g__e(), "reply", _film_list(&[gattr(&g__e(), "reply")]));
+    let _ = py_setattr(&g__e(), "reply", py_call(&g__film_list(), &[gattr(&g__e(), "reply")]));
     }
     }
     fn __data228() -> Py { py_dict(vec![(py_str("chord"), py_str("A chord is three or more notes played together: C major is C, E and G, all at once. Major chords sound settled and minor ones sound sad, which is most of why a song has a mood at all.")), (py_str("key"), py_str("The key is the home note a piece is built around and comes back to: a song in C keeps landing on C. The notes it uses are that key's scale, and a key change lifts the whole song.")), (py_str("scale"), py_str("A scale is the ladder of notes a key is made of, up or down: do re mi fa sol la ti do. A major scale sounds bright and a minor one darker, and both are eight notes with the first repeated at the top.")), (py_str("octave"), py_str("An octave is the gap between a note and the same note higher or lower, eight notes up the scale. It sounds like the same note because the frequency exactly doubles: A is 440 vibrations a second, the A above it 880.")), (py_str("time signature"), py_str("The two numbers at the start of the music. The top one is how many beats are in a bar and the bottom one which note gets the beat, so 4/4 is four quarter notes to the bar (most pop) and 3/4 is a waltz.")), (py_str("bar"), py_str("A bar is one group of beats, marked off by the bar lines on the page: in 4/4 that is four beats to a bar, which is why eight bars is the length of most pop verses. A bar and a measure are the same thing.")), (py_str("beat"), py_str("The beat is the steady pulse you clap or tap along to; the rhythm is the pattern played on top of it. Four beats to the bar is most pop, three is a waltz, and a drummer keeps the beat while everyone else plays around it.")), (py_str("tempo"), py_str("Tempo is how fast the music goes, counted in beats per minute: 60 is one a second and a ballad, 120 is two a second and a dance track. A metronome clicks it for you.")), (py_str("bpm"), py_str("BPM is beats per minute, how fast the music goes: 60 is one a second and a ballad, 120 is two a second and a dance track. A metronome clicks it for you.")), (py_str("pitch"), py_str("Pitch is how high or low a note is, set by how fast the sound vibrates: a short string or a tight one vibrates faster and sounds higher.")), (py_str("melody"), py_str("The melody is the tune - the line of single notes you could sing on its own. The harmony is the chords underneath it, and the rhythm is the pattern in time.")), (py_str("harmony"), py_str("Harmony is two or more notes sounding together, usually as the chords under the melody. It is what makes a bare tune sound full, and what a second singer adds.")), (py_str("rhythm"), py_str("Rhythm is the pattern of the music in time - where the beats fall and which are strong. A drummer keeps it, and you can clap it without knowing any notes.")), (py_str("pre chorus"), py_str("The pre-chorus is the short section between the verse and the chorus that builds towards it: the words change each time, the music lifts, and then the chorus lands. It is the ramp rather than the hook.")), (py_str("chorus"), py_str("The chorus is the part that comes round again with the same words - the bit you can sing back after one listen, and usually the title. The verses in between change each time and carry the story, and a bridge is the one different section near the end.")), (py_str("hook"), py_str("The hook is the short phrase that catches you: a chorus line, a riff or a bit of vocal you find yourself humming. A producer will often make it the first thing you hear in the song.")), (py_str("riff"), py_str("A riff is a short repeated phrase of notes, usually on guitar or keys, that a song is built on: the opening of *Smoke on the Water* or *Seven Nation Army*. It is a hook you can play rather than sing.")), (py_str("sample"), py_str("A sample is a piece of an existing recording lifted into a new track - a drum break, a vocal line or a chord. Hip hop and dance music are built on them, and the original artist is usually credited and paid.")), (py_str("progression"), py_str("A chord progression is the order the chords come in, usually a short loop that repeats: C, G, A minor, F is the one behind a thousand pop songs. The loop is what the melody and the words sit on, and changing one chord changes the whole mood.")), (py_str("key signature"), py_str("The key signature is the sharps or flats written at the start of every line of music, and they say which key the piece is in: one sharp is G major, one flat is F major, none is C major. It saves writing the same sharp or flat beside every note.")), (py_str("arpeggio"), py_str("An arpeggio is a chord played one note at a time instead of all together: C, E, G, one after another, low to high. It is what fingerpicking is made of and what you hear when a piano player rolls through the chords.")), (py_str("tab"), py_str("Tab (tablature) is guitar music written as six lines for the six strings, with a number on a line meaning that fret on that string: a 3 on the top line is the third fret of the top string. It is read left to right like a sentence, it skips the rhythm, and it is how most people learn a song by ear-free copying.")), (py_str("interval"), py_str("An interval is the distance between two notes, counted in the steps of the scale: C up to G is a fifth, C up to E a third, and the same note twice an octave. Every chord and tune is made of them, so learning their sounds by ear is the single most useful bit of theory there is.")), (py_str("clef"), py_str("A clef is the sign at the start of the staff that says which lines are which notes. Treble clef curls round the second line up, which is G, and is used for the right hand of a piano, the violin and most singing; bass clef covers the low lines for the left hand, the cello and the bass.")), (py_str("middle c"), py_str("Middle C is the C nearest the middle of a piano keyboard, the one four white keys in from the left of the group of two black keys in the middle. Written in treble clef it sits on its own short line just below the staff, and in bass clef on a short line just above it, which is why it is the note that joins the two hands.")), (py_str("transpose"), py_str("To transpose is to move a whole piece into a different key, keeping the tune and the shapes of the chords the same and shifting every note by the same amount - usually so a singer can reach it. On a guitar a capo transposes without changing anything you play; a keyboard has a transpose button that does it for you.")), (py_str("metronome"), py_str("A metronome clicks a steady beat at whatever speed you set, in beats per minute, so you can hear whether you are rushing. Practise the hard bar at a speed you can play it clean three times running, then nudge it up five at a time - it is the cheapest way to get faster, and a phone app does the job.")), (py_str("producer"), py_str("The producer is the person who shapes the recording: the arrangement, the sounds, how the parts fit, and the mix at the end. They are not the songwriter and not the engineer. In film the word means the person who runs the money and the schedule, a different job."))]) }
@@ -2415,9 +2758,9 @@ fn module_body() {
     s__LOOKING_FOR_THE_THING(__data250());
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.entertainment._MUSIC_TERM_KEY"); }
     s__MUSIC_TERM_KEY(call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_MUSIC_TERMS()) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&g__MUSIC_WORD_BESIDE(), &word.clone()))) {  __out.push(word.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
-    let _ = mcall(&g_ENTRIES(), "append", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("music-term")); __args.push(py_tuple(vec![op_add(&g__MUSIC_TERM_KEY(), &py_tuple(vec![py_str("music theory")])), g__MUSIC_ASKS()])); __args.push(py_func("_music_term", |args: &[Py]| _music_term(args))); __kws.extend(vec![("avoid".to_string(), op_add(&py_tuple(vec![py_str("podcast"), py_str("podcasts"), py_str("recommend"), py_str("should i listen"), py_str("what should i listen"), py_str("playlist"), py_str("spotify"), py_str("practise"), py_str("practice"), py_str("learn to play"), py_str("should i learn"), py_str("how do i get better")]), &g__MUSIC_GEAR())), ("ask".to_string(), g__MUSIC_ASKS()), ("guard".to_string(), py_func("_music_elsewhere", |args: &[Py]| _music_elsewhere(args)))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }]);
+    let _ = mcall(&g_ENTRIES(), "append", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("music-term")); __args.push(py_tuple(vec![op_add(&g__MUSIC_TERM_KEY(), &py_tuple(vec![py_str("music theory")])), g__MUSIC_ASKS()])); __args.push(py_func("_music_term", |args: &[Py]| _music_term__wrapped(args))); __kws.extend(vec![("avoid".to_string(), op_add(&py_tuple(vec![py_str("podcast"), py_str("podcasts"), py_str("recommend"), py_str("should i listen"), py_str("what should i listen"), py_str("playlist"), py_str("spotify"), py_str("practise"), py_str("practice"), py_str("learn to play"), py_str("should i learn"), py_str("how do i get better")]), &g__MUSIC_GEAR())), ("ask".to_string(), g__MUSIC_ASKS()), ("guard".to_string(), py_func("_music_elsewhere", |args: &[Py]| _music_elsewhere__wrapped(args)))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }]);
     let _ = mcall(&g_ENTRIES(), "append", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("music-producer")); __args.push(py_tuple(vec![py_tuple(vec![py_str("producer"), py_str("producers"), py_str("music producer")]), op_add(&geti(&g__MUSIC_WORD_BESIDE(), &py_str("producer")), &py_tuple(vec![py_str("do"), py_str("does"), py_str("did")]))])); __args.push(geti(&g_MUSIC_TERMS(), &py_str("producer"))); __kws.extend(vec![("avoid".to_string(), py_tuple(vec![py_str("film producer"), py_str("film"), py_str("films"), py_str("movie"), py_str("movies"), py_str("tv"), py_str("television"), py_str("documentary")]))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }]);
-    let _ = mcall(&g_ENTRIES(), "append", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("song-bridge")); __args.push(py_tuple(vec![py_tuple(vec![py_str("bridge")]), py_tuple(vec![py_str("song"), py_str("songs"), py_str("chorus"), py_str("verse"), py_str("music"), py_str("track"), py_str("tune")])])); __args.push(py_str("A bridge is the section that comes once, usually after the second chorus, and sounds like neither the verse nor the chorus - it is there to stop the song repeating itself before the last chorus, and it often changes key or drops to a quiet moment first.")); __kws.extend(vec![("guard".to_string(), py_func("_a_bridge_in_music", |args: &[Py]| _a_bridge_in_music(args)))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }]);
+    let _ = mcall(&g_ENTRIES(), "append", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("song-bridge")); __args.push(py_tuple(vec![py_tuple(vec![py_str("bridge")]), py_tuple(vec![py_str("song"), py_str("songs"), py_str("chorus"), py_str("verse"), py_str("music"), py_str("track"), py_str("tune")])])); __args.push(py_str("A bridge is the section that comes once, usually after the second chorus, and sounds like neither the verse nor the chorus - it is there to stop the song repeating itself before the last chorus, and it often changes key or drops to a quiet moment first.")); __kws.extend(vec![("guard".to_string(), py_func("_a_bridge_in_music", |args: &[Py]| _a_bridge_in_music__wrapped(args)))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }]);
     fn __data251() -> Py { py_dict(vec![(py_str("violin"), py_str("A violin has four strings, tuned G, D, A and E from the lowest up.")), (py_str("fiddle"), py_str("A fiddle is a violin, so four strings: G, D, A and E from the lowest up.")), (py_str("viola"), py_str("A viola has four strings, C, G, D and A - a fifth lower than a violin.")), (py_str("cello"), py_str("A cello has four strings, C, G, D and A, an octave below a viola.")), (py_str("double bass"), py_str("A double bass has four strings, E, A, D and G, and some have a fifth.")), (py_str("bass"), py_str("A bass guitar has four strings, E, A, D and G - the same notes as the bottom four of a guitar, an octave lower.")), (py_str("guitar"), py_str("A guitar has six strings, E, A, D, G, B and E from the thickest up. A 12-string guitar has twelve, in six pairs.")), (py_str("ukulele"), py_str("A ukulele has four strings, G, C, E and A.")), (py_str("banjo"), py_str("A five-string banjo has five, with the short fifth string partway up the neck.")), (py_str("mandolin"), py_str("A mandolin has eight strings in four pairs, tuned like a violin: G, D, A, E.")), (py_str("piano"), py_str("A piano has 88 keys: 52 white and 36 black, seven and a bit octaves from A0 to C8.")), (py_str("keyboard"), py_str("A full-size piano keyboard has 88 keys; a smaller synth or starter keyboard usually has 61 or 49.")), (py_str("harp"), py_str("A concert harp has 47 strings, six and a half octaves."))]) }
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.entertainment._INSTRUMENT_COUNTS"); }
     s__INSTRUMENT_COUNTS(__data251());
@@ -2436,13 +2779,13 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.entertainment._READ_MUSIC_WORDS"); }
     s__READ_MUSIC_WORDS(py_tuple(vec![py_str("read music"), py_str("reading music"), py_str("sight read"), py_str("sight-read"), py_str("sight reading"), py_str("learn to read"), py_str("sheet music")]));
     fn __data254() -> Py { py_tuple(vec![py_str("lesson"), py_str("lessons"), py_str("teacher"), py_str("cost"), py_str("price"), py_str("expensive"), py_str("cheap"), py_str("buy"), py_str("hire"), py_str("rent"), py_str("worth"), py_str("learn"), py_str("orchestra"), py_str("orchestras"), py_str("band"), py_str("choir"), py_str("ensemble")]) }
-    let _ = mcall(&g_ENTRIES(), "append", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("instrument-count")); __args.push(py_tuple(vec![call_builtin("tuple", &[g__INSTRUMENT_COUNTS()]).unwrap_or_else(|e| exc::raise(e)), g__COUNT_ASKS()])); __args.push(py_func("_instrument_count", |args: &[Py]| _instrument_count(args))); __kws.extend(vec![("ask".to_string(), g__COUNT_ASKS()), ("avoid".to_string(), __data254())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }]);
+    let _ = mcall(&g_ENTRIES(), "append", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("instrument-count")); __args.push(py_tuple(vec![call_builtin("tuple", &[g__INSTRUMENT_COUNTS()]).unwrap_or_else(|e| exc::raise(e)), g__COUNT_ASKS()])); __args.push(py_func("_instrument_count", |args: &[Py]| _instrument_count__wrapped(args))); __kws.extend(vec![("ask".to_string(), g__COUNT_ASKS()), ("avoid".to_string(), __data254())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }]);
     fn __data255() -> Py { py_tuple(vec![py_str("fly"), py_str("flying"), py_str("how do i"), py_str("how to"), py_str("launch"), py_str("get it up"), py_str("wont go up"), py_str("won't go up"), py_str("keep it up"), py_str("wont stay up"), py_str("wind"), py_str("first time"), py_str("stuck"), py_str("up in the air"), py_str("get up"), py_str("goes up"), py_str("air")]) }
     let _ = mcall(&g_ENTRIES(), "append", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("fly-a-kite")); __args.push(py_tuple(vec![py_tuple(vec![py_str("kite"), py_str("kites"), py_str("kite flying")]), __data255()])); __args.push(py_str("Fly it in open ground away from trees and power lines, with the wind at your back. Let out ten or fifteen metres of line, have someone hold the kite up and walk back until the line is tight, then pull gently and let line run through your hands as it climbs. A steady 8-20 mph is the sweet spot: if it loops and dives, let out line, and if it will not rise at all, wait for more wind rather than running.")); __kws.extend(vec![("avoid".to_string(), py_tuple(vec![py_str("kite runner"), py_str("book"), py_str("novel"), py_str("film"), py_str("movie"), py_str("author"), py_str("kite mark"), py_str("kite-mark"), py_str("kite marked"), py_str("kite-marked")]))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }]);
     fn __data256() -> Py { py_tuple(vec![py_str("buy"), py_str("buying"), py_str("first"), py_str("for a child"), py_str("for my son"), py_str("for my daughter"), py_str("for a 5 year old"), py_str("for a 6 year old"), py_str("for a 7 year old"), py_str("recommend"), py_str("which"), py_str("best"), py_str("beginner"), py_str("easy"), py_str("present")]) }
     let _ = mcall(&g_ENTRIES(), "append", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("first-kite")); __args.push(py_tuple(vec![py_tuple(vec![py_str("kite"), py_str("kites")]), __data256()])); __args.push(py_str("A diamond or a delta, about 1.2 to 1.5 metres across, is the usual first kite: it launches easily, flies in light wind and costs about fifteen to twenty-five pounds. Look for one with a long tail (it steadies the flight for a child) and a line of at least 30 metres on a winder. Skip the stunt kites and the two-line ones: they need more wind and a lot more practice. A cheap supermarket delta is fine to learn on - you can spend more when they ask for a second one.")); __kws.extend(vec![("avoid".to_string(), py_tuple(vec![py_str("kite runner"), py_str("book"), py_str("novel"), py_str("film"), py_str("movie"), py_str("author"), py_str("kite mark"), py_str("kite-mark"), py_str("kite marked"), py_str("kite-marked")])), ("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }]);
     fn __data257() -> Py { py_tuple(vec![py_str("film"), py_str("films"), py_str("movie"), py_str("movies"), py_str("watch"), py_str("watching"), py_str("recommend"), py_str("suggest"), py_str("suggestion"), py_str("good"), py_str("best"), py_str("something"), py_str("tonight")]) }
-    let _ = mcall(&g_ENTRIES(), "append", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("film-war")); __args.push(py_tuple(vec![py_tuple(vec![py_str("war"), py_str("wartime")]), __data257()])); __args.push(py_str("*Paths of Glory* is the one to start with: Kubrick, the WWI trenches, 88 minutes. *Went the Day Well?* (92 minutes) is a British village invasion story from 1942, and *Journey's End* (107 minutes) stays in one dugout and never shows the battle. All three fit inside two hours, and *Full Metal Jacket* is 116 if you want the training half too.")); __kws.extend(vec![("bias".to_string(), Py::Int(2)), ("guard".to_string(), py_func("_the_subject_is_wanted", |args: &[Py]| _the_subject_is_wanted(args))), ("avoid".to_string(), op_add(&op_add(&op_add(&op_add(&op_add(&g_WATCHING(), &g_CHILD()), &g_SPORT()), &g_SCREEN_TIME()), &g_NOT_WATCHING()), &py_tuple(vec![py_str("board game"), py_str("computer game"), py_str("video game"), py_str("toy"), py_str("poppy"), py_str("memorial"), py_str("war on"), py_str("war on drugs"), py_str("war on obesity")])))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }]);
+    let _ = mcall(&g_ENTRIES(), "append", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("film-war")); __args.push(py_tuple(vec![py_tuple(vec![py_str("war"), py_str("wartime")]), __data257()])); __args.push(py_str("*Paths of Glory* is the one to start with: Kubrick, the WWI trenches, 88 minutes. *Went the Day Well?* (92 minutes) is a British village invasion story from 1942, and *Journey's End* (107 minutes) stays in one dugout and never shows the battle. All three fit inside two hours, and *Full Metal Jacket* is 116 if you want the training half too.")); __kws.extend(vec![("bias".to_string(), Py::Int(2)), ("guard".to_string(), py_func("_the_subject_is_wanted", |args: &[Py]| _the_subject_is_wanted__wrapped(args))), ("avoid".to_string(), op_add(&op_add(&op_add(&op_add(&op_add(&g_WATCHING(), &g_CHILD()), &g_SPORT()), &g_SCREEN_TIME()), &g_NOT_WATCHING()), &py_tuple(vec![py_str("board game"), py_str("computer game"), py_str("video game"), py_str("toy"), py_str("poppy"), py_str("memorial"), py_str("war on"), py_str("war on drugs"), py_str("war on obesity")])))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }]);
     fn __data258() -> Py { py_tuple(vec![py_str("remember"), py_str("forgot"), py_str("forget"), py_str("forgotten"), py_str("forgetting"), py_str("recall"), py_str("cant think"), py_str("can't think"), py_str("think of"), py_str("thinking of"), py_str("name"), py_str("named"), py_str("called"), py_str("what was that"), py_str("whats that"), py_str("what's that"), py_str("which was that"), py_str("half remember"), py_str("half-remember")]) }
     fn __data259() -> Py { py_tuple(vec![py_str("film"), py_str("films"), py_str("movie"), py_str("movies"), py_str("song"), py_str("songs"), py_str("tune"), py_str("album"), py_str("band"), py_str("book"), py_str("books"), py_str("novel"), py_str("show"), py_str("shows"), py_str("series"), py_str("programme"), py_str("program"), py_str("episode"), py_str("actor"), py_str("actress"), py_str("documentary"), py_str("cartoon"), py_str("title"), py_str("sitcom"), py_str("podcast")]) }
     fn __data260() -> Py { py_tuple(vec![py_str("baby"), py_str("babies"), py_str("puppy"), py_str("kitten"), py_str("dog"), py_str("cat"), py_str("company"), py_str("business"), py_str("domain"), py_str("website"), py_str("username"), py_str("password"), py_str("team"), py_str("band name"), py_str("middle name"), py_str("surname"), py_str("first name"), py_str("nickname"), py_str("pet"), py_str("boat"), py_str("house name"), py_str("wifi"), py_str("recommend"), py_str("recommendation"), py_str("what should i watch"), py_str("what should i read"), py_str("watch tonight"), py_str("read next"), py_str("something to watch"), py_str("something to read")]) }
@@ -2451,7 +2794,7 @@ fn module_body() {
     fn __data262() -> Py { py_tuple(vec![py_str("tune"), py_str("tuning"), py_str("tuner"), py_str("in tune"), py_str("out of tune"), py_str("stay in tune"), py_str("buzz"), py_str("buzzing"), py_str("fret buzz"), py_str("how many"), py_str("count"), py_str("number of"), py_str("orchestra"), py_str("orchestras"), py_str("string section"), py_str("piece of string"), py_str("on a string"), py_str("no strings"), py_str("snapped"), py_str("snap"), py_str("snaps"), py_str("snapping"), py_str("broke"), py_str("broken"), py_str("breaking"), py_str("breaks"), py_str("keep breaking"), py_str("keeps breaking"), py_str("keep snapping"), py_str("keeps snapping"), py_str("bust")]) }
     let _ = mcall(&g_ENTRIES(), "append", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("instrument-strings")); __args.push(py_tuple(vec![py_tuple(vec![py_str("string"), py_str("strings"), py_str("guitar string"), py_str("guitar strings"), py_str("bass string"), py_str("bass strings"), py_str("violin string"), py_str("violin strings")]), __data261()])); __args.push(py_str("Change them every one to three months of near-daily playing, or when they look dull or rusty and go out of tune within minutes - a set is six to ten pounds. A string that keeps breaking at the same place means a sharp edge on the saddle or the nut, or a burr in the tuning peg, so run a fingernail along each and file any catch smooth. Change one at a time so the neck keeps its tension, and stretch each new string by pulling it gently away from the board before you tune it up.")); __kws.extend(vec![("avoid".to_string(), __data262())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }]);
     fn __data263() -> Py { py_tuple(vec![py_str("lesson"), py_str("lessons"), py_str("teacher"), py_str("tutor"), py_str("cost"), py_str("price"), py_str("expensive"), py_str("cheap"), py_str("free"), py_str("buy"), py_str("hire"), py_str("rent"), py_str("worth"), py_str("which instrument"), py_str("guitar or piano"), py_str("piano or guitar"), py_str("learn guitar"), py_str("learn piano"), py_str("learn to play"), py_str("tune"), py_str("tuning"), py_str("tuner"), py_str("in tune"), py_str("out of tune"), py_str("stay in tune"), py_str("buzz"), py_str("buzzing"), py_str("string"), py_str("strings"), py_str("restring"), py_str("singing"), py_str("sing"), py_str("voice"), py_str("choir"), py_str("how many"), py_str("count"), py_str("taste"), py_str("recommend"), py_str("playlist"), py_str("listen"), py_str("spotify"), py_str("what should i listen"), py_str("what scales are there"), py_str("which scales are there"), py_str("what are the scales"), py_str("how many scales")]) }
-    let _ = mcall(&g_ENTRIES(), "append", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("music-practice")); __args.push(py_tuple(vec![g__PRACTICE_INSTRUMENTS(), g__PRACTICE_ASKS()])); __args.push(py_func("_music_practice", |args: &[Py]| _music_practice(args))); __kws.extend(vec![("ask".to_string(), py_tuple(vec![py_str("practise"), py_str("practice"), py_str("get better"), py_str("improve"), py_str("how long"), py_str("how often"), py_str("scales"), py_str("read music")])), ("avoid".to_string(), __data263())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }]);
+    let _ = mcall(&g_ENTRIES(), "append", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("music-practice")); __args.push(py_tuple(vec![g__PRACTICE_INSTRUMENTS(), g__PRACTICE_ASKS()])); __args.push(py_func("_music_practice", |args: &[Py]| _music_practice__wrapped(args))); __kws.extend(vec![("ask".to_string(), py_tuple(vec![py_str("practise"), py_str("practice"), py_str("get better"), py_str("improve"), py_str("how long"), py_str("how often"), py_str("scales"), py_str("read music")])), ("avoid".to_string(), __data263())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }]);
     fn __data264() -> Py { py_tuple(vec![py_str("science"), py_str("scientific"), py_str("physics"), py_str("chemistry"), py_str("biology"), py_str("space"), py_str("astronomy"), py_str("the universe"), py_str("nature"), py_str("wildlife"), py_str("animals"), py_str("climate"), py_str("climate change"), py_str("environment"), py_str("ecology"), py_str("engineering"), py_str("maths"), py_str("mathematics")]) }
     fn __data265() -> Py { py_tuple(vec![py_str("food"), py_str("foods"), py_str("cooking"), py_str("cook"), py_str("chef"), py_str("chefs"), py_str("baking"), py_str("bake"), py_str("recipes"), py_str("recipe"), py_str("kitchen"), py_str("restaurants"), py_str("eating")]) }
     fn __data266() -> Py { py_tuple(vec![py_str("health"), py_str("healthy"), py_str("medicine"), py_str("medical"), py_str("doctor"), py_str("sleep"), py_str("insomnia"), py_str("fitness"), py_str("exercise"), py_str("running"), py_str("nutrition"), py_str("diet"), py_str("weight"), py_str("mental health"), py_str("anxiety"), py_str("stress"), py_str("wellbeing")]) }
@@ -2513,12 +2856,12 @@ fn module_body() {
     s_GAME_SOLO_WORDS(py_tuple(vec![py_str("on my own"), py_str("by myself"), py_str("by my self"), py_str("alone"), py_str("solo"), py_str("single player"), py_str("singleplayer"), py_str("on my tod"), py_str("no one to play with"), py_str("nobody to play with"), py_str("no one else to play with"), py_str("nothing to do with no one")]));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.entertainment.GAME_SOLO_ASKS"); }
     s_GAME_SOLO_ASKS(py_tuple(vec![py_str("game"), py_str("games"), py_str("play"), py_str("playing"), py_str("board game"), py_str("video game")]));
-    let _ = mcall(&g_ENTRIES(), "append", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("game-picks")); __args.push(py_tuple(vec![g_GAME_KINDS(), g_GAME_ASKS()])); __args.push(py_func("_the_game_pick", |args: &[Py]| _the_game_pick(args))); __kws.extend(vec![("ask".to_string(), g_GAME_ASKS()), ("avoid".to_string(), g_NOT_A_GAME_PICK()), ("bias".to_string(), Py::Int(2)), ("guard".to_string(), py_func("_a_game_pick_line", |args: &[Py]| _a_game_pick_line(args)))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }]);
-    let _ = mcall(&g_ENTRIES(), "append", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("game-solo")); __args.push(py_tuple(vec![g_GAME_SOLO_WORDS(), g_GAME_SOLO_ASKS()])); __args.push(py_func("_the_solo_game", |args: &[Py]| _the_solo_game(args))); __kws.extend(vec![("avoid".to_string(), g_NOT_A_GAME_PICK()), ("bias".to_string(), Py::Int(3))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }]);
+    let _ = mcall(&g_ENTRIES(), "append", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("game-picks")); __args.push(py_tuple(vec![g_GAME_KINDS(), g_GAME_ASKS()])); __args.push(py_func("_the_game_pick", |args: &[Py]| _the_game_pick__wrapped(args))); __kws.extend(vec![("ask".to_string(), g_GAME_ASKS()), ("avoid".to_string(), g_NOT_A_GAME_PICK()), ("bias".to_string(), Py::Int(2)), ("guard".to_string(), py_func("_a_game_pick_line", |args: &[Py]| _a_game_pick_line__wrapped(args)))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }]);
+    let _ = mcall(&g_ENTRIES(), "append", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("game-solo")); __args.push(py_tuple(vec![g_GAME_SOLO_WORDS(), g_GAME_SOLO_ASKS()])); __args.push(py_func("_the_solo_game", |args: &[Py]| _the_solo_game__wrapped(args))); __kws.extend(vec![("avoid".to_string(), g_NOT_A_GAME_PICK()), ("bias".to_string(), Py::Int(3))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }]);
     fn __data283() -> Py { py_tuple(vec![py_str("what is"), py_str("whats"), py_str("what does"), py_str("mean"), py_str("means"), py_str("recommend"), py_str("suggest"), py_str("which"), py_str("any"), py_str("good"), py_str("best"), py_str("book"), py_str("books"), py_str("novel"), py_str("read"), py_str("reading"), py_str("holiday")]) }
     let _ = mcall(&g_ENTRIES(), "append", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("page-turner")); __args.push(py_tuple(vec![py_tuple(vec![py_str("page turner"), py_str("page turners"), py_str("pageturner"), py_str("page-turner"), py_str("page-turners"), py_str("unputdownable"), py_str("cant put it down book")]), __data283()])); __args.push(py_str("A page turner is a book whose plot pulls you through - short chapters, a question you want answered, a twist you did not see - rather than one you admire slowly. The shorthand comes from book reviews because it says nothing about quality: a thriller can be a page turner and so can a good memoir. If you want one, say what you last could not put down and I will find something in the same shape; if you want a specific book, tell me the kind of story rather than the word.")); __kws.extend(vec![("avoid".to_string(), py_tuple(vec![py_str("bookmark"), py_str("page number"), py_str("printer"), py_str("paper"), py_str("print"), py_str("browser"), py_str("website"), py_str("web page"), py_str("homepage"), py_str("kindle"), py_str("page count")])), ("bias".to_string(), Py::Int(1))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }]);
 }
-pub fn _a_chess_line(args: &[Py]) -> Py {
+pub fn _a_chess_line__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -2541,7 +2884,7 @@ pub fn _a_chess_line(args: &[Py]) -> Py {
     return call_builtin("bool", &[mcall(&g__CASTLING_VERB(), "search", &[said.clone()])]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
-pub fn _no_city_is_named(args: &[Py]) -> Py {
+pub fn _no_city_is_named__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -2573,7 +2916,7 @@ pub fn _no_city_is_named(args: &[Py]) -> Py {
     return Py::Bool(true);
     Py::None
 }
-pub fn _title(args: &[Py]) -> Py {
+pub fn _title__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -2594,10 +2937,10 @@ pub fn _title(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = words.clone(); if !py_truthy(&__b) { __b } else { mcall(&geti(&words.clone(), &Py::Int(0)), "isdigit", &[]) } }) {
     return work.clone();
     }
-    return mcall(&py_str(" "), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk8637 = py_unpack(&__item.clone(), 2, None); let mut i: Py = __unpk8637[0].clone(); let mut word: Py = __unpk8637[1].clone(); __out.push(if py_truthy(&{ let __b = i.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g__SMALL(), &word.clone())) } }) { word.clone() } else { op_add(&mcall(&slice_or_raise(&word.clone(), &Py::None, &Py::Int(1), &Py::None), "upper", &[]), &slice_or_raise(&word.clone(), &Py::Int(1), &Py::None, &Py::None)) }); } py_list(__out) })() }]);
+    return mcall(&py_str(" "), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk1 = py_unpack(&__item.clone(), 2, None); let mut i: Py = __unpk1[0].clone(); let mut word: Py = __unpk1[1].clone(); __out.push(if py_truthy(&{ let __b = i.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g__SMALL(), &word.clone())) } }) { word.clone() } else { op_add(&mcall(&slice_or_raise(&word.clone(), &Py::None, &Py::Int(1), &Py::None), "upper", &[]), &slice_or_raise(&word.clone(), &Py::Int(1), &Py::None, &Py::None)) }); } py_list(__out) })() }]);
     Py::None
 }
-pub fn who_made(args: &[Py]) -> Py {
+pub fn who_made__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -2641,12 +2984,12 @@ pub fn who_made(args: &[Py]) -> Py {
     maker = __unpk2[0].clone();
     detail = __unpk2[1].clone();
     kind = __unpk2[2].clone();
-    name = _title(&[best.clone()]);
+    name = py_call(&g__title(), &[best.clone()]);
     article = if py_truthy(&Py::Bool(py_contains(&py_str("aeiou"), &slice_or_raise(&kind.clone(), &Py::None, &Py::Int(1), &Py::None)))) { py_str("an") } else { py_str("a") };
     return { let mut __s = String::new(); __s.push_str(&fstr(&name.clone(), -1, "")); __s.push_str(" is "); __s.push_str(&fstr(&article.clone(), -1, "")); __s.push_str(" "); __s.push_str(&fstr(&kind.clone(), -1, "")); __s.push_str(" by "); __s.push_str(&fstr(&maker.clone(), -1, "")); __s.push_str(", "); __s.push_str(&fstr(&detail.clone(), -1, "")); __s.push_str("."); py_string(__s) };
     Py::None
 }
-pub fn _author_key(args: &[Py]) -> Py {
+pub fn _author_key__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -2663,7 +3006,7 @@ pub fn _author_key(args: &[Py]) -> Py {
     return mcall(&geti(&mcall(&author.clone(), "split", &[]), &op_neg(&Py::Int(1))), "lower", &[]);
     Py::None
 }
-pub fn _titles_of(args: &[Py]) -> Py {
+pub fn _titles_of__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -2678,10 +3021,10 @@ pub fn _titles_of(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: author"))) };
     let mut title: Py = Py::None;
     let mut writer: Py = Py::None;
-    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_BOOK_AUTHORS()) { let __unpk9645 = py_unpack(&__item.clone(), 2, None); let mut title: Py = __unpk9645[0].clone(); let mut writer: Py = __unpk9645[1].clone(); if py_truthy(&Py::Bool(py_eq(&writer.clone(), &author.clone()))) {  __out.push(title.clone()); } } py_list(__out) })() };
+    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_BOOK_AUTHORS()) { let __unpk1 = py_unpack(&__item.clone(), 2, None); let mut title: Py = __unpk1[0].clone(); let mut writer: Py = __unpk1[1].clone(); if py_truthy(&Py::Bool(py_eq(&writer.clone(), &author.clone()))) {  __out.push(title.clone()); } } py_list(__out) })() };
     Py::None
 }
-pub fn _title_in(args: &[Py]) -> Py {
+pub fn _title_in__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -2713,7 +3056,7 @@ pub fn _title_in(args: &[Py]) -> Py {
     return best.clone();
     Py::None
 }
-pub fn _author_in(args: &[Py]) -> Py {
+pub fn _author_in__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -2737,10 +3080,10 @@ pub fn _author_in(args: &[Py]) -> Py {
     let mut words: Py = Py::None;
     let mut writer: Py = Py::None;
     let _ = py_str("The author the line names, by surname or by the surname people say with it.\n\n    A surname inside the title does not name anyone: \"who wrote harry potter\" names a\n    book, not Beatrix Potter.\n    ");
-    let __iter1 = py_iter_or_raise(&mcall(&py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e))), "fromkeys", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_BOOK_AUTHORS()) { let __unpk812 = py_unpack(&__item.clone(), 2, None); let mut _title: Py = __unpk812[0].clone(); let mut writer: Py = __unpk812[1].clone(); __out.push(writer.clone()); } py_list(__out) })() }]));
+    let __iter1 = py_iter_or_raise(&mcall(&py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e))), "fromkeys", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_BOOK_AUTHORS()) { let __unpk1 = py_unpack(&__item.clone(), 2, None); let mut _title: Py = __unpk1[0].clone(); let mut writer: Py = __unpk1[1].clone(); __out.push(writer.clone()); } py_list(__out) })() }]));
     for __item in __iter1 {
     author = __item.clone();
-    key = _author_key(&[author.clone()]);
+    key = py_call(&g__author_key(), &[author.clone()]);
     words = py_list(vec![key.clone()]);
     also = mcall(&g_AUTHOR_ALSO(), "get", &[key.clone()]);
     if py_truthy(&also.clone()) {
@@ -2760,7 +3103,7 @@ pub fn _author_in(args: &[Py]) -> Py {
     return Py::None;
     Py::None
 }
-pub fn _display(args: &[Py]) -> Py {
+pub fn _display__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -2790,7 +3133,7 @@ pub fn _display(args: &[Py]) -> Py {
     return mcall(&py_str(" "), "join", &[out.clone()]);
     Py::None
 }
-pub fn _said(args: &[Py]) -> Py {
+pub fn _said__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -2807,7 +3150,7 @@ pub fn _said(args: &[Py]) -> Py {
     return mcall(&text.clone(), "replace", &[py_str("."), py_str("")]);
     Py::None
 }
-pub fn _list_words(args: &[Py]) -> Py {
+pub fn _list_words__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -2827,7 +3170,7 @@ pub fn _list_words(args: &[Py]) -> Py {
     return op_add(&op_add(&mcall(&py_str(", "), "join", &[slice_or_raise(&items.clone(), &Py::None, &op_neg(&Py::Int(1)), &Py::None)]), &py_str(" and ")), &geti(&items.clone(), &op_neg(&Py::Int(1))));
     Py::None
 }
-pub fn _who_wrote(args: &[Py]) -> Py {
+pub fn _who_wrote__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -2865,35 +3208,35 @@ pub fn _who_wrote(args: &[Py]) -> Py {
     standard = __unpk2[1].clone();
     clean = mcall(&clean.clone(), "replace", &[spelling.clone(), standard.clone()]);
     }
-    found = _title_in(&[clean.clone()]);
-    named = _author_in(&[clean.clone(), if py_truthy(&found.clone()) { geti(&found.clone(), &Py::Int(0)) } else { Py::None }]);
+    found = py_call(&g__title_in(), &[clean.clone()]);
+    named = py_call(&g__author_in(), &[clean.clone(), if py_truthy(&found.clone()) { geti(&found.clone(), &Py::Int(0)) } else { Py::None }]);
     if py_truthy(&found.clone()) {
     let __unpk3 = py_unpack(&found.clone(), 2, None);
     title = __unpk3[0].clone();
     author = __unpk3[1].clone();
-    others = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&_titles_of(&[author.clone()])) { let mut t: Py = __item.clone(); if py_truthy(&{ let __b = Py::Bool(!py_eq(&t.clone(), &title.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_contains(&t.clone(), &title.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&mcall(&t.clone(), "startswith", &[title.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&title.clone(), "startswith", &[t.clone()]))) } } } } } }) {  __out.push(t.clone()); } } py_list(__out) })() };
-    rest = if py_truthy(&others.clone()) { { let mut __s = String::new(); __s.push_str(" Other books by "); __s.push_str(&fstr(&_said(&[author.clone()]), -1, "")); __s.push_str(": "); __s.push_str(&fstr(&_list_words(&[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&slice_or_raise(&others.clone(), &Py::None, &Py::Int(3), &Py::None)) { let mut t: Py = __item.clone(); __out.push(_display(&[t.clone()])); } py_list(__out) })() }]), -1, "")); __s.push_str("."); py_string(__s) } } else { py_str("") };
+    others = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&py_call(&g__titles_of(), &[author.clone()])) { let mut t: Py = __item.clone(); if py_truthy(&{ let __b = Py::Bool(!py_eq(&t.clone(), &title.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_contains(&t.clone(), &title.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&mcall(&t.clone(), "startswith", &[title.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&title.clone(), "startswith", &[t.clone()]))) } } } } } }) {  __out.push(t.clone()); } } py_list(__out) })() };
+    rest = if py_truthy(&others.clone()) { { let mut __s = String::new(); __s.push_str(" Other books by "); __s.push_str(&fstr(&py_call(&g__said(), &[author.clone()]), -1, "")); __s.push_str(": "); __s.push_str(&fstr(&py_call(&g__list_words(), &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&slice_or_raise(&others.clone(), &Py::None, &Py::Int(3), &Py::None)) { let mut t: Py = __item.clone(); __out.push(py_call(&g__display(), &[t.clone()])); } py_list(__out) })() }]), -1, "")); __s.push_str("."); py_string(__s) } } else { py_str("") };
     if py_truthy(&{ let __b = named.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(!py_eq(&named.clone(), &author.clone())) } }) {
-    return { let mut __s = String::new(); __s.push_str("Not quite - "); __s.push_str(&fstr(&_display(&[title.clone()]), -1, "")); __s.push_str(" is by "); __s.push_str(&fstr(&_said(&[author.clone()]), -1, "")); __s.push_str(", not "); __s.push_str(&fstr(&_said(&[named.clone()]), -1, "")); __s.push_str("."); __s.push_str(&fstr(&rest.clone(), -1, "")); py_string(__s) };
+    return { let mut __s = String::new(); __s.push_str("Not quite - "); __s.push_str(&fstr(&py_call(&g__display(), &[title.clone()]), -1, "")); __s.push_str(" is by "); __s.push_str(&fstr(&py_call(&g__said(), &[author.clone()]), -1, "")); __s.push_str(", not "); __s.push_str(&fstr(&py_call(&g__said(), &[named.clone()]), -1, "")); __s.push_str("."); __s.push_str(&fstr(&rest.clone(), -1, "")); py_string(__s) };
     }
     if py_truthy(&named.clone()) {
-    return { let mut __s = String::new(); __s.push_str("Yes - "); __s.push_str(&fstr(&_display(&[title.clone()]), -1, "")); __s.push_str(" is by "); __s.push_str(&fstr(&_said(&[author.clone()]), -1, "")); __s.push_str("."); __s.push_str(&fstr(&rest.clone(), -1, "")); py_string(__s) };
+    return { let mut __s = String::new(); __s.push_str("Yes - "); __s.push_str(&fstr(&py_call(&g__display(), &[title.clone()]), -1, "")); __s.push_str(" is by "); __s.push_str(&fstr(&py_call(&g__said(), &[author.clone()]), -1, "")); __s.push_str("."); __s.push_str(&fstr(&rest.clone(), -1, "")); py_string(__s) };
     }
-    return { let mut __s = String::new(); __s.push_str(&fstr(&_display(&[title.clone()]), -1, "")); __s.push_str(" is by "); __s.push_str(&fstr(&_said(&[author.clone()]), -1, "")); __s.push_str("."); __s.push_str(&fstr(&rest.clone(), -1, "")); py_string(__s) };
+    return { let mut __s = String::new(); __s.push_str(&fstr(&py_call(&g__display(), &[title.clone()]), -1, "")); __s.push_str(" is by "); __s.push_str(&fstr(&py_call(&g__said(), &[author.clone()]), -1, "")); __s.push_str("."); __s.push_str(&fstr(&rest.clone(), -1, "")); py_string(__s) };
     }
     if py_truthy(&Py::Bool(!py_truthy(&named.clone()))) {
     return Py::None;
     }
-    titles = _titles_of(&[named.clone()]);
+    titles = py_call(&g__titles_of(), &[named.clone()]);
     if py_truthy(&Py::Bool(!py_truthy(&titles.clone()))) {
     return Py::None;
     }
-    said = _list_words(&[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&slice_or_raise(&titles.clone(), &Py::None, &Py::Int(5), &Py::None)) { let mut t: Py = __item.clone(); __out.push(_display(&[t.clone()])); } py_list(__out) })() }]);
+    said = py_call(&g__list_words(), &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&slice_or_raise(&titles.clone(), &Py::None, &Py::Int(5), &Py::None)) { let mut t: Py = __item.clone(); __out.push(py_call(&g__display(), &[t.clone()])); } py_list(__out) })() }]);
     more = if py_truthy(&op_le(&call_builtin("len", &[titles.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(5))) { py_str("") } else { py_str(", among others") };
-    return { let mut __s = String::new(); __s.push_str(&fstr(&_said(&[named.clone()]), -1, "")); __s.push_str(" wrote "); __s.push_str(&fstr(&said.clone(), -1, "")); __s.push_str(&fstr(&more.clone(), -1, "")); __s.push_str("."); py_string(__s) };
+    return { let mut __s = String::new(); __s.push_str(&fstr(&py_call(&g__said(), &[named.clone()]), -1, "")); __s.push_str(" wrote "); __s.push_str(&fstr(&said.clone(), -1, "")); __s.push_str(&fstr(&more.clone(), -1, "")); __s.push_str("."); py_string(__s) };
     Py::None
 }
-pub fn _book_title_named(args: &[Py]) -> Py {
+pub fn _book_title_named__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -2923,7 +3266,7 @@ pub fn _book_title_named(args: &[Py]) -> Py {
     return best.clone();
     Py::None
 }
-pub fn _book_like(args: &[Py]) -> Py {
+pub fn _book_like__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -2948,7 +3291,7 @@ pub fn _book_like(args: &[Py]) -> Py {
     let mut title: Py = Py::None;
     let _ = py_str("The book that follows the one the line names, or an honest question about that one.\n\n    The same dozen titles are named over and over, so they have a pick prepared. One nobody here\n    knows is answered honestly where the line reaches this row at all: a made-up match is worse\n    than asking, and asking what they liked about it is the step that gets to a book that fits.\n    ");
     text = mcall(&{ let __b = mcall(&understood.clone(), "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { { let __b = mcall(&understood.clone(), "get", &[py_str("norm_text")]); if py_truthy(&__b) { __b } else { py_str("") } } } }, "lower", &[]);
-    named = _book_title_named(&[text.clone()]);
+    named = py_call(&g__book_title_named(), &[text.clone()]);
     scan = if py_truthy(&named.clone()) { mcall(&text.clone(), "replace", &[named.clone(), py_str(" ")]) } else { text.clone() };
     if py_truthy(&stdlib_call("re", "search", &[py_str("\\b\\d+ ?year old|\\byear olds?\\b|\\bkids?\\b|\\bchildren?\\b|\\btoddlers?\\b|\\bbab(?:y|ies)\\b|\\b(?:my|our|his|her|their) (?:son|daughter|child|boy|girl|grandson|granddaughter|niece|nephew)\\b"), scan.clone()]).unwrap_or_else(|e| exc::raise(e))) {
     return py_str("");
@@ -2974,7 +3317,7 @@ pub fn _book_like(args: &[Py]) -> Py {
     return py_str("");
     Py::None
 }
-pub fn _age_in(args: &[Py]) -> Py {
+pub fn _age_in__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -3005,7 +3348,7 @@ pub fn _age_in(args: &[Py]) -> Py {
     return Py::None;
     Py::None
 }
-pub fn _party_games_for_kids(args: &[Py]) -> Py {
+pub fn _party_games_for_kids__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -3033,13 +3376,13 @@ pub fn _party_games_for_kids(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = Py::Bool(py_contains(&line.clone(), &py_str("adult"))); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&line.clone(), &py_str("grown up"))); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&line.clone(), &py_str("grown-up"))) } } } }) {
     return py_str("");
     }
-    years = _age_in(&[line.clone()]);
+    years = py_call(&g__age_in(), &[line.clone()]);
     if py_truthy(&Py::Bool(py_is(&years.clone(), &Py::None))) {
     if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&py_tuple(vec![py_str("toddler"), py_str("toddlers"), py_str("baby"), py_str("babies"), py_str("nursery")])) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&line.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     years = Py::Int(2);
     } else {
     said = g__PARTY_ANY();
-    return if py_truthy(&Py::Bool(py_contains(&line.clone(), &py_str("indoor")))) { _indoors(&[said.clone(), line.clone()]) } else { said.clone() };
+    return if py_truthy(&Py::Bool(py_contains(&line.clone(), &py_str("indoor")))) { py_call(&g__indoors(), &[said.clone(), line.clone()]) } else { said.clone() };
     }
     }
     if py_truthy(&op_le(&years.clone(), &Py::Int(4))) {
@@ -3051,10 +3394,10 @@ pub fn _party_games_for_kids(args: &[Py]) -> Py {
     said = g__PARTY_OLDER();
     }
     }
-    return _indoors(&[said.clone(), line.clone()]);
+    return py_call(&g__indoors(), &[said.clone(), line.clone()]);
     Py::None
 }
-pub fn _indoors(args: &[Py]) -> Py {
+pub fn _indoors__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -3077,7 +3420,7 @@ pub fn _indoors(args: &[Py]) -> Py {
     return said.clone();
     Py::None
 }
-pub fn _listen_when(args: &[Py]) -> Py {
+pub fn _listen_when__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -3149,7 +3492,7 @@ pub fn _listen_when(args: &[Py]) -> Py {
     return py_str("For a long listen: *Rumours* by Fleetwood Mac, *Graceland* by Paul Simon, or *The Rest Is History* if you would rather hear talking. Tell me what the journey is and I'll make it specific.");
     Py::None
 }
-pub fn _family_film(args: &[Py]) -> Py {
+pub fn _family_film__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -3179,12 +3522,12 @@ pub fn _family_film(args: &[Py]) -> Py {
     clean = { let __b = mcall(&understood.clone(), "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { py_str("") } };
     said = mcall(&py_str(" "), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&py_tuple(vec![py_str("clean"), py_str("text")])) { let mut key: Py = __item.clone(); __out.push(call_builtin("str", &[{ let __b = mcall(&{ let __b = understood.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[key.clone()]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))); } py_list(__out) })() }]);
     if py_truthy(&Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&op_add(&g_CHILD(), &py_tuple(vec![py_str("family"), py_str("teenager"), py_str("teenagers"), py_str("teen"), py_str("teens")]))) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&said.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))))) {
-    return _films_within(&[py_str("For a laugh: *Groundhog Day* is the funniest safe pick, *The Grand Budapest Hotel* if you want something stylish with the same warmth, and *Paddington 2* if you want to laugh from the first minute. All three are fine with anyone in the room."), said.clone()]);
+    return py_call(&g__films_within(), &[py_str("For a laugh: *Groundhog Day* is the funniest safe pick, *The Grand Budapest Hotel* if you want something stylish with the same warmth, and *Paddington 2* if you want to laugh from the first minute. All three are fine with anyone in the room."), said.clone()]);
     }
     if py_truthy(&stdlib_call("re", "search", &[py_str("\\bteen\\w*|\\badolescen\\w*|\\b1[3-9]\\s*(?:year|yr)|\\b(?:aged|age)\\s*1[3-9]\\b"), clean.clone()]).unwrap_or_else(|e| exc::raise(e))) {
     return py_str("With teenagers in the room: *Spider-Man: Into the Spider-Verse* (funny, fast and genuinely good), *Knives Out* if they will sit through a 12A whodunnit, and *Back to the Future* for the one everybody ends up watching. *The Mitchells vs the Machines* is the safe pick for a mixed-age sofa, and *Paddington 2* still works on a teenager who has not seen it.");
     }
-    ages = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&stdlib_call("re", "findall", &[py_str("\\b(\\d{1,2})\\s*(?:year|yr)s?[ -]old\\b|\\bage[d]?\\s*(\\d{1,2})\\b|\\b(?:is|are)\\s+(\\d{1,2})\\b"), clean.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk1286 = py_unpack(&__item.clone(), 3, None); let mut a: Py = __unpk1286[0].clone(); let mut b: Py = __unpk1286[1].clone(); let mut c: Py = __unpk1286[2].clone(); __out.push(call_builtin("int", &[{ let __b = a.clone(); if py_truthy(&__b) { __b } else { { let __b = b.clone(); if py_truthy(&__b) { __b } else { c.clone() } } } }]).unwrap_or_else(|e| exc::raise(e))); } py_list(__out) })() };
+    ages = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&stdlib_call("re", "findall", &[py_str("\\b(\\d{1,2})\\s*(?:year|yr)s?[ -]old\\b|\\bage[d]?\\s*(\\d{1,2})\\b|\\b(?:is|are)\\s+(\\d{1,2})\\b"), clean.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk1 = py_unpack(&__item.clone(), 3, None); let mut a: Py = __unpk1[0].clone(); let mut b: Py = __unpk1[1].clone(); let mut c: Py = __unpk1[2].clone(); __out.push(call_builtin("int", &[{ let __b = a.clone(); if py_truthy(&__b) { __b } else { { let __b = b.clone(); if py_truthy(&__b) { __b } else { c.clone() } } } }]).unwrap_or_else(|e| exc::raise(e))); } py_list(__out) })() };
     ages = call_builtin("sorted", &[call_builtin("set", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&ages.clone()) { let mut n: Py = __item.clone(); if py_truthy(&{ let __cmp11: Py = n.clone(); if py_truthy(&op_le(&Py::Int(1), &__cmp11)) { op_le(&__cmp11, &Py::Int(16)) } else { Py::Bool(false) } }) {  __out.push(n.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&ages.clone()) {
     years = geti(&ages.clone(), &Py::Int(0));
@@ -3198,7 +3541,7 @@ pub fn _family_film(args: &[Py]) -> Py {
     return py_str("*Paddington 2*: funny for the adults too, and nothing in it will scare an 8- or 11-year-old. *The Mitchells vs the Machines* or *Matilda* are good backups.");
     Py::None
 }
-pub fn _the_gentle_list(args: &[Py]) -> Py {
+pub fn _the_gentle_list__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -3220,12 +3563,12 @@ pub fn _the_gentle_list(args: &[Py]) -> Py {
     let _ = py_str("The gentle list, or the lighter shelf when that is the answer the chat already has.\n\n    \"what else is good\" after this answer is somebody who wants another shelf, not the same one\n    read out again: the composer catches the repeat and answers with a shrug, which is the one\n    reply that ignores the question. The lighter table is a different list of titles, so it is a\n    real second answer.\n    ");
     last = if py_truthy(&call_builtin("isinstance", &[memory.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) { mcall(&memory.clone(), "get", &[py_str("last_answer")]) } else { Py::None };
     said = if py_truthy(&call_builtin("isinstance", &[last.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) { call_builtin("str", &[{ let __b = mcall(&{ let __b = last.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[py_str("reply")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)) } else { py_str("") };
-    if py_truthy(&{ let __b = said.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_eq(&_plain_words(&[said.clone()]), &_plain_words(&[g_GENTLE_LIST()]))) } }) {
-    if py_truthy(&Py::Bool(!py_contains(&py_tuple(vec![py_str(""), py_str("film")]), &_pick_kind(&[mcall(&py_str(" "), "join", &[_own_texts(&[understood.clone()])])])))) {
+    if py_truthy(&{ let __b = said.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_eq(&py_call(&g__plain_words(), &[said.clone()]), &py_call(&g__plain_words(), &[g_GENTLE_LIST()]))) } }) {
+    if py_truthy(&Py::Bool(!py_contains(&py_tuple(vec![py_str(""), py_str("film")]), &py_call(&g__pick_kind(), &[mcall(&py_str(" "), "join", &[py_call(&g__own_texts(), &[understood.clone()])])])))) {
     return g_GENTLE_LIST();
     }
     other = { let __b = mcall(&g_FILM_MOODS(), "get", &[py_str("funny")]); if py_truthy(&__b) { __b } else { py_str("") } };
-    if py_truthy(&{ let __b = other.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(!py_eq(&_plain_words(&[other.clone()]), &_plain_words(&[g_GENTLE_LIST()]))) } }) {
+    if py_truthy(&{ let __b = other.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(!py_eq(&py_call(&g__plain_words(), &[other.clone()]), &py_call(&g__plain_words(), &[g_GENTLE_LIST()]))) } }) {
     return other.clone();
     }
     return Py::None;
@@ -3233,7 +3576,7 @@ pub fn _the_gentle_list(args: &[Py]) -> Py {
     return g_GENTLE_LIST();
     Py::None
 }
-pub fn _the_chat_turned_down(args: &[Py]) -> Py {
+pub fn _the_chat_turned_down__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -3268,15 +3611,15 @@ pub fn _the_chat_turned_down(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&text.clone()))) {
     continue;
     }
-    if py_truthy(&Py::Bool(!py_truthy(&op_bitand(&names.clone(), &call_builtin("frozenset", &[mcall(&_plain_words(&[text.clone()]), "split", &[])]).unwrap_or_else(|e| exc::raise(e)))))) {
+    if py_truthy(&Py::Bool(!py_truthy(&op_bitand(&names.clone(), &call_builtin("frozenset", &[mcall(&py_call(&g__plain_words(), &[text.clone()]), "split", &[])]).unwrap_or_else(|e| exc::raise(e)))))) {
     continue;
     }
-    return _a_word_is_turned_down(&[text.clone(), names.clone(), after.clone()]);
+    return py_call(&g__a_word_is_turned_down(), &[text.clone(), names.clone(), after.clone()]);
     }
     return Py::Bool(false);
     Py::None
 }
-pub fn _the_mood_the_chat_turned_down(args: &[Py]) -> Py {
+pub fn _the_mood_the_chat_turned_down__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -3305,7 +3648,7 @@ pub fn _the_mood_the_chat_turned_down(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&text.clone()))) {
     continue;
     }
-    got = _mood_of(&[text.clone()]);
+    got = py_call(&g__mood_of(), &[text.clone()]);
     if py_truthy(&got.clone()) {
     return call_builtin("bool", &[geti(&got.clone(), &Py::Int(1))]).unwrap_or_else(|e| exc::raise(e));
     }
@@ -3313,7 +3656,7 @@ pub fn _the_mood_the_chat_turned_down(args: &[Py]) -> Py {
     return Py::Bool(false);
     Py::None
 }
-pub fn _the_mood_the_chat_holds(args: &[Py]) -> Py {
+pub fn _the_mood_the_chat_holds__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -3342,7 +3685,7 @@ pub fn _the_mood_the_chat_holds(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&text.clone()))) {
     continue;
     }
-    got = _mood_of(&[text.clone()]);
+    got = py_call(&g__mood_of(), &[text.clone()]);
     if py_truthy(&{ let __b = got.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&geti(&got.clone(), &Py::Int(1)))) } }) {
     return geti(&got.clone(), &Py::Int(0));
     }
@@ -3350,7 +3693,7 @@ pub fn _the_mood_the_chat_holds(args: &[Py]) -> Py {
     return Py::None;
     Py::None
 }
-pub fn _film_like(args: &[Py]) -> Py {
+pub fn _film_like__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -3377,12 +3720,12 @@ pub fn _film_like(args: &[Py]) -> Py {
     let mut title: Py = Py::None;
     let _ = py_str("A pick that follows the named film, or an honest question when it is not one we know.");
     texts = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&py_tuple(vec![{ let __b = mcall(&understood.clone(), "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { py_str("") } }, { let __b = mcall(&understood.clone(), "get", &[py_str("norm_text")]); if py_truthy(&__b) { __b } else { py_str("") } }])) { let mut one: Py = __item.clone(); if py_truthy(&one.clone()) {  __out.push(mcall(&one.clone(), "lower", &[])); } } py_list(__out) })() };
-    if py_truthy(&Py::Bool(!py_truthy(&_the_liked_thing_is_asked_about(&[understood.clone()])))) {
-    held = _the_mood_the_chat_holds(&[memory.clone()]);
+    if py_truthy(&Py::Bool(!py_truthy(&py_call(&g__the_liked_thing_is_asked_about(), &[understood.clone()])))) {
+    held = py_call(&g__the_mood_the_chat_holds(), &[memory.clone()]);
     if py_truthy(&held.clone()) {
     picks = mcall(&g_FILM_MOODS(), "get", &[held.clone()]);
     if py_truthy(&picks.clone()) {
-    return _films_within(&[picks.clone(), call_builtin("str", &[{ let __b = mcall(&understood.clone(), "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))]);
+    return py_call(&g__films_within(), &[picks.clone(), call_builtin("str", &[{ let __b = mcall(&understood.clone(), "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))]);
     }
     }
     return g_EASY_FILM_LIST();
@@ -3390,7 +3733,7 @@ pub fn _film_like(args: &[Py]) -> Py {
     let __iter1 = py_iter_or_raise(&texts.clone());
     for __item in __iter1 {
     text = __item.clone();
-    pick = _table_pick(&[text.clone()]);
+    pick = py_call(&g__table_pick(), &[text.clone()]);
     if py_truthy(&pick.clone()) {
     return pick.clone();
     }
@@ -3413,7 +3756,7 @@ pub fn _film_like(args: &[Py]) -> Py {
     return py_str("Tell me what you liked about the last film you enjoyed: the story, the jokes, or how tense it was. Name one and I'll suggest something close.");
     Py::None
 }
-pub fn _a_word_is_turned_down(args: &[Py]) -> Py {
+pub fn _a_word_is_turned_down__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -3445,7 +3788,7 @@ pub fn _a_word_is_turned_down(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&names.clone())); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&call_builtin("isinstance", &[text.clone(), py_func("str", |args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e)))); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&text.clone())) } } } }) {
     return Py::Bool(false);
     }
-    plain = mcall(&g_NOT_A_TURN_DOWN(), "sub", &[py_str(" "), _plain_words(&[text.clone()])]);
+    plain = mcall(&g_NOT_A_TURN_DOWN(), "sub", &[py_str(" "), py_call(&g__plain_words(), &[text.clone()])]);
     let __iter1 = py_iter_or_raise(&g_TURNED_DOWN_WANT());
     for __item in __iter1 {
     phrase = __item.clone();
@@ -3479,7 +3822,7 @@ pub fn _a_word_is_turned_down(args: &[Py]) -> Py {
     return Py::Bool(false);
     Py::None
 }
-pub fn _own_texts(args: &[Py]) -> Py {
+pub fn _own_texts__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -3514,7 +3857,7 @@ pub fn _own_texts(args: &[Py]) -> Py {
     return texts.clone();
     Py::None
 }
-pub fn _the_scare_is_refused(args: &[Py]) -> Py {
+pub fn _the_scare_is_refused__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -3529,17 +3872,17 @@ pub fn _the_scare_is_refused(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: understood"))) };
     let mut text: Py = Py::None;
     let _ = py_str("True when the line names a scare only to turn one down.\n\n    *\"i fancy a film but not a scary one\"* and *\"scary films are not for me\"* are both asks for a\n    film; the scare word in them is the thing to leave out, not the thing to fetch.\n    ");
-    let __iter1 = py_iter_or_raise(&_own_texts(&[understood.clone()]));
+    let __iter1 = py_iter_or_raise(&py_call(&g__own_texts(), &[understood.clone()]));
     for __item in __iter1 {
     text = __item.clone();
-    if py_truthy(&_a_word_is_turned_down(&[text.clone(), g_SCARE_WORDS(), g_SCARE_REFUSED_AFTER()])) {
+    if py_truthy(&py_call(&g__a_word_is_turned_down(), &[text.clone(), g_SCARE_WORDS(), g_SCARE_REFUSED_AFTER()])) {
     return Py::Bool(true);
     }
     }
     return Py::Bool(false);
     Py::None
 }
-pub fn _a_film_ask(args: &[Py]) -> Py {
+pub fn _a_film_ask__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -3556,18 +3899,18 @@ pub fn _a_film_ask(args: &[Py]) -> Py {
     let mut text: Py = Py::None;
     let mut word: Py = Py::None;
     let _ = py_str("The guard on the gentle list: the line has to name a medium, or turn a scare down itself.");
-    let __iter1 = py_iter_or_raise(&_own_texts(&[understood.clone()]));
+    let __iter1 = py_iter_or_raise(&py_call(&g__own_texts(), &[understood.clone()]));
     for __item in __iter1 {
     text = __item.clone();
-    plain = op_add(&op_add(&py_str(" "), &_plain_words(&[text.clone()])), &py_str(" "));
+    plain = op_add(&op_add(&py_str(" "), &py_call(&g__plain_words(), &[text.clone()])), &py_str(" "));
     if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_FILM_ASK_WORDS()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&plain.clone(), &op_add(&op_add(&py_str(" "), &word.clone()), &py_str(" "))))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     return Py::Bool(true);
     }
     }
-    return _the_scare_is_refused(&[understood.clone()]);
+    return py_call(&g__the_scare_is_refused(), &[understood.clone()]);
     Py::None
 }
-pub fn _the_scare_is_wanted(args: &[Py]) -> Py {
+pub fn _the_scare_is_wanted__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -3581,10 +3924,10 @@ pub fn _the_scare_is_wanted(args: &[Py]) -> Py {
     else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "understood") { v.clone() }
     else { exc::raise(type_err(&format!("missing required argument: understood"))) };
     let _ = py_str("The guard on the scary picks: a line that turns a scare down is asking the other row.");
-    return Py::Bool(!py_truthy(&_the_scare_is_refused(&[understood.clone()])));
+    return Py::Bool(!py_truthy(&py_call(&g__the_scare_is_refused(), &[understood.clone()])));
     Py::None
 }
-pub fn _work_named(args: &[Py]) -> Py {
+pub fn _work_named__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -3611,7 +3954,7 @@ pub fn _work_named(args: &[Py]) -> Py {
     return best.clone();
     Py::None
 }
-pub fn _the_liked_thing_is_asked_about(args: &[Py]) -> Py {
+pub fn _the_liked_thing_is_asked_about__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -3635,10 +3978,10 @@ pub fn _the_liked_thing_is_asked_about(args: &[Py]) -> Py {
     if py_truthy(&stdlib_call("re", "search", &[py_str("\\b(?:like|likes|liked|loves?|loved|enjoyed|similar)\\b"), own.clone()]).unwrap_or_else(|e| exc::raise(e))) {
     return Py::Bool(true);
     }
-    return call_builtin("bool", &[{ let __b = _book_title_named(&[own.clone()]); if py_truthy(&__b) { __b } else { _work_named(&[own.clone()]) } }]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("bool", &[{ let __b = py_call(&g__book_title_named(), &[own.clone()]); if py_truthy(&__b) { __b } else { py_call(&g__work_named(), &[own.clone()]) } }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
-pub fn _about_a_person(args: &[Py]) -> Py {
+pub fn _about_a_person__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -3658,7 +4001,7 @@ pub fn _about_a_person(args: &[Py]) -> Py {
     return call_builtin("bool", &[{ let __b = Py::Bool(!py_truthy(&mcall(&g_ASKING_FIRST(), "search", &[text.clone()]))); if !py_truthy(&__b) { __b } else { mcall(&g_SEEN_ALREADY(), "search", &[text.clone()]) } }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
-pub fn _a_place_not_a_work(args: &[Py]) -> Py {
+pub fn _a_place_not_a_work__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -3676,7 +4019,7 @@ pub fn _a_place_not_a_work(args: &[Py]) -> Py {
     return call_builtin("bool", &[{ let __b = mcall(&g__THE_OFFICE_IS(), "search", &[text.clone()]); if py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_A_PLACE_NOT_A_WORK()) { let mut phrase: Py = __item.clone(); __out.push(Py::Bool(py_contains(&text.clone(), &phrase.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
-pub fn _a_thing_is_being_baked(args: &[Py]) -> Py {
+pub fn _a_thing_is_being_baked__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -3701,7 +4044,7 @@ pub fn _a_thing_is_being_baked(args: &[Py]) -> Py {
     return Py::Bool(false);
     Py::None
 }
-pub fn _a_surface_is_being_painted(args: &[Py]) -> Py {
+pub fn _a_surface_is_being_painted__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -3728,7 +4071,7 @@ pub fn _a_surface_is_being_painted(args: &[Py]) -> Py {
     return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g__PAINTED_PHRASES()) { let mut phrase: Py = __item.clone(); __out.push(Py::Bool(py_contains(&padded.clone(), &phrase.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
-pub fn _activity_start(args: &[Py]) -> Py {
+pub fn _activity_start__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -3756,12 +4099,12 @@ pub fn _activity_start(args: &[Py]) -> Py {
     return Py::None;
     }
     text = mcall(&op_add(&op_add(&{ let __b = mcall(&understood.clone(), "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { py_str("") } }, &py_str(" ")), &{ let __b = mcall(&understood.clone(), "get", &[py_str("norm_text")]); if py_truthy(&__b) { __b } else { py_str("") } }), "lower", &[]);
-    if py_truthy(&_a_thing_is_being_baked(&[text.clone()])) {
+    if py_truthy(&py_call(&g__a_thing_is_being_baked(), &[text.clone()])) {
     return Py::None;
     }
     words = call_builtin("set", &[stdlib_call("re", "findall", &[py_str("[a-z']+"), text.clone()]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e));
     padded = op_modulo(&py_str(" %s "), &mcall(&py_str(" "), "join", &[stdlib_call("re", "findall", &[py_str("[a-z']+"), text.clone()]).unwrap_or_else(|e| exc::raise(e))]));
-    if py_truthy(&_a_surface_is_being_painted(&[words.clone(), padded.clone()])) {
+    if py_truthy(&py_call(&g__a_surface_is_being_painted(), &[words.clone(), padded.clone()])) {
     return Py::None;
     }
     let __iter1 = py_iter_or_raise(&g_ACTIVITY_START());
@@ -3778,7 +4121,7 @@ pub fn _activity_start(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = Py::Bool(py_contains(&g__FISH_VERBS(), &name.clone())); if !py_truthy(&__b) { __b } else { mcall(&g__FISH_IS_DINNER(), "search", &[text.clone()]) } }) {
     return Py::None;
     }
-    if py_truthy(&{ let __b = Py::Bool(py_contains(&g__PAINT_VERBS(), &name.clone())); if !py_truthy(&__b) { __b } else { _paints_a_thing(&[text.clone()]) } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g__PAINT_VERBS(), &name.clone())); if !py_truthy(&__b) { __b } else { py_call(&g__paints_a_thing(), &[text.clone()]) } }) {
     return Py::None;
     }
     return geti(&g_ACTIVITY_START(), &geti(&g_ACTIVITY_VERBS(), &name.clone()));
@@ -3796,7 +4139,7 @@ pub fn _activity_start(args: &[Py]) -> Py {
     return Py::None;
     Py::None
 }
-pub fn _paints_a_thing(args: &[Py]) -> Py {
+pub fn _paints_a_thing__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -3813,7 +4156,7 @@ pub fn _paints_a_thing(args: &[Py]) -> Py {
     return call_builtin("bool", &[{ let __b = mcall(&g__PAINTED_THINGS(), "search", &[text.clone()]); if py_truthy(&__b) { __b } else { { let __b = mcall(&g__PAINT_AS_A_THING(), "search", &[text.clone()]); if py_truthy(&__b) { __b } else { mcall(&g__PAINT_COLOURS(), "search", &[text.clone()]) } } } }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
-pub fn _an_ordinary_word(args: &[Py]) -> Py {
+pub fn _an_ordinary_word__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -3859,7 +4202,7 @@ pub fn _an_ordinary_word(args: &[Py]) -> Py {
     return Py::Bool(false);
     Py::None
 }
-pub fn _genre_start(args: &[Py]) -> Py {
+pub fn _genre_start__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -3904,7 +4247,7 @@ pub fn _genre_start(args: &[Py]) -> Py {
     name = __item.clone();
     if py_truthy(&{ let __b = Py::Bool(py_contains(&g_GENRE_START(), &name.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&text.clone(), &name.clone())) } }) {
     typed = mcall(&{ let __b = mcall(&understood.clone(), "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { { let __b = mcall(&understood.clone(), "get", &[py_str("norm_text")]); if py_truthy(&__b) { __b } else { text.clone() } } } }, "lower", &[]);
-    if py_truthy(&_an_ordinary_word(&[name.clone(), typed.clone()])) {
+    if py_truthy(&py_call(&g__an_ordinary_word(), &[name.clone(), typed.clone()])) {
     return Py::None;
     }
     return geti(&g_GENRE_START(), &name.clone());
@@ -3913,7 +4256,7 @@ pub fn _genre_start(args: &[Py]) -> Py {
     return Py::None;
     Py::None
 }
-pub fn _card_game(args: &[Py]) -> Py {
+pub fn _card_game__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -3946,7 +4289,7 @@ pub fn _card_game(args: &[Py]) -> Py {
     return Py::None;
     Py::None
 }
-pub fn _in_tune(args: &[Py]) -> Py {
+pub fn _in_tune__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -3985,7 +4328,7 @@ pub fn _in_tune(args: &[Py]) -> Py {
     return Py::None;
     Py::None
 }
-pub fn _buzz(args: &[Py]) -> Py {
+pub fn _buzz__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -4007,7 +4350,7 @@ pub fn _buzz(args: &[Py]) -> Py {
     return py_str("One buzzing string is usually that string: old, kinked, or sitting too low in its nut, so change it first and see. Buzz that follows one fret up and down the neck is that fret or the neck; buzz on every note is usually how hard you are picking, so try a lighter touch and press just behind the fret rather than on top of it. If it still rattles in the same place with a new string, the action is too low or the neck has moved - a shop sets that up for about forty pounds, and it is worth it, because no amount of technique fixes a guitar set up badly.");
     Py::None
 }
-pub fn _worth_it(args: &[Py]) -> Py {
+pub fn _worth_it__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -4027,14 +4370,14 @@ pub fn _worth_it(args: &[Py]) -> Py {
     let mut title: Py = Py::None;
     let _ = py_str("A view on the one work the line names.\n\n    People ask this about something they are about to spend an evening on, so the answer is a\n    yes or a no with the reason, never a list of other things: \"is it worth watching the wire\"\n    is not \"what should I watch\". Only a work in the table gets here; one nobody here knows is\n    the other entry's business, and a report of something already seen wants to talk.\n    ");
     text = mcall(&{ let __b = mcall(&understood.clone(), "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { { let __b = mcall(&understood.clone(), "get", &[py_str("norm_text")]); if py_truthy(&__b) { __b } else { py_str("") } } } }, "lower", &[]);
-    if py_truthy(&{ let __b = _about_a_person(&[text.clone()]); if py_truthy(&__b) { __b } else { _a_place_not_a_work(&[text.clone()]) } }) {
+    if py_truthy(&{ let __b = py_call(&g__about_a_person(), &[text.clone()]); if py_truthy(&__b) { __b } else { py_call(&g__a_place_not_a_work(), &[text.clone()]) } }) {
     return Py::None;
     }
-    title = _work_named(&[text.clone()]);
+    title = py_call(&g__work_named(), &[text.clone()]);
     return if py_truthy(&title.clone()) { geti(&g_VIEWS(), &title.clone()) } else { Py::None };
     Py::None
 }
-pub fn _worth_it_unnamed(args: &[Py]) -> Py {
+pub fn _worth_it_unnamed__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -4056,7 +4399,7 @@ pub fn _worth_it_unnamed(args: &[Py]) -> Py {
     let mut word: Py = Py::None;
     let _ = py_str("An honest line about a work the table does not know, or about one only called \"it\".\n\n    The table cannot hold every film and book, and inventing a verdict is worse than saying\n    which of the two this is, so the line names the work when the ask named it and always\n    offers a way to judge it. A pick of anything (\"whats a good film\"), a gift, tonight's\n    telly and a question about whether reading is good for you all have their own entries.\n    ");
     text = mcall(&{ let __b = mcall(&understood.clone(), "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { { let __b = mcall(&understood.clone(), "get", &[py_str("norm_text")]); if py_truthy(&__b) { __b } else { py_str("") } } } }, "lower", &[]);
-    if py_truthy(&{ let __b = _about_a_person(&[text.clone()]); if py_truthy(&__b) { __b } else { { let __b = _work_named(&[text.clone()]); if py_truthy(&__b) { __b } else { _a_place_not_a_work(&[text.clone()]) } } } }) {
+    if py_truthy(&{ let __b = py_call(&g__about_a_person(), &[text.clone()]); if py_truthy(&__b) { __b } else { { let __b = py_call(&g__work_named(), &[text.clone()]); if py_truthy(&__b) { __b } else { py_call(&g__a_place_not_a_work(), &[text.clone()]) } } } }) {
     return Py::None;
     }
     if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_NOT_A_VERDICT()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&text.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
@@ -4068,14 +4411,14 @@ pub fn _worth_it_unnamed(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_JUDGE_ASKS()) { let mut phrase: Py = __item.clone(); __out.push(Py::Bool(py_contains(&text.clone(), &phrase.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))))) {
     return Py::None;
     }
-    named = _named_work(&[text.clone()]);
+    named = py_call(&g__named_work(), &[text.clone()]);
     if py_truthy(&named.clone()) {
     return op_modulo(&py_str("I don't know *%s* well enough to call it honestly. Tell me what you liked about the last thing you enjoyed and I'll say whether it's that kind."), &named.clone());
     }
     return py_str("Not one I can call honestly, sorry. Name the last thing you enjoyed and I'll say whether this one is that kind of thing.");
     Py::None
 }
-pub fn _named_work(args: &[Py]) -> Py {
+pub fn _named_work__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -4114,11 +4457,11 @@ pub fn _named_work(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&title.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&py_tuple(vec![py_str("it"), py_str("this"), py_str("that"), py_str("something"), py_str("anything"), py_str("one"), py_str("worth"), py_str("the"), py_str("a"), py_str("an")]), &title.clone())) } }) {
     continue;
     }
-    return _display(&[title.clone()]);
+    return py_call(&g__display(), &[title.clone()]);
     }
     Py::None
 }
-pub fn _table_pick(args: &[Py]) -> Py {
+pub fn _table_pick__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -4159,7 +4502,7 @@ pub fn _table_pick(args: &[Py]) -> Py {
     return py_str("");
     Py::None
 }
-pub fn _after_named(args: &[Py]) -> Py {
+pub fn _after_named__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -4178,10 +4521,10 @@ pub fn _after_named(args: &[Py]) -> Py {
     let mut text: Py = Py::None;
     let _ = py_str("The pick that follows a title the line names, or \"\" so a lower entry gets the turn.");
     text = mcall(&op_add(&op_add(&{ let __b = mcall(&understood.clone(), "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { py_str("") } }, &py_str(" ")), &{ let __b = mcall(&understood.clone(), "get", &[py_str("norm_text")]); if py_truthy(&__b) { __b } else { py_str("") } }), "lower", &[]);
-    return _table_pick(&[text.clone()]);
+    return py_call(&g__table_pick(), &[text.clone()]);
     Py::None
 }
-pub fn _says(args: &[Py]) -> Py {
+pub fn _says__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -4201,7 +4544,7 @@ pub fn _says(args: &[Py]) -> Py {
     return Py::Bool(!py_is(&stdlib_call("re", "search", &[op_add(&op_add(&py_str("(?<![a-z])"), &stdlib_call("re", "escape", &[phrase.clone()]).unwrap_or_else(|e| exc::raise(e))), &py_str("(?![a-z])")), text.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::None));
     Py::None
 }
-pub fn _book_subject(args: &[Py]) -> Py {
+pub fn _book_subject__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -4232,21 +4575,21 @@ pub fn _book_subject(args: &[Py]) -> Py {
     let __iter1 = py_iter_or_raise(&g__SUBJECT_BOOK_ORDER());
     for __item in __iter1 {
     phrase = __item.clone();
-    if py_truthy(&_says(&[phrase.clone(), tail.clone()])) {
+    if py_truthy(&py_call(&g__says(), &[phrase.clone(), tail.clone()])) {
     return py_tuple(vec![geti(&g_SUBJECT_BOOKS(), &geti(&g_SUBJECT_BOOK_NAMES(), &phrase.clone())), Py::Bool(true)]);
     }
     }
     let __iter2 = py_iter_or_raise(&g__SUBJECT_UNCOVERED_ORDER());
     for __item in __iter2 {
     phrase = __item.clone();
-    if py_truthy(&_says(&[phrase.clone(), tail.clone()])) {
+    if py_truthy(&py_call(&g__says(), &[phrase.clone(), tail.clone()])) {
     return py_tuple(vec![Py::None, Py::Bool(true)]);
     }
     }
     return py_tuple(vec![Py::None, Py::Bool(false)]);
     Py::None
 }
-pub fn _book_thriller(args: &[Py]) -> Py {
+pub fn _book_thriller__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -4271,7 +4614,7 @@ pub fn _book_thriller(args: &[Py]) -> Py {
     return py_str("*The Silent Patient* by Alex Michaelides and *The Thursday Murder Club* by Richard Osman are both quick and hard to put down; the second one is much funnier. Tana French's *In the Woods* if you want something longer and darker.");
     Py::None
 }
-pub fn _book_about(args: &[Py]) -> Py {
+pub fn _book_about__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -4291,17 +4634,17 @@ pub fn _book_about(args: &[Py]) -> Py {
     let mut pick: Py = Py::None;
     let mut text: Py = Py::None;
     let _ = py_str("The first book on the subject the line names, or None so the line is passed on.");
-    if py_truthy(&Py::Bool(!py_truthy(&_a_genre_is_the_taste(&[understood.clone()])))) {
+    if py_truthy(&Py::Bool(!py_truthy(&py_call(&g__a_genre_is_the_taste(), &[understood.clone()])))) {
     return Py::None;
     }
     text = mcall(&op_add(&op_add(&{ let __b = mcall(&understood.clone(), "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { py_str("") } }, &py_str(" ")), &{ let __b = mcall(&understood.clone(), "get", &[py_str("norm_text")]); if py_truthy(&__b) { __b } else { py_str("") } }), "lower", &[]);
-    let __unpk1 = py_unpack(&_book_subject(&[text.clone()]), 2, None);
+    let __unpk1 = py_unpack(&py_call(&g__book_subject(), &[text.clone()]), 2, None);
     pick = __unpk1[0].clone();
     _named = __unpk1[1].clone();
     return pick.clone();
     Py::None
 }
-pub fn _not_a_reservation(args: &[Py]) -> Py {
+pub fn _not_a_reservation__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -4315,13 +4658,13 @@ pub fn _not_a_reservation(args: &[Py]) -> Py {
     else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "understood") { v.clone() }
     else { exc::raise(type_err(&format!("missing required argument: understood"))) };
     let _ = py_str("True when the line is not reserving something, for the row that answers book subjects.");
-    if py_truthy(&_a_judged_work_named(&[understood.clone()])) {
+    if py_truthy(&py_call(&g__a_judged_work_named(), &[understood.clone()])) {
     return Py::Bool(false);
     }
-    return Py::Bool(!py_truthy(&the_book_is_a_reservation(&[understood.clone()])));
+    return Py::Bool(!py_truthy(&py_call(&g_the_book_is_a_reservation(), &[understood.clone()])));
     Py::None
 }
-pub fn _a_judged_work_named(args: &[Py]) -> Py {
+pub fn _a_judged_work_named__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -4338,13 +4681,13 @@ pub fn _a_judged_work_named(args: &[Py]) -> Py {
     let mut word: Py = Py::None;
     let _ = py_str("True when the line names a work of the table and asks for a view on it.\n\n    \"is dune a good book\" names *Dune* and carries a judgement, so it is a question about that\n    book and the verdict row answers it. The subject row matched it as well - \"book\" plus \"good\"\n    - and won on its bias, so `lookup.find` handed back a row whose reply then stood down for\n    want of a subject, and the answer underneath was correct while the row that gave it was not.\n    A line that names a work *and* judges it is never a request for a book on a subject, so this\n    row stands down instead. \"recommend a book about the office\" carries no judgement word and\n    is not touched.\n    ");
     text = mcall(&op_add(&op_add(&{ let __b = mcall(&understood.clone(), "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { py_str("") } }, &py_str(" ")), &{ let __b = mcall(&understood.clone(), "get", &[py_str("norm_text")]); if py_truthy(&__b) { __b } else { py_str("") } }), "lower", &[]);
-    if py_truthy(&Py::Bool(!py_truthy(&_work_named(&[text.clone()])))) {
+    if py_truthy(&Py::Bool(!py_truthy(&py_call(&g__work_named(), &[text.clone()])))) {
     return Py::Bool(false);
     }
-    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_JUDGE_WORDS()) { let mut word: Py = __item.clone(); __out.push(_says(&[word.clone(), text.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_JUDGE_WORDS()) { let mut word: Py = __item.clone(); __out.push(py_call(&g__says(), &[word.clone(), text.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
-pub fn the_book_is_a_reservation(args: &[Py]) -> Py {
+pub fn the_book_is_a_reservation__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -4362,14 +4705,14 @@ pub fn the_book_is_a_reservation(args: &[Py]) -> Py {
     let __iter1 = py_iter_or_raise(&py_tuple(vec![mcall(&understood.clone(), "get", &[py_str("clean")]), mcall(&understood.clone(), "get", &[py_str("norm_text")])]));
     for __item in __iter1 {
     reading = __item.clone();
-    if py_truthy(&_a_reservation(&[mcall(&call_builtin("str", &[{ let __b = reading.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[])])) {
+    if py_truthy(&py_call(&g__a_reservation(), &[mcall(&call_builtin("str", &[{ let __b = reading.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[])])) {
     return Py::Bool(true);
     }
     }
     return Py::Bool(false);
     Py::None
 }
-pub fn _a_reservation(args: &[Py]) -> Py {
+pub fn _a_reservation__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -4389,7 +4732,7 @@ pub fn _a_reservation(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&mcall(&text.clone(), "strip", &[])))) {
     return Py::Bool(false);
     }
-    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g__RESERVING_PHRASES()) { let mut phrase: Py = __item.clone(); __out.push(_says(&[phrase.clone(), text.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g__RESERVING_PHRASES()) { let mut phrase: Py = __item.clone(); __out.push(py_call(&g__says(), &[phrase.clone(), text.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     return Py::Bool(true);
     }
     if py_truthy(&mcall(&g__BOOK_VERB_BEFORE(), "search", &[text.clone()])) {
@@ -4406,7 +4749,7 @@ pub fn _a_reservation(args: &[Py]) -> Py {
     return Py::Bool(false);
     Py::None
 }
-pub fn _a_listings_ask_near_me(args: &[Py]) -> Py {
+pub fn _a_listings_ask_near_me__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -4431,7 +4774,7 @@ pub fn _a_listings_ask_near_me(args: &[Py]) -> Py {
     return call_builtin("bool", &[mcall(&g__SAYS_WHAT_IS_ON(), "search", &[text.clone()])]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
-pub fn _book_recommend(args: &[Py]) -> Py {
+pub fn _book_recommend__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -4457,7 +4800,7 @@ pub fn _book_recommend(args: &[Py]) -> Py {
     let _ = py_str("A generic pick, unless the line asks about a subject or a child's reading.");
     earlier = mcall(&py_str(" "), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&slice_or_raise(&{ let __b = mcall(&memory.clone(), "get", &[py_str("turns")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }, &op_neg(&Py::Int(3)), &Py::None, &Py::None)) { let mut turn: Py = __item.clone(); __out.push(call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("user")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))); } py_list(__out) })() }]);
     said = mcall(&op_add(&op_add(&{ let __b = mcall(&understood.clone(), "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { py_str("") } }, &py_str(" ")), &{ let __b = mcall(&understood.clone(), "get", &[py_str("norm_text")]); if py_truthy(&__b) { __b } else { py_str("") } }), "lower", &[]);
-    let __unpk1 = py_unpack(&_book_subject(&[said.clone()]), 2, None);
+    let __unpk1 = py_unpack(&py_call(&g__book_subject(), &[said.clone()]), 2, None);
     pick = __unpk1[0].clone();
     named = __unpk1[1].clone();
     if py_truthy(&named.clone()) {
@@ -4467,11 +4810,11 @@ pub fn _book_recommend(args: &[Py]) -> Py {
     return py_str("Put it down - finishing a book you are not enjoying is not a virtue, and 50 pages is a fair trial before you give up on it. If you want another: *The Thursday Murder Club* by Richard Osman is funny with short chapters, *The Silent Patient* if you want a twist, and *The Midnight Library* by Matt Haig if you want something to think about. What did the last one you loved have that this one has not?");
     }
     context = mcall(&op_add(&op_add(&{ let __b = mcall(&understood.clone(), "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { py_str("") } }, &py_str(" ")), &earlier.clone()), "lower", &[]);
-    named = _book_title_named(&[context.clone()]);
+    named = py_call(&g__book_title_named(), &[context.clone()]);
     if py_truthy(&named.clone()) {
     context = mcall(&context.clone(), "replace", &[named.clone(), py_str(" ")]);
     if py_truthy(&Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&py_tuple(vec![py_str("son"), py_str("daughter"), py_str("child"), py_str("kid"), py_str("year old"), py_str("grandson"), py_str("granddaughter"), py_str("niece"), py_str("nephew"), py_str("teenager")])) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&context.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))))) {
-    return _book_like(&[memory.clone(), understood.clone()]);
+    return py_call(&g__book_like(), &[memory.clone(), understood.clone()]);
     }
     }
     if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&py_tuple(vec![py_str("baby"), py_str("babies"), py_str("toddler"), py_str("one year old"), py_str("two year old"), py_str("18 months"), py_str("six months"), py_str("nine months"), py_str("newborn")])) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&context.clone(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
@@ -4486,7 +4829,7 @@ pub fn _book_recommend(args: &[Py]) -> Py {
     return py_str("*The Thursday Murder Club* by Richard Osman is the safest pick: funny, short chapters, easy to pick up. For something darker, *The Silent Patient*; for a younger reader, *Wonder* by R. J. Palacio or *The Explorer* by Katherine Rundell. Tell me what you last enjoyed and I'll narrow it down.");
     Py::None
 }
-pub fn _mood_key_words(args: &[Py]) -> Py {
+pub fn _mood_key_words__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -4532,7 +4875,7 @@ pub fn _mood_key_words(args: &[Py]) -> Py {
     return call_builtin("tuple", &[found.clone()]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
-pub fn _mood_signals(args: &[Py]) -> Py {
+pub fn _mood_signals__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -4547,10 +4890,10 @@ pub fn _mood_signals(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: words"))) };
     let mut word: Py = Py::None;
     let _ = py_str("The words that name a mood on their own.\n\n    `MOOD_WORDS` lifts single words out of phrases, so \"turn my brain off\" contributes \"turn\" and\n    \"keep me on the edge of my seat\" contributes \"edge\". That is harmless where the entry also\n    needs a medium (\"a series to turn on\"), and wrong where the mood is the whole question: \"my\n    son is turning 7 and i have no idea what to get him\" is a present, not a pick. A word that\n    answers as a mood by itself is one `_mood_of` recognises alone, so the test is the reader\n    itself rather than a list kept by hand.\n    ");
-    return call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); if py_truthy(&{ let __b = _mood_of(&[word.clone()]); if py_truthy(&__b) { __b } else { { let __b = _mood_of(&[op_add(&py_str("not too "), &word.clone())]); if py_truthy(&__b) { __b } else { _mood_of(&[op_add(&py_str("nothing "), &word.clone())]) } } } }) {  __out.push(word.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); if py_truthy(&{ let __b = py_call(&g__mood_of(), &[word.clone()]); if py_truthy(&__b) { __b } else { { let __b = py_call(&g__mood_of(), &[op_add(&py_str("not too "), &word.clone())]); if py_truthy(&__b) { __b } else { py_call(&g__mood_of(), &[op_add(&py_str("nothing "), &word.clone())]) } } } }) {  __out.push(word.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
-pub fn _negated(args: &[Py]) -> Py {
+pub fn _negated__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -4590,7 +4933,7 @@ pub fn _negated(args: &[Py]) -> Py {
     return Py::Bool(false);
     Py::None
 }
-pub fn _typed_line(args: &[Py]) -> Py {
+pub fn _typed_line__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -4609,10 +4952,10 @@ pub fn _typed_line(args: &[Py]) -> Py {
     return py_str(" ");
     }
     said = { let __b = mcall(&understood.clone(), "get", &[py_str("text")]); if py_truthy(&__b) { __b } else { { let __b = mcall(&understood.clone(), "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { py_str("") } } } };
-    return op_modulo(&py_str(" %s "), &_plain_words(&[said.clone()]));
+    return op_modulo(&py_str(" %s "), &py_call(&g__plain_words(), &[said.clone()]));
     Py::None
 }
-pub fn _names_the_weather(args: &[Py]) -> Py {
+pub fn _names_the_weather__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -4629,11 +4972,11 @@ pub fn _names_the_weather(args: &[Py]) -> Py {
     let mut phrase: Py = Py::None;
     let mut word: Py = Py::None;
     let _ = py_str("True when this line says the weather, not when a topic from earlier turns does.");
-    line = _typed_line(&[understood.clone()]);
+    line = py_call(&g__typed_line(), &[understood.clone()]);
     return { let __b = call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g__WET_WORDS()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&line.clone(), &op_modulo(&py_str(" %s "), &word.clone())))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)); if py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g__WET_PHRASES()) { let mut phrase: Py = __item.clone(); __out.push(Py::Bool(py_contains(&line.clone(), &phrase.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } };
     Py::None
 }
-pub fn _names_the_evening(args: &[Py]) -> Py {
+pub fn _names_the_evening__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -4649,11 +4992,11 @@ pub fn _names_the_evening(args: &[Py]) -> Py {
     let mut line: Py = Py::None;
     let mut word: Py = Py::None;
     let _ = py_str("True when this line says the evening, not when a topic from earlier turns does.");
-    line = _typed_line(&[understood.clone()]);
+    line = py_call(&g__typed_line(), &[understood.clone()]);
     return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g__EVENING_WORDS()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&line.clone(), &op_modulo(&py_str(" %s "), &word.clone())))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
-pub fn _plain_words(args: &[Py]) -> Py {
+pub fn _plain_words__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -4682,7 +5025,7 @@ pub fn _plain_words(args: &[Py]) -> Py {
     return mcall(&py_str(" "), "join", &[words.clone()]);
     Py::None
 }
-pub fn _mood_of(args: &[Py]) -> Py {
+pub fn _mood_of__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -4705,7 +5048,7 @@ pub fn _mood_of(args: &[Py]) -> Py {
     let mut tokens: Py = Py::None;
     let mut words: Py = Py::None;
     let _ = py_str("The mood a line asks for, or None: (mood, turned down).\n\n    A mood the line turns down (\"not too sad\", \"nothing scary\") is answered with the light list\n    rather than with the mood it refused - a friend who hears \"nothing heavy tonight\" offers\n    something easy, not silence. A medium with no light row is left to its own entries.");
-    plain = _plain_words(&[line.clone()]);
+    plain = py_call(&g__plain_words(), &[line.clone()]);
     tokens = mcall(&plain.clone(), "split", &[]);
     if py_truthy(&Py::Bool(!py_truthy(&tokens.clone()))) {
     return Py::None;
@@ -4727,7 +5070,7 @@ pub fn _mood_of(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_eq(&slice_or_raise(&tokens.clone(), &start.clone(), &op_add(&start.clone(), &call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))), &Py::None), &words.clone()))) {
     continue;
     }
-    if py_truthy(&_negated(&[tokens.clone(), start.clone(), words.clone()])) {
+    if py_truthy(&py_call(&g__negated(), &[tokens.clone(), start.clone(), words.clone()])) {
     refused = { let __b = refused.clone(); if py_truthy(&__b) { __b } else { mood.clone() } };
     continue;
     }
@@ -4744,7 +5087,7 @@ pub fn _mood_of(args: &[Py]) -> Py {
     continue;
     }
     mood = mcall(&g_MOOD_BY_WORD(), "get", &[token.clone()]);
-    if py_truthy(&_negated(&[tokens.clone(), at.clone(), py_list(vec![token.clone()])])) {
+    if py_truthy(&py_call(&g__negated(), &[tokens.clone(), at.clone(), py_list(vec![token.clone()])])) {
     refused = { let __b = refused.clone(); if py_truthy(&__b) { __b } else { { let __b = mood.clone(); if py_truthy(&__b) { __b } else { token.clone() } } } };
     continue;
     }
@@ -4758,7 +5101,7 @@ pub fn _mood_of(args: &[Py]) -> Py {
     return Py::None;
     Py::None
 }
-pub fn _no_named_mood(args: &[Py]) -> Py {
+pub fn _no_named_mood__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -4775,10 +5118,10 @@ pub fn _no_named_mood(args: &[Py]) -> Py {
     let mut word: Py = Py::None;
     let _ = py_str("False when the line names a mood, so the general pick is not the answer.\n\n    \"give me a film that will make me cry\" was the easy-tonight list, because \"give me\" is a\n    key word of the general row and the mood row only ties with it: the want is read as the\n    whole ask and the mood was the part that said what to pick. A line that names a mood - said\n    out (\"something sad\") or turned down (\"nothing too heavy\") - belongs to the mood entries,\n    and this row is only for the line that names none.\n    ");
     said = mcall(&py_str(" "), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let __b = mcall(&understood.clone(), "get", &[py_str("words")]); if py_truthy(&__b) { __b } else { py_tuple(vec![]) } }) { let mut word: Py = __item.clone(); __out.push(call_builtin("str", &[word.clone()]).unwrap_or_else(|e| exc::raise(e))); } py_list(__out) })() }]);
-    return Py::Bool(py_is(&_mood_of(&[said.clone()]), &Py::None));
+    return Py::Bool(py_is(&py_call(&g__mood_of(), &[said.clone()]), &Py::None));
     Py::None
 }
-pub fn _films_within(args: &[Py]) -> Py {
+pub fn _films_within__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -4809,7 +5152,7 @@ pub fn _films_within(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&text.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&call_builtin("isinstance", &[line.clone(), py_func("str", |args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e)))) } }) {
     return text.clone();
     }
-    let __unpk1 = py_unpack(&_limit_wanted(&[line.clone()]), 2, None);
+    let __unpk1 = py_unpack(&py_call(&g__limit_wanted(), &[line.clone()]), 2, None);
     limit = __unpk1[0].clone();
     strict = __unpk1[1].clone();
     if py_truthy(&Py::Bool(!py_truthy(&limit.clone()))) {
@@ -4848,7 +5191,7 @@ pub fn _films_within(args: &[Py]) -> Py {
     return op_modulo(&py_str("Films that fit %s %d minutes: %s. The rest of that list run%s longer, so say if you would rather have one of those."), &py_tuple(vec![if py_truthy(&strict.clone()) { py_str("under") } else { py_str("up to") }, limit.clone(), body.clone(), if py_truthy(&Py::Bool(py_eq(&over.clone(), &Py::Int(1)))) { py_str("s") } else { py_str("") }]));
     Py::None
 }
-pub fn _mood_pick(args: &[Py]) -> Py {
+pub fn _mood_pick__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -4878,19 +5221,19 @@ pub fn __nested_pick_0(args: &[Py]) -> Py {
     let mut line: Py = Py::None;
     let mut mood: Py = Py::None;
     line = op_add(&op_add(&{ let __b = mcall(&understood.clone(), "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { py_str("") } }, &py_str(" ")), &{ let __b = mcall(&understood.clone(), "get", &[py_str("norm_text")]); if py_truthy(&__b) { __b } else { py_str("") } });
-    got = _mood_of(&[line.clone()]);
+    got = py_call(&g__mood_of(), &[line.clone()]);
     if py_truthy(&Py::Bool(!py_truthy(&got.clone()))) {
     return Py::None;
     }
     mood = if py_truthy(&geti(&got.clone(), &Py::Int(1))) { py_str("light") } else { geti(&got.clone(), &Py::Int(0)) };
-    return if py_truthy(&mood.clone()) { _films_within(&[mcall(&picks.clone(), "get", &[mood.clone()]), line.clone()]) } else { Py::None };
+    return if py_truthy(&mood.clone()) { py_call(&g__films_within(), &[mcall(&picks.clone(), "get", &[mood.clone()]), line.clone()]) } else { Py::None };
     Py::None
 }
     pick = {{ let pick = pick.clone(); let picks = picks.clone(); py_func("pick", move |args: &[Py]| { let mut full = vec![pick.clone(), picks.clone()]; full.extend_from_slice(args); __nested_pick_0(&full) }) }};
     return pick.clone();
     Py::None
 }
-pub fn _medium_named(args: &[Py]) -> Py {
+pub fn _medium_named__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -4911,7 +5254,7 @@ pub fn _medium_named(args: &[Py]) -> Py {
     let mut word: Py = Py::None;
     let mut words: Py = Py::None;
     let _ = py_str("Which medium a line names, or None.\n\n    A reply that names several (\"*Get Out* on film, *Hill House* as a series or the novel\") is\n    about the one it leads with, so the medium that comes first in the line is the one it is\n    about, not the first one in the table below.");
-    said = op_modulo(&py_str(" %s "), &_plain_words(&[text.clone()]));
+    said = op_modulo(&py_str(" %s "), &py_call(&g__plain_words(), &[text.clone()]));
     let __unpk1 = py_unpack(&py_tuple(vec![Py::None, op_add(&call_builtin("len", &[said.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1))]), 2, None);
     best = __unpk1[0].clone();
     where_ = __unpk1[1].clone();
@@ -4934,7 +5277,7 @@ pub fn _medium_named(args: &[Py]) -> Py {
     return best.clone();
     Py::None
 }
-pub fn _the_medium(args: &[Py]) -> Py {
+pub fn _the_medium__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -4974,7 +5317,7 @@ pub fn _the_medium(args: &[Py]) -> Py {
     let __iter1 = py_iter_or_raise(&order.clone());
     for __item in __iter1 {
     text = __item.clone();
-    medium = _medium_named(&[text.clone()]);
+    medium = py_call(&g__medium_named(), &[text.clone()]);
     if py_truthy(&medium.clone()) {
     return medium.clone();
     }
@@ -4982,7 +5325,7 @@ pub fn _the_medium(args: &[Py]) -> Py {
     let __iter2 = py_iter_or_raise(&order.clone());
     for __item in __iter2 {
     text = __item.clone();
-    medium = _title_medium(&[text.clone()]);
+    medium = py_call(&g__title_medium(), &[text.clone()]);
     if py_truthy(&medium.clone()) {
     return medium.clone();
     }
@@ -5002,7 +5345,7 @@ pub fn _the_medium(args: &[Py]) -> Py {
     return Py::None;
     Py::None
 }
-pub fn _picks_by_title(args: &[Py]) -> Py {
+pub fn _picks_by_title__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -5030,7 +5373,7 @@ pub fn _picks_by_title(args: &[Py]) -> Py {
     for __item in __iter4 {
     title = __item.clone();
     if py_truthy(&op_ge(&call_builtin("len", &[title.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(6))) {
-    let _ = mcall(&found.clone(), "setdefault", &[_plain_words(&[title.clone()]), medium.clone()]);
+    let _ = mcall(&found.clone(), "setdefault", &[py_call(&g__plain_words(), &[title.clone()]), medium.clone()]);
     }
     }
     }
@@ -5038,7 +5381,7 @@ pub fn _picks_by_title(args: &[Py]) -> Py {
     return found.clone();
     Py::None
 }
-pub fn _title_medium(args: &[Py]) -> Py {
+pub fn _title_medium__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -5058,7 +5401,7 @@ pub fn _title_medium(args: &[Py]) -> Py {
     let mut title: Py = Py::None;
     let mut where_: Py = Py::None;
     let _ = py_str("Which medium a reply is about, by the picks it names.\n\n    An answer that says \"*Schitt's Creek* starts daft...\" never says \"series\", and the follow-up\n    (\"which one first\") is about that medium. Every pick in the tables above is scanned once, so\n    a new pick in a table is known to its medium without another line of code.\n    ");
-    said = op_modulo(&py_str(" %s "), &_plain_words(&[text.clone()]));
+    said = op_modulo(&py_str(" %s "), &py_call(&g__plain_words(), &[text.clone()]));
     let __unpk1 = py_unpack(&py_tuple(vec![Py::None, op_add(&call_builtin("len", &[said.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1))]), 2, None);
     best = __unpk1[0].clone();
     where_ = __unpk1[1].clone();
@@ -5077,7 +5420,7 @@ pub fn _title_medium(args: &[Py]) -> Py {
     return best.clone();
     Py::None
 }
-pub fn _chat_is_about_a_pick(args: &[Py]) -> Py {
+pub fn _chat_is_about_a_pick__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -5113,7 +5456,7 @@ pub fn _chat_is_about_a_pick(args: &[Py]) -> Py {
     return { let __b = Py::Bool(!py_truthy(&domain.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&py_tuple(vec![py_str(""), py_str("feelings")]), &topic.clone())) } };
     Py::None
 }
-pub fn _a_pick_of_the_other_mood(args: &[Py]) -> Py {
+pub fn _a_pick_of_the_other_mood__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -5134,14 +5477,14 @@ pub fn _a_pick_of_the_other_mood(args: &[Py]) -> Py {
     let _ = py_str("The picks at the far end of a mood the line turns down: \"no not too scary\" after a scare.");
     understood = if py_truthy(&call_builtin("isinstance", &[understood.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) { understood.clone() } else { py_dict(vec![]) };
     line = op_modulo(&py_str("%s %s"), &py_tuple(vec![{ let __b = mcall(&understood.clone(), "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { py_str("") } }, { let __b = mcall(&understood.clone(), "get", &[py_str("norm_text")]); if py_truthy(&__b) { __b } else { py_str("") } }]));
-    got = _mood_of(&[line.clone()]);
+    got = py_call(&g__mood_of(), &[line.clone()]);
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&got.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&geti(&got.clone(), &Py::Int(1)))) } }) {
     return Py::None;
     }
-    return _a_pick_in_any_medium(&[memory.clone(), understood.clone()]);
+    return py_call(&g__a_pick_in_any_medium(), &[memory.clone(), understood.clone()]);
     Py::None
 }
-pub fn _a_pick_in_any_medium(args: &[Py]) -> Py {
+pub fn _a_pick_in_any_medium__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -5168,39 +5511,39 @@ pub fn _a_pick_in_any_medium(args: &[Py]) -> Py {
     let _ = py_str("Something in the mood they named, in whichever medium the chat was already on.");
     understood = if py_truthy(&call_builtin("isinstance", &[understood.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) { understood.clone() } else { py_dict(vec![]) };
     line = op_modulo(&py_str("%s %s"), &py_tuple(vec![{ let __b = mcall(&understood.clone(), "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { py_str("") } }, { let __b = mcall(&understood.clone(), "get", &[py_str("norm_text")]); if py_truthy(&__b) { __b } else { py_str("") } }]));
-    got = _mood_of(&[line.clone()]);
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&got.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_chat_is_about_a_pick(&[understood.clone(), memory.clone()]))) } }) {
+    got = py_call(&g__mood_of(), &[line.clone()]);
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&got.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&py_call(&g__chat_is_about_a_pick(), &[understood.clone(), memory.clone()]))) } }) {
     return Py::None;
     }
-    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_A_LENGTH_MOOD(), &geti(&got.clone(), &Py::Int(0)))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&{ let __b = _pick_kind(&[line.clone()]); if py_truthy(&__b) { __b } else { _pick_carry(&[memory.clone(), line.clone()]) } })) } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_A_LENGTH_MOOD(), &geti(&got.clone(), &Py::Int(0)))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&{ let __b = py_call(&g__pick_kind(), &[line.clone()]); if py_truthy(&__b) { __b } else { py_call(&g__pick_carry(), &[memory.clone(), line.clone()]) } })) } }) {
     return Py::None;
     }
-    own = _mood_of(&[mcall(&py_str(" "), "join", &[_own_texts(&[understood.clone()])])]);
+    own = py_call(&g__mood_of(), &[mcall(&py_str(" "), "join", &[py_call(&g__own_texts(), &[understood.clone()])])]);
     if py_truthy(&{ let __b = own.clone(); if !py_truthy(&__b) { __b } else { geti(&own.clone(), &Py::Int(1)) } }) {
     mood = py_str("light");
     } else {
     if py_truthy(&own.clone()) {
     mood = geti(&own.clone(), &Py::Int(0));
     } else {
-    mood = _the_mood_the_chat_holds(&[memory.clone()]);
+    mood = py_call(&g__the_mood_the_chat_holds(), &[memory.clone()]);
     if py_truthy(&Py::Bool(!py_truthy(&mood.clone()))) {
-    if py_truthy(&Py::Bool(!py_truthy(&_the_mood_the_chat_turned_down(&[memory.clone()])))) {
+    if py_truthy(&Py::Bool(!py_truthy(&py_call(&g__the_mood_the_chat_turned_down(), &[memory.clone()])))) {
     return Py::None;
     }
     mood = py_str("light");
     }
     }
     }
-    if py_truthy(&{ let __b = geti(&_limit_wanted(&[line.clone()]), &Py::Int(0)); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&_pick_kind(&[line.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_pick_carry(&[memory.clone(), line.clone()]))) } } } }) {
+    if py_truthy(&{ let __b = geti(&py_call(&g__limit_wanted(), &[line.clone()]), &Py::Int(0)); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&py_call(&g__pick_kind(), &[line.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&py_call(&g__pick_carry(), &[memory.clone(), line.clone()]))) } } } }) {
     picks = { let __b = mcall(&g_MOOD_TABLES(), "get", &[py_str("film")]); if py_truthy(&__b) { __b } else { py_dict(vec![]) } };
     } else {
-    picks = { let __b = mcall(&g_MOOD_TABLES(), "get", &[_the_medium(&[understood.clone(), memory.clone()])]); if py_truthy(&__b) { __b } else { py_dict(vec![]) } };
+    picks = { let __b = mcall(&g_MOOD_TABLES(), "get", &[py_call(&g__the_medium(), &[understood.clone(), memory.clone()])]); if py_truthy(&__b) { __b } else { py_dict(vec![]) } };
     }
     said = { let __b = mcall(&picks.clone(), "get", &[mood.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_ANY_MOODS(), "get", &[mood.clone()]) } };
     last = if py_truthy(&call_builtin("isinstance", &[memory.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) { mcall(&memory.clone(), "get", &[py_str("last_answer")]) } else { Py::None };
     last = if py_truthy(&call_builtin("isinstance", &[last.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) { last.clone() } else { py_dict(vec![]) };
-    said = _films_within(&[said.clone(), line.clone()]);
-    if py_truthy(&{ let __b = said.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_eq(&_plain_words(&[said.clone()]), &_plain_words(&[call_builtin("str", &[{ let __b = mcall(&last.clone(), "get", &[py_str("reply")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))]))) } }) {
+    said = py_call(&g__films_within(), &[said.clone(), line.clone()]);
+    if py_truthy(&{ let __b = said.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_eq(&py_call(&g__plain_words(), &[said.clone()]), &py_call(&g__plain_words(), &[call_builtin("str", &[{ let __b = mcall(&last.clone(), "get", &[py_str("reply")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))]))) } }) {
     first = stdlib_call("re", "search", &[py_str("\\*([^*]{2,60})\\*"), said.clone()]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&first.clone()) {
     return op_modulo(&py_str("Of those, I'd start with *%s*."), &mcall(&first.clone(), "group", &[Py::Int(1)]));
@@ -5210,7 +5553,7 @@ pub fn _a_pick_in_any_medium(args: &[Py]) -> Py {
     return said.clone();
     Py::None
 }
-pub fn not_asking_what_to_watch_for(args: &[Py]) -> Py {
+pub fn not_asking_what_to_watch_for__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -5240,7 +5583,7 @@ pub fn not_asking_what_to_watch_for(args: &[Py]) -> Py {
     return Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_ASKING_TO_WATCH_FOR()) { let mut asked: Py = __item.clone(); __out.push(Py::Bool(py_contains(&said.clone(), &asked.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))));
     Py::None
 }
-pub fn _the_possessive_phrase(args: &[Py]) -> Py {
+pub fn _the_possessive_phrase__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -5287,7 +5630,7 @@ pub fn _the_possessive_phrase(args: &[Py]) -> Py {
     return py_str("");
     Py::None
 }
-pub fn _article_for(args: &[Py]) -> Py {
+pub fn _article_for__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -5311,7 +5654,7 @@ pub fn _article_for(args: &[Py]) -> Py {
     let mut theirs: Py = Py::None;
     let _ = py_str("The article a thing takes in these templates, as both a mid-sentence and a lead word.\n\n    The person's own possessive, when the line has one - \"my nan\", \"his nurse\", \"mum's garden\" -\n    and otherwise the article the template asked for, so \"the sea\", \"a bike\", \"a baby\" and \"the\n    wedding\" read as they did. Returned as a dict of the phrases the templates interpolate,\n    because \"My nan arrived\" at the start of a line needs the capital and \"with my nan\" in the\n    middle does not.\n    ");
     said = mcall(&{ let __b = clean.clone(); if py_truthy(&__b) { __b } else { py_str("") } }, "lower", &[]);
-    theirs = _the_possessive_phrase(&[thing.clone(), said.clone()]);
+    theirs = py_call(&g__the_possessive_phrase(), &[thing.clone(), said.clone()]);
     if py_truthy(&theirs.clone()) {
     return py_dict(vec![(py_str("a_thing"), theirs.clone()), (py_str("the_thing"), theirs.clone()), (py_str("The_thing"), op_add(&mcall(&slice_or_raise(&theirs.clone(), &Py::None, &Py::Int(1), &Py::None), "upper", &[]), &slice_or_raise(&theirs.clone(), &Py::Int(1), &Py::None, &Py::None)))]);
     }
@@ -5319,7 +5662,7 @@ pub fn _article_for(args: &[Py]) -> Py {
     return py_dict(vec![(py_str("a_thing"), op_add(&py_str("a "), &thing.clone())), (py_str("the_thing"), op_add(&their.clone(), &thing.clone())), (py_str("The_thing"), op_add(&mcall(&slice_or_raise(&op_add(&their.clone(), &thing.clone()), &Py::None, &Py::Int(1), &Py::None), "upper", &[]), &slice_or_raise(&op_add(&their.clone(), &thing.clone()), &Py::Int(1), &Py::None, &Py::None)))]);
     Py::None
 }
-pub fn _subject_words(args: &[Py]) -> Py {
+pub fn _subject_words__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -5369,7 +5712,7 @@ pub fn _subject_words(args: &[Py]) -> Py {
     return words.clone();
     Py::None
 }
-pub fn _no_subject_verse(args: &[Py]) -> Py {
+pub fn _no_subject_verse__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -5396,10 +5739,10 @@ pub fn _no_subject_verse(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(py_eq(&noun.clone(), &py_str("rhyme")))) {
     lead = py_str("A rhyme, then:");
     }
-    return _lines(&[lines.clone(), lead.clone()]);
+    return py_call(&g__lines(), &[lines.clone(), lead.clone()]);
     Py::None
 }
-pub fn _names_another_form(args: &[Py]) -> Py {
+pub fn _names_another_form__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -5445,7 +5788,7 @@ pub fn _names_another_form(args: &[Py]) -> Py {
     return Py::Bool(false);
     Py::None
 }
-pub fn _asks_for_a_verse(args: &[Py]) -> Py {
+pub fn _asks_for_a_verse__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -5467,7 +5810,7 @@ pub fn _asks_for_a_verse(args: &[Py]) -> Py {
     let mut found: Py = Py::None;
     let mut words: Py = Py::None;
     let _ = py_str("The no-subject verse when the line asks for the form and names nothing else.\n\n    \"write a poem about my\" names a possessive and stops: a verse that fills the gap with\n    nothing (\"A short poem about my\") is worse than the shrug, so a half-named subject gets\n    none. \"write a poem for me\" and \"give me a haiku\" name nobody and get the verse.\n\n    Three kinds of line hold a form word and still want no verse: a how-to (\"how do i write a\n    poem\" is the advice row's, and the verse took it from them), a remark about somebody\n    else's verse (\"my sister writes limericks\" - one-slip repair reads \"writes\" as \"write\",\n    so the row fires on it), and a half-named subject.\n    ");
-    if py_truthy(&_names_another_form(&[clean.clone(), form.clone()])) {
+    if py_truthy(&py_call(&g__names_another_form(), &[clean.clone(), form.clone()])) {
     return Py::None;
     }
     if py_truthy(&stdlib_call("re", "search", &[py_str("\\b(?:how do i|how to|how can i|how should i|tips for|advice on|writes|wrote|writing|written|reads|reading)\\b"), clean.clone()]).unwrap_or_else(|e| exc::raise(e))) {
@@ -5475,15 +5818,15 @@ pub fn _asks_for_a_verse(args: &[Py]) -> Py {
     }
     found = stdlib_call("re", "search", &[py_str("\\b(?:about|of|on|regarding|describing|named|called|for)\\s+(.+)$"), clean.clone()]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&found.clone()) {
-    words = _subject_words(&[mcall(&found.clone(), "group", &[Py::Int(1)])]);
+    words = py_call(&g__subject_words(), &[mcall(&found.clone(), "group", &[Py::Int(1)])]);
     if py_truthy(&{ let __b = words.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&{ let __b = Py::Bool(py_eq(&call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1))); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_WHOM_IT_IS_FOR(), &geti(&words.clone(), &Py::Int(0)))) } })) } }) {
     return Py::None;
     }
     }
-    return _no_subject_verse(&[form.clone(), noun.clone()]);
+    return py_call(&g__no_subject_verse(), &[form.clone(), noun.clone()]);
     Py::None
 }
-pub fn _subject(args: &[Py]) -> Py {
+pub fn _subject__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -5504,14 +5847,14 @@ pub fn _subject(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&found.clone()))) {
     return py_str("");
     }
-    words = _subject_words(&[mcall(&found.clone(), "group", &[Py::Int(1)])]);
+    words = py_call(&g__subject_words(), &[mcall(&found.clone(), "group", &[Py::Int(1)])]);
     if py_truthy(&{ let __b = words.clone(); if !py_truthy(&__b) { __b } else { call_builtin("all", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&g_EMPTY_SUBJECT(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }) {
     return py_str("");
     }
     return mcall(&py_str(" "), "join", &[words.clone()]);
     Py::None
 }
-pub fn _thing(args: &[Py]) -> Py {
+pub fn _thing__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -5532,7 +5875,7 @@ pub fn _thing(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&found.clone()))) {
     return py_str("");
     }
-    words = _subject_words(&[mcall(&found.clone(), "group", &[Py::Int(1)])]);
+    words = py_call(&g__subject_words(), &[mcall(&found.clone(), "group", &[Py::Int(1)])]);
     if py_truthy(&Py::Bool(!py_truthy(&words.clone()))) {
     return py_str("");
     }
@@ -5560,7 +5903,7 @@ pub fn _thing(args: &[Py]) -> Py {
     return word.clone();
     Py::None
 }
-pub fn _named_nothing(args: &[Py]) -> Py {
+pub fn _named_nothing__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -5581,11 +5924,11 @@ pub fn _named_nothing(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&found.clone()))) {
     return Py::Bool(false);
     }
-    words = _subject_words(&[mcall(&found.clone(), "group", &[Py::Int(1)])]);
+    words = py_call(&g__subject_words(), &[mcall(&found.clone(), "group", &[Py::Int(1)])]);
     return { let __b = call_builtin("bool", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { call_builtin("all", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&g_EMPTY_SUBJECT(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } };
     Py::None
 }
-pub fn _lines(args: &[Py]) -> Py {
+pub fn _lines__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -5625,14 +5968,14 @@ pub fn _haiku__wrapped(args: &[Py]) -> Py {
     let mut subject: Py = Py::None;
     let _ = py_str("A haiku about the thing named, counted 5-7-5.");
     clean = { let __b = mcall(&understood.clone(), "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { py_str("") } };
-    if py_truthy(&_a_report_of_the_habit(&[clean.clone()])) {
-    return _a_report_answered(&[clean.clone(), understood.clone()]);
+    if py_truthy(&py_call(&g__a_report_of_the_habit(), &[clean.clone()])) {
+    return py_call(&g__a_report_answered(), &[clean.clone(), understood.clone()]);
     }
-    subject = _subject(&[clean.clone()]);
+    subject = py_call(&g__subject(), &[clean.clone()]);
     if py_truthy(&Py::Bool(!py_truthy(&subject.clone()))) {
-    return _asks_for_a_verse(&[clean.clone(), py_str("haiku")]);
+    return py_call(&g__asks_for_a_verse(), &[clean.clone(), py_str("haiku")]);
     }
-    return _say(&[py_str("haiku"), _thing(&[clean.clone()]), subject.clone()]);
+    return py_call(&g__say(), &[py_str("haiku"), py_call(&g__thing(), &[clean.clone()]), subject.clone()]);
     Py::None
 }
 pub fn _limerick__wrapped(args: &[Py]) -> Py {
@@ -5655,14 +5998,14 @@ pub fn _limerick__wrapped(args: &[Py]) -> Py {
     let mut subject: Py = Py::None;
     let _ = py_str("A limerick about the thing named, and one that scans for anything else.");
     clean = { let __b = mcall(&understood.clone(), "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { py_str("") } };
-    if py_truthy(&_a_report_of_the_habit(&[clean.clone()])) {
-    return _a_report_answered(&[clean.clone(), understood.clone()]);
+    if py_truthy(&py_call(&g__a_report_of_the_habit(), &[clean.clone()])) {
+    return py_call(&g__a_report_answered(), &[clean.clone(), understood.clone()]);
     }
-    subject = _subject(&[clean.clone()]);
+    subject = py_call(&g__subject(), &[clean.clone()]);
     if py_truthy(&Py::Bool(!py_truthy(&subject.clone()))) {
-    return _asks_for_a_verse(&[clean.clone(), py_str("limerick")]);
+    return py_call(&g__asks_for_a_verse(), &[clean.clone(), py_str("limerick")]);
     }
-    return _say(&[py_str("limerick"), _thing(&[clean.clone()]), subject.clone()]);
+    return py_call(&g__say(), &[py_str("limerick"), py_call(&g__thing(), &[clean.clone()]), subject.clone()]);
     Py::None
 }
 pub fn _poem__wrapped(args: &[Py]) -> Py {
@@ -5685,17 +6028,17 @@ pub fn _poem__wrapped(args: &[Py]) -> Py {
     let mut subject: Py = Py::None;
     let _ = py_str("A short rhymed poem about the thing named.");
     clean = { let __b = mcall(&understood.clone(), "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { py_str("") } };
-    if py_truthy(&_a_report_of_the_habit(&[clean.clone()])) {
-    return _a_report_answered(&[clean.clone(), understood.clone()]);
+    if py_truthy(&py_call(&g__a_report_of_the_habit(), &[clean.clone()])) {
+    return py_call(&g__a_report_answered(), &[clean.clone(), understood.clone()]);
     }
-    subject = _subject(&[clean.clone()]);
+    subject = py_call(&g__subject(), &[clean.clone()]);
     if py_truthy(&Py::Bool(!py_truthy(&subject.clone()))) {
-    return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(clean.clone()); __args.push(py_str("poem")); __kws.extend(vec![("noun".to_string(), if py_truthy(&Py::Bool(py_contains(&clean.clone(), &py_str("rhyme")))) { py_str("rhyme") } else { py_str("poem") })]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _asks_for_a_verse(args))(&__args) };
+    return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(clean.clone()); __args.push(py_str("poem")); __kws.extend(vec![("noun".to_string(), if py_truthy(&Py::Bool(py_contains(&clean.clone(), &py_str("rhyme")))) { py_str("rhyme") } else { py_str("poem") })]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| py_call(&g__asks_for_a_verse(), args))(&__args) };
     }
-    return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("poem")); __args.push(_thing(&[clean.clone()])); __args.push(subject.clone()); __kws.extend(vec![("noun".to_string(), if py_truthy(&Py::Bool(py_contains(&clean.clone(), &py_str("rhyme")))) { py_str("rhyme") } else { py_str("poem") })]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _say(args))(&__args) };
+    return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("poem")); __args.push(py_call(&g__thing(), &[clean.clone()])); __args.push(subject.clone()); __kws.extend(vec![("noun".to_string(), if py_truthy(&Py::Bool(py_contains(&clean.clone(), &py_str("rhyme")))) { py_str("rhyme") } else { py_str("poem") })]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| py_call(&g__say(), args))(&__args) };
     Py::None
 }
-pub fn _rhyme(args: &[Py]) -> Py {
+pub fn _rhyme__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -5735,14 +6078,14 @@ pub fn _rhyme(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = mcall(&word.clone(), "endswith", &[ending.clone()]); if py_truthy(&__b) { __b } else { mcall(&bare.clone(), "endswith", &[ending.clone()]) } }) {
     picks = slice_or_raise(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&geti(&g_RHYMES_BY_ENDING(), &ending.clone())) { let mut one: Py = __item.clone(); if py_truthy(&Py::Bool(!py_eq(&one.clone(), &word.clone()))) {  __out.push(one.clone()); } } py_list(__out) })() }, &Py::None, &Py::Int(5), &Py::None);
     if py_truthy(&picks.clone()) {
-    return op_modulo(&py_str("Words that rhyme with *%s*: %s. For a poem, the easiest thing is to put *%s* at the end of a line and pick the rhyme that says what you mean."), &py_tuple(vec![word.clone(), _list_words(&[picks.clone()]), word.clone()]));
+    return op_modulo(&py_str("Words that rhyme with *%s*: %s. For a poem, the easiest thing is to put *%s* at the end of a line and pick the rhyme that says what you mean."), &py_tuple(vec![word.clone(), py_call(&g__list_words(), &[picks.clone()]), word.clone()]));
     }
     }
     }
     return Py::None;
     Py::None
 }
-pub fn _story_idea(args: &[Py]) -> Py {
+pub fn _story_idea__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -5771,7 +6114,7 @@ pub fn _story_idea(args: &[Py]) -> Py {
     return op_modulo(&py_str("Two to start with:\n- %s\n- %s\nWhich one sounds like yours? I can help you find the first scene, or the thing that goes wrong."), &py_tuple(vec![first.clone(), second.clone()]));
     Py::None
 }
-pub fn _the_form_last_time(args: &[Py]) -> Py {
+pub fn _the_form_last_time__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -5813,7 +6156,7 @@ pub fn _the_form_last_time(args: &[Py]) -> Py {
     return Py::None;
     Py::None
 }
-pub fn _lead(args: &[Py]) -> Py {
+pub fn _lead__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -5838,7 +6181,7 @@ pub fn _lead(args: &[Py]) -> Py {
     return op_modulo(&py_str("A short poem about %s:"), &subject.clone());
     Py::None
 }
-pub fn _offer(args: &[Py]) -> Py {
+pub fn _offer__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -5860,7 +6203,7 @@ pub fn _offer(args: &[Py]) -> Py {
     return op_modulo(&py_str("A %s about %s needs one real thing in it: give me a sound, a smell or a day from it and I'll build the %s round that."), &py_tuple(vec![name.clone(), subject.clone(), name.clone()]));
     Py::None
 }
-pub fn _say(args: &[Py]) -> Py {
+pub fn _say__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -5891,36 +6234,36 @@ pub fn _say(args: &[Py]) -> Py {
     form = { let __b = noun.clone(); if py_truthy(&__b) { __b } else { form.clone() } };
     known = { let __b = { let __b = Py::Bool(py_contains(&g_FORMS(), &form.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&geti(&g_FORMS(), &form.clone()), &thing.clone())) } }; if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&g_POEMS(), &thing.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_PEOPLE(), &thing.clone())) } } } };
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&known.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&g_ABSTRACT(), &thing.clone())); if py_truthy(&__b) { __b } else { { let __b = slice_or_raise(&mcall(&subject.clone(), "split", &[]), &op_neg(&Py::Int(1)), &Py::None, &Py::None); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_ABSTRACT(), &geti(&mcall(&subject.clone(), "split", &[]), &op_neg(&Py::Int(1))))) } } } } } }) {
-    return _offer(&[form.clone(), subject.clone()]);
+    return py_call(&g__offer(), &[form.clone(), subject.clone()]);
     }
     if py_truthy(&Py::Bool(py_eq(&form.clone(), &py_str("haiku")))) {
     found = mcall(&g_HAIKU(), "get", &[thing.clone()]);
-    return if py_truthy(&found.clone()) { _lines(&[found.clone(), _lead(&[form.clone(), subject.clone()])]) } else { Py::None };
+    return if py_truthy(&found.clone()) { py_call(&g__lines(), &[found.clone(), py_call(&g__lead(), &[form.clone(), subject.clone()])]) } else { Py::None };
     }
     if py_truthy(&Py::Bool(!py_contains(&g_FORMS(), &form.clone()))) {
     thing_line = mcall(&g_POEMS(), "get", &[thing.clone()]);
     lead = op_modulo(&py_str("A rhyme about %s:"), &subject.clone());
     if py_truthy(&thing_line.clone()) {
-    return _lines(&[thing_line.clone(), lead.clone()]);
+    return py_call(&g__lines(), &[thing_line.clone(), lead.clone()]);
     }
     if py_truthy(&Py::Bool(py_contains(&g_PEOPLE(), &thing.clone()))) {
-    return _lines(&[g_WARM_POEM(), lead.clone()]);
+    return py_call(&g__lines(), &[g_WARM_POEM(), lead.clone()]);
     }
-    return _lines(&[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_GENERIC_POEM()) { let mut one: Py = __item.clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("thing".to_string(), thing.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&one.clone(), "format", args))(&__args) }); } py_list(__out) })() }, lead.clone()]);
+    return py_call(&g__lines(), &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_GENERIC_POEM()) { let mut one: Py = __item.clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("thing".to_string(), thing.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&one.clone(), "format", args))(&__args) }); } py_list(__out) })() }, lead.clone()]);
     }
     if py_truthy(&Py::Bool(py_contains(&geti(&g_FORMS(), &form.clone()), &thing.clone()))) {
-    return _lines(&[geti(&geti(&g_FORMS(), &form.clone()), &thing.clone()), _lead(&[form.clone(), subject.clone()])]);
+    return py_call(&g__lines(), &[geti(&geti(&g_FORMS(), &form.clone()), &thing.clone()), py_call(&g__lead(), &[form.clone(), subject.clone()])]);
     }
     if py_truthy(&{ let __b = Py::Bool(!py_eq(&form.clone(), &py_str("limerick"))); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_PEOPLE(), &thing.clone())) } }) {
-    return _lines(&[g_WARM_POEM(), _lead(&[form.clone(), subject.clone()])]);
+    return py_call(&g__lines(), &[g_WARM_POEM(), py_call(&g__lead(), &[form.clone(), subject.clone()])]);
     }
     if py_truthy(&Py::Bool(py_eq(&form.clone(), &py_str("limerick")))) {
-    return _lines(&[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_GENERIC_LIMERICK()) { let mut one: Py = __item.clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("thing".to_string(), thing.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&one.clone(), "format", args))(&__args) }); } py_list(__out) })() }, _lead(&[form.clone(), subject.clone()])]);
+    return py_call(&g__lines(), &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_GENERIC_LIMERICK()) { let mut one: Py = __item.clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("thing".to_string(), thing.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&one.clone(), "format", args))(&__args) }); } py_list(__out) })() }, py_call(&g__lead(), &[form.clone(), subject.clone()])]);
     }
-    return _lines(&[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_GENERIC_POEM()) { let mut one: Py = __item.clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("thing".to_string(), thing.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&one.clone(), "format", args))(&__args) }); } py_list(__out) })() }, _lead(&[form.clone(), subject.clone()])]);
+    return py_call(&g__lines(), &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_GENERIC_POEM()) { let mut one: Py = __item.clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("thing".to_string(), thing.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&one.clone(), "format", args))(&__args) }); } py_list(__out) })() }, py_call(&g__lead(), &[form.clone(), subject.clone()])]);
     Py::None
 }
-pub fn _picked(args: &[Py]) -> Py {
+pub fn _picked__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -5943,7 +6286,7 @@ pub fn _picked(args: &[Py]) -> Py {
     return geti(&choices.clone(), &place.clone());
     Py::None
 }
-pub fn _the_listener_lead(args: &[Py]) -> Py {
+pub fn _the_listener_lead__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -5962,7 +6305,7 @@ pub fn _the_listener_lead(args: &[Py]) -> Py {
     return if py_truthy(&Py::Bool(!py_truthy(&age.clone()))) { py_str("A short one for a child") } else { op_modulo(&py_str("A short one for a %s year old"), &mcall(&age.clone(), "group", &[Py::Int(1)])) };
     Py::None
 }
-pub fn _a_story_for_the_listener(args: &[Py]) -> Py {
+pub fn _a_story_for_the_listener__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -5976,10 +6319,10 @@ pub fn _a_story_for_the_listener(args: &[Py]) -> Py {
     else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "clean") { v.clone() }
     else { exc::raise(type_err(&format!("missing required argument: clean"))) };
     let _ = py_str("A story for the child named in the line, seeded by the line's own words.");
-    return op_add(&op_add(&_the_listener_lead(&[clean.clone()]), &py_str(": ")), &_picked(&[g_CHILD_STORIES(), clean.clone()]));
+    return op_add(&op_add(&py_call(&g__the_listener_lead(), &[clean.clone()]), &py_str(": ")), &py_call(&g__picked(), &[g_CHILD_STORIES(), clean.clone()]));
     Py::None
 }
-pub fn _a_child_story_about(args: &[Py]) -> Py {
+pub fn _a_child_story_about__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -5997,11 +6340,11 @@ pub fn _a_child_story_about(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: thing"))) };
     let mut opening: Py = Py::None;
     let _ = py_str("A story for the child named in the line, about the thing that is also named.");
-    opening = _picked(&[g_CHILD_STORY_OPENINGS(), op_add(&clean.clone(), &thing.clone())]);
-    return op_add(&op_add(&_the_listener_lead(&[clean.clone()]), &py_str(": ")), &{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("thing".to_string(), thing.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&opening.clone(), "format", args))(&__args) });
+    opening = py_call(&g__picked(), &[g_CHILD_STORY_OPENINGS(), op_add(&clean.clone(), &thing.clone())]);
+    return op_add(&op_add(&py_call(&g__the_listener_lead(), &[clean.clone()]), &py_str(": ")), &{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("thing".to_string(), thing.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&opening.clone(), "format", args))(&__args) });
     Py::None
 }
-pub fn _a_story_is_asked_for(args: &[Py]) -> Py {
+pub fn _a_story_is_asked_for__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -6030,7 +6373,7 @@ pub fn _a_story_is_asked_for(args: &[Py]) -> Py {
     return Py::Bool(!py_truthy(&mcall(&g_A_STORY_ALREADY_TOLD(), "search", &[clean.clone()])));
     Py::None
 }
-pub fn _the_line_to_read_for_a_story(args: &[Py]) -> Py {
+pub fn _the_line_to_read_for_a_story__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -6054,7 +6397,7 @@ pub fn _the_line_to_read_for_a_story(args: &[Py]) -> Py {
     return clean.clone();
     Py::None
 }
-pub fn _the_story_was_just_told(args: &[Py]) -> Py {
+pub fn _the_story_was_just_told__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -6084,7 +6427,7 @@ pub fn _the_story_was_just_told(args: &[Py]) -> Py {
     return Py::Bool(false);
     Py::None
 }
-pub fn _a_placeholder_word(args: &[Py]) -> Py {
+pub fn _a_placeholder_word__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -6106,7 +6449,7 @@ pub fn _a_placeholder_word(args: &[Py]) -> Py {
     return Py::Bool(py_contains(&g__PLACEHOLDER_SUBJECT(), &mcall(&mcall(&geti(&words.clone(), &Py::Int(0)), "strip", &[py_str(".,!?;:'\"")]), "lower", &[])));
     Py::None
 }
-pub fn _a_report_of_the_habit(args: &[Py]) -> Py {
+pub fn _a_report_of_the_habit__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -6125,7 +6468,7 @@ pub fn _a_report_of_the_habit(args: &[Py]) -> Py {
     return { let __b = call_builtin("bool", &[mcall(&g_REPORTS_ON_A_FORM(), "search", &[line.clone()])]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_ASKS_FOR_ONE(), "search", &[line.clone()]))) } };
     Py::None
 }
-pub fn _the_last_line_reported_a_form(args: &[Py]) -> Py {
+pub fn _the_last_line_reported_a_form__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -6154,12 +6497,12 @@ pub fn _the_last_line_reported_a_form(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&mcall(&call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("bot")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "strip", &[]))); if !py_truthy(&__b) { __b } else { Py::Bool(py_is(&turn.clone(), &geti(&turns.clone(), &op_neg(&Py::Int(1))))) } }) {
     continue;
     }
-    return _a_report_of_the_habit(&[said.clone()]);
+    return py_call(&g__a_report_of_the_habit(), &[said.clone()]);
     }
     return Py::Bool(false);
     Py::None
 }
-pub fn _a_report_answered(args: &[Py]) -> Py {
+pub fn _a_report_answered__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -6181,7 +6524,7 @@ pub fn _a_report_answered(args: &[Py]) -> Py {
     let mut once: Py = Py::None;
     let mut shape: Py = Py::None;
     let _ = py_str("What the form's own module says to a line that reports the habit, or None.");
-    if py_truthy(&Py::Bool(!py_truthy(&_a_report_of_the_habit(&[clean.clone()])))) {
+    if py_truthy(&Py::Bool(!py_truthy(&py_call(&g__a_report_of_the_habit(), &[clean.clone()])))) {
     return Py::None;
     }
     line = call_builtin("str", &[{ let __b = clean.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e));
@@ -6205,11 +6548,11 @@ pub fn _a_report_answered(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&mcall(&g_A_REPEATED_REPORT(), "search", &[line.clone()])))) {
     once = mcall(&g_REPORT_ONCE_BACK(), "get", &[form.clone()]);
     if py_truthy(&once.clone()) {
-    return _picked(&[once.clone(), line.clone()]);
+    return py_call(&g__picked(), &[once.clone(), line.clone()]);
     }
-    return op_modulo(&_picked(&[g_REPORT_ONCE_GENERIC(), line.clone()]), &form.clone());
+    return op_modulo(&py_call(&g__picked(), &[g_REPORT_ONCE_GENERIC(), line.clone()]), &form.clone());
     }
-    return _picked(&[geti(&g_REPORT_BACK(), &form.clone()), line.clone()]);
+    return py_call(&g__picked(), &[geti(&g_REPORT_BACK(), &form.clone()), line.clone()]);
     Py::None
 }
 pub fn _story__wrapped(args: &[Py]) -> Py {
@@ -6237,16 +6580,16 @@ pub fn _story__wrapped(args: &[Py]) -> Py {
     let mut thing: Py = Py::None;
     let mut typed: Py = Py::None;
     let _ = py_str("A very short story about the thing named, or about a small thing if none is named.");
-    clean = _the_line_to_read_for_a_story(&[understood.clone()]);
-    if py_truthy(&_a_report_of_the_habit(&[clean.clone()])) {
-    return _a_report_answered(&[clean.clone(), understood.clone()]);
+    clean = py_call(&g__the_line_to_read_for_a_story(), &[understood.clone()]);
+    if py_truthy(&py_call(&g__a_report_of_the_habit(), &[clean.clone()])) {
+    return py_call(&g__a_report_answered(), &[clean.clone(), understood.clone()]);
     }
-    if py_truthy(&{ let __b = _the_last_line_reported_a_form(&[memory.clone()]); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&mcall(&g_ASKS_FOR_ONE(), "search", &[clean.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g__SECOND_STORY(), "match", &[mcall(&call_builtin("str", &[{ let __b = mcall(&{ let __b = understood.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[py_str("plain")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "strip", &[])]))) } } } }) {
+    if py_truthy(&{ let __b = py_call(&g__the_last_line_reported_a_form(), &[memory.clone()]); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&mcall(&g_ASKS_FOR_ONE(), "search", &[clean.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g__SECOND_STORY(), "match", &[mcall(&call_builtin("str", &[{ let __b = mcall(&{ let __b = understood.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[py_str("plain")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "strip", &[])]))) } } } }) {
     return Py::None;
     }
     typed = call_builtin("str", &[{ let __b = mcall(&{ let __b = understood.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[py_str("plain")]); if py_truthy(&__b) { __b } else { { let __b = mcall(&{ let __b = understood.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[py_str("text")]); if py_truthy(&__b) { __b } else { py_str("") } } } }]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&{ let __b = typed.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_eq(&typed.clone(), &clean.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g__A_STORY_WORD(), "search", &[typed.clone()]))) } } } }) {
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&mcall(&g__SECOND_STORY(), "match", &[mcall(&typed.clone(), "strip", &[])]))); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_the_story_was_just_told(&[memory.clone()]))) } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&mcall(&g__SECOND_STORY(), "match", &[mcall(&typed.clone(), "strip", &[])]))); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&py_call(&g__the_story_was_just_told(), &[memory.clone()]))) } }) {
     return Py::None;
     }
     }
@@ -6254,7 +6597,7 @@ pub fn _story__wrapped(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&mcall(&g__SECOND_STORY(), "match", &[mcall(&clean.clone(), "strip", &[])])))) {
     return Py::None;
     }
-    if py_truthy(&Py::Bool(!py_truthy(&_the_story_was_just_told(&[memory.clone()])))) {
+    if py_truthy(&Py::Bool(!py_truthy(&py_call(&g__the_story_was_just_told(), &[memory.clone()])))) {
     return Py::None;
     }
     }
@@ -6262,39 +6605,39 @@ pub fn _story__wrapped(args: &[Py]) -> Py {
     return Py::None;
     }
     if py_truthy(&{ let __b = mcall(&g_A_STORY_ALREADY_HEARD(), "search", &[clean.clone()]); if !py_truthy(&__b) { __b } else { mcall(&g_ASKS_FOR_A_STORY(), "search", &[clean.clone()]) } }) {
-    return _picked(&[g_HEARD_IT_ALREADY(), clean.clone()]);
+    return py_call(&g__picked(), &[g_HEARD_IT_ALREADY(), clean.clone()]);
     }
-    if py_truthy(&Py::Bool(!py_truthy(&_a_story_is_asked_for(&[clean.clone()])))) {
+    if py_truthy(&Py::Bool(!py_truthy(&py_call(&g__a_story_is_asked_for(), &[clean.clone()])))) {
     return Py::None;
     }
     if py_truthy(&mcall(&g__A_LISTENER_IS_NAMED(), "search", &[clean.clone()])) {
     named = stdlib_call("re", "search", &[py_str("\\b(?:about|of|on|regarding)\\s+(?P<subject>\\S.*)$"), clean.clone()]).unwrap_or_else(|e| exc::raise(e));
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&named.clone())); if py_truthy(&__b) { __b } else { _a_placeholder_word(&[mcall(&named.clone(), "group", &[py_str("subject")])]) } }) {
-    return _a_story_for_the_listener(&[clean.clone()]);
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&named.clone())); if py_truthy(&__b) { __b } else { py_call(&g__a_placeholder_word(), &[mcall(&named.clone(), "group", &[py_str("subject")])]) } }) {
+    return py_call(&g__a_story_for_the_listener(), &[clean.clone()]);
     }
-    child_thing = _thing(&[mcall(&named.clone(), "group", &[Py::Int(0)])]);
-    if py_truthy(&{ let __b = child_thing.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_a_placeholder_word(&[child_thing.clone()]))) } }) {
-    return _a_child_story_about(&[clean.clone(), child_thing.clone()]);
+    child_thing = py_call(&g__thing(), &[mcall(&named.clone(), "group", &[Py::Int(0)])]);
+    if py_truthy(&{ let __b = child_thing.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&py_call(&g__a_placeholder_word(), &[child_thing.clone()]))) } }) {
+    return py_call(&g__a_child_story_about(), &[clean.clone(), child_thing.clone()]);
     }
-    return _a_story_for_the_listener(&[clean.clone()]);
+    return py_call(&g__a_story_for_the_listener(), &[clean.clone()]);
     }
-    thing = { let __b = _thing(&[clean.clone()]); if py_truthy(&__b) { __b } else { g_GENERIC_STORY_THING() } };
-    if py_truthy(&_a_placeholder_word(&[thing.clone()])) {
+    thing = { let __b = py_call(&g__thing(), &[clean.clone()]); if py_truthy(&__b) { __b } else { g_GENERIC_STORY_THING() } };
+    if py_truthy(&py_call(&g__a_placeholder_word(), &[thing.clone()])) {
     thing = g_GENERIC_STORY_THING();
     }
-    subject = _subject(&[clean.clone()]);
-    if py_truthy(&{ let __b = subject.clone(); if !py_truthy(&__b) { __b } else { _a_placeholder_word(&[subject.clone()]) } }) {
+    subject = py_call(&g__subject(), &[clean.clone()]);
+    if py_truthy(&{ let __b = subject.clone(); if !py_truthy(&__b) { __b } else { py_call(&g__a_placeholder_word(), &[subject.clone()]) } }) {
     subject = Py::None;
     }
     if py_truthy(&{ let __b = Py::Bool(py_contains(&g_ABSTRACT(), &thing.clone())); if !py_truthy(&__b) { __b } else { subject.clone() } }) {
-    return _offer(&[py_str("story"), subject.clone()]);
+    return py_call(&g__offer(), &[py_str("story"), subject.clone()]);
     }
     lead = if py_truthy(&subject.clone()) { { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("subject".to_string(), subject.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&geti(&g_STORY_LEADING(), &py_str("story")), "format", args))(&__args) } } else { py_str("Here is one, made up on the spot:") };
-    opening = _the_opening_not_said_yet(&[thing.clone(), memory.clone(), clean.clone()]);
+    opening = py_call(&g__the_opening_not_said_yet(), &[thing.clone(), memory.clone(), clean.clone()]);
     return op_add(&op_add(&lead.clone(), &py_str("\n")), &opening.clone());
     Py::None
 }
-pub fn _the_opening_not_said_yet(args: &[Py]) -> Py {
+pub fn _the_opening_not_said_yet__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -6322,7 +6665,7 @@ pub fn _the_opening_not_said_yet(args: &[Py]) -> Py {
     let _ = py_str("The opening for `thing`, unless it is already on the screen: then the next one.\n\n    \"tell me a story about a cat\" then \"another one about a cat\" was the same story twice,\n    and the composer framed the second one \"Same answer, and it covers this\" - which is what\n    a machine says. A second story is another story, so the openings rotate past the ones this\n    chat has already been told, and only come back round when all of them have been used.\n    ");
     start = if py_truthy(&thing.clone()) { op_modulo(&call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&thing.clone()) { let mut one: Py = __item.clone(); __out.push(call_builtin("ord", &[one.clone()]).unwrap_or_else(|e| exc::raise(e))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("len", &[g_STORY_OPENINGS()]).unwrap_or_else(|e| exc::raise(e))) } else { Py::Int(0) };
     told = mcall(&py_str(" "), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let __b = mcall(&{ let __b = memory.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[py_str("turns")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }) { let mut turn: Py = __item.clone(); if py_truthy(&call_builtin("isinstance", &[turn.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("bot")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))); } } py_list(__out) })() }]);
-    filled = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); for (k, v) in kw_pairs(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(thing.clone()); __kws.extend(vec![("clean".to_string(), clean.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _article_for(args))(&__args) }) { __kws.push((k, v)); } __kws.extend(vec![("thing".to_string(), thing.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
+    filled = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); for (k, v) in kw_pairs(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(thing.clone()); __kws.extend(vec![("clean".to_string(), clean.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| py_call(&g__article_for(), args))(&__args) }) { __kws.push((k, v)); } __kws.extend(vec![("thing".to_string(), thing.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
     let __iter1 = py_iter_or_raise(&call_builtin("range", &[call_builtin("len", &[g_STORY_OPENINGS()]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     for __item in __iter1 {
     step = __item.clone();
@@ -6358,20 +6701,20 @@ pub fn _rap__wrapped(args: &[Py]) -> Py {
     let mut thing: Py = Py::None;
     let _ = py_str("Four lines of rap about the thing named, with the rhyme words fixed in the template.");
     clean = { let __b = mcall(&understood.clone(), "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { py_str("") } };
-    if py_truthy(&_a_report_of_the_habit(&[clean.clone()])) {
-    return _a_report_answered(&[clean.clone(), understood.clone()]);
+    if py_truthy(&py_call(&g__a_report_of_the_habit(), &[clean.clone()])) {
+    return py_call(&g__a_report_answered(), &[clean.clone(), understood.clone()]);
     }
-    if py_truthy(&_named_nothing(&[clean.clone()])) {
+    if py_truthy(&py_call(&g__named_nothing(), &[clean.clone()])) {
     return Py::None;
     }
-    thing = { let __b = _thing(&[clean.clone()]); if py_truthy(&__b) { __b } else { geti(&g_NO_THING_IN_A_VERSE(), &py_str("rap")) } };
-    subject = { let __b = _subject(&[clean.clone()]); if py_truthy(&__b) { __b } else { thing.clone() } };
+    thing = { let __b = py_call(&g__thing(), &[clean.clone()]); if py_truthy(&__b) { __b } else { geti(&g_NO_THING_IN_A_VERSE(), &py_str("rap")) } };
+    subject = { let __b = py_call(&g__subject(), &[clean.clone()]); if py_truthy(&__b) { __b } else { thing.clone() } };
     if py_truthy(&Py::Bool(py_contains(&g_ABSTRACT(), &thing.clone()))) {
-    return _offer(&[py_str("rap"), subject.clone()]);
+    return py_call(&g__offer(), &[py_str("rap"), subject.clone()]);
     }
-    lines = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_GENERIC_RAP()) { let mut one: Py = __item.clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); for (k, v) in kw_pairs(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(thing.clone()); __kws.extend(vec![("clean".to_string(), clean.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _article_for(args))(&__args) }) { __kws.push((k, v)); } __kws.extend(vec![("thing".to_string(), thing.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&one.clone(), "format", args))(&__args) }); } py_list(__out) })() };
-    lead = if py_truthy(&_subject(&[clean.clone()])) { { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("subject".to_string(), subject.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&geti(&g_STORY_LEADING(), &py_str("rap")), "format", args))(&__args) } } else { geti(&g_NO_SUBJECT_LEADING(), &py_str("rap")) };
-    return _lines(&[lines.clone(), lead.clone()]);
+    lines = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_GENERIC_RAP()) { let mut one: Py = __item.clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); for (k, v) in kw_pairs(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(thing.clone()); __kws.extend(vec![("clean".to_string(), clean.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| py_call(&g__article_for(), args))(&__args) }) { __kws.push((k, v)); } __kws.extend(vec![("thing".to_string(), thing.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&one.clone(), "format", args))(&__args) }); } py_list(__out) })() };
+    lead = if py_truthy(&py_call(&g__subject(), &[clean.clone()])) { { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("subject".to_string(), subject.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&geti(&g_STORY_LEADING(), &py_str("rap")), "format", args))(&__args) } } else { geti(&g_NO_SUBJECT_LEADING(), &py_str("rap")) };
+    return py_call(&g__lines(), &[lines.clone(), lead.clone()]);
     Py::None
 }
 pub fn _song__wrapped(args: &[Py]) -> Py {
@@ -6396,22 +6739,22 @@ pub fn _song__wrapped(args: &[Py]) -> Py {
     let mut thing: Py = Py::None;
     let _ = py_str("A verse and a chorus about the thing named.");
     clean = { let __b = mcall(&understood.clone(), "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { py_str("") } };
-    if py_truthy(&_a_report_of_the_habit(&[clean.clone()])) {
-    return _a_report_answered(&[clean.clone(), understood.clone()]);
+    if py_truthy(&py_call(&g__a_report_of_the_habit(), &[clean.clone()])) {
+    return py_call(&g__a_report_answered(), &[clean.clone(), understood.clone()]);
     }
-    if py_truthy(&_named_nothing(&[clean.clone()])) {
+    if py_truthy(&py_call(&g__named_nothing(), &[clean.clone()])) {
     return Py::None;
     }
-    thing = { let __b = _thing(&[clean.clone()]); if py_truthy(&__b) { __b } else { geti(&g_NO_THING_IN_A_VERSE(), &py_str("song")) } };
-    subject = { let __b = _subject(&[clean.clone()]); if py_truthy(&__b) { __b } else { thing.clone() } };
+    thing = { let __b = py_call(&g__thing(), &[clean.clone()]); if py_truthy(&__b) { __b } else { geti(&g_NO_THING_IN_A_VERSE(), &py_str("song")) } };
+    subject = { let __b = py_call(&g__subject(), &[clean.clone()]); if py_truthy(&__b) { __b } else { thing.clone() } };
     if py_truthy(&Py::Bool(py_contains(&g_ABSTRACT(), &thing.clone()))) {
-    return _offer(&[py_str("song"), subject.clone()]);
+    return py_call(&g__offer(), &[py_str("song"), subject.clone()]);
     }
-    lead = if py_truthy(&_subject(&[clean.clone()])) { { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("subject".to_string(), subject.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&geti(&g_STORY_LEADING(), &py_str("song")), "format", args))(&__args) } } else { geti(&g_NO_SUBJECT_LEADING(), &py_str("song")) };
-    return op_add(&op_add(&lead.clone(), &py_str("\n")), &{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); for (k, v) in kw_pairs(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(thing.clone()); __kws.extend(vec![("clean".to_string(), clean.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _article_for(args))(&__args) }) { __kws.push((k, v)); } __kws.extend(vec![("thing".to_string(), thing.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g_GENERIC_SONG(), "format", args))(&__args) });
+    lead = if py_truthy(&py_call(&g__subject(), &[clean.clone()])) { { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("subject".to_string(), subject.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&geti(&g_STORY_LEADING(), &py_str("song")), "format", args))(&__args) } } else { geti(&g_NO_SUBJECT_LEADING(), &py_str("song")) };
+    return op_add(&op_add(&lead.clone(), &py_str("\n")), &{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); for (k, v) in kw_pairs(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(thing.clone()); __kws.extend(vec![("clean".to_string(), clean.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| py_call(&g__article_for(), args))(&__args) }) { __kws.push((k, v)); } __kws.extend(vec![("thing".to_string(), thing.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g_GENERIC_SONG(), "format", args))(&__args) });
     Py::None
 }
-pub fn _character_name(args: &[Py]) -> Py {
+pub fn _character_name__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -6433,10 +6776,10 @@ pub fn _character_name(args: &[Py]) -> Py {
     if py_truthy(&stdlib_call("re", "search", &[py_str("\\b(?:villain|villainess|baddie|antagonist|hero|heroine)\\b"), clean.clone(), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e))) {
     return geti(&g_CHARACTER_NAME_RULES(), &Py::Int(1));
     }
-    return _picked(&[g_CHARACTER_NAME_RULES(), clean.clone()]);
+    return py_call(&g__picked(), &[g_CHARACTER_NAME_RULES(), clean.clone()]);
     Py::None
 }
-pub fn _nickname(args: &[Py]) -> Py {
+pub fn _nickname__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -6471,7 +6814,7 @@ pub fn _nickname(args: &[Py]) -> Py {
     return op_modulo(&py_str("Start with *%s*; *%s* and *%s* if it sticks. A nickname works best when it comes from something only you two know."), &py_tuple(vec![geti(&picks.clone(), &Py::Int(0)), geti(&picks.clone(), &Py::Int(1)), geti(&picks.clone(), &Py::Int(2))]));
     Py::None
 }
-pub fn _the_second_one_asked_for(args: &[Py]) -> Py {
+pub fn _the_second_one_asked_for__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -6503,7 +6846,7 @@ pub fn _the_second_one_asked_for(args: &[Py]) -> Py {
     return py_str("");
     Py::None
 }
-pub fn _another_one(args: &[Py]) -> Py {
+pub fn _another_one__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -6531,12 +6874,12 @@ pub fn _another_one(args: &[Py]) -> Py {
     let mut thing: Py = Py::None;
     let mut writer: Py = Py::None;
     let _ = py_str("\"Another one\", or \"do one about the sea\", after a poem: the same form, a new subject.\n\n    A follow-up like this carries no form word of its own (\"can you do one about the sea\"), so\n    the form has to come from the last exchange, which is the one thing the poem had that the\n    question does not. A story, a rap and a song are written the same way: \"one more about a dog\"\n    after a story is another story, and it used to be read as \"one more\" and handed the words\n    \"more tell story\" as its subject.\n    ");
-    form = _the_form_last_time(&[memory.clone()]);
+    form = py_call(&g__the_form_last_time(), &[memory.clone()]);
     if py_truthy(&Py::Bool(!py_truthy(&form.clone()))) {
     return Py::None;
     }
-    second = _the_second_one_asked_for(&[understood.clone()]);
-    writer = mcall(&call_builtin("globals", &[]).unwrap_or_else(|e| exc::raise(e)), "get", &[mcall(&g__ANOTHER_FORM(), "get", &[form.clone(), py_str("")])]);
+    second = py_call(&g__the_second_one_asked_for(), &[understood.clone()]);
+    writer = mcall(&__globals(), "get", &[mcall(&g__ANOTHER_FORM(), "get", &[form.clone(), py_str("")])]);
     if py_truthy(&{ let __b = Py::Bool(!py_eq(&second.clone(), &py_str(""))); if !py_truthy(&__b) { __b } else { writer.clone() } }) {
     asked = if py_truthy(&second.clone()) { op_modulo(&py_str("a %s about %s"), &py_tuple(vec![form.clone(), second.clone()])) } else { op_modulo(&py_str("a %s"), &form.clone()) };
     said = py_call(&writer, &[memory.clone(), py_dict(vec![(py_str("clean"), asked.clone()), (py_str("text"), asked.clone())])]);
@@ -6545,9 +6888,9 @@ pub fn _another_one(args: &[Py]) -> Py {
     }
     }
     clean = { let __b = mcall(&understood.clone(), "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { py_str("") } };
-    thing = _thing(&[clean.clone()]);
+    thing = py_call(&g__thing(), &[clean.clone()]);
     if py_truthy(&thing.clone()) {
-    return _say(&[form.clone(), thing.clone(), _subject(&[clean.clone()])]);
+    return py_call(&g__say(), &[form.clone(), thing.clone(), py_call(&g__subject(), &[clean.clone()])]);
     }
     brighter = stdlib_call("re", "search", &[py_str("happ|bright|cheer|funny|nicer|lighter|lift"), clean.clone()]).unwrap_or_else(|e| exc::raise(e));
     calmer = { let __b = brighter.clone(); if py_truthy(&__b) { __b } else { stdlib_call("re", "search", &[py_str("calm|quiet|sooth|gentl|soft|slower|easier"), clean.clone()]).unwrap_or_else(|e| exc::raise(e)) } };
@@ -6559,13 +6902,13 @@ pub fn _another_one(args: &[Py]) -> Py {
     key = __item.clone();
     if py_truthy(&Py::Bool(py_contains(&mcall(&g_FORMS(), "get", &[form.clone(), py_dict(vec![])]), &key.clone()))) {
     lead = if py_truthy(&brighter.clone()) { py_str("Something brighter, then.") } else { py_str("Something quieter, then.") };
-    return _lines(&[geti(&geti(&g_FORMS(), &form.clone()), &key.clone()), lead.clone()]);
+    return py_call(&g__lines(), &[geti(&geti(&g_FORMS(), &form.clone()), &key.clone()), lead.clone()]);
     }
     }
     return Py::None;
     Py::None
 }
-pub fn _quiz_name(args: &[Py]) -> Py {
+pub fn _quiz_name__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -6595,7 +6938,7 @@ pub fn _quiz_name(args: &[Py]) -> Py {
     return op_modulo(&py_str("For the sheet: *%s*. Others that go down well: *%s* and *%s*."), &py_tuple(vec![geti(&picks.clone(), &Py::Int(0)), geti(&picks.clone(), &Py::Int(1)), geti(&picks.clone(), &Py::Int(2))]));
     Py::None
 }
-pub fn _asked_for_what_they_already_tried(args: &[Py]) -> Py {
+pub fn _asked_for_what_they_already_tried__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -6635,7 +6978,7 @@ pub fn _asked_for_what_they_already_tried(args: &[Py]) -> Py {
     return Py::Bool(false);
     Py::None
 }
-pub fn _with_the_detail_asked_for(args: &[Py]) -> Py {
+pub fn _with_the_detail_asked_for__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -6673,7 +7016,7 @@ pub fn __nested_answer_0(args: &[Py]) -> Py {
     let mut subject: Py = Py::None;
     let mut thing: Py = Py::None;
     let mut words: Py = Py::None;
-    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(understood.clone()); __args.extend(py_iter_or_raise(&names.clone())); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _asked_for_what_they_already_tried(args))(&__args) }) {
+    if py_truthy(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(understood.clone()); __args.extend(py_iter_or_raise(&names.clone())); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| py_call(&g__asked_for_what_they_already_tried(), args))(&__args) }) {
     return Py::None;
     }
     reply = py_call(&build, &[memory.clone(), understood.clone()]);
@@ -6681,11 +7024,11 @@ pub fn __nested_answer_0(args: &[Py]) -> Py {
     return reply.clone();
     }
     clean = { let __b = mcall(&understood.clone(), "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { py_str("") } };
-    if py_truthy(&_a_report_of_the_habit(&[clean.clone()])) {
+    if py_truthy(&py_call(&g__a_report_of_the_habit(), &[clean.clone()])) {
     return reply.clone();
     }
-    subject = { let __b = _subject(&[clean.clone()]); if py_truthy(&__b) { __b } else { py_str("") } };
-    thing = { let __b = _thing(&[clean.clone()]); if py_truthy(&__b) { __b } else { py_str("") } };
+    subject = { let __b = py_call(&g__subject(), &[clean.clone()]); if py_truthy(&__b) { __b } else { py_str("") } };
+    thing = { let __b = py_call(&g__thing(), &[clean.clone()]); if py_truthy(&__b) { __b } else { py_str("") } };
     words = slice_or_raise(&mcall(&subject.clone(), "split", &[]), &op_neg(&Py::Int(1)), &Py::None, &Py::None);
     if py_truthy(&{ let __b = Py::Bool(py_contains(&g__OFFERED(), &thing.clone())); if py_truthy(&__b) { __b } else { { let __b = words.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g__OFFERED(), &geti(&words.clone(), &Py::Int(0)))) } } } }) {
     reply = op_add(&reply.clone(), &{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("form".to_string(), form.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&g__OFFER_TAIL(), "format", args))(&__args) });
@@ -6697,7 +7040,7 @@ pub fn __nested_answer_0(args: &[Py]) -> Py {
     return answer.clone();
     Py::None
 }
-pub fn _a_second_one_read_first(args: &[Py]) -> Py {
+pub fn _a_second_one_read_first__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -6731,12 +7074,12 @@ pub fn __nested_write_0(args: &[Py]) -> Py {
     let mut chosen: Py = Py::None;
     let mut said: Py = Py::None;
     let mut second: Py = Py::None;
-    second = _the_second_one_asked_for(&[understood.clone()]);
+    second = py_call(&g__the_second_one_asked_for(), &[understood.clone()]);
     if py_truthy(&Py::Bool(!py_eq(&second.clone(), &py_str("")))) {
-    chosen = _the_form_last_time(&[memory.clone()]);
+    chosen = py_call(&g__the_form_last_time(), &[memory.clone()]);
     if py_truthy(&{ let __b = chosen.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_eq(&chosen.clone(), &form.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g__ANOTHER_FORM(), &chosen.clone())) } } } }) {
     asked = if py_truthy(&second.clone()) { op_modulo(&py_str("a %s about %s"), &py_tuple(vec![chosen.clone(), second.clone()])) } else { op_modulo(&py_str("a %s"), &chosen.clone()) };
-    return py_call(&geti(&call_builtin("globals", &[]).unwrap_or_else(|e| exc::raise(e)), &geti(&g__ANOTHER_FORM(), &chosen.clone())), &[memory.clone(), py_dict(vec![(py_str("clean"), asked.clone()), (py_str("text"), asked.clone())])]);
+    return py_call(&geti(&__globals(), &geti(&g__ANOTHER_FORM(), &chosen.clone())), &[memory.clone(), py_dict(vec![(py_str("clean"), asked.clone()), (py_str("text"), asked.clone())])]);
     }
     asked = if py_truthy(&second.clone()) { op_modulo(&py_str("a %s about %s"), &py_tuple(vec![form.clone(), second.clone()])) } else { op_modulo(&py_str("a %s"), &form.clone()) };
     said = py_call(&writer, &[memory.clone(), py_dict(vec![(py_str("clean"), asked.clone()), (py_str("text"), asked.clone())])]);
@@ -6749,7 +7092,7 @@ pub fn __nested_write_0(args: &[Py]) -> Py {
     return write.clone();
     Py::None
 }
-pub fn _a_country_is_a_country(args: &[Py]) -> Py {
+pub fn _a_country_is_a_country__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -6788,7 +7131,7 @@ pub fn _a_country_is_a_country(args: &[Py]) -> Py {
     return Py::Bool(true);
     Py::None
 }
-pub fn _kind_words(args: &[Py]) -> Py {
+pub fn _kind_words__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -6815,7 +7158,7 @@ pub fn _kind_words(args: &[Py]) -> Py {
     return call_builtin("frozenset", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); if py_truthy(&word.clone()) {  __out.push(word.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
-pub fn _the_subject_is_wanted(args: &[Py]) -> Py {
+pub fn _the_subject_is_wanted__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -6830,17 +7173,17 @@ pub fn _the_subject_is_wanted(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: understood"))) };
     let mut text: Py = Py::None;
     let _ = py_str("The guard on the subject picks: a subject turned down is asking the other row.");
-    let __iter1 = py_iter_or_raise(&_own_texts(&[understood.clone()]));
+    let __iter1 = py_iter_or_raise(&py_call(&g__own_texts(), &[understood.clone()]));
     for __item in __iter1 {
     text = __item.clone();
-    if py_truthy(&_a_word_is_turned_down(&[text.clone(), call_builtin("tuple", &[g_SHOW_SUBJECT_NAMES()]).unwrap_or_else(|e| exc::raise(e)), g_KIND_REFUSED_AFTER()])) {
+    if py_truthy(&py_call(&g__a_word_is_turned_down(), &[text.clone(), call_builtin("tuple", &[g_SHOW_SUBJECT_NAMES()]).unwrap_or_else(|e| exc::raise(e)), g_KIND_REFUSED_AFTER()])) {
     return Py::Bool(false);
     }
     }
     return Py::Bool(true);
     Py::None
 }
-pub fn _a_documentary_is_wanted(args: &[Py]) -> Py {
+pub fn _a_documentary_is_wanted__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -6855,17 +7198,17 @@ pub fn _a_documentary_is_wanted(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: understood"))) };
     let mut text: Py = Py::None;
     let _ = py_str("The guard on the documentary shelf: a documentary turned down is asking the other row.\n\n    \"documentary\" is a medium and not one of SHOW_SUBJECT_NAMES, so the shared guard above never\n    read it as a subject: \"i dont want to watch a documentary\" was answered with three\n    documentaries. The word is turned down in the same shapes as any other subject, so it is read\n    with the same reader.\n    ");
-    let __iter1 = py_iter_or_raise(&_own_texts(&[understood.clone()]));
+    let __iter1 = py_iter_or_raise(&py_call(&g__own_texts(), &[understood.clone()]));
     for __item in __iter1 {
     text = __item.clone();
-    if py_truthy(&_a_word_is_turned_down(&[text.clone(), g_DOCUMENTARY_WORDS(), g_KIND_REFUSED_AFTER()])) {
+    if py_truthy(&py_call(&g__a_word_is_turned_down(), &[text.clone(), g_DOCUMENTARY_WORDS(), g_KIND_REFUSED_AFTER()])) {
     return Py::Bool(false);
     }
     }
     return Py::Bool(true);
     Py::None
 }
-pub fn _names_a_film_genre(args: &[Py]) -> Py {
+pub fn _names_a_film_genre__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -6881,11 +7224,11 @@ pub fn _names_a_film_genre(args: &[Py]) -> Py {
     let mut word: Py = Py::None;
     let mut words: Py = Py::None;
     let _ = py_str("True when the line names a film genre that has picks of its own (see film-space).");
-    words = op_add(&op_add(&py_str(" "), &_plain_words(&[line.clone()])), &py_str(" "));
+    words = op_add(&op_add(&py_str(" "), &py_call(&g__plain_words(), &[line.clone()])), &py_str(" "));
     return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_FILM_GENRE_WORDS()) { let mut word: Py = __item.clone(); __out.push(stdlib_call("re", "search", &[op_add(&op_add(&py_str("(?<![a-z0-9])"), &stdlib_call("re", "escape", &[word.clone()]).unwrap_or_else(|e| exc::raise(e))), &py_str("(?![a-z0-9])")), words.clone()]).unwrap_or_else(|e| exc::raise(e))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
-pub fn _a_programme_is_wanted(args: &[Py]) -> Py {
+pub fn _a_programme_is_wanted__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -6904,7 +7247,7 @@ pub fn _a_programme_is_wanted(args: &[Py]) -> Py {
     return Py::Bool(!py_truthy(&mcall(&g__PLAYING_NOT_WATCHING(), "search", &[text.clone()])));
     Py::None
 }
-pub fn _show_subject(args: &[Py]) -> Py {
+pub fn _show_subject__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -6920,7 +7263,7 @@ pub fn _show_subject(args: &[Py]) -> Py {
     let mut word: Py = Py::None;
     let mut words: Py = Py::None;
     let _ = py_str("The subject the line names, or \"\" if it names none we have picks for.");
-    words = stdlib_call("re", "findall", &[py_str("[a-z0-9']+"), _plain_words(&[line.clone()])]).unwrap_or_else(|e| exc::raise(e));
+    words = stdlib_call("re", "findall", &[py_str("[a-z0-9']+"), py_call(&g__plain_words(), &[line.clone()])]).unwrap_or_else(|e| exc::raise(e));
     let __iter1 = py_iter_or_raise(&words.clone());
     for __item in __iter1 {
     word = __item.clone();
@@ -6931,7 +7274,7 @@ pub fn _show_subject(args: &[Py]) -> Py {
     return py_str("");
     Py::None
 }
-pub fn _show_about(args: &[Py]) -> Py {
+pub fn _show_about__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -6950,7 +7293,7 @@ pub fn _show_about(args: &[Py]) -> Py {
     let mut pick: Py = Py::None;
     let mut said: Py = Py::None;
     let mut subject: Py = Py::None;
-    subject = _show_subject(&[reading.clone()]);
+    subject = py_call(&g__show_subject(), &[reading.clone()]);
     if py_truthy(&Py::Bool(!py_truthy(&subject.clone()))) {
     return Py::None;
     }
@@ -6965,7 +7308,7 @@ pub fn _show_about(args: &[Py]) -> Py {
     return pick.clone();
     Py::None
 }
-pub fn _pick_kind(args: &[Py]) -> Py {
+pub fn _pick_kind__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -6980,7 +7323,7 @@ pub fn _pick_kind(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: line"))) };
     let mut word: Py = Py::None;
     let _ = py_str("Film, series or book: whichever the line asks about first.");
-    let __iter1 = py_iter_or_raise(&stdlib_call("re", "findall", &[py_str("[a-z0-9']+"), _plain_words(&[line.clone()])]).unwrap_or_else(|e| exc::raise(e)));
+    let __iter1 = py_iter_or_raise(&stdlib_call("re", "findall", &[py_str("[a-z0-9']+"), py_call(&g__plain_words(), &[line.clone()])]).unwrap_or_else(|e| exc::raise(e)));
     for __item in __iter1 {
     word = __item.clone();
     if py_truthy(&Py::Bool(py_contains(&py_tuple(vec![py_str("book"), py_str("books"), py_str("novel"), py_str("novels"), py_str("read"), py_str("reading")]), &word.clone()))) {
@@ -6999,7 +7342,7 @@ pub fn _pick_kind(args: &[Py]) -> Py {
     return py_str("");
     Py::None
 }
-pub fn _pick_refused(args: &[Py]) -> Py {
+pub fn _pick_refused__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -7014,11 +7357,11 @@ pub fn _pick_refused(args: &[Py]) -> Py {
     else { exc::raise(type_err(&format!("missing required argument: line"))) };
     let mut found: Py = Py::None;
     let _ = py_str("The medium the line rules out, or \"\" - \"not a series\" is not a request for a series.");
-    found = mcall(&g__REFUSED_KIND(), "search", &[op_add(&op_add(&py_str(" "), &_plain_words(&[line.clone()])), &py_str(" "))]);
-    return if py_truthy(&found.clone()) { _pick_kind(&[mcall(&found.clone(), "group", &[py_str("kind")])]) } else { py_str("") };
+    found = mcall(&g__REFUSED_KIND(), "search", &[op_add(&op_add(&py_str(" "), &py_call(&g__plain_words(), &[line.clone()])), &py_str(" "))]);
+    return if py_truthy(&found.clone()) { py_call(&g__pick_kind(), &[mcall(&found.clone(), "group", &[py_str("kind")])]) } else { py_str("") };
     Py::None
 }
-pub fn _pick_who(args: &[Py]) -> Py {
+pub fn _pick_who__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -7034,7 +7377,7 @@ pub fn _pick_who(args: &[Py]) -> Py {
     let mut said: Py = Py::None;
     let mut tell: Py = Py::None;
     let _ = py_str("Who the evening is for, read off the line: parents, partner, friends, or \"\" for no one.\n\n    \"The family\" is not here on purpose: with children in the house it means the children are in\n    the room, and there is a row that knows what will not scare an eight-year-old, so a family line\n    is left to it rather than answered with a pick for a parent.\n    ");
-    said = op_add(&op_add(&py_str(" "), &_plain_words(&[line.clone()])), &py_str(" "));
+    said = op_add(&op_add(&py_str(" "), &py_call(&g__plain_words(), &[line.clone()])), &py_str(" "));
     if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&py_tuple(vec![py_str("parents"), py_str(" my mum"), py_str(" my dad"), py_str(" my mother"), py_str(" my father"), py_str("in laws"), py_str("in law")])) { let mut tell: Py = __item.clone(); __out.push(Py::Bool(py_contains(&said.clone(), &tell.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     return py_str("parents");
     }
@@ -7047,7 +7390,7 @@ pub fn _pick_who(args: &[Py]) -> Py {
     return py_str("");
     Py::None
 }
-pub fn _pick_limit(args: &[Py]) -> Py {
+pub fn _pick_limit__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -7070,7 +7413,7 @@ pub fn _pick_limit(args: &[Py]) -> Py {
     let mut turns: Py = Py::None;
     let mut user: Py = Py::None;
     let _ = py_str("The limit the line, or a turn just before it, puts on what can be watched.\n\n    \"we only have bbc and itv\" and \"my mum doesnt like subtitles\" are the same kind of line: a\n    constraint, not a request. A pick made a turn later still has to respect it, so the last two\n    things the person typed are read too.\n    ");
-    said = op_add(&op_add(&op_add(&op_add(&py_str(" "), &mcall(&mcall(&call_builtin("str", &[line.clone()]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]), "replace", &[py_str("’"), py_str("'")])), &py_str(" ")), &_plain_words(&[line.clone()])), &py_str(" "));
+    said = op_add(&op_add(&op_add(&op_add(&py_str(" "), &mcall(&mcall(&call_builtin("str", &[line.clone()]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]), "replace", &[py_str("’"), py_str("'")])), &py_str(" ")), &py_call(&g__plain_words(), &[line.clone()])), &py_str(" "));
     if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_SUBS_TELLS()) { let mut tell: Py = __item.clone(); __out.push(Py::Bool(py_contains(&said.clone(), &tell.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     return py_str("nosubs");
     }
@@ -7078,15 +7421,15 @@ pub fn _pick_limit(args: &[Py]) -> Py {
     return py_str("free");
     }
     turns = if py_truthy(&call_builtin("isinstance", &[memory.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) { mcall(&memory.clone(), "get", &[py_str("turns")]) } else { Py::None };
-    mine = mcall(&_plain_words(&[line.clone()]), "strip", &[]);
+    mine = mcall(&py_call(&g__plain_words(), &[line.clone()]), "strip", &[]);
     let __iter1 = py_iter_or_raise(&slice_or_raise(&{ let __b = turns.clone(); if py_truthy(&__b) { __b } else { py_list(vec![]) } }, &op_neg(&Py::Int(2)), &Py::None, &Py::None));
     for __item in __iter1 {
     turn = __item.clone();
     user = call_builtin("str", &[{ let __b = mcall(&{ let __b = turn.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[py_str("user")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e));
-    if py_truthy(&Py::Bool(py_eq(&mcall(&_plain_words(&[user.clone()]), "strip", &[]), &mine.clone()))) {
+    if py_truthy(&Py::Bool(py_eq(&mcall(&py_call(&g__plain_words(), &[user.clone()]), "strip", &[]), &mine.clone()))) {
     continue;
     }
-    said = op_add(&op_add(&op_add(&op_add(&py_str(" "), &mcall(&mcall(&user.clone(), "lower", &[]), "replace", &[py_str("’"), py_str("'")])), &py_str(" ")), &_plain_words(&[user.clone()])), &py_str(" "));
+    said = op_add(&op_add(&op_add(&op_add(&py_str(" "), &mcall(&mcall(&user.clone(), "lower", &[]), "replace", &[py_str("’"), py_str("'")])), &py_str(" ")), &py_call(&g__plain_words(), &[user.clone()])), &py_str(" "));
     if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_SUBS_TELLS()) { let mut tell: Py = __item.clone(); __out.push(Py::Bool(py_contains(&said.clone(), &tell.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     return py_str("nosubs");
     }
@@ -7097,7 +7440,7 @@ pub fn _pick_limit(args: &[Py]) -> Py {
     return py_str("");
     Py::None
 }
-pub fn _wants_subtitles(args: &[Py]) -> Py {
+pub fn _wants_subtitles__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -7113,7 +7456,7 @@ pub fn _wants_subtitles(args: &[Py]) -> Py {
     let mut tell: Py = Py::None;
     let mut words: Py = Py::None;
     let _ = py_str("True when the line asks for a subtitled film rather than turning one down.");
-    words = op_add(&op_add(&py_str(" "), &_plain_words(&[line.clone()])), &py_str(" "));
+    words = op_add(&op_add(&py_str(" "), &py_call(&g__plain_words(), &[line.clone()])), &py_str(" "));
     if py_truthy(&{ let __b = call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_SUBS_TELLS()) { let mut tell: Py = __item.clone(); __out.push(Py::Bool(py_contains(&words.clone(), &tell.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)); if py_truthy(&__b) { __b } else { mcall(&g_SUBS_TURNED_DOWN(), "search", &[words.clone()]) } }) {
     return Py::Bool(false);
     }
@@ -7123,7 +7466,7 @@ pub fn _wants_subtitles(args: &[Py]) -> Py {
     return call_builtin("bool", &[{ let __b = mcall(&g_WATCHES_SOMETHING(), "search", &[words.clone()]); if !py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_SUBS_WANT_IF_WATCHING()) { let mut tell: Py = __item.clone(); __out.push(Py::Bool(py_contains(&words.clone(), &tell.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
-pub fn _cinema_of(args: &[Py]) -> Py {
+pub fn _cinema_of__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -7143,7 +7486,7 @@ pub fn _cinema_of(args: &[Py]) -> Py {
     let mut word: Py = Py::None;
     let mut words: Py = Py::None;
     let _ = py_str("The country whose films the line names, or None: \"good french films\" names France.\n\n    A country the person turned down is not a request for it - \"no french films tonight\" - so a\n    negator in front of the word passes the line to whatever else can answer it.\n    ");
-    words = op_add(&op_add(&py_str(" "), &_plain_words(&[line.clone()])), &py_str(" "));
+    words = op_add(&op_add(&py_str(" "), &py_call(&g__plain_words(), &[line.clone()])), &py_str(" "));
     let __iter1 = py_iter_or_raise(&mcall(&g_CINEMA(), "items", &[]));
     for __item in __iter1 {
     let __unpk2 = py_unpack(&__item.clone(), 2, None);
@@ -7162,7 +7505,7 @@ pub fn _cinema_of(args: &[Py]) -> Py {
     return Py::None;
     Py::None
 }
-pub fn _rows_from_cinema(args: &[Py]) -> Py {
+pub fn _rows_from_cinema__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -7179,10 +7522,10 @@ pub fn _rows_from_cinema(args: &[Py]) -> Py {
     let mut reason: Py = Py::None;
     let mut title: Py = Py::None;
     let _ = py_str("The national films of one country, in the same shape as a PICKS row.");
-    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_NATIONAL_CINEMA()) { let __unpk1351 = py_unpack(&__item.clone(), 3, None); let mut title: Py = __unpk1351[0].clone(); let mut of: Py = __unpk1351[1].clone(); let mut reason: Py = __unpk1351[2].clone(); if py_truthy(&Py::Bool(py_eq(&of.clone(), &country.clone()))) {  __out.push(py_tuple(vec![title.clone(), py_str("film"), py_tuple(vec![]), Py::Bool(false), Py::Bool(false), reason.clone()])); } } py_list(__out) })() };
+    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_NATIONAL_CINEMA()) { let __unpk1 = py_unpack(&__item.clone(), 3, None); let mut title: Py = __unpk1[0].clone(); let mut of: Py = __unpk1[1].clone(); let mut reason: Py = __unpk1[2].clone(); if py_truthy(&Py::Bool(py_eq(&of.clone(), &country.clone()))) {  __out.push(py_tuple(vec![title.clone(), py_str("film"), py_tuple(vec![]), Py::Bool(false), Py::Bool(false), reason.clone()])); } } py_list(__out) })() };
     Py::None
 }
-pub fn _pick_rows(args: &[Py]) -> Py {
+pub fn _pick_rows__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -7213,7 +7556,7 @@ pub fn _pick_rows(args: &[Py]) -> Py {
     let mut suited: Py = Py::None;
     let _ = py_str("The three rows that fit the medium, the company and the limit, wordiest first row last.\n\n    A limit is about watching, so it is read for films and series only: a book has no channel in\n    the way of it, and telling someone a paperback is free-to-air because it says so on iPlayer\n    would be a plain mistake.\n    ");
     if py_truthy(&country.clone()) {
-    return slice_or_raise(&_rows_from_cinema(&[country.clone()]), &Py::None, &count.clone(), &Py::None);
+    return slice_or_raise(&py_call(&g__rows_from_cinema(), &[country.clone()]), &Py::None, &count.clone(), &Py::None);
     }
     rows = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_PICKS()) { let mut row: Py = __item.clone(); if py_truthy(&Py::Bool(py_eq(&geti(&row.clone(), &Py::Int(1)), &kind.clone()))) {  __out.push(row.clone()); } } py_list(__out) })() };
     if py_truthy(&Py::Bool(!py_contains(&py_tuple(vec![py_str("film"), py_str("series")]), &kind.clone()))) {
@@ -7233,7 +7576,7 @@ pub fn _pick_rows(args: &[Py]) -> Py {
     return slice_or_raise(&rows.clone(), &Py::None, &count.clone(), &Py::None);
     Py::None
 }
-pub fn _pick_list(args: &[Py]) -> Py {
+pub fn _pick_list__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -7256,7 +7599,7 @@ pub fn _pick_list(args: &[Py]) -> Py {
     return op_add(&op_add(&mcall(&py_str(", "), "join", &[slice_or_raise(&said.clone(), &Py::None, &op_neg(&Py::Int(1)), &Py::None)]), &py_str(" or ")), &geti(&said.clone(), &op_neg(&Py::Int(1))));
     Py::None
 }
-pub fn _subs_sentence(args: &[Py]) -> Py {
+pub fn _subs_sentence__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -7282,7 +7625,7 @@ pub fn _subs_sentence(args: &[Py]) -> Py {
     return op_modulo(&py_str("All three are in %s with subtitles."), &language.clone());
     Py::None
 }
-pub fn _pick_reply(args: &[Py]) -> Py {
+pub fn _pick_reply__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -7343,9 +7686,9 @@ pub fn _pick_reply(args: &[Py]) -> Py {
     if py_truthy(&country.clone()) {
     head = op_modulo(&py_str("For %s %s film"), &py_tuple(vec![if py_truthy(&Py::Bool(py_contains(&py_str("aeiou"), &mcall(&slice_or_raise(&country.clone(), &Py::None, &Py::Int(1), &Py::None), "lower", &[])))) { py_str("an") } else { py_str("a") }, country.clone()]));
     }
-    said = op_add(&op_add(&op_add(&head.clone(), &py_str(": ")), &_pick_list(&[rows.clone()])), &py_str("."));
+    said = op_add(&op_add(&op_add(&head.clone(), &py_str(": ")), &py_call(&g__pick_list(), &[rows.clone()])), &py_str("."));
     if py_truthy(&country.clone()) {
-    let __aug4 = op_add(&said.clone(), &op_add(&py_str(" "), &_subs_sentence(&[call_builtin("len", &[rows.clone()]).unwrap_or_else(|e| exc::raise(e)), language.clone()])));
+    let __aug4 = op_add(&said.clone(), &op_add(&py_str(" "), &py_call(&g__subs_sentence(), &[call_builtin("len", &[rows.clone()]).unwrap_or_else(|e| exc::raise(e)), language.clone()])));
     said = __aug4;
     }
     if py_truthy(&{ let __b = Py::Bool(py_eq(&limit.clone(), &py_str("free"))); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&py_tuple(vec![py_str("film"), py_str("series")]), &kind.clone())) } }) {
@@ -7373,7 +7716,7 @@ pub fn _pick_reply(args: &[Py]) -> Py {
     return said.clone();
     Py::None
 }
-pub fn _pick_carry(args: &[Py]) -> Py {
+pub fn _pick_carry__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -7396,15 +7739,15 @@ pub fn _pick_carry(args: &[Py]) -> Py {
     let mut user: Py = Py::None;
     let _ = py_str("The medium asked about a turn ago, for a follow-up that names none of its own.\n\n    \"what should i read next, something funny\" then \"anything shorter\": the second line is a book\n    request with the noun left out, and answered as a film it is the wrong medium. The last two\n    things the person typed are read, the same way the limit is.\n    ");
     turns = if py_truthy(&call_builtin("isinstance", &[memory.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) { mcall(&memory.clone(), "get", &[py_str("turns")]) } else { Py::None };
-    mine = mcall(&_plain_words(&[line.clone()]), "strip", &[]);
+    mine = mcall(&py_call(&g__plain_words(), &[line.clone()]), "strip", &[]);
     let __iter1 = py_iter_or_raise(&slice_or_raise(&{ let __b = turns.clone(); if py_truthy(&__b) { __b } else { py_list(vec![]) } }, &op_neg(&Py::Int(2)), &Py::None, &Py::None));
     for __item in __iter1 {
     turn = __item.clone();
     user = call_builtin("str", &[{ let __b = mcall(&{ let __b = turn.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[py_str("user")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e));
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&user.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_eq(&mcall(&_plain_words(&[user.clone()]), "strip", &[]), &mine.clone())) } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&user.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_eq(&mcall(&py_call(&g__plain_words(), &[user.clone()]), "strip", &[]), &mine.clone())) } }) {
     continue;
     }
-    kind = _pick_kind(&[user.clone()]);
+    kind = py_call(&g__pick_kind(), &[user.clone()]);
     if py_truthy(&kind.clone()) {
     return kind.clone();
     }
@@ -7412,7 +7755,7 @@ pub fn _pick_carry(args: &[Py]) -> Py {
     return py_str("");
     Py::None
 }
-pub fn _pick_stands_down(args: &[Py]) -> Py {
+pub fn _pick_stands_down__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -7428,7 +7771,7 @@ pub fn _pick_stands_down(args: &[Py]) -> Py {
     let mut tell: Py = Py::None;
     let mut words: Py = Py::None;
     let _ = py_str("True when the line names something the table cannot hold, so the pick keeps out of it.\n\n    Three shapes: a medium the table has no rows for, a subject (\"about the war\"), and children in\n    the room. Each of them has a better answer elsewhere - the row that knows what suits an\n    eight-year-old, or the entry that answers the subject itself - so the pick passes and lets\n    that one speak.\n    ");
-    words = op_add(&op_add(&py_str(" "), &_plain_words(&[line.clone()])), &py_str(" "));
+    words = op_add(&op_add(&py_str(" "), &py_call(&g__plain_words(), &[line.clone()])), &py_str(" "));
     if py_truthy(&mcall(&g_BOOK_AS_VERB(), "search", &[words.clone()])) {
     return Py::Bool(true);
     }
@@ -7444,7 +7787,7 @@ pub fn _pick_stands_down(args: &[Py]) -> Py {
     return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&py_tuple(vec![py_str("family"), py_str("the kids"), py_str("kids"), py_str("children"), py_str("child")])) { let mut tell: Py = __item.clone(); __out.push(Py::Bool(py_contains(&words.clone(), &tell.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
-pub fn _another_subject(args: &[Py]) -> Py {
+pub fn _another_subject__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -7460,14 +7803,14 @@ pub fn _another_subject(args: &[Py]) -> Py {
     let mut word: Py = Py::None;
     let mut words: Py = Py::None;
     let _ = py_str("True when the line is about a length or a thing that is not a film.");
-    words = op_modulo(&py_str(" %s "), &_plain_words(&[line.clone()]));
+    words = op_modulo(&py_str(" %s "), &py_call(&g__plain_words(), &[line.clone()]));
     if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_FILM_SAID()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&words.clone(), &op_modulo(&py_str(" %s "), &word.clone())))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     return Py::Bool(false);
     }
     return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_OTHER_SUBJECT()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&words.clone(), &op_modulo(&py_str(" %s "), &word.clone())))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
-pub fn _pick_line(args: &[Py]) -> Py {
+pub fn _pick_line__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -7490,7 +7833,7 @@ pub fn _pick_line(args: &[Py]) -> Py {
     return mcall(&py_str(" "), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&said.clone()) { let mut part: Py = __item.clone(); if py_truthy(&part.clone()) {  __out.push(part.clone()); } } py_list(__out) })() }]);
     Py::None
 }
-pub fn _film_kind(args: &[Py]) -> Py {
+pub fn _film_kind__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -7509,7 +7852,7 @@ pub fn _film_kind(args: &[Py]) -> Py {
     let mut one: Py = Py::None;
     let mut words: Py = Py::None;
     let _ = py_str("The kind of film the line names (a key of FILM_KINDS), or \"\".\n\n    A kind the person turned down is not a request for it - \"not a musical\", \"i dont like\n    christmas films\" - so a negator just before the word passes the line on, the same way the\n    country word is read.\n    ");
-    words = op_add(&op_add(&py_str(" "), &_plain_words(&[line.clone()])), &py_str(" "));
+    words = op_add(&op_add(&py_str(" "), &py_call(&g__plain_words(), &[line.clone()])), &py_str(" "));
     let __iter1 = py_iter_or_raise(&g_FILM_KIND_WORDS());
     for __item in __iter1 {
     kind = __item.clone();
@@ -7526,7 +7869,7 @@ pub fn _film_kind(args: &[Py]) -> Py {
     return py_str("");
     Py::None
 }
-pub fn _limit_wanted(args: &[Py]) -> Py {
+pub fn _limit_wanted__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -7547,7 +7890,7 @@ pub fn _limit_wanted(args: &[Py]) -> Py {
     let mut tail: Py = Py::None;
     let mut words: Py = Py::None;
     let _ = py_str("The minutes the line allows and whether that wording excludes the number itself.\n\n    A limit is said three ways - \"under 100 minutes\", \"under two hours\", \"no longer than an\n    hour and a half\" - and all three are the same number here. A runtime named without an \"under\"\n    (\"a film that is 90 minutes\") is not a limit, so it reads as none and the line is not this\n    entry's question. The second half of the answer is the wording: \"under\" and \"less than\" rule\n    out a film of exactly that length, \"max\" and \"no longer than\" do not.\n    ");
-    words = op_add(&op_add(&py_str(" "), &_plain_words(&[line.clone()])), &py_str(" "));
+    words = op_add(&op_add(&py_str(" "), &py_call(&g__plain_words(), &[line.clone()])), &py_str(" "));
     found = mcall(&g__UNDER(), "search", &[words.clone()]);
     if py_truthy(&found.clone()) {
     strict = Py::Bool(py_contains(&g_STRICT_LIMIT(), &mcall(&found.clone(), "group", &[Py::Int(1)])));
@@ -7597,7 +7940,7 @@ pub fn _limit_wanted(args: &[Py]) -> Py {
     return py_tuple(vec![Py::Int(0), Py::Bool(false)]);
     Py::None
 }
-pub fn _minutes_wanted(args: &[Py]) -> Py {
+pub fn _minutes_wanted__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -7611,10 +7954,10 @@ pub fn _minutes_wanted(args: &[Py]) -> Py {
     else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "line") { v.clone() }
     else { exc::raise(type_err(&format!("missing required argument: line"))) };
     let _ = py_str("The length limit the line states in minutes, or 0 when it states none.");
-    return geti(&_limit_wanted(&[line.clone()]), &Py::Int(0));
+    return geti(&py_call(&g__limit_wanted(), &[line.clone()]), &Py::Int(0));
     Py::None
 }
-pub fn _film_under(args: &[Py]) -> Py {
+pub fn _film_under__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -7642,35 +7985,35 @@ pub fn _film_under(args: &[Py]) -> Py {
     let mut strict: Py = Py::None;
     let mut within: Py = Py::None;
     let _ = py_str("Films that fit the minutes the line allows, with the runtime beside each title.\n\n    The number is the answer, so a limit nothing fits says so rather than stretching the nearest\n    film over it: the shortest thing in the table is 23 minutes, and \"*Toy Story* is 81\" is not an\n    answer to somebody with half an hour.\n    ");
-    line = _pick_line(&[understood.clone()]);
-    if py_truthy(&_pick_stands_down(&[line.clone()])) {
+    line = py_call(&g__pick_line(), &[understood.clone()]);
+    if py_truthy(&py_call(&g__pick_stands_down(), &[line.clone()])) {
     return Py::None;
     }
-    if py_truthy(&_another_subject(&[line.clone()])) {
+    if py_truthy(&py_call(&g__another_subject(), &[line.clone()])) {
     return Py::None;
     }
-    let __unpk1 = py_unpack(&_limit_wanted(&[line.clone()]), 2, None);
+    let __unpk1 = py_unpack(&py_call(&g__limit_wanted(), &[line.clone()]), 2, None);
     limit = __unpk1[0].clone();
     strict = __unpk1[1].clone();
     if py_truthy(&Py::Bool(!py_truthy(&limit.clone()))) {
     return Py::None;
     }
-    kind = _film_kind(&[line.clone()]);
+    kind = py_call(&g__film_kind(), &[line.clone()]);
     if py_truthy(&kind.clone()) {
-    return _film_kind_reply(&[memory.clone(), understood.clone()]);
+    return py_call(&g__film_kind_reply(), &[memory.clone(), understood.clone()]);
     }
-    if py_truthy(&_mood_of(&[line.clone()])) {
-    if py_truthy(&{ let __b = _pick_kind(&[line.clone()]); if py_truthy(&__b) { __b } else { _pick_carry(&[memory.clone(), line.clone()]) } }) {
+    if py_truthy(&py_call(&g__mood_of(), &[line.clone()])) {
+    if py_truthy(&{ let __b = py_call(&g__pick_kind(), &[line.clone()]); if py_truthy(&__b) { __b } else { py_call(&g__pick_carry(), &[memory.clone(), line.clone()]) } }) {
     return Py::None;
     }
-    return _a_pick_in_any_medium(&[memory.clone(), understood.clone()]);
+    return py_call(&g__a_pick_in_any_medium(), &[memory.clone(), understood.clone()]);
     }
-    if py_truthy(&_names_a_film_genre(&[line.clone()])) {
+    if py_truthy(&py_call(&g__names_a_film_genre(), &[line.clone()])) {
     return Py::None;
     }
-    carried = _kind_carry(&[memory.clone(), line.clone()]);
+    carried = py_call(&g__kind_carry(), &[memory.clone(), line.clone()]);
     if py_truthy(&carried.clone()) {
-    within = _shelf_within(&[carried.clone(), limit.clone(), strict.clone()]);
+    within = py_call(&g__shelf_within(), &[carried.clone(), limit.clone(), strict.clone()]);
     if py_truthy(&within.clone()) {
     return within.clone();
     }
@@ -7690,7 +8033,7 @@ pub fn _film_under(args: &[Py]) -> Py {
     return op_modulo(&py_str("%s - all %s %d minutes. Say what you feel like and I will pick one."), &py_tuple(vec![body.clone(), if py_truthy(&strict.clone()) { py_str("under") } else { py_str("up to") }, limit.clone()]));
     Py::None
 }
-pub fn _shelf_within(args: &[Py]) -> Py {
+pub fn _shelf_within__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -7733,12 +8076,12 @@ pub fn _shelf_within(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(py_eq(&call_builtin("len", &[fit.clone()]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("len", &[rows.clone()]).unwrap_or_else(|e| exc::raise(e))))) {
     return Py::None;
     }
-    said = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&fit.clone()) { let __unpk829 = py_unpack(&__item.clone(), 3, None); let mut title: Py = __unpk829[0].clone(); let mut minutes: Py = __unpk829[1].clone(); let mut reason: Py = __unpk829[2].clone(); __out.push(op_modulo(&py_str("*%s* (%d minutes, %s)"), &py_tuple(vec![title.clone(), minutes.clone(), reason.clone()]))); } py_list(__out) })() };
+    said = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&fit.clone()) { let __unpk1 = py_unpack(&__item.clone(), 3, None); let mut title: Py = __unpk1[0].clone(); let mut minutes: Py = __unpk1[1].clone(); let mut reason: Py = __unpk1[2].clone(); __out.push(op_modulo(&py_str("*%s* (%d minutes, %s)"), &py_tuple(vec![title.clone(), minutes.clone(), reason.clone()]))); } py_list(__out) })() };
     body = if py_truthy(&Py::Bool(py_eq(&call_builtin("len", &[said.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1)))) { geti(&said.clone(), &Py::Int(0)) } else { op_add(&op_add(&mcall(&py_str(", "), "join", &[slice_or_raise(&said.clone(), &Py::None, &op_neg(&Py::Int(1)), &Py::None)]), &py_str(" or ")), &geti(&said.clone(), &op_neg(&Py::Int(1)))) };
     return op_modulo(&py_str("%s. %s %s %d minutes, and the other %s on that shelf run%s longer, so say if you would rather have one of those."), &py_tuple(vec![body.clone(), op_add(&mcall(&geti(&said_as.clone(), &Py::Int(0)), "upper", &[]), &slice_or_raise(&said_as.clone(), &Py::Int(1), &Py::None, &Py::None)), if py_truthy(&strict.clone()) { py_str("under") } else { py_str("up to") }, limit.clone(), if py_truthy(&Py::Bool(py_eq(&op_sub(&call_builtin("len", &[rows.clone()]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("len", &[fit.clone()]).unwrap_or_else(|e| exc::raise(e))), &Py::Int(1)))) { py_str("one") } else { py_str("two") }, if py_truthy(&Py::Bool(py_eq(&op_sub(&call_builtin("len", &[rows.clone()]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("len", &[fit.clone()]).unwrap_or_else(|e| exc::raise(e))), &Py::Int(1)))) { py_str("s") } else { py_str("") }]));
     Py::None
 }
-pub fn _kind_carry(args: &[Py]) -> Py {
+pub fn _kind_carry__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -7761,15 +8104,15 @@ pub fn _kind_carry(args: &[Py]) -> Py {
     let mut user: Py = Py::None;
     let _ = py_str("The kind of film asked about a turn ago, for a follow-up that says only a limit.\n\n    \"good westerns\" then \"under two hours\" is a western question with the kind left out, and the\n    length table answered it with *The King's Speech*: the shelf is what the chat is about, read\n    the same way the medium and the limit already are.\n    ");
     turns = if py_truthy(&call_builtin("isinstance", &[memory.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) { mcall(&memory.clone(), "get", &[py_str("turns")]) } else { Py::None };
-    mine = mcall(&_plain_words(&[line.clone()]), "strip", &[]);
+    mine = mcall(&py_call(&g__plain_words(), &[line.clone()]), "strip", &[]);
     let __iter1 = py_iter_or_raise(&slice_or_raise(&{ let __b = turns.clone(); if py_truthy(&__b) { __b } else { py_list(vec![]) } }, &op_neg(&Py::Int(2)), &Py::None, &Py::None));
     for __item in __iter1 {
     turn = __item.clone();
     user = call_builtin("str", &[{ let __b = mcall(&{ let __b = turn.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[py_str("user")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e));
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&user.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_eq(&mcall(&_plain_words(&[user.clone()]), "strip", &[]), &mine.clone())) } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&user.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_eq(&mcall(&py_call(&g__plain_words(), &[user.clone()]), "strip", &[]), &mine.clone())) } }) {
     continue;
     }
-    kind = _film_kind(&[user.clone()]);
+    kind = py_call(&g__film_kind(), &[user.clone()]);
     if py_truthy(&kind.clone()) {
     return kind.clone();
     }
@@ -7777,7 +8120,7 @@ pub fn _kind_carry(args: &[Py]) -> Py {
     return py_str("");
     Py::None
 }
-pub fn _shortest_wanted(args: &[Py]) -> Py {
+pub fn _shortest_wanted__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -7798,7 +8141,7 @@ pub fn _shortest_wanted(args: &[Py]) -> Py {
     return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&py_tuple(vec![py_str("one"), py_str("ones"), py_str("film"), py_str("films"), py_str("those"), py_str("these"), py_str("them"), py_str("pick"), py_str("of"), py_str("which"), py_str("what"), py_str("three"), py_str("any"), py_str("any of")])) { let mut word: Py = __item.clone(); __out.push(stdlib_call("re", "search", &[op_add(&op_add(&py_str("(?<![a-z0-9])"), &word.clone()), &py_str("(?![a-z0-9])")), line.clone()]).unwrap_or_else(|e| exc::raise(e))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
-pub fn _film_kind_reply(args: &[Py]) -> Py {
+pub fn _film_kind_reply__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -7831,32 +8174,32 @@ pub fn _film_kind_reply(args: &[Py]) -> Py {
     let mut within: Py = Py::None;
     let mut words: Py = Py::None;
     let _ = py_str("The shelf a kind names, three films from it, and how long each one runs.");
-    line = _pick_line(&[understood.clone()]);
-    if py_truthy(&_pick_stands_down(&[line.clone()])) {
+    line = py_call(&g__pick_line(), &[understood.clone()]);
+    if py_truthy(&py_call(&g__pick_stands_down(), &[line.clone()])) {
     return Py::None;
     }
-    if py_truthy(&_another_subject(&[line.clone()])) {
+    if py_truthy(&py_call(&g__another_subject(), &[line.clone()])) {
     return Py::None;
     }
-    words = op_add(&op_add(&py_str(" "), &_plain_words(&[line.clone()])), &py_str(" "));
-    kind = _film_kind(&[line.clone()]);
+    words = op_add(&op_add(&py_str(" "), &py_call(&g__plain_words(), &[line.clone()])), &py_str(" "));
+    kind = py_call(&g__film_kind(), &[line.clone()]);
     if py_truthy(&Py::Bool(!py_truthy(&kind.clone()))) {
     return Py::None;
     }
-    if py_truthy(&Py::Bool(!py_contains(&py_tuple(vec![py_str("film"), py_str("")]), &_pick_kind(&[line.clone()])))) {
+    if py_truthy(&Py::Bool(!py_contains(&py_tuple(vec![py_str("film"), py_str("")]), &py_call(&g__pick_kind(), &[line.clone()])))) {
     return Py::None;
     }
-    if py_truthy(&{ let __b = stdlib_call("re", "match", &[py_str("\\s*(?:is|was|are|were|isnt|wasnt)\\b"), _plain_words(&[line.clone()])]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&words.clone(), &op_add(&op_add(&py_str(" "), &kind.clone()), &py_str(" ")))) } }) {
+    if py_truthy(&{ let __b = stdlib_call("re", "match", &[py_str("\\s*(?:is|was|are|were|isnt|wasnt)\\b"), py_call(&g__plain_words(), &[line.clone()])]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&words.clone(), &op_add(&op_add(&py_str(" "), &kind.clone()), &py_str(" ")))) } }) {
     return Py::None;
     }
-    if py_truthy(&{ let __b = _a_word_is_turned_down(&[line.clone(), _kind_words(&[kind.clone()]), g_KIND_REFUSED_AFTER()]); if py_truthy(&__b) { __b } else { _the_chat_turned_down(&[_kind_words(&[kind.clone()]), memory.clone(), g_KIND_REFUSED_AFTER()]) } }) {
+    if py_truthy(&{ let __b = py_call(&g__a_word_is_turned_down(), &[line.clone(), py_call(&g__kind_words(), &[kind.clone()]), g_KIND_REFUSED_AFTER()]); if py_truthy(&__b) { __b } else { py_call(&g__the_chat_turned_down(), &[py_call(&g__kind_words(), &[kind.clone()]), memory.clone(), g_KIND_REFUSED_AFTER()]) } }) {
     return Py::None;
     }
     let __unpk1 = py_unpack(&geti(&g_FILM_KINDS(), &kind.clone()), 3, None);
     label = __unpk1[0].clone();
     said_as = __unpk1[1].clone();
     rows = __unpk1[2].clone();
-    if py_truthy(&_shortest_wanted(&[words.clone()])) {
+    if py_truthy(&py_call(&g__shortest_wanted(), &[words.clone()])) {
     shortest = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(rows.clone()); __kws.extend(vec![("key".to_string(), { let kind = kind.clone(); let label = label.clone(); let limit = limit.clone(); let line = line.clone(); let longer = longer.clone(); let memory = memory.clone(); let minutes = minutes.clone(); let reason = reason.clone(); let row = row.clone(); let rows = rows.clone(); let said = said.clone(); let said_as = said_as.clone(); let shortest = shortest.clone(); let strict = strict.clone(); let title = title.clone(); let understood = understood.clone(); let within = within.clone(); let words = words.clone(); py_func("lambda", move |args: &[Py]| { let kind = kind.clone(); let label = label.clone(); let limit = limit.clone(); let line = line.clone(); let longer = longer.clone(); let memory = memory.clone(); let minutes = minutes.clone(); let reason = reason.clone(); let row = row.clone(); let rows = rows.clone(); let said = said.clone(); let said_as = said_as.clone(); let shortest = shortest.clone(); let strict = strict.clone(); let title = title.clone(); let understood = understood.clone(); let within = within.clone(); let words = words.clone(); let row: Py = __kwp(args, 0, "row").unwrap_or(Py::None); geti(&row.clone(), &Py::Int(1)) }) })]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("min", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
     longer = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&rows.clone()) { let mut row: Py = __item.clone(); if py_truthy(&Py::Bool(!py_eq(&geti(&row.clone(), &Py::Int(0)), &geti(&shortest.clone(), &Py::Int(0))))) {  __out.push(row.clone()); } } py_list(__out) })() };
     said = op_modulo(&py_str("The shortest on that shelf is *%s* at %d minutes, %s"), &py_tuple(vec![geti(&shortest.clone(), &Py::Int(0)), geti(&shortest.clone(), &Py::Int(1)), geti(&shortest.clone(), &Py::Int(2))]));
@@ -7866,20 +8209,20 @@ pub fn _film_kind_reply(args: &[Py]) -> Py {
     }
     return said.clone();
     }
-    let __unpk3 = py_unpack(&_limit_wanted(&[line.clone()]), 2, None);
+    let __unpk3 = py_unpack(&py_call(&g__limit_wanted(), &[line.clone()]), 2, None);
     limit = __unpk3[0].clone();
     strict = __unpk3[1].clone();
     if py_truthy(&limit.clone()) {
-    within = _shelf_within(&[kind.clone(), limit.clone(), strict.clone()]);
+    within = py_call(&g__shelf_within(), &[kind.clone(), limit.clone(), strict.clone()]);
     if py_truthy(&within.clone()) {
     return within.clone();
     }
     }
-    said = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&rows.clone()) { let __unpk4286 = py_unpack(&__item.clone(), 3, None); let mut title: Py = __unpk4286[0].clone(); let mut minutes: Py = __unpk4286[1].clone(); let mut reason: Py = __unpk4286[2].clone(); __out.push(op_modulo(&py_str("*%s* (%d minutes, %s)"), &py_tuple(vec![title.clone(), minutes.clone(), reason.clone()]))); } py_list(__out) })() };
+    said = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&rows.clone()) { let __unpk1 = py_unpack(&__item.clone(), 3, None); let mut title: Py = __unpk1[0].clone(); let mut minutes: Py = __unpk1[1].clone(); let mut reason: Py = __unpk1[2].clone(); __out.push(op_modulo(&py_str("*%s* (%d minutes, %s)"), &py_tuple(vec![title.clone(), minutes.clone(), reason.clone()]))); } py_list(__out) })() };
     return op_modulo(&py_str("For %s: %s, or %s. Any of them is a good way in, and I can go shorter or pick one if you tell me the mood."), &py_tuple(vec![said_as.clone(), mcall(&py_str(", "), "join", &[slice_or_raise(&said.clone(), &Py::None, &op_neg(&Py::Int(1)), &Py::None)]), geti(&said.clone(), &op_neg(&Py::Int(1)))]));
     Py::None
 }
-pub fn _pick_plain(args: &[Py]) -> Py {
+pub fn _pick_plain__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -7915,17 +8258,17 @@ pub fn _pick_plain(args: &[Py]) -> Py {
     let mut title: Py = Py::None;
     let mut who: Py = Py::None;
     let _ = py_str("A pick for a line that names the medium and who it is for, with no mood in it.");
-    line = _pick_line(&[understood.clone()]);
-    if py_truthy(&_pick_stands_down(&[line.clone()])) {
+    line = py_call(&g__pick_line(), &[understood.clone()]);
+    if py_truthy(&py_call(&g__pick_stands_down(), &[line.clone()])) {
     return Py::None;
     }
-    if py_truthy(&Py::Bool(!py_is(&_mood_of(&[line.clone()]), &Py::None))) {
+    if py_truthy(&Py::Bool(!py_is(&py_call(&g__mood_of(), &[line.clone()]), &Py::None))) {
     return Py::None;
     }
-    kind = { let __b = _pick_kind(&[line.clone()]); if py_truthy(&__b) { __b } else { _pick_carry(&[memory.clone(), line.clone()]) } };
-    refused = _pick_refused(&[line.clone()]);
+    kind = { let __b = py_call(&g__pick_kind(), &[line.clone()]); if py_truthy(&__b) { __b } else { py_call(&g__pick_carry(), &[memory.clone(), line.clone()]) } };
+    refused = py_call(&g__pick_refused(), &[line.clone()]);
     if py_truthy(&{ let __b = refused.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_eq(&kind.clone(), &refused.clone())) } }) {
-    carried = _pick_carry(&[memory.clone(), line.clone()]);
+    carried = py_call(&g__pick_carry(), &[memory.clone(), line.clone()]);
     if py_truthy(&{ let __b = carried.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(!py_eq(&carried.clone(), &refused.clone())) } }) {
     kind = carried.clone();
     } else {
@@ -7939,13 +8282,13 @@ pub fn _pick_plain(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&kind.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_eq(&kind.clone(), &py_str("podcast"))) } }) {
     return Py::None;
     }
-    cinema = _cinema_of(&[line.clone()]);
+    cinema = py_call(&g__cinema_of(), &[line.clone()]);
     if py_truthy(&{ let __b = cinema.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_eq(&kind.clone(), &py_str("film"))) } }) {
     let __unpk1 = py_unpack(&cinema.clone(), 3, None);
     adjective = __unpk1[0].clone();
     country = __unpk1[1].clone();
     language = __unpk1[2].clone();
-    rows = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("film")); __args.push(py_str("")); __args.push(py_str("")); __kws.extend(vec![("country".to_string(), country.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _pick_rows(args))(&__args) };
+    rows = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("film")); __args.push(py_str("")); __args.push(py_str("")); __kws.extend(vec![("country".to_string(), country.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| py_call(&g__pick_rows(), args))(&__args) };
     if py_truthy(&Py::Bool(!py_truthy(&rows.clone()))) {
     have = py_list(vec![]);
     let __iter2 = py_iter_or_raise(&g_NATIONAL_CINEMA());
@@ -7963,23 +8306,23 @@ pub fn _pick_plain(args: &[Py]) -> Py {
     more = if py_truthy(&op_gt(&rest.clone(), &Py::Int(0))) { op_modulo(&py_str(" and %d other countries"), &rest.clone()) } else { py_str("") };
     return op_modulo(&py_str("I have not got a %s list, and I would rather say so than hand you the wrong film. I do have %s%s - tell me a %s film you liked and I will match the next one."), &py_tuple(vec![adjective.clone(), heard.clone(), more.clone(), adjective.clone()]));
     }
-    return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("film")); __args.push(py_str("")); __args.push(py_str("")); __args.push(rows.clone()); __kws.extend(vec![("country".to_string(), adjective.clone()), ("language".to_string(), language.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _pick_reply(args))(&__args) };
+    return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("film")); __args.push(py_str("")); __args.push(py_str("")); __args.push(rows.clone()); __kws.extend(vec![("country".to_string(), adjective.clone()), ("language".to_string(), language.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| py_call(&g__pick_reply(), args))(&__args) };
     }
-    if py_truthy(&{ let __b = Py::Bool(py_eq(&kind.clone(), &py_str("film"))); if !py_truthy(&__b) { __b } else { _wants_subtitles(&[line.clone()]) } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_eq(&kind.clone(), &py_str("film"))); if !py_truthy(&__b) { __b } else { py_call(&g__wants_subtitles(), &[line.clone()]) } }) {
     picked = slice_or_raise(&g_NATIONAL_CINEMA(), &Py::None, &Py::Int(9), &Py::Int(4));
-    rows = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&picked.clone()) { let __unpk5511 = py_unpack(&__item.clone(), 3, None); let mut title: Py = __unpk5511[0].clone(); let mut of: Py = __unpk5511[1].clone(); let mut reason: Py = __unpk5511[2].clone(); __out.push(py_tuple(vec![title.clone(), py_str("film"), py_tuple(vec![]), Py::Bool(false), Py::Bool(false), op_modulo(&py_str("%s: %s"), &py_tuple(vec![of.clone(), reason.clone()]))])); } py_list(__out) })() };
-    return op_add(&op_add(&py_str("Subtitled, then: "), &_pick_list(&[rows.clone()])), &py_str(". Tell me a country and I will give you three of its films."));
+    rows = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&picked.clone()) { let __unpk1 = py_unpack(&__item.clone(), 3, None); let mut title: Py = __unpk1[0].clone(); let mut of: Py = __unpk1[1].clone(); let mut reason: Py = __unpk1[2].clone(); __out.push(py_tuple(vec![title.clone(), py_str("film"), py_tuple(vec![]), Py::Bool(false), Py::Bool(false), op_modulo(&py_str("%s: %s"), &py_tuple(vec![of.clone(), reason.clone()]))])); } py_list(__out) })() };
+    return op_add(&op_add(&py_str("Subtitled, then: "), &py_call(&g__pick_list(), &[rows.clone()])), &py_str(". Tell me a country and I will give you three of its films."));
     }
-    who = _pick_who(&[line.clone()]);
-    limit = _pick_limit(&[line.clone(), memory.clone()]);
-    rows = _pick_rows(&[kind.clone(), who.clone(), limit.clone()]);
+    who = py_call(&g__pick_who(), &[line.clone()]);
+    limit = py_call(&g__pick_limit(), &[line.clone(), memory.clone()]);
+    rows = py_call(&g__pick_rows(), &[kind.clone(), who.clone(), limit.clone()]);
     if py_truthy(&Py::Bool(!py_truthy(&rows.clone()))) {
     return Py::None;
     }
-    return _pick_reply(&[kind.clone(), who.clone(), limit.clone(), rows.clone()]);
+    return py_call(&g__pick_reply(), &[kind.clone(), who.clone(), limit.clone(), rows.clone()]);
     Py::None
 }
-pub fn _pick_limit_reply(args: &[Py]) -> Py {
+pub fn _pick_limit_reply__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -8000,27 +8343,27 @@ pub fn _pick_limit_reply(args: &[Py]) -> Py {
     let mut line: Py = Py::None;
     let mut rows: Py = Py::None;
     let _ = py_str("A limit said on its own: what is left to watch once it is respected.\n\n    No limit found means the line only looked like one (a reading rewritten by a reader earlier in\n    the turn), and the entry stands down rather than guessing: \"i dont like subtitles\" must never\n    be answered with what is on iPlayer and ITVX, because nobody said anything about a channel.\n    ");
-    line = _pick_line(&[understood.clone()]);
-    if py_truthy(&_pick_stands_down(&[line.clone()])) {
+    line = py_call(&g__pick_line(), &[understood.clone()]);
+    if py_truthy(&py_call(&g__pick_stands_down(), &[line.clone()])) {
     return Py::None;
     }
-    limit = _pick_limit(&[line.clone(), memory.clone()]);
+    limit = py_call(&g__pick_limit(), &[line.clone(), memory.clone()]);
     if py_truthy(&Py::Bool(!py_truthy(&limit.clone()))) {
     return Py::None;
     }
-    kind = _pick_kind(&[line.clone()]);
+    kind = py_call(&g__pick_kind(), &[line.clone()]);
     if py_truthy(&Py::Bool(py_eq(&kind.clone(), &py_str("book")))) {
-    return _pick_reply(&[py_str("book"), py_str(""), py_str(""), _pick_rows(&[py_str("book"), py_str(""), py_str("")])]);
+    return py_call(&g__pick_reply(), &[py_str("book"), py_str(""), py_str(""), py_call(&g__pick_rows(), &[py_str("book"), py_str(""), py_str("")])]);
     }
     if py_truthy(&Py::Bool(py_eq(&limit.clone(), &py_str("nosubs")))) {
-    rows = _pick_rows(&[py_str("film"), py_str(""), py_str("nosubs")]);
-    return op_add(&op_add(&py_str("Nothing that needs subtitles, then: "), &_pick_list(&[slice_or_raise(&rows.clone(), &Py::None, &Py::Int(3), &Py::None)])), &py_str(". All three are in English, so nobody has to read the screen to follow them."));
+    rows = py_call(&g__pick_rows(), &[py_str("film"), py_str(""), py_str("nosubs")]);
+    return op_add(&op_add(&py_str("Nothing that needs subtitles, then: "), &py_call(&g__pick_list(), &[slice_or_raise(&rows.clone(), &Py::None, &Py::Int(3), &Py::None)])), &py_str(". All three are in English, so nobody has to read the screen to follow them."));
     }
-    rows = _pick_rows(&[if py_truthy(&Py::Bool(py_contains(&py_tuple(vec![py_str("film"), py_str("series")]), &kind.clone()))) { kind.clone() } else { py_str("series") }, py_str(""), py_str("free")]);
-    return op_add(&op_add(&py_str("Then it is iPlayer and ITVX, and both are free. "), &_pick_list(&[slice_or_raise(&rows.clone(), &Py::None, &Py::Int(3), &Py::None)])), &py_str(". All three are BBC, so they are on iPlayer, and a film on ITV turns up most weeks too - check iPlayer rather than trusting a listing, because rights move."));
+    rows = py_call(&g__pick_rows(), &[if py_truthy(&Py::Bool(py_contains(&py_tuple(vec![py_str("film"), py_str("series")]), &kind.clone()))) { kind.clone() } else { py_str("series") }, py_str(""), py_str("free")]);
+    return op_add(&op_add(&py_str("Then it is iPlayer and ITVX, and both are free. "), &py_call(&g__pick_list(), &[slice_or_raise(&rows.clone(), &Py::None, &Py::Int(3), &Py::None)])), &py_str(". All three are BBC, so they are on iPlayer, and a film on ITV turns up most weeks too - check iPlayer rather than trusting a listing, because rights move."));
     Py::None
 }
-pub fn _the_reader_age(args: &[Py]) -> Py {
+pub fn _the_reader_age__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -8056,7 +8399,7 @@ pub fn _the_reader_age(args: &[Py]) -> Py {
     return Py::Int(0);
     Py::None
 }
-pub fn _book_for_the_age(args: &[Py]) -> Py {
+pub fn _book_for_the_age__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -8081,7 +8424,7 @@ pub fn _book_for_the_age(args: &[Py]) -> Py {
     let mut reading: Py = Py::None;
     reading = if py_truthy(&call_builtin("isinstance", &[understood.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) { understood.clone() } else { py_dict(vec![]) };
     line = mcall(&call_builtin("str", &[{ let __b = mcall(&reading.clone(), "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { { let __b = mcall(&reading.clone(), "get", &[py_str("text")]); if py_truthy(&__b) { __b } else { py_str("") } } } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]);
-    age = _the_reader_age(&[line.clone()]);
+    age = py_call(&g__the_reader_age(), &[line.clone()]);
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&age.clone())); if !py_truthy(&__b) { __b } else { stdlib_call("re", "search", &[py_str("\\bteen(?:ager)?s?\\b"), line.clone()]).unwrap_or_else(|e| exc::raise(e)) } }) {
     age = Py::Int(13);
     }
@@ -8099,7 +8442,7 @@ pub fn _book_for_the_age(args: &[Py]) -> Py {
     return py_str("Short chapters and a picture every few pages are what a 5 to 7 year old reading alone wants: *The Worst Witch*, *Mr Gum*, *Dog Man* or *Captain Underpants*. For 8 to 9, *The Boy at the Back of the Class*, *Horrible Histories* or *Percy Jackson*. For 10 to 12, *Wonder*, *Artemis Fowl* or *Skulduggery Pleasant*. For 13 and over, *The Hunger Games*, *Northern Lights* or *The Book Thief*. Take them to a bookshop and let them pick the first one themselves; the series they choose is the one they read.");
     Py::None
 }
-pub fn _an_hour_or_a_day(args: &[Py]) -> Py {
+pub fn _an_hour_or_a_day__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -8125,7 +8468,7 @@ pub fn _an_hour_or_a_day(args: &[Py]) -> Py {
     return g__A_DAY();
     Py::None
 }
-pub fn _a_child_who_reads_already(args: &[Py]) -> Py {
+pub fn _a_child_who_reads_already__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -8154,7 +8497,7 @@ pub fn _a_child_who_reads_already(args: &[Py]) -> Py {
     return Py::Bool(!py_truthy(&mcall(&g__ASKS_FOR_A_PICK_WORDS(), "intersection", &[words.clone()])));
     Py::None
 }
-pub fn _asks_if_a_comic_suits_an_age(args: &[Py]) -> Py {
+pub fn _asks_if_a_comic_suits_an_age__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -8173,7 +8516,7 @@ pub fn _asks_if_a_comic_suits_an_age(args: &[Py]) -> Py {
     return call_builtin("bool", &[mcall(&g__SUITABILITY_ASK(), "search", &[mcall(&said.clone(), "lower", &[])])]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
-pub fn _the_kind_named(args: &[Py]) -> Py {
+pub fn _the_kind_named__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -8214,7 +8557,7 @@ pub fn _the_kind_named(args: &[Py]) -> Py {
     return py_str("");
     Py::None
 }
-pub fn _reader_named(args: &[Py]) -> Py {
+pub fn _reader_named__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -8274,7 +8617,7 @@ pub fn _reader_named(args: &[Py]) -> Py {
     return py_str("");
     Py::None
 }
-pub fn _comic_pick(args: &[Py]) -> Py {
+pub fn _comic_pick__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -8298,24 +8641,24 @@ pub fn _comic_pick(args: &[Py]) -> Py {
     let mut word: Py = Py::None;
     let mut words: Py = Py::None;
     let _ = py_str("The comic shelf, for the reader the line is for.\n\n    A pick for a grown-up is no use to a seven-year-old and Dog Man is an insult to a teenager,\n    so the row reads who it is for: the line first, and then the turns before it, because \"my son\n    is 8 and hates reading\" then \"what about comics\" carries the child over and the pick is still\n    for that child.\n    ");
-    if py_truthy(&_asks_if_a_comic_suits_an_age(&[understood.clone()])) {
+    if py_truthy(&py_call(&g__asks_if_a_comic_suits_an_age(), &[understood.clone()])) {
     return g__COMIC_SUITABILITY();
     }
     words = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let __b = mcall(&understood.clone(), "get", &[py_str("words")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }) { let mut word: Py = __item.clone(); __out.push(mcall(&call_builtin("str", &[word.clone()]).unwrap_or_else(|e| exc::raise(e)), "lower", &[])); } py_list(__out) })() };
-    if py_truthy(&Py::Bool(!py_truthy(&_reader_named(&[words.clone(), { let __b = mcall(&understood.clone(), "get", &[py_str("numbers")]); if py_truthy(&__b) { __b } else { py_tuple(vec![]) } }])))) {
-    named = _the_kind_named(&[understood.clone()]);
+    if py_truthy(&Py::Bool(!py_truthy(&py_call(&g__reader_named(), &[words.clone(), { let __b = mcall(&understood.clone(), "get", &[py_str("numbers")]); if py_truthy(&__b) { __b } else { py_tuple(vec![]) } }])))) {
+    named = py_call(&g__the_kind_named(), &[understood.clone()]);
     if py_truthy(&named.clone()) {
     return named.clone();
     }
     }
-    reader = _reader_named(&[words.clone(), { let __b = mcall(&understood.clone(), "get", &[py_str("numbers")]); if py_truthy(&__b) { __b } else { py_tuple(vec![]) } }]);
+    reader = py_call(&g__reader_named(), &[words.clone(), { let __b = mcall(&understood.clone(), "get", &[py_str("numbers")]); if py_truthy(&__b) { __b } else { py_tuple(vec![]) } }]);
     if py_truthy(&Py::Bool(!py_truthy(&reader.clone()))) {
     let __iter1 = py_iter_or_raise(&call_builtin("reversed", &[{ let __b = mcall(&{ let __b = memory.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[py_str("turns")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }]).unwrap_or_else(|e| exc::raise(e)));
     for __item in __iter1 {
     turn = __item.clone();
     said = mcall(&call_builtin("str", &[{ let __b = mcall(&{ let __b = turn.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[py_str("user")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]);
     earlier = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&stdlib_call("re", "split", &[py_str("[^a-z']+"), said.clone()]).unwrap_or_else(|e| exc::raise(e))) { let mut word: Py = __item.clone(); if py_truthy(&word.clone()) {  __out.push(word.clone()); } } py_list(__out) })() };
-    reader = _reader_named(&[earlier.clone()]);
+    reader = py_call(&g__reader_named(), &[earlier.clone()]);
     if py_truthy(&reader.clone()) {
     break;
     }
@@ -8330,7 +8673,7 @@ pub fn _comic_pick(args: &[Py]) -> Py {
     return g__COMIC_FOR_A_GROWN_UP();
     Py::None
 }
-pub fn _a_genre_is_the_taste(args: &[Py]) -> Py {
+pub fn _a_genre_is_the_taste__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -8349,7 +8692,7 @@ pub fn _a_genre_is_the_taste(args: &[Py]) -> Py {
     return Py::Bool(!py_truthy(&mcall(&g__LIKE_A_GENRE(), "search", &[text.clone()])));
     Py::None
 }
-pub fn the_verse_longer(args: &[Py]) -> Py {
+pub fn the_verse_longer__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -8389,7 +8732,7 @@ pub fn the_verse_longer(args: &[Py]) -> Py {
     turn = __item.clone();
     said = call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("bot")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&said.clone()) {
-    thing = _thing(&[call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("user")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))]);
+    thing = py_call(&g__thing(), &[call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("user")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))]);
     break;
     }
     }
@@ -8415,11 +8758,11 @@ pub fn the_verse_longer(args: &[Py]) -> Py {
     }
     thing = { let __b = thing.clone(); if py_truthy(&__b) { __b } else { g_GENERIC_STORY_THING() } };
     pool = if py_truthy(&mcall(&g__POEM_FORM(), "search", &[lead.clone()])) { g_VERSE_LONGER() } else { g_STORY_LONGER() };
-    more = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("thing".to_string(), thing.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&_picked(&[pool.clone(), thing.clone()]), "format", args))(&__args) };
+    more = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("thing".to_string(), thing.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&py_call(&g__picked(), &[pool.clone(), thing.clone()]), "format", args))(&__args) };
     return if py_truthy(&lead.clone()) { op_add(&op_add(&op_add(&op_add(&lead.clone(), &py_str("\n")), &rest.clone()), &py_str("\n")), &more.clone()) } else { op_add(&op_add(&rest.clone(), &py_str("\n")), &more.clone()) };
     Py::None
 }
-pub fn _a_second_verse_is_asked_for(args: &[Py]) -> Py {
+pub fn _a_second_verse_is_asked_for__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -8447,7 +8790,7 @@ pub fn _a_second_verse_is_asked_for(args: &[Py]) -> Py {
     return call_builtin("bool", &[mcall(&g__SECOND_VERSE_ABOUT(), "search", &[line.clone()])]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
-pub fn _the_subject_from_the_ask(args: &[Py]) -> Py {
+pub fn _the_subject_from_the_ask__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -8472,7 +8815,7 @@ pub fn _the_subject_from_the_ask(args: &[Py]) -> Py {
     return subject.clone();
     Py::None
 }
-pub fn _the_second_one_short(args: &[Py]) -> Py {
+pub fn _the_second_one_short__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -8491,7 +8834,7 @@ pub fn _the_second_one_short(args: &[Py]) -> Py {
     return op_modulo(&py_str("That last one was about nothing in particular - give me one word (the sea, my nan, the bus) and the next %s will be about that."), &form.clone());
     Py::None
 }
-pub fn _a_child_story_lead(args: &[Py]) -> Py {
+pub fn _a_child_story_lead__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -8510,7 +8853,7 @@ pub fn _a_child_story_lead(args: &[Py]) -> Py {
     return if py_truthy(&found.clone()) { op_add(&mcall(&found.clone(), "group", &[Py::Int(1)]), &py_str(":")) } else { py_str("") };
     Py::None
 }
-pub fn _the_form_a_repeat_ask_names(args: &[Py]) -> Py {
+pub fn _the_form_a_repeat_ask_names__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -8535,7 +8878,7 @@ pub fn _the_form_a_repeat_ask_names(args: &[Py]) -> Py {
     return named.clone();
     Py::None
 }
-pub fn _the_form_of_the_lead(args: &[Py]) -> Py {
+pub fn _the_form_of_the_lead__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -8573,7 +8916,7 @@ pub fn _the_form_of_the_lead(args: &[Py]) -> Py {
     return py_str("");
     Py::None
 }
-pub fn the_next_verse(args: &[Py]) -> Py {
+pub fn the_next_verse__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -8607,7 +8950,7 @@ pub fn the_next_verse(args: &[Py]) -> Py {
     let mut turn: Py = Py::None;
     let mut verse: Py = Py::None;
     let _ = py_str("Another verse, in the form asked for or the form just given, or None.\n\n    A poem asked for \"one more about the moon\" gets a second poem about the moon and a story asked\n    the same way gets a second story, told from an opening this chat has not had yet. A bare count\n    (\"one more\", \"again\", \"more please\") is the same ask with the thing left out: the thing is the\n    one the verse on the screen was about, read from its own lead, because read as words \"one more\"\n    is a subject like any other and \"A short poem about more poem:\" is what that earns. The form\n    is the one the ask names (\"another story\" after a poem) and otherwise the one just given. A\n    haiku and a limerick are fixed counts of lines, so their second one comes from the form's own\n    list rather than from the table of things.\n    ");
-    if py_truthy(&Py::Bool(!py_truthy(&_a_second_verse_is_asked_for(&[text.clone()])))) {
+    if py_truthy(&Py::Bool(!py_truthy(&py_call(&g__a_second_verse_is_asked_for(), &[text.clone()])))) {
     return Py::None;
     }
     line = mcall(&py_str(" "), "join", &[mcall(&mcall(&call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]), "split", &[])]);
@@ -8624,7 +8967,7 @@ pub fn the_next_verse(args: &[Py]) -> Py {
     return Py::None;
     }
     told = mcall(&py_str(" "), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let __b = mcall(&{ let __b = memory.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[py_str("turns")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }) { let mut turn: Py = __item.clone(); if py_truthy(&call_builtin("isinstance", &[turn.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("bot")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))); } } py_list(__out) })() }]);
-    child = _a_child_story_lead(&[said.clone()]);
+    child = py_call(&g__a_child_story_lead(), &[said.clone()]);
     if py_truthy(&child.clone()) {
     let __iter2 = py_iter_or_raise(&g_CHILD_STORIES());
     for __item in __iter2 {
@@ -8642,13 +8985,13 @@ pub fn the_next_verse(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&mcall(&mcall(&lead.clone(), "rstrip", &[]), "endswith", &[py_str(":")])))) {
     return Py::None;
     }
-    form = { let __b = _the_form_a_repeat_ask_names(&[line.clone()]); if py_truthy(&__b) { __b } else { _the_form_of_the_lead(&[lead.clone()]) } };
+    form = { let __b = py_call(&g__the_form_a_repeat_ask_names(), &[line.clone()]); if py_truthy(&__b) { __b } else { py_call(&g__the_form_of_the_lead(), &[lead.clone()]) } };
     if py_truthy(&Py::Bool(!py_truthy(&form.clone()))) {
     return Py::None;
     }
     found = mcall(&g__SECOND_VERSE_ABOUT(), "search", &[line.clone()]);
-    subject = _the_subject_from_the_ask(&[if py_truthy(&found.clone()) { slice_or_raise(&line.clone(), &mcall(&found.clone(), "end", &[]), &Py::None, &Py::None) } else { py_str("") }]);
-    thing = if py_truthy(&subject.clone()) { _thing(&[line.clone()]) } else { py_str("") };
+    subject = py_call(&g__the_subject_from_the_ask(), &[if py_truthy(&found.clone()) { slice_or_raise(&line.clone(), &mcall(&found.clone(), "end", &[]), &Py::None, &Py::None) } else { py_str("") }]);
+    thing = if py_truthy(&subject.clone()) { py_call(&g__thing(), &[line.clone()]) } else { py_str("") };
     if py_truthy(&Py::Bool(!py_truthy(&subject.clone()))) {
     let __iter3 = py_iter_or_raise(&call_builtin("reversed", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let __b = mcall(&{ let __b = memory.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[py_str("turns")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }) { let mut turn: Py = __item.clone(); if py_truthy(&{ let __b = call_builtin("isinstance", &[turn.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { mcall(&turn.clone(), "get", &[py_str("bot")]) } }) {  __out.push(call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("bot")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e))); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
     for __item in __iter3 {
@@ -8657,17 +9000,17 @@ pub fn the_next_verse(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&named.clone()))) {
     continue;
     }
-    subject = mcall(&geti(&mcall(&_the_subject_from_the_ask(&[mcall(&named.clone(), "group", &[Py::Int(1)])]), "split", &[py_str(",")]), &Py::Int(0)), "strip", &[]);
+    subject = mcall(&geti(&mcall(&py_call(&g__the_subject_from_the_ask(), &[mcall(&named.clone(), "group", &[Py::Int(1)])]), "split", &[py_str(",")]), &Py::Int(0)), "strip", &[]);
     if py_truthy(&subject.clone()) {
     break;
     }
     }
     }
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&thing.clone())); if !py_truthy(&__b) { __b } else { subject.clone() } }) {
-    thing = _thing(&[op_add(&py_str("about "), &subject.clone())]);
+    thing = py_call(&g__thing(), &[op_add(&py_str("about "), &subject.clone())]);
     }
     if py_truthy(&Py::Bool(py_contains(&py_tuple(vec![py_str("haiku"), py_str("limerick")]), &form.clone()))) {
-    about_it = if py_truthy(&{ let __b = subject.clone(); if !py_truthy(&__b) { __b } else { thing.clone() } }) { _say(&[form.clone(), thing.clone(), subject.clone()]) } else { Py::None };
+    about_it = if py_truthy(&{ let __b = subject.clone(); if !py_truthy(&__b) { __b } else { thing.clone() } }) { py_call(&g__say(), &[form.clone(), thing.clone(), subject.clone()]) } else { Py::None };
     if py_truthy(&{ let __b = about_it.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&about_it.clone(), &py_str("\n"))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&told.clone(), &about_it.clone())) } } } }) {
     return about_it.clone();
     }
@@ -8682,19 +9025,19 @@ pub fn the_next_verse(args: &[Py]) -> Py {
     return op_add(&op_modulo(&py_str("That is every %s I have about %s - a short poem about it instead:\n"), &py_tuple(vec![form.clone(), subject.clone()])), &mcall(&py_str("\n"), "join", &[lines.clone()]));
     }
     }
-    return _the_second_one_short(&[lead.clone()]);
+    return py_call(&g__the_second_one_short(), &[lead.clone()]);
     }
     if py_truthy(&Py::Bool(py_eq(&form.clone(), &py_str("story")))) {
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&subject.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&thing.clone())) } }) {
-    return _the_second_one_short(&[lead.clone()]);
+    return py_call(&g__the_second_one_short(), &[lead.clone()]);
     }
-    return op_add(&op_add(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("subject".to_string(), subject.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&geti(&g_STORY_LEADING(), &py_str("story")), "format", args))(&__args) }, &py_str("\n")), &_the_opening_not_said_yet(&[thing.clone(), memory.clone()]));
+    return op_add(&op_add(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("subject".to_string(), subject.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&geti(&g_STORY_LEADING(), &py_str("story")), "format", args))(&__args) }, &py_str("\n")), &py_call(&g__the_opening_not_said_yet(), &[thing.clone(), memory.clone()]));
     }
     if py_truthy(&Py::Bool(!py_truthy(&{ let __b = mcall(&g__THE_COUNT_AGAIN(), "search", &[line.clone()]); if py_truthy(&__b) { __b } else { mcall(&g__BARE_COUNT_AGAIN(), "match", &[line.clone()]) } }))) {
     return Py::None;
     }
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&subject.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&thing.clone())) } }) {
-    return _the_second_one_short(&[lead.clone()]);
+    return py_call(&g__the_second_one_short(), &[lead.clone()]);
     }
     noun = form.clone();
     let __iter4 = py_iter_or_raise(&py_tuple(vec![mcall(&g_POEMS(), "get", &[thing.clone()]), g_GENERIC_POEM(), g_GENERIC_POEM_TWO()]));
@@ -8711,7 +9054,7 @@ pub fn the_next_verse(args: &[Py]) -> Py {
     return op_add(&op_modulo(&py_str("Another %s about %s:\n"), &py_tuple(vec![noun.clone(), subject.clone()])), &mcall(&py_str("\n"), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_GENERIC_POEM_TWO()) { let mut one: Py = __item.clone(); __out.push({ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("thing".to_string(), thing.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&one.clone(), "format", args))(&__args) }); } py_list(__out) })() }]));
     Py::None
 }
-pub fn _film_list(args: &[Py]) -> Py {
+pub fn _film_list__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -8739,14 +9082,14 @@ pub fn __nested_said_0(args: &[Py]) -> Py {
     let mut understood: Py = __pos.get(3).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "understood").map(|(_, v)| v.clone())).unwrap_or(Py::None);
     let mut line: Py = Py::None;
     line = op_modulo(&py_str("%s %s"), &py_tuple(vec![if py_truthy(&call_builtin("isinstance", &[understood.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) { { let __b = mcall(&understood.clone(), "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { py_str("") } } } else { py_str("") }, if py_truthy(&call_builtin("isinstance", &[understood.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) { { let __b = mcall(&understood.clone(), "get", &[py_str("norm_text")]); if py_truthy(&__b) { __b } else { py_str("") } } } else { py_str("") }]));
-    return _films_within(&[text.clone(), line.clone()]);
+    return py_call(&g__films_within(), &[text.clone(), line.clone()]);
     Py::None
 }
     said = {{ let said = said.clone(); let text = text.clone(); py_func("said", move |args: &[Py]| { let mut full = vec![said.clone(), text.clone()]; full.extend_from_slice(args); __nested_said_0(&full) }) }};
     return said.clone();
     Py::None
 }
-pub fn _somebodys_own_thing(args: &[Py]) -> Py {
+pub fn _somebodys_own_thing__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -8778,7 +9121,7 @@ pub fn _somebodys_own_thing(args: &[Py]) -> Py {
     return Py::Bool(true);
     Py::None
 }
-pub fn _music_elsewhere(args: &[Py]) -> Py {
+pub fn _music_elsewhere__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -8804,10 +9147,10 @@ pub fn _music_elsewhere(args: &[Py]) -> Py {
     let __iter1 = py_iter_or_raise(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(g_MUSIC_TERMS()); __kws.extend(vec![("key".to_string(), py_func("len", |args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e)))), ("reverse".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sorted", args).unwrap_or_else(|e| exc::raise(e)))(&__args) });
     for __item in __iter1 {
     word = __item.clone();
-    forms = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[said.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk3082 = py_unpack(&__item.clone(), 2, None); let mut at: Py = __unpk3082[0].clone(); let mut one: Py = __unpk3082[1].clone(); if py_truthy(&{ let __b = Py::Bool(py_eq(&one.clone(), &word.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_eq(&one.clone(), &op_add(&word.clone(), &py_str("s")))) } }) {  __out.push(at.clone()); } } py_list(__out) })() };
+    forms = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[said.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk1 = py_unpack(&__item.clone(), 2, None); let mut at: Py = __unpk1[0].clone(); let mut one: Py = __unpk1[1].clone(); if py_truthy(&{ let __b = Py::Bool(py_eq(&one.clone(), &word.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_eq(&one.clone(), &op_add(&word.clone(), &py_str("s")))) } }) {  __out.push(at.clone()); } } py_list(__out) })() };
     if py_truthy(&{ let __b = forms.clone(); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&word.clone(), &py_str(" "))); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&flat.clone(), &word.clone())) } } } }) {
     elsewhere = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g__A_MUSIC_WORD()) { let mut one: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&py_tuple(vec![word.clone(), op_add(&word.clone(), &py_str("s"))]), &one.clone()))) {  __out.push(one.clone()); } } py_list(__out) })() };
-    if py_truthy(&{ let __b = Py::Bool(py_contains(&g__A_THING_OF_THEIRS(), &word.clone())); if !py_truthy(&__b) { __b } else { { let __b = call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&forms.clone()) { let mut at: Py = __item.clone(); __out.push(_somebodys_own_thing(&[said.clone(), at.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&elsewhere.clone()) { let mut one: Py = __item.clone(); __out.push({ let __b = Py::Bool(py_contains(&said.clone(), &one.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&flat.clone(), &one.clone())) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)))) } } } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g__A_THING_OF_THEIRS(), &word.clone())); if !py_truthy(&__b) { __b } else { { let __b = call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&forms.clone()) { let mut at: Py = __item.clone(); __out.push(py_call(&g__somebodys_own_thing(), &[said.clone(), at.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&elsewhere.clone()) { let mut one: Py = __item.clone(); __out.push({ let __b = Py::Bool(py_contains(&said.clone(), &one.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&flat.clone(), &one.clone())) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)))) } } } }) {
     return Py::Bool(false);
     }
     if py_truthy(&{ let __b = Py::Bool(py_contains(&g__NEEDS_A_MUSIC_WORD(), &word.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g__A_MUSIC_WORD()) { let mut one: Py = __item.clone(); __out.push({ let __b = Py::Bool(py_contains(&said.clone(), &one.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&flat.clone(), &one.clone())) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)))) } }) {
@@ -8819,7 +9162,7 @@ pub fn _music_elsewhere(args: &[Py]) -> Py {
     return Py::Bool(true);
     Py::None
 }
-pub fn _music_term(args: &[Py]) -> Py {
+pub fn _music_term__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -8856,7 +9199,7 @@ pub fn _music_term(args: &[Py]) -> Py {
     return py_str("A chord is three or more notes together, the key is the home note a song keeps returning to, and an octave is the same note higher or lower. The time signature says how many beats are in a bar. Ask about one and I'll give you its answer.");
     Py::None
 }
-pub fn _a_bridge_in_music(args: &[Py]) -> Py {
+pub fn _a_bridge_in_music__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -8881,7 +9224,7 @@ pub fn _a_bridge_in_music(args: &[Py]) -> Py {
     return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&py_tuple(vec![py_str("song"), py_str("songs"), py_str("chorus"), py_str("verse"), py_str("music"), py_str("musical"), py_str("track"), py_str("tune"), py_str("album"), py_str("band"), py_str("bridge of the song"), py_str("in the song")])) { let mut word: Py = __item.clone(); __out.push({ let __b = Py::Bool(py_contains(&low.clone(), &op_modulo(&py_str(" %s "), &word.clone()))); if py_truthy(&__b) { __b } else { mcall(&mcall(&low.clone(), "strip", &[]), "startswith", &[op_add(&word.clone(), &py_str(" "))]) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
-pub fn _instrument_count(args: &[Py]) -> Py {
+pub fn _instrument_count__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -8913,7 +9256,7 @@ pub fn _instrument_count(args: &[Py]) -> Py {
     return py_str("A guitar has six strings, a violin four, a bass four and a piano 88 keys. Ask me about the one you have and I'll tell you the count and the tuning.");
     Py::None
 }
-pub fn _music_practice(args: &[Py]) -> Py {
+pub fn _music_practice__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -8938,7 +9281,7 @@ pub fn _music_practice(args: &[Py]) -> Py {
     return g__PRACTICE_CORE();
     Py::None
 }
-pub fn _not_a_crowd(args: &[Py]) -> Py {
+pub fn _not_a_crowd__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -8972,7 +9315,7 @@ pub fn _not_a_crowd(args: &[Py]) -> Py {
     return Py::Bool(true);
     Py::None
 }
-pub fn _a_child_in_the_chat(args: &[Py]) -> Py {
+pub fn _a_child_in_the_chat__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -9007,7 +9350,7 @@ pub fn _a_child_in_the_chat(args: &[Py]) -> Py {
     return Py::Bool(false);
     Py::None
 }
-pub fn _the_game_pick(args: &[Py]) -> Py {
+pub fn _the_game_pick__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -9035,7 +9378,7 @@ pub fn _the_game_pick(args: &[Py]) -> Py {
     }
     line = op_modulo(&py_str("%s %s"), &py_tuple(vec![{ let __b = mcall(&reading.clone(), "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { py_str("") } }, { let __b = mcall(&reading.clone(), "get", &[py_str("norm_text")]); if py_truthy(&__b) { __b } else { py_str("") } }]));
     line = mcall(&line.clone(), "lower", &[]);
-    if py_truthy(&_a_child_in_the_chat(&[memory.clone()])) {
+    if py_truthy(&py_call(&g__a_child_in_the_chat(), &[memory.clone()])) {
     return py_str("*Dobble*, *UNO* and *Jenga* work from about five up, and *Catan Junior* if they are ready for a proper board game. A treasure hunt round the house costs nothing and takes the longest.");
     }
     let __iter1 = py_iter_or_raise(&g_GAME_PICKS());
@@ -9050,7 +9393,7 @@ pub fn _the_game_pick(args: &[Py]) -> Py {
     return py_str("*Hades* is the one I'd hand you first: fast, short runs, and it never wastes your time. *Stardew Valley* if you want calm, and *The Last of Us* if you want a story to sit through.");
     Py::None
 }
-pub fn _a_hardware_decision(args: &[Py]) -> Py {
+pub fn _a_hardware_decision__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -9077,7 +9420,7 @@ pub fn _a_hardware_decision(args: &[Py]) -> Py {
     return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g__MACHINE_SHAPES()) { let mut shape: Py = __item.clone(); __out.push(Py::Bool(py_contains(&clean.clone(), &shape.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
-pub fn _a_game_pick_line(args: &[Py]) -> Py {
+pub fn _a_game_pick_line__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -9095,10 +9438,10 @@ pub fn _a_game_pick_line(args: &[Py]) -> Py {
     let mut shape: Py = Py::None;
     let mut title: Py = Py::None;
     let _ = py_str("False when the line is not asking for a pick: a crowd, a named title, or a skill question.\n\n    \"what can i play on my own\" was answered with loneliness advice, \"is monopoly a good game\"\n    with *Hades* and *Stardew Valley*, and \"how do i get better at video games\" with the same\n    pick list. None of the three is a request for a game to buy: the first names nobody to play\n    with, the second is a question about a game the person already knows, and the third asks how\n    to improve. All three stand down here so the row that answers them can.\n    ");
-    if py_truthy(&Py::Bool(!py_truthy(&_not_a_crowd(&[understood.clone()])))) {
+    if py_truthy(&Py::Bool(!py_truthy(&py_call(&g__not_a_crowd(), &[understood.clone()])))) {
     return Py::Bool(false);
     }
-    if py_truthy(&_a_hardware_decision(&[understood.clone()])) {
+    if py_truthy(&py_call(&g__a_hardware_decision(), &[understood.clone()])) {
     return Py::Bool(false);
     }
     clean = op_modulo(&py_str(" %s "), &mcall(&mcall(&call_builtin("str", &[{ let __b = mcall(&understood.clone(), "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]), "replace", &[py_str("-"), py_str(" ")]));
@@ -9118,7 +9461,7 @@ pub fn _a_game_pick_line(args: &[Py]) -> Py {
     return Py::Bool(true);
     Py::None
 }
-pub fn _the_solo_game(args: &[Py]) -> Py {
+pub fn _the_solo_game__wrapped(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = Vec::new();
     let mut __kw: Vec<(String, Py)> = Vec::new();
@@ -9135,7 +9478,7 @@ pub fn _the_solo_game(args: &[Py]) -> Py {
     else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "reading") { v.clone() }
     else { exc::raise(type_err(&format!("missing required argument: reading"))) };
     let _ = py_str("A game one person can play tonight.");
-    if py_truthy(&_a_child_in_the_chat(&[memory.clone()])) {
+    if py_truthy(&py_call(&g__a_child_in_the_chat(), &[memory.clone()])) {
     return py_str("*Dobble* is fine with one player as a speed game, and *UNO* works solo if you play the house down. *Catan Junior* really needs two, though.");
     }
     return py_str("*Stardew Valley* is the one: farm, fish, befriend the village, nothing timed against you, and it runs on almost anything. *Hades* if you want ten-minute runs with a fight in them, or *Unpacking* for an evening of something quiet.");
@@ -9487,198 +9830,198 @@ pub fn module_obj() -> Py {
             "_WET_PHRASES" => Some(g__WET_PHRASES()),
             "_WET_WORDS" => Some(g__WET_WORDS()),
             "_WORD_AGES" => Some(g__WORD_AGES()),
-            "_a_bridge_in_music" => Some(py_func("_a_bridge_in_music", |args: &[Py]| _a_bridge_in_music(args))),
-            "_a_chess_line" => Some(py_func("_a_chess_line", |args: &[Py]| _a_chess_line(args))),
-            "_a_child_in_the_chat" => Some(py_func("_a_child_in_the_chat", |args: &[Py]| _a_child_in_the_chat(args))),
-            "_a_child_story_about" => Some(py_func("_a_child_story_about", |args: &[Py]| _a_child_story_about(args))),
-            "_a_child_story_lead" => Some(py_func("_a_child_story_lead", |args: &[Py]| _a_child_story_lead(args))),
-            "_a_child_who_reads_already" => Some(py_func("_a_child_who_reads_already", |args: &[Py]| _a_child_who_reads_already(args))),
-            "_a_country_is_a_country" => Some(py_func("_a_country_is_a_country", |args: &[Py]| _a_country_is_a_country(args))),
-            "_a_documentary_is_wanted" => Some(py_func("_a_documentary_is_wanted", |args: &[Py]| _a_documentary_is_wanted(args))),
-            "_a_film_ask" => Some(py_func("_a_film_ask", |args: &[Py]| _a_film_ask(args))),
-            "_a_game_pick_line" => Some(py_func("_a_game_pick_line", |args: &[Py]| _a_game_pick_line(args))),
-            "_a_genre_is_the_taste" => Some(py_func("_a_genre_is_the_taste", |args: &[Py]| _a_genre_is_the_taste(args))),
-            "_a_hardware_decision" => Some(py_func("_a_hardware_decision", |args: &[Py]| _a_hardware_decision(args))),
-            "_a_judged_work_named" => Some(py_func("_a_judged_work_named", |args: &[Py]| _a_judged_work_named(args))),
-            "_a_listings_ask_near_me" => Some(py_func("_a_listings_ask_near_me", |args: &[Py]| _a_listings_ask_near_me(args))),
-            "_a_pick_in_any_medium" => Some(py_func("_a_pick_in_any_medium", |args: &[Py]| _a_pick_in_any_medium(args))),
-            "_a_pick_of_the_other_mood" => Some(py_func("_a_pick_of_the_other_mood", |args: &[Py]| _a_pick_of_the_other_mood(args))),
-            "_a_place_not_a_work" => Some(py_func("_a_place_not_a_work", |args: &[Py]| _a_place_not_a_work(args))),
-            "_a_placeholder_word" => Some(py_func("_a_placeholder_word", |args: &[Py]| _a_placeholder_word(args))),
-            "_a_programme_is_wanted" => Some(py_func("_a_programme_is_wanted", |args: &[Py]| _a_programme_is_wanted(args))),
-            "_a_report_answered" => Some(py_func("_a_report_answered", |args: &[Py]| _a_report_answered(args))),
-            "_a_report_of_the_habit" => Some(py_func("_a_report_of_the_habit", |args: &[Py]| _a_report_of_the_habit(args))),
-            "_a_reservation" => Some(py_func("_a_reservation", |args: &[Py]| _a_reservation(args))),
-            "_a_second_one_read_first" => Some(py_func("_a_second_one_read_first", |args: &[Py]| _a_second_one_read_first(args))),
-            "_a_second_verse_is_asked_for" => Some(py_func("_a_second_verse_is_asked_for", |args: &[Py]| _a_second_verse_is_asked_for(args))),
-            "_a_story_for_the_listener" => Some(py_func("_a_story_for_the_listener", |args: &[Py]| _a_story_for_the_listener(args))),
-            "_a_story_is_asked_for" => Some(py_func("_a_story_is_asked_for", |args: &[Py]| _a_story_is_asked_for(args))),
-            "_a_surface_is_being_painted" => Some(py_func("_a_surface_is_being_painted", |args: &[Py]| _a_surface_is_being_painted(args))),
-            "_a_thing_is_being_baked" => Some(py_func("_a_thing_is_being_baked", |args: &[Py]| _a_thing_is_being_baked(args))),
-            "_a_word_is_turned_down" => Some(py_func("_a_word_is_turned_down", |args: &[Py]| _a_word_is_turned_down(args))),
-            "_about_a_person" => Some(py_func("_about_a_person", |args: &[Py]| _about_a_person(args))),
-            "_activity_start" => Some(py_func("_activity_start", |args: &[Py]| _activity_start(args))),
-            "_after_named" => Some(py_func("_after_named", |args: &[Py]| _after_named(args))),
-            "_age_in" => Some(py_func("_age_in", |args: &[Py]| _age_in(args))),
-            "_an_hour_or_a_day" => Some(py_func("_an_hour_or_a_day", |args: &[Py]| _an_hour_or_a_day(args))),
-            "_an_ordinary_word" => Some(py_func("_an_ordinary_word", |args: &[Py]| _an_ordinary_word(args))),
-            "_another_one" => Some(py_func("_another_one", |args: &[Py]| _another_one(args))),
-            "_another_subject" => Some(py_func("_another_subject", |args: &[Py]| _another_subject(args))),
-            "_article_for" => Some(py_func("_article_for", |args: &[Py]| _article_for(args))),
-            "_asked_for_what_they_already_tried" => Some(py_func("_asked_for_what_they_already_tried", |args: &[Py]| _asked_for_what_they_already_tried(args))),
-            "_asks_for_a_verse" => Some(py_func("_asks_for_a_verse", |args: &[Py]| _asks_for_a_verse(args))),
-            "_asks_if_a_comic_suits_an_age" => Some(py_func("_asks_if_a_comic_suits_an_age", |args: &[Py]| _asks_if_a_comic_suits_an_age(args))),
-            "_author_in" => Some(py_func("_author_in", |args: &[Py]| _author_in(args))),
-            "_author_key" => Some(py_func("_author_key", |args: &[Py]| _author_key(args))),
-            "_book_about" => Some(py_func("_book_about", |args: &[Py]| _book_about(args))),
-            "_book_for_the_age" => Some(py_func("_book_for_the_age", |args: &[Py]| _book_for_the_age(args))),
-            "_book_like" => Some(py_func("_book_like", |args: &[Py]| _book_like(args))),
-            "_book_recommend" => Some(py_func("_book_recommend", |args: &[Py]| _book_recommend(args))),
-            "_book_subject" => Some(py_func("_book_subject", |args: &[Py]| _book_subject(args))),
-            "_book_thriller" => Some(py_func("_book_thriller", |args: &[Py]| _book_thriller(args))),
-            "_book_title_named" => Some(py_func("_book_title_named", |args: &[Py]| _book_title_named(args))),
-            "_buzz" => Some(py_func("_buzz", |args: &[Py]| _buzz(args))),
-            "_card_game" => Some(py_func("_card_game", |args: &[Py]| _card_game(args))),
-            "_character_name" => Some(py_func("_character_name", |args: &[Py]| _character_name(args))),
-            "_chat_is_about_a_pick" => Some(py_func("_chat_is_about_a_pick", |args: &[Py]| _chat_is_about_a_pick(args))),
-            "_cinema_of" => Some(py_func("_cinema_of", |args: &[Py]| _cinema_of(args))),
-            "_comic_pick" => Some(py_func("_comic_pick", |args: &[Py]| _comic_pick(args))),
-            "_display" => Some(py_func("_display", |args: &[Py]| _display(args))),
+            "_a_bridge_in_music" => Some(g__a_bridge_in_music()),
+            "_a_chess_line" => Some(g__a_chess_line()),
+            "_a_child_in_the_chat" => Some(g__a_child_in_the_chat()),
+            "_a_child_story_about" => Some(g__a_child_story_about()),
+            "_a_child_story_lead" => Some(g__a_child_story_lead()),
+            "_a_child_who_reads_already" => Some(g__a_child_who_reads_already()),
+            "_a_country_is_a_country" => Some(g__a_country_is_a_country()),
+            "_a_documentary_is_wanted" => Some(g__a_documentary_is_wanted()),
+            "_a_film_ask" => Some(g__a_film_ask()),
+            "_a_game_pick_line" => Some(g__a_game_pick_line()),
+            "_a_genre_is_the_taste" => Some(g__a_genre_is_the_taste()),
+            "_a_hardware_decision" => Some(g__a_hardware_decision()),
+            "_a_judged_work_named" => Some(g__a_judged_work_named()),
+            "_a_listings_ask_near_me" => Some(g__a_listings_ask_near_me()),
+            "_a_pick_in_any_medium" => Some(g__a_pick_in_any_medium()),
+            "_a_pick_of_the_other_mood" => Some(g__a_pick_of_the_other_mood()),
+            "_a_place_not_a_work" => Some(g__a_place_not_a_work()),
+            "_a_placeholder_word" => Some(g__a_placeholder_word()),
+            "_a_programme_is_wanted" => Some(g__a_programme_is_wanted()),
+            "_a_report_answered" => Some(g__a_report_answered()),
+            "_a_report_of_the_habit" => Some(g__a_report_of_the_habit()),
+            "_a_reservation" => Some(g__a_reservation()),
+            "_a_second_one_read_first" => Some(g__a_second_one_read_first()),
+            "_a_second_verse_is_asked_for" => Some(g__a_second_verse_is_asked_for()),
+            "_a_story_for_the_listener" => Some(g__a_story_for_the_listener()),
+            "_a_story_is_asked_for" => Some(g__a_story_is_asked_for()),
+            "_a_surface_is_being_painted" => Some(g__a_surface_is_being_painted()),
+            "_a_thing_is_being_baked" => Some(g__a_thing_is_being_baked()),
+            "_a_word_is_turned_down" => Some(g__a_word_is_turned_down()),
+            "_about_a_person" => Some(g__about_a_person()),
+            "_activity_start" => Some(g__activity_start()),
+            "_after_named" => Some(g__after_named()),
+            "_age_in" => Some(g__age_in()),
+            "_an_hour_or_a_day" => Some(g__an_hour_or_a_day()),
+            "_an_ordinary_word" => Some(g__an_ordinary_word()),
+            "_another_one" => Some(g__another_one()),
+            "_another_subject" => Some(g__another_subject()),
+            "_article_for" => Some(g__article_for()),
+            "_asked_for_what_they_already_tried" => Some(g__asked_for_what_they_already_tried()),
+            "_asks_for_a_verse" => Some(g__asks_for_a_verse()),
+            "_asks_if_a_comic_suits_an_age" => Some(g__asks_if_a_comic_suits_an_age()),
+            "_author_in" => Some(g__author_in()),
+            "_author_key" => Some(g__author_key()),
+            "_book_about" => Some(g__book_about()),
+            "_book_for_the_age" => Some(g__book_for_the_age()),
+            "_book_like" => Some(g__book_like()),
+            "_book_recommend" => Some(g__book_recommend()),
+            "_book_subject" => Some(g__book_subject()),
+            "_book_thriller" => Some(g__book_thriller()),
+            "_book_title_named" => Some(g__book_title_named()),
+            "_buzz" => Some(g__buzz()),
+            "_card_game" => Some(g__card_game()),
+            "_character_name" => Some(g__character_name()),
+            "_chat_is_about_a_pick" => Some(g__chat_is_about_a_pick()),
+            "_cinema_of" => Some(g__cinema_of()),
+            "_comic_pick" => Some(g__comic_pick()),
+            "_display" => Some(g__display()),
             "_e" => Some(g__e()),
-            "_family_film" => Some(py_func("_family_film", |args: &[Py]| _family_film(args))),
-            "_film_kind" => Some(py_func("_film_kind", |args: &[Py]| _film_kind(args))),
-            "_film_kind_reply" => Some(py_func("_film_kind_reply", |args: &[Py]| _film_kind_reply(args))),
-            "_film_like" => Some(py_func("_film_like", |args: &[Py]| _film_like(args))),
-            "_film_list" => Some(py_func("_film_list", |args: &[Py]| _film_list(args))),
-            "_film_under" => Some(py_func("_film_under", |args: &[Py]| _film_under(args))),
-            "_films_within" => Some(py_func("_films_within", |args: &[Py]| _films_within(args))),
+            "_family_film" => Some(g__family_film()),
+            "_film_kind" => Some(g__film_kind()),
+            "_film_kind_reply" => Some(g__film_kind_reply()),
+            "_film_like" => Some(g__film_like()),
+            "_film_list" => Some(g__film_list()),
+            "_film_under" => Some(g__film_under()),
+            "_films_within" => Some(g__films_within()),
             "_form_name" => Some(g__form_name()),
             "_form_word" => Some(g__form_word()),
-            "_genre_start" => Some(py_func("_genre_start", |args: &[Py]| _genre_start(args))),
+            "_genre_start" => Some(g__genre_start()),
             "_haiku" => Some(g__haiku()),
-            "_in_tune" => Some(py_func("_in_tune", |args: &[Py]| _in_tune(args))),
-            "_indoors" => Some(py_func("_indoors", |args: &[Py]| _indoors(args))),
-            "_instrument_count" => Some(py_func("_instrument_count", |args: &[Py]| _instrument_count(args))),
-            "_kind_carry" => Some(py_func("_kind_carry", |args: &[Py]| _kind_carry(args))),
-            "_kind_words" => Some(py_func("_kind_words", |args: &[Py]| _kind_words(args))),
-            "_lead" => Some(py_func("_lead", |args: &[Py]| _lead(args))),
+            "_in_tune" => Some(g__in_tune()),
+            "_indoors" => Some(g__indoors()),
+            "_instrument_count" => Some(g__instrument_count()),
+            "_kind_carry" => Some(g__kind_carry()),
+            "_kind_words" => Some(g__kind_words()),
+            "_lead" => Some(g__lead()),
             "_limerick" => Some(g__limerick()),
-            "_limit_wanted" => Some(py_func("_limit_wanted", |args: &[Py]| _limit_wanted(args))),
-            "_lines" => Some(py_func("_lines", |args: &[Py]| _lines(args))),
-            "_list_words" => Some(py_func("_list_words", |args: &[Py]| _list_words(args))),
-            "_listen_when" => Some(py_func("_listen_when", |args: &[Py]| _listen_when(args))),
-            "_medium_named" => Some(py_func("_medium_named", |args: &[Py]| _medium_named(args))),
-            "_minutes_wanted" => Some(py_func("_minutes_wanted", |args: &[Py]| _minutes_wanted(args))),
+            "_limit_wanted" => Some(g__limit_wanted()),
+            "_lines" => Some(g__lines()),
+            "_list_words" => Some(g__list_words()),
+            "_listen_when" => Some(g__listen_when()),
+            "_medium_named" => Some(g__medium_named()),
+            "_minutes_wanted" => Some(g__minutes_wanted()),
             "_mood" => Some(g__mood()),
-            "_mood_key_words" => Some(py_func("_mood_key_words", |args: &[Py]| _mood_key_words(args))),
-            "_mood_of" => Some(py_func("_mood_of", |args: &[Py]| _mood_of(args))),
-            "_mood_pick" => Some(py_func("_mood_pick", |args: &[Py]| _mood_pick(args))),
-            "_mood_signals" => Some(py_func("_mood_signals", |args: &[Py]| _mood_signals(args))),
-            "_music_elsewhere" => Some(py_func("_music_elsewhere", |args: &[Py]| _music_elsewhere(args))),
-            "_music_practice" => Some(py_func("_music_practice", |args: &[Py]| _music_practice(args))),
-            "_music_term" => Some(py_func("_music_term", |args: &[Py]| _music_term(args))),
-            "_named_nothing" => Some(py_func("_named_nothing", |args: &[Py]| _named_nothing(args))),
-            "_named_work" => Some(py_func("_named_work", |args: &[Py]| _named_work(args))),
-            "_names_a_film_genre" => Some(py_func("_names_a_film_genre", |args: &[Py]| _names_a_film_genre(args))),
-            "_names_another_form" => Some(py_func("_names_another_form", |args: &[Py]| _names_another_form(args))),
-            "_names_the_evening" => Some(py_func("_names_the_evening", |args: &[Py]| _names_the_evening(args))),
-            "_names_the_weather" => Some(py_func("_names_the_weather", |args: &[Py]| _names_the_weather(args))),
-            "_negated" => Some(py_func("_negated", |args: &[Py]| _negated(args))),
-            "_nickname" => Some(py_func("_nickname", |args: &[Py]| _nickname(args))),
-            "_no_city_is_named" => Some(py_func("_no_city_is_named", |args: &[Py]| _no_city_is_named(args))),
-            "_no_named_mood" => Some(py_func("_no_named_mood", |args: &[Py]| _no_named_mood(args))),
-            "_no_subject_verse" => Some(py_func("_no_subject_verse", |args: &[Py]| _no_subject_verse(args))),
-            "_not_a_crowd" => Some(py_func("_not_a_crowd", |args: &[Py]| _not_a_crowd(args))),
-            "_not_a_reservation" => Some(py_func("_not_a_reservation", |args: &[Py]| _not_a_reservation(args))),
-            "_offer" => Some(py_func("_offer", |args: &[Py]| _offer(args))),
-            "_own_texts" => Some(py_func("_own_texts", |args: &[Py]| _own_texts(args))),
-            "_paints_a_thing" => Some(py_func("_paints_a_thing", |args: &[Py]| _paints_a_thing(args))),
-            "_party_games_for_kids" => Some(py_func("_party_games_for_kids", |args: &[Py]| _party_games_for_kids(args))),
-            "_pick_carry" => Some(py_func("_pick_carry", |args: &[Py]| _pick_carry(args))),
-            "_pick_kind" => Some(py_func("_pick_kind", |args: &[Py]| _pick_kind(args))),
-            "_pick_limit" => Some(py_func("_pick_limit", |args: &[Py]| _pick_limit(args))),
-            "_pick_limit_reply" => Some(py_func("_pick_limit_reply", |args: &[Py]| _pick_limit_reply(args))),
-            "_pick_line" => Some(py_func("_pick_line", |args: &[Py]| _pick_line(args))),
-            "_pick_list" => Some(py_func("_pick_list", |args: &[Py]| _pick_list(args))),
-            "_pick_plain" => Some(py_func("_pick_plain", |args: &[Py]| _pick_plain(args))),
-            "_pick_refused" => Some(py_func("_pick_refused", |args: &[Py]| _pick_refused(args))),
-            "_pick_reply" => Some(py_func("_pick_reply", |args: &[Py]| _pick_reply(args))),
-            "_pick_rows" => Some(py_func("_pick_rows", |args: &[Py]| _pick_rows(args))),
-            "_pick_stands_down" => Some(py_func("_pick_stands_down", |args: &[Py]| _pick_stands_down(args))),
-            "_pick_who" => Some(py_func("_pick_who", |args: &[Py]| _pick_who(args))),
-            "_picked" => Some(py_func("_picked", |args: &[Py]| _picked(args))),
-            "_picks_by_title" => Some(py_func("_picks_by_title", |args: &[Py]| _picks_by_title(args))),
-            "_plain_words" => Some(py_func("_plain_words", |args: &[Py]| _plain_words(args))),
+            "_mood_key_words" => Some(g__mood_key_words()),
+            "_mood_of" => Some(g__mood_of()),
+            "_mood_pick" => Some(g__mood_pick()),
+            "_mood_signals" => Some(g__mood_signals()),
+            "_music_elsewhere" => Some(g__music_elsewhere()),
+            "_music_practice" => Some(g__music_practice()),
+            "_music_term" => Some(g__music_term()),
+            "_named_nothing" => Some(g__named_nothing()),
+            "_named_work" => Some(g__named_work()),
+            "_names_a_film_genre" => Some(g__names_a_film_genre()),
+            "_names_another_form" => Some(g__names_another_form()),
+            "_names_the_evening" => Some(g__names_the_evening()),
+            "_names_the_weather" => Some(g__names_the_weather()),
+            "_negated" => Some(g__negated()),
+            "_nickname" => Some(g__nickname()),
+            "_no_city_is_named" => Some(g__no_city_is_named()),
+            "_no_named_mood" => Some(g__no_named_mood()),
+            "_no_subject_verse" => Some(g__no_subject_verse()),
+            "_not_a_crowd" => Some(g__not_a_crowd()),
+            "_not_a_reservation" => Some(g__not_a_reservation()),
+            "_offer" => Some(g__offer()),
+            "_own_texts" => Some(g__own_texts()),
+            "_paints_a_thing" => Some(g__paints_a_thing()),
+            "_party_games_for_kids" => Some(g__party_games_for_kids()),
+            "_pick_carry" => Some(g__pick_carry()),
+            "_pick_kind" => Some(g__pick_kind()),
+            "_pick_limit" => Some(g__pick_limit()),
+            "_pick_limit_reply" => Some(g__pick_limit_reply()),
+            "_pick_line" => Some(g__pick_line()),
+            "_pick_list" => Some(g__pick_list()),
+            "_pick_plain" => Some(g__pick_plain()),
+            "_pick_refused" => Some(g__pick_refused()),
+            "_pick_reply" => Some(g__pick_reply()),
+            "_pick_rows" => Some(g__pick_rows()),
+            "_pick_stands_down" => Some(g__pick_stands_down()),
+            "_pick_who" => Some(g__pick_who()),
+            "_picked" => Some(g__picked()),
+            "_picks_by_title" => Some(g__picks_by_title()),
+            "_plain_words" => Some(g__plain_words()),
             "_podcast_reply" => Some(g__podcast_reply()),
             "_podcast_subject" => Some(g__podcast_subject()),
             "_podcast_words" => Some(g__podcast_words()),
             "_poem" => Some(g__poem()),
-            "_quiz_name" => Some(py_func("_quiz_name", |args: &[Py]| _quiz_name(args))),
+            "_quiz_name" => Some(g__quiz_name()),
             "_rap" => Some(g__rap()),
-            "_reader_named" => Some(py_func("_reader_named", |args: &[Py]| _reader_named(args))),
-            "_rhyme" => Some(py_func("_rhyme", |args: &[Py]| _rhyme(args))),
-            "_rows_from_cinema" => Some(py_func("_rows_from_cinema", |args: &[Py]| _rows_from_cinema(args))),
-            "_said" => Some(py_func("_said", |args: &[Py]| _said(args))),
-            "_say" => Some(py_func("_say", |args: &[Py]| _say(args))),
-            "_says" => Some(py_func("_says", |args: &[Py]| _says(args))),
-            "_shelf_within" => Some(py_func("_shelf_within", |args: &[Py]| _shelf_within(args))),
-            "_shortest_wanted" => Some(py_func("_shortest_wanted", |args: &[Py]| _shortest_wanted(args))),
-            "_show_about" => Some(py_func("_show_about", |args: &[Py]| _show_about(args))),
-            "_show_subject" => Some(py_func("_show_subject", |args: &[Py]| _show_subject(args))),
-            "_somebodys_own_thing" => Some(py_func("_somebodys_own_thing", |args: &[Py]| _somebodys_own_thing(args))),
+            "_reader_named" => Some(g__reader_named()),
+            "_rhyme" => Some(g__rhyme()),
+            "_rows_from_cinema" => Some(g__rows_from_cinema()),
+            "_said" => Some(g__said()),
+            "_say" => Some(g__say()),
+            "_says" => Some(g__says()),
+            "_shelf_within" => Some(g__shelf_within()),
+            "_shortest_wanted" => Some(g__shortest_wanted()),
+            "_show_about" => Some(g__show_about()),
+            "_show_subject" => Some(g__show_subject()),
+            "_somebodys_own_thing" => Some(g__somebodys_own_thing()),
             "_song" => Some(g__song()),
             "_story" => Some(g__story()),
-            "_story_idea" => Some(py_func("_story_idea", |args: &[Py]| _story_idea(args))),
-            "_subject" => Some(py_func("_subject", |args: &[Py]| _subject(args))),
-            "_subject_words" => Some(py_func("_subject_words", |args: &[Py]| _subject_words(args))),
-            "_subs_sentence" => Some(py_func("_subs_sentence", |args: &[Py]| _subs_sentence(args))),
-            "_table_pick" => Some(py_func("_table_pick", |args: &[Py]| _table_pick(args))),
-            "_the_chat_turned_down" => Some(py_func("_the_chat_turned_down", |args: &[Py]| _the_chat_turned_down(args))),
-            "_the_form_a_repeat_ask_names" => Some(py_func("_the_form_a_repeat_ask_names", |args: &[Py]| _the_form_a_repeat_ask_names(args))),
-            "_the_form_last_time" => Some(py_func("_the_form_last_time", |args: &[Py]| _the_form_last_time(args))),
-            "_the_form_of_the_lead" => Some(py_func("_the_form_of_the_lead", |args: &[Py]| _the_form_of_the_lead(args))),
-            "_the_game_pick" => Some(py_func("_the_game_pick", |args: &[Py]| _the_game_pick(args))),
-            "_the_gentle_list" => Some(py_func("_the_gentle_list", |args: &[Py]| _the_gentle_list(args))),
-            "_the_kind_named" => Some(py_func("_the_kind_named", |args: &[Py]| _the_kind_named(args))),
-            "_the_last_line_reported_a_form" => Some(py_func("_the_last_line_reported_a_form", |args: &[Py]| _the_last_line_reported_a_form(args))),
-            "_the_liked_thing_is_asked_about" => Some(py_func("_the_liked_thing_is_asked_about", |args: &[Py]| _the_liked_thing_is_asked_about(args))),
-            "_the_line_to_read_for_a_story" => Some(py_func("_the_line_to_read_for_a_story", |args: &[Py]| _the_line_to_read_for_a_story(args))),
-            "_the_listener_lead" => Some(py_func("_the_listener_lead", |args: &[Py]| _the_listener_lead(args))),
-            "_the_medium" => Some(py_func("_the_medium", |args: &[Py]| _the_medium(args))),
-            "_the_mood_the_chat_holds" => Some(py_func("_the_mood_the_chat_holds", |args: &[Py]| _the_mood_the_chat_holds(args))),
-            "_the_mood_the_chat_turned_down" => Some(py_func("_the_mood_the_chat_turned_down", |args: &[Py]| _the_mood_the_chat_turned_down(args))),
-            "_the_opening_not_said_yet" => Some(py_func("_the_opening_not_said_yet", |args: &[Py]| _the_opening_not_said_yet(args))),
-            "_the_possessive_phrase" => Some(py_func("_the_possessive_phrase", |args: &[Py]| _the_possessive_phrase(args))),
-            "_the_reader_age" => Some(py_func("_the_reader_age", |args: &[Py]| _the_reader_age(args))),
-            "_the_scare_is_refused" => Some(py_func("_the_scare_is_refused", |args: &[Py]| _the_scare_is_refused(args))),
-            "_the_scare_is_wanted" => Some(py_func("_the_scare_is_wanted", |args: &[Py]| _the_scare_is_wanted(args))),
-            "_the_second_one_asked_for" => Some(py_func("_the_second_one_asked_for", |args: &[Py]| _the_second_one_asked_for(args))),
-            "_the_second_one_short" => Some(py_func("_the_second_one_short", |args: &[Py]| _the_second_one_short(args))),
-            "_the_solo_game" => Some(py_func("_the_solo_game", |args: &[Py]| _the_solo_game(args))),
-            "_the_story_was_just_told" => Some(py_func("_the_story_was_just_told", |args: &[Py]| _the_story_was_just_told(args))),
-            "_the_subject_from_the_ask" => Some(py_func("_the_subject_from_the_ask", |args: &[Py]| _the_subject_from_the_ask(args))),
-            "_the_subject_is_wanted" => Some(py_func("_the_subject_is_wanted", |args: &[Py]| _the_subject_is_wanted(args))),
-            "_thing" => Some(py_func("_thing", |args: &[Py]| _thing(args))),
-            "_title" => Some(py_func("_title", |args: &[Py]| _title(args))),
-            "_title_in" => Some(py_func("_title_in", |args: &[Py]| _title_in(args))),
-            "_title_medium" => Some(py_func("_title_medium", |args: &[Py]| _title_medium(args))),
-            "_titles_of" => Some(py_func("_titles_of", |args: &[Py]| _titles_of(args))),
-            "_typed_line" => Some(py_func("_typed_line", |args: &[Py]| _typed_line(args))),
-            "_wants_subtitles" => Some(py_func("_wants_subtitles", |args: &[Py]| _wants_subtitles(args))),
-            "_who_wrote" => Some(py_func("_who_wrote", |args: &[Py]| _who_wrote(args))),
-            "_with_the_detail_asked_for" => Some(py_func("_with_the_detail_asked_for", |args: &[Py]| _with_the_detail_asked_for(args))),
+            "_story_idea" => Some(g__story_idea()),
+            "_subject" => Some(g__subject()),
+            "_subject_words" => Some(g__subject_words()),
+            "_subs_sentence" => Some(g__subs_sentence()),
+            "_table_pick" => Some(g__table_pick()),
+            "_the_chat_turned_down" => Some(g__the_chat_turned_down()),
+            "_the_form_a_repeat_ask_names" => Some(g__the_form_a_repeat_ask_names()),
+            "_the_form_last_time" => Some(g__the_form_last_time()),
+            "_the_form_of_the_lead" => Some(g__the_form_of_the_lead()),
+            "_the_game_pick" => Some(g__the_game_pick()),
+            "_the_gentle_list" => Some(g__the_gentle_list()),
+            "_the_kind_named" => Some(g__the_kind_named()),
+            "_the_last_line_reported_a_form" => Some(g__the_last_line_reported_a_form()),
+            "_the_liked_thing_is_asked_about" => Some(g__the_liked_thing_is_asked_about()),
+            "_the_line_to_read_for_a_story" => Some(g__the_line_to_read_for_a_story()),
+            "_the_listener_lead" => Some(g__the_listener_lead()),
+            "_the_medium" => Some(g__the_medium()),
+            "_the_mood_the_chat_holds" => Some(g__the_mood_the_chat_holds()),
+            "_the_mood_the_chat_turned_down" => Some(g__the_mood_the_chat_turned_down()),
+            "_the_opening_not_said_yet" => Some(g__the_opening_not_said_yet()),
+            "_the_possessive_phrase" => Some(g__the_possessive_phrase()),
+            "_the_reader_age" => Some(g__the_reader_age()),
+            "_the_scare_is_refused" => Some(g__the_scare_is_refused()),
+            "_the_scare_is_wanted" => Some(g__the_scare_is_wanted()),
+            "_the_second_one_asked_for" => Some(g__the_second_one_asked_for()),
+            "_the_second_one_short" => Some(g__the_second_one_short()),
+            "_the_solo_game" => Some(g__the_solo_game()),
+            "_the_story_was_just_told" => Some(g__the_story_was_just_told()),
+            "_the_subject_from_the_ask" => Some(g__the_subject_from_the_ask()),
+            "_the_subject_is_wanted" => Some(g__the_subject_is_wanted()),
+            "_thing" => Some(g__thing()),
+            "_title" => Some(g__title()),
+            "_title_in" => Some(g__title_in()),
+            "_title_medium" => Some(g__title_medium()),
+            "_titles_of" => Some(g__titles_of()),
+            "_typed_line" => Some(g__typed_line()),
+            "_wants_subtitles" => Some(g__wants_subtitles()),
+            "_who_wrote" => Some(g__who_wrote()),
+            "_with_the_detail_asked_for" => Some(g__with_the_detail_asked_for()),
             "_word" => Some(g__word()),
-            "_work_named" => Some(py_func("_work_named", |args: &[Py]| _work_named(args))),
-            "_worth_it" => Some(py_func("_worth_it", |args: &[Py]| _worth_it(args))),
-            "_worth_it_unnamed" => Some(py_func("_worth_it_unnamed", |args: &[Py]| _worth_it_unnamed(args))),
+            "_work_named" => Some(g__work_named()),
+            "_worth_it" => Some(g__worth_it()),
+            "_worth_it_unnamed" => Some(g__worth_it_unnamed()),
             "asks_for_one_more" => Some(g_asks_for_one_more()),
             "entry" => Some(g_entry()),
-            "not_asking_what_to_watch_for" => Some(py_func("not_asking_what_to_watch_for", |args: &[Py]| not_asking_what_to_watch_for(args))),
+            "not_asking_what_to_watch_for" => Some(g_not_asking_what_to_watch_for()),
             "owns_the_deed" => Some(g_owns_the_deed()),
-            "the_book_is_a_reservation" => Some(py_func("the_book_is_a_reservation", |args: &[Py]| the_book_is_a_reservation(args))),
-            "the_next_verse" => Some(py_func("the_next_verse", |args: &[Py]| the_next_verse(args))),
-            "the_verse_longer" => Some(py_func("the_verse_longer", |args: &[Py]| the_verse_longer(args))),
-            "who_made" => Some(py_func("who_made", |args: &[Py]| who_made(args))),
+            "the_book_is_a_reservation" => Some(g_the_book_is_a_reservation()),
+            "the_next_verse" => Some(g_the_next_verse()),
+            "the_verse_longer" => Some(g_the_verse_longer()),
+            "who_made" => Some(g_who_made()),
             "re" => Some(stdlib_module("re")),
             _ => None,
         }),
@@ -10025,210 +10368,385 @@ pub fn module_obj() -> Py {
             "_WET_PHRASES" => s__WET_PHRASES(v),
             "_WET_WORDS" => s__WET_WORDS(v),
             "_WORD_AGES" => s__WORD_AGES(v),
+            "_a_bridge_in_music" => s__a_bridge_in_music(v),
+            "_a_chess_line" => s__a_chess_line(v),
+            "_a_child_in_the_chat" => s__a_child_in_the_chat(v),
+            "_a_child_story_about" => s__a_child_story_about(v),
+            "_a_child_story_lead" => s__a_child_story_lead(v),
+            "_a_child_who_reads_already" => s__a_child_who_reads_already(v),
+            "_a_country_is_a_country" => s__a_country_is_a_country(v),
+            "_a_documentary_is_wanted" => s__a_documentary_is_wanted(v),
+            "_a_film_ask" => s__a_film_ask(v),
+            "_a_game_pick_line" => s__a_game_pick_line(v),
+            "_a_genre_is_the_taste" => s__a_genre_is_the_taste(v),
+            "_a_hardware_decision" => s__a_hardware_decision(v),
+            "_a_judged_work_named" => s__a_judged_work_named(v),
+            "_a_listings_ask_near_me" => s__a_listings_ask_near_me(v),
+            "_a_pick_in_any_medium" => s__a_pick_in_any_medium(v),
+            "_a_pick_of_the_other_mood" => s__a_pick_of_the_other_mood(v),
+            "_a_place_not_a_work" => s__a_place_not_a_work(v),
+            "_a_placeholder_word" => s__a_placeholder_word(v),
+            "_a_programme_is_wanted" => s__a_programme_is_wanted(v),
+            "_a_report_answered" => s__a_report_answered(v),
+            "_a_report_of_the_habit" => s__a_report_of_the_habit(v),
+            "_a_reservation" => s__a_reservation(v),
+            "_a_second_one_read_first" => s__a_second_one_read_first(v),
+            "_a_second_verse_is_asked_for" => s__a_second_verse_is_asked_for(v),
+            "_a_story_for_the_listener" => s__a_story_for_the_listener(v),
+            "_a_story_is_asked_for" => s__a_story_is_asked_for(v),
+            "_a_surface_is_being_painted" => s__a_surface_is_being_painted(v),
+            "_a_thing_is_being_baked" => s__a_thing_is_being_baked(v),
+            "_a_word_is_turned_down" => s__a_word_is_turned_down(v),
+            "_about_a_person" => s__about_a_person(v),
+            "_activity_start" => s__activity_start(v),
+            "_after_named" => s__after_named(v),
+            "_age_in" => s__age_in(v),
+            "_an_hour_or_a_day" => s__an_hour_or_a_day(v),
+            "_an_ordinary_word" => s__an_ordinary_word(v),
+            "_another_one" => s__another_one(v),
+            "_another_subject" => s__another_subject(v),
+            "_article_for" => s__article_for(v),
+            "_asked_for_what_they_already_tried" => s__asked_for_what_they_already_tried(v),
+            "_asks_for_a_verse" => s__asks_for_a_verse(v),
+            "_asks_if_a_comic_suits_an_age" => s__asks_if_a_comic_suits_an_age(v),
+            "_author_in" => s__author_in(v),
+            "_author_key" => s__author_key(v),
+            "_book_about" => s__book_about(v),
+            "_book_for_the_age" => s__book_for_the_age(v),
+            "_book_like" => s__book_like(v),
+            "_book_recommend" => s__book_recommend(v),
+            "_book_subject" => s__book_subject(v),
+            "_book_thriller" => s__book_thriller(v),
+            "_book_title_named" => s__book_title_named(v),
+            "_buzz" => s__buzz(v),
+            "_card_game" => s__card_game(v),
+            "_character_name" => s__character_name(v),
+            "_chat_is_about_a_pick" => s__chat_is_about_a_pick(v),
+            "_cinema_of" => s__cinema_of(v),
+            "_comic_pick" => s__comic_pick(v),
+            "_display" => s__display(v),
             "_e" => s__e(v),
+            "_family_film" => s__family_film(v),
+            "_film_kind" => s__film_kind(v),
+            "_film_kind_reply" => s__film_kind_reply(v),
+            "_film_like" => s__film_like(v),
+            "_film_list" => s__film_list(v),
+            "_film_under" => s__film_under(v),
+            "_films_within" => s__films_within(v),
             "_form_name" => s__form_name(v),
             "_form_word" => s__form_word(v),
+            "_genre_start" => s__genre_start(v),
             "_haiku" => s__haiku(v),
+            "_in_tune" => s__in_tune(v),
+            "_indoors" => s__indoors(v),
+            "_instrument_count" => s__instrument_count(v),
+            "_kind_carry" => s__kind_carry(v),
+            "_kind_words" => s__kind_words(v),
+            "_lead" => s__lead(v),
             "_limerick" => s__limerick(v),
+            "_limit_wanted" => s__limit_wanted(v),
+            "_lines" => s__lines(v),
+            "_list_words" => s__list_words(v),
+            "_listen_when" => s__listen_when(v),
+            "_medium_named" => s__medium_named(v),
+            "_minutes_wanted" => s__minutes_wanted(v),
             "_mood" => s__mood(v),
+            "_mood_key_words" => s__mood_key_words(v),
+            "_mood_of" => s__mood_of(v),
+            "_mood_pick" => s__mood_pick(v),
+            "_mood_signals" => s__mood_signals(v),
+            "_music_elsewhere" => s__music_elsewhere(v),
+            "_music_practice" => s__music_practice(v),
+            "_music_term" => s__music_term(v),
+            "_named_nothing" => s__named_nothing(v),
+            "_named_work" => s__named_work(v),
+            "_names_a_film_genre" => s__names_a_film_genre(v),
+            "_names_another_form" => s__names_another_form(v),
+            "_names_the_evening" => s__names_the_evening(v),
+            "_names_the_weather" => s__names_the_weather(v),
+            "_negated" => s__negated(v),
+            "_nickname" => s__nickname(v),
+            "_no_city_is_named" => s__no_city_is_named(v),
+            "_no_named_mood" => s__no_named_mood(v),
+            "_no_subject_verse" => s__no_subject_verse(v),
+            "_not_a_crowd" => s__not_a_crowd(v),
+            "_not_a_reservation" => s__not_a_reservation(v),
+            "_offer" => s__offer(v),
+            "_own_texts" => s__own_texts(v),
+            "_paints_a_thing" => s__paints_a_thing(v),
+            "_party_games_for_kids" => s__party_games_for_kids(v),
+            "_pick_carry" => s__pick_carry(v),
+            "_pick_kind" => s__pick_kind(v),
+            "_pick_limit" => s__pick_limit(v),
+            "_pick_limit_reply" => s__pick_limit_reply(v),
+            "_pick_line" => s__pick_line(v),
+            "_pick_list" => s__pick_list(v),
+            "_pick_plain" => s__pick_plain(v),
+            "_pick_refused" => s__pick_refused(v),
+            "_pick_reply" => s__pick_reply(v),
+            "_pick_rows" => s__pick_rows(v),
+            "_pick_stands_down" => s__pick_stands_down(v),
+            "_pick_who" => s__pick_who(v),
+            "_picked" => s__picked(v),
+            "_picks_by_title" => s__picks_by_title(v),
+            "_plain_words" => s__plain_words(v),
             "_podcast_reply" => s__podcast_reply(v),
             "_podcast_subject" => s__podcast_subject(v),
             "_podcast_words" => s__podcast_words(v),
             "_poem" => s__poem(v),
+            "_quiz_name" => s__quiz_name(v),
             "_rap" => s__rap(v),
+            "_reader_named" => s__reader_named(v),
+            "_rhyme" => s__rhyme(v),
+            "_rows_from_cinema" => s__rows_from_cinema(v),
+            "_said" => s__said(v),
+            "_say" => s__say(v),
+            "_says" => s__says(v),
+            "_shelf_within" => s__shelf_within(v),
+            "_shortest_wanted" => s__shortest_wanted(v),
+            "_show_about" => s__show_about(v),
+            "_show_subject" => s__show_subject(v),
+            "_somebodys_own_thing" => s__somebodys_own_thing(v),
             "_song" => s__song(v),
             "_story" => s__story(v),
+            "_story_idea" => s__story_idea(v),
+            "_subject" => s__subject(v),
+            "_subject_words" => s__subject_words(v),
+            "_subs_sentence" => s__subs_sentence(v),
+            "_table_pick" => s__table_pick(v),
+            "_the_chat_turned_down" => s__the_chat_turned_down(v),
+            "_the_form_a_repeat_ask_names" => s__the_form_a_repeat_ask_names(v),
+            "_the_form_last_time" => s__the_form_last_time(v),
+            "_the_form_of_the_lead" => s__the_form_of_the_lead(v),
+            "_the_game_pick" => s__the_game_pick(v),
+            "_the_gentle_list" => s__the_gentle_list(v),
+            "_the_kind_named" => s__the_kind_named(v),
+            "_the_last_line_reported_a_form" => s__the_last_line_reported_a_form(v),
+            "_the_liked_thing_is_asked_about" => s__the_liked_thing_is_asked_about(v),
+            "_the_line_to_read_for_a_story" => s__the_line_to_read_for_a_story(v),
+            "_the_listener_lead" => s__the_listener_lead(v),
+            "_the_medium" => s__the_medium(v),
+            "_the_mood_the_chat_holds" => s__the_mood_the_chat_holds(v),
+            "_the_mood_the_chat_turned_down" => s__the_mood_the_chat_turned_down(v),
+            "_the_opening_not_said_yet" => s__the_opening_not_said_yet(v),
+            "_the_possessive_phrase" => s__the_possessive_phrase(v),
+            "_the_reader_age" => s__the_reader_age(v),
+            "_the_scare_is_refused" => s__the_scare_is_refused(v),
+            "_the_scare_is_wanted" => s__the_scare_is_wanted(v),
+            "_the_second_one_asked_for" => s__the_second_one_asked_for(v),
+            "_the_second_one_short" => s__the_second_one_short(v),
+            "_the_solo_game" => s__the_solo_game(v),
+            "_the_story_was_just_told" => s__the_story_was_just_told(v),
+            "_the_subject_from_the_ask" => s__the_subject_from_the_ask(v),
+            "_the_subject_is_wanted" => s__the_subject_is_wanted(v),
+            "_thing" => s__thing(v),
+            "_title" => s__title(v),
+            "_title_in" => s__title_in(v),
+            "_title_medium" => s__title_medium(v),
+            "_titles_of" => s__titles_of(v),
+            "_typed_line" => s__typed_line(v),
+            "_wants_subtitles" => s__wants_subtitles(v),
+            "_who_wrote" => s__who_wrote(v),
+            "_with_the_detail_asked_for" => s__with_the_detail_asked_for(v),
             "_word" => s__word(v),
+            "_work_named" => s__work_named(v),
+            "_worth_it" => s__worth_it(v),
+            "_worth_it_unnamed" => s__worth_it_unnamed(v),
             "asks_for_one_more" => s_asks_for_one_more(v),
             "entry" => s_entry(v),
+            "not_asking_what_to_watch_for" => s_not_asking_what_to_watch_for(v),
             "owns_the_deed" => s_owns_the_deed(v),
+            "the_book_is_a_reservation" => s_the_book_is_a_reservation(v),
+            "the_next_verse" => s_the_next_verse(v),
+            "the_verse_longer" => s_the_verse_longer(v),
+            "who_made" => s_who_made(v),
             _ => {},
         })),
     }))
 }
 pub fn register() {
     pyrt::xrefs::reg_module("knowledge.entertainment", module_obj);
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_chess_line", py_func("_a_chess_line", |args: &[Py]| _a_chess_line(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_no_city_is_named", py_func("_no_city_is_named", |args: &[Py]| _no_city_is_named(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_title", py_func("_title", |args: &[Py]| _title(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "who_made", py_func("who_made", |args: &[Py]| who_made(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_author_key", py_func("_author_key", |args: &[Py]| _author_key(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_titles_of", py_func("_titles_of", |args: &[Py]| _titles_of(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_title_in", py_func("_title_in", |args: &[Py]| _title_in(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_author_in", py_func("_author_in", |args: &[Py]| _author_in(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_display", py_func("_display", |args: &[Py]| _display(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_said", py_func("_said", |args: &[Py]| _said(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_list_words", py_func("_list_words", |args: &[Py]| _list_words(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_who_wrote", py_func("_who_wrote", |args: &[Py]| _who_wrote(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_book_title_named", py_func("_book_title_named", |args: &[Py]| _book_title_named(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_book_like", py_func("_book_like", |args: &[Py]| _book_like(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_age_in", py_func("_age_in", |args: &[Py]| _age_in(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_party_games_for_kids", py_func("_party_games_for_kids", |args: &[Py]| _party_games_for_kids(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_indoors", py_func("_indoors", |args: &[Py]| _indoors(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_listen_when", py_func("_listen_when", |args: &[Py]| _listen_when(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_family_film", py_func("_family_film", |args: &[Py]| _family_film(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_gentle_list", py_func("_the_gentle_list", |args: &[Py]| _the_gentle_list(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_chat_turned_down", py_func("_the_chat_turned_down", |args: &[Py]| _the_chat_turned_down(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_mood_the_chat_turned_down", py_func("_the_mood_the_chat_turned_down", |args: &[Py]| _the_mood_the_chat_turned_down(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_mood_the_chat_holds", py_func("_the_mood_the_chat_holds", |args: &[Py]| _the_mood_the_chat_holds(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_film_like", py_func("_film_like", |args: &[Py]| _film_like(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_word_is_turned_down", py_func("_a_word_is_turned_down", |args: &[Py]| _a_word_is_turned_down(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_own_texts", py_func("_own_texts", |args: &[Py]| _own_texts(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_scare_is_refused", py_func("_the_scare_is_refused", |args: &[Py]| _the_scare_is_refused(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_film_ask", py_func("_a_film_ask", |args: &[Py]| _a_film_ask(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_scare_is_wanted", py_func("_the_scare_is_wanted", |args: &[Py]| _the_scare_is_wanted(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_work_named", py_func("_work_named", |args: &[Py]| _work_named(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_liked_thing_is_asked_about", py_func("_the_liked_thing_is_asked_about", |args: &[Py]| _the_liked_thing_is_asked_about(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_about_a_person", py_func("_about_a_person", |args: &[Py]| _about_a_person(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_place_not_a_work", py_func("_a_place_not_a_work", |args: &[Py]| _a_place_not_a_work(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_thing_is_being_baked", py_func("_a_thing_is_being_baked", |args: &[Py]| _a_thing_is_being_baked(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_surface_is_being_painted", py_func("_a_surface_is_being_painted", |args: &[Py]| _a_surface_is_being_painted(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_activity_start", py_func("_activity_start", |args: &[Py]| _activity_start(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_paints_a_thing", py_func("_paints_a_thing", |args: &[Py]| _paints_a_thing(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_an_ordinary_word", py_func("_an_ordinary_word", |args: &[Py]| _an_ordinary_word(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_genre_start", py_func("_genre_start", |args: &[Py]| _genre_start(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_card_game", py_func("_card_game", |args: &[Py]| _card_game(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_in_tune", py_func("_in_tune", |args: &[Py]| _in_tune(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_buzz", py_func("_buzz", |args: &[Py]| _buzz(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_worth_it", py_func("_worth_it", |args: &[Py]| _worth_it(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_worth_it_unnamed", py_func("_worth_it_unnamed", |args: &[Py]| _worth_it_unnamed(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_named_work", py_func("_named_work", |args: &[Py]| _named_work(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_table_pick", py_func("_table_pick", |args: &[Py]| _table_pick(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_after_named", py_func("_after_named", |args: &[Py]| _after_named(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_says", py_func("_says", |args: &[Py]| _says(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_book_subject", py_func("_book_subject", |args: &[Py]| _book_subject(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_book_thriller", py_func("_book_thriller", |args: &[Py]| _book_thriller(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_book_about", py_func("_book_about", |args: &[Py]| _book_about(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_not_a_reservation", py_func("_not_a_reservation", |args: &[Py]| _not_a_reservation(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_judged_work_named", py_func("_a_judged_work_named", |args: &[Py]| _a_judged_work_named(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "the_book_is_a_reservation", py_func("the_book_is_a_reservation", |args: &[Py]| the_book_is_a_reservation(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_reservation", py_func("_a_reservation", |args: &[Py]| _a_reservation(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_listings_ask_near_me", py_func("_a_listings_ask_near_me", |args: &[Py]| _a_listings_ask_near_me(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_book_recommend", py_func("_book_recommend", |args: &[Py]| _book_recommend(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_mood_key_words", py_func("_mood_key_words", |args: &[Py]| _mood_key_words(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_mood_signals", py_func("_mood_signals", |args: &[Py]| _mood_signals(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_negated", py_func("_negated", |args: &[Py]| _negated(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_typed_line", py_func("_typed_line", |args: &[Py]| _typed_line(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_names_the_weather", py_func("_names_the_weather", |args: &[Py]| _names_the_weather(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_names_the_evening", py_func("_names_the_evening", |args: &[Py]| _names_the_evening(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_plain_words", py_func("_plain_words", |args: &[Py]| _plain_words(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_mood_of", py_func("_mood_of", |args: &[Py]| _mood_of(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_no_named_mood", py_func("_no_named_mood", |args: &[Py]| _no_named_mood(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_films_within", py_func("_films_within", |args: &[Py]| _films_within(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_mood_pick", py_func("_mood_pick", |args: &[Py]| _mood_pick(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_medium_named", py_func("_medium_named", |args: &[Py]| _medium_named(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_medium", py_func("_the_medium", |args: &[Py]| _the_medium(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_picks_by_title", py_func("_picks_by_title", |args: &[Py]| _picks_by_title(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_title_medium", py_func("_title_medium", |args: &[Py]| _title_medium(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_chat_is_about_a_pick", py_func("_chat_is_about_a_pick", |args: &[Py]| _chat_is_about_a_pick(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_pick_of_the_other_mood", py_func("_a_pick_of_the_other_mood", |args: &[Py]| _a_pick_of_the_other_mood(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_pick_in_any_medium", py_func("_a_pick_in_any_medium", |args: &[Py]| _a_pick_in_any_medium(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "not_asking_what_to_watch_for", py_func("not_asking_what_to_watch_for", |args: &[Py]| not_asking_what_to_watch_for(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_possessive_phrase", py_func("_the_possessive_phrase", |args: &[Py]| _the_possessive_phrase(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_article_for", py_func("_article_for", |args: &[Py]| _article_for(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_subject_words", py_func("_subject_words", |args: &[Py]| _subject_words(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_no_subject_verse", py_func("_no_subject_verse", |args: &[Py]| _no_subject_verse(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_names_another_form", py_func("_names_another_form", |args: &[Py]| _names_another_form(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_asks_for_a_verse", py_func("_asks_for_a_verse", |args: &[Py]| _asks_for_a_verse(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_subject", py_func("_subject", |args: &[Py]| _subject(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_thing", py_func("_thing", |args: &[Py]| _thing(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_named_nothing", py_func("_named_nothing", |args: &[Py]| _named_nothing(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_lines", py_func("_lines", |args: &[Py]| _lines(args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_chess_line", py_func("_a_chess_line", |args: &[Py]| py_call(&g__a_chess_line(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_no_city_is_named", py_func("_no_city_is_named", |args: &[Py]| py_call(&g__no_city_is_named(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_title", py_func("_title", |args: &[Py]| py_call(&g__title(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "who_made", py_func("who_made", |args: &[Py]| py_call(&g_who_made(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_author_key", py_func("_author_key", |args: &[Py]| py_call(&g__author_key(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_titles_of", py_func("_titles_of", |args: &[Py]| py_call(&g__titles_of(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_title_in", py_func("_title_in", |args: &[Py]| py_call(&g__title_in(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_author_in", py_func("_author_in", |args: &[Py]| py_call(&g__author_in(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_display", py_func("_display", |args: &[Py]| py_call(&g__display(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_said", py_func("_said", |args: &[Py]| py_call(&g__said(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_list_words", py_func("_list_words", |args: &[Py]| py_call(&g__list_words(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_who_wrote", py_func("_who_wrote", |args: &[Py]| py_call(&g__who_wrote(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_book_title_named", py_func("_book_title_named", |args: &[Py]| py_call(&g__book_title_named(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_book_like", py_func("_book_like", |args: &[Py]| py_call(&g__book_like(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_age_in", py_func("_age_in", |args: &[Py]| py_call(&g__age_in(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_party_games_for_kids", py_func("_party_games_for_kids", |args: &[Py]| py_call(&g__party_games_for_kids(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_indoors", py_func("_indoors", |args: &[Py]| py_call(&g__indoors(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_listen_when", py_func("_listen_when", |args: &[Py]| py_call(&g__listen_when(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_family_film", py_func("_family_film", |args: &[Py]| py_call(&g__family_film(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_gentle_list", py_func("_the_gentle_list", |args: &[Py]| py_call(&g__the_gentle_list(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_chat_turned_down", py_func("_the_chat_turned_down", |args: &[Py]| py_call(&g__the_chat_turned_down(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_mood_the_chat_turned_down", py_func("_the_mood_the_chat_turned_down", |args: &[Py]| py_call(&g__the_mood_the_chat_turned_down(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_mood_the_chat_holds", py_func("_the_mood_the_chat_holds", |args: &[Py]| py_call(&g__the_mood_the_chat_holds(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_film_like", py_func("_film_like", |args: &[Py]| py_call(&g__film_like(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_word_is_turned_down", py_func("_a_word_is_turned_down", |args: &[Py]| py_call(&g__a_word_is_turned_down(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_own_texts", py_func("_own_texts", |args: &[Py]| py_call(&g__own_texts(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_scare_is_refused", py_func("_the_scare_is_refused", |args: &[Py]| py_call(&g__the_scare_is_refused(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_film_ask", py_func("_a_film_ask", |args: &[Py]| py_call(&g__a_film_ask(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_scare_is_wanted", py_func("_the_scare_is_wanted", |args: &[Py]| py_call(&g__the_scare_is_wanted(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_work_named", py_func("_work_named", |args: &[Py]| py_call(&g__work_named(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_liked_thing_is_asked_about", py_func("_the_liked_thing_is_asked_about", |args: &[Py]| py_call(&g__the_liked_thing_is_asked_about(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_about_a_person", py_func("_about_a_person", |args: &[Py]| py_call(&g__about_a_person(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_place_not_a_work", py_func("_a_place_not_a_work", |args: &[Py]| py_call(&g__a_place_not_a_work(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_thing_is_being_baked", py_func("_a_thing_is_being_baked", |args: &[Py]| py_call(&g__a_thing_is_being_baked(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_surface_is_being_painted", py_func("_a_surface_is_being_painted", |args: &[Py]| py_call(&g__a_surface_is_being_painted(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_activity_start", py_func("_activity_start", |args: &[Py]| py_call(&g__activity_start(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_paints_a_thing", py_func("_paints_a_thing", |args: &[Py]| py_call(&g__paints_a_thing(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_an_ordinary_word", py_func("_an_ordinary_word", |args: &[Py]| py_call(&g__an_ordinary_word(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_genre_start", py_func("_genre_start", |args: &[Py]| py_call(&g__genre_start(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_card_game", py_func("_card_game", |args: &[Py]| py_call(&g__card_game(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_in_tune", py_func("_in_tune", |args: &[Py]| py_call(&g__in_tune(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_buzz", py_func("_buzz", |args: &[Py]| py_call(&g__buzz(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_worth_it", py_func("_worth_it", |args: &[Py]| py_call(&g__worth_it(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_worth_it_unnamed", py_func("_worth_it_unnamed", |args: &[Py]| py_call(&g__worth_it_unnamed(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_named_work", py_func("_named_work", |args: &[Py]| py_call(&g__named_work(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_table_pick", py_func("_table_pick", |args: &[Py]| py_call(&g__table_pick(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_after_named", py_func("_after_named", |args: &[Py]| py_call(&g__after_named(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_says", py_func("_says", |args: &[Py]| py_call(&g__says(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_book_subject", py_func("_book_subject", |args: &[Py]| py_call(&g__book_subject(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_book_thriller", py_func("_book_thriller", |args: &[Py]| py_call(&g__book_thriller(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_book_about", py_func("_book_about", |args: &[Py]| py_call(&g__book_about(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_not_a_reservation", py_func("_not_a_reservation", |args: &[Py]| py_call(&g__not_a_reservation(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_judged_work_named", py_func("_a_judged_work_named", |args: &[Py]| py_call(&g__a_judged_work_named(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "the_book_is_a_reservation", py_func("the_book_is_a_reservation", |args: &[Py]| py_call(&g_the_book_is_a_reservation(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_reservation", py_func("_a_reservation", |args: &[Py]| py_call(&g__a_reservation(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_listings_ask_near_me", py_func("_a_listings_ask_near_me", |args: &[Py]| py_call(&g__a_listings_ask_near_me(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_book_recommend", py_func("_book_recommend", |args: &[Py]| py_call(&g__book_recommend(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_mood_key_words", py_func("_mood_key_words", |args: &[Py]| py_call(&g__mood_key_words(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_mood_signals", py_func("_mood_signals", |args: &[Py]| py_call(&g__mood_signals(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_negated", py_func("_negated", |args: &[Py]| py_call(&g__negated(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_typed_line", py_func("_typed_line", |args: &[Py]| py_call(&g__typed_line(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_names_the_weather", py_func("_names_the_weather", |args: &[Py]| py_call(&g__names_the_weather(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_names_the_evening", py_func("_names_the_evening", |args: &[Py]| py_call(&g__names_the_evening(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_plain_words", py_func("_plain_words", |args: &[Py]| py_call(&g__plain_words(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_mood_of", py_func("_mood_of", |args: &[Py]| py_call(&g__mood_of(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_no_named_mood", py_func("_no_named_mood", |args: &[Py]| py_call(&g__no_named_mood(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_films_within", py_func("_films_within", |args: &[Py]| py_call(&g__films_within(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_mood_pick", py_func("_mood_pick", |args: &[Py]| py_call(&g__mood_pick(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_medium_named", py_func("_medium_named", |args: &[Py]| py_call(&g__medium_named(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_medium", py_func("_the_medium", |args: &[Py]| py_call(&g__the_medium(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_picks_by_title", py_func("_picks_by_title", |args: &[Py]| py_call(&g__picks_by_title(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_title_medium", py_func("_title_medium", |args: &[Py]| py_call(&g__title_medium(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_chat_is_about_a_pick", py_func("_chat_is_about_a_pick", |args: &[Py]| py_call(&g__chat_is_about_a_pick(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_pick_of_the_other_mood", py_func("_a_pick_of_the_other_mood", |args: &[Py]| py_call(&g__a_pick_of_the_other_mood(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_pick_in_any_medium", py_func("_a_pick_in_any_medium", |args: &[Py]| py_call(&g__a_pick_in_any_medium(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "not_asking_what_to_watch_for", py_func("not_asking_what_to_watch_for", |args: &[Py]| py_call(&g_not_asking_what_to_watch_for(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_possessive_phrase", py_func("_the_possessive_phrase", |args: &[Py]| py_call(&g__the_possessive_phrase(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_article_for", py_func("_article_for", |args: &[Py]| py_call(&g__article_for(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_subject_words", py_func("_subject_words", |args: &[Py]| py_call(&g__subject_words(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_no_subject_verse", py_func("_no_subject_verse", |args: &[Py]| py_call(&g__no_subject_verse(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_names_another_form", py_func("_names_another_form", |args: &[Py]| py_call(&g__names_another_form(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_asks_for_a_verse", py_func("_asks_for_a_verse", |args: &[Py]| py_call(&g__asks_for_a_verse(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_subject", py_func("_subject", |args: &[Py]| py_call(&g__subject(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_thing", py_func("_thing", |args: &[Py]| py_call(&g__thing(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_named_nothing", py_func("_named_nothing", |args: &[Py]| py_call(&g__named_nothing(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_lines", py_func("_lines", |args: &[Py]| py_call(&g__lines(), args)));
     pyrt::xrefs::reg_fn("knowledge.entertainment", "_haiku", py_func("_haiku", |args: &[Py]| py_call(&g__haiku(), args)));
     pyrt::xrefs::reg_fn("knowledge.entertainment", "_limerick", py_func("_limerick", |args: &[Py]| py_call(&g__limerick(), args)));
     pyrt::xrefs::reg_fn("knowledge.entertainment", "_poem", py_func("_poem", |args: &[Py]| py_call(&g__poem(), args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_rhyme", py_func("_rhyme", |args: &[Py]| _rhyme(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_story_idea", py_func("_story_idea", |args: &[Py]| _story_idea(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_form_last_time", py_func("_the_form_last_time", |args: &[Py]| _the_form_last_time(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_lead", py_func("_lead", |args: &[Py]| _lead(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_offer", py_func("_offer", |args: &[Py]| _offer(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_say", py_func("_say", |args: &[Py]| _say(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_picked", py_func("_picked", |args: &[Py]| _picked(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_listener_lead", py_func("_the_listener_lead", |args: &[Py]| _the_listener_lead(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_story_for_the_listener", py_func("_a_story_for_the_listener", |args: &[Py]| _a_story_for_the_listener(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_child_story_about", py_func("_a_child_story_about", |args: &[Py]| _a_child_story_about(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_story_is_asked_for", py_func("_a_story_is_asked_for", |args: &[Py]| _a_story_is_asked_for(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_line_to_read_for_a_story", py_func("_the_line_to_read_for_a_story", |args: &[Py]| _the_line_to_read_for_a_story(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_story_was_just_told", py_func("_the_story_was_just_told", |args: &[Py]| _the_story_was_just_told(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_placeholder_word", py_func("_a_placeholder_word", |args: &[Py]| _a_placeholder_word(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_report_of_the_habit", py_func("_a_report_of_the_habit", |args: &[Py]| _a_report_of_the_habit(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_last_line_reported_a_form", py_func("_the_last_line_reported_a_form", |args: &[Py]| _the_last_line_reported_a_form(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_report_answered", py_func("_a_report_answered", |args: &[Py]| _a_report_answered(args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_rhyme", py_func("_rhyme", |args: &[Py]| py_call(&g__rhyme(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_story_idea", py_func("_story_idea", |args: &[Py]| py_call(&g__story_idea(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_form_last_time", py_func("_the_form_last_time", |args: &[Py]| py_call(&g__the_form_last_time(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_lead", py_func("_lead", |args: &[Py]| py_call(&g__lead(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_offer", py_func("_offer", |args: &[Py]| py_call(&g__offer(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_say", py_func("_say", |args: &[Py]| py_call(&g__say(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_picked", py_func("_picked", |args: &[Py]| py_call(&g__picked(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_listener_lead", py_func("_the_listener_lead", |args: &[Py]| py_call(&g__the_listener_lead(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_story_for_the_listener", py_func("_a_story_for_the_listener", |args: &[Py]| py_call(&g__a_story_for_the_listener(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_child_story_about", py_func("_a_child_story_about", |args: &[Py]| py_call(&g__a_child_story_about(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_story_is_asked_for", py_func("_a_story_is_asked_for", |args: &[Py]| py_call(&g__a_story_is_asked_for(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_line_to_read_for_a_story", py_func("_the_line_to_read_for_a_story", |args: &[Py]| py_call(&g__the_line_to_read_for_a_story(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_story_was_just_told", py_func("_the_story_was_just_told", |args: &[Py]| py_call(&g__the_story_was_just_told(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_placeholder_word", py_func("_a_placeholder_word", |args: &[Py]| py_call(&g__a_placeholder_word(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_report_of_the_habit", py_func("_a_report_of_the_habit", |args: &[Py]| py_call(&g__a_report_of_the_habit(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_last_line_reported_a_form", py_func("_the_last_line_reported_a_form", |args: &[Py]| py_call(&g__the_last_line_reported_a_form(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_report_answered", py_func("_a_report_answered", |args: &[Py]| py_call(&g__a_report_answered(), args)));
     pyrt::xrefs::reg_fn("knowledge.entertainment", "_story", py_func("_story", |args: &[Py]| py_call(&g__story(), args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_opening_not_said_yet", py_func("_the_opening_not_said_yet", |args: &[Py]| _the_opening_not_said_yet(args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_opening_not_said_yet", py_func("_the_opening_not_said_yet", |args: &[Py]| py_call(&g__the_opening_not_said_yet(), args)));
     pyrt::xrefs::reg_fn("knowledge.entertainment", "_rap", py_func("_rap", |args: &[Py]| py_call(&g__rap(), args)));
     pyrt::xrefs::reg_fn("knowledge.entertainment", "_song", py_func("_song", |args: &[Py]| py_call(&g__song(), args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_character_name", py_func("_character_name", |args: &[Py]| _character_name(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_nickname", py_func("_nickname", |args: &[Py]| _nickname(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_second_one_asked_for", py_func("_the_second_one_asked_for", |args: &[Py]| _the_second_one_asked_for(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_another_one", py_func("_another_one", |args: &[Py]| _another_one(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_quiz_name", py_func("_quiz_name", |args: &[Py]| _quiz_name(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_asked_for_what_they_already_tried", py_func("_asked_for_what_they_already_tried", |args: &[Py]| _asked_for_what_they_already_tried(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_with_the_detail_asked_for", py_func("_with_the_detail_asked_for", |args: &[Py]| _with_the_detail_asked_for(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_second_one_read_first", py_func("_a_second_one_read_first", |args: &[Py]| _a_second_one_read_first(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_country_is_a_country", py_func("_a_country_is_a_country", |args: &[Py]| _a_country_is_a_country(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_kind_words", py_func("_kind_words", |args: &[Py]| _kind_words(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_subject_is_wanted", py_func("_the_subject_is_wanted", |args: &[Py]| _the_subject_is_wanted(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_documentary_is_wanted", py_func("_a_documentary_is_wanted", |args: &[Py]| _a_documentary_is_wanted(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_names_a_film_genre", py_func("_names_a_film_genre", |args: &[Py]| _names_a_film_genre(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_programme_is_wanted", py_func("_a_programme_is_wanted", |args: &[Py]| _a_programme_is_wanted(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_show_subject", py_func("_show_subject", |args: &[Py]| _show_subject(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_show_about", py_func("_show_about", |args: &[Py]| _show_about(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_pick_kind", py_func("_pick_kind", |args: &[Py]| _pick_kind(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_pick_refused", py_func("_pick_refused", |args: &[Py]| _pick_refused(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_pick_who", py_func("_pick_who", |args: &[Py]| _pick_who(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_pick_limit", py_func("_pick_limit", |args: &[Py]| _pick_limit(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_wants_subtitles", py_func("_wants_subtitles", |args: &[Py]| _wants_subtitles(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_cinema_of", py_func("_cinema_of", |args: &[Py]| _cinema_of(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_rows_from_cinema", py_func("_rows_from_cinema", |args: &[Py]| _rows_from_cinema(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_pick_rows", py_func("_pick_rows", |args: &[Py]| _pick_rows(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_pick_list", py_func("_pick_list", |args: &[Py]| _pick_list(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_subs_sentence", py_func("_subs_sentence", |args: &[Py]| _subs_sentence(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_pick_reply", py_func("_pick_reply", |args: &[Py]| _pick_reply(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_pick_carry", py_func("_pick_carry", |args: &[Py]| _pick_carry(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_pick_stands_down", py_func("_pick_stands_down", |args: &[Py]| _pick_stands_down(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_another_subject", py_func("_another_subject", |args: &[Py]| _another_subject(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_pick_line", py_func("_pick_line", |args: &[Py]| _pick_line(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_film_kind", py_func("_film_kind", |args: &[Py]| _film_kind(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_limit_wanted", py_func("_limit_wanted", |args: &[Py]| _limit_wanted(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_minutes_wanted", py_func("_minutes_wanted", |args: &[Py]| _minutes_wanted(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_film_under", py_func("_film_under", |args: &[Py]| _film_under(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_shelf_within", py_func("_shelf_within", |args: &[Py]| _shelf_within(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_kind_carry", py_func("_kind_carry", |args: &[Py]| _kind_carry(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_shortest_wanted", py_func("_shortest_wanted", |args: &[Py]| _shortest_wanted(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_film_kind_reply", py_func("_film_kind_reply", |args: &[Py]| _film_kind_reply(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_pick_plain", py_func("_pick_plain", |args: &[Py]| _pick_plain(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_pick_limit_reply", py_func("_pick_limit_reply", |args: &[Py]| _pick_limit_reply(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_reader_age", py_func("_the_reader_age", |args: &[Py]| _the_reader_age(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_book_for_the_age", py_func("_book_for_the_age", |args: &[Py]| _book_for_the_age(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_an_hour_or_a_day", py_func("_an_hour_or_a_day", |args: &[Py]| _an_hour_or_a_day(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_child_who_reads_already", py_func("_a_child_who_reads_already", |args: &[Py]| _a_child_who_reads_already(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_asks_if_a_comic_suits_an_age", py_func("_asks_if_a_comic_suits_an_age", |args: &[Py]| _asks_if_a_comic_suits_an_age(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_kind_named", py_func("_the_kind_named", |args: &[Py]| _the_kind_named(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_reader_named", py_func("_reader_named", |args: &[Py]| _reader_named(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_comic_pick", py_func("_comic_pick", |args: &[Py]| _comic_pick(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_genre_is_the_taste", py_func("_a_genre_is_the_taste", |args: &[Py]| _a_genre_is_the_taste(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "the_verse_longer", py_func("the_verse_longer", |args: &[Py]| the_verse_longer(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_second_verse_is_asked_for", py_func("_a_second_verse_is_asked_for", |args: &[Py]| _a_second_verse_is_asked_for(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_subject_from_the_ask", py_func("_the_subject_from_the_ask", |args: &[Py]| _the_subject_from_the_ask(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_second_one_short", py_func("_the_second_one_short", |args: &[Py]| _the_second_one_short(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_child_story_lead", py_func("_a_child_story_lead", |args: &[Py]| _a_child_story_lead(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_form_a_repeat_ask_names", py_func("_the_form_a_repeat_ask_names", |args: &[Py]| _the_form_a_repeat_ask_names(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_form_of_the_lead", py_func("_the_form_of_the_lead", |args: &[Py]| _the_form_of_the_lead(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "the_next_verse", py_func("the_next_verse", |args: &[Py]| the_next_verse(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_film_list", py_func("_film_list", |args: &[Py]| _film_list(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_somebodys_own_thing", py_func("_somebodys_own_thing", |args: &[Py]| _somebodys_own_thing(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_music_elsewhere", py_func("_music_elsewhere", |args: &[Py]| _music_elsewhere(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_music_term", py_func("_music_term", |args: &[Py]| _music_term(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_bridge_in_music", py_func("_a_bridge_in_music", |args: &[Py]| _a_bridge_in_music(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_instrument_count", py_func("_instrument_count", |args: &[Py]| _instrument_count(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_music_practice", py_func("_music_practice", |args: &[Py]| _music_practice(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_not_a_crowd", py_func("_not_a_crowd", |args: &[Py]| _not_a_crowd(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_child_in_the_chat", py_func("_a_child_in_the_chat", |args: &[Py]| _a_child_in_the_chat(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_game_pick", py_func("_the_game_pick", |args: &[Py]| _the_game_pick(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_hardware_decision", py_func("_a_hardware_decision", |args: &[Py]| _a_hardware_decision(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_game_pick_line", py_func("_a_game_pick_line", |args: &[Py]| _a_game_pick_line(args)));
-    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_solo_game", py_func("_the_solo_game", |args: &[Py]| _the_solo_game(args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_character_name", py_func("_character_name", |args: &[Py]| py_call(&g__character_name(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_nickname", py_func("_nickname", |args: &[Py]| py_call(&g__nickname(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_second_one_asked_for", py_func("_the_second_one_asked_for", |args: &[Py]| py_call(&g__the_second_one_asked_for(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_another_one", py_func("_another_one", |args: &[Py]| py_call(&g__another_one(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_quiz_name", py_func("_quiz_name", |args: &[Py]| py_call(&g__quiz_name(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_asked_for_what_they_already_tried", py_func("_asked_for_what_they_already_tried", |args: &[Py]| py_call(&g__asked_for_what_they_already_tried(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_with_the_detail_asked_for", py_func("_with_the_detail_asked_for", |args: &[Py]| py_call(&g__with_the_detail_asked_for(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_second_one_read_first", py_func("_a_second_one_read_first", |args: &[Py]| py_call(&g__a_second_one_read_first(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_country_is_a_country", py_func("_a_country_is_a_country", |args: &[Py]| py_call(&g__a_country_is_a_country(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_kind_words", py_func("_kind_words", |args: &[Py]| py_call(&g__kind_words(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_subject_is_wanted", py_func("_the_subject_is_wanted", |args: &[Py]| py_call(&g__the_subject_is_wanted(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_documentary_is_wanted", py_func("_a_documentary_is_wanted", |args: &[Py]| py_call(&g__a_documentary_is_wanted(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_names_a_film_genre", py_func("_names_a_film_genre", |args: &[Py]| py_call(&g__names_a_film_genre(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_programme_is_wanted", py_func("_a_programme_is_wanted", |args: &[Py]| py_call(&g__a_programme_is_wanted(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_show_subject", py_func("_show_subject", |args: &[Py]| py_call(&g__show_subject(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_show_about", py_func("_show_about", |args: &[Py]| py_call(&g__show_about(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_pick_kind", py_func("_pick_kind", |args: &[Py]| py_call(&g__pick_kind(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_pick_refused", py_func("_pick_refused", |args: &[Py]| py_call(&g__pick_refused(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_pick_who", py_func("_pick_who", |args: &[Py]| py_call(&g__pick_who(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_pick_limit", py_func("_pick_limit", |args: &[Py]| py_call(&g__pick_limit(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_wants_subtitles", py_func("_wants_subtitles", |args: &[Py]| py_call(&g__wants_subtitles(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_cinema_of", py_func("_cinema_of", |args: &[Py]| py_call(&g__cinema_of(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_rows_from_cinema", py_func("_rows_from_cinema", |args: &[Py]| py_call(&g__rows_from_cinema(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_pick_rows", py_func("_pick_rows", |args: &[Py]| py_call(&g__pick_rows(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_pick_list", py_func("_pick_list", |args: &[Py]| py_call(&g__pick_list(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_subs_sentence", py_func("_subs_sentence", |args: &[Py]| py_call(&g__subs_sentence(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_pick_reply", py_func("_pick_reply", |args: &[Py]| py_call(&g__pick_reply(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_pick_carry", py_func("_pick_carry", |args: &[Py]| py_call(&g__pick_carry(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_pick_stands_down", py_func("_pick_stands_down", |args: &[Py]| py_call(&g__pick_stands_down(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_another_subject", py_func("_another_subject", |args: &[Py]| py_call(&g__another_subject(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_pick_line", py_func("_pick_line", |args: &[Py]| py_call(&g__pick_line(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_film_kind", py_func("_film_kind", |args: &[Py]| py_call(&g__film_kind(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_limit_wanted", py_func("_limit_wanted", |args: &[Py]| py_call(&g__limit_wanted(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_minutes_wanted", py_func("_minutes_wanted", |args: &[Py]| py_call(&g__minutes_wanted(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_film_under", py_func("_film_under", |args: &[Py]| py_call(&g__film_under(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_shelf_within", py_func("_shelf_within", |args: &[Py]| py_call(&g__shelf_within(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_kind_carry", py_func("_kind_carry", |args: &[Py]| py_call(&g__kind_carry(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_shortest_wanted", py_func("_shortest_wanted", |args: &[Py]| py_call(&g__shortest_wanted(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_film_kind_reply", py_func("_film_kind_reply", |args: &[Py]| py_call(&g__film_kind_reply(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_pick_plain", py_func("_pick_plain", |args: &[Py]| py_call(&g__pick_plain(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_pick_limit_reply", py_func("_pick_limit_reply", |args: &[Py]| py_call(&g__pick_limit_reply(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_reader_age", py_func("_the_reader_age", |args: &[Py]| py_call(&g__the_reader_age(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_book_for_the_age", py_func("_book_for_the_age", |args: &[Py]| py_call(&g__book_for_the_age(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_an_hour_or_a_day", py_func("_an_hour_or_a_day", |args: &[Py]| py_call(&g__an_hour_or_a_day(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_child_who_reads_already", py_func("_a_child_who_reads_already", |args: &[Py]| py_call(&g__a_child_who_reads_already(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_asks_if_a_comic_suits_an_age", py_func("_asks_if_a_comic_suits_an_age", |args: &[Py]| py_call(&g__asks_if_a_comic_suits_an_age(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_kind_named", py_func("_the_kind_named", |args: &[Py]| py_call(&g__the_kind_named(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_reader_named", py_func("_reader_named", |args: &[Py]| py_call(&g__reader_named(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_comic_pick", py_func("_comic_pick", |args: &[Py]| py_call(&g__comic_pick(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_genre_is_the_taste", py_func("_a_genre_is_the_taste", |args: &[Py]| py_call(&g__a_genre_is_the_taste(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "the_verse_longer", py_func("the_verse_longer", |args: &[Py]| py_call(&g_the_verse_longer(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_second_verse_is_asked_for", py_func("_a_second_verse_is_asked_for", |args: &[Py]| py_call(&g__a_second_verse_is_asked_for(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_subject_from_the_ask", py_func("_the_subject_from_the_ask", |args: &[Py]| py_call(&g__the_subject_from_the_ask(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_second_one_short", py_func("_the_second_one_short", |args: &[Py]| py_call(&g__the_second_one_short(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_child_story_lead", py_func("_a_child_story_lead", |args: &[Py]| py_call(&g__a_child_story_lead(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_form_a_repeat_ask_names", py_func("_the_form_a_repeat_ask_names", |args: &[Py]| py_call(&g__the_form_a_repeat_ask_names(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_form_of_the_lead", py_func("_the_form_of_the_lead", |args: &[Py]| py_call(&g__the_form_of_the_lead(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "the_next_verse", py_func("the_next_verse", |args: &[Py]| py_call(&g_the_next_verse(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_film_list", py_func("_film_list", |args: &[Py]| py_call(&g__film_list(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_somebodys_own_thing", py_func("_somebodys_own_thing", |args: &[Py]| py_call(&g__somebodys_own_thing(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_music_elsewhere", py_func("_music_elsewhere", |args: &[Py]| py_call(&g__music_elsewhere(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_music_term", py_func("_music_term", |args: &[Py]| py_call(&g__music_term(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_bridge_in_music", py_func("_a_bridge_in_music", |args: &[Py]| py_call(&g__a_bridge_in_music(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_instrument_count", py_func("_instrument_count", |args: &[Py]| py_call(&g__instrument_count(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_music_practice", py_func("_music_practice", |args: &[Py]| py_call(&g__music_practice(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_not_a_crowd", py_func("_not_a_crowd", |args: &[Py]| py_call(&g__not_a_crowd(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_child_in_the_chat", py_func("_a_child_in_the_chat", |args: &[Py]| py_call(&g__a_child_in_the_chat(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_game_pick", py_func("_the_game_pick", |args: &[Py]| py_call(&g__the_game_pick(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_hardware_decision", py_func("_a_hardware_decision", |args: &[Py]| py_call(&g__a_hardware_decision(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_a_game_pick_line", py_func("_a_game_pick_line", |args: &[Py]| py_call(&g__a_game_pick_line(), args)));
+    pyrt::xrefs::reg_fn("knowledge.entertainment", "_the_solo_game", py_func("_the_solo_game", |args: &[Py]| py_call(&g__the_solo_game(), args)));
     pyrt::xrefs::reg_access("knowledge.entertainment", "ABSTRACT", g_ABSTRACT, s_ABSTRACT);
     pyrt::xrefs::reg_access("knowledge.entertainment", "ACTIVITY_ASKS", g_ACTIVITY_ASKS, s_ACTIVITY_ASKS);
     pyrt::xrefs::reg_access("knowledge.entertainment", "ACTIVITY_OTHER_NAMES", g_ACTIVITY_OTHER_NAMES, s_ACTIVITY_OTHER_NAMES);
@@ -10571,21 +11089,196 @@ pub fn register() {
     pyrt::xrefs::reg_access("knowledge.entertainment", "_WET_PHRASES", g__WET_PHRASES, s__WET_PHRASES);
     pyrt::xrefs::reg_access("knowledge.entertainment", "_WET_WORDS", g__WET_WORDS, s__WET_WORDS);
     pyrt::xrefs::reg_access("knowledge.entertainment", "_WORD_AGES", g__WORD_AGES, s__WORD_AGES);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_a_bridge_in_music", g__a_bridge_in_music, s__a_bridge_in_music);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_a_chess_line", g__a_chess_line, s__a_chess_line);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_a_child_in_the_chat", g__a_child_in_the_chat, s__a_child_in_the_chat);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_a_child_story_about", g__a_child_story_about, s__a_child_story_about);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_a_child_story_lead", g__a_child_story_lead, s__a_child_story_lead);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_a_child_who_reads_already", g__a_child_who_reads_already, s__a_child_who_reads_already);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_a_country_is_a_country", g__a_country_is_a_country, s__a_country_is_a_country);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_a_documentary_is_wanted", g__a_documentary_is_wanted, s__a_documentary_is_wanted);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_a_film_ask", g__a_film_ask, s__a_film_ask);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_a_game_pick_line", g__a_game_pick_line, s__a_game_pick_line);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_a_genre_is_the_taste", g__a_genre_is_the_taste, s__a_genre_is_the_taste);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_a_hardware_decision", g__a_hardware_decision, s__a_hardware_decision);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_a_judged_work_named", g__a_judged_work_named, s__a_judged_work_named);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_a_listings_ask_near_me", g__a_listings_ask_near_me, s__a_listings_ask_near_me);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_a_pick_in_any_medium", g__a_pick_in_any_medium, s__a_pick_in_any_medium);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_a_pick_of_the_other_mood", g__a_pick_of_the_other_mood, s__a_pick_of_the_other_mood);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_a_place_not_a_work", g__a_place_not_a_work, s__a_place_not_a_work);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_a_placeholder_word", g__a_placeholder_word, s__a_placeholder_word);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_a_programme_is_wanted", g__a_programme_is_wanted, s__a_programme_is_wanted);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_a_report_answered", g__a_report_answered, s__a_report_answered);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_a_report_of_the_habit", g__a_report_of_the_habit, s__a_report_of_the_habit);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_a_reservation", g__a_reservation, s__a_reservation);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_a_second_one_read_first", g__a_second_one_read_first, s__a_second_one_read_first);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_a_second_verse_is_asked_for", g__a_second_verse_is_asked_for, s__a_second_verse_is_asked_for);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_a_story_for_the_listener", g__a_story_for_the_listener, s__a_story_for_the_listener);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_a_story_is_asked_for", g__a_story_is_asked_for, s__a_story_is_asked_for);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_a_surface_is_being_painted", g__a_surface_is_being_painted, s__a_surface_is_being_painted);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_a_thing_is_being_baked", g__a_thing_is_being_baked, s__a_thing_is_being_baked);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_a_word_is_turned_down", g__a_word_is_turned_down, s__a_word_is_turned_down);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_about_a_person", g__about_a_person, s__about_a_person);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_activity_start", g__activity_start, s__activity_start);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_after_named", g__after_named, s__after_named);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_age_in", g__age_in, s__age_in);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_an_hour_or_a_day", g__an_hour_or_a_day, s__an_hour_or_a_day);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_an_ordinary_word", g__an_ordinary_word, s__an_ordinary_word);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_another_one", g__another_one, s__another_one);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_another_subject", g__another_subject, s__another_subject);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_article_for", g__article_for, s__article_for);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_asked_for_what_they_already_tried", g__asked_for_what_they_already_tried, s__asked_for_what_they_already_tried);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_asks_for_a_verse", g__asks_for_a_verse, s__asks_for_a_verse);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_asks_if_a_comic_suits_an_age", g__asks_if_a_comic_suits_an_age, s__asks_if_a_comic_suits_an_age);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_author_in", g__author_in, s__author_in);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_author_key", g__author_key, s__author_key);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_book_about", g__book_about, s__book_about);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_book_for_the_age", g__book_for_the_age, s__book_for_the_age);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_book_like", g__book_like, s__book_like);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_book_recommend", g__book_recommend, s__book_recommend);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_book_subject", g__book_subject, s__book_subject);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_book_thriller", g__book_thriller, s__book_thriller);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_book_title_named", g__book_title_named, s__book_title_named);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_buzz", g__buzz, s__buzz);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_card_game", g__card_game, s__card_game);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_character_name", g__character_name, s__character_name);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_chat_is_about_a_pick", g__chat_is_about_a_pick, s__chat_is_about_a_pick);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_cinema_of", g__cinema_of, s__cinema_of);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_comic_pick", g__comic_pick, s__comic_pick);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_display", g__display, s__display);
     pyrt::xrefs::reg_access("knowledge.entertainment", "_e", g__e, s__e);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_family_film", g__family_film, s__family_film);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_film_kind", g__film_kind, s__film_kind);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_film_kind_reply", g__film_kind_reply, s__film_kind_reply);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_film_like", g__film_like, s__film_like);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_film_list", g__film_list, s__film_list);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_film_under", g__film_under, s__film_under);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_films_within", g__films_within, s__films_within);
     pyrt::xrefs::reg_access("knowledge.entertainment", "_form_name", g__form_name, s__form_name);
     pyrt::xrefs::reg_access("knowledge.entertainment", "_form_word", g__form_word, s__form_word);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_genre_start", g__genre_start, s__genre_start);
     pyrt::xrefs::reg_access("knowledge.entertainment", "_haiku", g__haiku, s__haiku);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_in_tune", g__in_tune, s__in_tune);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_indoors", g__indoors, s__indoors);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_instrument_count", g__instrument_count, s__instrument_count);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_kind_carry", g__kind_carry, s__kind_carry);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_kind_words", g__kind_words, s__kind_words);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_lead", g__lead, s__lead);
     pyrt::xrefs::reg_access("knowledge.entertainment", "_limerick", g__limerick, s__limerick);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_limit_wanted", g__limit_wanted, s__limit_wanted);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_lines", g__lines, s__lines);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_list_words", g__list_words, s__list_words);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_listen_when", g__listen_when, s__listen_when);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_medium_named", g__medium_named, s__medium_named);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_minutes_wanted", g__minutes_wanted, s__minutes_wanted);
     pyrt::xrefs::reg_access("knowledge.entertainment", "_mood", g__mood, s__mood);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_mood_key_words", g__mood_key_words, s__mood_key_words);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_mood_of", g__mood_of, s__mood_of);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_mood_pick", g__mood_pick, s__mood_pick);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_mood_signals", g__mood_signals, s__mood_signals);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_music_elsewhere", g__music_elsewhere, s__music_elsewhere);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_music_practice", g__music_practice, s__music_practice);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_music_term", g__music_term, s__music_term);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_named_nothing", g__named_nothing, s__named_nothing);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_named_work", g__named_work, s__named_work);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_names_a_film_genre", g__names_a_film_genre, s__names_a_film_genre);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_names_another_form", g__names_another_form, s__names_another_form);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_names_the_evening", g__names_the_evening, s__names_the_evening);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_names_the_weather", g__names_the_weather, s__names_the_weather);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_negated", g__negated, s__negated);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_nickname", g__nickname, s__nickname);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_no_city_is_named", g__no_city_is_named, s__no_city_is_named);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_no_named_mood", g__no_named_mood, s__no_named_mood);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_no_subject_verse", g__no_subject_verse, s__no_subject_verse);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_not_a_crowd", g__not_a_crowd, s__not_a_crowd);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_not_a_reservation", g__not_a_reservation, s__not_a_reservation);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_offer", g__offer, s__offer);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_own_texts", g__own_texts, s__own_texts);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_paints_a_thing", g__paints_a_thing, s__paints_a_thing);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_party_games_for_kids", g__party_games_for_kids, s__party_games_for_kids);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_pick_carry", g__pick_carry, s__pick_carry);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_pick_kind", g__pick_kind, s__pick_kind);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_pick_limit", g__pick_limit, s__pick_limit);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_pick_limit_reply", g__pick_limit_reply, s__pick_limit_reply);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_pick_line", g__pick_line, s__pick_line);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_pick_list", g__pick_list, s__pick_list);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_pick_plain", g__pick_plain, s__pick_plain);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_pick_refused", g__pick_refused, s__pick_refused);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_pick_reply", g__pick_reply, s__pick_reply);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_pick_rows", g__pick_rows, s__pick_rows);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_pick_stands_down", g__pick_stands_down, s__pick_stands_down);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_pick_who", g__pick_who, s__pick_who);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_picked", g__picked, s__picked);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_picks_by_title", g__picks_by_title, s__picks_by_title);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_plain_words", g__plain_words, s__plain_words);
     pyrt::xrefs::reg_access("knowledge.entertainment", "_podcast_reply", g__podcast_reply, s__podcast_reply);
     pyrt::xrefs::reg_access("knowledge.entertainment", "_podcast_subject", g__podcast_subject, s__podcast_subject);
     pyrt::xrefs::reg_access("knowledge.entertainment", "_podcast_words", g__podcast_words, s__podcast_words);
     pyrt::xrefs::reg_access("knowledge.entertainment", "_poem", g__poem, s__poem);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_quiz_name", g__quiz_name, s__quiz_name);
     pyrt::xrefs::reg_access("knowledge.entertainment", "_rap", g__rap, s__rap);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_reader_named", g__reader_named, s__reader_named);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_rhyme", g__rhyme, s__rhyme);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_rows_from_cinema", g__rows_from_cinema, s__rows_from_cinema);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_said", g__said, s__said);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_say", g__say, s__say);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_says", g__says, s__says);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_shelf_within", g__shelf_within, s__shelf_within);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_shortest_wanted", g__shortest_wanted, s__shortest_wanted);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_show_about", g__show_about, s__show_about);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_show_subject", g__show_subject, s__show_subject);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_somebodys_own_thing", g__somebodys_own_thing, s__somebodys_own_thing);
     pyrt::xrefs::reg_access("knowledge.entertainment", "_song", g__song, s__song);
     pyrt::xrefs::reg_access("knowledge.entertainment", "_story", g__story, s__story);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_story_idea", g__story_idea, s__story_idea);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_subject", g__subject, s__subject);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_subject_words", g__subject_words, s__subject_words);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_subs_sentence", g__subs_sentence, s__subs_sentence);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_table_pick", g__table_pick, s__table_pick);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_the_chat_turned_down", g__the_chat_turned_down, s__the_chat_turned_down);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_the_form_a_repeat_ask_names", g__the_form_a_repeat_ask_names, s__the_form_a_repeat_ask_names);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_the_form_last_time", g__the_form_last_time, s__the_form_last_time);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_the_form_of_the_lead", g__the_form_of_the_lead, s__the_form_of_the_lead);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_the_game_pick", g__the_game_pick, s__the_game_pick);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_the_gentle_list", g__the_gentle_list, s__the_gentle_list);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_the_kind_named", g__the_kind_named, s__the_kind_named);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_the_last_line_reported_a_form", g__the_last_line_reported_a_form, s__the_last_line_reported_a_form);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_the_liked_thing_is_asked_about", g__the_liked_thing_is_asked_about, s__the_liked_thing_is_asked_about);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_the_line_to_read_for_a_story", g__the_line_to_read_for_a_story, s__the_line_to_read_for_a_story);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_the_listener_lead", g__the_listener_lead, s__the_listener_lead);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_the_medium", g__the_medium, s__the_medium);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_the_mood_the_chat_holds", g__the_mood_the_chat_holds, s__the_mood_the_chat_holds);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_the_mood_the_chat_turned_down", g__the_mood_the_chat_turned_down, s__the_mood_the_chat_turned_down);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_the_opening_not_said_yet", g__the_opening_not_said_yet, s__the_opening_not_said_yet);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_the_possessive_phrase", g__the_possessive_phrase, s__the_possessive_phrase);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_the_reader_age", g__the_reader_age, s__the_reader_age);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_the_scare_is_refused", g__the_scare_is_refused, s__the_scare_is_refused);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_the_scare_is_wanted", g__the_scare_is_wanted, s__the_scare_is_wanted);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_the_second_one_asked_for", g__the_second_one_asked_for, s__the_second_one_asked_for);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_the_second_one_short", g__the_second_one_short, s__the_second_one_short);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_the_solo_game", g__the_solo_game, s__the_solo_game);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_the_story_was_just_told", g__the_story_was_just_told, s__the_story_was_just_told);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_the_subject_from_the_ask", g__the_subject_from_the_ask, s__the_subject_from_the_ask);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_the_subject_is_wanted", g__the_subject_is_wanted, s__the_subject_is_wanted);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_thing", g__thing, s__thing);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_title", g__title, s__title);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_title_in", g__title_in, s__title_in);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_title_medium", g__title_medium, s__title_medium);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_titles_of", g__titles_of, s__titles_of);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_typed_line", g__typed_line, s__typed_line);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_wants_subtitles", g__wants_subtitles, s__wants_subtitles);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_who_wrote", g__who_wrote, s__who_wrote);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_with_the_detail_asked_for", g__with_the_detail_asked_for, s__with_the_detail_asked_for);
     pyrt::xrefs::reg_access("knowledge.entertainment", "_word", g__word, s__word);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_work_named", g__work_named, s__work_named);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_worth_it", g__worth_it, s__worth_it);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "_worth_it_unnamed", g__worth_it_unnamed, s__worth_it_unnamed);
     pyrt::xrefs::reg_access("knowledge.entertainment", "asks_for_one_more", g_asks_for_one_more, s_asks_for_one_more);
     pyrt::xrefs::reg_access("knowledge.entertainment", "entry", g_entry, s_entry);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "not_asking_what_to_watch_for", g_not_asking_what_to_watch_for, s_not_asking_what_to_watch_for);
     pyrt::xrefs::reg_access("knowledge.entertainment", "owns_the_deed", g_owns_the_deed, s_owns_the_deed);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "the_book_is_a_reservation", g_the_book_is_a_reservation, s_the_book_is_a_reservation);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "the_next_verse", g_the_next_verse, s_the_next_verse);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "the_verse_longer", g_the_verse_longer, s_the_verse_longer);
+    pyrt::xrefs::reg_access("knowledge.entertainment", "who_made", g_who_made, s_who_made);
 }

@@ -20,3 +20,14 @@ codegen-units = 256
 
 [profile.release]
 opt-level = 2
+
+[profile.dev.package.pyrt]
+opt-level = 2
+[profile.dev.package.regex]
+opt-level = 2
+[profile.dev.package.regex-automata]
+opt-level = 2
+[profile.dev.package.regex-syntax]
+opt-level = 2
+[profile.dev.package.fancy-regex]
+opt-level = 2

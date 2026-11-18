@@ -404,6 +404,11 @@ class Gen:
             if alias not in fn_names:
                 self.import_globals[alias] = pair
         mod_globals |= set(self.import_globals)
+        self.has_globals = 'globals()' in self.src
+        if self.has_globals:
+            mod_globals |= {f.name for f in fdefs}
+            self.emit('thread_local! { static MODULE_DICT: RefCell<Py> = RefCell::new(py_dict(vec![])); }')
+            self.emit('pub fn __globals() -> Py { ensure_init(); MODULE_DICT.with(|d| d.borrow().clone()) }')
         for name in sorted(mod_globals):
             rname = rust_ident(name)
             self.emit(f"thread_local! {{ static G_{rname}: RefCell<Py> = const {{ RefCell::new(Py::None) }}; }}")
@@ -429,8 +434,12 @@ class Gen:
         # accessors
         for name in sorted(mod_globals | self.decorated):
             rname = rust_ident(name)
-            self.emit(f"pub fn g_{rname}() -> Py {{ ensure_init(); G_{rname}.with(|c| c.borrow().clone()) }}")
-            self.emit(f"#[allow(non_snake_case)]\npub fn s_{rname}(v: Py) {{ ensure_init(); G_{rname}.with(|c| *c.borrow_mut() = v); }}")
+            if self.has_globals:
+                self.emit(f'pub fn g_{rname}() -> Py {{ ensure_init(); let d = __globals(); if let Py::Dict(m) = d {{ return m.borrow().get(&PyKey(py_str({rust_string(name)}))).cloned().unwrap_or(Py::None); }} Py::None }}')
+                self.emit(f'pub fn s_{rname}(v: Py) {{ ensure_init(); let _ = py_setitem(&__globals(), &py_str({rust_string(name)}), v); }}')
+            else:
+                self.emit(f"pub fn g_{rname}() -> Py {{ ensure_init(); G_{rname}.with(|c| c.borrow().clone()) }}")
+                self.emit(f"#[allow(non_snake_case)]\npub fn s_{rname}(v: Py) {{ ensure_init(); G_{rname}.with(|c| *c.borrow_mut() = v); }}")
         # module body
         self.emit("fn module_body() {")
         self.rebound_pending = set(self.rebound)
@@ -1281,6 +1290,8 @@ class Gen:
                                        args, kwargs, has_star, ctx, node)
         if isinstance(node.func, ast.Name):
             name = node.func.id
+            if name == 'globals' and self.has_globals:
+                return '__globals()'
             # Function-local bindings shadow imports and builtins.
             if ctx.kind == 'fn' and (name in ctx.locals or name in ctx.params):
                 return self.call_with_args(f'|args: &[Py]| py_call(&{rust_ident(name)}, args)', args, kwargs, has_star, ctx, node)
