@@ -36,6 +36,7 @@ pub fn py_call(f: &Py, args: &[Py]) -> Py {
             }
         }
         _ => {
+            if std::env::var_os("PYBOT_TRACE_NOT_CALLABLE").is_some() { eprintln!("NOT_CALLABLE {} {}",py_repr(f),std::backtrace::Backtrace::force_capture()); }
             // Builtin functions referenced by name reach here through py_func wrappers;
             // anything else is not callable.
             match py_method_call(f, "__call__", args) {
