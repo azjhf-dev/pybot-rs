@@ -275,16 +275,16 @@
         "Nice to meet you, Alex. What can I help with?",
         "You're Alex."
       ],
-      "diagnostics": "[module: chat | 1055 ms]\n[module: memory_store | 2687 ms]\n"
+      "diagnostics": "[module: chat | 1098 ms]\n[module: memory_store | 2736 ms]\n"
     },
     "rust": {
       "returncode": 0,
       "replies": [
-        "What would be most useful to sort out?",
+        "Nice to meet you, Alex. What can I help with?",
         "You're Alex."
       ],
-      "diagnostics": "[module: first_line_open | 36030 ms]\n[module: memory_store | 6112 ms]\n"
+      "diagnostics": "[module: chat | 34942 ms]\n[module: memory_store | 13454 ms]\n"
     },
-    "exact": false
+    "exact": true
   }
 ]
