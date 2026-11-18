@@ -1,29 +1,5 @@
 [
   {
-    "case": 5,
-    "inputs": [
-      "how do I boil an egg",
-      "how long does rice take to cook"
-    ],
-    "python": {
-      "returncode": 0,
-      "replies": [
-        "Lower eggs into already boiling water: 6 minutes for a runny yolk, 7 for jammy, 9 to 10 for hard boiled. Cool them in cold water for a minute before peeling so the shell comes away cleanly.",
-        "White long grain takes 10 to 12 minutes on a low simmer with the lid on, then 10 more off the heat. Use 1 part rice to about 1.5 parts water by volume, or the fingertip test: water one knuckle above the rice. Brown and wholegrain are the ones that take longer. Too much water is what turns rice to porridge."
-      ],
-      "diagnostics": "[module: answers | 1091 ms]\n[module: answers | 737 ms]\n"
-    },
-    "rust": {
-      "returncode": 0,
-      "replies": [
-        "Lower eggs into already boiling water: 6 minutes for a runny yolk, 7 for jammy, 9 to 10 for hard boiled. Cool them in cold water for a minute before peeling so the shell comes away cleanly.",
-        "White long grain takes 10 to 12 minutes on a low simmer with the lid on, then 10 more off the heat. Use 1 part rice to about 1.5 parts water by volume, or the fingertip test: water one knuckle above the rice. Brown and wholegrain are the ones that take longer. Too much water is what turns rice to porridge."
-      ],
-      "diagnostics": "[module: answers | 27397 ms]\n[module: answers | 2607 ms]\n"
-    },
-    "exact": true
-  },
-  {
     "case": 8,
     "inputs": [
       "my chest hurts and I cannot breathe"
@@ -305,6 +281,33 @@
         "You like pizza."
       ],
       "diagnostics": "[module: greeting | 25020 ms]\n[module: memory_store | 3641 ms]\n"
+    },
+    "exact": true
+  },
+  {
+    "binary_sha256": "bf98fc48613880ed03b5c39ce2e1c0769a2ba2ab7ebf72108aa0dbe06a569520",
+    "case": 5,
+    "inputs": [
+      "how do I boil an egg",
+      "how long does rice take to cook"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "Lower eggs into already boiling water: 6 minutes for a runny yolk, 7 for jammy, 9 to 10 for hard boiled. Cool them in cold water for a minute before peeling so the shell comes away cleanly.",
+        "White long grain takes 10 to 12 minutes on a low simmer with the lid on, then 10 more off the heat. Use 1 part rice to about 1.5 parts water by volume, or the fingertip test: water one knuckle above the rice. Brown and wholegrain are the ones that take longer. Too much water is what turns rice to porridge."
+      ],
+      "diagnostics": "[module: answers | 1091 ms]\n[module: answers | 737 ms]\n",
+      "baseline_reused": true,
+      "source_commit": "7d63c7fbebb44c7e466e5c8b5c1f341ab767929e"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "Lower eggs into already boiling water: 6 minutes for a runny yolk, 7 for jammy, 9 to 10 for hard boiled. Cool them in cold water for a minute before peeling so the shell comes away cleanly.",
+        "White long grain takes 10 to 12 minutes on a low simmer with the lid on, then 10 more off the heat. Use 1 part rice to about 1.5 parts water by volume, or the fingertip test: water one knuckle above the rice. Brown and wholegrain are the ones that take longer. Too much water is what turns rice to porridge."
+      ],
+      "diagnostics": "[module: answers | 26479 ms]\n[module: answers | 2486 ms]\n"
     },
     "exact": true
   }
