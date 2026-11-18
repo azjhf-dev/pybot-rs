@@ -1,0 +1,560 @@
+#![allow(non_snake_case, non_upper_case_globals, dead_code, unused_mut, unused_variables, unused_assignments, unused_parens, unused_imports, clippy::all)]
+use crate::pyrt::builtins::*;
+use crate::pyrt::pybuiltins::*;
+use crate::pyrt::stdlib::*;
+use crate::pyrt::value::*;
+use crate::pyrt::exc;
+use crate::pyrt::{pystr, pyre, pyrandom, pydatetime};
+use std::sync::{LazyLock as Lazy, RwLock, Once};
+use std::cell::{Cell, RefCell};
+use std::rc::Rc;
+use indexmap::IndexMap;
+
+
+pub static A_BARE_COUNT: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static A_BARE_RATE: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static A_COUNT_AND_PERIOD: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static COUNTS_A_PERIOD: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static RATES_ADVICE: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static RATES_ASK: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static RATES_ASK_FILLER: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static RATES_ASK_LEAD: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static RATES_CORRECTION_LEAD: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static RATES_CORRECTION_TAIL: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static RATES_END: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static RATES_FILLER_LEAD: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static RATES_FIX_LEAD: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static RATES_IGNORE: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static RATES_LEAD: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static RATES_PRONOUN: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static RATES_SAID: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static RATES_SUBJECT: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static RATES_TEXT: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+static INIT: Once = Once::new();
+thread_local! { static INITIALIZING: Cell<bool> = const { Cell::new(false) }; }
+pub fn ensure_init() {
+    if INITIALIZING.with(|c| c.get()) { return; }
+    INIT.call_once(|| {
+        INITIALIZING.with(|c| c.set(true));
+        let _ = exc::catch(|| { module_body(); Py::None });
+        INITIALIZING.with(|c| c.set(false));
+    });
+}
+pub fn g_A_BARE_COUNT() -> Py { ensure_init(); A_BARE_COUNT.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_A_BARE_COUNT(v: Py) { ensure_init(); if let Ok(mut w) = A_BARE_COUNT.write() { *w = v; } }
+pub fn g_A_BARE_RATE() -> Py { ensure_init(); A_BARE_RATE.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_A_BARE_RATE(v: Py) { ensure_init(); if let Ok(mut w) = A_BARE_RATE.write() { *w = v; } }
+pub fn g_A_COUNT_AND_PERIOD() -> Py { ensure_init(); A_COUNT_AND_PERIOD.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_A_COUNT_AND_PERIOD(v: Py) { ensure_init(); if let Ok(mut w) = A_COUNT_AND_PERIOD.write() { *w = v; } }
+pub fn g_COUNTS_A_PERIOD() -> Py { ensure_init(); COUNTS_A_PERIOD.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_COUNTS_A_PERIOD(v: Py) { ensure_init(); if let Ok(mut w) = COUNTS_A_PERIOD.write() { *w = v; } }
+pub fn g_RATES_ADVICE() -> Py { ensure_init(); RATES_ADVICE.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_RATES_ADVICE(v: Py) { ensure_init(); if let Ok(mut w) = RATES_ADVICE.write() { *w = v; } }
+pub fn g_RATES_ASK() -> Py { ensure_init(); RATES_ASK.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_RATES_ASK(v: Py) { ensure_init(); if let Ok(mut w) = RATES_ASK.write() { *w = v; } }
+pub fn g_RATES_ASK_FILLER() -> Py { ensure_init(); RATES_ASK_FILLER.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_RATES_ASK_FILLER(v: Py) { ensure_init(); if let Ok(mut w) = RATES_ASK_FILLER.write() { *w = v; } }
+pub fn g_RATES_ASK_LEAD() -> Py { ensure_init(); RATES_ASK_LEAD.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_RATES_ASK_LEAD(v: Py) { ensure_init(); if let Ok(mut w) = RATES_ASK_LEAD.write() { *w = v; } }
+pub fn g_RATES_CORRECTION_LEAD() -> Py { ensure_init(); RATES_CORRECTION_LEAD.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_RATES_CORRECTION_LEAD(v: Py) { ensure_init(); if let Ok(mut w) = RATES_CORRECTION_LEAD.write() { *w = v; } }
+pub fn g_RATES_CORRECTION_TAIL() -> Py { ensure_init(); RATES_CORRECTION_TAIL.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_RATES_CORRECTION_TAIL(v: Py) { ensure_init(); if let Ok(mut w) = RATES_CORRECTION_TAIL.write() { *w = v; } }
+pub fn g_RATES_END() -> Py { ensure_init(); RATES_END.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_RATES_END(v: Py) { ensure_init(); if let Ok(mut w) = RATES_END.write() { *w = v; } }
+pub fn g_RATES_FILLER_LEAD() -> Py { ensure_init(); RATES_FILLER_LEAD.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_RATES_FILLER_LEAD(v: Py) { ensure_init(); if let Ok(mut w) = RATES_FILLER_LEAD.write() { *w = v; } }
+pub fn g_RATES_FIX_LEAD() -> Py { ensure_init(); RATES_FIX_LEAD.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_RATES_FIX_LEAD(v: Py) { ensure_init(); if let Ok(mut w) = RATES_FIX_LEAD.write() { *w = v; } }
+pub fn g_RATES_IGNORE() -> Py { ensure_init(); RATES_IGNORE.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_RATES_IGNORE(v: Py) { ensure_init(); if let Ok(mut w) = RATES_IGNORE.write() { *w = v; } }
+pub fn g_RATES_LEAD() -> Py { ensure_init(); RATES_LEAD.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_RATES_LEAD(v: Py) { ensure_init(); if let Ok(mut w) = RATES_LEAD.write() { *w = v; } }
+pub fn g_RATES_PRONOUN() -> Py { ensure_init(); RATES_PRONOUN.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_RATES_PRONOUN(v: Py) { ensure_init(); if let Ok(mut w) = RATES_PRONOUN.write() { *w = v; } }
+pub fn g_RATES_SAID() -> Py { ensure_init(); RATES_SAID.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_RATES_SAID(v: Py) { ensure_init(); if let Ok(mut w) = RATES_SAID.write() { *w = v; } }
+pub fn g_RATES_SUBJECT() -> Py { ensure_init(); RATES_SUBJECT.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_RATES_SUBJECT(v: Py) { ensure_init(); if let Ok(mut w) = RATES_SUBJECT.write() { *w = v; } }
+pub fn g_RATES_TEXT() -> Py { ensure_init(); RATES_TEXT.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_RATES_TEXT(v: Py) { ensure_init(); if let Ok(mut w) = RATES_TEXT.write() { *w = v; } }
+fn module_body() {
+    let _ = py_str("How often a thing they do happens, said of themselves.\n\n    i go to the gym twice a week\n    how often was that again\n      \"You go to the gym twice a week.\"\n\nThe store kept the hours a person's day runs on (`bot/modules/memory_store.py`, `_the_times`)\nbut nothing about how often they do a thing, so a late \"how often was that again\" reached the\ndetail ask-back and asked them the question they were asking the bot (\"You haven't said - how\noften was that?\"), and \"how often do i go to the gym\" was answered from the exercise entry's\nguideline rather than from the twice they had told it. This is the same shape of fact as a time\nof day with a different unit, so it is filed the same way: against the doing they named, newest\nwinning, and read back in their own words.\n\nOnly a first-person line is filed, so \"my husband goes to the gym twice a week\" is not put on\nthem; a pronoun in the ask never names a doing (\"how often should i feed them\" after \"i water\nthem every day\" is about feeding, which nothing here holds); and a rate asked for as advice\n(\"how often should i water them\") is the knowledge base's, not this reader's.\n");
+    s_RATES_TEXT(py_str("(?:once|twice)(?:\\s+(?:a|per|each)\\s+(?:hour|day|week|fortnight|month|year))?|(?:(?:\\d+|two|three|four|five|six|seven|eight)\\s+times?)\\s+(?:a|per|each)\\s+(?:hour|day|week|fortnight|month|year)|every\\s+(?:\\d+|a|an|one|two|three|four|five|six|few)\\s+(?:hours?|minutes?|days?|weeks?|months?|nights?)|every\\s+(?:hour|day|week|morning|evening|night|weekend|other\\s+day|monday|tuesday|wednesday|thursday|friday|saturday|sunday)|most\\s+(?:days|weeks|mornings|evenings)"));
+    s_RATES_END(py_str("(?![a-z])"));
+    s_RATES_SAID(stdlib_call("re", "compile", &[add(&add(&add(&py_str("\\b(?P<how>"), &g_RATES_TEXT()), &py_str(")")), &g_RATES_END()), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s_RATES_SUBJECT(stdlib_call("re", "compile", &[py_str("^(?P<lead>and\\s+|so\\s+|also\\s+|oh\\s+|well\\s+|but\\s+|actually\\s+|no\\s+|sorry\\s+|make it\\s+|i mean\\s+|i meant\\s+|rather\\s+|instead\\s+)*(?P<subj>i|we|i'm|im|i've|ive|we're|were)\\b(?P<rest>.*)$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s_RATES_FIX_LEAD(call_builtin("frozenset", &[py_tuple(vec![py_str("actually"), py_str("no"), py_str("sorry"), py_str("make"), py_str("i mean"), py_str("i meant"), py_str("rather"), py_str("instead")])]).unwrap_or_else(|e| exc::raise(e)));
+    s_RATES_IGNORE(call_builtin("frozenset", &[mcall(&py_str("i we my our me the a an at on in to for of it that this and but so\njust now only really still usually normally about around im ive were don't dont"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_RATES_ASK_LEAD(call_builtin("frozenset", &[mcall(&py_str("how what when where why who which whose should shall can could\nwould will do does did is are was were if whether whats hows remind tell"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_RATES_LEAD(stdlib_call("re", "compile", &[py_str("^(?:and|so|but|also|oh|well|then|just|now|ok|okay|plus)\\s+"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s_RATES_CORRECTION_LEAD(py_str("(?:actually|no\\s+wait|no|sorry|wait|hang\\s+on|make\\s+it|i\\s+mean|i\\s+meant|rather|instead)"));
+    s_RATES_CORRECTION_TAIL(py_str("(?:\\s+(?:now|instead|actually|these\\s+days|not))?\\s*[.!]*\\s*$"));
+    s_A_BARE_COUNT(stdlib_call("re", "compile", &[add(&add(&add(&py_str("^\\s*"), &g_RATES_CORRECTION_LEAD()), &py_str("\\b[,\\s:]*(?P<num>\\d+|two|three|four|five|six|seven|eight|nine|ten)\\s+times?(?:\\s+(?:a|per|each)\\s+(?P<period>day|week|fortnight|month|year))?")), &g_RATES_CORRECTION_TAIL()), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s_A_BARE_RATE(stdlib_call("re", "compile", &[add(&add(&add(&add(&add(&py_str("^\\s*"), &g_RATES_CORRECTION_LEAD()), &py_str("\\b[,\\s:]*(?P<how>")), &g_RATES_TEXT()), &py_str(")")), &g_RATES_CORRECTION_TAIL()), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s_A_COUNT_AND_PERIOD(stdlib_call("re", "compile", &[py_str("^(?P<num>\\d+|two|three|four|five|six|seven|eight|nine|ten)\\s+times?\\s+(?:a|per|each)\\s+(?P<period>day|week|fortnight|month|year)$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s_RATES_FILLER_LEAD(call_builtin("frozenset", &[mcall(&py_str("and so but also oh well then plus just still only now really\nactually normally usually today tomorrow tonight yesterday"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_RATES_ADVICE(stdlib_call("re", "compile", &[py_str("\\b(?:should|shall|ought|need(?:s)?|best|recommend\\w*|advice)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s_RATES_ASK(stdlib_call("re", "compile", &[add(&add(&add(&add(&py_str("^\\s*(?:and |so |ok |okay |oh |also |then )*(?:remind me\\s+)?(?:(?P<a>how often|how many times)\\b(?P<rest>.*)|(?P<c>how (?:many|much)\\b(?P<rest3>[^?]*))|(?P<b>was|is|were|are)\\s+(?:that|it|this)\\s+(?P<how>"), &g_RATES_TEXT()), &py_str(")")), &g_RATES_END()), &py_str("|what(?:'s|s| is| was)\\s+the\\s+(?:pattern|rate|schedule)\\b(?P<rest2>.*))\\s*[?.!]*\\s*$")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s_COUNTS_A_PERIOD(stdlib_call("re", "compile", &[py_str("\\b(?:a|per|each)\\s+(?:hour|day|week|fortnight|month|year|morning|evening|night)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    s_RATES_PRONOUN(call_builtin("frozenset", &[mcall(&py_str("them they it its it's that this these those him her his hers me us\none ones thing stuff"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_RATES_ASK_FILLER(call_builtin("frozenset", &[mcall(&py_str("do does did was is were i we my our me the a an you go going\nagain then was that it this now still say said tell once twice a week day month year times\nusually normally have has had get gets got take takes make makes use uses need needs\ni'm im've"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+}
+pub fn _the_rates(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut memory: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "memory") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: memory"))) };
+    let mut held: Py = Py::None;
+    held = mcall(&memory.clone(), "get", &[py_str("rates")]);
+    return if py_truthy(&call_builtin("isinstance", &[held.clone(), py_func("list", |args: &[Py]| call_builtin("list", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) { held.clone() } else { py_list(vec![]) };
+    Py::None
+}
+pub fn _keep_a_rate_of_a_doing(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut said: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "said") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: said"))) };
+    let mut rate: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "rate") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: rate"))) };
+    let mut memory: Py = if __pos.len() > 2 { __pos[2].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "memory") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: memory"))) };
+    let mut lead: Py = Py::None;
+    let mut w: Py = Py::None;
+    let mut what: Py = Py::None;
+    let mut words: Py = Py::None;
+    let _ = py_str("File a rate a line says of a doing that is not put as their own: \"the boiler gets serviced\n    once a year\", \"our 7 month old is waking every 2 hours\".\n\n    A question (\"how often should i water them\") and advice to them (\"you should water them twice\n    a week\") are not things to keep; a line whose rate is the whole of it (\"twice a week\") is an\n    answer to a question the bot asked, not a fact about a doing.\n    ");
+    words = mcall(&said.clone(), "split", &[]);
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&words.clone())); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&g_RATES_ASK_LEAD(), &geti(&words.clone(), &Py::Int(0)))); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_RATES_ASK(), "search", &[said.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_RATES_ADVICE(), "search", &[said.clone()]) } } } } } }) {
+    return Py::None;
+    }
+    if py_truthy(&Py::Bool(py_contains(&py_tuple(vec![py_str("you"), py_str("your"), py_str("yours"), py_str("themselves")]), &geti(&words.clone(), &Py::Int(0))))) {
+    return Py::None;
+    }
+    what = mcall(&g_RATES_SAID(), "sub", &[py_str(" "), said.clone()]);
+    what = mcall(&mcall(&py_str(" "), "join", &[mcall(&what.clone(), "split", &[])]), "strip", &[py_str(" .,!;:-")]);
+    lead = slice_or_raise(&mcall(&what.clone(), "split", &[]), &Py::None, &Py::Int(1), &Py::None);
+    if py_truthy(&{ let __b = lead.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_RATES_FILLER_LEAD(), &geti(&lead.clone(), &Py::Int(0)))) } }) {
+    what = mcall(&mcall(&py_str(" "), "join", &[slice_or_raise(&mcall(&what.clone(), "split", &[]), &Py::Int(1), &Py::None, &Py::None)]), "strip", &[py_str(" .,!;:-")]);
+    }
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&what.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&stdlib_call("re", "findall", &[py_str("[a-z']+"), what.clone()]).unwrap_or_else(|e| exc::raise(e))) { let mut w: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&g_RATES_IGNORE(), &w.clone()))) {  __out.push(w.clone()); } } py_list(__out) })() })) } }) {
+    return Py::None;
+    }
+    let _ = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(memory.clone()); __args.push(what.clone()); __args.push(mcall(&rate.clone(), "group", &[py_str("how")])); __args.push(said.clone()); __kws.extend(vec![("own".to_string(), Py::Bool(false))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _keep_a_rate(args))(&__args) };
+    Py::None
+}
+pub fn _keep_a_rate(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut memory: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "memory") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: memory"))) };
+    let mut what: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "what") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: what"))) };
+    let mut how: Py = if __pos.len() > 2 { __pos[2].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "how") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: how"))) };
+    let mut said: Py = if __pos.len() > 3 { __pos[3].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "said") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: said"))) };
+    let mut own: Py = if __pos.len() > 4 { __pos[4].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "own") { v.clone() }
+    else { Py::Bool(true) };
+    let mut held: Py = Py::None;
+    let mut item: Py = Py::None;
+    let mut turn: Py = Py::None;
+    let _ = py_str("File one rate they said of a doing, newest winning for that doing.\n\n    `own` is whether the doing is theirs (\"i go to the gym twice a week\") or somebody else's\n    (\"our 7 month old is waking every 2 hours\"); only the first is said back as what they do.\n    ");
+    what = mcall(&mcall(&py_str(" "), "join", &[mcall(&call_builtin("str", &[{ let __b = what.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "split", &[])]), "strip", &[py_str(" .,!;:-")]);
+    how = mcall(&mcall(&py_str(" "), "join", &[mcall(&call_builtin("str", &[{ let __b = how.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "split", &[])]), "strip", &[py_str(" .,!;:-")]);
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&what.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&how.clone())) } }) {
+    return Py::None;
+    }
+    held = _the_rates(&[memory.clone()]);
+    turn = call_builtin("len", &[{ let __b = mcall(&memory.clone(), "get", &[py_str("turns")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }]).unwrap_or_else(|e| exc::raise(e));
+    let __iter1 = py_iter_or_raise(&held.clone());
+    let mut __else2 = false;
+    for __item in __iter1 {
+    item = __item.clone();
+    if py_truthy(&{ let __b = call_builtin("isinstance", &[item.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { Py::Bool(py_eq(&mcall(&item.clone(), "get", &[py_str("what")]), &what.clone())) } }) {
+    let _ = py_setitem(&item.clone(), &py_str("how"), how.clone());
+    let _ = py_setitem(&item.clone(), &py_str("said"), said.clone());
+    let _ = py_setitem(&item.clone(), &py_str("turn"), turn.clone());
+    let _ = py_setitem(&item.clone(), &py_str("own"), call_builtin("bool", &[own.clone()]).unwrap_or_else(|e| exc::raise(e)));
+    break;
+    }
+    }
+    let _ = mcall(&held.clone(), "append", &[py_dict(vec![(py_str("what"), what.clone()), (py_str("how"), how.clone()), (py_str("said"), said.clone()), (py_str("turn"), turn.clone()), (py_str("own"), call_builtin("bool", &[own.clone()]).unwrap_or_else(|e| exc::raise(e)))])]);
+    let _ = py_setitem(&memory.clone(), &py_str("rates"), slice_or_raise(&held.clone(), &neg(&Py::Int(8)), &Py::None, &Py::None));
+    Py::None
+}
+pub fn _the_newest_recent_rate(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut memory: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "memory") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: memory"))) };
+    let mut within: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "within") { v.clone() }
+    else { Py::Int(2) };
+    let mut item: Py = Py::None;
+    let mut turn: Py = Py::None;
+    let _ = py_str("The newest rate on file said a turn or two ago, which a bare correction can be about.");
+    turn = call_builtin("len", &[{ let __b = mcall(&memory.clone(), "get", &[py_str("turns")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }]).unwrap_or_else(|e| exc::raise(e));
+    let __iter1 = py_iter_or_raise(&call_builtin("reversed", &[_the_rates(&[memory.clone()])]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter1 {
+    item = __item.clone();
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&call_builtin("isinstance", &[item.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e)))); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&item.clone(), "get", &[py_str("how")]))) } }) {
+    continue;
+    }
+    if py_truthy(&le(&sub(&turn.clone(), &call_builtin("int", &[{ let __b = mcall(&item.clone(), "get", &[py_str("turn")]); if py_truthy(&__b) { __b } else { Py::Int(0) } }]).unwrap_or_else(|e| exc::raise(e))), &within.clone())) {
+    return item.clone();
+    }
+    }
+    return Py::None;
+    Py::None
+}
+pub fn _the_rate_put_right(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut text: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "text") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: text"))) };
+    let mut memory: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "memory") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: memory"))) };
+    let mut count: Py = Py::None;
+    let mut held: Py = Py::None;
+    let mut item: Py = Py::None;
+    let mut period: Py = Py::None;
+    let mut said: Py = Py::None;
+    let mut whole: Py = Py::None;
+    let _ = py_str("File a correction of a rate that names no doing of its own, when there is one to correct.\n\n    \"actually 5 times\" and \"no wait, twice a week\" are the line before, put right. The count alone\n    keeps the period the rate was said with, because the person is changing how many and not how\n    often the period runs: \"i walk 3 times a week\" then \"actually 5 times\" is five times a week,\n    not five times ever.\n    ");
+    said = mcall(&py_str(" "), "join", &[mcall(&call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "split", &[])]);
+    if py_truthy(&Py::Bool(!py_truthy(&said.clone()))) {
+    return Py::Bool(false);
+    }
+    count = mcall(&g_A_BARE_COUNT(), "match", &[said.clone()]);
+    whole = if py_truthy(&count.clone()) { Py::None } else { mcall(&g_A_BARE_RATE(), "match", &[said.clone()]) };
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&count.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&whole.clone())) } }) {
+    return Py::Bool(false);
+    }
+    item = _the_newest_recent_rate(&[memory.clone()]);
+    if py_truthy(&Py::Bool(py_is(&item.clone(), &Py::None))) {
+    return Py::Bool(false);
+    }
+    if py_truthy(&count.clone()) {
+    period = mcall(&count.clone(), "group", &[py_str("period")]);
+    if py_truthy(&Py::Bool(!py_truthy(&period.clone()))) {
+    held = mcall(&g_A_COUNT_AND_PERIOD(), "match", &[mcall(&call_builtin("str", &[{ let __b = mcall(&item.clone(), "get", &[py_str("how")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "strip", &[])]);
+    if py_truthy(&Py::Bool(py_is(&held.clone(), &Py::None))) {
+    return Py::Bool(false);
+    }
+    period = mcall(&held.clone(), "group", &[py_str("period")]);
+    }
+    let _ = py_setitem(&item.clone(), &py_str("how"), add(&add(&mcall(&mcall(&count.clone(), "group", &[py_str("num")]), "lower", &[]), &py_str(" times a ")), &mcall(&period.clone(), "lower", &[])));
+    } else {
+    let _ = py_setitem(&item.clone(), &py_str("how"), mcall(&py_str(" "), "join", &[mcall(&mcall(&mcall(&whole.clone(), "group", &[py_str("how")]), "lower", &[]), "split", &[])]));
+    }
+    let _ = py_setitem(&item.clone(), &py_str("said"), mcall(&said.clone(), "lower", &[]));
+    let _ = py_setitem(&item.clone(), &py_str("turn"), call_builtin("len", &[{ let __b = mcall(&memory.clone(), "get", &[py_str("turns")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }]).unwrap_or_else(|e| exc::raise(e)));
+    let _ = py_setitem(&memory.clone(), &py_str("rates"), _the_rates(&[memory.clone()]));
+    return Py::Bool(true);
+    Py::None
+}
+pub fn keep(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut text: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "text") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: text"))) };
+    let mut memory: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "memory") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: memory"))) };
+    let mut clause: Py = Py::None;
+    let mut held: Py = Py::None;
+    let mut inner: Py = Py::None;
+    let mut item: Py = Py::None;
+    let mut lead: Py = Py::None;
+    let mut mine: Py = Py::None;
+    let mut rate: Py = Py::None;
+    let mut rest: Py = Py::None;
+    let mut said: Py = Py::None;
+    let mut subject: Py = Py::None;
+    let mut theirs: Py = Py::None;
+    let mut turn: Py = Py::None;
+    let mut what: Py = Py::None;
+    let mut word: Py = Py::None;
+    let mut words: Py = Py::None;
+    let _ = py_str("Keep a rate a line says of a doing: \"i go to the gym twice a week\".\n\n    A rate said of somebody else's doing (\"our 7 month old is waking every 2 hours\") is kept\n    too, filed against the doing as the line put it, because the late ask is the same ask (\"how\n    often was he waking\") and it was being answered with the first line's card again.\n    ");
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&call_builtin("isinstance", &[text.clone(), py_func("str", |args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e)))); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&call_builtin("isinstance", &[memory.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e)))) } }) {
+    return Py::None;
+    }
+    if py_truthy(&_the_rate_put_right(&[text.clone(), memory.clone()])) {
+    return Py::None;
+    }
+    let __iter1 = py_iter_or_raise(&stdlib_call("re", "split", &[py_str("[.;!?,]|\\band\\b|\\bbut\\b"), mcall(&text.clone(), "lower", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter1 {
+    clause = __item.clone();
+    said = mcall(&py_str(" "), "join", &[mcall(&clause.clone(), "split", &[])]);
+    if py_truthy(&Py::Bool(!py_truthy(&said.clone()))) {
+    continue;
+    }
+    rate = mcall(&g_RATES_SAID(), "search", &[said.clone()]);
+    if py_truthy(&Py::Bool(!py_truthy(&rate.clone()))) {
+    continue;
+    }
+    subject = mcall(&g_RATES_SUBJECT(), "match", &[said.clone()]);
+    if py_truthy(&Py::Bool(!py_truthy(&subject.clone()))) {
+    let _ = _keep_a_rate_of_a_doing(&[said.clone(), rate.clone(), memory.clone()]);
+    continue;
+    }
+    if py_truthy(&Py::Bool(!py_contains(&py_tuple(vec![py_str("i"), py_str("we"), py_str("i'm"), py_str("im"), py_str("i've"), py_str("ive"), py_str("we're"), py_str("were")]), &mcall(&mcall(&subject.clone(), "group", &[py_str("subj")]), "lower", &[])))) {
+    let _ = _keep_a_rate_of_a_doing(&[said.clone(), rate.clone(), memory.clone()]);
+    continue;
+    }
+    rest = mcall(&py_str(" "), "join", &[mcall(&mcall(&subject.clone(), "group", &[py_str("rest")]), "split", &[])]);
+    inner = mcall(&g_RATES_SAID(), "search", &[rest.clone()]);
+    what = mcall(&if py_truthy(&inner.clone()) { slice_or_raise(&rest.clone(), &Py::None, &mcall(&inner.clone(), "start", &[]), &Py::None) } else { py_str("") }, "strip", &[py_str(" .,!;:-!")]);
+    what = mcall(&py_str(" "), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&what.clone(), "split", &[])) { let mut word: Py = __item.clone(); __out.push(word.clone()); } py_list(__out) })() }]);
+    words = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&stdlib_call("re", "findall", &[py_str("[a-z']+"), what.clone()]).unwrap_or_else(|e| exc::raise(e))) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&g_RATES_IGNORE(), &word.clone()))) {  __out.push(word.clone()); } } py_list(__out) })() };
+    if py_truthy(&Py::Bool(!py_truthy(&words.clone()))) {
+    continue;
+    }
+    lead = mcall(&mcall(&{ let __b = mcall(&subject.clone(), "group", &[py_str("lead")]); if py_truthy(&__b) { __b } else { py_str("") } }, "strip", &[]), "split", &[]);
+    if py_truthy(&{ let __b = lead.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_RATES_FIX_LEAD(), &geti(&lead.clone(), &Py::Int(0)))) } }) {
+    held = _the_rates(&[memory.clone()]);
+    turn = call_builtin("len", &[{ let __b = mcall(&memory.clone(), "get", &[py_str("turns")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }]).unwrap_or_else(|e| exc::raise(e));
+    let __iter2 = py_iter_or_raise(&call_builtin("reversed", &[held.clone()]).unwrap_or_else(|e| exc::raise(e)));
+    let mut __else3 = false;
+    for __item in __iter2 {
+    item = __item.clone();
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&call_builtin("isinstance", &[item.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e)))); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&item.clone(), "get", &[py_str("how")]))) } }) {
+    continue;
+    }
+    mine = call_builtin("set", &[stdlib_call("re", "findall", &[py_str("[a-z']+"), mcall(&call_builtin("str", &[{ let __b = mcall(&item.clone(), "get", &[py_str("what")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[])]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e));
+    theirs = call_builtin("set", &[stdlib_call("re", "findall", &[py_str("[a-z']+"), mcall(&what.clone(), "lower", &[])]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e));
+    if py_truthy(&{ let __b = bitand(&mine.clone(), &theirs.clone()); if py_truthy(&__b) { __b } else { le(&sub(&turn.clone(), &call_builtin("int", &[{ let __b = mcall(&item.clone(), "get", &[py_str("turn")]); if py_truthy(&__b) { __b } else { Py::Int(0) } }]).unwrap_or_else(|e| exc::raise(e))), &Py::Int(2)) } }) {
+    let _ = py_setitem(&item.clone(), &py_str("what"), { let __b = mcall(&item.clone(), "get", &[py_str("what")]); if py_truthy(&__b) { __b } else { what.clone() } });
+    let _ = py_setitem(&item.clone(), &py_str("how"), mcall(&rate.clone(), "group", &[py_str("how")]));
+    let _ = py_setitem(&item.clone(), &py_str("said"), said.clone());
+    let _ = py_setitem(&item.clone(), &py_str("turn"), turn.clone());
+    let _ = py_setitem(&memory.clone(), &py_str("rates"), held.clone());
+    break;
+    }
+    }
+    let _ = _keep_a_rate(&[memory.clone(), what.clone(), mcall(&rate.clone(), "group", &[py_str("how")]), said.clone()]);
+    continue;
+    }
+    let _ = _keep_a_rate(&[memory.clone(), what.clone(), mcall(&rate.clone(), "group", &[py_str("how")]), said.clone()]);
+    }
+    Py::None
+}
+pub fn is_a_rate_ask(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut text: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "text") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: text"))) };
+    let mut memory: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "memory") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: memory"))) };
+    let _ = py_str("Is this line only the ask for one of the rates kept here?");
+    return call_builtin("bool", &[answer(&[text.clone(), memory.clone()])]).unwrap_or_else(|e| exc::raise(e));
+    Py::None
+}
+pub fn answer(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut text: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "text") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: text"))) };
+    let mut memory: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "memory") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: memory"))) };
+    let mut asked: Py = Py::None;
+    let mut held: Py = Py::None;
+    let mut held_item: Py = Py::None;
+    let mut how: Py = Py::None;
+    let mut item: Py = Py::None;
+    let mut lean_back: Py = Py::None;
+    let mut named: Py = Py::None;
+    let mut rest: Py = Py::None;
+    let mut said: Py = Py::None;
+    let mut what: Py = Py::None;
+    let mut word: Py = Py::None;
+    let mut words: Py = Py::None;
+    let _ = py_str("The rate of their own doing a late ask names, said back in their own words.");
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&call_builtin("isinstance", &[text.clone(), py_func("str", |args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e)))); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&call_builtin("isinstance", &[memory.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e)))) } }) {
+    return Py::None;
+    }
+    held = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&_the_rates(&[memory.clone()])) { let mut item: Py = __item.clone(); if py_truthy(&{ let __b = call_builtin("isinstance", &[item.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { mcall(&item.clone(), "get", &[py_str("how")]) } }) {  __out.push(item.clone()); } } py_list(__out) })() };
+    if py_truthy(&Py::Bool(!py_truthy(&held.clone()))) {
+    return Py::None;
+    }
+    asked = mcall(&g_RATES_ASK(), "match", &[mcall(&py_str(" "), "join", &[mcall(&text.clone(), "split", &[])])]);
+    if py_truthy(&Py::Bool(!py_truthy(&asked.clone()))) {
+    return Py::None;
+    }
+    if py_truthy(&mcall(&g_RATES_ADVICE(), "search", &[mcall(&asked.clone(), "group", &[Py::Int(0)])])) {
+    return Py::None;
+    }
+    if py_truthy(&{ let __b = mcall(&asked.clone(), "group", &[py_str("c")]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&g_COUNTS_A_PERIOD(), "search", &[mcall(&asked.clone(), "group", &[py_str("c")])]))) } }) {
+    return Py::None;
+    }
+    rest = mcall(&{ let __b = mcall(&asked.clone(), "group", &[py_str("rest")]); if py_truthy(&__b) { __b } else { { let __b = mcall(&asked.clone(), "group", &[py_str("rest3")]); if py_truthy(&__b) { __b } else { { let __b = mcall(&asked.clone(), "group", &[py_str("rest2")]); if py_truthy(&__b) { __b } else { py_str("") } } } } } }, "lower", &[]);
+    named = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&stdlib_call("re", "findall", &[py_str("[a-z']+"), rest.clone()]).unwrap_or_else(|e| exc::raise(e))) { let mut word: Py = __item.clone(); if py_truthy(&{ let __b = Py::Bool(!py_contains(&g_RATES_ASK_FILLER(), &word.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_contains(&g_RATES_PRONOUN(), &word.clone())); if !py_truthy(&__b) { __b } else { gt(&call_builtin("len", &[word.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)) } } } }) {  __out.push(word.clone()); } } py_set(__out) })() };
+    item = Py::None;
+    if py_truthy(&named.clone()) {
+    let __iter1 = py_iter_or_raise(&call_builtin("reversed", &[held.clone()]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter1 {
+    held_item = __item.clone();
+    words = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&stdlib_call("re", "findall", &[py_str("[a-z']+"), mcall(&call_builtin("str", &[{ let __b = mcall(&held_item.clone(), "get", &[py_str("what")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[])]).unwrap_or_else(|e| exc::raise(e))) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&g_RATES_PRONOUN(), &word.clone()))) {  __out.push(word.clone()); } } py_set(__out) })() };
+    if py_truthy(&bitand(&named.clone(), &words.clone())) {
+    item = held_item.clone();
+    break;
+    }
+    }
+    if py_truthy(&Py::Bool(py_is(&item.clone(), &Py::None))) {
+    return Py::None;
+    }
+    } else {
+    lean_back = stdlib_call("re", "search", &[py_str("\\b(?:that|it|this|again|remind|said|say|told|tell)\\b"), mcall(&mcall(&asked.clone(), "group", &[Py::Int(0)]), "lower", &[])]).unwrap_or_else(|e| exc::raise(e));
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&lean_back.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&mcall(&asked.clone(), "group", &[py_str("b")]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&asked.clone(), "group", &[py_str("c")]))) } } } }) {
+    return Py::None;
+    }
+    item = geti(&held.clone(), &neg(&Py::Int(1)));
+    }
+    what = mcall(&py_str(" "), "join", &[mcall(&call_builtin("str", &[{ let __b = mcall(&item.clone(), "get", &[py_str("what")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "split", &[])]);
+    how = mcall(&py_str(" "), "join", &[mcall(&call_builtin("str", &[{ let __b = mcall(&item.clone(), "get", &[py_str("how")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "split", &[])]);
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&what.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&how.clone())) } }) {
+    return Py::None;
+    }
+    what = stdlib_call("re", "sub", &[py_str("\\bmy\\b"), py_str("your"), what.clone()]).unwrap_or_else(|e| exc::raise(e));
+    what = stdlib_call("re", "sub", &[py_str("\\bour\\b"), py_str("your"), what.clone()]).unwrap_or_else(|e| exc::raise(e));
+    if py_truthy(&Py::Bool(py_is(&mcall(&item.clone(), "get", &[py_str("own")]), &Py::Bool(false)))) {
+    return add(&add(&add(&add(&py_str("You said "), &what.clone()), &py_str(" ")), &how.clone()), &py_str("."));
+    }
+    if py_truthy(&Py::Bool(py_eq(&crate::gen::compose::pick(&[py_list(vec![Py::Int(0), Py::Int(1)]), memory.clone()]), &Py::Int(0)))) {
+    said = add(&add(&add(&add(&py_str("You "), &what.clone()), &py_str(" ")), &how.clone()), &py_str("."));
+    } else {
+    said = add(&add(&add(&add(&mcall(&slice_or_raise(&how.clone(), &Py::None, &Py::Int(1), &Py::None), "upper", &[]), &slice_or_raise(&how.clone(), &Py::Int(1), &Py::None, &Py::None)), &py_str(" — you ")), &what.clone()), &py_str("."));
+    }
+    return said.clone();
+    Py::None
+}
+pub fn module_obj() -> Py {
+    ensure_init();
+    Py::Module(Rc::new(PyModule { name: "bot.memory.rates".to_string(),
+        get: Rc::new(|attr: &str| match attr {
+            "A_BARE_COUNT" => Some(g_A_BARE_COUNT()),
+            "A_BARE_RATE" => Some(g_A_BARE_RATE()),
+            "A_COUNT_AND_PERIOD" => Some(g_A_COUNT_AND_PERIOD()),
+            "COUNTS_A_PERIOD" => Some(g_COUNTS_A_PERIOD()),
+            "RATES_ADVICE" => Some(g_RATES_ADVICE()),
+            "RATES_ASK" => Some(g_RATES_ASK()),
+            "RATES_ASK_FILLER" => Some(g_RATES_ASK_FILLER()),
+            "RATES_ASK_LEAD" => Some(g_RATES_ASK_LEAD()),
+            "RATES_CORRECTION_LEAD" => Some(g_RATES_CORRECTION_LEAD()),
+            "RATES_CORRECTION_TAIL" => Some(g_RATES_CORRECTION_TAIL()),
+            "RATES_END" => Some(g_RATES_END()),
+            "RATES_FILLER_LEAD" => Some(g_RATES_FILLER_LEAD()),
+            "RATES_FIX_LEAD" => Some(g_RATES_FIX_LEAD()),
+            "RATES_IGNORE" => Some(g_RATES_IGNORE()),
+            "RATES_LEAD" => Some(g_RATES_LEAD()),
+            "RATES_PRONOUN" => Some(g_RATES_PRONOUN()),
+            "RATES_SAID" => Some(g_RATES_SAID()),
+            "RATES_SUBJECT" => Some(g_RATES_SUBJECT()),
+            "RATES_TEXT" => Some(g_RATES_TEXT()),
+            "_keep_a_rate" => Some(py_func("_keep_a_rate", |args: &[Py]| _keep_a_rate(args))),
+            "_keep_a_rate_of_a_doing" => Some(py_func("_keep_a_rate_of_a_doing", |args: &[Py]| _keep_a_rate_of_a_doing(args))),
+            "_the_newest_recent_rate" => Some(py_func("_the_newest_recent_rate", |args: &[Py]| _the_newest_recent_rate(args))),
+            "_the_rate_put_right" => Some(py_func("_the_rate_put_right", |args: &[Py]| _the_rate_put_right(args))),
+            "_the_rates" => Some(py_func("_the_rates", |args: &[Py]| _the_rates(args))),
+            "answer" => Some(py_func("answer", |args: &[Py]| answer(args))),
+            "is_a_rate_ask" => Some(py_func("is_a_rate_ask", |args: &[Py]| is_a_rate_ask(args))),
+            "keep" => Some(py_func("keep", |args: &[Py]| keep(args))),
+            _ => None,
+        }),
+        set: None,
+    }))
+}

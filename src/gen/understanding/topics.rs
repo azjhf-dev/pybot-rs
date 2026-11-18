@@ -1,0 +1,5587 @@
+#![allow(non_snake_case, non_upper_case_globals, dead_code, unused_mut, unused_variables, unused_assignments, unused_parens, unused_imports, clippy::all)]
+use crate::pyrt::builtins::*;
+use crate::pyrt::pybuiltins::*;
+use crate::pyrt::stdlib::*;
+use crate::pyrt::value::*;
+use crate::pyrt::exc;
+use crate::pyrt::{pystr, pyre, pyrandom, pydatetime};
+use std::sync::{LazyLock as Lazy, RwLock, Once};
+use std::cell::{Cell, RefCell};
+use std::rc::Rc;
+use indexmap::IndexMap;
+
+
+pub static AGE_AFTER: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static AGE_IN_A_YEAR: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static AGE_NOUNS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static AGE_OF_A_CHILD_WORDS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static ANIMALS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static ARTICLES: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static ASK_PHRASES: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static ASK_WORDS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static A_AMOUNT_NOUN: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static A_AMOUNT_SYMBOL: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static A_CHILD_TILL: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static A_CHILD_TO_READ_FOR: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static A_MONEY_WORD: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static A_PERSON_WHO_WANTS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static A_PORTION_NEEDS_OF: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static A_PORTION_UNITS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static A_THING_WANTED: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static A_WAIT: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static A_WAIT_TO: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static BEHAVIOUR: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static BIG_PURSE: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static BODILY_OUTPUT: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static BODILY_OUTPUT_NOUN: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static BODY: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static BODY_CUES: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static BODY_OR_SELF: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static BODY_TWO_LIFE: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static BOOK_WORDS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static BROKE_AS_SUBJECT: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static BROKE_AS_TIME: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static CANCELS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static CANCEL_AFTER: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static CARRY: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static CAR_NAMES: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static CLIPPED_AFTER_A_SLASH: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static CLIPPED_UNIT_WORDS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static COLD_PEOPLE: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static COLD_WORDS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static COMMS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static COMPARE_WORDS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static COMPLAINT_OF: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static COMPLAINT_OF_NEXT: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static CONDITIONS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static CONDITION_BOOST: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static CONDITION_NEEDS_PART: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static CONDITION_NEEDS_WORD: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static CONDITION_NOT_NEXT: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static CONDITION_OTHER_LIFE: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static CONDITION_REACH: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static COUNTRY_BOOST: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static COUNTRY_CUES: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static COUNTRY_HOMOGRAPHS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static CROPS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static CROP_BOOST: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static CROP_KITCHEN: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static CROP_STATES: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static CUE_CARRIERS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static DEGREE_NOUNS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static DERIVED_ENDINGS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static DETERMINERS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static DRIVEN_JOINERS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static DRIVEN_MOOD: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static DRIVEN_PERSON: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static DRIVEN_TAIL: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static DRIVES: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static EXERCISE_AFTER: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static EXERCISE_NOUNS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static EXTRA_PEOPLE: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static FAMILY_PAIRS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static FAMILY_STEM: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static FAMILY_WORD: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static FIGURE_SIZE_WORDS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static FRIEND_BOOST: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static FRIEND_WORDS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static GENERIC: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static GIFTS_OR_OCCASIONS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static GIFT_ALWAYS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static GIFT_ASKING: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static GIFT_BOOST: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static GIFT_OCCASION: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static GIFT_WANTING: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static GIFT_WORDS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static GIVEN_UP_FOOD: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static GIVE_DETERMINERS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static GIVE_RELATIVE: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static GIVE_THING: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static GIVE_THINGS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static GIVE_TO: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static GIVE_VERB: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static GIVING_UP: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static GIVING_UP_BOOST: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static GROWING_PLACES: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static HEAD_FOG: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static HEAD_FOG_BOOST: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static HEAD_FOG_REACH: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static HEAD_WORDS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static HEARERS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static HOT_WORDS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static HURTS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static HURT_BOOST: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static IDIOM_PHRASES: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static JUDGEMENT_OF_RECORD: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static LEADING: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static LIVES: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static MACHINE_BIN_WORDS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static MACHINE_WORD_CUES: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static MACHINE_WORD_PHRASES: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static MECHANISM: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static MECHANISM_HOW: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static MIXED_FRACTION: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static MIXED_JOINERS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static MONEY_TIGHT: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static MONEY_TIGHT_MAX: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static NAME_BREAKS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static NAME_FRAMES: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static NATURE_WORDS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static NOSE_BLOCKED: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static NOSE_BLOCKED_BOOST: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static NOT_CUT_OUT: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static NOT_PLACES: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static NOT_THINGS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static NOT_WORDS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static NOUNY_SIGNS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static NUMBER_FILLER: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static NUMBER_RE: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static NUMBER_WORDS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static ONE_IS_A_THING: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static ONLY_A_STOOL: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static ORDINARY_VERBS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static OTHER_PERSON: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static OWNED_BY: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static OWNERS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static OWNING_WORDS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static OWNS_THE_UNIT: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static OWN_SELF: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static PARTS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static PART_UP_BOOST: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static PEOPLE_TOPICS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static PERSON_WORDS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static PETS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static PET_BOOST: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static PHRASES: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static PLACES: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static PLACE_HOMOGRAPHS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static PLACE_OVER: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static PLACE_THING: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static PLACE_WORDS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static PLACE_WORDS_WITH_CUE: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static PLAYS_UP_BEFORE: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static PLAY_UP_REACH: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static POLYSEMOUS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static POLY_FORMS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static PORTION_UNITS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static PORTION_WORDS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static RELATIONS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static RUN_OUT_BEFORE: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static SAMPLE_WORDS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static SCIENCE_BOOST: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static SEASONS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static SENSE_ELSEWHERE: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static SENSE_ELSEWHERE_FORMS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static SENSE_NEAR: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static SENSE_PAIRS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static SENSE_REACH: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static SENSE_WEIGHT: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static SIGN_FOLLOWS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static SIGN_NOT_AFTER: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static SKIN_BOOST: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static SKIN_PARTS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static SKIN_REACH: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static SKIN_STATES: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static STONE_COMPOUNDS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static STONE_VERBS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static STOOL_AS_FURNITURE: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static STRONG: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static STUDY_OBJECTS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static SUMS_AFTER: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static SUM_MONEY: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static TABLE: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static TEETHING_AND_A_CHILD: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static TEETHING_IS_A_FAULT: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static THE_PEOPLE: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static THE_PERSONS_OWN: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static THINGS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static THING_WORDS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static TRAVEL_CUES: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static TRAVEL_STRONG: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static TWO_HOMES: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static TWO_LIVES: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static TWO_LIVES_FORMS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static TWO_LIVES_REACH: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static UNIT_WORDS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static UNWELL_BOOST: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static UNWELL_IDIOMS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static UNWELL_NOT: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static UNWELL_SIGNS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static VERB_CUES: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static WANTED_BEFORE_A_STOP: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static WANT_VERBS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static WARMTH_ARE: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static WARMTH_DEGREE: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static WARMTH_HABITUAL: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static WARMTH_THEN: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static WARMTH_WORDS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static WATCHING: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static WATCH_OUT_AFTER: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static WEAK: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static WEATHER_BEFORE: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static WEATHER_ITSELF: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static WORD_DIGITS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static WORD_NUMBERS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static WORK_WORDS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static WORLD: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static WORLD_NOT: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static WORN_OUT: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static WORN_OUT_BOOST: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static WORN_OUT_CUE: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static WORN_OUT_LOOKBACK: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static WORN_OUT_SAID: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static _A_STATE_VERB: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static _BREAKS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static _FUNCTION_WORDS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static _GRAND_RELATIONS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static _KIN_BUILT: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static _NOT_THE_SUBJECT: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static _POSSESSIVE: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static _SENSE_TIERS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static _STEPPED_RELATIONS: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static _THE_OWNER_SETTLES: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static _form: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static _forms: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static _sense_topic: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+pub static _tiers: Lazy<RwLock<Py>> = Lazy::new(|| RwLock::new(Py::None));
+static INIT: Once = Once::new();
+thread_local! { static INITIALIZING: Cell<bool> = const { Cell::new(false) }; }
+pub fn ensure_init() {
+    if INITIALIZING.with(|c| c.get()) { return; }
+    INIT.call_once(|| {
+        INITIALIZING.with(|c| c.set(true));
+        let _ = exc::catch(|| { module_body(); Py::None });
+        INITIALIZING.with(|c| c.set(false));
+    });
+}
+pub fn g_AGE_AFTER() -> Py { ensure_init(); AGE_AFTER.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_AGE_AFTER(v: Py) { ensure_init(); if let Ok(mut w) = AGE_AFTER.write() { *w = v; } }
+pub fn g_AGE_IN_A_YEAR() -> Py { ensure_init(); AGE_IN_A_YEAR.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_AGE_IN_A_YEAR(v: Py) { ensure_init(); if let Ok(mut w) = AGE_IN_A_YEAR.write() { *w = v; } }
+pub fn g_AGE_NOUNS() -> Py { ensure_init(); AGE_NOUNS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_AGE_NOUNS(v: Py) { ensure_init(); if let Ok(mut w) = AGE_NOUNS.write() { *w = v; } }
+pub fn g_AGE_OF_A_CHILD_WORDS() -> Py { ensure_init(); AGE_OF_A_CHILD_WORDS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_AGE_OF_A_CHILD_WORDS(v: Py) { ensure_init(); if let Ok(mut w) = AGE_OF_A_CHILD_WORDS.write() { *w = v; } }
+pub fn g_ANIMALS() -> Py { ensure_init(); ANIMALS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_ANIMALS(v: Py) { ensure_init(); if let Ok(mut w) = ANIMALS.write() { *w = v; } }
+pub fn g_ARTICLES() -> Py { ensure_init(); ARTICLES.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_ARTICLES(v: Py) { ensure_init(); if let Ok(mut w) = ARTICLES.write() { *w = v; } }
+pub fn g_ASK_PHRASES() -> Py { ensure_init(); ASK_PHRASES.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_ASK_PHRASES(v: Py) { ensure_init(); if let Ok(mut w) = ASK_PHRASES.write() { *w = v; } }
+pub fn g_ASK_WORDS() -> Py { ensure_init(); ASK_WORDS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_ASK_WORDS(v: Py) { ensure_init(); if let Ok(mut w) = ASK_WORDS.write() { *w = v; } }
+pub fn g_A_AMOUNT_NOUN() -> Py { ensure_init(); A_AMOUNT_NOUN.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_A_AMOUNT_NOUN(v: Py) { ensure_init(); if let Ok(mut w) = A_AMOUNT_NOUN.write() { *w = v; } }
+pub fn g_A_AMOUNT_SYMBOL() -> Py { ensure_init(); A_AMOUNT_SYMBOL.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_A_AMOUNT_SYMBOL(v: Py) { ensure_init(); if let Ok(mut w) = A_AMOUNT_SYMBOL.write() { *w = v; } }
+pub fn g_A_CHILD_TILL() -> Py { ensure_init(); A_CHILD_TILL.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_A_CHILD_TILL(v: Py) { ensure_init(); if let Ok(mut w) = A_CHILD_TILL.write() { *w = v; } }
+pub fn g_A_CHILD_TO_READ_FOR() -> Py { ensure_init(); A_CHILD_TO_READ_FOR.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_A_CHILD_TO_READ_FOR(v: Py) { ensure_init(); if let Ok(mut w) = A_CHILD_TO_READ_FOR.write() { *w = v; } }
+pub fn g_A_MONEY_WORD() -> Py { ensure_init(); A_MONEY_WORD.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_A_MONEY_WORD(v: Py) { ensure_init(); if let Ok(mut w) = A_MONEY_WORD.write() { *w = v; } }
+pub fn g_A_PERSON_WHO_WANTS() -> Py { ensure_init(); A_PERSON_WHO_WANTS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_A_PERSON_WHO_WANTS(v: Py) { ensure_init(); if let Ok(mut w) = A_PERSON_WHO_WANTS.write() { *w = v; } }
+pub fn g_A_PORTION_NEEDS_OF() -> Py { ensure_init(); A_PORTION_NEEDS_OF.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_A_PORTION_NEEDS_OF(v: Py) { ensure_init(); if let Ok(mut w) = A_PORTION_NEEDS_OF.write() { *w = v; } }
+pub fn g_A_PORTION_UNITS() -> Py { ensure_init(); A_PORTION_UNITS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_A_PORTION_UNITS(v: Py) { ensure_init(); if let Ok(mut w) = A_PORTION_UNITS.write() { *w = v; } }
+pub fn g_A_THING_WANTED() -> Py { ensure_init(); A_THING_WANTED.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_A_THING_WANTED(v: Py) { ensure_init(); if let Ok(mut w) = A_THING_WANTED.write() { *w = v; } }
+pub fn g_A_WAIT() -> Py { ensure_init(); A_WAIT.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_A_WAIT(v: Py) { ensure_init(); if let Ok(mut w) = A_WAIT.write() { *w = v; } }
+pub fn g_A_WAIT_TO() -> Py { ensure_init(); A_WAIT_TO.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_A_WAIT_TO(v: Py) { ensure_init(); if let Ok(mut w) = A_WAIT_TO.write() { *w = v; } }
+pub fn g_BEHAVIOUR() -> Py { ensure_init(); BEHAVIOUR.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_BEHAVIOUR(v: Py) { ensure_init(); if let Ok(mut w) = BEHAVIOUR.write() { *w = v; } }
+pub fn g_BIG_PURSE() -> Py { ensure_init(); BIG_PURSE.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_BIG_PURSE(v: Py) { ensure_init(); if let Ok(mut w) = BIG_PURSE.write() { *w = v; } }
+pub fn g_BODILY_OUTPUT() -> Py { ensure_init(); BODILY_OUTPUT.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_BODILY_OUTPUT(v: Py) { ensure_init(); if let Ok(mut w) = BODILY_OUTPUT.write() { *w = v; } }
+pub fn g_BODILY_OUTPUT_NOUN() -> Py { ensure_init(); BODILY_OUTPUT_NOUN.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_BODILY_OUTPUT_NOUN(v: Py) { ensure_init(); if let Ok(mut w) = BODILY_OUTPUT_NOUN.write() { *w = v; } }
+pub fn g_BODY() -> Py { ensure_init(); BODY.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_BODY(v: Py) { ensure_init(); if let Ok(mut w) = BODY.write() { *w = v; } }
+pub fn g_BODY_CUES() -> Py { ensure_init(); BODY_CUES.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_BODY_CUES(v: Py) { ensure_init(); if let Ok(mut w) = BODY_CUES.write() { *w = v; } }
+pub fn g_BODY_OR_SELF() -> Py { ensure_init(); BODY_OR_SELF.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_BODY_OR_SELF(v: Py) { ensure_init(); if let Ok(mut w) = BODY_OR_SELF.write() { *w = v; } }
+pub fn g_BODY_TWO_LIFE() -> Py { ensure_init(); BODY_TWO_LIFE.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_BODY_TWO_LIFE(v: Py) { ensure_init(); if let Ok(mut w) = BODY_TWO_LIFE.write() { *w = v; } }
+pub fn g_BOOK_WORDS() -> Py { ensure_init(); BOOK_WORDS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_BOOK_WORDS(v: Py) { ensure_init(); if let Ok(mut w) = BOOK_WORDS.write() { *w = v; } }
+pub fn g_BROKE_AS_SUBJECT() -> Py { ensure_init(); BROKE_AS_SUBJECT.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_BROKE_AS_SUBJECT(v: Py) { ensure_init(); if let Ok(mut w) = BROKE_AS_SUBJECT.write() { *w = v; } }
+pub fn g_BROKE_AS_TIME() -> Py { ensure_init(); BROKE_AS_TIME.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_BROKE_AS_TIME(v: Py) { ensure_init(); if let Ok(mut w) = BROKE_AS_TIME.write() { *w = v; } }
+pub fn g_CANCELS() -> Py { ensure_init(); CANCELS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_CANCELS(v: Py) { ensure_init(); if let Ok(mut w) = CANCELS.write() { *w = v; } }
+pub fn g_CANCEL_AFTER() -> Py { ensure_init(); CANCEL_AFTER.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_CANCEL_AFTER(v: Py) { ensure_init(); if let Ok(mut w) = CANCEL_AFTER.write() { *w = v; } }
+pub fn g_CARRY() -> Py { ensure_init(); CARRY.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_CARRY(v: Py) { ensure_init(); if let Ok(mut w) = CARRY.write() { *w = v; } }
+pub fn g_CAR_NAMES() -> Py { ensure_init(); CAR_NAMES.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_CAR_NAMES(v: Py) { ensure_init(); if let Ok(mut w) = CAR_NAMES.write() { *w = v; } }
+pub fn g_CLIPPED_AFTER_A_SLASH() -> Py { ensure_init(); CLIPPED_AFTER_A_SLASH.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_CLIPPED_AFTER_A_SLASH(v: Py) { ensure_init(); if let Ok(mut w) = CLIPPED_AFTER_A_SLASH.write() { *w = v; } }
+pub fn g_CLIPPED_UNIT_WORDS() -> Py { ensure_init(); CLIPPED_UNIT_WORDS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_CLIPPED_UNIT_WORDS(v: Py) { ensure_init(); if let Ok(mut w) = CLIPPED_UNIT_WORDS.write() { *w = v; } }
+pub fn g_COLD_PEOPLE() -> Py { ensure_init(); COLD_PEOPLE.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_COLD_PEOPLE(v: Py) { ensure_init(); if let Ok(mut w) = COLD_PEOPLE.write() { *w = v; } }
+pub fn g_COLD_WORDS() -> Py { ensure_init(); COLD_WORDS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_COLD_WORDS(v: Py) { ensure_init(); if let Ok(mut w) = COLD_WORDS.write() { *w = v; } }
+pub fn g_COMMS() -> Py { ensure_init(); COMMS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_COMMS(v: Py) { ensure_init(); if let Ok(mut w) = COMMS.write() { *w = v; } }
+pub fn g_COMPARE_WORDS() -> Py { ensure_init(); COMPARE_WORDS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_COMPARE_WORDS(v: Py) { ensure_init(); if let Ok(mut w) = COMPARE_WORDS.write() { *w = v; } }
+pub fn g_COMPLAINT_OF() -> Py { ensure_init(); COMPLAINT_OF.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_COMPLAINT_OF(v: Py) { ensure_init(); if let Ok(mut w) = COMPLAINT_OF.write() { *w = v; } }
+pub fn g_COMPLAINT_OF_NEXT() -> Py { ensure_init(); COMPLAINT_OF_NEXT.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_COMPLAINT_OF_NEXT(v: Py) { ensure_init(); if let Ok(mut w) = COMPLAINT_OF_NEXT.write() { *w = v; } }
+pub fn g_CONDITIONS() -> Py { ensure_init(); CONDITIONS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_CONDITIONS(v: Py) { ensure_init(); if let Ok(mut w) = CONDITIONS.write() { *w = v; } }
+pub fn g_CONDITION_BOOST() -> Py { ensure_init(); CONDITION_BOOST.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_CONDITION_BOOST(v: Py) { ensure_init(); if let Ok(mut w) = CONDITION_BOOST.write() { *w = v; } }
+pub fn g_CONDITION_NEEDS_PART() -> Py { ensure_init(); CONDITION_NEEDS_PART.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_CONDITION_NEEDS_PART(v: Py) { ensure_init(); if let Ok(mut w) = CONDITION_NEEDS_PART.write() { *w = v; } }
+pub fn g_CONDITION_NEEDS_WORD() -> Py { ensure_init(); CONDITION_NEEDS_WORD.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_CONDITION_NEEDS_WORD(v: Py) { ensure_init(); if let Ok(mut w) = CONDITION_NEEDS_WORD.write() { *w = v; } }
+pub fn g_CONDITION_NOT_NEXT() -> Py { ensure_init(); CONDITION_NOT_NEXT.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_CONDITION_NOT_NEXT(v: Py) { ensure_init(); if let Ok(mut w) = CONDITION_NOT_NEXT.write() { *w = v; } }
+pub fn g_CONDITION_OTHER_LIFE() -> Py { ensure_init(); CONDITION_OTHER_LIFE.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_CONDITION_OTHER_LIFE(v: Py) { ensure_init(); if let Ok(mut w) = CONDITION_OTHER_LIFE.write() { *w = v; } }
+pub fn g_CONDITION_REACH() -> Py { ensure_init(); CONDITION_REACH.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_CONDITION_REACH(v: Py) { ensure_init(); if let Ok(mut w) = CONDITION_REACH.write() { *w = v; } }
+pub fn g_COUNTRY_BOOST() -> Py { ensure_init(); COUNTRY_BOOST.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_COUNTRY_BOOST(v: Py) { ensure_init(); if let Ok(mut w) = COUNTRY_BOOST.write() { *w = v; } }
+pub fn g_COUNTRY_CUES() -> Py { ensure_init(); COUNTRY_CUES.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_COUNTRY_CUES(v: Py) { ensure_init(); if let Ok(mut w) = COUNTRY_CUES.write() { *w = v; } }
+pub fn g_COUNTRY_HOMOGRAPHS() -> Py { ensure_init(); COUNTRY_HOMOGRAPHS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_COUNTRY_HOMOGRAPHS(v: Py) { ensure_init(); if let Ok(mut w) = COUNTRY_HOMOGRAPHS.write() { *w = v; } }
+pub fn g_CROPS() -> Py { ensure_init(); CROPS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_CROPS(v: Py) { ensure_init(); if let Ok(mut w) = CROPS.write() { *w = v; } }
+pub fn g_CROP_BOOST() -> Py { ensure_init(); CROP_BOOST.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_CROP_BOOST(v: Py) { ensure_init(); if let Ok(mut w) = CROP_BOOST.write() { *w = v; } }
+pub fn g_CROP_KITCHEN() -> Py { ensure_init(); CROP_KITCHEN.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_CROP_KITCHEN(v: Py) { ensure_init(); if let Ok(mut w) = CROP_KITCHEN.write() { *w = v; } }
+pub fn g_CROP_STATES() -> Py { ensure_init(); CROP_STATES.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_CROP_STATES(v: Py) { ensure_init(); if let Ok(mut w) = CROP_STATES.write() { *w = v; } }
+pub fn g_CUE_CARRIERS() -> Py { ensure_init(); CUE_CARRIERS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_CUE_CARRIERS(v: Py) { ensure_init(); if let Ok(mut w) = CUE_CARRIERS.write() { *w = v; } }
+pub fn g_DEGREE_NOUNS() -> Py { ensure_init(); DEGREE_NOUNS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_DEGREE_NOUNS(v: Py) { ensure_init(); if let Ok(mut w) = DEGREE_NOUNS.write() { *w = v; } }
+pub fn g_DERIVED_ENDINGS() -> Py { ensure_init(); DERIVED_ENDINGS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_DERIVED_ENDINGS(v: Py) { ensure_init(); if let Ok(mut w) = DERIVED_ENDINGS.write() { *w = v; } }
+pub fn g_DETERMINERS() -> Py { ensure_init(); DETERMINERS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_DETERMINERS(v: Py) { ensure_init(); if let Ok(mut w) = DETERMINERS.write() { *w = v; } }
+pub fn g_DRIVEN_JOINERS() -> Py { ensure_init(); DRIVEN_JOINERS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_DRIVEN_JOINERS(v: Py) { ensure_init(); if let Ok(mut w) = DRIVEN_JOINERS.write() { *w = v; } }
+pub fn g_DRIVEN_MOOD() -> Py { ensure_init(); DRIVEN_MOOD.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_DRIVEN_MOOD(v: Py) { ensure_init(); if let Ok(mut w) = DRIVEN_MOOD.write() { *w = v; } }
+pub fn g_DRIVEN_PERSON() -> Py { ensure_init(); DRIVEN_PERSON.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_DRIVEN_PERSON(v: Py) { ensure_init(); if let Ok(mut w) = DRIVEN_PERSON.write() { *w = v; } }
+pub fn g_DRIVEN_TAIL() -> Py { ensure_init(); DRIVEN_TAIL.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_DRIVEN_TAIL(v: Py) { ensure_init(); if let Ok(mut w) = DRIVEN_TAIL.write() { *w = v; } }
+pub fn g_DRIVES() -> Py { ensure_init(); DRIVES.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_DRIVES(v: Py) { ensure_init(); if let Ok(mut w) = DRIVES.write() { *w = v; } }
+pub fn g_EXERCISE_AFTER() -> Py { ensure_init(); EXERCISE_AFTER.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_EXERCISE_AFTER(v: Py) { ensure_init(); if let Ok(mut w) = EXERCISE_AFTER.write() { *w = v; } }
+pub fn g_EXERCISE_NOUNS() -> Py { ensure_init(); EXERCISE_NOUNS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_EXERCISE_NOUNS(v: Py) { ensure_init(); if let Ok(mut w) = EXERCISE_NOUNS.write() { *w = v; } }
+pub fn g_EXTRA_PEOPLE() -> Py { ensure_init(); EXTRA_PEOPLE.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_EXTRA_PEOPLE(v: Py) { ensure_init(); if let Ok(mut w) = EXTRA_PEOPLE.write() { *w = v; } }
+pub fn g_FAMILY_PAIRS() -> Py { ensure_init(); FAMILY_PAIRS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_FAMILY_PAIRS(v: Py) { ensure_init(); if let Ok(mut w) = FAMILY_PAIRS.write() { *w = v; } }
+pub fn g_FAMILY_STEM() -> Py { ensure_init(); FAMILY_STEM.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_FAMILY_STEM(v: Py) { ensure_init(); if let Ok(mut w) = FAMILY_STEM.write() { *w = v; } }
+pub fn g_FAMILY_WORD() -> Py { ensure_init(); FAMILY_WORD.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_FAMILY_WORD(v: Py) { ensure_init(); if let Ok(mut w) = FAMILY_WORD.write() { *w = v; } }
+pub fn g_FIGURE_SIZE_WORDS() -> Py { ensure_init(); FIGURE_SIZE_WORDS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_FIGURE_SIZE_WORDS(v: Py) { ensure_init(); if let Ok(mut w) = FIGURE_SIZE_WORDS.write() { *w = v; } }
+pub fn g_FRIEND_BOOST() -> Py { ensure_init(); FRIEND_BOOST.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_FRIEND_BOOST(v: Py) { ensure_init(); if let Ok(mut w) = FRIEND_BOOST.write() { *w = v; } }
+pub fn g_FRIEND_WORDS() -> Py { ensure_init(); FRIEND_WORDS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_FRIEND_WORDS(v: Py) { ensure_init(); if let Ok(mut w) = FRIEND_WORDS.write() { *w = v; } }
+pub fn g_GENERIC() -> Py { ensure_init(); GENERIC.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_GENERIC(v: Py) { ensure_init(); if let Ok(mut w) = GENERIC.write() { *w = v; } }
+pub fn g_GIFTS_OR_OCCASIONS() -> Py { ensure_init(); GIFTS_OR_OCCASIONS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_GIFTS_OR_OCCASIONS(v: Py) { ensure_init(); if let Ok(mut w) = GIFTS_OR_OCCASIONS.write() { *w = v; } }
+pub fn g_GIFT_ALWAYS() -> Py { ensure_init(); GIFT_ALWAYS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_GIFT_ALWAYS(v: Py) { ensure_init(); if let Ok(mut w) = GIFT_ALWAYS.write() { *w = v; } }
+pub fn g_GIFT_ASKING() -> Py { ensure_init(); GIFT_ASKING.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_GIFT_ASKING(v: Py) { ensure_init(); if let Ok(mut w) = GIFT_ASKING.write() { *w = v; } }
+pub fn g_GIFT_BOOST() -> Py { ensure_init(); GIFT_BOOST.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_GIFT_BOOST(v: Py) { ensure_init(); if let Ok(mut w) = GIFT_BOOST.write() { *w = v; } }
+pub fn g_GIFT_OCCASION() -> Py { ensure_init(); GIFT_OCCASION.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_GIFT_OCCASION(v: Py) { ensure_init(); if let Ok(mut w) = GIFT_OCCASION.write() { *w = v; } }
+pub fn g_GIFT_WANTING() -> Py { ensure_init(); GIFT_WANTING.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_GIFT_WANTING(v: Py) { ensure_init(); if let Ok(mut w) = GIFT_WANTING.write() { *w = v; } }
+pub fn g_GIFT_WORDS() -> Py { ensure_init(); GIFT_WORDS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_GIFT_WORDS(v: Py) { ensure_init(); if let Ok(mut w) = GIFT_WORDS.write() { *w = v; } }
+pub fn g_GIVEN_UP_FOOD() -> Py { ensure_init(); GIVEN_UP_FOOD.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_GIVEN_UP_FOOD(v: Py) { ensure_init(); if let Ok(mut w) = GIVEN_UP_FOOD.write() { *w = v; } }
+pub fn g_GIVE_DETERMINERS() -> Py { ensure_init(); GIVE_DETERMINERS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_GIVE_DETERMINERS(v: Py) { ensure_init(); if let Ok(mut w) = GIVE_DETERMINERS.write() { *w = v; } }
+pub fn g_GIVE_RELATIVE() -> Py { ensure_init(); GIVE_RELATIVE.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_GIVE_RELATIVE(v: Py) { ensure_init(); if let Ok(mut w) = GIVE_RELATIVE.write() { *w = v; } }
+pub fn g_GIVE_THING() -> Py { ensure_init(); GIVE_THING.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_GIVE_THING(v: Py) { ensure_init(); if let Ok(mut w) = GIVE_THING.write() { *w = v; } }
+pub fn g_GIVE_THINGS() -> Py { ensure_init(); GIVE_THINGS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_GIVE_THINGS(v: Py) { ensure_init(); if let Ok(mut w) = GIVE_THINGS.write() { *w = v; } }
+pub fn g_GIVE_TO() -> Py { ensure_init(); GIVE_TO.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_GIVE_TO(v: Py) { ensure_init(); if let Ok(mut w) = GIVE_TO.write() { *w = v; } }
+pub fn g_GIVE_VERB() -> Py { ensure_init(); GIVE_VERB.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_GIVE_VERB(v: Py) { ensure_init(); if let Ok(mut w) = GIVE_VERB.write() { *w = v; } }
+pub fn g_GIVING_UP() -> Py { ensure_init(); GIVING_UP.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_GIVING_UP(v: Py) { ensure_init(); if let Ok(mut w) = GIVING_UP.write() { *w = v; } }
+pub fn g_GIVING_UP_BOOST() -> Py { ensure_init(); GIVING_UP_BOOST.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_GIVING_UP_BOOST(v: Py) { ensure_init(); if let Ok(mut w) = GIVING_UP_BOOST.write() { *w = v; } }
+pub fn g_GROWING_PLACES() -> Py { ensure_init(); GROWING_PLACES.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_GROWING_PLACES(v: Py) { ensure_init(); if let Ok(mut w) = GROWING_PLACES.write() { *w = v; } }
+pub fn g_HEAD_FOG() -> Py { ensure_init(); HEAD_FOG.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_HEAD_FOG(v: Py) { ensure_init(); if let Ok(mut w) = HEAD_FOG.write() { *w = v; } }
+pub fn g_HEAD_FOG_BOOST() -> Py { ensure_init(); HEAD_FOG_BOOST.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_HEAD_FOG_BOOST(v: Py) { ensure_init(); if let Ok(mut w) = HEAD_FOG_BOOST.write() { *w = v; } }
+pub fn g_HEAD_FOG_REACH() -> Py { ensure_init(); HEAD_FOG_REACH.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_HEAD_FOG_REACH(v: Py) { ensure_init(); if let Ok(mut w) = HEAD_FOG_REACH.write() { *w = v; } }
+pub fn g_HEAD_WORDS() -> Py { ensure_init(); HEAD_WORDS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_HEAD_WORDS(v: Py) { ensure_init(); if let Ok(mut w) = HEAD_WORDS.write() { *w = v; } }
+pub fn g_HEARERS() -> Py { ensure_init(); HEARERS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_HEARERS(v: Py) { ensure_init(); if let Ok(mut w) = HEARERS.write() { *w = v; } }
+pub fn g_HOT_WORDS() -> Py { ensure_init(); HOT_WORDS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_HOT_WORDS(v: Py) { ensure_init(); if let Ok(mut w) = HOT_WORDS.write() { *w = v; } }
+pub fn g_HURTS() -> Py { ensure_init(); HURTS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_HURTS(v: Py) { ensure_init(); if let Ok(mut w) = HURTS.write() { *w = v; } }
+pub fn g_HURT_BOOST() -> Py { ensure_init(); HURT_BOOST.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_HURT_BOOST(v: Py) { ensure_init(); if let Ok(mut w) = HURT_BOOST.write() { *w = v; } }
+pub fn g_IDIOM_PHRASES() -> Py { ensure_init(); IDIOM_PHRASES.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_IDIOM_PHRASES(v: Py) { ensure_init(); if let Ok(mut w) = IDIOM_PHRASES.write() { *w = v; } }
+pub fn g_JUDGEMENT_OF_RECORD() -> Py { ensure_init(); JUDGEMENT_OF_RECORD.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_JUDGEMENT_OF_RECORD(v: Py) { ensure_init(); if let Ok(mut w) = JUDGEMENT_OF_RECORD.write() { *w = v; } }
+pub fn g_LEADING() -> Py { ensure_init(); LEADING.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_LEADING(v: Py) { ensure_init(); if let Ok(mut w) = LEADING.write() { *w = v; } }
+pub fn g_LIVES() -> Py { ensure_init(); LIVES.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_LIVES(v: Py) { ensure_init(); if let Ok(mut w) = LIVES.write() { *w = v; } }
+pub fn g_MACHINE_BIN_WORDS() -> Py { ensure_init(); MACHINE_BIN_WORDS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_MACHINE_BIN_WORDS(v: Py) { ensure_init(); if let Ok(mut w) = MACHINE_BIN_WORDS.write() { *w = v; } }
+pub fn g_MACHINE_WORD_CUES() -> Py { ensure_init(); MACHINE_WORD_CUES.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_MACHINE_WORD_CUES(v: Py) { ensure_init(); if let Ok(mut w) = MACHINE_WORD_CUES.write() { *w = v; } }
+pub fn g_MACHINE_WORD_PHRASES() -> Py { ensure_init(); MACHINE_WORD_PHRASES.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_MACHINE_WORD_PHRASES(v: Py) { ensure_init(); if let Ok(mut w) = MACHINE_WORD_PHRASES.write() { *w = v; } }
+pub fn g_MECHANISM() -> Py { ensure_init(); MECHANISM.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_MECHANISM(v: Py) { ensure_init(); if let Ok(mut w) = MECHANISM.write() { *w = v; } }
+pub fn g_MECHANISM_HOW() -> Py { ensure_init(); MECHANISM_HOW.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_MECHANISM_HOW(v: Py) { ensure_init(); if let Ok(mut w) = MECHANISM_HOW.write() { *w = v; } }
+pub fn g_MIXED_FRACTION() -> Py { ensure_init(); MIXED_FRACTION.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_MIXED_FRACTION(v: Py) { ensure_init(); if let Ok(mut w) = MIXED_FRACTION.write() { *w = v; } }
+pub fn g_MIXED_JOINERS() -> Py { ensure_init(); MIXED_JOINERS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_MIXED_JOINERS(v: Py) { ensure_init(); if let Ok(mut w) = MIXED_JOINERS.write() { *w = v; } }
+pub fn g_MONEY_TIGHT() -> Py { ensure_init(); MONEY_TIGHT.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_MONEY_TIGHT(v: Py) { ensure_init(); if let Ok(mut w) = MONEY_TIGHT.write() { *w = v; } }
+pub fn g_MONEY_TIGHT_MAX() -> Py { ensure_init(); MONEY_TIGHT_MAX.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_MONEY_TIGHT_MAX(v: Py) { ensure_init(); if let Ok(mut w) = MONEY_TIGHT_MAX.write() { *w = v; } }
+pub fn g_NAME_BREAKS() -> Py { ensure_init(); NAME_BREAKS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_NAME_BREAKS(v: Py) { ensure_init(); if let Ok(mut w) = NAME_BREAKS.write() { *w = v; } }
+pub fn g_NAME_FRAMES() -> Py { ensure_init(); NAME_FRAMES.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_NAME_FRAMES(v: Py) { ensure_init(); if let Ok(mut w) = NAME_FRAMES.write() { *w = v; } }
+pub fn g_NATURE_WORDS() -> Py { ensure_init(); NATURE_WORDS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_NATURE_WORDS(v: Py) { ensure_init(); if let Ok(mut w) = NATURE_WORDS.write() { *w = v; } }
+pub fn g_NOSE_BLOCKED() -> Py { ensure_init(); NOSE_BLOCKED.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_NOSE_BLOCKED(v: Py) { ensure_init(); if let Ok(mut w) = NOSE_BLOCKED.write() { *w = v; } }
+pub fn g_NOSE_BLOCKED_BOOST() -> Py { ensure_init(); NOSE_BLOCKED_BOOST.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_NOSE_BLOCKED_BOOST(v: Py) { ensure_init(); if let Ok(mut w) = NOSE_BLOCKED_BOOST.write() { *w = v; } }
+pub fn g_NOT_CUT_OUT() -> Py { ensure_init(); NOT_CUT_OUT.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_NOT_CUT_OUT(v: Py) { ensure_init(); if let Ok(mut w) = NOT_CUT_OUT.write() { *w = v; } }
+pub fn g_NOT_PLACES() -> Py { ensure_init(); NOT_PLACES.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_NOT_PLACES(v: Py) { ensure_init(); if let Ok(mut w) = NOT_PLACES.write() { *w = v; } }
+pub fn g_NOT_THINGS() -> Py { ensure_init(); NOT_THINGS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_NOT_THINGS(v: Py) { ensure_init(); if let Ok(mut w) = NOT_THINGS.write() { *w = v; } }
+pub fn g_NOT_WORDS() -> Py { ensure_init(); NOT_WORDS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_NOT_WORDS(v: Py) { ensure_init(); if let Ok(mut w) = NOT_WORDS.write() { *w = v; } }
+pub fn g_NOUNY_SIGNS() -> Py { ensure_init(); NOUNY_SIGNS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_NOUNY_SIGNS(v: Py) { ensure_init(); if let Ok(mut w) = NOUNY_SIGNS.write() { *w = v; } }
+pub fn g_NUMBER_FILLER() -> Py { ensure_init(); NUMBER_FILLER.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_NUMBER_FILLER(v: Py) { ensure_init(); if let Ok(mut w) = NUMBER_FILLER.write() { *w = v; } }
+pub fn g_NUMBER_RE() -> Py { ensure_init(); NUMBER_RE.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_NUMBER_RE(v: Py) { ensure_init(); if let Ok(mut w) = NUMBER_RE.write() { *w = v; } }
+pub fn g_NUMBER_WORDS() -> Py { ensure_init(); NUMBER_WORDS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_NUMBER_WORDS(v: Py) { ensure_init(); if let Ok(mut w) = NUMBER_WORDS.write() { *w = v; } }
+pub fn g_ONE_IS_A_THING() -> Py { ensure_init(); ONE_IS_A_THING.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_ONE_IS_A_THING(v: Py) { ensure_init(); if let Ok(mut w) = ONE_IS_A_THING.write() { *w = v; } }
+pub fn g_ONLY_A_STOOL() -> Py { ensure_init(); ONLY_A_STOOL.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_ONLY_A_STOOL(v: Py) { ensure_init(); if let Ok(mut w) = ONLY_A_STOOL.write() { *w = v; } }
+pub fn g_ORDINARY_VERBS() -> Py { ensure_init(); ORDINARY_VERBS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_ORDINARY_VERBS(v: Py) { ensure_init(); if let Ok(mut w) = ORDINARY_VERBS.write() { *w = v; } }
+pub fn g_OTHER_PERSON() -> Py { ensure_init(); OTHER_PERSON.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_OTHER_PERSON(v: Py) { ensure_init(); if let Ok(mut w) = OTHER_PERSON.write() { *w = v; } }
+pub fn g_OWNED_BY() -> Py { ensure_init(); OWNED_BY.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_OWNED_BY(v: Py) { ensure_init(); if let Ok(mut w) = OWNED_BY.write() { *w = v; } }
+pub fn g_OWNERS() -> Py { ensure_init(); OWNERS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_OWNERS(v: Py) { ensure_init(); if let Ok(mut w) = OWNERS.write() { *w = v; } }
+pub fn g_OWNING_WORDS() -> Py { ensure_init(); OWNING_WORDS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_OWNING_WORDS(v: Py) { ensure_init(); if let Ok(mut w) = OWNING_WORDS.write() { *w = v; } }
+pub fn g_OWNS_THE_UNIT() -> Py { ensure_init(); OWNS_THE_UNIT.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_OWNS_THE_UNIT(v: Py) { ensure_init(); if let Ok(mut w) = OWNS_THE_UNIT.write() { *w = v; } }
+pub fn g_OWN_SELF() -> Py { ensure_init(); OWN_SELF.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_OWN_SELF(v: Py) { ensure_init(); if let Ok(mut w) = OWN_SELF.write() { *w = v; } }
+pub fn g_PARTS() -> Py { ensure_init(); PARTS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_PARTS(v: Py) { ensure_init(); if let Ok(mut w) = PARTS.write() { *w = v; } }
+pub fn g_PART_UP_BOOST() -> Py { ensure_init(); PART_UP_BOOST.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_PART_UP_BOOST(v: Py) { ensure_init(); if let Ok(mut w) = PART_UP_BOOST.write() { *w = v; } }
+pub fn g_PEOPLE_TOPICS() -> Py { ensure_init(); PEOPLE_TOPICS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_PEOPLE_TOPICS(v: Py) { ensure_init(); if let Ok(mut w) = PEOPLE_TOPICS.write() { *w = v; } }
+pub fn g_PERSON_WORDS() -> Py { ensure_init(); PERSON_WORDS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_PERSON_WORDS(v: Py) { ensure_init(); if let Ok(mut w) = PERSON_WORDS.write() { *w = v; } }
+pub fn g_PETS() -> Py { ensure_init(); PETS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_PETS(v: Py) { ensure_init(); if let Ok(mut w) = PETS.write() { *w = v; } }
+pub fn g_PET_BOOST() -> Py { ensure_init(); PET_BOOST.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_PET_BOOST(v: Py) { ensure_init(); if let Ok(mut w) = PET_BOOST.write() { *w = v; } }
+pub fn g_PHRASES() -> Py { ensure_init(); PHRASES.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_PHRASES(v: Py) { ensure_init(); if let Ok(mut w) = PHRASES.write() { *w = v; } }
+pub fn g_PLACES() -> Py { ensure_init(); PLACES.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_PLACES(v: Py) { ensure_init(); if let Ok(mut w) = PLACES.write() { *w = v; } }
+pub fn g_PLACE_HOMOGRAPHS() -> Py { ensure_init(); PLACE_HOMOGRAPHS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_PLACE_HOMOGRAPHS(v: Py) { ensure_init(); if let Ok(mut w) = PLACE_HOMOGRAPHS.write() { *w = v; } }
+pub fn g_PLACE_OVER() -> Py { ensure_init(); PLACE_OVER.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_PLACE_OVER(v: Py) { ensure_init(); if let Ok(mut w) = PLACE_OVER.write() { *w = v; } }
+pub fn g_PLACE_THING() -> Py { ensure_init(); PLACE_THING.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_PLACE_THING(v: Py) { ensure_init(); if let Ok(mut w) = PLACE_THING.write() { *w = v; } }
+pub fn g_PLACE_WORDS() -> Py { ensure_init(); PLACE_WORDS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_PLACE_WORDS(v: Py) { ensure_init(); if let Ok(mut w) = PLACE_WORDS.write() { *w = v; } }
+pub fn g_PLACE_WORDS_WITH_CUE() -> Py { ensure_init(); PLACE_WORDS_WITH_CUE.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_PLACE_WORDS_WITH_CUE(v: Py) { ensure_init(); if let Ok(mut w) = PLACE_WORDS_WITH_CUE.write() { *w = v; } }
+pub fn g_PLAYS_UP_BEFORE() -> Py { ensure_init(); PLAYS_UP_BEFORE.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_PLAYS_UP_BEFORE(v: Py) { ensure_init(); if let Ok(mut w) = PLAYS_UP_BEFORE.write() { *w = v; } }
+pub fn g_PLAY_UP_REACH() -> Py { ensure_init(); PLAY_UP_REACH.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_PLAY_UP_REACH(v: Py) { ensure_init(); if let Ok(mut w) = PLAY_UP_REACH.write() { *w = v; } }
+pub fn g_POLYSEMOUS() -> Py { ensure_init(); POLYSEMOUS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_POLYSEMOUS(v: Py) { ensure_init(); if let Ok(mut w) = POLYSEMOUS.write() { *w = v; } }
+pub fn g_POLY_FORMS() -> Py { ensure_init(); POLY_FORMS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_POLY_FORMS(v: Py) { ensure_init(); if let Ok(mut w) = POLY_FORMS.write() { *w = v; } }
+pub fn g_PORTION_UNITS() -> Py { ensure_init(); PORTION_UNITS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_PORTION_UNITS(v: Py) { ensure_init(); if let Ok(mut w) = PORTION_UNITS.write() { *w = v; } }
+pub fn g_PORTION_WORDS() -> Py { ensure_init(); PORTION_WORDS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_PORTION_WORDS(v: Py) { ensure_init(); if let Ok(mut w) = PORTION_WORDS.write() { *w = v; } }
+pub fn g_RELATIONS() -> Py { ensure_init(); RELATIONS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_RELATIONS(v: Py) { ensure_init(); if let Ok(mut w) = RELATIONS.write() { *w = v; } }
+pub fn g_RUN_OUT_BEFORE() -> Py { ensure_init(); RUN_OUT_BEFORE.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_RUN_OUT_BEFORE(v: Py) { ensure_init(); if let Ok(mut w) = RUN_OUT_BEFORE.write() { *w = v; } }
+pub fn g_SAMPLE_WORDS() -> Py { ensure_init(); SAMPLE_WORDS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_SAMPLE_WORDS(v: Py) { ensure_init(); if let Ok(mut w) = SAMPLE_WORDS.write() { *w = v; } }
+pub fn g_SCIENCE_BOOST() -> Py { ensure_init(); SCIENCE_BOOST.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_SCIENCE_BOOST(v: Py) { ensure_init(); if let Ok(mut w) = SCIENCE_BOOST.write() { *w = v; } }
+pub fn g_SEASONS() -> Py { ensure_init(); SEASONS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_SEASONS(v: Py) { ensure_init(); if let Ok(mut w) = SEASONS.write() { *w = v; } }
+pub fn g_SENSE_ELSEWHERE() -> Py { ensure_init(); SENSE_ELSEWHERE.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_SENSE_ELSEWHERE(v: Py) { ensure_init(); if let Ok(mut w) = SENSE_ELSEWHERE.write() { *w = v; } }
+pub fn g_SENSE_ELSEWHERE_FORMS() -> Py { ensure_init(); SENSE_ELSEWHERE_FORMS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_SENSE_ELSEWHERE_FORMS(v: Py) { ensure_init(); if let Ok(mut w) = SENSE_ELSEWHERE_FORMS.write() { *w = v; } }
+pub fn g_SENSE_NEAR() -> Py { ensure_init(); SENSE_NEAR.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_SENSE_NEAR(v: Py) { ensure_init(); if let Ok(mut w) = SENSE_NEAR.write() { *w = v; } }
+pub fn g_SENSE_PAIRS() -> Py { ensure_init(); SENSE_PAIRS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_SENSE_PAIRS(v: Py) { ensure_init(); if let Ok(mut w) = SENSE_PAIRS.write() { *w = v; } }
+pub fn g_SENSE_REACH() -> Py { ensure_init(); SENSE_REACH.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_SENSE_REACH(v: Py) { ensure_init(); if let Ok(mut w) = SENSE_REACH.write() { *w = v; } }
+pub fn g_SENSE_WEIGHT() -> Py { ensure_init(); SENSE_WEIGHT.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_SENSE_WEIGHT(v: Py) { ensure_init(); if let Ok(mut w) = SENSE_WEIGHT.write() { *w = v; } }
+pub fn g_SIGN_FOLLOWS() -> Py { ensure_init(); SIGN_FOLLOWS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_SIGN_FOLLOWS(v: Py) { ensure_init(); if let Ok(mut w) = SIGN_FOLLOWS.write() { *w = v; } }
+pub fn g_SIGN_NOT_AFTER() -> Py { ensure_init(); SIGN_NOT_AFTER.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_SIGN_NOT_AFTER(v: Py) { ensure_init(); if let Ok(mut w) = SIGN_NOT_AFTER.write() { *w = v; } }
+pub fn g_SKIN_BOOST() -> Py { ensure_init(); SKIN_BOOST.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_SKIN_BOOST(v: Py) { ensure_init(); if let Ok(mut w) = SKIN_BOOST.write() { *w = v; } }
+pub fn g_SKIN_PARTS() -> Py { ensure_init(); SKIN_PARTS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_SKIN_PARTS(v: Py) { ensure_init(); if let Ok(mut w) = SKIN_PARTS.write() { *w = v; } }
+pub fn g_SKIN_REACH() -> Py { ensure_init(); SKIN_REACH.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_SKIN_REACH(v: Py) { ensure_init(); if let Ok(mut w) = SKIN_REACH.write() { *w = v; } }
+pub fn g_SKIN_STATES() -> Py { ensure_init(); SKIN_STATES.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_SKIN_STATES(v: Py) { ensure_init(); if let Ok(mut w) = SKIN_STATES.write() { *w = v; } }
+pub fn g_STONE_COMPOUNDS() -> Py { ensure_init(); STONE_COMPOUNDS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_STONE_COMPOUNDS(v: Py) { ensure_init(); if let Ok(mut w) = STONE_COMPOUNDS.write() { *w = v; } }
+pub fn g_STONE_VERBS() -> Py { ensure_init(); STONE_VERBS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_STONE_VERBS(v: Py) { ensure_init(); if let Ok(mut w) = STONE_VERBS.write() { *w = v; } }
+pub fn g_STOOL_AS_FURNITURE() -> Py { ensure_init(); STOOL_AS_FURNITURE.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_STOOL_AS_FURNITURE(v: Py) { ensure_init(); if let Ok(mut w) = STOOL_AS_FURNITURE.write() { *w = v; } }
+pub fn g_STRONG() -> Py { ensure_init(); STRONG.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_STRONG(v: Py) { ensure_init(); if let Ok(mut w) = STRONG.write() { *w = v; } }
+pub fn g_STUDY_OBJECTS() -> Py { ensure_init(); STUDY_OBJECTS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_STUDY_OBJECTS(v: Py) { ensure_init(); if let Ok(mut w) = STUDY_OBJECTS.write() { *w = v; } }
+pub fn g_SUMS_AFTER() -> Py { ensure_init(); SUMS_AFTER.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_SUMS_AFTER(v: Py) { ensure_init(); if let Ok(mut w) = SUMS_AFTER.write() { *w = v; } }
+pub fn g_SUM_MONEY() -> Py { ensure_init(); SUM_MONEY.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_SUM_MONEY(v: Py) { ensure_init(); if let Ok(mut w) = SUM_MONEY.write() { *w = v; } }
+pub fn g_TABLE() -> Py { ensure_init(); TABLE.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_TABLE(v: Py) { ensure_init(); if let Ok(mut w) = TABLE.write() { *w = v; } }
+pub fn g_TEETHING_AND_A_CHILD() -> Py { ensure_init(); TEETHING_AND_A_CHILD.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_TEETHING_AND_A_CHILD(v: Py) { ensure_init(); if let Ok(mut w) = TEETHING_AND_A_CHILD.write() { *w = v; } }
+pub fn g_TEETHING_IS_A_FAULT() -> Py { ensure_init(); TEETHING_IS_A_FAULT.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_TEETHING_IS_A_FAULT(v: Py) { ensure_init(); if let Ok(mut w) = TEETHING_IS_A_FAULT.write() { *w = v; } }
+pub fn g_THE_PEOPLE() -> Py { ensure_init(); THE_PEOPLE.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_THE_PEOPLE(v: Py) { ensure_init(); if let Ok(mut w) = THE_PEOPLE.write() { *w = v; } }
+pub fn g_THE_PERSONS_OWN() -> Py { ensure_init(); THE_PERSONS_OWN.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_THE_PERSONS_OWN(v: Py) { ensure_init(); if let Ok(mut w) = THE_PERSONS_OWN.write() { *w = v; } }
+pub fn g_THINGS() -> Py { ensure_init(); THINGS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_THINGS(v: Py) { ensure_init(); if let Ok(mut w) = THINGS.write() { *w = v; } }
+pub fn g_THING_WORDS() -> Py { ensure_init(); THING_WORDS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_THING_WORDS(v: Py) { ensure_init(); if let Ok(mut w) = THING_WORDS.write() { *w = v; } }
+pub fn g_TRAVEL_CUES() -> Py { ensure_init(); TRAVEL_CUES.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_TRAVEL_CUES(v: Py) { ensure_init(); if let Ok(mut w) = TRAVEL_CUES.write() { *w = v; } }
+pub fn g_TRAVEL_STRONG() -> Py { ensure_init(); TRAVEL_STRONG.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_TRAVEL_STRONG(v: Py) { ensure_init(); if let Ok(mut w) = TRAVEL_STRONG.write() { *w = v; } }
+pub fn g_TWO_HOMES() -> Py { ensure_init(); TWO_HOMES.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_TWO_HOMES(v: Py) { ensure_init(); if let Ok(mut w) = TWO_HOMES.write() { *w = v; } }
+pub fn g_TWO_LIVES() -> Py { ensure_init(); TWO_LIVES.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_TWO_LIVES(v: Py) { ensure_init(); if let Ok(mut w) = TWO_LIVES.write() { *w = v; } }
+pub fn g_TWO_LIVES_FORMS() -> Py { ensure_init(); TWO_LIVES_FORMS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_TWO_LIVES_FORMS(v: Py) { ensure_init(); if let Ok(mut w) = TWO_LIVES_FORMS.write() { *w = v; } }
+pub fn g_TWO_LIVES_REACH() -> Py { ensure_init(); TWO_LIVES_REACH.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_TWO_LIVES_REACH(v: Py) { ensure_init(); if let Ok(mut w) = TWO_LIVES_REACH.write() { *w = v; } }
+pub fn g_UNIT_WORDS() -> Py { ensure_init(); UNIT_WORDS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_UNIT_WORDS(v: Py) { ensure_init(); if let Ok(mut w) = UNIT_WORDS.write() { *w = v; } }
+pub fn g_UNWELL_BOOST() -> Py { ensure_init(); UNWELL_BOOST.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_UNWELL_BOOST(v: Py) { ensure_init(); if let Ok(mut w) = UNWELL_BOOST.write() { *w = v; } }
+pub fn g_UNWELL_IDIOMS() -> Py { ensure_init(); UNWELL_IDIOMS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_UNWELL_IDIOMS(v: Py) { ensure_init(); if let Ok(mut w) = UNWELL_IDIOMS.write() { *w = v; } }
+pub fn g_UNWELL_NOT() -> Py { ensure_init(); UNWELL_NOT.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_UNWELL_NOT(v: Py) { ensure_init(); if let Ok(mut w) = UNWELL_NOT.write() { *w = v; } }
+pub fn g_UNWELL_SIGNS() -> Py { ensure_init(); UNWELL_SIGNS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_UNWELL_SIGNS(v: Py) { ensure_init(); if let Ok(mut w) = UNWELL_SIGNS.write() { *w = v; } }
+pub fn g_VERB_CUES() -> Py { ensure_init(); VERB_CUES.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_VERB_CUES(v: Py) { ensure_init(); if let Ok(mut w) = VERB_CUES.write() { *w = v; } }
+pub fn g_WANTED_BEFORE_A_STOP() -> Py { ensure_init(); WANTED_BEFORE_A_STOP.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_WANTED_BEFORE_A_STOP(v: Py) { ensure_init(); if let Ok(mut w) = WANTED_BEFORE_A_STOP.write() { *w = v; } }
+pub fn g_WANT_VERBS() -> Py { ensure_init(); WANT_VERBS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_WANT_VERBS(v: Py) { ensure_init(); if let Ok(mut w) = WANT_VERBS.write() { *w = v; } }
+pub fn g_WARMTH_ARE() -> Py { ensure_init(); WARMTH_ARE.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_WARMTH_ARE(v: Py) { ensure_init(); if let Ok(mut w) = WARMTH_ARE.write() { *w = v; } }
+pub fn g_WARMTH_DEGREE() -> Py { ensure_init(); WARMTH_DEGREE.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_WARMTH_DEGREE(v: Py) { ensure_init(); if let Ok(mut w) = WARMTH_DEGREE.write() { *w = v; } }
+pub fn g_WARMTH_HABITUAL() -> Py { ensure_init(); WARMTH_HABITUAL.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_WARMTH_HABITUAL(v: Py) { ensure_init(); if let Ok(mut w) = WARMTH_HABITUAL.write() { *w = v; } }
+pub fn g_WARMTH_THEN() -> Py { ensure_init(); WARMTH_THEN.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_WARMTH_THEN(v: Py) { ensure_init(); if let Ok(mut w) = WARMTH_THEN.write() { *w = v; } }
+pub fn g_WARMTH_WORDS() -> Py { ensure_init(); WARMTH_WORDS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_WARMTH_WORDS(v: Py) { ensure_init(); if let Ok(mut w) = WARMTH_WORDS.write() { *w = v; } }
+pub fn g_WATCHING() -> Py { ensure_init(); WATCHING.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_WATCHING(v: Py) { ensure_init(); if let Ok(mut w) = WATCHING.write() { *w = v; } }
+pub fn g_WATCH_OUT_AFTER() -> Py { ensure_init(); WATCH_OUT_AFTER.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_WATCH_OUT_AFTER(v: Py) { ensure_init(); if let Ok(mut w) = WATCH_OUT_AFTER.write() { *w = v; } }
+pub fn g_WEAK() -> Py { ensure_init(); WEAK.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_WEAK(v: Py) { ensure_init(); if let Ok(mut w) = WEAK.write() { *w = v; } }
+pub fn g_WEATHER_BEFORE() -> Py { ensure_init(); WEATHER_BEFORE.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_WEATHER_BEFORE(v: Py) { ensure_init(); if let Ok(mut w) = WEATHER_BEFORE.write() { *w = v; } }
+pub fn g_WEATHER_ITSELF() -> Py { ensure_init(); WEATHER_ITSELF.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_WEATHER_ITSELF(v: Py) { ensure_init(); if let Ok(mut w) = WEATHER_ITSELF.write() { *w = v; } }
+pub fn g_WORD_DIGITS() -> Py { ensure_init(); WORD_DIGITS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_WORD_DIGITS(v: Py) { ensure_init(); if let Ok(mut w) = WORD_DIGITS.write() { *w = v; } }
+pub fn g_WORD_NUMBERS() -> Py { ensure_init(); WORD_NUMBERS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_WORD_NUMBERS(v: Py) { ensure_init(); if let Ok(mut w) = WORD_NUMBERS.write() { *w = v; } }
+pub fn g_WORK_WORDS() -> Py { ensure_init(); WORK_WORDS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_WORK_WORDS(v: Py) { ensure_init(); if let Ok(mut w) = WORK_WORDS.write() { *w = v; } }
+pub fn g_WORLD() -> Py { ensure_init(); WORLD.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_WORLD(v: Py) { ensure_init(); if let Ok(mut w) = WORLD.write() { *w = v; } }
+pub fn g_WORLD_NOT() -> Py { ensure_init(); WORLD_NOT.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_WORLD_NOT(v: Py) { ensure_init(); if let Ok(mut w) = WORLD_NOT.write() { *w = v; } }
+pub fn g_WORN_OUT() -> Py { ensure_init(); WORN_OUT.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_WORN_OUT(v: Py) { ensure_init(); if let Ok(mut w) = WORN_OUT.write() { *w = v; } }
+pub fn g_WORN_OUT_BOOST() -> Py { ensure_init(); WORN_OUT_BOOST.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_WORN_OUT_BOOST(v: Py) { ensure_init(); if let Ok(mut w) = WORN_OUT_BOOST.write() { *w = v; } }
+pub fn g_WORN_OUT_CUE() -> Py { ensure_init(); WORN_OUT_CUE.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_WORN_OUT_CUE(v: Py) { ensure_init(); if let Ok(mut w) = WORN_OUT_CUE.write() { *w = v; } }
+pub fn g_WORN_OUT_LOOKBACK() -> Py { ensure_init(); WORN_OUT_LOOKBACK.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_WORN_OUT_LOOKBACK(v: Py) { ensure_init(); if let Ok(mut w) = WORN_OUT_LOOKBACK.write() { *w = v; } }
+pub fn g_WORN_OUT_SAID() -> Py { ensure_init(); WORN_OUT_SAID.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s_WORN_OUT_SAID(v: Py) { ensure_init(); if let Ok(mut w) = WORN_OUT_SAID.write() { *w = v; } }
+pub fn g__A_STATE_VERB() -> Py { ensure_init(); _A_STATE_VERB.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s__A_STATE_VERB(v: Py) { ensure_init(); if let Ok(mut w) = _A_STATE_VERB.write() { *w = v; } }
+pub fn g__BREAKS() -> Py { ensure_init(); _BREAKS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s__BREAKS(v: Py) { ensure_init(); if let Ok(mut w) = _BREAKS.write() { *w = v; } }
+pub fn g__FUNCTION_WORDS() -> Py { ensure_init(); _FUNCTION_WORDS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s__FUNCTION_WORDS(v: Py) { ensure_init(); if let Ok(mut w) = _FUNCTION_WORDS.write() { *w = v; } }
+pub fn g__GRAND_RELATIONS() -> Py { ensure_init(); _GRAND_RELATIONS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s__GRAND_RELATIONS(v: Py) { ensure_init(); if let Ok(mut w) = _GRAND_RELATIONS.write() { *w = v; } }
+pub fn g__KIN_BUILT() -> Py { ensure_init(); _KIN_BUILT.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s__KIN_BUILT(v: Py) { ensure_init(); if let Ok(mut w) = _KIN_BUILT.write() { *w = v; } }
+pub fn g__NOT_THE_SUBJECT() -> Py { ensure_init(); _NOT_THE_SUBJECT.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s__NOT_THE_SUBJECT(v: Py) { ensure_init(); if let Ok(mut w) = _NOT_THE_SUBJECT.write() { *w = v; } }
+pub fn g__POSSESSIVE() -> Py { ensure_init(); _POSSESSIVE.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s__POSSESSIVE(v: Py) { ensure_init(); if let Ok(mut w) = _POSSESSIVE.write() { *w = v; } }
+pub fn g__SENSE_TIERS() -> Py { ensure_init(); _SENSE_TIERS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s__SENSE_TIERS(v: Py) { ensure_init(); if let Ok(mut w) = _SENSE_TIERS.write() { *w = v; } }
+pub fn g__STEPPED_RELATIONS() -> Py { ensure_init(); _STEPPED_RELATIONS.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s__STEPPED_RELATIONS(v: Py) { ensure_init(); if let Ok(mut w) = _STEPPED_RELATIONS.write() { *w = v; } }
+pub fn g__THE_OWNER_SETTLES() -> Py { ensure_init(); _THE_OWNER_SETTLES.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s__THE_OWNER_SETTLES(v: Py) { ensure_init(); if let Ok(mut w) = _THE_OWNER_SETTLES.write() { *w = v; } }
+pub fn g__form() -> Py { ensure_init(); _form.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s__form(v: Py) { ensure_init(); if let Ok(mut w) = _form.write() { *w = v; } }
+pub fn g__forms() -> Py { ensure_init(); _forms.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s__forms(v: Py) { ensure_init(); if let Ok(mut w) = _forms.write() { *w = v; } }
+pub fn g__sense_topic() -> Py { ensure_init(); _sense_topic.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s__sense_topic(v: Py) { ensure_init(); if let Ok(mut w) = _sense_topic.write() { *w = v; } }
+pub fn g__tiers() -> Py { ensure_init(); _tiers.read().map(|r| r.clone()).unwrap_or(Py::None) }
+#[allow(non_snake_case)]
+pub fn s__tiers(v: Py) { ensure_init(); if let Ok(mut w) = _tiers.write() { *w = v; } }
+fn module_body() {
+    let _ = py_str("What the line is about: the topic, the things it names, and the numbers in it.\n\nData first: every topic is a small vocabulary of distinctive words (\"strong\"), ordinary words\n(\"weak\") and short phrases. A match scores 2 for a strong word, 3 for a phrase and 1 for a\nweak word, so a distinctive word beats a generic one, and a line only gets a topic when\nsomething in it really points that way. Ties go to the topic mentioned last, because people\nend a line with what they actually want.\n\nEntities come from what the line names: capitalised names (\"Lisbon\", \"Gone Girl\"), the people\nit mentions (\"my daughter\"), quoted titles, and the everyday things in the vocabulary above.\nNumbers come with their unit when the line gives one (\"2kg\", \"20 minutes\", \"15%\").\n\nThe understanding lane owns this file; extend a vocabulary rather than special-casing a line.\n");
+    s_STRONG(py_dict(vec![(py_str("cooking"), py_str("cook cooking recipe recipes bake baking boiled boil fry frying roast roasted\n        pudding puddings bbq\n        grill simmer oven hob pan pot saucepan whisk knead dough batter marinade seasoning\n        chop chopped chopped stir fry leftover leftovers sourdough pastry cake cupcakes\n        biscuits bread pizza pasta curry soup stew rice risotto noodles sauce gravy stuffing\n        roast scrambled poached omelette pancake pancakes lasagne lasagna meatballs\n        undercooked overcooked sticky mushy crispy seasoning vegan vegetarian cheese\n        dairy gluten lactose nut soya soy wheat\n        cheeses chicken beef pork lamb mince bacon sausages ham fish salmon tuna prawns\n        potato potatoes tomato tomatoes onion onions garlic ginger carrot carrots\n        cabbage leeks cauliflowers swede peas celery cucumber lettuce beetroot sprouts pepper\n        peppers mushroom mushrooms spinach courgette courgettes broccoli beans lentils\n        chickpeas pasta spaghetti noodles rice flour sugar butter egg eggs milk cream\n        lemon lemons lime limes orange herbs basil thyme rosemary parsley coriander cumin\n        paprika cinnamon vanilla honey mustard mayonnaise yoghurt oil vinegar stock\n        casserole tray tin whisk blender frying baking grill saucepan saucepan dish\n        defrost thaw preheat simmering frying boiling recipes portions portion serving\n        brine brining deseed deseeded meringue meringues pavlova guacamole milkshake\n        milkshakes melon melons burrito burritos\n        refreeze cabbage cauliflower kale lettuce sprouts peas veggie veggies pie quiche\n        shortbread sponge scones icing frosting buttercream jam pesto hummus couscous halloumi\n        buttermilk pudding puddings bolognese bol spag chilli chips mash loaf yeast\n        parboil thicken reheat bland soggy rubbery watery steak chops breast thighs burgers meat\n tablespoon dessertspoon rinse tinned muffins muffin custard flapjacks flapjack popcorn cheesecake brownies brownie\n        caramel tzatziki wok jelly aioli clams crumble meringue sorbet coleslaw\n        burgers pineapple oats\n turkey knives cheddar quinoa scales sweetcorn mussels burger chinese indian grainy")), (py_str("food-and-drink"), py_str("eat eating food meal breakfast lunch dinner snack snacks drink drinking\n        supper brunch dessert pud afters nibbles elevenses brekkie brekky sarnie\n        butty cuppa takeout nosh chow kebab chippy munchies bap sanger\n        coffee tea water juice wine beer sugar salt pepper cheese butter milk yogurt cream\n        vegan vegetarian gluten allergy allergic caffeine decaf fizzy chocolate crisps\n        takeaway restaurant menu hungry thirsty tasty delicious bread toast sandwiches\n        sandwich cereal porridge yoghurt smoothie chocolate crisps nuts fruit apple apples\n        banana bananas orange strawberries berries salad salad dressing mouldy moldy\n leftovers reheating leftovers portions\n        ripe granola")), (py_str("health"), py_str("doctor gp hospital nurse pharmacy medicine tablet tablets pill pills symptom\n        symptoms pain ache ill illness sick unwell fever temperature cold flu cough sneeze\n        headache headaches migraine throat sore throat bleeding bleed cut burn burnt bruise\n        infection antibiotics vaccine vaccination allergy allergic dizziness dizzy nausea\n        blood pressure appointment clinic injury prescription eyes eye vision headache\n        migraines dentist dental toothache teeth stroke numb numbness slurred\n        seizure fainted fainting sprain sprained swelling swollen blister blisters\n        sliced rash itchy itch vomiting vomit puking puke puked barf barfing diarrhoea constipation\n        heartburn indigestion reflux\n        cramps cramp bloated congestion earache ankle wrist elbow shoulder knee hip\n        thumb finger fingers toe toes spine joint tendon ligament stomach calpol nurofen\n        ibuprofen\n        paracetamol painkiller painkillers cyst infected hangover hangovers\n        nostrils nostril sinus sinuses sniffles sniffly stinging stings stung hoarse\n        shivery chills queasy laryngitis tonsils wheezy croaky phlegmy smoking braces\n        cholesterol heal healing snacking aching aches hurting nails toothbrush fibre\n        fasting rundown mole moles acne hayfever inhaler inhalers colic palpitations antidepressants\n        antidepressant dandruff floss plaque smear nits verruca verrucas wart warts\n cystitis menopause measles mumps chickenpox tonsillitis earache toenail\n        toenails adhd autism dyslexia ocd ptsd sunscreen aftersun blistering\n        pregnancy vitamin limping")), (py_str("fitness"), py_str("run running jog jogging gym workout exercise exercises stretch stretching\n        training train fitness muscle muscles cardio weights lifting squat squats push-ups\n plank cycling swim swimming yoga pilates marathon 10k 5k steps calories toned\n        insoles reps pace sets")), (py_str("sleep"), py_str("sleep sleeping slept insomnia bedtime nap naps wake waking woke tired exhausted\n mattress pillow duvet toddler wakes snore snoring dreams nightmare melatonin")), (py_str("money"), py_str("money bank savings save saving budget budgeting salary wage wages pay paid\n        loan loans mortgage rent debt debts credit debit card overdraft pension\n        invest investing insurance tax taxes bills bill invoice receipt refund expensive\n        cheap afford spending spent pound pounds euro euros dollar dollars cash atm council\n        owes owed supplier payday payment payments doubled income lease vat switching\n deposit skint overcharging overcharged isa retire retired retirement subscriptions allowance overdrawn bailiff bailiffs\n        dividend dividends apr payslip payslips annuity\nbenefit declare hmrc")), (py_str("work"), py_str("job jobs work working boss manager colleague colleagues office interview cv\n        resume salary promotion review meeting meetings deadline project team hire hiring\n        fired quit resign resignation contract shift shifts overtime coworker workplace\n        conference presentation badge rota roster timesheet timesheets appraisal\n payslip warehouse supervisor defensive\n        employer reference probation earlies sacked staff published")), (py_str("school-and-study"), py_str("school exam exams revise revising revision study studying homework\n        teacher class lesson lessons term semester university college student grades grade\n        test tests essays essay coursework dissertation notebook learn learning\n        spelling vocabulary subject tutor a-level a-levels alevel alevels gcse\n        gcses apprenticeship apprenticeships lecture lectures seminar\n seminars memorise memorising memorised cram cramming timetable\n        uni squared levels phd ucas factorise accountant thesis courses maintenance equations lab")), (py_str("science"), py_str("science scientific physics chemistry biology atoms molecules gravity energy\n        evolution photosynthesis oxygen carbon climate vaccines virus bacteria cells species\n        experiment theory hypothesis dna planets jupiter saturn mars venus mercury\n orbit orbits seasons solar astronomy telescope moon moons\n        tan planet thunder lava reflect blink shiver freckles digestion conductor insulator galaxy skyscrapers berry")), (py_str("history"), py_str("history historical century ancient empire revolution war wars king queen\n        pharaoh pyramids roman romans greeks medieval victorian industrial\n archaeology civilisation civilization darwin einstein freud waterloo tsar lenin bismarck attila napoleon\n        boleyn tudor tudors victorians aztec aztecs inca vikings\n        invented britain blitz hitler marx antoinette curie crusades")), (py_str("geography-and-travel"), py_str("travel travelling traveling trip holiday holidays flight fly\n        flying airport boarding plane train station passport luggage packing pack suitcase hotel\n        booking itinerary visa abroad city countries country capital jet lag jetlag map\n tour tourist sightseeing beach mountains island abroad drive driving\n        spain rome cornwall lisbon ferry edinburgh paris portugal london croatia coast naples amalfi airline cabin metro mexico heathrow prague pompeii benidorm")), (py_str("technology"), py_str("phone laptop computer tablet screen keyboard battery charger wifi wi-fi\n        internet email app apps website software password passwords download upload update\n        install printer router bluetooth notification notifications file files folder backup\n        virus hacking privacy screenshot log login account data iphone android mac macbook\n        photos delete uninstall restart spam scam texting pointer icloud zoom\n        broadband headphones earphones robocall robocalls landline\n        \n        ipad signal earbuds pdf blurry monitor sim print facebook ssd speaker usb spreadsheet vlookup teams google cloud youtube photograph")), (py_str("home-and-diy"), py_str("house flat apartment kitchen bathroom bedroom ceiling wall walls floor\n        carpet paint painting diy drill hammer screw screws shelf cupboard radiator boiler\n        sink tap drain drains mould mold damp leak leaking plumber electrician fuse\n        furniture sofa bed washing machine dishwasher hoover dyson vacuum suction filter\n        ironing ironed curtain curtains\n        moving move removal landlord toilet flush flushing grout tile tiles shower smoke alarm\n        carbon monoxide draught draughts door doors window windows lock locks thermostat\n        heating freezer fridge kettle draft loft gutter guttering locksmith doorbell\n        burner burners stove stoves fireplace chimney flue hearth worktop worktops dryer tumble\n        jeans shirt shirts jumper towels stain stains condensation limescale kettling extractor\n radiators gutters fence plasterboard drum loader wooden spilt pipes\n wallpaper wallpapering decking wardrobe wardrobes patio toaster cistern ladder ladders tenancy chipped varnish\n        blinds cutlery crockery doormat skirting tiling umbrellas knit knitted scarf\n        recycling rug bins bedding softener stool")), (py_str("garden-and-plants"), py_str("garden gardening plant plants planting grow growing seed seeds\n        seedling seedlings soil compost weed weeds weeding watering pruning prune lawn grass\n        flower flowers bulbs tulip tulips basil tomato tomatoes balcony allotment greenhouse\n        pots shrubs shrub hedge hedges turf mower rake hoe mulch repot repotting\n        deadhead deadheading cuttings propagate houseplant houseplants monstera orchid orchids\n        cactus cacti succulent succulents fern ferns lily lilies aloe lavender hydrangea\n        daffodil daffodils sunflower sunflowers composted harvest harvesting harvested\n        sow sows sowing sowed slug slugs snail snails\n        roses moss lawnmower vase bonsai bamboo baskets basket chit")), (py_str("pets"), py_str("pet pets dog dogs puppy cat cats kitten kittens vet vet rabbit rabbits hamster\n        goldfish fish tank lead leash walkies dog lead kitten litter kennel rescue adopted\n adopt purring barking bark treats barks fleas collar paw poisonous\n        labrador greyhound guinea whippet spaniel pug pig neutering")), (py_str("family-and-parenting"), py_str("child children kid kids baby toddler toddler son daughter\n        parent parents mum mom mother dad father husband wife partner family babies nappy nappies\n        pram nursery babysit twins birthday party school run parenting newborn\n        toddler toddlers potty weaning teething playgroup playschool childminder\n        gran grans sister sisters brother brothers sibling siblings grandma grandmas granny grandad\n        grandpa grandparents grandmother grandfather grandson granddaughter grandchild\n        grandchildren nan nana nanna nephew nephews niece nieces cousin cousins aunt aunty\n        auntie uncle uncles stepmother stepfather stepmum stepdad stepson stepdaughter\n        stepchild stepchildren stepsister stepbrother half-brother half-sister in-laws\n relatives ex exes\n        teen invitations godparent babysitting hymns boys")), (py_str("friends-and-relationships"), py_str("friend friends friendship partner boyfriend girlfriend\n        wife husband marry married wedding dating date anniversary argument argued row\n        apology apologise apologize forgive trust relationship relationships breakup\n        neighbour neighbours colleague flatmate housemate ex exes\n divorce divorced separation separated cheat cheated cheating affair affairs")), (py_str("shopping"), py_str("buy buying bought shop shopping store price prices cheap expensive\n        sale discount refund warranty returns second-hand reviews review order\n delivery parcel stock size sizes brand\n moisturiser housewarming bleaching")), (py_str("cars"), py_str("car cars tyre tyres tire tires mot brakes brake braking engine engines clutch\n        gearbox windscreen windshield wipers wiper headlights headlight bonnet coolant\n        dipstick tread puncture petrol diesel mpg speedometer dashboard mechanic garage\n servicing motoring motorway alloy alloys demist\n        ebike pcn bumper pedal penalty motor")), (py_str("entertainment"), py_str("film films movie movies watch watching series tv television show\n        shows netflix book books novel novels read reading podcast podcasts music song songs\n        album band concert theatre theatre game games play console chess draughts\n        backgammon scrabble monopoly jigsaw jigsaws\n        documentary comedy comedy episode episodes season author writer actor actress\n streaming\n chords amp iplayer succession western jazz")), (py_str("sport"), py_str("sport sports football footy footie soccer rugby cricket tennis golf match\n        matches team\n        league cup goal goals offside wicket wickets innings coach coaching training\n        bowling yorker googly bouncer crease stumps batsman batsmen wicketkeeper keeper\n        olympics tennis badminton swimming race racing formula tennis wimbledon\n player players referee darts snooker hockey netball volleyball athletics\n        basketball baseball softball handball squash boxing marathon marathons triathlon\n        skiing surfing rowing bowls\n        hamstrings")), (py_str("language-and-writing"), py_str("grammar spelling word words writing wrote write sentence\n        sentences essay paragraph punctuation apostrophe comma vocabulary phrase\n        wording translate translation english language meaning affect effect fewer less\n email draft letter poem speech bio caption congratulations plural plurals semicolon semicolons colon voicemail thesaurus dictionary mumbling\n        monotone\n        spell fluent exclamation bullet rewrite")), (py_str("feelings"), py_str("feel feeling felt emotional lonely alone sad unhappy upset anxious worried\n        nervous stressed stress overwhelmed depressed crying tears heartbroken gutted angry\n        annoyed frustrated guilty ashamed jealous embarrassed happy excited relieved proud\n grateful mood feelings grief grieving funeral devastated\n        coping knots churning")), (py_str("small-talk"), py_str("jigsaw chatty catch chat catch-up catchup rain raining sunny freezing\n chilly warm cold weather bye lovely\n easter")), (py_str("opinions"), py_str("opinion favourite favorite prefer rather\n worth overrated underrated agree disagree")), (py_str("creative"), py_str("poem poetry story stories joke jokes nickname creative\n write writing speech rhyme character plot lyrics slogan tagline design\n        limerick haiku rap")), (py_str("maths-and-numbers"), py_str("percent percentage maths math numbers calculate sum total average\n        divide multiply minus plus equation fraction fractions decimals half double triple\n algebra geometry numerator denominator perimeter theorem pythagoras protractor diameter radius\n        isosceles quadrilateral quadrilaterals parallelogram rhombus trapezium cuboid\n        triangles triangle probability median")), (py_str("nature-and-weather"), py_str("weather rain raining snow snowing storm thunderstorm lightning\n        wind windy sunny sunshine clouds cloudy fog foggy freezing frost heatwave forecast\n        autumn spring winter summer birds heron robin sparrow wildlife trees nature\n river sea ocean beach stars moon\n        animal whale cheetah penguins penguin")), (py_str("about-the-bot"), py_str("chatbot bot robot artificial intelligence human person alive feelings\n remember yourself yourself\n        version chatgpt soul"))]));
+    let __aug1 = add(&geti(&g_STRONG(), &py_str("home-and-diy")), &py_str("\n        attic cellar mirror mirrors picture pictures frame frames lamp lamps\n        socket sockets plug plugs wiring hook hooks armchair armchairs"));
+    let _ = py_setitem(&g_STRONG(), &py_str("home-and-diy"), __aug1);
+    s_WEAK(py_dict(vec![(py_str("cooking"), py_str("make made time minutes hours temperature heat hot plate bowl spoon knife cookies dinner tonight lunch breakfast tastes frozen handful freeze")), (py_str("food-and-drink"), py_str("like dislike sweet sour spicy fresh cold hot bottle cup glass")), (py_str("health"), py_str("feel better worse days week rest sleep tired checked")), (py_str("fitness"), py_str("minute minutes week day morning evening body")), (py_str("sleep"), py_str("night morning bed room")), (py_str("money"), py_str("much cost worth pay month year percent save owe minimum")), (py_str("work"), py_str("day week hours people ask")), (py_str("school-and-study"), py_str("help practice remember book week day")), (py_str("science"), py_str("why works explain")), (py_str("history"), py_str("time people built")), (py_str("geography-and-travel"), py_str("go going place days week month")), (py_str("technology"), py_str("work working broken fix new old connect storage charging broadband")), (py_str("home-and-diy"), py_str("room house fix clean door doors window windows repairing replace serviced bleach smells smelling dripping banging rattling humming stinks stinking squeaking leather patch")), (py_str("garden-and-plants"), py_str("water green yellow leaves grow")), (py_str("pets"), py_str("feed cat dog walk scratching")), (py_str("family-and-parenting"), py_str("home help age")), (py_str("friends-and-relationships"), py_str("talk said told mate mates pal pals buddy bloke fella")), (py_str("shopping"), py_str("need new look")), (py_str("cars"), py_str("start starting noise noisy sound light warning fix cost worth check insurance")), (py_str("entertainment"), py_str("good funny watch read listen")), (py_str("sport"), py_str("play watch season")), (py_str("language-and-writing"), py_str("say write help mean")), (py_str("feelings"), py_str("really very today week")), (py_str("small-talk"), py_str("today hello hi tomorrow day week morning evening busy tired")), (py_str("opinions"), py_str("think really")), (py_str("creative"), py_str("help idea")), (py_str("maths-and-numbers"), py_str("how many long")), (py_str("nature-and-weather"), py_str("today season year")), (py_str("about-the-bot"), py_str("you your help"))]));
+    s_THING_WORDS(call_builtin("frozenset", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&add(&call_builtin("list", &[mcall(&g_STRONG(), "values", &[])]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("list", &[mcall(&g_WEAK(), "values", &[])]).unwrap_or_else(|e| exc::raise(e)))) { let mut words: Py = __item.clone(); for __item in py_iter_or_raise(&mcall(&words.clone(), "split", &[])) { let mut word: Py = __item.clone(); __out.push(word.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
+    let _ = crate::gen::understanding::normalize::learn_thing_words(&[g_THING_WORDS()]);
+    s_SUMS_AFTER(call_builtin("frozenset", &[mcall(&py_str("how what which if whether when where why much many long cost costs\n    budget rate rates salary pay bill bills price prices percentage percent total average\n    amount area size volume length distance mpg miles tax taxes loan loans owe owes\n    spend spending split share calories tiles paint dose timer timers worth number numbers\n    cheaper cheapest\n    the my our your his her their its this that these those"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_NUMBER_WORDS(call_builtin("frozenset", &[mcall(&py_str("one two three four five six seven eight nine ten eleven twelve\n    thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty thirty forty fifty\n    sixty seventy eighty ninety hundred thousand million billion half quarter"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_SUM_MONEY(call_builtin("frozenset", &[mcall(&py_str("pay paid salary wage wages tax taxes bill bills budget price prices\n    cost costs rate hourly income rent loan loans mortgage overtime notice pension fee fees\n    profit loss interest entitlement entitlements cheaper cheapest owe owes\n    debt debts refund refunds save savings total"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_EXERCISE_AFTER(call_builtin("frozenset", &[mcall(&py_str("gym home more often regularly times sets reps cardio weights\n    running fit fitness training body muscles arms arm legs leg abs back chest shoulders\n    glutes core biceps triceps thighs butt hard lightly daily weekly workout session\n    day days week weeks once twice\n    morning mornings evening evenings night afternoon today tomorrow"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_EXERCISE_NOUNS(call_builtin("frozenset", &[mcall(&py_str("heart pulse zone calorie calories macro macros protein\n    rep reps weight weights pace treadmill lifting lift sets bodyfat bmi 1rm\n    km kilometre kilometres mile miles"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_CANCELS(py_tuple(vec![py_tuple(vec![stdlib_call("re", "compile", &[py_str("\\bhow (?:do|does|did|would|will|should) (?:[a-z]+ ){0,3}?work\\b")]).unwrap_or_else(|e| exc::raise(e)), py_str("work")]), py_tuple(vec![stdlib_call("re", "compile", &[py_str("\\bhow (?:it|they|this|that|these|those) works?\\b")]).unwrap_or_else(|e| exc::raise(e)), py_str("work")]), py_tuple(vec![stdlib_call("re", "compile", &[py_str("\\b(?:does|do|will|would|can|could) (?:it|that|this|they) work\\b")]).unwrap_or_else(|e| exc::raise(e)), py_str("work")]), py_tuple(vec![stdlib_call("re", "compile", &[py_str("\\bwhat makes (?:[a-z]+ ){0,3}?work\\b")]).unwrap_or_else(|e| exc::raise(e)), py_str("work")])]));
+    s_CANCEL_AFTER(call_builtin("frozenset", &[mcall(&py_str("\n    for with in on at to out up like if when as that this it than from about\n    and or but so then though because\n"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_PHRASES(py_dict(vec![(py_str("cooking"), py_tuple(vec![py_str("packed lunch"), py_str("packed lunches"), py_str("party food"), py_str("lunch box"), py_str("lunchbox"), py_str("how long should i cook"), py_str("how do i cook"), py_str("what can i make"), py_str("what can i cook"), py_str("main course"), py_str("cooking for"), py_str("i am cooking"), py_str("cook for"), py_str("easy dinner"), py_str("quick dinner"), py_str("quick meal"), py_str("use up"), py_str("birthday cake"), py_str("something to cook"), py_str("cook tonight"), py_str("meal for"), py_str("sunday roast"), py_str("roast dinner for"), py_str("christmas dinner"), py_str("yorkshire pudding"), py_str("yorkshire puddings"), py_str("pressure cooker"), py_str("slow cooker"), py_str("air fryer"), py_str("leftover"), py_str("meal idea"), py_str("meal ideas"), py_str("dinner idea"), py_str("dinner ideas"), py_str("something quick"), py_str("under cooked"), py_str("ice cream"), py_str("chopping board"), py_str("chopping boards"), py_str("cutting board"), py_str("cutting boards")])), (py_str("food-and-drink"), py_tuple(vec![py_str("book a table"), py_str("a table for"), py_str("table for two"), py_str("table for four"), py_str("high in iron"), py_str("iron rich"), py_str("rich in iron"), py_str("low in iron"), py_str("low iron"), py_str("iron levels"), py_str("iron level"), py_str("iron deficiency"), py_str("deficient in iron"), py_str("more iron"), py_str("iron in"), py_str("sources of iron"), py_str("getting enough iron"), py_str("enough iron"), py_str("need iron"), py_str("anaemic"), py_str("anaemia"), py_str("anemia"), py_str("anemic"), py_str("eat out"), py_str("go out for dinner"), py_str("too much coffee"), py_str("less coffee"), py_str("ice cream"), py_str("is it safe to eat"), py_str("out of date"), py_str("goes well with"), py_str("cheese board"), py_str("graze board"), py_str("graze boards"), py_str("picky bits"), py_str("picky tea"), py_str("main course"), py_str("use by date"), py_str("sell by date"), py_str("best before"), py_str("past its date"), py_str("in season")])), (py_str("health"), py_tuple(vec![py_str("see a doctor"), py_str("go to the doctor"), py_str("should i see a doctor"), py_str("sore throat"), py_str("root canal"), py_str("mole checked"), py_str("throwing up"), py_str("throws up"), py_str("threw up"), py_str("thrown up"), py_str("want to throw up"), py_str("going to throw up"), py_str("gonna throw up"), py_str("high temperature"), py_str("blood pressure"), py_str("cut my finger"), py_str("feeling ill"), py_str("feel unwell"), py_str("get headaches"), py_str("have a headache"), py_str("my head hurts"), py_str("making me cry"), py_str("stopped bleeding"), py_str("wont stop bleeding"), py_str("signs of a stroke"), py_str("burnt my hand"), py_str("burnt myself"), py_str("burnt my arm"), py_str("burnt my finger"), py_str("coming down with"), py_str("going down with"), py_str("runny nose"), py_str("stuffy nose"), py_str("blocked nose"), py_str("bunged up"), py_str("bunged nose"), py_str("blocked ear"), py_str("blocked ears"), py_str("ear is blocked"), py_str("ears are blocked"), py_str("ear infection"), py_str("sore ears"), py_str("ringing in my ears"), py_str("ears are ringing"), py_str("stuffy head"), py_str("scratchy throat"), py_str("sinus infection"), py_str("my nose is blocked"), py_str("my nose is running"), py_str("my nose is bunged"), py_str("my nose is stuffy"), py_str("nose bleed"), py_str("nose bleeds"), py_str("nosebleed"), py_str("chest congestion"), py_str("my chest is congested"), py_str("congested chest"), py_str("nasal congestion"), py_str("sinus congestion"), py_str("congested nose"), py_str("im congested"), py_str("i am congested"), py_str("feel congested"), py_str("feeling congested"), py_str("really congested"), py_str("mouth ulcer"), py_str("mouth ulcers"), py_str("ulcer in my mouth"), py_str("ulcers in my mouth"), py_str("ulcer on my tongue"), py_str("ulcer on my gum"), py_str("canker sore"), py_str("canker sores"), py_str("water in my ear"), py_str("water in my ears"), py_str("water trapped in my ear"), py_str("water trapped in my ears"), py_str("water stuck in my ear"), py_str("water stuck in my ears"), py_str("water in my ear after swimming"), py_str("swimmers ear"), py_str("swimmer's ear"), py_str("upset stomach"), py_str("upset tummy"), py_str("upset belly"), py_str("upset guts"), py_str("bad guts"), py_str("bad belly"), py_str("dicky tummy"), py_str("dicky stomach"), py_str("dodgy tummy"), py_str("dodgy stomach"), py_str("tummy bug"), py_str("stomach bug"), py_str("sick bug"), py_str("the runs"), py_str("the trots"), py_str("the squits"), py_str("got the runs"), py_str("have the runs"), py_str("loose stools"), py_str("runny tummy"), py_str("runny bottom"), py_str("running to the loo"), py_str("running to the toilet"), py_str("runs to the loo"), py_str("runs to the toilet"), py_str("back and forth to the loo"), py_str("stomach is off"), py_str("tummy is off"), py_str("belly is off"), py_str("stomach is queasy"), py_str("tummy is queasy"), py_str("diarrhoea"), py_str("diarrhea"), py_str("sick with diarrhoea"), py_str("sick with diarrhea"), py_str("wisdom tooth"), py_str("wisdom teeth"), py_str("ingrown toenail"), py_str("ingrown nail"), py_str("ingrowing toenail"), py_str("ingrowing nail"), py_str("nail is ingrown"), py_str("nettle sting"), py_str("nettle stings"), py_str("stung by nettles"), py_str("insect bite"), py_str("insect bites"), py_str("insect sting"), py_str("bug bite"), py_str("bug bites"), py_str("hair loss"), py_str("losing my hair"), py_str("going bald"), py_str("panic attack"), py_str("panic attacks"), py_str("acid reflux"), py_str("acid indigestion"), py_str("athletes foot"), py_str("athlete's foot"), py_str("sweating too much"), py_str("excessive sweating"), py_str("night sweats"), py_str("heavy period"), py_str("period pain"), py_str("period pains"), py_str("period cramps"), py_str("on my period"), py_str("missed period"), py_str("late period"), py_str("irregular periods"), py_str("stop sweating"), py_str("sweat so much"), py_str("sweating a lot"), py_str("sweat a lot"), py_str("lump in my breast"), py_str("lump in my armpit"), py_str("lump in my neck"), py_str("lump under my skin"), py_str("swollen glands"), py_str("glands are up")])), (py_str("fitness"), py_tuple(vec![py_str("out of breath"), py_str("get fit"), py_str("lose weight"), py_str("work out"), py_str("start running"), py_str("training for"), py_str("train for"), py_str("train hard"), py_str("lower back")])), (py_str("sleep"), py_tuple(vec![py_str("get to sleep"), py_str("back to sleep"), py_str("wake up"), py_str("wakes up"), py_str("can not sleep"), py_str("cant sleep"), py_str("sleep through")])), (py_str("money"), py_tuple(vec![py_str("save for"), py_str("how much should i save"), py_str("pay off"), py_str("stamp duty"), py_str("worth paying"), py_str("interest rate"), py_str("interest rates"), py_str("savings account"), py_str("the interest"), py_str("compound interest"), py_str("cut my bills"), py_str("energy bills"), py_str("energy bill"), py_str("electricity bill"), py_str("gas bill"), py_str("water bill"), py_str("small salary"), py_str("how should i budget")])), (py_str("work"), py_tuple(vec![py_str("my boss"), py_str("my manager"), py_str("job interview"), py_str("my colleague"), py_str("teaching assistant"), py_str("performance review"), py_str("my team"), py_str("too much on my plate"), py_str("public speaking"), py_str("speaking in front of people"), py_str("speaking in front of an audience"), py_str("in front of an audience"), py_str("speaking to a room"), py_str("before a talk"), py_str("at a talk"), py_str("giving a talk"), py_str("give a talk"), py_str("nervous about my presentation")])), (py_str("school-and-study"), py_tuple(vec![py_str("revise for"), py_str("exam in"), py_str("how do i revise"), py_str("learn vocabulary"), py_str("struggling with"), py_str("get started on"), py_str("science project"), py_str("school project"), py_str("for an exam"), py_str("a degree worth"), py_str("degree still worth"), py_str("do a degree"), py_str("a-level results"), py_str("do my a-levels"), py_str("my mocks"), py_str("mock exam"), py_str("mock exams"), py_str("mocks in"), py_str("mocks next")])), (py_str("science"), py_tuple(vec![py_str("how does it work"), py_str("why does"), py_str("why is the sky"), py_str("what is the difference between"), py_str("how do plants"), py_str("in a nutshell"), py_str("speed of light"), py_str("how many moons"), py_str("why is it hotter"), py_str("human body"), py_str("bones in the"), py_str("bones are in"), py_str("how many bones"), py_str("what causes an earthquake"), py_str("what causes earthquakes"), py_str("how do earthquakes"), py_str("why do earthquakes"), py_str("earthquake happen"), py_str("earthquakes happen"), py_str("how do tsunamis"), py_str("what causes a tsunami"), py_str("tsunami warning"), py_str("what causes a volcano"), py_str("how do volcanoes"), py_str("volcano erupt"), py_str("volcano erupts"), py_str("volcano erupted"), py_str("volcanoes erupt"), py_str("volcano erupting"), py_str("volcanoes work"), py_str("volcano work"), py_str("volcano project"), py_str("volcanoes project"), py_str("project on volcanoes"), py_str("project on volcano"), py_str("volcanic eruption")])), (py_str("history"), py_tuple(vec![py_str("who built"), py_str("when did"), py_str("in a nutshell"), py_str("roman empire"), py_str("industrial revolution"), py_str("slave trade"), py_str("genghis khan"), py_str("great wall of china"), py_str("ancient china"), py_str("berlin wall"), py_str("the berlin wall"), py_str("cold war"), py_str("moon landing"), py_str("titanic sank"), py_str("titanic sink"), py_str("titanic sinking"), py_str("titanic wreck"), py_str("titanic iceberg"), py_str("the titanic hit"), py_str("when did the titanic"), py_str("how did the titanic"), py_str("why did the titanic"), py_str("the tudors"), py_str("tudor period"), py_str("tudor times"), py_str("tudor england")])), (py_str("geography-and-travel"), py_tuple(vec![py_str("day trip"), py_str("jet lag"), py_str("shouldn miss"), py_str("don t miss"), py_str("what should i see"), py_str("long flight"), py_str("car journey"), py_str("capital of"), py_str("book a flight"), py_str("book a hotel"), py_str("book a train"), py_str("book a room"), py_str("by coach"), py_str("a coach to"), py_str("coach from"), py_str("coach station"), py_str("coach trip"), py_str("coach leaves"), py_str("by train"), py_str("train ticket"), py_str("train tickets"), py_str("train station"), py_str("train times"), py_str("train fare"), py_str("train fares"), py_str("catch the train"), py_str("the next train"), py_str("the last train"), py_str("missed the train"), py_str("missed my train"), py_str("the train to"), py_str("train to london"), py_str("train to leeds")])), (py_str("technology"), py_tuple(vec![py_str("battery drains"), py_str("wont turn on"), py_str("wont start"), py_str("keeps dropping"), py_str("improve the signal"), py_str("take a screenshot"), py_str("password manager"), py_str("group chat")])), (py_str("home-and-diy"), py_tuple(vec![py_str("get rid of"), py_str("unblock"), py_str("bleed the radiator"), py_str("front door"), py_str("back door"), py_str("clothes iron"), py_str("steam iron"), py_str("iron a shirt"), py_str("iron the shirt"), py_str("iron my shirt"), py_str("iron a few shirts"), py_str("ironing board"), py_str("iron board"), py_str("my iron"), py_str("the iron"), py_str("our iron"), py_str("iron is broken"), py_str("iron broke"), py_str("iron has broken"), py_str("iron stopped"), py_str("iron wont heat"), py_str("iron is not heating"), py_str("iron is leaking"), py_str("iron spits"), py_str("iron spitting"), py_str("never iron"), py_str("never ironing"), py_str("hate ironing"), py_str("creases out of"), py_str("crease out of"), py_str("get creases"), py_str("stop creases"), py_str("trousers creased"), py_str("iron the creases"), py_str("heat pump"), py_str("heat pumps"), py_str("cold at the top"), py_str("desk fan"), py_str("desk fans"), py_str("ceiling fan"), py_str("ceiling fans"), py_str("hot at the bottom"), py_str("get red wine out"), py_str("paint my"), py_str("second hand"), py_str("do the dishes"), py_str("wash the dishes"), py_str("the dishes"), py_str("dishes are"), py_str("the spring on"), py_str("spring broke"), py_str("spring has gone"), py_str("a new spring"), py_str("the spring needs"), py_str("smoke alarm"), py_str("wont flush"), py_str("won t flush"), py_str("cold air coming"), py_str("water pressure"), py_str("low pressure"), py_str("pressure gauge"), py_str("wood burner"), py_str("woodburner"), py_str("log burner"), py_str("log fire"), py_str("wood fire"), py_str("burning stove"), py_str("wood stove"), py_str("fire place")])), (py_str("garden-and-plants"), py_tuple(vec![py_str("turning yellow"), py_str("easy to grow"), py_str("when should i plant"), py_str("plant bulbs"), py_str("on the balcony"), py_str("when do i harvest"), py_str("when should i harvest"), py_str("when can i harvest"), py_str("when do i sow"), py_str("when should i sow"), py_str("when can i sow"), py_str("when do i lift"), py_str("when should i lift"), py_str("ready to harvest"), py_str("ready to lift")])), (py_str("pets"), py_tuple(vec![py_str("pulls on the lead"), py_str("dangerous for dogs"), py_str("clean the tank"), py_str("getting a puppy"), py_str("getting a kitten"), py_str("rescue dog"), py_str("stopped eating"), py_str("has not eaten")])), (py_str("family-and-parenting"), py_tuple(vec![py_str("starting school"), py_str("with kids"), py_str("for my son"), py_str("for my daughter"), py_str("potty training"), py_str("health visitor"), py_str("health visitors"), py_str("my health visitor"), py_str("my parents are visiting"), py_str("birthday party"), py_str("watch the kids"), py_str("watching the kids"), py_str("watch my kids"), py_str("to watch my kids"), py_str("to watch the kids"), py_str("to watch the children"), py_str("someone to watch")])), (py_str("friends-and-relationships"), py_tuple(vec![py_str("forgot my birthday"), py_str("make friends"), py_str("anniversary gift"), py_str("had an argument"), py_str("bring it up"), py_str("best friend"), py_str("on a date"), py_str("date night"), py_str("blind date"), py_str("first date"), py_str("going on a date"), py_str("a date with"), py_str("fell out with"), py_str("avoiding me"), py_str("stopped asking me out"), py_str("stopped speaking to me"), py_str("not speaking to me")])), (py_str("shopping"), py_tuple(vec![py_str("worth it"), py_str("worth the money"), py_str("should i look for"), py_str("before buying"), py_str("second-hand"), py_str("which one should i buy"), py_str("buying a car"), py_str("used car"), py_str("worth paying"), py_str("good deal"), py_str("bad deal"), py_str("better deal"), py_str("a deal"), py_str("the store"), py_str("at the store"), py_str("to the store"), py_str("in the store"), py_str("store was"), py_str("store is"), py_str("which store"), py_str("store sells"), py_str("store open"), py_str("store closed"), py_str("any store"), py_str("the shops"), py_str("what specs"), py_str("how much should a decent")])), (py_str("cars"), py_tuple(vec![py_str("jump start"), py_str("warning light"), py_str("engine light"), py_str("tyre pressure"), py_str("oil change"), py_str("break down"), py_str("broken down"), py_str("hard shoulder"), py_str("won t start"), py_str("wont start"), py_str("won t turn over"), py_str("new tyres"), py_str("car insurance"), py_str("road tax"), py_str("mot due"), py_str("mot fail"), py_str("failed its mot"), py_str("car tax")])), (py_str("entertainment"), py_tuple(vec![py_str("harry potter"), py_str("what should i read"), py_str("what should i watch"), py_str("anything good"), py_str("watch tv"), py_str("watch a film"), py_str("watch a movie"), py_str("watch a series"), py_str("watching tv"), py_str("watch the match"), py_str("watching the match"), py_str("something to watch"), py_str("anything to watch"), py_str("what can i watch"), py_str("can i watch"), py_str("this book"), py_str("a book about"), py_str("book club"), py_str("which book"), py_str("a book for"), py_str("what book"), py_str("good book"), py_str("need a book"), py_str("book to read"), py_str("book recommendations"), py_str("recommend a book"), py_str("books for"), py_str("favourite book"), py_str("favorite book"), py_str("to watch"), py_str("worth watching"), py_str("what to read"), py_str("family night"), py_str("board game"), py_str("play station"), py_str("playstation"), py_str("for my commute"), py_str("season ticket"), py_str("season finale"), py_str("new season of"), py_str("next season of"), py_str("series finale")])), (py_str("sport"), py_tuple(vec![py_str("offside rule"), py_str("world cup"), py_str("how does the game work"), py_str("my coach"), py_str("coached"), py_str("coaching"), py_str("the match"), py_str("match is on"), py_str("match tonight"), py_str("match day"), py_str("cricket match"), py_str("football match"), py_str("rugby match"), py_str("tennis match"), py_str("darts match"), py_str("boxing match"), py_str("this season"), py_str("next season"), py_str("pre-season")])), (py_str("language-and-writing"), py_tuple(vec![py_str("difference between"), py_str("is it bad to say"), py_str("how do i word"), py_str("without sounding rude"), py_str("can you help me word")])), (py_str("feelings"), py_tuple(vec![py_str("i feel"), py_str("i am feeling"), py_str("been feeling"), py_str("feel like"), py_str("so stressed"), py_str("so done"), py_str("done with today"), py_str("done with this week"), py_str("done with today"), py_str("fed up"), py_str("had enough"), py_str("long day"), py_str("what a day"), py_str("tough day"), py_str("rough day"), py_str("really lonely"), py_str("i am nervous"), py_str("nervous about"), py_str("i am worried"), py_str("i am gutted"), py_str("i am upset"), py_str("let off steam"), py_str("miss my old"), py_str("get everything wrong"), py_str("gets everything wrong"), py_str("do everything wrong"), py_str("did everything wrong"), py_str("doing everything wrong"), py_str("doing it all wrong"), py_str("did it all wrong"), py_str("everything i do goes wrong"), py_str("everything i do is wrong"), py_str("mess everything up"), py_str("messed everything up"), py_str("messing everything up"), py_str("mess it all up"), py_str("messed it all up"), py_str("cant do anything right"), py_str("can not do anything right"), py_str("never get anything right"), py_str("never do anything right")])), (py_str("small-talk"), py_tuple(vec![py_str("how s your day"), py_str("how is your day"), py_str("how are you"), py_str("how is it going"), py_str("nice to meet you"), py_str("what s up"), py_str("any plans"), py_str("plans for the weekend"), py_str("up to this weekend"), py_str("this weekend"), py_str("weekend plans")])), (py_str("opinions"), py_tuple(vec![py_str("what do you think"), py_str("do you think"), py_str("your favourite"), py_str("which do you prefer")])), (py_str("creative"), py_tuple(vec![py_str("write a poem"), py_str("tell me a joke"), py_str("name for"), py_str("opening line")])), (py_str("maths-and-numbers"), py_tuple(vec![py_str("how many weeks"), py_str("how much is"), py_str("percent of"), py_str("what is the average"), py_str("miles an hour"), py_str("miles per hour"), py_str("km an hour"), py_str("per hour"), py_str("per day"), py_str("per week"), py_str("how many miles")])), (py_str("nature-and-weather"), py_tuple(vec![py_str("change colour"), py_str("change color"), py_str("leaves change"), py_str("leaves fall"), py_str("leaves turn"), py_str("in a thunderstorm"), py_str("in the spring"), py_str("this spring"), py_str("next spring"), py_str("spring is"), py_str("spring flowers"), py_str("early spring"), py_str("going to rain"), py_str("will it rain"), py_str("is it going to be sunny"), py_str("birds might i see"), py_str("leaves are")])), (py_str("about-the-bot"), py_tuple(vec![py_str("are you a bot"), py_str("are you real"), py_str("are you human"), py_str("what are you"), py_str("who are you"), py_str("do you remember"), py_str("what can you do"), py_str("what kind of things can you help"), py_str("how can you help"), py_str("how was your day"), py_str("how has your day been"), py_str("hows your day been"), py_str("how s your day been"), py_str("hows your day going"), py_str("how was your week"), py_str("how has your week been"), py_str("hows your week been"), py_str("how s your week been"), py_str("how have you been"), py_str("how you been")]))]));
+    s_NOT_THINGS(call_builtin("frozenset", &[mcall(&py_str("\ncook cooking bake baking boil boiled frying fry roast roasted grill simmer chop chopped stir\neat eating drink drinking feed fed save saving pay paid spend spent buy buying bought sell\nsold work working revise revising study studying learn learning teach taught travel travelling\ntraveling fly flying drive driving pack packing book booking plan planning move moving rent\nwatch watching read reading write writing wrote felt feel feeling sleep sleeping slept wake\nwaking run running jog jogging train training exercise stretching stretch grow growing plant\nplanting water watering clean cleaning fix fixing paint painting repair repairing adopt adopted\nrescue buy fix bleed bleeding cut chopped knocked dropped broke broken spill spilled leak\nleaking drain drains turned turning turned stuck stop stopped start started finish finished\nscrambled poached undercooked overcooked sticky mushy crispy hungry thirsty tasty delicious\nexpensive cheap worth tired exhausted lonely sad unhappy upset anxious worried nervous stressed\noverwhelmed depressed crying angry annoyed frustrated guilty ashamed jealous happy excited\nrelieved proud grateful dizzy sore ill sick unwell allergic vegan vegetarian second-hand\nbest better worst good bad great nice lovely favourite favorite perfect brilliant amazing\nfine okay first second third last next more less most least many few several some\npercent percentage maths math number numbers average total half double\nlog lag row sow hoe\n"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_THINGS(call_builtin("frozenset", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_STRONG(), "values", &[])) { let mut words: Py = __item.clone(); for __item in py_iter_or_raise(&mcall(&words.clone(), "split", &[])) { let mut word: Py = __item.clone(); if py_truthy(&{ let __b = gt(&call_builtin("len", &[word.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)); if !py_truthy(&__b) { __b } else { { let __b = mcall(&word.clone(), "isalpha", &[]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&g_NOT_THINGS(), &word.clone())) } } } }) {  __out.push(word.clone()); } } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
+    s_PLACES(call_builtin("frozenset", &[mcall(&py_str("\nlondon paris rome florence lisbon madrid barcelona berlin amsterdam brussels dublin edinburgh\nglasgow manchester birmingham leeds liverpool bristol cardiff belfast newcastle oxford\ncambridge brighton york bath bristol glasgow tokyo kyoto osaka beijing shanghai hong kong\nsingapore bangkok sydney melbourne auckland delhi mumbai goa istanbul athens cairo dubai\nnew york chicago boston seattle toronto vancouver mexico brazil argentina spain france\nitaly germany portugal greece turkey egypt india china japan korea thailand vietnam canada\naustralia america england scotland wales ireland europe africa asia\neiffel\n"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_UNIT_WORDS(py_dict(vec![(py_str("g"), py_str("g")), (py_str("gram"), py_str("g")), (py_str("grams"), py_str("g")), (py_str("gramme"), py_str("g")), (py_str("grammes"), py_str("g")), (py_str("kg"), py_str("kg")), (py_str("kilo"), py_str("kg")), (py_str("kilos"), py_str("kg")), (py_str("kilogram"), py_str("kg")), (py_str("kilograms"), py_str("kg")), (py_str("lb"), py_str("lb")), (py_str("lbs"), py_str("lb")), (py_str("pound"), py_str("lb")), (py_str("pounds"), py_str("lb")), (py_str("oz"), py_str("oz")), (py_str("ounce"), py_str("oz")), (py_str("ounces"), py_str("oz")), (py_str("ml"), py_str("ml")), (py_str("millilitre"), py_str("ml")), (py_str("millilitres"), py_str("ml")), (py_str("milliliter"), py_str("ml")), (py_str("l"), py_str("litre")), (py_str("litre"), py_str("litre")), (py_str("litres"), py_str("litre")), (py_str("liter"), py_str("litre")), (py_str("liters"), py_str("litre")), (py_str("tsp"), py_str("tsp")), (py_str("teaspoon"), py_str("tsp")), (py_str("teaspoons"), py_str("tsp")), (py_str("tbsp"), py_str("tbsp")), (py_str("tablespoon"), py_str("tbsp")), (py_str("tablespoons"), py_str("tbsp")), (py_str("cup"), py_str("cup")), (py_str("cups"), py_str("cup")), (py_str("c"), py_str("celsius")), (py_str("°c"), py_str("celsius")), (py_str("celsius"), py_str("celsius")), (py_str("centigrade"), py_str("celsius")), (py_str("f"), py_str("fahrenheit")), (py_str("°f"), py_str("fahrenheit")), (py_str("fahrenheit"), py_str("fahrenheit")), (py_str("sec"), py_str("seconds")), (py_str("secs"), py_str("seconds")), (py_str("second"), py_str("seconds")), (py_str("seconds"), py_str("seconds")), (py_str("min"), py_str("minutes")), (py_str("mins"), py_str("minutes")), (py_str("minute"), py_str("minutes")), (py_str("minutes"), py_str("minutes")), (py_str("hr"), py_str("hours")), (py_str("hrs"), py_str("hours")), (py_str("hour"), py_str("hours")), (py_str("hours"), py_str("hours")), (py_str("day"), py_str("days")), (py_str("days"), py_str("days")), (py_str("week"), py_str("weeks")), (py_str("weeks"), py_str("weeks")), (py_str("month"), py_str("months")), (py_str("months"), py_str("months")), (py_str("year"), py_str("years")), (py_str("years"), py_str("years")), (py_str("mile"), py_str("miles")), (py_str("miles"), py_str("miles")), (py_str("km"), py_str("km")), (py_str("kilometre"), py_str("km")), (py_str("kilometres"), py_str("km")), (py_str("kilometer"), py_str("km")), (py_str("kilometers"), py_str("km")), (py_str("metre"), py_str("metres")), (py_str("metres"), py_str("metres")), (py_str("meter"), py_str("metres")), (py_str("meters"), py_str("metres")), (py_str("foot"), py_str("feet")), (py_str("feet"), py_str("feet")), (py_str("ft"), py_str("feet")), (py_str("inch"), py_str("inches")), (py_str("inches"), py_str("inches")), (py_str("mph"), py_str("mph")), (py_str("percent"), py_str("percent")), (py_str("%"), py_str("percent")), (py_str("quid"), py_str("gbp")), (py_str("£"), py_str("gbp")), (py_str("euro"), py_str("eur")), (py_str("euros"), py_str("eur")), (py_str("€"), py_str("eur")), (py_str("dollar"), py_str("usd")), (py_str("dollars"), py_str("usd")), (py_str("$"), py_str("usd")), (py_str("people"), py_str("people")), (py_str("person"), py_str("people")), (py_str("kid"), py_str("people")), (py_str("kids"), py_str("people")), (py_str("adult"), py_str("people")), (py_str("adults"), py_str("people")), (py_str("guest"), py_str("people")), (py_str("guests"), py_str("people"))]));
+    s_WORD_NUMBERS(py_dict(vec![(py_str("half"), Py::Float(0.5)), (py_str("one"), Py::Int(1)), (py_str("two"), Py::Int(2)), (py_str("three"), Py::Int(3)), (py_str("four"), Py::Int(4)), (py_str("five"), Py::Int(5)), (py_str("six"), Py::Int(6)), (py_str("seven"), Py::Int(7)), (py_str("eight"), Py::Int(8)), (py_str("nine"), Py::Int(9)), (py_str("ten"), Py::Int(10)), (py_str("eleven"), Py::Int(11)), (py_str("twelve"), Py::Int(12)), (py_str("thirteen"), Py::Int(13)), (py_str("fourteen"), Py::Int(14)), (py_str("fifteen"), Py::Int(15)), (py_str("sixteen"), Py::Int(16)), (py_str("seventeen"), Py::Int(17)), (py_str("eighteen"), Py::Int(18)), (py_str("nineteen"), Py::Int(19)), (py_str("twenty"), Py::Int(20)), (py_str("thirty"), Py::Int(30)), (py_str("forty"), Py::Int(40)), (py_str("fifty"), Py::Int(50)), (py_str("sixty"), Py::Int(60)), (py_str("seventy"), Py::Int(70)), (py_str("eighty"), Py::Int(80)), (py_str("ninety"), Py::Int(90)), (py_str("hundred"), Py::Int(100)), (py_str("thousand"), Py::Int(1000)), (py_str("couple"), Py::Int(2)), (py_str("dozen"), Py::Int(12))]));
+    s_FIGURE_SIZE_WORDS(call_builtin("frozenset", &[mcall(&py_str("k ks grand thousand million millionaire billion bn mil mths"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_NUMBER_RE(stdlib_call("re", "compile", &[py_str("(\\d+(?:[.,]\\d+)?)\\s*(%|[a-z]+)?")]).unwrap_or_else(|e| exc::raise(e)));
+    s_CLIPPED_UNIT_WORDS(py_dict(vec![(py_str("yr"), py_str("years")), (py_str("yrs"), py_str("years")), (py_str("y"), py_str("years")), (py_str("yo"), py_str("years")), (py_str("yos"), py_str("years")), (py_str("mth"), py_str("months")), (py_str("mths"), py_str("months")), (py_str("mnt"), py_str("months")), (py_str("mnts"), py_str("months")), (py_str("wk"), py_str("weeks")), (py_str("wks"), py_str("weeks"))]));
+    s_CLIPPED_AFTER_A_SLASH(stdlib_call("re", "compile", &[py_str("\\s*(?:y/o|y\\.o\\.?|yo)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    s_MIXED_FRACTION(stdlib_call("re", "compile", &[py_str("\\s+(?:(?:and|n)\\s+)?(?:(?:a|an)\\s+)?(?:half|quarter)s?\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    s_MIXED_JOINERS(call_builtin("frozenset", &[py_tuple(vec![py_str(""), py_str("n"), py_str("and"), py_str("a"), py_str("an")])]).unwrap_or_else(|e| exc::raise(e)));
+    s__BREAKS(stdlib_call("re", "compile", &[py_str("[^a-z0-9' ]+")]).unwrap_or_else(|e| exc::raise(e)));
+    s_CARRY(Py::Int(2));
+    s_BODY(crate::gen::understanding::lexicon::g_BODY_PARTS());
+    s_HURTS(crate::gen::understanding::lexicon::g_PAIN_WORDS());
+    s_SKIN_STATES(call_builtin("frozenset", &[mcall(&py_str("dry drier dryness flaky flakes flaking cracked cracking chapped\n    itchy itching peeling"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_SKIN_REACH(Py::Int(3));
+    s_SKIN_BOOST(Py::Int(4));
+    s_SKIN_PARTS(bitor(&g_BODY(), &call_builtin("frozenset", &[mcall(&py_str("face cheeks cheek knuckles knuckle lips lip mouth heels"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))));
+    s_HEAD_WORDS(call_builtin("frozenset", &[mcall(&py_str("head brain mind thoughts thinking concentration memory"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_HEAD_FOG(call_builtin("frozenset", &[mcall(&py_str("fog foggy cloudy misty muzzy woolly wooly fuzzy thick"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_HEAD_FOG_REACH(Py::Int(4));
+    s_HEAD_FOG_BOOST(Py::Int(6));
+    s_PLAYS_UP_BEFORE(call_builtin("frozenset", &[mcall(&py_str("playing playin plays play played acting acts acted\n    "), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_PLAY_UP_REACH(Py::Int(3));
+    s_PART_UP_BOOST(Py::Int(4));
+    s_HURT_BOOST(Py::Int(5));
+    s_CONDITION_BOOST(Py::Int(4));
+    s_CONDITIONS(call_builtin("frozenset", &[mcall(&py_str("cystitis uti thrush dandruff eczema asthma verruca verrucas piles\n    haemorrhoids sciatica gout stye styes shingles tonsillitis arthritis coeliac anaemic anaemia\n    psoriasis rosacea conjunctivitis bronchitis pneumonia appendicitis vertigo tinnitus\n    endometriosis ibs crohns colitis prolapse bunion bunions whitlow ringworm scabies nits\n    headlice hypo hypos coldsore coldsores abscess quinsy phlebitis dvt cataract cataracts\n    glaucoma gingivitis hiccup hiccups thyroid constipated\n    boil boils lump lumps spot spots cyst cysts filling fillings\n    pcos copd lupus fibromyalgia hashimotos hypothyroid hyperthyroid epilepsy diabetes\n    anorexia bulimia cfs ibd"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_CONDITION_NEEDS_PART(call_builtin("frozenset", &[mcall(&py_str("boil boils lump lumps spot spots cyst cysts"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_CONDITION_NEEDS_WORD(py_dict(vec![(py_str("filling"), call_builtin("frozenset", &[mcall(&py_str("tooth teeth molar molars cavity cavities dentist dental gum gums\n        filled"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))), (py_str("fillings"), call_builtin("frozenset", &[mcall(&py_str("tooth teeth molar molars cavity cavities dentist dental gum gums\n        filled"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)))]));
+    s_CONDITION_OTHER_LIFE(py_dict(vec![(py_str("thrush"), call_builtin("frozenset", &[mcall(&py_str("garden lawn bird birds nest hedge tree trees feeder"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))), (py_str("shingles"), call_builtin("frozenset", &[mcall(&py_str("roof roofs tile tiles tiled shed sheds wall walls house chimney slate"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)))]));
+    s_CONDITION_NOT_NEXT(py_dict(vec![(py_str("piles"), call_builtin("frozenset", &[mcall(&py_str("of"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)))]));
+    s_CONDITION_REACH(Py::Int(3));
+    s_UNWELL_BOOST(Py::Int(3));
+    s_PEOPLE_TOPICS(py_tuple(vec![py_str("family-and-parenting"), py_str("friends-and-relationships"), py_str("pets")]));
+    s_UNWELL_SIGNS(call_builtin("frozenset", &[mcall(&py_str("unresponsive unconscious drowsy confused floppy limp listless\n    dehydrated collapsed fitting seizure seizures temperature fever sepsis bleeding puking\n    puke puked barf\n    breathless rash cold cough flu dizzy vomiting vomit diarrhoea diarrhea constipated\n    wheeze wheezing swollen infection itchy ill unwell allergy allergic diabetic diabetes\n    overdose pills operation surgery chemo chemotherapy fell fall fallen broken broke\n    fracture fractured stroke injured injury"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_UNWELL_NOT(call_builtin("frozenset", &[mcall(&py_str("feeding drinking eating responding waking weeing"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_NOUNY_SIGNS(call_builtin("frozenset", &[mcall(&py_str("temperature cold cough flu pills pill operation surgery infection\n    rash seizure seizures allergy overdose chemo chemotherapy diabetes dose medicine"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_EXTRA_PEOPLE(call_builtin("frozenset", &[mcall(&py_str("newborn newborns toddler toddlers baby babies person people someone\n    somebody anyone anybody child children kid kids"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_SIGN_FOLLOWS(call_builtin("frozenset", &[mcall(&py_str("a an the his her my your our their its is was are were am has have\n    had got get gets of and or but so to for in on at with from since last this that these those\n    today tonight yesterday morning night now still again too very really all just should shall\n    will would can could do does did not no time times day days week weeks month months about\n    up down out over"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_HEARERS(call_builtin("frozenset", &[mcall(&py_str("me us name names pain voice voices anything anyone nothing stimulus\n    sounds noise light lights it them him her breakfast medicine"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_COMMS(call_builtin("frozenset", &[mcall(&py_str("text texts message messages phone phones mobile mobiles email emails\n    call calls whatsapp dm dms letter letters post emailing texting"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_BEHAVIOUR(call_builtin("frozenset", &[mcall(&py_str("when whenever if unless because after before till until once while"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_SIGN_NOT_AFTER(call_builtin("frozenset", &[mcall(&py_str("asleep out over apart behind short through pregnant ill about\n    for"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_UNWELL_IDIOMS(py_tuple(vec![py_str("bleeding me dry"), py_str("bleed me dry"), py_str("bleeding us dry"), py_str("bleed us dry"), py_str("drove me mad"), py_str("driving me mad"), py_str("worried sick"), py_str("bored stiff")]));
+    s_PETS(call_builtin("frozenset", &[mcall(&py_str("dog dogs puppy puppies cat cats kitten kittens rabbit hamster parrot goldfish\npet pets"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_OWNERS(call_builtin("frozenset", &[mcall(&py_str("my our his her their"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_ANIMALS(call_builtin("frozenset", &[mcall(&py_str("dog dogs puppy puppies cat cats kitten kittens rabbit rabbits hamster\nhamsters guinea parrot parrots budgie budgies goldfish fish tortoise tortoises turtle turtles\nsnake snakes lizard lizards gecko geckos horse horses pony"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_PET_BOOST(Py::Int(3));
+    s_COUNTRY_BOOST(Py::Int(6));
+    s_GIFT_WORDS(call_builtin("frozenset", &[mcall(&py_str("gift gifts present presents"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_GIFT_ALWAYS(call_builtin("frozenset", &[mcall(&py_str("gifts presents"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_GIVE_VERB(call_builtin("frozenset", &[mcall(&py_str("get gets got gotten getting buy buys buying bought pick wrap"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_GIFT_WANTING(call_builtin("frozenset", &[mcall(&py_str("need needs needed needing still yet havent havnt haventgot\n    must should ought havent got gotta later tomorrow soon"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_GIVE_TO(call_builtin("frozenset", &[mcall(&py_str("her him them mum mom mother dad father sister brother nan gran\n    granny grandma grandad grandpa friend friends teacher husband wife partner son daughter\n    nephew niece colleague boss kids child children inlaws flatmate flatmates housemate\n    roommate mate mates cousin cousins aunt aunty uncle neighbour neighbor girlfriend\n    boyfriend"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_GIFT_OCCASION(call_builtin("frozenset", &[mcall(&py_str("christmas xmas birthday anniversary wedding graduation\n    leaving retiring retirement"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_GIFT_ASKING(call_builtin("frozenset", &[mcall(&py_str("should could would shall what which worth best any idea ideas"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_GIVE_THING(call_builtin("frozenset", &[mcall(&py_str("something anything ideas idea nothing"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_GIFT_BOOST(Py::Int(5));
+    s_GIFTS_OR_OCCASIONS(bitor(&bitor(&g_GIVE_THING(), &g_GIFT_WORDS()), &g_GIFT_OCCASION()));
+    s_GIVE_THINGS(bitor(&g_GIVE_THING(), &g_GIFT_WORDS()));
+    s_GIVE_DETERMINERS(call_builtin("frozenset", &[mcall(&py_str("my your his their our the a an some"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_GIVE_RELATIVE(call_builtin("frozenset", &[mcall(&py_str("who whos that"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_CROP_STATES(py_tuple(vec![py_str("not ripening"), py_str("going blue"), py_str("gone blue"), py_str("going yellow"), py_str("turning yellow"), py_str("gone to seed"), py_str("blossom end rot"), py_str("not flowering"), py_str("no flowers"), py_str("not fruiting"), py_str("no fruit"), py_str("ripening"), py_str("bolting"), py_str("leggy"), py_str("wilting"), py_str("drooping"), py_str("rotting"), py_str("rotten"), py_str("stunted"), py_str("flowering"), py_str("splitting"), py_str("dying")]));
+    s_CROP_KITCHEN(call_builtin("frozenset", &[mcall(&py_str("fridge freezer cupboard pantry shelf shop shops supermarket market\nbag box tub jar tin pan pans oven hob pot pots bowl plate dinner lunch tea recipe cook cooked\ncooking eat eating mash roast boil boiled fry fried bake baked salad sandwich soup sauce"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_CROPS(call_builtin("frozenset", &[mcall(&py_str("tomato tomatoes tom toms potato potatoes courgette courgettes zucchini\ncucumber cucumbers pepper peppers chilli chillies chili chillis carrot carrots onion onions\nleek leeks garlic lettuce spinach kale cabbage cabbages bean beans pea peas strawberry\nstrawberries raspberry raspberries blackberry blackberries blueberry blueberries apple apples\npear pears plum plums cherry cherries grape grapes rhubarb beetroot beetroot parsnip parsnips\nsquash pumpkin marrows marrow broccoli cauliflower sweetcorn corn aubergine aubergines\nbasil mint parsley rosemary thyme coriander chives sage oregano dill herbs herb"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_GROWING_PLACES(call_builtin("frozenset", &[mcall(&py_str("plant plants vine vines tree trees greenhouse greenhouse allotment\nallotments garden plot pots bed beds border seedling seedlings bush bushes"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_CROP_BOOST(Py::Int(3));
+    s_TRAVEL_CUES(call_builtin("frozenset", &[mcall(&py_str("trip holiday flight fly flying visit visiting travel travelling\ntraveling abroad hotel booking itinerary sightseeing tourist stay staying going go get\nplan plans planned planning break weekend week days"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_WORLD(call_builtin("frozenset", &[mcall(&py_str("sun sky moon stars earth planets planet ocean sea river mountain\nmountains snow ice rain wind thunder lightning clouds tides gravity rainbow seasons\nwinter summer spring autumn frost temperature fish fishes bird\nbirds animal animals insects bees brain bones lungs cells atoms veins"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    let __aug2 = bitor(&g_WORLD(), &sub(&g_BODY(), &call_builtin("frozenset", &[mcall(&py_str("back hand hands arm arms leg legs foot feet chest"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))));
+    s_WORLD(__aug2);
+    s_WORLD_NOT(call_builtin("frozenset", &[mcall(&py_str("maker machine tray cube bin bucket box cream lolly lollies"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_NATURE_WORDS(call_builtin("frozenset", &[mcall(&geti(&g_STRONG(), &py_str("nature-and-weather")), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_MECHANISM(py_tuple(vec![py_str("why"), py_str("how")]));
+    s_MECHANISM_HOW(call_builtin("frozenset", &[mcall(&py_str("old many long far hot cold big deep fast wide"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_SCIENCE_BOOST(Py::Int(2));
+    s_VERB_CUES(py_dict(vec![(py_str("school-and-study"), call_builtin("frozenset", &[mcall(&py_str("revise revising revision"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)))]));
+    s_STUDY_OBJECTS(call_builtin("frozenset", &[mcall(&py_str("exam exams test tests mock mocks gcse a-level alevel biology\nchemistry physics maths math history geography french spanish german notes revision\ncoursework subject term paper spelling vocabulary homework school college university\nclass lesson a2 as-level sat sats"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_DETERMINERS(call_builtin("frozenset", &[mcall(&py_str("my your his her their our the a an this that these those some any"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_BODY_CUES(call_builtin("frozenset", &[mcall(&py_str("burn burnt burned burning scald scalded scalds cut cuts cutting\n    bleed bleeding"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_PARTS(call_builtin("frozenset", &[mcall(&py_str("me myself yourself himself herself themselves ourselves itself tongue lip\nlips gum gums cheek cheeks chin forehead scalp brow eyebrow eyelash eyelid palm palms nail\nnails knuckle knuckles thigh thighs calf calves shin shins shing toe toes sole soles mouth\nmouths face faces nose noses bottom bottoms bum waist sides upper lower"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_BODY_OR_SELF(bitor(&g_BODY(), &g_PARTS()));
+    s_CUE_CARRIERS(call_builtin("frozenset", &[mcall(&py_str("and or but so now again today yesterday tomorrow still then than\n    it into in on at when if because very really badly slightly a bit\n    down back up out off away through over around first next"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_JUDGEMENT_OF_RECORD(stdlib_call("re", "compile", &[py_str("\\b(?:i|i'm)\\s+(?:am |was |have |had |been |being |always |still |just |really |keep |keeps |kept |constantly |probably )*(?:get|gets|getting|got|do|does|did|doing|mess|messes|messed|messing)\\s+(?:everything|it all)\\s+(?:wrong|up)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    s_NOT_CUT_OUT(stdlib_call("re", "compile", &[py_str("\\b(?:cut out|made) (?:for|to be)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    s_NOT_WORDS(call_builtin("frozenset", &[mcall(&py_str("not never dont don't didnt didn't isnt isn't wasnt wasn't aint ain't"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_OWN_SELF(call_builtin("frozenset", &[mcall(&py_str("i im i'm me myself"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_OTHER_PERSON(call_builtin("frozenset", &[mcall(&py_str("he she they hes shes theyre him her them his her their you your\n    we we're us our my brother sister son daughter mum mom dad father mother husband wife\n    partner friend boss colleague"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_GIVING_UP(py_tuple(vec![py_str("gave up"), py_str("give up"), py_str("given up"), py_str("gives up"), py_str("giving up"), py_str("packed in"), py_str("packing in"), py_str("cut out"), py_str("cutting out"), py_str("cut down on"), py_str("cutting down on"), py_str("stopped eating"), py_str("stopped drinking"), py_str("gone off")]));
+    s_GIVEN_UP_FOOD(bitor(&call_builtin("frozenset", &[mcall(&geti(&g_STRONG(), &py_str("food-and-drink")), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("frozenset", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&geti(&g_STRONG(), &py_str("cooking")), "split", &[])) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(py_contains(&py_tuple(vec![py_str("meat"), py_str("dairy"), py_str("gluten"), py_str("lactose"), py_str("nut"), py_str("soya"), py_str("soy"), py_str("wheat")]), &word.clone()))) {  __out.push(word.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))));
+    s_GIVING_UP_BOOST(Py::Int(3));
+    s_GENERIC(call_builtin("frozenset", &[mcall(&py_str("a an the to of in on at for with my your i you it is and or something\nsomeone thing things any some this that these those be have do does"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_POLYSEMOUS(call_builtin("frozenset", &[mcall(&py_str("date season store book coach dish match spring watch cream\n    pressure"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_PORTION_WORDS(call_builtin("frozenset", &[mcall(&py_str("half double triple"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_PORTION_UNITS(call_builtin("frozenset", &[mcall(&py_str("cup cups stone stones pint pints litre litres ml gram grams kilo\nkilos kg ounce ounces oz tablespoon tablespoons tbsp teaspoon teaspoons inch inches foot feet\nmile miles metre metres metre hour hours minute minutes"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_POLY_FORMS(bitor(&g_POLYSEMOUS(), &call_builtin("frozenset", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_POLYSEMOUS()) { let mut word: Py = __item.clone(); __out.push(add(&word.clone(), &py_str("s"))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))));
+    s_SEASONS(call_builtin("frozenset", &[mcall(&py_str("spring summer autumn winter"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_WEATHER_BEFORE(call_builtin("frozenset", &[mcall(&py_str("dry wet cold warm mild harsh hard bad good long short late early\n    frosty freezing sunny rainy"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_WEATHER_ITSELF(call_builtin("frozenset", &[mcall(&py_str("warm cold hot sunny cloudy raining snowing windy icy freezing\n    icy humid muggy showers drizzle"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_SENSE_WEIGHT(Py::Int(6));
+    s_SENSE_REACH(Py::Int(3));
+    s_SENSE_NEAR(Py::Int(2));
+    s_MACHINE_BIN_WORDS(call_builtin("frozenset", &[mcall(&py_str("recycle trash windows mac macbook laptop desktop disk disks\n    file files folder folders downloads download storage usb restore permanently"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_SENSE_PAIRS(py_dict(vec![(py_str("train"), py_tuple(vec![py_tuple(vec![py_str("train"), py_str("trains")]), py_str("geography-and-travel"), py_tuple(vec![py_tuple(vec![g_SENSE_REACH(), call_builtin("frozenset", &[mcall(&py_str("ticket tickets station platform timetable fare fares rail\n            railcard carriage intercity"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))]), py_tuple(vec![g_SENSE_REACH(), call_builtin("frozenset", &[mcall(&py_str("cancelled cancel delayed delay"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))]), py_tuple(vec![g_SENSE_NEAR(), call_builtin("frozenset", &[mcall(&py_str("missed miss catch catching missed leaves leaving departs\n            departing arrives arrival"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))])])])), (py_str("run"), py_tuple(vec![py_tuple(vec![py_str("run"), py_str("runs"), py_str("running"), py_str("ran")]), py_str("geography-and-travel"), py_tuple(vec![py_tuple(vec![g_SENSE_NEAR(), call_builtin("frozenset", &[mcall(&py_str("bus buses train trains tram trams coach coaches tube\n            ferry ferries flight flights timetable"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))])])])), (py_str("chippy"), py_tuple(vec![py_tuple(vec![py_str("chippy"), py_str("chippies")]), py_str("home-and-diy"), py_tuple(vec![py_tuple(vec![g_SENSE_NEAR(), call_builtin("frozenset", &[mcall(&py_str("door doors hinge hinges hang hanging shelf shelves skirting\n            timber joiner joiners fitter fitted"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))])])])), (py_str("mole"), py_tuple(vec![py_tuple(vec![py_str("mole"), py_str("moles")]), py_str("garden-and-plants"), py_tuple(vec![py_tuple(vec![g_SENSE_REACH(), call_builtin("frozenset", &[mcall(&py_str("garden gardens lawn lawns grass hedge hedges border borders\n            soil flowerbed flowerbed lawnmower molehill molehills tunnel tunnels"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))])])])), (py_str("root"), py_tuple(vec![py_tuple(vec![py_str("root"), py_str("roots")]), py_str("garden-and-plants"), py_tuple(vec![py_tuple(vec![g_SENSE_REACH(), call_builtin("frozenset", &[mcall(&py_str("plant plants tree trees soil pot pots potted repot repotting\n            cutting cuttings seedling seedlings"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))])])])), (py_str("root-canal"), py_tuple(vec![py_tuple(vec![py_str("root"), py_str("roots")]), py_str("health"), py_tuple(vec![py_tuple(vec![g_SENSE_NEAR(), call_builtin("frozenset", &[mcall(&py_str("canal tooth teeth dentist dental filling abscess gum\n            gums"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))])])])), (py_str("root-maths"), py_tuple(vec![py_tuple(vec![py_str("root"), py_str("roots")]), py_str("maths-and-numbers"), py_tuple(vec![py_tuple(vec![g_SENSE_NEAR(), call_builtin("frozenset", &[mcall(&py_str("square squares squared cube cubed equation equations\n            number numbers solve solved divided prime"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))])])])), (py_str("root-access"), py_tuple(vec![py_tuple(vec![py_str("root"), py_str("roots")]), py_str("technology"), py_tuple(vec![py_tuple(vec![g_SENSE_NEAR(), call_builtin("frozenset", &[mcall(&py_str("phone android device access enable enabled boot bootloader\n            samsung pixel tablet"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))])])])), (py_str("stock"), py_tuple(vec![py_tuple(vec![py_str("stock"), py_str("stocks")]), py_str("money"), py_tuple(vec![py_tuple(vec![g_SENSE_NEAR(), call_builtin("frozenset", &[mcall(&py_str("market markets share shares trading trader exchange portfolio\n            dividend dividends isa"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))])])])), (py_str("stock-pot"), py_tuple(vec![py_tuple(vec![py_str("stock"), py_str("stocks")]), py_str("cooking"), py_tuple(vec![py_tuple(vec![g_SENSE_NEAR(), call_builtin("frozenset", &[mcall(&py_str("cube cubes pot pan soup gravy vegetable chicken beef ham\n            simmer simmering broth"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))])])])), (py_str("match"), py_tuple(vec![py_tuple(vec![py_str("match"), py_str("matches")]), py_str("home-and-diy"), py_tuple(vec![py_tuple(vec![g_SENSE_REACH(), call_builtin("frozenset", &[mcall(&py_str("box damp flame flames firelighter firelighters kindling bbq\n            barbecue burner smoulder smolder"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))]), py_tuple(vec![g_SENSE_REACH(), call_builtin("frozenset", &[mcall(&py_str("light lights lit strike struck"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))])])])), (py_str("bin"), py_tuple(vec![py_tuple(vec![py_str("bin"), py_str("bins")]), py_str("technology"), py_tuple(vec![py_tuple(vec![g_SENSE_REACH(), g_MACHINE_BIN_WORDS()])])]))]));
+    s_TWO_LIVES(py_dict(vec![(py_str("bank"), py_tuple(vec![py_tuple(vec![py_str("bank"), py_str("banks")]), py_tuple(vec![py_tuple(vec![call_builtin("frozenset", &[mcall(&py_str("account accounts money cash card cards overdraft loan loans mortgage\n            mortgages payment payments paid pay savings branch branches switch switches\n            statement statements balance balances deposit deposits withdraw withdrawal\n            transfer transfers debit credit cheque cheques interest debt debts atm cashpoint\n            salary salaries wages building society current holiday holidays food blood\n            england sperm said says told rang ring called phoned robbed robbery robber cashier teller\n            vault charge charges charged charging fee fees refund refunds claim claims useless\n            overdrawn locked blocked phone app online free pending shut shuts empty sunday\n            sundays saturday saturdays weekday weekdays hours opening opens"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), call_builtin("frozenset", &[py_tuple(vec![py_str("money"), py_str("shopping"), py_str("life-admin"), py_str("work-and-money")])]).unwrap_or_else(|e| exc::raise(e))]), py_tuple(vec![call_builtin("frozenset", &[mcall(&py_str("river rivers water fish swim swimming path paths walk walked walking boat\n            boats flood flooded muddy grass trees reeds ducks swans fishing current currents\n            flow steep bridge bridges canal canals lake lakes stream streams shore bankside"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), call_builtin("frozenset", &[py_tuple(vec![py_str("nature-and-weather"), py_str("geography-and-travel"), py_str("fitness"), py_str("home-and-diy")])]).unwrap_or_else(|e| exc::raise(e))])])])), (py_str("seal"), py_tuple(vec![py_tuple(vec![py_str("seal"), py_str("seals")]), py_tuple(vec![py_tuple(vec![call_builtin("frozenset", &[mcall(&py_str("zoo sea beach ocean shore rocks ice swimming fish pup pups rescue wildlife\n            aquarium flipper flippers colony warden vet injured entangled plastic cute cuddly\n            adorable"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), call_builtin("frozenset", &[py_tuple(vec![py_str("pets"), py_str("nature-and-weather"), py_str("geography-and-travel")])]).unwrap_or_else(|e| exc::raise(e))]), py_tuple(vec![call_builtin("frozenset", &[mcall(&py_str("jar jars lid lids door doors window windows freezer fridge container\n            containers bottle bottles cap caps rubber gasket airtight vacuum preserve jam\n            pickle filter filters oven washing machine drum black mould mold leak leaks\n            leaking leaked dripping split torn worn perished hardened stiff sticky crumpled\n            shut shuts"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), call_builtin("frozenset", &[py_tuple(vec![py_str("home-and-diy"), py_str("cooking"), py_str("cleaning"), py_str("food-and-drink")])]).unwrap_or_else(|e| exc::raise(e))])])]))]));
+    s_TWO_LIVES_FORMS({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_TWO_LIVES(), "values", &[])) { let __unpk7831 = py_unpack(&__item.clone(), 2, None); let mut _forms: Py = __unpk7831[0].clone(); let mut tiers: Py = __unpk7831[1].clone(); for __item in py_iter_or_raise(&_forms.clone()) { let mut form: Py = __item.clone(); __out.push((form.clone(), tiers.clone())); } } py_dict(__out) })() });
+    s_TWO_LIVES_REACH(Py::Int(99));
+    s__A_STATE_VERB(call_builtin("frozenset", &[mcall(&py_str("is are was were has have had looks seems seemed becomes became\n    sounds feels closed shut broke broken breaks split splits tore torn worn wears"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s__THE_OWNER_SETTLES(call_builtin("frozenset", &[py_tuple(vec![py_str("bank")])]).unwrap_or_else(|e| exc::raise(e)));
+    s__POSSESSIVE(call_builtin("frozenset", &[mcall(&py_str("my our your his her their"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s__NOT_THE_SUBJECT(call_builtin("frozenset", &[mcall(&py_str("a an the my our your his her their this that these those i we\n    you he she they it there old new local main high street current former usual regular\n    well so but and oh hmm actually honestly anyway right now then also just only even\n    hi hello hey good morning afternoon evening please thanks thank perhaps maybe"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_SENSE_ELSEWHERE(py_dict(vec![(py_str("pie"), py_tuple(vec![py_tuple(vec![py_str("pie"), py_str("pies")]), py_tuple(vec![py_tuple(vec![g_SENSE_NEAR(), call_builtin("frozenset", &[mcall(&py_str("chart charts graph graphs diagram diagrams"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))])])])), (py_str("jam"), py_tuple(vec![py_tuple(vec![py_str("jam"), py_str("jams")]), py_tuple(vec![py_tuple(vec![g_SENSE_NEAR(), call_builtin("frozenset", &[mcall(&py_str("traffic queued stuck pickle spot trouble bind work"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))])])])), (py_str("chips"), py_tuple(vec![py_tuple(vec![py_str("chip"), py_str("chips")]), py_tuple(vec![py_tuple(vec![g_SENSE_NEAR(), call_builtin("frozenset", &[mcall(&py_str("down poker casino betting stack stacks"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))])])])), (py_str("yeast"), py_tuple(vec![py_tuple(vec![py_str("yeast")]), py_tuple(vec![py_tuple(vec![g_SENSE_NEAR(), call_builtin("frozenset", &[mcall(&py_str("infection infections thrush"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))])])])), (py_str("nails"), py_tuple(vec![py_tuple(vec![py_str("nail"), py_str("nails")]), py_tuple(vec![py_tuple(vec![g_SENSE_REACH(), call_builtin("frozenset", &[mcall(&py_str("shelf hammer wooden wood wall walls box boxes diy rawlplug\n            plasterboard studwork picture pictures hang hanging screws screw"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))])])])), (py_str("breast"), py_tuple(vec![py_tuple(vec![py_str("breast"), py_str("breasts")]), py_tuple(vec![py_tuple(vec![g_SENSE_REACH(), call_builtin("frozenset", &[mcall(&py_str("lump lumps cancer nipple nipples areola sore hurting hurt\n            hurts painful ache aches aching swelling discharge mastitis checked checking scan\n            mammogram"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))]), py_tuple(vec![g_SENSE_NEAR(), call_builtin("frozenset", &[mcall(&py_str("milk feeding breastfeeding fed"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))])])])), (py_str("spam"), py_tuple(vec![py_tuple(vec![py_str("spam")]), py_tuple(vec![py_tuple(vec![g_SENSE_REACH(), call_builtin("frozenset", &[mcall(&py_str("post letter letters envelope envelopes doormat junk pile"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))])])])), (py_str("thighs"), py_tuple(vec![py_tuple(vec![py_str("thigh"), py_str("thighs")]), py_tuple(vec![py_tuple(vec![g_SENSE_NEAR(), call_builtin("frozenset", &[mcall(&py_str("tight sore ache aches aching hurt hurts hurting cramp cramps\n            chafing"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))])])])), (py_str("icing"), py_tuple(vec![py_tuple(vec![py_str("icing")]), py_tuple(vec![py_tuple(vec![g_SENSE_REACH(), call_builtin("frozenset", &[mcall(&py_str("knee knees ankle ankles shoulder elbow muscle muscles\n            injury injured swelling sprain bruise bruising hurt hurts"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))])])])), (py_str("fibre"), py_tuple(vec![py_tuple(vec![py_str("fibre"), py_str("fiber")]), py_tuple(vec![py_tuple(vec![g_SENSE_REACH(), call_builtin("frozenset", &[mcall(&py_str("broadband internet router connection cable provider\n            install installed"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))])])]))]));
+    s_TEETHING_IS_A_FAULT(call_builtin("frozenset", &[mcall(&py_str("problem problems trouble troubles fault faults\n    niggles issues"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_TEETHING_AND_A_CHILD(call_builtin("frozenset", &[mcall(&py_str("baby babies child children kid kids toddler toddlers\n    son daughter newborn girl boy he she his her their ours"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_SENSE_ELSEWHERE_FORMS({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_SENSE_ELSEWHERE(), "values", &[])) { let __unpk9981 = py_unpack(&__item.clone(), 2, None); let mut _forms: Py = __unpk9981[0].clone(); let mut tiers: Py = __unpk9981[1].clone(); for __item in py_iter_or_raise(&_forms.clone()) { let mut form: Py = __item.clone(); __out.push((form.clone(), tiers.clone())); } } py_dict(__out) })() });
+    s_BODY_TWO_LIFE(call_builtin("frozenset", &[mcall(&py_str("breast breasts thigh thighs"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_OWNING_WORDS(call_builtin("frozenset", &[mcall(&py_str("my her his their your our"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_COLD_WORDS(call_builtin("frozenset", &[mcall(&py_str("cold freezing frozen chilled"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_HOT_WORDS(call_builtin("frozenset", &[mcall(&py_str("hot boiling roasting sweltering sweaty sweating shivery shivering\n    feverish"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_WARMTH_WORDS(bitor(&g_COLD_WORDS(), &g_HOT_WORDS()));
+    s_WARMTH_ARE(bitor(&call_builtin("frozenset", &[mcall(&py_str("is are was were am feeling getting being"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("frozenset", &[mcall(&py_str("feel feels felt"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))));
+    s_WARMTH_DEGREE(call_builtin("frozenset", &[mcall(&py_str("a bit lot little tad wee touch really so very too proper bloody\n    freezing stone quite that dead still always absolutely proper"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_WARMTH_HABITUAL(call_builtin("frozenset", &[mcall(&py_str("always still"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_WARMTH_THEN(call_builtin("frozenset", &[mcall(&py_str("now today tonight again too still here outside lately"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_COLD_PEOPLE(call_builtin("frozenset", &[mcall(&py_str("i im i'm iam me she he they we you u everyone everybody someone\n    somebody people"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_MACHINE_WORD_CUES(py_dict(vec![(py_str("mouse"), call_builtin("frozenset", &[mcall(&py_str("mice kitchen loft attic shed garage garden cupboard bedroom house home\n        flat wall walls nest trap traps mousetrap droppings infestation pest pests rodent\n        rodents chewing chewed scurrying poison wild tame pet pets caught catch cat cats dog\n        dogs cage hutch tank vet alive ran running escape escaped squeak squeaking bait cheese\n        bins bin cavity floorboards floorboard living saw seen"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)))]));
+    s_MACHINE_WORD_PHRASES(py_tuple(vec![py_str("mouse problem"), py_str("mouse problems"), py_str("mice problem"), py_str("mice problems"), py_str("mouse infestation"), py_str("mouse in the"), py_str("mouse in my"), py_str("mice in the"), py_str("mice in my"), py_str("rid of mice"), py_str("rid of the mouse"), py_str("mouse trap")]));
+    s_ASK_PHRASES(call_builtin("frozenset", &[py_list(vec![py_str("any ideas"), py_str("do you think")])]).unwrap_or_else(|e| exc::raise(e)));
+    s_ORDINARY_VERBS(call_builtin("frozenset", &[mcall(&py_str("keep keeps kept drop drops dropped dropping fall falls falling\n    cut cuts cutting stop stops stopped start starts started go goes going get gets getting\n    turn turns turned work works worked show shows showed"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s__SENSE_TIERS(py_dict(vec![]));
+    let __iter3 = py_iter_or_raise(&mcall(&g_SENSE_PAIRS(), "values", &[]));
+    for __item in __iter3 {
+    let __unpk4 = py_unpack(&__item.clone(), 3, None);
+    s__forms(__unpk4[0].clone());
+    s__sense_topic(__unpk4[1].clone());
+    s__tiers(__unpk4[2].clone());
+    let __iter5 = py_iter_or_raise(&g__forms());
+    for __item in __iter5 {
+    s__form(__item.clone());
+    let _ = mcall(&mcall(&g__SENSE_TIERS(), "setdefault", &[g__form(), py_list(vec![])]), "append", &[py_tuple(vec![g__sense_topic(), g__tiers()])]);
+    }
+    }
+    s_CAR_NAMES(call_builtin("frozenset", &[mcall(&py_str("audi fords ford vauxhall toyota honda nissan renault peugeot citroen\n    skoda hyundai kia mazda volvo suzuki bmw mercedes volkswagen vw fiat tesla dacia chevrolet\n    chrysler dodge subaru mitsubishi lexus saab alfa jeep bentley porsche ferrari lamborghini\n    aston lada daewoo infiniti acura punto corsa clio astra mondeo passat micra yaris fabia\n    octavia ibiza qashqai juke captur kadjar sandero duster sprinter picanto zafira insignia\n    vectra laguna megane berlingo picasso cupra leon toledo kamiq karoq kodiaq tucson sportage\n    camaro impreza forester hilux auris avensis prius celica supra aygo navara"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_TABLE(_index(&[]));
+    s_DEGREE_NOUNS(call_builtin("frozenset", &[mcall(&py_str("lot lots bit little much few couple plenty"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_RUN_OUT_BEFORE(call_builtin("frozenset", &[mcall(&py_str("run runs running ran"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_WATCH_OUT_AFTER(call_builtin("frozenset", &[mcall(&py_str("for out"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_WATCHING(call_builtin("frozenset", &[mcall(&py_str("watch watches watching watched"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_DRIVEN_PERSON(call_builtin("frozenset", &[mcall(&py_str("me us him her them you u everyone everybody"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_DRIVEN_MOOD(call_builtin("frozenset", &[mcall(&py_str("mad insane crazy nuts bonkers barmy potty daft distracted wild\n    spare"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_DRIVEN_TAIL(call_builtin("frozenset", &[mcall(&py_str("wall walls bend"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_DRIVEN_JOINERS(call_builtin("frozenset", &[mcall(&py_str("up round around over"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_DRIVES(call_builtin("frozenset", &[mcall(&py_str("drive drives driving drove driven"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_AGE_NOUNS(call_builtin("frozenset", &[mcall(&py_str("year years yr yrs month months mth mths week weeks wk wks"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_AGE_IN_A_YEAR(py_dict(vec![(py_str("year"), Py::Int(1)), (py_str("years"), Py::Int(1)), (py_str("yr"), Py::Int(1)), (py_str("yrs"), Py::Int(1)), (py_str("month"), Py::Int(12)), (py_str("months"), Py::Int(12)), (py_str("mth"), Py::Int(12)), (py_str("mths"), Py::Int(12)), (py_str("week"), Py::Int(52)), (py_str("weeks"), Py::Int(52)), (py_str("wk"), Py::Int(52)), (py_str("wks"), Py::Int(52))]));
+    s_A_CHILD_TILL(Py::Int(19));
+    s_AGE_OF_A_CHILD_WORDS(call_builtin("frozenset", &[mcall(&py_str("baby babies child children kid kids toddler toddlers\n    infant infants newborn boy girl son daughter grandchild lad lass"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_THE_PERSONS_OWN(call_builtin("frozenset", &[mcall(&py_str("my our his her their"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_AGE_AFTER(call_builtin("frozenset", &[mcall(&py_str("is are was were be been about turned turns nearly almost just only"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_BOOK_WORDS(call_builtin("frozenset", &[mcall(&py_str("book books novel novels"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_A_CHILD_TO_READ_FOR(call_builtin("frozenset", &[mcall(&py_str("child children kid kids baby toddler boy girl son\n    daughter niece nephew grandson granddaughter grandchild teenager teen"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_IDIOM_PHRASES(py_tuple(vec![py_tuple(vec![py_str("run"), py_str("off"), py_str("my"), py_str("feet")]), py_tuple(vec![py_str("run"), py_str("off"), py_str("our"), py_str("feet")]), py_tuple(vec![py_str("run"), py_str("off"), py_str("your"), py_str("feet")]), py_tuple(vec![py_str("running"), py_str("off"), py_str("my"), py_str("feet")]), py_tuple(vec![py_str("rushed"), py_str("off"), py_str("my"), py_str("feet")]), py_tuple(vec![py_str("rushed"), py_str("off"), py_str("our"), py_str("feet")]), py_tuple(vec![py_str("pushed"), py_str("off"), py_str("my"), py_str("feet")]), py_tuple(vec![py_str("ran"), py_str("off"), py_str("my"), py_str("feet")]), py_tuple(vec![py_str("on"), py_str("my"), py_str("feet"), py_str("all"), py_str("day")]), py_tuple(vec![py_str("on"), py_str("our"), py_str("feet"), py_str("all"), py_str("day")]), py_tuple(vec![py_str("on"), py_str("my"), py_str("feet"), py_str("all"), py_str("week")]), py_tuple(vec![py_str("up"), py_str("on"), py_str("my"), py_str("feet")]), py_tuple(vec![py_str("run"), py_str("ragged")]), py_tuple(vec![py_str("running"), py_str("ragged")]), py_tuple(vec![py_str("ran"), py_str("ragged")]), py_tuple(vec![py_str("dead"), py_str("on"), py_str("my"), py_str("feet")]), py_tuple(vec![py_str("dead"), py_str("on"), py_str("her"), py_str("feet")]), py_tuple(vec![py_str("dead"), py_str("on"), py_str("his"), py_str("feet")]), py_tuple(vec![py_str("dead"), py_str("on"), py_str("their"), py_str("feet")]), py_tuple(vec![py_str("back"), py_str("on"), py_str("my"), py_str("feet")]), py_tuple(vec![py_str("back"), py_str("on"), py_str("his"), py_str("feet")]), py_tuple(vec![py_str("back"), py_str("on"), py_str("her"), py_str("feet")]), py_tuple(vec![py_str("back"), py_str("on"), py_str("its"), py_str("feet")]), py_tuple(vec![py_str("back"), py_str("on"), py_str("their"), py_str("feet")]), py_tuple(vec![py_str("back"), py_str("on"), py_str("our"), py_str("feet")]), py_tuple(vec![py_str("find"), py_str("my"), py_str("feet")]), py_tuple(vec![py_str("finding"), py_str("my"), py_str("feet")]), py_tuple(vec![py_str("found"), py_str("my"), py_str("feet")]), py_tuple(vec![py_str("two"), py_str("left"), py_str("feet")]), py_tuple(vec![py_str("swept"), py_str("off"), py_str("my"), py_str("feet")]), py_tuple(vec![py_str("swept"), py_str("me"), py_str("off"), py_str("my"), py_str("feet")]), py_tuple(vec![py_str("cold"), py_str("feet")]), py_tuple(vec![py_str("cold"), py_str("turkey")]), py_tuple(vec![py_str("snowed"), py_str("under")]), py_tuple(vec![py_str("snowed"), py_str("under"), py_str("with")]), py_tuple(vec![py_str("under"), py_str("the"), py_str("weather")]), py_tuple(vec![py_str("under"), py_str("my"), py_str("belt")]), py_tuple(vec![py_str("out"), py_str("of"), py_str("my"), py_str("depth")]), py_tuple(vec![py_str("out"), py_str("of"), py_str("our"), py_str("depth")]), py_tuple(vec![py_str("at"), py_str("my"), py_str("wits"), py_str("end")]), py_tuple(vec![py_str("at"), py_str("our"), py_str("wits"), py_str("end")]), py_tuple(vec![py_str("at"), py_str("wits"), py_str("end")]), py_tuple(vec![py_str("on"), py_str("the"), py_str("fence")]), py_tuple(vec![py_str("in"), py_str("two"), py_str("minds")]), py_tuple(vec![py_str("on"), py_str("the"), py_str("same"), py_str("page")]), py_tuple(vec![py_str("over"), py_str("the"), py_str("moon")]), py_tuple(vec![py_str("in"), py_str("the"), py_str("same"), py_str("boat")]), py_tuple(vec![py_str("doing"), py_str("my"), py_str("head"), py_str("in")]), py_tuple(vec![py_str("doing"), py_str("my"), py_str("nut"), py_str("in")]), py_tuple(vec![py_str("does"), py_str("my"), py_str("head"), py_str("in")]), py_tuple(vec![py_str("doing"), py_str("his"), py_str("head"), py_str("in")]), py_tuple(vec![py_str("doing"), py_str("her"), py_str("head"), py_str("in")]), py_tuple(vec![py_str("doing"), py_str("our"), py_str("head"), py_str("in")]), py_tuple(vec![py_str("a"), py_str("piece"), py_str("of"), py_str("cake")]), py_tuple(vec![py_str("piece"), py_str("of"), py_str("cake")]), py_tuple(vec![py_str("easy"), py_str("as"), py_str("pie")]), py_tuple(vec![py_str("spill"), py_str("the"), py_str("beans")]), py_tuple(vec![py_str("spilling"), py_str("the"), py_str("beans")]), py_tuple(vec![py_str("spilled"), py_str("the"), py_str("beans")]), py_tuple(vec![py_str("not"), py_str("my"), py_str("cup"), py_str("of"), py_str("tea")]), py_tuple(vec![py_str("my"), py_str("cup"), py_str("of"), py_str("tea")]), py_tuple(vec![py_str("the"), py_str("icing"), py_str("on"), py_str("the"), py_str("cake")]), py_tuple(vec![py_str("icing"), py_str("on"), py_str("the"), py_str("cake")]), py_tuple(vec![py_str("cherry"), py_str("on"), py_str("the"), py_str("cake")]), py_tuple(vec![py_str("half"), py_str("baked"), py_str("idea")]), py_tuple(vec![py_str("the"), py_str("last"), py_str("straw")]), py_tuple(vec![py_str("a"), py_str("storm"), py_str("in"), py_str("a"), py_str("teacup")]), py_tuple(vec![py_str("a"), py_str("pain"), py_str("in"), py_str("the"), py_str("neck")]), py_tuple(vec![py_str("a"), py_str("pain"), py_str("in"), py_str("the"), py_str("backside")]), py_tuple(vec![py_str("music"), py_str("to"), py_str("my"), py_str("ears")]), py_tuple(vec![py_str("a"), py_str("shot"), py_str("in"), py_str("the"), py_str("arm")]), py_tuple(vec![py_str("the"), py_str("tip"), py_str("of"), py_str("the"), py_str("iceberg")]), py_tuple(vec![py_str("a"), py_str("drop"), py_str("in"), py_str("the"), py_str("ocean")]), py_tuple(vec![py_str("a"), py_str("grey"), py_str("area")]), py_tuple(vec![py_str("off"), py_str("the"), py_str("rails")]), py_tuple(vec![py_str("off"), py_str("the"), py_str("boil")]), py_tuple(vec![py_str("on"), py_str("its"), py_str("last"), py_str("legs")]), py_tuple(vec![py_str("on"), py_str("their"), py_str("last"), py_str("legs")])]));
+    s_COMPLAINT_OF(call_builtin("frozenset", &[mcall(&py_str("sick tired bored weary"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_COMPLAINT_OF_NEXT(call_builtin("frozenset", &[mcall(&py_str("of with about"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_BODILY_OUTPUT(call_builtin("frozenset", &[mcall(&py_str("poo poos pooed pooing poop poops pooped pooping stool stools\n    faeces feces turd turds bowels bowel"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_BODILY_OUTPUT_NOUN(sub(&g_BODILY_OUTPUT(), &call_builtin("frozenset", &[mcall(&py_str("pooed pooped pooing pooping"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))));
+    s_SAMPLE_WORDS(call_builtin("frozenset", &[mcall(&py_str("sample samples test tests tested testing kit pot container jar\n    form forms"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_STOOL_AS_FURNITURE(call_builtin("frozenset", &[mcall(&py_str("wobbly wobble wobbles wobbliest rickety leg legs joint joints\n    seat seats wood wooden screw screws screwdriver tighten tight creak creaks squeak squeaks\n    bracket glue chair chairs table tables bench furniture dresser sideboard carpenter flatpack\n    kitchen"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_ONLY_A_STOOL(call_builtin("frozenset", &[mcall(&py_str("stool stools"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_DERIVED_ENDINGS(py_tuple(vec![py_str("ness"), py_str("ment"), py_str("tion"), py_str("sion"), py_str("ity"), py_str("ance"), py_str("ence"), py_str("ancy"), py_str("ency"), py_str("ism"), py_str("ist"), py_str("ful"), py_str("less"), py_str("ing"), py_str("ers"), py_str("ant"), py_str("ent"), py_str("er"), py_str("ed"), py_str("cy"), py_str("ic"), py_str("al"), py_str("ly"), py_str("th"), py_str("y"), py_str("s")]));
+    s_FAMILY_PAIRS(py_tuple(vec![py_tuple(vec![py_str("ant"), py_str("ancy")]), py_tuple(vec![py_str("ent"), py_str("ency")]), py_tuple(vec![py_str("ate"), py_str("ation")]), py_tuple(vec![py_str("ate"), py_str("acy")]), py_tuple(vec![py_str("ive"), py_str("ion")]), py_tuple(vec![py_str("ible"), py_str("ibility")]), py_tuple(vec![py_str("able"), py_str("ability")])]));
+    s_FAMILY_STEM(Py::Int(5));
+    s_FAMILY_WORD(Py::Int(5));
+    s__FUNCTION_WORDS(Py::None);
+    s_TWO_HOMES(call_builtin("frozenset", &[mcall(&py_str("\n    tablet stock fish draughts tomato tomatoes basil virus team\n"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_LIVES(py_dict(vec![(py_str("tablet"), py_tuple(vec![call_builtin("frozenset", &[mcall(&py_str("pill pills dose dosage swallow swallowed blister pack pharmacy\n            prescription headache headachey painkiller painkillers ibuprofen paracetamol\n            antibiotic antibiotics chemist gp food meal meals stomach empty water milk\n            coffee breakfast with"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), call_builtin("frozenset", &[mcall(&py_str("screen screens battery charge charging charger charged app apps keypad\n            keyboard wifi update downloading cracked ipad android"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))])), (py_str("stock"), py_tuple(vec![call_builtin("frozenset", &[mcall(&py_str("cube cubes gravy soup broth pot saucepan freezer shelf cupboard kitchen\n            chicken vegetable vegetables veg boil simmer bone bones"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), call_builtin("frozenset", &[mcall(&py_str("shares share market markets invest investing investment portfolio dividend\n            dividends trading trader isa pension ftse broker buy sell buying selling worth\n            price prices"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))])), (py_str("fish"), py_tuple(vec![call_builtin("frozenset", &[mcall(&py_str("dinner tea supper lunch cook cooked frying fried grill grilled baked\n            fillet fillets bones chips salmon tuna cod haddock mackerel monger fingers rice\n            lemon batter"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), call_builtin("frozenset", &[mcall(&py_str("tank tanks pond pond bowl aquarium goldfish swim swimming died dying filter\n            feeder feeding feed water"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))])), (py_str("draughts"), py_tuple(vec![call_builtin("frozenset", &[mcall(&py_str("board pieces checkers play playing game games opponent win won lose"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), call_builtin("frozenset", &[mcall(&py_str("door doors window windows draught gap gaps under cold blow blowing seal"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))])), (py_str("tomato"), py_tuple(vec![call_builtin("frozenset", &[mcall(&py_str("sauce sauces salad ketchup slice sliced soup tinned canned ripe puree\n            passata sandwich make making cook cooking dinner meal"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), call_builtin("frozenset", &[mcall(&py_str("plant plants grow growing grew seed seeds seedling seedlings garden\n            greenhouse blight water watering stake"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))])), (py_str("basil"), py_tuple(vec![call_builtin("frozenset", &[mcall(&py_str("pesto pasta sauce leaves leaf fresh cook cooked make making recipe salad\n            sprinkle dish dinner meal pizza"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), call_builtin("frozenset", &[mcall(&py_str("plant plants grow growing grew died dying wilted wilt pot soil water\n            watering repot seed seeds"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))])), (py_str("virus"), py_tuple(vec![call_builtin("frozenset", &[mcall(&py_str("laptop computer pc file files email software antivirus malware download\n            downloaded popup popups password browser update"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), call_builtin("frozenset", &[mcall(&py_str("cold flu round caught fever cough symptoms sick ill bug bugs tummy\n            throwing headache"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))])), (py_str("team"), py_tuple(vec![call_builtin("frozenset", &[mcall(&py_str("rota shift shifts manager boss job work project colleagues colleague\n            meeting employer office"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), call_builtin("frozenset", &[mcall(&py_str("match game win won lost lose score scored goal goals player players coach\n            league season fans football rugby cricket kit"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))]))]));
+    let _ = py_setitem(&g_LIVES(), &py_str("tomatoes"), geti(&g_LIVES(), &py_str("tomato")));
+    s_PLACE_OVER(Py::Int(2));
+    s_TRAVEL_STRONG(call_builtin("frozenset", &[mcall(&py_str("trip trips holiday holidays flight flights fly flying flew\n    visit visiting visited travel travelling traveling travelled traveled abroad hotel hotels\n    booking itinerary sightseeing tourist tourists weekend weekends break honeymoon\n    going drove driving ride staying"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_ASK_WORDS(call_builtin("frozenset", &[mcall(&py_str("what how where when why which who whom whose can could should would\n    will shall do does did is are was were am any anyone something tell give suggest\n    recommend show me"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_WANT_VERBS(call_builtin("frozenset", &[mcall(&py_str("want wants wanted wanting need needs needed fancies fancy\n    fancied fancies"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_A_THING_WANTED(call_builtin("frozenset", &[mcall(&py_str("a an the some another new more"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_WANTED_BEFORE_A_STOP(call_builtin("frozenset", &[mcall(&py_str("for to of at with and but so because when if\n    about by from in on"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_A_PERSON_WHO_WANTS(call_builtin("frozenset", &[mcall(&py_str("wife husband mrs missus partner son daughter kid kids\n    child children baby teenager mum mom mother dad father brother sister mate mates friend\n    friends boyfriend girlfriend fella bloke lad lass nan nana granny grandad"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_FRIEND_WORDS(call_builtin("frozenset", &[mcall(&py_str("mate mates pal pals buddy buddies bloke fella\n    flatmate flatmates housemate housemates"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_OWNED_BY(call_builtin("frozenset", &[mcall(&py_str("my your his her our their me"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_FRIEND_BOOST(Py::Int(1));
+    s_NOSE_BLOCKED(stdlib_call("re", "compile", &[py_str("\\b(?:im|i am|i feel|im feeling|i am feeling|i feel like i am)\\b(?:\\s+(?:all|really|so|very|a\\s+bit|a\\s+little|totally|properly|quite|that|bit|still|now|again|bit)){0,3}\\s+(?:stuffy|stuffed\\s+up|bunged\\s+up|blocked\\s+up|congested|congestion|clogged\\s+up)\\b|\\b(?:im|ive|i've|i\\s+have|i\\s+keep)\\b(?:(?!\\b(?:dog|cat|puppy|kitten|baby|kid|boy|girl)\\b)[^.!?]){0,18}?\\b(?:sniffly|sniffles|sniffling|sniffing|snotty)\\b|\\bmy\\s+(?:head|nose|sinuses?|nose\\s+passages?|face)\\b(?:\\s+(?:is|are|feels?|feeling|gets?|keeps?|has\\s+been)){0,2}(?:\\s+(?:all|really|so|very|a\\s+bit|a\\s+little|totally|quite|still|now|again|bit)){0,3}\\s+(?:stuffy|stuffed\\s+up|bunged\\s+up|blocked\\s+up|blocked|congested|congestion)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    s_NOSE_BLOCKED_BOOST(Py::Int(6));
+    s_MONEY_TIGHT(py_tuple(vec![py_str("skint"), py_str("brassic"), py_str("till payday"), py_str("until payday"), py_str("money is tight"), py_str("tight month"), py_str("on the breadline"), py_str("no money till"), py_str("no money until"), py_str("no money left"), py_str("no money"), py_str("running out of money"), py_str("a bit short this month"), py_str("short this month"), py_str("short till payday"), py_str("short till"), py_str("short this week"), py_str("nothing till"), py_str("nothing until"), py_str("nowt till"), py_str("nowt until"), py_str("cleaned out"), py_str("not got a penny"), py_str("penny to my name")]));
+    s_MONEY_TIGHT_MAX(Py::Int(10));
+    s_BROKE_AS_SUBJECT(call_builtin("frozenset", &[mcall(&py_str("i im am we are he she hes shes they theyre you youre u is\n    was were been be being totally completely so officially proper flat dead stone absolutely\n    very pretty quite really just still honestly yeah ok okay and but now"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_BROKE_AS_TIME(call_builtin("frozenset", &[mcall(&py_str("till until by for this week month payday weekend end today\n    tomorrow again now already friday monday tuesday wednesday thursday saturday sunday and but\n    so or time yet though honestly lol ha thanks anyway right now"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_A_MONEY_WORD(call_builtin("frozenset", &[mcall(&py_str("quid pound pounds tenner tenners fiver fivers bucks"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_A_AMOUNT_NOUN(py_dict(vec![(py_str("tenner"), Py::Int(10)), (py_str("tenners"), Py::Int(10)), (py_str("fiver"), Py::Int(5)), (py_str("fivers"), Py::Int(5))]));
+    s_A_AMOUNT_SYMBOL(stdlib_call("re", "compile", &[py_str("£\\s*(\\d+(?:[.,]\\d+)?)|(?<![\\w.])(\\d{1,4})\\s*p\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    s_A_WAIT(call_builtin("frozenset", &[mcall(&py_str("till until til"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_A_WAIT_TO(call_builtin("frozenset", &[mcall(&py_str("payday friday saturday sunday monday tuesday wednesday thursday week\n    weekend month end tomorrow today next"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_BIG_PURSE(Py::Int(500));
+    s_STONE_VERBS(call_builtin("frozenset", &[mcall(&py_str("lose loses losing lost loss shed sheds shedding gained gain\n    gains gaining weighed weigh weighs weigh-in diet dieting slimming slimmer"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_STONE_COMPOUNDS(py_tuple(vec![py_str("put on"), py_str("piling on"), py_str("piled on")]));
+    s_WORN_OUT(call_builtin("frozenset", &[mcall(&py_str("shattered whacked zonked pooped bushed fagged drained wrecked frazzled"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_WORN_OUT_SAID(py_tuple(vec![py_str("wiped out"), py_str("done in"), py_str("worn out"), py_str("cream crackered"), py_str("wiped")]));
+    s_WORN_OUT_CUE(call_builtin("frozenset", &[mcall(&py_str("im am feel feeling"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_WORN_OUT_LOOKBACK(Py::Int(3));
+    s_WORN_OUT_BOOST(Py::Int(4));
+    s_NAME_BREAKS(call_builtin("frozenset", &[mcall(&py_str("a an the and or but if then than that this these those there here\n    i me my we our us you your he him his she her they them their it its am is are was were be\n    been being do does did have has had will would shall should can could may might must not no\n    so too very just really quite only also as at by for from in into of off on onto out over\n    under up with within without about after again against all any both each few more most other\n    some such own same what which who whom whose when where why how"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_LEADING(call_builtin("frozenset", &[mcall(&py_str("i i'm im i've ive i'll ill i'd id we we're we've you you're\n    he he's she she's it it's they they're"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_PLACE_WORDS(call_builtin("frozenset", &[mcall(&py_str("in at from near around across through visit visiting visited\n    outside inside via"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_PLACE_WORDS_WITH_CUE(call_builtin("frozenset", &[mcall(&py_str("to towards toward"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_NOT_PLACES(call_builtin("frozenset", &[mcall(&py_str("excel word powerpoint outlook onenote slack zoom teams skype discord\n    facebook instagram twitter whatsapp tiktok youtube netflix spotify amazon ebay etsy google\n    gmail github gitlab python javascript chrome safari windows android iphone ipad mac\n    photoshop canva notion trello jira dropbox onedrive icloud uber airbnb booking expedia\n    linkedin paypal ebay tinder\ndrive docs sheets slides mail calendar\ntesco sainsbury asda aldi lidl waitrose morrisons coop boots argos ikea currys"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_WORK_WORDS(call_builtin("frozenset", &[mcall(&py_str("work works working worked workplace office job jobs shift shifts\n    employer company meeting meetings boss manager team interview roster rota colleagues"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_PLACE_THING(call_builtin("frozenset", &[mcall(&py_str("the a an my your his her our their this that some any another"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_PLACE_HOMOGRAPHS(call_builtin("frozenset", &[mcall(&py_str("turkey china brazil bath reading new"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_COUNTRY_HOMOGRAPHS(call_builtin("frozenset", &[mcall(&py_str("turkey china brazil"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_COUNTRY_CUES(call_builtin("frozenset", &[mcall(&py_str("hot warm cold sunny rainy weather temperature safe dangerous\n    expensive cheap currency capital visa language speak driving flights flight hotel hotels\n    resort beaches beach coast airport north south east west trip holiday visit visiting\n    travel travelling traveling season best part parts city cities region regions\n    january february march april may june july august september october november\n    december"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_COMPARE_WORDS(call_builtin("frozenset", &[mcall(&py_str("or and vs versus compared than"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_ARTICLES(call_builtin("frozenset", &[mcall(&py_str("the a an my our your his her their this that these those some any"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_NAME_FRAMES(call_builtin("frozenset", &[mcall(&py_str("called named call calls"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_WORD_DIGITS(stdlib_call("re", "compile", &[py_str("[0-9]+(?:[.,][0-9]+)?")]).unwrap_or_else(|e| exc::raise(e)));
+    s__STEPPED_RELATIONS(py_tuple(vec![py_str("mum"), py_str("mom"), py_str("mother"), py_str("dad"), py_str("father"), py_str("son"), py_str("daughter"), py_str("brother"), py_str("sister")]));
+    s__GRAND_RELATIONS(py_tuple(vec![py_str("mum"), py_str("mom"), py_str("mother"), py_str("dad"), py_str("father"), py_str("son"), py_str("daughter"), py_str("child")]));
+    s__KIN_BUILT(call_builtin("tuple", &[add(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g__STEPPED_RELATIONS()) { let mut word: Py = __item.clone(); __out.push(add(&py_str("step"), &word.clone())); } py_list(__out) })() }, &{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g__GRAND_RELATIONS()) { let mut word: Py = __item.clone(); __out.push(add(&py_str("grand"), &word.clone())); } py_list(__out) })() })]).unwrap_or_else(|e| exc::raise(e)));
+    s_RELATIONS(bitor(&bitor(&call_builtin("frozenset", &[mcall(&py_str("\nson daughter kid kids child children baby toddler mum mom mother dad father husband wife\npartner boyfriend girlfriend friend friends boss manager colleague brother sister aunt\nuncle cousin gran grandma grandad grandpa grandmother grandfather neighbour neighbour\nlandlord flatmate housemate boss team pet dog cat puppy kitten\nex exes\n"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("frozenset", &[g__KIN_BUILT()]).unwrap_or_else(|e| exc::raise(e))), &call_builtin("frozenset", &[py_tuple(vec![py_str("gran"), py_str("granddad"), py_str("granny")])]).unwrap_or_else(|e| exc::raise(e))));
+    s_PERSON_WORDS(bitor(&g_RELATIONS(), &call_builtin("frozenset", &[mcall(&py_str("mate mates nan nana granny auntie pal lad lass fella\n    bloke guy missus fiance fiancee stepson stepdaughter"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))));
+    s_THE_PEOPLE(_person_words(&[]));
+    s_NUMBER_FILLER(call_builtin("frozenset", &[mcall(&py_str("a an of"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_A_PORTION_UNITS(call_builtin("frozenset", &[mcall(&py_str("g gram grams gramme grammes kg kilo kilos kilogram kilograms\nlb lbs pound pounds oz ounce ounces ml millilitre millilitres milliliter milliliters\nl litre litres liter liters tsp teaspoon teaspoons tbsp tablespoon tablespoons cup cups\nmile miles km kilometre kilometres kilometer kilometers metre metres meter meters\nfoot feet ft inch inches"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    s_OWNS_THE_UNIT(bitor(&call_builtin("frozenset", &[g_WORD_NUMBERS()]).unwrap_or_else(|e| exc::raise(e)), &py_set(vec![py_str("quarter"), py_str("quarters"), py_str("third"), py_str("thirds")])));
+    s_A_PORTION_NEEDS_OF(call_builtin("frozenset", &[py_set(vec![py_str("pound"), py_str("pounds"), py_str("lb"), py_str("lbs")])]).unwrap_or_else(|e| exc::raise(e)));
+    s_ONE_IS_A_THING(call_builtin("frozenset", &[mcall(&py_str("the this that these those which no any each every another\n    nice good great big small little wrong right other same next last first"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+}
+pub fn _work_out_sums(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut after: Py = Py::None;
+    let mut hits: Py = Py::None;
+    let mut index: Py = Py::None;
+    let mut training: Py = Py::None;
+    let mut word: Py = Py::None;
+    let _ = py_str("Where \"work out\" is arithmetic or deciding, not the job and not the exercise.\n\n    \"work out a percentage\", \"work out my hourly rate\", \"work out how much i owe\" and\n    \"work out if the loan is worth it\" are sums, and there the word \"work\" is no evidence for\n    the work topic either. \"work out at home\", \"work out three times a week\" and \"work out\n    more\" are the exercise, and those keep both the word and the fitness phrase.\n    ");
+    hits = call_builtin("set", &[]).unwrap_or_else(|e| exc::raise(e));
+    training = call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&norm.clone()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&g_EXERCISE_NOUNS(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    let __iter1 = py_iter_or_raise(&call_builtin("enumerate", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter1 {
+    let __unpk2 = py_unpack(&__item.clone(), 2, None);
+    index = __unpk2[0].clone();
+    word = __unpk2[1].clone();
+    if py_truthy(&{ let __b = Py::Bool(!py_contains(&py_tuple(vec![py_str("work"), py_str("works"), py_str("working"), py_str("worked")]), &word.clone())); if py_truthy(&__b) { __b } else { ge(&add(&index.clone(), &Py::Int(1)), &call_builtin("len", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e))) } }) {
+    continue;
+    }
+    if py_truthy(&Py::Bool(!py_eq(&geti(&norm.clone(), &add(&index.clone(), &Py::Int(1))), &py_str("out")))) {
+    continue;
+    }
+    after = slice_or_raise(&norm.clone(), &add(&index.clone(), &Py::Int(2)), &add(&index.clone(), &Py::Int(8)), &Py::None);
+    if py_truthy(&{ let __b = ge(&call_builtin("len", &[after.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(3)); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&g_NUMBER_WORDS(), &geti(&after.clone(), &Py::Int(0)))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_eq(&geti(&after.clone(), &Py::Int(1)), &py_str("times"))); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_NUMBER_WORDS(), &geti(&after.clone(), &Py::Int(2)))) } } } } } }) {
+    let _ = mcall(&hits.clone(), "add", &[index.clone()]);
+    continue;
+    }
+    if py_truthy(&{ let __b = training.clone(); if py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&slice_or_raise(&after.clone(), &Py::None, &Py::Int(3), &Py::None)) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&g_EXERCISE_AFTER(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }) {
+    continue;
+    }
+    if py_truthy(&{ let __b = call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&after.clone()) { let mut word: Py = __item.clone(); __out.push({ let __b = Py::Bool(py_contains(&g_SUMS_AFTER(), &word.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_NUMBER_WORDS(), &word.clone())) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)); if py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&after.clone()) { let mut word: Py = __item.clone(); __out.push(mcall(&word.clone(), "isdigit", &[])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }) {
+    let _ = mcall(&hits.clone(), "add", &[index.clone()]);
+    }
+    }
+    return hits.clone();
+    Py::None
+}
+pub fn _head_fog(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut at: Py = Py::None;
+    let mut foggy: Py = Py::None;
+    let mut other: Py = Py::None;
+    let mut word: Py = Py::None;
+    let _ = py_str("True when the line says the speaker's own head, brain or mind is foggy or thick.");
+    foggy = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk4370 = py_unpack(&__item.clone(), 2, None); let mut at: Py = __unpk4370[0].clone(); let mut word: Py = __unpk4370[1].clone(); if py_truthy(&Py::Bool(py_contains(&g_HEAD_FOG(), &word.clone()))) {  __out.push(at.clone()); } } py_list(__out) })() };
+    if py_truthy(&Py::Bool(!py_truthy(&foggy.clone()))) {
+    return Py::Bool(false);
+    }
+    let __iter1 = py_iter_or_raise(&call_builtin("enumerate", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter1 {
+    let __unpk2 = py_unpack(&__item.clone(), 2, None);
+    at = __unpk2[0].clone();
+    word = __unpk2[1].clone();
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_HEAD_FOG(), &word.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&g_HEAD_WORDS(), &word.clone())) } }) {
+    continue;
+    }
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&foggy.clone()) { let mut other: Py = __item.clone(); __out.push(if py_truthy(&lt(&Py::Int(0), &{ let __cmp10 = sub(&other.clone(), &at.clone()); __cmp10.clone() })) { le(&__cmp10.clone(), &g_HEAD_FOG_REACH()) } else { Py::Bool(false) }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    return Py::Bool(true);
+    }
+    }
+    return Py::Bool(false);
+    Py::None
+}
+pub fn _skin_state(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut skip: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "skip") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: skip"))) };
+    let mut at: Py = Py::None;
+    let mut state: Py = Py::None;
+    let mut states: Py = Py::None;
+    let mut word: Py = Py::None;
+    let _ = py_str("The position of a body part within `SKIN_REACH` of the state of its skin, or None.\n\n    The reach keeps a state said of something else off the body: \"the cracked tile under my\n    feet\" is the tile, and only a part next to the state is the skin (\"my heels are cracked\").\n    ");
+    states = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk9602 = py_unpack(&__item.clone(), 2, None); let mut at: Py = __unpk9602[0].clone(); let mut word: Py = __unpk9602[1].clone(); if py_truthy(&{ let __b = Py::Bool(py_contains(&g_SKIN_STATES(), &word.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&skip.clone(), &at.clone())) } }) {  __out.push(at.clone()); } } py_list(__out) })() };
+    if py_truthy(&Py::Bool(!py_truthy(&states.clone()))) {
+    return Py::None;
+    }
+    let __iter1 = py_iter_or_raise(&call_builtin("enumerate", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter1 {
+    let __unpk2 = py_unpack(&__item.clone(), 2, None);
+    at = __unpk2[0].clone();
+    word = __unpk2[1].clone();
+    if py_truthy(&{ let __b = Py::Bool(!py_contains(&g_SKIN_PARTS(), &word.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&skip.clone(), &at.clone())) } }) {
+    continue;
+    }
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&states.clone()) { let mut state: Py = __item.clone(); __out.push(le(&call_builtin("abs", &[sub(&state.clone(), &at.clone())]).unwrap_or_else(|e| exc::raise(e)), &g_SKIN_REACH())); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    return at.clone();
+    }
+    }
+    return Py::None;
+    Py::None
+}
+pub fn _a_part_plays_up(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut skip: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "skip") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: skip"))) };
+    let mut at: Py = Py::None;
+    let mut up: Py = Py::None;
+    let mut ups: Py = Py::None;
+    let mut word: Py = Py::None;
+    let _ = py_str("The position of a body part that is playing up, or None.\n\n    The part has to be next to the words, so \"the kids are playing up\" (no part) and \"the\n    boiler is playing up\" (a part of the house, not of a person) are not health lines.\n    ");
+    ups = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk1907 = py_unpack(&__item.clone(), 2, None); let mut at: Py = __unpk1907[0].clone(); let mut word: Py = __unpk1907[1].clone(); if py_truthy(&{ let __b = Py::Bool(py_eq(&word.clone(), &py_str("up"))); if !py_truthy(&__b) { __b } else { { let __b = at.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_contains(&skip.clone(), &at.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&g_PLAYS_UP_BEFORE(), &geti(&norm.clone(), &sub(&at.clone(), &Py::Int(1))))); if py_truthy(&__b) { __b } else { { let __b = ge(&at.clone(), &Py::Int(2)); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&py_tuple(vec![py_str("me"), py_str("my")]), &geti(&norm.clone(), &sub(&at.clone(), &Py::Int(1))))); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_PLAYS_UP_BEFORE(), &geti(&norm.clone(), &sub(&at.clone(), &Py::Int(2))))) } } } } } } } } } } } }) {  __out.push(at.clone()); } } py_list(__out) })() };
+    if py_truthy(&Py::Bool(!py_truthy(&ups.clone()))) {
+    return Py::None;
+    }
+    let __iter1 = py_iter_or_raise(&call_builtin("enumerate", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter1 {
+    let __unpk2 = py_unpack(&__item.clone(), 2, None);
+    at = __unpk2[0].clone();
+    word = __unpk2[1].clone();
+    if py_truthy(&{ let __b = Py::Bool(!py_contains(&g_BODY(), &word.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&skip.clone(), &at.clone())) } }) {
+    continue;
+    }
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&ups.clone()) { let mut up: Py = __item.clone(); __out.push(if py_truthy(&lt(&Py::Int(0), &{ let __cmp10 = sub(&up.clone(), &at.clone()); __cmp10.clone() })) { le(&__cmp10.clone(), &g_PLAY_UP_REACH()) } else { Py::Bool(false) }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    return at.clone();
+    }
+    }
+    return Py::None;
+    Py::None
+}
+pub fn _named_condition(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut words: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "words") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: words"))) };
+    let mut skip: Py = if __pos.len() > 2 { __pos[2].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "skip") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: skip"))) };
+    let mut at: Py = Py::None;
+    let mut nexts: Py = Py::None;
+    let mut other: Py = Py::None;
+    let mut other_at: Py = Py::None;
+    let mut other_word: Py = Py::None;
+    let mut wanted: Py = Py::None;
+    let mut word: Py = Py::None;
+    let _ = py_str("True when the line names a condition that is not, here, its other life.\n\n    The part the word is on has to be within `CONDITION_REACH` for a word in\n    `CONDITION_NEEDS_PART` (\"i have a boil on my back\" is health, \"boil the kettle\" is not),\n    and one of the other-life words has to be absent for a word in `CONDITION_OTHER_LIFE`. An\n    animal that has the condition is the animal's: \"the dog is constipated\" is a pet question\n    with an answer about warm beds and short walks, so the condition counts only where no\n    animal is named, unless a person is named as well (\"my son has nits and so does the cat\").\n    ");
+    if py_truthy(&{ let __b = bitand(&words.clone(), &g_PETS()); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&bitand(&words.clone(), &sub(&_person_words(&[]), &g_PETS())))) } }) {
+    return Py::Bool(false);
+    }
+    let __iter1 = py_iter_or_raise(&call_builtin("enumerate", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter1 {
+    let __unpk2 = py_unpack(&__item.clone(), 2, None);
+    at = __unpk2[0].clone();
+    word = __unpk2[1].clone();
+    if py_truthy(&{ let __b = Py::Bool(!py_contains(&g_CONDITIONS(), &word.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&skip.clone(), &at.clone())) } }) {
+    continue;
+    }
+    nexts = mcall(&g_CONDITION_NOT_NEXT(), "get", &[word.clone()]);
+    if py_truthy(&{ let __b = nexts.clone(); if !py_truthy(&__b) { __b } else { { let __b = lt(&add(&at.clone(), &Py::Int(1)), &call_builtin("len", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e))); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&nexts.clone(), &geti(&norm.clone(), &add(&at.clone(), &Py::Int(1))))) } } } }) {
+    continue;
+    }
+    other = mcall(&g_CONDITION_OTHER_LIFE(), "get", &[word.clone()]);
+    if py_truthy(&{ let __b = other.clone(); if !py_truthy(&__b) { __b } else { bitand(&words.clone(), &other.clone()) } }) {
+    continue;
+    }
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_CONDITION_NEEDS_PART(), &word.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk7081 = py_unpack(&__item.clone(), 2, None); let mut other_at: Py = __unpk7081[0].clone(); let mut other_word: Py = __unpk7081[1].clone(); if py_truthy(&Py::Bool(!py_contains(&skip.clone(), &other_at.clone()))) {  __out.push({ let __b = le(&call_builtin("abs", &[sub(&other_at.clone(), &at.clone())]).unwrap_or_else(|e| exc::raise(e)), &g_CONDITION_REACH()); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_BODY(), &other_word.clone())) } }); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)))) } }) {
+    continue;
+    }
+    wanted = mcall(&g_CONDITION_NEEDS_WORD(), "get", &[word.clone()]);
+    if py_truthy(&{ let __b = wanted.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk2089 = py_unpack(&__item.clone(), 2, None); let mut other_at: Py = __unpk2089[0].clone(); let mut other_word: Py = __unpk2089[1].clone(); if py_truthy(&Py::Bool(!py_contains(&skip.clone(), &other_at.clone()))) {  __out.push({ let __b = le(&call_builtin("abs", &[sub(&other_at.clone(), &at.clone())]).unwrap_or_else(|e| exc::raise(e)), &g_CONDITION_REACH()); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&wanted.clone(), &other_word.clone())) } }); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)))) } }) {
+    continue;
+    }
+    return Py::Bool(true);
+    }
+    return Py::Bool(false);
+    Py::None
+}
+pub fn _person_words(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut topic: Py = Py::None;
+    let mut words: Py = Py::None;
+    let _ = py_str("Every word that can name a person a symptom could be said of.");
+    words = bitor(&bitor(&call_builtin("set", &[g_RELATIONS()]).unwrap_or_else(|e| exc::raise(e)), &g_EXTRA_PEOPLE()), &g_PETS());
+    let __iter1 = py_iter_or_raise(&py_tuple(vec![py_str("family-and-parenting"), py_str("friends-and-relationships")]));
+    for __item in __iter1 {
+    topic = __item.clone();
+    let __aug2 = bitor(&words.clone(), &call_builtin("set", &[mcall(&geti(&g_STRONG(), &topic.clone()), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    words = __aug2;
+    }
+    return call_builtin("frozenset", &[words.clone()]).unwrap_or_else(|e| exc::raise(e));
+    Py::None
+}
+pub fn reads_as_unfit(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut text: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "text") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: text"))) };
+    let mut before: Py = Py::None;
+    let mut match_: Py = Py::None;
+    let mut person: Py = Py::None;
+    let mut word: Py = Py::None;
+    let _ = py_str("Where the words say they are not cut out for something, or None.\n\n    Shared with the composer (`bot/modules/chat.py`), which answers it with the pool for a\n    judgement about themselves: the engine decides the line is about how they see themselves, and\n    the composer must not then treat it as a fact about a job.\n\n    The negative and the person are what make it a judgement: \"im cut out for this\" is a boast,\n    \"i never cut out sugar\" is a diet, and \"my brother is not cut out for the army\" is about him.\n    ");
+    let __iter1 = py_iter_or_raise(&mcall(&g_NOT_CUT_OUT(), "finditer", &[text.clone()]));
+    for __item in __iter1 {
+    match_ = __item.clone();
+    before = slice_or_raise(&mcall(&slice_or_raise(&text.clone(), &Py::None, &mcall(&match_.clone(), "start", &[]), &Py::None), "split", &[]), &neg(&Py::Int(6)), &Py::None, &Py::None);
+    if py_truthy(&Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&before.clone()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&g_NOT_WORDS(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))))) {
+    continue;
+    }
+    person = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&before.clone()) { let mut word: Py = __item.clone(); if py_truthy(&{ let __b = Py::Bool(py_contains(&g_OWN_SELF(), &word.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_OTHER_PERSON(), &word.clone())) } }) {  __out.push(word.clone()); } } py_list(__out) })() };
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&person.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&g_OWN_SELF(), &geti(&person.clone(), &neg(&Py::Int(1))))) } }) {
+    continue;
+    }
+    return mcall(&match_.clone(), "start", &[]);
+    }
+    return Py::None;
+    Py::None
+}
+pub fn _a_habit_given_up(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut phrase: Py = Py::None;
+    let mut text: Py = Py::None;
+    let mut word: Py = Py::None;
+    let _ = py_str("True when the line gives up something they eat or drink, read off the whole line.");
+    text = mcall(&py_str(" "), "join", &[norm.clone()]);
+    if py_truthy(&Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&norm.clone()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&g_GIVEN_UP_FOOD(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))))) {
+    return Py::Bool(false);
+    }
+    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_GIVING_UP()) { let mut phrase: Py = __item.clone(); __out.push(Py::Bool(py_contains(&text.clone(), &phrase.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    Py::None
+}
+pub fn the_bin_is_on_a_machine(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut understood: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "understood") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: understood"))) };
+    let mut words: Py = Py::None;
+    let _ = py_str("True when the sentence's bin is the one on a computer (\"how do i empty the recycle bin on\n    my laptop\"), False when it says nothing about a machine (\"the bin needs emptying\").\n\n    The machine words above are what settles it, and the technology topic is the same reading\n    from the other side: a line that names a laptop or a disk is about a machine whether or not\n    it uses one of these words. A line that names neither keeps the everyday bin, which is what\n    \"my bin is full\" and \"how do i empty my bin\" are.\n    ");
+    words = call_builtin("set", &[{ let __b = mcall(&{ let __b = understood.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[py_str("words")]); if py_truthy(&__b) { __b } else { py_tuple(vec![]) } }]).unwrap_or_else(|e| exc::raise(e));
+    if py_truthy(&bitand(&words.clone(), &g_MACHINE_BIN_WORDS())) {
+    return Py::Bool(true);
+    }
+    return Py::Bool(py_contains(&{ let __b = mcall(&{ let __b = understood.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[py_str("topics")]); if py_truthy(&__b) { __b } else { py_tuple(vec![]) } }, &py_str("technology")));
+    Py::None
+}
+pub fn unclear_subject(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut inherited: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "inherited") { v.clone() }
+    else { Py::None };
+    let mut previous: Py = if __pos.len() > 2 { __pos[2].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "previous") { v.clone() }
+    else { Py::None };
+    let mut _cues: Py = Py::None;
+    let mut _sense_topics: Py = Py::None;
+    let mut after: Py = Py::None;
+    let mut at: Py = Py::None;
+    let mut before: Py = Py::None;
+    let mut content: Py = Py::None;
+    let mut cues: Py = Py::None;
+    let mut first: Py = Py::None;
+    let mut other: Py = Py::None;
+    let mut sense_topics: Py = Py::None;
+    let mut tiers: Py = Py::None;
+    let mut word: Py = Py::None;
+    let _ = py_str("The two-life word the line leaves unsettled, or None.\n\n    Only the first thing the line names, only when it is the subject of a state (\"the bank was\n    closed\", \"the seal is broken\"), and only when no word in the line fits one of its lives and\n    the conversation has not already settled on a subject. A line with a cue (\"my bank account\",\n    \"the seal on the fridge door\") is not unclear, and neither is a line that only passes the\n    word by (\"we walked past the bank\").\n    ");
+    content = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk9034 = py_unpack(&__item.clone(), 2, None); let mut at: Py = __unpk9034[0].clone(); let mut word: Py = __unpk9034[1].clone(); if py_truthy(&Py::Bool(!py_contains(&g__NOT_THE_SUBJECT(), &word.clone()))) {  __out.push(at.clone()); } } py_list(__out) })() };
+    if py_truthy(&Py::Bool(!py_truthy(&content.clone()))) {
+    return Py::None;
+    }
+    first = geti(&content.clone(), &Py::Int(0));
+    word = geti(&norm.clone(), &first.clone());
+    tiers = mcall(&g_TWO_LIVES_FORMS(), "get", &[word.clone()]);
+    if py_truthy(&Py::Bool(!py_truthy(&tiers.clone()))) {
+    return Py::None;
+    }
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g__THE_OWNER_SETTLES(), &word.clone())); if !py_truthy(&__b) { __b } else { { let __b = first.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g__POSSESSIVE(), &geti(&norm.clone(), &sub(&first.clone(), &Py::Int(1))))) } } } }) {
+    return Py::None;
+    }
+    if py_truthy(&{ let __b = inherited.clone(); if !py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&tiers.clone()) { let __unpk5674 = py_unpack(&__item.clone(), 2, None); let mut _cues: Py = __unpk5674[0].clone(); let mut sense_topics: Py = __unpk5674[1].clone(); __out.push(Py::Bool(py_contains(&sense_topics.clone(), &inherited.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }) {
+    return Py::None;
+    }
+    if py_truthy(&previous.clone()) {
+    before = call_builtin("set", &[{ let __b = mcall(&previous.clone(), "get", &[py_str("norm")]); if py_truthy(&__b) { __b } else { py_tuple(vec![]) } }]).unwrap_or_else(|e| exc::raise(e));
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&tiers.clone()) { let __unpk5290 = py_unpack(&__item.clone(), 2, None); let mut cues: Py = __unpk5290[0].clone(); let mut _sense_topics: Py = __unpk5290[1].clone(); __out.push(bitand(&before.clone(), &cues.clone())); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    return Py::None;
+    }
+    }
+    after = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&slice_or_raise(&content.clone(), &Py::Int(1), &Py::Int(9), &Py::None)) { let mut at: Py = __item.clone(); __out.push(geti(&norm.clone(), &at.clone())); } py_list(__out) })() };
+    if py_truthy(&Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&after.clone()) { let mut other: Py = __item.clone(); __out.push(Py::Bool(py_contains(&g__A_STATE_VERB(), &other.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))))) {
+    return Py::None;
+    }
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&tiers.clone()) { let __unpk3774 = py_unpack(&__item.clone(), 2, None); let mut cues: Py = __unpk3774[0].clone(); let mut _sense_topics: Py = __unpk3774[1].clone(); __out.push(_sense_cue(&[norm.clone(), py_list(vec![first.clone()]), py_tuple(vec![py_tuple(vec![g_TWO_LIVES_REACH(), cues.clone()])])])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    return Py::None;
+    }
+    return word.clone();
+    Py::None
+}
+pub fn _teething_is_a_fault(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let _ = py_str("True when \"teething\" is a new thing finding its feet, not a child cutting teeth.");
+    return { let __b = call_builtin("bool", &[bitand(&call_builtin("set", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)), &g_TEETHING_IS_A_FAULT())]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&bitand(&call_builtin("set", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)), &g_TEETHING_AND_A_CHILD()))) } };
+    Py::None
+}
+pub fn the_warmth_said(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut at: Py = Py::None;
+    let mut back: Py = Py::None;
+    let mut habit: Py = Py::None;
+    let mut person: Py = Py::None;
+    let mut rest: Py = Py::None;
+    let mut who: Py = Py::None;
+    let mut word: Py = Py::None;
+    let _ = py_str("The word for how warm somebody is, when that is what the line says: \"cold\", \"hot\", else None.\n\n    Read over the whole sentence rather than the word: a person, then is/are/feels, then the\n    warmth with no more than a degree word or two in between, then nothing but when it was. So\n    \"my mum is cold\" and \"the kids are cold\" are the warmth, and \"my mum has a cold\", \"my mum\n    is full of cold\", \"my mum is cold all the time\" and \"my hands are cold\" are all something\n    else and keep the reading they had. A habit is not this turn's question either: \"my mum is\n    always cold\" runs like \"cold all the time\" and \"my dad is always hot\" runs like it too. The\n    hot side answers the same question from the other end: \"my nan is boiling\" and \"my son is\n    shivery\" are a temperature to take, not a shrug.\n    ");
+    let __iter1 = py_iter_or_raise(&call_builtin("enumerate", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter1 {
+    let __unpk2 = py_unpack(&__item.clone(), 2, None);
+    at = __unpk2[0].clone();
+    word = __unpk2[1].clone();
+    if py_truthy(&Py::Bool(!py_contains(&g_WARMTH_WORDS(), &word.clone()))) {
+    continue;
+    }
+    back = sub(&at.clone(), &Py::Int(1));
+    habit = Py::Bool(false);
+    while py_truthy(&{ let __b = ge(&back.clone(), &Py::Int(0)); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_WARMTH_DEGREE(), &geti(&norm.clone(), &back.clone()))) } }) {
+    if py_truthy(&Py::Bool(py_contains(&g_WARMTH_HABITUAL(), &geti(&norm.clone(), &back.clone())))) {
+    habit = Py::Bool(true);
+    }
+    let __aug3 = sub(&back.clone(), &Py::Int(1));
+    back = __aug3;
+    }
+    if py_truthy(&{ let __b = lt(&back.clone(), &Py::Int(1)); if py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&g_WARMTH_ARE(), &geti(&norm.clone(), &back.clone()))) } }) {
+    continue;
+    }
+    if py_truthy(&habit.clone()) {
+    continue;
+    }
+    who = geti(&norm.clone(), &sub(&back.clone(), &Py::Int(1)));
+    if py_truthy(&Py::Bool(py_contains(&g_COLD_PEOPLE(), &who.clone()))) {
+    person = Py::Bool(true);
+    } else {
+    if py_truthy(&Py::Bool(py_contains(&g_PERSON_WORDS(), &who.clone()))) {
+    person = Py::Bool(true);
+    } else {
+    if py_truthy(&{ let __b = mcall(&who.clone(), "endswith", &[py_str("s")]); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_PERSON_WORDS(), &slice_or_raise(&who.clone(), &Py::None, &neg(&Py::Int(1)), &Py::None))) } }) {
+    person = Py::Bool(true);
+    } else {
+    person = Py::Bool(false);
+    }
+    }
+    }
+    if py_truthy(&Py::Bool(!py_truthy(&person.clone()))) {
+    continue;
+    }
+    rest = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&slice_or_raise(&norm.clone(), &add(&at.clone(), &Py::Int(1)), &Py::None, &Py::None)) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&g_WARMTH_THEN(), &word.clone()))) {  __out.push(word.clone()); } } py_list(__out) })() };
+    if py_truthy(&{ let __b = rest.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&py_tuple(vec![py_str("."), py_str("!"), py_str("?"), py_str(",")]), &geti(&rest.clone(), &Py::Int(0)))) } }) {
+    continue;
+    }
+    return word.clone();
+    }
+    return Py::None;
+    Py::None
+}
+pub fn _means_something_else(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut position: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "position") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: position"))) };
+    let mut tiers: Py = Py::None;
+    let _ = py_str("True when the word at `position` names another thing in this line (SENSE_ELSEWHERE).");
+    if py_truthy(&{ let __b = Py::Bool(py_eq(&geti(&norm.clone(), &position.clone()), &py_str("teething"))); if !py_truthy(&__b) { __b } else { _teething_is_a_fault(&[norm.clone()]) } }) {
+    return Py::Bool(true);
+    }
+    tiers = mcall(&g_SENSE_ELSEWHERE_FORMS(), "get", &[geti(&norm.clone(), &position.clone())]);
+    if py_truthy(&Py::Bool(!py_truthy(&tiers.clone()))) {
+    return Py::Bool(false);
+    }
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_BODY_TWO_LIFE(), &geti(&norm.clone(), &position.clone()))); if !py_truthy(&__b) { __b } else { { let __b = position.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_OWNING_WORDS(), &geti(&norm.clone(), &sub(&position.clone(), &Py::Int(1))))) } } } }) {
+    return Py::Bool(true);
+    }
+    return _sense_cue(&[norm.clone(), py_list(vec![position.clone()]), tiers.clone()]);
+    Py::None
+}
+pub fn says_another_thing(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut text: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "text") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: text"))) };
+    let mut at: Py = Py::None;
+    let mut norm: Py = Py::None;
+    let mut word: Py = Py::None;
+    let _ = py_str("The two-life words in a line that a cue has taken to their other life, as a set.\n\n    `text` is a normalised line, so the words are split on anything that is not one.\n    ");
+    norm = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&stdlib_call("re", "split", &[py_str("[^a-z0-9]+"), mcall(&call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[])]).unwrap_or_else(|e| exc::raise(e))) { let mut word: Py = __item.clone(); if py_truthy(&word.clone()) {  __out.push(word.clone()); } } py_list(__out) })() };
+    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&names_another_thing(&[norm.clone()])) { let mut at: Py = __item.clone(); __out.push(geti(&norm.clone(), &at.clone())); } py_set(__out) })() };
+    Py::None
+}
+pub fn names_another_thing(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut at: Py = Py::None;
+    let mut word: Py = Py::None;
+    let _ = py_str("The positions in `norm` of two-life words a cue has taken to their other life.\n\n    The topics read drops these words; a table that looks for a dish by name has its own match\n    and needs the same answer, or \"how do i check my breasts for lumps\" keeps the chicken and\n    \"a lump in my breast\" does not.\n    ");
+    return call_builtin("frozenset", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk694 = py_unpack(&__item.clone(), 2, None); let mut at: Py = __unpk694[0].clone(); let mut word: Py = __unpk694[1].clone(); if py_truthy(&{ let __b = Py::Bool(py_contains(&g_SENSE_ELSEWHERE_FORMS(), &word.clone())); if !py_truthy(&__b) { __b } else { _means_something_else(&[norm.clone(), at.clone()]) } }) {  __out.push(at.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    Py::None
+}
+pub fn is_a_machine_word(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut text: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "text") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: text"))) };
+    let mut phrase: Py = Py::None;
+    let mut said: Py = Py::None;
+    let mut words: Py = Py::None;
+    let _ = py_str("True when the line's \"mouse\" is the computer part, not the animal.\n\n    \"my mouse isnt working\", \"i lost my mouse\" and \"my mouse battery is dead\" are the device;\n    \"we have mice in the kitchen\", \"my cat caught a mouse\" and \"my pet mouse died\" are not.\n    A line with no cue at all (\"my mouse\") is read as the device, which is the everyday meaning.\n    ");
+    said = mcall(&mcall(&call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]), "replace", &[py_str("'"), py_str("")]);
+    words = call_builtin("set", &[stdlib_call("re", "split", &[py_str("[^a-z]+"), said.clone()]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e));
+    if py_truthy(&{ let __b = Py::Bool(!py_contains(&words.clone(), &py_str("mouse"))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_contains(&words.clone(), &py_str("mice"))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&words.clone(), &py_str("mousepad"))) } } } }) {
+    return Py::Bool(false);
+    }
+    if py_truthy(&Py::Bool(py_contains(&words.clone(), &py_str("mice")))) {
+    return Py::Bool(false);
+    }
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_MACHINE_WORD_PHRASES()) { let mut phrase: Py = __item.clone(); __out.push(Py::Bool(py_contains(&said.clone(), &phrase.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    return Py::Bool(false);
+    }
+    return Py::Bool(!py_truthy(&bitand(&words.clone(), &geti(&g_MACHINE_WORD_CUES(), &py_str("mouse")))));
+    Py::None
+}
+pub fn _the_sense_the_cues_name(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut position: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "position") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: position"))) };
+    let mut word: Py = if __pos.len() > 2 { __pos[2].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "word") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: word"))) };
+    let mut _topic: Py = Py::None;
+    let mut tiers: Py = Py::None;
+    let _ = py_str("True when a cue word beside this one names the other sense of a two-life word.\n\n    \"a mole in the garden\" is the lawn's, though \"mole\" on its own is the doctor's, and \"the\n    stock market\" is money though \"stock\" alone is the shop's. The word keeps its own weight\n    only where nothing beside it says which thing is meant.\n    ");
+    let __iter1 = py_iter_or_raise(&mcall(&g__SENSE_TIERS(), "get", &[word.clone(), py_tuple(vec![])]));
+    for __item in __iter1 {
+    let __unpk2 = py_unpack(&__item.clone(), 2, None);
+    _topic = __unpk2[0].clone();
+    tiers = __unpk2[1].clone();
+    if py_truthy(&_sense_cue(&[norm.clone(), py_list(vec![position.clone()]), tiers.clone()])) {
+    return Py::Bool(true);
+    }
+    }
+    return Py::Bool(false);
+    Py::None
+}
+pub fn _sense_cue(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut positions: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "positions") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: positions"))) };
+    let mut tiers: Py = if __pos.len() > 2 { __pos[2].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "tiers") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: tiers"))) };
+    let mut cue_at: Py = Py::None;
+    let mut cues: Py = Py::None;
+    let mut reach: Py = Py::None;
+    let mut spot: Py = Py::None;
+    let mut word: Py = Py::None;
+    let _ = py_str("True when a cue word sits near one of the two-life words (see SENSE_PAIRS).");
+    let __iter1 = py_iter_or_raise(&call_builtin("enumerate", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter1 {
+    let __unpk2 = py_unpack(&__item.clone(), 2, None);
+    cue_at = __unpk2[0].clone();
+    word = __unpk2[1].clone();
+    let __iter3 = py_iter_or_raise(&tiers.clone());
+    for __item in __iter3 {
+    let __unpk4 = py_unpack(&__item.clone(), 2, None);
+    reach = __unpk4[0].clone();
+    cues = __unpk4[1].clone();
+    if py_truthy(&Py::Bool(!py_contains(&cues.clone(), &word.clone()))) {
+    continue;
+    }
+    let __iter5 = py_iter_or_raise(&positions.clone());
+    for __item in __iter5 {
+    spot = __item.clone();
+    if py_truthy(&if py_truthy(&le(&sub(&spot.clone(), &reach.clone()), &{ let __cmp60 = cue_at.clone(); __cmp60.clone() })) { le(&__cmp60.clone(), &add(&spot.clone(), &reach.clone())) } else { Py::Bool(false) }) {
+    return Py::Bool(true);
+    }
+    }
+    }
+    }
+    return Py::Bool(false);
+    Py::None
+}
+pub fn _index(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut add: Py = Py::None;
+    let mut key: Py = Py::None;
+    let mut name: Py = Py::None;
+    let mut ordinary: Py = Py::None;
+    let mut phrase: Py = Py::None;
+    let mut phrases: Py = Py::None;
+    let mut table: Py = Py::None;
+    let mut topic: Py = Py::None;
+    let mut word: Py = Py::None;
+    let mut words: Py = Py::None;
+    let _ = py_str("word/phrase -> [(topic, weight)], built once from the data above.");
+    table = py_dict(vec![]);
+pub fn __nested_add_0(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = args.to_vec();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    let mut __split = __pos.len();
+    for (i, a) in args.iter().enumerate() { if let Py::Kwargs(kws) = a { __split = i; for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } break; } }
+    let __pos = &args[..__split];
+    let mut add: Py = __pos.get(0).cloned().unwrap_or(Py::None);
+    let mut key: Py = __pos.get(1).cloned().unwrap_or(Py::None);
+    let mut name: Py = __pos.get(2).cloned().unwrap_or(Py::None);
+    let mut ordinary: Py = __pos.get(3).cloned().unwrap_or(Py::None);
+    let mut phrase: Py = __pos.get(4).cloned().unwrap_or(Py::None);
+    let mut phrases: Py = __pos.get(5).cloned().unwrap_or(Py::None);
+    let mut table: Py = __pos.get(6).cloned().unwrap_or(Py::None);
+    let mut topic: Py = __pos.get(7).cloned().unwrap_or(Py::None);
+    let mut word: Py = __pos.get(8).cloned().unwrap_or(Py::None);
+    let mut words: Py = __pos.get(9).cloned().unwrap_or(Py::None);
+    let mut key: Py = __pos.get(10).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "key").map(|(_, v)| v.clone())).unwrap_or(Py::None);
+    let mut topic: Py = __pos.get(11).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "topic").map(|(_, v)| v.clone())).unwrap_or(Py::None);
+    let mut weight: Py = __pos.get(12).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "weight").map(|(_, v)| v.clone())).unwrap_or(Py::None);
+    let mut entries: Py = Py::None;
+    let mut index: Py = Py::None;
+    let mut points: Py = Py::None;
+    let mut seen: Py = Py::None;
+    entries = mcall(&table.clone(), "setdefault", &[key.clone(), py_list(vec![])]);
+    let __iter1 = py_iter_or_raise(&call_builtin("enumerate", &[entries.clone()]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter1 {
+    let __unpk2 = py_unpack(&__item.clone(), 2, None);
+    index = __unpk2[0].clone();
+    let __unpk3 = py_unpack(&__unpk2[1].clone(), 2, None);
+    seen = __unpk3[0].clone();
+    points = __unpk3[1].clone();
+    if py_truthy(&Py::Bool(py_eq(&seen.clone(), &topic.clone()))) {
+    if py_truthy(&gt(&weight.clone(), &points.clone())) {
+    let _ = py_setitem(&entries.clone(), &index.clone(), py_tuple(vec![topic.clone(), weight.clone()]));
+    }
+    return Py::None;
+    }
+    }
+    let _ = mcall(&entries.clone(), "append", &[py_tuple(vec![topic.clone(), weight.clone()])]);
+    Py::None
+}
+    add = py_func("add", move |args: &[Py]| { let mut full = vec![add.clone(), key.clone(), name.clone(), ordinary.clone(), phrase.clone(), phrases.clone(), table.clone(), topic.clone(), word.clone(), words.clone()]; full.extend_from_slice(args); __nested_add_0(&full) });
+    let __iter2 = py_iter_or_raise(&mcall(&g_STRONG(), "items", &[]));
+    for __item in __iter2 {
+    let __unpk3 = py_unpack(&__item.clone(), 2, None);
+    topic = __unpk3[0].clone();
+    words = __unpk3[1].clone();
+    let __iter4 = py_iter_or_raise(&mcall(&words.clone(), "split", &[]));
+    for __item in __iter4 {
+    word = __item.clone();
+    if py_truthy(&Py::Bool(!py_contains(&g_GENERIC(), &word.clone()))) {
+    let _ = py_call(&add, &[word.clone(), topic.clone(), Py::Int(2)]);
+    }
+    }
+    }
+    let __iter5 = py_iter_or_raise(&mcall(&g_WEAK(), "items", &[]));
+    for __item in __iter5 {
+    let __unpk6 = py_unpack(&__item.clone(), 2, None);
+    topic = __unpk6[0].clone();
+    words = __unpk6[1].clone();
+    let __iter7 = py_iter_or_raise(&mcall(&words.clone(), "split", &[]));
+    for __item in __iter7 {
+    word = __item.clone();
+    if py_truthy(&Py::Bool(!py_contains(&g_GENERIC(), &word.clone()))) {
+    let _ = py_call(&add, &[word.clone(), topic.clone(), Py::Int(1)]);
+    }
+    }
+    }
+    let __iter8 = py_iter_or_raise(&g_CAR_NAMES());
+    for __item in __iter8 {
+    name = __item.clone();
+    let _ = py_call(&add, &[name.clone(), py_str("cars"), Py::Int(2)]);
+    }
+    let __iter9 = py_iter_or_raise(&mcall(&g_PHRASES(), "items", &[]));
+    for __item in __iter9 {
+    let __unpk10 = py_unpack(&__item.clone(), 2, None);
+    topic = __unpk10[0].clone();
+    phrases = __unpk10[1].clone();
+    let __iter11 = py_iter_or_raise(&phrases.clone());
+    for __item in __iter11 {
+    phrase = __item.clone();
+    key = mcall(&py_str(" "), "join", &[mcall(&mcall(&g__BREAKS(), "sub", &[py_str(" "), phrase.clone()]), "split", &[])]);
+    if py_truthy(&{ let __b = key.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&g_GENERIC(), &key.clone())) } }) {
+    ordinary = call_builtin("all", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&key.clone(), "split", &[])) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&g_ORDINARY_VERBS(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    let _ = py_call(&add, &[key.clone(), topic.clone(), if py_truthy(&{ let __b = Py::Bool(py_contains(&g_ASK_PHRASES(), &key.clone())); if py_truthy(&__b) { __b } else { ordinary.clone() } }) { Py::Int(1) } else { Py::Int(3) }]);
+    }
+    }
+    }
+    return table.clone();
+    Py::None
+}
+pub fn _takes_an_object(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut position: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "position") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: position"))) };
+    let _ = py_str("True when a word at `position` is followed by a determiner and the thing it names.");
+    return { let __b = lt(&add(&position.clone(), &Py::Int(1)), &call_builtin("len", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e))); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_DETERMINERS(), &geti(&norm.clone(), &add(&position.clone(), &Py::Int(1))))) } };
+    Py::None
+}
+pub fn _acts_on_a_thing(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut topic: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "topic") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: topic"))) };
+    let mut words: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "words") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: words"))) };
+    let mut norm: Py = if __pos.len() > 2 { __pos[2].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut start: Py = if __pos.len() > 3 { __pos[3].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "start") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: start"))) };
+    let mut offset: Py = Py::None;
+    let mut word: Py = Py::None;
+    let _ = py_str("True when a verb cue in these words is followed by the thing it acts on: \"revise my cv\".\n    The test runs after the cue itself, not after the whole phrase.");
+    let __iter1 = py_iter_or_raise(&call_builtin("enumerate", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter1 {
+    let __unpk2 = py_unpack(&__item.clone(), 2, None);
+    offset = __unpk2[0].clone();
+    word = __unpk2[1].clone();
+    if py_truthy(&Py::Bool(py_contains(&mcall(&g_VERB_CUES(), "get", &[topic.clone(), py_tuple(vec![])]), &word.clone()))) {
+    return _takes_an_object(&[norm.clone(), add(&start.clone(), &offset.clone())]);
+    }
+    }
+    return Py::Bool(false);
+    Py::None
+}
+pub fn _thing_a_cue_acts_on(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut position: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "position") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: position"))) };
+    let mut index: Py = Py::None;
+    let mut noun: Py = Py::None;
+    let _ = py_str("The head noun of the thing after a cue, or \"\" when it names nothing: \"the pan\",\n    \"the bottom of the pan\" -> pan.");
+    if py_truthy(&Py::Bool(!py_truthy(&_takes_an_object(&[norm.clone(), position.clone()])))) {
+    return py_str("");
+    }
+    index = add(&position.clone(), &Py::Int(2));
+    noun = if py_truthy(&lt(&index.clone(), &call_builtin("len", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)))) { geti(&norm.clone(), &index.clone()) } else { py_str("") };
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_DEGREE_NOUNS(), &noun.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&{ let __b = lt(&add(&index.clone(), &Py::Int(1)), &call_builtin("len", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e))); if !py_truthy(&__b) { __b } else { Py::Bool(py_eq(&geti(&norm.clone(), &add(&index.clone(), &Py::Int(1))), &py_str("of"))) } })) } }) {
+    return py_str("");
+    }
+    while py_truthy(&{ let __b = lt(&add(&index.clone(), &Py::Int(1)), &call_builtin("len", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e))); if !py_truthy(&__b) { __b } else { Py::Bool(py_eq(&geti(&norm.clone(), &add(&index.clone(), &Py::Int(1))), &py_str("of"))) } }) {
+    let __aug1 = add(&index.clone(), &Py::Int(2));
+    index = __aug1;
+    if py_truthy(&{ let __b = lt(&index.clone(), &call_builtin("len", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e))); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_DETERMINERS(), &geti(&norm.clone(), &index.clone()))) } }) {
+    let __aug2 = add(&index.clone(), &Py::Int(1));
+    index = __aug2;
+    }
+    noun = if py_truthy(&lt(&index.clone(), &call_builtin("len", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)))) { geti(&norm.clone(), &index.clone()) } else { noun.clone() };
+    }
+    return noun.clone();
+    Py::None
+}
+pub fn _acts_on_the_body(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut position: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "position") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: position"))) };
+    let mut after: Py = Py::None;
+    let mut index: Py = Py::None;
+    let mut others: Py = Py::None;
+    let mut thing: Py = Py::None;
+    let mut topic: Py = Py::None;
+    let mut weight: Py = Py::None;
+    let mut word: Py = Py::None;
+    let _ = py_str("True when a burn or a cut at `position` is on the body, or names nothing at all.");
+    thing = _thing_a_cue_acts_on(&[norm.clone(), position.clone()]);
+    if py_truthy(&thing.clone()) {
+    return Py::Bool(py_contains(&g_BODY_OR_SELF(), &thing.clone()));
+    }
+    after = slice_or_raise(&norm.clone(), &add(&position.clone(), &Py::Int(1)), &add(&position.clone(), &Py::Int(2)), &Py::None);
+    if py_truthy(&{ let __b = after.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_contains(&g_BODY_OR_SELF(), &geti(&after.clone(), &Py::Int(0)))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&g_CUE_CARRIERS(), &geti(&after.clone(), &Py::Int(0)))) } } } }) {
+    others = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk1235 = py_unpack(&__item.clone(), 2, None); let mut index: Py = __unpk1235[0].clone(); let mut word: Py = __unpk1235[1].clone(); if py_truthy(&{ let __b = Py::Bool(!py_eq(&index.clone(), &position.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&g_POLY_FORMS(), &word.clone())) } }) {  for __item in py_iter_or_raise(&_lookup(&[word.clone()])) { let __unpk356 = py_unpack(&__item.clone(), 2, None); let mut topic: Py = __unpk356[0].clone(); let mut weight: Py = __unpk356[1].clone(); if py_truthy(&{ let __b = ge(&weight.clone(), &Py::Int(2)); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&py_tuple(vec![py_str("health"), py_str("small-talk")]), &topic.clone())) } }) {  __out.push(topic.clone()); } } } } py_set(__out) })() };
+    return Py::Bool(!py_truthy(&others.clone()));
+    }
+    return Py::Bool(true);
+    Py::None
+}
+pub fn _is_run_out(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut position: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "position") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: position"))) };
+    let _ = py_str("True when the word at `position` is the `run` of \"run out of\" rather than a run.");
+    return { let __b = Py::Bool(py_contains(&g_RUN_OUT_BEFORE(), &geti(&norm.clone(), &position.clone()))); if !py_truthy(&__b) { __b } else { { let __b = lt(&add(&position.clone(), &Py::Int(1)), &call_builtin("len", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e))); if !py_truthy(&__b) { __b } else { Py::Bool(py_eq(&geti(&norm.clone(), &add(&position.clone(), &Py::Int(1))), &py_str("out"))) } } } };
+    Py::None
+}
+pub fn _watches_out_for(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut words: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "words") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: words"))) };
+    let mut norm: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut end: Py = if __pos.len() > 2 { __pos[2].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "end") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: end"))) };
+    let _ = py_str("True when the watching in this phrase is followed by the for or out of \"watch for\".");
+    return { let __b = slice_or_raise(&words.clone(), &neg(&Py::Int(1)), &Py::None, &Py::None); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&g_WATCHING(), &geti(&words.clone(), &neg(&Py::Int(1))))); if !py_truthy(&__b) { __b } else { { let __b = lt(&end.clone(), &call_builtin("len", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e))); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_WATCH_OUT_AFTER(), &geti(&norm.clone(), &end.clone()))) } } } } } };
+    Py::None
+}
+pub fn _says_nothing_here(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut topic: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "topic") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: topic"))) };
+    let mut words: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "words") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: words"))) };
+    let mut norm: Py = if __pos.len() > 2 { __pos[2].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut start: Py = if __pos.len() > 3 { __pos[3].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "start") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: start"))) };
+    let mut study: Py = if __pos.len() > 4 { __pos[4].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "study") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: study"))) };
+    let mut rest: Py = Py::None;
+    let mut topic_: Py = Py::None;
+    let mut weight: Py = Py::None;
+    let mut word: Py = Py::None;
+    let _ = py_str("True when this word or phrase cannot name `topic` in this line: the same words are an\n    ordinary verb here, and the line does not say what they act on.");
+    if py_truthy(&_watches_out_for(&[words.clone(), norm.clone(), add(&start.clone(), &call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)))])) {
+    return Py::Bool(true);
+    }
+    if py_truthy(&{ let __b = Py::Bool(py_eq(&topic.clone(), &py_str("family-and-parenting"))); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&mcall(&py_str(" "), "join", &[words.clone()]), &py_str("health visitor"))) } }) {
+    rest = mcall(&mcall(&mcall(&py_str(" "), "join", &[norm.clone()]), "replace", &[py_str("health visitor"), py_str(" ")]), "replace", &[py_str("health visitors"), py_str(" ")]);
+    let __iter1 = py_iter_or_raise(&mcall(&rest.clone(), "split", &[]));
+    for __item in __iter1 {
+    word = __item.clone();
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&_lookup(&[word.clone()])) { let __unpk2849 = py_unpack(&__item.clone(), 2, None); let mut topic_: Py = __unpk2849[0].clone(); let mut weight: Py = __unpk2849[1].clone(); __out.push({ let __b = Py::Bool(py_eq(&topic_.clone(), &py_str("health"))); if !py_truthy(&__b) { __b } else { ge(&weight.clone(), &Py::Int(2)) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    return Py::Bool(true);
+    }
+    }
+    }
+    if py_truthy(&{ let __b = Py::Bool(py_eq(&call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1))); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_BODY_CUES(), &geti(&words.clone(), &Py::Int(0)))) } }) {
+    return Py::Bool(!py_truthy(&_acts_on_the_body(&[norm.clone(), start.clone()])));
+    }
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&mcall(&g_VERB_CUES(), "get", &[topic.clone(), py_tuple(vec![])]), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    return { let __b = _acts_on_a_thing(&[topic.clone(), words.clone(), norm.clone(), start.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&study.clone())) } };
+    }
+    return Py::Bool(false);
+    Py::None
+}
+pub fn _age_value(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut word: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "word") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: word"))) };
+    let mut digits: Py = Py::None;
+    let mut value: Py = Py::None;
+    let _ = py_str("The number a child's age is said with, or a large value when it is not a small count.");
+    value = mcall(&g_WORD_NUMBERS(), "get", &[word.clone()]);
+    if py_truthy(&Py::Bool(py_is(&value.clone(), &Py::None))) {
+    digits = mcall(&g_WORD_DIGITS(), "match", &[word.clone()]);
+    value = if py_truthy(&digits.clone()) { call_builtin("float", &[mcall(&mcall(&digits.clone(), "group", &[Py::Int(0)]), "replace", &[py_str(","), py_str(".")])]).unwrap_or_else(|e| exc::raise(e)) } else { Py::Int(99) };
+    }
+    return value.clone();
+    Py::None
+}
+pub fn _ages_of_a_child(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut ages: Py = Py::None;
+    let mut number_at: Py = Py::None;
+    let mut position: Py = Py::None;
+    let mut word: Py = Py::None;
+    let _ = py_str("The positions of a \"a 7 year old\" in this line: a child, not a machine's age.");
+    ages = py_list(vec![]);
+    let __iter1 = py_iter_or_raise(&call_builtin("enumerate", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter1 {
+    let __unpk2 = py_unpack(&__item.clone(), 2, None);
+    position = __unpk2[0].clone();
+    word = __unpk2[1].clone();
+    if py_truthy(&{ let __b = Py::Bool(!py_contains(&g_AGE_NOUNS(), &word.clone())); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_eq(&position.clone(), &Py::Int(0))); if py_truthy(&__b) { __b } else { ge(&add(&position.clone(), &Py::Int(1)), &call_builtin("len", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e))) } } } }) {
+    continue;
+    }
+    if py_truthy(&Py::Bool(!py_eq(&geti(&norm.clone(), &add(&position.clone(), &Py::Int(1))), &py_str("old")))) {
+    continue;
+    }
+    number_at = sub(&position.clone(), &Py::Int(1));
+    if py_truthy(&Py::Bool(py_contains(&g_AGE_AFTER(), &geti(&norm.clone(), &number_at.clone())))) {
+    continue;
+    }
+    if py_truthy(&{ let __b = Py::Bool(py_eq(&number_at.clone(), &Py::Int(0))); if py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&g_DETERMINERS(), &geti(&norm.clone(), &sub(&number_at.clone(), &Py::Int(1))))) } }) {
+    continue;
+    }
+    if py_truthy(&gt(&truediv(&_age_value(&[geti(&norm.clone(), &number_at.clone())]), &geti(&g_AGE_IN_A_YEAR(), &word.clone())), &g_A_CHILD_TILL())) {
+    continue;
+    }
+    let _ = mcall(&ages.clone(), "append", &[number_at.clone()]);
+    }
+    return ages.clone();
+    Py::None
+}
+pub fn _a_book_for_a_child(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut child_ages: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "child_ages") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: child_ages"))) };
+    let mut after: Py = Py::None;
+    let mut age: Py = Py::None;
+    let mut position: Py = Py::None;
+    let mut tail: Py = Py::None;
+    let mut word: Py = Py::None;
+    let _ = py_str("The position of \"book for a 10 year old\" in this line, or None.");
+    let __iter1 = py_iter_or_raise(&call_builtin("enumerate", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter1 {
+    let __unpk2 = py_unpack(&__item.clone(), 2, None);
+    position = __unpk2[0].clone();
+    word = __unpk2[1].clone();
+    if py_truthy(&{ let __b = Py::Bool(!py_contains(&g_BOOK_WORDS(), &word.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_eq(&slice_or_raise(&norm.clone(), &add(&position.clone(), &Py::Int(1)), &add(&position.clone(), &Py::Int(2)), &Py::None), &py_list(vec![py_str("for")]))) } }) {
+    continue;
+    }
+    after = add(&position.clone(), &Py::Int(2));
+    tail = slice_or_raise(&norm.clone(), &after.clone(), &add(&after.clone(), &Py::Int(5)), &Py::None);
+    if py_truthy(&bitand(&call_builtin("set", &[tail.clone()]).unwrap_or_else(|e| exc::raise(e)), &g_A_CHILD_TO_READ_FOR())) {
+    return position.clone();
+    }
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&child_ages.clone()) { let mut age: Py = __item.clone(); __out.push(if py_truthy(&le(&after.clone(), &{ let __cmp10 = age.clone(); __cmp10.clone() })) { le(&__cmp10.clone(), &add(&after.clone(), &Py::Int(3))) } else { Py::Bool(false) }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    return position.clone();
+    }
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&tail.clone(), &py_str("year"))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&tail.clone(), &py_str("old"))); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&tail.clone(), &py_str("olds"))) } } } }) {
+    return position.clone();
+    }
+    }
+    return Py::None;
+    Py::None
+}
+pub fn _drives_a_person(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut position: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "position") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: position"))) };
+    let mut tail: Py = Py::None;
+    let _ = py_str("True for \"driving me mad\": a person object and then a mood, not a destination.");
+    if py_truthy(&Py::Bool(!py_contains(&g_DRIVES(), &geti(&norm.clone(), &position.clone())))) {
+    return Py::Bool(false);
+    }
+    if py_truthy(&{ let __b = Py::Bool(!py_eq(&slice_or_raise(&norm.clone(), &add(&position.clone(), &Py::Int(1)), &add(&position.clone(), &Py::Int(2)), &Py::None), &py_list(vec![]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&g_DRIVEN_PERSON(), &geti(&norm.clone(), &add(&position.clone(), &Py::Int(1))))) } }) {
+    return Py::Bool(false);
+    }
+    if py_truthy(&Py::Bool(!py_truthy(&slice_or_raise(&norm.clone(), &add(&position.clone(), &Py::Int(1)), &add(&position.clone(), &Py::Int(2)), &Py::None)))) {
+    return Py::Bool(false);
+    }
+    tail = slice_or_raise(&norm.clone(), &add(&position.clone(), &Py::Int(2)), &add(&position.clone(), &Py::Int(7)), &Py::None);
+    return call_builtin("bool", &[{ let __b = bitand(&call_builtin("set", &[tail.clone()]).unwrap_or_else(|e| exc::raise(e)), &g_DRIVEN_MOOD()); if py_truthy(&__b) { __b } else { { let __b = bitand(&call_builtin("set", &[tail.clone()]).unwrap_or_else(|e| exc::raise(e)), &g_DRIVEN_TAIL()); if !py_truthy(&__b) { __b } else { bitand(&call_builtin("set", &[tail.clone()]).unwrap_or_else(|e| exc::raise(e)), &g_DRIVEN_JOINERS()) } } } }]).unwrap_or_else(|e| exc::raise(e));
+    Py::None
+}
+pub fn _idiom_positions(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut at: Py = Py::None;
+    let mut joined: Py = Py::None;
+    let mut needle: Py = Py::None;
+    let mut phrase: Py = Py::None;
+    let mut spots: Py = Py::None;
+    let mut start: Py = Py::None;
+    let _ = py_str("The positions taken by a phrase in `IDIOM_PHRASES`, or an empty set.\n\n    Only a whole phrase counts, so `moon` on its own is still the sky, `cake` on its own is\n    still to eat, and `my feet are killing me` is still about feet.\n    ");
+    spots = call_builtin("set", &[]).unwrap_or_else(|e| exc::raise(e));
+    joined = add(&add(&py_str(" "), &mcall(&py_str(" "), "join", &[norm.clone()])), &py_str(" "));
+    let __iter1 = py_iter_or_raise(&g_IDIOM_PHRASES());
+    for __item in __iter1 {
+    phrase = __item.clone();
+    needle = add(&add(&py_str(" "), &mcall(&py_str(" "), "join", &[phrase.clone()])), &py_str(" "));
+    start = Py::Int(0);
+    while py_truthy(&Py::Bool(true)) {
+    at = mcall(&joined.clone(), "find", &[needle.clone(), start.clone()]);
+    if py_truthy(&lt(&at.clone(), &Py::Int(0))) {
+    break;
+    }
+    let _ = mcall(&spots.clone(), "update", &[call_builtin("range", &[call_builtin("len", &[mcall(&slice_or_raise(&joined.clone(), &Py::None, &at.clone(), &Py::None), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), add(&call_builtin("len", &[mcall(&slice_or_raise(&joined.clone(), &Py::None, &at.clone(), &Py::None), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("len", &[phrase.clone()]).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))]);
+    start = add(&at.clone(), &Py::Int(1));
+    }
+    }
+    return spots.clone();
+    Py::None
+}
+pub fn _bad_verdict_positions(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut position: Py = Py::None;
+    let _ = py_str("The positions of a verdict on a thing: \"my landlord is a joke\", \"the nhs is a shambles\".\n\n    The noun is what the person thinks of the thing they named, and it is not the subject of the\n    line: \"the nhs is a joke\" is about the nhs, and read as a line about a joke it went to the\n    punchline pool. Nothing inside the verdict scores a topic or names an entity, which is what\n    makes \"is a joke\" a comment on the thing in front of it.\n    ");
+    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("range", &[call_builtin("len", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e))) { let mut position: Py = __item.clone(); if py_truthy(&crate::gen::understanding::kinds::a_bad_verdict(&[norm.clone(), position.clone()])) {  __out.push(position.clone()); } } py_set(__out) })() };
+    Py::None
+}
+pub fn _drive_idiom(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut idiom: Py = Py::None;
+    let mut offset: Py = Py::None;
+    let mut position: Py = Py::None;
+    let _ = py_str("The positions of a \"driving me up the wall\" idiom: its verb, its person and its mood.\n\n    Inside the idiom no word names a thing: `wall` is not the wall of a house and `bend` is not\n    a road, so a line made of the idiom alone (`driving me up the wall`, `shes driving me round\n    the bend`) must not be read as home-and-diy or a journey. The idiom says how the speaker\n    feels, and the topic comes from whatever the line names outside it (`the kids are driving me\n    up the wall` is still family-and-parenting).\n    ");
+    idiom = call_builtin("set", &[]).unwrap_or_else(|e| exc::raise(e));
+    let __iter1 = py_iter_or_raise(&call_builtin("range", &[call_builtin("len", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter1 {
+    position = __item.clone();
+    if py_truthy(&Py::Bool(!py_truthy(&_drives_a_person(&[norm.clone(), position.clone()])))) {
+    continue;
+    }
+    let _ = mcall(&idiom.clone(), "update", &[py_tuple(vec![position.clone(), add(&position.clone(), &Py::Int(1))])]);
+    let __iter2 = py_iter_or_raise(&call_builtin("range", &[add(&position.clone(), &Py::Int(2)), call_builtin("min", &[add(&position.clone(), &Py::Int(7)), call_builtin("len", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter2 {
+    offset = __item.clone();
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_DRIVEN_MOOD(), &geti(&norm.clone(), &offset.clone()))); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&g_DRIVEN_TAIL(), &geti(&norm.clone(), &offset.clone()))); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_DRIVEN_JOINERS(), &geti(&norm.clone(), &offset.clone()))) } } } }) {
+    let _ = mcall(&idiom.clone(), "add", &[offset.clone()]);
+    }
+    }
+    }
+    return idiom.clone();
+    Py::None
+}
+pub fn _is_a_complaint(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut position: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "position") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: position"))) };
+    let _ = py_str("True when the word at `position` is \"sick of\"/\"tired of\": a complaint, not a symptom.");
+    if py_truthy(&Py::Bool(!py_contains(&g_COMPLAINT_OF(), &geti(&norm.clone(), &position.clone())))) {
+    return Py::Bool(false);
+    }
+    return { let __b = lt(&add(&position.clone(), &Py::Int(1)), &call_builtin("len", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e))); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_COMPLAINT_OF_NEXT(), &geti(&norm.clone(), &add(&position.clone(), &Py::Int(1))))) } };
+    Py::None
+}
+pub fn _function_words(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let _ = py_str("The words that are only grammar: they are never another word with an ending on.");
+    if py_truthy(&Py::Bool(py_is(&g__FUNCTION_WORDS(), &Py::None))) {
+    let __try1 = exc::catch(|| {
+    let mut STOPWORDS: Py = crate::gen::understanding::g_STOPWORDS();
+    s__FUNCTION_WORDS(call_builtin("frozenset", &[STOPWORDS.clone()]).unwrap_or_else(|e| exc::raise(e)));
+        py_tuple(vec![Py::Bool(false), Py::None])
+    });
+    let mut __ret2: Py = Py::Bool(false);
+    let mut __val3: Py = Py::None;
+    let mut __unhandled4: Option<exc::PyExc> = None;
+    match __try1 {
+        Ok(__t) => { let __p = py_iter_or_raise(&__t); __ret2 = __p[0].clone(); __val3 = __p[1].clone(); }
+        Err(__e) => {
+            let mut __handled5 = false;
+            if !__handled5 && exc::matches_any(&__e, &["Exception"]) {
+                __handled5 = true;
+    s__FUNCTION_WORDS(call_builtin("frozenset", &[]).unwrap_or_else(|e| exc::raise(e)));
+            }
+            if !__handled5 { __unhandled4 = Some(__e); }
+        }
+    }
+    if let Some(__e) = __unhandled4 { exc::raise(__e); }
+    if py_truthy(&__ret2) { return __val3; }
+    }
+    return g__FUNCTION_WORDS();
+    Py::None
+}
+pub fn _family(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut word: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "word") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: word"))) };
+    let mut ending: Py = Py::None;
+    let mut here: Py = Py::None;
+    let mut hit: Py = Py::None;
+    let mut stem: Py = Py::None;
+    let mut there: Py = Py::None;
+    let _ = py_str("The table entries for another form of this word, if the list holds that form.");
+    let __iter1 = py_iter_or_raise(&g_DERIVED_ENDINGS());
+    for __item in __iter1 {
+    ending = __item.clone();
+    if py_truthy(&mcall(&word.clone(), "endswith", &[ending.clone()])) {
+    stem = slice_or_raise(&word.clone(), &Py::None, &neg(&call_builtin("len", &[ending.clone()]).unwrap_or_else(|e| exc::raise(e))), &Py::None);
+    if py_truthy(&ge(&call_builtin("len", &[stem.clone()]).unwrap_or_else(|e| exc::raise(e)), &g_FAMILY_STEM())) {
+    hit = { let __b = mcall(&g_TABLE(), "get", &[stem.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_TABLE(), "get", &[add(&stem.clone(), &py_str("e"))]) } };
+    if py_truthy(&hit.clone()) {
+    return hit.clone();
+    }
+    }
+    }
+    if py_truthy(&{ let __b = ge(&call_builtin("len", &[word.clone()]).unwrap_or_else(|e| exc::raise(e)), &g_FAMILY_WORD()); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&_function_words(&[]), &word.clone())) } }) {
+    hit = mcall(&g_TABLE(), "get", &[add(&word.clone(), &ending.clone())]);
+    if py_truthy(&hit.clone()) {
+    return hit.clone();
+    }
+    }
+    }
+    let __iter2 = py_iter_or_raise(&g_FAMILY_PAIRS());
+    for __item in __iter2 {
+    let __unpk3 = py_unpack(&__item.clone(), 2, None);
+    here = __unpk3[0].clone();
+    there = __unpk3[1].clone();
+    if py_truthy(&mcall(&word.clone(), "endswith", &[here.clone()])) {
+    hit = mcall(&g_TABLE(), "get", &[add(&slice_or_raise(&word.clone(), &Py::None, &neg(&call_builtin("len", &[here.clone()]).unwrap_or_else(|e| exc::raise(e))), &Py::None), &there.clone())]);
+    if py_truthy(&hit.clone()) {
+    return hit.clone();
+    }
+    }
+    if py_truthy(&mcall(&word.clone(), "endswith", &[there.clone()])) {
+    hit = mcall(&g_TABLE(), "get", &[add(&slice_or_raise(&word.clone(), &Py::None, &neg(&call_builtin("len", &[there.clone()]).unwrap_or_else(|e| exc::raise(e))), &Py::None), &here.clone())]);
+    if py_truthy(&hit.clone()) {
+    return hit.clone();
+    }
+    }
+    }
+    return py_tuple(vec![]);
+    Py::None
+}
+pub fn _lookup(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut word: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "word") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: word"))) };
+    let mut family: Py = Py::None;
+    let mut hit: Py = Py::None;
+    let mut replacement: Py = Py::None;
+    let mut suffix: Py = Py::None;
+    let mut topic: Py = Py::None;
+    let mut weight: Py = Py::None;
+    let _ = py_str("The table entries for a word, also trying its singular and verb stem.");
+    hit = mcall(&g_TABLE(), "get", &[word.clone()]);
+    if py_truthy(&hit.clone()) {
+    return hit.clone();
+    }
+    let __iter1 = py_iter_or_raise(&py_tuple(vec![py_tuple(vec![py_str("ies"), py_str("y")]), py_tuple(vec![py_str("es"), py_str("")]), py_tuple(vec![py_str("s"), py_str("")]), py_tuple(vec![py_str("ing"), py_str("")]), py_tuple(vec![py_str("ing"), py_str("e")]), py_tuple(vec![py_str("ed"), py_str("")]), py_tuple(vec![py_str("ed"), py_str("e")])]));
+    for __item in __iter1 {
+    let __unpk2 = py_unpack(&__item.clone(), 2, None);
+    suffix = __unpk2[0].clone();
+    replacement = __unpk2[1].clone();
+    if py_truthy(&{ let __b = mcall(&word.clone(), "endswith", &[suffix.clone()]); if !py_truthy(&__b) { __b } else { gt(&call_builtin("len", &[word.clone()]).unwrap_or_else(|e| exc::raise(e)), &add(&call_builtin("len", &[suffix.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2))) } }) {
+    hit = mcall(&g_TABLE(), "get", &[add(&slice_or_raise(&word.clone(), &Py::None, &neg(&call_builtin("len", &[suffix.clone()]).unwrap_or_else(|e| exc::raise(e))), &Py::None), &replacement.clone())]);
+    if py_truthy(&hit.clone()) {
+    return hit.clone();
+    }
+    }
+    }
+    family = _family(&[word.clone()]);
+    if py_truthy(&family.clone()) {
+    return call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&family.clone()) { let __unpk1770 = py_unpack(&__item.clone(), 2, None); let mut topic: Py = __unpk1770[0].clone(); let mut weight: Py = __unpk1770[1].clone(); if py_truthy(&Py::Bool(!py_eq(&topic.clone(), &py_str("about-the-bot")))) {  __out.push(py_tuple(vec![topic.clone(), weight.clone()])); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    }
+    return py_tuple(vec![]);
+    Py::None
+}
+pub fn _is_a_portion(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut position: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "position") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: position"))) };
+    let mut after: Py = Py::None;
+    let _ = py_str("True for \"half a cabbage\", \"half the batter\", \"double the recipe\".\n\n    A quantity word in front of an article is a piece of a thing the line already names, which\n    is not a sum: \"ive got half a cabbage left, what can i do with it\" is a cooking line. A\n    figure after it (\"half of 80\") is arithmetic and keeps its full weight.\n    ");
+    if py_truthy(&Py::Bool(!py_contains(&g_PORTION_WORDS(), &geti(&norm.clone(), &position.clone())))) {
+    return Py::Bool(false);
+    }
+    after = slice_or_raise(&norm.clone(), &add(&position.clone(), &Py::Int(1)), &add(&position.clone(), &Py::Int(3)), &Py::None);
+    if py_truthy(&Py::Bool(!py_truthy(&after.clone()))) {
+    return Py::Bool(false);
+    }
+    if py_truthy(&Py::Bool(py_contains(&py_tuple(vec![py_str("a"), py_str("an"), py_str("the")]), &geti(&after.clone(), &Py::Int(0))))) {
+    if py_truthy(&{ let __b = gt(&call_builtin("len", &[after.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1)); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_PORTION_UNITS(), &geti(&after.clone(), &Py::Int(1)))) } }) {
+    return Py::Bool(false);
+    }
+    return Py::Bool(true);
+    }
+    return { let __b = Py::Bool(py_eq(&geti(&after.clone(), &Py::Int(0)), &py_str("of"))); if !py_truthy(&__b) { __b } else { { let __b = gt(&call_builtin("len", &[after.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1)); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&py_tuple(vec![py_str("a"), py_str("an"), py_str("the")]), &geti(&after.clone(), &Py::Int(1)))) } } } };
+    Py::None
+}
+pub fn _the_weather_is_just_a_season(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut text: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "text") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: text"))) };
+    let mut _weight: Py = Py::None;
+    let mut at: Py = Py::None;
+    let mut entries: Py = Py::None;
+    let mut key: Py = Py::None;
+    let mut spots: Py = Py::None;
+    let mut topic: Py = Py::None;
+    let mut weight: Py = Py::None;
+    let mut word: Py = Py::None;
+    let _ = py_str("True when the only weather in the line is a season word.\n\n    A season phrase (\"in the spring\", \"next winter\") counts as the season, not as weather of its\n    own. A temperature or a sky word does not: \"is it warm in the summer in spain\" is still the\n    weather.\n    ");
+    spots = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk3384 = py_unpack(&__item.clone(), 2, None); let mut at: Py = __unpk3384[0].clone(); let mut word: Py = __unpk3384[1].clone(); if py_truthy(&Py::Bool(py_contains(&g_SEASONS(), &word.clone()))) {  __out.push(at.clone()); } } py_list(__out) })() };
+    if py_truthy(&Py::Bool(!py_truthy(&spots.clone()))) {
+    return Py::Bool(false);
+    }
+    if py_truthy(&le(&call_builtin("min", &[spots.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2))) {
+    return Py::Bool(false);
+    }
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&spots.clone()) { let mut at: Py = __item.clone(); if py_truthy(&at.clone()) {  __out.push(Py::Bool(py_contains(&g_WEATHER_BEFORE(), &geti(&norm.clone(), &sub(&at.clone(), &Py::Int(1)))))); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    return Py::Bool(false);
+    }
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&norm.clone()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&g_WEATHER_ITSELF(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    return Py::Bool(false);
+    }
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&norm.clone()) { let mut word: Py = __item.clone(); for __item in py_iter_or_raise(&_lookup(&[word.clone()])) { let __unpk6024 = py_unpack(&__item.clone(), 2, None); let mut topic: Py = __unpk6024[0].clone(); let mut weight: Py = __unpk6024[1].clone(); __out.push({ let __b = Py::Bool(!py_contains(&g_SEASONS(), &word.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_eq(&topic.clone(), &py_str("nature-and-weather"))); if !py_truthy(&__b) { __b } else { ge(&weight.clone(), &Py::Int(2)) } } } }); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    return Py::Bool(false);
+    }
+    return Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_TABLE(), "items", &[])) { let __unpk7239 = py_unpack(&__item.clone(), 2, None); let mut key: Py = __unpk7239[0].clone(); let mut entries: Py = __unpk7239[1].clone(); if py_truthy(&{ let __b = Py::Bool(py_contains(&key.clone(), &py_str(" "))); if !py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&entries.clone()) { let __unpk4935 = py_unpack(&__item.clone(), 2, None); let mut topic: Py = __unpk4935[0].clone(); let mut _weight: Py = __unpk4935[1].clone(); __out.push(Py::Bool(py_eq(&topic.clone(), &py_str("nature-and-weather")))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }) {  __out.push({ let __b = Py::Bool(py_contains(&text.clone(), &key.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&bitand(&call_builtin("set", &[mcall(&key.clone(), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), &g_SEASONS()))) } }); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))));
+    Py::None
+}
+pub fn score_topics(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut line: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "line") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: line"))) };
+    let mut inherited: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "inherited") { v.clone() }
+    else { Py::None };
+    let mut _first: Py = Py::None;
+    let mut _tiers: Py = Py::None;
+    let mut _top: Py = Py::None;
+    let mut _topic: Py = Py::None;
+    let mut _weight: Py = Py::None;
+    let mut after: Py = Py::None;
+    let mut at: Py = Py::None;
+    let mut background: Py = Py::None;
+    let mut book_at: Py = Py::None;
+    let mut child_ages: Py = Py::None;
+    let mut elsewhere: Py = Py::None;
+    let mut entries: Py = Py::None;
+    let mut family_score: Py = Py::None;
+    let mut first: Py = Py::None;
+    let mut form: Py = Py::None;
+    let mut forms: Py = Py::None;
+    let mut forms_of: Py = Py::None;
+    let mut found: Py = Py::None;
+    let mut idiom: Py = Py::None;
+    let mut key: Py = Py::None;
+    let mut match_: Py = Py::None;
+    let mut named: Py = Py::None;
+    let mut norm: Py = Py::None;
+    let mut note: Py = Py::None;
+    let mut other: Py = Py::None;
+    let mut output_at: Py = Py::None;
+    let mut own: Py = Py::None;
+    let mut pattern: Py = Py::None;
+    let mut position: Py = Py::None;
+    let mut ranked: Py = Py::None;
+    let mut score: Py = Py::None;
+    let mut sense_topic: Py = Py::None;
+    let mut spots: Py = Py::None;
+    let mut start: Py = Py::None;
+    let mut stone_at: Py = Py::None;
+    let mut study: Py = Py::None;
+    let mut sums: Py = Py::None;
+    let mut text: Py = Py::None;
+    let mut text_norm: Py = Py::None;
+    let mut tiers: Py = Py::None;
+    let mut tight_at: Py = Py::None;
+    let mut top: Py = Py::None;
+    let mut topic: Py = Py::None;
+    let mut unfit: Py = Py::None;
+    let mut weight: Py = Py::None;
+    let mut word: Py = Py::None;
+    let mut words: Py = Py::None;
+    let _ = py_str("[(topic, score, best weight)] for this line, best first.\n\n    The best weight is the strongest single thing that pointed at the topic: 2 or more means a\n    distinctive word or a phrase, 1 means only ordinary words (see `subject_topic`).\n    ");
+    norm = geti(&line.clone(), &py_str("norm"));
+    text = add(&add(&py_str(" "), &geti(&line.clone(), &py_str("norm_text"))), &py_str(" "));
+    sums = _work_out_sums(&[norm.clone()]);
+    study = call_builtin("bool", &[bitand(&call_builtin("set", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)), &g_STUDY_OBJECTS())]).unwrap_or_else(|e| exc::raise(e));
+    background = crate::gen::understanding::normalize::background_positions(&[norm.clone()]);
+    let __unpk1 = py_unpack(&py_tuple(vec![py_dict(vec![]), py_dict(vec![])]), 2, None);
+    found = __unpk1[0].clone();
+    own = __unpk1[1].clone();
+pub fn __nested_note_1(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = args.to_vec();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    let mut __split = __pos.len();
+    for (i, a) in args.iter().enumerate() { if let Py::Kwargs(kws) = a { __split = i; for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } break; } }
+    let __pos = &args[..__split];
+    let mut _first: Py = __pos.get(0).cloned().unwrap_or(Py::None);
+    let mut _tiers: Py = __pos.get(1).cloned().unwrap_or(Py::None);
+    let mut _top: Py = __pos.get(2).cloned().unwrap_or(Py::None);
+    let mut _topic: Py = __pos.get(3).cloned().unwrap_or(Py::None);
+    let mut _weight: Py = __pos.get(4).cloned().unwrap_or(Py::None);
+    let mut after: Py = __pos.get(5).cloned().unwrap_or(Py::None);
+    let mut at: Py = __pos.get(6).cloned().unwrap_or(Py::None);
+    let mut background: Py = __pos.get(7).cloned().unwrap_or(Py::None);
+    let mut book_at: Py = __pos.get(8).cloned().unwrap_or(Py::None);
+    let mut child_ages: Py = __pos.get(9).cloned().unwrap_or(Py::None);
+    let mut elsewhere: Py = __pos.get(10).cloned().unwrap_or(Py::None);
+    let mut entries: Py = __pos.get(11).cloned().unwrap_or(Py::None);
+    let mut family_score: Py = __pos.get(12).cloned().unwrap_or(Py::None);
+    let mut first: Py = __pos.get(13).cloned().unwrap_or(Py::None);
+    let mut form: Py = __pos.get(14).cloned().unwrap_or(Py::None);
+    let mut forms: Py = __pos.get(15).cloned().unwrap_or(Py::None);
+    let mut forms_of: Py = __pos.get(16).cloned().unwrap_or(Py::None);
+    let mut found: Py = __pos.get(17).cloned().unwrap_or(Py::None);
+    let mut idiom: Py = __pos.get(18).cloned().unwrap_or(Py::None);
+    let mut inherited: Py = __pos.get(19).cloned().unwrap_or(Py::None);
+    let mut key: Py = __pos.get(20).cloned().unwrap_or(Py::None);
+    let mut line: Py = __pos.get(21).cloned().unwrap_or(Py::None);
+    let mut match_: Py = __pos.get(22).cloned().unwrap_or(Py::None);
+    let mut named: Py = __pos.get(23).cloned().unwrap_or(Py::None);
+    let mut norm: Py = __pos.get(24).cloned().unwrap_or(Py::None);
+    let mut note: Py = __pos.get(25).cloned().unwrap_or(Py::None);
+    let mut other: Py = __pos.get(26).cloned().unwrap_or(Py::None);
+    let mut output_at: Py = __pos.get(27).cloned().unwrap_or(Py::None);
+    let mut own: Py = __pos.get(28).cloned().unwrap_or(Py::None);
+    let mut pattern: Py = __pos.get(29).cloned().unwrap_or(Py::None);
+    let mut position: Py = __pos.get(30).cloned().unwrap_or(Py::None);
+    let mut ranked: Py = __pos.get(31).cloned().unwrap_or(Py::None);
+    let mut score: Py = __pos.get(32).cloned().unwrap_or(Py::None);
+    let mut sense_topic: Py = __pos.get(33).cloned().unwrap_or(Py::None);
+    let mut spots: Py = __pos.get(34).cloned().unwrap_or(Py::None);
+    let mut start: Py = __pos.get(35).cloned().unwrap_or(Py::None);
+    let mut stone_at: Py = __pos.get(36).cloned().unwrap_or(Py::None);
+    let mut study: Py = __pos.get(37).cloned().unwrap_or(Py::None);
+    let mut sums: Py = __pos.get(38).cloned().unwrap_or(Py::None);
+    let mut text: Py = __pos.get(39).cloned().unwrap_or(Py::None);
+    let mut text_norm: Py = __pos.get(40).cloned().unwrap_or(Py::None);
+    let mut tiers: Py = __pos.get(41).cloned().unwrap_or(Py::None);
+    let mut tight_at: Py = __pos.get(42).cloned().unwrap_or(Py::None);
+    let mut top: Py = __pos.get(43).cloned().unwrap_or(Py::None);
+    let mut topic: Py = __pos.get(44).cloned().unwrap_or(Py::None);
+    let mut unfit: Py = __pos.get(45).cloned().unwrap_or(Py::None);
+    let mut weight: Py = __pos.get(46).cloned().unwrap_or(Py::None);
+    let mut word: Py = __pos.get(47).cloned().unwrap_or(Py::None);
+    let mut words: Py = __pos.get(48).cloned().unwrap_or(Py::None);
+    let mut topic: Py = __pos.get(49).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "topic").map(|(_, v)| v.clone())).unwrap_or(Py::None);
+    let mut weight: Py = __pos.get(50).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "weight").map(|(_, v)| v.clone())).unwrap_or(Py::None);
+    let mut position: Py = __pos.get(51).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "position").map(|(_, v)| v.clone())).unwrap_or(Py::None);
+    let mut polysemous: Py = __pos.get(52).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "polysemous").map(|(_, v)| v.clone())).unwrap_or(Py::None);
+    let __unpk1 = py_unpack(&mcall(&found.clone(), "get", &[topic.clone(), py_tuple(vec![Py::Int(0), Py::Int(0), position.clone()])]), 3, None);
+    score = __unpk1[0].clone();
+    top = __unpk1[1].clone();
+    first = __unpk1[2].clone();
+    let _ = py_setitem(&found.clone(), &topic.clone(), py_tuple(vec![add(&score.clone(), &weight.clone()), call_builtin("max", &[top.clone(), weight.clone()]).unwrap_or_else(|e| exc::raise(e)), first.clone()]));
+    if py_truthy(&Py::Bool(!py_truthy(&polysemous.clone()))) {
+    let _ = py_setitem(&own.clone(), &topic.clone(), Py::Bool(true));
+    }
+    Py::None
+}
+    note = py_func("note", move |args: &[Py]| { let mut full = vec![_first.clone(), _tiers.clone(), _top.clone(), _topic.clone(), _weight.clone(), after.clone(), at.clone(), background.clone(), book_at.clone(), child_ages.clone(), elsewhere.clone(), entries.clone(), family_score.clone(), first.clone(), form.clone(), forms.clone(), forms_of.clone(), found.clone(), idiom.clone(), inherited.clone(), key.clone(), line.clone(), match_.clone(), named.clone(), norm.clone(), note.clone(), other.clone(), output_at.clone(), own.clone(), pattern.clone(), position.clone(), ranked.clone(), score.clone(), sense_topic.clone(), spots.clone(), start.clone(), stone_at.clone(), study.clone(), sums.clone(), text.clone(), text_norm.clone(), tiers.clone(), tight_at.clone(), top.clone(), topic.clone(), unfit.clone(), weight.clone(), word.clone(), words.clone()]; full.extend_from_slice(args); __nested_note_1(&full) });
+    forms_of = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_SENSE_PAIRS(), "values", &[])) { let __unpk6605 = py_unpack(&__item.clone(), 3, None); let mut forms: Py = __unpk6605[0].clone(); let mut _topic: Py = __unpk6605[1].clone(); let mut _tiers: Py = __unpk6605[2].clone(); for __item in py_iter_or_raise(&forms.clone()) { let mut form: Py = __item.clone(); __out.push(form.clone()); } } py_set(__out) })() };
+    idiom = bitor(&bitor(&_drive_idiom(&[norm.clone()]), &_idiom_positions(&[norm.clone()])), &_bad_verdict_positions(&[norm.clone()]));
+    child_ages = _ages_of_a_child(&[norm.clone()]);
+    let __iter3 = py_iter_or_raise(&call_builtin("enumerate", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter3 {
+    let __unpk4 = py_unpack(&__item.clone(), 2, None);
+    position = __unpk4[0].clone();
+    word = __unpk4[1].clone();
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&sums.clone(), &position.clone())); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&background.clone(), &position.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&idiom.clone(), &position.clone())) } } } }) {
+    continue;
+    }
+    if py_truthy(&_is_run_out(&[norm.clone(), position.clone()])) {
+    continue;
+    }
+    if py_truthy(&_is_a_complaint(&[norm.clone(), position.clone()])) {
+    continue;
+    }
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_PLACES(), &word.clone())); if !py_truthy(&__b) { __b } else { _names_a_person(&[norm.clone(), position.clone()]) } }) {
+    continue;
+    }
+    elsewhere = _means_something_else(&[norm.clone(), position.clone()]);
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_WARMTH_WORDS(), &word.clone())); if !py_truthy(&__b) { __b } else { the_warmth_said(&[norm.clone()]) } }) {
+    elsewhere = Py::Bool(true);
+    }
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&forms_of.clone(), &word.clone())); if !py_truthy(&__b) { __b } else { _the_sense_the_cues_name(&[norm.clone(), position.clone(), word.clone()]) } }) {
+    continue;
+    }
+    let __iter5 = py_iter_or_raise(&_lookup(&[word.clone()]));
+    for __item in __iter5 {
+    let __unpk6 = py_unpack(&__item.clone(), 2, None);
+    topic = __unpk6[0].clone();
+    weight = __unpk6[1].clone();
+    if py_truthy(&elsewhere.clone()) {
+    continue;
+    }
+    if py_truthy(&_says_nothing_here(&[topic.clone(), py_list(vec![word.clone()]), norm.clone(), position.clone(), study.clone()])) {
+    continue;
+    }
+    let _ = py_call(&note, &[topic.clone(), weight.clone(), position.clone(), { let __b = Py::Bool(py_contains(&g_POLY_FORMS(), &word.clone())); if py_truthy(&__b) { __b } else { _is_a_portion(&[norm.clone(), position.clone()]) } }]);
+    }
+    }
+    let __iter7 = py_iter_or_raise(&mcall(&g_SENSE_PAIRS(), "values", &[]));
+    for __item in __iter7 {
+    let __unpk8 = py_unpack(&__item.clone(), 3, None);
+    forms = __unpk8[0].clone();
+    sense_topic = __unpk8[1].clone();
+    tiers = __unpk8[2].clone();
+    spots = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk5837 = py_unpack(&__item.clone(), 2, None); let mut at: Py = __unpk5837[0].clone(); let mut word: Py = __unpk5837[1].clone(); if py_truthy(&{ let __b = Py::Bool(py_contains(&forms_of.clone(), &word.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&forms.clone(), &word.clone())) } }) {  __out.push(at.clone()); } } py_list(__out) })() };
+    if py_truthy(&{ let __b = spots.clone(); if !py_truthy(&__b) { __b } else { _sense_cue(&[norm.clone(), spots.clone(), tiers.clone()]) } }) {
+    let _ = py_call(&note, &[sense_topic.clone(), g_SENSE_WEIGHT(), geti(&spots.clone(), &Py::Int(0)), Py::Bool(false)]);
+    }
+    }
+    family_score = geti(&mcall(&found.clone(), "get", &[py_str("family-and-parenting"), py_tuple(vec![Py::Int(0), Py::Int(0), Py::Int(0)])]), &Py::Int(0));
+    if py_truthy(&{ let __b = child_ages.clone(); if !py_truthy(&__b) { __b } else { { let __b = ge(&family_score.clone(), &Py::Int(2)); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&found.clone(), "items", &[])) { let __unpk8356 = py_unpack(&__item.clone(), 2, None); let mut topic: Py = __unpk8356[0].clone(); let __unpk8452 = py_unpack(&__unpk8356[1].clone(), 3, None); let mut score: Py = __unpk8452[0].clone(); let mut _top: Py = __unpk8452[1].clone(); let mut _first: Py = __unpk8452[2].clone(); if py_truthy(&Py::Bool(!py_contains(&py_tuple(vec![py_str("family-and-parenting"), py_str("feelings")]), &topic.clone()))) {  __out.push(ge(&score.clone(), &Py::Int(2))); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)))) } } } }) {
+    let _ = py_call(&note, &[py_str("family-and-parenting"), Py::Int(2), geti(&child_ages.clone(), &Py::Int(0)), Py::Bool(false)]);
+    }
+    book_at = _a_book_for_a_child(&[norm.clone(), child_ages.clone()]);
+    if py_truthy(&Py::Bool(!py_is(&book_at.clone(), &Py::None))) {
+    let _ = py_call(&note, &[py_str("entertainment"), Py::Int(3), book_at.clone(), Py::Bool(false)]);
+    }
+    if py_truthy(&{ let __b = sums.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&found.clone(), "values", &[])) { let __unpk949 = py_unpack(&__item.clone(), 3, None); let mut score: Py = __unpk949[0].clone(); let mut _top: Py = __unpk949[1].clone(); let mut _first: Py = __unpk949[2].clone(); __out.push(ge(&score.clone(), &Py::Int(2))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)))) } }) {
+    let _ = py_call(&note, &[py_str("maths-and-numbers"), Py::Int(2), call_builtin("min", &[sums.clone()]).unwrap_or_else(|e| exc::raise(e)), Py::Bool(false)]);
+    }
+    output_at = _the_persons_own_output(&[norm.clone()]);
+    if py_truthy(&Py::Bool(!py_is(&output_at.clone(), &Py::None))) {
+    let _ = py_call(&note, &[py_str("health"), Py::Int(2), output_at.clone(), Py::Bool(false)]);
+    }
+    stone_at = stone_weight_at(&[norm.clone()]);
+    if py_truthy(&Py::Bool(!py_is(&stone_at.clone(), &Py::None))) {
+    let _ = py_call(&note, &[py_str("fitness"), Py::Int(3), stone_at.clone(), Py::Bool(false)]);
+    }
+    tight_at = tight_money_at(&[norm.clone(), { let __b = mcall(&line.clone(), "get", &[py_str("text")]); if py_truthy(&__b) { __b } else { py_str("") } }]);
+    if py_truthy(&{ let __b = Py::Bool(!py_is(&tight_at.clone(), &Py::None)); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&found.clone(), "items", &[])) { let __unpk316 = py_unpack(&__item.clone(), 2, None); let mut topic: Py = __unpk316[0].clone(); let __unpk220 = py_unpack(&__unpk316[1].clone(), 3, None); let mut score: Py = __unpk220[0].clone(); let mut _top: Py = __unpk220[1].clone(); let mut _first: Py = __unpk220[2].clone(); if py_truthy(&Py::Bool(!py_eq(&topic.clone(), &py_str("money")))) {  __out.push(ge(&score.clone(), &Py::Int(2))); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)))) } }) {
+    let _ = py_call(&note, &[py_str("money"), Py::Int(3), tight_at.clone(), Py::Bool(false)]);
+    }
+    if py_truthy(&{ let __b = sums.clone(); if !py_truthy(&__b) { __b } else { bitand(&call_builtin("set", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)), &g_SUM_MONEY()) } }) {
+    let _ = py_call(&note, &[py_str("money"), Py::Int(3), call_builtin("min", &[sums.clone()]).unwrap_or_else(|e| exc::raise(e)), Py::Bool(false)]);
+    }
+    named = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&norm.clone()) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&crate::gen::understanding::kinds::g_ADDRESS_WORDS(), &word.clone()))) {  for __item in py_iter_or_raise(&_lookup(&[word.clone()])) { let __unpk7867 = py_unpack(&__item.clone(), 2, None); let mut topic: Py = __unpk7867[0].clone(); let mut weight: Py = __unpk7867[1].clone(); if py_truthy(&{ let __b = ge(&weight.clone(), &Py::Int(2)); if !py_truthy(&__b) { __b } else { Py::Bool(!py_eq(&topic.clone(), &py_str("small-talk"))) } }) {  __out.push(topic.clone()); } } } } py_set(__out) })() };
+    let __iter9 = py_iter_or_raise(&mcall(&g_TABLE(), "items", &[]));
+    for __item in __iter9 {
+    let __unpk10 = py_unpack(&__item.clone(), 2, None);
+    key = __unpk10[0].clone();
+    entries = __unpk10[1].clone();
+    if py_truthy(&{ let __b = Py::Bool(!py_contains(&key.clone(), &py_str(" "))); if py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&text.clone(), &key.clone())) } }) {
+    continue;
+    }
+    words = mcall(&key.clone(), "split", &[]);
+    let __iter11 = py_iter_or_raise(&call_builtin("range", &[add(&sub(&call_builtin("len", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))), &Py::Int(1))]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter11 {
+    start = __item.clone();
+    if py_truthy(&Py::Bool(!py_eq(&slice_or_raise(&norm.clone(), &start.clone(), &add(&start.clone(), &call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))), &Py::None), &words.clone()))) {
+    continue;
+    }
+    if py_truthy(&Py::Bool(py_contains(&background.clone(), &start.clone()))) {
+    continue;
+    }
+    if py_truthy(&{ let __b = sums.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_eq(&key.clone(), &py_str("work out"))) } }) {
+    continue;
+    }
+    if py_truthy(&{ let __b = named.clone(); if !py_truthy(&__b) { __b } else { call_builtin("all", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&entries.clone()) { let __unpk3643 = py_unpack(&__item.clone(), 2, None); let mut topic: Py = __unpk3643[0].clone(); let mut _weight: Py = __unpk3643[1].clone(); __out.push(Py::Bool(py_eq(&topic.clone(), &py_str("small-talk")))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }) {
+    continue;
+    }
+    let __iter12 = py_iter_or_raise(&entries.clone());
+    for __item in __iter12 {
+    let __unpk13 = py_unpack(&__item.clone(), 2, None);
+    topic = __unpk13[0].clone();
+    weight = __unpk13[1].clone();
+    if py_truthy(&_says_nothing_here(&[topic.clone(), words.clone(), norm.clone(), start.clone(), study.clone()])) {
+    continue;
+    }
+    let _ = py_call(&note, &[topic.clone(), weight.clone(), start.clone(), Py::Bool(false)]);
+    }
+    break;
+    }
+    }
+    text_norm = add(&add(&py_str(" "), &mcall(&py_str(" "), "join", &[norm.clone()])), &py_str(" "));
+    match_ = mcall(&g_JUDGEMENT_OF_RECORD(), "search", &[text_norm.clone()]);
+    if py_truthy(&{ let __b = match_.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&found.clone(), "values", &[])) { let __unpk763 = py_unpack(&__item.clone(), 3, None); let mut score: Py = __unpk763[0].clone(); let mut _top: Py = __unpk763[1].clone(); let mut _first: Py = __unpk763[2].clone(); __out.push(ge(&score.clone(), &Py::Int(3))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)))) } }) {
+    let _ = py_call(&note, &[py_str("feelings"), Py::Int(3), mcall(&slice_or_raise(&text_norm.clone(), &Py::None, &mcall(&match_.clone(), "start", &[]), &Py::None), "count", &[py_str(" ")]), Py::Bool(false)]);
+    }
+    unfit = reads_as_unfit(&[text_norm.clone()]);
+    if py_truthy(&{ let __b = Py::Bool(!py_is(&unfit.clone(), &Py::None)); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&found.clone(), "values", &[])) { let __unpk8746 = py_unpack(&__item.clone(), 3, None); let mut score: Py = __unpk8746[0].clone(); let mut _top: Py = __unpk8746[1].clone(); let mut _first: Py = __unpk8746[2].clone(); __out.push(ge(&score.clone(), &Py::Int(3))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)))) } }) {
+    let _ = py_call(&note, &[py_str("feelings"), Py::Int(3), mcall(&slice_or_raise(&text_norm.clone(), &Py::None, &unfit.clone(), &Py::None), "count", &[py_str(" ")]), Py::Bool(false)]);
+    }
+    if py_truthy(&{ let __b = _the_weather_is_just_a_season(&[norm.clone(), text.clone()]); if !py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&found.clone(), "items", &[])) { let __unpk6874 = py_unpack(&__item.clone(), 2, None); let mut other: Py = __unpk6874[0].clone(); let __unpk6778 = py_unpack(&__unpk6874[1].clone(), 3, None); let mut score: Py = __unpk6778[0].clone(); let mut _top: Py = __unpk6778[1].clone(); let mut _first: Py = __unpk6778[2].clone(); __out.push({ let __b = Py::Bool(!py_eq(&other.clone(), &py_str("nature-and-weather"))); if !py_truthy(&__b) { __b } else { ge(&score.clone(), &Py::Int(2)) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }) {
+    let _ = mcall(&own.clone(), "pop", &[py_str("nature-and-weather"), Py::None]);
+    }
+    let __iter14 = py_iter_or_raise(&g_CANCELS());
+    for __item in __iter14 {
+    let __unpk15 = py_unpack(&__item.clone(), 2, None);
+    pattern = __unpk15[0].clone();
+    topic = __unpk15[1].clone();
+    if py_truthy(&Py::Bool(!py_contains(&found.clone(), &topic.clone()))) {
+    continue;
+    }
+    if py_truthy(&Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&found.clone(), "items", &[])) { let __unpk4906 = py_unpack(&__item.clone(), 2, None); let mut other: Py = __unpk4906[0].clone(); let __unpk4810 = py_unpack(&__unpk4906[1].clone(), 3, None); let mut score: Py = __unpk4810[0].clone(); let mut _top: Py = __unpk4810[1].clone(); let mut _first: Py = __unpk4810[2].clone(); __out.push({ let __b = Py::Bool(!py_eq(&other.clone(), &topic.clone())); if !py_truthy(&__b) { __b } else { ge(&score.clone(), &Py::Int(2)) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))))) {
+    continue;
+    }
+    match_ = mcall(&pattern.clone(), "search", &[text_norm.clone()]);
+    if py_truthy(&Py::Bool(!py_truthy(&match_.clone()))) {
+    continue;
+    }
+    after = mcall(&mcall(&slice_or_raise(&text_norm.clone(), &mcall(&match_.clone(), "end", &[]), &Py::None, &Py::None), "strip", &[]), "split", &[]);
+    if py_truthy(&{ let __b = after.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_contains(&g_CANCEL_AFTER(), &geti(&after.clone(), &Py::Int(0)))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&py_tuple(vec![py_str("."), py_str(","), py_str(";"), py_str(":")]), &geti(&after.clone(), &Py::Int(0)))) } } } }) {
+    continue;
+    }
+    let __unpk16 = py_unpack(&geti(&found.clone(), &topic.clone()), 3, None);
+    score = __unpk16[0].clone();
+    top = __unpk16[1].clone();
+    first = __unpk16[2].clone();
+    let _ = py_setitem(&found.clone(), &topic.clone(), py_tuple(vec![call_builtin("max", &[Py::Int(0), sub(&score.clone(), &Py::Int(2))]).unwrap_or_else(|e| exc::raise(e)), top.clone(), first.clone()]));
+    }
+    ranked = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(mcall(&found.clone(), "items", &[])); __kws.extend(vec![("key".to_string(), py_func("lambda", move |args: &[Py]| { let _first = _first.clone(); let _tiers = _tiers.clone(); let _top = _top.clone(); let _topic = _topic.clone(); let _weight = _weight.clone(); let after = after.clone(); let at = at.clone(); let background = background.clone(); let book_at = book_at.clone(); let child_ages = child_ages.clone(); let elsewhere = elsewhere.clone(); let entries = entries.clone(); let family_score = family_score.clone(); let first = first.clone(); let form = form.clone(); let forms = forms.clone(); let forms_of = forms_of.clone(); let found = found.clone(); let idiom = idiom.clone(); let inherited = inherited.clone(); let key = key.clone(); let line = line.clone(); let match_ = match_.clone(); let named = named.clone(); let norm = norm.clone(); let note = note.clone(); let other = other.clone(); let output_at = output_at.clone(); let own = own.clone(); let pattern = pattern.clone(); let position = position.clone(); let ranked = ranked.clone(); let score = score.clone(); let sense_topic = sense_topic.clone(); let spots = spots.clone(); let start = start.clone(); let stone_at = stone_at.clone(); let study = study.clone(); let sums = sums.clone(); let text = text.clone(); let text_norm = text_norm.clone(); let tiers = tiers.clone(); let tight_at = tight_at.clone(); let top = top.clone(); let topic = topic.clone(); let unfit = unfit.clone(); let weight = weight.clone(); let word = word.clone(); let words = words.clone(); let item: Py = __kwp(args, 0, "item").unwrap_or(Py::None); py_tuple(vec![geti(&geti(&item.clone(), &Py::Int(1)), &Py::Int(0)), geti(&geti(&item.clone(), &Py::Int(1)), &Py::Int(1)), neg(&geti(&geti(&item.clone(), &Py::Int(1)), &Py::Int(2)))]) })), ("reverse".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sorted", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
+    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&ranked.clone()) { let __unpk2700 = py_unpack(&__item.clone(), 2, None); let mut topic: Py = __unpk2700[0].clone(); let __unpk2604 = py_unpack(&__unpk2700[1].clone(), 3, None); let mut score: Py = __unpk2604[0].clone(); let mut top: Py = __unpk2604[1].clone(); let mut _first: Py = __unpk2604[2].clone(); __out.push(py_tuple(vec![topic.clone(), if py_truthy(&mcall(&own.clone(), "get", &[topic.clone()])) { score.clone() } else { call_builtin("min", &[score.clone(), Py::Int(1)]).unwrap_or_else(|e| exc::raise(e)) }, if py_truthy(&mcall(&own.clone(), "get", &[topic.clone()])) { top.clone() } else { call_builtin("min", &[top.clone(), Py::Int(1)]).unwrap_or_else(|e| exc::raise(e)) }])); } py_list(__out) })() };
+    Py::None
+}
+pub fn unsure_words(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut topic: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "topic") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: topic"))) };
+    let mut home: Py = Py::None;
+    let mut in_doubt: Py = Py::None;
+    let mut word: Py = Py::None;
+    let mut words: Py = Py::None;
+    let _ = py_str("The words whose second life is still in play, when the line said nothing to settle it.\n\n    \"my tablet has gone missing\" names a thing that is a pill and a screen, and the rest of the\n    line does not say which, so the area the reader picked from it is a guess. \"should i take a\n    tablet with food\" says which in another word (`food` is the pill's life), and \"the freezer is\n    full, how do i stock it\" (`freezer` is the kitchen's). Those lines have said what they are\n    about, and nothing is in doubt.\n\n    The line is asked which of the two lives it named (LIVES), and only that. A word of neither\n    life, however well it scores for the area the line was read as, leaves the doubt standing:\n    the area came from the doubtful word in the first place.\n    ");
+    if py_truthy(&Py::Bool(!py_truthy(&topic.clone()))) {
+    return py_list(vec![]);
+    }
+    words = call_builtin("set", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e));
+    in_doubt = py_list(vec![]);
+    let __iter1 = py_iter_or_raise(&words.clone());
+    for __item in __iter1 {
+    word = __item.clone();
+    if py_truthy(&Py::Bool(!py_contains(&g_TWO_HOMES(), &word.clone()))) {
+    continue;
+    }
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_LIVES(), "get", &[word.clone(), py_tuple(vec![])])) { let mut home: Py = __item.clone(); __out.push(bitand(&words.clone(), &home.clone())); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    continue;
+    }
+    let _ = mcall(&in_doubt.clone(), "append", &[word.clone()]);
+    }
+    return call_builtin("sorted", &[in_doubt.clone()]).unwrap_or_else(|e| exc::raise(e));
+    Py::None
+}
+pub fn _place_points(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut line: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "line") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: line"))) };
+    let mut entities: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "entities") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: entities"))) };
+    let mut scores: Py = if __pos.len() > 2 { __pos[2].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "scores") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: scores"))) };
+    let mut asks: Py = if __pos.len() > 3 { __pos[3].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "asks") { v.clone() }
+    else { Py::None };
+    let mut asked: Py = Py::None;
+    let mut item: Py = Py::None;
+    let mut others: Py = Py::None;
+    let mut score: Py = Py::None;
+    let mut topic: Py = Py::None;
+    let mut words: Py = Py::None;
+    let _ = py_str("How much a place the line names says about what the line is about.\n\n    A place is what a line is about when the person is going there or planning something\n    there (\"a weekend in Lisbon\", \"we are going to Rome next month\"), and when they ask what\n    to do there (\"museums in Rome\", \"restaurants in Edinburgh\"). It is only the background of\n    a line about something else: \"how do i get a mortgage in Birmingham\" is a money question,\n    \"i am a bus driver in Leeds\" is a self-introduction, \"my sister lives in Paris\" is news\n    about a sister. So the place scores 4 with a travel word, 3 when the line asks something\n    and nothing else in it scores, and nothing otherwise.\n    ");
+    words = call_builtin("set", &[geti(&line.clone(), &py_str("norm"))]).unwrap_or_else(|e| exc::raise(e));
+    if py_truthy(&bitand(&words.clone(), &g_TRAVEL_STRONG())) {
+    return Py::Int(4);
+    }
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&entities.clone()) { let mut item: Py = __item.clone(); __out.push(Py::Bool(py_eq(&geti(&item.clone(), &py_str("type")), &py_str("person")))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    return Py::Int(0);
+    }
+    others = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&scores.clone(), "items", &[])) { let __unpk1042 = py_unpack(&__item.clone(), 2, None); let mut topic: Py = __unpk1042[0].clone(); let mut score: Py = __unpk1042[1].clone(); if py_truthy(&Py::Bool(!py_contains(&py_tuple(vec![py_str("geography-and-travel"), py_str("small-talk")]), &topic.clone()))) {  __out.push(score.clone()); } } py_list(__out) })() };
+    if py_truthy(&{ let __b = others.clone(); if !py_truthy(&__b) { __b } else { ge(&call_builtin("max", &[others.clone()]).unwrap_or_else(|e| exc::raise(e)), &g_PLACE_OVER()) } }) {
+    return Py::Int(0);
+    }
+    asked = if py_truthy(&Py::Bool(py_is(&asks.clone(), &Py::None))) { _looks_like_an_ask(&[line.clone()]) } else { asks.clone() };
+    return if py_truthy(&asked.clone()) { Py::Int(3) } else { Py::Int(0) };
+    Py::None
+}
+pub fn _what_someone_else_wants(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut at: Py = Py::None;
+    let mut candidate: Py = Py::None;
+    let mut spot: Py = Py::None;
+    let mut topic: Py = Py::None;
+    let mut topics: Py = Py::None;
+    let mut weight: Py = Py::None;
+    let mut word: Py = Py::None;
+    let _ = py_str("(topic, position) for the thing a person in the line wants, or None.\n\n    \"my wife wants a takeaway\" -> (\"cooking-and-food\", 4), \"my son wants a dog\" -> pets. The\n    person has to be the one wanting - the person word sits just before the verb - so \"i need\n    some breathing room from my husband\" is not read as something the husband wants, and the\n    thing wanted has to be written as a thing (\"a takeaway\", \"some new bedding\"), not abstractly\n    or after a preposition: \"school wants 20 pounds for a trip\" is a money line about a trip.\n    ");
+    let __iter1 = py_iter_or_raise(&call_builtin("enumerate", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter1 {
+    let __unpk2 = py_unpack(&__item.clone(), 2, None);
+    at = __unpk2[0].clone();
+    word = __unpk2[1].clone();
+    if py_truthy(&Py::Bool(!py_contains(&g_WANT_VERBS(), &word.clone()))) {
+    continue;
+    }
+    if py_truthy(&Py::Bool(!py_truthy(&bitand(&g_A_PERSON_WHO_WANTS(), &call_builtin("set", &[slice_or_raise(&norm.clone(), &call_builtin("max", &[Py::Int(0), sub(&at.clone(), &Py::Int(3))]).unwrap_or_else(|e| exc::raise(e)), &at.clone(), &Py::None)]).unwrap_or_else(|e| exc::raise(e)))))) {
+    continue;
+    }
+    let __iter3 = py_iter_or_raise(&call_builtin("range", &[add(&at.clone(), &Py::Int(1)), call_builtin("min", &[call_builtin("len", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)), add(&at.clone(), &Py::Int(5))]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter3 {
+    spot = __item.clone();
+    if py_truthy(&Py::Bool(py_contains(&g_WANTED_BEFORE_A_STOP(), &geti(&norm.clone(), &spot.clone())))) {
+    break;
+    }
+    if py_truthy(&Py::Bool(!py_contains(&g_A_THING_WANTED(), &geti(&norm.clone(), &spot.clone())))) {
+    continue;
+    }
+    let __iter4 = py_iter_or_raise(&slice_or_raise(&norm.clone(), &add(&spot.clone(), &Py::Int(1)), &call_builtin("min", &[call_builtin("len", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)), add(&spot.clone(), &Py::Int(5))]).unwrap_or_else(|e| exc::raise(e)), &Py::None));
+    for __item in __iter4 {
+    candidate = __item.clone();
+    if py_truthy(&Py::Bool(py_contains(&g_A_THING_WANTED(), &candidate.clone()))) {
+    continue;
+    }
+    topics = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&_lookup(&[candidate.clone()])) { let __unpk2593 = py_unpack(&__item.clone(), 2, None); let mut topic: Py = __unpk2593[0].clone(); let mut weight: Py = __unpk2593[1].clone(); if py_truthy(&{ let __b = Py::Bool(!py_contains(&g_PEOPLE_TOPICS(), &topic.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_eq(&topic.clone(), &py_str("small-talk"))); if !py_truthy(&__b) { __b } else { ge(&weight.clone(), &Py::Int(2)) } } } }) {  __out.push(topic.clone()); } } py_list(__out) })() };
+    if py_truthy(&topics.clone()) {
+    return py_tuple(vec![geti(&topics.clone(), &Py::Int(0)), add(&spot.clone(), &Py::Int(1))]);
+    }
+    }
+    break;
+    }
+    }
+    return Py::None;
+    Py::None
+}
+pub fn _looks_like_an_ask(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut line: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "line") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: line"))) };
+    let mut norm: Py = Py::None;
+    let mut text: Py = Py::None;
+    let _ = py_str("Does the line ask for something? A question mark, a question word, or an imperative.");
+    text = { let __b = mcall(&line.clone(), "get", &[py_str("text")]); if py_truthy(&__b) { __b } else { py_str("") } };
+    norm = geti(&line.clone(), &py_str("norm"));
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&text.clone(), &py_str("?"))); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&norm.clone())) } }) {
+    return Py::Bool(true);
+    }
+    return Py::Bool(py_contains(&g_ASK_WORDS(), &geti(&norm.clone(), &Py::Int(0))));
+    Py::None
+}
+pub fn _names_a_friend_of_their_own(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut before: Py = Py::None;
+    let mut word: Py = Py::None;
+    let _ = py_str("True when the line says \"my mate\", \"our mates\", \"your bloke\": a friend they claim.");
+    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[norm.clone(), slice_or_raise(&norm.clone(), &Py::Int(1), &Py::None, &Py::None)]).unwrap_or_else(|e| exc::raise(e))) { let __unpk7552 = py_unpack(&__item.clone(), 2, None); let mut before: Py = __unpk7552[0].clone(); let mut word: Py = __unpk7552[1].clone(); __out.push({ let __b = Py::Bool(py_contains(&g_FRIEND_WORDS(), &word.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_OWNED_BY(), &before.clone())) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    Py::None
+}
+pub fn _the_persons_own_output(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut at: Py = Py::None;
+    let mut person: Py = Py::None;
+    let mut word: Py = Py::None;
+    let mut words: Py = Py::None;
+    let _ = py_str("Where the line talks about what comes out of the person, or None.\n\n    \"my poo has been green for a week\" named no part of the body, so the only words left were\n    \"green\" and \"a week\" and it was answered with the salad-drawer advice. The words for it are\n    also the words for what an animal does and for a job to be done - \"how do i get bird poo off\n    my car\" is the car - so the line has to make it the person's own: said of them (\"i have not\n    pooed in 3 days\", \"my son hasnt pooed for two days\") or owned by them (\"my poo\", \"her\n    stools\"). A sample or a test is a thing being handed in, not a symptom.\n    ");
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&bitand(&call_builtin("set", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)), &g_BODILY_OUTPUT()))); if py_truthy(&__b) { __b } else { bitand(&call_builtin("set", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)), &g_SAMPLE_WORDS()) } }) {
+    return Py::None;
+    }
+    words = call_builtin("set", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e));
+    if py_truthy(&{ let __b = bitand(&words.clone(), &g_ONLY_A_STOOL()); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&bitand(&words.clone(), &sub(&g_BODILY_OUTPUT(), &g_ONLY_A_STOOL())))) } }) {
+    if py_truthy(&bitand(&words.clone(), &g_STOOL_AS_FURNITURE())) {
+    return Py::None;
+    }
+    if py_truthy(&Py::Bool(!py_truthy(&mcall(&crate::gen::understanding::body::g_A_GUT_ONLY(), "search", &[mcall(&py_str(" "), "join", &[norm.clone()])])))) {
+    return Py::None;
+    }
+    }
+    if py_truthy(&bitand(&call_builtin("set", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)), &g_ANIMALS())) {
+    return Py::None;
+    }
+    if py_truthy(&bitand(&call_builtin("set", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)), &g_PETS())) {
+    return Py::None;
+    }
+    words = call_builtin("set", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e));
+    person = call_builtin("bool", &[bitand(&words.clone(), &sub(&sub(&_person_words(&[]), &g_PETS()), &g_ANIMALS()))]).unwrap_or_else(|e| exc::raise(e));
+    let __iter1 = py_iter_or_raise(&call_builtin("enumerate", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter1 {
+    let __unpk2 = py_unpack(&__item.clone(), 2, None);
+    at = __unpk2[0].clone();
+    word = __unpk2[1].clone();
+    if py_truthy(&Py::Bool(!py_contains(&g_BODILY_OUTPUT(), &word.clone()))) {
+    continue;
+    }
+    if py_truthy(&Py::Bool(py_contains(&g_BODILY_OUTPUT_NOUN(), &word.clone()))) {
+    if py_truthy(&{ let __b = at.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_OWNERS(), &geti(&norm.clone(), &sub(&at.clone(), &Py::Int(1))))) } }) {
+    return at.clone();
+    }
+    continue;
+    }
+    if py_truthy(&{ let __b = person.clone(); if py_truthy(&__b) { __b } else { bitand(&words.clone(), &call_builtin("frozenset", &[mcall(&py_str("i im ive we weve"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))) } }) {
+    return at.clone();
+    }
+    }
+    return Py::None;
+    Py::None
+}
+pub fn own_output_word(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let _ = py_str("The word for what comes out of the person, when the line makes it theirs, or None.\n\n    The reading carries it as `own_output` so a knowledge row that shares the word with a thing\n    - a stool is a chair, green leaves keep a week in the drawer - can stand aside for the body.\n    ");
+    return _the_persons_own_output(&[norm.clone()]);
+    Py::None
+}
+pub fn _owns_an_animal(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut at: Py = Py::None;
+    let mut word: Py = Py::None;
+    let _ = py_str("True when the line names an animal somebody owns (\"my fish\", \"our rabbit\").");
+    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[slice_or_raise(&norm.clone(), &Py::None, &neg(&Py::Int(1)), &Py::None)]).unwrap_or_else(|e| exc::raise(e))) { let __unpk8607 = py_unpack(&__item.clone(), 2, None); let mut at: Py = __unpk8607[0].clone(); let mut word: Py = __unpk8607[1].clone(); __out.push({ let __b = Py::Bool(py_contains(&g_OWNERS(), &word.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_ANIMALS(), &geti(&norm.clone(), &add(&at.clone(), &Py::Int(1))))) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    Py::None
+}
+pub fn _a_crop_is_failing(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut at: Py = Py::None;
+    let mut state: Py = Py::None;
+    let mut text: Py = Py::None;
+    let mut word: Py = Py::None;
+    let mut words: Py = Py::None;
+    let _ = py_str("True when the line says a crop of the person's own is not doing well where it grows.\n\n    The state has to be one a plant is in rather than a dish: \"my tomatoes are not ripening\" is\n    the plant, \"my tomatoes are in the salad\" is dinner. A crop kept in a kitchen, or one the\n    line cooks, is dinner whatever else it says, so the kitchen words hold the fence off.\n    ");
+    words = call_builtin("set", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e));
+    if py_truthy(&bitand(&words.clone(), &g_CROP_KITCHEN())) {
+    return Py::Bool(false);
+    }
+    text = mcall(&py_str(" "), "join", &[norm.clone()]);
+    if py_truthy(&Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_CROP_STATES()) { let mut state: Py = __item.clone(); __out.push(Py::Bool(py_contains(&text.clone(), &state.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))))) {
+    return Py::Bool(false);
+    }
+    if py_truthy(&bitand(&words.clone(), &g_GROWING_PLACES())) {
+    return Py::Bool(true);
+    }
+    let __iter1 = py_iter_or_raise(&call_builtin("enumerate", &[slice_or_raise(&norm.clone(), &Py::None, &neg(&Py::Int(1)), &Py::None)]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter1 {
+    let __unpk2 = py_unpack(&__item.clone(), 2, None);
+    at = __unpk2[0].clone();
+    word = __unpk2[1].clone();
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_OWNERS(), &word.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_CROPS(), &geti(&norm.clone(), &add(&at.clone(), &Py::Int(1))))) } }) {
+    return Py::Bool(true);
+    }
+    }
+    return Py::Bool(false);
+    Py::None
+}
+pub fn _asks_mechanism(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let _ = py_str("True when the line asks how the world works (\"why do...\", \"how old is...\").");
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&norm.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&g_MECHANISM(), &geti(&norm.clone(), &Py::Int(0)))) } }) {
+    return Py::Bool(false);
+    }
+    if py_truthy(&Py::Bool(py_eq(&geti(&norm.clone(), &Py::Int(0)), &py_str("how")))) {
+    return { let __b = gt(&call_builtin("len", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1)); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_MECHANISM_HOW(), &geti(&norm.clone(), &Py::Int(1)))) } };
+    }
+    return Py::Bool(true);
+    Py::None
+}
+pub fn _sign_said_of_a_person(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut words: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "words") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: words"))) };
+    let mut after: Py = Py::None;
+    let mut ahead: Py = Py::None;
+    let mut at: Py = Py::None;
+    let mut before: Py = Py::None;
+    let mut phrase: Py = Py::None;
+    let mut text: Py = Py::None;
+    let mut word: Py = Py::None;
+    let _ = py_str("True when a sign word in the line is the state of the person it is said of.\n\n    A sign only counts with a person in the line to have it, and then only in the shapes that\n    make it the person's state rather than a modifier, a behaviour or an idiom.\n    ");
+    text = mcall(&py_str(" "), "join", &[norm.clone()]);
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_UNWELL_IDIOMS()) { let mut phrase: Py = __item.clone(); __out.push(Py::Bool(py_contains(&text.clone(), &phrase.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    return Py::Bool(false);
+    }
+    let __iter1 = py_iter_or_raise(&call_builtin("enumerate", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter1 {
+    let __unpk2 = py_unpack(&__item.clone(), 2, None);
+    at = __unpk2[0].clone();
+    word = __unpk2[1].clone();
+    after = if py_truthy(&lt(&add(&at.clone(), &Py::Int(1)), &call_builtin("len", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)))) { geti(&norm.clone(), &add(&at.clone(), &Py::Int(1))) } else { py_str("") };
+    before = if py_truthy(&at.clone()) { geti(&norm.clone(), &sub(&at.clone(), &Py::Int(1))) } else { py_str("") };
+    if py_truthy(&Py::Bool(py_contains(&g_UNWELL_SIGNS(), &word.clone()))) {
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_BEHAVIOUR(), &after.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_SIGN_NOT_AFTER(), &after.clone())) } }) {
+    continue;
+    }
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_NOUNY_SIGNS(), &word.clone())); if !py_truthy(&__b) { __b } else { { let __b = after.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_contains(&g_SIGN_FOLLOWS(), &after.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&after.clone(), "isdigit", &[]))) } } } } } }) {
+    continue;
+    }
+    if py_truthy(&{ let __b = Py::Bool(py_eq(&word.clone(), &py_str("broke"))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&bitand(&words.clone(), &g_BODY()))) } }) {
+    continue;
+    }
+    return Py::Bool(true);
+    }
+    if py_truthy(&{ let __b = Py::Bool(py_eq(&before.clone(), &py_str("not"))); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_UNWELL_NOT(), &word.clone())) } }) {
+    if py_truthy(&Py::Bool(!py_eq(&word.clone(), &py_str("responding")))) {
+    return Py::Bool(true);
+    }
+    let __iter3 = py_iter_or_raise(&slice_or_raise(&norm.clone(), &add(&at.clone(), &Py::Int(1)), &add(&at.clone(), &Py::Int(4)), &Py::None));
+    for __item in __iter3 {
+    ahead = __item.clone();
+    if py_truthy(&Py::Bool(py_contains(&g_COMMS(), &ahead.clone()))) {
+    return Py::Bool(false);
+    }
+    if py_truthy(&Py::Bool(py_contains(&g_HEARERS(), &ahead.clone()))) {
+    return Py::Bool(true);
+    }
+    }
+    return Py::Bool(true);
+    }
+    }
+    return Py::Bool(false);
+    Py::None
+}
+pub fn _a_person_is_unwell(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut words: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "words") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: words"))) };
+    let mut word: Py = Py::None;
+    let _ = py_str("A line that names a person and says something is wrong with them (\"my baby has a fever\").");
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&bitand(&words.clone(), &g_UNWELL_SIGNS()))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&{ let __b = Py::Bool(py_contains(&words.clone(), &py_str("not"))); if !py_truthy(&__b) { __b } else { bitand(&words.clone(), &g_UNWELL_NOT()) } })) } }) {
+    return Py::Bool(false);
+    }
+    if py_truthy(&Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&norm.clone()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&g_THE_PEOPLE(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))))) {
+    return Py::Bool(false);
+    }
+    return _sign_said_of_a_person(&[norm.clone(), words.clone()]);
+    Py::None
+}
+pub fn broke_at(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut after: Py = Py::None;
+    let mut at: Py = Py::None;
+    let mut before: Py = Py::None;
+    let mut word: Py = Py::None;
+    let _ = py_str("Where the line says the speaker has no money with `broke`, or None.");
+    let __iter1 = py_iter_or_raise(&call_builtin("enumerate", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter1 {
+    let __unpk2 = py_unpack(&__item.clone(), 2, None);
+    at = __unpk2[0].clone();
+    word = __unpk2[1].clone();
+    if py_truthy(&Py::Bool(!py_eq(&word.clone(), &py_str("broke")))) {
+    continue;
+    }
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&slice_or_raise(&norm.clone(), &Py::None, &at.clone(), &Py::None)) { let mut before: Py = __item.clone(); __out.push(Py::Bool(!py_contains(&g_BROKE_AS_SUBJECT(), &before.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    continue;
+    }
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&slice_or_raise(&norm.clone(), &add(&at.clone(), &Py::Int(1)), &Py::None, &Py::None)) { let mut after: Py = __item.clone(); __out.push(Py::Bool(!py_contains(&g_BROKE_AS_TIME(), &after.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    continue;
+    }
+    return at.clone();
+    }
+    return Py::None;
+    Py::None
+}
+pub fn _purse_amount(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut at: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "at") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: at"))) };
+    let mut amount: Py = Py::None;
+    let mut before: Py = Py::None;
+    let mut value: Py = Py::None;
+    let _ = py_str("How much the line says is left, in pounds, or None when it does not say.");
+    amount = geti(&norm.clone(), &sub(&at.clone(), &Py::Int(1)));
+    if py_truthy(&mcall(&mcall(&amount.clone(), "replace", &[py_str("."), py_str("")]), "isdigit", &[])) {
+    return call_builtin("float", &[amount.clone()]).unwrap_or_else(|e| exc::raise(e));
+    }
+    value = mcall(&g_WORD_NUMBERS(), "get", &[amount.clone()]);
+    if py_truthy(&Py::Bool(py_is(&value.clone(), &Py::None))) {
+    return Py::None;
+    }
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&py_tuple(vec![py_str("hundred"), py_str("thousand")]), &amount.clone())); if !py_truthy(&__b) { __b } else { ge(&at.clone(), &Py::Int(2)) } }) {
+    before = mcall(&g_WORD_NUMBERS(), "get", &[geti(&norm.clone(), &sub(&at.clone(), &Py::Int(2)))]);
+    if py_truthy(&Py::Bool(!py_is(&before.clone(), &Py::None))) {
+    return mul(&before.clone(), &value.clone());
+    }
+    }
+    return value.clone();
+    Py::None
+}
+pub fn _a_wait_follows(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut words: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "words") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: words"))) };
+    let mut one: Py = Py::None;
+    let mut rest: Py = Py::None;
+    let mut spot: Py = Py::None;
+    let mut word: Py = Py::None;
+    let _ = py_str("True when the words after an amount say when the money comes.");
+    let __iter1 = py_iter_or_raise(&call_builtin("enumerate", &[slice_or_raise(&words.clone(), &Py::None, &Py::Int(3), &Py::None)]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter1 {
+    let __unpk2 = py_unpack(&__item.clone(), 2, None);
+    spot = __unpk2[0].clone();
+    word = __unpk2[1].clone();
+    if py_truthy(&Py::Bool(!py_contains(&g_A_WAIT(), &word.clone()))) {
+    continue;
+    }
+    rest = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&slice_or_raise(&words.clone(), &add(&spot.clone(), &Py::Int(1)), &add(&spot.clone(), &Py::Int(3)), &Py::None)) { let mut one: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&py_tuple(vec![py_str("the"), py_str("a"), py_str("i")]), &one.clone()))) {  __out.push(one.clone()); } } py_list(__out) })() };
+    if py_truthy(&{ let __b = rest.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_A_WAIT_TO(), &geti(&rest.clone(), &Py::Int(0)))) } }) {
+    return Py::Bool(true);
+    }
+    }
+    return Py::Bool(false);
+    Py::None
+}
+pub fn purse_till_at(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut text: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "text") { v.clone() }
+    else { py_str("") };
+    let mut after: Py = Py::None;
+    let mut amount: Py = Py::None;
+    let mut at: Py = Py::None;
+    let mut match_: Py = Py::None;
+    let mut pence: Py = Py::None;
+    let mut pounds: Py = Py::None;
+    let mut value: Py = Py::None;
+    let mut word: Py = Py::None;
+    let _ = py_str("Where the line says what is left and when the money comes, or None.");
+    let __iter1 = py_iter_or_raise(&call_builtin("enumerate", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter1 {
+    let __unpk2 = py_unpack(&__item.clone(), 2, None);
+    at = __unpk2[0].clone();
+    word = __unpk2[1].clone();
+    if py_truthy(&Py::Bool(py_eq(&at.clone(), &Py::Int(0)))) {
+    continue;
+    }
+    if py_truthy(&Py::Bool(py_contains(&g_A_AMOUNT_NOUN(), &word.clone()))) {
+    if py_truthy(&_a_wait_follows(&[slice_or_raise(&norm.clone(), &add(&at.clone(), &Py::Int(1)), &Py::None, &Py::None)])) {
+    return sub(&at.clone(), &Py::Int(1));
+    }
+    continue;
+    }
+    if py_truthy(&Py::Bool(!py_contains(&g_A_MONEY_WORD(), &word.clone()))) {
+    continue;
+    }
+    amount = geti(&norm.clone(), &sub(&at.clone(), &Py::Int(1)));
+    if py_truthy(&{ let __b = Py::Bool(!py_contains(&g_NUMBER_WORDS(), &amount.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&mcall(&amount.clone(), "replace", &[py_str("."), py_str("")]), "isdigit", &[]))) } }) {
+    continue;
+    }
+    if py_truthy(&ge(&{ let __b = _purse_amount(&[norm.clone(), at.clone()]); if py_truthy(&__b) { __b } else { Py::Int(0) } }, &g_BIG_PURSE())) {
+    continue;
+    }
+    if py_truthy(&_a_wait_follows(&[slice_or_raise(&norm.clone(), &add(&at.clone(), &Py::Int(1)), &Py::None, &Py::None)])) {
+    return sub(&at.clone(), &Py::Int(1));
+    }
+    }
+    if py_truthy(&text.clone()) {
+    let __iter3 = py_iter_or_raise(&mcall(&g_A_AMOUNT_SYMBOL(), "finditer", &[mcall(&text.clone(), "lower", &[])]));
+    for __item in __iter3 {
+    match_ = __item.clone();
+    let __unpk4 = py_unpack(&py_tuple(vec![mcall(&match_.clone(), "group", &[Py::Int(1)]), mcall(&match_.clone(), "group", &[Py::Int(2)])]), 2, None);
+    pounds = __unpk4[0].clone();
+    pence = __unpk4[1].clone();
+    value = if py_truthy(&pounds.clone()) { call_builtin("float", &[mcall(&pounds.clone(), "replace", &[py_str(","), py_str("")])]).unwrap_or_else(|e| exc::raise(e)) } else { truediv(&call_builtin("float", &[pence.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Float(100.0)) };
+    if py_truthy(&ge(&value.clone(), &g_BIG_PURSE())) {
+    continue;
+    }
+    after = stdlib_call("re", "findall", &[py_str("[a-z']+"), mcall(&slice_or_raise(&text.clone(), &mcall(&match_.clone(), "end", &[]), &Py::None, &Py::None), "lower", &[])]).unwrap_or_else(|e| exc::raise(e));
+    if py_truthy(&_a_wait_follows(&[after.clone()])) {
+    return Py::Int(0);
+    }
+    }
+    }
+    return Py::None;
+    Py::None
+}
+pub fn tight_money_at(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut text: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "text") { v.clone() }
+    else { py_str("") };
+    let mut at: Py = Py::None;
+    let mut index: Py = Py::None;
+    let mut joined: Py = Py::None;
+    let mut phrase: Py = Py::None;
+    let mut purse: Py = Py::None;
+    let mut spot: Py = Py::None;
+    let mut topic: Py = Py::None;
+    let mut weight: Py = Py::None;
+    let mut word: Py = Py::None;
+    let _ = py_str("Where the line says the money has run out, or None: \"im skint till friday\", \"a bit short\".\n\n    The phrase has to be the whole of what the line names. \"im vegetarian and im skint, cheap\n    dinners\" asks for dinners and is answered as the cooking ask it is, so naming another\n    subject at all leaves the tight week unsaid.\n    ");
+    joined = add(&add(&py_str(" "), &mcall(&py_str(" "), "join", &[norm.clone()])), &py_str(" "));
+    at = broke_at(&[norm.clone()]);
+    purse = purse_till_at(&[norm.clone(), text.clone()]);
+    if py_truthy(&Py::Bool(!py_is(&purse.clone(), &Py::None))) {
+    at = if py_truthy(&Py::Bool(py_is(&at.clone(), &Py::None))) { purse.clone() } else { call_builtin("min", &[at.clone(), purse.clone()]).unwrap_or_else(|e| exc::raise(e)) };
+    }
+    let __iter1 = py_iter_or_raise(&g_MONEY_TIGHT());
+    for __item in __iter1 {
+    phrase = __item.clone();
+    spot = mcall(&joined.clone(), "find", &[add(&add(&py_str(" "), &phrase.clone()), &py_str(" "))]);
+    if py_truthy(&lt(&spot.clone(), &Py::Int(0))) {
+    continue;
+    }
+    index = call_builtin("len", &[mcall(&slice_or_raise(&joined.clone(), &Py::None, &spot.clone(), &Py::None), "split", &[])]).unwrap_or_else(|e| exc::raise(e));
+    at = if py_truthy(&Py::Bool(py_is(&at.clone(), &Py::None))) { index.clone() } else { call_builtin("min", &[at.clone(), index.clone()]).unwrap_or_else(|e| exc::raise(e)) };
+    }
+    if py_truthy(&Py::Bool(py_is(&at.clone(), &Py::None))) {
+    return Py::None;
+    }
+    let __iter2 = py_iter_or_raise(&norm.clone());
+    for __item in __iter2 {
+    word = __item.clone();
+    let __iter3 = py_iter_or_raise(&_lookup(&[word.clone()]));
+    for __item in __iter3 {
+    let __unpk4 = py_unpack(&__item.clone(), 2, None);
+    topic = __unpk4[0].clone();
+    weight = __unpk4[1].clone();
+    if py_truthy(&{ let __b = ge(&weight.clone(), &Py::Int(2)); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&py_tuple(vec![py_str("money"), py_str("small-talk")]), &topic.clone())) } }) {
+    return Py::None;
+    }
+    }
+    }
+    return at.clone();
+    Py::None
+}
+pub fn stone_weight_at(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut at: Py = Py::None;
+    let mut cue: Py = Py::None;
+    let mut cues: Py = Py::None;
+    let mut joined: Py = Py::None;
+    let mut phrase: Py = Py::None;
+    let mut spot: Py = Py::None;
+    let mut spots: Py = Py::None;
+    let mut start: Py = Py::None;
+    let mut word: Py = Py::None;
+    let _ = py_str("Where the line weighs something in stones, or None.\n\n    Only the verb makes it a weight, and it has to be near the stone (\"i want to lose a stone\",\n    \"half a stone to shift before the wedding\"), so a line about a wall or a fruit stone keeps\n    its own area.\n    ");
+    spots = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk883 = py_unpack(&__item.clone(), 2, None); let mut at: Py = __unpk883[0].clone(); let mut word: Py = __unpk883[1].clone(); if py_truthy(&Py::Bool(py_contains(&py_tuple(vec![py_str("stone"), py_str("stones")]), &word.clone()))) {  __out.push(at.clone()); } } py_list(__out) })() };
+    if py_truthy(&Py::Bool(!py_truthy(&spots.clone()))) {
+    return Py::None;
+    }
+    joined = mcall(&py_str(" "), "join", &[norm.clone()]);
+    cues = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk9490 = py_unpack(&__item.clone(), 2, None); let mut at: Py = __unpk9490[0].clone(); let mut word: Py = __unpk9490[1].clone(); if py_truthy(&Py::Bool(py_contains(&g_STONE_VERBS(), &word.clone()))) {  __out.push(at.clone()); } } py_set(__out) })() };
+    let __iter1 = py_iter_or_raise(&g_STONE_COMPOUNDS());
+    for __item in __iter1 {
+    phrase = __item.clone();
+    start = Py::Int(0);
+    while py_truthy(&Py::Bool(true)) {
+    spot = mcall(&joined.clone(), "find", &[phrase.clone(), start.clone()]);
+    if py_truthy(&lt(&spot.clone(), &Py::Int(0))) {
+    break;
+    }
+    let _ = mcall(&cues.clone(), "add", &[call_builtin("len", &[mcall(&slice_or_raise(&joined.clone(), &Py::None, &spot.clone(), &Py::None), "split", &[])]).unwrap_or_else(|e| exc::raise(e))]);
+    start = add(&spot.clone(), &Py::Int(1));
+    }
+    }
+    let __iter2 = py_iter_or_raise(&spots.clone());
+    for __item in __iter2 {
+    at = __item.clone();
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&cues.clone()) { let mut cue: Py = __item.clone(); __out.push(le(&call_builtin("abs", &[sub(&at.clone(), &cue.clone())]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(4))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    return at.clone();
+    }
+    }
+    return Py::None;
+    Py::None
+}
+pub fn tight_on_money(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut kind: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "kind") { v.clone() }
+    else { Py::None };
+    let mut text: Py = if __pos.len() > 2 { __pos[2].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "text") { v.clone() }
+    else { py_str("") };
+    let _ = py_str("True when the line says the money has run out and is about nothing else.\n\n    A question is left alone - \"what can i cook till payday\" is a cooking ask that happens to\n    mention payday - and so is a line long enough to be about something else.\n    ");
+    if py_truthy(&{ let __b = Py::Bool(py_eq(&kind.clone(), &py_str("question"))); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&norm.clone())); if py_truthy(&__b) { __b } else { gt(&call_builtin("len", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)), &g_MONEY_TIGHT_MAX()) } } } }) {
+    return Py::Bool(false);
+    }
+    return Py::Bool(!py_is(&tight_money_at(&[norm.clone(), text.clone()]), &Py::None));
+    Py::None
+}
+pub fn _worn_out(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut at: Py = Py::None;
+    let mut back: Py = Py::None;
+    let mut item: Py = Py::None;
+    let mut joined: Py = Py::None;
+    let mut phrase: Py = Py::None;
+    let mut spot: Py = Py::None;
+    let mut word: Py = Py::None;
+    let _ = py_str("True when the line says the person is worn out, in the words people use for it.\n\n    The cue is the person: \"im shattered\" is the tiredness and \"the shed window is shattered\"\n    is not, so the word has to come within three words of \"im\", \"am\" or \"feel\". \"Wiped\", \"done\"\n    and \"worn\" only count inside their phrase, because \"im done with that\" is not tiredness.\n    ");
+    if py_truthy(&Py::Bool(!py_truthy(&norm.clone()))) {
+    return Py::Bool(false);
+    }
+    let __iter1 = py_iter_or_raise(&call_builtin("enumerate", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter1 {
+    let __unpk2 = py_unpack(&__item.clone(), 2, None);
+    at = __unpk2[0].clone();
+    word = __unpk2[1].clone();
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_WORN_OUT(), &word.clone())); if !py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&slice_or_raise(&norm.clone(), &call_builtin("max", &[Py::Int(0), sub(&at.clone(), &g_WORN_OUT_LOOKBACK())]).unwrap_or_else(|e| exc::raise(e)), &at.clone(), &Py::None)) { let mut item: Py = __item.clone(); __out.push(Py::Bool(py_contains(&g_WORN_OUT_CUE(), &item.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }) {
+    return Py::Bool(true);
+    }
+    }
+    joined = add(&add(&py_str(" "), &mcall(&py_str(" "), "join", &[norm.clone()])), &py_str(" "));
+    let __iter3 = py_iter_or_raise(&g_WORN_OUT_SAID());
+    for __item in __iter3 {
+    phrase = __item.clone();
+    spot = mcall(&joined.clone(), "find", &[add(&add(&py_str(" "), &phrase.clone()), &py_str(" "))]);
+    if py_truthy(&lt(&spot.clone(), &Py::Int(0))) {
+    continue;
+    }
+    back = slice_or_raise(&mcall(&slice_or_raise(&joined.clone(), &Py::None, &spot.clone(), &Py::None), "split", &[]), &neg(&g_WORN_OUT_LOOKBACK()), &Py::None, &Py::None);
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&back.clone()) { let mut item: Py = __item.clone(); __out.push(Py::Bool(py_contains(&g_WORN_OUT_CUE(), &item.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    return Py::Bool(true);
+    }
+    }
+    return Py::Bool(false);
+    Py::None
+}
+pub fn rank_topics(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut line: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "line") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: line"))) };
+    let mut inherited: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "inherited") { v.clone() }
+    else { Py::None };
+    let mut entities: Py = if __pos.len() > 2 { __pos[2].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "entities") { v.clone() }
+    else { Py::None };
+    let mut asks: Py = if __pos.len() > 3 { __pos[3].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "asks") { v.clone() }
+    else { Py::None };
+    let mut _top: Py = Py::None;
+    let mut animals: Py = Py::None;
+    let mut at: Py = Py::None;
+    let mut boost: Py = Py::None;
+    let mut entry: Py = Py::None;
+    let mut found: Py = Py::None;
+    let mut item: Py = Py::None;
+    let mut number: Py = Py::None;
+    let mut other: Py = Py::None;
+    let mut points: Py = Py::None;
+    let mut position: Py = Py::None;
+    let mut ranked: Py = Py::None;
+    let mut reason: Py = Py::None;
+    let mut score: Py = Py::None;
+    let mut scores: Py = Py::None;
+    let mut sign_words: Py = Py::None;
+    let mut top: Py = Py::None;
+    let mut topic: Py = Py::None;
+    let mut wanted: Py = Py::None;
+    let mut warmth: Py = Py::None;
+    let mut word: Py = Py::None;
+    let mut words: Py = Py::None;
+    let _ = py_str("[(topic, score)] for this line, best first, with what the line names taken into\n    account: a place plus a travel cue, a pet that is the subject, a percentage.");
+    found = { (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&score_topics(&[line.clone()])) { let __unpk7009 = py_unpack(&__item.clone(), 3, None); let mut topic: Py = __unpk7009[0].clone(); let mut score: Py = __unpk7009[1].clone(); let mut top: Py = __unpk7009[2].clone(); __out.push((topic.clone(), py_list(vec![score.clone(), top.clone()]))); } py_dict(__out) })() };
+pub fn __nested_boost_0(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = args.to_vec();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    let mut __split = __pos.len();
+    for (i, a) in args.iter().enumerate() { if let Py::Kwargs(kws) = a { __split = i; for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } break; } }
+    let __pos = &args[..__split];
+    let mut _top: Py = __pos.get(0).cloned().unwrap_or(Py::None);
+    let mut animals: Py = __pos.get(1).cloned().unwrap_or(Py::None);
+    let mut asks: Py = __pos.get(2).cloned().unwrap_or(Py::None);
+    let mut at: Py = __pos.get(3).cloned().unwrap_or(Py::None);
+    let mut boost: Py = __pos.get(4).cloned().unwrap_or(Py::None);
+    let mut entities: Py = __pos.get(5).cloned().unwrap_or(Py::None);
+    let mut entry: Py = __pos.get(6).cloned().unwrap_or(Py::None);
+    let mut found: Py = __pos.get(7).cloned().unwrap_or(Py::None);
+    let mut inherited: Py = __pos.get(8).cloned().unwrap_or(Py::None);
+    let mut item: Py = __pos.get(9).cloned().unwrap_or(Py::None);
+    let mut line: Py = __pos.get(10).cloned().unwrap_or(Py::None);
+    let mut number: Py = __pos.get(11).cloned().unwrap_or(Py::None);
+    let mut other: Py = __pos.get(12).cloned().unwrap_or(Py::None);
+    let mut points: Py = __pos.get(13).cloned().unwrap_or(Py::None);
+    let mut position: Py = __pos.get(14).cloned().unwrap_or(Py::None);
+    let mut ranked: Py = __pos.get(15).cloned().unwrap_or(Py::None);
+    let mut reason: Py = __pos.get(16).cloned().unwrap_or(Py::None);
+    let mut score: Py = __pos.get(17).cloned().unwrap_or(Py::None);
+    let mut scores: Py = __pos.get(18).cloned().unwrap_or(Py::None);
+    let mut sign_words: Py = __pos.get(19).cloned().unwrap_or(Py::None);
+    let mut top: Py = __pos.get(20).cloned().unwrap_or(Py::None);
+    let mut topic: Py = __pos.get(21).cloned().unwrap_or(Py::None);
+    let mut wanted: Py = __pos.get(22).cloned().unwrap_or(Py::None);
+    let mut warmth: Py = __pos.get(23).cloned().unwrap_or(Py::None);
+    let mut word: Py = __pos.get(24).cloned().unwrap_or(Py::None);
+    let mut words: Py = __pos.get(25).cloned().unwrap_or(Py::None);
+    let mut topic: Py = __pos.get(26).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "topic").map(|(_, v)| v.clone())).unwrap_or(Py::None);
+    let mut points: Py = __pos.get(27).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "points").map(|(_, v)| v.clone())).unwrap_or(Py::None);
+    entry = mcall(&found.clone(), "setdefault", &[topic.clone(), py_list(vec![Py::Int(0), Py::Int(0)])]);
+    let __aug1 = add(&geti(&entry.clone(), &Py::Int(0)), &points.clone());
+    let _ = py_setitem(&entry.clone(), &Py::Int(0), __aug1);
+    let _ = py_setitem(&entry.clone(), &Py::Int(1), call_builtin("max", &[geti(&entry.clone(), &Py::Int(1)), points.clone()]).unwrap_or_else(|e| exc::raise(e)));
+    Py::None
+}
+    boost = py_func("boost", move |args: &[Py]| { let mut full = vec![_top.clone(), animals.clone(), asks.clone(), at.clone(), boost.clone(), entities.clone(), entry.clone(), found.clone(), inherited.clone(), item.clone(), line.clone(), number.clone(), other.clone(), points.clone(), position.clone(), ranked.clone(), reason.clone(), score.clone(), scores.clone(), sign_words.clone(), top.clone(), topic.clone(), wanted.clone(), warmth.clone(), word.clone(), words.clone()]; full.extend_from_slice(args); __nested_boost_0(&full) });
+    words = call_builtin("set", &[geti(&line.clone(), &py_str("norm"))]).unwrap_or_else(|e| exc::raise(e));
+    if py_truthy(&{ let __b = entities.clone(); if !py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&entities.clone()) { let mut item: Py = __item.clone(); __out.push(Py::Bool(py_eq(&geti(&item.clone(), &py_str("type")), &py_str("place")))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }) {
+    points = _place_points(&[line.clone(), entities.clone(), { (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&found.clone(), "items", &[])) { let __unpk2452 = py_unpack(&__item.clone(), 2, None); let mut topic: Py = __unpk2452[0].clone(); let __unpk2404 = py_unpack(&__unpk2452[1].clone(), 2, None); let mut score: Py = __unpk2404[0].clone(); let mut _top: Py = __unpk2404[1].clone(); __out.push((topic.clone(), score.clone())); } py_dict(__out) })() }, asks.clone()]);
+    if py_truthy(&points.clone()) {
+    let _ = py_call(&boost, &[py_str("geography-and-travel"), points.clone()]);
+    }
+    }
+    if py_truthy(&{ let __b = entities.clone(); if !py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&entities.clone()) { let mut item: Py = __item.clone(); __out.push(_a_country_named(&[item.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }) {
+    let _ = py_call(&boost, &[py_str("geography-and-travel"), g_COUNTRY_BOOST()]);
+    }
+    if py_truthy(&{ let __b = entities.clone(); if !py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&entities.clone()) { let mut item: Py = __item.clone(); __out.push(Py::Bool(py_contains(&g_PETS(), &geti(&mcall(&mcall(&geti(&item.clone(), &py_str("text")), "lower", &[]), "split", &[]), &neg(&Py::Int(1)))))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }) {
+    let _ = py_call(&boost, &[py_str("pets"), g_PET_BOOST()]);
+    }
+    words = call_builtin("set", &[geti(&line.clone(), &py_str("norm"))]).unwrap_or_else(|e| exc::raise(e));
+    reason = crate::gen::understanding::normalize::reason_positions(&[geti(&line.clone(), &py_str("norm"))]);
+    if py_truthy(&{ let __b = bitand(&call_builtin("set", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[geti(&line.clone(), &py_str("norm"))]).unwrap_or_else(|e| exc::raise(e))) { let __unpk6388 = py_unpack(&__item.clone(), 2, None); let mut position: Py = __unpk6388[0].clone(); let mut word: Py = __unpk6388[1].clone(); if py_truthy(&Py::Bool(!py_contains(&reason.clone(), &position.clone()))) {  __out.push(word.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)), &g_BODY()); if !py_truthy(&__b) { __b } else { bitand(&call_builtin("set", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[geti(&line.clone(), &py_str("norm"))]).unwrap_or_else(|e| exc::raise(e))) { let __unpk7780 = py_unpack(&__item.clone(), 2, None); let mut position: Py = __unpk7780[0].clone(); let mut word: Py = __unpk7780[1].clone(); if py_truthy(&Py::Bool(!py_contains(&reason.clone(), &position.clone()))) {  __out.push(word.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)), &g_HURTS()) } }) {
+    let _ = py_call(&boost, &[py_str("health"), g_HURT_BOOST()]);
+    }
+    if py_truthy(&_head_fog(&[geti(&line.clone(), &py_str("norm"))])) {
+    let _ = py_call(&boost, &[py_str("health"), g_HEAD_FOG_BOOST()]);
+    }
+    if py_truthy(&{ let __b = Py::Bool(!py_is(&_skin_state(&[geti(&line.clone(), &py_str("norm")), reason.clone()]), &Py::None)); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_PEOPLE_TOPICS()) { let mut topic: Py = __item.clone(); __out.push(ge(&geti(&mcall(&found.clone(), "get", &[topic.clone(), py_list(vec![Py::Int(0)])]), &Py::Int(0)), &Py::Int(2))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)))) } }) {
+    let _ = py_call(&boost, &[py_str("health"), g_SKIN_BOOST()]);
+    }
+    if py_truthy(&_named_condition(&[geti(&line.clone(), &py_str("norm")), words.clone(), reason.clone()])) {
+    let _ = py_call(&boost, &[py_str("health"), g_CONDITION_BOOST()]);
+    }
+    if py_truthy(&Py::Bool(!py_is(&_a_part_plays_up(&[geti(&line.clone(), &py_str("norm")), reason.clone()]), &Py::None))) {
+    let _ = py_call(&boost, &[py_str("health"), g_PART_UP_BOOST()]);
+    }
+    warmth = the_warmth_said(&[geti(&line.clone(), &py_str("norm"))]);
+    sign_words = if py_truthy(&warmth.clone()) { { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&geti(&line.clone(), &py_str("norm"))) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(!py_eq(&word.clone(), &warmth.clone()))) {  __out.push(word.clone()); } } py_list(__out) })() } } else { geti(&line.clone(), &py_str("norm")) };
+    if py_truthy(&_a_person_is_unwell(&[sign_words.clone(), call_builtin("set", &[sign_words.clone()]).unwrap_or_else(|e| exc::raise(e))])) {
+    let _ = py_call(&boost, &[py_str("health"), g_UNWELL_BOOST()]);
+    }
+    if py_truthy(&mcall(&g_NOSE_BLOCKED(), "search", &[add(&add(&py_str(" "), &mcall(&py_str(" "), "join", &[geti(&line.clone(), &py_str("norm"))])), &py_str(" "))])) {
+    let _ = py_call(&boost, &[py_str("health"), g_NOSE_BLOCKED_BOOST()]);
+    }
+    animals = _owns_an_animal(&[geti(&line.clone(), &py_str("norm"))]);
+    if py_truthy(&animals.clone()) {
+    let _ = py_call(&boost, &[py_str("pets"), g_PET_BOOST()]);
+    }
+    if py_truthy(&_names_a_friend_of_their_own(&[geti(&line.clone(), &py_str("norm"))])) {
+    let _ = py_call(&boost, &[py_str("friends-and-relationships"), g_FRIEND_BOOST()]);
+    }
+    wanted = _what_someone_else_wants(&[geti(&line.clone(), &py_str("norm"))]);
+    if py_truthy(&{ let __b = Py::Bool(!py_is(&wanted.clone(), &Py::None)); if !py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_PEOPLE_TOPICS()) { let mut topic: Py = __item.clone(); __out.push(ge(&geti(&mcall(&found.clone(), "get", &[topic.clone(), py_list(vec![Py::Int(0)])]), &Py::Int(0)), &Py::Int(2))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }) {
+    let __unpk2 = py_unpack(&wanted.clone(), 2, None);
+    topic = __unpk2[0].clone();
+    at = __unpk2[1].clone();
+    let _ = py_call(&boost, &[topic.clone(), add(&call_builtin("max", &[geti(&mcall(&found.clone(), "get", &[topic.clone(), py_list(vec![Py::Int(0)])]), &Py::Int(0)), Py::Int(2)]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1))]);
+    }
+    if py_truthy(&_a_crop_is_failing(&[geti(&line.clone(), &py_str("norm"))])) {
+    let _ = py_call(&boost, &[py_str("garden-and-plants"), g_CROP_BOOST()]);
+    }
+    if py_truthy(&_a_habit_given_up(&[geti(&line.clone(), &py_str("norm"))])) {
+    let _ = py_call(&boost, &[py_str("food-and-drink"), g_GIVING_UP_BOOST()]);
+    }
+    if py_truthy(&{ let __b = _worn_out(&[geti(&line.clone(), &py_str("norm"))]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&crate::gen::understanding::kinds::_asks_back(&[geti(&line.clone(), &py_str("norm"))]))) } }) {
+    let _ = py_call(&boost, &[py_str("sleep"), g_WORN_OUT_BOOST()]);
+    }
+    if py_truthy(&{ let __b = bitand(&words.clone(), &g_WORLD()); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&bitand(&words.clone(), &g_WORLD_NOT()))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&bitand(&words.clone(), &g_NATURE_WORDS()))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&bitand(&words.clone(), &g_HURTS()))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&animals.clone())); if !py_truthy(&__b) { __b } else { _asks_mechanism(&[geti(&line.clone(), &py_str("norm"))]) } } } } } } } } } }) {
+    let _ = py_call(&boost, &[py_str("science"), g_SCIENCE_BOOST()]);
+    }
+    let __iter3 = py_iter_or_raise(&detect_numbers(&[line.clone()]));
+    for __item in __iter3 {
+    number = __item.clone();
+    if py_truthy(&Py::Bool(py_eq(&geti(&number.clone(), &py_str("unit")), &py_str("percent")))) {
+    let _ = py_call(&boost, &[py_str("maths-and-numbers"), Py::Int(3)]);
+    }
+    }
+    if py_truthy(&_gift_ask(&[words.clone(), geti(&line.clone(), &py_str("norm"))])) {
+    let _ = py_call(&boost, &[py_str("shopping"), g_GIFT_BOOST()]);
+    }
+    if py_truthy(&{ let __b = ge(&geti(&mcall(&found.clone(), "get", &[py_str("health"), py_list(vec![Py::Int(0)])]), &Py::Int(0)), &Py::Int(3)); if !py_truthy(&__b) { __b } else { le(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&found.clone(), "items", &[])) { let __unpk9297 = py_unpack(&__item.clone(), 2, None); let mut topic: Py = __unpk9297[0].clone(); let mut entry: Py = __unpk9297[1].clone(); if py_truthy(&ge(&geti(&entry.clone(), &Py::Int(0)), &Py::Int(2))) {  __out.push(topic.clone()); } } py_set(__out) })() }, &py_set(vec![py_str("health"), py_str("small-talk")])) } }) {
+    let _ = mcall(&found.clone(), "pop", &[py_str("small-talk"), Py::None]);
+    }
+    if py_truthy(&inherited.clone()) {
+    let __iter4 = py_iter_or_raise(&mcall(&found.clone(), "items", &[]));
+    for __item in __iter4 {
+    let __unpk5 = py_unpack(&__item.clone(), 2, None);
+    topic = __unpk5[0].clone();
+    entry = __unpk5[1].clone();
+    if py_truthy(&{ let __b = Py::Bool(!py_eq(&topic.clone(), &inherited.clone())); if !py_truthy(&__b) { __b } else { lt(&geti(&entry.clone(), &Py::Int(1)), &Py::Int(2)) } }) {
+    let __aug6 = sub(&geti(&entry.clone(), &Py::Int(0)), &Py::Int(1));
+    let _ = py_setitem(&entry.clone(), &Py::Int(0), __aug6);
+    }
+    }
+    let _ = py_call(&boost, &[inherited.clone(), g_CARRY()]);
+    }
+    scores = { (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&found.clone(), "items", &[])) { let __unpk2322 = py_unpack(&__item.clone(), 2, None); let mut topic: Py = __unpk2322[0].clone(); let __unpk2898 = py_unpack(&__unpk2322[1].clone(), 2, None); let mut score: Py = __unpk2898[0].clone(); let mut _top: Py = __unpk2898[1].clone(); __out.push((topic.clone(), score.clone())); } py_dict(__out) })() };
+    if py_truthy(&_the_weather_is_just_a_season(&[geti(&line.clone(), &py_str("norm")), add(&add(&py_str(" "), &geti(&line.clone(), &py_str("norm_text"))), &py_str(" "))])) {
+    entry = mcall(&scores.clone(), "get", &[py_str("nature-and-weather")]);
+    if py_truthy(&{ let __b = Py::Bool(!py_is(&entry.clone(), &Py::None)); if !py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&scores.clone(), "items", &[])) { let __unpk4386 = py_unpack(&__item.clone(), 2, None); let mut other: Py = __unpk4386[0].clone(); let mut score: Py = __unpk4386[1].clone(); __out.push({ let __b = Py::Bool(!py_eq(&other.clone(), &py_str("nature-and-weather"))); if !py_truthy(&__b) { __b } else { ge(&score.clone(), &Py::Int(2)) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }) {
+    let _ = py_setitem(&scores.clone(), &py_str("nature-and-weather"), call_builtin("min", &[entry.clone(), Py::Int(1)]).unwrap_or_else(|e| exc::raise(e)));
+    }
+    }
+    ranked = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&scores.clone(), "items", &[])) { let __unpk6066 = py_unpack(&__item.clone(), 2, None); let mut topic: Py = __unpk6066[0].clone(); let mut score: Py = __unpk6066[1].clone(); if py_truthy(&ge(&score.clone(), &Py::Int(2))) {  __out.push(py_tuple(vec![topic.clone(), score.clone()])); } } py_list(__out) })() };
+    let _ = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("key".to_string(), py_func("lambda", move |args: &[Py]| { let _top = _top.clone(); let animals = animals.clone(); let asks = asks.clone(); let at = at.clone(); let boost = boost.clone(); let entities = entities.clone(); let entry = entry.clone(); let found = found.clone(); let inherited = inherited.clone(); let item = item.clone(); let line = line.clone(); let number = number.clone(); let other = other.clone(); let points = points.clone(); let position = position.clone(); let ranked = ranked.clone(); let reason = reason.clone(); let score = score.clone(); let scores = scores.clone(); let sign_words = sign_words.clone(); let top = top.clone(); let topic = topic.clone(); let wanted = wanted.clone(); let warmth = warmth.clone(); let word = word.clone(); let words = words.clone(); let item: Py = __kwp(args, 0, "item").unwrap_or(Py::None); py_tuple(vec![geti(&item.clone(), &Py::Int(1)), Py::Bool(py_eq(&geti(&item.clone(), &Py::Int(0)), &inherited.clone()))]) })), ("reverse".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&ranked.clone(), "sort", args))(&__args) };
+    return ranked.clone();
+    Py::None
+}
+pub fn gift_ask(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut understood: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "understood") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: understood"))) };
+    let mut norm: Py = Py::None;
+    let _ = py_str("True when this reading asks what to give someone. Public: the answer entry asks too.");
+    if py_truthy(&Py::Bool(!py_truthy(&call_builtin("isinstance", &[understood.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))))) {
+    return Py::Bool(false);
+    }
+    norm = mcall(&understood.clone(), "get", &[py_str("norm")]);
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&call_builtin("isinstance", &[norm.clone(), py_tuple(vec![py_func("list", |args: &[Py]| call_builtin("list", args).unwrap_or_else(|e| exc::raise(e))), py_func("tuple", |args: &[Py]| call_builtin("tuple", args).unwrap_or_else(|e| exc::raise(e)))])]).unwrap_or_else(|e| exc::raise(e)))); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&norm.clone())) } }) {
+    return Py::Bool(false);
+    }
+    return _gift_ask(&[call_builtin("set", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)), call_builtin("list", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e))]);
+    Py::None
+}
+pub fn _gift_ask(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut words: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "words") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: words"))) };
+    let mut norm: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut ch: Py = Py::None;
+    let mut head: Py = Py::None;
+    let mut index: Py = Py::None;
+    let mut one: Py = Py::None;
+    let mut position: Py = Py::None;
+    let mut rest: Py = Py::None;
+    let mut tail: Py = Py::None;
+    let mut word: Py = Py::None;
+    let _ = py_str("True when the line asks what to give someone.\n\n    A gift word needs one other sign of a gift (\"a present for\", \"an anniversary gift\"), and\n    a plain \"get\" needs a person to give to and then nothing that turns it into another\n    errand: \"get her\" is a present, \"get her to eat\", \"get her a taxi\", \"get him tested\" and\n    \"get him for his cough\" are not. What follows the person decides - the end of the line, or\n    \"something\", a present word, or an occasion (\"for christmas\", \"for her birthday\").\n    ");
+    if py_truthy(&bitand(&words.clone(), &g_GIFT_ALWAYS())) {
+    return Py::Bool(true);
+    }
+    if py_truthy(&{ let __b = bitand(&words.clone(), &g_GIFT_WORDS()); if !py_truthy(&__b) { __b } else { { let __b = bitand(&words.clone(), &g_GIFT_ASKING()); if py_truthy(&__b) { __b } else { { let __b = bitand(&words.clone(), &g_GIVE_VERB()); if py_truthy(&__b) { __b } else { { let __b = bitand(&words.clone(), &g_GIFT_OCCASION()); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&words.clone(), &py_str("for"))) } } } } } } } }) {
+    return Py::Bool(true);
+    }
+    if py_truthy(&{ let __b = bitand(&words.clone(), &g_GIFT_WANTING()); if !py_truthy(&__b) { __b } else { _gift_still_to_get(&[words.clone(), norm.clone()]) } }) {
+    return Py::Bool(true);
+    }
+    if py_truthy(&Py::Bool(!py_truthy(&{ let __b = bitand(&words.clone(), &g_GIFT_ASKING()); if py_truthy(&__b) { __b } else { bitand(&words.clone(), &g_GIFT_OCCASION()) } }))) {
+    return Py::Bool(false);
+    }
+    if py_truthy(&bitand(&words.clone(), &g_GIFT_OCCASION())) {
+    let __iter1 = py_iter_or_raise(&call_builtin("enumerate", &[slice_or_raise(&norm.clone(), &Py::None, &neg(&Py::Int(1)), &Py::None)]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter1 {
+    let __unpk2 = py_unpack(&__item.clone(), 2, None);
+    position = __unpk2[0].clone();
+    word = __unpk2[1].clone();
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_GIVE_TO(), &word.clone())); if !py_truthy(&__b) { __b } else { bitand(&call_builtin("set", &[slice_or_raise(&norm.clone(), &add(&position.clone(), &Py::Int(1)), &add(&position.clone(), &Py::Int(3)), &Py::None)]).unwrap_or_else(|e| exc::raise(e)), &g_GIVE_THINGS()) } }) {
+    return Py::Bool(true);
+    }
+    }
+    }
+    let __iter3 = py_iter_or_raise(&call_builtin("enumerate", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter3 {
+    let __unpk4 = py_unpack(&__item.clone(), 2, None);
+    position = __unpk4[0].clone();
+    word = __unpk4[1].clone();
+    if py_truthy(&Py::Bool(!py_contains(&g_GIVE_VERB(), &word.clone()))) {
+    continue;
+    }
+    rest = slice_or_raise(&norm.clone(), &add(&position.clone(), &Py::Int(1)), &Py::None, &Py::None);
+    if py_truthy(&Py::Bool(!py_truthy(&rest.clone()))) {
+    continue;
+    }
+    head = geti(&rest.clone(), &Py::Int(0));
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_GIVE_THING(), &head.clone())); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&g_GIFT_WORDS(), &head.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_GIFT_OCCASION(), &head.clone())) } } } }) {
+    return Py::Bool(true);
+    }
+    tail = rest.clone();
+    let __iter5 = py_iter_or_raise(&call_builtin("enumerate", &[slice_or_raise(&rest.clone(), &Py::None, &Py::Int(2), &Py::None)]).unwrap_or_else(|e| exc::raise(e)));
+    let mut __else6 = false;
+    for __item in __iter5 {
+    let __unpk7 = py_unpack(&__item.clone(), 2, None);
+    index = __unpk7[0].clone();
+    one = __unpk7[1].clone();
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_GIVE_TO(), &one.clone())); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&g_GIVE_DETERMINERS(), &one.clone())); if !py_truthy(&__b) { __b } else { { let __b = slice_or_raise(&rest.clone(), &add(&index.clone(), &Py::Int(1)), &add(&index.clone(), &Py::Int(2)), &Py::None); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_GIVE_TO(), &geti(&rest.clone(), &add(&index.clone(), &Py::Int(1))))) } } } } } }) {
+    tail = if py_truthy(&Py::Bool(py_contains(&g_GIVE_TO(), &one.clone()))) { slice_or_raise(&rest.clone(), &add(&index.clone(), &Py::Int(1)), &Py::None, &Py::None) } else { slice_or_raise(&rest.clone(), &add(&index.clone(), &Py::Int(2)), &Py::None, &Py::None) };
+    break;
+    }
+    }
+    continue;
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&tail.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_GIVE_RELATIVE(), &geti(&tail.clone(), &Py::Int(0)))) } }) {
+    return Py::Bool(true);
+    }
+    if py_truthy(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&slice_or_raise(&tail.clone(), &Py::None, &Py::Int(3), &Py::None)) { let mut one: Py = __item.clone(); if py_truthy(&Py::Bool(py_contains(&g_GIFTS_OR_OCCASIONS(), &one.clone()))) {  __out.push(one.clone()); } } py_list(__out) })() }) {
+    return Py::Bool(true);
+    }
+    if py_truthy(&{ let __b = Py::Bool(py_eq(&geti(&tail.clone(), &Py::Int(0)), &py_str("for"))); if !py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&slice_or_raise(&tail.clone(), &Py::Int(1), &Py::Int(4), &Py::None)) { let mut one: Py = __item.clone(); for __item in py_iter_or_raise(&one.clone()) { let mut ch: Py = __item.clone(); __out.push(mcall(&ch.clone(), "isdigit", &[])); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }) {
+    return Py::Bool(true);
+    }
+    }
+    return Py::Bool(false);
+    Py::None
+}
+pub fn _gift_still_to_get(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut words: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "words") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: words"))) };
+    let mut norm: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut index: Py = Py::None;
+    let mut one: Py = Py::None;
+    let mut position: Py = Py::None;
+    let mut rest: Py = Py::None;
+    let mut tail: Py = Py::None;
+    let mut word: Py = Py::None;
+    let _ = py_str("True when the line says a present is still not got: the person and the thing, no question.\n\n    \"i still havent got her anything\", \"still need to get my mum something\", \"i havent bought\n    my sister her present yet\", \"nothing for him yet\". The giving verb is the same one a gift\n    question uses, so the shape is the same - a person to give to and then the thing given -\n    and what makes it a gift line rather than an errand is that the thing is still owed: a\n    want word somewhere in the line, and \"anything\" or \"nothing\" as the thing.\n    \"get her a taxi\", \"get him tested\" and \"get the kids to bed\" name no thing given.\n    ");
+    if py_truthy(&{ let __b = bitand(&words.clone(), &g_GIVE_TO()); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&words.clone(), &py_str("for"))); if !py_truthy(&__b) { __b } else { bitand(&words.clone(), &py_set(vec![py_str("nothing"), py_str("anything")])) } } } }) {
+    return Py::Bool(true);
+    }
+    let __iter1 = py_iter_or_raise(&call_builtin("enumerate", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter1 {
+    let __unpk2 = py_unpack(&__item.clone(), 2, None);
+    position = __unpk2[0].clone();
+    word = __unpk2[1].clone();
+    if py_truthy(&Py::Bool(!py_contains(&g_GIVE_VERB(), &word.clone()))) {
+    continue;
+    }
+    rest = slice_or_raise(&norm.clone(), &add(&position.clone(), &Py::Int(1)), &Py::None, &Py::None);
+    let __iter3 = py_iter_or_raise(&call_builtin("enumerate", &[slice_or_raise(&rest.clone(), &Py::None, &Py::Int(2), &Py::None)]).unwrap_or_else(|e| exc::raise(e)));
+    let mut __else4 = false;
+    for __item in __iter3 {
+    let __unpk5 = py_unpack(&__item.clone(), 2, None);
+    index = __unpk5[0].clone();
+    one = __unpk5[1].clone();
+    if py_truthy(&Py::Bool(py_contains(&g_GIVE_TO(), &one.clone()))) {
+    tail = slice_or_raise(&rest.clone(), &add(&index.clone(), &Py::Int(1)), &Py::None, &Py::None);
+    break;
+    }
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_GIVE_DETERMINERS(), &one.clone())); if !py_truthy(&__b) { __b } else { { let __b = slice_or_raise(&rest.clone(), &add(&index.clone(), &Py::Int(1)), &add(&index.clone(), &Py::Int(2)), &Py::None); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_GIVE_TO(), &geti(&rest.clone(), &add(&index.clone(), &Py::Int(1))))) } } } }) {
+    tail = slice_or_raise(&rest.clone(), &add(&index.clone(), &Py::Int(2)), &Py::None, &Py::None);
+    break;
+    }
+    }
+    continue;
+    if py_truthy(&Py::Bool(!py_truthy(&tail.clone()))) {
+    continue;
+    }
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_GIVE_THING(), &geti(&tail.clone(), &Py::Int(0)))); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_GIFT_WORDS(), &geti(&tail.clone(), &Py::Int(0)))) } }) {
+    return Py::Bool(true);
+    }
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&tail.clone(), &py_str("for"))); if !py_truthy(&__b) { __b } else { bitand(&words.clone(), &py_set(vec![py_str("nothing"), py_str("anything")])) } }) {
+    return Py::Bool(true);
+    }
+    if py_truthy(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&slice_or_raise(&tail.clone(), &Py::None, &Py::Int(3), &Py::None)) { let mut one: Py = __item.clone(); if py_truthy(&Py::Bool(py_contains(&g_GIFT_OCCASION(), &one.clone()))) {  __out.push(one.clone()); } } py_list(__out) })() }) {
+    return Py::Bool(true);
+    }
+    }
+    return Py::Bool(false);
+    Py::None
+}
+pub fn subject_topic(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut line: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "line") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: line"))) };
+    let mut entities: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "entities") { v.clone() }
+    else { Py::None };
+    let mut _score: Py = Py::None;
+    let mut top: Py = Py::None;
+    let mut topic: Py = Py::None;
+    let _ = py_str("The topic this line names with a distinctive word or a phrase, or None.\n\n    Ordinary words alone (\"year\", \"old\", \"think\") do not make a subject: a line built from\n    them is a follow-up on whatever the conversation is already about, so this is what a\n    caller asks before treating the line as a new subject.\n    ");
+    let __iter1 = py_iter_or_raise(&score_topics(&[line.clone()]));
+    for __item in __iter1 {
+    let __unpk2 = py_unpack(&__item.clone(), 3, None);
+    topic = __unpk2[0].clone();
+    _score = __unpk2[1].clone();
+    top = __unpk2[2].clone();
+    if py_truthy(&ge(&top.clone(), &Py::Int(2))) {
+    return topic.clone();
+    }
+    }
+    return Py::None;
+    Py::None
+}
+pub fn the_words_that_said(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut line: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "line") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: line"))) };
+    let mut topic: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "topic") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: topic"))) };
+    let mut entities: Py = if __pos.len() > 2 { __pos[2].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "entities") { v.clone() }
+    else { Py::None };
+    let mut covered: Py = Py::None;
+    let mut found: Py = Py::None;
+    let mut key: Py = Py::None;
+    let mut name: Py = Py::None;
+    let mut norm: Py = Py::None;
+    let mut position: Py = Py::None;
+    let mut size: Py = Py::None;
+    let mut start: Py = Py::None;
+    let mut weight: Py = Py::None;
+    let mut word: Py = Py::None;
+    let _ = py_str("[(word, weight)] for what in the line points at `topic`, strongest first.\n\n    A phrase counts as the phrase (`hot dog`, `work out`) and not as its words, because the\n    phrase is what says which sense a word is being used in: \"hot dog\" is a food, while `dog`\n    on its own is the animal. Understanding publishes this so a reader can see how much of the\n    sentence backs a topic before it answers from it (`understood[\"topic_from\"]`).\n    ");
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&call_builtin("isinstance", &[topic.clone(), py_func("str", |args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e)))); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&topic.clone())) } }) {
+    return py_list(vec![]);
+    }
+    norm = call_builtin("list", &[{ let __b = mcall(&line.clone(), "get", &[py_str("norm")]); if py_truthy(&__b) { __b } else { py_tuple(vec![]) } }]).unwrap_or_else(|e| exc::raise(e));
+    let __unpk1 = py_unpack(&py_tuple(vec![py_list(vec![]), call_builtin("set", &[]).unwrap_or_else(|e| exc::raise(e))]), 2, None);
+    found = __unpk1[0].clone();
+    covered = __unpk1[1].clone();
+    let __iter2 = py_iter_or_raise(&call_builtin("range", &[Py::Int(2), Py::Int(5)]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter2 {
+    size = __item.clone();
+    let __iter3 = py_iter_or_raise(&call_builtin("range", &[add(&sub(&call_builtin("len", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)), &size.clone()), &Py::Int(1))]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter3 {
+    start = __item.clone();
+    key = mcall(&py_str(" "), "join", &[slice_or_raise(&norm.clone(), &start.clone(), &add(&start.clone(), &size.clone()), &Py::None)]);
+    let __iter4 = py_iter_or_raise(&mcall(&g_TABLE(), "get", &[key.clone(), py_tuple(vec![])]));
+    for __item in __iter4 {
+    let __unpk5 = py_unpack(&__item.clone(), 2, None);
+    name = __unpk5[0].clone();
+    weight = __unpk5[1].clone();
+    if py_truthy(&Py::Bool(py_eq(&name.clone(), &topic.clone()))) {
+    let _ = mcall(&found.clone(), "append", &[py_tuple(vec![key.clone(), weight.clone()])]);
+    let _ = mcall(&covered.clone(), "update", &[slice_or_raise(&norm.clone(), &start.clone(), &add(&start.clone(), &size.clone()), &Py::None)]);
+    }
+    }
+    }
+    }
+    let __iter6 = py_iter_or_raise(&call_builtin("enumerate", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter6 {
+    let __unpk7 = py_unpack(&__item.clone(), 2, None);
+    position = __unpk7[0].clone();
+    word = __unpk7[1].clone();
+    if py_truthy(&Py::Bool(py_contains(&covered.clone(), &word.clone()))) {
+    continue;
+    }
+    let __iter8 = py_iter_or_raise(&_lookup(&[word.clone()]));
+    for __item in __iter8 {
+    let __unpk9 = py_unpack(&__item.clone(), 2, None);
+    name = __unpk9[0].clone();
+    weight = __unpk9[1].clone();
+    if py_truthy(&Py::Bool(py_eq(&name.clone(), &topic.clone()))) {
+    let _ = mcall(&found.clone(), "append", &[py_tuple(vec![word.clone(), weight.clone()])]);
+    }
+    }
+    }
+    let _ = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("key".to_string(), py_func("lambda", move |args: &[Py]| { let covered = covered.clone(); let entities = entities.clone(); let found = found.clone(); let key = key.clone(); let line = line.clone(); let name = name.clone(); let norm = norm.clone(); let position = position.clone(); let size = size.clone(); let start = start.clone(); let topic = topic.clone(); let weight = weight.clone(); let word = word.clone(); let item: Py = __kwp(args, 0, "item").unwrap_or(Py::None); py_tuple(vec![neg(&geti(&item.clone(), &Py::Int(1))), geti(&item.clone(), &Py::Int(0))]) }))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&found.clone(), "sort", args))(&__args) };
+    return found.clone();
+    Py::None
+}
+pub fn detect_topic(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut line: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "line") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: line"))) };
+    let mut inherited: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "inherited") { v.clone() }
+    else { Py::None };
+    let mut entities: Py = if __pos.len() > 2 { __pos[2].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "entities") { v.clone() }
+    else { Py::None };
+    let mut asks: Py = if __pos.len() > 3 { __pos[3].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "asks") { v.clone() }
+    else { Py::None };
+    let mut ranked: Py = Py::None;
+    let _ = py_str("The topic the line is about (or inherited when it adds nothing), plus its score.");
+    ranked = rank_topics(&[line.clone(), inherited.clone(), entities.clone(), asks.clone()]);
+    if py_truthy(&ranked.clone()) {
+    return geti(&ranked.clone(), &Py::Int(0));
+    }
+    return if py_truthy(&inherited.clone()) { py_tuple(vec![inherited.clone(), Py::Int(0)]) } else { py_tuple(vec![Py::None, Py::Int(0)]) };
+    Py::None
+}
+pub fn _is_name(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut word: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "word") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: word"))) };
+    let mut lower: Py = Py::None;
+    let mut stem: Py = Py::None;
+    let _ = py_str("A capitalised word is a name when it is not just an ordinary word in capitals.\n\n    \"She's 12.\" and \"It's about the booking system\" only start with a capital because they\n    start the sentence: an ordinary word that happens to be written short (\"she's\", \"don't\",\n    \"it's\") is no more a name than \"the\" is.\n    ");
+    lower = mcall(&word.clone(), "lower", &[]);
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&crate::gen::understanding::normalize::g_LEXICON(), &lower.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_eq(&lower.clone(), &py_str("i"))) } }) {
+    return Py::Bool(false);
+    }
+    stem = geti(&mcall(&lower.clone(), "split", &[py_str("'")]), &Py::Int(0));
+    if py_truthy(&{ let __b = Py::Bool(!py_eq(&stem.clone(), &lower.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&crate::gen::understanding::lexicon::g_CORE_WORDS(), &stem.clone())); if py_truthy(&__b) { __b } else { { let __b = mcall(&stem.clone(), "endswith", &[py_str("n")]); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&crate::gen::understanding::lexicon::g_CORE_WORDS(), &slice_or_raise(&stem.clone(), &Py::None, &neg(&Py::Int(1)), &Py::None))) } } } } } }) {
+    return Py::Bool(false);
+    }
+    return { let __b = Py::Bool(!py_contains(&crate::gen::understanding::lexicon::g_CHAT(), &lower.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_eq(&lower.clone(), &py_str("i"))) } };
+    Py::None
+}
+pub fn _capitalised(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut text: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "text") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: text"))) };
+    let mut at: Py = Py::None;
+    let mut bare: Py = Py::None;
+    let mut current: Py = Py::None;
+    let mut names: Py = Py::None;
+    let mut part: Py = Py::None;
+    let mut run: Py = Py::None;
+    let mut runs: Py = Py::None;
+    let mut start: Py = Py::None;
+    let mut token: Py = Py::None;
+    let mut word: Py = Py::None;
+    let _ = py_str("Runs of capitalised words that read as names: the people and things a line mentions.\n\n    A name can carry an ordinary word written with a capital: \"Eiffel Tower\" and \"Niagara\n    Falls\" are one name, and the knowledge base knows the whole phrase. Only the run that\n    starts with the name is kept, so an article in front of it (\"the Eiffel Tower\") and a\n    sentence after it (\"the Eiffel Tower is tall\") do not become part of the name.\n    ");
+    let __unpk1 = py_unpack(&py_tuple(vec![py_list(vec![]), py_list(vec![])]), 2, None);
+    runs = __unpk1[0].clone();
+    current = __unpk1[1].clone();
+    let __iter2 = py_iter_or_raise(&mcall(&text.clone(), "split", &[]));
+    for __item in __iter2 {
+    token = __item.clone();
+    bare = mcall(&token.clone(), "strip", &[py_str(".,!?;:\"'()[]")]);
+    if py_truthy(&{ let __b = mcall(&slice_or_raise(&bare.clone(), &Py::None, &Py::Int(1), &Py::None), "isupper", &[]); if !py_truthy(&__b) { __b } else { mcall(&mcall(&mcall(&bare.clone(), "replace", &[py_str("-"), py_str("")]), "replace", &[py_str("'"), py_str("")]), "isalpha", &[]) } }) {
+    let _ = mcall(&current.clone(), "append", &[bare.clone()]);
+    } else {
+    if py_truthy(&current.clone()) {
+    let _ = mcall(&runs.clone(), "append", &[current.clone()]);
+    current = py_list(vec![]);
+    }
+    }
+    }
+    if py_truthy(&current.clone()) {
+    let _ = mcall(&runs.clone(), "append", &[current.clone()]);
+    }
+    names = py_list(vec![]);
+    let __iter3 = py_iter_or_raise(&runs.clone());
+    for __item in __iter3 {
+    run = __item.clone();
+    if py_truthy(&Py::Bool(py_eq(&call_builtin("len", &[run.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1)))) {
+    if py_truthy(&_is_name(&[geti(&run.clone(), &Py::Int(0))])) {
+    let _ = mcall(&names.clone(), "append", &[geti(&run.clone(), &Py::Int(0))]);
+    }
+    continue;
+    }
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_ARTICLES(), &mcall(&geti(&run.clone(), &Py::Int(0)), "lower", &[]))); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_LEADING(), &mcall(&geti(&run.clone(), &Py::Int(0)), "lower", &[]))) } }) {
+    run = slice_or_raise(&run.clone(), &Py::Int(1), &Py::None, &Py::None);
+    }
+    if py_truthy(&Py::Bool(!py_truthy(&run.clone()))) {
+    continue;
+    }
+    start = call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[run.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk838 = py_unpack(&__item.clone(), 2, None); let mut at: Py = __unpk838[0].clone(); let mut word: Py = __unpk838[1].clone(); if py_truthy(&{ let __b = _is_name(&[word.clone()]); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_PLACES(), &mcall(&word.clone(), "lower", &[]))) } }) {  __out.push(at.clone()); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e));
+    if py_truthy(&Py::Bool(py_is(&start.clone(), &Py::None))) {
+    continue;
+    }
+    part = py_list(vec![]);
+    let __iter4 = py_iter_or_raise(&slice_or_raise(&run.clone(), &start.clone(), &Py::None, &Py::None));
+    for __item in __iter4 {
+    word = __item.clone();
+    if py_truthy(&Py::Bool(py_contains(&g_NAME_BREAKS(), &mcall(&word.clone(), "lower", &[])))) {
+    break;
+    }
+    let _ = mcall(&part.clone(), "append", &[word.clone()]);
+    }
+    if py_truthy(&part.clone()) {
+    let _ = mcall(&names.clone(), "append", &[mcall(&py_str(" "), "join", &[part.clone()])]);
+    }
+    }
+    return names.clone();
+    Py::None
+}
+pub fn detect_entities(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut line: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "line") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: line"))) };
+    let mut text: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "text") { v.clone() }
+    else { Py::None };
+    let mut add: Py = Py::None;
+    let mut after: Py = Py::None;
+    let mut asked: Py = Py::None;
+    let mut at: Py = Py::None;
+    let mut entities: Py = Py::None;
+    let mut first_word: Py = Py::None;
+    let mut index: Py = Py::None;
+    let mut kind: Py = Py::None;
+    let mut match_: Py = Py::None;
+    let mut person: Py = Py::None;
+    let mut run: Py = Py::None;
+    let mut seen: Py = Py::None;
+    let mut thing: Py = Py::None;
+    let mut verdicts: Py = Py::None;
+    let mut word: Py = Py::None;
+    let _ = py_str("The things the line names: people, places, titles and everyday objects.");
+    text = if py_truthy(&Py::Bool(py_is(&text.clone(), &Py::None))) { geti(&line.clone(), &py_str("text")) } else { text.clone() };
+    if py_truthy(&crate::gen::understanding::kinds::small_talk_only(&[geti(&line.clone(), &py_str("norm"))])) {
+    return py_list(vec![]);
+    }
+    let __unpk1 = py_unpack(&py_tuple(vec![py_list(vec![]), call_builtin("set", &[]).unwrap_or_else(|e| exc::raise(e))]), 2, None);
+    entities = __unpk1[0].clone();
+    seen = __unpk1[1].clone();
+pub fn __nested_add_1(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = args.to_vec();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    let mut __split = __pos.len();
+    for (i, a) in args.iter().enumerate() { if let Py::Kwargs(kws) = a { __split = i; for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } break; } }
+    let __pos = &args[..__split];
+    let mut add: Py = __pos.get(0).cloned().unwrap_or(Py::None);
+    let mut after: Py = __pos.get(1).cloned().unwrap_or(Py::None);
+    let mut asked: Py = __pos.get(2).cloned().unwrap_or(Py::None);
+    let mut at: Py = __pos.get(3).cloned().unwrap_or(Py::None);
+    let mut entities: Py = __pos.get(4).cloned().unwrap_or(Py::None);
+    let mut first_word: Py = __pos.get(5).cloned().unwrap_or(Py::None);
+    let mut index: Py = __pos.get(6).cloned().unwrap_or(Py::None);
+    let mut kind: Py = __pos.get(7).cloned().unwrap_or(Py::None);
+    let mut line: Py = __pos.get(8).cloned().unwrap_or(Py::None);
+    let mut match_: Py = __pos.get(9).cloned().unwrap_or(Py::None);
+    let mut person: Py = __pos.get(10).cloned().unwrap_or(Py::None);
+    let mut run: Py = __pos.get(11).cloned().unwrap_or(Py::None);
+    let mut seen: Py = __pos.get(12).cloned().unwrap_or(Py::None);
+    let mut text: Py = __pos.get(13).cloned().unwrap_or(Py::None);
+    let mut thing: Py = __pos.get(14).cloned().unwrap_or(Py::None);
+    let mut verdicts: Py = __pos.get(15).cloned().unwrap_or(Py::None);
+    let mut word: Py = __pos.get(16).cloned().unwrap_or(Py::None);
+    let mut name: Py = __pos.get(17).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "name").map(|(_, v)| v.clone())).unwrap_or(Py::None);
+    let mut kind: Py = __pos.get(18).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "kind").map(|(_, v)| v.clone())).unwrap_or(Py::None);
+    let mut at: Py = __pos.get(19).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "at").map(|(_, v)| v.clone())).unwrap_or_else(|| Py::None);
+    let mut key: Py = Py::None;
+    key = mcall(&name.clone(), "lower", &[]);
+    if py_truthy(&{ let __b = key.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_contains(&seen.clone(), &key.clone())); if !py_truthy(&__b) { __b } else { gt(&call_builtin("len", &[key.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1)) } } } }) {
+    let _ = mcall(&seen.clone(), "add", &[key.clone()]);
+    let _ = mcall(&entities.clone(), "append", &[py_dict(vec![(py_str("text"), mcall(&name.clone(), "strip", &[])), (py_str("type"), kind.clone()), (py_str("at"), if py_truthy(&Py::Bool(py_is(&at.clone(), &Py::None))) { _position(&[line.clone(), key.clone()]) } else { at.clone() })])]);
+    }
+    Py::None
+}
+    add = py_func("add", move |args: &[Py]| { let mut full = vec![add.clone(), after.clone(), asked.clone(), at.clone(), entities.clone(), first_word.clone(), index.clone(), kind.clone(), line.clone(), match_.clone(), person.clone(), run.clone(), seen.clone(), text.clone(), thing.clone(), verdicts.clone(), word.clone()]; full.extend_from_slice(args); __nested_add_1(&full) });
+    let __iter3 = py_iter_or_raise(&stdlib_call("re", "finditer", &[py_str("\\*([^*]{2,60})\\*|\\\"([^\\\"]{2,60})\\\""), text.clone()]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter3 {
+    match_ = __item.clone();
+    let _ = py_call(&add, &[{ let __b = mcall(&match_.clone(), "group", &[Py::Int(1)]); if py_truthy(&__b) { __b } else { mcall(&match_.clone(), "group", &[Py::Int(2)]) } }, py_str("title")]);
+    }
+    let __iter4 = py_iter_or_raise(&stdlib_call("re", "finditer", &[py_str("\\bmy ([a-z]+(?:\\s+[a-z]+)?)"), geti(&line.clone(), &py_str("clean"))]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter4 {
+    person = __item.clone();
+    word = geti(&mcall(&mcall(&person.clone(), "group", &[Py::Int(1)]), "split", &[]), &Py::Int(0));
+    if py_truthy(&Py::Bool(py_contains(&g_RELATIONS(), &word.clone()))) {
+    let _ = py_call(&add, &[add(&py_str("my "), &word.clone()), py_str("person")]);
+    let _ = mcall(&seen.clone(), "add", &[word.clone()]);
+    }
+    }
+    let __iter5 = py_iter_or_raise(&_ages_of_a_child(&[geti(&line.clone(), &py_str("norm"))]));
+    for __item in __iter5 {
+    at = __item.clone();
+    after = if py_truthy(&lt(&add(&at.clone(), &Py::Int(3)), &call_builtin("len", &[geti(&line.clone(), &py_str("norm"))]).unwrap_or_else(|e| exc::raise(e)))) { geti(&geti(&line.clone(), &py_str("norm")), &add(&at.clone(), &Py::Int(3))) } else { py_str("") };
+    if py_truthy(&Py::Bool(!py_contains(&g_THE_PERSONS_OWN(), &geti(&geti(&line.clone(), &py_str("norm")), &sub(&at.clone(), &Py::Int(1)))))) {
+    continue;
+    }
+    if py_truthy(&{ let __b = after.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_contains(&g_AGE_OF_A_CHILD_WORDS(), &after.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&g_PETS(), &after.clone())); if py_truthy(&__b) { __b } else { _thing(&[after.clone()]) } } } } } }) {
+    continue;
+    }
+    let _ = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(mcall(&py_str(" "), "join", &[slice_or_raise(&geti(&line.clone(), &py_str("norm")), &sub(&at.clone(), &Py::Int(1)), &add(&at.clone(), &Py::Int(3)), &Py::None)])); __args.push(py_str("person")); __kws.extend(vec![("at".to_string(), sub(&at.clone(), &Py::Int(1)))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| py_call(&add, args))(&__args) };
+    }
+    let __iter6 = py_iter_or_raise(&_capitalised(&[text.clone()]));
+    for __item in __iter6 {
+    run = __item.clone();
+    if py_truthy(&Py::Bool(py_contains(&py_set(vec![py_str("i"), py_str("i'm"), py_str("im")]), &mcall(&run.clone(), "lower", &[])))) {
+    continue;
+    }
+    first_word = geti(&mcall(&mcall(&run.clone(), "lower", &[]), "split", &[]), &Py::Int(0));
+    kind = if py_truthy(&{ let __b = Py::Bool(py_contains(&g_PLACES(), &mcall(&run.clone(), "lower", &[]))); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_PLACES(), &first_word.clone())) } }) { py_str("place") } else { py_str("name") };
+    if py_truthy(&{ let __b = Py::Bool(py_eq(&kind.clone(), &py_str("name"))); if !py_truthy(&__b) { __b } else { _said_as_a_place(&[run.clone(), geti(&line.clone(), &py_str("norm"))]) } }) {
+    kind = py_str("place");
+    }
+    let _ = py_call(&add, &[run.clone(), kind.clone()]);
+    }
+    verdicts = _bad_verdict_positions(&[geti(&line.clone(), &py_str("norm"))]);
+    let __iter7 = py_iter_or_raise(&call_builtin("enumerate", &[geti(&line.clone(), &py_str("norm"))]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter7 {
+    let __unpk8 = py_unpack(&__item.clone(), 2, None);
+    index = __unpk8[0].clone();
+    word = __unpk8[1].clone();
+    if py_truthy(&Py::Bool(py_contains(&verdicts.clone(), &index.clone()))) {
+    continue;
+    }
+    asked = _asked_as_a_country(&[geti(&line.clone(), &py_str("norm")), index.clone()]);
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_PLACES(), &word.clone())); if !py_truthy(&__b) { __b } else { _names_a_person(&[geti(&line.clone(), &py_str("norm")), index.clone()]) } }) {
+    continue;
+    }
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_PLACES(), &word.clone())); if !py_truthy(&__b) { __b } else { { let __b = _names_a_place(&[word.clone(), text.clone(), asked.clone()]); if py_truthy(&__b) { __b } else { _placed_by_a_word(&[geti(&line.clone(), &py_str("norm")), index.clone()]) } } } }) {
+    let _ = py_call(&add, &[word.clone(), py_str("place")]);
+    continue;
+    }
+    if py_truthy(&Py::Bool(py_contains(&g_RELATIONS(), &word.clone()))) {
+    if py_truthy(&{ let __b = index.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_contains(&mcall(&geti(&line.clone(), &py_str("clean")), "split", &[]), &word.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_OWNERS(), &geti(&geti(&line.clone(), &py_str("norm")), &sub(&index.clone(), &Py::Int(1))))) } } } }) {
+    let _ = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(add(&add(&geti(&geti(&line.clone(), &py_str("norm")), &sub(&index.clone(), &Py::Int(1))), &py_str(" ")), &word.clone())); __args.push(py_str("person")); __kws.extend(vec![("at".to_string(), sub(&index.clone(), &Py::Int(1)))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| py_call(&add, args))(&__args) };
+    let _ = mcall(&seen.clone(), "add", &[word.clone()]);
+    continue;
+    }
+    let _ = py_call(&add, &[word.clone(), py_str("person")]);
+    continue;
+    }
+    thing = _thing(&[word.clone()]);
+    if py_truthy(&thing.clone()) {
+    let _ = py_call(&add, &[thing.clone(), py_str("thing")]);
+    }
+    }
+    let _ = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("key".to_string(), py_func("lambda", move |args: &[Py]| { let add = add.clone(); let after = after.clone(); let asked = asked.clone(); let at = at.clone(); let entities = entities.clone(); let first_word = first_word.clone(); let index = index.clone(); let kind = kind.clone(); let line = line.clone(); let match_ = match_.clone(); let person = person.clone(); let run = run.clone(); let seen = seen.clone(); let text = text.clone(); let thing = thing.clone(); let verdicts = verdicts.clone(); let word = word.clone(); let entity: Py = __kwp(args, 0, "entity").unwrap_or(Py::None); geti(&entity.clone(), &py_str("at")) }))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&entities.clone(), "sort", args))(&__args) };
+    return entities.clone();
+    Py::None
+}
+pub fn _said_as_a_place(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut run: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "run") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: run"))) };
+    let mut norm: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut first: Py = Py::None;
+    let mut index: Py = Py::None;
+    let mut word: Py = Py::None;
+    let _ = py_str("True when the line puts the name where a place goes (\"in Ljubljana\", \"to Osaka\").");
+    first = mcall(&mcall(&geti(&mcall(&run.clone(), "split", &[]), &Py::Int(0)), "lower", &[]), "strip", &[py_str(".,!?;:\"'()[]")]);
+    if py_truthy(&Py::Bool(py_contains(&g_NOT_PLACES(), &first.clone()))) {
+    return Py::Bool(false);
+    }
+    let __iter1 = py_iter_or_raise(&call_builtin("enumerate", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter1 {
+    let __unpk2 = py_unpack(&__item.clone(), 2, None);
+    index = __unpk2[0].clone();
+    word = __unpk2[1].clone();
+    if py_truthy(&Py::Bool(!py_eq(&word.clone(), &first.clone()))) {
+    continue;
+    }
+    if py_truthy(&_places_a_name(&[norm.clone(), index.clone()])) {
+    return Py::Bool(true);
+    }
+    if py_truthy(&{ let __b = ge(&index.clone(), &Py::Int(2)); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&g_PLACE_THING(), &geti(&norm.clone(), &sub(&index.clone(), &Py::Int(1))))); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_PLACE_WORDS(), &geti(&norm.clone(), &sub(&index.clone(), &Py::Int(2))))) } } } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_eq(&geti(&norm.clone(), &sub(&index.clone(), &Py::Int(2))), &py_str("at"))); if !py_truthy(&__b) { __b } else { bitand(&call_builtin("set", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)), &g_WORK_WORDS()) } }) {
+    return Py::Bool(false);
+    }
+    return Py::Bool(true);
+    }
+    return Py::Bool(false);
+    }
+    return Py::Bool(false);
+    Py::None
+}
+pub fn _placed_by_a_word(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut index: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "index") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: index"))) };
+    let _ = py_str("True when the word sits right after a place word (\"in rome\"), not after an article.");
+    return _places_a_name(&[norm.clone(), index.clone()]);
+    Py::None
+}
+pub fn _has_travel_word(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut word: Py = Py::None;
+    let mut words: Py = Py::None;
+    let _ = py_str("Does the line carry a word that is about going somewhere (\"flights\", \"visit\", \"trip\")?");
+    words = call_builtin("set", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e));
+    if py_truthy(&bitand(&words.clone(), &g_TRAVEL_CUES())) {
+    return Py::Bool(true);
+    }
+    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); if py_truthy(&mcall(&word.clone(), "endswith", &[py_str("s")])) {  __out.push(Py::Bool(py_contains(&g_TRAVEL_CUES(), &slice_or_raise(&word.clone(), &Py::None, &neg(&Py::Int(1)), &Py::None)))); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    Py::None
+}
+pub fn _places_a_name(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut index: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "index") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: index"))) };
+    let mut before: Py = Py::None;
+    let _ = py_str("Does the word at index sit where a place goes, so the word before it places the line?\n\n    \"in rome\", \"at the airport in Lisbon\" place a line on their own. \"to\" does not: it points\n    at a person just as often (\"i said to Sarah\"), so it needs a travel word in the line.\n    \"at\" with a work word around it names a workplace (\"she works at Google\"), not a place.\n    ");
+    if py_truthy(&{ let __b = lt(&index.clone(), &Py::Int(1)); if py_truthy(&__b) { __b } else { ge(&index.clone(), &call_builtin("len", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e))) } }) {
+    return Py::Bool(false);
+    }
+    before = geti(&norm.clone(), &sub(&index.clone(), &Py::Int(1)));
+    if py_truthy(&Py::Bool(py_contains(&g_PLACE_WORDS_WITH_CUE(), &before.clone()))) {
+    return _has_travel_word(&[norm.clone()]);
+    }
+    if py_truthy(&Py::Bool(!py_contains(&g_PLACE_WORDS(), &before.clone()))) {
+    return Py::Bool(false);
+    }
+    if py_truthy(&{ let __b = Py::Bool(py_eq(&before.clone(), &py_str("at"))); if !py_truthy(&__b) { __b } else { bitand(&call_builtin("set", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)), &g_WORK_WORDS()) } }) {
+    return Py::Bool(false);
+    }
+    return Py::Bool(true);
+    Py::None
+}
+pub fn _a_country_named(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut entity: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "entity") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: entity"))) };
+    let mut text: Py = Py::None;
+    let mut words: Py = Py::None;
+    let _ = py_str("Is this a place the sentence has said is the country, though the word is also a thing?\n\n    The entity is typed by the place rules - a capital letter, a place word in front, a word only\n    a country takes, \"in europe\" after it - so a place whose last word is also an everyday thing\n    is the country here, and the everyday thing is not what the line is about.\n    ");
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&call_builtin("isinstance", &[entity.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e)))); if py_truthy(&__b) { __b } else { Py::Bool(!py_eq(&mcall(&entity.clone(), "get", &[py_str("type")]), &py_str("place"))) } }) {
+    return Py::Bool(false);
+    }
+    text = { let __b = mcall(&entity.clone(), "get", &[py_str("text")]); if py_truthy(&__b) { __b } else { py_str("") } };
+    words = mcall(&mcall(&text.clone(), "lower", &[]), "split", &[]);
+    return { let __b = call_builtin("bool", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_PLACE_HOMOGRAPHS(), &geti(&words.clone(), &neg(&Py::Int(1))))) } };
+    Py::None
+}
+pub fn _set_in_a_place(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut index: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "index") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: index"))) };
+    let mut between: Py = Py::None;
+    let mut near: Py = Py::None;
+    let mut word: Py = Py::None;
+    let _ = py_str("Is the word at index said to be somewhere, the way a country is? \"is turkey in europe\",\n    \"is china in asia\", \"china is bigger than india\". A place named after it with \"in\" between\n    (\"turkey in europe\") or a comparison with another place says the word is the country, not\n    the bird or the cup: nothing is said to be \"in europe\" except a place.\n    ");
+    if py_truthy(&{ let __b = lt(&add(&index.clone(), &Py::Int(2)), &call_builtin("len", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_eq(&geti(&norm.clone(), &add(&index.clone(), &Py::Int(1))), &py_str("in"))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&g_PLACES(), &geti(&norm.clone(), &add(&index.clone(), &Py::Int(2))))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&g_PLACE_HOMOGRAPHS(), &geti(&norm.clone(), &add(&index.clone(), &Py::Int(2))))) } } } } } }) {
+    return Py::Bool(true);
+    }
+    let __iter1 = py_iter_or_raise(&call_builtin("range", &[call_builtin("max", &[Py::Int(0), sub(&index.clone(), &Py::Int(3))]).unwrap_or_else(|e| exc::raise(e)), call_builtin("min", &[call_builtin("len", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)), add(&index.clone(), &Py::Int(4))]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter1 {
+    near = __item.clone();
+    if py_truthy(&{ let __b = Py::Bool(!py_eq(&near.clone(), &index.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&g_PLACES(), &geti(&norm.clone(), &near.clone()))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&g_PLACE_HOMOGRAPHS(), &geti(&norm.clone(), &near.clone()))) } } } }) {
+    between = slice_or_raise(&norm.clone(), &call_builtin("min", &[index.clone(), near.clone()]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("max", &[index.clone(), near.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::None);
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&between.clone()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&g_COMPARE_WORDS(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    return Py::Bool(true);
+    }
+    }
+    }
+    return Py::Bool(false);
+    Py::None
+}
+pub fn _asked_as_a_country(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut index: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "index") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: index"))) };
+    let mut between: Py = Py::None;
+    let mut near: Py = Py::None;
+    let mut word: Py = Py::None;
+    let _ = py_str("Is the line about the country, not about the thing the country is also called?\n\n    \"is turkey hot in june\" and \"how safe is turkey\" ask about the country; \"the turkey is\n    still frozen\" does not, and the words only a country takes (\"weather\", \"visa\", \"currency\")\n    are how it is asked without a capital letter.\n    ");
+    if py_truthy(&{ let __b = index.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_ARTICLES(), &geti(&norm.clone(), &sub(&index.clone(), &Py::Int(1))))) } }) {
+    return Py::Bool(false);
+    }
+    if py_truthy(&bitand(&call_builtin("set", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)), &g_COUNTRY_CUES())) {
+    return Py::Bool(true);
+    }
+    if py_truthy(&_set_in_a_place(&[norm.clone(), index.clone()])) {
+    return Py::Bool(true);
+    }
+    let __iter1 = py_iter_or_raise(&call_builtin("range", &[call_builtin("max", &[Py::Int(0), sub(&index.clone(), &Py::Int(2))]).unwrap_or_else(|e| exc::raise(e)), call_builtin("min", &[call_builtin("len", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)), add(&index.clone(), &Py::Int(3))]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter1 {
+    near = __item.clone();
+    if py_truthy(&{ let __b = Py::Bool(!py_eq(&near.clone(), &index.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&g_PLACES(), &geti(&norm.clone(), &near.clone()))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&g_PLACE_HOMOGRAPHS(), &geti(&norm.clone(), &near.clone()))) } } } }) {
+    between = slice_or_raise(&norm.clone(), &call_builtin("min", &[index.clone(), near.clone()]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("max", &[index.clone(), near.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::None);
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&between.clone()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&g_COMPARE_WORDS(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    return Py::Bool(true);
+    }
+    }
+    }
+    return Py::Bool(false);
+    Py::None
+}
+pub fn _names_a_person(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut index: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "index") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: index"))) };
+    let mut before: Py = Py::None;
+    let _ = py_str("Is the word at index somebody's name in this line, though the vocabulary knows it as a\n    place?");
+    before = if py_truthy(&index.clone()) { geti(&norm.clone(), &sub(&index.clone(), &Py::Int(1))) } else { py_str("") };
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_PERSON_WORDS(), &before.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_NAME_FRAMES(), &before.clone())) } }) {
+    return Py::Bool(true);
+    }
+    return { let __b = lt(&add(&index.clone(), &Py::Int(3)), &call_builtin("len", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_eq(&geti(&norm.clone(), &add(&index.clone(), &Py::Int(1))), &py_str("is"))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_eq(&geti(&norm.clone(), &add(&index.clone(), &Py::Int(2))), &py_str("my"))); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_PERSON_WORDS(), &geti(&norm.clone(), &add(&index.clone(), &Py::Int(3))))) } } } } } };
+    Py::None
+}
+pub fn person_names(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut line: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "line") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: line"))) };
+    let mut index: Py = Py::None;
+    let mut names: Py = Py::None;
+    let mut norm: Py = Py::None;
+    let mut seen: Py = Py::None;
+    let mut word: Py = Py::None;
+    let _ = py_str("The place words this line uses as somebody's name, in the order said.\n\n    \"my mate paris is visiting\" is a friend, not the city: the knowledge base must not read the\n    word as the place the line is about. Kept as its own list so the memory lane can still see\n    the name, and every domain gets the same answer to \"is this a place here\".\n    ");
+    norm = geti(&line.clone(), &py_str("norm"));
+    let __unpk1 = py_unpack(&py_tuple(vec![call_builtin("set", &[]).unwrap_or_else(|e| exc::raise(e)), py_list(vec![])]), 2, None);
+    seen = __unpk1[0].clone();
+    names = __unpk1[1].clone();
+    let __iter2 = py_iter_or_raise(&call_builtin("enumerate", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter2 {
+    let __unpk3 = py_unpack(&__item.clone(), 2, None);
+    index = __unpk3[0].clone();
+    word = __unpk3[1].clone();
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_PLACES(), &word.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_contains(&seen.clone(), &word.clone())); if !py_truthy(&__b) { __b } else { _names_a_person(&[norm.clone(), index.clone()]) } } } }) {
+    let _ = mcall(&seen.clone(), "add", &[word.clone()]);
+    let _ = mcall(&names.clone(), "append", &[word.clone()]);
+    }
+    }
+    return names.clone();
+    Py::None
+}
+pub fn _names_a_place(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut word: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "word") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: word"))) };
+    let mut text: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "text") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: text"))) };
+    let mut asked: Py = if __pos.len() > 2 { __pos[2].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "asked") { v.clone() }
+    else { Py::Bool(false) };
+    let _ = py_str("Some place names are also ordinary words (\"bath\", \"reading\", \"turkey\"): those only name\n    a place when the line writes them as one, or asks about the country.");
+    if py_truthy(&Py::Bool(!py_contains(&g_PLACE_HOMOGRAPHS(), &word.clone()))) {
+    return Py::Bool(true);
+    }
+    if py_truthy(&{ let __b = asked.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_COUNTRY_HOMOGRAPHS(), &word.clone())) } }) {
+    return Py::Bool(true);
+    }
+    return Py::Bool(!py_is(&stdlib_call("re", "search", &[modulo(&py_str("\\b%s\\b"), &mcall(&word.clone(), "capitalize", &[])), text.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::None));
+    Py::None
+}
+pub fn _position(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut line: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "line") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: line"))) };
+    let mut name: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "name") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: name"))) };
+    let mut first: Py = Py::None;
+    let mut index: Py = Py::None;
+    let mut word: Py = Py::None;
+    let _ = py_str("Where in the line the first mention appears, so entities read in the order said.");
+    first = geti(&mcall(&name.clone(), "split", &[]), &Py::Int(0));
+    let __iter1 = py_iter_or_raise(&call_builtin("enumerate", &[geti(&line.clone(), &py_str("norm"))]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter1 {
+    let __unpk2 = py_unpack(&__item.clone(), 2, None);
+    index = __unpk2[0].clone();
+    word = __unpk2[1].clone();
+    if py_truthy(&{ let __b = Py::Bool(py_eq(&word.clone(), &first.clone())); if py_truthy(&__b) { __b } else { mcall(&word.clone(), "startswith", &[first.clone()]) } }) {
+    return index.clone();
+    }
+    }
+    return call_builtin("len", &[geti(&line.clone(), &py_str("norm"))]).unwrap_or_else(|e| exc::raise(e));
+    Py::None
+}
+pub fn _thing(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut word: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "word") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: word"))) };
+    let mut candidate: Py = Py::None;
+    let _ = py_str("The everyday thing a word names, singular, or None.\n\n    A short word is looked up before it is turned away. The length check below is there for the\n    plural endings - \"as\" is not \"a\" and \"is\" is not \"i\" - but it was also throwing away every\n    three-letter thing `THINGS` holds, so \"egg\", \"pot\", \"pan\", \"tap\", \"cup\", \"car\", \"job\" and\n    fifty-odd more named nothing at all. A line with no thing of its own (\"how long do i boil an\n    egg\") is then read as a follow-up on whatever came before it, and the mince from the turn\n    ago answered the question about eggs.\n    ");
+    if py_truthy(&Py::Bool(py_contains(&g_THINGS(), &word.clone()))) {
+    return word.clone();
+    }
+    if py_truthy(&le(&call_builtin("len", &[word.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(3))) {
+    return Py::None;
+    }
+    let __iter1 = py_iter_or_raise(&py_tuple(vec![mcall(&word.clone(), "rstrip", &[py_str("s")]), if py_truthy(&mcall(&word.clone(), "endswith", &[py_str("es")])) { slice_or_raise(&word.clone(), &Py::None, &neg(&Py::Int(2)), &Py::None) } else { Py::None }, if py_truthy(&mcall(&word.clone(), "endswith", &[py_str("ies")])) { slice_or_raise(&word.clone(), &Py::None, &neg(&Py::Int(3)), &Py::None) } else { Py::None }]));
+    for __item in __iter1 {
+    candidate = __item.clone();
+    if py_truthy(&{ let __b = candidate.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_THINGS(), &candidate.clone())) } }) {
+    return word.clone();
+    }
+    }
+    return Py::None;
+    Py::None
+}
+pub fn _spoken_numbers(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut digits: Py = Py::None;
+    let mut value: Py = Py::None;
+    let mut values: Py = Py::None;
+    let mut word: Py = Py::None;
+    let _ = py_str("The values the normalised line still says, so a digit read as a word can be dropped.\n\n    \"4 the kids\" reads as \"for the kids\": the line has no four in it any more, so listing one\n    would have a module do arithmetic on a number the person never said.\n    ");
+    values = call_builtin("set", &[]).unwrap_or_else(|e| exc::raise(e));
+    let __iter1 = py_iter_or_raise(&norm.clone());
+    for __item in __iter1 {
+    word = __item.clone();
+    value = mcall(&g_WORD_NUMBERS(), "get", &[word.clone()]);
+    if py_truthy(&Py::Bool(!py_is(&value.clone(), &Py::None))) {
+    let _ = mcall(&values.clone(), "add", &[value.clone()]);
+    continue;
+    }
+    digits = mcall(&g_WORD_DIGITS(), "match", &[word.clone()]);
+    if py_truthy(&digits.clone()) {
+    let __try2 = exc::catch(|| {
+    value = call_builtin("float", &[mcall(&mcall(&digits.clone(), "group", &[Py::Int(0)]), "replace", &[py_str(","), py_str(".")])]).unwrap_or_else(|e| exc::raise(e));
+        py_tuple(vec![Py::Bool(false), Py::None])
+    });
+    let mut __ret3: Py = Py::Bool(false);
+    let mut __val4: Py = Py::None;
+    let mut __unhandled5: Option<exc::PyExc> = None;
+    match __try2 {
+        Ok(__t) => { let __p = py_iter_or_raise(&__t); __ret3 = __p[0].clone(); __val4 = __p[1].clone(); }
+        Err(__e) => {
+            let mut __handled6 = false;
+            if !__handled6 && exc::matches_any(&__e, &["ValueError"]) {
+                __handled6 = true;
+    continue;
+            }
+            if !__handled6 { __unhandled5 = Some(__e); }
+        }
+    }
+    if let Some(__e) = __unhandled5 { exc::raise(__e); }
+    if py_truthy(&__ret3) { return __val4; }
+    let _ = mcall(&values.clone(), "add", &[if py_truthy(&mcall(&value.clone(), "is_integer", &[])) { call_builtin("int", &[value.clone()]).unwrap_or_else(|e| exc::raise(e)) } else { value.clone() }]);
+    }
+    }
+    return values.clone();
+    Py::None
+}
+pub fn _mixed_number(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut position: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "position") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: position"))) };
+    let mut value: Py = if __pos.len() > 2 { __pos[2].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "value") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: value"))) };
+    let mut fraction: Py = Py::None;
+    let mut step: Py = Py::None;
+    let mut words: Py = Py::None;
+    let _ = py_str("A count with a half after it: \"one and a half kilos\" is 1.5, not a half.\n\n    Read as two numbers it is worse than as none at all - a recipe told \"half a kilo\" of\n    potatoes it was told one and a half kilos of. So the \"and a half\" is folded into the count in\n    front of it, and the words it used are returned so the half is not counted twice.\n    ");
+    words = call_builtin("tuple", &[slice_or_raise(&norm.clone(), &add(&position.clone(), &Py::Int(1)), &add(&position.clone(), &Py::Int(4)), &Py::None)]).unwrap_or_else(|e| exc::raise(e));
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&words.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_eq(&geti(&words.clone(), &Py::Int(0)), &py_str("and"))) } }) {
+    return py_tuple(vec![value.clone(), py_tuple(vec![])]);
+    }
+    step = if py_truthy(&Py::Bool(py_contains(&py_tuple(vec![py_tuple(vec![py_str("a")]), py_tuple(vec![py_str("an")])]), &slice_or_raise(&words.clone(), &Py::Int(1), &Py::Int(2), &Py::None)))) { Py::Int(2) } else { Py::Int(1) };
+    fraction = if py_truthy(&gt(&call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &step.clone())) { geti(&words.clone(), &step.clone()) } else { Py::None };
+    if py_truthy(&Py::Bool(!py_contains(&py_tuple(vec![py_str("half"), py_str("quarter")]), &fraction.clone()))) {
+    return py_tuple(vec![value.clone(), py_tuple(vec![])]);
+    }
+    return py_tuple(vec![add(&value.clone(), &if py_truthy(&Py::Bool(py_eq(&fraction.clone(), &py_str("half")))) { Py::Float(0.5) } else { Py::Float(0.25) }), call_builtin("tuple", &[call_builtin("range", &[add(&position.clone(), &Py::Int(1)), add(&add(&add(&position.clone(), &Py::Int(1)), &step.clone()), &Py::Int(1))]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e))]);
+    Py::None
+}
+pub fn _the_figure_and_its_unit(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut digits: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "digits") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: digits"))) };
+    let mut unit: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "unit") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: unit"))) };
+    let mut raw: Py = if __pos.len() > 2 { __pos[2].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "raw") { v.clone() }
+    else { py_str("") };
+    let mut gap: Py = Py::None;
+    let _ = py_str("The figure as it is said back, with the unit only when the word is a unit.\n\n    The unit group of NUMBER_RE takes any word at all, which the unit table then reads: most\n    words are not units and are dropped there, but the text kept them, so a figure said with a\n    reason or a preposition was stored as \"75 because\", \"34 and\", \"2000 on\", \"5 for\". The text is\n    what a reply says back (\"You said 75 because.\"), and it is also what a later value is read\n    out of, so the word that follows belongs in it only when it is a measure of the figure.\n    ");
+    if py_truthy(&Py::Bool(!py_truthy(&unit.clone()))) {
+    return digits.clone();
+    }
+    if py_truthy(&Py::Bool(py_eq(&unit.clone(), &py_str("%")))) {
+    return add(&digits.clone(), &py_str("%"));
+    }
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_UNIT_WORDS(), &unit.clone())); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&g_CLIPPED_UNIT_WORDS(), &unit.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_FIGURE_SIZE_WORDS(), &unit.clone())) } } } }) {
+    gap = if py_truthy(&mcall(&slice_or_raise(&call_builtin("str", &[raw.clone()]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("len", &[digits.clone()]).unwrap_or_else(|e| exc::raise(e)), &add(&call_builtin("len", &[digits.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1)), &Py::None), "isspace", &[])) { py_str(" ") } else { py_str("") };
+    return add(&add(&digits.clone(), &gap.clone()), &unit.clone());
+    }
+    return digits.clone();
+    Py::None
+}
+pub fn detect_numbers(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut line: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "line") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: line"))) };
+    let mut after: Py = Py::None;
+    let mut after_word: Py = Py::None;
+    let mut at: Py = Py::None;
+    let mut before: Py = Py::None;
+    let mut canonical: Py = Py::None;
+    let mut clipped: Py = Py::None;
+    let mut digits: Py = Py::None;
+    let mut folded: Py = Py::None;
+    let mut got: Py = Py::None;
+    let mut key: Py = Py::None;
+    let mut match_: Py = Py::None;
+    let mut merged: Py = Py::None;
+    let mut norm: Py = Py::None;
+    let mut out: Py = Py::None;
+    let mut position: Py = Py::None;
+    let mut raw: Py = Py::None;
+    let mut seen: Py = Py::None;
+    let mut spoken: Py = Py::None;
+    let mut step: Py = Py::None;
+    let mut typed: Py = Py::None;
+    let mut unit: Py = Py::None;
+    let mut value: Py = Py::None;
+    let mut word: Py = Py::None;
+    let _ = py_str("Numbers in the line with their unit, so a module can use \"2kg\" or \"20 minutes\".");
+    let __unpk1 = py_unpack(&py_tuple(vec![py_list(vec![]), call_builtin("set", &[]).unwrap_or_else(|e| exc::raise(e)), py_list(vec![]), call_builtin("set", &[]).unwrap_or_else(|e| exc::raise(e))]), 4, None);
+    out = __unpk1[0].clone();
+    seen = __unpk1[1].clone();
+    typed = __unpk1[2].clone();
+    merged = __unpk1[3].clone();
+    norm = geti(&line.clone(), &py_str("norm"));
+    spoken = _spoken_numbers(&[norm.clone()]);
+    let __iter2 = py_iter_or_raise(&mcall(&g_NUMBER_RE(), "finditer", &[geti(&line.clone(), &py_str("clean"))]));
+    for __item in __iter2 {
+    match_ = __item.clone();
+    raw = mcall(&mcall(&match_.clone(), "group", &[Py::Int(0)]), "strip", &[]);
+    let __unpk3 = py_unpack(&py_tuple(vec![mcall(&match_.clone(), "group", &[Py::Int(1)]), mcall(&{ let __b = mcall(&match_.clone(), "group", &[Py::Int(2)]); if py_truthy(&__b) { __b } else { py_str("") } }, "lower", &[])]), 2, None);
+    digits = __unpk3[0].clone();
+    unit = __unpk3[1].clone();
+    let __try4 = exc::catch(|| {
+    value = call_builtin("float", &[mcall(&digits.clone(), "replace", &[py_str(","), py_str(".")])]).unwrap_or_else(|e| exc::raise(e));
+        py_tuple(vec![Py::Bool(false), Py::None])
+    });
+    let mut __ret5: Py = Py::Bool(false);
+    let mut __val6: Py = Py::None;
+    let mut __unhandled7: Option<exc::PyExc> = None;
+    match __try4 {
+        Ok(__t) => { let __p = py_iter_or_raise(&__t); __ret5 = __p[0].clone(); __val6 = __p[1].clone(); }
+        Err(__e) => {
+            let mut __handled8 = false;
+            if !__handled8 && exc::matches_any(&__e, &["ValueError"]) {
+                __handled8 = true;
+    continue;
+            }
+            if !__handled8 { __unhandled7 = Some(__e); }
+        }
+    }
+    if let Some(__e) = __unhandled7 { exc::raise(__e); }
+    if py_truthy(&__ret5) { return __val6; }
+    if py_truthy(&mcall(&value.clone(), "is_integer", &[])) {
+    value = call_builtin("int", &[value.clone()]).unwrap_or_else(|e| exc::raise(e));
+    }
+    if py_truthy(&Py::Bool(!py_contains(&spoken.clone(), &value.clone()))) {
+    continue;
+    }
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_MIXED_JOINERS(), &unit.clone())); if !py_truthy(&__b) { __b } else { mcall(&g_MIXED_FRACTION(), "match", &[geti(&line.clone(), &py_str("clean")), mcall(&match_.clone(), "end", &[])]) } }) {
+    continue;
+    }
+    canonical = { let __b = mcall(&g_UNIT_WORDS(), "get", &[unit.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_UNIT_WORDS(), "get", &[mcall(&unit.clone(), "rstrip", &[py_str("s")])]) } };
+    if py_truthy(&Py::Bool(py_is(&canonical.clone(), &Py::None))) {
+    canonical = mcall(&g_CLIPPED_UNIT_WORDS(), "get", &[unit.clone()]);
+    }
+    if py_truthy(&{ let __b = Py::Bool(py_is(&canonical.clone(), &Py::None)); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&unit.clone())) } }) {
+    clipped = mcall(&g_CLIPPED_AFTER_A_SLASH(), "match", &[geti(&line.clone(), &py_str("clean")), mcall(&match_.clone(), "end", &[])]);
+    if py_truthy(&clipped.clone()) {
+    canonical = mcall(&g_CLIPPED_UNIT_WORDS(), "get", &[mcall(&mcall(&mcall(&clipped.clone(), "group", &[Py::Int(0)]), "strip", &[]), "lower", &[]), py_str("years")]);
+    }
+    }
+    let _ = mcall(&typed.clone(), "append", &[py_tuple(vec![mcall(&slice_or_raise(&geti(&line.clone(), &py_str("clean")), &Py::None, &mcall(&match_.clone(), "start", &[]), &Py::None), "count", &[py_str(" ")]), value.clone()])]);
+    key = py_tuple(vec![value.clone(), canonical.clone()]);
+    if py_truthy(&Py::Bool(!py_contains(&seen.clone(), &key.clone()))) {
+    let _ = mcall(&seen.clone(), "add", &[key.clone()]);
+    let _ = mcall(&out.clone(), "append", &[py_dict(vec![(py_str("value"), value.clone()), (py_str("unit"), canonical.clone()), (py_str("text"), _the_figure_and_its_unit(&[digits.clone(), unit.clone(), raw.clone()]))])]);
+    }
+    }
+    let __iter9 = py_iter_or_raise(&call_builtin("enumerate", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter9 {
+    let __unpk10 = py_unpack(&__item.clone(), 2, None);
+    position = __unpk10[0].clone();
+    word = __unpk10[1].clone();
+    if py_truthy(&Py::Bool(py_contains(&py_tuple(vec![py_str("a"), py_str("an")]), &word.clone()))) {
+    if py_truthy(&{ let __b = lt(&add(&position.clone(), &Py::Int(1)), &call_builtin("len", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e))); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_A_PORTION_UNITS(), &geti(&norm.clone(), &add(&position.clone(), &Py::Int(1))))) } }) {
+    before = if py_truthy(&position.clone()) { geti(&norm.clone(), &sub(&position.clone(), &Py::Int(1))) } else { py_str("") };
+    after = if py_truthy(&lt(&add(&position.clone(), &Py::Int(2)), &call_builtin("len", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)))) { geti(&norm.clone(), &add(&position.clone(), &Py::Int(2))) } else { py_str("") };
+    unit = mcall(&g_UNIT_WORDS(), "get", &[geti(&norm.clone(), &add(&position.clone(), &Py::Int(1)))]);
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_A_PORTION_NEEDS_OF(), &geti(&norm.clone(), &add(&position.clone(), &Py::Int(1))))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_eq(&after.clone(), &py_str("of"))) } }) {
+    continue;
+    }
+    key = py_tuple(vec![Py::Int(1), unit.clone()]);
+    if py_truthy(&{ let __b = Py::Bool(!py_contains(&g_OWNS_THE_UNIT(), &before.clone())); if !py_truthy(&__b) { __b } else { { let __b = unit.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&seen.clone(), &key.clone())) } } } }) {
+    let _ = mcall(&seen.clone(), "add", &[key.clone()]);
+    let _ = mcall(&out.clone(), "append", &[py_dict(vec![(py_str("value"), Py::Int(1)), (py_str("unit"), unit.clone()), (py_str("text"), modulo(&py_str("%s %s"), &py_tuple(vec![word.clone(), geti(&norm.clone(), &add(&position.clone(), &Py::Int(1)))])))])]);
+    }
+    }
+    continue;
+    }
+    value = mcall(&g_WORD_NUMBERS(), "get", &[word.clone()]);
+    if py_truthy(&{ let __b = Py::Bool(py_is(&value.clone(), &Py::None)); if py_truthy(&__b) { __b } else { _counts_as_number(&[norm.clone(), position.clone()]) } }) {
+    continue;
+    }
+    if py_truthy(&Py::Bool(py_contains(&merged.clone(), &position.clone()))) {
+    continue;
+    }
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&typed.clone()) { let __unpk8702 = py_unpack(&__item.clone(), 2, None); let mut at: Py = __unpk8702[0].clone(); let mut got: Py = __unpk8702[1].clone(); __out.push({ let __b = Py::Bool(py_eq(&got.clone(), &value.clone())); if !py_truthy(&__b) { __b } else { le(&call_builtin("abs", &[sub(&at.clone(), &position.clone())]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1)) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    continue;
+    }
+    let __unpk11 = py_unpack(&_mixed_number(&[norm.clone(), position.clone(), value.clone()]), 2, None);
+    value = __unpk11[0].clone();
+    folded = __unpk11[1].clone();
+    let _ = mcall(&merged.clone(), "update", &[folded.clone()]);
+    unit = Py::None;
+    step = add(&Py::Int(1), &call_builtin("len", &[folded.clone()]).unwrap_or_else(|e| exc::raise(e)));
+    while py_truthy(&{ let __b = lt(&add(&position.clone(), &step.clone()), &call_builtin("len", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e))); if !py_truthy(&__b) { __b } else { le(&step.clone(), &Py::Int(5)) } }) {
+    after_word = geti(&norm.clone(), &add(&position.clone(), &step.clone()));
+    if py_truthy(&Py::Bool(py_contains(&g_UNIT_WORDS(), &after_word.clone()))) {
+    unit = geti(&g_UNIT_WORDS(), &after_word.clone());
+    break;
+    }
+    if py_truthy(&Py::Bool(!py_contains(&g_NUMBER_FILLER(), &after_word.clone()))) {
+    break;
+    }
+    let __aug12 = add(&step.clone(), &Py::Int(1));
+    step = __aug12;
+    }
+    key = py_tuple(vec![value.clone(), unit.clone(), word.clone()]);
+    if py_truthy(&Py::Bool(!py_contains(&seen.clone(), &key.clone()))) {
+    let _ = mcall(&seen.clone(), "add", &[key.clone()]);
+    let _ = mcall(&out.clone(), "append", &[py_dict(vec![(py_str("value"), value.clone()), (py_str("unit"), unit.clone()), (py_str("text"), word.clone())])]);
+    }
+    }
+    return out.clone();
+    Py::None
+}
+pub fn _counts_as_number(args: &[Py]) -> Py {
+    ensure_init();
+    let mut __pos: Vec<Py> = Vec::new();
+    let mut __kw: Vec<(String, Py)> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => { for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } }
+            other => __pos.push(other.clone()),
+        }
+    }
+    let mut norm: Py = if __pos.len() > 0 { __pos[0].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "norm") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: norm"))) };
+    let mut position: Py = if __pos.len() > 1 { __pos[1].clone() }
+    else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "position") { v.clone() }
+    else { exc::raise(type_err(&format!("missing required argument: position"))) };
+    let mut after: Py = Py::None;
+    let mut before: Py = Py::None;
+    let mut following: Py = Py::None;
+    let mut word: Py = Py::None;
+    let _ = py_str("True when the word there is not being used as a count (\"one\" mostly is not).");
+    word = geti(&norm.clone(), &position.clone());
+    if py_truthy(&Py::Bool(!py_eq(&word.clone(), &py_str("one")))) {
+    return Py::Bool(false);
+    }
+    following = call_builtin("tuple", &[slice_or_raise(&norm.clone(), &add(&position.clone(), &Py::Int(1)), &add(&position.clone(), &Py::Int(4)), &Py::None)]).unwrap_or_else(|e| exc::raise(e));
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&py_tuple(vec![py_tuple(vec![py_str("and"), py_str("a"), py_str("half")]), py_tuple(vec![py_str("and"), py_str("an"), py_str("half")])]), &slice_or_raise(&following.clone(), &Py::None, &Py::Int(3), &Py::None))); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&py_tuple(vec![py_tuple(vec![py_str("and"), py_str("half")]), py_tuple(vec![py_str("and"), py_str("quarter")])]), &slice_or_raise(&following.clone(), &Py::None, &Py::Int(2), &Py::None))) } }) {
+    return Py::Bool(false);
+    }
+    before = if py_truthy(&position.clone()) { geti(&norm.clone(), &sub(&position.clone(), &Py::Int(1))) } else { Py::None };
+    after = if py_truthy(&lt(&add(&position.clone(), &Py::Int(1)), &call_builtin("len", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e)))) { geti(&norm.clone(), &add(&position.clone(), &Py::Int(1))) } else { Py::None };
+    if py_truthy(&{ let __b = after.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_UNIT_WORDS(), &after.clone())) } }) {
+    return Py::Bool(false);
+    }
+    return { let __b = Py::Bool(py_is(&before.clone(), &Py::None)); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&g_ONE_IS_A_THING(), &before.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_is(&after.clone(), &Py::None)) } } } };
+    Py::None
+}
+pub fn module_obj() -> Py {
+    ensure_init();
+    Py::Module(Rc::new(PyModule { name: "bot.understanding.topics".to_string(),
+        get: Rc::new(|attr: &str| match attr {
+            "AGE_AFTER" => Some(g_AGE_AFTER()),
+            "AGE_IN_A_YEAR" => Some(g_AGE_IN_A_YEAR()),
+            "AGE_NOUNS" => Some(g_AGE_NOUNS()),
+            "AGE_OF_A_CHILD_WORDS" => Some(g_AGE_OF_A_CHILD_WORDS()),
+            "ANIMALS" => Some(g_ANIMALS()),
+            "ARTICLES" => Some(g_ARTICLES()),
+            "ASK_PHRASES" => Some(g_ASK_PHRASES()),
+            "ASK_WORDS" => Some(g_ASK_WORDS()),
+            "A_AMOUNT_NOUN" => Some(g_A_AMOUNT_NOUN()),
+            "A_AMOUNT_SYMBOL" => Some(g_A_AMOUNT_SYMBOL()),
+            "A_CHILD_TILL" => Some(g_A_CHILD_TILL()),
+            "A_CHILD_TO_READ_FOR" => Some(g_A_CHILD_TO_READ_FOR()),
+            "A_MONEY_WORD" => Some(g_A_MONEY_WORD()),
+            "A_PERSON_WHO_WANTS" => Some(g_A_PERSON_WHO_WANTS()),
+            "A_PORTION_NEEDS_OF" => Some(g_A_PORTION_NEEDS_OF()),
+            "A_PORTION_UNITS" => Some(g_A_PORTION_UNITS()),
+            "A_THING_WANTED" => Some(g_A_THING_WANTED()),
+            "A_WAIT" => Some(g_A_WAIT()),
+            "A_WAIT_TO" => Some(g_A_WAIT_TO()),
+            "BEHAVIOUR" => Some(g_BEHAVIOUR()),
+            "BIG_PURSE" => Some(g_BIG_PURSE()),
+            "BODILY_OUTPUT" => Some(g_BODILY_OUTPUT()),
+            "BODILY_OUTPUT_NOUN" => Some(g_BODILY_OUTPUT_NOUN()),
+            "BODY" => Some(g_BODY()),
+            "BODY_CUES" => Some(g_BODY_CUES()),
+            "BODY_OR_SELF" => Some(g_BODY_OR_SELF()),
+            "BODY_TWO_LIFE" => Some(g_BODY_TWO_LIFE()),
+            "BOOK_WORDS" => Some(g_BOOK_WORDS()),
+            "BROKE_AS_SUBJECT" => Some(g_BROKE_AS_SUBJECT()),
+            "BROKE_AS_TIME" => Some(g_BROKE_AS_TIME()),
+            "CANCELS" => Some(g_CANCELS()),
+            "CANCEL_AFTER" => Some(g_CANCEL_AFTER()),
+            "CARRY" => Some(g_CARRY()),
+            "CAR_NAMES" => Some(g_CAR_NAMES()),
+            "CLIPPED_AFTER_A_SLASH" => Some(g_CLIPPED_AFTER_A_SLASH()),
+            "CLIPPED_UNIT_WORDS" => Some(g_CLIPPED_UNIT_WORDS()),
+            "COLD_PEOPLE" => Some(g_COLD_PEOPLE()),
+            "COLD_WORDS" => Some(g_COLD_WORDS()),
+            "COMMS" => Some(g_COMMS()),
+            "COMPARE_WORDS" => Some(g_COMPARE_WORDS()),
+            "COMPLAINT_OF" => Some(g_COMPLAINT_OF()),
+            "COMPLAINT_OF_NEXT" => Some(g_COMPLAINT_OF_NEXT()),
+            "CONDITIONS" => Some(g_CONDITIONS()),
+            "CONDITION_BOOST" => Some(g_CONDITION_BOOST()),
+            "CONDITION_NEEDS_PART" => Some(g_CONDITION_NEEDS_PART()),
+            "CONDITION_NEEDS_WORD" => Some(g_CONDITION_NEEDS_WORD()),
+            "CONDITION_NOT_NEXT" => Some(g_CONDITION_NOT_NEXT()),
+            "CONDITION_OTHER_LIFE" => Some(g_CONDITION_OTHER_LIFE()),
+            "CONDITION_REACH" => Some(g_CONDITION_REACH()),
+            "COUNTRY_BOOST" => Some(g_COUNTRY_BOOST()),
+            "COUNTRY_CUES" => Some(g_COUNTRY_CUES()),
+            "COUNTRY_HOMOGRAPHS" => Some(g_COUNTRY_HOMOGRAPHS()),
+            "CROPS" => Some(g_CROPS()),
+            "CROP_BOOST" => Some(g_CROP_BOOST()),
+            "CROP_KITCHEN" => Some(g_CROP_KITCHEN()),
+            "CROP_STATES" => Some(g_CROP_STATES()),
+            "CUE_CARRIERS" => Some(g_CUE_CARRIERS()),
+            "DEGREE_NOUNS" => Some(g_DEGREE_NOUNS()),
+            "DERIVED_ENDINGS" => Some(g_DERIVED_ENDINGS()),
+            "DETERMINERS" => Some(g_DETERMINERS()),
+            "DRIVEN_JOINERS" => Some(g_DRIVEN_JOINERS()),
+            "DRIVEN_MOOD" => Some(g_DRIVEN_MOOD()),
+            "DRIVEN_PERSON" => Some(g_DRIVEN_PERSON()),
+            "DRIVEN_TAIL" => Some(g_DRIVEN_TAIL()),
+            "DRIVES" => Some(g_DRIVES()),
+            "EXERCISE_AFTER" => Some(g_EXERCISE_AFTER()),
+            "EXERCISE_NOUNS" => Some(g_EXERCISE_NOUNS()),
+            "EXTRA_PEOPLE" => Some(g_EXTRA_PEOPLE()),
+            "FAMILY_PAIRS" => Some(g_FAMILY_PAIRS()),
+            "FAMILY_STEM" => Some(g_FAMILY_STEM()),
+            "FAMILY_WORD" => Some(g_FAMILY_WORD()),
+            "FIGURE_SIZE_WORDS" => Some(g_FIGURE_SIZE_WORDS()),
+            "FRIEND_BOOST" => Some(g_FRIEND_BOOST()),
+            "FRIEND_WORDS" => Some(g_FRIEND_WORDS()),
+            "GENERIC" => Some(g_GENERIC()),
+            "GIFTS_OR_OCCASIONS" => Some(g_GIFTS_OR_OCCASIONS()),
+            "GIFT_ALWAYS" => Some(g_GIFT_ALWAYS()),
+            "GIFT_ASKING" => Some(g_GIFT_ASKING()),
+            "GIFT_BOOST" => Some(g_GIFT_BOOST()),
+            "GIFT_OCCASION" => Some(g_GIFT_OCCASION()),
+            "GIFT_WANTING" => Some(g_GIFT_WANTING()),
+            "GIFT_WORDS" => Some(g_GIFT_WORDS()),
+            "GIVEN_UP_FOOD" => Some(g_GIVEN_UP_FOOD()),
+            "GIVE_DETERMINERS" => Some(g_GIVE_DETERMINERS()),
+            "GIVE_RELATIVE" => Some(g_GIVE_RELATIVE()),
+            "GIVE_THING" => Some(g_GIVE_THING()),
+            "GIVE_THINGS" => Some(g_GIVE_THINGS()),
+            "GIVE_TO" => Some(g_GIVE_TO()),
+            "GIVE_VERB" => Some(g_GIVE_VERB()),
+            "GIVING_UP" => Some(g_GIVING_UP()),
+            "GIVING_UP_BOOST" => Some(g_GIVING_UP_BOOST()),
+            "GROWING_PLACES" => Some(g_GROWING_PLACES()),
+            "HEAD_FOG" => Some(g_HEAD_FOG()),
+            "HEAD_FOG_BOOST" => Some(g_HEAD_FOG_BOOST()),
+            "HEAD_FOG_REACH" => Some(g_HEAD_FOG_REACH()),
+            "HEAD_WORDS" => Some(g_HEAD_WORDS()),
+            "HEARERS" => Some(g_HEARERS()),
+            "HOT_WORDS" => Some(g_HOT_WORDS()),
+            "HURTS" => Some(g_HURTS()),
+            "HURT_BOOST" => Some(g_HURT_BOOST()),
+            "IDIOM_PHRASES" => Some(g_IDIOM_PHRASES()),
+            "JUDGEMENT_OF_RECORD" => Some(g_JUDGEMENT_OF_RECORD()),
+            "LEADING" => Some(g_LEADING()),
+            "LIVES" => Some(g_LIVES()),
+            "MACHINE_BIN_WORDS" => Some(g_MACHINE_BIN_WORDS()),
+            "MACHINE_WORD_CUES" => Some(g_MACHINE_WORD_CUES()),
+            "MACHINE_WORD_PHRASES" => Some(g_MACHINE_WORD_PHRASES()),
+            "MECHANISM" => Some(g_MECHANISM()),
+            "MECHANISM_HOW" => Some(g_MECHANISM_HOW()),
+            "MIXED_FRACTION" => Some(g_MIXED_FRACTION()),
+            "MIXED_JOINERS" => Some(g_MIXED_JOINERS()),
+            "MONEY_TIGHT" => Some(g_MONEY_TIGHT()),
+            "MONEY_TIGHT_MAX" => Some(g_MONEY_TIGHT_MAX()),
+            "NAME_BREAKS" => Some(g_NAME_BREAKS()),
+            "NAME_FRAMES" => Some(g_NAME_FRAMES()),
+            "NATURE_WORDS" => Some(g_NATURE_WORDS()),
+            "NOSE_BLOCKED" => Some(g_NOSE_BLOCKED()),
+            "NOSE_BLOCKED_BOOST" => Some(g_NOSE_BLOCKED_BOOST()),
+            "NOT_CUT_OUT" => Some(g_NOT_CUT_OUT()),
+            "NOT_PLACES" => Some(g_NOT_PLACES()),
+            "NOT_THINGS" => Some(g_NOT_THINGS()),
+            "NOT_WORDS" => Some(g_NOT_WORDS()),
+            "NOUNY_SIGNS" => Some(g_NOUNY_SIGNS()),
+            "NUMBER_FILLER" => Some(g_NUMBER_FILLER()),
+            "NUMBER_RE" => Some(g_NUMBER_RE()),
+            "NUMBER_WORDS" => Some(g_NUMBER_WORDS()),
+            "ONE_IS_A_THING" => Some(g_ONE_IS_A_THING()),
+            "ONLY_A_STOOL" => Some(g_ONLY_A_STOOL()),
+            "ORDINARY_VERBS" => Some(g_ORDINARY_VERBS()),
+            "OTHER_PERSON" => Some(g_OTHER_PERSON()),
+            "OWNED_BY" => Some(g_OWNED_BY()),
+            "OWNERS" => Some(g_OWNERS()),
+            "OWNING_WORDS" => Some(g_OWNING_WORDS()),
+            "OWNS_THE_UNIT" => Some(g_OWNS_THE_UNIT()),
+            "OWN_SELF" => Some(g_OWN_SELF()),
+            "PARTS" => Some(g_PARTS()),
+            "PART_UP_BOOST" => Some(g_PART_UP_BOOST()),
+            "PEOPLE_TOPICS" => Some(g_PEOPLE_TOPICS()),
+            "PERSON_WORDS" => Some(g_PERSON_WORDS()),
+            "PETS" => Some(g_PETS()),
+            "PET_BOOST" => Some(g_PET_BOOST()),
+            "PHRASES" => Some(g_PHRASES()),
+            "PLACES" => Some(g_PLACES()),
+            "PLACE_HOMOGRAPHS" => Some(g_PLACE_HOMOGRAPHS()),
+            "PLACE_OVER" => Some(g_PLACE_OVER()),
+            "PLACE_THING" => Some(g_PLACE_THING()),
+            "PLACE_WORDS" => Some(g_PLACE_WORDS()),
+            "PLACE_WORDS_WITH_CUE" => Some(g_PLACE_WORDS_WITH_CUE()),
+            "PLAYS_UP_BEFORE" => Some(g_PLAYS_UP_BEFORE()),
+            "PLAY_UP_REACH" => Some(g_PLAY_UP_REACH()),
+            "POLYSEMOUS" => Some(g_POLYSEMOUS()),
+            "POLY_FORMS" => Some(g_POLY_FORMS()),
+            "PORTION_UNITS" => Some(g_PORTION_UNITS()),
+            "PORTION_WORDS" => Some(g_PORTION_WORDS()),
+            "RELATIONS" => Some(g_RELATIONS()),
+            "RUN_OUT_BEFORE" => Some(g_RUN_OUT_BEFORE()),
+            "SAMPLE_WORDS" => Some(g_SAMPLE_WORDS()),
+            "SCIENCE_BOOST" => Some(g_SCIENCE_BOOST()),
+            "SEASONS" => Some(g_SEASONS()),
+            "SENSE_ELSEWHERE" => Some(g_SENSE_ELSEWHERE()),
+            "SENSE_ELSEWHERE_FORMS" => Some(g_SENSE_ELSEWHERE_FORMS()),
+            "SENSE_NEAR" => Some(g_SENSE_NEAR()),
+            "SENSE_PAIRS" => Some(g_SENSE_PAIRS()),
+            "SENSE_REACH" => Some(g_SENSE_REACH()),
+            "SENSE_WEIGHT" => Some(g_SENSE_WEIGHT()),
+            "SIGN_FOLLOWS" => Some(g_SIGN_FOLLOWS()),
+            "SIGN_NOT_AFTER" => Some(g_SIGN_NOT_AFTER()),
+            "SKIN_BOOST" => Some(g_SKIN_BOOST()),
+            "SKIN_PARTS" => Some(g_SKIN_PARTS()),
+            "SKIN_REACH" => Some(g_SKIN_REACH()),
+            "SKIN_STATES" => Some(g_SKIN_STATES()),
+            "STONE_COMPOUNDS" => Some(g_STONE_COMPOUNDS()),
+            "STONE_VERBS" => Some(g_STONE_VERBS()),
+            "STOOL_AS_FURNITURE" => Some(g_STOOL_AS_FURNITURE()),
+            "STRONG" => Some(g_STRONG()),
+            "STUDY_OBJECTS" => Some(g_STUDY_OBJECTS()),
+            "SUMS_AFTER" => Some(g_SUMS_AFTER()),
+            "SUM_MONEY" => Some(g_SUM_MONEY()),
+            "TABLE" => Some(g_TABLE()),
+            "TEETHING_AND_A_CHILD" => Some(g_TEETHING_AND_A_CHILD()),
+            "TEETHING_IS_A_FAULT" => Some(g_TEETHING_IS_A_FAULT()),
+            "THE_PEOPLE" => Some(g_THE_PEOPLE()),
+            "THE_PERSONS_OWN" => Some(g_THE_PERSONS_OWN()),
+            "THINGS" => Some(g_THINGS()),
+            "THING_WORDS" => Some(g_THING_WORDS()),
+            "TRAVEL_CUES" => Some(g_TRAVEL_CUES()),
+            "TRAVEL_STRONG" => Some(g_TRAVEL_STRONG()),
+            "TWO_HOMES" => Some(g_TWO_HOMES()),
+            "TWO_LIVES" => Some(g_TWO_LIVES()),
+            "TWO_LIVES_FORMS" => Some(g_TWO_LIVES_FORMS()),
+            "TWO_LIVES_REACH" => Some(g_TWO_LIVES_REACH()),
+            "UNIT_WORDS" => Some(g_UNIT_WORDS()),
+            "UNWELL_BOOST" => Some(g_UNWELL_BOOST()),
+            "UNWELL_IDIOMS" => Some(g_UNWELL_IDIOMS()),
+            "UNWELL_NOT" => Some(g_UNWELL_NOT()),
+            "UNWELL_SIGNS" => Some(g_UNWELL_SIGNS()),
+            "VERB_CUES" => Some(g_VERB_CUES()),
+            "WANTED_BEFORE_A_STOP" => Some(g_WANTED_BEFORE_A_STOP()),
+            "WANT_VERBS" => Some(g_WANT_VERBS()),
+            "WARMTH_ARE" => Some(g_WARMTH_ARE()),
+            "WARMTH_DEGREE" => Some(g_WARMTH_DEGREE()),
+            "WARMTH_HABITUAL" => Some(g_WARMTH_HABITUAL()),
+            "WARMTH_THEN" => Some(g_WARMTH_THEN()),
+            "WARMTH_WORDS" => Some(g_WARMTH_WORDS()),
+            "WATCHING" => Some(g_WATCHING()),
+            "WATCH_OUT_AFTER" => Some(g_WATCH_OUT_AFTER()),
+            "WEAK" => Some(g_WEAK()),
+            "WEATHER_BEFORE" => Some(g_WEATHER_BEFORE()),
+            "WEATHER_ITSELF" => Some(g_WEATHER_ITSELF()),
+            "WORD_DIGITS" => Some(g_WORD_DIGITS()),
+            "WORD_NUMBERS" => Some(g_WORD_NUMBERS()),
+            "WORK_WORDS" => Some(g_WORK_WORDS()),
+            "WORLD" => Some(g_WORLD()),
+            "WORLD_NOT" => Some(g_WORLD_NOT()),
+            "WORN_OUT" => Some(g_WORN_OUT()),
+            "WORN_OUT_BOOST" => Some(g_WORN_OUT_BOOST()),
+            "WORN_OUT_CUE" => Some(g_WORN_OUT_CUE()),
+            "WORN_OUT_LOOKBACK" => Some(g_WORN_OUT_LOOKBACK()),
+            "WORN_OUT_SAID" => Some(g_WORN_OUT_SAID()),
+            "_A_STATE_VERB" => Some(g__A_STATE_VERB()),
+            "_BREAKS" => Some(g__BREAKS()),
+            "_FUNCTION_WORDS" => Some(g__FUNCTION_WORDS()),
+            "_GRAND_RELATIONS" => Some(g__GRAND_RELATIONS()),
+            "_KIN_BUILT" => Some(g__KIN_BUILT()),
+            "_NOT_THE_SUBJECT" => Some(g__NOT_THE_SUBJECT()),
+            "_POSSESSIVE" => Some(g__POSSESSIVE()),
+            "_SENSE_TIERS" => Some(g__SENSE_TIERS()),
+            "_STEPPED_RELATIONS" => Some(g__STEPPED_RELATIONS()),
+            "_THE_OWNER_SETTLES" => Some(g__THE_OWNER_SETTLES()),
+            "_a_book_for_a_child" => Some(py_func("_a_book_for_a_child", |args: &[Py]| _a_book_for_a_child(args))),
+            "_a_country_named" => Some(py_func("_a_country_named", |args: &[Py]| _a_country_named(args))),
+            "_a_crop_is_failing" => Some(py_func("_a_crop_is_failing", |args: &[Py]| _a_crop_is_failing(args))),
+            "_a_habit_given_up" => Some(py_func("_a_habit_given_up", |args: &[Py]| _a_habit_given_up(args))),
+            "_a_part_plays_up" => Some(py_func("_a_part_plays_up", |args: &[Py]| _a_part_plays_up(args))),
+            "_a_person_is_unwell" => Some(py_func("_a_person_is_unwell", |args: &[Py]| _a_person_is_unwell(args))),
+            "_a_wait_follows" => Some(py_func("_a_wait_follows", |args: &[Py]| _a_wait_follows(args))),
+            "_acts_on_a_thing" => Some(py_func("_acts_on_a_thing", |args: &[Py]| _acts_on_a_thing(args))),
+            "_acts_on_the_body" => Some(py_func("_acts_on_the_body", |args: &[Py]| _acts_on_the_body(args))),
+            "_age_value" => Some(py_func("_age_value", |args: &[Py]| _age_value(args))),
+            "_ages_of_a_child" => Some(py_func("_ages_of_a_child", |args: &[Py]| _ages_of_a_child(args))),
+            "_asked_as_a_country" => Some(py_func("_asked_as_a_country", |args: &[Py]| _asked_as_a_country(args))),
+            "_asks_mechanism" => Some(py_func("_asks_mechanism", |args: &[Py]| _asks_mechanism(args))),
+            "_bad_verdict_positions" => Some(py_func("_bad_verdict_positions", |args: &[Py]| _bad_verdict_positions(args))),
+            "_capitalised" => Some(py_func("_capitalised", |args: &[Py]| _capitalised(args))),
+            "_counts_as_number" => Some(py_func("_counts_as_number", |args: &[Py]| _counts_as_number(args))),
+            "_drive_idiom" => Some(py_func("_drive_idiom", |args: &[Py]| _drive_idiom(args))),
+            "_drives_a_person" => Some(py_func("_drives_a_person", |args: &[Py]| _drives_a_person(args))),
+            "_family" => Some(py_func("_family", |args: &[Py]| _family(args))),
+            "_form" => Some(g__form()),
+            "_forms" => Some(g__forms()),
+            "_function_words" => Some(py_func("_function_words", |args: &[Py]| _function_words(args))),
+            "_gift_ask" => Some(py_func("_gift_ask", |args: &[Py]| _gift_ask(args))),
+            "_gift_still_to_get" => Some(py_func("_gift_still_to_get", |args: &[Py]| _gift_still_to_get(args))),
+            "_has_travel_word" => Some(py_func("_has_travel_word", |args: &[Py]| _has_travel_word(args))),
+            "_head_fog" => Some(py_func("_head_fog", |args: &[Py]| _head_fog(args))),
+            "_idiom_positions" => Some(py_func("_idiom_positions", |args: &[Py]| _idiom_positions(args))),
+            "_index" => Some(py_func("_index", |args: &[Py]| _index(args))),
+            "_is_a_complaint" => Some(py_func("_is_a_complaint", |args: &[Py]| _is_a_complaint(args))),
+            "_is_a_portion" => Some(py_func("_is_a_portion", |args: &[Py]| _is_a_portion(args))),
+            "_is_name" => Some(py_func("_is_name", |args: &[Py]| _is_name(args))),
+            "_is_run_out" => Some(py_func("_is_run_out", |args: &[Py]| _is_run_out(args))),
+            "_looks_like_an_ask" => Some(py_func("_looks_like_an_ask", |args: &[Py]| _looks_like_an_ask(args))),
+            "_lookup" => Some(py_func("_lookup", |args: &[Py]| _lookup(args))),
+            "_means_something_else" => Some(py_func("_means_something_else", |args: &[Py]| _means_something_else(args))),
+            "_mixed_number" => Some(py_func("_mixed_number", |args: &[Py]| _mixed_number(args))),
+            "_named_condition" => Some(py_func("_named_condition", |args: &[Py]| _named_condition(args))),
+            "_names_a_friend_of_their_own" => Some(py_func("_names_a_friend_of_their_own", |args: &[Py]| _names_a_friend_of_their_own(args))),
+            "_names_a_person" => Some(py_func("_names_a_person", |args: &[Py]| _names_a_person(args))),
+            "_names_a_place" => Some(py_func("_names_a_place", |args: &[Py]| _names_a_place(args))),
+            "_owns_an_animal" => Some(py_func("_owns_an_animal", |args: &[Py]| _owns_an_animal(args))),
+            "_person_words" => Some(py_func("_person_words", |args: &[Py]| _person_words(args))),
+            "_place_points" => Some(py_func("_place_points", |args: &[Py]| _place_points(args))),
+            "_placed_by_a_word" => Some(py_func("_placed_by_a_word", |args: &[Py]| _placed_by_a_word(args))),
+            "_places_a_name" => Some(py_func("_places_a_name", |args: &[Py]| _places_a_name(args))),
+            "_position" => Some(py_func("_position", |args: &[Py]| _position(args))),
+            "_purse_amount" => Some(py_func("_purse_amount", |args: &[Py]| _purse_amount(args))),
+            "_said_as_a_place" => Some(py_func("_said_as_a_place", |args: &[Py]| _said_as_a_place(args))),
+            "_says_nothing_here" => Some(py_func("_says_nothing_here", |args: &[Py]| _says_nothing_here(args))),
+            "_sense_cue" => Some(py_func("_sense_cue", |args: &[Py]| _sense_cue(args))),
+            "_sense_topic" => Some(g__sense_topic()),
+            "_set_in_a_place" => Some(py_func("_set_in_a_place", |args: &[Py]| _set_in_a_place(args))),
+            "_sign_said_of_a_person" => Some(py_func("_sign_said_of_a_person", |args: &[Py]| _sign_said_of_a_person(args))),
+            "_skin_state" => Some(py_func("_skin_state", |args: &[Py]| _skin_state(args))),
+            "_spoken_numbers" => Some(py_func("_spoken_numbers", |args: &[Py]| _spoken_numbers(args))),
+            "_takes_an_object" => Some(py_func("_takes_an_object", |args: &[Py]| _takes_an_object(args))),
+            "_teething_is_a_fault" => Some(py_func("_teething_is_a_fault", |args: &[Py]| _teething_is_a_fault(args))),
+            "_the_figure_and_its_unit" => Some(py_func("_the_figure_and_its_unit", |args: &[Py]| _the_figure_and_its_unit(args))),
+            "_the_persons_own_output" => Some(py_func("_the_persons_own_output", |args: &[Py]| _the_persons_own_output(args))),
+            "_the_sense_the_cues_name" => Some(py_func("_the_sense_the_cues_name", |args: &[Py]| _the_sense_the_cues_name(args))),
+            "_the_weather_is_just_a_season" => Some(py_func("_the_weather_is_just_a_season", |args: &[Py]| _the_weather_is_just_a_season(args))),
+            "_thing" => Some(py_func("_thing", |args: &[Py]| _thing(args))),
+            "_thing_a_cue_acts_on" => Some(py_func("_thing_a_cue_acts_on", |args: &[Py]| _thing_a_cue_acts_on(args))),
+            "_tiers" => Some(g__tiers()),
+            "_watches_out_for" => Some(py_func("_watches_out_for", |args: &[Py]| _watches_out_for(args))),
+            "_what_someone_else_wants" => Some(py_func("_what_someone_else_wants", |args: &[Py]| _what_someone_else_wants(args))),
+            "_work_out_sums" => Some(py_func("_work_out_sums", |args: &[Py]| _work_out_sums(args))),
+            "_worn_out" => Some(py_func("_worn_out", |args: &[Py]| _worn_out(args))),
+            "broke_at" => Some(py_func("broke_at", |args: &[Py]| broke_at(args))),
+            "detect_entities" => Some(py_func("detect_entities", |args: &[Py]| detect_entities(args))),
+            "detect_numbers" => Some(py_func("detect_numbers", |args: &[Py]| detect_numbers(args))),
+            "detect_topic" => Some(py_func("detect_topic", |args: &[Py]| detect_topic(args))),
+            "gift_ask" => Some(py_func("gift_ask", |args: &[Py]| gift_ask(args))),
+            "is_a_machine_word" => Some(py_func("is_a_machine_word", |args: &[Py]| is_a_machine_word(args))),
+            "names_another_thing" => Some(py_func("names_another_thing", |args: &[Py]| names_another_thing(args))),
+            "own_output_word" => Some(py_func("own_output_word", |args: &[Py]| own_output_word(args))),
+            "person_names" => Some(py_func("person_names", |args: &[Py]| person_names(args))),
+            "purse_till_at" => Some(py_func("purse_till_at", |args: &[Py]| purse_till_at(args))),
+            "rank_topics" => Some(py_func("rank_topics", |args: &[Py]| rank_topics(args))),
+            "reads_as_unfit" => Some(py_func("reads_as_unfit", |args: &[Py]| reads_as_unfit(args))),
+            "says_another_thing" => Some(py_func("says_another_thing", |args: &[Py]| says_another_thing(args))),
+            "score_topics" => Some(py_func("score_topics", |args: &[Py]| score_topics(args))),
+            "stone_weight_at" => Some(py_func("stone_weight_at", |args: &[Py]| stone_weight_at(args))),
+            "subject_topic" => Some(py_func("subject_topic", |args: &[Py]| subject_topic(args))),
+            "the_bin_is_on_a_machine" => Some(py_func("the_bin_is_on_a_machine", |args: &[Py]| the_bin_is_on_a_machine(args))),
+            "the_warmth_said" => Some(py_func("the_warmth_said", |args: &[Py]| the_warmth_said(args))),
+            "the_words_that_said" => Some(py_func("the_words_that_said", |args: &[Py]| the_words_that_said(args))),
+            "tight_money_at" => Some(py_func("tight_money_at", |args: &[Py]| tight_money_at(args))),
+            "tight_on_money" => Some(py_func("tight_on_money", |args: &[Py]| tight_on_money(args))),
+            "unclear_subject" => Some(py_func("unclear_subject", |args: &[Py]| unclear_subject(args))),
+            "unsure_words" => Some(py_func("unsure_words", |args: &[Py]| unsure_words(args))),
+            _ => None,
+        }),
+        set: None,
+    }))
+}

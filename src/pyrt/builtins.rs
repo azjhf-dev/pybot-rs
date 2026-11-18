@@ -556,3 +556,218 @@ pub fn py_deepcopy(v: &Py) -> Py {
         other => other.clone(),
     }
 }
+
+// ---------------------------------------------------------------- transpiler helpers
+pub fn gattr(v: &Py, name: &str) -> Py {
+    py_getattr(v, name).unwrap_or_else(|e| exc::raise(e))
+}
+pub fn mcall(recv: &Py, name: &str, args: &[Py]) -> Py {
+    py_method_call(recv, name, args).unwrap_or_else(|e| exc::raise(e))
+}
+pub fn kw_pairs(v: &Py) -> Vec<(String, Py)> {
+    match v {
+        Py::Dict(d) => d.borrow().iter().map(|(k, val)| (py_str_of(&k.0), val.clone())).collect(),
+        _ => Vec::new(),
+    }
+}
+pub fn __kwp(args: &[Py], i: usize, name: &str) -> Option<Py> {
+    let mut pos: Vec<&Py> = Vec::new();
+    for a in args {
+        match a {
+            Py::Kwargs(kws) => {
+                for (n, v) in kws.iter() {
+                    if n == name { return Some(v.clone()); }
+                }
+            }
+            other => pos.push(other),
+        }
+    }
+    if pos.len() > i { Some(pos[i].clone()) } else { None }
+}
+pub fn py_iter_or_raise(v: &Py) -> Vec<Py> {
+    py_iter(v).unwrap_or_else(|e| exc::raise(e))
+}
+pub fn py_unpack(v: &Py, n: usize, star: Option<usize>) -> Vec<Py> {
+    let items = py_iter_or_raise(v);
+    match star {
+        None => {
+            if items.len() != n {
+                exc::raise(value_err(&format!("too many or too few values to unpack (expected {})", n)));
+            }
+            items
+        }
+        Some(s) => {
+            if items.len() < n - 1 {
+                exc::raise(value_err("not enough values to unpack"));
+            }
+            let mut out: Vec<Py> = Vec::new();
+            for i in 0..s { out.push(items[i].clone()); }
+            let tail = n - 1 - s;
+            out.push(py_list(items[s..items.len() - tail].to_vec()));
+            for i in (items.len() - tail)..items.len() { out.push(items[i].clone()); }
+            out
+        }
+    }
+}
+pub fn dict_spread(vals: &[Py]) -> Py {
+    let mut out: Vec<(Py, Py)> = Vec::new();
+    for v in vals {
+        match v {
+            Py::Dict(d) => out.extend(d.borrow().iter().map(|(k, val)| (k.0.clone(), val.clone()))),
+            _ => { exc::raise(type_err("argument is not a mapping")); }
+        }
+    }
+    py_dict(out)
+}
+pub fn py_is(a: &Py, b: &Py) -> bool {
+    match (a, b) {
+        (Py::None, Py::None) => true,
+        (Py::Bool(x), Py::Bool(y)) => x == y,
+        (Py::Str(x), Py::Str(y)) => Rc::ptr_eq(x, y),
+        (Py::List(x), Py::List(y)) => Rc::ptr_eq(x, y),
+        (Py::Dict(x), Py::Dict(y)) => Rc::ptr_eq(x, y),
+        (Py::Tuple(x), Py::Tuple(y)) => Rc::ptr_eq(x, y),
+        (Py::Set(x), Py::Set(y)) => Rc::ptr_eq(x, y),
+        (Py::Func(x), Py::Func(y)) => Rc::ptr_eq(x, y),
+        (Py::Instance(x), Py::Instance(y)) => Rc::ptr_eq(x, y),
+        (Py::Module(x), Py::Module(y)) => Rc::ptr_eq(x, y),
+        (Py::Int(x), Py::Int(y)) => x == y && (*x >= -5 && *x <= 256),
+        _ => false,
+    }
+}
+pub fn geti(v: &Py, key: &Py) -> Py {
+    py_getitem(v, key).unwrap_or_else(|e| exc::raise(e))
+}
+pub fn slice_or_raise(v: &Py, start: &Py, stop: &Py, step: &Py) -> Py {
+    py_slice(v, start, stop, step).unwrap_or_else(|e| exc::raise(e))
+}
+pub fn fstr(v: &Py, conv: i32, spec: &str) -> String {
+    let s = match conv {
+        114 => py_repr(v),               // 'r'
+        115 => py_str_of(v),             // 's'
+        97 => py_repr(v),                // 'a'
+        _ => py_str_of(v),
+    };
+    if spec.is_empty() { return s; }
+    format_with_spec(v, &s, spec)
+}
+fn format_with_spec(v: &Py, s: &str, spec: &str) -> String {
+    // minimal format spec: [[fill]align][sign][#][0][width][,][.prec][type]
+    let b = spec.as_bytes();
+    let mut i = 0;
+    let mut fill = ' ';
+    let mut align = '\0';
+    if b.len() >= 2 && (b[1] == b'<' || b[1] == b'>' || b[1] == b'^' || b[1] == b'=') {
+        fill = b[0] as char; align = b[1] as char; i = 2;
+    } else if b.len() >= 1 && (b[0] == b'<' || b[0] == b'>' || b[0] == b'^' || b[0] == b'=') {
+        align = b[0] as char; i = 1;
+    }
+    let mut sign = '-';
+    if i < b.len() && (b[i] == b'+' || b[i] == b'-' || b[i] == b' ') { sign = b[i] as char; i += 1; }
+    if i < b.len() && b[i] == b'#' { i += 1; }
+    let mut zero = false;
+    if i < b.len() && b[i] == b'0' { zero = true; i += 1; }
+    let mut width = String::new();
+    while i < b.len() && b[i].is_ascii_digit() { width.push(b[i] as char); i += 1; }
+    if i < b.len() && b[i] == b',' { i += 1; }
+    let mut prec = String::new();
+    let mut has_prec = false;
+    if i < b.len() && b[i] == b'.' { has_prec = true; i += 1; while i < b.len() && b[i].is_ascii_digit() { prec.push(b[i] as char); i += 1; } }
+    let ty = if i < b.len() { b[i] as char } else { '\0' };
+    let width_n: usize = width.parse().unwrap_or(0);
+    let mut body = s.to_string();
+    match ty {
+        'f' | 'F' => {
+            let p: usize = if has_prec { prec.parse().unwrap_or(6) } else { 6 };
+            if let Some(f) = num_f64(v) { body = format!("{:.*}", p, f); }
+        }
+        'd' => { if let Some(n) = num_i64(v) { body = n.to_string(); } }
+        'x' => { if let Some(n) = num_i64(v) { body = format!("{:x}", n); } }
+        'X' => { if let Some(n) = num_i64(v) { body = format!("{:X}", n); } }
+        'o' => { if let Some(n) = num_i64(v) { body = format!("{:o}", n); } }
+        'b' => { if let Some(n) = num_i64(v) { body = format!("{:b}", n); } }
+        'e' | 'E' => {
+            let p: usize = if has_prec { prec.parse().unwrap_or(6) } else { 6 };
+            if let Some(f) = num_f64(v) { body = format!("{:.*e}", p, f); }
+        }
+        '%' => {
+            let p: usize = if has_prec { prec.parse().unwrap_or(6) } else { 6 };
+            if let Some(f) = num_f64(v) { body = format!("{:.*}%", p, f * 100.0); }
+        }
+        's' => {}
+        '\0' => {
+            if has_prec {
+                if let Some(f) = num_f64(v) {
+                    let p: usize = prec.parse().unwrap_or(6);
+                    body = format_g(f, p);
+                } else {
+                    body = s.chars().take(prec.parse().unwrap_or(usize::MAX)).collect();
+                }
+            }
+        }
+        _ => {}
+    }
+    if sign == '+' {
+        if matches!(v, Py::Int(_) | Py::Float(_)) && !body.starts_with('-') && !body.starts_with('+') { body = format!("+{}", body); }
+    } else if sign == ' ' {
+        if matches!(v, Py::Int(_) | Py::Float(_)) && !body.starts_with('-') { body = format!(" {}", body); }
+    }
+    if body.chars().count() >= width_n { return body; }
+    let pad = width_n - body.chars().count();
+    if zero && align == '\0' && matches!(v, Py::Int(_) | Py::Float(_)) {
+        let (signpart, rest) = if body.starts_with('-') || body.starts_with('+') || body.starts_with(' ') {
+            body.split_at(1)
+        } else { ("", body.as_str()) };
+        return format!("{}{}{}", signpart, "0".repeat(pad), rest);
+    }
+    match align {
+        '<' => format!("{}{}", body, fill.to_string().repeat(pad)),
+        '^' => { let l = pad / 2; let r = pad - l; format!("{}{}{}", fill.to_string().repeat(l), body, fill.to_string().repeat(r)) }
+        _ => format!("{}{}", fill.to_string().repeat(pad), body),
+    }
+}
+fn num_f64(v: &Py) -> Option<f64> {
+    match v { Py::Int(i) => Some(*i as f64), Py::Float(f) => Some(*f), Py::Bool(b) => Some(*b as u8 as f64), _ => None }
+}
+fn num_i64(v: &Py) -> Option<i64> {
+    match v { Py::Int(i) => Some(*i), Py::Bool(b) => Some(*b as i64), _ => None }
+}
+fn format_g(f: f64, p: usize) -> String {
+    let p = if p == 0 { 1 } else { p };
+    let exp = f.abs().log10().floor() as i32;
+    if exp < -4 || exp >= p as i32 {
+        format!("{:.*e}", p - 1, f)
+    } else {
+        let dec = (p as i32 - 1 - exp).max(0) as usize;
+        let s = format!("{:.*}", dec, f);
+        let s = s.trim_end_matches('0').trim_end_matches('.');
+        s.to_string()
+    }
+}
+// raising op wrappers
+pub fn add(a: &Py, b: &Py) -> Py { py_add(a, b).unwrap_or_else(|e| exc::raise(e)) }
+pub fn sub(a: &Py, b: &Py) -> Py { py_sub(a, b).unwrap_or_else(|e| exc::raise(e)) }
+pub fn mul(a: &Py, b: &Py) -> Py { py_mul(a, b).unwrap_or_else(|e| exc::raise(e)) }
+pub fn truediv(a: &Py, b: &Py) -> Py { py_truediv(a, b).unwrap_or_else(|e| exc::raise(e)) }
+pub fn floordiv(a: &Py, b: &Py) -> Py { py_floordiv(a, b).unwrap_or_else(|e| exc::raise(e)) }
+pub fn modulo(a: &Py, b: &Py) -> Py { py_mod(a, b).unwrap_or_else(|e| exc::raise(e)) }
+pub fn pow_op(a: &Py, b: &Py) -> Py { py_pow(a, b).unwrap_or_else(|e| exc::raise(e)) }
+pub fn neg(a: &Py) -> Py { py_neg(a).unwrap_or_else(|e| exc::raise(e)) }
+pub fn invert(a: &Py) -> Py { py_invert(a).unwrap_or_else(|e| exc::raise(e)) }
+pub fn bitand(a: &Py, b: &Py) -> Py { py_bitand(a, b).unwrap_or_else(|e| exc::raise(e)) }
+pub fn bitor(a: &Py, b: &Py) -> Py { py_bitor(a, b).unwrap_or_else(|e| exc::raise(e)) }
+pub fn bitxor(a: &Py, b: &Py) -> Py { py_bitxor(a, b).unwrap_or_else(|e| exc::raise(e)) }
+pub fn lshift(a: &Py, b: &Py) -> Py { py_lshift(a, b).unwrap_or_else(|e| exc::raise(e)) }
+pub fn rshift(a: &Py, b: &Py) -> Py { py_rshift(a, b).unwrap_or_else(|e| exc::raise(e)) }
+fn cmp_bool(a: &Py, b: &Py, op: &str) -> Py {
+    match py_cmp(a, b, op) {
+        Ok(std::cmp::Ordering::Less) => Py::Bool(matches!(op, "<" | "<=" | "!=")),
+        Ok(std::cmp::Ordering::Equal) => Py::Bool(matches!(op, "<=" | ">=" | "==")),
+        Ok(std::cmp::Ordering::Greater) => Py::Bool(matches!(op, ">" | ">=" | "!=")),
+        Err(e) => exc::raise(e),
+    }
+}
+pub fn lt(a: &Py, b: &Py) -> Py { cmp_bool(a, b, "<") }
+pub fn le(a: &Py, b: &Py) -> Py { cmp_bool(a, b, "<=") }
+pub fn gt(a: &Py, b: &Py) -> Py { cmp_bool(a, b, ">") }
+pub fn ge(a: &Py, b: &Py) -> Py { cmp_bool(a, b, ">") }

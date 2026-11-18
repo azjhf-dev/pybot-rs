@@ -100,6 +100,7 @@ pub enum Py {
 pub fn type_err(msg: &str) -> PyExc { py_err("TypeError", msg) }
 pub fn val_err(msg: &str) -> PyExc { py_err("ValueError", msg) }
 pub fn key_err(key: &Py) -> PyExc { PyExc::new("KeyError", &py_repr(key)) }
+pub fn value_err(msg: &str) -> PyExc { py_err("ValueError", msg) }
 pub fn index_err() -> PyExc { py_err("IndexError", "list index out of range") }
 pub fn attr_err(name: &str) -> PyExc { PyExc::new("AttributeError", &format!("object has no attribute '{}'", name)) }
 pub fn name_err(name: &str) -> PyExc { PyExc::new("NameError", &format!("name '{}' is not defined", name)) }
