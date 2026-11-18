@@ -23,5 +23,30 @@
       "diagnostics": "[module: answers | 34905 ms]\n[module: memory_store | 2687 ms]\n"
     },
     "exact": true
+  },
+  {
+    "binary_sha256": "d4cabea0451fe30ff4ca24c455750b4e0d45833b59a77fa13bf5c230bb078a33",
+    "case": 1,
+    "inputs": [
+      "my cat is called Luna",
+      "what is my cat called"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "A cat called Luna \u2014 is it good company?",
+        "You've got a cat called Luna."
+      ],
+      "diagnostics": "[module: greeting | 1102 ms]\n[module: memory_store | 1371 ms]\n"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "A cat called Luna \u2014 is it good company?",
+        "You've got a cat called Luna."
+      ],
+      "diagnostics": "[module: greeting | 34428 ms]\n[module: memory_store | 4995 ms]\n"
+    },
+    "exact": true
   }
 ]
