@@ -231,5 +231,27 @@
       "diagnostics": "[module: answers | 25113 ms]\n[module: chat | 2932 ms]\n"
     },
     "exact": true
+  },
+  {
+    "binary_sha256": "bf98fc48613880ed03b5c39ce2e1c0769a2ba2ab7ebf72108aa0dbe06a569520",
+    "case": 10,
+    "inputs": [
+      "what is the capital of France"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "Paris."
+      ],
+      "diagnostics": "[module: answers | 1121 ms]\n"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "Paris."
+      ],
+      "diagnostics": "[module: answers | 26837 ms]\n"
+    },
+    "exact": true
   }
 ]
