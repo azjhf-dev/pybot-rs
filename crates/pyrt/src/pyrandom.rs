@@ -10,6 +10,7 @@ const MATRIX_A: u32 = 0x9908b0df;
 const UPPER_MASK: u32 = 0x80000000;
 const LOWER_MASK: u32 = 0x7fffffff;
 
+#[derive(Clone)]
 pub struct Mt19937 {
     mt: [u32; N],
     index: usize,
@@ -228,6 +229,23 @@ pub fn getrandbits(k: &Py) -> Py {
 /// random module call dispatcher: random.choice(...), etc.
 pub fn call(name: &str, args: &[Py]) -> PyResult {
     match name {
+        "Random" => {
+            use std::rc::Rc;
+            let saved = with_rng(|r| r.clone());
+            seed(args.first().unwrap_or(&Py::None));
+            let local = Rc::new(RefCell::new(with_rng(|r| r.clone())));
+            with_rng(|r| *r = saved);
+            Ok(Py::Module(Rc::new(PyModule { name: "random.Random".into(), set: None, get: Rc::new(move |attr| {
+                let rng = local.clone(); let method = attr.to_string();
+                Some(py_func(attr, move |args| {
+                    let original = with_rng(|r| std::mem::replace(r, rng.borrow().clone()));
+                    let result = call(&method, args);
+                    let advanced = with_rng(|r| std::mem::replace(r, original));
+                    *rng.borrow_mut() = advanced;
+                    result.unwrap_or_else(|e| crate::exc::raise(e))
+                }))
+            }) })))
+        }
         "seed" => { seed(args.first().unwrap_or(&Py::None)); Ok(Py::None) }
         "random" => Ok(random()),
         "randint" => randint(args.first().unwrap_or(&Py::None), args.get(1).unwrap_or(&Py::None)),

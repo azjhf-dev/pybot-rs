@@ -92,7 +92,7 @@ const MONTH_ABBR: [&str; 12] = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
 fn stdlib_has_call(module: &str, name: &str) -> bool {
     match module {
         "re" => matches!(name, "compile" | "search" | "match" | "fullmatch" | "findall" | "finditer" | "sub" | "subn" | "split" | "escape" | "purge"),
-        "random" => matches!(name, "seed" | "random" | "randint" | "randrange" | "choice" | "shuffle" | "uniform" | "sample" | "getrandbits" | "choices" | "triangular"),
+        "random" => matches!(name, "Random" | "seed" | "random" | "randint" | "randrange" | "choice" | "shuffle" | "uniform" | "sample" | "getrandbits" | "choices" | "triangular"),
         "datetime" => matches!(name, "date" | "datetime" | "timedelta" | "date.today" | "datetime.now" | "date.fromisoformat" | "datetime.fromisoformat" | "datetime.combine" | "time"),
         "string" => matches!(name, "capwords" | "maketrans"),
         "copy" => matches!(name, "deepcopy" | "copy"),
