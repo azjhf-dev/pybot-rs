@@ -11,7 +11,7 @@ use std::io::{BufRead, Write};
 use std::time::Instant;
 
 const VERSION: &str = "0.2.0";
-const SOURCE_COMMIT: &str = "24cbc0439e07fd015c0747ab3be6e782a42b5c5b";
+const SOURCE_COMMIT: &str = "7d63c7fbebb44c7e466e5c8b5c1f341ab767929e";
 
 const LOGO: &str = r#"    ____        ____        __
    / __ \__  __/ __ )____  / /_
