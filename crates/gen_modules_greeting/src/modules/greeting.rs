@@ -118,6 +118,7 @@ fn module_body() {
     s_A_REFERS_BACK(stdlib_call("re", "compile", &[py_str("\\b(?:you|u|yous)\\s+(?:said|told me|mentioned|suggested|advised|recommended|agreed|promised|told me to)\\b|^(?:(?:o+|oh|and|so|ok|okay|right|now|but|well|anyway|erm|um)\\s+)*(?:back|going back|return|coming back)\\s+to\\s+(?:what|that|it|this|where|our|the)\\b|^(?:(?:o+|oh|and|so|ok|okay|right|now|but|well|anyway|erm|um)\\s+)*(?:what|which)\\s+(?:was|were)\\s+we\\b|\\bwhat we (?:were|was) (?:saying|talking about|on about)\\b|\\b(?:the )?same (?:as )?(?:before|last time)\\b|\\bthat thing i (?:told|mentioned|said to|asked) you\\b|\\bas (?:we|you) (?:said|were saying|agreed|discussed)\\b|\\bas i (?:said|mentioned|told you)\\b")]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.greeting.NOTHING_BEFORE_IT"); }
     s_NOTHING_BEFORE_IT(py_tuple(vec![py_str("There's nothing before this line for me to go on - say what it was about and I'll pick it up."), py_str("I haven't said anything yet, so give me the thing itself: what are we going back to?"), py_str("Nothing on my side yet - tell me what it was and I'll take it from there."), py_str("That's the first thing you've said to me, so I'll need it in full: what was it about?")]));
+    s_respond(py_func("respond", |args: &[Py]| respond__wrapped(args)));
     fn __data1() -> Py { py_tuple(vec![py_str("check"), py_str("clear"), py_str("tr"), py_str("us"), py_str("put"), py_str("add"), py_str("set"), py_str("switch"), py_str("turn"), py_str("leav"), py_str("keep"), py_str("ask"), py_str("tak"), py_str("replace"), py_str("restart"), py_str("update"), py_str("mov"), py_str("clean"), py_str("fix"), py_str("buy"), py_str("get"), py_str("call"), py_str("ring"), py_str("book"), py_str("look"), py_str("mak"), py_str("run"), py_str("wash"), py_str("charg"), py_str("delet"), py_str("start"), py_str("install"), py_str("plug"), py_str("test"), py_str("measur"), py_str("wip"), py_str("help"), py_str("need"), py_str("work"), py_str("cost"), py_str("sav")]) }
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.greeting.A_STEP_IN_IT"); }
     s_A_STEP_IN_IT(__data1());
@@ -156,7 +157,7 @@ fn module_body() {
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.greeting.TAKES_AS_IT_COMES"); }
     s_TAKES_AS_IT_COMES(py_func("takes_as_it_comes", |args: &[Py]| takes_as_it_comes(args)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.greeting.respond"); }
-    s_respond(pyrt::xrefs::xcall("memory.again", "replied", &[py_func("respond", |args: &[Py]| respond__wrapped(args))]));
+    s_respond(pyrt::xrefs::xcall("memory.again", "replied", &[g_respond()]));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.greeting.respond"); }
     s_respond(pyrt::xrefs::xcall("compose.a_detail_dropped", "turned", &[g_respond()]));
 }

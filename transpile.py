@@ -459,6 +459,13 @@ class Gen:
                             self.emit(f"    s_{rust_ident(alias)}({expr});")
                 continue
             if isinstance(stmt, (ast.FunctionDef, ast.ClassDef)):
+                if isinstance(stmt, ast.FunctionDef) and stmt.name in self.decorated:
+                    rn = rust_ident(stmt.name)
+                    value = f'py_func({rust_string(stmt.name)}, |args: &[Py]| {rn}__wrapped(args))'
+                    for dec in reversed(stmt.decorator_list):
+                        value = f'py_call(&{self.gen_expr(dec, ctx)}, &[{value}])'
+                    self.emit(f'    s_{rn}({value});')
+                    self.rebound_pending.discard(stmt.name)
                 if isinstance(stmt, ast.ClassDef):
                     self.gen_class_reg(stmt)
                 continue
@@ -821,6 +828,7 @@ class Gen:
         if isinstance(target, ast.Name):
             name = target.id
             if ctx.kind == 'module':
+                self.rebound_pending.discard(name)
                 E(f'    if std::env::var_os("PYBOT_TRACE_INIT").is_some() {{ eprintln!("SET {self.dotted}.{name}"); }}')
             if name in ctx.global_names:
                 E(f"    s_{rust_ident(name)}({val});")
@@ -832,6 +840,8 @@ class Gen:
                 # comprehension-bound or new: declare
                 E(f"    let mut {rust_ident(name)}: Py = {val};")
                 ctx.locals.add(name)
+        elif isinstance(target, ast.Starred):
+            self.gen_assign(target.value, val, ctx)
         elif isinstance(target, ast.Subscript):
             if isinstance(target.slice, ast.Slice):
                 self.warn("slice assignment approximated", target)
@@ -1459,6 +1469,8 @@ class Gen:
             ctx.locals.add(name)
         if isinstance(target, ast.Name):
             lines.append(f'let mut {rust_ident(target.id)}: Py = {expr};')
+        elif isinstance(target, ast.Starred):
+            self.comp_bind(target.value, expr, lines, ctx)
         elif isinstance(target, (ast.Tuple, ast.List)):
             tmp = ctx.tmpname('unpk')
             star = next((i for i,e in enumerate(target.elts) if isinstance(e, ast.Starred)), None)

@@ -33,6 +33,7 @@ thread_local! {
 
 /// Panic with a Python exception payload.
 pub fn raise(exc: PyExc) -> ! {
+    if std::env::var_os("PYBOT_TRACE_STACK").is_some() { eprintln!("EXCEPTION {} {}\n{}", exc.class_name, exc.message, std::backtrace::Backtrace::force_capture()); }
     SUPPRESS.with(|s| s.set(true));
     std::panic::panic_any(exc);
 }

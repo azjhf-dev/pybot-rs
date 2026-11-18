@@ -514,7 +514,7 @@ fn module_body() {
     s__concept(__unpk10[0].clone());
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.study._by_language"); }
     s__by_language(__unpk10[1].clone());
-    let _ = mcall(&mcall(&g_PHRASES(), "setdefault", &[py_func("_concept", |args: &[Py]| _concept__wrapped(args)), py_dict(vec![])]), "update", &[g__by_language()]);
+    let _ = mcall(&mcall(&g_PHRASES(), "setdefault", &[g__concept(), py_dict(vec![])]), "update", &[g__by_language()]);
     }
     fn __data11() -> Py { py_dict(vec![(py_str("spanish"), py_str("Spanish")), (py_str("espanol"), py_str("Spanish")), (py_str("español"), py_str("Spanish")), (py_str("french"), py_str("French")), (py_str("francais"), py_str("French")), (py_str("français"), py_str("French")), (py_str("italian"), py_str("Italian")), (py_str("italiano"), py_str("Italian")), (py_str("german"), py_str("German")), (py_str("deutsch"), py_str("German")), (py_str("welsh"), py_str("Welsh")), (py_str("cymraeg"), py_str("Welsh")), (py_str("wales"), py_str("Welsh")), (py_str("irish"), py_str("Irish")), (py_str("gaeilge"), py_str("Irish")), (py_str("gailge"), py_str("Irish")), (py_str("as gaeilge"), py_str("Irish")), (py_str("gaelic"), py_str("Scottish Gaelic")), (py_str("scottish gaelic"), py_str("Scottish Gaelic")), (py_str("portuguese"), py_str("Portuguese")), (py_str("portugues"), py_str("Portuguese")), (py_str("português"), py_str("Portuguese")), (py_str("greek"), py_str("Greek")), (py_str("turkish"), py_str("Turkish")), (py_str("japanese"), py_str("Japanese")), (py_str("chinese"), py_str("Chinese")), (py_str("mandarin"), py_str("Chinese")), (py_str("dutch"), py_str("Dutch"))]) }
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.study.LANGUAGES"); }
@@ -595,6 +595,7 @@ fn module_body() {
     fn __data23() -> Py { py_tuple(vec![py_str("was"), py_str("die"), py_str("non"), py_str("tot"), py_str("mas"), py_str("nos"), py_str("dia"), py_str("per"), py_str("mar"), py_str("faint"), py_str("bore"), py_str("dank"), py_str("salute"), py_str("sante"), py_str("santé"), py_str("wasser"), py_str("ble")]) }
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.study._ENGLISH_TOO"); }
     s__ENGLISH_TOO(call_builtin("frozenset", &[__data23()]).unwrap_or_else(|e| exc::raise(e)));
+    s__concept(py_func("_concept", |args: &[Py]| _concept__wrapped(args)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.study._ABOUT_THE_PLATE"); }
     s__ABOUT_THE_PLATE(stdlib_call("re", "compile", &[py_str("(?<![a-z])(?:food|foods|cuisine|dish|dishes|eat|eating|meals?|restaurants?)(?![a-z])"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.study._SAY_OR_TRANSLATE"); }
@@ -1958,7 +1959,7 @@ pub fn _classes_named(args: &[Py]) -> Py {
     }
     }
     }
-    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("sorted", &[found.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk8917 = py_unpack(&__item.clone(), 2, None); let mut _u: Py = __unpk8917[0].clone(); let mut name: Py = __unpk8917[1].clone(); __out.push(name.clone()); } py_list(__out) })() };
+    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("sorted", &[found.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk1 = py_unpack(&__item.clone(), 2, None); let mut _u: Py = __unpk1[0].clone(); let mut name: Py = __unpk1[1].clone(); __out.push(name.clone()); } py_list(__out) })() };
     Py::None
 }
 pub fn _half_of_class_said(args: &[Py]) -> Py {
