@@ -221,6 +221,13 @@ def target_names(t):
         return target_names(t.value)
     return []
 
+def is_generator(node):
+    def visit(n):
+        if isinstance(n, (ast.Yield, ast.YieldFrom)): return True
+        if isinstance(n, (ast.FunctionDef, ast.Lambda, ast.ClassDef)): return False
+        return any(visit(c) for c in ast.iter_child_nodes(n))
+    return any(visit(c) for c in node.body)
+
 def assigned_names(node):
     out = []
     for n in ast.walk(node):
@@ -545,7 +552,7 @@ class Gen:
         locals_, globals_declared = self.fn_scope(node)
         ctx.locals = locals_
         ctx.global_names = globals_declared
-        ctx.generator = any(isinstance(n, (ast.Yield, ast.YieldFrom)) for n in ast.walk(node))
+        ctx.generator = is_generator(node)
         self.emit(f"pub fn {rname}(args: &[Py]) -> Py {{")
         self.emit("    ensure_init();")
         self.emit("    let mut __pos: Vec<Py> = Vec::new();")
@@ -853,6 +860,7 @@ class Gen:
         inner_ctx.params = captures + params
         inner_ctx.locals = locals_
         inner_ctx.global_names = globals_declared
+        inner_ctx.generator = is_generator(node)
         self.emit(f"pub fn {hidden}(args: &[Py]) -> Py {{")
         self.emit("    ensure_init();")
         self.emit("    let mut __pos: Vec<Py> = args.to_vec();")
@@ -880,9 +888,11 @@ class Gen:
             self.emit(f"    let mut {kp}: Py = py_dict(__kw.iter().filter(|(n, _)| ![{pnames}].contains(&n.as_str())).map(|(n, v)| (py_str(n), v.clone())).collect());")
         for name in sorted(locals_ - set(captures) - set(params) - ({node.args.vararg.arg} if node.args.vararg else set()) - ({node.args.kwarg.arg} if node.args.kwarg else set())):
             self.emit(f"    let mut {rust_ident(name)}: Py = Py::None;")
+        if inner_ctx.generator:
+            self.emit('    let mut __yielded: Vec<Py> = Vec::new();')
         for s in node.body:
             self.gen_stmt(s, inner_ctx)
-        self.emit("    Py::None")
+        self.emit("    py_list(__yielded)" if inner_ctx.generator else "    Py::None")
         self.emit("}")
         E = self.emit
         if ctx.kind == 'module':
