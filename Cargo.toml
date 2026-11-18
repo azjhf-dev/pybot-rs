@@ -171,3 +171,1975 @@ codegen-units = 256
 [profile.release.package.gen_understanding_normalize]
 opt-level = 0
 codegen-units = 256
+
+[profile.release.package.gen___main__]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_a_count_of_packets]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_a_detail_dropped]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_a_document_lives_with_an_office]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_a_first_time]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_a_number_the_bot_knows]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_a_place_nobody_can_see]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_a_thing_being_weighed]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_a_thing_wants_doing]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_a_trouble]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_a_wait_about_a_body]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_aboutness]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_badnews]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_breakup]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_check_with_you]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_checking]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_childwords]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_circumstance]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_clause]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_colour_on_the_body]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_doubt]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_draft]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_facts]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_fallback_pools]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_fallback_words]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_find_a_place]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_finding_out]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_findout]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_for_the_day]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_gap]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_goodnews]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_griefplea]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_habit]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_handoff]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_hands]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_harm]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_hedge]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_how_it_went]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_invitation]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_is_it_worth_it]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_judgement]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_kept_nearby]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_lead]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_lead_in]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_leaving]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_limit]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_liveask]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_loss]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_missing_half]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_morning_after]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_moving]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_nearby_one]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_news_ask]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_no_advice]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_no_eyes]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_no_page]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_not_knowing]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_nottheirbest]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_occasionplan]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_onething]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_only_they_know]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_onmybehalf]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_onscreen]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_onsubject]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_outlook]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_own_ask]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_own_facts]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_pace]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_place_facts]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_plan_ask]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_plans]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_pleased]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_postcode]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_prices]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_quantity]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_reaction]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_reading]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_recall]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_receiving_end]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_remark]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_repair]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_rotten_luck]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_routes]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_rule]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_ruledout]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_safety_doubt]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_safetyask]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_said_about_me]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_saidby]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_setting_off]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_stepwords]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_still]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_stretches]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_talktime]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_talkto]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_taste]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_the_course_of_it]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_the_rule_for_it]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_the_shape_without_the_fact]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_the_trouble_named]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_the_turn_after]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_their_day]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_their_detail]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_their_life]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_theirperson]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_thread_detail]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_toknow]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_tone_again]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_trouble]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_unseen]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_urgent]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_waited_for]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_ward]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_what_decides_it]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_what_i_do_know]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_what_it_asks]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_who]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_who_to_see]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_whole]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_why]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_compose_worn]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_a_plain_noise_word_on_a_machine]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_affording]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_animals]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_appointments]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_babyfood]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_bake_faults]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_bikes]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_body]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_body_energy]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_build_jobs]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_business]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_cakes]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_caring]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_cars]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_child_work]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_chilli]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_cleaning]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_clothing]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_coats]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_comeback]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_complaints]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_conditions]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_consumer]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_containers_frost]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_cook_kit]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_cooking_fats]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_cooking_gaps]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_cooking_more]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_cooking_tables]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_cooling]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_costs]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_creative]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_crisis_replies]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_dates]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_decorating]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_desk_setup]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_devices]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_differences]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_dish_verdicts]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_drinks]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_eithers]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_everyday_lines]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_explains]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_fabrics]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_family_more]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_fears]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_fitness]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_fitweek]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_food_left_out]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_freshness]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_friends]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_fruit]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_fun]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_garden_tools]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_geography]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_habits]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_history]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_house_odds]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_how_it_works]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_icing]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_idioms]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_income_periods]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_ingredient_swaps]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_job_times]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_joint_time]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_joints]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_keeping]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_keeping_cooked]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_kept_animals]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_kit_lists]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_kitchen]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_kitchen_odds]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_kitchen_prep]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_kits_and_claims]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_land]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_language]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_left_on]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_lifeadmin]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_machine_door]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_materials]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_meals]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_measures]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_meat_in_a_card]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_microwave_methods]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_money_words]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_music]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_nature]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_newborn]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_no_kit]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_notable]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_nursing]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_nutrition]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_occasions]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_odours]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_opinions]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_painting_faults]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_panic_talk]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_parking]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_pasta]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_pay]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_pensions]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_pets_health]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_pharmacy]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_phone_use]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_photography]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_picking]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_picks]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_plans]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_power_heat]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_pregnancy]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_prices]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_procedures]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_quantity]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_rice]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_routines]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_rubbish]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_sauces]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_school_day]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_school_days]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_schoolmaths]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_seasoning]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_shopping]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_sleep]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_sleep_aids]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_spice_heat]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_sport]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_still_ok]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_study]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_swaps]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_takes]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_tenancy]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_trades]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_travel_health]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_units]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_vaccines]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_vegetables]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_warm_food]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_water_out]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_what_damages_what]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_whenbuy]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_knowledge_wording]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_a_year_of_birth]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_aboutthem]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_again]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_already]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_amounts]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_another]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_asked_about]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_asleep]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_back_again]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_baking]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_callback]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_carried_on]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_carry]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_cause]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_change]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_choice]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_company]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_condition]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_corrected]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_counts]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_deadline]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_decided]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_detail]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_doing_it]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_doubt]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_dream]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_earlier]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_enough]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_favourite]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_filler]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_goals]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_groupages]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_guest]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_healing]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_history]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_holds]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_hope]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_hours]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_household]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_kidcount]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_kinds]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_limit]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_limits]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_lineback]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_matters]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_meant]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_measure]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_more]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_named]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_narrow]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_newborn]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_not_a_trip]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_not_this]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_obstacle]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_onset]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_opening]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_outfit]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_outgoings]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_paragraph]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_passing_the_time]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_pending]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_people]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_pile]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_places]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_plan]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_plans]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_portions]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_prefer]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_price]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_purse]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_quotes]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_rates]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_recall]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_reject]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_relations]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_remedy]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_reminded]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_rename]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_repair]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_resize]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_returned]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_returns]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_saving]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_setback]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_size]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_spent]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_spoken]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_stands]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_store_lines]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_stuck]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_surname]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_swap]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_taking]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_taste]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_the_verdict]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_the_years]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_their_feeling]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_thread]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_times]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_told]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_too_late]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_tried]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_trips]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_warmth]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_whathurts]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_when]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_whereabout]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_whose_body]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_will_it_work]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_workplace]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_memory_years_in]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_meta]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_a_cake_between_its_layers]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_a_check_with_you]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_a_count_of_packets]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_a_count_said]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_a_day_somebody_else_keeps]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_a_debt_said_flat]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_a_fact_asked_again]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_a_figure_beside_the_state]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_a_figure_of_a_dish]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_a_first_time]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_a_habit_is_raised]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_a_job_that_is_not_a_diy_job]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_a_letter_about_money]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_a_limit_over_the_answer]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_a_measure_asked_again]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_a_number_the_bot_knows]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_a_plan_the_thread_holds]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_a_question_about_somebody]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_a_return_brings_back_the_advice]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_a_shock_at_a_bill]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_a_thing_being_weighed]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_a_thing_wants_doing]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_a_will_it_work]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_aboutachild]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_after_a_lead_in]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_already]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_an_age_ahead]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_attribute_said_again]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_bulky]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_callback_about]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_carers_turn]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_chasing_a_body]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_chat_replies]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_colour_on_the_body]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_confusing]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_detail_question]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_done_ask]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_doubt]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_dreams]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_familyask]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_favourites]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_figure_asked_again]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_first_line_open]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_greeting]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_grief]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_group_ages]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_hardpast]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_household]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_how_long_a_stay]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_intent]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_invitation]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_judge_ask]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_keeping]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_kid_tally]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_live_source]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_live_times]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_loss]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_memory_tables]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_my_work]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_name_taken_back]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_near_me]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_night]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_no_advice]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_nudge]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_on_record]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_onsubject]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_pace]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_particles]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_recap]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_receiving_end]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_record_due]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_ruled_out]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_safety_cards]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_safety_phrases]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_said_back]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_said_fact_back]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_saving_followup]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_since_it_began]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_steps]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_taking_asked_again]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_talkto]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_the_detail_the_thread_adds]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_the_kind_one_line_up]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_the_month_they_have]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_the_shape_of_the_answer]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_the_trouble_it_has]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_the_trouble_named]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_the_wait_about_a_body]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_their_life]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_their_pastime]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_their_taste]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_theirperson]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_thing_i_did_with]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_trip_date_said_again]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_understand]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_urgent]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_ward]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_what_decides_it]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_what_they_said]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_where_it_answers]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_who_to_see]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_words]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_modules_years_in]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_runtime]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_understanding]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_understanding_attempts]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_understanding_body]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_understanding_breeds]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_understanding_car_glass]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_understanding_cars]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_understanding_confusion]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_understanding_lexicon]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_understanding_references]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_understanding_senses]
+opt-level = 0
+codegen-units = 256
+
+[profile.release.package.gen_understanding_topics]
+opt-level = 0
+codegen-units = 256
