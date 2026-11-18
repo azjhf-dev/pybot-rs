@@ -97,7 +97,7 @@ opt-level = 0
 codegen-units = 256
 
 [profile.release.package.gen_modules_answers]
-opt-level = 0
+opt-level = 1
 codegen-units = 256
 
 [profile.release.package.gen_modules_chat]
@@ -157,7 +157,7 @@ opt-level = 0
 codegen-units = 256
 
 [profile.release.package.gen_modules_memory_store]
-opt-level = 0
+opt-level = 1
 codegen-units = 256
 
 [profile.release.package.gen_modules_safety_tables]
@@ -1857,7 +1857,7 @@ opt-level = 0
 codegen-units = 256
 
 [profile.release.package.gen_modules_greeting]
-opt-level = 0
+opt-level = 1
 codegen-units = 256
 
 [profile.release.package.gen_modules_grief]
@@ -1985,7 +1985,7 @@ opt-level = 0
 codegen-units = 256
 
 [profile.release.package.gen_modules_said_fact_back]
-opt-level = 0
+opt-level = 1
 codegen-units = 256
 
 [profile.release.package.gen_modules_saving_followup]
@@ -2005,7 +2005,7 @@ opt-level = 0
 codegen-units = 256
 
 [profile.release.package.gen_modules_talkto]
-opt-level = 0
+opt-level = 1
 codegen-units = 256
 
 [profile.release.package.gen_modules_the_detail_the_thread_adds]
@@ -2053,7 +2053,7 @@ opt-level = 0
 codegen-units = 256
 
 [profile.release.package.gen_modules_thing_i_did_with]
-opt-level = 0
+opt-level = 1
 codegen-units = 256
 
 [profile.release.package.gen_modules_trip_date_said_again]
