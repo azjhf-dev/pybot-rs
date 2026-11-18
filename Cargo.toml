@@ -33,77 +33,77 @@ opt-level = 2
 opt-level = 2
 
 [profile.release.package.gen_compose_fallback]
-opt-level = 1
+opt-level = 0
 codegen-units = 256
 
 [profile.release.package.gen_compose_fallback_chain]
-opt-level = 1
+opt-level = 0
 codegen-units = 256
 
 [profile.release.package.gen_knowledge_cooking]
-opt-level = 1
+opt-level = 0
 codegen-units = 256
 
 [profile.release.package.gen_knowledge_cooking_entries]
-opt-level = 1
+opt-level = 0
 codegen-units = 256
 
 [profile.release.package.gen_knowledge_entertainment]
-opt-level = 1
+opt-level = 0
 codegen-units = 256
 
 [profile.release.package.gen_knowledge_family]
-opt-level = 1
+opt-level = 0
 codegen-units = 256
 
 [profile.release.package.gen_knowledge_health]
-opt-level = 1
+opt-level = 0
 codegen-units = 256
 
 [profile.release.package.gen_knowledge_home]
-opt-level = 1
+opt-level = 0
 codegen-units = 256
 
 [profile.release.package.gen_knowledge_lookup]
-opt-level = 1
+opt-level = 0
 codegen-units = 256
 
 [profile.release.package.gen_knowledge_money]
-opt-level = 1
+opt-level = 0
 codegen-units = 256
 
 [profile.release.package.gen_knowledge_pets]
-opt-level = 1
+opt-level = 0
 codegen-units = 256
 
 [profile.release.package.gen_knowledge_science]
-opt-level = 1
+opt-level = 0
 codegen-units = 256
 
 [profile.release.package.gen_knowledge_travel]
-opt-level = 1
+opt-level = 0
 codegen-units = 256
 
 [profile.release.package.gen_memory_facts]
-opt-level = 1
+opt-level = 0
 codegen-units = 256
 
 [profile.release.package.gen_memory_store_replies]
-opt-level = 1
+opt-level = 0
 codegen-units = 256
 
 [profile.release.package.gen_memory_topics]
-opt-level = 1
+opt-level = 0
 codegen-units = 256
 
 [profile.release.package.gen_modules_answers]
-opt-level = 1
+opt-level = 0
 codegen-units = 256
 
 [profile.release.package.gen_modules_chat]
-opt-level = 1
+opt-level = 0
 codegen-units = 256
 
 [profile.release.package.gen_modules_safety]
-opt-level = 1
+opt-level = 0
 codegen-units = 256
