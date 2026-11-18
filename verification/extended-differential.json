@@ -138,5 +138,27 @@
       "diagnostics": "[module: answers | 34370 ms]\n"
     },
     "exact": true
+  },
+  {
+    "binary_sha256": "d4cabea0451fe30ff4ca24c455750b4e0d45833b59a77fa13bf5c230bb078a33",
+    "case": 6,
+    "inputs": [
+      "what is the difference between a list and a tuple"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "I'm not sure about that one, sorry \u2014 I'd rather not guess. A quick search online will get you a solid answer, and I can help you make sense of what you find."
+      ],
+      "diagnostics": "[module: greeting | 6356 ms]\n"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "I'm not sure about that one, sorry \u2014 I'd rather not guess. A quick search online will get you a solid answer, and I can help you make sense of what you find."
+      ],
+      "diagnostics": "[module: greeting | 52312 ms]\n"
+    },
+    "exact": true
   }
 ]
