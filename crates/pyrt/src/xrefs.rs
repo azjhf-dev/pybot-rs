@@ -11,6 +11,7 @@ use crate::exc::{self, PyExc};
 use crate::value::*;
 
 thread_local! {
+    static TRACE_ERRORS: bool = std::env::var_os("PYBOT_TRACE_CALL_ERRORS").is_some();
     static FUNCS: RefCell<HashMap<String, HashMap<String, Py>>> = RefCell::new(HashMap::new());
     static GETTERS: RefCell<HashMap<String, HashMap<String, fn() -> Py>>> = RefCell::new(HashMap::new());
     static SETTERS: RefCell<HashMap<String, HashMap<String, fn(Py)>>> = RefCell::new(HashMap::new());
@@ -43,7 +44,7 @@ fn lookup_func(module: &str, name: &str) -> Option<Py> {
 pub fn xcall(module: &str, name: &str, args: &[Py]) -> Py {
     match lookup_func(module, name) {
         Some(f) => {
-            if std::env::var_os("PYBOT_TRACE_CALL_ERRORS").is_some() {
+            if TRACE_ERRORS.with(|v| *v) {
                 exc::catch(||crate::builtins::py_call(&f,args)).unwrap_or_else(|e| {eprintln!("XERR {}.{}: {} {}",module,name,e.class_name,e.message);exc::raise(e)})
             } else {crate::builtins::py_call(&f,args)}
         },
