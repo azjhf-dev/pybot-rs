@@ -95,23 +95,41 @@ pub fn g_TRIP() -> Py { ensure_init(); G_TRIP.with(|c| c.borrow().clone()) }
 pub fn s_TRIP(v: Py) { ensure_init(); G_TRIP.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("A bare \"what can i take\" is a question about the thing the chat is on.\n\nThe four words name nothing to take and nothing to take it for, so every reader that needs a\nsubject reads them off the words alone. On main the person who had just said \"i keep getting\nheartburn\" got a packing question, and the person who had just said \"my back is killing me\" got\nthe duty-free allowance:\n\n    i keep getting heartburn / is it normal / what can i take\n      -> \"What are you going to, and how long for? Then I can say what to take and what to leave.\"\n    my back is killing me / what can i take\n      -> \"Coming into the UK you can bring 4 litres of spirits, 18 litres of wine...\"\n\nThe knowledge base has the answer to the question the person is actually asking. What it cannot\ndo is see the thing the chat is on: a line with no subject in it reaches no entry. So this module\nputs the subject in and asks, in the words the entries are keyed on (\"what can i take for\nheartburn\", \"what can i take for back pain\"), and answers only when\n\n- the line is the bare ask and names nothing itself - a thing of its own (\"what can i take to\n  spain\", \"can i take ibuprofen\") is left to the readers that can read it,\n- the chat is not a trip, where the packing question is the right answer,\n- the chat says a subject with the person in it (\"my back is killing me\", not \"the boiler is\n  making a noise\" - nothing is taken for a boiler), and\n- the answer the entry gives names that subject and is not the answer already on the screen.\n\nEverything else is passed on, and the reply the person is getting today stands.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.taking.FILLER"); }
     s_FILLER(stdlib_call("re", "compile", &[py_str("^(?:(?:so|and|but|ok|okay|well|right|ah|oh|hmm|then|now|also|please)\\b[\\s,]+)*")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.taking.NOTHING_NAMED"); }
     s_NOTHING_NAMED(stdlib_call("re", "compile", &[py_str("^(?:(?:what|which)\\s+(?:(?:else|kind|sort)\\s+)*(?:can|could|should|may|shall|would)\\s+(?:i|we)\\s+(?:take|use|have)\\b|(?:is\\s+there\\s+)?(?:anything|something)\\s+(?:else\\s+)?(?:that\\s+)?(?:i|we)\\s+(?:can|could|should|may)\\s+(?:take|use|have)\\b|(?:what|which)\\s+is\\s+(?:safe|ok|okay|best)\\s+to\\s+(?:take|use)\\b)(?:\\s+for\\s+(?:it|this|that|them|those|the pain|the ache|the soreness|the hurt|any of it|any of that|any of those|the same))?[\\s!.,?]*$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.taking.TRIP"); }
     s_TRIP(stdlib_call("re", "compile", &[py_str("\\b(?:flight|flights|flying|plane|airport|holiday|holidays|trip|travel|abroad|away|luggage|suitcase|bag|bags|hand luggage|carry on|packing|packed|passport|camping|campsite|hotel|ferry|cruise)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.taking.THEIRS"); }
     s_THEIRS(stdlib_call("re", "compile", &[py_str("\\b(?:i|im|i'm|ive|i've|id|i'd|my|me|we|we're|weve|our|us)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.taking.NOT_A_THING"); }
     s_NOT_A_THING(call_builtin("frozenset", &[mcall(&py_str("\nache aching bad badly better bit constantly really still sore tender terrible awful worse worst\nkeep keeps keeping get gets getting got gotten feel feels feeling felt hurt hurts hurting kill\nkills killing make makes making made go goes going gone come comes coming give gives giving put\nwont wont sleep sleeping woke wake waking too very lot lots much many every always sometimes\nagain anymore either though bother bothering last night morning evening day days week weeks\nmonth months hour hours while since thing things stuff\n"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.taking.A_FORM_OF_A_VERB"); }
     s_A_FORM_OF_A_VERB(stdlib_call("re", "compile", &[py_str("^(?:[a-z]{3,})(?:ing|ed)$")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.taking.FORMULAS"); }
     s_FORMULAS(py_tuple(vec![py_str("what can i take for %s"), py_str("what can i take for %s pain")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.taking.PAINKILLER_ASKS"); }
     s_PAINKILLER_ASKS(py_tuple(vec![py_str("what painkiller can i take")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.taking.IN_PAIN"); }
     s_IN_PAIN(stdlib_call("re", "compile", &[py_str("\\b(?:pain|pains|ache|aches|aching|achy|hurts?|hurting|sore|throbbing|killing|agony|stinging|burning|tender)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.taking.FEEDING"); }
     s_FEEDING(stdlib_call("re", "compile", &[py_str("\\b(?:breastfeeding|breast feeding|breastfeed|nursing|expressing|pumping)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.taking.PREGNANT"); }
     s_PREGNANT(stdlib_call("re", "compile", &[py_str("\\b(?:pregnan\\w*|expecting|trimester|weeks gone|weeks along|midwife)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.taking.A_SENTENCE"); }
     s_A_SENTENCE(stdlib_call("re", "compile", &[py_str("[^.!?]+(?:[.!?]+|$)")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.taking.A_CARD_IS_LONG"); }
     s_A_CARD_IS_LONG(Py::Int(120));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.taking.THE_SUBJECTS_A_CHAT_HAS"); }
     s_THE_SUBJECTS_A_CHAT_HAS(Py::Int(2));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.taking.THE_WORDS_A_SUBJECT_HAS"); }
     s_THE_WORDS_A_SUBJECT_HAS(Py::Int(2));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.taking.THE_ASKS_A_LINE_MAKES"); }
     s_THE_ASKS_A_LINE_MAKES(Py::Int(3));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.taking.COMPLAINT"); }
     s_COMPLAINT(Py::None);
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.taking.NOT_THEIRS"); }
     s_NOT_THEIRS(Py::None);
 }
 pub fn _flat(args: &[Py]) -> Py {

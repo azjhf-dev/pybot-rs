@@ -200,50 +200,93 @@ pub fn s_pick(v: Py) { ensure_init(); G_pick.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("A question about a fact of the person's own life, where the bot has not been told it.\n\n\"how many brothers do i have\" got the search hedge (\"I don't know enough to answer that honestly.\nA search should sort you out quickly\") - which is nonsense: no search engine knows how many\nbrothers the person typing has. \"whats my middle name\" got the same. The store answers these fine\nwhen it was told (`memory_store`: \"You told me you're 34\", \"Your sister is called Emma\"), so what\nis left is the case where nobody ever said it, and the honest answer there is not a search engine.\nIt is STYLE.md's \"Not knowing, honestly\" in its plainest form: only they know, say so in a few\nwords, and ask - which is also the one move that turns the gap into the fact the store can keep.\n\nThe question is read here, not composed from a list of facts: \"how many X do i have\" becomes \"how\nmany X you have\", \"whats my X\" becomes \"what your X is\", \"when is my X\" becomes \"when your X is\".\nSo the reply says the thing back in the person's own words and then says the true part.\n\nNarrow on purpose. It takes a question about themselves - \"my\", \"i have\", \"am i\" - whose subject\nis a thing of their own life: family, a name, an age, a birthday, a home, work, a pet, an\nappointment. A how-to (\"how do i lose weight\"), a fact about the world (\"how many people live in\nwales\"), a question about the bot (\"whats your name\"), an ask with no subject of theirs in it, and\nanything the store or a card already answers keep the reply they had.\n");
     s_pick(py_func("pick", |args: &[Py]| pyrt::xrefs::xcall("compose", "pick", args)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.own_facts.STOP_WORDS"); }
     s_STOP_WORDS(call_builtin("frozenset", &[mcall(&py_str("about the a an and or but that this it its was were is are be been\ndid do does say said tell told mention mentioned you your me my i we us our again"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
     fn __data1() -> Py { py_tuple(vec![py_str("mum"), py_str("mom"), py_str("mother"), py_str("dad"), py_str("father"), py_str("parent"), py_str("parents"), py_str("brother"), py_str("brothers"), py_str("sister"), py_str("sisters"), py_str("sibling"), py_str("siblings"), py_str("son"), py_str("sons"), py_str("daughter"), py_str("daughters"), py_str("kid"), py_str("kids"), py_str("child"), py_str("children"), py_str("baby"), py_str("wife"), py_str("husband"), py_str("partner"), py_str("nan"), py_str("nana"), py_str("gran"), py_str("granny"), py_str("grandma"), py_str("grandad"), py_str("grandpa"), py_str("grandparents"), py_str("aunt"), py_str("auntie"), py_str("uncle"), py_str("cousin"), py_str("cousins"), py_str("niece"), py_str("nephew"), py_str("inlaws"), py_str("family"), py_str("flatmate"), py_str("housemate"), py_str("landlord"), py_str("neighbour"), py_str("neighbours"), py_str("boss"), py_str("manager"), py_str("colleague"), py_str("carer"), py_str("name"), py_str("surname"), py_str("middlename"), py_str("nickname"), py_str("age"), py_str("birthday"), py_str("birthdate"), py_str("dob"), py_str("address"), py_str("postcode"), py_str("house"), py_str("flat"), py_str("home"), py_str("rent"), py_str("mortgage"), py_str("job"), py_str("work"), py_str("shift"), py_str("shifts"), py_str("rota"), py_str("wage"), py_str("wages"), py_str("salary"), py_str("pay"), py_str("holiday"), py_str("holidays"), py_str("leave"), py_str("appointment"), py_str("appointments"), py_str("referral"), py_str("prescription"), py_str("meds"), py_str("medication"), py_str("tablets"), py_str("results"), py_str("record"), py_str("records"), py_str("account"), py_str("bill"), py_str("bills"), py_str("order"), py_str("budget"), py_str("savings"), py_str("dog"), py_str("dogs"), py_str("cat"), py_str("cats"), py_str("pet"), py_str("pets"), py_str("puppy"), py_str("kitten"), py_str("car"), py_str("van"), py_str("bike")]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.own_facts.OWN_WORDS"); }
     s_OWN_WORDS(call_builtin("frozenset", &[__data1()]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.own_facts.HOW_MANY"); }
     s_HOW_MANY(stdlib_call("re", "compile", &[py_str("^how (many|much)\\s+(.+?)\\s+(?:do|did) i have(?: left)?$")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.own_facts.HOW_MANY_GOT"); }
     s_HOW_MANY_GOT(stdlib_call("re", "compile", &[py_str("^how (many|much)\\s+(.+?)\\s+have i got(?: left)?$")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.own_facts.HOW_OLD"); }
     s_HOW_OLD(stdlib_call("re", "compile", &[py_str("^how old am i$")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.own_facts.WHAT_MY"); }
     s_WHAT_MY(stdlib_call("re", "compile", &[py_str("^what(?:s| is| was)?\\s+my\\s+(.+?)$")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.own_facts.WHEN_MY"); }
     s_WHEN_MY(stdlib_call("re", "compile", &[py_str("^(?:when|what time)(?:s| is| was)?\\s+my\\s+(.+?)$")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.own_facts.WHEN_AUX_MY"); }
     s_WHEN_AUX_MY(stdlib_call("re", "compile", &[py_str("^(?:when|what time)\\s+(?:does|do|did|will|should|can)\\s+my\\s+(.+?)$")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.own_facts.WHERE_MY"); }
     s_WHERE_MY(stdlib_call("re", "compile", &[py_str("^where(?:s| is| was)?\\s+my\\s+(.+?)$")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.own_facts.HAVEN_T_SAID"); }
     s_HAVEN_T_SAID(py_tuple(vec![py_str("You haven't told me {q}, so I've no way to know - tell me and I'll remember it."), py_str("I don't know {q}: that's yours, not something I can look up. Tell me and I'll keep it."), py_str("I only know what you tell me, and you've not said {q}. What's the answer?")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.own_facts.AS_THE_QUESTION"); }
     s_AS_THE_QUESTION(py_tuple(vec![py_str("{Q}? You've not said, so only you know - tell me and I'll remember it."), py_str("{Q}? I can't look that up: it's about you. Say it once and I'll keep it.")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.own_facts.HOW_TO"); }
     s_HOW_TO(stdlib_call("re", "compile", &[py_str("\\bhow (?:do|can|could|should|would|might) i\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.own_facts.ABOUT_BOT"); }
     s_ABOUT_BOT(stdlib_call("re", "compile", &[py_str("\\b(?:you|your|yours|yourself)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.own_facts.CHAT_WORDS"); }
     s_CHAT_WORDS(call_builtin("frozenset", &[py_tuple(vec![py_str("chat"), py_str("chats"), py_str("conversation"), py_str("conversations"), py_str("message"), py_str("messages"), py_str("history"), py_str("transcript"), py_str("transcripts"), py_str("logs")])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.own_facts.A_HAND_ON_THEM"); }
     s_A_HAND_ON_THEM(stdlib_call("re", "compile", &[py_str("\\b(?:see|read|open|look at|look back|check|bring up|pull up|access|scroll back|go back to|remember|recall|keep|store|save|hold|show me|do with)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.own_facts.THE_OTHER_CHATS"); }
     s_THE_OTHER_CHATS(stdlib_call("re", "compile", &[py_str("\\b(?:see|read|open|look at|look back|check|bring up|pull up|access|scroll back|go back to|remember|recall|find|keep|store|save|hold|show me|know about|do with)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.own_facts.OTHER_THAN_THIS"); }
     s_OTHER_THAN_THIS(stdlib_call("re", "compile", &[py_str("\\b(?:before|earlier|previous|previously|past|old|last|other|others|yesterday|prior|last time|history)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.own_facts.A_RECORD_OF_THEM"); }
     s_A_RECORD_OF_THEM(stdlib_call("re", "compile", &[py_str("\\b(?:is|are) there (?:a |any |some )?\\b.{0,24}\\b(?:list|record|records|history|log|logs|copy|transcript)\\b|\\bdo you (?:have|keep|store) (?:a |any )?(?:record|records|list|history|log|logs|copy|transcript)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.own_facts.SAID_IN_A_PAST_CHAT"); }
     s_SAID_IN_A_PAST_CHAT(stdlib_call("re", "compile", &[py_str("\\b(?:what|everything|all) (?:we|i) (?:said|talked about|wrote|asked)\\b.{0,30}\\b(?:before|earlier|yesterday|last time|previous|in another chat|in other chats)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.own_facts.LEARNING_ASK"); }
     s_LEARNING_ASK(stdlib_call("re", "compile", &[py_str("\\b(?:learn|learns|learning|train|trains|training|trained|teach|teaches|teaching|update|updates|updating|improve|improves|improving|pick (?:things |stuff )?up|pick up on)\\b|\\b(?:do|will|would|are|did)\\s+(?:you|u)\\s+get(?:ting)?\\s+better\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.own_facts.TAUGHT_BY_THIS"); }
     s_TAUGHT_BY_THIS(stdlib_call("re", "compile", &[py_str("\\b(?:teach|teaches|show|shows|tell|tells|give|gives|feed|feeds)\\s+(?:you|u)\\b|\\b(?:you|u)\\s+(?:learn|learning|train|training|pick\\w*)\\b.{0,30}\\b(?:from|on|off)\\s+(?:me|what i|us|this|my|our|these|the chats)\\b|\\b(?:learn|train)\\w*\\s+(?:on|from)\\s+(?:my|our|these|this)\\b|\\blearn from me\\b|\\b(?:do|will|would|are|did)\\s+(?:you|u)\\s+get(?:ting)?\\s+better\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.own_facts.SAID_BEFORE"); }
     s_SAID_BEFORE(stdlib_call("re", "compile", &[py_str("\\b(?:again|remind me|did i say|did i tell you)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.own_facts.NO_OTHER_CHATS"); }
     s_NO_OTHER_CHATS(py_tuple(vec![py_str("No: each chat starts empty for me, so nothing from another conversation comes through. Everything you tell me in this one stays with me, though - say it here and I'll use it. What was it about?"), py_str("I can't open earlier chats - a new one starts with nothing in it. What you and I say in this chat I do keep, so tell me here and I'll pick it up from there. What were you trying to find?"), py_str("There's no history on my side: what we say stays in this conversation, and a new chat begins blank. So say it once more here and I'll have it. What was it?")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.own_facts.NO_TRAINING"); }
     s_NO_TRAINING(py_tuple(vec![py_str("No training as we talk: I'm a program with a lot of everyday things in it, and what I pick up is only what you say here, while we are in this chat. Nothing you tell me teaches me for the next person."), py_str("I don't learn from the chat, no - nothing is fed back in. I'm the same program at the end of it as at the start, with everything you said in front of me while we talk."), py_str("Nothing I hear changes what I know: no training, no memory of it afterwards. What you say does get used - here, in this conversation, as we go.")]));
     fn __data2() -> Py { py_tuple(vec![py_str("my"), py_str("our"), py_str("the"), py_str("these"), py_str("those"), py_str("your"), py_str("all"), py_str("any"), py_str("every"), py_str("this"), py_str("that"), py_str("previous"), py_str("past"), py_str("old"), py_str("last"), py_str("earlier"), py_str("other"), py_str("another"), py_str("same")]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.own_facts.THEIR_OWN_WORD"); }
     s_THEIR_OWN_WORD(call_builtin("frozenset", &[__data2()]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.own_facts.WHEN_I"); }
     s_WHEN_I(stdlib_call("re", "compile", &[py_str("^(?:when|what time|what day|which day|what days|which days|how many hours)\\s+(?:do|did|will|should|am|can|have)\\s+i\\b(.*)$")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.own_facts.PAY_DAY"); }
     s_PAY_DAY(stdlib_call("re", "compile", &[py_str("^when(?:s| is| was)?\\s+(?:my\\s+)?pay ?day$")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.own_facts.ROTA_WORDS"); }
     s_ROTA_WORDS(call_builtin("frozenset", &[py_tuple(vec![py_str("work"), py_str("works"), py_str("working"), py_str("shift"), py_str("shifts"), py_str("rota"), py_str("hours"), py_str("overtime"), py_str("oncall")])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.own_facts.ROTA_NOUNS"); }
     s_ROTA_NOUNS(call_builtin("frozenset", &[py_tuple(vec![py_str("shift"), py_str("shifts"), py_str("rota"), py_str("hours"), py_str("overtime"), py_str("oncall")])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.own_facts.PAY_WORDS"); }
     s_PAY_WORDS(call_builtin("frozenset", &[py_tuple(vec![py_str("paid"), py_str("payday"), py_str("wage"), py_str("wages"), py_str("salary")])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.own_facts.ON_THE_ROTA"); }
     s_ON_THE_ROTA(py_tuple(vec![py_str("Your rota isn't something I can see, so read the hours off it and tell me and I'll keep them."), py_str("That lives on your rota rather than anywhere I can see, so tell me what it says."), py_str("No window on your rota from this end, sorry, so say the hours and I'll remember them.")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.own_facts.ON_THE_PAYSLIP"); }
     s_ON_THE_PAYSLIP(py_tuple(vec![py_str("A pay date is set in your contract, not known here, so tell me the date and I'll keep it."), py_str("Your pay date is on the contract you signed, so say it once and I'll remember it.")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.own_facts._THE_PLACE"); }
     s__THE_PLACE(py_dict(vec![(py_str("rota"), g_ON_THE_ROTA()), (py_str("payslip"), g_ON_THE_PAYSLIP())]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.own_facts.NOT_A_NOUN_PHRASE"); }
     s_NOT_A_NOUN_PHRASE(stdlib_call("re", "compile", &[py_str("\\b(?:to|for|with|about|at|in|on|from|by|due|like|doing|going|coming|getting|allowed|before|after|now|then|anymore|originally|anyway)\\b|\\w+ing\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.own_facts.SAID_ASK"); }
     s_SAID_ASK(stdlib_call("re", "compile", &[py_str("\\b(?:(where|what|when|why|who|how\\s+often|how\\s+many\\s+times)\\s+)?did\\s+(?:i|we)\\s+(?:ever\\s+)?(?:say|tell\\s+you|mention)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.own_facts.FREQUENCY_ASK"); }
     s_FREQUENCY_ASK(stdlib_call("re", "compile", &[py_str("\\bhow\\s+(?:often|many\\s+times)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.own_facts.PROPERTY_ASK"); }
     s_PROPERTY_ASK(stdlib_call("re", "compile", &[py_str("\\bhow\\s+(?:old|big|heavy|long|far|tall|late|early)\\b|\\bwhat\\s+colou?r\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.own_facts.A_RATE"); }
     s_A_RATE(stdlib_call("re", "compile", &[py_str("\\b\\d+\\s*(?:times?|x)\\b|\\b(?:once|twice|daily|weekly|monthly)\\b|\\bevery\\s+(?:day|week|month|year|morning|night)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.own_facts.GENERIC_WORDS"); }
     s_GENERIC_WORDS(call_builtin("frozenset", &[mcall(&py_str("go goes going went do does doing get gets got have has had make makes\nmade take takes took put see saw look start stop carry"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.own_facts.SAID_POOL"); }
     s_SAID_POOL(py_tuple(vec![py_str("You told me: “{said}”"), py_str("That was you, not me: “{said}”"), py_str("From your own words: “{said}”")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.own_facts.NOT_A_RECORD"); }
     s_NOT_A_RECORD(py_tuple(vec![py_str("You've not said that to me yet, so there's nothing to hand back - tell me and I'll keep it."), py_str("I've nothing on that from you: it's yours to tell me, and then it's kept.")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.own_facts.NOT_A_RECORD_BUT"); }
     s_NOT_A_RECORD_BUT(py_tuple(vec![py_str("You've not said that to me, but the nearest you've given me is: “{said}”"), py_str("Nothing of yours on that yet - the closest is “{said}”, and I'll keep the rest when you say it.")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.own_facts.HOW_OFTEN_MINE"); }
     s_HOW_OFTEN_MINE(stdlib_call("re", "compile", &[py_str("^how\\s+(?:often|many\\s+times)\\s+(?:do|did|does)\\s+(?:i|we)\\s+(\\w+)(?:\\s+(?:it|that|this|them|now))?$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
 }
 pub fn _names_their_chats(args: &[Py]) -> Py {

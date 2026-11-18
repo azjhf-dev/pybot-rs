@@ -55,13 +55,21 @@ pub fn g_TAIL() -> Py { ensure_init(); G_TAIL.with(|c| c.borrow().clone()) }
 pub fn s_TAIL(v: Py) { ensure_init(); G_TAIL.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("A line that names a kind of cake is a question about that cake, not about its vegetable.\n\n\"im thinking of baking a cake\" then \"what about a carrot cake\" was answered with green\nvegetables, because the word the entries key on is \"carrot\" and the entry for carrots is a\nside dish. The same line about a coffee cake fell to the search hedge, and \"what about lemon\ndrizzle\" reached the entry about drizzling a sauce over a joint. The person is still in the\ncake they named three words ago: written out as \"how do i make a carrot cake\" the line\nreaches the cake entries, which answer it.\n\nOnly an ask takes this route - a report (\"i baked a carrot cake\") or a taste (\"i love carrot\ncake\") is not a how-to question, and the turn stays with whatever answers a report. Anything\nthat is not a compound name of a bake has no line here and passes to the entries untouched.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.baking.NAMED_BAKES"); }
     s_NAMED_BAKES(stdlib_call("re", "compile", &[py_str("\\b(?:lemon|orange)\\s+drizzle\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.baking.BAKE"); }
     s_BAKE(stdlib_call("re", "compile", &[py_str("\\b(cakes?|loaves|loaf|bread|muffins?|cupcakes?|sponge|buns?|scones?|biscuits?|traybake|traybakes?|brownies?)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.baking.ASK"); }
     s_ASK(stdlib_call("re", "compile", &[py_str("^(?:so\\s+|ok\\s+|okay\\s+|and\\s+)?(?:(?:what|how)\\s+about\\s+|(?:and|or|plus)\\s+|(?:can|could|should|shall|would)\\s+(?:i|we)\\s+(?:make|bake|do|cook)\\s+|what\\s+if\\s+(?:i|we)\\s+(?:made|make|bake|baked|cooked|cook)\\s+)"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.baking.TAIL"); }
     s_TAIL(stdlib_call("re", "compile", &[py_str("\\s+(?:instead|too|as well|then|please|later|tonight|now)$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.baking.LONGEST"); }
     s_LONGEST(Py::Int(4));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.baking.NAME_WORD"); }
     s_NAME_WORD(stdlib_call("re", "compile", &[py_str("^[a-z][a-z'-]*$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.baking.APPLIANCES"); }
     s_APPLIANCES(py_str("oven|grill|hob|microwave|air\\s*fryer|cooker|stove|range|pressure\\s*cooker|slow\\s*cooker|toaster"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.baking.LACKS"); }
     s_LACKS(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&py_str("\\b(?:no|without|not\\s+got|dont\\s+have|don't\\s+have|cant\\s+use|can't\\s+use)\\s+(?:a\\s+|an\\s+|any\\s+|working\\s+|my\\s+)?(?:"), &g_APPLIANCES()), &py_str(")\\b|\\b(?:")), &g_APPLIANCES()), &py_str(")\\s+(?:is\\s+|has\\s+|has\\s+gone\\s+)?(?:broken|gone|died|had\\s+it|packed\\s+in)\\b")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
 }
 pub fn _the_name(args: &[Py]) -> Py {

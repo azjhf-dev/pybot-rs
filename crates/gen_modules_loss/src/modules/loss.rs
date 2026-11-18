@@ -49,9 +49,13 @@ fn module_body() {
     let _ = py_str("A death is never small talk, and never a topic a gift entry can win.\n\n\"My dad died in march\" used to get \"Got it.\", and \"some days i can't get out of bed since my mum\ndied\" got a present-buying answer, because a topic entry matched the word \"mum\". The reading and\nthe pools live in `bot/compose/loss.py`: plain sympathy for the user's own loss, what to say to\nthe person who had the loss, words for a condolence card, a normalising answer to a question\nabout grief, and company for a short follow-up (\"it was really hard\").\n\nThis module is the speaker for those lines, so it says what it answers in two ways:\n\n* `ANSWERS = (\"loss\", \"grief\")` — the topics, like every other module;\n* `ANSWERS_INSTEAD = (\"loss\", \"grief\")` — it answers *in place of* the topic entries. A topic\n  entry matches a word or a topic id of the line (\"mum\", \"cat\", \"card\"), so on a bereavement\n  line it answers a different question; the arbiter lets a declaring module answer instead, and\n  the safety band still comes first;\n* `DEFERS_TO = loss.acknowledges` — it stands back when another candidate's reply already\n  acknowledges the death and knows something more about it.\n\nIt proposes only a line it is sure of, so a false reading would take a turn — that is why the\nread demands a person or a pet behind the death word (bot/compose/loss.py).\n");
     s_pick(py_func("pick", |args: &[Py]| pyrt::xrefs::xcall("compose", "pick", args)));
     s_understand(py_func("understand", |args: &[Py]| pyrt::xrefs::xcall("understanding", "understand", args)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.loss.PRIORITY"); }
     s_PRIORITY(Py::Int(2000));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.loss.ANSWERS"); }
     s_ANSWERS(py_tuple(vec![py_str("loss"), py_str("grief")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.loss.ANSWERS_INSTEAD"); }
     s_ANSWERS_INSTEAD(py_tuple(vec![py_str("loss"), py_str("grief")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.loss.DEFERS_TO"); }
     s_DEFERS_TO(py_func("defers_to", |args: &[Py]| defers_to(args)));
 }
 pub fn defers_to(args: &[Py]) -> Py {

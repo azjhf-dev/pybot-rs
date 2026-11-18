@@ -169,39 +169,73 @@ fn module_body() {
     let _ = py_str("They turned down the answer the bot just gave, and it owes them another one.\n\n\"whats a good film tonight\" / \"nah not that one\" is a conversation still going somewhere. Main\nanswers it by saying the line back - \"Got it — nah not that one.\" - which is the coldest reply\nthere is: the three films the bot named a turn ago are still on the screen, one of them has been\nruled out, and the person is asking, in four words, for the next one. The same shape arrives as\n\"dont fancy it\", \"ive seen it\", \"already read that one\", \"not for me\" and \"nah not those\".\n\nSo this reads the refusal and the answer it refuses. Two rules keep it to the lines it is good\nat:\n\n* the whole line has to be the refusal. Every word, once the chat-speak is taken off, has to be\n  a word for turning something down or one of the pronouns that point at it (\"that\", \"it\",\n  \"those\"). \"nah just eggs and some rice\" is a person saying what they have, not a refusal, and\n  one word this module does not know sends the turn back to the rest of the bot.\n* the answer has to have offered things to choose between, read out of the bot's own last reply\n  the way \"you pick\" is (bot/memory/choice.py). A refusal of advice with no choice in it (\"do i\n  need a coat\" / \"not today\") is not a choice to make again, and the ordinary pools answer it.\n\nWhat comes back is one of the things the bot itself offered, never a new fact: a title, a dish\nor a price it can read off its own last reply. When the line rules the whole list out (\"ive seen\nall those\") there is nothing left to hand over from it, so the reply asks the one thing that\nlets the bot pick again - what they did like - rather than offering the same list a second time.\n");
     s_pick(py_func("pick", |args: &[Py]| pyrt::xrefs::xcall("compose", "pick", args)));
     s_recent(py_func("recent", |args: &[Py]| pyrt::xrefs::xcall("memory", "recent", args)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reject.MEMORY_STORE"); }
     s_MEMORY_STORE(py_str("memory_store"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reject.FILLER"); }
     s_FILLER(call_builtin("frozenset", &[mcall(&py_str("\n    ok okay oh ah well right so then but and just really sorry ta thanks thank you thx cheers\n    hmm erm uh um like actually honestly tbh though tho anyway ha haha lol x xx please pls\n    i im ive id ill we youre you u us for of about at in too either also still yet neither\n"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reject.NEGATION"); }
     s_NEGATION(call_builtin("frozenset", &[mcall(&py_str("\n    nah no nope none not dont do not doesnt didnt didnt never aint already meh rather\n"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reject.OBJECT"); }
     s_OBJECT(call_builtin("frozenset", &[mcall(&py_str("\n    that this it those these them one ones both either neither any all every everything\n    thing things one either list two three\n"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reject.JUDGED"); }
     s_JUDGED(call_builtin("frozenset", &[mcall(&py_str("\n    seen saw watch watched read tried had have ate eaten got get fancy fancied like liked keen\n    bother bothered feel feeling want wanted sound sounds sounded appeal appeals my me kind\n    cup tea sort thing things type sort my mine thanks ta taste tastes\n"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reject.DONE"); }
     s_DONE(call_builtin("frozenset", &[mcall(&py_str("seen saw watched read tried had ate eaten got heard done"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reject.POSSESSION"); }
     s_POSSESSION(call_builtin("frozenset", &[py_tuple(vec![py_str("got"), py_str("get")])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reject.A_HAVE_ALREADY"); }
     s_A_HAVE_ALREADY(stdlib_call("re", "compile", &[py_str("\\b(?:already|before|once|one|ones|last|year|years|since|when|ever|yet|ages?)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reject._I_HAVE"); }
     s__I_HAVE(stdlib_call("re", "compile", &[py_str("^\\s*(?:i\\s+have|ive|i\\s+got|we\\s+have|weve|we\\s+got)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reject.KNOWN"); }
     s_KNOWN(op_bitor(&op_bitor(&op_bitor(&op_bitor(&g_FILLER(), &g_NEGATION()), &g_OBJECT()), &g_JUDGED()), &g_DONE()));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reject._ASKS_THE_BOT"); }
     s__ASKS_THE_BOT(call_builtin("frozenset", &[mcall(&py_str("\n    have has do does did can could would will shall is are was were am any anything\n"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reject._WHOLE_LIST"); }
     s__WHOLE_LIST(stdlib_call("re", "compile", &[py_str("\\b(?:all|those|them|these|both|every|everything|any|list|three|two)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reject._OFFER_NOT_A_LIST"); }
     s__OFFER_NOT_A_LIST(stdlib_call("re", "compile", &[py_str("\\?\\s*$")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reject.ANOTHER"); }
     s_ANOTHER(py_tuple(vec![py_str("Fair enough — then how about {option}?"), py_str("Then {option} instead."), py_str("Right, {option} is the other one worth a go."), py_str("Not that one, then — {option}?")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reject.PICK_AGAIN"); }
     s_PICK_AGAIN(py_tuple(vec![py_str("Fair enough, none of those then. What did you enjoy last? I'll pick something in that vein."), py_str("Right, that list is out. Tell me one you did like and I'll go from there."), py_str("Fair enough. What have you enjoyed lately? I'll keep clear of these three.")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reject.ALL_OF_THEM"); }
     s_ALL_OF_THEM(py_tuple(vec![py_str("{which} then: {names}."), py_str("All of them: {names}."), py_str("Then take {which}: {names}."), py_str("Good — {which}: {names}.")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reject.ONE_LEFT"); }
     s_ONE_LEFT(py_tuple(vec![py_str("That leaves one: {option}."), py_str("Two of those are out, so it comes down to {option}."), py_str("Then there is just {option} left.")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reject.ONE_TAKEN"); }
     s_ONE_TAKEN(py_tuple(vec![py_str("Then take {option}."), py_str("Then it is {option}."), py_str("Go with {option}, then.")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reject._THE_LOT"); }
     s__THE_LOT(stdlib_call("re", "compile", &[py_str("\\b(?:all|every|everything|both)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reject.THE_MOST_A_LIST"); }
     s_THE_MOST_A_LIST(Py::Int(5));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reject._SOMEONE_ELSE_HAS_IT"); }
     s__SOMEONE_ELSE_HAS_IT(stdlib_call("re", "compile", &[py_str("(?<!\\bi )(?<!\\bwe )(?<!\\byou )(?<!\\bive )(?<!\\bweve )(?<!\\byouve )(?<!\\balready )\\b(?:has|have|got)\\s+(?:everything|it all|the lot)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reject.STOPS_ON_AN_INITIAL"); }
     s_STOPS_ON_AN_INITIAL(stdlib_call("re", "compile", &[py_str("(?:^|\\s)[A-Z]\\.?$")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reject.NAME_GOES_ON"); }
     s_NAME_GOES_ON(stdlib_call("re", "compile", &[py_str("\\.?\\s+((?:[A-Z]\\.\\s*)*(?:[A-Z][a-z'\\u2019-]+)(?:\\s+[A-Z][a-z'\\u2019-]+)?)")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reject._NOT_A_NAME"); }
     s__NOT_A_NAME(stdlib_call("re", "compile", &[py_str("[()\\[\\];:!?]")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reject._STEP_START"); }
     s__STEP_START(call_builtin("frozenset", &[mcall(&py_str("\n    take put use add cook roast boil fry bake grill heat mix stir cut chop peel wash rinse spray\n    wipe clean soak leave cover simmer drain season salt rest cool freeze store keep serve pour\n    toss brush line preheat check test break slice grate whisk knead roll spread fill top drizzle\n    sprinkle reduce blend mash layer wrap seal tie trim dry hang iron vacuum dust scrub hoover\n"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reject._CLAUSE_VERB"); }
     s__CLAUSE_VERB(call_builtin("frozenset", &[mcall(&py_str("\n    is are was were has have had does do did will would can could make makes keep keeps help\n    helps work works come comes go goes run runs give gives take takes last lasts win wins beat\n    beats fit fits hold holds protect protects save saves cost costs sound sounds look looks\n    taste tastes feel feels crisp crisps promise promises mean means sit sits stand stands need\n    needs seem seems turn turns stay stays\n"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reject._TITLE"); }
     s__TITLE(stdlib_call("re", "compile", &[py_str("\\*([^*\\n]{2,40})\\*")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reject.TRIED_THE_LOT"); }
     s_TRIED_THE_LOT(stdlib_call("re", "compile", &[py_str("\\btried\\b[^.!?]{0,24}?\\b(?:everything|all of it|all of them|them all|it all|every one|the lot)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reject._NOT_A_THING_START"); }
     s__NOT_A_THING_START(call_builtin("frozenset", &[mcall(&py_str("\n    most more less least too very so quite much many few little enough only even also still yet\n    just then now and or but if when while as because than that this these those it they we you\n    he she i is are was were be been being do does did done have has had will would can could\n    should may might must not no never always usually often sometimes there here\n"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reject._A_REASON"); }
     s__A_REASON(stdlib_call("re", "compile", &[py_str("(?:\\bbecause\\b|\\bthe reason\\b|\\bwhich is why\\b|\\bthat'?s why\\b|\\bwhy\\b|\\bsomewhere\\b|\\bcauses?\\b|\\bcaused by\\b|\\bis down to\\b|\\bcomes down to\\b)[^.;!?]{0,70}$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reject._OR_CHOICE"); }
     s__OR_CHOICE(stdlib_call("re", "compile", &[py_str(",\\s*or\\s+(?!(?:it|they|i|you|we|he|she|that|this|there|those)\\b)"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reject._FENCE"); }
     s__FENCE(stdlib_call("re", "compile", &[py_str("\\b(?:not|no|never|without|except|anything but)\\s+(?:a|an|the|any|too much|more)?\\s*([a-z][a-z'\\-]{3,})"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reject._HELD_THE_FENCE"); }
     s__HELD_THE_FENCE(stdlib_call("re", "compile", &[py_str("\\b(?:without|no|not|nothing|non)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reject.FENCED_OUT"); }
     s_FENCED_OUT(py_tuple(vec![py_str("Fair enough, nothing {kind} then. What do you fancy instead?"), py_str("Right, no {kind} ones. Tell me what you do want and I'll aim at that."), py_str("Fair enough - {kind} is out. What sort of thing would you go for?")]));
 }
 pub fn _words(args: &[Py]) -> Py {

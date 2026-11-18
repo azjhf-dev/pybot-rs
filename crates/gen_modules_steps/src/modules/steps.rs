@@ -27,6 +27,7 @@ pub fn g_PRIORITY() -> Py { ensure_init(); G_PRIORITY.with(|c| c.borrow().clone(
 pub fn s_PRIORITY(v: Py) { ensure_init(); G_PRIORITY.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("The order in an answer, asked for again: \"what next\", \"and then\", \"what now\".\n\nAn answer that gives its steps in order - \"turn the water off at the valve, take the handle off, and\ntake the old part to a shop to match it\" - has an order in it, and the person working through it\nasks \"what next\" after each one. `bot/memory/plan.py` keeps that order and the step the chat has\nreached; this module is the turn that hands the next one over.\n\nIt runs at PRIORITY 7100, just above the memory store (7000), because the store answers these lines\nout of the answer it has in hand: \"what next\" after the washing-machine answer came back as \"The bit\nof that answer worth doing first: Leaving the door and drawer open between washes ...\", a sentence\nfrom the end of it handed over as if it were the beginning. Nothing else moves: the line is read the\nsame way every turn, and a line that is not an ask for the next step leaves this module returning\nNone.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.steps.PRIORITY"); }
     s_PRIORITY(Py::Int(7100));
 }
 pub fn respond(args: &[Py]) -> Py {

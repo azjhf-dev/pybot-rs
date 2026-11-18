@@ -32,6 +32,7 @@ pub fn s_understand(v: Py) { ensure_init(); G_understand.with(|c| *c.borrow_mut(
 fn module_body() {
     let _ = py_str("A question about a child is asked with the age the store has for that child.\n\n\"my son is 5\" then \"how much sleep does he need\" is a line with no age in it, and the sleep\nanswer a pronoun reaches is the adult one - seven to nine hours, coffee at three - while the\nfive year old's is ten to thirteen. The store kept the age a turn ago, so the line is written\nout as \"how much sleep does a five year old need\" and answered from the child's own row.\n\nIt passes on everything else: no child in the store, no pronoun in the line, or a written ask\nthat reaches no row. The line then goes on to the module it went to before this one existed.\n");
     s_understand(py_func("understand", |args: &[Py]| pyrt::xrefs::xcall("understanding", "understand", args)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.aboutachild.PRIORITY"); }
     s_PRIORITY(Py::Int(1100));
 }
 pub fn TAKES_AS_IT_COMES(args: &[Py]) -> Py {

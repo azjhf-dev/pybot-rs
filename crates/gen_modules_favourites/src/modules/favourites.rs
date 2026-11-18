@@ -37,6 +37,7 @@ fn module_body() {
     let _ = py_str("A favourite the person names, and the ask for it a turn later.\n\nA favourite is a fact about the person and nothing in the knowledge base knows it: \"my favourite\nfood is curry\" was kept as a taste (and became a dish), \"my favourite band is blur\" reached the\nentry for \"band\" as an object, \"what is my favourite genre\" reached the entry for genes, and\n\"what is my favourite colour\" the paint card. The slot and its wording are in\n`bot/memory/favourite.py`; this module is the store's face for them.\n\n`observe` keeps one: a colour, a film, a food, a team, a genre, whatever they name, plus the\nchange said out loud (\"i prefer blue now\") and the correction (\"no wait its blade runner\").\n`respond` says it back - the receipt for the line that said it, the one thing they named for the\nask - and leaves the turn alone whenever something better answers it: a line that states a\nfavourite and asks something else in the same breath, and a favourite of a thing the knowledge\nbase has an entry for, which is answered about the thing rather than as a receipt.\n\nThe whole of it is in one module on purpose: a favourite is nobody else's business, and the store\nis a big file every lane edits.\n");
     s_pick(py_func("pick", |args: &[Py]| pyrt::xrefs::xcall("compose", "pick", args)));
     s_read_tastes(py_func("read_all", |args: &[Py]| pyrt::xrefs::xcall("memory.taste", "read_all", args)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.favourites.PRIORITY"); }
     s_PRIORITY(Py::Int(7000));
 }
 pub fn observe(args: &[Py]) -> Py {
@@ -211,7 +212,7 @@ pub fn _said_back(args: &[Py]) -> Py {
     held = pyrt::xrefs::xcall("memory.favourite", "the_favourites", &[memory.clone()]);
     if py_truthy(&held.clone()) {
     last = slice_or_raise(&held.clone(), &op_neg(&Py::Int(4)), &Py::None, &Py::None);
-    parts = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&last.clone()) { let __unpk2534 = py_unpack(&__item.clone(), 2, None); let mut thing: Py = __unpk2534[0].clone(); let mut value: Py = __unpk2534[1].clone(); __out.push(op_add(&op_add(&op_add(&py_str("your favourite "), &call_builtin("str", &[thing.clone()]).unwrap_or_else(|e| exc::raise(e))), &py_str(" is ")), &call_builtin("str", &[value.clone()]).unwrap_or_else(|e| exc::raise(e)))); } py_list(__out) })() };
+    parts = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&last.clone()) { let __unpk8557 = py_unpack(&__item.clone(), 2, None); let mut thing: Py = __unpk8557[0].clone(); let mut value: Py = __unpk8557[1].clone(); __out.push(op_add(&op_add(&op_add(&py_str("your favourite "), &call_builtin("str", &[thing.clone()]).unwrap_or_else(|e| exc::raise(e))), &py_str(" is ")), &call_builtin("str", &[value.clone()]).unwrap_or_else(|e| exc::raise(e)))); } py_list(__out) })() };
     if py_truthy(&Py::Bool(py_eq(&call_builtin("len", &[parts.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1)))) {
     said_all = op_add(&op_add(&py_str("You have told me one: "), &geti(&parts.clone(), &Py::Int(0))), &py_str("."));
     } else {

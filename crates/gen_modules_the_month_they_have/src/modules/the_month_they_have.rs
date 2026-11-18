@@ -27,6 +27,7 @@ pub fn g_PRIORITY() -> Py { ensure_init(); G_PRIORITY.with(|c| c.borrow().clone(
 pub fn s_PRIORITY(v: Py) { ensure_init(); G_PRIORITY.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("The month a person sets out: what comes in, what goes out, and what is left of it.\n\n\"im on 1800 a month and rent is 700\" is arithmetic, and in the deck on main it reached a card\nabout the rent being raised or an eviction notice, because `rent` is a word the housing entry\nowns; \"i take home 1800 and rent is 700\" reached the duty-free allowance, off `take home`; and\n\"we bring in 2400 a month and the mortgage is 900\" reached \"Got it. Is there anything you'd like\na hand with?\". What comes in and what goes out, said together, is a sum, and the reply is the\nsum on the person's own figures.\n\nThe reading lives in `bot/memory/outgoings.py` and says \"\" for everything it does not read whole\n- arrears, a rent going up, a tax code, an ask, two units in one line - so this module answers\nonly the lines it read, and passes on every other line.\n\nPriorities: above the answer modules (0) because a card about the rent answers a different\nquestion from the sum of a month, and below the safety band (9000) and the reading of the line\n(10000), which must lead on a line of their own.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.the_month_they_have.PRIORITY"); }
     s_PRIORITY(Py::Int(8000));
 }
 pub fn TAKES_AS_IT_COMES(args: &[Py]) -> Py {

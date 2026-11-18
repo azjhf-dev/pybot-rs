@@ -316,79 +316,151 @@ pub fn s_pick(v: Py) { ensure_init(); G_pick.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("A verdict asked for on a place or a thing the bot has never seen: the criteria, not a guess.\n\nPeople ask the bot to judge things it cannot see more often than they ask it for a fact about\nthem: \"is benidorm ok with a toddler\", \"is the old town doable\", \"is that restaurant good\", \"is\nthis area safe\". No knowledge base holds a judgement about a place, so every one of those lines\nreached the search hedge:\n\n    is benidorm ok with a toddler\n    That's beyond what I know well, sorry. Searching for it will turn up better sources than I\n    can offer; tell me what you find and I'll help you weigh it up.\n\nNothing there is wrong and nothing in it helps. STYLE.md's \"Not knowing, honestly\" has the shape\nthat does: say what the bot cannot see in a few words, give the part it does know, and stay with\nthe person for the rest. The part it knows here is not a fact about Benidorm - it is what actually\ndecides a trip with a toddler, which is true of every trip with a toddler. So the reply names the\nthing back, says plainly that there is no first-hand knowledge of it, gives the two or three things\nthat settle it, and names where the live detail is (recent reviews, a map app, the council's crime\nmap). Nobody is told what to think about a place the bot has never been to.\n\nThis is a last resort: `fallback.unknown_pool` asks it only on the branch where nothing else has\nanswered, and only for a line that is a judgement ask. Any entry, any module, and the composer's\nown decision or live answer all come first, so the file can only replace a search hedge.\n");
     s_pick(py_func("pick", |args: &[Py]| pyrt::xrefs::xcall("compose", "pick", args)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see.HEDGE_OPENERS"); }
     s_HEDGE_OPENERS(py_tuple(vec![py_str("i'm not sure about that one"), py_str("that's beyond what i know well"), py_str("i don't know enough to answer that honestly")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._JUDGE"); }
     s__JUDGE(py_str("(?:ok|okay|alright|all right|good|nice|safe|doable|suitable|any good|any cop|any use|decent|handy|worth it|worth going|worth seeing)"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see.VERDICT_ASK"); }
     s_VERDICT_ASK(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&py_str("^\\s*(?:so|but|and|ok|okay)?\\s*(?:do you think\\s+)?(?:(?:is|are|was|were)\\s+[a-z' ]{2,40}?\\s+"), &g__JUDGE()), &py_str("|(?:would|will)\\s+[a-z' ]{2,40}?\\s+(?:suit|work for|be ok for|be alright for|be all right for|be good for)\\b|(?:is|was|would)\\s+[a-z' ]{0,40}?\\s*worth\\s+(?:it|a (?:look|visit|go|trip|day out)|going|the (?:trip|money|hype))\\b)|\\b(?:is|would)\\s+it\\s+")), &g__JUDGE()), &py_str("\\b"))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see.NOT_A_JUDGEMENT"); }
     s_NOT_A_JUDGEMENT(stdlib_call("re", "compile", &[py_str("\\b(?:eat|eaten|ate|eating|cook|cooked|cooking|cooker|freeze|frozen|defrost|fridge|left out|left over|leftover|reheat|next day|day after|still ok|still good|gone off|use by|sell by|best before|chicken|meat|fish|rice|milk|eggs|yoghurt|yogurt|dose|dosage|mg|ml|tablet|tablets|pill|pills|medicine|paracetamol|ibuprofen|antibiotic|pregnan\\w*|symptom\\w*|rash|fever|temperature|covid|flu|old enough|how old|legal|illegal|allowed|the law|licen\\w+|rules|cost|costs|price|prices|how much|cheaper|afford|salary|wage|wages|tax|refund|deposit|visa|passport|insur\\w*|contract|tenancy|notice period|worth buying|worth fixing|worth repairing|worth selling|repair|fix|broken)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._THING"); }
     s__THING(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("^\\s*(?:so|but|and|ok|okay)?\\s*(?:do you think\\s+)?(?:is|are|was|were|would|will)\\s+(?P<thing>[a-z' ]{2,40}?)\\s+(?:"), &g__JUDGE()), &py_str("|suit|work for|be ok for|be alright for|be all right for|be good for)\\b"))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._BARE_NOUN"); }
     s__BARE_NOUN(call_builtin("frozenset", &[mcall(&py_str("area place street road estate flat house home hotel restaurant cafe\n    pub school nursery gym club class course town city village beach park market walk route\n    holiday trip"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._NOT_A_THING"); }
     s__NOT_A_THING(call_builtin("frozenset", &[mcall(&py_str("food menu price cost drink beer wine coffee"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
     fn __data1() -> Py { py_tuple(vec![py_str("suit"), py_str("work"), py_str("be"), py_str("ok"), py_str("okay"), py_str("alright"), py_str("good"), py_str("nice"), py_str("safe"), py_str("doable"), py_str("worth"), py_str("any"), py_str("decent"), py_str("handy"), py_str("all")]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._STOP"); }
     s__STOP(__data1());
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._TRIP_CRITERIA"); }
     s__TRIP_CRITERIA(py_str("how far the flight or the drive is, how hot it gets, and how much walking there is once you are there"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._TRIP_WHERE"); }
     s__TRIP_WHERE(py_str("Reviews from the last few months say what a place is like now rather than five years ago."));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._CHILD_CRITERIA"); }
     s__CHILD_CRITERIA(py_str("the flight or the drive, the heat, and how far the beach, the food and the shops are from the room"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._CHILD_WHERE"); }
     s__CHILD_WHERE(py_str("The hotel's own page and the last few months of reviews cover the rest, and a map app shows the walk to the sand."));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._SAFE_CRITERIA"); }
     s__SAFE_CRITERIA(py_str("the time of day you would be out, how busy the street is then, and whether you would be walking it alone"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._SAFE_WHERE"); }
     s__SAFE_WHERE(py_str("The police's own crime map for the postcode says more than any general view of a place does."));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._SAFE_OBJECT_CRITERIA"); }
     s__SAFE_OBJECT_CRITERIA(py_str("the moving parts, the fixings and the seals, and anything cracked, loose, or smelling of gas or hot plastic"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._SAFE_OBJECT_WHERE"); }
     s__SAFE_OBJECT_WHERE(py_str("Whoever services them will look it over for very little, and a gas or electrical job wants a registered engineer rather than a guess."));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._SCHOOL_CRITERIA"); }
     s__SCHOOL_CRITERIA(py_str("the walk there, what the mornings feel like, and how easy it is to get a straight answer out of the staff"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._SCHOOL_WHERE"); }
     s__SCHOOL_WHERE(py_str("Their own site has the numbers and the last report, and other parents tell you the rest."));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._FOOD_CRITERIA"); }
     s__FOOD_CRITERIA(py_str("the last few months of reviews, the menu, and whether the price suits the evening you have in mind"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._FOOD_WHERE"); }
     s__FOOD_WHERE(py_str("Their own page and the recent reviews have all three, and one visit settles it."));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._STAY_CRITERIA"); }
     s__STAY_CRITERIA(py_str("the last few months of reviews, how far it is from where you want to be, and what the noise is like at night"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._STAY_WHERE"); }
     s__STAY_WHERE(py_str("Their own page and recent reviews cover all three, and the map listing shows the walk into town."));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._CLASS_CRITERIA"); }
     s__CLASS_CRITERIA(py_str("the times you can actually get to, who takes the session, and whether the first one is free"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._CLASS_WHERE"); }
     s__CLASS_WHERE(py_str("Their timetable and a trial session answer that better than any review."));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._WALK_CRITERIA"); }
     s__WALK_CRITERIA(py_str("the distance, how much of it is up or down, and the ground underfoot"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._WALK_WHERE"); }
     s__WALK_WHERE(py_str("A map app shows the distance and the climb in a minute, and street view shows you the path."));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._HOME_CRITERIA"); }
     s__HOME_CRITERIA(py_str("the walk from the station or the bus, the light in the rooms, the noise at the time you would be home, and what the neighbours are like"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._HOME_WHERE"); }
     s__HOME_WHERE(py_str("A map app shows the walk and the streets, and one visit on a weekday evening tells you the noise."));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see.TRIP"); }
     s_TRIP(py_tuple(vec![py_str("{lead}never been, so no verdict from me. What decides a trip there is {criteria}. {where}"), py_str("{lead}no first-hand knowledge of the place, so no verdict from me. The things that settle it are {criteria}. {where}")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see.WITH_CHILDREN"); }
     s_WITH_CHILDREN(py_tuple(vec![py_str("{lead}not been with a little one, so I can't call it. What decides that trip is {criteria}. {where}"), py_str("{lead}can't call it from here. With a child in tow it comes down to {criteria}. {where}")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see.SAFE_"); }
     s_SAFE_(py_tuple(vec![py_str("{lead}can't tell you whether a place is safe from here, and I won't guess at it. What changes the answer is {criteria}. {where}"), py_str("{lead}no way for me to know about crime on a street I can't see, so no verdict from me. It turns on {criteria}. {where}")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see.SAFE_OBJECT"); }
     s_SAFE_OBJECT(py_tuple(vec![py_str("{lead}I can't look at it from here, so no verdict from me on whether it is safe. What a check comes down to is {criteria}. {where}"), py_str("{lead}no way for me to see the state of it, and safety is not something I'll guess at. It comes down to {criteria}. {where}")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see.SCHOOL"); }
     s_SCHOOL(py_tuple(vec![py_str("{lead}can't judge a school from here, and guessing would be worse than saying so. What tells you most is {criteria}. {where}"), py_str("{lead}no verdict from me on that one - I can't see inside a school from here. What tells you most is {criteria}. {where}")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see.FOOD"); }
     s_FOOD(py_tuple(vec![py_str("{lead}not eaten there, so no verdict from me. What decides it is {criteria}. {where}")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see.STAY"); }
     s_STAY(py_tuple(vec![py_str("{lead}not stayed there, so no verdict from me. What decides it is {criteria}. {where}")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see.CLASS"); }
     s_CLASS(py_tuple(vec![py_str("{lead}can't judge one from here. It comes down to {criteria}. {where}")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see.WALK"); }
     s_WALK(py_tuple(vec![py_str("{lead}can't see the ground from here, so I won't guess at how hard it is. What decides it is {criteria}. {where}")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see.SIGHT"); }
     s_SIGHT(py_tuple(vec![py_str("{lead}no first-hand knowledge of the place, so no verdict from me. The things that settle it are {criteria}. {where}")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see.FAMILY"); }
     s_FAMILY(py_tuple(vec![py_str("{lead}can't judge a place to bring children up from here. What decides it is {criteria}. {where}")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see.HOME"); }
     s_HOME(py_tuple(vec![py_str("{lead}no way of seeing a place I haven't been to, so no verdict from me. What decides it is {criteria}. {where}")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see.OTHER"); }
     s_OTHER(py_tuple(vec![py_str("No first-hand knowledge of that one, so no verdict from me - and guessing would be worse than saying so. What settles most of these is what you want out of it, what you would do with it if it turned out to be no good, and what people who wanted the same thing say about it once they have had it a few months. Reviews from people who wanted the same thing say more than the page selling it."), py_str("No first-hand knowledge of that one here, so no verdict from me. What it comes down to is how it works for the thing you actually want it for, how it holds up after a few months, and what it costs you if it is wrong. Recent reviews from people who wanted the same thing are the shortest way to all three.")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._SCREEN_CRITERIA"); }
     s__SCREEN_CRITERIA(py_str("who made it and what you thought of theirs before, how long it takes to get going, and whether you want to think or switch off"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._SCREEN_WHERE"); }
     s__SCREEN_WHERE(py_str("A trailer or the first chapter tells you more in ten minutes than any review, and the recent reviews say whether it holds up after the opening."));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._JOB_CRITERIA"); }
     s__JOB_CRITERIA(py_str("the pay, the hours, and what the day actually looks like rather than what the job is called"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._JOB_WHERE"); }
     s__JOB_WHERE(py_str("The pay scales are published, and asking two people who do it now about a normal week settles more than any article."));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see.SCREEN"); }
     s_SCREEN(py_tuple(vec![py_str("{lead}no first-hand knowledge of that one, so no verdict from me. What decides it is {criteria}. {where}"), py_str("{lead}can't judge it from here. It comes down to {criteria}. {where}")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see.JOB"); }
     s_JOB(py_tuple(vec![py_str("{lead}wouldn't want to call that from here. What decides it is {criteria}. {where}"), py_str("{lead}no first-hand knowledge of that one. The honest answer turns on {criteria}. {where}")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._ABOUT_THE_BOT"); }
     s__ABOUT_THE_BOT(stdlib_call("re", "compile", &[py_str("\\b(?:are|is|was|were)\\s+(?:you|u|ya|the bot|this bot|this thing|the chatbot)\\b|\\b(?:ok|okay|alright|all right|fine|good|bad)\\s+(?:with|to|for)\\s+(?:you|u|ya)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._PLACE"); }
     s__PLACE(stdlib_call("re", "compile", &[py_str("\\b(?:area|areas|street|streets|road|roads|neighbourhood|neighborhood|estate|town|city|village|centre|center|park|beach|seafront|suburb|postcode|place|location|block|here|there|abroad|hotel|hostel|flat|house|home|station|walkway|alley|underpass|path|route|car park|sea|lake|river|coast|seaside|harbour|harbor)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._SAFE"); }
     s__SAFE(stdlib_call("re", "compile", &[py_str("\\b(?:safe|safety|rough|dodgy|crime|mugged|sketchy|dangers?)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._FEELING"); }
     s__FEELING(stdlib_call("re", "compile", &[py_str("\\b(?:feel|feels|feeling|felt)\\b|\\blike this\\b|\\babout myself\\b|\\bfor me to\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._SCREEN"); }
     s__SCREEN(stdlib_call("re", "compile", &[py_str("\\b(?:films?|movies?|series|show|shows|book|books|novel|album|game|games|documentar(?:y|ies)|podcasts?|sitcom|box set)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._JOB"); }
     s__JOB(stdlib_call("re", "compile", &[py_str("\\b(?:jobs?|careers?|trades?|profession|line of work|working as|worth (?:doing|studying|training))\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._SAFE_OBJECT"); }
     s__SAFE_OBJECT(stdlib_call("re", "compile", &[py_str("\\b(?:bikes?|cars?|vans?|mopeds?|scooters?|motorcycles?|ladders?|boilers?|heaters?|wood ?burners?|wiring|electrics|roof|chainsaws?|trampolines?|swing sets?|woodburner)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._SCHOOL"); }
     s__SCHOOL(stdlib_call("re", "compile", &[py_str("\\b(?:school|schools|nursery|nurseries|preschool|pre-school|childminder|creche|cr[e\\u00e8]che|kindergarten|college|university|uni)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._STAY"); }
     s__STAY(stdlib_call("re", "compile", &[py_str("\\b(?:hotel|hotels|b&b|b and b|hostel|guest house|guesthouse|apartment|villa|cottage|campsite)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._FOOD"); }
     s__FOOD(stdlib_call("re", "compile", &[py_str("\\b(?:restaurant|restaurants|caf[e\\u00e9]|pub|takeaway|bar|canteen|chippy|kebab shop|menu|food)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._CLASS"); }
     s__CLASS(stdlib_call("re", "compile", &[py_str("\\b(?:gym|gyms|class|classes|club|clubs|course|courses|lessons|swimming pool|pool|leisure centre)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._WITH_CHILDREN"); }
     s__WITH_CHILDREN(stdlib_call("re", "compile", &[py_str("\\b(?:toddlers?|bab(?:y|ies)|kids?|children|child|pram|buggy|pushchair|teenagers?|families)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._WALK"); }
     s__WALK(stdlib_call("re", "compile", &[py_str("\\b(?:walk|walks|route|hike|climb|stairs|hill)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._RAISING"); }
     s__RAISING(stdlib_call("re", "compile", &[py_str("\\b(?:bring (?:up|ing up)|raise|raising|grow(?:ing)? up|settle down|to live|live in|family life)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._SIGHT"); }
     s__SIGHT(stdlib_call("re", "compile", &[py_str("\\b(?:old town|town cent(?:re|er)|city cent(?:re|er)|market|attractions?|museum|gallery|castle|cathedral|zoo|theme park|water park)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._TRIP"); }
     s__TRIP(stdlib_call("re", "compile", &[py_str("\\b(?:holiday|holidays|trip|resort|resorts|beach|town|city|village|island|abroad|seaside|centre|center|market|attraction|museum|zoo|park|cruise|cruises|ferry|flight|flights|long haul|day out|days out|weekend away)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._NAMED"); }
     s__NAMED(stdlib_call("re", "compile", &[py_str("\\S\\s+(?:the\\s+|a\\s+|an\\s+)?[A-Z][a-z]{2,}")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._TRAVEL_TOPICS"); }
     s__TRAVEL_TOPICS(call_builtin("frozenset", &[py_tuple(vec![py_str("geography-and-travel"), py_str("travel"), py_str("holidays"), py_str("places")])]).unwrap_or_else(|e| exc::raise(e)));
     fn __data2() -> Py { py_tuple(vec![py_str("sport"), py_str("fitness"), py_str("health"), py_str("body"), py_str("eating"), py_str("food-and-drink"), py_str("money"), py_str("work"), py_str("technology"), py_str("pets"), py_str("law"), py_str("driving"), py_str("school-and-study"), py_str("hobbies"), py_str("home-and-garden"), py_str("beauty"), py_str("clothes")]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._NOT_A_PLACE_TOPICS"); }
     s__NOT_A_PLACE_TOPICS(call_builtin("frozenset", &[__data2()]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._SIGHT_CRITERIA"); }
     s__SIGHT_CRITERIA(py_str("how much walking there is, whether it goes up or down, and how busy it gets at the time you would go"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._SIGHT_WHERE"); }
     s__SIGHT_WHERE(py_str("The place's own page has the access and the opening times, and a map app shows the walk and the climb"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._FAMILY_CRITERIA"); }
     s__FAMILY_CRITERIA(py_str("the schools and how you get into them, how much green space is within walking distance, and what there is for children to do"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._FAMILY_WHERE"); }
     s__FAMILY_WHERE(py_str("The council's own site lists the schools and the areas they take, and an afternoon walk round on a school day tells you the rest"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._HOME"); }
     s__HOME(stdlib_call("re", "compile", &[py_str("\\b(?:flat|house|home|area|neighbourhood|neighborhood|street|road|estate|place|location|block)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.a_place_nobody_can_see._PAST_ASK"); }
     s__PAST_ASK(stdlib_call("re", "compile", &[py_str("^(?:and\\s+)?(?:was|were|did|how was|how were|how did)\\b")]).unwrap_or_else(|e| exc::raise(e)));
 }
 pub fn _the_thing(args: &[Py]) -> Py {

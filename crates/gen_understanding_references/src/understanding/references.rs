@@ -123,31 +123,56 @@ pub fn g_WITHOUT_THE_APOSTROPHE() -> Py { ensure_init(); G_WITHOUT_THE_APOSTROPH
 pub fn s_WITHOUT_THE_APOSTROPHE(v: Py) { ensure_init(); G_WITHOUT_THE_APOSTROPHE.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("What \"it\", \"that\", \"they\" and \"there\" point at, and whether this line follows the last one.\n\nPeople answer in fragments and lean on the last turn: \"How long will it take?\", \"And if I\nstuff it?\", \"Anything cheaper there?\". This module reads the previous user line and says what\na pronoun most likely means, so a module can answer about the right thing.\n\n`resolve()` never guesses when there is nothing to point at: on the first turn every referent\nis None and `followup` is False.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.references.PRONOUNS"); }
     s_PRONOUNS(py_dict(vec![(py_str("it"), py_tuple(vec![py_str("it"), py_str("its"), py_str("itself")])), (py_str("that"), py_tuple(vec![py_str("that"), py_str("this"), py_str("these"), py_str("those"), py_str("one"), py_str("ones")])), (py_str("they"), py_tuple(vec![py_str("they"), py_str("them"), py_str("their"), py_str("theirs")])), (py_str("there"), py_tuple(vec![py_str("there")])), (py_str("he"), py_tuple(vec![py_str("he"), py_str("him"), py_str("his"), py_str("himself")])), (py_str("she"), py_tuple(vec![py_str("she"), py_str("her"), py_str("hers"), py_str("herself")]))]));
     fn __data1() -> Py { py_tuple(vec![py_str("and"), py_str("also"), py_str("but"), py_str("so"), py_str("what about"), py_str("how about"), py_str("what if"), py_str("and what"), py_str("then"), py_str("why"), py_str("how long"), py_str("how much"), py_str("how many"), py_str("how often"), py_str("when"), py_str("where"), py_str("which"), py_str("same"), py_str("another"), py_str("more"), py_str("else"), py_str("other"), py_str("instead"), py_str("so that"), py_str("ok and"), py_str("ok so"), py_str("even if"), py_str("does it"), py_str("is it"), py_str("can it"), py_str("will it"), py_str("does that"), py_str("is that"), py_str("can that"), py_str("will that"), py_str("would it"), py_str("should it"), py_str("what else"), py_str("anything else"), py_str("and then")]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.references.FOLLOWUP_STARTS"); }
     s_FOLLOWUP_STARTS(__data1());
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.references.POINTING_BACK"); }
     s_POINTING_BACK(call_builtin("frozenset", &[mcall(&py_str("on in at with to for from by under over near into onto around\n    inside outside about off through across behind beside"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.references.ASK_OPENERS"); }
     s_ASK_OPENERS(call_builtin("frozenset", &[mcall(&py_str("will would shall should can could do does did may might must"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.references.WHERE_WORDS"); }
     s_WHERE_WORDS(call_builtin("frozenset", &[mcall(&py_str("there where place city area town country"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.references.CLAUSE_SUBJECTS"); }
     s_CLAUSE_SUBJECTS(call_builtin("frozenset", &[mcall(&py_str("i you we they he she it there its im ive dont cant thats"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.references.TIME_RE"); }
     s_TIME_RE(stdlib_call("re", "compile", &[py_str("^(and|also|but|so)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.references.OWN_THINGS"); }
     s_OWN_THINGS(py_tuple(vec![py_str("title"), py_str("name"), py_str("person"), py_str("place"), py_str("thing")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.references.OWN_PERSONS"); }
     s_OWN_PERSONS(py_tuple(vec![py_str("title"), py_str("name"), py_str("person")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.references.DETERMINERS"); }
     s_DETERMINERS(call_builtin("frozenset", &[mcall(&py_str("a an the this these those that my your his her its our their\n    some any each every another"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.references.COORDINATORS"); }
     s_COORDINATORS(call_builtin("frozenset", &[mcall(&py_str("and but so then"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.references.POSSESSIVE_PRONOUNS"); }
     s_POSSESSIVE_PRONOUNS(call_builtin("frozenset", &[mcall(&py_str("its their"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.references.PRONOUN_WORDS"); }
     s_PRONOUN_WORDS(call_builtin("frozenset", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_PRONOUNS(), "values", &[])) { let mut forms: Py = __item.clone(); for __item in py_iter_or_raise(&forms.clone()) { let mut word: Py = __item.clone(); __out.push(word.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.references.CLAUSE_STOPS"); }
     s_CLAUSE_STOPS(call_builtin("frozenset", &[mcall(&py_str("is was are were be been am do does did have has had will would can\n    could should to of in on at for from with by if when because so that which who"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.references.ONE_PERSON"); }
     s_ONE_PERSON(py_tuple(vec![py_str("he"), py_str("him"), py_str("his"), py_str("she"), py_str("her"), py_str("hers")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.references.PLACEHOLDER_IT"); }
     s_PLACEHOLDER_IT(stdlib_call("re", "compile", &[py_str("^(?:is|was|would|will|does|did|can|could|should)(?:n'?t)?\\s+it\\s+(?:[a-z']+\\s+){0,3}?to\\s+[a-z]+")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.references.NAMES_A_THING"); }
     s_NAMES_A_THING(stdlib_call("re", "compile", &[py_str("\\b(?:a|an|the|some|any|my|your|our|their|his|her|its|another)\\s+[a-z]"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.references.STANDS_FOR_SOMETHING"); }
     s_STANDS_FOR_SOMETHING(call_builtin("frozenset", &[mcall(&py_str("it its them they that this these those him her one ones\n    there"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.references.LEAVES_SOMETHING_OUT"); }
     s_LEAVES_SOMETHING_OUT(call_builtin("frozenset", &[mcall(&py_str("after before then while during since until till instead\n    without with on in at for to from about when if and but or that"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.references.ANIMALS_IN_HAND"); }
     s_ANIMALS_IN_HAND(stdlib_call("re", "compile", &[py_str("\\b(dogs?|pupp(?:y|ies)|cats?|kittens?|rabbits?|bunn(?:y|ies)|hamsters?|guinea\\s+pigs?|parrots?|budgies?|goldfish|fish|tortoises?|turtles?|snakes?|lizards?|geckos?|horses?|pon(?:y|ies))\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.references.OWN_SUBJECT"); }
     s_OWN_SUBJECT(call_builtin("frozenset", &[mcall(&py_str("i im ive id ill we weve wed"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.references.WITHOUT_THE_APOSTROPHE"); }
     s_WITHOUT_THE_APOSTROPHE(py_dict(vec![(py_str("he"), py_tuple(vec![py_str("hes"), py_str("hed"), py_str("hisself")])), (py_str("she"), py_tuple(vec![py_str("shes"), py_str("shed")])), (py_str("they"), py_tuple(vec![py_str("theyre"), py_str("theyd"), py_str("theyll")]))]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.references.ANIMAL_NAMES"); }
     s_ANIMAL_NAMES(call_builtin("frozenset", &[mcall(&py_str("dog dogs puppy puppies cat cats kitten kittens"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.references.THIRD_PERSON"); }
     s_THIRD_PERSON(call_builtin("frozenset", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_PRONOUNS()) { let mut name: Py = __item.clone(); for __item in py_iter_or_raise(&geti(&g_PRONOUNS(), &name.clone())) { let mut word: Py = __item.clone(); __out.push(word.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.references.MINE"); }
     s_MINE(call_builtin("frozenset", &[mcall(&py_str("my mine our ours"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
 }
 pub fn _target(args: &[Py]) -> Py {
@@ -422,7 +447,7 @@ pub fn _named_before(args: &[Py]) -> Py {
     let __iter1 = py_iter_or_raise(&names.clone());
     for __item in __iter1 {
     name = __item.clone();
-    at = call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk8366 = py_unpack(&__item.clone(), 2, None); let mut i: Py = __unpk8366[0].clone(); let mut word: Py = __unpk8366[1].clone(); if py_truthy(&Py::Bool(py_contains(&geti(&g_PRONOUNS(), &name.clone()), &word.clone()))) {  __out.push(i.clone()); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e));
+    at = call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[norm.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk1039 = py_unpack(&__item.clone(), 2, None); let mut i: Py = __unpk1039[0].clone(); let mut word: Py = __unpk1039[1].clone(); if py_truthy(&Py::Bool(py_contains(&geti(&g_PRONOUNS(), &name.clone()), &word.clone()))) {  __out.push(i.clone()); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&Py::Bool(py_is(&at.clone(), &Py::None))) {
     continue;
     }
@@ -770,7 +795,7 @@ pub fn resolve(args: &[Py]) -> Py {
     let _ = py_str("{\"it\", \"that\", \"they\", \"there\", \"followup\"} for the current line.");
     prev_entities = { let __b = prev_entities.clone(); if py_truthy(&__b) { __b } else { py_list(vec![]) } };
     words = call_builtin("set", &[geti(&line.clone(), &py_str("norm"))]).unwrap_or_else(|e| exc::raise(e));
-    used = { (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_PRONOUNS(), "items", &[])) { let __unpk4372 = py_unpack(&__item.clone(), 2, None); let mut name: Py = __unpk4372[0].clone(); let mut aliases: Py = __unpk4372[1].clone(); __out.push((name.clone(), call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&aliases.clone()) { let mut p: Py = __item.clone(); if py_truthy(&Py::Bool(py_contains(&words.clone(), &p.clone()))) {  __out.push(p.clone()); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e)))); } py_dict(__out) })() };
+    used = { (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g_PRONOUNS(), "items", &[])) { let __unpk2959 = py_unpack(&__item.clone(), 2, None); let mut name: Py = __unpk2959[0].clone(); let mut aliases: Py = __unpk2959[1].clone(); __out.push((name.clone(), call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&aliases.clone()) { let mut p: Py = __item.clone(); if py_truthy(&Py::Bool(py_contains(&words.clone(), &p.clone()))) {  __out.push(p.clone()); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e)))); } py_dict(__out) })() };
     ref_ = py_dict(vec![(py_str("it"), Py::None), (py_str("that"), Py::None), (py_str("they"), Py::None), (py_str("there"), Py::None), (py_str("he"), Py::None), (py_str("she"), Py::None), (py_str("kind"), Py::None), (py_str("followup"), Py::Bool(false))]);
     if py_truthy(&Py::Bool(py_is(&prev_line.clone(), &Py::None))) {
     return ref_.clone();

@@ -119,37 +119,61 @@ pub fn g__EGG_SPONGE() -> Py { ensure_init(); G__EGG_SPONGE.with(|c| c.borrow().
 pub fn s__EGG_SPONGE(v: Py) { ensure_init(); G__EGG_SPONGE.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("How many people a party cake feeds, and the tin that covers the number asked for.\n\nThis holds the sizing ladder for the `cake-size` row in dishes.py: the shapes a party cake comes\nin, how many each one feeds, and the arithmetic that picks the fewest tins for the number in the\nline. It lives here rather than in cooking.py because that file is at the repository's 1 MB\nlimit, and a number is the part of a cake question that will keep growing.\n\nIt also owns the row's key and avoid list, and the reply function that reads them.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cakes.ANSWERS"); }
     s_ANSWERS(py_tuple(vec![py_str("cooking"), py_str("food-and-drink")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cakes._CAKE_SHAPES"); }
     s__CAKE_SHAPES(py_tuple(vec![py_tuple(vec![py_str("20cm tin"), py_str("20cm tins"), Py::Int(8), Py::Int(10)]), py_tuple(vec![py_str("23cm tin"), py_str("23cm tins"), Py::Int(12), Py::Int(14)]), py_tuple(vec![py_str("25cm tin"), py_str("25cm tins"), Py::Int(18), Py::Int(20)]), py_tuple(vec![py_str("30 x 20cm traybake"), py_str("30 x 20cm traybakes"), Py::Int(15), Py::Int(18)])]));
     fn __data1() -> Py { py_dict(vec![(py_str("a dozen"), Py::Int(12)), (py_str("dozen"), Py::Int(12)), (py_str("ten"), Py::Int(10)), (py_str("twelve"), Py::Int(12)), (py_str("fifteen"), Py::Int(15)), (py_str("sixteen"), Py::Int(16)), (py_str("eighteen"), Py::Int(18)), (py_str("twenty"), Py::Int(20)), (py_str("twenty five"), Py::Int(25)), (py_str("thirty"), Py::Int(30)), (py_str("thirty five"), Py::Int(35)), (py_str("forty"), Py::Int(40)), (py_str("forty five"), Py::Int(45)), (py_str("fifty"), Py::Int(50)), (py_str("sixty"), Py::Int(60)), (py_str("seventy"), Py::Int(70)), (py_str("eighty"), Py::Int(80)), (py_str("ninety"), Py::Int(90)), (py_str("a hundred"), Py::Int(100)), (py_str("hundred"), Py::Int(100))]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cakes._CAKE_COUNTS"); }
     s__CAKE_COUNTS(__data1());
     fn __data2() -> Py { py_tuple(vec![py_str("minute"), py_str("minutes"), py_str("min"), py_str("mins"), py_str("hour"), py_str("hours"), py_str("cm"), py_str("g"), py_str("kg"), py_str("degrees"), py_str("second"), py_str("seconds"), py_str("percent")]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cakes._CAKE_CLOCK"); }
     s__CAKE_CLOCK(__data2());
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cakes._CAKE_DAY_BEFORE"); }
     s__CAKE_DAY_BEFORE(py_str("Bake it the day before, wrap it well and fill it with buttercream on the day."));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cakes._CAKE_SIZE"); }
     s__CAKE_SIZE(py_str("Size it by the tin: 20cm serves 8 to 10, 23cm 12 to 14, 25cm 18 to 20, and a 30 x 20cm traybake cut into squares feeds 15 to 18."));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cakes._CAKE_DOUBLE"); }
     s__CAKE_DOUBLE(py_str("To double a recipe double every weight and split it between two tins with the same heat and time."));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cakes._CAKE_DECOR"); }
     s__CAKE_DECOR(py_str("Buttercream or icing between the layers and on top is all a party cake needs: spread it warm, chill the cake first, and keep it plain or add a handful of fruit or sweets."));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cakes._CAKE_BASE"); }
     s__CAKE_BASE(py_str("A two-layer chocolate or madeira sponge is the easy crowd-pleaser: bake it the day before, wrap it well and fill it with buttercream on the day. One 20cm tin serves 8 to 10 people generously."));
     fn __data3() -> Py { py_tuple(vec![py_str("how much cake"), py_str("size"), py_str("sized"), py_str("big"), py_str("bigger"), py_str("serve"), py_str("serving"), py_str("people"), py_str("guests"), py_str("crowd"), py_str("portions"), py_str("slices"), py_str("serves"), py_str("serve"), py_str("feeds"), py_str("feed"), py_str("heads")]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cakes._CAKE_SIZE_WORDS"); }
     s__CAKE_SIZE_WORDS(__data3());
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cakes._CUPCAKE_WORDS"); }
     s__CUPCAKE_WORDS(py_tuple(vec![py_str("cupcake"), py_str("cupcakes"), py_str("cup cake"), py_str("cup cakes"), py_str("fairy cake"), py_str("fairy cakes")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cakes._CUPCAKE_KEEP"); }
     s__CUPCAKE_KEEP(py_str("Twelve to a tray and two a head, so one 12-hole tray covers six people: bake them at 180C (160C fan) for 12 to 18 minutes and ice them on the day."));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cakes._CAKE_DOUBLE_WORDS"); }
     s__CAKE_DOUBLE_WORDS(py_tuple(vec![py_str("double"), py_str("doubling"), py_str("halve"), py_str("halving"), py_str("half the"), py_str("scale up"), py_str("scaling up"), py_str("bigger batch"), py_str("twice as much"), py_str("two batches")]));
     fn __data4() -> Py { py_tuple(vec![py_str("ice"), py_str("icing"), py_str("iced"), py_str("decorate"), py_str("decorating"), py_str("decorated"), py_str("buttercream"), py_str("frost"), py_str("frosting"), py_str("fill it"), py_str("filling"), py_str("pipe"), py_str("piping"), py_str("writing on"), py_str("writing happy birthday")]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cakes._CAKE_DECOR_WORDS"); }
     s__CAKE_DECOR_WORDS(__data4());
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cakes._CAKE_NUMBERS"); }
     s__CAKE_NUMBERS(py_tuple(vec![py_str(""), py_str("one"), py_str("two"), py_str("three"), py_str("four"), py_str("five"), py_str("six")]));
     fn __data5() -> Py { py_tuple(vec![py_str("birthday"), py_str("party"), py_str("celebrate"), py_str("celebrating"), py_str("people"), py_str("guests"), py_str("crowd"), py_str("number"), py_str("scale"), py_str("scale up"), py_str("bigger"), py_str("double"), py_str("doubling"), py_str("halve"), py_str("how many"), py_str("serves"), py_str("serve"), py_str("feed"), py_str("serving"), py_str("slices"), py_str("portions")]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cakes.CAKE_KEY"); }
     s_CAKE_KEY(py_tuple(vec![py_tuple(vec![py_str("cake"), py_str("cakes"), py_str("cupcake"), py_str("cupcakes"), py_str("fairy cakes")]), __data5()]));
     fn __data6() -> Py { py_tuple(vec![py_str("how long"), py_str("time"), py_str("temperature"), py_str("sink"), py_str("sank"), py_str("sunken"), py_str("stuck"), py_str("burn"), py_str("burnt"), py_str("nut"), py_str("nuts"), py_str("allergy"), py_str("gluten"), py_str("vegan"), py_str("egg"), py_str("eggs"), py_str("egg free"), py_str("eggless"), py_str("butter"), py_str("flour"), py_str("sugar"), py_str("cocoa"), py_str("vanilla"), py_str("what size tin"), py_str("which tin"), py_str("tin size"), py_str("how many tins"), py_str("clove"), py_str("cloves"), py_str("cinnamon"), py_str("nutmeg"), py_str("mixed spice"), py_str("allspice"), py_str("turmeric"), py_str("paprika"), py_str("cardamom"), py_str("saffron"), py_str("spice"), py_str("spices"), py_str("teaspoon"), py_str("tablespoon"), py_str("keep"), py_str("keeps"), py_str("last"), py_str("freeze"), py_str("fridge"), py_str("calorie"), py_str("calories"), py_str("kcal"), py_str("cals")]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cakes.CAKE_AVOID"); }
     s_CAKE_AVOID(__data6());
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cakes._EGG_BATTER"); }
     s__EGG_BATTER(py_str("For batter, use four eggs to 200g plain flour and 300ml milk, with a pinch of salt, and rest it half an hour: the eggs are what make a Yorkshire rise, so don't cut them down. That fills a 12-hole tin."));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cakes._EGG_PANCAKE"); }
     s__EGG_PANCAKE(py_str("Two eggs to 150g plain flour and 300ml milk makes about eight thin pancakes, enough for four people. More eggs make them richer and more likely to tear; they don't make more pancakes."));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cakes._EGG_MERINGUE"); }
     s__EGG_MERINGUE(py_str("One egg white to 50g caster sugar, so a meringue nest for four takes two egg whites: whisk them to stiff peaks, then add the sugar a spoon at a time until it feels smooth between your fingers."));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cakes._EGG_SPONGE"); }
     s__EGG_SPONGE(py_str("Weigh the eggs in their shells and use the same weight of soft butter, caster sugar and self-raising flour: three eggs fills a 20cm two-layer sandwich tin (about 175g of each), and four fills a 23cm one. The eggs are the measure, so there is no fixed count - a bigger bake starts by weighing more eggs."));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cakes._EGG_SKIP"); }
     s__EGG_SKIP(py_str("Not for the mix: the egg binds a cake and helps it rise, and in most sponges 60g of yoghurt, half a mashed banana or a tablespoon of ground flax in three of water does the same job. Egg-free sponges are a little more crumbly and stale sooner, so eat them within a day or two, and don't expect a swap to work in a meringue or a genoise, which are made of egg."));
     fn __data7() -> Py { py_tuple(vec![py_str("instead"), py_str("instead of"), py_str("substitute"), py_str("substitutes"), py_str("substituting"), py_str("swap"), py_str("swaps"), py_str("swapping"), py_str("replace"), py_str("replaces"), py_str("replacing"), py_str("replacement"), py_str("without"), py_str("egg free"), py_str("egg-free"), py_str("eggless"), py_str("vegan"), py_str("flax"), py_str("flaxseed"), py_str("allergy"), py_str("allergic")]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cakes.CAKE_EGGS_AVOID"); }
     s_CAKE_EGGS_AVOID(__data7());
     fn __data8() -> Py { py_tuple(vec![py_str("cake"), py_str("cakes"), py_str("sponge"), py_str("sponge cake"), py_str("victoria sponge"), py_str("madeira"), py_str("birthday cake"), py_str("sandwich cake"), py_str("yorkshire pudding"), py_str("batter"), py_str("pancakes"), py_str("pancake"), py_str("meringue"), py_str("meringues"), py_str("cupcakes"), py_str("cupcake")]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.cakes.CAKE_EGGS_KEY"); }
     s_CAKE_EGGS_KEY(py_tuple(vec![__data8(), py_tuple(vec![py_str("eggs"), py_str("egg"), py_str("how many eggs")])]));
 }
 pub fn _cake_count(args: &[Py]) -> Py {
@@ -310,8 +334,8 @@ pub fn _cake_tins(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&tins.clone())); if py_truthy(&__b) { __b } else { op_gt(&tins.clone(), &Py::Int(12)) } }) {
     continue;
     }
-    low = call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[counts.clone(), g__CAKE_SHAPES()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk4566 = py_unpack(&__item.clone(), 2, None); let mut n: Py = __unpk4566[0].clone(); let mut shape: Py = __unpk4566[1].clone(); __out.push(op_mul(&n.clone(), &geti(&shape.clone(), &Py::Int(2)))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
-    high = call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[counts.clone(), g__CAKE_SHAPES()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk5526 = py_unpack(&__item.clone(), 2, None); let mut n: Py = __unpk5526[0].clone(); let mut shape: Py = __unpk5526[1].clone(); __out.push(op_mul(&n.clone(), &geti(&shape.clone(), &Py::Int(3)))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    low = call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[counts.clone(), g__CAKE_SHAPES()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk261 = py_unpack(&__item.clone(), 2, None); let mut n: Py = __unpk261[0].clone(); let mut shape: Py = __unpk261[1].clone(); __out.push(op_mul(&n.clone(), &geti(&shape.clone(), &Py::Int(2)))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    high = call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[counts.clone(), g__CAKE_SHAPES()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk774 = py_unpack(&__item.clone(), 2, None); let mut n: Py = __unpk774[0].clone(); let mut shape: Py = __unpk774[1].clone(); __out.push(op_mul(&n.clone(), &geti(&shape.clone(), &Py::Int(3)))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&op_lt(&high.clone(), &count.clone())) {
     continue;
     }
@@ -423,7 +447,7 @@ pub fn cake_plan(args: &[Py]) -> Py {
     high = __unpk5[3].clone();
     }
     tins = call_builtin("sum", &[counts.clone()]).unwrap_or_else(|e| exc::raise(e));
-    parts = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[counts.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk3404 = py_unpack(&__item.clone(), 2, None); let mut i: Py = __unpk3404[0].clone(); let mut n: Py = __unpk3404[1].clone(); if py_truthy(&n.clone()) {  __out.push({ let mut __s = String::new(); __s.push_str(&fstr(&geti(&g__CAKE_NUMBERS(), &n.clone()), -1, "")); __s.push_str(" "); __s.push_str(&fstr(&if py_truthy(&Py::Bool(py_eq(&n.clone(), &Py::Int(1)))) { geti(&geti(&g__CAKE_SHAPES(), &i.clone()), &Py::Int(0)) } else { geti(&geti(&g__CAKE_SHAPES(), &i.clone()), &Py::Int(1)) }, -1, "")); py_string(__s) }); } } py_list(__out) })() };
+    parts = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[counts.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk4098 = py_unpack(&__item.clone(), 2, None); let mut i: Py = __unpk4098[0].clone(); let mut n: Py = __unpk4098[1].clone(); if py_truthy(&n.clone()) {  __out.push({ let mut __s = String::new(); __s.push_str(&fstr(&geti(&g__CAKE_NUMBERS(), &n.clone()), -1, "")); __s.push_str(" "); __s.push_str(&fstr(&if py_truthy(&Py::Bool(py_eq(&n.clone(), &Py::Int(1)))) { geti(&geti(&g__CAKE_SHAPES(), &i.clone()), &Py::Int(0)) } else { geti(&geti(&g__CAKE_SHAPES(), &i.clone()), &Py::Int(1)) }, -1, "")); py_string(__s) }); } } py_list(__out) })() };
     if py_truthy(&Py::Bool(py_eq(&tins.clone(), &Py::Int(1)))) {
     shape = geti(&mcall(&geti(&parts.clone(), &Py::Int(0)), "split", &[py_str(" "), Py::Int(1)]), &Py::Int(1));
     if py_truthy(&Py::Bool(py_contains(&shape.clone(), &py_str("traybake")))) {

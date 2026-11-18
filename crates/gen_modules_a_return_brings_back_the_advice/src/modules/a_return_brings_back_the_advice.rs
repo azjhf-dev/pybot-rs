@@ -43,10 +43,15 @@ pub fn g_SUBSTANCE() -> Py { ensure_init(); G_SUBSTANCE.with(|c| c.borrow().clon
 pub fn s_SUBSTANCE(v: Py) { ensure_init(); G_SUBSTANCE.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("A return to a subject brings back what was said about it, not a question about where we were.\n\nA person can leave a subject for a turn or two and come back to it by its name alone:\n\n    my boiler is making a noise\n    how much is a new one\n    i rent so who pays\n    back to the noise          -> \"OK, back to the noise. Where were we?\"\n\nThe bot had the subject, what the person said about it and what it had answered, and it handed the\nquestion back. A friend asked to go back to the boiler says what they said about it the first time:\n\"Back to the noise: banging or rumbling when the heating starts is usually air or a pump set too\nfast, so bleed the radiators and check the pressure is 1 to 1.5 bar.\"\n\nNothing new is read here. The store's own reading (`bot/memory/topics.py`) has already noted that\nthis line goes back to an earlier topic (`memory[\"returned\"]`), and it has already moved the answer\nthat belongs to that topic to the top of the kept answers. This module adds the one thing the\nstore's pool of return lines does not have - the substance - and passes on every return with an ask\nof its own (\"back to the laptop, is it worth servicing?\"), because the module for the thing named\nanswers those with the question in front of it.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.a_return_brings_back_the_advice.PRIORITY"); }
     s_PRIORITY(Py::Int(7050));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.a_return_brings_back_the_advice.LEADS"); }
     s_LEADS(py_tuple(vec![py_str("Back to {thing}: {advice}"), py_str("Back on {thing}: {advice}"), py_str("On {thing}, then: {advice}")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.a_return_brings_back_the_advice.A_RECEIPT"); }
     s_A_RECEIPT(stdlib_call("re", "compile", &[py_str("^(?:got it|noted|ok|okay|sure|right|you said|you've told me|you told me|that's right|that is right|makes sense|fair enough|understood|i'm not sure|i am not sure|that's beyond|that is beyond|no number for that|i can't|i cannot|i'd rather not|i would rather not|searching for it|a quick search)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.a_return_brings_back_the_advice.SUBSTANCE"); }
     s_SUBSTANCE(Py::Int(6));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.a_return_brings_back_the_advice.SENTENCE"); }
     s_SENTENCE(stdlib_call("re", "compile", &[py_str("(?<=[.!?])\\s+")]).unwrap_or_else(|e| exc::raise(e)));
 }
 pub fn _the_advice(args: &[Py]) -> Py {

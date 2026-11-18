@@ -57,11 +57,17 @@ fn module_body() {
     let _ = py_str("Where somebody lives, read out of what they said - and said back.\n\nThese are the readers the store answers \"where does my sister live\" from: the town a line gave\n(\"my sister lives in cork\"), the pronoun that stands for the person the chat has just been about\n(\"she moved to york\"), the correction that moves somebody's town (\"no, york\"), and the say-back\nline built from them.\n\nThey live here rather than in `bot/modules/memory_store.py` because that module had grown past the\nsize the world accepts a change to. Nothing changed in the move: the store imports every name\nback, so the readers and their callers are the same objects they were.\n");
     s_others(py_func("others", |args: &[Py]| pyrt::xrefs::xcall("memory", "others", args)));
     s_WHERE_ASK(pyrt::xrefs::xget("memory.store_lines", "WHERE_ASK"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.places.OTHER_PLACE"); }
     s_OTHER_PLACE(stdlib_call("re", "compile", &[py_str("\\bmy (\\w+)s?\\b[^.!?]{0,60}?\\b(?:live|lives|living|moved|moves|moving|settled|based|staying|relocated)\\s+(?:in|to|near|at)\\s+([A-Za-z][A-Za-z'-]{1,}(?:[ -][A-Za-z][A-Za-z'-]{1,})?)"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.places.OTHER_PLACE_PRONOUN"); }
     s_OTHER_PLACE_PRONOUN(stdlib_call("re", "compile", &[py_str("\\b(?:she|he|they)\\s+(?:has\\s+|had\\s+|just\\s+|now\\s+)?(?:live[sd]?|lives|living|moved|moves|moving|settled|relocated|is\\s+based|are\\s+based)\\s+(?:in|to|near|at)\\s+([A-Za-z][A-Za-z'-]{1,}(?:[ -][A-Za-z][A-Za-z'-]{1,})?)"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.places.PLACE_ENDS"); }
     s_PLACE_ENDS(call_builtin("frozenset", &[mcall(&py_str("last next this that year years month months week weeks ago previously\nbefore then soon now already after"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.places.OTHER_PERSON_NAMED"); }
     s_OTHER_PERSON_NAMED(stdlib_call("re", "compile", &[py_str("\\bmy (\\w+)s?\\b(?:[^.!?]{0,40}?\\b(?:is|are|was|were)\\s+(?:called|named|known as)\\b|[^.!?]{0,12}$)"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.places.A_QUESTION_ASKED"); }
     s_A_QUESTION_ASKED(stdlib_call("re", "compile", &[py_str("^\\W*(?:and\\s+|but\\s+|so\\s+)?(?:do|does|did|is|are|was|were|has|have|had|can|could|will|would|should|shall|may|might|am)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.places.NOT_A_PLACE_VALUE"); }
     s_NOT_A_PLACE_VALUE(call_builtin("frozenset", &[mcall(&py_str("\ni me my we us our you your he him his she her it its they them their\none two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen\nsixteen seventeen eighteen nineteen twenty thirty forty fifty sixty seventy eighty ninety\nhundred thousand million first second third last next again too either neither\n"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
 }
 pub fn _a_place(args: &[Py]) -> Py {
@@ -301,7 +307,7 @@ pub fn _other_place(args: &[Py]) -> Py {
     let mut want: Py = Py::None;
     let _ = py_str("The last place the user gave for this person, said back as a line.");
     want = mcall(&mcall(&{ let __b = who.clone(); if py_truthy(&__b) { __b } else { py_str("") } }, "lower", &[]), "rstrip", &[py_str("s")]);
-    found = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&_said_places(&[memory.clone()])) { let __unpk3397 = py_unpack(&__item.clone(), 2, None); let mut said: Py = __unpk3397[0].clone(); let mut place: Py = __unpk3397[1].clone(); if py_truthy(&{ let __b = Py::Bool(!py_truthy(&want.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_eq(&mcall(&mcall(&said.clone(), "lower", &[]), "rstrip", &[py_str("s")]), &want.clone())) } }) {  __out.push(py_tuple(vec![said.clone(), place.clone()])); } } py_list(__out) })() };
+    found = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&_said_places(&[memory.clone()])) { let __unpk5758 = py_unpack(&__item.clone(), 2, None); let mut said: Py = __unpk5758[0].clone(); let mut place: Py = __unpk5758[1].clone(); if py_truthy(&{ let __b = Py::Bool(!py_truthy(&want.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_eq(&mcall(&mcall(&said.clone(), "lower", &[]), "rstrip", &[py_str("s")]), &want.clone())) } }) {  __out.push(py_tuple(vec![said.clone(), place.clone()])); } } py_list(__out) })() };
     if py_truthy(&Py::Bool(!py_truthy(&found.clone()))) {
     return Py::None;
     }

@@ -43,10 +43,15 @@ pub fn g_SAID_AGAIN() -> Py { ensure_init(); G_SAID_AGAIN.with(|c| c.borrow().cl
 pub fn s_SAID_AGAIN(v: Py) { ensure_init(); G_SAID_AGAIN.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("A wait about a body is not a bad day at work, and the bot says the wait or it says nothing.\n\nFive lines were answered by the generic pool on main - the same line a person gets for a missed bus:\n\n    they think its cancer         -> \"That sounds rough. If you want, I can help you think...\"\n    theyre testing me for cancer  -> \"Ugh, that's a lot to carry.\"\n    my mum might have cancer      -> \"I'm sorry - that's frustrating. Want a hand...\"\n    i have cancer                 -> \"That sounds rough. If you want, I can help you think...\"\n    its not cancer                -> \"Sorry to hear that.\"   (the opposite of the news)\n\nThe composer's own answer is asked for first, and this module stands down unless it is one of those\ngeneric families: a card about a symptom, an entry, a pool that names the condition, or an answer\nwith somebody to ask in it all keep the turn. So the worst case here is that a placeholder is\nreplaced by one of four lines written for the wait, the news, or the thing ruled out\n(bot/compose/a_wait_about_a_body.py) - and none of those states a fact about the world.\n\nIt sits above greeting (-1000) and below every card, which is the band a floor module wants. The\n`results` half of this (`im worried about my results` gets the driving-test line) is in `chat`, at\nCHATTER, and is reported to #conversation rather than reached from here.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.the_wait_about_a_body.PRIORITY"); }
     s_PRIORITY(op_neg(&Py::Int(999)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.the_wait_about_a_body.GENERIC"); }
     s_GENERIC(py_tuple(vec![py_str("that sounds rough"), py_str("ugh, that's a lot to carry"), py_str("i'm sorry — that's frustrating"), py_str("i'm sorry - that's frustrating"), py_str("i'm sorry, that's frustrating"), py_str("sorry to hear that"), py_str("i'm sorry to hear that"), py_str("i'm listening"), py_str("that's a lot to carry")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.the_wait_about_a_body.NOTED"); }
     s_NOTED(py_str("noted: "));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.the_wait_about_a_body.GOT_IT"); }
     s_GOT_IT(py_tuple(vec![py_str("got it — "), py_str("got it - "), py_str("got it, "), py_str("got it: ")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.the_wait_about_a_body.SAID_AGAIN"); }
     s_SAID_AGAIN(py_str("same as before: "));
 }
 pub fn is_generic(args: &[Py]) -> Py {

@@ -31,7 +31,9 @@ pub fn g_PRIORITY() -> Py { ensure_init(); G_PRIORITY.with(|c| c.borrow().clone(
 pub fn s_PRIORITY(v: Py) { ensure_init(); G_PRIORITY.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("Asking after a person the chat already holds: answer with what the chat holds.\n\nThe reading and the wording are in `bot/memory/callback.py`. This is the module that offers it,\nand it is a module of its own for the reason `theirperson` is one: the shape is a shape, and a\nhook in the seed fallback would have to grow a branch for the next one.\n\nPRIORITY 260 puts it above `answers` (0) and below `chat` (300) and `theirperson` (250 is below\nit, and both stand down unless the line is their shape). What it can take is the answer to\n`how is she doing`, which without it was the last paragraph the chat had already had, headed\n\"Same as before\"; what it cannot take is a line with its own reading.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.callback_about.PRIORITY"); }
     s_PRIORITY(Py::Int(260));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.callback_about.ANSWERS"); }
     s_ANSWERS(py_tuple(vec![py_str("family-and-parenting"), py_str("friends-and-relationships"), py_str("health"), py_str("work"), py_str("school-and-study"), py_str("pets")]));
 }
 pub fn respond(args: &[Py]) -> Py {

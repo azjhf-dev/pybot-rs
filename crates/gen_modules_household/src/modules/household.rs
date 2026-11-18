@@ -31,7 +31,9 @@ pub fn g_TAKES_AS_IT_COMES() -> Py { ensure_init(); G_TAKES_AS_IT_COMES.with(|c|
 pub fn s_TAKES_AS_IT_COMES(v: Py) { ensure_init(); G_TAKES_AS_IT_COMES.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("Who lives with the person, as a turn of its own.\n\n`bot/memory/household.py` holds the reading and the wording. This module is here because the two\nlines it answers are ones the store and the knowledge base both read wrongly:\n\n    its just me and my daughter\n      -> \"Tell them as soon as it is certain... which room is theirs, where the school is...\"\n    who lives with us\n      -> \"You haven't mentioned a place yet.\"\n\nThe first is the move-news card, because the line names a child and the word \"just\"; the second is\nthe place reader looking for a town in a line that asks about the household. Neither is a guess a\nhigher band should keep: the household is the whole of the line, so the claim is this module's.\n\nIt sits just above the store's band, which is the band for the facts the chat holds, because the\nplace reader is in the store and would otherwise answer the ask with a denial.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.household.PRIORITY"); }
     s_PRIORITY(Py::Int(7050));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.household.TAKES_AS_IT_COMES"); }
     s_TAKES_AS_IT_COMES(py_func("takes_as_it_comes", |args: &[Py]| takes_as_it_comes(args)));
 }
 pub fn observe(args: &[Py]) -> Py {

@@ -96,3 +96,9 @@ pub fn import_module(name: &str, package: Option<&str>) -> Result<Py, PyExc> {
         Err(PyExc::new("ImportError", &format!("No module named '{}'", name)))
     }
 }
+
+pub fn children(package: &str) -> Vec<String> {
+    let prefix = format!("{}.", package.trim_start_matches("bot."));
+    let mut names = MODULES.with(|m| m.borrow().keys().filter_map(|k| k.strip_prefix(&prefix).filter(|s| !s.contains('.')).map(str::to_string)).collect::<Vec<_>>());
+    names.sort(); names
+}

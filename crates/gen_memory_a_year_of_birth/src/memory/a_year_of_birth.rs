@@ -39,9 +39,13 @@ pub fn g__SOMEONE_ELSE_BORN() -> Py { ensure_init(); G__SOMEONE_ELSE_BORN.with(|
 pub fn s__SOMEONE_ELSE_BORN(v: Py) { ensure_init(); G__SOMEONE_ELSE_BORN.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("A year of birth told in chat is the age, said the long way.\n\n    i was born in 1990\n    how old am i          -> main: \"You haven't told me your age yet.\"\n\nThe store has always answered \"how old am i\" from the age it was told (\"You told me you're 34\"),\nand it reads a figure after \"i am\" or \"i'm\". A year of birth is the same fact in other words, and\nnothing read it: the person says when they were born, asks their age a turn later, and is told\nthey never said.\n\nSo the year is filed as the age this chat would work out from it, and the store's own answer does\nthe rest - which is what the person hears in the wording the store already uses, not a second\nvoice saying the same thing in its own way.\n\nOnly the person's own year is taken. Somebody else's (\"my son was born in 2015\") is a fact about a\nperson the store keeps, and the readers that answer \"how old is my son\" own it. A line that gives\nboth keeps them apart: \"i was born in 1990 and im 35\" leaves the age it states.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.a_year_of_birth.A_BIRTH_YEAR"); }
     s_A_BIRTH_YEAR(py_tuple(vec![py_str("Born in {born}, so you turn {turned} this year."), py_str("{born}. That makes you {turned} this year."), py_str("Noted - {turned} this year, going by {born}.")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.a_year_of_birth._A_BORN"); }
     s__A_BORN(stdlib_call("re", "compile", &[py_str("\\b(?:i\\s+was\\s+born|i\\s+am\\s+born|im\\s+born|born)\\b[^0-9]{0,14}\\b(1[89]\\d\\d|20\\d\\d)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.a_year_of_birth._SOMEONE_ELSE_BORN"); }
     s__SOMEONE_ELSE_BORN(stdlib_call("re", "compile", &[py_str("\\b(?:my|his|her|their|our|your|its)\\s+(?:\\w+\\s+){0,2}?(?:was|were|is|are)\\s+born\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.a_year_of_birth._ALSO_AN_AGE"); }
     s__ALSO_AN_AGE(stdlib_call("re", "compile", &[py_str("\\b(?:i\\s?m|i\\s+am|im|i\\s+turned|i\\s+will\\s+be)\\s+(\\d{1,3})\\b(?!\\s*(?:years?\\s+(?:ago|from)|kg|pounds?|miles?|minutes?|hours?|days?|weeks?|months?))"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
 }
 pub fn _today(args: &[Py]) -> Py {

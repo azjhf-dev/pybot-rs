@@ -36,7 +36,9 @@ pub fn s_time_entries(v: Py) { ensure_init(); G_time_entries.with(|c| *c.borrow_
 fn module_body() {
     let _ = py_str("How long the everyday jobs in the house take, kept apart from the big home domain.\n\n`bot/knowledge/home.py` is past the publisher's 1 MiB file limit, so a row added to it cannot\nship: this file answers the home job whose length people ask for - a house survey - and declares\nthe same topic, so it answers exactly what a row in `home.py` would. The row itself is built\nfrom `JOB_TIMES` in `bot/knowledge/costs.py`, beside the prices for the same jobs, and a job's\nrow is only built where its length is missing from another card: the boiler service already has\nits length on main, so it is not in that table.\n\nBeing a small separate domain has a second use: a mistake in an import line here loses this row\nand nothing else, where a broken import in `home.py` would take the whole house with it\n(`domains()` skips a module that fails to import).\n");
     s_time_entries(py_func("time_entries", |args: &[Py]| pyrt::xrefs::xcall("knowledge.costs", "time_entries", args)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.job_times.ANSWERS"); }
     s_ANSWERS(py_tuple(vec![py_str("home-and-diy")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.job_times.ENTRIES"); }
     s_ENTRIES(pyrt::xrefs::xcall("knowledge.costs", "time_entries", &[py_str("house-survey")]));
 }
 pub fn module_obj() -> Py {

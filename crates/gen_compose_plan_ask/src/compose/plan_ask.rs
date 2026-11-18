@@ -59,14 +59,23 @@ pub fn g_PLAN_TOGETHER() -> Py { ensure_init(); G_PLAN_TOGETHER.with(|c| c.borro
 pub fn s_PLAN_TOGETHER(v: Py) { ensure_init(); G_PLAN_TOGETHER.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("A plan asked for when the thread already holds one.\n\nThe reader and its patterns live here rather than in `fallback.py` so that the file every lane\nadds an ending to keeps one line of it, and the walk back over the thread is somewhere a reader\ncan find it.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.plan_ask.PLAN_ASK"); }
     s_PLAN_ASK(stdlib_call("re", "compile", &[py_str("(?:whats? (?:the |our )?plan|what is the plan|the plan for (?:the|our|this) (?:day|trip|weekend|evening|visit)|what (?:should|shall|do) we do (?:first|next|then)|where (?:do|should) we start|whats? the order|how (?:should|do|shall) we plan|plan (?:out )?the (?:day|trip|weekend)|sort (?:out )?the plan)(?=\\s*(?:$|[.?!]|(?:then|now|today|tonight|tomorrow|weekend)\\b|for (?:the|this|our|next|\\w+day)\\b|on \\w+day\\b))")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.plan_ask.PLAN_PLACE"); }
     s_PLAN_PLACE(stdlib_call("re", "compile", &[py_str("\\b(?:gig|gigs|venue|concert|show|match|game|festival|tour|theatre|cinema|museum|exhibition|station|train|flight|airport|coach|trip|day out|weekend away|night out)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.plan_ask.PLAN_MEAL"); }
     s_PLAN_MEAL(stdlib_call("re", "compile", &[py_str("\\b(?:eat|eats|eating|food|meal|dinner|lunch|breakfast|restaurant|table|bite|pub|pizza|curry)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.plan_ask.PLAN_BED"); }
     s_PLAN_BED(stdlib_call("re", "compile", &[py_str("\\b(?:stay over|stay the night|staying over|hotel|hotels|bed|room|sleep|sleeping|airbnb|hostel)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.plan_ask.PLAN_BOOKED"); }
     s_PLAN_BOOKED(stdlib_call("re", "compile", &[py_str("\\b(?:booked|reserved|sorted|got a table|have a table|already got)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.plan_ask.PLAN_TOGETHER"); }
     s_PLAN_TOGETHER(stdlib_call("re", "compile", &[py_str("\\b(?:\\d+|two|three|four|five|six|seven|eight|several|few|both) of (?:us|them|you)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.plan_ask.PLAN_DOORS"); }
     s_PLAN_DOORS(stdlib_call("re", "compile", &[py_str("\\b(?:gig|gigs|venue|concert|show|match|game|festival|tour|theatre|cinema|museum|exhibition)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.plan_ask.PLAN_QUESTION"); }
     s_PLAN_QUESTION(stdlib_call("re", "compile", &[py_str("^(?:so |ok |okay |and |but |then )*(?:what|why|how|when|where|who|which)\\b|^(?:so |ok |okay |and |but |then )*(?:can|could|should|shall|do|does|did|is|are|was|were|will|would|have|has|am|any)\\s+(?:i|you|we|they|he|she|it|there|this|that|one)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.plan_ask.PLAN_EMPTY"); }
     s_PLAN_EMPTY(call_builtin("frozenset", &[mcall(&py_str("\nhi hello hey ok okay cool nice great thanks thank you yes yeah no nope sure right ah oh hmm\nlol haha good fine maybe alright\n"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
 }
 pub fn _a_statement(args: &[Py]) -> Py {

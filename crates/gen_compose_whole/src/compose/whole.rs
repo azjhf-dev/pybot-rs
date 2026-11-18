@@ -35,8 +35,11 @@ pub fn g__MOST_AFTER() -> Py { ensure_init(); G__MOST_AFTER.with(|c| c.borrow().
 pub fn s__MOST_AFTER(v: Py) { ensure_init(); G__MOST_AFTER.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("A reply cut to length without ending on a condition whose doing was cut away.\n\nHanding back a part of an earlier answer means cutting it to the length of a reply, and the\nusual cut is at the last comma that fits: \"... 48 hours ahead?\" If it keeps happening\" is what\nthat gives, and \"If it keeps happening.\" tells the person nothing to do - the step is in the\nclause the cut took away. The fault is general: any sentence written \"If X, do Y\" loses Y when\nit is cut between X and Y, and the same happens with \"unless\" and \"in case\".\n\nSo the cut is checked before it is used: when the piece that fits would end on one of those\nconditions, the cut moves on to the end of the doing that follows it, or, if that doing is too\nlong to carry, steps back to the clause before the condition. Either way the reply is a whole\nstep rather than a condition with its consequence missing.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.whole._LAST_CLAUSE"); }
     s__LAST_CLAUSE(stdlib_call("re", "compile", &[py_str("(?:^|[,;:]\\s+|[.!?][\\\"'\\u201d]?\\s+)((?:and\\s+)?(?:if|unless|in\\s+case)\\b[^,;:]*)$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.whole._CONTINUES"); }
     s__CONTINUES(stdlib_call("re", "compile", &[py_str("^['\\\"\\u201d]?(?:or|and|but|which|who|whom|whose|that|so|then|yet|plus|as|if|unless)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.whole._MOST_AFTER"); }
     s__MOST_AFTER(Py::Int(90));
 }
 pub fn a_whole_cut(args: &[Py]) -> Py {

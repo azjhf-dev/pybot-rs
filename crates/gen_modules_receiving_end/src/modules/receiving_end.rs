@@ -27,6 +27,7 @@ pub fn g_PRIORITY() -> Py { ensure_init(); G_PRIORITY.with(|c| c.borrow().clone(
 pub fn s_PRIORITY(v: Py) { ensure_init(); G_PRIORITY.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("A person in a role who keeps doing the same thing has a band of its own.\n\n\"my boss keeps moving the goalposts\", \"my landlord shrugs it off\", \"the school says thats life\"\nname no ask, so they reached the pools that fit any message. The reading and the wording live in\n`bot/compose/receiving_end.py`; this module is here so the claim has a band just above the greeting\nfallback and below the nudge, and so the fallback file - which is over the size the world accepts -\ndoes not have to change. `respond` returns None on every line that is not this turn.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.receiving_end.PRIORITY"); }
     s_PRIORITY(op_neg(&Py::Int(980)));
 }
 pub fn respond(args: &[Py]) -> Py {

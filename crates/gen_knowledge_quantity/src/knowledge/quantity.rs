@@ -31,7 +31,9 @@ pub fn g_UNITS() -> Py { ensure_init(); G_UNITS.with(|c| c.borrow().clone()) }
 pub fn s_UNITS(v: Py) { ensure_init(); G_UNITS.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("A figure with a unit on it is an amount, not a code.\n\nA degree class is written with a dot or a colon in it, and a phone writes \"2:1\" as \"2 1\", so the\nknowledge base has to hold \"2.1\" and \"2.2\" as words of their own. A joint of meat weighing 2.2\nkilos is then the same two characters: \"the lamb is 2.2 kilos not 2\" was answered with what a\ndegree passes at, in the middle of a slow roast.\n\nThe understanding engine already reads a number and the unit it is counted in - \"2.2 kilos\" comes\nback as a number of 2.2 with a unit of kg - so a card keyed on the digits alone can ask here and\nstand down when a unit is on them.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.quantity.UNITS"); }
     s_UNITS(call_builtin("frozenset", &[mcall(&py_str("\nkg kgs kilo kilos g gram grams gm gms lb lbs pound pounds st stone stones\nl litre litres liter liters ml cl cm mm m metre metres meter meters km\n"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.quantity.AFTER_A_FIGURE"); }
     s_AFTER_A_FIGURE(stdlib_call("re", "compile", &[py_str("\\b\\d+(?:[.,]\\d+)?\\s*(?:kg|kgs|kilo|kilos|g|gram|grams|gm|gms|lb|lbs|pound|pounds|st|stone|stones|l|litre|litres|ml|cl|cm|mm|metre|metres|km)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
 }
 pub fn a_figure_with_a_unit(args: &[Py]) -> Py {

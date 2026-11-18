@@ -49,10 +49,15 @@ fn module_body() {
     s_respond(py_func("respond", |args: &[Py]| respond__wrapped(args)));
     let _ = py_str("The follow-up turns of a saving plan, answered before the general readings get them.\n\nA saving goal, the date for it and the rate are one question asked over three turns, and only\nthe first of the three says the word \"save\":\n\n    i want to save 2000 pounds    -> \"Then start with the smallest version of it\" (advice about a\n                                     habit, which says nothing about money)\n    by june                       -> \"Got it. Is there anything you'd like a hand with?\"\n    im putting by 500 a month     -> \"Got it - you're putting by 500 a month.\"\n\nEach of those lines on its own names nothing a knowledge entry can look up, so the readings that\nanswer a subjectless line took them and answered something else. Together they are arithmetic:\nthe goal, the weeks left and the rate give the figure the person actually wants.\n\n`bot/memory/saving.py` holds all of the reading. This module is the turn it is asked on: the\ncandidates below are tried in the order a person would ask them, and the first one that\nrecognises the line answers it. Every one of them returns \"\" for a line it is not about, so a\nchat with no saving plan in it is untouched.\n\nThe arithmetic itself is the money entry's - the goal, the date and the weekly figure are what\n`bot/knowledge/money.py` already works out - so the question is written the way that entry reads\nit (`saving.rate_question`) and answered in the knowledge base, rather than a second copy of the\nsums living here.\n");
     s_understand(py_func("understand", |args: &[Py]| pyrt::xrefs::xcall("understanding", "understand", args)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.saving_followup.PRIORITY"); }
     s_PRIORITY(Py::Int(1100));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.saving_followup.ANSWERS"); }
     s_ANSWERS(py_tuple(vec![py_str("money")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.saving_followup.A_LENGTH_IN_MONTHS"); }
     s_A_LENGTH_IN_MONTHS(stdlib_call("re", "compile", &[py_str("\\b(?:is|in|takes|takes\\s+about)\\s+(?:about\\s+)?(?:\\d[\\d,]*|a|an|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve)\\s*(?:month|months|year|years|week|weeks)\\b|\\bone\\s+pay\\s+packet\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.saving_followup._SEEN"); }
     s__SEEN(py_dict(vec![]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.saving_followup.respond"); }
     s_respond(pyrt::xrefs::xcall("memory.again", "replied", &[py_func("respond", |args: &[Py]| respond__wrapped(args))]));
 }
 pub fn _lower_first(args: &[Py]) -> Py {

@@ -27,6 +27,7 @@ pub fn g_PRIORITY() -> Py { ensure_init(); G_PRIORITY.with(|c| c.borrow().clone(
 pub fn s_PRIORITY(v: Py) { ensure_init(); G_PRIORITY.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("A near-me ask with the thing left out is answered with the thing put back in.\n\n\"Is there one close by\" after \"im looking for a launderette\" fell to the search hedge, although\nthe named form of the same question - \"is there a launderette near me\" - has an answer: there is no\nlocal list here, a map app shows what is close, a phone call settles the rest. The pronoun is the\nthing the person said a turn ago, so the answer is the named answer with their own word in it.\n\n`bot/compose/nearby_one.py` holds the reading and the wording. The band sits just above the\nfallback, because this is a pointer and a shape, not knowledge: any module that knows something\nabout the thing keeps the turn, and so does every module above -1000. Nothing else is claimed:\n`respond` returns None on a named ask, on a line whose thread named no thing, and on a cold line.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.near_me.PRIORITY"); }
     s_PRIORITY(op_neg(&Py::Int(995)));
 }
 pub fn respond(args: &[Py]) -> Py {

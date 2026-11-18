@@ -72,18 +72,29 @@ pub fn s_pick(v: Py) { ensure_init(); G_pick.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("A line that says something is coming and has not said it yet: \"one more thing\", \"quick one\".\n\nThese lines carry no subject of their own. Nothing has been asked, so there is nothing to answer,\nand nothing to search for either - main answered \"one more thing\" with a knowledge entry about\nstudying (\"Test yourself instead of rereading\") because \"one\" and \"thing\" are words in the base,\nand \"another thing\" with \"Another thing — I'll remember that.\", which files away a line that has\nsaid nothing at all. A friend says go on. Anything more is invented: the person has not said what\nthe thing is.\n\nSo the whole line has to be the hand-off and nothing else. \"quick one, how do i descale a\nkettle\" names the thing after the comma and keeps whatever answers it, and a hand-off with a\nsubject (\"one more thing about the boiler\") has something in it to go on with.\n\nRead by the arbiter as well as by the composer: the line has no words to match, so the module\nthat answered last would otherwise keep the turn and reply to its own last answer. The composer\nsays it read this line, and the arbiter asks that before the never-repeat rule (README.md,\n\"Interface\").\n");
     s_pick(py_func("pick", |args: &[Py]| pyrt::xrefs::xcall("compose", "pick", args)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.handoff._FRONT"); }
     s__FRONT(py_str("(?:(?:and|oh|ooh|ok|okay|so|right|ah|er|um|umm|hmm|sorry|also|just|plus|hey|ta|anyway|anyways|first|then|actually|also)\\b[\\s,]+)*"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.handoff.BACK"); }
     s_BACK(py_str("(?:\\s+(?:actually|too|as well|then|now|first|ok|okay|sorry|thanks|tho|though|i think|i suppose|i reckon))?"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.handoff._CORE"); }
     s__CORE(py_str("(?:one|two|three|a couple|a few|couple)(?: more| other| final| last) (?:things?|questions?|qs?|asks?|quer(?:y|ies)|bits?|points?|ones?)|another (?:things?|questions?|qs?|asks?|ones?|points?|quer(?:y|ies))|(?:one |the |a )?(?:last|final|next|other|second) (?:things?|questions?|qs?|asks?|ones?|bits?)|a? ?quick (?:ones?|questions?|qs?|asks?|things?|quer(?:y|ies))|(?:a |one |an )?(?:different|separate|unrelated|side) (?:questions?|ones?|asks?|things?|quer(?:y|ies))|one thing more|before i forget|while (?:im|i am) (?:here|at it)"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.handoff.HANDOFF"); }
     s_HANDOFF(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&py_str("^"), &g__FRONT()), &py_str("(?:")), &g__CORE()), &py_str(")")), &g_BACK()), &py_str("[\\s.?!,]*$")), stdlib_attr("re", "IGNORECASE").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.handoff.ABOUT"); }
     s_ABOUT(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&py_str("^"), &g__FRONT()), &py_str("(?:")), &g__CORE()), &py_str(")")), &g_BACK()), &py_str("[\\s,:-]*(?:about|on|to do with|regarding|around)\\s+(?P<thing>(?:(?:the|my|our|your|his|her|their|its|a|an|this|that)\\s+)?[\\w'-]+(?:\\s+[\\w'-]+){0,3})[\\s.?!,]*$")), stdlib_attr("re", "IGNORECASE").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     fn __data1() -> Py { py_tuple(vec![py_str("it"), py_str("that"), py_str("this"), py_str("them"), py_str("they"), py_str("us"), py_str("you"), py_str("me"), py_str("him"), py_str("her"), py_str("there"), py_str("things"), py_str("thing"), py_str("stuff"), py_str("everything"), py_str("nothing"), py_str("something"), py_str("anything"), py_str("it all"), py_str("the lot")]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.handoff._POINTS_AT_NOTHING"); }
     s__POINTS_AT_NOTHING(call_builtin("frozenset", &[__data1()]).unwrap_or_else(|e| exc::raise(e)));
     fn __data2() -> Py { py_tuple(vec![py_str("whether"), py_str("if"), py_str("how"), py_str("what"), py_str("when"), py_str("why"), py_str("where"), py_str("who"), py_str("whom"), py_str("which"), py_str("that"), py_str("because"), py_str("so"), py_str("but"), py_str("and")]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.handoff._NOT_A_SUBJECT"); }
     s__NOT_A_SUBJECT(call_builtin("frozenset", &[__data2()]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.handoff.ABOUT_THE_THING"); }
     s_ABOUT_THE_THING(py_tuple(vec![py_str("Go on — what about {thing}?"), py_str("Ask away about {thing}."), py_str("{Thing} — right. What do you want to know?"), py_str("What about {thing}? I'm listening.")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.handoff._NAMES_A_QUESTION"); }
     s__NAMES_A_QUESTION(stdlib_call("re", "compile", &[py_str("\\b(?:question|questions|q|qs|ask|asks|query|queries)\\b"), stdlib_attr("re", "IGNORECASE").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.handoff.ASK_AWAY"); }
     s_ASK_AWAY(py_tuple(vec![py_str("Ask away."), py_str("Sure — what is it you want to know?"), py_str("Go on, I'm listening."), py_str("Yes, ask away — I'm here.")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.handoff.GO_ON"); }
     s_GO_ON(py_tuple(vec![py_str("Go on — what is it?"), py_str("Sure, go ahead."), py_str("I'm listening — tell me."), py_str("Yes, what else?"), py_str("Go ahead, I'm here.")]));
 }
 pub fn reads_as_handoff_about_a_thing(args: &[Py]) -> Py {

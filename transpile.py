@@ -786,6 +786,8 @@ class Gen:
         E = self.emit
         if isinstance(target, ast.Name):
             name = target.id
+            if ctx.kind == 'module':
+                E(f'    if std::env::var_os("PYBOT_TRACE_INIT").is_some() {{ eprintln!("SET {self.dotted}.{name}"); }}')
             if name in ctx.global_names:
                 E(f"    s_{rust_ident(name)}({val});")
             elif ctx.kind == 'module':

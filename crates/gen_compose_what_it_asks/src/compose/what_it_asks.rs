@@ -58,10 +58,15 @@ fn module_body() {
     s_AMOUNT(pyrt::xrefs::xget("compose.fit", "AMOUNT"));
     s_OPTIONS(pyrt::xrefs::xget("compose.fit", "OPTIONS"));
     s_PICK(pyrt::xrefs::xget("compose.fit", "PICK"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.what_it_asks.MONEY_VERB_ASK"); }
     s_MONEY_VERB_ASK(stdlib_call("re", "compile", &[py_str("\\bwhat should (?:i|we) (?:tip\\b|spend (?:on)(?! it)\\b|budget for\\b|pay (?:for|a|an|my|the|him|her|them)\\b)"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.what_it_asks.SPEND_IT_ON"); }
     s_SPEND_IT_ON(stdlib_call("re", "compile", &[py_str("\\bwhat (?:should|shall|do) (?:i|we) (?:spend|put) it (?:on|into|in)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.what_it_asks.PRESENT_LOOKING"); }
     s_PRESENT_LOOKING(stdlib_call("re", "compile", &[py_str("\\b(?:present|gift|pressie)s?\\b[^?.!]{0,20}?\\bfor\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.what_it_asks.NOT_A_PRESENT_ASK"); }
     s_NOT_A_PRESENT_ASK(stdlib_call("re", "compile", &[py_str("\\b(?:thank(?:s| you)|refund|receipt|return(?:ed|ing)?|buying|bought|got|gave|given|giving|keeps)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.what_it_asks.ALTERNATIVES"); }
     s_ALTERNATIVES(stdlib_call("re", "compile", &[py_str("\\bor\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
 }
 pub fn _names_alternatives(args: &[Py]) -> Py {

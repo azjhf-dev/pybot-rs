@@ -195,50 +195,94 @@ pub fn g__RULED_OUT() -> Py { ensure_init(); G__RULED_OUT.with(|c| c.borrow().cl
 pub fn s__RULED_OUT(v: Py) { ensure_init(); G__RULED_OUT.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("The same paragraph is about to be said twice: say the short of it, framed as the repeat it is.\n\nSTYLE.md rules out the same answer twice in a row. `bot/memory/topics.said_again` frames a repeat\nwith a lead-in, but it stands aside when the line names something of its own: \"he keeps coming\ninto our bed at 2am\" is a new detail, so the turn is not \"the same ask again\" and the lead-in is\nwithheld - and the entry the line reaches has nothing new to say, so the paragraph goes out byte\nfor byte as before. The person has just told the bot something and gets back what they already\nread:\n\n    my son is 6 and he wont sleep\n      Walk them back every time with the same short line - \"it's sleep time, I love you\" - and ...\n    he keeps coming into our bed at 2am\n      (the same paragraph, word for word)\n\nThe answer is still right, so it is not replaced: it is cut to the sentence with the move in it\nand the lead-in says the answer has not changed, which also leaves the door open for the person\nto say what did not work.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again.SHORT"); }
     s_SHORT(Py::Int(14));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again.SENTENCE"); }
     s_SENTENCE(stdlib_call("re", "compile", &[py_str("(?<=[.!?])\\s+")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again.AGAIN"); }
     s_AGAIN(py_tuple(vec![py_str("Same answer, and it covers this: {reply}"), py_str("That is still the thing to do: {reply}"), py_str("Nothing new to add on it: {reply}")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again.SHORT_AGAIN"); }
     s_SHORT_AGAIN(py_tuple(vec![py_str("Same as before: {reply}"), py_str("As I said: {reply}"), py_str("Still: {reply}")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again.AGAIN_HELP"); }
     s_AGAIN_HELP(py_str("Same answer I'm afraid: {reply} If that hasn't worked for you, tell me what went wrong and I'll take it from there."));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again.DETAIL_AGAIN"); }
     s_DETAIL_AGAIN(py_tuple(vec![py_str("Same for {detail}: {reply}"), py_str("Same answer for {detail}: {reply}"), py_str("It is the same for {detail}: {reply}"), py_str("Same again for {detail}: {reply}")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again.SAME_ADVICE"); }
     s_SAME_ADVICE(py_tuple(vec![py_str("Nothing separate for {detail} - it is the same advice: {reply}"), py_str("Nothing different for {detail} I'm afraid: the same answer covers it - {reply}"), py_str("No separate fix for {detail} - the same advice as before: {reply}"), py_str("Nothing more for {detail}: the same answer covers it - {reply}")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again.RETURN"); }
     s_RETURN(py_tuple(vec![py_str("Back to {detail}: {reply}"), py_str("Back to {detail} then: {reply}"), py_str("Back on {detail} again: {reply}"), py_str("As we said about {detail}: {reply}")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again.UNDERNEATH_SAID"); }
     s_UNDERNEATH_SAID(py_tuple(vec![py_str("{said} is the same thing underneath, and the step is the same: {reply}"), py_str("{said} is the same thing again, so the step has not changed: {reply}")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again.UNDERNEATH_CLAUSE"); }
     s_UNDERNEATH_CLAUSE(py_tuple(vec![py_str("{said} - that is the same thing underneath, and the step is the same: {reply}"), py_str("{said}, and it comes to the same thing: {reply}")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again.NOTHING_MORE"); }
     s_NOTHING_MORE(py_tuple(vec![py_str("Nothing more on it I'm afraid: {reply}"), py_str("That is all I have on it: {reply}"), py_str("There is nothing further to add: {reply}")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again.LIKE_I_SAID"); }
     s_LIKE_I_SAID(py_tuple(vec![py_str("Like I said: {reply}")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again.FRAMES"); }
     s_FRAMES(call_builtin("tuple", &[mcall(&py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e))), "fromkeys", &[op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&g_AGAIN(), &g_SHORT_AGAIN()), &py_tuple(vec![g_AGAIN_HELP()])), &g_DETAIL_AGAIN()), &g_SAME_ADVICE()), &g_RETURN()), &g_UNDERNEATH_SAID()), &g_UNDERNEATH_CLAUSE()), &g_NOTHING_MORE()), &g_LIKE_I_SAID()), &pyrt::xrefs::xget("memory.topics", "REPEAT"))])]).unwrap_or_else(|e| exc::raise(e)));
     fn __data1() -> Py { py_dict(vec![(py_str("i"), py_str("you")), (py_str("me"), py_str("you")), (py_str("my"), py_str("your")), (py_str("mine"), py_str("yours")), (py_str("myself"), py_str("yourself")), (py_str("am"), py_str("are")), (py_str("i'm"), py_str("you're")), (py_str("im"), py_str("you're")), (py_str("i've"), py_str("you've")), (py_str("i'll"), py_str("you'll")), (py_str("i'd"), py_str("you'd")), (py_str("we"), py_str("you")), (py_str("our"), py_str("your")), (py_str("us"), py_str("you")), (py_str("was"), py_str("were"))]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again.FOR_THE_PERSON"); }
     s_FOR_THE_PERSON(__data1());
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again.SLOT"); }
     s_SLOT(stdlib_call("re", "compile", &[py_str("\\{[a-z_]+\\}")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again.FEELING"); }
     s_FEELING(stdlib_call("re", "compile", &[py_str("^(?:i\\s+feel|i\\s+felt|i'?m\\s+feeling|i\\s+am\\s+feeling|feeling)\\s+(.+)$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again.CANNOT"); }
     s_CANNOT(stdlib_call("re", "compile", &[py_str("^(?:i\\s+can'?t|i\\s+cannot|i\\s+can\\s+not|i'?m\\s+not\\s+able\\s+to)\\s+(.+)$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again.BEING"); }
     s_BEING(stdlib_call("re", "compile", &[py_str("^(?:i'?m|i\\s+am)\\s+(?:so\\s+|really\\s+|very\\s+|still\\s+|just\\s+|quite\\s+)?(.+)$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again.NOTHING"); }
     s_NOTHING(stdlib_call("re", "compile", &[py_str("^nothing\\s+(\\w+)\\s+me$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again.CLAUSE_ONLY"); }
     s_CLAUSE_ONLY(stdlib_call("re", "compile", &[py_str("^(?:everything|nobody|nothing|life|things|it|this)\\s+\\S"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again.OPENING_FILLER"); }
     s_OPENING_FILLER(stdlib_call("re", "compile", &[py_str("^(?:so|and|but|yeah|yeah|well|honestly|tbh|idk|dunno|just|ok|okay|hi|hey)\\b[ ,]*"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again.A_PHRASE"); }
     s_A_PHRASE(Py::Int(8));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again._NOT_THE_END"); }
     s__NOT_THE_END(call_builtin("frozenset", &[mcall(&py_str("a an the my your our his her their its this that these those some any"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again.SEPARATOR"); }
     s_SEPARATOR(stdlib_call("re", "compile", &[py_str("\\s*(?::|\\u2014|\\u2013|-)\\s*$")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again.ANY_SEPARATOR"); }
     s_ANY_SEPARATOR(py_str("\\s*(?::|\\u2014|\\u2013|-)\\s*"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again.LEADS"); }
     s_LEADS(call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_FRAMES()) { let mut frame: Py = __item.clone(); __out.push(geti(&mcall(&call_builtin("str", &[frame.clone()]).unwrap_or_else(|e| exc::raise(e)), "split", &[py_str("{reply}")]), &Py::Int(0))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again.PATTERNS"); }
     s_PATTERNS(call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_FRAMES()) { let mut frame: Py = __item.clone(); __out.push(_lead(&[frame.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again.LEAD_WORDS"); }
     s_LEAD_WORDS(call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_FRAMES()) { let mut frame: Py = __item.clone(); __out.push(call_builtin("tuple", &[pyrt::xrefs::xcall("memory.topics", "words", &[geti(&mcall(&call_builtin("str", &[frame.clone()]).unwrap_or_else(|e| exc::raise(e)), "split", &[py_str("{")]), &Py::Int(0))])]).unwrap_or_else(|e| exc::raise(e))); } py_list(__out) })() }) { let mut lead: Py = __item.clone(); if py_truthy(&op_gt(&call_builtin("len", &[lead.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1))) {  __out.push(lead.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again.COLON_LEADS"); }
     s_COLON_LEADS(call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_FRAMES()) { let mut frame: Py = __item.clone(); __out.push(call_builtin("tuple", &[pyrt::xrefs::xcall("memory.topics", "words", &[geti(&mcall(&call_builtin("str", &[frame.clone()]).unwrap_or_else(|e| exc::raise(e)), "split", &[py_str("{")]), &Py::Int(0))])]).unwrap_or_else(|e| exc::raise(e))); } py_list(__out) })() }) { let mut lead: Py = __item.clone(); if py_truthy(&Py::Bool(py_eq(&call_builtin("len", &[lead.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1)))) {  __out.push(geti(&lead.clone(), &Py::Int(0))); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again.ONE_WORD_LEAD"); }
     s_ONE_WORD_LEAD(if py_truthy(&g_COLON_LEADS()) { stdlib_call("re", "compile", &[op_modulo(&py_str("^(%s)\\s*[:,]\\s"), &mcall(&py_str("|"), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_COLON_LEADS()) { let mut word: Py = __item.clone(); __out.push(stdlib_call("re", "escape", &[word.clone()]).unwrap_or_else(|e| exc::raise(e))); } py_list(__out) })() }])), stdlib_attr("re", "IGNORECASE").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)) } else { Py::None });
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again.AN_ASK"); }
     s_AN_ASK(stdlib_call("re", "compile", &[py_str("\\b(?:what|whats|which|why|how|when|where|who|whose|should|shall|could|would|can|do|does|did|is|are|was|were|any|anything)\\b|\\?")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again.FRAME_WORDS"); }
     s_FRAME_WORDS(call_builtin("frozenset", &[mcall(&py_str("back again then about as said return returning goes going go to a an the\n    of in on at for and or but so also just still now it its this that these those i me my we our\n    you your they them their he she him her please thanks thank"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again.A_DETAIL"); }
     s_A_DETAIL(stdlib_call("re", "compile", &[py_str("\\bhow\\s+(?:long|much|many|often|far|hot|old|quickly)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again.ANOTHER_ONE"); }
     s_ANOTHER_ONE(stdlib_call("re", "compile", &[py_str("\\b(?:what|how) about\\b|\\b(?:bigger|smaller|larger|heavier|lighter|cheaper|dearer|pricier|costlier|older|younger|worse|better|other|different|longer|shorter|higher|lower|faster|nearer|further|farther|easier|harder|stronger|weaker|hotter|colder|warmer|quicker|newer|smarter|richer|poorer|nicer|simpler|tougher|thicker|thinner|slower)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again.A_MONEY_ASK"); }
     s_A_MONEY_ASK(stdlib_call("re", "compile", &[py_str("\\bhow much\\b|\\bhow many (?:pounds|dollars|euros)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again.MONEY_SAID"); }
     s_MONEY_SAID(stdlib_call("re", "compile", &[py_str("\\b(?:owe|owes|owed|pay|paid|pays|cost|costs|price|prices|afford|spend|spent|bill|bills|budget|save|saved|earn|earns|salary|wage|wages|rent|money|card|loan|mortgage|debt|deposit|refund|quote|quoted)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again.AN_AMOUNT"); }
     s_AN_AMOUNT(stdlib_call("re", "compile", &[py_str("[\\u00a3$\\u20ac]|\\b\\d+(?:\\.\\d+)?\\s?(?:pounds?|quid|dollars?|euros?|bucks|pence|cents)\\b|\\b\\d+(?:,\\d{3})+\\b|\\b[bB]\\d{2,}\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again.A_REPORT"); }
     s_A_REPORT(stdlib_call("re", "compile", &[py_str("\\b(?:i|im|i'm|i've|ive|we|we're|we've|my|our|he|he's|hes|she|she's|shes|they|they're|they've)\\s+\\w"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again.AN_ASK"); }
     s_AN_ASK(stdlib_call("re", "compile", &[py_str("\\b(?:what|which|how|why|when|where|who|can|could|should|would|shall|is|are|do|does|did|any|anything|anyone|remind|tell|told|worth)\\b|\\?"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again.A_STILL_GOING_ON"); }
     s_A_STILL_GOING_ON(stdlib_call("re", "compile", &[py_str("\\b(?:keeps?|kept|keeps on|still|again|always|every|each|wont|won't|never|constantly|over and over|every time|all the time)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again.A_SCRIPT"); }
     s_A_SCRIPT(stdlib_call("re", "compile", &[py_str("(?:\\\"[^\\\"]{8,}\\\"|\\u201c[^\\u201d]{8,}\\u201d|(?<![\\w])'[^']{8,}'(?![\\w]))")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again.FACT_RECALL"); }
     s_FACT_RECALL(stdlib_call("re", "compile", &[py_str("^(?:you(?:'ve| have) (?:got|had)|you (?:live|'re|are)|your \\w[\\w' -]{0,20}? (?:is|was)|i have you as|you told me (?:you|your|it))\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again.SAID_BACK"); }
     s_SAID_BACK(stdlib_call("re", "compile", &[py_str("^(?:you said\\b|you told me\\b|i have you as\\b)"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.again._RULED_OUT"); }
     s__RULED_OUT(stdlib_call("re", "compile", &[py_str("\\b(?:no|not|without|instead|except|never|other\\s+than)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
 }
 pub fn the_name_the_answer_says(args: &[Py]) -> Py {

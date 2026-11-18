@@ -67,18 +67,26 @@ fn module_body() {
             let mut __handled5 = false;
             if !__handled5 && exc::matches_any(&__e, &["Exception"]) {
                 __handled5 = true;
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.a_question_about_somebody.pick"); }
     s_pick(Py::None);
             }
             if !__handled5 { __unhandled4 = Some(__e); }
         }
     }
     if let Some(__e) = __unhandled4 { exc::raise(__e); }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.a_question_about_somebody.WHO_IS_IT"); }
     s_WHO_IS_IT(py_tuple(vec![py_str("Who do you mean?"), py_str("Who's that, then?"), py_str("Who are we talking about?")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.a_question_about_somebody.PRIORITY"); }
     s_PRIORITY(Py::Int(7300));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.a_question_about_somebody.A_THIRD_PARTY"); }
     s_A_THIRD_PARTY(stdlib_call("re", "compile", &[py_str("\\b(?:he|she|him|her|his|hers|they|them|their|theirs)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.a_question_about_somebody.SOMEBODY_IN_THE_LINE"); }
     s_SOMEBODY_IN_THE_LINE(stdlib_call("re", "compile", &[py_str("\\b(?:i|i'm|im|me|my|mine|myself|we|us|our|ours|you|your|yours|yourself|yourselves|someone|somebody|anyone|anybody|everyone|everybody|people|nobody|no one)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.a_question_about_somebody.NAMES_THEM"); }
     s_NAMES_THEM(stdlib_call("re", "compile", &[py_str("\\b(?:my|our|the|this|that|these|those)\\s+[a-z][a-z'-]{1,}"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.a_question_about_somebody.A_FACT_ABOUT_THEM"); }
     s_A_FACT_ABOUT_THEM(stdlib_call("re", "compile", &[py_str("\\bhow (?:old|tall|big|heavy|far|long)\\b|\\b(?:what|whats|what's)\\b[^?]*\\b(?:name|age|job|birthday|number|address)\\b|\\bwhere (?:does|do|did|is|was)\\b[^?]*\\b(?:live|work|come from|from|stay|based)\\b|\\b(?:is|are|was|were)\\s+(?:he|she|they)\\b|\\bhow (?:is|are|was|were)\\s+(?:he|she|they)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.a_question_about_somebody.AN_ASK"); }
     s_AN_ASK(stdlib_call("re", "compile", &[py_str("^\\s*(?:how|what|whats|what's|where|when|which|why|is|are|was|were|does|do|did|has|have|can|could|would|will)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
 }
 pub fn _there_is_a_chat(args: &[Py]) -> Py {

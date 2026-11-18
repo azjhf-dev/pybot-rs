@@ -99,24 +99,43 @@ pub fn g__SIZE_WORD() -> Py { ensure_init(); G__SIZE_WORD.with(|c| c.borrow().cl
 pub fn s__SIZE_WORD(v: Py) { ensure_init(); G__SIZE_WORD.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("The same thing in another size, asked straight after the answer.\n\n\"how long do i roast a chicken\" is answered with a rule that already carries the size in it (\"20\nminutes per 500g plus 20 minutes\"), and \"what about a bigger one\" is the person asking that rule\nfor their own bird. The follow-up names no food and no number, so every reader refused it and the\nperson was told the bot did not know enough to answer honestly, with a search suggested - one\nturn after an answer that had the whole of it.\n\nTwo things follow the answer, and both are said with what the answer already said:\n\n* a rate (\"per 500g\", \"for every pound\") is the answer for any size, so the rule is said again\n  and the sum is left to the person;\n* times that were given for one unnamed size (\"6 minutes for a runny yolk\", \"about an hour for a\n  medium potato\") are times for that size, so a bigger one wants a few minutes more and a smaller\n  one a few minutes less, with the method unchanged.\n\nOnly a follow-up that says \"bigger\", \"larger\", \"smaller\" and so on about \"one\" reaches this, and\nonly when the answer on the screen gave a time. Anything else is left to the modules below.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.size._ANOTHER_SIZE"); }
     s__ANOTHER_SIZE(stdlib_call("re", "compile", &[py_str("\\b(?:big|bigger|large|larger|small|smaller|little|littler|thicker|thinner|wider|narrower)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.size._SIZE_WORD"); }
     s__SIZE_WORD(py_str("(?:bigger|larger|smaller|littler|thicker|thinner|wider|narrower)"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.size._POINTS_BACK"); }
     s__POINTS_BACK(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&g__SIZE_WORD(), &py_str("\\s+(?:one|ones|version|size|sized|that|it|them|those|batch|tin|pot|dish|piece|bird|cut|joint|loaf|pan|mug|cup|glass|portion|helping)\\b|\\b(?:what about|and|how about|what if|or|then)\\s+(?:a|an|the)?\\s*(?:bit\\s+|little\\s+|much\\s+|whole\\s+)?(?:a|an|the)?\\s*")), &g__SIZE_WORD()), &py_str("\\s*[?.!]*$")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.size._A_TIME"); }
     s__A_TIME(stdlib_call("re", "compile", &[py_str("\\b\\d+\\s*(?:-|to)?\\s*\\d*\\s*(?:minutes?|mins?|hours?|hrs?)\\b|\\b\\d+\\s*(?:per|a)\\b|\\b(?:an?|one|two|three|four|five|ten|twenty|thirty|forty|half an)\\s+(?:minutes?|mins?|hours?|hrs?)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.size._RULE_STOPS"); }
     s__RULE_STOPS(stdlib_call("re", "compile", &[py_str(",\\s*(?:so|which) |; |\\s-\\s|\\s\\u2014\\s")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.size._A_RATE"); }
     s__A_RATE(stdlib_call("re", "compile", &[py_str("\\bper\\s+(?:\\d+\\s*)?(?:g|kg|gram|grams|kilo|kilos|pound|pounds|lb|lbs|centimetre|centimetres|cm|inch|inches|litre|litres|person)\\b|\\bfor every\\b|\\beach\\s+\\d+"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.size._SENTENCE"); }
     s__SENTENCE(stdlib_call("re", "compile", &[py_str("[^.!?]+[.!?]?")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.size.BIGGER"); }
     s_BIGGER(py_tuple(vec![py_str("Same rule, just a bigger sum: {rule}"), py_str("The rule works at any size: {rule}"), py_str("Same as before, and the sum does the work: {rule}")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.size.SMALLER"); }
     s_SMALLER(py_tuple(vec![py_str("Same rule, just a smaller sum: {rule}"), py_str("The rule works at any size: {rule}"), py_str("Same as before, and the sum does the work: {rule}")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.size.SAID_BIGGER"); }
     s_SAID_BIGGER(py_tuple(vec![py_str("That rule is the whole of it - the size goes into it and the time comes out."), py_str("Same rule, still: nothing changes with a bigger one except the figure you put into it."), py_str("It does not change with the size - put your figure into that rule and it holds.")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.size.SAID_SMALLER"); }
     s_SAID_SMALLER(py_tuple(vec![py_str("That rule is the whole of it - the size goes into it and the time comes out."), py_str("Same rule, still: nothing changes with a smaller one except the figure you put into it."), py_str("It does not change with the size - put your figure into that rule and it holds.")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.size.MORE"); }
     s_MORE(py_tuple(vec![py_str("A bigger one wants a few minutes more than that - same method, just check it later."), py_str("Give a bigger one longer than those times: a few minutes more, and check it."), py_str("Those times are for a normal one, so a bigger one takes a few minutes longer.")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.size.LESS"); }
     s_LESS(py_tuple(vec![py_str("A smaller one wants a few minutes less than that - same method, just check it earlier."), py_str("Give a smaller one less time than that: a few minutes fewer, then check it."), py_str("Those times are for a normal one, so a smaller one takes a few minutes less.")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.size._OUR_SHORT_LINES"); }
     s__OUR_SHORT_LINES(call_builtin("frozenset", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&op_add(&op_add(&op_add(&g_MORE(), &g_LESS()), &g_SAID_BIGGER()), &g_SAID_SMALLER())) { let mut shape: Py = __item.clone(); __out.push(_flat(&[shape.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.size._OUR_RULE_LEADS"); }
     s__OUR_RULE_LEADS(py_tuple(vec![py_str("same rule, just a bigger sum:"), py_str("same rule, just a smaller sum:"), py_str("the rule works at any size:"), py_str("same as before, and the sum does the work:")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.size._BY_WEIGHT"); }
     s__BY_WEIGHT(stdlib_call("re", "compile", &[py_str("\\bper\\s+(?:\\d+\\s*)?(?:g|kg|gram|grams|kilo|kilos|pound|pounds|lb|lbs)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.size._FOOD"); }
     s__FOOD(py_str("chickens?|birds?|turkeys?|duck|lamb|beef|pork|ham|roasts?|steaks?|chops?|fillets?|fish|salmon|cod|trout|eggs?|potatoes|potato|onions?|carrots?|tomatoes|tomato|peppers?|courgettes?|aubergines?|cabbage|squash|melon|sausages?|cakes?|loaf|loaves|bread|pizza|pastry|pies?|tarts?|sponge|scones?|buns?|pancakes?"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.size._SIZED_THING"); }
     s__SIZED_THING(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("\\b(?:"), &g__FOOD()), &py_str(")\\b")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.size._SIZED_ASKED"); }
     s__SIZED_ASKED(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("\\b(?:"), &g__FOOD()), &py_str("|joints?|breasts?|thighs?|legs?|cuts?|tins?|pots?|pans?|dishes|trays?|batches?|portions?|helpings?|mugs?|cups?|glasses)\\b")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
 }
 pub fn _flat(args: &[Py]) -> Py {

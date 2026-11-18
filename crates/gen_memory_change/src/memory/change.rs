@@ -75,18 +75,31 @@ pub fn g_WISHES() -> Py { ensure_init(); G_WISHES.with(|c| c.borrow().clone()) }
 pub fn s_WISHES(v: Py) { ensure_init(); G_WISHES.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("A line that reports a change to a fact the store keeps is news, not a question about it.\n\n\"i want to lose a bit of weight\" / \"ive changed my diet\" was answered \"You haven't told me about\nyour diet.\" The person had just told the store about their diet, and the store denied the lot: the\nask pattern reads the words \"my diet\" as a request for the fact, and a line that reports a change\nto the fact is not a request for it.\n\nWhat is missing after \"ive changed my diet\" is not whether they changed it, it is what it is now,\nso the honest reply asks for that (or runs with it when the store holds the value). The same\nshape said as a wish (\"i want to change my diet\", \"should i change my diet\", \"im thinking of\nchanging my diet\") wants a hand with the change rather than a denial.\n\nThe subject is the caller's: it passes the word the fact is kept under (\"diet\", \"budget\", \"my\nhours\") and gets back how the line stands to it, so this is one reading for every fact the store\ncan be asked about rather than a rule for the diet.\n\nTwo things are left alone. A line that gives the new value (\"i changed jobs, im in a hospital\nnow\", \"ive changed my diet to vegan\") is a fact the readers that keep facts have already taken,\nand this reader stands down so they keep it. A how-to ask (\"how do i change my diet\") is a\nrequest for advice, which the advice modules answer with something concrete.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.change.CHANGED"); }
     s_CHANGED(stdlib_call("re", "compile", &[py_str("\\b(?:change|changed|changes|changing|swapped|swapping|switched|switching|given up|give up|gave up|gone off|went off|cut out|cut down|cutting out|cutting down|stopped|stopping|quit|quitting|dropped|ditched|overhauled|tweaked|reworked)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.change.SUBJECT_CHANGED"); }
     s_SUBJECT_CHANGED(stdlib_call("re", "compile", &[py_str("\\b(?:is|are|has|have|had|got)\\s+(?:all\\s+)?(?:changed|different|new)\\b|\\bis\\s+not\\s+the\\s+same\\b|\\bnot the same\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.change.WANTS"); }
     s_WANTS(stdlib_call("re", "compile", &[py_str("\\b(?:want(?:s|ed)?|wanna|need(?:s|ed)?|should|shall|ought|could|would|might|may|thinking|thought|considering|planning|plan|trying|try|hoping|hope|ready|about|worth|idea|better)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.change.HOW_TO"); }
     s_HOW_TO(stdlib_call("re", "compile", &[py_str("\\bhow\\s+(?:do|does|can|could|should|would|might|to)\\b|\\bwhat(?:'s| is) the best way\\b|\\bany (?:tips|advice|ways)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.change.WHEN_TAIL"); }
     s_WHEN_TAIL(stdlib_call("re", "compile", &[py_str("\\b(?:a|an|one|two|three|four|five|six|few|couple(?: of)?|\\d+)\\s+(?:day|week|month|year|while)s?(?:\\s+or so)?\\s+ago\\b|\\b(?:last|this)\\s+(?:week|month|year)\\b|\\b(?:recently|lately|these days|nowadays)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.change.FILLER"); }
     s_FILLER(call_builtin("frozenset", &[mcall(&py_str("\n    i me my our we you your it its the a an to of and but so or now just really also too very\n    much lot bit still again already even actually all right ok okay well oh ah yeah yes no\n    have has had ve ive weve youve theyve im am is are was were be been do does did done\n    dont doesnt didnt cant\n"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.change.ASKS"); }
     s_ASKS(py_dict(vec![(py_str("diet"), py_str("What does a normal day look like now?")), (py_str("budget"), py_str("What are you working with now?")), (py_str("hours"), py_str("What are your hours now?")), (py_str("job"), py_str("What are you doing now?"))]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.change.WISHES"); }
     s_WISHES(py_dict(vec![(py_str("diet"), py_str("What is the change for - weight, energy, or something a doctor said? That decides which swaps are worth it.")), (py_str("budget"), py_str("What is the change for - a bill, a save, or paying something off?"))]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.change.KEPT"); }
     s_KEPT(py_str("Good to know. "));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.change.DROPPING"); }
     s_DROPPING(py_str("{was}, so I'll drop that - {ask}"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.change.CHANGED_ASK"); }
     s_CHANGED_ASK(py_str("What is it now?"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.change.WISHED"); }
     s_WISHED(py_str("What are you trying to change about it? Tell me and I'll be concrete."));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.change.NOT_WANTING"); }
     s_NOT_WANTING(stdlib_call("re", "compile", &[py_str("\\b(?:don'?t|doesn'?t|didn'?t|not|never|no need|no plans|no intention)\\b[^.!?]{0,20}\\b(?:want|wanna|need|going to|gonna|plan|plans|thinking|planning|change|changing)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
 }
 pub fn _names(args: &[Py]) -> Py {

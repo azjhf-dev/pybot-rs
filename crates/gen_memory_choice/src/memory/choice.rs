@@ -178,40 +178,75 @@ fn module_body() {
     s_pick(py_func("pick", |args: &[Py]| pyrt::xrefs::xcall("compose", "pick", args)));
     s_last_bot(py_func("last_bot", |args: &[Py]| pyrt::xrefs::xcall("memory", "last_bot", args)));
     s_recent(py_func("recent", |args: &[Py]| pyrt::xrefs::xcall("memory", "recent", args)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.choice._LEAD"); }
     s__LEAD(py_str("^(?:(?:ok|okay|fine|right|well|so|then|hmm|ha)[, ]+)*"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.choice._PICK_ASK"); }
     s__PICK_ASK(stdlib_call("re", "compile", &[op_add(&g__LEAD(), &py_str("(?:(?:you|u|yous)[ ]?(?:pick|choose|decide|select|choose one|pick one|decide for me)|(?:you|u) (?:can )?(?:pick|choose|decide)(?: (?:one|it|for me|the (?:one|rest|\\w+)))?|your (?:call|choice|pick|decision)|(?:i'?ll |i will |i'?d )?let you (?:pick|choose|decide)(?: (?:one|it|for me|this time))?|(?:can|could|will|would) you (?:pick|choose|decide)(?: (?:one|it|for me))?|up to you|over to you|you tell me|you know best|surprise me|(?:i )?(?:don'?t|do not) mind[, ]+you (?:pick|choose|decide)|(?:either|any|whatever)(?: one| of (?:them|those|these))?(?: is| are)? (?:fine|good|ok|okay)(?:[, ]+(?:you|u) (?:pick|choose|decide))?|(?:you|u) (?:pick|choose|decide)(?:[, ]+(?:i )?(?:don'?t|do not) mind)?)(?: (?:then|please|thanks|for me|between (?:them|those|these|the two)))?[.?!]*$")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.choice._CLAUSE"); }
     s__CLAUSE(stdlib_call("re", "compile", &[py_str("\\b(?:i|i'll|i'd|you|you'll|we|they|tell me|let me|if|but|because|which|whichever|whatever|search|google|not sure|don'?t know)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.choice._TAIL_STRIP"); }
     s__TAIL_STRIP(stdlib_call("re", "compile", &[py_str("[\\s.;:,]+$")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.choice._STEP"); }
     s__STEP(stdlib_call("re", "compile", &[py_str("\\b(?:with|then|until|after|before|for \\d|at \\d|under|onto|over|into|using|while|once)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.choice._NOT_A_THING"); }
     s__NOT_A_THING(stdlib_call("re", "compile", &[py_str("\\b(?:so|are|is|was|were|works|tastes|means|are)\\b|^-"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.choice.PICKS"); }
     s_PICKS(py_tuple(vec![py_str("My pick: {option}."), py_str("I'd say {option}."), py_str("If it were me: {option}."), py_str("{option} — that's the one I'd choose.")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.choice._ASKED"); }
     s__ASKED(stdlib_call("re", "compile", &[py_str("^(?:\\W*(?:what|which|who|when|where|why|how|any|anyone|anything|can|could|should|would|do|does|did|is|are|shall|give me|tell me|suggest|recommend)\\b|.*\\?\\s*$)"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.choice._BARE_HAND_BACK"); }
     s__BARE_HAND_BACK(stdlib_call("re", "compile", &[py_str("^(?:(?:ok|okay|fine|right|well|so|then|and|hmm|ha)[, ]+)*(?:(?:i\\s)?(?:don'?t|do not|dont) mind(?: (?:really|either|much|at all|tbh))?|(?:i'?m|im) (?:easy|not bothered|not fussed)(?: (?:either|really|tbh))?|(?:either|any|anything)(?: one| of (?:them|those|these))?(?: ?(?:is|are)? ?(?:fine|good|ok|okay|works))?|(?:any|either) of (?:them|those|these)|whatever (?:you|u) (?:think|reckon|say|like))[.?!]*$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.choice._PICK_SAID"); }
     s__PICK_SAID(py_tuple(vec![stdlib_call("re", "compile", &[py_str("^(?:my pick:|if it were me:|i'?d say|i'?d go with|i would go with) *(.+?)[.!]*$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)), stdlib_call("re", "compile", &[py_str("^(.+?)\\s+\\u2014\\s+that's the one i'?d choose[.!]*$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e))]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.choice._INSIST_LEAD"); }
     s__INSIST_LEAD(py_str("then it is|my pick is still|same pick:|i'?ll decide then:|go with"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.choice._INSIST_SAID"); }
     s__INSIST_SAID(stdlib_call("re", "compile", &[op_modulo(&py_str("^(?:%s) *(.+?)[.!](?:\\s|$)"), &g__INSIST_LEAD()), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.choice._INSIST_WRAP"); }
     s__INSIST_WRAP(stdlib_call("re", "compile", &[op_modulo(&py_str("^(?:%s) *(.+?)[.!]*$"), &g__INSIST_LEAD()), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.choice.INSISTED"); }
     s_INSISTED(py_tuple(vec![py_str("Then it is {option}. You can blame me if it is wrong."), py_str("My pick is still {option}."), py_str("Same pick: {option}."), py_str("I'll decide then: {option}."), py_str("Go with {option}. Someone has to choose, so I have."), py_str("Then it is {option}. There is nothing else to weigh up.")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.choice.BY_A_RULE"); }
     s_BY_A_RULE(py_tuple(vec![py_str("Then take the cheapest one that fits the time you have, and sort the details as you go."), py_str("Go with the one you would be annoyed to lose. The rest is noise."), py_str("Pick the first one you liked the sound of. That instinct is usually right."), py_str("Then choose the one that leaves you the most time. The rest sorts itself out.")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.choice._A_MEASURE"); }
     s__A_MEASURE(stdlib_call("re", "compile", &[py_str("\\b(?:\\d+(?:\\.\\d+)?\\s*(?:cal|calories|kcal|g|kg|mg|ml|l|gram|grams|kilo|kilos|litre|litres|min|mins|minutes|hour|hours|degrees?|percent|%)|per\\s+\\d)"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.choice.DECIDING_ASK"); }
     s_DECIDING_ASK(stdlib_call("re", "compile", &[py_str("^(?:(?:ok|okay|fine|right|well|so|then|and|but|hmm|ah)[, ]+)*(?:(?:what|which)(?:\\s+(?:one|thing|of them))?\\s+(?:did|do|have|had)\\s+(?:i|we)\\s+(?:decide|decided|settle|settled|pick|picked|choose|chose|go for|go with|end up with|end up getting|come down to|land on|get|got|buy|bought)|(?:so\\s+)?what\\s+(?:am|are)\\s+(?:i|we)\\s+(?:getting|having|going for|picking|ending up with|settling on))\\b[^?.!]{0,24}[?.!]*$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.choice.STRONG_CHANGE"); }
     s_STRONG_CHANGE(stdlib_call("re", "compile", &[py_str("\\b(?:actually|instead|on second thoughts?|changed my mind|then again|make it|i(?:'| a)?ve decided|i decided|we decided|we(?:'| a)?ve decided|decided on|settled on|settling on|i(?:'| a)?ve settled|we(?:'| a)?ve settled)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.choice.WEAK_CHANGE"); }
     s_WEAK_CHANGE(stdlib_call("re", "compile", &[py_str("\\b(?:go with|going with|go for|going for|went with|went for|end up with|ended up with|land on|landed on|opt for|opted for|pick|picked|picks|choose|chose|chosen)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.choice.CHANGED_IT"); }
     s_CHANGED_IT(stdlib_call("re", "compile", &[op_add(&op_add(&gattr(&g_STRONG_CHANGE(), "pattern"), &py_str("|")), &gattr(&g_WEAK_CHANGE(), "pattern")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.choice.CUE"); }
     s_CUE(call_builtin("frozenset", &[mcall(&py_str("no nope ok okay so then well and but lets let fine right actually instead\n    hmm ah yes yeah"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.choice.SECOND_FRAME"); }
     s_SECOND_FRAME(stdlib_call("re", "compile", &[py_str("^\\W*(?:(?:make (?:it|that)|go (?:with|for)|going (?:with|for)|decided on|settled on|settling on|(?:i|we)(?:'ve|'a)?ve?\\s+(?:decided|settled)(?:\\s+(?:on|to))?|lets|let us|to (?:get|go|buy|have)|just|then|so|ok|okay|instead|actually)\\b[\\s,]*)+"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.choice.NOT_AT_THE_START"); }
     s_NOT_AT_THE_START(call_builtin("frozenset", &[mcall(&py_str("up out off on down back in into onto over around through about\n    at by from with without for to of after before since until away along across"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.choice.DEFINITE"); }
     s_DEFINITE(call_builtin("frozenset", &[mcall(&py_str("the this that these those my our your his her their"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.choice.TRAIL"); }
     s_TRAIL(call_builtin("frozenset", &[mcall(&py_str("instead actually really probably maybe i think though anyway honestly then\n    now please thanks for with to on in at about of and but so also too both"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.choice.CORRECTION"); }
     s_CORRECTION(stdlib_call("re", "compile", &[py_str("^\\W*(?:its|it's|it is|theyre|they're|they are|theres|there's|thats|that's|hes|he's|shes|she's|im|i'm|i am|we're|we are)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.choice.A_CHOICE"); }
     s_A_CHOICE(stdlib_call("re", "compile", &[py_str("\\b(?:thinking (?:of|about)|consider(?:ing)?|deciding|decided between|chose between|choosing between|torn between|looking at|can'?t decide|undecided|options?|should i (?:get|go|buy|have|pick|choose)|which (?:one|would)|instead of|whether)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.choice.BARE_CHANGE"); }
     s_BARE_CHANGE(call_builtin("frozenset", &[py_tuple(vec![py_str("actually"), py_str("rather")])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.choice.DETERMINERS"); }
     s_DETERMINERS(call_builtin("frozenset", &[mcall(&py_str("a an the my our your his her their this that"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.choice.NO_THEN_THING"); }
     s_NO_THEN_THING(stdlib_call("re", "compile", &[py_str("^\\W*(?:no|nope)\\b[\\s,!]+"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.choice.CORRECTION_OPENER"); }
     s_CORRECTION_OPENER(stdlib_call("re", "compile", &[py_str("^\\W*(?:(?:actually|oh|sorry|ok|okay|well|right|wait)\\s+[,.]?\\s*)*(?:no|nope)\\b[\\s,.!-]+"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.choice.NO_CONTINUES"); }
     s_NO_CONTINUES(call_builtin("frozenset", &[mcall(&py_str("longer more way thanks thank such bother idea need chance matter doubt"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.choice.VERBISH"); }
     s_VERBISH(call_builtin("frozenset", &[mcall(&py_str("\nlike likes liked love loved hate hated want wanted need needed think thought know knew\nsaid say says tell told do did does done be been being is are was were will would can\ncould should might have has had get got go went feel felt seems seem sound sounds work works\n"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.choice.NOT_THE_THING"); }
     s_NOT_THE_THING(call_builtin("frozenset", &[mcall(&py_str("\na an the my our your his her their this that these those it its it's them they he she hes shes\none ones you your yours i im ive we us there here\nto get getting have having buy buying go going for with on about at in\nof and or but so then now instead actually really probably maybe i think we\nsomething anything nothing else more better different\n"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.choice.SETTLED"); }
     s_SETTLED(py_tuple(vec![py_str("{thing} — that's the one you settled on."), py_str("You settled on {thing}."), py_str("The one you landed on was {thing}."), py_str("{thing}, as far as this chat goes.")]));
 }
 pub fn _clean_option(args: &[Py]) -> Py {

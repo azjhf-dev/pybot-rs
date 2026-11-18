@@ -27,6 +27,7 @@ pub fn g_PRIORITY() -> Py { ensure_init(); G_PRIORITY.with(|c| c.borrow().clone(
 pub fn s_PRIORITY(v: Py) { ensure_init(); G_PRIORITY.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("A colour on a part of the person's own body is answered, not filed.\n\n\"my back is red\", \"my neck is blotchy\", \"my face has gone bright red\" fell to the floor - \"Got it.\nIs there anything you'd like a hand with?\" - and \"my ears went red\" reached the laundry card,\nbecause the -ed catch-all read \"red\" as a past tense. The person is showing you something, and what\na patch like that usually is plus one question about it is a better reply than either.\n\n`bot/compose/colour_on_the_body.py` holds the reading and the wording. The band sits above the\nsmall-talk pool and the floor and below the modules that know a subject: this is a shape and two\nsentences, not knowledge. `respond` returns None on every line the reading cannot stand behind, so\nanother reader or the fallback keeps the turn.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.colour_on_the_body.PRIORITY"); }
     s_PRIORITY(Py::Int(350));
 }
 pub fn respond(args: &[Py]) -> Py {

@@ -2621,6 +2621,7 @@ fn module_body() {
     s__amounts(py_func("_amounts", |args: &[Py]| pyrt::xrefs::xcall("memory.enough", "_amounts", args)));
     s__near_bare_range(py_func("_near_bare_range", |args: &[Py]| pyrt::xrefs::xcall("memory.enough", "_near_bare_range", args)));
     s__target(py_func("_target", |args: &[Py]| pyrt::xrefs::xcall("memory.enough", "_target", args)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store._enough_reply"); }
     s__enough_reply(pyrt::xrefs::xget("memory.store_replies", "enough_reply"));
     s_ABOUT_PERSON_ASK(pyrt::xrefs::xget("memory.relations", "ABOUT_PERSON_ASK"));
     s_AGE_ADVERB(pyrt::xrefs::xget("memory.relations", "AGE_ADVERB"));
@@ -2754,21 +2755,37 @@ fn module_body() {
     s_WHEN_VAGUE(pyrt::xrefs::xget("modules.memory_tables", "WHEN_VAGUE"));
     s_WHEN_VERB(pyrt::xrefs::xget("modules.memory_tables", "WHEN_VERB"));
     s_WHERE_PLAN(pyrt::xrefs::xget("memory.store_replies", "WHERE_PLAN"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.REMIND_QUESTION"); }
     s_REMIND_QUESTION(stdlib_call("re", "compile", &[py_str("\\bremind me\\b[^.!?]{0,24}\\b(?:what|when|where|who|whom|whose|how|which|why|if)\\b|\\bremind me\\b(?:[\\s,]*(?:again|please))*[\\s,]*$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.NOT_A_FACT"); }
     s_NOT_A_FACT(stdlib_call("re", "compile", &[py_str("\\bhaven't (?:told|said|mentioned|given|got)\\b|\\bhaven't your\\b|\\bdon't know\\b|\\bnot sure\\b|\\bnothing comes to mind\\b|\\bdidn't say\\b|\\bnever told\\b|\\bno idea\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.NOT_FROM_THE_REPAIR"); }
     s_NOT_FROM_THE_REPAIR(call_builtin("frozenset", &[mcall(&py_str("plan plans drop retract correction"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.NOT_A_NAME_BEFORE"); }
     s_NOT_A_NAME_BEFORE(stdlib_call("re", "compile", &[py_str("(?:\\b(?:a|an|the|some|another|his|her|their|our|your|my)\\s+)$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.THE_PLACE_IS_NAMED"); }
     s_THE_PLACE_IS_NAMED(stdlib_call("re", "compile", &[py_str("(?:^|[.!?;:]\\s+|\\n|\\b(?:to|in|into|from|at|near|of|around|through|toward|towards|via|going|coming|off|back|flying|travelling|traveling|moving|heading|headed|staying|visiting|visit|bound|left)\\s*(?:\\d+|two|three|four|five|six|seven|eight|nine|ten)?\\s*)$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.ASK_OPENERS"); }
     s_ASK_OPENERS(call_builtin("frozenset", &[mcall(&py_str("what whats which when where who whose why how hows\ndo does did is are was were am can could should would will shall have has had\nany anyone anything"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
-    s_AGES_IN_WORDS({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&pyrt::xrefs::xget("memory.facts", "FIGURE_WORDS"), "items", &[])) { let __unpk8078 = py_unpack(&__item.clone(), 2, None); let mut word: Py = __unpk8078[0].clone(); let mut number: Py = __unpk8078[1].clone(); __out.push((call_builtin("int", &[number.clone()]).unwrap_or_else(|e| exc::raise(e)), word.clone())); } py_dict(__out) })() });
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.AGES_IN_WORDS"); }
+    s_AGES_IN_WORDS({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&pyrt::xrefs::xget("memory.facts", "FIGURE_WORDS"), "items", &[])) { let __unpk9972 = py_unpack(&__item.clone(), 2, None); let mut word: Py = __unpk9972[0].clone(); let mut number: Py = __unpk9972[1].clone(); __out.push((call_builtin("int", &[number.clone()]).unwrap_or_else(|e| exc::raise(e)), word.clone())); } py_dict(__out) })() });
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.NAMED_FACT_ASK"); }
     s_NAMED_FACT_ASK(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&py_str("\\bwhat(?:'s|s| is| are| was| were)?\\s+my\\s+"), &pyrt::xrefs::xget("memory.store_lines", "_FACT_SLOT")), &py_str("\\b|\\bwhat\\s+(?:is|are|was|were)\\s+my\\s+")), &pyrt::xrefs::xget("memory.store_lines", "_FACT_SLOT")), &py_str("\\b|\\bwhere do i (?:work|live|come from)\\b(?=\\s*(?:[?.!,;:]|$)|\\s+(?:now|again|then|at|from|these|days|properly|though|honestly|anymore|either|oh|wait|sorry|hmm|actually|um|right|please|thanks)\\b)|\\bwhat do i work as\\b|\\bwho am i\\b|\\bhow old am i\\b|\\bwhat do i do for a living\\b")), stdlib_attr("re", "IGNORECASE").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.ASK_ABOUT_THEM"); }
     s_ASK_ABOUT_THEM(stdlib_call("re", "compile", &[py_str("^\\W*(?:is|are|does|do|did|was|were|can|could|has|have|will)\\b|\\bwhat (?:does|do|did|can|could|is|are|was|were) (?:he|she|they|your|my|his|her|their)\\b|\\bwhat(?:'s|s| is| are)\\s+(?:my|his|her|their|he|she|they)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.PERSON_ADVICE_ASK"); }
     s_PERSON_ADVICE_ASK(stdlib_call("re", "compile", &[py_str("^\\W*(?:can|could|should|shall|would|will|may|might|is it (?:ok|okay|fine|safe)|what can|what could|what should|how (?:do|can|should)|any (?:tips|ideas|advice|suggestions|ways))\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.CORRECTS_A_NAME"); }
     s_CORRECTS_A_NAME(stdlib_call("re", "compile", &[py_str("^\\W*(?:(?:no|nope|sorry|actually|oops|wait|hold on|correction)[,.]?\\s+)"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.CORRECTS_A_NAME_POSSESSIVE"); }
     s_CORRECTS_A_NAME_POSSESSIVE(stdlib_call("re", "compile", &[py_str("^\\W*(?:his|her|its|their)\\s+names?\\s+(?:actually|really)\\s+"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.AGE_IN_WORDS"); }
     s_AGE_IN_WORDS(mcall(&py_str("|"), "join", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(pyrt::xrefs::xget("memory.facts", "FIGURE_WORDS")); __kws.extend(vec![("key".to_string(), py_func("len", |args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e)))), ("reverse".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sorted", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.PET_NAME_AGE"); }
     s_PET_NAME_AGE(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("^\\W*(?:[a-z][a-z'-]{2,20})\\s+(?:is|was|are|were)\\s+(?P<age>\\d{1,2}|"), &g_AGE_IN_WORDS()), &py_str(")(?![\\d.,]\\d)(?!\\s+of\\b)(?!\\s*(?:kg|kilo\\w*|lbs?|pounds?|stone|st|cm|metres?|meters?|miles?|hours?|mins?|minutes?|percent|%))\\s*(?P<unit>months?|weeks?)?\\b")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.PET_LEAD_IN"); }
     s_PET_LEAD_IN(stdlib_call("re", "compile", &[py_str("^(?:and|also|oh|but|well|yeah|yes|no|sorry|actually|ok|okay|right|wait|god|hang on)\\b[\\s,]*"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.PET_AGE_ANSWER"); }
     s_PET_AGE_ANSWER(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("^\\W*(?:(?:he|she|it|they)(?:'s|s|\\s+is|\\s+are|\\s+is\\s+now)?\\s+)?(?P<age>\\d{1,2}|"), &g_AGE_IN_WORDS()), &py_str(")\\s*(?P<unit>years?|months?|weeks?)?\\s*(?:old)?\\W*$")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     s_AMOUNT(pyrt::xrefs::xget("memory.corrected", "AMOUNT"));
     s_ANY_NUMBER(pyrt::xrefs::xget("memory.corrected", "ANY_NUMBER"));
@@ -2993,63 +3010,107 @@ fn module_body() {
     s_when_answer(pyrt::xrefs::xget("memory.store_replies", "when_answer"));
     s_REPEAT_WORDS(pyrt::xrefs::xget("memory.store_replies", "REPEAT_WORDS"));
     s_asks_again(py_func("asks_again", |args: &[Py]| pyrt::xrefs::xcall("memory.store_replies", "asks_again", args)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.AGE_FIX"); }
     s_AGE_FIX(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("\\b(?:he|she|they)(?:'s|s| is| are| was)\\s+(?:now\\s+)?(?P<age>\\d{1,3}|"), &g_AGE_IN_WORDS()), &py_str(")\\b(?!\\s+of\\b)")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.CORRECTING"); }
     s_CORRECTING(stdlib_call("re", "compile", &[py_str("\\b(?:actually|no|nope|sorry|wait|i mean|i meant|make it|makes it)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.WEEKS_FIX"); }
     s_WEEKS_FIX(stdlib_call("re", "compile", &[py_str("\\b(?P<weeks>\\d{1,2})\\s*(?:weeks?|wks?)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.PREGNANCY_SAID_AGAIN"); }
     s_PREGNANCY_SAID_AGAIN(stdlib_call("re", "compile", &[py_str("\\b(?:pregnant|expecting)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.NAME_FIX"); }
     s_NAME_FIX(stdlib_call("re", "compile", &[py_str("\\b(?:(?:he|she|they)(?:'s|s| is| was)?\\s+(?:actually\\s+|really\\s+)?(?:called|named)|(?:his|her|their)\\s+names?\\s+(?:is|was|actually|really))\\s+(?P<name>[a-z][a-z'\\u2019-]{1,19})\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.NAME_NOT_A_NAME"); }
     s_NAME_NOT_A_NAME(call_builtin("frozenset", &[mcall(&py_str("not called named now really also still a an the"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.A_NAME_AFTER_A_PRONOUN"); }
     s_A_NAME_AFTER_A_PRONOUN(stdlib_call("re", "compile", &[py_str("\\b(?:he|she|they)(?:'s|s| is| was)\\s+(?P<name>[a-z][a-z'\\u2019-]{1,19})\\s*[,.!]?$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.A_NAME_WITH_ITS_VERB"); }
     s_A_NAME_WITH_ITS_VERB(stdlib_call("re", "compile", &[py_str("\\b(?:called|named)\\s+(?P<name>[A-Za-z][A-Za-z'-]{1,19})\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.ANOTHER_ANIMAL"); }
     s_ANOTHER_ANIMAL(stdlib_call("re", "compile", &[py_str("\\b(?:other|second|another|also|third)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.CORRECTS_A_MAKE"); }
     s_CORRECTS_A_MAKE(stdlib_call("re", "compile", &[py_str("\\b(?:sorry|actually|no|i mean|make that|or)?[\\s,]*(?:its|it's|it is)\\s+(?:actually\\s+|really\\s+|just\\s+)?(?:a|an|the)\\s+(?P<value>[a-z0-9][a-z0-9' .+-]{0,31})$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.NAME_GIVEN"); }
     s_NAME_GIVEN(stdlib_call("re", "compile", &[py_str("\\b(?:he|she|they)(?:'s|s| is| was)?\\s+(?:called|named)\\s+(?P<name>[a-z][a-z'\\-]{1,19})\\b|\\b(?:his|her|their)\\s+name(?:'s|\\s+is)\\s+(?P<name2>[a-z][a-z'\\-]{1,19})\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.NOT_A_NAME_AFTER_CALLED"); }
     s_NOT_A_NAME_AFTER_CALLED(call_builtin("frozenset", &[mcall(&py_str("\nin out off up down back away over round around about on at by for with without into onto\nsick ill late busy tired poorly bad good home here there now soon again today tonight\ntomorrow yesterday it them him her me us you one ones the a an\n"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.NUMBER"); }
     s_NUMBER(stdlib_call("re", "compile", &[py_str("[£$€]?\\d+(?:[.,]\\d+)?(?:\\s?(?:pounds|quid|euros?|dollars?|k))?(?![a-z])")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.PAIR_WITHOUT_A_MARKER"); }
     s_PAIR_WITHOUT_A_MARKER(py_tuple(vec![stdlib_call("re", "compile", &[py_str("^\\W*(?:(?:ok|okay|oh|well|so|and|hmm)[,. ]+)*(?:(?:it'?s|its|that'?s|thats)\\s+)?(?P<to>[a-z0-9][a-z0-9'-]{0,19})\\s*,?\\s+not\\s+(?P<wrong>[a-z0-9][a-z0-9'-]{0,19})[.!]?\\s*$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)), stdlib_call("re", "compile", &[py_str("^\\W*(?:(?:ok|okay|oh|well|so|and|hmm)[,. ]+)*not\\s+(?P<wrong>[a-z0-9][a-z0-9'-]{0,19})\\s*[,\\u2013\\u2014;-]\\s*(?:(?:it'?s|its|that'?s)\\s+)?(?P<to>[a-z0-9][a-z0-9'-]{0,19})[.!]?\\s*$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)), stdlib_call("re", "compile", &[py_str("^\\W*(?:(?:ok|okay|oh|well|so|and|hmm|sorry|actually|no|nope)[,. ]+)*(?:i'?m|i am|im|it'?s|its|it is|that'?s|thats|we'?re|we are)\\s+not\\s+(?P<wrong>[a-z0-9][a-z0-9'.\\-]{0,19})[\\s,;.!-]*(?:but\\s+)?(?:i'?m|i am|im|it'?s|its|it is|that'?s|thats|we'?re|we are)\\s+(?P<to>[a-z0-9][a-z0-9'.\\-]{0,19})[.!]?\\s*$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e))]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.NOT_A_NEW_VALUE"); }
     s_NOT_A_NEW_VALUE(call_builtin("frozenset", &[mcall(&py_str("a an the me you it that this these those my your his her our their\nthanks thank sure fair right wrong now then today tomorrow yesterday fine bad good great sorry\nplease yes yeah no not ok okay yet even both all much many one two three too so there here what\nwhy how who when where true false"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.TOO_AS_WELL"); }
     s_TOO_AS_WELL(stdlib_call("re", "compile", &[py_str("^(?:(?:and|also|but|plus)\\s+)?(?:my|our)\\s+(?P<who>[a-z]+(?:[ -]in[ -]law)?)\\s+(?P<agree>is\\s+as\\s+well|is\\s+too|as\\s+well|also|too)$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.OTHER_NOUNS"); }
     s_OTHER_NOUNS(call_builtin("frozenset", &[mcall(&py_str("friend mate partner baby child kid children kids cousin parent parents"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.FIGURE_MONEY"); }
     s_FIGURE_MONEY(py_tuple(vec![py_str("money")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.FIGURE_ASK"); }
     s_FIGURE_ASK(stdlib_call("re", "compile", &[py_str("^\\W*(?:(?:and|but|so|ok|okay|right|then|oh|well)\\W+)*how\\s+(?P<asked>many|much|long|far)\\b(?P<rest>.*)$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.FIGURE_FILLER"); }
     s_FIGURE_FILLER(call_builtin("frozenset", &[mcall(&py_str("a an the it its that this them those there here then now again\n    roughly exactly approximately about around all told overall altogether total more less much\n    many long do does did will would should can could you i we they he she reckon think suppose\n    guess say again please for of in at on to be have has had is are was were and but so if\n    when after before time times per each"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.FIGURE_AFTER"); }
     s_FIGURE_AFTER(call_builtin("frozenset", &[mcall(&py_str("is are was were and or a an the in for of to on at by after before\n    now then so but if when that from with without each every per of till until into about\n    to around roughly or while than which where"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.ACTION_DURATION"); }
     s_ACTION_DURATION(stdlib_call("re", "compile", &[py_str("\\bat a time\\b|\\bfor the first\\b|\\bfor the next\\b|\\bin a row\\b|\\beach time\\b|\\bthe (?:first|next|last|coming|following|remaining|final)\\b|\\b(?:once|twice|three times|a few times) a day\\b|\\ba day or two\\b|\\bper session\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.ACTION_AMOUNT"); }
     s_ACTION_AMOUNT(stdlib_call("re", "compile", &[py_str("\\b(?:whenever|when|if|once|each time|any time|every time|in case|unless)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.A_MONEY_FIGURE"); }
     s_A_MONEY_FIGURE(stdlib_call("re", "compile", &[py_str("(?:£|\\$|€)\\s*\\d[\\d,]*(?:\\.\\d+)?(?:\\s*(?:to|-|or)\\s*(?:£|\\$|€)?\\s*\\d[\\d,]*(?:\\.\\d+)?)?|(?<![\\d.,])\\d[\\d,]*(?:\\.\\d+)?(?:\\s*(?:to|-|or)\\s*\\d[\\d,]*(?:\\.\\d+)?)?\\s*(?:pounds?|quid|dollars?|euros?|pence)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.A_PERCENT_FIGURE"); }
     s_A_PERCENT_FIGURE(stdlib_call("re", "compile", &[py_str("(?<![\\d.,])\\d[\\d,]*(?:\\.\\d+)?(?:\\s*(?:to|-|or)\\s*\\d[\\d,]*(?:\\.\\d+)?)?\\s*(?:per\\s?cent|percent|%)"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.LISTED_FIGURE"); }
     s_LISTED_FIGURE(stdlib_call("re", "compile", &[py_str("(?:,|;)\\s*\\d+(?:\\s*(?:to|-|or)\\s*\\d+)?\\s+for\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.A_RATE_ASK"); }
     s_A_RATE_ASK(stdlib_call("re", "compile", &[py_str("how\\s+much\\b[^.?!]*\\b(?:a|per|each|every)\\s+(?:day|week|month|year)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.A_RATE_STATED"); }
     s_A_RATE_STATED(stdlib_call("re", "compile", &[py_str("(?:£|\\bgbp\\s*)?\\d[\\d,.]*\\s*(?:pounds?\\s+)?(?:a|per|each|every)\\s+(?:day|week|month|year)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.SAID_AGAIN"); }
     s_SAID_AGAIN(stdlib_call("re", "compile", &[py_str("\\bi\\s+(?:mean|meant)(?:\\s+to\\s+say)?\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.SORRY_OPENS_A_CORRECTION"); }
     s_SORRY_OPENS_A_CORRECTION(stdlib_call("re", "compile", &[py_str("\\b(?:sorry|soz)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.RECALL_WRAPPER"); }
     s_RECALL_WRAPPER(stdlib_call("re", "compile", &[py_str("^\\s*(?:and\\s+|so\\s+|but\\s+|also\\s+|again\\s+)?(?P<word>what|when|how\\s+old)\\s+(?:did|do)\\s+(?:i|we)\\s+(?:say|call|tell\\s+(?:you|u)|told\\s+(?:you|u)|mention)\\s+(?P<rest>.+?)\\s*\\??\\s*$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.RECALL_SLOTS"); }
     s_RECALL_SLOTS(py_tuple(vec![py_tuple(vec![stdlib_call("re", "compile", &[py_str("\\b(?:names?|called)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)), py_str("what"), py_str("name")]), py_tuple(vec![stdlib_call("re", "compile", &[py_str("\\b(?:birthday|bday|dob|date\\s+of\\s+birth)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)), py_str("when"), py_str("birthday")]), py_tuple(vec![stdlib_call("re", "compile", &[py_str("\\b(?:ages?)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)), py_str("how old"), py_str("age")]), py_tuple(vec![stdlib_call("re", "compile", &[py_str("\\b(?:budget|salary|wage|rent|target|savings?)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)), py_str("what"), Py::None]), py_tuple(vec![stdlib_call("re", "compile", &[py_str("\\b(?:address|postcode|number|time|date)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)), py_str("what"), Py::None])]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.RECALL_POSSESSIVE"); }
     s_RECALL_POSSESSIVE(stdlib_call("re", "compile", &[py_str("^\\s*(?P<poss>my|our|his|her|their)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.RECALL_SLOTS_BY_POSSESSIVE"); }
     s_RECALL_SLOTS_BY_POSSESSIVE(stdlib_call("re", "compile", &[py_str("^\\s*(?:my|our|his|her|their)\\s+(?P<attribute>names?|birthday|bday|dob|ages?|budget|salary|wage|societys?|address|postcode)\\??\\s*$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.SHE_OR_HE"); }
     s_SHE_OR_HE(py_dict(vec![(py_str("his"), py_tuple(vec![py_str("he"), py_str("is")])), (py_str("her"), py_tuple(vec![py_str("she"), py_str("is")])), (py_str("their"), py_tuple(vec![py_str("they"), py_str("are")])), (py_str("my"), py_tuple(vec![py_str("i"), py_str("am")])), (py_str("our"), py_tuple(vec![py_str("we"), py_str("are")]))]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.SLOT_WORDS"); }
     s_SLOT_WORDS(py_dict(vec![(py_str("age"), stdlib_call("re", "compile", &[py_str("\\b\\d|\\b(?:age|aged|old)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e))), (py_str("name"), stdlib_call("re", "compile", &[py_str("\\b(?:name|called|named|calls)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e))), (py_str("birthday"), stdlib_call("re", "compile", &[py_str("\\b(?:birthday|bday|dob|january|february|march|april|may|june|july|august|september|october|november|december)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)))]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.WORK_ON_IT"); }
     s_WORK_ON_IT(stdlib_call("re", "compile", &[py_str("\\b[a-z]{3,}\\s+it\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     fn __data1() -> Py { py_tuple(vec![py_str("name"), py_str("called"), py_str("age"), py_str("old"), py_str("job"), py_str("work"), py_str("works"), py_str("working"), py_str("city"), py_str("town"), py_str("live"), py_str("lives"), py_str("living"), py_str("moved"), py_str("moving"), py_str("from"), py_str("diet"), py_str("dieting"), py_str("eating"), py_str("food"), py_str("budget"), py_str("money"), py_str("afford"), py_str("allergy"), py_str("allergies"), py_str("allergic"), py_str("pet"), py_str("pets"), py_str("dog"), py_str("cat"), py_str("height"), py_str("tall")]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.FACT_WORDS"); }
     s_FACT_WORDS(call_builtin("frozenset", &[__data1()]).unwrap_or_else(|e| exc::raise(e)));
     fn __data3() -> Py { py_tuple(vec![py_tuple(vec![py_str("mother"), py_str("mum mom mummy ma mam mother mumma")]), py_tuple(vec![py_str("father"), py_str("dad daddy pa papa father")]), py_tuple(vec![py_str("parent"), py_str("parent parents folks")]), py_tuple(vec![py_str("child"), py_str("kid kids child children baby toddler")]), py_tuple(vec![py_str("dog"), py_str("dog puppy pup dogs")]), py_tuple(vec![py_str("cat"), py_str("cat kitten kitty cats")]), py_tuple(vec![py_str("pet"), py_str("pet pets")]), py_tuple(vec![py_str("car"), py_str("car vehicle motor")]), py_tuple(vec![py_str("home"), py_str("home house flat apartment place")]), py_tuple(vec![py_str("party"), py_str("party birthday bday celebration bash")]), py_tuple(vec![py_str("job"), py_str("job work career")]), py_tuple(vec![py_str("food"), py_str("food dinner tea meal supper")]), py_tuple(vec![py_str("money"), py_str("money budget cash savings")]), py_tuple(vec![py_str("diet"), py_str("diet vegetarian vegan pescatarian")]), py_tuple(vec![py_str("doctor"), py_str("doctor gp surgery hospital")]), py_tuple(vec![py_str("wedding"), py_str("wedding weddings married marry marriage engaged engagement bride groom fiance fiancee honeymoon")]), py_tuple(vec![py_str("holiday"), py_str("holiday holidays vacation trip trips break abroad travelling travel")]), py_tuple(vec![py_str("exam"), py_str("exam exams revision revise revising coursework dissertation thesis mock")]), py_tuple(vec![py_str("gym"), py_str("gym gyms fitter fitness exercise exercising workout workouts jogging running")]), py_tuple(vec![py_str("smoking"), py_str("smoking smoke smoker cigarettes cigarette fags vaping vape nicotine")])]) }
     let __iter2 = py_iter_or_raise(&__data3());
     for __item in __iter2 {
     let __unpk4 = py_unpack(&__item.clone(), 2, None);
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store._concept"); }
     s__concept(__unpk4[0].clone());
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store._words"); }
     s__words(__unpk4[1].clone());
     let __iter5 = py_iter_or_raise(&mcall(&g__words(), "split", &[]));
     for __item in __iter5 {
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store._word"); }
     s__word(__item.clone());
     let _ = py_setitem(&pyrt::xrefs::xget("memory.store_lines", "CONCEPTS"), &g__word(), g__concept());
     }
     }
     let __iter6 = py_iter_or_raise(&pyrt::xrefs::xget("memory.facts", "COUNTRIES"));
     for __item in __iter6 {
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store._country"); }
     s__country(__item.clone());
     let _ = mcall(&pyrt::xrefs::xget("memory.store_lines", "CONCEPTS"), "setdefault", &[mcall(&g__country(), "lower", &[]), py_str("holiday")]);
     }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.A_RECALL_IN_ANOTHER_SHAPE"); }
     s_A_RECALL_IN_ANOTHER_SHAPE(stdlib_call("re", "compile", &[py_str("^(?:and|so|but|also|again|ok|okay|well)?\\s*(?:tell\\s+me\\s+what\\s+(?:i|we)\\s+(?:said|say|told\\s+(?:you|u)|tell\\s+(?:you|u)|mentioned?)\\b|(?:did|do)\\s+(?:i|we)\\s+(?:say|tell\\s+(?:you|u)|told\\s+(?:you|u)|mentioned?)\\s+(?:anything|something|much)\\b|what\\s+(?:was|were)\\s+(?:the\\s+thing|that\\s+thing|that)\\s+(?:that\\s+)?(?:i|we)\\s+(?:said|told\\s+(?:you|u)|mentioned?)\\b|remind\\s+me\\s+what\\s+(?:that|it|this|those|they)\\s+(?:was|were|is|are)\\b)"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.memory_store.RECALL_NAMES_NOTHING"); }
     s_RECALL_NAMES_NOTHING(call_builtin("frozenset", &[mcall(&py_str("it that this them those these one ones there anything something\nmuch thing things about of on in at to for from with the a an was were is are be been being\ni we you u he she they me us my our his her their said say told tell mention mentioned mentioning\nand or so but also again then just really actually exactly then"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
 }
 pub fn _a_kept_fact_read(args: &[Py]) -> Py {
@@ -6932,7 +6993,7 @@ pub fn _the_figure_the_answer_names(args: &[Py]) -> Py {
     }
     continue;
     }
-    stated = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&found.clone()) { let __unpk7168 = py_unpack(&__item.clone(), 2, None); let mut figure: Py = __unpk7168[0].clone(); let mut _u: Py = __unpk7168[1].clone(); __out.push(mcall(&figure.clone(), "lower", &[])); } py_set(__out) })() };
+    stated = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&found.clone()) { let __unpk1125 = py_unpack(&__item.clone(), 2, None); let mut figure: Py = __unpk1125[0].clone(); let mut _u: Py = __unpk1125[1].clone(); __out.push(mcall(&figure.clone(), "lower", &[])); } py_set(__out) })() };
     if py_truthy(&op_gt(&call_builtin("len", &[stated.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1))) {
     return Py::None;
     }
@@ -7401,7 +7462,7 @@ pub fn _the_ask_behind_the_recall(args: &[Py]) -> Py {
     }
     rest = stdlib_call("re", "sub", &[py_str("\\s+(?:was|is|were|are)\\s*$"), py_str(""), mcall(&mcall(&wrapped.clone(), "group", &[py_str("rest")]), "strip", &[])]).unwrap_or_else(|e| exc::raise(e));
     said = mcall(&mcall(&mcall(&wrapped.clone(), "group", &[py_str("word")]), "lower", &[]), "replace", &[py_str("  "), py_str(" ")]);
-    slot = call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_RECALL_SLOTS()) { let __unpk2963 = py_unpack(&__item.clone(), 3, None); let mut pattern: Py = __unpk2963[0].clone(); let mut word: Py = __unpk2963[1].clone(); let mut name: Py = __unpk2963[2].clone(); if py_truthy(&mcall(&pattern.clone(), "search", &[rest.clone()])) {  __out.push(py_tuple(vec![word.clone(), name.clone()])); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e));
+    slot = call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_RECALL_SLOTS()) { let __unpk776 = py_unpack(&__item.clone(), 3, None); let mut pattern: Py = __unpk776[0].clone(); let mut word: Py = __unpk776[1].clone(); let mut name: Py = __unpk776[2].clone(); if py_truthy(&mcall(&pattern.clone(), "search", &[rest.clone()])) {  __out.push(py_tuple(vec![word.clone(), name.clone()])); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&Py::Bool(!py_truthy(&slot.clone()))) {
     return Py::None;
     }

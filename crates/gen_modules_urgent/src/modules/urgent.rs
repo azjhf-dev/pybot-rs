@@ -35,8 +35,11 @@ pub fn g_PRIORITY() -> Py { ensure_init(); G_PRIORITY.with(|c| c.borrow().clone(
 pub fn s_PRIORITY(v: Py) { ensure_init(); G_PRIORITY.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("Someone they look after in trouble wins the turn over a pleasantry, and only that.\n\n`bot/compose/urgent.py` holds the rules and the wording; this module is the proposal, so the\narbiter has something better than the fallback's nod to choose.\n\nIt answers in two places, and no others:\n\n- the lines nothing claims, where the fallback would have nodded (a body in trouble is not small\n  talk, so it sits above the greeting);\n- **in place of the health topic entries**, because a swallowed thing is a poison line and the\n  entries get it wrong: `my daughter ate a washing tablet` is screen-time advice on the entries and\n  a 999 call here. `ANSWERS_INSTEAD` scopes that to one topic, and the reading is strict - a\n  relative and an ingest verb with a chemical, medicine or small object - so nothing else moves.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.urgent.PRIORITY"); }
     s_PRIORITY(op_neg(&Py::Int(900)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.urgent.ANSWERS"); }
     s_ANSWERS(py_tuple(vec![]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.urgent.ANSWERS_INSTEAD"); }
     s_ANSWERS_INSTEAD(py_tuple(vec![py_str("health")]));
 }
 pub fn respond(args: &[Py]) -> Py {

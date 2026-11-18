@@ -105,6 +105,7 @@ fn stdlib_has_call(module: &str, name: &str) -> bool {
         "sys" => matches!(name, "exit" | "getrecursionlimit" | "setrecursionlimit" | "getsizeof"),
         "calendar" => matches!(name, "monthrange" | "isleap" | "month" | "weekday"),
         "importlib" => matches!(name, "import_module"),
+        "pkgutil" => name == "iter_modules",
         "operator" => matches!(name, "add" | "sub" | "mul" | "truediv" | "pow" | "mod" | "floordiv" | "eq" | "ne" | "lt" | "le" | "gt" | "ge" | "itemgetter" | "attrgetter" | "contains" | "neg" | "not_" | "and_" | "or_"),
         "ast" => matches!(name, "parse" | "literal_eval" | "walk"),
         "json" => matches!(name, "loads" | "dumps"),
@@ -118,6 +119,14 @@ fn stdlib_has_call(module: &str, name: &str) -> bool {
 
 pub fn stdlib_call(module: &str, name: &str, args: &[Py]) -> PyResult {
     match module {
+        "pkgutil" if name == "iter_modules" => {
+            let paths = args.first().map(py_iter).transpose()?.unwrap_or_default();
+            let package = paths.first().and_then(|p| p.as_str()).unwrap_or("");
+            Ok(py_list(crate::xrefs::children(package).into_iter().map(|n| {
+                let saved = n.clone();
+                Py::Module(Rc::new(PyModule { name: n, set: None, get: Rc::new(move |a| match a { "name" => Some(py_str(&saved)), "ispkg" => Some(Py::Bool(false)), _ => None }) }))
+            }).collect()))
+        }
         "re" => re_call(name, args),
         "random" => pyrandom::call(name, args),
         "datetime" => pydatetime::datetime_call(&name.split('.').collect::<Vec<_>>(), args),

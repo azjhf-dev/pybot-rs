@@ -152,39 +152,70 @@ pub fn s_entry(v: Py) { ensure_init(); G_entry.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("A sleep that depends on a thing in the room is a question about that thing.\n\nPeople say the aid and the sleep in one line: \"i cant fall asleep without the telly on\",\n\"i need the fan on to get to sleep\", \"i cant sleep, the light is too bright\". The chat\nmodule read the first of those as \"i can't sleep\" and offered the bad-week sympathy pool,\nand the answers module had no row that named the telly, the fan or the lamp. This domain\nholds the rows, keyed by the aid, the sleep, the dependence and the complaint.\n\nA line that asks about the habit is not the same question: \"is it bad to sleep with the tv\non\" keeps the older `tv-sleep` card, and \"how do i get to sleep without my phone\" keeps the\nsleep-hygiene advice, because it asks for a way to stop rather than reporting a dependence.\n");
     s_entry(py_func("entry", |args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.sleep_aids.ANSWERS"); }
     s_ANSWERS(py_tuple(vec![py_str("health"), py_str("sleep")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.sleep_aids.SLEEP_AID_SCREENS"); }
     s_SLEEP_AID_SCREENS(py_tuple(vec![py_str("telly"), py_str("phone"), py_str("screen"), py_str("laptop"), py_str("tablet"), py_str("ipad"), py_str("computer"), py_str("monitor")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.sleep_aids.SLEEP_AID_SOUNDS"); }
     s_SLEEP_AID_SOUNDS(py_tuple(vec![py_str("radio"), py_str("podcast"), py_str("music"), py_str("white noise"), py_str("fan"), py_str("audiobook")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.sleep_aids.SLEEP_AID_LIGHTS"); }
     s_SLEEP_AID_LIGHTS(py_tuple(vec![py_str("light"), py_str("lights"), py_str("lamp"), py_str("lamps"), py_str("streetlight"), py_str("street light"), py_str("daylight"), py_str("bright")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.sleep_aids.SLEEP_AID_TELEVISIONS"); }
     s_SLEEP_AID_TELEVISIONS(py_tuple(vec![py_str("tv"), py_str("television"), py_str("telly")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.sleep_aids.SLEEP_AID_SLEEP"); }
     s_SLEEP_AID_SLEEP(py_tuple(vec![py_str("sleep"), py_str("sleeping"), py_str("asleep"), py_str("fall asleep"), py_str("get to sleep"), py_str("go to sleep"), py_str("bed"), py_str("bedtime"), py_str("awake"), py_str("wake")]));
     fn __data1() -> Py { py_tuple(vec![py_str("without"), py_str("with"), py_str("unless"), py_str("only"), py_str("need"), py_str("needs"), py_str("need it"), py_str("have to have"), py_str("got to have"), py_str("because"), py_str("keeps me"), py_str("helps me"), py_str("is on"), py_str("was on"), py_str("left on"), py_str("loud"), py_str("too bright"), py_str("too loud")]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.sleep_aids.SLEEP_AID_DEPENDS"); }
     s_SLEEP_AID_DEPENDS(__data1());
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.sleep_aids.SLEEP_AID_NOISES"); }
     s_SLEEP_AID_NOISES(py_tuple(vec![py_str("noise"), py_str("noisy")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.sleep_aids.SLEEP_AID_OUTSIDE"); }
     s_SLEEP_AID_OUTSIDE(py_tuple(vec![py_str("outside"), py_str("street"), py_str("road"), py_str("main road"), py_str("outside my window"), py_str("outside the window")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.sleep_aids.SLEEP_AID_WALL"); }
     s_SLEEP_AID_WALL(py_tuple(vec![py_str("next door"), py_str("next room"), py_str("other room"), py_str("another room"), py_str("upstairs"), py_str("downstairs")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.sleep_aids.SLEEP_AID_THROUGH_A_WALL"); }
     s_SLEEP_AID_THROUGH_A_WALL(py_tuple(vec![py_str("washing machine"), py_str("dishwasher"), py_str("tumble dryer"), py_str("hoover"), py_str("vacuum"), py_str("music"), py_str("stereo"), py_str("party"), py_str("drilling"), py_str("diy")]));
     fn __data2() -> Py { py_tuple(vec![py_str("cant"), py_str("can't"), py_str("cannot"), py_str("can not"), py_str("struggle"), py_str("struggling"), py_str("hard to"), py_str("unable"), py_str("need"), py_str("needs"), py_str("needed"), py_str("only"), py_str("have to"), py_str("got to"), py_str("keeps me awake"), py_str("waking me"), py_str("wake me"), py_str("better")]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.sleep_aids.SLEEP_AID_COMPLAINT"); }
     s_SLEEP_AID_COMPLAINT(__data2());
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.sleep_aids.SCREEN_REPLY"); }
     s_SCREEN_REPLY(py_str("It isn't dangerous, but the light and the story keep your brain alert, so you fall asleep later and wake more in the night. If you need something playing, a podcast or radio set to a sleep timer is easier on sleep than a screen, and charging the phone across the room helps too."));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.sleep_aids.TELLY_REPLY"); }
     s_TELLY_REPLY(py_str("It isn't dangerous, but the light and the story keep your brain alert, so you fall asleep later and wake more in the night. If you need something playing, a podcast or radio set to a sleep timer is easier on sleep than a screen."));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.sleep_aids.SOUND_REPLY"); }
     s_SOUND_REPLY(py_str("A steady sound is easier on sleep than a screen, because there's nothing to watch. Keep the radio or podcast low and on a sleep timer; if it is a fan or white noise, point it away from your face. If the noise is a neighbour's, earplugs and a heavy curtain take the edge off."));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.sleep_aids.NOISE_REPLY"); }
     s_NOISE_REPLY(py_str("If the noise is coming from outside your room, earplugs and a heavy curtain take the edge off, and a fan or white noise can mask it. If it is a neighbour and it happens often, your council's noise team can act on it; a short log of the times is what they ask for."));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.sleep_aids.LIGHT_REPLY"); }
     s_LIGHT_REPLY(py_str("Light tells your brain it is still daytime, so keep the room as dark as you can: a blackout curtain or an eye mask, and turn the lamp off rather than dimming it. If a streetlight gets in, a curtain that reaches the floor helps."));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.sleep_aids.WALL_REPLY"); }
     s_WALL_REPLY(py_str("Sound goes through a wall more than people expect: earplugs and a heavy curtain or a bookcase against the shared wall take the edge off, and a fan or white noise masks the rest. If it is the room next door, ask them once at a calm time to turn it down after a set hour; if it keeps happening, keep a short log of the times and your council's noise team can act on it."));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.sleep_aids._A_SCREEN"); }
     s__A_SCREEN(_words(&[g_SLEEP_AID_SCREENS()]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.sleep_aids._A_SOUND"); }
     s__A_SOUND(_words(&[g_SLEEP_AID_SOUNDS()]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.sleep_aids._A_LIGHT"); }
     s__A_LIGHT(_words(&[g_SLEEP_AID_LIGHTS()]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.sleep_aids._A_TELLY"); }
     s__A_TELLY(_words(&[g_SLEEP_AID_TELEVISIONS()]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.sleep_aids._A_SLEEP"); }
     s__A_SLEEP(_words(&[g_SLEEP_AID_SLEEP()]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.sleep_aids._A_DEPENDS"); }
     s__A_DEPENDS(_words(&[g_SLEEP_AID_DEPENDS()]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.sleep_aids._A_COMPLAINT"); }
     s__A_COMPLAINT(_words(&[g_SLEEP_AID_COMPLAINT()]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.sleep_aids._A_NOISE"); }
     s__A_NOISE(_words(&[g_SLEEP_AID_NOISES()]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.sleep_aids._A_OUTSIDE"); }
     s__A_OUTSIDE(_words(&[g_SLEEP_AID_OUTSIDE()]));
     fn __data3() -> Py { py_tuple(vec![py_str("neighbour"), py_str("neighbor"), py_str("neighbours"), py_str("neighbors"), py_str("next door"), py_str("next room"), py_str("other room"), py_str("another room"), py_str("outside"), py_str("upstairs"), py_str("downstairs"), py_str("people"), py_str("someone"), py_str("somebody")]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.sleep_aids._A_SOMEONE_ELSES"); }
     s__A_SOMEONE_ELSES(_words(&[__data3()]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.sleep_aids._A_WALL"); }
     s__A_WALL(_words(&[g_SLEEP_AID_WALL()]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.sleep_aids._A_THROUGH_A_WALL"); }
     s__A_THROUGH_A_WALL(_words(&[g_SLEEP_AID_THROUGH_A_WALL()]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.sleep_aids.ENTRIES"); }
     s_ENTRIES(py_list(vec![{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("a-sleep-that-needs-a-screen")); __args.push(py_tuple(vec![g_SLEEP_AID_SCREENS(), g_SLEEP_AID_SLEEP(), g_SLEEP_AID_DEPENDS()])); __args.push(g_SCREEN_REPLY()); __kws.extend(vec![("ask".to_string(), g_SLEEP_AID_COMPLAINT()), ("guard".to_string(), py_func("_the_line_itself", |args: &[Py]| _the_line_itself(args)))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("a-sleep-that-needs-the-telly")); __args.push(py_tuple(vec![g_SLEEP_AID_TELEVISIONS(), g_SLEEP_AID_SLEEP(), g_SLEEP_AID_DEPENDS()])); __args.push(g_TELLY_REPLY()); __kws.extend(vec![("guard".to_string(), py_func("_the_telly_line", |args: &[Py]| _the_telly_line(args)))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("a-sleep-that-needs-a-sound")); __args.push(py_tuple(vec![g_SLEEP_AID_SOUNDS(), g_SLEEP_AID_SLEEP(), g_SLEEP_AID_DEPENDS()])); __args.push(g_SOUND_REPLY()); __kws.extend(vec![("ask".to_string(), g_SLEEP_AID_COMPLAINT()), ("guard".to_string(), py_func("_the_line_itself", |args: &[Py]| _the_line_itself(args)))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("a-sleep-that-needs-a-light")); __args.push(py_tuple(vec![g_SLEEP_AID_LIGHTS(), g_SLEEP_AID_SLEEP(), g_SLEEP_AID_DEPENDS()])); __args.push(g_LIGHT_REPLY()); __kws.extend(vec![("ask".to_string(), g_SLEEP_AID_COMPLAINT()), ("guard".to_string(), py_func("_the_line_itself", |args: &[Py]| _the_line_itself(args)))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("a-sleep-broken-by-a-thing-next-door")); __args.push(py_tuple(vec![g_SLEEP_AID_WALL(), g_SLEEP_AID_SLEEP(), g_SLEEP_AID_COMPLAINT()])); __args.push(g_WALL_REPLY()); __kws.extend(vec![("guard".to_string(), py_func("_the_wall_line", |args: &[Py]| _the_wall_line(args)))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }, { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("a-sleep-broken-by-a-noise")); __args.push(py_tuple(vec![g_SLEEP_AID_NOISES(), g_SLEEP_AID_SLEEP(), g_SLEEP_AID_COMPLAINT(), g_SLEEP_AID_OUTSIDE()])); __args.push(g_NOISE_REPLY()); __kws.extend(vec![("guard".to_string(), py_func("_the_noise_line", |args: &[Py]| _the_noise_line(args)))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args))(&__args) }]));
 }
 pub fn _words(args: &[Py]) -> Py {

@@ -91,17 +91,29 @@ fn module_body() {
     s_content(py_func("content", |args: &[Py]| pyrt::xrefs::xcall("memory.topics", "content", args)));
     s_forms(py_func("forms", |args: &[Py]| pyrt::xrefs::xcall("memory.topics", "forms", args)));
     s_stem(py_func("stem", |args: &[Py]| pyrt::xrefs::xcall("memory.topics", "stem", args)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reminded.WITH_THE_THING"); }
     s_WITH_THE_THING(stdlib_call("re", "compile", &[py_str("\\bwith\\s+(?:((?:my|our|the)\\s+[a-z][a-z'\\-]*(?:\\s+[a-z][a-z'\\-]*){0,2})|(it|that|this|them|those))\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reminded.TRAILING"); }
     s_TRAILING(call_builtin("frozenset", &[mcall(&py_str("again before earlier already then yesterday today please so far\nuntil up now one ones thing things stuff lot"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reminded.EMPTY"); }
     s_EMPTY(call_builtin("frozenset", &[mcall(&py_str("one ones thing things stuff lot"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reminded.STATE_ASKS"); }
     s_STATE_ASKS(stdlib_call("re", "compile", &[py_str("\\b(?:wrong|up|(?:the\\s+)?(?:problem|matter|issue|fault|trouble|deal)|happen\\w*|going\\s+on|doing|keep\\s+doing|kept\\s+doing|said\\s+about)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reminded.STATE_SAID"); }
     s_STATE_SAID(stdlib_call("re", "compile", &[py_str("\\b(?:keep\\w*|kept|won'?t|wont|stopped|stopping|not\\s+work\\w*|doesnt\\s+work\\w*|hurts?|hurting|sore|pain\\w*|aches?|aching|swell\\w*|swollen|stiff|broken|broke|breaks?|cracked|leak\\w*|drip\\w*|dripping|slip\\w*|slipped|jammed|stuck|went|gone|dying|dead|failed|failing|crash\\w*|dragging|drains?|drained|struggl\\w*|worr\\w*|sort\\w*|sorted|fault\\w*|wrong|issue\\w*|problem\\w*|trouble|stinks?|stink\\w*|smell\\w*|noise\\w*|noisy|squeak\\w*|rattle\\w*|vibrat\\w*|slow\\w*|weak\\w*|blocked|clogged|mould\\w*|damp)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reminded.IN_THE_PAST"); }
     s_IN_THE_PAST(stdlib_call("re", "compile", &[py_str("^(?:and |so |but |also |ok |okay )?(?:what|whats|which)\\s+(?:was|were|did|has|have|had)\\b|\\b(?:what|whats)\\s+(?:was|were)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reminded.AGAIN"); }
     s_AGAIN(stdlib_call("re", "compile", &[py_str("\\b(?:again|before|earlier|remind me|remind me again|(?:cant|can not|cannot|dont|do not) remember|what did i say|what did i tell you)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reminded.REMINDING"); }
     s_REMINDING(stdlib_call("re", "compile", &[py_str("\\b(?:remind me|(?:cant|can not|cannot|dont|do not) remember)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reminded.THEIR_THING"); }
     s_THEIR_THING(stdlib_call("re", "compile", &[py_str("\\b(?:what|whats|which)\\s+(?:was|were|is|are|did|does|has|have|had|d)\\s*((?:my|our)\\s+[a-z][a-z'\\-]*(?:\\s+[a-z][a-z'\\-]*){0,3})\\b|\\b(?:what|whats|which)\\s+((?:my|our)\\s+[a-z][a-z'\\-]*(?:\\s+[a-z][a-z'\\-]*){0,3})\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reminded.ASK_WORDS"); }
     s_ASK_WORDS(call_builtin("frozenset", &[mcall(&py_str("problem problems matter issue fault trouble deal going happening doing\nwrong up again before earlier then so far please"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reminded.THING_TAIL"); }
     s_THING_TAIL(op_bitor(&g_ASK_WORDS(), &call_builtin("frozenset", &[mcall(&py_str("was were is are be been being did does has have had"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.reminded.WHAT_IT_DID"); }
     s_WHAT_IT_DID(stdlib_call("re", "compile", &[py_str("\\b(?:what|whats)\\s+(?:did|does|has|have)\\s+((?:my|our|the)\\s+[a-z][a-z'\\-]*(?:\\s+[a-z][a-z'\\-]*){0,2}?)\\s+(?:keep\\s+|kept\\s+)?(?:doing|do|say|saying)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
 }
 pub fn _trim(args: &[Py]) -> Py {

@@ -27,6 +27,7 @@ pub fn g_PRIORITY() -> Py { ensure_init(); G_PRIORITY.with(|c| c.borrow().clone(
 pub fn s_PRIORITY(v: Py) { ensure_init(); G_PRIORITY.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("A count the person reports, read against the count the last answer named.\n\n\"how many steps should i do a day\" names a figure to aim at (\"about 7,000 to 8,000 steps a day\"),\nand the next thing people do is say how they are doing against it: \"i have about 7000 steps\". That\nline was answered with a search hedge, a receipt or a greeting, because the answer's own figure is\nsaid as a rate (\"7,000 to 8,000 steps a day\") and a rate is not read as an amount to compare with.\n\n`bot/memory/amounts.py` reads the two counts. This module is the thin part: one line in, one line\nout, and it hands the line back (None) whenever the counts are not the same thing said the same\nway - a count of something else, a question about an amount, a length that belongs to something\nelse (\"2 hours of meetings\"), or an answer naming two figures of that thing.\n\nIt answers **only** the turn that reports the count. The turn after it (\"how much more do i need\",\n\"is that enough\") belongs to the store, which already reads it and keeps its own guards, so\nnothing here is kept in `memory` and nothing is claimed twice.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.a_count_said.PRIORITY"); }
     s_PRIORITY(Py::Int(7000));
 }
 pub fn observe(args: &[Py]) -> Py {

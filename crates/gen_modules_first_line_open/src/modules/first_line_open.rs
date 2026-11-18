@@ -37,6 +37,7 @@ fn module_body() {
     let _ = py_str("A first line is not receipted for something never said.\n\nTwo of the composer's three floor lines say the bot has taken something in (\"Got it. Is there\nanything you'd like a hand with?\", \"Thanks for telling me - I'm here if you want to dig into any of\nthat\"). A chat's first line is the one turn where nothing has been said yet, so the receipt claims\na turn that did not happen: thirty of the deck's nine hundred first lines got one of the two.\n\nOn the first turn only, a receipt with nothing behind it is replaced by an opener that says nothing\nabout the line and asks for the thing an answer would start from. This module sits above `greeting`\n(-1000) and below every module that answers a line of its own, and it asks greeting what it would\nsay, so a card, a place named in the answer, an ask for hands and a limit all keep the turn\n(\"the laundry needs doing\" keeps the chore card, a fence down in the wind keeps the damage card,\n\"my glucose is 2.9\" keeps the hypo card). The same receipt is right on every later turn, where\nthere is a turn behind it.\n");
     s_A_RECEIPT_OF_NOTHING(pyrt::xrefs::xget("compose.fallback_data", "A_RECEIPT_OF_NOTHING"));
     s_COLD_OPEN(pyrt::xrefs::xget("compose.fallback_data", "COLD_OPEN"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.first_line_open.PRIORITY"); }
     s_PRIORITY(op_neg(&Py::Float(999.5)));
 }
 pub fn _has_a_turn_behind_it(args: &[Py]) -> Py {

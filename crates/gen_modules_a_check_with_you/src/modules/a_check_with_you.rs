@@ -27,6 +27,7 @@ pub fn g_PRIORITY() -> Py { ensure_init(); G_PRIORITY.with(|c| c.borrow().clone(
 pub fn s_PRIORITY(v: Py) { ensure_init(); G_PRIORITY.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("A check of a plan against the bot gets the agreement, not a search hedge or a receipt.\n\n\"u ok with that\", \"are you ok with that\", \"you good with that plan\", \"does that work for you\" -\nseven different placeholder landings for one shape (see bot/compose/check_with_you.py). The\nperson is not asking about the world, so no card can answer it, and a question back (\"what would\nyou like to do?\") hands the decision back to someone who has just made it.\n\nIt sits at PRIORITY -999: above the greeting band, which is where all seven of those landings\ncome from, and below every module that knows a subject. So a card, the small talk and every\nsafety line keep their turn, and only a fallback line is ever replaced.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.a_check_with_you.PRIORITY"); }
     s_PRIORITY(op_neg(&Py::Int(999)));
 }
 pub fn respond(args: &[Py]) -> Py {

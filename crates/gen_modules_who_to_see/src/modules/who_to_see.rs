@@ -31,7 +31,9 @@ pub fn g_TAKES_AS_IT_COMES() -> Py { ensure_init(); G_TAKES_AS_IT_COMES.with(|c|
 pub fn s_TAKES_AS_IT_COMES(v: Py) { ensure_init(); G_TAKES_AS_IT_COMES.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("The person to see, when the follow-up asks who and not what to do about it.\n\n\"my back hurts\" is answered with the back paragraph. \"who should i see\" is a different ask, and\non main it got the paragraph again, \"That is everything I have on that one\", or a search hedge.\n\n`bot/compose/who.py` holds the reading and the wording, so this module is the claim and nothing\nelse. The hook is the one this shape needs: a bare \"who should i see\" matches no topic entry, so\nevery module that proposes on it is guessing, and the entry that answered the symptom is the one\nthat has the person in it - it is where the bot wrote \"See a GP if it is no better in a\nfortnight\", or \"have the vet look before the skin is broken\".\n\nIt sits above the generalists (chat, words, the follow-ups about an answer) because what it hands\nback is a second reading of the bot's own answer, not a fresh paragraph about it, and stands well\nunder the specialists: `respond` returns None on every line that is not a bare ask.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.who_to_see.PRIORITY"); }
     s_PRIORITY(Py::Int(1500));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.who_to_see.TAKES_AS_IT_COMES"); }
     s_TAKES_AS_IT_COMES(py_func("takes_as_it_comes", |args: &[Py]| takes_as_it_comes(args)));
 }
 pub fn respond(args: &[Py]) -> Py {

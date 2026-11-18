@@ -27,6 +27,7 @@ pub fn g_PRIORITY() -> Py { ensure_init(); G_PRIORITY.with(|c| c.borrow().clone(
 pub fn s_PRIORITY(v: Py) { ensure_init(); G_PRIORITY.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("The detail a person drops into a thread, taken up rather than nodded at.\n\n\"she doesnt like surprises\" while a 70th is being planned, \"it was fine for two years\" about a\nboiler, \"ive said no once already\" about a boss: the turn after each of those is where the bot\nsays nothing - \"I'm listening - say more if it helps\", the line said back, or a search - and the\nturn after that, asked as a question, gets a real card. The thread was there all along.\n\n`bot/compose/thread_detail.py` does the reading: three kinds of detail (a limit somebody has, an\nattempt already made, a history), and the one question each of them raises. This module sits in\nthe band `where_it_answers` and `a_day_somebody_else_keeps` use - above greeting's hedge, below\nevery card - and stands down unless the composer's own reply says nothing about the line, so any\nreader that found its own answer keeps the turn.\n\nNothing here holds a fact, so nothing here can be wrong or go stale.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.the_detail_the_thread_adds.PRIORITY"); }
     s_PRIORITY(op_neg(&Py::Int(999)));
 }
 pub fn respond(args: &[Py]) -> Py {

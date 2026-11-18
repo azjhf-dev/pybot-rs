@@ -144,34 +144,58 @@ fn module_body() {
     s__the_job_in(py_func("_the_job_in", |args: &[Py]| pyrt::xrefs::xcall("compose.remark", "_the_job_in", args)));
     s_fill_person(py_func("fill_person", |args: &[Py]| pyrt::xrefs::xcall("compose.remark", "fill_person", args)));
     s_person_pronouns(py_func("person_pronouns", |args: &[Py]| pyrt::xrefs::xcall("compose.remark", "person_pronouns", args)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_pastime.PRIORITY"); }
     s_PRIORITY(Py::Int(300));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_pastime.THEIR_ANY"); }
     s_THEIR_ANY(op_add(&op_add(&py_str("(?:"), &pyrt::xrefs::xget("compose.remark", "THEIR_PERSON")), &py_str("|father in law|mother in law|son in law|daughter in law|sister in law|brother in law|friend|best friend|neighbour|neighbor|mate|boss|aunty|auntie|boyfriend|girlfriend|other half|flatmate|housemate|fella|missus|stepmum|stepdad|grandson|granddaughter)")));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_pastime.WHAT_THEY_ARE_INTO"); }
     s_WHAT_THEY_ARE_INTO(py_str("(?:loves|adores|likes|is obsessed with|is mad about|is nuts about)"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_pastime.WHAT_THEY_DO"); }
     s_WHAT_THEY_DO(py_str("(?:plays|does|collects|makes|teaches|runs|swims|sings|paints|draws|bakes|cooks|gardens|reads|writes|dances)"));
     fn __data1() -> Py { py_tuple(vec![py_str("smoking"), py_str("drinking"), py_str("gambling"), py_str("drugs"), py_str("cocaine"), py_str("heroin"), py_str("betting"), py_str("vaping"), py_str("the bottle"), py_str("fighting"), py_str("biting"), py_str("wetting"), py_str("stealing"), py_str("drink"), py_str("alcohol"), py_str("weed"), py_str("pills"), py_str("porn"), py_str("scratchcards"), py_str("debt"), py_str("self-harm"), py_str("harm"), py_str("cutting"), py_str("shouting"), py_str("bottle"), py_str("cans"), py_str("booze")]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_pastime.NOT_TAKEN_UP"); }
     s_NOT_TAKEN_UP(call_builtin("frozenset", &[__data1()]).unwrap_or_else(|e| exc::raise(e)));
     fn __data2() -> Py { py_tuple(vec![py_str("another woman"), py_str("another man"), py_str("another bloke"), py_str("another person"), py_str("another fella"), py_str("another lad"), py_str("another girl"), py_str("someone else"), py_str("somebody else"), py_str("an affair"), py_str("an ex"), py_str("his ex"), py_str("her ex"), py_str("the ex"), py_str("a row"), py_str("rows"), py_str("arguing"), py_str("arguments"), py_str("a fight"), py_str("trouble"), py_str("the police"), py_str("a gang"), py_str("crime"), py_str("money he hasnt got"), py_str("the horses")]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_pastime.NOT_TAKEN_UP_PHRASES"); }
     s_NOT_TAKEN_UP_PHRASES(__data2());
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_pastime.THEIR_INTO"); }
     s_THEIR_INTO(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("^my (?P<person>"), &g_THEIR_ANY()), &py_str(")(?:'?s)? (?:is|are) (?:really |well |properly |totally |so )?into (?P<thing>[a-z][a-z' \\-]{1,22})$"))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_pastime.THEIR_LOVES"); }
     s_THEIR_LOVES(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&py_str("^my (?P<person>"), &g_THEIR_ANY()), &py_str(")(?:'?s)? ")), &g_WHAT_THEY_ARE_INTO()), &py_str(" (?P<thing>[a-z][a-z' \\-]{1,22})$"))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_pastime.THEIR_DOES"); }
     s_THEIR_DOES(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&py_str("^my (?P<person>"), &g_THEIR_ANY()), &py_str(")(?:'?s)? ")), &g_WHAT_THEY_DO()), &py_str(" (?:in |with |for |at )?(?P<thing>[a-z][a-z' \\-]{1,22})$"))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_pastime.THEIR_TOOK_UP"); }
     s_THEIR_TOOK_UP(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("^my (?P<person>"), &g_THEIR_ANY()), &py_str(")(?:'?s)? (?:has|have) (?:just |recently )?(?:taken up|got into|started) (?P<thing>[a-z][a-z' \\-]{1,22})$"))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_pastime.THEIR_KEEPS"); }
     s_THEIR_KEEPS(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("^my (?P<person>"), &g_THEIR_ANY()), &py_str(")(?:'?s)? keeps (?:some |a few |two |three )?(?P<thing>[a-z]{2,12}s)$"))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_pastime.THEIR_GOOD_AT"); }
     s_THEIR_GOOD_AT(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("^my (?P<person>"), &g_THEIR_ANY()), &py_str(")(?:'?s)? (?:is|are) (?:really |very |so |quite )?good at (?P<thing>[a-z][a-z' \\-]{1,22})$"))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_pastime.THEIR_VISIT"); }
     s_THEIR_VISIT(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("^my (?P<person>"), &g_THEIR_ANY()), &py_str(")(?:'?s)? (?:is|are) (?:coming|visiting|staying) (?P<when>(?:on |at |this |next |for |in |over )[a-z0-9' \\-]{1,24})$"))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_pastime.THEIR_IS_A_ROLE"); }
     s_THEIR_IS_A_ROLE(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("^my (?P<person>"), &g_THEIR_ANY()), &py_str(")(?:'?s)? (?:is|works as) (?:a|an) (?P<role>[a-z][a-z'\\-]{2,20})$"))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_pastime.THEIRS_ROLE_LINES"); }
     s_THEIRS_ROLE_LINES(py_tuple(vec![py_str("{Job}. What does a normal day look like for {them}?"), py_str("{Job}. Is that what {they} always wanted to do?"), py_str("{Job} — how long {has} {they} been at it?")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_pastime.THEIRS_INTO_LINES"); }
     s_THEIRS_INTO_LINES(py_tuple(vec![py_str("How did {they} get into that?"), py_str("Is that a new thing, or {has} {they} always been into {it}?"), py_str("Are you into {it} too, or is that {their} thing?"), py_str("What got {them} started on {it}?")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_pastime.THEIRS_LOVES_LINES"); }
     s_THEIRS_LOVES_LINES(py_tuple(vec![py_str("What {do} {they} like most about {it}?"), py_str("How did that start?"), py_str("Do you get roped in too?"), py_str("Did {they} get you into {it} as well?")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_pastime.THEIRS_DOES_LINES"); }
     s_THEIRS_DOES_LINES(py_tuple(vec![py_str("How long {has} {they} been doing that?"), py_str("How often {do} {they} do it?"), py_str("Do you ever go and watch?"), py_str("What is {their} favourite bit of it?")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_pastime.THEIRS_GOOD_AT_LINES"); }
     s_THEIRS_GOOD_AT_LINES(py_tuple(vec![py_str("How long {has} {they} been at that?"), py_str("Is it a class, or something {they} {do} at home?"), py_str("Where did {they} learn that?"), py_str("Do they get much chance to show it off?")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_pastime.THEIRS_VISIT_LINES"); }
     s_THEIRS_VISIT_LINES(py_tuple(vec![py_str("{is} {they} staying with you, or nearby?"), py_str("Is it a flying visit, or a long one?"), py_str("Are you looking forward to it?"), py_str("How much of the week is that taking up?")]));
     fn __data3() -> Py { py_tuple(vec![py_str("chess"), py_str("darts"), py_str("news"), py_str("gymnastics"), py_str("athletics"), py_str("bowls"), py_str("skittles"), py_str("billiards"), py_str("physics"), py_str("maths"), py_str("mathematics"), py_str("business"), py_str("class"), py_str("glass"), py_str("bass"), py_str("gas"), py_str("bus"), py_str("christmas"), py_str("tennis"), py_str("series"), py_str("species"), py_str("means"), py_str("this"), py_str("his"), py_str("hers"), py_str("its")]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_pastime.NOT_PLURAL"); }
     s_NOT_PLURAL(call_builtin("frozenset", &[__data3()]).unwrap_or_else(|e| exc::raise(e)));
     fn __data4() -> Py { py_tuple(vec![py_str("football"), py_str("rugby"), py_str("cricket"), py_str("tennis"), py_str("netball"), py_str("hockey"), py_str("athletics"), py_str("racing"), py_str("races"), py_str("matches"), py_str("dancing"), py_str("ballet"), py_str("singing"), py_str("choir"), py_str("gigs"), py_str("bands"), py_str("drama"), py_str("theatre"), py_str("plays"), py_str("stand up"), py_str("swimming"), py_str("speedway"), py_str("boxing"), py_str("darts"), py_str("golf")]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_pastime.BEFORE_AN_AUDIENCE"); }
     s_BEFORE_AN_AUDIENCE(call_builtin("frozenset", &[__data4()]).unwrap_or_else(|e| exc::raise(e)));
     fn __data5() -> Py { py_tuple(vec![py_str("noted"), py_str("i'm listening"), py_str("i am listening"), py_str("got it"), py_str("ok."), py_str("that's noted"), py_str("thanks for telling me"), py_str("i don't know enough"), py_str("i dont know enough"), py_str("that's beyond what i know"), py_str("thats beyond what i know"), py_str("i'm not sure about that one"), py_str("im not sure about that one")]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_pastime.PLACEHOLDER_OPENINGS"); }
     s_PLACEHOLDER_OPENINGS(__data5());
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_pastime.HEAVY_IN_THE_THREAD"); }
     s_HEAVY_IN_THE_THREAD(stdlib_call("re", "compile", &[py_str("\\b(?:bull(?:y|ied|ying)|bullies|ill|unwell|poorly|poorlier|sick|sicker|sickness|diagnos\\w*|cancer|tumou?r|chemo\\w*|radiotherap\\w*|dementia|alzheim\\w*|parkinson\\w*|stroke|sepsis|pneumonia|surgery|operation|transplant|dialysis|hospice|palliative|terminal|sectioned|sectioning|depress\\w*|anxiety|anorexi\\w*|bulimi\\w*|addict\\w*|relapse\\w*|overdose\\w*|self[- ]harm|suicidal|miscarr\\w*|stillborn|funeral|burial|cremat\\w*|griev\\w*|bereave\\w*|died|dying|death|passed away|lost (?:him|her|them|my)|hospital|icu|a&e|ambulance|in pain|suffering|struggling|carer|carers|dementia)\\b")]).unwrap_or_else(|e| exc::raise(e)));
 }
 pub fn _starts_a_sentence(args: &[Py]) -> Py {

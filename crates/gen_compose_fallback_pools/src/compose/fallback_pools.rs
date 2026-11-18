@@ -765,8 +765,11 @@ fn module_body() {
     s_reads_as_if_i_saw(py_func("reads_as_if_i_saw", |args: &[Py]| pyrt::xrefs::xcall("compose.fallback", "reads_as_if_i_saw", args)));
     s_the_lost_ask_reply(py_func("the_lost_ask_reply", |args: &[Py]| pyrt::xrefs::xcall("compose.fallback", "the_lost_ask_reply", args)));
     s_unknown_pool(py_func("unknown_pool", |args: &[Py]| pyrt::xrefs::xcall("compose.fallback", "unknown_pool", args)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback_pools.MISSED_STEP"); }
     s_MISSED_STEP(stdlib_call("re", "compile", &[py_str("\\bwhat (?:if|happens if) (?:i|we|you) (?:miss|skip|dont do|cant do|cannot do)\\b|\\bwhat (?:if|happens if) (?:i|we) (?:have to )?(?:miss|skip)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback_pools.MISSED_STEP_PLAN"); }
     s_MISSED_STEP_PLAN(stdlib_call("re", "compile", &[py_str("\\b(?:a|an|one|two|three|four|\\d+|a couple of|a few|couple of|few)?\\s*(?:days?|weeks?|fortnight|months?|sessions?|runs?|rides?|swims?|classes?|lessons?|workouts?|practice|training)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.fallback_pools.MISSED_STEP_KEEPS"); }
     s_MISSED_STEP_KEEPS(stdlib_call("re", "compile", &[py_str("\\b(?:pills?|doses?|drops|tablets?|meds|medication|medications|prescriptions?|insulin|inhalers?|injections?|jabs?|appointments?|periods?|contracepti\\w*|antidepressants?|antibiotics?|lenses?|dressing|dressings)\\b")]).unwrap_or_else(|e| exc::raise(e)));
 }
 pub fn _the_repeat_answer(args: &[Py]) -> Py {

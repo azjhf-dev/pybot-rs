@@ -31,7 +31,9 @@ pub fn g_TAKES_AS_IT_COMES() -> Py { ensure_init(); G_TAKES_AS_IT_COMES.with(|c|
 pub fn s_TAKES_AS_IT_COMES(v: Py) { ensure_init(); G_TAKES_AS_IT_COMES.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("How long they have been at the job they filed, said back as something worth a word.\n\n    im a teacher\n    i have been doing it for 10 years\n\nThe first turn is answered well. The second was answered by the greeting fallback with \"Got it -\nyou have been doing it for 10 years\" - the line said back with a receipt on it. It knows nothing\nabout the job filed a turn ago and nothing about what ten years means, and it is the whole reply:\nno warmth, nothing to say next. Telling someone how long you have stuck at something is a bid to\ntalk about it, not a fact being filed.\n\n`bot/memory/years_in.py` holds the reading and the wording. This module is the turn it is asked\non: a band above the chat module, so the length is answered as the follow-up it is, and the store's\nown readers keep every other line. `respond` returns None on a line it is not about, so a chat\nwith no job in it, or a line with a feeling or a question in it, is answered as it was before.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.years_in.PRIORITY"); }
     s_PRIORITY(Py::Int(1150));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.years_in.TAKES_AS_IT_COMES"); }
     s_TAKES_AS_IT_COMES(py_func("takes_as_it_comes", |args: &[Py]| takes_as_it_comes(args)));
 }
 pub fn respond(args: &[Py]) -> Py {

@@ -75,18 +75,31 @@ pub fn g__WHEN() -> Py { ensure_init(); G__WHEN.with(|c| c.borrow().clone()) }
 pub fn s__WHEN(v: Py) { ensure_init(); G__WHEN.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("What a guest will not eat, and the answer it changes.\n\nA line such as \"and she hates mushrooms\" is not a new subject: it is one more constraint\non the dinner we were already planning. The memory store keeps it against the person, and\nthis module revises the suggestion the bot has just given so the reply is concrete rather\nthan a nod. The same shape serves \"he can't stand olives\" and \"she isn't keen on fish\".\n\nThe knowledge base is still the authority on food; this module only needs to tell a food\napart from the other things a person might hate (\"she hates her job\"). The words come from\nthe understanding lane's cooking vocabulary and from the pantry table, so a new ingredient\nthere is recognised here without a second list to maintain.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.guest.WORD"); }
     s_WORD(stdlib_call("re", "compile", &[py_str("[a-z0-9']+")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.guest.STOP"); }
     s_STOP(stdlib_call("re", "compile", &[py_str("\\b(?:but|so|because|though|although|which|when|if|and then)\\b|[,.;!?]")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.guest.DISLIKE"); }
     s_DISLIKE(stdlib_call("re", "compile", &[py_str("\\b(?:hates?|dislikes?|can'?t stand|cannot stand|(?:do|does|did)(?:n'?t| not) (?:like|fancy|enjoy|want|wants?)|(?:isn'?t|aren'?t|is not|are not|amn'?t) (?:(?:that|really|very|so) )?(?:much of )?(?:a |the )?(?:(?:big|huge|massive|great) )?(?:fan of|keen on|fond of|fussed on|my thing|my kind of thing)|not (?:(?:that|really|very|so|all that) )?(?:much of )?(?:a |the )?(?:(?:big|huge|massive|great) )?(?:fan of|keen on|fond of|fussed on|my thing|my kind of thing)|avoids?|avoiding)\\s+(?:the\\s+|any\\s+)?(?P<food>[a-z][a-z' -]{1,40})"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.guest.NOT_MY_THING"); }
     s_NOT_MY_THING(stdlib_call("re", "compile", &[py_str("\\b(?P<food>[a-z][a-z' -]{1,30}?)\\s+(?:isn'?t|is not|aren'?t|are not)\\s+(?:(?:really|that|exactly|quite)\\s+)?(?:my|our)\\s+(?:(?:kind|sort)\\s+of\\s+|cup\\s+of\\s+tea|thing)"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.guest.NO_FOR_ME"); }
     s_NO_FOR_ME(stdlib_call("re", "compile", &[py_str("\\b(?:no|not|none of the)\\s+(?:any\\s+|more\\s+|the\\s+)?(?P<food>[a-z][a-z' -]{1,40}?)\\s+(?:for me|thanks|thank you|please|today|tonight|tomorrow|later)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.guest.NO_FOOD_ALONE"); }
     s_NO_FOOD_ALONE(stdlib_call("re", "compile", &[py_str("^\\s*(?:no|not|none(?=[\\s,])|nothing with|anything but)\\s+(?P<food>[a-z][a-z' ,-]{3,60}?\\s+(?:or|and|,)\\s+[a-z][a-z' ,-]{1,40})\\s*$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.guest.GENERIC"); }
     s_GENERIC(call_builtin("frozenset", &[mcall(&py_str("\ncooking cook food dinner tea lunch breakfast eating eat meal meals work job school housework\ncleaning shopping mornings mondays tuesdays wednesdays thursdays fridays saturdays sundays\nwinter summer rain traffic flying travel travelling exercise sport gym crowds spiders\neverything anything nothing it that this them him her\n"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.guest.PRONOUN"); }
     s_PRONOUN(call_builtin("frozenset", &[mcall(&py_str("her his their my your our its it them him this that these those"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.guest.EXTRA"); }
     s_EXTRA(call_builtin("frozenset", &[mcall(&py_str("\nolive feta couscous halloumi paneer quinoa avocado broccoli cauliflower cabbage leek celery\ncucumber lettuce peas sweetcorn beetroot aubergine courgette pumpkin berries banana apple\norange lemon lime grape melon peach pear plum mango pineapple strawberry blueberry raspberry\nwalnut almond cashew peanut hazelnut pistachio sesame tofu prawn salmon tuna cod haddock\nmackerel sardine anchovy sausage bacon ham chorizo steak mince turkey duck lamb pork beef\nchicken fish egg eggs cheese butter milk cream yoghurt bread pasta rice potato tomato onion\ngarlic carrot pepper spinach mushroom lentil chickpea bean noodle soup curry lasagne pizza\ncake chocolate sugar salt\n"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.guest._KNOWN"); }
     s__KNOWN(Py::None);
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.guest._WHEN"); }
     s__WHEN(stdlib_call("re", "compile", &[py_str("(?:\\s+(?:(?:this|next|last|on)\\s+(?:week|weekend|friday|saturday|sunday|monday|tuesday|wednesday|thursday|morning|evening|afternoon|night|weekday|birthday|christmas)|today|tonight|tomorrow|tomorrow night|now|later|again|then|instead|for (?:tea|dinner|lunch|breakfast|supper)|at (?:lunch|dinner|breakfast|tea)|any\\s?more))+$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.guest.DRINK_PAIR"); }
     s_DRINK_PAIR(call_builtin("frozenset", &[mcall(&py_str("\ntea coffee beer wine lager cider ale stout juice squash cordial water milk lemonade\n"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.guest.NO_X_ALONE"); }
     s_NO_X_ALONE(stdlib_call("re", "compile", &[py_str("^\\s*(?:no|not|none of the|nothing with)\\s+(?:any\\s+|more\\s+|the\\s+)?(?P<food>[a-z][a-z' -]{1,40}?)\\s*(?:please|thanks|thank you)?\\s*$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
 }
 pub fn _fold(args: &[Py]) -> Py {
@@ -344,7 +357,7 @@ pub fn found(args: &[Py]) -> Py {
     let __iter3 = py_iter_or_raise(&pieces.clone());
     for __item in __iter3 {
     item = __item.clone();
-    if py_truthy(&{ let __b = { let __b = _is_food(&[item.clone()]); if py_truthy(&__b) { __b } else { a_pair.clone() } }; if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&out.clone()) { let __unpk6208 = py_unpack(&__item.clone(), 2, None); let mut food: Py = __unpk6208[0].clone(); let mut _at: Py = __unpk6208[1].clone(); __out.push(food.clone()); } py_list(__out) })() }, &item.clone())) } }) {
+    if py_truthy(&{ let __b = { let __b = _is_food(&[item.clone()]); if py_truthy(&__b) { __b } else { a_pair.clone() } }; if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&out.clone()) { let __unpk1806 = py_unpack(&__item.clone(), 2, None); let mut food: Py = __unpk1806[0].clone(); let mut _at: Py = __unpk1806[1].clone(); __out.push(food.clone()); } py_list(__out) })() }, &item.clone())) } }) {
     let _ = mcall(&out.clone(), "append", &[py_tuple(vec![item.clone(), mcall(&match_.clone(), "start", &[py_str("food")])])]);
     }
     }

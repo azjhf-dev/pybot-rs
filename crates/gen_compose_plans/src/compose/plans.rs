@@ -87,21 +87,37 @@ pub fn g_WORK_TOLD() -> Py { ensure_init(); G_WORK_TOLD.with(|c| c.borrow().clon
 pub fn s_WORK_TOLD(v: Py) { ensure_init(); G_WORK_TOLD.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("The ask about a plan the person has just told us about.\n\n\"we fly on the 12th\" then \"what time do i need to leave\". No knowledge entry holds it, nothing on\nthe web has it, and the hedge (\"A search should sort you out quickly\") sends a person to a search\nengine about their own booking. The plan is theirs and the missing half is in their ticket or their\nletter. What a friend does is give the rule of thumb that is worth knowing and ask the one thing\nthat fills the gap: \"What time do you need to be there? Work back from the journey, and add half an\nhour for the queue.\"\n\nThe reader is narrow on two sides. The ask has to be about them (i, me, we, us) and it has to name\nno record to look up, because \"when does my parcel arrive\" is a delivery with its own answer. And\nthe plan has to have been told to us in this chat, a few lines back: a bare \"what time do i need to\nleave\" with nothing before it belongs to whoever can answer it, not here.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.plans.TRIP_TOLD"); }
     s_TRIP_TOLD(stdlib_call("re", "compile", &[py_str("\\b(?:going|off|away|flying|fly|flies|travelling|traveling|trip|holiday|hols|flight|abroad|visiting|weekend away)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.plans.WORK_TOLD"); }
     s_WORK_TOLD(stdlib_call("re", "compile", &[py_str("\\b(?:new job|job interview|interview|first day|start(?:ing)? (?:work|my new job)|back to work|work at|work in|new role|promotion|training day|induction|night shift)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.plans.HEALTH_TOLD"); }
     s_HEALTH_TOLD(stdlib_call("re", "compile", &[py_str("\\b(dentist|doctors?|gp|surgery|hospital|check-?up|scan|x-?ray|optician|jab|vaccine|physio|clinic|antenatal)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.plans.MOVE_TOLD"); }
     s_MOVE_TOLD(stdlib_call("re", "compile", &[py_str("\\b(?:moving|move house|moving house|new flat|new house|moving out|house move|removal van|packing up|exchanging contracts)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.plans.EVENT_TOLD"); }
     s_EVENT_TOLD(stdlib_call("re", "compile", &[py_str("\\b(wedding|getting married|funeral|christening|birthday party|concert|gig|match|conference|exam|driving test|course)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.plans.PLACE_AND_MONTH"); }
     s_PLACE_AND_MONTH(stdlib_call("re", "compile", &[py_str("\\b([a-z][a-z'\\-]{2,})\\s+in\\s+(?:january|february|march|april|may|june|july|august|september|october|november|december|the (?:spring|summer|autumn))\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.plans.PLAN_KINDS"); }
     s_PLAN_KINDS(py_tuple(vec![py_tuple(vec![py_str("move"), g_MOVE_TOLD()]), py_tuple(vec![py_str("health"), g_HEALTH_TOLD()]), py_tuple(vec![py_str("work"), g_WORK_TOLD()]), py_tuple(vec![py_str("event"), g_EVENT_TOLD()]), py_tuple(vec![py_str("trip"), g_TRIP_TOLD()])]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.plans.A_PLACE_NAMED"); }
     s_A_PLACE_NAMED(stdlib_call("re", "compile", &[py_str("\\b(?:to|in|back to|visiting|off to)\\s+([a-z][a-z'\\-]{2,})\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.plans.PLAN_NOT_A_PLACE"); }
     s_PLAN_NOT_A_PLACE(call_builtin("frozenset", &[mcall(&py_str("\nabout and appointment back bed before be been being birthday business check check-up christening\nconcert conference course do doctors early exam funeral get gig go going have holiday honeymoon\nhome hospital interview it its late match me my night party scan see sleep somebody someone test\nthat the them then there today tomorrow trip wedding work yesterday you\n"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.plans.WHO_WITH_ME"); }
     s_WHO_WITH_ME(stdlib_call("re", "compile", &[py_str("\\bwho(?:'s|s| is| else| all)?\\b[^?]{0,24}\\b(?:with|coming|going|travelling|traveling)\\b[^?]{0,16}\\b(?:me|us|my|our)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.plans.WHAT_TIME"); }
     s_WHAT_TIME(stdlib_call("re", "compile", &[py_str("\\b(?:what|which)\\s+time\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.plans.TIME_DOING"); }
     s_TIME_DOING(stdlib_call("re", "compile", &[py_str("\\b(?:leave|leaving|set off|get there|be there|arrive|arriving|set out|head off|check in|start|go|be)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.plans.WHAT_TO_TAKE"); }
     s_WHAT_TO_TAKE(stdlib_call("re", "compile", &[py_str("\\b(?:what|anything)\\b[^?]{0,34}\\b(?:bring|bringing|take|taking|pack|packing|wear|wearing)\\b[^?]{0,24}\\b(?:with (?:me|us)|for the|on the|for a|to the|for my|for our)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.plans.WHAT_FIRST"); }
     s_WHAT_FIRST(stdlib_call("re", "compile", &[py_str("\\b(?:what|anything|is there anything|what else)\\b[^?]{0,44}\\b(?:before i (?:go|leave|set off|travel)|before we (?:go|leave|set off|travel)|beforehand|on the day|the day before|when i get there|when we get there|to do before (?:i|we) go|to sort before|to organise before|to organize before)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.plans.WHAT_MISSED"); }
     s_WHAT_MISSED(stdlib_call("re", "compile", &[py_str("\\b(?:anything|what) (?:have|did) i (?:miss|missed)\\b[^?]{0,30}\\b(?:while|off|away|on (?:holiday|leave)|out of)\\b|\\bwhile i was (?:off|away|on holiday|on leave)\\b|\\bcatch up on\\b[^?]{0,20}\\b(?:while|since|off|back)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.plans.ABOUT_THEMSELVES"); }
     s_ABOUT_THEMSELVES(stdlib_call("re", "compile", &[py_str("\\b(?:i|me|my|we|us|our|i'm|im|i've|ive)\\b")]).unwrap_or_else(|e| exc::raise(e)));
 }
 pub fn _the_plan_told(args: &[Py]) -> Py {

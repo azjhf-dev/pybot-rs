@@ -71,17 +71,29 @@ pub fn g__VAGUE_LEAD() -> Py { ensure_init(); G__VAGUE_LEAD.with(|c| c.borrow().
 pub fn s__VAGUE_LEAD(v: Py) { ensure_init(); G__VAGUE_LEAD.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("A taste named on the next line is a request for more of it, in the thing on the table.\n\n    what should i watch tonight / i like sci fi      -> the science fiction films\n    any good books / i like crime                    -> the crime books\n\nBoth used to be acknowledged and dropped (\"Got it - you like sci fi.\"), because \"i like sci fi\" on\nits own names no medium: the knowledge base knows science fiction films and science fiction books,\nand nothing in the line says which. The medium is in the answer just given, so the line carries it\nalong and the entry that answered the first turn answers this one too.\n\nThree things keep it from firing where it should not:\n\n  * the answer before it has to have offered choices (two named things to pick between) - \"any\n    good books for my son\" is answered with how to read with him, and a taste said next to that is\n    not asking for a list of books;\n  * a taste with nothing on the table is a fact about the person (\"i like crime\" on its own), and\n    stays one;\n  * a taste said twice running is served once (the second one would hand the same list back);\n  * the answer it reaches has to say something new, which is checked where the answer is made\n    (`bot/modules/answers.py`, `_same_as_the_last_answer`), because an entry with no picks for\n    that taste hands the same list back and the person hears what they have just heard.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.prefer.TASTE"); }
     s_TASTE(stdlib_call("re", "compile", &[py_str("^(?:(?:i|we)\\s+)?(?:really\\s+|do\\s+|just\\s+)?(?:like|love|enjoy|prefer|am into|'m into|im into|am a fan of|'m a fan of|im a fan of)\\s+(.+)$")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.prefer.WANTS"); }
     s_WANTS(stdlib_call("re", "compile", &[py_str("^(?:(?:i|we)\\s*)?(?:'?m|'?re|am|are)?\\s*(?:in\\s+the\\s+mood\\s+for|in\\s+the\\s+humou?r\\s+for|keen\\s+on|up\\s+for|in\\s+the\\s+market\\s+for|fancy|fancied|fancying|'?d\\s+go\\s+for|would\\s+go\\s+for)\\s+(.+)$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.prefer.SOMETHING"); }
     s_SOMETHING(stdlib_call("re", "compile", &[py_str("^(?:something|anything)\\s+(\\S.*)$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.prefer._VAGUE_LEAD"); }
     s__VAGUE_LEAD(stdlib_call("re", "compile", &[py_str("^(?:something|anything|some|any|a|an|the)\\s+"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.prefer._ASKS_SOMETHING"); }
     s__ASKS_SOMETHING(stdlib_call("re", "compile", &[py_str("\\?|^(?:what|how|why|when|where|which|who|can|could|should|do|does)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.prefer.REFUSED"); }
     s_REFUSED(stdlib_call("re", "compile", &[py_str("\\b(?:not|no|never|none|nope|hate|hates|dislike|dislikes|instead|rather|except|apart|prefer|prefers|can'?t stand|cannot stand|stood|sick of|bored of|tired of|over|without|anything but)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.prefer.MEDIUM"); }
     s_MEDIUM(py_tuple(vec![py_tuple(vec![py_str("books"), stdlib_call("re", "compile", &[py_str("\\b(?:book|books|novel|novels|read|reading|author|paperback)\\b")]).unwrap_or_else(|e| exc::raise(e))]), py_tuple(vec![py_str("films"), stdlib_call("re", "compile", &[py_str("\\b(?:film|films|movie|movies|watch|watching|series|tv|cinema)\\b")]).unwrap_or_else(|e| exc::raise(e))])]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.prefer._TITLE"); }
     s__TITLE(stdlib_call("re", "compile", &[py_str("\\*[^*\\n]{2,}\\*")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.prefer._LEAD"); }
     s__LEAD(stdlib_call("re", "compile", &[py_str("^(?:a|an|the|good|nice|great)\\s+")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.prefer.POINTS_BACK"); }
     s_POINTS_BACK(py_tuple(vec![py_str("you"), py_str("me"), py_str("it"), py_str("that"), py_str("this"), py_str("them"), py_str("him"), py_str("her")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.prefer.MOST_WORDS"); }
     s_MOST_WORDS(Py::Int(4));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.prefer.MEDIUM_WORDS"); }
     s_MEDIUM_WORDS(py_dict(vec![(py_str("books"), stdlib_call("re", "compile", &[py_str("\\b(?:books?|novels?|read(?:ing|s)?|author|paperback|stor(?:y|ies))\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e))), (py_str("films"), stdlib_call("re", "compile", &[py_str("\\b(?:films?|movies?|watch(?:ing)?|series|tv|cinema|documentar(?:y|ies))\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)))]));
 }
 pub fn _offered_choices(args: &[Py]) -> Py {

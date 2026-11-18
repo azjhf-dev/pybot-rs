@@ -27,6 +27,7 @@ pub fn g_PRIORITY() -> Py { ensure_init(); G_PRIORITY.with(|c| c.borrow().clone(
 pub fn s_PRIORITY(v: Py) { ensure_init(); G_PRIORITY.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("One question back about the thing that is not working, instead of a stall.\n\n\"my airpods are not showing up\" and \"my laptop is slow\" are statements of a trouble, and the bot\nanswers them with \"Got it. Is there anything you'd like a hand with?\" or a search, which fits any\nmessage at all. The question a friend asks instead is the same one for a boiler, a car and a\nlaptop - is it every time, and did anything change - and it is a question the bot can ask without\nknowing a single fact about the thing.\n\n`bot/compose/a_trouble.py` finds the thing in the person's own words and the question that goes\nwith it. This module sits in the band `where_it_answers` uses - above greeting's hedge, below\nevery card - and stands down unless the composer's own reply says nothing about the line.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.the_trouble_it_has.PRIORITY"); }
     s_PRIORITY(op_neg(&Py::Int(999)));
 }
 pub fn respond(args: &[Py]) -> Py {

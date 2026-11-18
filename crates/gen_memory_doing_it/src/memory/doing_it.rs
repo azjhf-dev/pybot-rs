@@ -51,12 +51,19 @@ pub fn g_TIME_WORDS() -> Py { ensure_init(); G_TIME_WORDS.with(|c| c.borrow().cl
 pub fn s_TIME_WORDS(v: Py) { ensure_init(); G_TIME_WORDS.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("An ask about how long to do a thing, written out with the thing the chat is about.\n\n    i started learning guitar last month\n    my fingers hurt\n    how long should i practise          -> \"About six weeks for most bones - six for a wrist or\n                                            collarbone, six to eight for an arm ...\"\n\nThe last line is a question about the practice, and the chat is on the guitar: an answer about a\nfracture is the wrong answer to a person who has said nothing about a break. The line was read\nagainst the line before it, whose words are a complaint about fingers, and the entry on bone\nhealing keys both \"fingers\" and \"how long\", so it took the turn.\n\nThe doing word in the line (\"practise\") is what the ask is about, and the thing it is done with\n(\"guitar\") is what the chat has been doing. Written out with that thing - \"how long should i\npractise guitar?\" - the entry filed for the instrument answers seven words, which is the answer\nthe person wanted. The module only offers the rewrites: the caller looks each one up and takes the\nfirst that answers with a length, so a line whose thing reaches nothing keeps the turn it had.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.doing_it.LENGTH_ASK"); }
     s_LENGTH_ASK(stdlib_call("re", "compile", &[py_str("\\bhow (?:long|many (?:hours|minutes|days|weeks|months|years))\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.doing_it.ASK_WORDS"); }
     s_ASK_WORDS(call_builtin("frozenset", &[mcall(&py_str("\nhow long many much hours hour days day weeks week months month years year minutes minute should\nshall can could would will do does did is are was i me my we you it that this to for the a an in\non at about each per every and or of time\n"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.doing_it.TIME_WORDS"); }
     s_TIME_WORDS(call_builtin("frozenset", &[mcall(&py_str("\nday days week weeks month months year years weekend summer winter spring autumn today tomorrow\nyesterday morning evening night ago last next this recent lately start started\n"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.doing_it.NOT_A_THING_DONE"); }
     s_NOT_A_THING_DONE(call_builtin("frozenset", &[mcall(&py_str("heal recover bleed"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.doing_it.LOOKBACK"); }
     s_LOOKBACK(Py::Int(12));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.doing_it.A_MOAN"); }
     s_A_MOAN(stdlib_call("re", "compile", &[py_str("\\bi (?:can\\s+)?(?:never|always|keep|constantly|usually|often|still)\\b(?:\\s+(?P<verb>getting|get|doing|do|making|make|cooking|cook|picking|pick|finding|find|managing|manage))?\\b(?P<thing>[^?.!,]{1,40}?)\\s+(?:wrong|right|messed up|ruined|spoiled|spoilt|screwed up|backwards)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.doing_it.MOAN_VERB"); }
     s_MOAN_VERB(py_dict(vec![(py_str("getting"), py_str("get")), (py_str("doing"), py_str("do")), (py_str("making"), py_str("make")), (py_str("cooking"), py_str("cook")), (py_str("picking"), py_str("pick")), (py_str("finding"), py_str("find")), (py_str("managing"), py_str("manage"))]));
 }
 pub fn _is_doing(args: &[Py]) -> Py {

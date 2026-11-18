@@ -51,13 +51,20 @@ pub fn g__OBSERVERS() -> Py { ensure_init(); G__OBSERVERS.with(|c| c.borrow().cl
 pub fn s__OBSERVERS(v: Py) { ensure_init(); G__OBSERVERS.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("Fixed module interface. Edit bot/modules/, never this file.\n\nEvery turn runs the modules in bot/modules/ in descending PRIORITY (default 0), then by\nfilename, in three phases:\n\n1. observe(text, memory): remember things (a name, a fact, the topic). It never replies.\n2. respond(text, memory): propose a reply (a string) or pass (None). Every module proposes;\n   each one works on its own copy of memory, so a reply that is not chosen leaves no trace.\n3. choose(text, memory, candidates) in bot/modules/arbiter.py picks one candidate, and the\n   chosen module's copy of memory becomes the conversation's memory. A candidate is\n   {\"module\": name, \"priority\": PRIORITY, \"reply\": text}; they arrive in the order above.\n   Without a working arbiter, the first candidate (the highest PRIORITY) is chosen.\n\nThen after(text, reply, memory) runs in every module that defines it, and the runtime appends\n{\"user\": text, \"bot\": reply, \"module\": name} to memory[\"turns\"] (read it, never change it).\nA module that fails is skipped; a turn never fails.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET runtime.ARBITER"); }
     s_ARBITER(py_str("arbiter"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET runtime.FALLBACK"); }
     s_FALLBACK(py_str("Hello!"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET runtime._MODULES"); }
     s__MODULES(load_modules(&[]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET runtime._OBSERVERS"); }
     s__OBSERVERS(_hooks(&[py_str("observe")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET runtime._HANDLERS"); }
     s__HANDLERS(_hooks(&[py_str("respond")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET runtime._AFTER"); }
     s__AFTER(_hooks(&[py_str("after")]));
-    s__ARBITER(call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g__MODULES()) { let __unpk2846 = py_unpack(&__item.clone(), 3, None); let mut name: Py = __unpk2846[0].clone(); let mut _u: Py = __unpk2846[1].clone(); let mut module: Py = __unpk2846[2].clone(); if py_truthy(&Py::Bool(py_eq(&name.clone(), &g_ARBITER()))) {  __out.push(call_builtin("getattr", &[module.clone(), py_str("choose"), Py::None]).unwrap_or_else(|e| exc::raise(e))); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET runtime._ARBITER"); }
+    s__ARBITER(call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g__MODULES()) { let __unpk9411 = py_unpack(&__item.clone(), 3, None); let mut name: Py = __unpk9411[0].clone(); let mut _u: Py = __unpk9411[1].clone(); let mut module: Py = __unpk9411[2].clone(); if py_truthy(&Py::Bool(py_eq(&name.clone(), &g_ARBITER()))) {  __out.push(call_builtin("getattr", &[module.clone(), py_str("choose"), Py::None]).unwrap_or_else(|e| exc::raise(e))); } } py_list(__out) })() }, Py::None]).unwrap_or_else(|e| exc::raise(e)));
 }
 pub fn load_modules(args: &[Py]) -> Py {
     ensure_init();
@@ -106,7 +113,7 @@ pub fn load_modules(args: &[Py]) -> Py {
     let _ = mcall(&loaded.clone(), "append", &[py_tuple(vec![priority.clone(), gattr(&entry.clone(), "name"), module.clone()])]);
     }
     let _ = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("key".to_string(), { let entry = entry.clone(); let loaded = loaded.clone(); let module = module.clone(); let name = name.clone(); let priority = priority.clone(); py_func("lambda", move |args: &[Py]| { let entry = entry.clone(); let loaded = loaded.clone(); let module = module.clone(); let name = name.clone(); let priority = priority.clone(); let item: Py = __kwp(args, 0, "item").unwrap_or(Py::None); py_tuple(vec![op_neg(&geti(&item.clone(), &Py::Int(0))), geti(&item.clone(), &Py::Int(1))]) }) })]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&loaded.clone(), "sort", args))(&__args) };
-    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&loaded.clone()) { let __unpk3422 = py_unpack(&__item.clone(), 3, None); let mut priority: Py = __unpk3422[0].clone(); let mut name: Py = __unpk3422[1].clone(); let mut module: Py = __unpk3422[2].clone(); __out.push(py_tuple(vec![name.clone(), priority.clone(), module.clone()])); } py_list(__out) })() };
+    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&loaded.clone()) { let __unpk9363 = py_unpack(&__item.clone(), 3, None); let mut priority: Py = __unpk9363[0].clone(); let mut name: Py = __unpk9363[1].clone(); let mut module: Py = __unpk9363[2].clone(); __out.push(py_tuple(vec![name.clone(), priority.clone(), module.clone()])); } py_list(__out) })() };
     Py::None
 }
 pub fn _hooks(args: &[Py]) -> Py {
@@ -125,7 +132,7 @@ pub fn _hooks(args: &[Py]) -> Py {
     let mut module: Py = Py::None;
     let mut module_name: Py = Py::None;
     let mut priority: Py = Py::None;
-    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g__MODULES()) { let __unpk6926 = py_unpack(&__item.clone(), 3, None); let mut module_name: Py = __unpk6926[0].clone(); let mut priority: Py = __unpk6926[1].clone(); let mut module: Py = __unpk6926[2].clone(); if py_truthy(&call_builtin("callable", &[call_builtin("getattr", &[module.clone(), name.clone(), Py::None]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(py_tuple(vec![module_name.clone(), priority.clone(), call_builtin("getattr", &[module.clone(), name.clone()]).unwrap_or_else(|e| exc::raise(e))])); } } py_list(__out) })() };
+    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g__MODULES()) { let __unpk4068 = py_unpack(&__item.clone(), 3, None); let mut module_name: Py = __unpk4068[0].clone(); let mut priority: Py = __unpk4068[1].clone(); let mut module: Py = __unpk4068[2].clone(); if py_truthy(&call_builtin("callable", &[call_builtin("getattr", &[module.clone(), name.clone(), Py::None]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(py_tuple(vec![module_name.clone(), priority.clone(), call_builtin("getattr", &[module.clone(), name.clone()]).unwrap_or_else(|e| exc::raise(e))])); } } py_list(__out) })() };
     Py::None
 }
 pub fn _copy(args: &[Py]) -> Py {
@@ -145,7 +152,7 @@ pub fn _copy(args: &[Py]) -> Py {
     let mut value: Py = Py::None;
     let _ = py_str("A module's own copy of memory. memory[\"turns\"] is shared: only the runtime writes it.");
     let __try1 = exc::catch(|| {
-    return py_tuple(vec![Py::Bool(true), { (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&memory.clone(), "items", &[])) { let __unpk1742 = py_unpack(&__item.clone(), 2, None); let mut key: Py = __unpk1742[0].clone(); let mut value: Py = __unpk1742[1].clone(); __out.push((key.clone(), if py_truthy(&Py::Bool(py_eq(&key.clone(), &py_str("turns")))) { value.clone() } else { stdlib_call("copy", "deepcopy", &[value.clone()]).unwrap_or_else(|e| exc::raise(e)) })); } py_dict(__out) })() }]);
+    return py_tuple(vec![Py::Bool(true), { (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&mcall(&memory.clone(), "items", &[])) { let __unpk8772 = py_unpack(&__item.clone(), 2, None); let mut key: Py = __unpk8772[0].clone(); let mut value: Py = __unpk8772[1].clone(); __out.push((key.clone(), if py_truthy(&Py::Bool(py_eq(&key.clone(), &py_str("turns")))) { value.clone() } else { stdlib_call("copy", "deepcopy", &[value.clone()]).unwrap_or_else(|e| exc::raise(e)) })); } py_dict(__out) })() }]);
         py_tuple(vec![Py::Bool(false), Py::None])
     });
     let mut __ret2: Py = Py::Bool(false);

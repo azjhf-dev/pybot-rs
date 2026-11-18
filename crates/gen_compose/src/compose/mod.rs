@@ -112,30 +112,52 @@ pub fn s__SHORT_RUN(v: Py) { ensure_init(); G__SHORT_RUN.with(|c| *c.borrow_mut(
 fn module_body() {
     let _ = py_str("Phrasing helpers for the response composer. The routing lane owns the composer: what to do\nthis turn (bot/modules/arbiter.py chooses among the modules' replies) and how it is phrased.\n");
     fn __data1() -> Py { py_tuple(vec![py_str("not"), py_str("no"), py_str("never"), py_str("hardly"), py_str("barely"), py_str("nothing"), py_str("without"), py_str("cant"), py_str("cannot"), py_str("dont"), py_str("doesnt"), py_str("didnt"), py_str("isnt"), py_str("wasnt"), py_str("arent"), py_str("werent"), py_str("wont"), py_str("wouldnt"), py_str("couldnt"), py_str("shouldnt"), py_str("havent"), py_str("hasnt"), py_str("aint")]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.NEGATORS"); }
     s_NEGATORS(call_builtin("frozenset", &[__data1()]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.NEARLY"); }
     s_NEARLY(call_builtin("frozenset", &[py_tuple(vec![py_str("nearly"), py_str("almost")])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.SAYS_IT_HAS_LINGERED"); }
     s_SAYS_IT_HAS_LINGERED(stdlib_call("re", "compile", &[py_str("\\b(?:wont|won'?t|not)\\s+(?:go|shift|clear|budge|settle)\\w*|\\bfor\\s+(?:\\d+|a\\s+couple\\s+of|a\\s+few|a|an|two|three|four|five|six|seven|eight|nine|ten)\\s+(?:days?|weeks?|months?|years?)\\b|\\b(?:been going|going on|dragging on)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.STILL_AT_IT"); }
     s_STILL_AT_IT(stdlib_call("re", "compile", &[py_str("\\bstill\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose._SHORT_RUN"); }
     s__SHORT_RUN(stdlib_call("re", "compile", &[py_str("\\b(?:(?:one|two|a\\s+couple\\s+of)\\s+days?|day\\s+(?:one|two|three|1|2|3))\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.LINGERED_LINE"); }
     s_LINGERED_LINE(py_tuple(vec![py_str("Anything that has hung on is worth getting looked at — a pharmacist will see you quicker than a GP, and they'll tell you if it needs one."), py_str("That is long enough to be worth a proper look rather than another stretch of waiting: a pharmacist today, and a GP if it is still there after that."), py_str("Sorry it is still going. Note when it is worst and what eases it, then take that to a pharmacist — a thing that has lasted this long is worth putting a name to.")]));
     fn __data2() -> Py { py_tuple(vec![py_str("can"), py_str("could"), py_str("do"), py_str("does"), py_str("did"), py_str("is"), py_str("was"), py_str("were"), py_str("are"), py_str("would"), py_str("should"), py_str("have"), py_str("has"), py_str("had"), py_str("wo"), py_str("ai"), py_str("must"), py_str("need"), py_str("might")]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.AUX"); }
     s_AUX(call_builtin("frozenset", &[__data2()]).unwrap_or_else(|e| exc::raise(e)));
     fn __data3() -> Py { py_tuple(vec![py_str("do"), py_str("did"), py_str("ca"), py_str("wo"), py_str("ai"), py_str("is"), py_str("are"), py_str("was"), py_str("were"), py_str("has"), py_str("have"), py_str("had"), py_str("could"), py_str("would"), py_str("should"), py_str("must"), py_str("need"), py_str("dare"), py_str("does"), py_str("am"), py_str("might")]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.CONTRACTED_AUX"); }
     s_CONTRACTED_AUX(call_builtin("frozenset", &[__data3()]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.DOUBT"); }
     s_DOUBT(call_builtin("frozenset", &[py_tuple(vec![py_str("believe"), py_str("believed"), py_str("imagine"), py_str("imagined"), py_str("thought"), py_str("think")])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.CANNOT"); }
     s_CANNOT(call_builtin("frozenset", &[py_tuple(vec![py_str("cant"), py_str("cannot"), py_str("couldnt"), py_str("never"), py_str("always")])]).unwrap_or_else(|e| exc::raise(e)));
     fn __data4() -> Py { py_tuple(vec![py_str("think"), py_str("thought"), py_str("know"), py_str("knew"), py_str("reckon"), py_str("guess"), py_str("suppose"), py_str("sure"), py_str("expect"), py_str("imagine"), py_str("say"), py_str("believe"), py_str("believed"), py_str("certain")]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.SURE"); }
     s_SURE(call_builtin("frozenset", &[__data4()]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.DOUBTED"); }
     s_DOUBTED(call_builtin("frozenset", &[py_tuple(vec![py_str("doubt"), py_str("doubts"), py_str("doubted"), py_str("doubting"), py_str("unsure"), py_str("uncertain")])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.BELIEVE_IT"); }
     s_BELIEVE_IT(call_builtin("frozenset", &[py_tuple(vec![py_str("believe"), py_str("believed")])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose._PERSON_WORD"); }
     s__PERSON_WORD(stdlib_call("re", "compile", &[py_str("\\b(?:he|she|they|him|her|them|his|hers|their|himself|herself|themselves)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose._CAPITAL_I"); }
     s__CAPITAL_I(stdlib_call("re", "compile", &[py_str("I(?:'|’|\\b)")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose._HELLO_OPENS"); }
     s__HELLO_OPENS(py_tuple(vec![py_str("hi "), py_str("hi,"), py_str("hello"), py_str("hey"), py_str("morning"), py_str("afternoon"), py_str("evening"), py_str("nice to meet"), py_str("good to meet")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose._ONE_WORD_THEN_A_BREAK"); }
     s__ONE_WORD_THEN_A_BREAK(stdlib_call("re", "compile", &[py_str("^([A-Za-z'\\u2019-]{1,20})\\s*(?:\\u2014|--|-|\\?|!|:|,)")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose._OPENS_A_SENTENCE"); }
     s__OPENS_A_SENTENCE(call_builtin("frozenset", &[mcall(&py_str("\n    a an the and but or nor so yet if then when while with without for from to of in on at by\n    it its it's i i'm im you you're ur your yours he she they we us them there here this that\n    these those what whats why how who whom where which yes no not never always often usually\n    sometimes maybe perhaps probably honestly actually really just only also still even too\n    one two three four five few some any all each both most many more less least enough\n    good bad best worst great fine okay ok right well now today tonight tomorrow first next last\n    check try keep stop start put take give get go going let leave look make use ask call add\n    avoid buy clean cook cover cut drink eat drive hold pick raise read ring run say see set sit\n    sort speak stick tell turn walk wash wear write fill fix top find change wait watch worth\n    sounds looks seems sorry thanks thank please sorry glad sadly luckily hopefully\n"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.OPENS_ON_A_FRAGMENT_QUESTION"); }
     s_OPENS_ON_A_FRAGMENT_QUESTION(stdlib_call("re", "compile", &[py_str("^\\s*([A-Z][\\w'\\u2019]*(?:\\s+[\\w'\\u2019]+){0,3})\\?\\s")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose._NOT_A_FRAGMENT"); }
     s__NOT_A_FRAGMENT(call_builtin("frozenset", &[mcall(&py_str("what who why when where which how whatever honestly really\n    sorry right ok okay so then and but well anyway"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.STEP_WHEN_LOW"); }
     s_STEP_WHEN_LOW(py_tuple(vec![py_str("Start with the smallest thing that would help: something to eat, a shower, ten minutes outside. One of those, and that is today's job."), py_str("Write down the three things on your mind, then do the smallest one. The other two can wait an hour."), py_str("Tell one person today — a friend, family, whoever is easiest — that it is a rough one. It weighs less once somebody else knows."), py_str("If it has been like this for weeks rather than days, the GP is the practical step: that is what they are there for, and you do not have to explain it well."), py_str("Do the small thing in front of you — the dishes, a walk, a shower. The push to do the next one comes after the first, not before.")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.A_STEP_ASK"); }
     s_A_STEP_ASK(stdlib_call("re", "compile", &[py_str("^\\s*(?:so\\s+|and\\s+|ok(?:ay)?\\s+|right\\s+|well\\s+)?(?:what|where|how)\\s+(?:should|do|can|could|shall|would)\\s+(?:i|we)\\s+(?:do|start|begin|try|go|handle|sort|fix|deal)(?:\\s+(?:now|then|next|first|it|this|that|about it|about that|from here|today|tonight|at all))?\\s*[?.!]*\\s*$|^\\s*(?:so\\s+|and\\s+|ok(?:ay)?\\s+|right\\s+)?what\\s+(?:now|next)\\s*[?.!]*\\s*$|^\\s*(?:so\\s+|and\\s+|ok(?:ay)?\\s+|right\\s+)?now\\s+what\\s*[?.!]*\\s*$|^\\s*(?:so\\s+|and\\s+|ok(?:ay)?\\s+|right\\s+)?(?:what|anything)\\s+(?:helps|would\\s+help|can\\s+help|might\\s+help)\\s*[?.!]*\\s*$|^\\s*(?:so\\s+|and\\s+)?how\\s+(?:do|can|could|should)\\s+i\\s+(?:feel|get|make\\s+myself\\s+feel)\\s+better\\b[^?.!]*[?.!]*\\s*$"), stdlib_attr("re", "IGNORECASE").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
 }
 pub fn says_it_has_lingered(args: &[Py]) -> Py {

@@ -52,12 +52,19 @@ pub fn s_WORDS(v: Py) { ensure_init(); G_WORDS.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("The number of children, counted from the children the chat already holds.\n\nNo single line has to state a number for the count to be known. `my son is 6` and `and my\ndaughter is 9` are two children with their ages, and the ask after them, `how many children do i\nhave`, was answered \"You've mentioned your son - how many have you got altogether?\": the store\nreads a count off one line, and a line about one child gives one child.\n\nSo the count is read off what the store holds: each child relation the person named is one child,\na child named on their own is one however they came in (`my son jack is 6` and `my son sam is 9`\nare two), and the same child said twice is still one. A child who belongs to somebody else is not\ncounted, and one child keeps the honest ask for a number.\n\nOnly the ask is answered: `reply_for` returns None on every other line, and on a chat that\nalready has a number, because the store answers that one.\n");
     fn __data1() -> Py { py_tuple(vec![py_str("son"), py_str("daughter"), py_str("child"), py_str("kid"), py_str("baby"), py_str("twin"), py_str("boy"), py_str("girl"), py_str("stepson"), py_str("stepdaughter"), py_str("teenager"), py_str("lad"), py_str("lass"), py_str("sons"), py_str("daughters"), py_str("children"), py_str("kids"), py_str("boys"), py_str("girls"), py_str("twins"), py_str("lads"), py_str("lasses")]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.kidcount.CHILD_RELATIONS"); }
     s_CHILD_RELATIONS(__data1());
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.kidcount.THE_ASK"); }
     s_THE_ASK(stdlib_call("re", "compile", &[py_str("\\bhow\\s+many\\b(?P<rest>[^.?!]*)"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.kidcount.THEIR_OWN"); }
     s_THEIR_OWN(stdlib_call("re", "compile", &[py_str("\\b(?:i|we|my|our|us)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.kidcount.SOMEONE_ELSE"); }
     s_SOMEONE_ELSE(stdlib_call("re", "compile", &[py_str("\\b(?:does|do|did|has|have|had)\\s+(?:my|her|his|their|your|she|he|they|the|that)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.kidcount.A_CHILD"); }
     s_A_CHILD(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("\\b(?:"), &mcall(&py_str("|"), "join", &[g_CHILD_RELATIONS()])), &py_str(")\\b")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.kidcount.NOT_THEIR_OWN"); }
     s_NOT_THEIR_OWN(stdlib_call("re", "compile", &[py_str("\\b(?:in|at|per|into)\\s+(?:a|an|the|my|our)\\s+(?:class|classroom|school|nursery|team|group|year|country|world)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.kidcount.WORDS"); }
     s_WORDS(py_dict(vec![(Py::Int(2), py_str("two")), (Py::Int(3), py_str("three")), (Py::Int(4), py_str("four")), (Py::Int(5), py_str("five")), (Py::Int(6), py_str("six")), (Py::Int(7), py_str("seven")), (Py::Int(8), py_str("eight")), (Py::Int(9), py_str("nine")), (Py::Int(10), py_str("ten")), (Py::Int(11), py_str("eleven")), (Py::Int(12), py_str("twelve"))]));
 }
 pub fn _asks(args: &[Py]) -> Py {

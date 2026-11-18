@@ -95,23 +95,41 @@ pub fn g_UNITS() -> Py { ensure_init(); G_UNITS.with(|c| c.borrow().clone()) }
 pub fn s_UNITS(v: Py) { ensure_init(); G_UNITS.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("The branch of the last answer that a short line of the person's own words chooses.\n\nAn answer often offers a side and names the case it is for: \"Dogs, by a whisker ... A cat is the\nkinder choice if you're out all day\". When the person then says \"i work all day\", the answer has\nalready said what that means, and repeating their line back to them (\"Got it - you work all day\")\nthrows the answer away. This reads the conditions out of the answer we just gave and hands back\nthe consequence of the one their line matches, so the reply can be the choice, not an echo.\n\nThe match is on a pair of words, not a topic: \"all day\" is in both lines, where \"i had a long day\"\nshares only \"day\" with \"out all day\" and is a different thing to say.\n\nA case is about the person who asked. \"my neighbour works all day\" shares \"all day\" with \"if\nyou're out all day\" and says nothing about the flat the cat would live in, so it takes no case:\nthe branch is theirs only when the line is about them.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.condition.SENTENCE"); }
     s_SENTENCE(stdlib_call("re", "compile", &[py_str("(?:(?:\\d\\.\\d)|[^.!?])+[.!?]?")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.condition.OPENS"); }
     s_OPENS(stdlib_call("re", "compile", &[py_str("^(?:if|when|unless|in case)\\s+"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.condition.CONDITION_WORD"); }
     s_CONDITION_WORD(stdlib_call("re", "compile", &[py_str("\\b(?:if|when|unless|in case)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.condition.BREAK"); }
     s_BREAK(stdlib_call("re", "compile", &[py_str("\\s*(?:,|;|:|\\u2014|\\s-\\s|\\band then\\b|\\bthen\\b)"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.condition.EMPTY"); }
     s_EMPTY(call_builtin("frozenset", &[mcall(&py_str("a an the i im you your youre we us our it its that this there\nhere to of in on at for with and or but if then so as is are was were be been am do does did\nhave has had got get all just really very too not no now some any my me him her his hers them\nthey their what which who whom whose how why when where"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.condition.MOST_LETTERS"); }
     s_MOST_LETTERS(Py::Int(90));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.condition.MOST_CASE"); }
     s_MOST_CASE(Py::Int(60));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.condition.RUNS_ON"); }
     s_RUNS_ON(stdlib_call("re", "compile", &[py_str("\\b(?:get|ring|call|take|keep|see|use|put|leave|buy|stop|go|try|check|ask|tell|give|make|book|contact|wash|clean|apply|move|add|rest|ice|eat|drink)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.condition.PLACE"); }
     s_PLACE(call_builtin("frozenset", &[mcall(&py_str("out outside away outdoors home house indoors inside office in"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.condition.PERSON"); }
     s_PERSON(op_bitor(&call_builtin("frozenset", &[pyrt::xrefs::xget("memory.facts", "RELATIONS")]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("frozenset", &[mcall(&py_str("neighbour neighbor friend boss manager\ncolleague coworker roommate flatmate housemate landlord partner kids kid child children baby\ntoddler twins sister brother son daughter"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.condition.MY_PERSON"); }
     s_MY_PERSON(stdlib_call("re", "compile", &[py_str("\\b(?:my|our)\\s+([a-z]+)")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.condition.A_PERSON_IN_IT"); }
     s_A_PERSON_IN_IT(op_bitor(&call_builtin("frozenset", &[g_PERSON()]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("frozenset", &[mcall(&py_str("someone anyone somebody anybody child children\n    baby toddler guest visitor family relatives"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.condition.A_PLAN"); }
     s_A_PLAN(stdlib_call("re", "compile", &[py_str("\\b(?:i|we)(?:m|re| am| are)?\\s+(?:want|wanna|need|plan|intend|have to|must|should|will|would like|am going|are going|going to|think i|ll|will)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.condition.UNITS"); }
     s_UNITS(call_builtin("frozenset", &[mcall(&py_str("year month week day hour minute mile km kilo stone pound percent"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
-    s_NUMBERS({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[mcall(&py_str("zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty thirty forty fifty sixty seventy eighty ninety hundred"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))) { let __unpk2451 = py_unpack(&__item.clone(), 2, None); let mut value: Py = __unpk2451[0].clone(); let mut word: Py = __unpk2451[1].clone(); __out.push((word.clone(), value.clone())); } py_dict(__out) })() });
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.condition.NUMBERS"); }
+    s_NUMBERS({ (|| -> Py { let mut __out: Vec<(Py, Py)> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[mcall(&py_str("zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty thirty forty fifty sixty seventy eighty ninety hundred"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))) { let __unpk1025 = py_unpack(&__item.clone(), 2, None); let mut value: Py = __unpk1025[0].clone(); let mut word: Py = __unpk1025[1].clone(); __out.push((word.clone(), value.clone())); } py_dict(__out) })() });
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.condition.BELOW"); }
     s_BELOW(py_tuple(vec![py_str("under"), py_str("below"), py_str("less than"), py_str("fewer than"), py_str("up to"), py_str("at most"), py_str("no more than"), py_str("within"), py_str("younger than"), py_str("shorter than")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.condition.ABOVE"); }
     s_ABOVE(py_tuple(vec![py_str("over"), py_str("above"), py_str("more than"), py_str("past"), py_str("older than"), py_str("longer than"), py_str("beyond"), py_str("at least"), py_str("from"), py_str("at")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.condition.MOST_WORDS_BEFORE"); }
     s_MOST_WORDS_BEFORE(Py::Int(3));
 }
 pub fn _places(args: &[Py]) -> Py {
@@ -164,7 +182,7 @@ pub fn _pairs(args: &[Py]) -> Py {
     let mut first: Py = Py::None;
     let mut second: Py = Py::None;
     let _ = py_str("Every two words that sit next to each other and are not both empty ones.");
-    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[words.clone(), slice_or_raise(&words.clone(), &Py::Int(1), &Py::None, &Py::None)]).unwrap_or_else(|e| exc::raise(e))) { let __unpk1026 = py_unpack(&__item.clone(), 2, None); let mut first: Py = __unpk1026[0].clone(); let mut second: Py = __unpk1026[1].clone(); if py_truthy(&{ let __b = Py::Bool(!py_contains(&g_EMPTY(), &first.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&g_EMPTY(), &second.clone())) } }) {  __out.push(op_add(&op_add(&first.clone(), &py_str(" ")), &second.clone())); } } py_set(__out) })() };
+    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[words.clone(), slice_or_raise(&words.clone(), &Py::Int(1), &Py::None, &Py::None)]).unwrap_or_else(|e| exc::raise(e))) { let __unpk7606 = py_unpack(&__item.clone(), 2, None); let mut first: Py = __unpk7606[0].clone(); let mut second: Py = __unpk7606[1].clone(); if py_truthy(&{ let __b = Py::Bool(!py_contains(&g_EMPTY(), &first.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&g_EMPTY(), &second.clone())) } }) {  __out.push(op_add(&op_add(&first.clone(), &py_str(" ")), &second.clone())); } } py_set(__out) })() };
     Py::None
 }
 pub fn about_someone_else(args: &[Py]) -> Py {
@@ -514,7 +532,7 @@ pub fn refused(args: &[Py]) -> Py {
     let mut _u: Py = Py::None;
     let mut case: Py = Py::None;
     let _ = py_str("Whether the last answer put a test on the number this line gives, and their number fails.\n\n    The other half of the same reading: \"repair it if it is under five years old\" is answered\n    \"its 8 years old\", and the answer's verdict does not apply to them. The caller says the fact\n    back and stops, which is the honest reply - the answer itself already said what to do about\n    the two cases it named, and neither of them is this one.\n    ");
-    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&_candidates(&[text.clone(), said.clone()])) { let __unpk6284 = py_unpack(&__item.clone(), 2, None); let mut case: Py = __unpk6284[0].clone(); let mut _u: Py = __unpk6284[1].clone(); __out.push(Py::Bool(py_is(&_meets(&[case.clone(), text.clone()]), &Py::Bool(false)))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&_candidates(&[text.clone(), said.clone()])) { let __unpk7195 = py_unpack(&__item.clone(), 2, None); let mut case: Py = __unpk7195[0].clone(); let mut _u: Py = __unpk7195[1].clone(); __out.push(Py::Bool(py_is(&_meets(&[case.clone(), text.clone()]), &Py::Bool(false)))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn _carried(args: &[Py]) -> Py {

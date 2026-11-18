@@ -208,59 +208,104 @@ pub fn s__part_pattern(v: Py) { ensure_init(); G__part_pattern.with(|c| *c.borro
 fn module_body() {
     let _ = py_str("Which part of the body the line says is unwell, when the illness is the speaker's own.\n\nOne reading for everybody: \"i have a migraine\" and \"my throat is killing me\" are the same kind\nof line as \"i have a cold\", and the only thing that tells them apart is the part named. The\ncomposer keeps a pool of lines per part (`ill` is the cold's), so this reading says which pool\nthe line is asking for instead of every module matching the words again.\n\nThree things are checked, and all are needed:\n\n* the part, from the words people use for it (\"migraine\", \"sore throat\", \"fever\", \"throwing up\",\n  \"chest infection\");\n* whose it is. \"my son has a fever\" is the child's illness and the child's advice, \"she gets\n  migraines\" is hers, and only the speaker's own comes here. \"My\" counts only when the part\n  itself follows it - \"my head\" is the speaker's, \"my room temperature is 40\" is a room's - and\n  anything else needs the speaker in front of it (\"i have a headache\", \"ive been throwing up\");\n* that it is the body and not the word: hay fever is not a fever, and \"i feel sick about going\n  to the dentist\" is dread rather than a stomach.\n\nThe reading is `None` on every line that names no part - a cold, the flu and \"i feel ill\" stay\nwith the plain illness pool, which is what those lines want.\n");
     s_COMMON_WORDS(pyrt::xrefs::xget("understanding.normalize", "LEXICON"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body._COLD_SIDE"); }
     s__COLD_SIDE(py_str("\\b(?:freezing|cold|chilly|shivering|shivery)\\b"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body._HOT_SIDE"); }
     s__HOT_SIDE(py_str("\\b(?:sweating|sweaty|boiling|hot|burning(?: up)?)\\b"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body._FILL"); }
     s__FILL(py_str("(?:\\s+(?:one|two|a|an|the|some|bit|minute|minutes|or|and|then|so|very|really|sometimes|always|all|next|im|i'm|i|am|at|in|of|night|nights|morning|mornings|day|days|evening|evenings|afternoon|week|weekend|first|second))*\\s*"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body._JOIN"); }
     s__JOIN(op_add(&op_add(&op_add(&g__FILL(), &py_str("(?:and\\s+then|then|and|or|but)")), &g__FILL()), &py_str("\\s*")));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body._FROM_TO"); }
     s__FROM_TO(op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&py_str("(?:"), &g__COLD_SIDE()), &py_str("\\s+to\\s+")), &g__HOT_SIDE()), &py_str("|")), &g__HOT_SIDE()), &py_str("\\s+to\\s+")), &g__COLD_SIDE()), &py_str(")")));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body._ALTERNATING"); }
     s__ALTERNATING(op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&py_str("(?:"), &g__COLD_SIDE()), &g__JOIN()), &g__HOT_SIDE()), &py_str("|")), &g__HOT_SIDE()), &g__JOIN()), &g__COLD_SIDE()), &py_str("|")), &g__FROM_TO()), &py_str(")")));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body.GOING_BOTH_WAYS"); }
     s_GOING_BOTH_WAYS(stdlib_call("re", "compile", &[g__ALTERNATING(), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body._CHUCK_UP"); }
     s__CHUCK_UP(py_str("\\b(?:been |kept? |keep |still )?chuck(?:s|ed|ing)? (?:it |them |his |her |my |their |our )?up\\b(?=\\s*(?:$|[,.!?;:]|(?:all|every|again|still|constantly|most|so|since|at|during|yesterday|today|tonight|tomorrow|now|once|twice|last|this|in|for|after|before|the other\\b)\\b|(?:my |the |his |her |their |your |our |some |that )?(?:lunch|dinner|breakfast|tea|supper|food|water|drink|drinks|milk|coffee|beer|wine|blood|bile|medicine|meal|it)\\b))"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body.PARTS"); }
     s_PARTS(py_tuple(vec![py_tuple(vec![py_str("head"), py_str("\\bmigraines?\\b|\\bmigranes?\\b|\\bheadaches?\\b|\\bhead aches?\\b|\\bhead\\b[^.!?]{0,14}?\\b(?:is |feels? |keeps? |has )?(?:pounding|throbbing|splitting|banging|hurts?|hurting|aching|killing)\\b|\\b(?:pounding|throbbing|splitting)\\b[^.!?]{0,10}?\\bhead\\b"), call_builtin("frozenset", &[mcall(&py_str("head headache headaches migraine migraines"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))]), py_tuple(vec![py_str("throat"), py_str("\\bsore throat\\b|\\bstrep throat\\b|\\bthroat\\b[^.!?]{0,14}?\\b(?:hurts?|hurting|aches?|is sore|is killing|feels? raw|is rough|is scratchy)\\b"), call_builtin("frozenset", &[mcall(&py_str("throat"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))]), py_tuple(vec![py_str("temperature"), op_add(&py_str("(?<!hay )\\bfever\\w*|\\btemperature\\b|\\bshivery\\b|\\bchills\\b|\\bhot and cold\\b|\\bburning up\\b|"), &g__ALTERNATING()), call_builtin("frozenset", &[mcall(&py_str("temperature fever"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))]), py_tuple(vec![py_str("stomach"), op_add(&op_add(&py_str("\\bstomach (?:bug|ache|cramps?|upset)\\b|\\btummy (?:ache|bug)\\b|\\b(?:stomach|tummy)\\b[^.!?]{0,12}?\\b(?:hurts?|hurting|aches?|aching|is killing|is (?:sore|cramping))\\b|\\b(?:(?:going|gonna|about)\\s+to\\s+|been |kept? |keep |still )?(?:throwing up|thrown up|threw up|throws up|throw up|vomiting|vomited|vomit|vomits|puk(?:e|es|ed|ing)|barf(?:s|ed|ing)?|"), &g__CHUCK_UP()), &py_str("|(?:be|been|being|was|were) sick(?!\\s+(?:of|to death|and tired)\\b)|nauseous|nausea)\\b|\\bsick\\b(?=\\s+(?:\\d|twice|once|three|four|five|since|all |last night|yesterday|most mornings|every))|\\b(?:can ?not|cant|can't|could not|couldnt|couldn't|unable to|not able to) keep (?:anything|much|water|fluids?|food|it) down\\b|\\bkeep(?:ing)? nothing down\\b|\\b(?:feel|feels|feeling|felt) sick\\b(?!\\s+(?:about|at|of|thinking)\\b)|\\bdiarrhoea\\b|\\bdiarrhea\\b|\\bd\\s?and\\s?v\\b")), call_builtin("frozenset", &[mcall(&py_str("stomach tummy belly gut"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))]), py_tuple(vec![py_str("chest"), py_str("\\bchest infection\\b|\\bchesty\\b|\\bwheez\\w*"), call_builtin("frozenset", &[mcall(&py_str("chest"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))]), py_tuple(vec![py_str("teeth"), py_str("\\btoothaches?\\b|\\btooth aches?\\b|\\bteeth\\b[^.!?]{0,14}?\\b(?:hurt|hurts|aching|ache|sensitive|killing)\\b|\\btooth\\b[^.!?]{0,14}?\\b(?:hurts?|aching|aches?|throbbing|is killing)\\b|\\b(?:dental|dentist)\\b[^.!?]{0,20}?\\b(?:pain|agony|hurts?)\\b|\\babscess\\b|\\bgums?\\b[^.!?]{0,14}?\\b(?:sore|bleeding|swollen|hurts?|aching)\\b"), call_builtin("frozenset", &[mcall(&py_str("tooth teeth gum gums mouth jaw"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))]), py_tuple(vec![py_str("ear"), py_str("\\bearaches?\\b|\\bear aches?\\b|\\b(?:ear|ears)\\b[^.!?]{0,16}?\\b(?:hurts?|hurting|aching|aches?|throbbing|is killing|is sore)\\b|\\bear infection\\b|\\bglue ear\\b"), call_builtin("frozenset", &[mcall(&py_str("ear ears"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))])]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body.AN_ABSCESS"); }
     s_AN_ABSCESS(stdlib_call("re", "compile", &[py_str("\\babscess\\w*\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body.A_MOUTH_WORD"); }
     s_A_MOUTH_WORD(stdlib_call("re", "compile", &[py_str("\\b(?:tooth|toothache|toothaches|teeth|gums?|mouth|jaw|dental|dentist|molar)\\b[^.!?]{0,20}?\\babscess\\w*|\\babscess\\w*\\b[^.!?]{0,20}?\\b(?:tooth|toothache|teeth|gums?|mouth|jaw|dental|molar)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body.A_SPREADING_SIGN"); }
     s_A_SPREADING_SIGN(stdlib_call("re", "compile", &[py_str("\\b(?:fever|temperature|pus|pussy|puffy|swelling|swollen|spreading|swallow|swallowing|cheek|face)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body.ANOTHER_PART"); }
     s_ANOTHER_PART(stdlib_call("re", "compile", &[py_str("\\b(?:leg|legs|arm|arms|foot|feet|toe|toes|hand|hands|finger|fingers|knee|knees|hip|hips|back|shoulder|shoulders|skin|wound|wounds|armpit|groin|bum|bottom|thumb|elbow|ankle|shin|thigh|chest|stomach|tummy|neck|scalp|eye|eyes|breast|breasts|ear|ears)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body.ALREADY_DEALT_WITH"); }
     s_ALREADY_DEALT_WITH(stdlib_call("re", "compile", &[py_str("\\b(?:drained|lanced|removed|burst|popped|gone)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body.A_SAMPLE"); }
     s_A_SAMPLE(stdlib_call("re", "compile", &[py_str("\\b(?:sample|samples|test|tests|tested|testing|kit|pot|container|form|forms)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body.ASKING"); }
     s_ASKING(stdlib_call("re", "compile", &[py_str("\\b(?:what|anything|something)\\b[^.!?]{0,26}?\\b(?:helps?|works?|should i (?:take|do)|can i take|do i take|do for|to take|to do)\\b|\\bhow (?:do|can) i (?:get rid of|stop|shift|ease)\\b|\\bany (?:advice|tips|ideas)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body.A_LOOSE_STOOL"); }
     s_A_LOOSE_STOOL(stdlib_call("re", "compile", &[py_str("\\b(?:loose|runny|watery|liquid|soft)\\s+(?:stools?|poos?|poops?|bowels?)\\b|\\b(?:stools?|poos?|poops?|bowels?)\\b[^.!?]{0,24}?\\b(?:loose|runny|watery|liquid|like water)\\b|\\bthe (?:trots|shits|squits|skitters|squirts)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body.A_THING_IS_TERRIBLE"); }
     s_A_THING_IS_TERRIBLE(stdlib_call("re", "compile", &[py_str("\\b(?:is|are|was|were|be|being|been|seems?|looks?|feels?|gone|go(?:es|ing)?|went)\\s+(?:to\\s+|a (?:bit |total |right |proper |complete |real |crock )?of\\s+|such\\s+|right\\s+|proper\\s+|complete\\s+)?the (?:shits|trots|squits|skitters|squirts)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body.A_CHAIR_WORD"); }
     s_A_CHAIR_WORD(stdlib_call("re", "compile", &[py_str("\\b(?:leg|legs|joint|joints|seat|seats|wood|wooden|screw|screws|screwdriver|tighten|tight|wobbly|wobble|wobbles|rickety|bracket|glue|chair|chairs|table|tables|bench|furniture|dresser|sideboard|kitchen|carpenter|flat ?pack)\\b|\\b(?:bar|counter|pub|breakfast|dining) ?stools?\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body.A_GUT_ONLY"); }
     s_A_GUT_ONLY(stdlib_call("re", "compile", &[py_str("\\b(?:runny|watery|liquid|soft|hard|firm|pale|smelly|stinking|streaked|streaks|slimy|mucus|diarr?hoea|constipat\\w*|tummy|stomach|gut|guts|ache|aches|aching|pain|pains|painful|cramps?|cramping|sore|wind|bloat\\w*|toilet|loo|bum|poo|poos|pooed|pooping|bowels?|sick|nausea|nauseous|vomit\\w*|days?|weeks?|months?|since|morning|mornings|night|nights|yesterday|today|times|a day)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body.A_POO_COLOUR"); }
     s_A_POO_COLOUR(stdlib_call("re", "compile", &[py_str("\\b(?:pale|black|tarry|bloody|blood|red|floats?|green|colour|color|mucus|slimy)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body.PART_NOUNS_BY_LENGTH"); }
     s_PART_NOUNS_BY_LENGTH(py_dict(vec![]));
     let __iter1 = py_iter_or_raise(&g_PARTS());
     for __item in __iter1 {
     let __unpk2 = py_unpack(&__item.clone(), 3, None);
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body._part_name"); }
     s__part_name(__unpk2[0].clone());
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body._part_pattern"); }
     s__part_pattern(__unpk2[1].clone());
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body._part_nouns"); }
     s__part_nouns(__unpk2[2].clone());
     let __iter3 = py_iter_or_raise(&g__part_nouns());
     for __item in __iter3 {
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body._noun"); }
     s__noun(__item.clone());
     let _ = mcall(&mcall(&g_PART_NOUNS_BY_LENGTH(), "setdefault", &[call_builtin("len", &[g__noun()]).unwrap_or_else(|e| exc::raise(e)), call_builtin("set", &[]).unwrap_or_else(|e| exc::raise(e))]), "add", &[g__noun()]);
     }
     }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body.A_WORD_OF_ITS_OWN"); }
     s_A_WORD_OF_ITS_OWN(call_builtin("frozenset", &[mcall(&py_str("\n    bella bell bully chesty chess earns glut glum heady heal heap heat heed tommy threat\n    "), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body._BEFORE_THE_COMPLAINT"); }
     s__BEFORE_THE_COMPLAINT(call_builtin("frozenset", &[mcall(&py_str("i we am is are was were be been being have has had got\n    get gets getting keep keeps kept stop stops stopped can cannot cant can't could couldnt\n    couldn't not dont don't never still just only also really so very badly feel feels felt\n    again night days woke up started begin began"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body._A_MAYBE"); }
     s__A_MAYBE(call_builtin("frozenset", &[mcall(&py_str("could might may would should must can"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body._A_NO"); }
     s__A_NO(call_builtin("frozenset", &[mcall(&py_str("not never cant cannot couldnt couldn't didnt didn't"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
     fn __data4() -> Py { py_tuple(vec![py_str("am"), py_str("is"), py_str("are"), py_str("was"), py_str("were"), py_str("be"), py_str("been"), py_str("being"), py_str("have"), py_str("has"), py_str("had"), py_str("ve"), py_str("feel"), py_str("feels"), py_str("felt"), py_str("keep"), py_str("keeps")]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body._A_VERB_NEEDING_ITS_SUBJECT"); }
     s__A_VERB_NEEDING_ITS_SUBJECT(__data4());
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body.SPEAKER_ILL"); }
     s_SPEAKER_ILL(stdlib_call("re", "compile", &[py_str("\\b(?:i|we) (?:both |also |all )?(?:have|had|has|got|get|getting|having|been|being|keep|keeps|keeping|am|was|are|were|feel|feeling|felt|suffer\\w*|with)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body.FILLER"); }
     s_FILLER(call_builtin("frozenset", &[mcall(&py_str("a an the my some this that bit of a really very so proper proper\n    bad worse worst sore slight terrible awful horrible nasty mild chronic another again\n    another little quite too pretty still"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body.PLAIN_SKIP"); }
     s_PLAIN_SKIP(call_builtin("frozenset", &[py_tuple(vec![py_str("chest"), py_str("temperature")])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body.PLAIN_SKIP_WORDS"); }
     s_PLAIN_SKIP_WORDS(call_builtin("frozenset", &[py_tuple(vec![py_str("jaw")])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body.PLAIN_PAIN"); }
     s_PLAIN_PAIN(op_bitor(&call_builtin("frozenset", &[pyrt::xrefs::xget("understanding.lexicon", "PAIN_WORDS")]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("frozenset", &[py_tuple(vec![py_str("bad"), py_str("cramping"), py_str("cramps"), py_str("upset")])]).unwrap_or_else(|e| exc::raise(e))));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body.WHEN_IT_HAPPENED"); }
     s_WHEN_IT_HAPPENED(call_builtin("frozenset", &[mcall(&py_str("today tonight yesterday morning mornings afternoon afternoons\n    evening evenings night nights week weeks weekend weekends month months day days all since\n    last this now again every hour hours minute minutes am pm o clock time times midnight noon\n    monday tuesday wednesday thursday friday saturday sunday once twice three four five six ten\n    couple few several"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body._A_HELPER_BEFORE"); }
     s__A_HELPER_BEFORE(call_builtin("frozenset", &[mcall(&py_str("be been being am is are was were keep keeps kept still just"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body.PAIN_ADJECTIVE"); }
     s_PAIN_ADJECTIVE(call_builtin("frozenset", &[mcall(&py_str("sore painful aching achy bad swollen cramping crampy upset stiff\n    throbbing stinging burning numb rough dodgy awful terrible horrible rubbish queasy\n    trouble troubles"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body.PAIN_BETWEEN"); }
     s_PAIN_BETWEEN(call_builtin("frozenset", &[mcall(&py_str("is am are was were be been being feels feel felt gets getting got\n    gone keep keeps kept very really so too quite a bit little just now still often always"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body.PAIN_REACH"); }
     s_PAIN_REACH(Py::Int(3));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body.POSSESSIVE"); }
     s_POSSESSIVE(call_builtin("frozenset", &[mcall(&py_str("my his her their our your"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body.PLAIN_UNWELL"); }
     s_PLAIN_UNWELL(call_builtin("frozenset", &[mcall(&py_str("off rough bad awful terrible horrible rubbish dodgy queasy\n    trouble troubles unhappy wrong grim"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body.OFF_MAY_GO_ON"); }
     s_OFF_MAY_GO_ON(call_builtin("frozenset", &[mcall(&py_str("and but for since today tonight now still again all most\n    lately recently days weeks months hours mornings afternoons evenings nights every\n    couple few several very really quite bit little"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET understanding.body.PAIN_PHRASE"); }
     s_PAIN_PHRASE(py_tuple(vec![py_tuple(vec![py_str("playing"), py_str("up")]), py_tuple(vec![py_str("acting"), py_str("up")]), py_tuple(vec![py_str("in"), py_str("knots")]), py_tuple(vec![py_str("in"), py_str("bits")]), py_tuple(vec![py_str("in"), py_str("a"), py_str("knot")]), py_tuple(vec![py_str("all"), py_str("over"), py_str("the"), py_str("place")]), py_tuple(vec![py_str("giving"), py_str("me"), py_str("grief")]), py_tuple(vec![py_str("giving"), py_str("me"), py_str("jip")])]));
 }
 pub fn _an_abscess_elsewhere(args: &[Py]) -> Py {
@@ -309,7 +354,7 @@ pub fn _one_letter_apart(args: &[Py]) -> Py {
     return Py::Bool(false);
     }
     if py_truthy(&Py::Bool(py_eq(&call_builtin("len", &[typed.clone()]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("len", &[spelled.clone()]).unwrap_or_else(|e| exc::raise(e))))) {
-    return Py::Bool(py_eq(&call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[typed.clone(), spelled.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk1428 = py_unpack(&__item.clone(), 2, None); let mut typed_at: Py = __unpk1428[0].clone(); let mut spelled_at: Py = __unpk1428[1].clone(); if py_truthy(&Py::Bool(!py_eq(&typed_at.clone(), &spelled_at.clone()))) {  __out.push(Py::Int(1)); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1)));
+    return Py::Bool(py_eq(&call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("zip", &[typed.clone(), spelled.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk5674 = py_unpack(&__item.clone(), 2, None); let mut typed_at: Py = __unpk5674[0].clone(); let mut spelled_at: Py = __unpk5674[1].clone(); if py_truthy(&Py::Bool(!py_eq(&typed_at.clone(), &spelled_at.clone()))) {  __out.push(Py::Int(1)); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1)));
     }
     let __unpk1 = py_unpack(&{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_tuple(vec![typed.clone(), spelled.clone()])); __kws.extend(vec![("key".to_string(), py_func("len", |args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e))))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sorted", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }, 2, None);
     short = __unpk1[0].clone();

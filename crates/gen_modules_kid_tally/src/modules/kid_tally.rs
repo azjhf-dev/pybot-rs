@@ -31,7 +31,9 @@ pub fn g_PRIORITY() -> Py { ensure_init(); G_PRIORITY.with(|c| c.borrow().clone(
 pub fn s_PRIORITY(v: Py) { ensure_init(); G_PRIORITY.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("The number of children, counted from the children the chat already holds.\n\n`my son is 6` and `and my daughter is 9` are two children with their ages, and `how many children\ndo i have` after them was answered \"You've mentioned your son - how many have you got\naltogether?\". No line said a number, so the store's count stayed empty, and it answered about the\none child it could see. The children are in the chat all the same.\n\n`bot/memory/kidcount.py` holds the reading and the wording; this module is here so the claim\nhas a band of its own. It answers only the ask, and only when the store has no number of its own:\nevery other line, and a chat that said how many, is left to the store exactly as before.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.kid_tally.PRIORITY"); }
     s_PRIORITY(Py::Int(7050));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.kid_tally.ANSWERS"); }
     s_ANSWERS(py_tuple(vec![py_str("family-and-parenting")]));
 }
 pub fn respond(args: &[Py]) -> Py {

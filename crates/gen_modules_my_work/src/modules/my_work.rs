@@ -27,6 +27,7 @@ pub fn g_PRIORITY() -> Py { ensure_init(); G_PRIORITY.with(|c| c.borrow().clone(
 pub fn s_PRIORITY(v: Py) { ensure_init(); G_PRIORITY.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("A line that says where they work is answered with the job the chat already holds.\n\n`bot/memory/workplace.py` reads the line; this module is the turn it is asked on. Priorities:\nthe general helpful band, above `answers` (0), so a workplace line is not answered by the\npre-school-places card the words \"primary school\" reach, and below the loss, grief and safety\nbands, which must lead on a hard line.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.my_work.PRIORITY"); }
     s_PRIORITY(Py::Int(1150));
 }
 pub fn TAKES_AS_IT_COMES(args: &[Py]) -> Py {

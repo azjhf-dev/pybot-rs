@@ -42,6 +42,7 @@ fn module_body() {
     s_pick(py_func("pick", |args: &[Py]| pyrt::xrefs::xcall("compose", "pick", args)));
     s_is_a_dose(py_func("is_a_dose", |args: &[Py]| pyrt::xrefs::xcall("compose.a_count_of_packets", "is_a_dose", args)));
     s_REPLIES(pyrt::xrefs::xget("knowledge.crisis_replies", "REPLIES"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.a_count_of_packets.PRIORITY"); }
     s_PRIORITY(Py::Int(9000));
 }
 pub fn respond(args: &[Py]) -> Py {

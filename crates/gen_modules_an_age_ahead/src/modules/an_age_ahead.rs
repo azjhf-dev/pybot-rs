@@ -27,6 +27,7 @@ pub fn g_PRIORITY() -> Py { ensure_init(); G_PRIORITY.with(|c| c.borrow().clone(
 pub fn s_PRIORITY(v: Py) { ensure_init(); G_PRIORITY.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("An age asked for further ahead is the age the store keeps, moved on.\n\n\"my son is 6\" then \"how old will he be next year\" was answered by the store's own card - \"You\nhaven't said - how old will he be next year?\" - because the line asks about the conversation the\nbot has had rather than about the world, and the store's reading of that claim is the one that\nleads the turn. The store keeps one age at one day; a day further ahead is arithmetic on what it\nkeeps, which no entry and no card can answer.\n\n`bot/memory/aboutthem.py` reads it (`an_age_ahead`), so a child kept in months and a day that names\nno length (\"next summer\", \"on his birthday\") are left exactly as they were.\n\nPriorities: above the memory store's recall band (7000), because this module's reply is the answer\nto the line the store claims, and it declares `CLAIMS_INSTEAD` so the claim is given up only on\nthe lines where that is true. It sits below the safety band, which must lead on a hard line.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.an_age_ahead.PRIORITY"); }
     s_PRIORITY(Py::Int(7150));
 }
 pub fn TAKES_AS_IT_COMES(args: &[Py]) -> Py {

@@ -80,19 +80,32 @@ pub fn s_pick(v: Py) { ensure_init(); G_pick.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("How long they have been doing the job they told me about, said back as a person would.\n\nTwo turns of a chat:\n\n    im a teacher\n    i have been doing it for 10 years\n\nThe first turn is answered well (\"Teacher - good to know. What do you like most about it?\"). The\nsecond is not: the whole bot says \"Got it - you have been doing it for 10 years\", which is the\nline said back with a receipt on it. It answers nothing, asks nothing, and does not know that ten\nyears is a thing worth a word. The person is not filing a fact, they are telling me how long they\nhave stuck at something.\n\nSo this reads the length, finds the job it is the length of - in the line (\"i've been teaching\")\nor in the store, where the job was filed two turns ago - and says something about it. It is a\nnarrow reading on purpose:\n\n- the line has to be only the length statement: no question, no ask, nothing else in it. \"i have\n  been doing it for 10 years and i hate it\" is a line about the last half, and the store's own\n  readers keep it.\n- there has to be a job: one filed in this chat, or one the line names with a job word. \"i've been\n  waiting for 10 years\" is a length, and it is not a job, so it is left alone.\n- the length has to be years or months. \"i've been doing it for 10 minutes\" is not a stint.\n");
     s_pick(py_func("pick", |args: &[Py]| pyrt::xrefs::xcall("compose", "pick", args)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.years_in._A_LEAD_IN"); }
     s__A_LEAD_IN(py_str("(?:(?:so|well|oh|and|actually|tbh|honestly|yeah|yes)\\s+,?\\s*)?"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.years_in._LISTEN"); }
     s__LISTEN(py_str("listen\\s*,\\s*"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.years_in._A_LENGTH"); }
     s__A_LENGTH(py_str("(?:for\\s+|about\\s+|nearly\\s+|over\\s+|almost\\s+)?(?P<count>\\d{1,2}|an?|one|a few|a couple of|several|many)\\s*(?P<unit>years?|yrs?|months?)\\b"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.years_in._A_TAIL"); }
     s__A_TAIL(py_str("(?:\\s+(?:now|already|so far|in total|and counting|today|lol|haha|hah))?"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.years_in.BEEN_AT_IT"); }
     s_BEEN_AT_IT(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&g__A_LEAD_IN(), &py_str("(?:i(?:'ve| have)?|ive)\\s+been\\s+(?P<doing>[a-z][a-z' ]{0,24}?)\\s+")), &g__A_LENGTH()), &g__A_TAIL()), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.years_in.BEEN_AT_IT_BARE"); }
     s_BEEN_AT_IT_BARE(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&g__A_LEAD_IN(), &py_str("(?:been\\s+|doing\\s+it\\s+)(?P<doing>[a-z][a-z' ]{0,20}?)?\\s*")), &g__A_LENGTH()), &g__A_TAIL()), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.years_in.NOT_A_STINT"); }
     s_NOT_A_STINT(stdlib_call("re", "compile", &[py_str("\\b(?:minutes?|mins?|hours?|hrs?|days?|weeks?)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.years_in._A_GERUND"); }
     s__A_GERUND(stdlib_call("re", "compile", &[py_str("^(?P<stem>[a-z]{3,}?)(?:ing|in)$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.years_in.THE_JOB_NOUNS"); }
     s_THE_JOB_NOUNS(call_builtin("frozenset", &[pyrt::xrefs::xget("memory.facts", "JOB_WORDS")]).unwrap_or_else(|e| exc::raise(e)));
     fn __data1() -> Py { py_tuple(vec![py_str("zero"), py_str("one"), py_str("two"), py_str("three"), py_str("four"), py_str("five"), py_str("six"), py_str("seven"), py_str("eight"), py_str("nine"), py_str("ten"), py_str("eleven"), py_str("twelve"), py_str("thirteen"), py_str("fourteen"), py_str("fifteen"), py_str("sixteen"), py_str("seventeen"), py_str("eighteen"), py_str("nineteen")]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.years_in._NUMBERS"); }
     s__NUMBERS(__data1());
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.years_in._TENS"); }
     s__TENS(py_tuple(vec![py_str(""), py_str(""), py_str("twenty"), py_str("thirty"), py_str("forty"), py_str("fifty"), py_str("sixty"), py_str("seventy"), py_str("eighty"), py_str("ninety"), py_str("")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.years_in.THE_PRONOUN"); }
     s_THE_PRONOUN(stdlib_call("re", "compile", &[py_str("^(?:so\\s+)?(?P<who>she|he|they)(?:'s|s| has| have|'ve| have been|s been)?\\s+been\\s+(?P<doing>[a-z][a-z' ]{0,24}?)\\s*"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.years_in.THEIR_LENGTH"); }
     s_THEIR_LENGTH(stdlib_call("re", "compile", &[py_str("^(?:so\\s+)?(?P<who>she|he|they)(?:'s|s| has|'ve| have)?\\s+been\\s+(?P<doing>[a-z][a-z' ]{0,24}?)\\s+(?:(?:for|about|nearly|over|almost)\\s+)?(?P<count>\\d{1,2}|an?|one|a few|a couple of|several|many|years)\\s*(?P<unit>years?|yrs?|months?)?\\b(?:\\s+(?:now|already|so far|in total|and counting|lol|haha))?\\s*$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
 }
 pub fn _a_job_word(args: &[Py]) -> Py {

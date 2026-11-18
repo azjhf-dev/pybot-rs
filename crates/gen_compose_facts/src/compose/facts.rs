@@ -47,11 +47,17 @@ pub fn g_WHEN_ASK() -> Py { ensure_init(); G_WHEN_ASK.with(|c| c.borrow().clone(
 pub fn s_WHEN_ASK(v: Py) { ensure_init(); G_WHEN_ASK.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("A card is not the date the person has already given.\n\n\"when do we fly\" and \"when is my dentist appointment\" ask for a fact the person has told the bot,\nand the memory store hands the fact straight back - \"In July.\", \"You're at the dentist on\ntuesday.\" Both were answered by a knowledge card that read the subject and none of the date: the\nairport check-in card for the flight, and \"ring practices near you and ask whether they take new\nNHS patients\" to somebody who already has an appointment.\n\nSo the reading is two questions, kept apart here and put together by the arbiter: does the line ask\n*when* about the thing, and does a reply carry the date? A card that answers a different question\nthan the one asked then stands down, and nothing else about it changes.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.facts.WHEN_ASK"); }
     s_WHEN_ASK(stdlib_call("re", "compile", &[py_str("^\\W*(?:(?:and|so|but|ok|okay|oh|ah|right|well|yes|yeah|hi|hey|please|then|now|quick|sorry|also)\\W+)*(?:when|what\\s+time|what\\s+day|which\\s+day|what\\s+date|which\\s+date)\\s+(?:is|are|was|were|do|does|did|will|shall|have|has|am)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.facts.HOW_TO_MOMENT"); }
     s_HOW_TO_MOMENT(stdlib_call("re", "compile", &[py_str("\\b(?:best|good|right|ideal|worst)\\s+time\\b|\\btime\\s+to\\s+(?:plant|sow|prune|book|go|start|take|give|use|apply|cut|paint|ring)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.facts.A_MONTH"); }
     s_A_MONTH(stdlib_call("re", "compile", &[py_str("\\b(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t|tember)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.facts.A_CLOCK"); }
     s_A_CLOCK(stdlib_call("re", "compile", &[py_str("\\b(?:at|by|around|about|from|until|till)\\s+\\d{1,2}(?::\\d{2})?\\s*(?:am|pm|a\\.m|p\\.m|o'?clock)?\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.facts.MOST_WORDS"); }
     s_MOST_WORDS(Py::Int(45));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.facts.DATE_TOKEN"); }
     s_DATE_TOKEN(stdlib_call("re", "compile", &[py_str("\\b(?:mon|tues?|wed(?:nes)?|thur?s?|fri|sat(?:ur)?|sun(?:day)?)(?:day)?\\b|\\b(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\\b|\\b\\d{1,2}(?:st|nd|rd|th)\\b|\\b\\d{1,2}(?::\\d{2})?\\s*(?:am|pm|a\\.m|p\\.m|o'?clock)\\b|\\b(?:19|20)\\d{2}\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
 }
 pub fn asks_for_a_when(args: &[Py]) -> Py {

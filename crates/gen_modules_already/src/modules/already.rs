@@ -31,7 +31,9 @@ pub fn g_TAKES_AS_IT_COMES() -> Py { ensure_init(); G_TAKES_AS_IT_COMES.with(|c|
 pub fn s_TAKES_AS_IT_COMES(v: Py) { ensure_init(); G_TAKES_AS_IT_COMES.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("A report that the step was already taken is answered with the next turn of the thread.\n\n\"someone used my card online\" / \"i already called the bank\" got \"Got it. Is there anything\nyou'd like a hand with?\", and a bare \"i already called the plumber\" got \"I'm listening - say\nmore if it helps.\" Neither answers the person: they told the bot something they had done, and\nwhat they want is what comes next. The reading is `bot/memory/already.py`, which says which step\nit was so the question that follows it fits - \"what did they say?\" after a call, \"is it any\nbetter since?\" after a repair.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.already.PRIORITY"); }
     s_PRIORITY(Py::Int(400));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.already.TAKES_AS_IT_COMES"); }
     s_TAKES_AS_IT_COMES(py_func("takes_as_it_comes", |args: &[Py]| pyrt::xrefs::xcall("memory.already", "takes_as_it_comes", args)));
 }
 pub fn respond(args: &[Py]) -> Py {

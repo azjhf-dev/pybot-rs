@@ -27,6 +27,7 @@ pub fn g_PRIORITY() -> Py { ensure_init(); G_PRIORITY.with(|c| c.borrow().clone(
 pub fn s_PRIORITY(v: Py) { ensure_init(); G_PRIORITY.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("A thing named as the trouble is the subject of the next turn, so the reply asks which way it is.\n\n\"Its the electric thats the problem\", \"the problem is the car\", \"its my wifi thats the problem\",\n\"the trouble is the hot water\" all reached the intake form - \"I'm listening - say more if it\nhelps\", \"Got it. Is there anything you'd like a hand with?\" - which hands the subject back and\nasks for nothing. The pool in `bot/compose/the_trouble_named.py` says the two ways that thing\ngoes wrong and asks which one it is, because the next step is different for each.\n\nPRIORITY is the floor of the floor: above the greeting band, below every module that gives a\nperson something to do. A card that already answers a boiler, a leak, a dead car or a council tax\nquestion keeps its turn - \"the problem is the council\" is a Citizens Advice pointer and \"its the\nboiler thats the problem\" is the plumber line, and a question is only ever better than a shrug, not\nbetter than an answer. A body part, a pet and anything else stay as they were: the pool returns\nNone for them.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.the_trouble_named.PRIORITY"); }
     s_PRIORITY(op_neg(&Py::Int(997)));
 }
 pub fn respond(args: &[Py]) -> Py {

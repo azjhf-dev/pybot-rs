@@ -31,7 +31,9 @@ pub fn g_TAKES_AS_IT_COMES() -> Py { ensure_init(); G_TAKES_AS_IT_COMES.with(|c|
 pub fn s_TAKES_AS_IT_COMES(v: Py) { ensure_init(); G_TAKES_AS_IT_COMES.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("How slowly or how fast to go at the plan in hand: \"how slowly should i build up\".\n\nThe answer above already carries the rate - \"run-walk to start, one minute of easy jogging to two\nof walking, twenty minutes, three times a week, and add a minute of running a week\" - and the next\nline asks how fast to go at it. The knowledge base read the line's own words and answered from an\nentry about fuelling a long run, so a person building back up to running was told what to eat\nbefore an hour of it: a reply about a different question, on the same subject.\n\nThe reading and the wording live in `bot/compose/pace.py`: the reply hands back the answer's own\nstep (\"add a minute of running a week for six weeks\") and then the answer's own test (\"keep every\nrun slow enough to talk\"), because that is what a friend says when asked how fast to go at the\nplan they just gave.\n\nIt sits above the knowledge base (0) and returns None on every line that names a thing of its own\n(\"how fast should i run a 5k\" has an entry of its own) and on every line with no rate in the\nanswer above it.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.pace.PRIORITY"); }
     s_PRIORITY(Py::Int(1300));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.pace.TAKES_AS_IT_COMES"); }
     s_TAKES_AS_IT_COMES(py_func("takes_as_it_comes", |args: &[Py]| takes_as_it_comes(args)));
 }
 pub fn respond(args: &[Py]) -> Py {

@@ -51,12 +51,19 @@ pub fn g_NOT_THE_BABY() -> Py { ensure_init(); G_NOT_THE_BABY.with(|c| c.borrow(
 pub fn s_NOT_THE_BABY(v: Py) { ensure_init(); G_NOT_THE_BABY.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("A new baby in the chat is what the next few lines are about.\n\nPeople tell you the news and then talk about it for a while without naming it again: \"my sister\nhad her baby on tuesday\", \"a girl, 7lb 2oz\", then \"what should i get them\". The store keeps the\nturns, so a line that names no subject can still be read as being about the baby. This answers one\nquestion only - is the chat about a new baby - and leaves what to say to whoever asked.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.newborn.BABY_WORDS"); }
     s_BABY_WORDS(call_builtin("frozenset", &[mcall(&py_str("\nbaby babies babydoll newborn babe infant toddler twins nappy nappies pram buggy cot\nlabour labor midwife caesarean csection breastfeeding bottle-feeding christening\n"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.newborn.A_BIRTH"); }
     s_A_BIRTH(stdlib_call("re", "compile", &[py_str("\\b(?:had|has|having|gave|give|giving|born|arrived|arrives|delivered|induced|in\\s+labour|in\\s+labor|went\\s+into\\s+labour|went\\s+into\\s+labor)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.newborn.JUST_BORN"); }
     s_JUST_BORN(stdlib_call("re", "compile", &[py_str("\\bborn\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.newborn.A_YEAR"); }
     s_A_YEAR(stdlib_call("re", "compile", &[py_str("\\b(?:19|20)\\d\\d\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.newborn.A_BIRTH_WEIGHT"); }
     s_A_BIRTH_WEIGHT(stdlib_call("re", "compile", &[py_str("\\b\\d+\\s*(?:lb|lbs|pound|pounds|oz|ounces)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.newborn.NOT_THE_BABY"); }
     s_NOT_THE_BABY(stdlib_call("re", "compile", &[py_str("\\b(?:puppy|kitten|dog|cat|lamb|calf|chick|seedling|plant)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.newborn.HOW_MANY_TURNS"); }
     s_HOW_MANY_TURNS(Py::Int(3));
 }
 pub fn _the_lines(args: &[Py]) -> Py {

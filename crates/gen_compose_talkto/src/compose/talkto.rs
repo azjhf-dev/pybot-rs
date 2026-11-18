@@ -132,32 +132,58 @@ pub fn s_pick(v: Py) { ensure_init(); G_pick.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("Somebody asks this bot for room to talk about a thing of theirs, and names the thing.\n\n\"can you talk to me about my anxiety\" got the search hedge (\"I don't know enough to answer that\nhonestly. A search should sort you out quickly\") - which is no answer at all: nobody wants a search\nengine for that. The bot can do the one thing asked for, which is talk with them, and the honest\nreply is a yes in a few words and the one question that starts it: STYLE.md's \"Not knowing,\nhonestly\" and its one short question in the same breath.\n\nThe ask is read, not listed: \"can you talk to me about X\", \"can we talk about X\", \"can i talk to\nyou about X\", \"i want / need / would like to talk about X\", \"talk to me about X\", and the same\nframes with \"think\" and \"work\" (\"can you help me think about my options\"). The thing named is said\nback in the person's own words with the possessive turned round (\"my job\" is \"your job\"), because\nthe thing named is the thing they want to talk about.\n\nNarrow on purpose. It wants the bot addressed - a person in the line asking for the bot's ear - so\n\"he wont talk to me about it\" and \"my daughter wont talk about it\" are somebody else's refusal and\nkeep the reply they had. It only ever replaces one of the composer's own shrugs, so a card that\nanswers the line stands, and a crisis line never reaches here.\n");
     s_pick(py_func("pick", |args: &[Py]| pyrt::xrefs::xcall("compose", "pick", args)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.talkto._LEAD"); }
     s__LEAD(py_str("(?:(?:ok|okay|so|right|hi|hey|well)\\s+)?"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.talkto._POLITE"); }
     s__POLITE(py_str("(?:(?:please|just)\\s+)?"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.talkto._TALK"); }
     s__TALK(py_str("(?:talk|chat|speak)"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.talkto._VERB"); }
     s__VERB(py_str("(?:want|wanna|need|needed|would\\s+like|'?d\\s+like|have\\s+to|got\\s+to|gotta|have|got)"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.talkto.TALK_ASKS"); }
     s_TALK_ASKS(call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&py_tuple(vec![op_add(&op_add(&op_add(&py_str("(?:can|could|would|will)\\s+you\\s+"), &g__POLITE()), &g__TALK()), &py_str("\\s+(?:to|with)\\s+me\\s+(?:about|through)\\s+(?P<subject>.+)$")), op_add(&op_add(&py_str("(?:can|could|may)\\s+(?:i|we)\\s+(?:please\\s+)?"), &g__TALK()), &py_str("(?:\\s+(?:to|with)\\s+you)?\\s+(?:about|through)\\s+(?P<subject>.+)$")), op_add(&op_add(&op_add(&op_add(&py_str("(?:i|we)\\s+(?:just\\s+|really\\s+|honestly\\s+)?"), &g__VERB()), &py_str("\\s+(?:to\\s+)?")), &g__TALK()), &py_str("(?:\\s+(?:to|with)\\s+you)?\\s+(?:about|through)\\s+(?P<subject>.+)$")), op_add(&op_add(&g__POLITE(), &g__TALK()), &py_str("\\s+to\\s+me\\s+(?:about|through)\\s+(?P<subject>.+)$")), op_add(&op_add(&py_str("(?:can|could|would|will)\\s+you\\s+"), &g__POLITE()), &py_str("help\\s+me\\s+(?:think|talk|work)\\s+(?:about|through|out)\\s+(?P<subject>.+)$")), op_add(&op_add(&py_str("(?:i|we)\\s+(?:just\\s+|really\\s+)?"), &g__VERB()), &py_str("\\s+(?:to\\s+)?(?:think|work)\\s+(?:about|through|out)\\s+(?P<subject>.+)$"))])) { let mut pattern: Py = __item.clone(); __out.push(stdlib_call("re", "compile", &[op_add(&g__LEAD(), &pattern.clone())]).unwrap_or_else(|e| exc::raise(e))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
     fn __data1() -> Py { py_tuple(vec![py_str("it"), py_str("this"), py_str("that"), py_str("them"), py_str("something"), py_str("somethin"), py_str("anything"), py_str("everything"), py_str("stuff"), py_str("a thing"), py_str("one thing"), py_str("it all"), py_str("something else")]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.talkto.BLANK_SUBJECTS"); }
     s_BLANK_SUBJECTS(call_builtin("frozenset", &[__data1()]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.talkto._SUBJECT_TAIL"); }
     s__SUBJECT_TAIL(stdlib_call("re", "compile", &[py_str("\\s+(?:with|to)\\s+(?:you|me)\\s*$|\\s+(?:again|please|now|today|tonight|later|tomorrow|sometime|soon|this\\s+(?:evening|afternoon|morning|weekend)|next\\s+week)\\s*$")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.talkto._WHEN"); }
     s__WHEN(py_str("(?:again|now|today|tonight|tomorrow|later|sometime|soon|this\\s+(?:evening|afternoon|morning|weekend)|next\\s+week|when\\s+(?:you\\s+)?(?:have|get|'ve\\s+got)\\s+a\\s+(?:minute|mo|moment))"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.talkto._A_TIME_BEFORE_THE_THING"); }
     s__A_TIME_BEFORE_THE_THING(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("\\b(talk|chat|speak|think|work)\\s+(?:to\\s+(?:you|me)\\s+)?(?:"), &g__WHEN()), &py_str("\\s+)+(?=(?:about|through|out)\\b)"))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.talkto._SUBJECT_HEAD"); }
     s__SUBJECT_HEAD(stdlib_call("re", "compile", &[py_str("^(?:the|that|this)\\s+thing\\s+(?:about|with)\\s+")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.talkto._SOMETHING_ELSE"); }
     s__SOMETHING_ELSE(stdlib_call("re", "compile", &[py_str("^(?:something|anything|somebody|anybody|a\\s+different\\s+thing|something\\s+different|another\\s+thing|anything\\s+else\\s+at\\s+all)\\s+else\\s*[,;:\\-\\u2013\\u2014]?\\s*")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.talkto._SUBJECT_END"); }
     s__SUBJECT_END(stdlib_call("re", "compile", &[py_str("\\s+(?:its|it's|it is|it was|it's|and|but|because|cos|cuz|coz|so|which|that|who|i|ive|i've|we|were|we're|he|she|they|my|our)\\b.*$")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.talkto._CLAUSE_START"); }
     s__CLAUSE_START(stdlib_call("re", "compile", &[py_str("^(?:how|what|why|whether|if|when|where|which|who|whoever|whatever)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.talkto._SUBJECT_END_CLAUSE"); }
     s__SUBJECT_END_CLAUSE(stdlib_call("re", "compile", &[py_str("\\s+(?:its|it's|it is|it was|and|but|because|cos|cuz|coz|which|that)\\b.*$")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.talkto._HEDGED_END"); }
     s__HEDGED_END(stdlib_call("re", "compile", &[py_str("\\s*,?\\s*(?:maybe|perhaps|i\\s+think|i\\s+reckon|if\\s+that\\s+is\\s+ok)\\s*$")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.talkto._OWNERS"); }
     s__OWNERS(py_tuple(vec![py_tuple(vec![py_str("my"), py_str("your")]), py_tuple(vec![py_str("our"), py_str("your")])]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.talkto._A_BARE_INVITATION"); }
     s__A_BARE_INVITATION(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&g__LEAD(), &py_str("(?:(?:can|could|may|shall|should)\\s+(?:i|we)\\s+")), &g__POLITE()), &py_str("|(?:i|we)\\s+")), &g__VERB()), &py_str("\\s+(?:to\\s+)?|")), &g__POLITE()), &py_str(")(?:talk|chat|speak)(?:\\s+(?:to|with)\\s+(?:you|me))?(?:\\s+")), &g__WHEN()), &py_str(")+\\s*[?.!]*$"))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.talkto._A_LEAD_IN_FRONT"); }
     s__A_LEAD_IN_FRONT(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&op_add(&g__LEAD(), &py_str("(?:(?:can|could|may|shall|should)\\s+(?:i|we)\\s+")), &g__POLITE()), &py_str("|(?:i|we)\\s+")), &g__VERB()), &py_str("\\s+(?:to\\s+)?)(?:talk|chat|speak)"))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.talkto.INVITED"); }
     s_INVITED(py_tuple(vec![py_str("Yes - I'm here whenever you are. What's on your mind?"), py_str("Any time. What is it you want to talk about?"), py_str("Of course. What's going on, and where do you want to start?")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.talkto.POOL"); }
     s_POOL(py_tuple(vec![py_str("Of course. Tell me about {thing} - what's the part that's bothering you most?"), py_str("{Thing} it is. What's on your mind about it?"), py_str("Happy to. Where do you want to start with {thing}?"), py_str("Right, {thing} - go on. What's the bit you want to think out loud about?")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.talkto.POOL_CLAUSE"); }
     s_POOL_CLAUSE(py_tuple(vec![geti(&g_POOL(), &Py::Int(0)), geti(&g_POOL(), &Py::Int(3))]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.talkto.WEIGHING"); }
     s_WEIGHING(py_tuple(vec![py_str("Yes. What are the options you're weighing, as they stand now?"), py_str("Let's lay them out. What's on each side of it?"), py_str("Of course. What would you lose with each one?")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.talkto.WEIGHING_WORDS"); }
     s_WEIGHING_WORDS(call_builtin("frozenset", &[mcall(&py_str("\noptions option choice choices decision decisions pros cons\n"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.talkto._TYPED_SHORT"); }
     s__TYPED_SHORT(py_tuple(vec![py_tuple(vec![py_str("u"), py_str("you")]), py_tuple(vec![py_str("ya"), py_str("you")]), py_tuple(vec![py_str("ur"), py_str("your")]), py_tuple(vec![py_str("yr"), py_str("your")]), py_tuple(vec![py_str("wana"), py_str("want")]), py_tuple(vec![py_str("wanna"), py_str("want")]), py_tuple(vec![py_str("wanta"), py_str("want")])]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.talkto._REPEATED_WORD"); }
     s__REPEATED_WORD(stdlib_call("re", "compile", &[py_str("\\b(\\w+)(\\s+\\1\\b)+")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.talkto._TYPED_SHORT_DICT"); }
     s__TYPED_SHORT_DICT(call_builtin("dict", &[g__TYPED_SHORT()]).unwrap_or_else(|e| exc::raise(e)));
 }
 pub fn _as_typed(args: &[Py]) -> Py {

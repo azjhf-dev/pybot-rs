@@ -123,30 +123,55 @@ pub fn g__THE_COST() -> Py { ensure_init(); G__THE_COST.with(|c| c.borrow().clon
 pub fn s__THE_COST(v: Py) { ensure_init(); G__THE_COST.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("What comes in and what goes out: \"im on 1800 a month and rent is 700\".\n\nA person setting out their month says the two figures together, because together they are the one\nthing worth knowing: what is left. Nothing in the bot read the pair. Each figure found a card of\nits own, or a receipt:\n\n```\nim on 1800 a month and rent is 700        -> \"Tell the landlord in writing before the next rent\n                                              day, and ask the council about a Discretionary\n                                              Housing Payment...\"   (the arrears card)\ni earn 1800 and my rent is 700            -> \"Thanks for telling me - I'm here if you want to dig\n                                              into any of that.\"\ni take home 1800 and rent is 700          -> \"Coming into the UK you can bring 4 litres of\n                                              spirits...\"   (the duty-free entry, off \"take home\")\nwe bring in 2400 and the mortgage is 900  -> \"Got it. Is there anything you'd like a hand with?\"\nrent is 700                               -> the arrears card again, to somebody who is not behind\n```\n\nThe arrears card is right for \"i cant pay my rent\" and wrong for \"rent is 700\". The duty-free card\nis right for nothing here at all: the words \"take home\" found it. The two figures are the line, so\nthe two figures are what the reply is about.\n\nThree shapes, each answered with arithmetic on the person's own numbers:\n\n* what comes in and what goes out in one line - \"im on 1800 a month and rent is 700\" - and what is\n  left after the rent is the answer;\n* the cost on its own after the income was said a turn or two before (\"i earn about 1800 a month\" /\n  \"and rent is 900\"), which is the same sum with the income read off the chat;\n* the income on its own when the chat is already about putting money by (\"how much should i save\n  each month\" / \"i earn about 1800 a month\"), which is the share of *their* figure rather than the\n  share of the example figure the money entry uses.\n\nNothing is invented: every figure in the reply is one the person gave, or a share the money entry\nalready uses (\"put away 10 to 20 percent of your take-home\", \"a tenth to a fifth\"). What is not a\nbudget line is left alone - arrears, an eviction notice, a rent that is going up, a tax code, and\nevery ask (\"should i overpay\", \"how do i budget\") belong to the readings that answer them.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.outgoings.SUM"); }
     s_SUM(stdlib_call("re", "compile", &[py_str("£\\s*(?P<marked>\\d[\\d,]*(?:\\.\\d+)?)\\s*(?P<marked_unit>k|grand|thousand)?|(?P<bare>\\d[\\d,]*(?:\\.\\d+)?)\\s*(?P<bare_unit>k|grand|thousand|pounds?|quid)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.outgoings.BARE_NUMBER"); }
     s_BARE_NUMBER(stdlib_call("re", "compile", &[py_str("\\d[\\d,]*(?:\\.\\d+)?")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.outgoings.INCOME"); }
     s_INCOME(stdlib_call("re", "compile", &[py_str("\\b(?:i|we)(?:'m|m|'re| are)?\\s+(?:on|earn|earns|make|makes|bring\\s+in|brings\\s+in|get|gets)\\b|\\btake[\\s-]?home\\b|\\b(?:my|our)\\s+(?:pay|wage|wages|salary|pension|income|earnings)\\b|\\bafter\\s+tax\\b|\\b(?:partner|husband|wife)\\s+(?:earns?|makes?|brings?\\s+in|gets?|takes?\\s+home)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.outgoings.FIXED_COST"); }
     s_FIXED_COST(stdlib_call("re", "compile", &[py_str("\\b(?:rents?|mortgage|childcare|child\\s*care|childminder|nursery|nursery\\s+fees|school\\s+(?:fees|dinners|clubs?)|breakfast\\s+club|after[\\s-]school\\s+club|council\\s+tax|bills?|utility|utilities|energy|electric(?:ity)?|water|gas|heating|broadband|internet|phone|mobile|tv\\s+licen[cs]e|car\\s+finance|car\\s+payment|car\\s+insurance|loan|loans|repayments?|insurance|commut\\w*|travel|fares?|transport|petrol|diesel|fuel|parking|tolls?|train\\s+fare|season\\s+ticket|bus\\s+pass|subscriptions?|gym|clothes|uniforms?|nappies|food|groceries|shopping|car|van|pets?|vets?|vet\\s+bills?|medicines?|prescriptions?|dentist|child\\s+maintenance|maintenance)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.outgoings.AFTER_THE_FIGURE"); }
     s_AFTER_THE_FIGURE(stdlib_call("re", "compile", &[py_str("^\\s*(?:a\\s+(?:month|week|year|fortnight)\\s*)?(?:goes?|went|is\\s+spent|are\\s+spent)?\\s*(?:on|for|towards|into)\\s+(?P<noun>[a-z][a-z'\\-]*)"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.outgoings.NOT_A_COST_NAME"); }
     s_NOT_A_COST_NAME(stdlib_call("re", "compile", &[py_str("^(?:a|an|the|it|them|that|this|me|us|him|her|his|my|our|their|its|and|or|so|but|if|when|top|all|everything|nothing|stuff|things?)$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.outgoings.MONTH"); }
     s_MONTH(stdlib_call("re", "compile", &[py_str("\\b(?:a|per|each|every)\\s+month\\b|\\bmonthly\\b|\\bpcm\\b|\\b(?:a|per)\\s+4\\s+weeks\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.outgoings.WEEK"); }
     s_WEEK(stdlib_call("re", "compile", &[py_str("\\b(?:a|per|each|every)\\s+week\\b|\\bweekly\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.outgoings.YEAR"); }
     s_YEAR(stdlib_call("re", "compile", &[py_str("\\b(?:a|per|each|every)\\s+year\\b|\\byearly\\b|\\bannually\\b|\\ba\\s+year\\b|\\bp\\.?a\\.?\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.outgoings.NOT_A_BUDGET_LINE"); }
     s_NOT_A_BUDGET_LINE(stdlib_call("re", "compile", &[py_str("\\b(?:arrears?|behind|overdue|evict\\w*|notice|can'?t\\s+pay|cant\\s+pay|couldn'?t\\s+pay|not\\s+paid|unpaid|short\\s+this\\s+month|owing|owe|owed|debt|debts|default\\w*|bailiff\\w*|due|going\\s+up|went\\s+up|go\\s+up|gone\\s+up|goes\\s+up|rising|increas\\w*|raise[sd]?|cheaper|reduce|reducing|lower|negotiate|landlord|housing\\s+benefit|universal\\s+credit)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.outgoings.AN_ASK"); }
     s_AN_ASK(stdlib_call("re", "compile", &[py_str("^\\s*(?:should|could|can|do|does|is|are|was|were|what|how|when|where|which|why|would|will)\\b|[,;]\\s*(?:should|could|can|do|does|is|are|was|were|what|how|when|where|which|why|would|will)\\s+\\w|\\?\\s*$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.outgoings.A_MEASURE"); }
     s_A_MEASURE(stdlib_call("re", "compile", &[py_str("^\\s*(?:mins?|minutes?|hours?|hrs?|days?|weeks?|months?|years?|miles?|km|kg|bed(?:room)?s?|kids?|people|guests?|percent|%)"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.outgoings.A_CODE"); }
     s_A_CODE(stdlib_call("re", "compile", &[py_str("\\b\\d{3,}[A-Za-z]{1,2}\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.outgoings.A_HAND_HELD"); }
     s_A_HAND_HELD(stdlib_call("re", "compile", &[py_str("\\b(?:put|set|stick)\\s+(?:\\u00a3?\\d[\\d,]*(?:\\.\\d+)?\\s+)?(?:by|aside|away)\\b|\\b(?:save[sd]?|saving|savings|pot|putting\\s+by)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.outgoings._THE_COST"); }
     s__THE_COST(py_dict(vec![(py_str("rents"), py_str("rent")), (py_str("bills"), py_str("bills")), (py_str("loans"), py_str("loan payments")), (py_str("repayments"), py_str("repayment"))]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.outgoings.LOW_SHARE"); }
     s_LOW_SHARE(Py::Float(0.1));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.outgoings.HIGH_SHARE"); }
     s_HIGH_SHARE(Py::Float(0.2));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.outgoings.LEFT"); }
     s_LEFT(py_tuple(vec![py_str("That leaves {left} after the {named}. Food, travel and the rest come out of that, and whatever is over at the end is what you can put by."), py_str("{left} left after the {named}, then. A standing order for the amount you want to keep, on the day after payday, takes it out before you can spend it."), py_str("So {in_amount} in and {out_amount} out on the {named} leaves {left}. Pick the figure you want to keep and move it the day you are paid.")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.outgoings.A_YEAR_AND_A_MONTH"); }
     s_A_YEAR_AND_A_MONTH(py_tuple(vec![py_str("{in_amount} a year is about {a_month} a month, so the {named} leaves {left}."), py_str("{in_amount} a year works out at {a_month} a month, and after the {named} there is {left}.")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.outgoings.FIRST_MOVE"); }
     s_FIRST_MOVE(py_tuple(vec![py_str("Set the standing order first: choose the figure you want to keep and move it the day after you are paid, so the month runs on what is left rather than the other way round."), py_str("Start with the standing order on payday for the figure you want to keep. Everything else in the month can move around it.")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.outgoings.A_FIRST_ASK"); }
     s_A_FIRST_ASK(stdlib_call("re", "compile", &[py_str("\\b(?:what|where)\\s+(?:should|do|shall)\\s+i\\s+(?:do|start|begin)\\b[^.?!]*\\b(?:first|next|now|start)\\b|\\bhow\\s+do\\s+i\\s+(?:start|begin)\\b|\\bwhere\\s+(?:do|should)\\s+i\\s+(?:even\\s+)?(?:start|begin)\\b|\\bwhat'?s\\s+(?:the\\s+)?first\\s+(?:step|thing)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.outgoings.A_LEFT_ASK"); }
     s_A_LEFT_ASK(stdlib_call("re", "compile", &[py_str("\\bwhat'?s\\s+left\\b|\\bwhat\\s+is\\s+left\\b|\\bwhat'?s\\s+left\\s+over\\b|\\bhow\\s+much\\s+(?:is\\s+left|left|do\\s+i\\s+have\\s+left|have\\s+i\\s+(?:got\\s+)?left)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.outgoings.LEFT_AGAIN"); }
     s_LEFT_AGAIN(py_tuple(vec![py_str("{left} {unit}, on the figures you gave."), py_str("Same sum, on the figures you gave: {left} {unit}.")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.outgoings.A_STEP_ASK_POINTS_BACK"); }
     s_A_STEP_ASK_POINTS_BACK(stdlib_call("re", "compile", &[py_str("\\b(?:that|this|it|them|those|these|now|next|first|then|month|months|money|save|saves|saving|savings|budget|budgeting|pay|paid|payday|salary|wage|income|rent|bills?|pot|aside|afford)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.outgoings.A_SHARE"); }
     s_A_SHARE(py_tuple(vec![py_str("A tenth to a fifth of {in_amount} is {low} to {high} {period}, which is the usual amount to put by."), py_str("Put by a tenth to a fifth of it: {low} to {high} {period}, out of {in_amount}.")]));
 }
 pub fn _choice(args: &[Py]) -> Py {
@@ -296,7 +321,7 @@ pub fn _sums(args: &[Py]) -> Py {
     let __iter8 = py_iter_or_raise(&mcall(&g_BARE_NUMBER(), "finditer", &[text.clone()]));
     for __item in __iter8 {
     match_ = __item.clone();
-    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&taken.clone()) { let __unpk9775 = py_unpack(&__item.clone(), 2, None); let mut start: Py = __unpk9775[0].clone(); let mut end: Py = __unpk9775[1].clone(); __out.push({ let __cmp11: Py = mcall(&match_.clone(), "start", &[]); if py_truthy(&op_le(&start.clone(), &__cmp11)) { op_lt(&__cmp11, &end.clone()) } else { Py::Bool(false) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&taken.clone()) { let __unpk3267 = py_unpack(&__item.clone(), 2, None); let mut start: Py = __unpk3267[0].clone(); let mut end: Py = __unpk3267[1].clone(); __out.push({ let __cmp11: Py = mcall(&match_.clone(), "start", &[]); if py_truthy(&op_le(&start.clone(), &__cmp11)) { op_lt(&__cmp11, &end.clone()) } else { Py::Bool(false) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     continue;
     }
     if py_truthy(&{ let __b = mcall(&slice_or_raise(&text.clone(), &mcall(&match_.clone(), "end", &[]), &op_add(&mcall(&match_.clone(), "end", &[]), &Py::Int(1)), &Py::None), "isalpha", &[]); if py_truthy(&__b) { __b } else { mcall(&g_A_MEASURE(), "match", &[slice_or_raise(&text.clone(), &mcall(&match_.clone(), "end", &[]), &Py::None, &Py::None)]) } }) {
@@ -626,7 +651,7 @@ pub fn the_income_in_the_line(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&incomes.clone()))) {
     return Py::None;
     }
-    return py_tuple(vec![call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&incomes.clone()) { let __unpk1613 = py_unpack(&__item.clone(), 3, None); let mut value: Py = __unpk1613[0].clone(); let mut _start: Py = __unpk1613[1].clone(); let mut _end: Py = __unpk1613[2].clone(); __out.push(value.clone()); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)), _period(&[line.clone()])]);
+    return py_tuple(vec![call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&incomes.clone()) { let __unpk7518 = py_unpack(&__item.clone(), 3, None); let mut value: Py = __unpk7518[0].clone(); let mut _start: Py = __unpk7518[1].clone(); let mut _end: Py = __unpk7518[2].clone(); __out.push(value.clone()); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)), _period(&[line.clone()])]);
     Py::None
 }
 pub fn _the_cost_the_figure_is_for(args: &[Py]) -> Py {
@@ -748,7 +773,7 @@ pub fn the_costs_with_units_in_the_line(args: &[Py]) -> Py {
     return py_list(vec![]);
     }
     sums = _sums(&[line.clone()]);
-    incomes = call_builtin("set", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&_the_incomes_in_the_line(&[line.clone(), sums.clone()])) { let __unpk3445 = py_unpack(&__item.clone(), 3, None); let mut _value: Py = __unpk3445[0].clone(); let mut start: Py = __unpk3445[1].clone(); let mut _end: Py = __unpk3445[2].clone(); __out.push(start.clone()); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    incomes = call_builtin("set", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&_the_incomes_in_the_line(&[line.clone(), sums.clone()])) { let __unpk2963 = py_unpack(&__item.clone(), 3, None); let mut _value: Py = __unpk2963[0].clone(); let mut start: Py = __unpk2963[1].clone(); let mut _end: Py = __unpk2963[2].clone(); __out.push(start.clone()); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     found = py_list(vec![]);
     let __iter1 = py_iter_or_raise(&sums.clone());
     for __item in __iter1 {
@@ -788,7 +813,7 @@ pub fn the_outgoings_in_the_line(args: &[Py]) -> Py {
     let mut name: Py = Py::None;
     let mut value: Py = Py::None;
     let _ = py_str("[(name, value)] for the costs the line names with a figure beside them, all of them.");
-    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&the_costs_with_units_in_the_line(&[text.clone()])) { let __unpk1669 = py_unpack(&__item.clone(), 3, None); let mut name: Py = __unpk1669[0].clone(); let mut value: Py = __unpk1669[1].clone(); let mut _unit: Py = __unpk1669[2].clone(); __out.push(py_tuple(vec![name.clone(), value.clone()])); } py_list(__out) })() };
+    return { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&the_costs_with_units_in_the_line(&[text.clone()])) { let __unpk8675 = py_unpack(&__item.clone(), 3, None); let mut name: Py = __unpk8675[0].clone(); let mut value: Py = __unpk8675[1].clone(); let mut _unit: Py = __unpk8675[2].clone(); __out.push(py_tuple(vec![name.clone(), value.clone()])); } py_list(__out) })() };
     Py::None
 }
 pub fn _there_is_memory(args: &[Py]) -> Py {
@@ -1163,7 +1188,7 @@ pub fn reply_for(args: &[Py]) -> Py {
     unit = _period(&[line.clone()]);
     income = the_income_in_the_line(&[line.clone()]);
     with_units = the_costs_with_units_in_the_line(&[line.clone()]);
-    costs = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&with_units.clone()) { let __unpk4262 = py_unpack(&__item.clone(), 3, None); let mut name: Py = __unpk4262[0].clone(); let mut value: Py = __unpk4262[1].clone(); let mut _said: Py = __unpk4262[2].clone(); __out.push(py_tuple(vec![name.clone(), value.clone()])); } py_list(__out) })() };
+    costs = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&with_units.clone()) { let __unpk2314 = py_unpack(&__item.clone(), 3, None); let mut name: Py = __unpk2314[0].clone(); let mut value: Py = __unpk2314[1].clone(); let mut _said: Py = __unpk2314[2].clone(); __out.push(py_tuple(vec![name.clone(), value.clone()])); } py_list(__out) })() };
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&_there_is_memory(&[memory.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&{ let __b = income.clone(); if !py_truthy(&__b) { __b } else { costs.clone() } })) } }) {
     return py_str("");
     }
@@ -1184,7 +1209,7 @@ pub fn reply_for(args: &[Py]) -> Py {
     if py_truthy(&costs.clone()) {
     before = py_list(vec![]);
     if py_truthy(&Py::Bool(!py_truthy(&own_month.clone()))) {
-    before = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&_the_costs_before(&[memory.clone()])) { let mut cost: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&costs.clone()) { let __unpk5688 = py_unpack(&__item.clone(), 2, None); let mut name: Py = __unpk5688[0].clone(); let mut _value: Py = __unpk5688[1].clone(); __out.push(name.clone()); } py_list(__out) })() }, &geti(&cost.clone(), &Py::Int(0))))) {  __out.push(cost.clone()); } } py_list(__out) })() };
+    before = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&_the_costs_before(&[memory.clone()])) { let mut cost: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&costs.clone()) { let __unpk165 = py_unpack(&__item.clone(), 2, None); let mut name: Py = __unpk165[0].clone(); let mut _value: Py = __unpk165[1].clone(); __out.push(name.clone()); } py_list(__out) })() }, &geti(&cost.clone(), &Py::Int(0))))) {  __out.push(cost.clone()); } } py_list(__out) })() };
     }
     costs = op_add(&before.clone(), &costs.clone());
     cost = geti(&geti(&costs.clone(), &op_neg(&Py::Int(1))), &Py::Int(1));
@@ -1195,18 +1220,18 @@ pub fn reply_for(args: &[Py]) -> Py {
     }
     if py_truthy(&{ let __b = Py::Bool(py_eq(&unit.clone(), &py_str("a year"))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_eq(&cost_unit.clone(), &py_str("a year"))) } }) {
     a_month = call_builtin("round", &[op_truediv(&value.clone(), &Py::Float(12.0))]).unwrap_or_else(|e| exc::raise(e));
-    left = op_sub(&a_month.clone(), &call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&costs.clone()) { let __unpk4425 = py_unpack(&__item.clone(), 2, None); let mut _name: Py = __unpk4425[0].clone(); let mut cost: Py = __unpk4425[1].clone(); __out.push(cost.clone()); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
+    left = op_sub(&a_month.clone(), &call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&costs.clone()) { let __unpk7236 = py_unpack(&__item.clone(), 2, None); let mut _name: Py = __unpk7236[0].clone(); let mut cost: Py = __unpk7236[1].clone(); __out.push(cost.clone()); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
     if py_truthy(&{ let __b = op_le(&left.clone(), &Py::Int(0)); if py_truthy(&__b) { __b } else { op_lt(&left.clone(), &op_mul(&a_month.clone(), &Py::Float(0.05))) } }) {
     return py_str("");
     }
     let _ = _remember(&[memory.clone(), left.clone(), py_str("a month")]);
     return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("in_amount".to_string(), _pounds(&[value.clone()])), ("a_month".to_string(), _pounds(&[a_month.clone()])), ("named".to_string(), named.clone()), ("left".to_string(), _with_unit(&[left.clone(), py_str("a month")]))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&_choice(&[g_A_YEAR_AND_A_MONTH(), line.clone(), memory.clone()]), "format", args))(&__args) };
     }
-    left = op_sub(&value.clone(), &call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&costs.clone()) { let __unpk2937 = py_unpack(&__item.clone(), 2, None); let mut _name: Py = __unpk2937[0].clone(); let mut cost: Py = __unpk2937[1].clone(); __out.push(cost.clone()); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
+    left = op_sub(&value.clone(), &call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&costs.clone()) { let __unpk5220 = py_unpack(&__item.clone(), 2, None); let mut _name: Py = __unpk5220[0].clone(); let mut cost: Py = __unpk5220[1].clone(); __out.push(cost.clone()); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
     if py_truthy(&{ let __b = op_le(&left.clone(), &Py::Int(0)); if py_truthy(&__b) { __b } else { op_lt(&left.clone(), &op_mul(&value.clone(), &Py::Float(0.05))) } }) {
     return py_str("");
     }
-    spent_all = call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&costs.clone()) { let __unpk4404 = py_unpack(&__item.clone(), 2, None); let mut _name: Py = __unpk4404[0].clone(); let mut amount: Py = __unpk4404[1].clone(); __out.push(amount.clone()); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    spent_all = call_builtin("sum", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&costs.clone()) { let __unpk7680 = py_unpack(&__item.clone(), 2, None); let mut _name: Py = __unpk7680[0].clone(); let mut amount: Py = __unpk7680[1].clone(); __out.push(amount.clone()); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     pot = _the_pot_in_the_line(&[line.clone()]);
     reply = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("left".to_string(), _with_unit(&[left.clone(), unit.clone()])), ("named".to_string(), named.clone()), ("in_amount".to_string(), _pounds(&[value.clone()])), ("out_amount".to_string(), _pounds(&[spent_all.clone()]))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&_choice(&[g_LEFT(), line.clone(), memory.clone()]), "format", args))(&__args) };
     if py_truthy(&pot.clone()) {

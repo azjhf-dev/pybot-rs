@@ -27,6 +27,7 @@ pub fn g_PRIORITY() -> Py { ensure_init(); G_PRIORITY.with(|c| c.borrow().clone(
 pub fn s_PRIORITY(v: Py) { ensure_init(); G_PRIORITY.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("A detail the person adds, answered by the question it implies.\n\nThe floor answers a line with no question in it by saying it back: \"theres eight of us at home\"\nover a party food answer got \"Got it - there's eight of you at home\", which is nothing added.\nThe knowledge base does answer the question such a detail implies (\"how much food for eight\npeople\", \"what should i know before a trip to rome in september\"), so the reply a person gets is\nthat answer (bot/compose/their_detail.py).\n\nIt sits above greeting (-1000) and below nudge (-950), urgent and every card, so only the floor's\nown turn is at stake: a module that knows the subject answers first, and a line this cannot read\nreturns None and leaves the turn exactly as it was.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.detail_question.PRIORITY"); }
     s_PRIORITY(op_neg(&Py::Int(997)));
 }
 pub fn respond(args: &[Py]) -> Py {

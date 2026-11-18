@@ -56,15 +56,22 @@ pub fn s_entry(v: Py) { ensure_init(); G_entry.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("What stands in for an ingredient: the sugar a recipe runs out of, and the flour.\n\nThe rest of the swap family (butter, egg, milk, yeast, self-raising) lives in\nbot/knowledge/cooking.py. These two are here because they were the shapes that had no answer\nat all: \"i ran out of sugar\" was read as a feeling and answered \"Nice one - how did that feel?\",\n\"out of sugar\" got \"I'm listening\", and \"what can i use instead of sugar\" reached the\ncut-down-on-sugar card in nutrition, which is a diet question and the wrong job for someone\nmid-recipe with a cake in the bowl.\n\nA shortage and a swap are the same question - \"im out of sugar\", \"no sugar, what can i use\",\n\"can i use granulated instead of caster sugar\" - so both rows are keyed on the ingredient plus a\nshortage-or-swap phrase. The diet lines keep their own answer in nutrition, and a flourless\nrecipe keeps its own answer, so the sugar row stands down on \"cut down\", \"give up\", \"sweets\" and\non comparison questions (\"difference\", \"vs\", \"same as\"), and the flour row stands down on\n\"without flour\" and \"flourless\".\n");
     s_entry(py_func("entry", |args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "entry", args)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.ingredient_swaps.ANSWERS"); }
     s_ANSWERS(py_tuple(vec![py_str("cooking"), py_str("food-and-drink")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.ingredient_swaps.SWAP_ASK"); }
     s_SWAP_ASK(py_tuple(vec![py_str("instead"), py_str("substitute"), py_str("swap"), py_str("replace"), py_str("alternative"), py_str("what can i use"), py_str("what do i use"), py_str("what should i use"), py_str("what else can i use"), py_str("use in place of"), py_str("stand-in"), py_str("stand in")]));
     fn __data1() -> Py { py_tuple(vec![py_str("out of"), py_str("ran out"), py_str("run out"), py_str("none left"), py_str("nothing left"), py_str("havent got"), py_str("haven't got"), py_str("dont have"), py_str("don't have"), py_str("no sugar"), py_str("no flour"), py_str("no honey"), py_str("no icing sugar"), py_str("no caster sugar"), py_str("no plain flour"), py_str("no sugar left"), py_str("no flour left"), py_str("no honey left")]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.ingredient_swaps.OUT_ASK"); }
     s_OUT_ASK(__data1());
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.ingredient_swaps.ASK"); }
     s_ASK(op_add(&g_SWAP_ASK(), &g_OUT_ASK()));
     fn __data2() -> Py { py_tuple(vec![py_str("cut down"), py_str("cut out"), py_str("give up"), py_str("less sugar"), py_str("reduce"), py_str("diet"), py_str("dieting"), py_str("calories"), py_str("sweets"), py_str("sweets and"), py_str("biscuits"), py_str("chocolate"), py_str("cravings"), py_str("crave"), py_str("stop eating"), py_str("healthy"), py_str("healthier"), py_str("lose weight"), py_str("cut sugar"), py_str("cut the sugar"), py_str("cutting sugar"), py_str("add sugar"), py_str("no idea"), py_str("in my coffee"), py_str("in my tea"), py_str("take no sugar"), py_str("takes no sugar")]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.ingredient_swaps.NOT_A_DIET"); }
     s_NOT_A_DIET(__data2());
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.ingredient_swaps.HONEY_COMES_IN"); }
     s_HONEY_COMES_IN(py_tuple(vec![py_str("use honey"), py_str("using honey"), py_str("honey instead"), py_str("honey rather")]));
     fn __data3() -> Py { py_tuple(vec![py_str("difference"), py_str("different"), py_str("same as"), py_str("vs"), py_str("versus"), py_str("better for you"), py_str("gone hard"), py_str("set hard"), py_str("hard as"), py_str("lumpy"), py_str("caked"), py_str("clumped"), py_str("goes hard"), py_str("go hard"), py_str("how do i store"), py_str("keep it soft"), py_str("storing"), py_str("burnt"), py_str("burned"), py_str("burnt on"), py_str("stuck on"), py_str("stuck to"), py_str("scorched"), py_str("charred"), py_str("cleanout of date"), py_str("use by"), py_str("use-by"), py_str("past its date"), py_str("past the date"), py_str("best before"), py_str("gone past")]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET knowledge.ingredient_swaps.NOT_A_SWAP"); }
     s_NOT_A_SWAP(__data3());
 }
 pub fn module_obj() -> Py {

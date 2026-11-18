@@ -61,13 +61,20 @@ fn module_body() {
     let _ = py_str("The part of them that hurts, and which one it is.\n\nThe store keeps one complaint of the person's in ``user[\"hurts\"]`` (the part, the side, the place\non it, and the part a put-right came from). These readers answer the lines about it. They live\nhere rather than in ``bot/modules/memory_store.py`` because that file is at the 1 MiB cap the\nworld enforces and a reader added to it cannot be submitted.\n");
     s_last_user(py_func("last_user", |args: &[Py]| pyrt::xrefs::xcall("memory", "last_user", args)));
     s_quote_said(py_func("_quote", |args: &[Py]| pyrt::xrefs::xcall("memory.told", "_quote", args)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.whathurts.BODY_PARTS"); }
     s_BODY_PARTS(pyrt::xrefs::xget("memory.facts", "BODY_PARTS"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.whathurts.BODY_PART"); }
     s_BODY_PART(pyrt::xrefs::xget("memory.facts", "BODY_PART"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.whathurts.WHICH_PART"); }
     s_WHICH_PART(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("\\bwhich (?:one|side|part|"), &mcall(&py_str("|"), "join", &[g_BODY_PARTS()])), &py_str(")\\b|\\bwhat side\\b|\\bleft or right\\b")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.whathurts.AFTER_WHICH_ONE"); }
     s_AFTER_WHICH_ONE(stdlib_call("re", "compile", &[py_str("\\bwhich one\\b(.*)$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     fn __data1() -> Py { py_tuple(vec![py_str("was"), py_str("is"), py_str("it"), py_str("that"), py_str("did"), py_str("i"), py_str("say"), py_str("said"), py_str("then"), py_str("again"), py_str("exactly"), py_str("hurts"), py_str("hurt"), py_str("of"), py_str("them"), py_str("those"), py_str("the"), py_str("two"), py_str("please"), py_str("one"), py_str("side"), py_str("part"), py_str("was")]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.whathurts.A_SIDE_TAIL"); }
     s_A_SIDE_TAIL(call_builtin("frozenset", &[__data1()]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.whathurts.HURTING_ASK"); }
     s_HURTING_ASK(stdlib_call("re", "compile", &[py_str("\\b(?:hurt|hurts|hurting|sore|ache|aching|pain|painful)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.whathurts.ASKED_ABOUT_A_PART"); }
     s_ASKED_ABOUT_A_PART(stdlib_call("re", "compile", &[py_str("^\\s*(?:who|what|which|when|where|why|how|does|do|did|is|are|was|should|shall|can|could|would|will|any)\\b|\\?\\s*$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
 }
 pub fn _vary(args: &[Py]) -> Py {

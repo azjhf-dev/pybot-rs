@@ -31,7 +31,9 @@ pub fn g_TAKES_AS_IT_COMES() -> Py { ensure_init(); G_TAKES_AS_IT_COMES.with(|c|
 pub fn s_TAKES_AS_IT_COMES(v: Py) { ensure_init(); G_TAKES_AS_IT_COMES.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("A line asking whether the advice will work is answered with what the advice achieves.\n\n\"will that work\" after a how-to names nothing of its own, and the chat module read it as a nod.\nThe card the bot had just printed already says what the method achieves (\"almost nothing needs\nscrubbing after that\"), so the reply is that clause with the yes in front of it. The reading and\nthe wording live in `bot/memory/will_it_work.py`.\n\nThe band sits above the small talk (chat.py, 300), which is what answered these lines with a stock\nline, and below the memory store and the safety band: a check inside a crisis is never this\nmodule's, and a verdict the store holds (\"No: a satay is made with nuts\") is said back by\n`thread.checking_the_verdict`. It returns None on every line that is not only this check, and on\nevery card that does not say what it achieves.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.a_will_it_work.PRIORITY"); }
     s_PRIORITY(Py::Int(1000));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.a_will_it_work.TAKES_AS_IT_COMES"); }
     s_TAKES_AS_IT_COMES(py_func("takes_as_it_comes", |args: &[Py]| takes_as_it_comes(args)));
 }
 pub fn respond(args: &[Py]) -> Py {

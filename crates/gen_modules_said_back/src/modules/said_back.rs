@@ -27,6 +27,7 @@ pub fn g_PRIORITY() -> Py { ensure_init(); G_PRIORITY.with(|c| c.borrow().clone(
 pub fn s_PRIORITY(v: Py) { ensure_init(); G_PRIORITY.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("A detail given earlier is said back when the person asks for it again.\n\n    its on the outside of the knee, just under the bone          (turn 2)\n    and which knee was it          before  the whole iliotibial band card, said again\n                                   now     You said: \"its on the outside of the knee, just\n                                           under the bone\"\n\nThe reading is `bot/memory/lineback.py`: it only answers the shapes people use to ask for\nsomething said earlier, and only when a line they typed carries the words of the ask. So a\nknowledge question is left to the entries, and a recall ask the store answers from a fact it\nkeeps is left to the store, which says it in the person's own words already.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.said_back.PRIORITY"); }
     s_PRIORITY(Py::Int(350));
 }
 pub fn respond(args: &[Py]) -> Py {

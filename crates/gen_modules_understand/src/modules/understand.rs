@@ -37,6 +37,7 @@ fn module_body() {
     let _ = py_str("Runs the understanding engine (bot/understanding) before any module proposes a reply.");
     s_the_thing_it_is(pyrt::xrefs::xget("memory", "the_thing_it_is"));
     s_understand(py_func("understand", |args: &[Py]| pyrt::xrefs::xcall("understanding", "understand", args)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.understand.PRIORITY"); }
     s_PRIORITY(Py::Int(10000));
 }
 pub fn observe(args: &[Py]) -> Py {

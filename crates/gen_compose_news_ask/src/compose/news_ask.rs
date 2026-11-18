@@ -47,11 +47,17 @@ pub fn g_THEIR_OWN() -> Py { ensure_init(); G_THEIR_OWN.with(|c| c.borrow().clon
 pub fn s_THEIR_OWN(v: Py) { ensure_init(); G_THEIR_OWN.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("A line that names the news and nothing else is the ask with the words left out.\n\n\"anything in the news\", \"the headlines\", \"news about the strike\" carry no question mark, so the\nasking gate in `bot/compose/fallback.py` dropped them and the line was met with a nod (\"I'm\nlistening - say more if it helps\") as though the person had told the bot something, or with the\nnothing-much pool's \"None that I know of\", which claims the bot has looked and found nothing.\n\nWhat makes a line this ask is its shape, not a list of phrasings: an asking frame, then the news\nword, then nothing but where or when it is, or one thing it is about. A line that puts anything\nelse after the word is about the person's own business and keeps its own answer - \"i have news\"\nis an announcement the nod answers, \"news from the hospital\" is about someone they know, \"no\nnews yet\" is a verdict they have already reached.\n\nThis module answers only the lines it is good at and says nothing about any other line.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.news_ask.A_FRAME"); }
     s_A_FRAME(stdlib_call("re", "compile", &[py_str("^(?:so|and|ok|okay|well|but)?\\s*(?:any|anything|got|get|is\\s+there|are\\s+there|whats?|what\\s+(?:is|are)|tell\\s+me|you\\s+got|have\\s+you\\s+got|more|the|some)?\\s*(?:in\\s+the\\s+|from\\s+the\\s+|on\\s+the\\s+|the\\s+)?(?:news|headlines?)(?:\\s+(?:about|on|of|regarding)\\s+.*|\\s+(?:today|tonight|this\\s+(?:morning|afternoon|evening)|at\\s+the\\s+moment|right\\s+now|please|then)\\b.*)?$")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.news_ask.A_NEWS_DOING"); }
     s_A_NEWS_DOING(stdlib_call("re", "compile", &[py_str("\\b(?:news|headlines?)\\s+(?:is|are|was|were|has|have|had|gets?|got|makes?|made|keeps?|puts?|bothered|upsets?|worries)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.news_ask.A_VERDICT"); }
     s_A_VERDICT(stdlib_call("re", "compile", &[py_str("\\b(?:no|some|good|bad|great|awful|sad|terrible|nice|exciting|brilliant|lovely|fantastic|amazing|grim|big)\\s+(?:news|headlines?)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.news_ask.THEIR_OWN"); }
     s_THEIR_OWN(stdlib_call("re", "compile", &[py_str("\\b(?:i|we|my|our|his|her|their)\\b.*\\b(?:news|headlines?)\\b|\\b(?:news|headlines?)\\b.*\\b(?:my|our|his|her|their)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.news_ask.A_REPORT_VERB"); }
     s_A_REPORT_VERB(stdlib_call("re", "compile", &[py_str("\\b(?:watched|watching|read|reading|heard|hear|told|saw|seen|made|missed|followed|caught)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.news_ask.A_YEAR"); }
     s_A_YEAR(stdlib_call("re", "compile", &[py_str("\\b(?:19|20)\\d\\d\\b")]).unwrap_or_else(|e| exc::raise(e)));
 }
 pub fn reads_as_an_ask_for_the_news(args: &[Py]) -> Py {

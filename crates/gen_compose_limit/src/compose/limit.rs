@@ -87,21 +87,37 @@ pub fn g_WORD() -> Py { ensure_init(); G_WORD.with(|c| c.borrow().clone()) }
 pub fn s_WORD(v: Py) { ensure_init(); G_WORD.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("A line that only rules something out is answered inside the answer before it.\n\n\"recommend a film\" / \"no horror\" and \"training the lead\" / \"no treats\" are follow-ups, not new\nsubjects. Left to the modules, the word after \"no\" is a topic word like any other and the bot\nanswers the thing the person has just taken away (a horror list after \"no horror\", the treat\nagain after \"no treats\"). The understanding engine reads the line as a limit on the last\nanswer (`memory[\"understood\"][\"excludes\"]`, `[\"constraint\"]`); this composer turns that reading\ninto a reply.\n\nThe rule, in one line: keep the bot's own last answer, take out the parts of it that carry the\nthing they ruled out, and say what is left. Nothing here knows what a genre, a food or a dog\ntreat is. It works on the words of the answer above, so the same code answers a horror film, a\njar of garlic and a pocket of treats.\n\nIt only speaks when the answer above actually carries the thing: where it never mentioned it\nthere is nothing to take out, and the answer that was already given (or the next module) is\nleft alone rather than replaced with a remark about itself.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.limit.PART"); }
     s_PART(stdlib_call("re", "compile", &[py_str("(?<=[.?!;:,])\\s+")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.limit.CONTINUES"); }
     s_CONTINUES(stdlib_call("re", "compile", &[py_str("^(?:and|or|then|but|plus|so|because|with|also|instead|though|which|that|to|for|in|on|at|of)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.limit.COUNTED"); }
     s_COUNTED(stdlib_call("re", "compile", &[py_str("\\b(?:all three|all four|all five|all of them|both of them|both|either|any of those|any of them|none of them|three of|the three)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.limit.WORD"); }
     s_WORD(stdlib_call("re", "compile", &[py_str("[a-z0-9']*[a-z][a-z0-9']*")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.limit.FRAME"); }
     s_FRAME(stdlib_call("re", "compile", &[py_str("^(?:same as before|same answer(?:, and it covers this)?|as i said|still|that is still the thing to do|nothing new to add on it|nothing more on it(?: i'm afraid)?|that is all i have on it|there is nothing further to add|same again for|it is the same for|same for|the same for|it is the same\\b)"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.limit.BACK_REFERENCE"); }
     s_BACK_REFERENCE(stdlib_call("re", "compile", &[py_str("^(?:the same|this|that|these|those|it|its|it's|they|them|their|both|either|which|such|the latter|the former)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.limit.KEPT"); }
     s_KEPT(py_tuple(vec![py_str("Right — no {thing}, then. {kept}"), py_str("Then leave the {thing} out: {kept}"), py_str("No {thing}, then — {kept}"), py_str("Fair enough, no {thing}: {kept}")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.limit.NOTHING_LEFT"); }
     s_NOTHING_LEFT(py_tuple(vec![py_str("Right — no {thing}, then, and that changes the answer: what would you use instead?"), py_str("With no {thing} in it there is not much of that answer left — what would you rather use?"), py_str("Then {thing} out changes it. What should it be instead?")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.limit.LEAST_KEPT"); }
     s_LEAST_KEPT(Py::Int(20));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.limit.LEAST_WORDS"); }
     s_LEAST_WORDS(Py::Int(4));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.limit.RESTATED"); }
     s_RESTATED(stdlib_call("re", "compile", &[py_str("^(?:right\\s*[-\\u2014]\\s*no\\s+\\S[^.]{0,40},\\s*then[.\\s,:\\u2014-]|no\\s+\\S[^.]{0,40},\\s*then\\s*[-\\u2014]|then leave the\\s+\\S[^.]{0,40}\\s+out[:,]|fair enough, no\\s+\\S[^.]{0,40}:|with no\\s+\\S[^.]{0,40}\\s+in it there is not much|then\\s+\\S[^.]{0,30}\\s+out changes it)"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.limit.A_STATE_IS_NOT_A_LIMIT"); }
     s_A_STATE_IS_NOT_A_LIMIT(stdlib_call("re", "compile", &[py_str("^(?:feel|feels|felt|feeling|is|are|was|were|be|been|being|seems|seem|seemed|i|im|i'm|ive|i've|me|my|we|we're|us)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.limit.NOTHING_THAT_LIMITS"); }
     s_NOTHING_THAT_LIMITS(stdlib_call("re", "compile", &[py_str("\\bnothing\\s+(?:with|that|too|but|except|without|involving|containing|featuring|before|after|under|over|like)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.limit.NO_LAUGH_OR_SCARES"); }
     s_NO_LAUGH_OR_SCARES(stdlib_call("re", "compile", &[py_str("\\b(?:no|not|without|except|minus)\\s+(?:a\\s+|the\\s+|any\\s+|too\\s+|more\\s+)?(?:laugh\\s?track|laughter|laughing|comedy|comedies|jokes?|funny|scares?|scary|horror|gore|violence|subtitles|sad\\s+ones?|sad\\s+films?)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.limit.A_LIMIT_SHAPE"); }
     s_A_LIMIT_SHAPE(stdlib_call("re", "compile", &[py_str("\\b(?:nothing|no|not|without|except|minus)\\s+(?:with|that|too|more|any|much|a|the)?\\s*\\S")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.limit.MISSED_LIMIT"); }
     s_MISSED_LIMIT(py_tuple(vec![py_str("Leave that out, then - which of those was nearest, and I'll find another in the same vein."), py_str("Fair enough, that one's out. Tell me which of those you'd keep and I'll follow the thread."), py_str("Then it's out. Which of them came closest, and what would you change about it?")]));
 }
 pub fn restates_the_answer(args: &[Py]) -> Py {

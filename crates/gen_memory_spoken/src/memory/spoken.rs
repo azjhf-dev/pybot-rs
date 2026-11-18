@@ -79,21 +79,35 @@ pub fn g_spoken_as_numbers() -> Py { ensure_init(); G_spoken_as_numbers.with(|c|
 pub fn s_spoken_as_numbers(v: Py) { ensure_init(); G_spoken_as_numbers.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("A figure said out loud, written as the same figure in digits.\n\nPeople say the figure in words as often as in digits, and the amount reader in `memory_store`\nknew only a digit or a word up to twelve: \"half an hour\" was not a figure at all, so \"is that\nenough\" had nothing to measure against the answer. This module has no imports but `re`, and\n`memory_store` reads every line through it before it looks for an amount.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.spoken._SPOKEN_UNIT"); }
     s__SPOKEN_UNIT(py_str("(?:minutes?|mins?|hours?|hrs?|days?|weeks?|nights?|miles?|km|kilometres?|kilometers?|litres?|liters?|glasses?|steps?|grams?|grammes?|calories|cals?|micrograms?|milligrams?)"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.spoken._A_SPOKEN_FRACTION"); }
     s__A_SPOKEN_FRACTION(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("\\b(half|a half|a quarter|quarter|three quarters?|a couple of|a couple|a dozen|a few)\\s+(?:of\\s+)?(?:a\\b|an\\b)?\\s*("), &g__SPOKEN_UNIT()), &py_str(")\\b")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.spoken._SPOKEN_FRACTION_VALUE"); }
     s__SPOKEN_FRACTION_VALUE(py_dict(vec![(py_str("half"), Py::Float(0.5)), (py_str("a half"), Py::Float(0.5)), (py_str("a quarter"), Py::Float(0.25)), (py_str("quarter"), Py::Float(0.25)), (py_str("three quarters"), Py::Float(0.75)), (py_str("three quarter"), Py::Float(0.75)), (py_str("a couple of"), Py::Float(2.0)), (py_str("a couple"), Py::Float(2.0)), (py_str("a dozen"), Py::Float(12.0))]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.spoken._A_SPOKEN_HALF_HOUR"); }
     s__A_SPOKEN_HALF_HOUR(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("\\b(?:(an?|one|two|three|four|five|six|seven|eight|nine)\\s+)?("), &g__SPOKEN_UNIT()), &py_str(")\\s+and\\s+(?:a\\s+)?(half|quarter)\\b")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     fn __data1() -> Py { py_dict(vec![(py_str("thirteen"), Py::Int(13)), (py_str("fourteen"), Py::Int(14)), (py_str("fifteen"), Py::Int(15)), (py_str("sixteen"), Py::Int(16)), (py_str("seventeen"), Py::Int(17)), (py_str("eighteen"), Py::Int(18)), (py_str("nineteen"), Py::Int(19)), (py_str("twenty"), Py::Int(20)), (py_str("thirty"), Py::Int(30)), (py_str("forty"), Py::Int(40)), (py_str("fifty"), Py::Int(50)), (py_str("sixty"), Py::Int(60)), (py_str("seventy"), Py::Int(70)), (py_str("eighty"), Py::Int(80)), (py_str("ninety"), Py::Int(90)), (py_str("a hundred"), Py::Int(100)), (py_str("hundred"), Py::Int(100))]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.spoken._SPOKEN_NUMBER"); }
     s__SPOKEN_NUMBER(__data1());
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.spoken._A_RATE_UNIT"); }
     s__A_RATE_UNIT(stdlib_call("re", "compile", &[py_str("^(?:days?|weeks?|nights?)$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.spoken._A_COUNT_AND_A_HALF"); }
     s__A_COUNT_AND_A_HALF(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("\\b(one|two|three|four|five|six|seven|eight|nine|ten|a|an|\\d+)\\s+and\\s+a\\s+(half|quarter)\\s+("), &g__SPOKEN_UNIT()), &py_str(")\\b")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.spoken._SPOKEN_TENS"); }
     s__SPOKEN_TENS(py_str("(?:twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety)"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.spoken._A_WORDED_FIGURE"); }
     s__A_WORDED_FIGURE(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&py_str("\\b("), &g__SPOKEN_TENS()), &py_str("(?:[-\\s](?:one|two|three|four|five|six|seven|eight|nine))?|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|a hundred|an?)\\s+(")), &g__SPOKEN_UNIT()), &py_str(")\\b")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.spoken._A_TENS_AND_UNITS"); }
     s__A_TENS_AND_UNITS(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("\\b("), &g__SPOKEN_TENS()), &py_str(")[-\\s](one|two|three|four|five|six|seven|eight|nine)\\b")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.spoken._ONE_TO_NINE"); }
     s__ONE_TO_NINE(py_dict(vec![(py_str("one"), Py::Int(1)), (py_str("two"), Py::Int(2)), (py_str("three"), Py::Int(3)), (py_str("four"), Py::Int(4)), (py_str("five"), Py::Int(5)), (py_str("six"), Py::Int(6)), (py_str("seven"), Py::Int(7)), (py_str("eight"), Py::Int(8)), (py_str("nine"), Py::Int(9))]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.spoken._MINUTES_CEILING"); }
     s__MINUTES_CEILING(Py::Int(180));
     fn __data2() -> Py { py_dict(vec![(py_str("one"), Py::Int(1)), (py_str("two"), Py::Int(2)), (py_str("three"), Py::Int(3)), (py_str("four"), Py::Int(4)), (py_str("five"), Py::Int(5)), (py_str("six"), Py::Int(6)), (py_str("seven"), Py::Int(7)), (py_str("eight"), Py::Int(8)), (py_str("nine"), Py::Int(9)), (py_str("ten"), Py::Int(10)), (py_str("eleven"), Py::Int(11)), (py_str("twelve"), Py::Int(12)), (py_str("a"), Py::Float(1.0)), (py_str("an"), Py::Float(1.0)), (py_str("once"), Py::Int(1)), (py_str("twice"), Py::Int(2))]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.spoken._UNIT_WORDS"); }
     s__UNIT_WORDS(__data2());
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.spoken.spoken_as_numbers"); }
     s_spoken_as_numbers(py_func("_spoken_as_numbers", |args: &[Py]| _spoken_as_numbers(args)));
 }
 pub fn _the_number(args: &[Py]) -> Py {

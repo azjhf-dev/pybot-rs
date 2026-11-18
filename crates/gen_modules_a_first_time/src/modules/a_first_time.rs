@@ -27,6 +27,7 @@ pub fn g_PRIORITY() -> Py { ensure_init(); G_PRIORITY.with(|c| c.borrow().clone(
 pub fn s_PRIORITY(v: Py) { ensure_init(); G_PRIORITY.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("A first time is a task, not a first taste.\n\n\"how do i give a talk at work\" then \"ive never done one before\" got \"I'm listening - say more if it\nhelps\", which is no help at all to somebody standing in front of the thing. This answers it with\nthe one thing that is true of every first (bot/compose/a_first_time.py), and sits above greeting\n(-1000) and below nudge (-950), urgent and every card, so only the floor's turn is at stake.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.a_first_time.PRIORITY"); }
     s_PRIORITY(op_neg(&Py::Int(996)));
 }
 pub fn respond(args: &[Py]) -> Py {

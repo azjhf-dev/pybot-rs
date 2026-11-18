@@ -51,12 +51,19 @@ pub fn g_THE_RELATIONS() -> Py { ensure_init(); G_THE_RELATIONS.with(|c| c.borro
 pub fn s_THE_RELATIONS(v: Py) { ensure_init(); G_THE_RELATIONS.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("A question about a person the chat already holds: answer it with what the chat holds.\n\n    my mum is in hospital / she had a fall / she is 82 / how is she doing\n        -> \"Same as before: Falls are usually several small things adding up ...\"\n\nA friend asked how their mum was doing, and the bot read the word \"doing\" as the fall it had\nalready answered and said the same paragraph again, headed \"Same as before\". The person was not\nasking for the advice twice; they were asking after their mum, and the only thing the bot knows\nabout her is what they told it.\n\nSo the reply is what the chat holds, said in one line: the person (\"your mum\"), what they said\nabout her (\"had a fall\"), her age if it was given, and the one thing a friend asks - whether\nthere is any word since. When the chat holds nobody, there is nothing to answer with and the\nmodule stands down.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.callback.THE_ASK"); }
     s_THE_ASK(stdlib_call("re", "compile", &[py_str("^\\s*(?:and\\s+|so\\s+|but\\s+)?(?:how(?:'s|\\s+is|\\s+are|\\s+was|\\s+were)\\s+(?P<who>he|she|they|him|her|them)\\s*(?:doing|getting\\s+on|going|coping|holding\\s+up|been)?|how\\s+(?:has|have)\\s+(?P<been>he|she|they)\\s+been|is\\s+(?P<better>he|she|they)\\s+(?:any\\s+)?better)\\s*(?:now|today|then|since|at\\s+the\\s+moment)?\\s*\\?*\\s*$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.callback.THE_NAMED_ASK"); }
     s_THE_NAMED_ASK(stdlib_call("re", "compile", &[py_str("^\\s*(?:and\\s+|so\\s+)?(?:how(?:'s|\\s+is|\\s+was)\\s+(?:your\\s+|my\\s+)?(?P<who>[a-z]{2,})|any\\s+news\\s+(?:about|on|of)\\s+(?:your\\s+|my\\s+)?(?P<news>[a-z]{2,})|how\\s+did\\s+it\\s+go\\s+with\\s+(?:your\\s+|my\\s+)?(?P<went>[a-z]{2,}))\\s*(?:doing|getting\\s+on|now|then|today)?\\s*\\?*\\s*$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.callback.THE_RELATIONS"); }
     s_THE_RELATIONS(op_bitor(&call_builtin("frozenset", &[pyrt::xrefs::xget("memory.facts", "RELATIONS")]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("frozenset", &[mcall(&py_str("mum mom mam mother dad father gran granny grandma grandad grandpa nan nana pops"), "split", &[])]).unwrap_or_else(|e| exc::raise(e))));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.callback.AN_AGE"); }
     s_AN_AGE(stdlib_call("re", "compile", &[py_str("^(?:is|was|turned|is\\s+now|just\\s+turned)\\s+\\d{1,3}\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.callback.MOST_WORDS_OF_NEWS"); }
     s_MOST_WORDS_OF_NEWS(Py::Int(9));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.callback.IN_A_MEDICAL_EPISODE"); }
     s_IN_A_MEDICAL_EPISODE(stdlib_call("re", "compile", &[py_str("\\b(?:hospital|hospitalis\\w*|hospitaliz\\w*|surgery|surgical|operation|a&?e|casualty|intensive care|icu|coronary care|hospice|care home|nursing home|the ward|on a ward|in a ward)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.callback.EPISODE_TURNS"); }
     s_EPISODE_TURNS(Py::Int(6));
 }
 pub fn _the_person_held(args: &[Py]) -> Py {

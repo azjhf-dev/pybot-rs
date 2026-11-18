@@ -47,11 +47,17 @@ pub fn g_THEM_SAID() -> Py { ensure_init(); G_THEM_SAID.with(|c| c.borrow().clon
 pub fn s_THEM_SAID(v: Py) { ensure_init(); G_THEM_SAID.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("The person a line is about, when the chat already knows one: who, and how old they are.\n\nThe store keeps facts about other people in `memory[\"others\"]` (`bot/memory/__init__.py`), one\nrecord per person: `{\"who\": \"son\", \"age\": 4}` from `my son is 4`. An answer that needs something\nabout that person - a present for their birthday, how long they should sleep - can only use it\nif it can say *which* of the people in the store the line means. That is all this module does:\n\n    my son is 4 / what should i get him for his birthday\n    -> {\"who\": \"son\", \"age\": 4}, so the present is a four-year-old's and not a grown-up's\n\nA line that names the relation (\"my daughter\", \"my mum\") is the sure case. A line that says only\n`him` or `her` is read by the gender of the relation the store holds, and only when the store\nholds exactly one person of it: two sons and a `him` is nobody in particular, and a guess about\nwhose age it is is worse than saying nothing. Everyone else returns None, so a module that asks\nfalls back to the answer it had before.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.people.HIM"); }
     s_HIM(call_builtin("frozenset", &[mcall(&py_str("son dad father daddy papa husband brother nephew grandad grandpa granddad\ngrandfather stepdad stepson uncle boyfriend fiance grandson godson"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.people.HER"); }
     s_HER(call_builtin("frozenset", &[mcall(&py_str("daughter mum mom mam mummy mumma mother wife sister niece nan nana gran\ngranny grandma grandmother stepmum stepdaughter aunt auntie girlfriend fiancee granddaughter\ngoddaughter"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.people.HIM_SAID"); }
     s_HIM_SAID(stdlib_call("re", "compile", &[py_str("\\b(?:him|his|he)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.people.HER_SAID"); }
     s_HER_SAID(stdlib_call("re", "compile", &[py_str("\\b(?:her|hers|she)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.people.THEM_SAID"); }
     s_THEM_SAID(stdlib_call("re", "compile", &[py_str("\\b(?:them|they|theirs|their)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.people.CHILD_OF_THE_FAMILY"); }
     s_CHILD_OF_THE_FAMILY(call_builtin("frozenset", &[mcall(&py_str("son daughter grandson granddaughter nephew niece stepson\n    stepdaughter grandchild"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
 }
 pub fn _the_age_of_the_group(args: &[Py]) -> Py {

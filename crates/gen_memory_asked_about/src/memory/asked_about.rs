@@ -51,12 +51,19 @@ pub fn g__NOT_A_THING() -> Py { ensure_init(); G__NOT_A_THING.with(|c| c.borrow(
 pub fn s__NOT_A_THING(v: Py) { ensure_init(); G__NOT_A_THING.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("The answer this chat already gave, when a later line names the thing it was about.\n\n    i havent slept much          -> Nights like that wear you down ...\n    i keep waking at 3           -> Waking in the night is normal - sleep runs in cycles ...\n    my head is full              -> The fix is what you do in those minutes ...\n    and how do i get some sleep  -> I'm not sure about that one, sorry - I'd rather not guess.\n\nThe chat had the sleep answer three turns up and then said it did not know enough. Nothing read\nthe line: every reader that hands an earlier answer back is reached only when a module *serves*\nthat answer again, and on this line nothing does - the composer has no card for \"some sleep\", so\nthe search hedge is the only candidate left, and it is the one answer that cannot help when the\nchat itself holds the answer.\n\n`topics.answer_about` already finds that card: it scores the line's own words against every\n`answers` turn in the last six and returns the one they belong to. Nothing asked it on this path.\nSo this is the asking, and the reply is the sentence of that card which carries the words the\nline asked with, said as the return it is - \"Back to sleep: ...\".\n\nNarrow on purpose:\n\n* it is only ever read in place of a hedge (`bot/modules/greeting.py`), so a line with an answer\n  of its own keeps it. That is the same gate the answer-on-screen reader uses;\n* the line has to name a thing, a content word the card also names, so a bare \"and what should i\n  do\" - which belongs to every answer that gives a step - is left to the readers that own it;\n* the sentence said back may not be one the bot has just said, so this cannot be a repeat dressed\n  as a return, and the whole card is never handed over: it is the part that answers the line.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.asked_about.SENTENCE"); }
     s_SENTENCE(stdlib_call("re", "compile", &[py_str("(?<=[.!?])\\s+")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.asked_about.RETURN"); }
     s_RETURN(py_tuple(vec![py_str("Back to {thing}: {reply}"), py_str("Back to {thing} then: {reply}"), py_str("It is the same answer on {thing}: {reply}"), py_str("As before on {thing}: {reply}")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.asked_about.RETURN_UNNAMED"); }
     s_RETURN_UNNAMED(py_tuple(vec![py_str("Back to what I said: {reply}"), py_str("It is the same answer as before: {reply}"), py_str("As before: {reply}"), py_str("Back to it: {reply}")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.asked_about.SHORT"); }
     s_SHORT(Py::Int(5));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.asked_about.MOST"); }
     s_MOST(Py::Int(45));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.asked_about._NOT_A_THING"); }
     s__NOT_A_THING(call_builtin("frozenset", &[mcall(&py_str("\nwhat which who whom whose how when where why whether whats\nnow then again left else next other same other another anything something nothing everything\nplease thanks ok okay well so and but\n"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.asked_about._A_CONTINUATION"); }
     s__A_CONTINUATION(stdlib_call("re", "compile", &[py_str("^(?:if|and|or|but|so|then|also|because|when|while|though|although|plus|that said)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
 }
 pub fn _sentences(args: &[Py]) -> Py {
@@ -157,7 +164,7 @@ pub fn _the_part_that_answers(args: &[Py]) -> Py {
     index = geti(&best.clone(), &Py::Int(2));
     } else {
     if py_truthy(&geti(&best.clone(), &Py::Int(0))) {
-    index = call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[parts.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk8876 = py_unpack(&__item.clone(), 2, None); let mut i: Py = __unpk8876[0].clone(); let mut part: Py = __unpk8876[1].clone(); if py_truthy(&Py::Bool(!py_truthy(&mcall(&g__A_CONTINUATION(), "match", &[part.clone()])))) {  __out.push(i.clone()); } } py_list(__out) })() }, geti(&best.clone(), &Py::Int(2))]).unwrap_or_else(|e| exc::raise(e));
+    index = call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[parts.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk6973 = py_unpack(&__item.clone(), 2, None); let mut i: Py = __unpk6973[0].clone(); let mut part: Py = __unpk6973[1].clone(); if py_truthy(&Py::Bool(!py_truthy(&mcall(&g__A_CONTINUATION(), "match", &[part.clone()])))) {  __out.push(i.clone()); } } py_list(__out) })() }, geti(&best.clone(), &Py::Int(2))]).unwrap_or_else(|e| exc::raise(e));
     } else {
     return py_str("");
     }

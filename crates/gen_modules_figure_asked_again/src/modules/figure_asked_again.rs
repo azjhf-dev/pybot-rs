@@ -31,7 +31,9 @@ pub fn g_TAKES_AS_IT_COMES() -> Py { ensure_init(); G_TAKES_AS_IT_COMES.with(|c|
 pub fn s_TAKES_AS_IT_COMES(v: Py) { ensure_init(); G_TAKES_AS_IT_COMES.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("A yes/no about a figure the bot itself gave: \"so is eight weeks still right\".\n\nThe figure is the answer's - the chat already said eight weeks - and the question is whether it\nstill stands. Nothing in the line names a thing of its own, so the knowledge base read the words\nit could see and answered from an entry about something else: \"so is eight weeks still right\"\nafter a 5k plan got \"Ask in writing and name what you want: a refund, a repair, or money for the\ntrouble. Once eight weeks pass...\" - a consumer-complaint entry, reached by the figure's words.\n\nThe reading and the wording live in `bot/memory/stands.py`: the answer is the figure with the\nreason the chat already gave for it, because that is the sentence the bot used and a friend who is\nasked \"is that still right\" says where the number came from rather than looking it up again.\n\nThis module sits above the knowledge base (0), because the entry that answered these lines was the\nknowledge base reading a figure as a subject, and below the safety band and the loss and grief\nmodules, which keep their turns: \"is three sessions a week still right\" during a bereavement is\nnot a question about the figure. It returns None on every line that is not a yes/no about a figure\nof this chat's own answers.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.figure_asked_again.PRIORITY"); }
     s_PRIORITY(Py::Int(1000));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.figure_asked_again.TAKES_AS_IT_COMES"); }
     s_TAKES_AS_IT_COMES(py_func("takes_as_it_comes", |args: &[Py]| takes_as_it_comes(args)));
 }
 pub fn respond(args: &[Py]) -> Py {

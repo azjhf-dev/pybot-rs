@@ -39,10 +39,14 @@ pub fn g_TAIL_PHRASES() -> Py { ensure_init(); G_TAIL_PHRASES.with(|c| c.borrow(
 pub fn s_TAIL_PHRASES(v: Py) { ensure_init(); G_TAIL_PHRASES.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("The chat-speak people hang off the end of a line, and the line without it.\n\nIt is not part of what they told you: the fact is \"my sister is called meg\", and \"you said your\nsister is called meg to be honest\" says the fact back with a shrug on it. The reply that notes a\nline, the summary that quotes it, and the plan the store keeps all read this, so the words that\nare only a shrug are dropped in one place rather than three.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.filler.TAIL_OFF"); }
     s_TAIL_OFF(call_builtin("frozenset", &[mcall(&py_str("tho though lol lmao haha ha hehe tbh ngl imo idk innit x xx xxx\n    actually btw"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.filler.TAIL_PHRASES"); }
     s_TAIL_PHRASES(py_tuple(vec![py_str("by the way"), py_str("out of interest"), py_str("while im at it"), py_str("whilst im at it"), py_str("as it happens"), py_str("if thats ok"), py_str("if that's ok"), py_str("if you dont mind"), py_str("if you don't mind"), py_str("come to think of it"), py_str("now i think of it"), py_str("now that i think of it")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.filler.IN_THE_WAY"); }
     s_IN_THE_WAY(call_builtin("frozenset", &[mcall(&py_str("actually really honestly literally genuinely basically"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
     fn __data1() -> Py { py_tuple(vec![py_str("by the way"), py_str("btw"), py_str("out of interest"), py_str("while im at it"), py_str("whilst im at it"), py_str("as it happens"), py_str("if thats ok"), py_str("if that's ok"), py_str("if you dont mind"), py_str("if you don't mind"), py_str("come to think of it"), py_str("now i think of it"), py_str("now that i think of it"), py_str("actually")]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.filler.ASK_TAIL"); }
     s_ASK_TAIL(__data1());
 }
 pub fn without_filler(args: &[Py]) -> Py {

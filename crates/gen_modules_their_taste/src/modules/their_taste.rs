@@ -116,33 +116,52 @@ fn module_body() {
             let mut __handled5 = false;
             if !__handled5 && exc::matches_any(&__e, &["Exception"]) {
                 __handled5 = true;
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_taste._obstacle"); }
     s__obstacle(Py::None);
             }
             if !__handled5 { __unhandled4 = Some(__e); }
         }
     }
     if let Some(__e) = __unhandled4 { exc::raise(__e); }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_taste.PRIORITY"); }
     s_PRIORITY(op_neg(&Py::Int(960)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_taste._LIKES"); }
     s__LIKES(py_tuple(vec![py_str("Can't argue with {thing}. What do you like most?"), py_str("{Thing} - good taste. What is it about {thing} that you like?"), py_str("That is a good thing to like. What do you like most about {thing}?")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_taste._DISLIKES"); }
     s__DISLIKES(py_tuple(vec![py_str("{Thing} - fair enough. What is it you don't like about {thing}?"), py_str("Nobody is going to talk you round on {thing}, and nobody needs to. What is it that puts you off?"), py_str("Plenty of people would say the same about {thing}. What is it you cannot take about {thing}?")]));
     fn __data6() -> Py { py_tuple(vec![py_str("really like"), py_str("do like"), py_str("love"), py_str("like"), py_str("adore"), py_str("am mad about"), py_str("m mad about"), py_str("am into"), py_str("m into"), py_str("can't get enough of"), py_str("cant get enough of"), py_str("can not get enough of"), py_str("am a fan of"), py_str("m a fan of"), py_str("am obsessed with"), py_str("m obsessed with"), py_str("have always loved")]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_taste._LIKE_VERBS"); }
     s__LIKE_VERBS(__data6());
     fn __data7() -> Py { py_tuple(vec![py_str("really don't like"), py_str("really dont like"), py_str("don't like"), py_str("dont like"), py_str("hate"), py_str("dislike"), py_str("can't stand"), py_str("cant stand"), py_str("can not stand"), py_str("am not a fan of"), py_str("m not a fan of"), py_str("am not keen on"), py_str("m not keen on"), py_str("have never liked"), py_str("have gone off")]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_taste._DISLIKE_VERBS"); }
     s__DISLIKE_VERBS(__data7());
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_taste._FAN_OF"); }
     s__FAN_OF(stdlib_call("re", "compile", &[py_str("(?:am|m)\\s+(?:a\\s+)?(?:\\w+\\s+){0,2}fan\\s+of"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_taste._TONE"); }
     s__TONE(stdlib_call("re", "compile", &[py_str("(?:\\s+(?:tbh|tho|though|really|honestly|actually|literally|so\\s+much|a\\s+lot|as\\s+well|too|now|anyway|i\\s+suppose|i\\s+guess|lol|ha|haha|btw|atm|lately|these\\s+days|at\\s+the\\s+moment|right\\s+now|still|again))+$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_taste._LEAD"); }
     s__LEAD(py_str("(?:(?:oh|god|god,|honestly|yeah|well|actually|man|christ|jesus|blimey)\\s+)*"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_taste._THING"); }
     s__THING(stdlib_call("re", "compile", &[py_str("^(?P<thing>[a-z][a-z'\\-]*(?:\\s+[a-z][a-z'\\-]*){0,4})$")]).unwrap_or_else(|e| exc::raise(e)));
     fn __data8() -> Py { py_tuple(vec![py_str("it"), py_str("that"), py_str("this"), py_str("them"), py_str("these"), py_str("those"), py_str("him"), py_str("her"), py_str("you"), py_str("me"), py_str("us"), py_str("here"), py_str("there"), py_str("everything"), py_str("anything"), py_str("nothing"), py_str("everyone"), py_str("someone"), py_str("it all"), py_str("that one"), py_str("this one"), py_str("one"), py_str("ones"), py_str("things"), py_str("stuff"), py_str("life"), py_str("my life"), py_str("myself"), py_str("my job"), py_str("my work"), py_str("people"), py_str("the world"), py_str("the news"), py_str("him too"), py_str("her too"), py_str("your advice"), py_str("advice"), py_str("your help"), py_str("this recipe"), py_str("the recipe"), py_str("your recipes"), py_str("this place"), py_str("this app"), py_str("chatting to you"), py_str("talking to you"), py_str("you too"), py_str("you both"), py_str("your voice"), py_str("much more of this"), py_str("more of this"), py_str("much more"), py_str("any more of this"), py_str("it any more"), py_str("it anymore"), py_str("this any more"), py_str("this anymore")]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_taste._NOT_A_THING"); }
     s__NOT_A_THING(call_builtin("frozenset", &[__data8()]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_taste._A_PERSON"); }
     s__A_PERSON(stdlib_call("re", "compile", &[py_str("\\b(?:girl|boy|woman|man|guy|lad|lass|bloke|fella|someone|somebody|people|person|her|him|them|she|he|they)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_taste._THEIRS_BUT_NOT_A_THING"); }
     s__THEIRS_BUT_NOT_A_THING(stdlib_call("re", "compile", &[py_str("\\b(?:mum|mom|mother|dad|father|son|daughter|kid|kids|child|children|wife|husband|partner|baby|gran|grandma|grandmother|nan|nana|grandad|grandpa|grandfather|aunt|uncle|cousin|sister|brother|parents|family|dog|cat|puppy|kitten|pets?|bird|horse|rabbit|hamster|boss|friend|mate|neighbours?|self|life|job|work|body|looks|health|mind|sleep)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_taste._NOT_A_TASTE"); }
     s__NOT_A_TASTE(stdlib_call("re", "compile", &[py_str("\\b(?:my life|myself|my job|my work|my body|my looks|the world|people|mondays?\\s+morning)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_taste._I_SAY"); }
     s__I_SAY(py_str("^(?:i|i'm|i've)\\s+"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_taste._TYPED"); }
     s__TYPED(py_tuple(vec![py_tuple(vec![py_str("im "), py_str("i am ")]), py_tuple(vec![py_str("i m "), py_str("i am ")]), py_tuple(vec![py_str("ive "), py_str("i have ")])]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_taste._STORY"); }
     s__STORY(stdlib_call("re", "compile", &[py_str("\\b(?:but|because|so|though|although|when|whenever|if|since|which|that|keeps?|makes?|gets?|goes?|go|went|got|costs?|cost|is|are|was|were|will|would|can|could|have|has|had|need|needs|want|wants|helps?|works?|tastes?|smells?)\\b|\\band\\s+(?:i|it|its|it's|they|we|you|he|she|there|thats|that's)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_taste._HEAVY"); }
     s__HEAVY(stdlib_call("re", "compile", &[py_str("\\b(?:ill|unwell|poorly|sick|dying|died|death|passed away|funeral|bereave\\w*|griev\\w*|cancer|chemo\\w*|radiotherap\\w*|tumou?r|dementia|alzheim\\w*|stroke|sepsis|surgery|operation|transplant|hospice|palliative|terminal|hospital|icu|ambulance|diagnos\\w*|bully\\w*|bullied|depress\\w*|suicid\\w*|self harm|miscarr\\w*|stillborn|addict\\w*|relapse\\w*|overdose\\w*|sectioned|in pain|suffering)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     fn __data9() -> Py { py_tuple(vec![py_str("noted"), py_str("got it"), py_str("i'm listening"), py_str("i am listening"), py_str("thanks for telling me"), py_str("that's noted"), py_str("thats noted"), py_str("ok."), py_str("okay."), py_str("i don't know enough"), py_str("i dont know enough"), py_str("that's beyond what i know"), py_str("thats beyond what i know"), py_str("i'm not sure about that one"), py_str("im not sure about that one")]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.their_taste._PLACEHOLDER_OPENINGS"); }
     s__PLACEHOLDER_OPENINGS(__data9());
 }
 pub fn _the_composer_would_answer(args: &[Py]) -> Py {

@@ -31,7 +31,9 @@ pub fn g_TAKES_AS_IT_COMES() -> Py { ensure_init(); G_TAKES_AS_IT_COMES.with(|c|
 pub fn s_TAKES_AS_IT_COMES(v: Py) { ensure_init(); G_TAKES_AS_IT_COMES.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("A follow-up that asks the measure again is answered from the answer above, not looked up again.\n\n\"and how much\" after \"how much water should i drink a day\" reached the alcohol card, because the\nthree words name nothing and the knowledge base read them as a question of their own. The figure\nis in the answer the person just read, so the answer is that sentence of it. The reading and the\nwording live in `bot/memory/measure.py`.\n\nThis module sits above the knowledge base (0) - the entry that answered these lines was the\nknowledge base reading a bare measure as a subject - and below the safety band and the loss and\ngrief modules, which keep their turns: \"and how long\" in a chat about a diagnosis is not a\nquestion about a cooking time. It returns None on every line that is not only a measure.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.a_measure_asked_again.PRIORITY"); }
     s_PRIORITY(Py::Int(1000));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.a_measure_asked_again.TAKES_AS_IT_COMES"); }
     s_TAKES_AS_IT_COMES(py_func("takes_as_it_comes", |args: &[Py]| takes_as_it_comes(args)));
 }
 pub fn respond(args: &[Py]) -> Py {

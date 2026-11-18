@@ -31,7 +31,9 @@ pub fn g_TAKES_AS_IT_COMES() -> Py { ensure_init(); G_TAKES_AS_IT_COMES.with(|c|
 pub fn s_TAKES_AS_IT_COMES(v: Py) { ensure_init(); G_TAKES_AS_IT_COMES.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("A thing the person rules out is answered against the answer they just got.\n\nAfter \"what should i watch tonight\" the bot offered three films, and \"not a series\" got a fresh\nlist with two series in it; after \"how do i sleep better\", \"not tablets\" reached the repeat\nprescription card; after \"what car should i buy\", \"not a diesel\" got the misfuelling paragraph.\nThose are the plainest form of \"the bot did not listen to itself\": the person is steering the\nanswer they have, and what they ruled out was never in it.\n\n`bot/compose/ruledout.py` holds the reading and the wording; this module is here so the claim has\na band of its own. The hook is the one this shape needs: the line has nothing in it that a topic\nentry can match, so every module that proposes on it is guessing, and the entry that answered the\nthing in the first place is the one that gets it wrong - \"not a diesel\" is a car line, and the\nanswer to it is not the card about putting petrol in a diesel tank.\n\nA line whose thing the answer does name is left to the entry that gave the answer, and a line that\nnames no thing at all (`nothing that needs much water`, `not really`) is left alone: `respond`\nreturns None on every other line.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.ruled_out.PRIORITY"); }
     s_PRIORITY(op_neg(&Py::Int(450)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.ruled_out.TAKES_AS_IT_COMES"); }
     s_TAKES_AS_IT_COMES(py_func("takes_as_it_comes", |args: &[Py]| takes_as_it_comes(args)));
 }
 pub fn respond(args: &[Py]) -> Py {

@@ -104,24 +104,43 @@ pub fn s_pick(v: Py) { ensure_init(); G_pick.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("How often a thing they do happens, said of themselves.\n\n    i go to the gym twice a week\n    how often was that again\n      \"You go to the gym twice a week.\"\n\nThe store kept the hours a person's day runs on (`bot/modules/memory_store.py`, `_the_times`)\nbut nothing about how often they do a thing, so a late \"how often was that again\" reached the\ndetail ask-back and asked them the question they were asking the bot (\"You haven't said - how\noften was that?\"), and \"how often do i go to the gym\" was answered from the exercise entry's\nguideline rather than from the twice they had told it. This is the same shape of fact as a time\nof day with a different unit, so it is filed the same way: against the doing they named, newest\nwinning, and read back in their own words.\n\nOnly a first-person line is filed, so \"my husband goes to the gym twice a week\" is not put on\nthem; a pronoun in the ask never names a doing (\"how often should i feed them\" after \"i water\nthem every day\" is about feeding, which nothing here holds); and a rate asked for as advice\n(\"how often should i water them\") is the knowledge base's, not this reader's.\n");
     s_pick(py_func("pick", |args: &[Py]| pyrt::xrefs::xcall("compose", "pick", args)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.rates.RATES_TEXT"); }
     s_RATES_TEXT(py_str("(?:once|twice)(?:\\s+(?:a|per|each)\\s+(?:hour|day|week|fortnight|month|year))?|(?:(?:\\d+|two|three|four|five|six|seven|eight)\\s+times?)\\s+(?:a|per|each)\\s+(?:hour|day|week|fortnight|month|year)|every\\s+(?:\\d+|a|an|one|two|three|four|five|six|few)\\s+(?:hours?|minutes?|days?|weeks?|months?|nights?)|every\\s+(?:hour|day|week|morning|evening|night|weekend|other\\s+day|monday|tuesday|wednesday|thursday|friday|saturday|sunday)|most\\s+(?:days|weeks|mornings|evenings)"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.rates.RATES_END"); }
     s_RATES_END(py_str("(?![a-z])"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.rates.RATES_SAID"); }
     s_RATES_SAID(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&py_str("\\b(?P<how>"), &g_RATES_TEXT()), &py_str(")")), &g_RATES_END()), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.rates.RATES_SUBJECT"); }
     s_RATES_SUBJECT(stdlib_call("re", "compile", &[py_str("^(?P<lead>and\\s+|so\\s+|also\\s+|oh\\s+|well\\s+|but\\s+|actually\\s+|no\\s+|sorry\\s+|make it\\s+|i mean\\s+|i meant\\s+|rather\\s+|instead\\s+)*(?P<subj>i|we|i'm|im|i've|ive|we're|were)\\b(?P<rest>.*)$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.rates.RATES_FIX_LEAD"); }
     s_RATES_FIX_LEAD(call_builtin("frozenset", &[py_tuple(vec![py_str("actually"), py_str("no"), py_str("sorry"), py_str("make"), py_str("i mean"), py_str("i meant"), py_str("rather"), py_str("instead")])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.rates.RATES_IGNORE"); }
     s_RATES_IGNORE(call_builtin("frozenset", &[mcall(&py_str("i we my our me the a an at on in to for of it that this and but so\njust now only really still usually normally about around im ive were don't dont"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.rates.RATES_ASK_LEAD"); }
     s_RATES_ASK_LEAD(call_builtin("frozenset", &[mcall(&py_str("how what when where why who which whose should shall can could\nwould will do does did is are was were if whether whats hows remind tell"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.rates.RATES_LEAD"); }
     s_RATES_LEAD(stdlib_call("re", "compile", &[py_str("^(?:and|so|but|also|oh|well|then|just|now|ok|okay|plus)\\s+"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.rates.RATES_CORRECTION_LEAD"); }
     s_RATES_CORRECTION_LEAD(py_str("(?:actually|no\\s+wait|no|sorry|wait|hang\\s+on|make\\s+it|i\\s+mean|i\\s+meant|rather|instead)"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.rates.RATES_CORRECTION_TAIL"); }
     s_RATES_CORRECTION_TAIL(py_str("(?:\\s+(?:now|instead|actually|these\\s+days|not))?\\s*[.!]*\\s*$"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.rates.A_BARE_COUNT"); }
     s_A_BARE_COUNT(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&py_str("^\\s*"), &g_RATES_CORRECTION_LEAD()), &py_str("\\b[,\\s:]*(?P<num>\\d+|two|three|four|five|six|seven|eight|nine|ten)\\s+times?(?:\\s+(?:a|per|each)\\s+(?P<period>day|week|fortnight|month|year))?")), &g_RATES_CORRECTION_TAIL()), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.rates.A_BARE_RATE"); }
     s_A_BARE_RATE(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&op_add(&py_str("^\\s*"), &g_RATES_CORRECTION_LEAD()), &py_str("\\b[,\\s:]*(?P<how>")), &g_RATES_TEXT()), &py_str(")")), &g_RATES_CORRECTION_TAIL()), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.rates.A_COUNT_AND_PERIOD"); }
     s_A_COUNT_AND_PERIOD(stdlib_call("re", "compile", &[py_str("^(?P<num>\\d+|two|three|four|five|six|seven|eight|nine|ten)\\s+times?\\s+(?:a|per|each)\\s+(?P<period>day|week|fortnight|month|year)$"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.rates.RATES_FILLER_LEAD"); }
     s_RATES_FILLER_LEAD(call_builtin("frozenset", &[mcall(&py_str("and so but also oh well then plus just still only now really\nactually normally usually today tomorrow tonight yesterday"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.rates.RATES_ADVICE"); }
     s_RATES_ADVICE(stdlib_call("re", "compile", &[py_str("\\b(?:should|shall|ought|need(?:s)?|best|recommend\\w*|advice)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.rates.RATES_ASK"); }
     s_RATES_ASK(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&py_str("^\\s*(?:and |so |ok |okay |oh |also |then )*(?:remind me\\s+)?(?:(?P<a>how often|how many times)\\b(?P<rest>.*)|(?P<c>how (?:many|much)\\b(?P<rest3>[^?]*))|(?P<b>was|is|were|are)\\s+(?:that|it|this)\\s+(?P<how>"), &g_RATES_TEXT()), &py_str(")")), &g_RATES_END()), &py_str("|what(?:'s|s| is| was)\\s+the\\s+(?:pattern|rate|schedule)\\b(?P<rest2>.*))\\s*[?.!]*\\s*$")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.rates.COUNTS_A_PERIOD"); }
     s_COUNTS_A_PERIOD(stdlib_call("re", "compile", &[py_str("\\b(?:a|per|each)\\s+(?:hour|day|week|fortnight|month|year|morning|evening|night)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.rates.RATES_PRONOUN"); }
     s_RATES_PRONOUN(call_builtin("frozenset", &[mcall(&py_str("them they it its it's that this these those him her his hers me us\none ones thing stuff"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.rates.RATES_ASK_FILLER"); }
     s_RATES_ASK_FILLER(call_builtin("frozenset", &[mcall(&py_str("do does did was is were i we my our me the a an you go going\nagain then was that it this now still say said tell once twice a week day month year times\nusually normally have has had get gets got take takes make makes use uses need needs\ni'm im've"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
 }
 pub fn _the_rates(args: &[Py]) -> Py {

@@ -80,19 +80,32 @@ pub fn s_pick(v: Py) { ensure_init(); G_pick.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("A pleased remark is answered as pleasure, not as something to look up.\n\n\"What a lovely day\", \"what a beautiful morning\", \"what a brilliant day\" and \"what a gorgeous day\"\nall reach the composer's search hedge on main - \"A quick search online will get you a solid\nanswer\" - and so do the short ones that carry the same feeling with no thing in them: \"what a\nrelief\", \"what a result\". Nothing about the weather is being asked and nothing needs looking up;\nthe person has said that something is good, and the reply a friend gives says so back in a few\nwords and gives them somewhere to go with it.\n\nThe bad half of the same shape already reads well (\"what a nightmare\" gets \"Ouch is right. Go\non.\", \"what a shame\" gets \"What happened, then?\"), which is the whole reading this file needs: the\nfeeling is in the words \"what a\" and in whether the word after them is one of pleasure. The pool\nthat follows is the one thing the bot can honestly do with a good moment it cannot see - say it\nsounds good and ask one light question about it - and the outside words (a day, a morning, a\nwindow) get the pool that talks about being out in it, because that is what people say next.\n\nTwo things are deliberately left alone. A thing that is not good however the adjective reads\n(\"what a fine mess\", \"a great shame\") is a complaint, and it stands down here. And a remark that\nnames nothing of its own and has no adjective (\"what a day\") is already read as a rough one by\n`bot/modules/chat.py`; if this file took it, a hard day would be congratulated.\n\nThis is a last resort and it is written to be one: `bot/modules/greeting.py` asks it where the\nother readers of a hedge are asked, and only a hedge is replaced.\n");
     s_pick(py_func("pick", |args: &[Py]| pyrt::xrefs::xcall("compose", "pick", args)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.pleased.GOOD"); }
     s_GOOD(py_str("lovely|beautiful|gorgeous|brilliant|great|wonderful|fantastic|perfect|cracking|smashing|nice|amazing|glorious|grand|super|fab|stunning|lush|decent"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.pleased.THING"); }
     s_THING(py_str("[a-z][a-z' -]{0,24}"));
     fn __data1() -> Py { py_tuple(vec![py_str("day"), py_str("morning"), py_str("afternoon"), py_str("evening"), py_str("weather"), py_str("sun"), py_str("sunshine"), py_str("sky"), py_str("view"), py_str("sunset"), py_str("sunrise"), py_str("night"), py_str("light"), py_str("breeze")]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.pleased.OUTSIDE"); }
     s_OUTSIDE(call_builtin("frozenset", &[__data1()]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.pleased.NOT_GOOD"); }
     s_NOT_GOOD(call_builtin("frozenset", &[mcall(&py_str("\nmess shame pity nightmare waste disaster worry state pain fuss palaver joke\n"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.pleased.WHAT_A"); }
     s_WHAT_A(stdlib_call("re", "compile", &[op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&op_add(&py_str("^(?:oh|ah|wow|ooh)[,\\s]+what a\\s+(?:"), &g_GOOD()), &py_str(")\\s+(?P<thing>")), &g_THING()), &py_str(")$|^(?:what|such) a\\s+(?:")), &g_GOOD()), &py_str(")\\s+(?P<thing2>")), &g_THING()), &py_str(")$"))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.pleased.RELIEF_LINE"); }
     s_RELIEF_LINE(stdlib_call("re", "compile", &[py_str("^(?:what|such) a (?:relief|weight off|load off)$|^that'?s? a relief$")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.pleased.RESULT_LINE"); }
     s_RESULT_LINE(stdlib_call("re", "compile", &[py_str("^(?:what|such) a (?:result|win|good result|great result)$")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.pleased.NEWS_LINE"); }
     s_NEWS_LINE(stdlib_call("re", "compile", &[py_str("^(?:lovely|great|wonderful|brilliant|smashing|nice) news$")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.pleased.PLEASED"); }
     s_PLEASED(py_tuple(vec![py_str("Good to hear. What are you up to today?"), py_str("Nice one. Make the most of it - what's the plan?"), py_str("That's good. Tell me about it.")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.pleased.OUT_IN_IT"); }
     s_OUT_IN_IT(py_tuple(vec![py_str("Good to hear. Are you getting out in it?"), py_str("Lovely. What are you up to today?"), py_str("That's the kind of day to be outside. What's the plan?")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.pleased.RELIEF"); }
     s_RELIEF(py_tuple(vec![py_str("That's a weight off. What was it about?"), py_str("Good - that's the end of it, then. What changed?"), py_str("Phew. What was it in the end?")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.pleased.NEWS"); }
     s_NEWS(py_tuple(vec![py_str("Good news. What is it?"), py_str("Nice one. Tell me."), py_str("Lovely. What's happened?")]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.pleased.RESULT"); }
     s_RESULT(py_tuple(vec![py_str("Good result. What was it for?"), py_str("Nice one. Tell me how it went."), py_str("That's a good one. What happened?")]));
 }
 pub fn _thing(args: &[Py]) -> Py {

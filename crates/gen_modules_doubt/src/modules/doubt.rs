@@ -31,7 +31,9 @@ pub fn g_SUBJECT_UNCLEAR() -> Py { ensure_init(); G_SUBJECT_UNCLEAR.with(|c| c.b
 pub fn s_SUBJECT_UNCLEAR(v: Py) { ensure_init(); G_SUBJECT_UNCLEAR.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("A line that takes issue with the bot's own answer is answered about that answer.\n\n\"that makes no sense\", \"that cant be right\", \"youre confusing me\" name nothing of their own: the\nthing they are about is the paragraph the bot has just printed. On main every one of them was read\nas a shrug or as bad news about the person (\"Fair enough.\", \"Thanks for telling me - I'm here if\nyou want to dig into any of that\"), which is the bot saying it heard nothing at the one moment the\nperson is telling it the answer failed.\n\nThe reading and the wording live in `bot/memory/doubt.py`, next to the store it reads; this module\nis here so the claim has a band of its own. It sits above the small talk (`chat.py`, 300), which is\nwhat answered these lines with a stock nod, and below the safety band: a line in a crisis is never\nthis module's, however it is phrased. Nothing is claimed from any other module's real answer -\n`respond` returns None on every line that is not a doubt about the bot's own last sentence.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.doubt.PRIORITY"); }
     s_PRIORITY(Py::Int(400));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.doubt.SUBJECT_UNCLEAR"); }
     s_SUBJECT_UNCLEAR(py_tuple(vec![py_str("I'm not sure which {word} you mean - a word or two about it and I'll answer the right one."), py_str("Which {word} do you mean? Tell me a bit more and I'll take it from there."), py_str("There's more than one thing '{word}' could mean. What's the one you're asking about?")]));
 }
 pub fn _the_question(args: &[Py]) -> Py {

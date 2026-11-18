@@ -66,12 +66,19 @@ fn module_body() {
     s_A_CHILD_DIED(pyrt::xrefs::xget("compose.fallback", "A_CHILD_DIED"));
     s_A_DEATH_IN_THE_LINE(pyrt::xrefs::xget("compose.fallback", "A_DEATH_IN_THE_LINE"));
     s_A_SUICIDE_IN_THE_LINE(pyrt::xrefs::xget("compose.fallback", "A_SUICIDE_IN_THE_LINE"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.childwords.TELL_ASK"); }
     s_TELL_ASK(stdlib_call("re", "compile", &[py_str("\\b(?:how|what)\\s+(?:do|should|can|would|will)\\s+(?:i|we)\\s+(?:tell|say|word|phrase|put it|put)\\b|\\bhow do i put (?:it|this)\\b|\\bwhat do i tell\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.childwords.A_CHILD_IN_THE_ASK"); }
     s_A_CHILD_IN_THE_ASK(stdlib_call("re", "compile", &[py_str("\\b(?:kid|kids|child|children|son|daughter|boy|boys|girl|girls|toddler|little one|teenager|teen|baby|niece|nephew|grandson|granddaughter|(?:two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|\\d{1,2})[- ](?:year|yr)s?[- ]old)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.childwords.TAIL_FILLER"); }
     s_TAIL_FILLER(call_builtin("frozenset", &[mcall(&py_str("please now then too ok okay soon gently first properly exactly tonight\ntoday tomorrow at bedtime the a an this that it and but so just really here you i we my"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.childwords.TAIL_ABOUT_THE_ONE_WHO_DIED"); }
     s_TAIL_ABOUT_THE_ONE_WHO_DIED(call_builtin("frozenset", &[mcall(&py_str("about his her their them of on with dad daddy mum mummy\nmom mommy mother father gran granny grandma grandad grandpa nana nan brother sister uncle aunt dog\ncat pet name what happened truth"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.childwords._A_PERSON_IN_THE_TAIL"); }
     s__A_PERSON_IN_THE_TAIL(stdlib_call("re", "compile", &[py_str("\\b(?:dad|daddy|mum|mummy|mom|mommy|mother|father|gran|granny|grandma|grandad|grandpa|nana|nan|brother|sister|uncle|aunt|dog|cat|pet)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.childwords.A_DEATH_IN_THE_TAIL"); }
     s_A_DEATH_IN_THE_TAIL(stdlib_call("re", "compile", &[py_str("\\b(?:died|dead|dying|dies|death|passed|passing|gone|killed|funeral|buried|cremated)\\b")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET compose.childwords.THE_WORDS_FOR_A_CHILD"); }
     s_THE_WORDS_FOR_A_CHILD(py_tuple(vec![py_str("Keep it to a sentence or two, with their name and the plain word: they died, and they are not coming back. Then answer whatever the child asks, in the same words, and if they ask again next week - they will - say the same thing again."), py_str("Say it plainly and soon: their name, and that they died. Not asleep, not gone away, and not \"lost\" - a child takes those words literally, and then waits for them to wake up. What follows can come from their questions."), py_str("The words are the ones you would use to an adult, just shorter: their name, that they died, and that they will not be coming back. It is all right for the child to see you cry - that is how they learn it is all right to be sad.")]));
 }
 pub fn _the_tail_after_the_child(args: &[Py]) -> Py {

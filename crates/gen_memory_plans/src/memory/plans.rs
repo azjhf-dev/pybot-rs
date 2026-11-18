@@ -122,28 +122,49 @@ fn module_body() {
     s_pick(py_func("pick", |args: &[Py]| pyrt::xrefs::xcall("compose", "pick", args)));
     s_understand(py_func("understand", |args: &[Py]| pyrt::xrefs::xcall("understanding", "understand", args)));
     s_CALENDAR_NOW(pyrt::xrefs::xget("memory.when", "CALENDAR_NOW"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.plans._SELF"); }
     s__SELF(py_str("^(?:(?:so|ok|okay|and|also|well|right|hmm)[, ]+)*"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.plans._WHO"); }
     s__WHO(py_str("(?:i'm|im|i am|we're|we are|(?:me|i) and [a-z]+ (?:are|'re)|[a-z]+ and i (?:are|'re))"));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.plans._PLANNING"); }
     s__PLANNING(stdlib_call("re", "compile", &[op_add(&op_add(&g__SELF(), &g__WHO()), &py_str("\\s+(?:planning|sorting out|organising|organizing|arranging)\\b(?:\\s+(?:a|an|the|my|our|some))?\\s+(?P<thing>[a-z][a-z ']{2,40})")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.plans._MOVING"); }
     s__MOVING(stdlib_call("re", "compile", &[op_add(&op_add(&g__SELF(), &g__WHO()), &py_str("\\s+moving\\s+(?:house|home|flat|out|in\\b|to\\s+[a-z]+|next|soon|this|in\\s)")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.plans._MARRYING"); }
     s__MARRYING(stdlib_call("re", "compile", &[op_add(&op_add(&g__SELF(), &g__WHO()), &py_str("\\s+getting married\\b")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.plans._NEW_JOB"); }
     s__NEW_JOB(stdlib_call("re", "compile", &[op_add(&g__SELF(), &py_str("(?:i'm|im|i am|i|we're|we are|we)?\\s*(?:start|starts|starting|begin|beginning)\\s+(?:a |my |our )?(?:new )?(?P<what>job|work)\\b(?P<after>.*)")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     fn __data1() -> Py { py_list(vec![py_str("monday"), py_str("tuesday"), py_str("wednesday"), py_str("thursday"), py_str("friday"), py_str("saturday"), py_str("sunday"), py_str("mon"), py_str("tues"), py_str("tue"), py_str("weds"), py_str("wed"), py_str("thurs"), py_str("thu"), py_str("thur"), py_str("fri"), py_str("sat"), py_str("sun")]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.plans._WORK_WHEN"); }
     s__WORK_WHEN(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("^\\s*(?:(?:on|by)\\s+(?:the\\s+)?(?:\\d+|first|last|"), &mcall(&py_str("|"), "join", &[__data1()])), &py_str(")(?:st|nd|rd|th)?|next\\s+(?:week|month|monday|tuesday|wednesday|thursday|friday|saturday|sunday)|tomorrow|today|this\\s+(?:week|month|monday|tuesday|wednesday|thursday|friday|saturday|sunday))\\b")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.plans._ASK_FOR"); }
     s__ASK_FOR(py_tuple(vec![py_tuple(vec![gattr(&g__MARRYING(), "search"), py_str("how do i plan a wedding")]), py_tuple(vec![gattr(&g__MOVING(), "search"), py_str("what do i need to do to move house")]), py_tuple(vec![py_func("_a_first_day", |args: &[Py]| _a_first_day(args)), py_str("first day at a new job")])]));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.plans._ASKING"); }
     s__ASKING(stdlib_call("re", "compile", &[py_str("\\?|\\b(?:what|how|when|where|which|who|why|should|shall|can|could|would|do i need|do we need|any (?:tips|ideas|advice))\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.plans._TURNED"); }
     s__TURNED(stdlib_call("re", "compile", &[py_str("\\bbut\\b|\\bthough\\b|\\bexcept\\b|\\bonly\\b|\\bhowever\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.plans._DENIED"); }
     s__DENIED(stdlib_call("re", "compile", &[py_str("\\b(?:not|never|no longer|arent|isnt|wasnt|dont|doesnt)\\b|n't\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.plans._ABOUT_A_DEATH"); }
     s__ABOUT_A_DEATH(stdlib_call("re", "compile", &[py_str("\\b(?:grave|graves|graveside|cemetery|ashes|funeral|funerals|burial|buried|cremation|cremated|crematorium|memorial|hospice|dying|died|death|passed away|say goodbye|last goodbye)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.plans.PLANNING_KEYS"); }
     s_PLANNING_KEYS(call_builtin("frozenset", &[mcall(&py_str("\nplan plans planning planned prepare preparing preparation organise organises organising\norganize organized organizing arrange arranging countdown checklist need needs booking book\nbudget budgeting\n"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.plans._PART_WORDS"); }
     s__PART_WORDS(call_builtin("frozenset", &[mcall(&py_str("\na an the and or but if so to of in on at for with about from by as is are was were be been do\ndoes did doing done i im me my we our you your it its that this these those what which how when\nwhere who why should could would can will shall may might must not no yes please just really\nany some more most first next then now again also too very get got getting go going want need\nneed to know tell say said help good best way ways thing things\n"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.plans._A_LENGTH_ASK"); }
     s__A_LENGTH_ASK(stdlib_call("re", "compile", &[py_str("\\bhow long\\b|\\bhow soon\\b|\\bhow far ahead\\b|\\bhow many (?:weeks|days|months|hours)\\b|\\bwhat order\\b|\\bbefore i go\\b|\\btimeline\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     fn __data2() -> Py { py_list(vec![py_str("\\d+"), py_str("a"), py_str("an"), py_str("one"), py_str("two"), py_str("three"), py_str("four"), py_str("five"), py_str("six"), py_str("seven"), py_str("eight"), py_str("nine"), py_str("ten"), py_str("eleven"), py_str("twelve")]) }
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.plans._SPAN_HEAD"); }
     s__SPAN_HEAD(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("\\b(?:"), &mcall(&py_str("|"), "join", &[__data2()])), &py_str(")\\s+(?:day|week|month|year)s?\\s+(?:out|before|ahead)\\b|\\bthe (?:day|week|month|year) before\\b")), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.plans._A_CLAUSE_BREAK"); }
     s__A_CLAUSE_BREAK(stdlib_call("re", "compile", &[py_str("(?:,|;|\\s-\\s|:\\s)")]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.plans._ASK_WORDS"); }
     s__ASK_WORDS(call_builtin("frozenset", &[mcall(&py_str("long soon far ahead many much weeks week days day months month hours\n    hour minutes minute time take takes last before order timeline go going get"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.plans._A_FIRST_ASK"); }
     s__A_FIRST_ASK(stdlib_call("re", "compile", &[py_str("\\b(?:what(?:'s|s| is)? (?:the )?(?:first|next)|what (?:should |will |does )?comes? first|what do i do(?: first)?|what should i do(?: first)?|where (?:do|should) i (?:start|begin)|how do i (?:start|begin)|first (?:thing|step|bit)|what first)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.plans._ORDER_WORDS"); }
     s__ORDER_WORDS(call_builtin("frozenset", &[mcall(&py_str("first comes start begin next thing things step steps order point\n    anything else now again should could would can will might must the and then so about\n    whats what come"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET memory.plans._PLAN_ASK"); }
     s__PLAN_ASK(stdlib_call("re", "compile", &[py_str("how\\s+(?:do|can|should)\\s+i\\s+(?:plan|prepare for|get ready for|start planning)\\b")]).unwrap_or_else(|e| exc::raise(e)));
 }
 pub fn _a_first_day(args: &[Py]) -> Py {

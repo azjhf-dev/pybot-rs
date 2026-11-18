@@ -31,7 +31,9 @@ pub fn g_PRIORITY() -> Py { ensure_init(); G_PRIORITY.with(|c| c.borrow().clone(
 pub fn s_PRIORITY(v: Py) { ensure_init(); G_PRIORITY.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("The ages of a group of people, said back as the list the person gave.\n\n    my parents are 66 and 70\n    how old are they            ->  Your parents are 66 and 70.\n\n    my two kids theyre 4 and 7\n    how old are they again      ->  Your kids are 4 and 7.\n    how old is my youngest      ->  Your youngest is 4.\n\nFound late in a chat on main `f05d1112`. The store keeps one age for the person in the chat\n(`memory[\"their_age\"]`), so a line that gave two kept the first and dropped the rest: `how old are\nthey again` answered \"They are 4.\", `how old are my kids` answered \"You haven't told me how old\nthey are.\", and a chat with two parents in it said nothing about either. A list of two is not one\nnumber, and it is not nothing.\n\nThe reading and the wording live in `bot/memory/groupages.py`, which keeps the list under\n`memory[\"group_ages\"]`. This module exists rather than a branch inside\n`bot/modules/memory_store.py` because that file is past the world's size cap and cannot be\nuploaded (the same reason as `bot/modules/trip_date_said_again.py`).\n\nIt answers nothing a chat has not said: with no list in the store it returns None and the line\ngoes on to the module it went to before this one existed, which is what keeps a first line - where\nthere is no memory at all - answered as the line it is.\n");
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.group_ages.PRIORITY"); }
     s_PRIORITY(Py::Int(7050));
+    if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.group_ages.ANSWERS"); }
     s_ANSWERS(py_tuple(vec![py_str("family-and-parenting")]));
 }
 pub fn observe(args: &[Py]) -> Py {
