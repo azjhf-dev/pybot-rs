@@ -28,5 +28,29 @@
       "diagnostics": "[module: chat | 26076 ms]\n[module: chat | 2705 ms]\n[module: chat | 13746 ms]\n[module: chat | 355 ms]\n"
     },
     "exact": true
+  },
+  {
+    "case": 1,
+    "inputs": [
+      "my name is Alex",
+      "what is my name"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "Nice to meet you, Alex. What can I help with?",
+        "You're Alex."
+      ],
+      "diagnostics": "[module: chat | 1058 ms]\n[module: memory_store | 2700 ms]\n"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "What would be most useful to sort out?",
+        "You told me your name is Alex."
+      ],
+      "diagnostics": "[module: first_line_open | 36159 ms]\n[module: attribute_said_again | 5021 ms]\n"
+    },
+    "exact": false
   }
 ]
