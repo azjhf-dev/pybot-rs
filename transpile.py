@@ -680,35 +680,35 @@ class Gen:
                 for s in node.orelse:
                     self.gen_stmt(s, ctx)
             E("    }")
-        elif isinstance(node, ast.While):
+        elif isinstance(node, (ast.While, ast.For)):
             ctx.loop_depth = getattr(ctx, 'loop_depth', 0) + 1
-            E(f"    while py_truthy(&{self.gen_expr(node.test, ctx)}) {{")
-            for s in node.body:
-                self.gen_stmt(s, ctx)
-            E("    }")
-            ctx.loop_depth -= 1
-            if node.orelse:
-                for s in node.orelse:
-                    self.gen_stmt(s, ctx)
-        elif isinstance(node, ast.For):
-            ctx.loop_depth = getattr(ctx, 'loop_depth', 0) + 1
-            it = ctx.tmpname('iter')
-            E(f"    let {it} = py_iter_or_raise(&{self.gen_expr(node.iter, ctx)});")
-            broke = ctx.tmpname('else') if node.orelse else None
+            broke = ctx.tmpname('broke') if node.orelse else None
             if broke:
                 E(f"    let mut {broke} = false;")
-            E(f"    for __item in {it} {{")
-            if broke:
-                pass
-            self.gen_assign_target_inline(node.target, '__item', ctx)
-            for s in node.body:
-                self.gen_stmt(s, ctx)
+            if not hasattr(ctx, 'loop_stack'):
+                ctx.loop_stack = []
+            ctx.loop_stack.append(broke)
+            if isinstance(node, ast.While):
+                E(f"    while py_truthy(&{self.gen_expr(node.test, ctx)}) {{")
+            else:
+                it = ctx.tmpname('iter')
+                E(f"    let {it} = py_iter_or_raise(&{self.gen_expr(node.iter, ctx)});")
+                E(f"    for __item in {it} {{")
+                self.gen_assign_target_inline(node.target, '__item', ctx)
+            for stmt in node.body:
+                self.gen_stmt(stmt, ctx)
             E("    }")
+            ctx.loop_stack.pop()
             ctx.loop_depth -= 1
             if node.orelse:
-                for s in node.orelse:
-                    self.gen_stmt(s, ctx)
+                E(f"    if !{broke} {{")
+                for stmt in node.orelse:
+                    self.gen_stmt(stmt, ctx)
+                E("    }")
         elif isinstance(node, ast.Break):
+            stack = getattr(ctx, 'loop_stack', [])
+            if stack and stack[-1]:
+                E(f"    {stack[-1]} = true;")
             E("    break;")
         elif isinstance(node, ast.Continue):
             if getattr(ctx, 'try_stack', []) and getattr(ctx, 'loop_depth', 0) == ctx.try_stack[-1]['depth']:

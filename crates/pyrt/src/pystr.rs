@@ -24,6 +24,7 @@ pub fn split(s: &str, sep: Option<&str>, maxsplit: i64) -> Vec<String> {
     let mut out: Vec<String> = Vec::new();
     match sep {
         None => {
+            if maxsplit >= 0 { return split_ws_max(s,maxsplit); }
             let mut cur = String::new();
             let mut splits = 0i64;
             let mut in_word = false;

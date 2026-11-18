@@ -4012,9 +4012,9 @@ pub fn _phrase_span_bare(args: &[Py]) -> Py {
     }
     span = py_list(vec![start.clone()]);
     here = op_add(&start.clone(), &Py::Int(1));
-    let __iter2 = py_iter_or_raise(&call_builtin("range", &[Py::Int(1), n.clone()]).unwrap_or_else(|e| exc::raise(e)));
-    let mut __else3 = false;
-    for __item in __iter2 {
+    let mut __broke2 = false;
+    let __iter3 = py_iter_or_raise(&call_builtin("range", &[Py::Int(1), n.clone()]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter3 {
     j = __item.clone();
     while py_truthy(&{ let __b = op_le(&here.clone(), &last.clone()); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&op_bitand(&geti(&forms.clone(), &here.clone()), &geti(&wanted.clone(), &j.clone())))) } }) {
     if py_truthy(&Py::Bool(!py_truthy(&op_bitand(&geti(&forms.clone(), &here.clone()), &g__ARTICLE_FORMS())))) {
@@ -4024,13 +4024,16 @@ pub fn _phrase_span_bare(args: &[Py]) -> Py {
     here = __aug4;
     }
     if py_truthy(&{ let __b = op_gt(&here.clone(), &last.clone()); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&op_bitand(&geti(&forms.clone(), &here.clone()), &geti(&wanted.clone(), &j.clone())))) } }) {
+    __broke2 = true;
     break;
     }
     let _ = mcall(&span.clone(), "append", &[here.clone()]);
     let __aug5 = op_add(&here.clone(), &Py::Int(1));
     here = __aug5;
     }
+    if !__broke2 {
     return call_builtin("tuple", &[span.clone()]).unwrap_or_else(|e| exc::raise(e));
+    }
     }
     return py_tuple(vec![]);
     Py::None
