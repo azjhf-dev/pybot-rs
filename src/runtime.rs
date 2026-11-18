@@ -48,6 +48,7 @@ impl Runtime {
         let mut copies: Vec<Memory> = Vec::new();
         for m in &self.modules {
             if let Some(respond) = m.respond {
+                if std::env::var_os("PYBOT_TRACE_MODULES").is_some() { eprintln!("RESPOND {}",m.name); }
                 let mut mine = pyrt::builtins::py_deepcopy(memory);
                 let name = m.name;
                 let answer = exc::catch({
