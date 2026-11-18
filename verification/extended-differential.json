@@ -94,5 +94,27 @@
       "diagnostics": "[module: answers | 46455 ms]\n"
     },
     "exact": true
+  },
+  {
+    "binary_sha256": "d4cabea0451fe30ff4ca24c455750b4e0d45833b59a77fa13bf5c230bb078a33",
+    "case": 4,
+    "inputs": [
+      "how do I fix a leaking tap"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "A dripping tap is nearly always a worn washer or cartridge: turn the water off at the isolating valve under the sink, take the handle off, and take the old part to a hardware shop to match it. It's a 20-minute job and saves a lot of water."
+      ],
+      "diagnostics": "[module: answers | 1347 ms]\n"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "A dripping tap is nearly always a worn washer or cartridge: turn the water off at the isolating valve under the sink, take the handle off, and take the old part to a hardware shop to match it. It's a 20-minute job and saves a lot of water."
+      ],
+      "diagnostics": "[module: answers | 35731 ms]\n"
+    },
+    "exact": true
   }
 ]
