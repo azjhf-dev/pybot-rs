@@ -6672,30 +6672,31 @@ pub fn _the_thing_that_picks(args: &[Py]) -> Py {
     let mut takes_the_figure: Py = Py::None;
     let _ = py_str("The shortest span of a deciding sentence that names the thing to take, or None.\n\n    A recommendation has two halves when it has a colon at all: the things to get, and either the\n    reason for them (\"the running cost over ten years beats the purchase price difference\") or\n    the list itself (\"a proper thermos, a voucher, a photo book\"). Which half decides is read off\n    the sentence: a list of things after an instruction is the list, otherwise the half with the\n    figures in it wins. What comes back is one thing to take - never the whole sentence, because\n    the whole sentence is the last turn said again - and None when the sentence names nothing a\n    person could choose on.\n    ");
     span = mcall(&sentence.clone(), "strip", &[]);
-    listed = Py::Bool(false);
-    sized = Py::Bool(false);
+    let __assigned1 = Py::Bool(false);
+    listed = __assigned1.clone();
+    sized = __assigned1.clone();
     if py_truthy(&Py::Bool(py_contains(&span.clone(), &py_str(": ")))) {
-    let __unpk1 = py_unpack(&mcall(&span.clone(), "split", &[py_str(": "), Py::Int(1)]), 2, None);
-    head = __unpk1[0].clone();
-    tail = __unpk1[1].clone();
-    let __unpk2 = py_unpack(&py_tuple(vec![mcall(&head.clone(), "strip", &[]), mcall(&tail.clone(), "strip", &[])]), 2, None);
+    let __unpk2 = py_unpack(&mcall(&span.clone(), "split", &[py_str(": "), Py::Int(1)]), 2, None);
     head = __unpk2[0].clone();
     tail = __unpk2[1].clone();
+    let __unpk3 = py_unpack(&py_tuple(vec![mcall(&head.clone(), "strip", &[]), mcall(&tail.clone(), "strip", &[])]), 2, None);
+    head = __unpk3[0].clone();
+    tail = __unpk3[1].clone();
     if py_truthy(&op_ge(&call_builtin("len", &[mcall(&tail.clone(), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(3))) {
     if py_truthy(&{ let __b = mcall(&g_CHOICE_LIST_HEAD(), "search", &[head.clone()]); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&mcall(&g_CHOICE_FIGURE(), "search", &[head.clone()]))); if !py_truthy(&__b) { __b } else { _a_list_of_things(&[tail.clone()]) } } } }) {
-    let __unpk3 = py_unpack(&py_tuple(vec![tail.clone(), Py::Bool(true)]), 2, None);
-    span = __unpk3[0].clone();
-    listed = __unpk3[1].clone();
+    let __unpk4 = py_unpack(&py_tuple(vec![tail.clone(), Py::Bool(true)]), 2, None);
+    span = __unpk4[0].clone();
+    listed = __unpk4[1].clone();
     } else {
     if py_truthy(&op_gt(&call_builtin("len", &[mcall(&g_CHOICE_FIGURE(), "findall", &[head.clone()])]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("len", &[mcall(&g_CHOICE_FIGURE(), "findall", &[tail.clone()])]).unwrap_or_else(|e| exc::raise(e)))) {
-    let __unpk4 = py_unpack(&py_tuple(vec![head.clone(), Py::Bool(true)]), 2, None);
-    span = __unpk4[0].clone();
-    sized = __unpk4[1].clone();
-    } else {
-    if py_truthy(&op_gt(&call_builtin("len", &[mcall(&g_CHOICE_FIGURE(), "findall", &[tail.clone()])]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("len", &[mcall(&g_CHOICE_FIGURE(), "findall", &[head.clone()])]).unwrap_or_else(|e| exc::raise(e)))) {
-    let __unpk5 = py_unpack(&py_tuple(vec![tail.clone(), Py::Bool(true)]), 2, None);
+    let __unpk5 = py_unpack(&py_tuple(vec![head.clone(), Py::Bool(true)]), 2, None);
     span = __unpk5[0].clone();
     sized = __unpk5[1].clone();
+    } else {
+    if py_truthy(&op_gt(&call_builtin("len", &[mcall(&g_CHOICE_FIGURE(), "findall", &[tail.clone()])]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("len", &[mcall(&g_CHOICE_FIGURE(), "findall", &[head.clone()])]).unwrap_or_else(|e| exc::raise(e)))) {
+    let __unpk6 = py_unpack(&py_tuple(vec![tail.clone(), Py::Bool(true)]), 2, None);
+    span = __unpk6[0].clone();
+    sized = __unpk6[1].clone();
     } else {
     span = head.clone();
     }

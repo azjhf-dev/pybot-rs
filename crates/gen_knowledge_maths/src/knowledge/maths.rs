@@ -3163,24 +3163,17 @@ pub fn _what_percent(args: &[Py]) -> Py {
     let mut share: Py = Py::None;
     let mut total: Py = Py::None;
     let _ = py_str("One number as a percentage of another: \"what percentage is 15 of 80\".");
-    part = Py::None;
-    total = Py::None;
+    let __assigned1 = Py::None;
+    part = __assigned1.clone();
+    total = __assigned1.clone();
     match_ = stdlib_call("re", "search", &[py_str("what (?:percentage|percent) of ([\\d,.]+) is ([\\d,.]+)"), clean.clone()]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&match_.clone()) {
-    let __unpk1 = py_unpack(&py_tuple(vec![_amount(&[mcall(&match_.clone(), "group", &[Py::Int(1)])]), _amount(&[mcall(&match_.clone(), "group", &[Py::Int(2)])])]), 2, None);
-    total = __unpk1[0].clone();
-    part = __unpk1[1].clone();
+    let __unpk2 = py_unpack(&py_tuple(vec![_amount(&[mcall(&match_.clone(), "group", &[Py::Int(1)])]), _amount(&[mcall(&match_.clone(), "group", &[Py::Int(2)])])]), 2, None);
+    total = __unpk2[0].clone();
+    part = __unpk2[1].clone();
     }
     if py_truthy(&Py::Bool(py_is(&part.clone(), &Py::None))) {
     match_ = stdlib_call("re", "search", &[py_str("what (?:percentage|percent) (?:is )?([\\d,.]+) (?:of|out of) ([\\d,.]+)"), clean.clone()]).unwrap_or_else(|e| exc::raise(e));
-    if py_truthy(&match_.clone()) {
-    let __unpk2 = py_unpack(&py_tuple(vec![_amount(&[mcall(&match_.clone(), "group", &[Py::Int(1)])]), _amount(&[mcall(&match_.clone(), "group", &[Py::Int(2)])])]), 2, None);
-    part = __unpk2[0].clone();
-    total = __unpk2[1].clone();
-    }
-    }
-    if py_truthy(&Py::Bool(py_is(&part.clone(), &Py::None))) {
-    match_ = stdlib_call("re", "search", &[py_str("([\\d,.]+)\\s+(?:is\\s+)?what\\s+(?:percentage|percent)\\s+of\\s+([\\d,.]+)"), clean.clone()]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&match_.clone()) {
     let __unpk3 = py_unpack(&py_tuple(vec![_amount(&[mcall(&match_.clone(), "group", &[Py::Int(1)])]), _amount(&[mcall(&match_.clone(), "group", &[Py::Int(2)])])]), 2, None);
     part = __unpk3[0].clone();
@@ -3188,7 +3181,7 @@ pub fn _what_percent(args: &[Py]) -> Py {
     }
     }
     if py_truthy(&Py::Bool(py_is(&part.clone(), &Py::None))) {
-    match_ = stdlib_call("re", "search", &[py_str("([\\d,.]+) (?:out of|of) ([\\d,.]+) (?:as a |in )?(?:percentage|percent)"), clean.clone()]).unwrap_or_else(|e| exc::raise(e));
+    match_ = stdlib_call("re", "search", &[py_str("([\\d,.]+)\\s+(?:is\\s+)?what\\s+(?:percentage|percent)\\s+of\\s+([\\d,.]+)"), clean.clone()]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&match_.clone()) {
     let __unpk4 = py_unpack(&py_tuple(vec![_amount(&[mcall(&match_.clone(), "group", &[Py::Int(1)])]), _amount(&[mcall(&match_.clone(), "group", &[Py::Int(2)])])]), 2, None);
     part = __unpk4[0].clone();
@@ -3196,11 +3189,19 @@ pub fn _what_percent(args: &[Py]) -> Py {
     }
     }
     if py_truthy(&Py::Bool(py_is(&part.clone(), &Py::None))) {
-    match_ = stdlib_call("re", "search", &[py_str("([\\d,.]+) as a (?:percentage|percent) of ([\\d,.]+)"), clean.clone()]).unwrap_or_else(|e| exc::raise(e));
+    match_ = stdlib_call("re", "search", &[py_str("([\\d,.]+) (?:out of|of) ([\\d,.]+) (?:as a |in )?(?:percentage|percent)"), clean.clone()]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&match_.clone()) {
     let __unpk5 = py_unpack(&py_tuple(vec![_amount(&[mcall(&match_.clone(), "group", &[Py::Int(1)])]), _amount(&[mcall(&match_.clone(), "group", &[Py::Int(2)])])]), 2, None);
     part = __unpk5[0].clone();
     total = __unpk5[1].clone();
+    }
+    }
+    if py_truthy(&Py::Bool(py_is(&part.clone(), &Py::None))) {
+    match_ = stdlib_call("re", "search", &[py_str("([\\d,.]+) as a (?:percentage|percent) of ([\\d,.]+)"), clean.clone()]).unwrap_or_else(|e| exc::raise(e));
+    if py_truthy(&match_.clone()) {
+    let __unpk6 = py_unpack(&py_tuple(vec![_amount(&[mcall(&match_.clone(), "group", &[Py::Int(1)])]), _amount(&[mcall(&match_.clone(), "group", &[Py::Int(2)])])]), 2, None);
+    part = __unpk6[0].clone();
+    total = __unpk6[1].clone();
     }
     }
     if py_truthy(&{ let __b = Py::Bool(py_is(&part.clone(), &Py::None)); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&total.clone())) } }) {

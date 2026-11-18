@@ -657,6 +657,10 @@ class Gen:
                 E(f"    return {self.gen_expr(node.value, ctx)};")
         elif isinstance(node, ast.Assign):
             val = self.gen_expr(node.value, ctx)
+            if len(node.targets) > 1:
+                shared = ctx.tmpname("assigned")
+                E(f"    let {shared} = {val};")
+                val = f"{shared}.clone()"
             for t in node.targets:
                 self.gen_assign(t, val, ctx)
             if ctx.kind == 'module':

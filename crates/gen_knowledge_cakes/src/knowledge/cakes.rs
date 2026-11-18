@@ -419,19 +419,20 @@ pub fn cake_plan(args: &[Py]) -> Py {
     }
     return said.clone();
     }
-    counts = Py::None;
-    low = Py::None;
-    high = Py::None;
-    let __iter2 = py_iter_or_raise(&call_builtin("enumerate", &[if py_truthy(&op_le(&count.clone(), &Py::Int(20))) { slice_or_raise(&g__CAKE_SHAPES(), &Py::None, &Py::Int(3), &Py::None) } else { py_tuple(vec![]) }]).unwrap_or_else(|e| exc::raise(e)));
-    for __item in __iter2 {
-    let __unpk3 = py_unpack(&__item.clone(), 2, None);
-    index = __unpk3[0].clone();
-    shape = __unpk3[1].clone();
+    let __assigned2 = Py::None;
+    counts = __assigned2.clone();
+    low = __assigned2.clone();
+    high = __assigned2.clone();
+    let __iter3 = py_iter_or_raise(&call_builtin("enumerate", &[if py_truthy(&op_le(&count.clone(), &Py::Int(20))) { slice_or_raise(&g__CAKE_SHAPES(), &Py::None, &Py::Int(3), &Py::None) } else { py_tuple(vec![]) }]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter3 {
+    let __unpk4 = py_unpack(&__item.clone(), 2, None);
+    index = __unpk4[0].clone();
+    shape = __unpk4[1].clone();
     if py_truthy(&op_le(&count.clone(), &geti(&shape.clone(), &Py::Int(3)))) {
     counts = call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("range", &[Py::Int(4)]).unwrap_or_else(|e| exc::raise(e))) { let mut i: Py = __item.clone(); __out.push(if py_truthy(&Py::Bool(py_eq(&i.clone(), &index.clone()))) { Py::Int(1) } else { Py::Int(0) }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
-    let __unpk4 = py_unpack(&py_tuple(vec![geti(&shape.clone(), &Py::Int(2)), geti(&shape.clone(), &Py::Int(3))]), 2, None);
-    low = __unpk4[0].clone();
-    high = __unpk4[1].clone();
+    let __unpk5 = py_unpack(&py_tuple(vec![geti(&shape.clone(), &Py::Int(2)), geti(&shape.clone(), &Py::Int(3))]), 2, None);
+    low = __unpk5[0].clone();
+    high = __unpk5[1].clone();
     break;
     }
     }
@@ -440,11 +441,11 @@ pub fn cake_plan(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&fit.clone()))) {
     return Py::None;
     }
-    let __unpk5 = py_unpack(&fit.clone(), 4, None);
-    _score = __unpk5[0].clone();
-    counts = __unpk5[1].clone();
-    low = __unpk5[2].clone();
-    high = __unpk5[3].clone();
+    let __unpk6 = py_unpack(&fit.clone(), 4, None);
+    _score = __unpk6[0].clone();
+    counts = __unpk6[1].clone();
+    low = __unpk6[2].clone();
+    high = __unpk6[3].clone();
     }
     tins = call_builtin("sum", &[counts.clone()]).unwrap_or_else(|e| exc::raise(e));
     parts = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[counts.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk1 = py_unpack(&__item.clone(), 2, None); let mut i: Py = __unpk1[0].clone(); let mut n: Py = __unpk1[1].clone(); if py_truthy(&n.clone()) {  __out.push({ let mut __s = String::new(); __s.push_str(&fstr(&geti(&g__CAKE_NUMBERS(), &n.clone()), -1, "")); __s.push_str(" "); __s.push_str(&fstr(&if py_truthy(&Py::Bool(py_eq(&n.clone(), &Py::Int(1)))) { geti(&geti(&g__CAKE_SHAPES(), &i.clone()), &Py::Int(0)) } else { geti(&geti(&g__CAKE_SHAPES(), &i.clone()), &Py::Int(1)) }, -1, "")); py_string(__s) }); } } py_list(__out) })() };

@@ -12106,13 +12106,14 @@ pub fn __nested__part_of_a_dish_0(args: &[Py]) -> Py {
     let __unpk4 = py_unpack(&py_tuple(vec![geti(&mcall(&best.clone(), "split", &[]), &Py::Int(0)), geti(&mcall(&best.clone(), "split", &[]), &op_neg(&Py::Int(1)))]), 2, None);
     head = __unpk4[0].clone();
     tail = __unpk4[1].clone();
-    before = Py::None;
-    after = Py::None;
-    let __iter5 = py_iter_or_raise(&call_builtin("enumerate", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)));
-    for __item in __iter5 {
-    let __unpk6 = py_unpack(&__item.clone(), 2, None);
-    i = __unpk6[0].clone();
-    word = __unpk6[1].clone();
+    let __assigned5 = Py::None;
+    before = __assigned5.clone();
+    after = __assigned5.clone();
+    let __iter6 = py_iter_or_raise(&call_builtin("enumerate", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter6 {
+    let __unpk7 = py_unpack(&__item.clone(), 2, None);
+    i = __unpk7[0].clone();
+    word = __unpk7[1].clone();
     if py_truthy(&Py::Bool(py_eq(&word.clone(), &tail.clone()))) {
     after = if py_truthy(&op_lt(&op_add(&i.clone(), &Py::Int(1)), &call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)))) { geti(&words.clone(), &op_add(&i.clone(), &Py::Int(1))) } else { Py::None };
     back = op_add(&op_sub(&i.clone(), &call_builtin("len", &[mcall(&best.clone(), "split", &[])]).unwrap_or_else(|e| exc::raise(e))), &Py::Int(1));
@@ -12125,10 +12126,10 @@ pub fn __nested__part_of_a_dish_0(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = before.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g__CALORIE_JOIN(), &before.clone())) } }) {
     return Py::None;
     }
-    let __unpk7 = py_unpack(&geti(&g_FOOD_CALORIES(), &best.clone()), 3, None);
-    subject = __unpk7[0].clone();
-    portion = __unpk7[1].clone();
-    count = __unpk7[2].clone();
+    let __unpk8 = py_unpack(&geti(&g_FOOD_CALORIES(), &best.clone()), 3, None);
+    subject = __unpk8[0].clone();
+    portion = __unpk8[1].clone();
+    count = __unpk8[2].clone();
     said = op_add(&mcall(&slice_or_raise(&subject.clone(), &Py::None, &Py::Int(1), &Py::None), "upper", &[]), &slice_or_raise(&subject.clone(), &Py::Int(1), &Py::None, &Py::None));
     verb = if py_truthy(&{ let __b = Py::Bool(py_contains(&g__CALORIE_PLURAL(), &best.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&py_tuple(vec![py_str("a "), py_str("an")]), &slice_or_raise(&subject.clone(), &Py::None, &Py::Int(2), &Py::None))) } }) { py_str("are") } else { py_str("is") };
     return { let mut __s = String::new(); __s.push_str(&fstr(&said.clone(), -1, "")); __s.push_str(" "); __s.push_str(&fstr(&verb.clone(), -1, "")); __s.push_str(" about "); __s.push_str(&fstr(&count.clone(), -1, "")); __s.push_str(" calories ("); __s.push_str(&fstr(&portion.clone(), -1, "")); __s.push_str(")."); py_string(__s) };

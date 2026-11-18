@@ -2035,8 +2035,9 @@ pub fn _note(args: &[Py]) -> Py {
     let _ = py_setitem(&memory.clone(), &py_str("topic"), record.clone());
     topics = mcall(&memory.clone(), "get", &[py_str("topics")]);
     if py_truthy(&Py::Bool(!py_truthy(&call_builtin("isinstance", &[topics.clone(), py_func("list", |args: &[Py]| call_builtin("list", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))))) {
-    topics = py_list(vec![]);
-    let _ = py_setitem(&memory.clone(), &py_str("topics"), py_list(vec![]));
+    let __assigned1 = py_list(vec![]);
+    topics = __assigned1.clone();
+    let _ = py_setitem(&memory.clone(), &py_str("topics"), __assigned1.clone());
     }
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&topics.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_eq(&mcall(&geti(&topics.clone(), &op_neg(&Py::Int(1))), "get", &[py_str("text")]), &geti(&record.clone(), &py_str("text")))) } }) {
     let _ = mcall(&topics.clone(), "append", &[record.clone()]);
@@ -2127,8 +2128,9 @@ pub fn _note(args: &[Py]) -> Py {
     let _ = py_setitem(&memory.clone(), &py_str("topic"), record.clone());
     topics = mcall(&memory.clone(), "get", &[py_str("topics")]);
     if py_truthy(&Py::Bool(!py_truthy(&call_builtin("isinstance", &[topics.clone(), py_func("list", |args: &[Py]| call_builtin("list", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))))) {
-    topics = py_list(vec![]);
-    let _ = py_setitem(&memory.clone(), &py_str("topics"), py_list(vec![]));
+    let __assigned2 = py_list(vec![]);
+    topics = __assigned2.clone();
+    let _ = py_setitem(&memory.clone(), &py_str("topics"), __assigned2.clone());
     }
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&topics.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_eq(&mcall(&geti(&topics.clone(), &op_neg(&Py::Int(1))), "get", &[py_str("text")]), &geti(&record.clone(), &py_str("text")))) } }) {
     let _ = mcall(&topics.clone(), "append", &[record.clone()]);
@@ -2152,8 +2154,9 @@ pub fn _note(args: &[Py]) -> Py {
     let _ = py_setitem(&memory.clone(), &py_str("topic"), record.clone());
     topics = mcall(&memory.clone(), "get", &[py_str("topics")]);
     if py_truthy(&Py::Bool(!py_truthy(&call_builtin("isinstance", &[topics.clone(), py_func("list", |args: &[Py]| call_builtin("list", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))))) {
-    topics = py_list(vec![]);
-    let _ = py_setitem(&memory.clone(), &py_str("topics"), py_list(vec![]));
+    let __assigned3 = py_list(vec![]);
+    topics = __assigned3.clone();
+    let _ = py_setitem(&memory.clone(), &py_str("topics"), __assigned3.clone());
     }
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&topics.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_eq(&mcall(&geti(&topics.clone(), &op_neg(&Py::Int(1))), "get", &[py_str("text")]), &geti(&record.clone(), &py_str("text")))) } }) {
     let _ = mcall(&topics.clone(), "append", &[record.clone()]);
@@ -3622,8 +3625,9 @@ pub fn _resume(args: &[Py]) -> Py {
     let _ = py_setitem(&memory.clone(), &py_str("topic"), said.clone());
     topics = mcall(&memory.clone(), "get", &[py_str("topics")]);
     if py_truthy(&Py::Bool(!py_truthy(&call_builtin("isinstance", &[topics.clone(), py_func("list", |args: &[Py]| call_builtin("list", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))))) {
-    topics = py_list(vec![]);
-    let _ = py_setitem(&memory.clone(), &py_str("topics"), py_list(vec![]));
+    let __assigned1 = py_list(vec![]);
+    topics = __assigned1.clone();
+    let _ = py_setitem(&memory.clone(), &py_str("topics"), __assigned1.clone());
     }
     py_setslice(&topics.clone(), &Py::None, &Py::None, &Py::None, &{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&topics.clone()) { let mut other: Py = __item.clone(); if py_truthy(&{ let __b = Py::Bool(!py_is(&other.clone(), &record.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_eq(&{ let __b = mcall(&other.clone(), "get", &[py_str("text")]); if py_truthy(&__b) { __b } else { py_str("") } }, &{ let __b = mcall(&said.clone(), "get", &[py_str("text")]); if py_truthy(&__b) { __b } else { py_str("") } })) } }) {  __out.push(other.clone()); } } py_list(__out) })() }).unwrap_or_else(|e| exc::raise(e));
     let _ = mcall(&topics.clone(), "append", &[said.clone()]);
@@ -5987,14 +5991,15 @@ pub fn _carry_the_words(args: &[Py]) -> Py {
     }
     stem_of = mcall(&mcall(&mcall(&line.clone(), "strip", &[]), "rstrip", &[py_str("?.!")]), "strip", &[]);
     cands = op_add(&op_add(&py_list(vec![extra.clone()]), &{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&extra.clone()) { let mut one: Py = __item.clone(); for __item in py_iter_or_raise(&extra.clone()) { let mut two: Py = __item.clone(); if py_truthy(&Py::Bool(!py_eq(&one.clone(), &two.clone()))) {  __out.push(py_list(vec![one.clone(), two.clone()])); } } } py_list(__out) })() }), &{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&extra.clone()) { let mut one: Py = __item.clone(); __out.push(py_list(vec![one.clone()])); } py_list(__out) })() });
-    text = Py::None;
-    item = Py::None;
-    borrowed = Py::None;
-    let __iter1 = py_iter_or_raise(&_the_ways_of_saying_it(&[stem_of.clone(), call_builtin("str", &[{ let __b = line.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), cands.clone()]));
-    for __item in __iter1 {
-    let __unpk2 = py_unpack(&__item.clone(), 2, None);
-    tried = __unpk2[0].clone();
-    carried = __unpk2[1].clone();
+    let __assigned1 = Py::None;
+    text = __assigned1.clone();
+    item = __assigned1.clone();
+    borrowed = __assigned1.clone();
+    let __iter2 = py_iter_or_raise(&_the_ways_of_saying_it(&[stem_of.clone(), call_builtin("str", &[{ let __b = line.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), cands.clone()]));
+    for __item in __iter2 {
+    let __unpk3 = py_unpack(&__item.clone(), 2, None);
+    tried = __unpk3[0].clone();
+    carried = __unpk3[1].clone();
     borrowed = carried.clone();
     found = _entry(&[tried.clone()]);
     if py_truthy(&Py::Bool(py_is(&found.clone(), &Py::None))) {
@@ -6004,9 +6009,9 @@ pub fn _carry_the_words(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&call_builtin("all", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&carried.clone(), "split", &[])) { let mut word: Py = __item.clone(); __out.push({ let __b = Py::Bool(py_contains(&keyed.clone(), &word.clone())); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&keyed.clone(), &stem(&[word.clone()]))); if py_truthy(&__b) { __b } else { _said(&[word.clone(), keyed.clone()]) } } } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))))) {
     continue;
     }
-    let __unpk3 = py_unpack(&py_tuple(vec![tried.clone(), found.clone()]), 2, None);
-    text = __unpk3[0].clone();
-    item = __unpk3[1].clone();
+    let __unpk4 = py_unpack(&py_tuple(vec![tried.clone(), found.clone()]), 2, None);
+    text = __unpk4[0].clone();
+    item = __unpk4[1].clone();
     break;
     }
     if py_truthy(&Py::Bool(py_is(&item.clone(), &Py::None))) {
@@ -6014,14 +6019,14 @@ pub fn _carry_the_words(args: &[Py]) -> Py {
     }
     keyed = _key_words_of(&[item.clone()]);
     lean = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&borrowed.clone(), "split", &[])) { let mut word: Py = __item.clone(); if py_truthy(&{ let __b = Py::Bool(py_contains(&keyed.clone(), &word.clone())); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&keyed.clone(), &stem(&[word.clone()]))); if py_truthy(&__b) { __b } else { _said(&[word.clone(), keyed.clone()]) } } } }) {  __out.push(word.clone()); } } py_list(__out) })() };
-    if py_truthy(&{ let __cmp41: Py = call_builtin("len", &[lean.clone()]).unwrap_or_else(|e| exc::raise(e)); if py_truthy(&op_lt(&Py::Int(0), &__cmp41)) { op_lt(&__cmp41, &call_builtin("len", &[mcall(&borrowed.clone(), "split", &[])]).unwrap_or_else(|e| exc::raise(e))) } else { Py::Bool(false) } }) {
+    if py_truthy(&{ let __cmp51: Py = call_builtin("len", &[lean.clone()]).unwrap_or_else(|e| exc::raise(e)); if py_truthy(&op_lt(&Py::Int(0), &__cmp51)) { op_lt(&__cmp51, &call_builtin("len", &[mcall(&borrowed.clone(), "split", &[])]).unwrap_or_else(|e| exc::raise(e))) } else { Py::Bool(false) } }) {
     tried = op_add(&op_add(&stem_of.clone(), &py_str(" ")), &mcall(&py_str(" "), "join", &[lean.clone()]));
     found = _entry(&[tried.clone()]);
     if py_truthy(&Py::Bool(!py_is(&found.clone(), &Py::None))) {
-    let __unpk5 = py_unpack(&py_tuple(vec![tried.clone(), found.clone(), mcall(&py_str(" "), "join", &[lean.clone()])]), 3, None);
-    text = __unpk5[0].clone();
-    item = __unpk5[1].clone();
-    borrowed = __unpk5[2].clone();
+    let __unpk6 = py_unpack(&py_tuple(vec![tried.clone(), found.clone(), mcall(&py_str(" "), "join", &[lean.clone()])]), 3, None);
+    text = __unpk6[0].clone();
+    item = __unpk6[1].clone();
+    borrowed = __unpk6[2].clone();
     }
     }
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&_names_it(&[said.clone(), item.clone()]))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&names_nothing(&[line.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_is(&item.clone(), &anchor.clone())) } } } }) {
@@ -7594,8 +7599,9 @@ pub fn same_as_before(args: &[Py]) -> Py {
     return worked.clone();
     }
     if py_truthy(&{ let __b = earlier.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(!py_eq(&earlier.clone(), &answer.clone())) } }) {
-    answer = earlier.clone();
-    whole = earlier.clone();
+    let __assigned3 = earlier.clone();
+    answer = __assigned3.clone();
+    whole = __assigned3.clone();
     narrow = py_func("narrow", |args: &[Py]| pyrt::xrefs::xcall("memory.narrow", "narrow", args));
     part = py_call(&narrow, &[answer.clone(), line.clone()]);
     if py_truthy(&part.clone()) {

@@ -7429,8 +7429,9 @@ pub fn _job_and_city(args: &[Py]) -> Py {
     let mut tail: Py = Py::None;
     let mut was_working: Py = Py::None;
     let mut words: Py = Py::None;
-    job = Py::None;
-    city = Py::None;
+    let __assigned1 = Py::None;
+    job = __assigned1.clone();
+    city = __assigned1.clone();
     frame = py_str("");
     if py_truthy(&name.clone()) {
     at = mcall(&mcall(&text.clone(), "lower", &[]), "find", &[mcall(&name.clone(), "lower", &[])]);
@@ -7448,8 +7449,8 @@ pub fn _job_and_city(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&matches.clone()))) {
     return py_tuple(vec![job.clone(), city.clone(), frame.clone()]);
     }
-    let __iter1 = py_iter_or_raise(&matches.clone());
-    for __item in __iter1 {
+    let __iter2 = py_iter_or_raise(&matches.clone());
+    for __item in __iter2 {
     match_ = __item.clone();
     groups = mcall(&match_.clone(), "groups", &[]);
     was_working = op_gt(&call_builtin("len", &[groups.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2));
@@ -7460,9 +7461,9 @@ pub fn _job_and_city(args: &[Py]) -> Py {
     cut = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(phrase.clone()); __kws.extend(vec![("tails".to_string(), g_JOB_TAIL_PLACE())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _first_tail(args))(&__args) };
     }
     if py_truthy(&cut.clone()) {
-    let __unpk2 = py_unpack(&cut.clone(), 2, None);
-    at = __unpk2[0].clone();
-    tail = __unpk2[1].clone();
+    let __unpk3 = py_unpack(&cut.clone(), 2, None);
+    at = __unpk3[0].clone();
+    tail = __unpk3[1].clone();
     rest = slice_or_raise(&phrase.clone(), &op_add(&at.clone(), &call_builtin("len", &[tail.clone()]).unwrap_or_else(|e| exc::raise(e))), &Py::None, &Py::None);
     if py_truthy(&{ let __b = Py::Bool(py_contains(&py_tuple(vec![py_str("in"), py_str("at")]), &mcall(&tail.clone(), "strip", &[]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&city.clone())) } }) {
     place = stdlib_call("re", "match", &[py_str("([A-Z][a-z]+(?: [A-Z][a-z]+)?)"), mcall(&rest.clone(), "strip", &[])]).unwrap_or_else(|e| exc::raise(e));
@@ -7522,8 +7523,8 @@ pub fn _job_and_city(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = was_working.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&op_bitor(&g_JOB_FRAME(), &g_JOB_GOT_FRAME()), &mcall(&{ let __b = geti(&groups.clone(), &Py::Int(0)); if py_truthy(&__b) { __b } else { py_str("") } }, "lower", &[]))) } }) {
     frame = mcall(&py_str(" "), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&slice_or_raise(&groups.clone(), &Py::None, &Py::Int(2), &Py::None)) { let mut part: Py = __item.clone(); if py_truthy(&{ let __b = part.clone(); if !py_truthy(&__b) { __b } else { mcall(&part.clone(), "strip", &[]) } }) {  __out.push(mcall(&part.clone(), "strip", &[])); } } py_list(__out) })() }]);
     if py_truthy(&{ let __b = Py::Bool(py_is(&gattr(&match_.clone(), "re"), &g_JOB_GOT_AT())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_eq(&call_builtin("len", &[mcall(&frame.clone(), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1))); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_JOB_GOT_AN_EMPLOYER(), &mcall(&job.clone(), "lower", &[]))) } } } }) {
-    let __aug3 = op_add(&frame.clone(), &py_str(" a"));
-    frame = __aug3;
+    let __aug4 = op_add(&frame.clone(), &py_str(" a"));
+    frame = __aug4;
     }
     }
     }

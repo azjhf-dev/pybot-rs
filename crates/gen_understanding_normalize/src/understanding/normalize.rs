@@ -3014,16 +3014,17 @@ pub fn _longest_consonant_run(args: &[Py]) -> Py {
     let mut char: Py = Py::None;
     let mut run: Py = Py::None;
     let _ = py_str("The longest stretch of letters in a word with no vowel in it.\n\n    A vowel typed past closes a gap and leaves a run behind - \"collpsd\" has \"psd\", \"bleedng\"\n    has \"dng\" - and an ordinary word hardly ever has three consonants in a row. That is what\n    tells a typo from a word: \"balding\" and \"sizing\" are only two (\"ld\", \"ng\"), and they are\n    words, so they must not be read as \"bleeding\" and \"seizing\" (the same bones).\n    ");
-    run = Py::Int(0);
-    best = Py::Int(0);
-    let __iter1 = py_iter_or_raise(&word.clone());
-    for __item in __iter1 {
+    let __assigned1 = Py::Int(0);
+    run = __assigned1.clone();
+    best = __assigned1.clone();
+    let __iter2 = py_iter_or_raise(&word.clone());
+    for __item in __iter2 {
     char = __item.clone();
     if py_truthy(&{ let __b = Py::Bool(py_contains(&g_VOWELS(), &char.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_eq(&char.clone(), &py_str("y"))) } }) {
     run = Py::Int(0);
     } else {
-    let __aug2 = op_add(&run.clone(), &Py::Int(1));
-    run = __aug2;
+    let __aug3 = op_add(&run.clone(), &Py::Int(1));
+    run = __aug3;
     if py_truthy(&op_gt(&run.clone(), &best.clone())) {
     best = run.clone();
     }

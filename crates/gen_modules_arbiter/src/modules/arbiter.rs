@@ -476,310 +476,311 @@ fn module_body() {
             let mut __handled10 = false;
             if !__handled10 && exc::matches_any(&__e, &["Exception"]) {
                 __handled10 = true;
+    let __assigned11 = Py::None;
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.arbiter._recall"); }
-    s__recall(Py::None);
+    s__recall(__assigned11.clone());
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.arbiter._repeat"); }
-    s__repeat(Py::None);
+    s__repeat(__assigned11.clone());
             }
             if !__handled10 { __unhandled9 = Some(__e); }
         }
     }
     if let Some(__e) = __unhandled9 { exc::raise(__e); }
-    let __try11 = exc::catch(|| {
+    let __try12 = exc::catch(|| {
         py_tuple(vec![Py::Bool(false), Py::None])
     });
-    let mut __ret12: Py = Py::Bool(false);
-    let mut __val13: Py = Py::None;
-    let mut __unhandled14: Option<exc::PyExc> = None;
-    match __try11 {
-        Ok(__t) => { let __p = py_iter_or_raise(&__t); __ret12 = __p[0].clone(); __val13 = __p[1].clone(); }
+    let mut __ret13: Py = Py::Bool(false);
+    let mut __val14: Py = Py::None;
+    let mut __unhandled15: Option<exc::PyExc> = None;
+    match __try12 {
+        Ok(__t) => { let __p = py_iter_or_raise(&__t); __ret13 = __p[0].clone(); __val14 = __p[1].clone(); }
         Err(__e) => {
-            let mut __handled15 = false;
-            if !__handled15 && exc::matches_any(&__e, &["Exception"]) {
-                __handled15 = true;
+            let mut __handled16 = false;
+            if !__handled16 && exc::matches_any(&__e, &["Exception"]) {
+                __handled16 = true;
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.arbiter._loss"); }
     s__loss(Py::None);
             }
-            if !__handled15 { __unhandled14 = Some(__e); }
+            if !__handled16 { __unhandled15 = Some(__e); }
         }
     }
-    if let Some(__e) = __unhandled14 { exc::raise(__e); }
-    let __try16 = exc::catch(|| {
+    if let Some(__e) = __unhandled15 { exc::raise(__e); }
+    let __try17 = exc::catch(|| {
         py_tuple(vec![Py::Bool(false), Py::None])
     });
-    let mut __ret17: Py = Py::Bool(false);
-    let mut __val18: Py = Py::None;
-    let mut __unhandled19: Option<exc::PyExc> = None;
-    match __try16 {
-        Ok(__t) => { let __p = py_iter_or_raise(&__t); __ret17 = __p[0].clone(); __val18 = __p[1].clone(); }
+    let mut __ret18: Py = Py::Bool(false);
+    let mut __val19: Py = Py::None;
+    let mut __unhandled20: Option<exc::PyExc> = None;
+    match __try17 {
+        Ok(__t) => { let __p = py_iter_or_raise(&__t); __ret18 = __p[0].clone(); __val19 = __p[1].clone(); }
         Err(__e) => {
-            let mut __handled20 = false;
-            if !__handled20 && exc::matches_any(&__e, &["Exception"]) {
-                __handled20 = true;
+            let mut __handled21 = false;
+            if !__handled21 && exc::matches_any(&__e, &["Exception"]) {
+                __handled21 = true;
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.arbiter._dream"); }
     s__dream(Py::None);
             }
-            if !__handled20 { __unhandled19 = Some(__e); }
+            if !__handled21 { __unhandled20 = Some(__e); }
         }
     }
-    if let Some(__e) = __unhandled19 { exc::raise(__e); }
-    let __try21 = exc::catch(|| {
+    if let Some(__e) = __unhandled20 { exc::raise(__e); }
+    let __try22 = exc::catch(|| {
         py_tuple(vec![Py::Bool(false), Py::None])
     });
-    let mut __ret22: Py = Py::Bool(false);
-    let mut __val23: Py = Py::None;
-    let mut __unhandled24: Option<exc::PyExc> = None;
-    match __try21 {
-        Ok(__t) => { let __p = py_iter_or_raise(&__t); __ret22 = __p[0].clone(); __val23 = __p[1].clone(); }
+    let mut __ret23: Py = Py::Bool(false);
+    let mut __val24: Py = Py::None;
+    let mut __unhandled25: Option<exc::PyExc> = None;
+    match __try22 {
+        Ok(__t) => { let __p = py_iter_or_raise(&__t); __ret23 = __p[0].clone(); __val24 = __p[1].clone(); }
         Err(__e) => {
-            let mut __handled25 = false;
-            if !__handled25 && exc::matches_any(&__e, &["Exception"]) {
-                __handled25 = true;
+            let mut __handled26 = false;
+            if !__handled26 && exc::matches_any(&__e, &["Exception"]) {
+                __handled26 = true;
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.arbiter._already"); }
     s__already(Py::None);
             }
-            if !__handled25 { __unhandled24 = Some(__e); }
+            if !__handled26 { __unhandled25 = Some(__e); }
         }
     }
-    if let Some(__e) = __unhandled24 { exc::raise(__e); }
-    let __try26 = exc::catch(|| {
+    if let Some(__e) = __unhandled25 { exc::raise(__e); }
+    let __try27 = exc::catch(|| {
         py_tuple(vec![Py::Bool(false), Py::None])
     });
-    let mut __ret27: Py = Py::Bool(false);
-    let mut __val28: Py = Py::None;
-    let mut __unhandled29: Option<exc::PyExc> = None;
-    match __try26 {
-        Ok(__t) => { let __p = py_iter_or_raise(&__t); __ret27 = __p[0].clone(); __val28 = __p[1].clone(); }
+    let mut __ret28: Py = Py::Bool(false);
+    let mut __val29: Py = Py::None;
+    let mut __unhandled30: Option<exc::PyExc> = None;
+    match __try27 {
+        Ok(__t) => { let __p = py_iter_or_raise(&__t); __ret28 = __p[0].clone(); __val29 = __p[1].clone(); }
         Err(__e) => {
-            let mut __handled30 = false;
-            if !__handled30 && exc::matches_any(&__e, &["Exception"]) {
-                __handled30 = true;
+            let mut __handled31 = false;
+            if !__handled31 && exc::matches_any(&__e, &["Exception"]) {
+                __handled31 = true;
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.arbiter._harm"); }
     s__harm(Py::None);
             }
-            if !__handled30 { __unhandled29 = Some(__e); }
+            if !__handled31 { __unhandled30 = Some(__e); }
         }
     }
-    if let Some(__e) = __unhandled29 { exc::raise(__e); }
-    let __try31 = exc::catch(|| {
+    if let Some(__e) = __unhandled30 { exc::raise(__e); }
+    let __try32 = exc::catch(|| {
     s__there_is_a_chat(py_func("there_is_a_chat", |args: &[Py]| pyrt::xrefs::xcall("memory", "there_is_a_chat", args)));
         py_tuple(vec![Py::Bool(false), Py::None])
     });
-    let mut __ret32: Py = Py::Bool(false);
-    let mut __val33: Py = Py::None;
-    let mut __unhandled34: Option<exc::PyExc> = None;
-    match __try31 {
-        Ok(__t) => { let __p = py_iter_or_raise(&__t); __ret32 = __p[0].clone(); __val33 = __p[1].clone(); }
+    let mut __ret33: Py = Py::Bool(false);
+    let mut __val34: Py = Py::None;
+    let mut __unhandled35: Option<exc::PyExc> = None;
+    match __try32 {
+        Ok(__t) => { let __p = py_iter_or_raise(&__t); __ret33 = __p[0].clone(); __val34 = __p[1].clone(); }
         Err(__e) => {
-            let mut __handled35 = false;
-            if !__handled35 && exc::matches_any(&__e, &["Exception"]) {
-                __handled35 = true;
+            let mut __handled36 = false;
+            if !__handled36 && exc::matches_any(&__e, &["Exception"]) {
+                __handled36 = true;
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.arbiter._there_is_a_chat"); }
     s__there_is_a_chat(py_func("lambda", move |args: &[Py]| {  let _memory: Py = __kwp(args, 0, "_memory").unwrap_or(Py::None); Py::Bool(false) }));
             }
-            if !__handled35 { __unhandled34 = Some(__e); }
+            if !__handled36 { __unhandled35 = Some(__e); }
         }
     }
-    if let Some(__e) = __unhandled34 { exc::raise(__e); }
-    let __try36 = exc::catch(|| {
+    if let Some(__e) = __unhandled35 { exc::raise(__e); }
+    let __try37 = exc::catch(|| {
         py_tuple(vec![Py::Bool(false), Py::None])
     });
-    let mut __ret37: Py = Py::Bool(false);
-    let mut __val38: Py = Py::None;
-    let mut __unhandled39: Option<exc::PyExc> = None;
-    match __try36 {
-        Ok(__t) => { let __p = py_iter_or_raise(&__t); __ret37 = __p[0].clone(); __val38 = __p[1].clone(); }
+    let mut __ret38: Py = Py::Bool(false);
+    let mut __val39: Py = Py::None;
+    let mut __unhandled40: Option<exc::PyExc> = None;
+    match __try37 {
+        Ok(__t) => { let __p = py_iter_or_raise(&__t); __ret38 = __p[0].clone(); __val39 = __p[1].clone(); }
         Err(__e) => {
-            let mut __handled40 = false;
-            if !__handled40 && exc::matches_any(&__e, &["Exception"]) {
-                __handled40 = true;
+            let mut __handled41 = false;
+            if !__handled41 && exc::matches_any(&__e, &["Exception"]) {
+                __handled41 = true;
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.arbiter._repeat"); }
     s__repeat(Py::None);
             }
-            if !__handled40 { __unhandled39 = Some(__e); }
+            if !__handled41 { __unhandled40 = Some(__e); }
         }
     }
-    if let Some(__e) = __unhandled39 { exc::raise(__e); }
-    let __try41 = exc::catch(|| {
+    if let Some(__e) = __unhandled40 { exc::raise(__e); }
+    let __try42 = exc::catch(|| {
         py_tuple(vec![Py::Bool(false), Py::None])
     });
-    let mut __ret42: Py = Py::Bool(false);
-    let mut __val43: Py = Py::None;
-    let mut __unhandled44: Option<exc::PyExc> = None;
-    match __try41 {
-        Ok(__t) => { let __p = py_iter_or_raise(&__t); __ret42 = __p[0].clone(); __val43 = __p[1].clone(); }
+    let mut __ret43: Py = Py::Bool(false);
+    let mut __val44: Py = Py::None;
+    let mut __unhandled45: Option<exc::PyExc> = None;
+    match __try42 {
+        Ok(__t) => { let __p = py_iter_or_raise(&__t); __ret43 = __p[0].clone(); __val44 = __p[1].clone(); }
         Err(__e) => {
-            let mut __handled45 = false;
-            if !__handled45 && exc::matches_any(&__e, &["Exception"]) {
-                __handled45 = true;
+            let mut __handled46 = false;
+            if !__handled46 && exc::matches_any(&__e, &["Exception"]) {
+                __handled46 = true;
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.arbiter._recall"); }
     s__recall(Py::None);
             }
-            if !__handled45 { __unhandled44 = Some(__e); }
+            if !__handled46 { __unhandled45 = Some(__e); }
         }
     }
-    if let Some(__e) = __unhandled44 { exc::raise(__e); }
-    let __try46 = exc::catch(|| {
+    if let Some(__e) = __unhandled45 { exc::raise(__e); }
+    let __try47 = exc::catch(|| {
         py_tuple(vec![Py::Bool(false), Py::None])
     });
-    let mut __ret47: Py = Py::Bool(false);
-    let mut __val48: Py = Py::None;
-    let mut __unhandled49: Option<exc::PyExc> = None;
-    match __try46 {
-        Ok(__t) => { let __p = py_iter_or_raise(&__t); __ret47 = __p[0].clone(); __val48 = __p[1].clone(); }
+    let mut __ret48: Py = Py::Bool(false);
+    let mut __val49: Py = Py::None;
+    let mut __unhandled50: Option<exc::PyExc> = None;
+    match __try47 {
+        Ok(__t) => { let __p = py_iter_or_raise(&__t); __ret48 = __p[0].clone(); __val49 = __p[1].clone(); }
         Err(__e) => {
-            let mut __handled50 = false;
-            if !__handled50 && exc::matches_any(&__e, &["Exception"]) {
-                __handled50 = true;
+            let mut __handled51 = false;
+            if !__handled51 && exc::matches_any(&__e, &["Exception"]) {
+                __handled51 = true;
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.arbiter._lineback"); }
     s__lineback(Py::None);
             }
-            if !__handled50 { __unhandled49 = Some(__e); }
+            if !__handled51 { __unhandled50 = Some(__e); }
         }
     }
-    if let Some(__e) = __unhandled49 { exc::raise(__e); }
-    let __try51 = exc::catch(|| {
+    if let Some(__e) = __unhandled50 { exc::raise(__e); }
+    let __try52 = exc::catch(|| {
         py_tuple(vec![Py::Bool(false), Py::None])
     });
-    let mut __ret52: Py = Py::Bool(false);
-    let mut __val53: Py = Py::None;
-    let mut __unhandled54: Option<exc::PyExc> = None;
-    match __try51 {
-        Ok(__t) => { let __p = py_iter_or_raise(&__t); __ret52 = __p[0].clone(); __val53 = __p[1].clone(); }
+    let mut __ret53: Py = Py::Bool(false);
+    let mut __val54: Py = Py::None;
+    let mut __unhandled55: Option<exc::PyExc> = None;
+    match __try52 {
+        Ok(__t) => { let __p = py_iter_or_raise(&__t); __ret53 = __p[0].clone(); __val54 = __p[1].clone(); }
         Err(__e) => {
-            let mut __handled55 = false;
-            if !__handled55 && exc::matches_any(&__e, &["Exception"]) {
-                __handled55 = true;
+            let mut __handled56 = false;
+            if !__handled56 && exc::matches_any(&__e, &["Exception"]) {
+                __handled56 = true;
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.arbiter._naming"); }
     s__naming(Py::None);
             }
-            if !__handled55 { __unhandled54 = Some(__e); }
+            if !__handled56 { __unhandled55 = Some(__e); }
         }
     }
-    if let Some(__e) = __unhandled54 { exc::raise(__e); }
-    let __try56 = exc::catch(|| {
+    if let Some(__e) = __unhandled55 { exc::raise(__e); }
+    let __try57 = exc::catch(|| {
     s_CARE_THREAD(pyrt::xrefs::xget("compose.fallback", "CARE_THREAD"));
     s_PAUSE(pyrt::xrefs::xget("compose.fallback", "PAUSE"));
     s_THREAD(pyrt::xrefs::xget("compose.fallback", "THREAD"));
         py_tuple(vec![Py::Bool(false), Py::None])
     });
-    let mut __ret57: Py = Py::Bool(false);
-    let mut __val58: Py = Py::None;
-    let mut __unhandled59: Option<exc::PyExc> = None;
-    match __try56 {
-        Ok(__t) => { let __p = py_iter_or_raise(&__t); __ret57 = __p[0].clone(); __val58 = __p[1].clone(); }
+    let mut __ret58: Py = Py::Bool(false);
+    let mut __val59: Py = Py::None;
+    let mut __unhandled60: Option<exc::PyExc> = None;
+    match __try57 {
+        Ok(__t) => { let __p = py_iter_or_raise(&__t); __ret58 = __p[0].clone(); __val59 = __p[1].clone(); }
         Err(__e) => {
-            let mut __handled60 = false;
-            if !__handled60 && exc::matches_any(&__e, &["Exception"]) {
-                __handled60 = true;
-    let __unpk61 = py_unpack(&py_tuple(vec![py_str("thread"), py_str("care-thread"), py_str("pause")]), 3, None);
+            let mut __handled61 = false;
+            if !__handled61 && exc::matches_any(&__e, &["Exception"]) {
+                __handled61 = true;
+    let __unpk62 = py_unpack(&py_tuple(vec![py_str("thread"), py_str("care-thread"), py_str("pause")]), 3, None);
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.arbiter.THREAD"); }
-    s_THREAD(__unpk61[0].clone());
+    s_THREAD(__unpk62[0].clone());
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.arbiter.CARE_THREAD"); }
-    s_CARE_THREAD(__unpk61[1].clone());
+    s_CARE_THREAD(__unpk62[1].clone());
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.arbiter.PAUSE"); }
-    s_PAUSE(__unpk61[2].clone());
+    s_PAUSE(__unpk62[2].clone());
             }
-            if !__handled60 { __unhandled59 = Some(__e); }
+            if !__handled61 { __unhandled60 = Some(__e); }
         }
     }
-    if let Some(__e) = __unhandled59 { exc::raise(__e); }
-    let __try62 = exc::catch(|| {
+    if let Some(__e) = __unhandled60 { exc::raise(__e); }
+    let __try63 = exc::catch(|| {
     s__STEP_WHEN_LOW(pyrt::xrefs::xget("compose", "STEP_WHEN_LOW"));
         py_tuple(vec![Py::Bool(false), Py::None])
     });
-    let mut __ret63: Py = Py::Bool(false);
-    let mut __val64: Py = Py::None;
-    let mut __unhandled65: Option<exc::PyExc> = None;
-    match __try62 {
-        Ok(__t) => { let __p = py_iter_or_raise(&__t); __ret63 = __p[0].clone(); __val64 = __p[1].clone(); }
+    let mut __ret64: Py = Py::Bool(false);
+    let mut __val65: Py = Py::None;
+    let mut __unhandled66: Option<exc::PyExc> = None;
+    match __try63 {
+        Ok(__t) => { let __p = py_iter_or_raise(&__t); __ret64 = __p[0].clone(); __val65 = __p[1].clone(); }
         Err(__e) => {
-            let mut __handled66 = false;
-            if !__handled66 && exc::matches_any(&__e, &["Exception"]) {
-                __handled66 = true;
+            let mut __handled67 = false;
+            if !__handled67 && exc::matches_any(&__e, &["Exception"]) {
+                __handled67 = true;
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.arbiter._STEP_WHEN_LOW"); }
     s__STEP_WHEN_LOW(py_tuple(vec![]));
             }
-            if !__handled66 { __unhandled65 = Some(__e); }
+            if !__handled67 { __unhandled66 = Some(__e); }
         }
     }
-    if let Some(__e) = __unhandled65 { exc::raise(__e); }
-    let __try67 = exc::catch(|| {
+    if let Some(__e) = __unhandled66 { exc::raise(__e); }
+    let __try68 = exc::catch(|| {
         py_tuple(vec![Py::Bool(false), Py::None])
     });
-    let mut __ret68: Py = Py::Bool(false);
-    let mut __val69: Py = Py::None;
-    let mut __unhandled70: Option<exc::PyExc> = None;
-    match __try67 {
-        Ok(__t) => { let __p = py_iter_or_raise(&__t); __ret68 = __p[0].clone(); __val69 = __p[1].clone(); }
+    let mut __ret69: Py = Py::Bool(false);
+    let mut __val70: Py = Py::None;
+    let mut __unhandled71: Option<exc::PyExc> = None;
+    match __try68 {
+        Ok(__t) => { let __p = py_iter_or_raise(&__t); __ret69 = __p[0].clone(); __val70 = __p[1].clone(); }
         Err(__e) => {
-            let mut __handled71 = false;
-            if !__handled71 && exc::matches_any(&__e, &["Exception"]) {
-                __handled71 = true;
+            let mut __handled72 = false;
+            if !__handled72 && exc::matches_any(&__e, &["Exception"]) {
+                __handled72 = true;
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.arbiter._cooking"); }
     s__cooking(Py::None);
             }
-            if !__handled71 { __unhandled70 = Some(__e); }
+            if !__handled72 { __unhandled71 = Some(__e); }
         }
     }
-    if let Some(__e) = __unhandled70 { exc::raise(__e); }
-    let __try72 = exc::catch(|| {
+    if let Some(__e) = __unhandled71 { exc::raise(__e); }
+    let __try73 = exc::catch(|| {
         py_tuple(vec![Py::Bool(false), Py::None])
     });
-    let mut __ret73: Py = Py::Bool(false);
-    let mut __val74: Py = Py::None;
-    let mut __unhandled75: Option<exc::PyExc> = None;
-    match __try72 {
-        Ok(__t) => { let __p = py_iter_or_raise(&__t); __ret73 = __p[0].clone(); __val74 = __p[1].clone(); }
+    let mut __ret74: Py = Py::Bool(false);
+    let mut __val75: Py = Py::None;
+    let mut __unhandled76: Option<exc::PyExc> = None;
+    match __try73 {
+        Ok(__t) => { let __p = py_iter_or_raise(&__t); __ret74 = __p[0].clone(); __val75 = __p[1].clone(); }
         Err(__e) => {
-            let mut __handled76 = false;
-            if !__handled76 && exc::matches_any(&__e, &["Exception"]) {
-                __handled76 = true;
+            let mut __handled77 = false;
+            if !__handled77 && exc::matches_any(&__e, &["Exception"]) {
+                __handled77 = true;
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.arbiter._ruledout"); }
     s__ruledout(Py::None);
             }
-            if !__handled76 { __unhandled75 = Some(__e); }
+            if !__handled77 { __unhandled76 = Some(__e); }
         }
     }
-    if let Some(__e) = __unhandled75 { exc::raise(__e); }
-    let __try77 = exc::catch(|| {
+    if let Some(__e) = __unhandled76 { exc::raise(__e); }
+    let __try78 = exc::catch(|| {
         py_tuple(vec![Py::Bool(false), Py::None])
     });
-    let mut __ret78: Py = Py::Bool(false);
-    let mut __val79: Py = Py::None;
-    let mut __unhandled80: Option<exc::PyExc> = None;
-    match __try77 {
-        Ok(__t) => { let __p = py_iter_or_raise(&__t); __ret78 = __p[0].clone(); __val79 = __p[1].clone(); }
+    let mut __ret79: Py = Py::Bool(false);
+    let mut __val80: Py = Py::None;
+    let mut __unhandled81: Option<exc::PyExc> = None;
+    match __try78 {
+        Ok(__t) => { let __p = py_iter_or_raise(&__t); __ret79 = __p[0].clone(); __val80 = __p[1].clone(); }
         Err(__e) => {
-            let mut __handled81 = false;
-            if !__handled81 && exc::matches_any(&__e, &["Exception"]) {
-                __handled81 = true;
+            let mut __handled82 = false;
+            if !__handled82 && exc::matches_any(&__e, &["Exception"]) {
+                __handled82 = true;
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.arbiter._history"); }
     s__history(Py::None);
             }
-            if !__handled81 { __unhandled80 = Some(__e); }
+            if !__handled82 { __unhandled81 = Some(__e); }
         }
     }
-    if let Some(__e) = __unhandled80 { exc::raise(__e); }
-    let __try82 = exc::catch(|| {
+    if let Some(__e) = __unhandled81 { exc::raise(__e); }
+    let __try83 = exc::catch(|| {
         py_tuple(vec![Py::Bool(false), Py::None])
     });
-    let mut __ret83: Py = Py::Bool(false);
-    let mut __val84: Py = Py::None;
-    let mut __unhandled85: Option<exc::PyExc> = None;
-    match __try82 {
-        Ok(__t) => { let __p = py_iter_or_raise(&__t); __ret83 = __p[0].clone(); __val84 = __p[1].clone(); }
+    let mut __ret84: Py = Py::Bool(false);
+    let mut __val85: Py = Py::None;
+    let mut __unhandled86: Option<exc::PyExc> = None;
+    match __try83 {
+        Ok(__t) => { let __p = py_iter_or_raise(&__t); __ret84 = __p[0].clone(); __val85 = __p[1].clone(); }
         Err(__e) => {
-            let mut __handled86 = false;
-            if !__handled86 && exc::matches_any(&__e, &["Exception"]) {
-                __handled86 = true;
+            let mut __handled87 = false;
+            if !__handled87 && exc::matches_any(&__e, &["Exception"]) {
+                __handled87 = true;
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.arbiter._reading"); }
     s__reading(Py::None);
             }
-            if !__handled86 { __unhandled85 = Some(__e); }
+            if !__handled87 { __unhandled86 = Some(__e); }
         }
     }
-    if let Some(__e) = __unhandled85 { exc::raise(__e); }
+    if let Some(__e) = __unhandled86 { exc::raise(__e); }
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.arbiter.DECLARED_TOPICS"); }
     s_DECLARED_TOPICS(py_str("ANSWERS"));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.arbiter.CHOICE"); }
@@ -822,9 +823,9 @@ fn module_body() {
     s__SAID_BEFORE_WORDS(Py::Int(8));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.arbiter.MEMORY_MODULES"); }
     s_MEMORY_MODULES(call_builtin("frozenset", &[py_tuple(vec![py_str("memory_store"), py_str("chat"), py_str("greeting"), py_str("said_back")])]).unwrap_or_else(|e| exc::raise(e)));
-    fn __data87() -> Py { py_tuple(vec![py_str("no"), py_str("not"), py_str("without"), py_str("free"), py_str("avoid"), py_str("leave"), py_str("leaves"), py_str("leaving"), py_str("left"), py_str("out"), py_str("instead"), py_str("swap"), py_str("swaps"), py_str("swapped"), py_str("rather"), py_str("cant"), py_str("dont"), py_str("doesnt"), py_str("didnt"), py_str("refuse"), py_str("refused"), py_str("refuses"), py_str("allergic"), py_str("allergy"), py_str("intolerant"), py_str("allergen"), py_str("isnt"), py_str("arent"), py_str("wasnt"), py_str("wont"), py_str("cannot"), py_str("never"), py_str("none"), py_str("nothing"), py_str("off"), py_str("replace")]) }
+    fn __data88() -> Py { py_tuple(vec![py_str("no"), py_str("not"), py_str("without"), py_str("free"), py_str("avoid"), py_str("leave"), py_str("leaves"), py_str("leaving"), py_str("left"), py_str("out"), py_str("instead"), py_str("swap"), py_str("swaps"), py_str("swapped"), py_str("rather"), py_str("cant"), py_str("dont"), py_str("doesnt"), py_str("didnt"), py_str("refuse"), py_str("refused"), py_str("refuses"), py_str("allergic"), py_str("allergy"), py_str("intolerant"), py_str("allergen"), py_str("isnt"), py_str("arent"), py_str("wasnt"), py_str("wont"), py_str("cannot"), py_str("never"), py_str("none"), py_str("nothing"), py_str("off"), py_str("replace")]) }
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.arbiter._REFUSAL_UNDONE"); }
-    s__REFUSAL_UNDONE(call_builtin("frozenset", &[__data87()]).unwrap_or_else(|e| exc::raise(e)));
+    s__REFUSAL_UNDONE(call_builtin("frozenset", &[__data88()]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.arbiter._ALLERGY_LIFTED"); }
     s__ALLERGY_LIFTED(stdlib_call("re", "compile", &[py_str("\\b(?:not|isnt|arent|wasnt|werent|never)\\s+(?:actually\\s+)?(?:allergic|intolerant)\\b|\\bno\\s+(?:allerg(?:y|ies)|intolerance)\\b")]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.arbiter.A_CEILING"); }
@@ -845,9 +846,9 @@ fn module_body() {
     s_DOING_WANTS(call_builtin("frozenset", &[py_tuple(vec![py_str("steps"), py_str("options"), py_str("pick"), py_str("advice"), py_str("howto")])]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.arbiter.SAID_BACK"); }
     s_SAID_BACK(stdlib_call("re", "compile", &[py_str("^(?:you said|you told me|you mentioned|as you said|still )\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
-    fn __data88() -> Py { py_dict(vec![(py_str("one"), Py::Int(1)), (py_str("two"), Py::Int(2)), (py_str("three"), Py::Int(3)), (py_str("four"), Py::Int(4)), (py_str("five"), Py::Int(5)), (py_str("six"), Py::Int(6)), (py_str("seven"), Py::Int(7)), (py_str("eight"), Py::Int(8)), (py_str("nine"), Py::Int(9)), (py_str("ten"), Py::Int(10)), (py_str("eleven"), Py::Int(11)), (py_str("twelve"), Py::Int(12)), (py_str("fifteen"), Py::Int(15)), (py_str("twenty"), Py::Int(20)), (py_str("thirty"), Py::Int(30)), (py_str("forty"), Py::Int(40)), (py_str("fifty"), Py::Int(50)), (py_str("sixty"), Py::Int(60)), (py_str("hundred"), Py::Int(100)), (py_str("thousand"), Py::Int(1000))]) }
+    fn __data89() -> Py { py_dict(vec![(py_str("one"), Py::Int(1)), (py_str("two"), Py::Int(2)), (py_str("three"), Py::Int(3)), (py_str("four"), Py::Int(4)), (py_str("five"), Py::Int(5)), (py_str("six"), Py::Int(6)), (py_str("seven"), Py::Int(7)), (py_str("eight"), Py::Int(8)), (py_str("nine"), Py::Int(9)), (py_str("ten"), Py::Int(10)), (py_str("eleven"), Py::Int(11)), (py_str("twelve"), Py::Int(12)), (py_str("fifteen"), Py::Int(15)), (py_str("twenty"), Py::Int(20)), (py_str("thirty"), Py::Int(30)), (py_str("forty"), Py::Int(40)), (py_str("fifty"), Py::Int(50)), (py_str("sixty"), Py::Int(60)), (py_str("hundred"), Py::Int(100)), (py_str("thousand"), Py::Int(1000))]) }
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.arbiter._NUMBER_WORDS"); }
-    s__NUMBER_WORDS(__data88());
+    s__NUMBER_WORDS(__data89());
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.arbiter._FIGURES"); }
     s__FIGURES(stdlib_call("re", "compile", &[op_add(&op_add(&py_str("\\b\\d[\\d,]*(?:\\.\\d+)?\\b|\\b(?:"), &mcall(&py_str("|"), "join", &[{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(g__NUMBER_WORDS()); __kws.extend(vec![("key".to_string(), py_func("len", |args: &[Py]| call_builtin("len", args).unwrap_or_else(|e| exc::raise(e)))), ("reverse".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("sorted", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }])), &py_str(")\\b"))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.arbiter.A_MY_OWN_REPORT"); }
@@ -888,9 +889,9 @@ fn module_body() {
     s_POOL_MODULES(call_builtin("frozenset", &[py_tuple(vec![py_str("chat"), py_str("greeting")])]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.arbiter.THE_ASK_OPENS"); }
     s_THE_ASK_OPENS(stdlib_call("re", "compile", &[py_str("^(?:and |so |but |also |then |please )*(?:what|how|which|where|when|who|why|any|ideas|thoughts|suggestions|advice|tips|recommend\\w*|should|could|shall|can|do|is|are|help)\\b")]).unwrap_or_else(|e| exc::raise(e)));
-    fn __data89() -> Py { py_tuple(vec![py_str("the"), py_str("and"), py_str("for"), py_str("you"), py_str("your"), py_str("with"), py_str("that"), py_str("this"), py_str("have"), py_str("has"), py_str("was"), py_str("were"), py_str("are"), py_str("but"), py_str("not"), py_str("his"), py_str("her"), py_str("she"), py_str("him"), py_str("they"), py_str("them"), py_str("its"), py_str("out"), py_str("about"), py_str("some"), py_str("from"), py_str("been"), py_str("what"), py_str("how"), py_str("would"), py_str("will"), py_str("just"), py_str("one"), py_str("now"), py_str("day"), py_str("like")]) }
+    fn __data90() -> Py { py_tuple(vec![py_str("the"), py_str("and"), py_str("for"), py_str("you"), py_str("your"), py_str("with"), py_str("that"), py_str("this"), py_str("have"), py_str("has"), py_str("was"), py_str("were"), py_str("are"), py_str("but"), py_str("not"), py_str("his"), py_str("her"), py_str("she"), py_str("him"), py_str("they"), py_str("them"), py_str("its"), py_str("out"), py_str("about"), py_str("some"), py_str("from"), py_str("been"), py_str("what"), py_str("how"), py_str("would"), py_str("will"), py_str("just"), py_str("one"), py_str("now"), py_str("day"), py_str("like")]) }
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.arbiter.ECHO_STOP"); }
-    s_ECHO_STOP(call_builtin("frozenset", &[__data89()]).unwrap_or_else(|e| exc::raise(e)));
+    s_ECHO_STOP(call_builtin("frozenset", &[__data90()]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.arbiter.THEIR_VOICE"); }
     s_THEIR_VOICE(py_dict(vec![(py_str("my"), py_str("your")), (py_str("mine"), py_str("yours")), (py_str("i"), py_str("you")), (py_str("im"), py_str("youre")), (py_str("me"), py_str("you")), (py_str("myself"), py_str("yourself")), (py_str("we"), py_str("you")), (py_str("our"), py_str("your")), (py_str("ours"), py_str("yours"))]));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.arbiter.A_SUBJECT_WORD"); }
@@ -923,9 +924,9 @@ fn module_body() {
     s_ANSWERS_THE_NEWS(py_tuple(vec![py_str("answers")]));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.arbiter.A_VERDICT_BACK"); }
     s_A_VERDICT_BACK(stdlib_call("re", "compile", &[py_str("^\\W*(?:it\\s+is|it'?s|it\\s+does|it\\s+doesn'?t|that\\s+is|that'?s|that\\s+would|that'?d|that\\s+kind|that\\s+sounds|you'?re\\s+right|you\\s+are\\s+right|yeah|yes|true|fair\\s+enough|of\\s+course|same\\s+here|i\\s+know|i\\s+don'?t\\s+blame|anyone\\s+would)\\b")]).unwrap_or_else(|e| exc::raise(e)));
-    fn __data90() -> Py { py_tuple(vec![py_str("the"), py_str("and"), py_str("but"), py_str("for"), py_str("with"), py_str("you"), py_str("your"), py_str("yours"), py_str("they"), py_str("them"), py_str("their"), py_str("his"), py_str("her"), py_str("hers"), py_str("she"), py_str("him"), py_str("our"), py_str("ours"), py_str("us"), py_str("its"), py_str("it"), py_str("that"), py_str("this"), py_str("these"), py_str("those"), py_str("was"), py_str("were"), py_str("been"), py_str("are"), py_str("am"), py_str("is"), py_str("be"), py_str("does"), py_str("did"), py_str("done"), py_str("have"), py_str("has"), py_str("had"), py_str("can"), py_str("cant"), py_str("cannot"), py_str("will"), py_str("would"), py_str("should"), py_str("could"), py_str("may"), py_str("might"), py_str("must"), py_str("not"), py_str("nor"), py_str("off"), py_str("out"), py_str("down"), py_str("too"), py_str("very"), py_str("really"), py_str("much"), py_str("many"), py_str("some"), py_str("any"), py_str("all"), py_str("more"), py_str("most"), py_str("just"), py_str("only"), py_str("then"), py_str("there"), py_str("here"), py_str("now"), py_str("how"), py_str("what"), py_str("when"), py_str("where"), py_str("why"), py_str("who"), py_str("which"), py_str("about"), py_str("than"), py_str("into"), py_str("onto"), py_str("over"), py_str("under"), py_str("again"), py_str("still"), py_str("even"), py_str("ever"), py_str("never"), py_str("get"), py_str("got"), py_str("gets"), py_str("one"), py_str("two"), py_str("put"), py_str("say"), py_str("says"), py_str("said"), py_str("think"), py_str("know"), py_str("like"), py_str("want"), py_str("need"), py_str("make"), py_str("made"), py_str("take"), py_str("took"), py_str("going"), py_str("went"), py_str("gone"), py_str("come"), py_str("came"), py_str("keep"), py_str("keeps"), py_str("kept"), py_str("let"), py_str("lets")]) }
+    fn __data91() -> Py { py_tuple(vec![py_str("the"), py_str("and"), py_str("but"), py_str("for"), py_str("with"), py_str("you"), py_str("your"), py_str("yours"), py_str("they"), py_str("them"), py_str("their"), py_str("his"), py_str("her"), py_str("hers"), py_str("she"), py_str("him"), py_str("our"), py_str("ours"), py_str("us"), py_str("its"), py_str("it"), py_str("that"), py_str("this"), py_str("these"), py_str("those"), py_str("was"), py_str("were"), py_str("been"), py_str("are"), py_str("am"), py_str("is"), py_str("be"), py_str("does"), py_str("did"), py_str("done"), py_str("have"), py_str("has"), py_str("had"), py_str("can"), py_str("cant"), py_str("cannot"), py_str("will"), py_str("would"), py_str("should"), py_str("could"), py_str("may"), py_str("might"), py_str("must"), py_str("not"), py_str("nor"), py_str("off"), py_str("out"), py_str("down"), py_str("too"), py_str("very"), py_str("really"), py_str("much"), py_str("many"), py_str("some"), py_str("any"), py_str("all"), py_str("more"), py_str("most"), py_str("just"), py_str("only"), py_str("then"), py_str("there"), py_str("here"), py_str("now"), py_str("how"), py_str("what"), py_str("when"), py_str("where"), py_str("why"), py_str("who"), py_str("which"), py_str("about"), py_str("than"), py_str("into"), py_str("onto"), py_str("over"), py_str("under"), py_str("again"), py_str("still"), py_str("even"), py_str("ever"), py_str("never"), py_str("get"), py_str("got"), py_str("gets"), py_str("one"), py_str("two"), py_str("put"), py_str("say"), py_str("says"), py_str("said"), py_str("think"), py_str("know"), py_str("like"), py_str("want"), py_str("need"), py_str("make"), py_str("made"), py_str("take"), py_str("took"), py_str("going"), py_str("went"), py_str("gone"), py_str("come"), py_str("came"), py_str("keep"), py_str("keeps"), py_str("kept"), py_str("let"), py_str("lets")]) }
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.arbiter.NOT_A_SUBJECT_WORD"); }
-    s_NOT_A_SUBJECT_WORD(call_builtin("frozenset", &[__data90()]).unwrap_or_else(|e| exc::raise(e)));
+    s_NOT_A_SUBJECT_WORD(call_builtin("frozenset", &[__data91()]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.arbiter.ASK_CLAUSE_SPLIT"); }
     s_ASK_CLAUSE_SPLIT(stdlib_call("re", "compile", &[py_str(",|\\band\\b|\\bbut\\b|\\bsince\\b|\\bbecause\\b|\\bso\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     if std::env::var_os("PYBOT_TRACE_INIT").is_some() { eprintln!("SET modules.arbiter.ASKS_FOR_A_THING"); }

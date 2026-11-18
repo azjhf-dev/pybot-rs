@@ -1209,18 +1209,19 @@ pub fn observe(args: &[Py]) -> Py {
     }
     user = mcall(&memory.clone(), "get", &[py_str("user")]);
     if py_truthy(&Py::Bool(!py_truthy(&call_builtin("isinstance", &[user.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))))) {
-    user = py_dict(vec![]);
-    let _ = py_setitem(&memory.clone(), &py_str("user"), py_dict(vec![]));
+    let __assigned7 = py_dict(vec![]);
+    user = __assigned7.clone();
+    let _ = py_setitem(&memory.clone(), &py_str("user"), __assigned7.clone());
     }
     held = mcall(&user.clone(), "get", &[py_str("how_many")]);
     if py_truthy(&Py::Bool(!py_truthy(&call_builtin("isinstance", &[held.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))))) {
     held = py_dict(vec![]);
     }
-    let __iter7 = py_iter_or_raise(&mcall(&counts.clone(), "items", &[]));
-    for __item in __iter7 {
-    let __unpk8 = py_unpack(&__item.clone(), 2, None);
-    thing = __unpk8[0].clone();
-    number = __unpk8[1].clone();
+    let __iter8 = py_iter_or_raise(&mcall(&counts.clone(), "items", &[]));
+    for __item in __iter8 {
+    let __unpk9 = py_unpack(&__item.clone(), 2, None);
+    thing = __unpk9[0].clone();
+    number = __unpk9[1].clone();
     if py_truthy(&Py::Bool(!py_eq(&mcall(&held.clone(), "get", &[thing.clone()]), &number.clone()))) {
     let _ = py_setitem(&held.clone(), &thing.clone(), number.clone());
     }

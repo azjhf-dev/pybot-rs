@@ -375,8 +375,9 @@ pub fn turn(args: &[Py]) -> Py {
     }
     turns = mcall(&memory.clone(), "get", &[py_str("turns")]);
     if py_truthy(&Py::Bool(!py_truthy(&call_builtin("isinstance", &[turns.clone(), py_func("list", |args: &[Py]| call_builtin("list", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))))) {
-    turns = py_list(vec![]);
-    let _ = py_setitem(&memory.clone(), &py_str("turns"), py_list(vec![]));
+    let __assigned25 = py_list(vec![]);
+    turns = __assigned25.clone();
+    let _ = py_setitem(&memory.clone(), &py_str("turns"), __assigned25.clone());
     }
     let _ = mcall(&turns.clone(), "append", &[py_dict(vec![(py_str("user"), text.clone()), (py_str("bot"), reply.clone()), (py_str("module"), module.clone())])]);
     return py_dict(vec![(py_str("reply"), reply.clone()), (py_str("module"), module.clone()), (py_str("candidates"), candidates.clone())]);

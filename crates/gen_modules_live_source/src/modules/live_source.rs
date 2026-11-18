@@ -212,8 +212,9 @@ pub fn _bounded(args: &[Py]) -> Py {
     let _ = py_str("A phrase matched as whole words, so \"raining\" is not \"training\".");
     pattern = mcall(&g__BOUNDED(), "get", &[phrase.clone()]);
     if py_truthy(&Py::Bool(py_is(&pattern.clone(), &Py::None))) {
-    pattern = stdlib_call("re", "compile", &[op_add(&op_add(&py_str("(?<![a-z])"), &stdlib_call("re", "escape", &[phrase.clone()]).unwrap_or_else(|e| exc::raise(e))), &py_str("(?![a-z])"))]).unwrap_or_else(|e| exc::raise(e));
-    let _ = py_setitem(&g__BOUNDED(), &phrase.clone(), stdlib_call("re", "compile", &[op_add(&op_add(&py_str("(?<![a-z])"), &stdlib_call("re", "escape", &[phrase.clone()]).unwrap_or_else(|e| exc::raise(e))), &py_str("(?![a-z])"))]).unwrap_or_else(|e| exc::raise(e)));
+    let __assigned1 = stdlib_call("re", "compile", &[op_add(&op_add(&py_str("(?<![a-z])"), &stdlib_call("re", "escape", &[phrase.clone()]).unwrap_or_else(|e| exc::raise(e))), &py_str("(?![a-z])"))]).unwrap_or_else(|e| exc::raise(e));
+    pattern = __assigned1.clone();
+    let _ = py_setitem(&g__BOUNDED(), &phrase.clone(), __assigned1.clone());
     }
     return pattern.clone();
     Py::None

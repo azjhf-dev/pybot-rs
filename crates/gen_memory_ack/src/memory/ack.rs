@@ -4574,8 +4574,9 @@ pub fn reply(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&rest.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&pyrt::xrefs::xcall("memory.facts", "about_themselves", &[rest.clone()]))) } }) {
     return Py::None;
     }
-    clean = rest.clone();
-    text = rest.clone();
+    let __assigned1 = rest.clone();
+    clean = __assigned1.clone();
+    text = __assigned1.clone();
     read = _repaired(&[clean.clone(), memory.clone()]);
     } else {
     if py_truthy(&{ let __b = mcall(&g_MEET_GREET(), "search", &[clean.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_SELF_INTRO(), "search", &[clean.clone()]) } }) {
@@ -4769,9 +4770,9 @@ pub fn reply(args: &[Py]) -> Py {
     return Py::None;
     }
     if py_truthy(&{ let __b = pets.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&more.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_eq(&call_builtin("set", &[found.clone()]).unwrap_or_else(|e| exc::raise(e)), &py_set(vec![py_str("pets")]))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&mcall(&g_AS_WELL(), "search", &[clean.clone()]))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&mcall(&g_A_CHILD_IN_THE_LINE(), "search", &[clean.clone()]))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_a_pet_that_is_all_right(&[clean.clone(), pets.clone()]))) } } } } } } } } } }) {
-    let __unpk1 = py_unpack(&_the_pets_said(&[pets.clone(), clean.clone()]), 2, None);
-    said = __unpk1[0].clone();
-    many = __unpk1[1].clone();
+    let __unpk2 = py_unpack(&_the_pets_said(&[pets.clone(), clean.clone()]), 2, None);
+    said = __unpk2[0].clone();
+    many = __unpk2[1].clone();
     if py_truthy(&said.clone()) {
     if py_truthy(&_the_pets_are_coming(&[pets.clone(), memory.clone()])) {
     pool = if py_truthy(&many.clone()) { g_PET_TAIL_COMING_MANY() } else { g_PET_TAIL_COMING() };

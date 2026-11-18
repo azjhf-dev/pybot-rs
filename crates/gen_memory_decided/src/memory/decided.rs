@@ -273,19 +273,20 @@ pub fn _two_things(args: &[Py]) -> Py {
     let mut right_words: Py = Py::None;
     let _ = py_str("The two things a line put side by side, as \"X or Y\", or None.\n\n    Used by the ask that finds nothing settled: naming the two things the chat left open is an\n    answer, and \"Nothing settled yet.\" on its own tells the person less than they told us.\n    ");
     low = mcall(&mcall(&py_str(" "), "join", &[mcall(&mcall(&call_builtin("str", &[{ let __b = said.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]), "split", &[])]), "strip", &[py_str(" ?.!,")]);
-    left = py_str("");
-    right = py_str("");
+    let __assigned1 = py_str("");
+    left = __assigned1.clone();
+    right = __assigned1.clone();
     if py_truthy(&{ let __b = Py::Bool(py_contains(&low.clone(), &py_str(" between "))); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&geti(&mcall(&low.clone(), "split", &[py_str(" between "), Py::Int(1)]), &Py::Int(1)), &py_str(" and "))) } }) {
     head = geti(&mcall(&low.clone(), "split", &[py_str(" between "), Py::Int(1)]), &Py::Int(1));
-    let __unpk1 = py_unpack(&mcall(&head.clone(), "split", &[py_str(" and "), Py::Int(1)]), 2, None);
-    left = __unpk1[0].clone();
-    right = __unpk1[1].clone();
+    let __unpk2 = py_unpack(&mcall(&head.clone(), "split", &[py_str(" and "), Py::Int(1)]), 2, None);
+    left = __unpk2[0].clone();
+    right = __unpk2[1].clone();
     } else {
     if py_truthy(&Py::Bool(py_contains(&low.clone(), &py_str(" or ")))) {
     cut = mcall(&low.clone(), "rfind", &[py_str(" or ")]);
-    let __unpk2 = py_unpack(&py_tuple(vec![slice_or_raise(&low.clone(), &Py::None, &cut.clone(), &Py::None), slice_or_raise(&low.clone(), &op_add(&cut.clone(), &Py::Int(4)), &Py::None, &Py::None)]), 2, None);
-    left = __unpk2[0].clone();
-    right = __unpk2[1].clone();
+    let __unpk3 = py_unpack(&py_tuple(vec![slice_or_raise(&low.clone(), &Py::None, &cut.clone(), &Py::None), slice_or_raise(&low.clone(), &op_add(&cut.clone(), &Py::Int(4)), &Py::None, &Py::None)]), 2, None);
+    left = __unpk3[0].clone();
+    right = __unpk3[1].clone();
     } else {
     return Py::None;
     }

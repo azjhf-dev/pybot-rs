@@ -1179,8 +1179,9 @@ pub fn _apply_correction(args: &[Py]) -> Py {
     let _ = py_setitem(&memory.clone(), &py_str("topic"), fresh.clone());
     topics = mcall(&memory.clone(), "get", &[py_str("topics")]);
     if py_truthy(&Py::Bool(!py_truthy(&call_builtin("isinstance", &[topics.clone(), py_func("list", |args: &[Py]| call_builtin("list", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))))) {
-    topics = py_list(vec![]);
-    let _ = py_setitem(&memory.clone(), &py_str("topics"), py_list(vec![]));
+    let __assigned1 = py_list(vec![]);
+    topics = __assigned1.clone();
+    let _ = py_setitem(&memory.clone(), &py_str("topics"), __assigned1.clone());
     }
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&topics.clone())); if py_truthy(&__b) { __b } else { Py::Bool(!py_eq(&mcall(&geti(&topics.clone(), &op_neg(&Py::Int(1))), "get", &[py_str("text")]), &line.clone())) } }) {
     let _ = mcall(&topics.clone(), "append", &[fresh.clone()]);
@@ -1212,8 +1213,8 @@ pub fn _apply_correction(args: &[Py]) -> Py {
     let _ = py_setitem(&record.clone(), &py_str("words"), py_call(&pyrt::xrefs::xget("memory", "keywords"), &[text.clone()]));
     before = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(py_str("\\s*\\(mean [^)]*\\)\\s*$")); __args.push(py_str("")); __args.push(text.clone()); __kws.extend(vec![("flags".to_string(), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e)))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("re", "sub", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
     stated = { let __b = if py_truthy(&wrong.clone()) { _swap_in(&[before.clone(), target.clone(), wrong.clone()]) } else { Py::None }; if py_truthy(&__b) { __b } else { before.clone() } };
-    let __iter1 = py_iter_or_raise(&{ let __b = mcall(&pyrt::xrefs::xcall("memory.facts", "extract", &[{ let __b = stated.clone(); if py_truthy(&__b) { __b } else { text.clone() } }]), "get", &[py_str("others")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } });
-    for __item in __iter1 {
+    let __iter2 = py_iter_or_raise(&{ let __b = mcall(&pyrt::xrefs::xcall("memory.facts", "extract", &[{ let __b = stated.clone(); if py_truthy(&__b) { __b } else { text.clone() } }]), "get", &[py_str("others")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } });
+    for __item in __iter2 {
     entry = __item.clone();
     if py_truthy(&Py::Bool(!py_truthy(&op_sub(&call_builtin("set", &[entry.clone()]).unwrap_or_else(|e| exc::raise(e)), &py_set(vec![py_str("who"), py_str("pronoun")]))))) {
     continue;

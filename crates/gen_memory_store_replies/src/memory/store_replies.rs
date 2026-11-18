@@ -15904,8 +15904,9 @@ pub fn _the_same_fact_about_someone(args: &[Py]) -> Py {
     by_pronoun = Py::Bool(false);
     if py_truthy(&Py::Bool(!py_truthy(&match_.clone()))) {
     match_ = mcall(&g_SAME_FACT_AGAINST_PRONOUN(), "match", &[low.clone()]);
-    against = call_builtin("bool", &[match_.clone()]).unwrap_or_else(|e| exc::raise(e));
-    by_pronoun = call_builtin("bool", &[match_.clone()]).unwrap_or_else(|e| exc::raise(e));
+    let __assigned1 = call_builtin("bool", &[match_.clone()]).unwrap_or_else(|e| exc::raise(e));
+    against = __assigned1.clone();
+    by_pronoun = __assigned1.clone();
     }
     if py_truthy(&Py::Bool(!py_truthy(&match_.clone()))) {
     match_ = mcall(&g_SAME_FACT_ABOUT(), "match", &[low.clone()]);
@@ -15918,10 +15919,10 @@ pub fn _the_same_fact_about_someone(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&last.clone()))) {
     return Py::None;
     }
-    let __unpk1 = py_unpack(&last.clone(), 3, None);
-    who = __unpk1[0].clone();
-    kind = __unpk1[1].clone();
-    value = __unpk1[2].clone();
+    let __unpk2 = py_unpack(&last.clone(), 3, None);
+    who = __unpk2[0].clone();
+    kind = __unpk2[1].clone();
+    value = __unpk2[2].clone();
     if py_truthy(&Py::Bool(!py_truthy(&_the_fact_said_against(&[kind.clone(), value.clone(), { let __b = mcall(&mcall(&match_.clone(), "groupdict", &[]), "get", &[py_str("rest")]); if py_truthy(&__b) { __b } else { py_str("") } }])))) {
     return Py::None;
     }
@@ -15947,16 +15948,16 @@ pub fn _the_same_fact_about_someone(args: &[Py]) -> Py {
     if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_SAME_FACT_THEIR_OWN()) { let mut key: Py = __item.clone(); __out.push(mcall(&given.clone(), "get", &[key.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     return Py::None;
     }
-    let __iter2 = py_iter_or_raise(&pyrt::xrefs::xcall("memory", "others", &[memory.clone()]));
-    for __item in __iter2 {
+    let __iter3 = py_iter_or_raise(&pyrt::xrefs::xcall("memory", "others", &[memory.clone()]));
+    for __item in __iter3 {
     known = __item.clone();
     if py_truthy(&{ let __b = Py::Bool(py_eq(&mcall(&known.clone(), "get", &[py_str("who")]), &who.clone())); if !py_truthy(&__b) { __b } else { call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_SAME_FACT_THEIR_OWN()) { let mut key: Py = __item.clone(); __out.push(mcall(&known.clone(), "get", &[key.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }) {
     return Py::None;
     }
     }
-    let __unpk3 = py_unpack(&held.clone(), 2, None);
-    kind = __unpk3[0].clone();
-    value = __unpk3[1].clone();
+    let __unpk4 = py_unpack(&held.clone(), 2, None);
+    kind = __unpk4[0].clone();
+    value = __unpk4[1].clone();
     if py_truthy(&against.clone()) {
     if py_truthy(&Py::Bool(py_eq(&mcall(&mcall(&mcall(&match_.clone(), "groupdict", &[]), "get", &[py_str("same"), py_str("")]), "lower", &[]), &py_str("neither")))) {
     return Py::None;
@@ -21926,21 +21927,22 @@ pub fn _the_call_from_the_advice(args: &[Py]) -> Py {
     if py_truthy(&mcall(&g_SEE_SOMEONE(), "search", &[low.clone()])) {
     return Py::None;
     }
-    limit = Py::None;
-    condition = Py::None;
-    let __iter1 = py_iter_or_raise(&_recent_answers(&[memory.clone()]));
-    for __item in __iter1 {
+    let __assigned1 = Py::None;
+    limit = __assigned1.clone();
+    condition = __assigned1.clone();
+    let __iter2 = py_iter_or_raise(&_recent_answers(&[memory.clone()]));
+    for __item in __iter2 {
     said = __item.clone();
     if py_truthy(&Py::Bool(!py_truthy(&_shares_a_word(&[low.clone(), said.clone()])))) {
     continue;
     }
-    let __unpk2 = py_unpack(&py_tuple(vec![_the_limit(&[said.clone()]), _the_condition(&[said.clone()])]), 2, None);
-    found = __unpk2[0].clone();
-    if_half = __unpk2[1].clone();
+    let __unpk3 = py_unpack(&py_tuple(vec![_the_limit(&[said.clone()]), _the_condition(&[said.clone()])]), 2, None);
+    found = __unpk3[0].clone();
+    if_half = __unpk3[1].clone();
     if py_truthy(&{ let __b = found.clone(); if !py_truthy(&__b) { __b } else { if_half.clone() } }) {
-    let __unpk3 = py_unpack(&py_tuple(vec![found.clone(), if_half.clone()]), 2, None);
-    limit = __unpk3[0].clone();
-    condition = __unpk3[1].clone();
+    let __unpk4 = py_unpack(&py_tuple(vec![found.clone(), if_half.clone()]), 2, None);
+    limit = __unpk4[0].clone();
+    condition = __unpk4[1].clone();
     break;
     }
     }

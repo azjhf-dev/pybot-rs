@@ -561,8 +561,9 @@ pub fn user(args: &[Py]) -> Py {
     let _ = py_str("The user's facts (a dict), created on first use.");
     facts_ = mcall(&memory.clone(), "get", &[py_str("user")]);
     if py_truthy(&Py::Bool(!py_truthy(&call_builtin("isinstance", &[facts_.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))))) {
-    facts_ = py_dict(vec![]);
-    let _ = py_setitem(&memory.clone(), &py_str("user"), py_dict(vec![]));
+    let __assigned1 = py_dict(vec![]);
+    facts_ = __assigned1.clone();
+    let _ = py_setitem(&memory.clone(), &py_str("user"), __assigned1.clone());
     }
     return facts_.clone();
     Py::None
@@ -584,8 +585,9 @@ pub fn log(args: &[Py]) -> Py {
     let _ = py_str("Every fact the user stated, in the order they said it.");
     entries = mcall(&memory.clone(), "get", &[py_str("facts_log")]);
     if py_truthy(&Py::Bool(!py_truthy(&call_builtin("isinstance", &[entries.clone(), py_func("list", |args: &[Py]| call_builtin("list", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))))) {
-    entries = py_list(vec![]);
-    let _ = py_setitem(&memory.clone(), &py_str("facts_log"), py_list(vec![]));
+    let __assigned1 = py_list(vec![]);
+    entries = __assigned1.clone();
+    let _ = py_setitem(&memory.clone(), &py_str("facts_log"), __assigned1.clone());
     }
     return entries.clone();
     Py::None
@@ -607,8 +609,9 @@ pub fn others(args: &[Py]) -> Py {
     let _ = py_str("Facts about other people the user mentioned: [{\"who\": \"son\", \"allergies\": [\"nuts\"]}].\n\n    A fact belongs to the person it is about: \"my son is allergic to nuts\" is the son's, and\n    only what the user says about themselves can be recalled as their own (bot/memory/facts.py\n    decides with facts.subject()).\n    ");
     seen = mcall(&memory.clone(), "get", &[py_str("others")]);
     if py_truthy(&Py::Bool(!py_truthy(&call_builtin("isinstance", &[seen.clone(), py_func("list", |args: &[Py]| call_builtin("list", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))))) {
-    seen = py_list(vec![]);
-    let _ = py_setitem(&memory.clone(), &py_str("others"), py_list(vec![]));
+    let __assigned1 = py_list(vec![]);
+    seen = __assigned1.clone();
+    let _ = py_setitem(&memory.clone(), &py_str("others"), __assigned1.clone());
     }
     return seen.clone();
     Py::None
@@ -1220,7 +1223,7 @@ pub fn forget(args: &[Py]) -> Py {
     return py_list(vec![]);
     }
     if py_truthy(&Py::Bool(py_contains(&doomed.clone(), &mcall(&mcall(&call_builtin("str", &[had.clone()]).unwrap_or_else(|e| exc::raise(e)), "strip", &[]), "lower", &[])))) {
-    let _ = py_delitem(&known.clone(), &key.clone()).unwrap_or(());
+    py_delitem(&known.clone(), &key.clone()).unwrap_or_else(|e| exc::raise(e));
     return py_list(vec![had.clone()]);
     }
     return py_list(vec![]);

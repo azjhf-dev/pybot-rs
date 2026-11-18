@@ -7382,19 +7382,20 @@ pub fn _mood(args: &[Py]) -> Py {
     if py_truthy(&reads_as_no_pleasure(&[clean.clone()])) {
     return py_str("negative");
     }
-    good = Py::Bool(false);
-    bad = Py::Bool(false);
+    let __assigned1 = Py::Bool(false);
+    good = __assigned1.clone();
+    bad = __assigned1.clone();
     if py_truthy(&{ let __b = Py::Bool(py_contains(&words.clone(), &py_str("ill"))); if !py_truthy(&__b) { __b } else { pyrt::xrefs::xcall("compose.fallback", "_reads_as_illness", &[clean.clone()]) } }) {
     bad = Py::Bool(true);
     }
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&good.clone())); if !py_truthy(&__b) { __b } else { { let __b = _a_harm_said(&[clean.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&py_call(&pyrt::xrefs::xget("compose.fallback", "reads_like_a_symptom"), &[clean.clone()]))) } } } }) {
     bad = Py::Bool(true);
     }
-    let __iter1 = py_iter_or_raise(&call_builtin("enumerate", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)));
-    for __item in __iter1 {
-    let __unpk2 = py_unpack(&__item.clone(), 2, None);
-    i = __unpk2[0].clone();
-    word = __unpk2[1].clone();
+    let __iter2 = py_iter_or_raise(&call_builtin("enumerate", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter2 {
+    let __unpk3 = py_unpack(&__item.clone(), 2, None);
+    i = __unpk3[0].clone();
+    word = __unpk3[1].clone();
     if py_truthy(&pyrt::xrefs::xcall("compose.fallback", "_in_an_aim", &[clean.clone(), word.clone()])) {
     continue;
     }

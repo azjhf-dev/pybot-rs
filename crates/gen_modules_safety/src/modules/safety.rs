@@ -8703,8 +8703,9 @@ pub fn _matches(args: &[Py]) -> Py {
     pattern = __item.clone();
     rx = mcall(&g__COMPILED(), "get", &[pattern.clone()]);
     if py_truthy(&Py::Bool(py_is(&rx.clone(), &Py::None))) {
-    rx = stdlib_call("re", "compile", &[pattern.clone()]).unwrap_or_else(|e| exc::raise(e));
-    let _ = py_setitem(&g__COMPILED(), &pattern.clone(), stdlib_call("re", "compile", &[pattern.clone()]).unwrap_or_else(|e| exc::raise(e)));
+    let __assigned2 = stdlib_call("re", "compile", &[pattern.clone()]).unwrap_or_else(|e| exc::raise(e));
+    rx = __assigned2.clone();
+    let _ = py_setitem(&g__COMPILED(), &pattern.clone(), __assigned2.clone());
     }
     if py_truthy(&mcall(&rx.clone(), "search", &[line.clone()])) {
     return Py::Bool(true);

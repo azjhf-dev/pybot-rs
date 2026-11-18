@@ -834,8 +834,9 @@ pub fn resolve(args: &[Py]) -> Py {
     name = __item.clone();
     let _ = py_setitem(&ref_.clone(), &name.clone(), Py::None);
     if py_truthy(&Py::Bool(py_contains(&py_tuple(vec![py_str("they"), py_str("that")]), &name.clone()))) {
-    let _ = py_setitem(&ref_.clone(), &py_str("he"), Py::None);
-    let _ = py_setitem(&ref_.clone(), &py_str("she"), Py::None);
+    let __assigned3 = Py::None;
+    let _ = py_setitem(&ref_.clone(), &py_str("he"), __assigned3.clone());
+    let _ = py_setitem(&ref_.clone(), &py_str("she"), __assigned3.clone());
     }
     }
     pointed_back = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&py_tuple(vec![py_str("it"), py_str("that"), py_str("they"), py_str("there")])) { let mut name: Py = __item.clone(); if py_truthy(&geti(&used.clone(), &name.clone())) {  __out.push(name.clone()); } } py_list(__out) })() };

@@ -10538,8 +10538,9 @@ pub fn _bounded__wrapped(args: &[Py]) -> Py {
     let _ = py_str("A phrase matched as whole words, so \"raining\" is not \"training\".");
     pattern = mcall(&g__BOUNDED(), "get", &[phrase.clone()]);
     if py_truthy(&Py::Bool(py_is(&pattern.clone(), &Py::None))) {
-    pattern = stdlib_call("re", "compile", &[op_add(&op_add(&py_str("(?<![a-z])"), &stdlib_call("re", "escape", &[phrase.clone()]).unwrap_or_else(|e| exc::raise(e))), &py_str("(?![a-z])"))]).unwrap_or_else(|e| exc::raise(e));
-    let _ = py_setitem(&g__BOUNDED(), &phrase.clone(), stdlib_call("re", "compile", &[op_add(&op_add(&py_str("(?<![a-z])"), &stdlib_call("re", "escape", &[phrase.clone()]).unwrap_or_else(|e| exc::raise(e))), &py_str("(?![a-z])"))]).unwrap_or_else(|e| exc::raise(e)));
+    let __assigned1 = stdlib_call("re", "compile", &[op_add(&op_add(&py_str("(?<![a-z])"), &stdlib_call("re", "escape", &[phrase.clone()]).unwrap_or_else(|e| exc::raise(e))), &py_str("(?![a-z])"))]).unwrap_or_else(|e| exc::raise(e));
+    pattern = __assigned1.clone();
+    let _ = py_setitem(&g__BOUNDED(), &phrase.clone(), __assigned1.clone());
     }
     return pattern.clone();
     Py::None
@@ -13261,10 +13262,11 @@ pub fn _the_pronoun__wrapped(args: &[Py]) -> Py {
     let mut words: Py = Py::None;
     let _ = py_str("her or him for the one person the day belongs to, \"\" when the line names none or both.");
     words = stdlib_call("re", "findall", &[py_str("[a-z']+"), mcall(&mcall(&call_builtin("str", &[{ let __b = clean.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]), "replace", &[py_str("’"), py_str("'")])]).unwrap_or_else(|e| exc::raise(e));
-    she = Py::Bool(false);
-    he = Py::Bool(false);
-    let __iter1 = py_iter_or_raise(&words.clone());
-    for __item in __iter1 {
+    let __assigned1 = Py::Bool(false);
+    she = __assigned1.clone();
+    he = __assigned1.clone();
+    let __iter2 = py_iter_or_raise(&words.clone());
+    for __item in __iter2 {
     word = __item.clone();
     stem = if py_truthy(&{ let __b = mcall(&word.clone(), "endswith", &[py_str("s")]); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&op_bitor(&g__SHE(), &g__HE()), &slice_or_raise(&word.clone(), &Py::None, &op_neg(&Py::Int(1)), &Py::None))) } }) { slice_or_raise(&word.clone(), &Py::None, &op_neg(&Py::Int(1)), &Py::None) } else { word.clone() };
     if py_truthy(&Py::Bool(py_contains(&g__SHE(), &stem.clone()))) {
@@ -16669,8 +16671,9 @@ pub fn _their_own_phrase__wrapped(args: &[Py]) -> Py {
     thing = __item.clone();
     pattern = mcall(&g_MY_OWN(), "get", &[thing.clone()]);
     if py_truthy(&Py::Bool(py_is(&pattern.clone(), &Py::None))) {
-    pattern = stdlib_call("re", "compile", &[op_add(&op_add(&py_str("\\b(?:my|our)\\s+(?:[a-z']+\\s+){0,2}"), &stdlib_call("re", "escape", &[thing.clone()]).unwrap_or_else(|e| exc::raise(e))), &py_str("(?![a-z])"))]).unwrap_or_else(|e| exc::raise(e));
-    let _ = py_setitem(&g_MY_OWN(), &thing.clone(), stdlib_call("re", "compile", &[op_add(&op_add(&py_str("\\b(?:my|our)\\s+(?:[a-z']+\\s+){0,2}"), &stdlib_call("re", "escape", &[thing.clone()]).unwrap_or_else(|e| exc::raise(e))), &py_str("(?![a-z])"))]).unwrap_or_else(|e| exc::raise(e)));
+    let __assigned2 = stdlib_call("re", "compile", &[op_add(&op_add(&py_str("\\b(?:my|our)\\s+(?:[a-z']+\\s+){0,2}"), &stdlib_call("re", "escape", &[thing.clone()]).unwrap_or_else(|e| exc::raise(e))), &py_str("(?![a-z])"))]).unwrap_or_else(|e| exc::raise(e));
+    pattern = __assigned2.clone();
+    let _ = py_setitem(&g_MY_OWN(), &thing.clone(), __assigned2.clone());
     }
     match_ = mcall(&pattern.clone(), "search", &[clean.clone()]);
     if py_truthy(&match_.clone()) {
@@ -16916,8 +16919,9 @@ pub fn _names_place__wrapped(args: &[Py]) -> Py {
     place = __item.clone();
     pattern = mcall(&g_NUMBER_PLACE_PATTERNS(), "get", &[place.clone()]);
     if py_truthy(&Py::Bool(py_is(&pattern.clone(), &Py::None))) {
-    pattern = stdlib_call("re", "compile", &[op_add(&op_add(&py_str("\\b"), &stdlib_call("re", "escape", &[place.clone()]).unwrap_or_else(|e| exc::raise(e))), &py_str("(?:s|es)?\\b"))]).unwrap_or_else(|e| exc::raise(e));
-    let _ = py_setitem(&g_NUMBER_PLACE_PATTERNS(), &place.clone(), stdlib_call("re", "compile", &[op_add(&op_add(&py_str("\\b"), &stdlib_call("re", "escape", &[place.clone()]).unwrap_or_else(|e| exc::raise(e))), &py_str("(?:s|es)?\\b"))]).unwrap_or_else(|e| exc::raise(e)));
+    let __assigned2 = stdlib_call("re", "compile", &[op_add(&op_add(&py_str("\\b"), &stdlib_call("re", "escape", &[place.clone()]).unwrap_or_else(|e| exc::raise(e))), &py_str("(?:s|es)?\\b"))]).unwrap_or_else(|e| exc::raise(e));
+    pattern = __assigned2.clone();
+    let _ = py_setitem(&g_NUMBER_PLACE_PATTERNS(), &place.clone(), __assigned2.clone());
     }
     if py_truthy(&mcall(&pattern.clone(), "search", &[clean.clone()])) {
     return Py::Bool(true);

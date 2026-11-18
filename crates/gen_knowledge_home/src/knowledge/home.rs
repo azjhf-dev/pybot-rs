@@ -4946,34 +4946,35 @@ pub fn __nested_nearest_0(args: &[Py]) -> Py {
     Py::None
 }
     nearest = {{ let cold = cold.clone(); let cold_down = cold_down.clone(); let cold_up = cold_up.clone(); let i = i.clone(); let is_cold = is_cold.clone(); let is_warm = is_warm.clone(); let nearest = nearest.clone(); let said = said.clone(); let warm = warm.clone(); let word = word.clone(); let words = words.clone(); py_func("nearest", move |args: &[Py]| { let mut full = vec![cold.clone(), cold_down.clone(), cold_up.clone(), i.clone(), is_cold.clone(), is_warm.clone(), nearest.clone(), said.clone(), warm.clone(), word.clone(), words.clone()]; full.extend_from_slice(args); __nested_nearest_0(&full) }) }};
-    cold_up = Py::Int(0);
-    cold_down = Py::Int(0);
-    let __iter2 = py_iter_or_raise(&call_builtin("enumerate", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)));
-    for __item in __iter2 {
-    let __unpk3 = py_unpack(&__item.clone(), 2, None);
-    i = __unpk3[0].clone();
-    word = __unpk3[1].clone();
+    let __assigned2 = Py::Int(0);
+    cold_up = __assigned2.clone();
+    cold_down = __assigned2.clone();
+    let __iter3 = py_iter_or_raise(&call_builtin("enumerate", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter3 {
+    let __unpk4 = py_unpack(&__item.clone(), 2, None);
+    i = __unpk4[0].clone();
+    word = __unpk4[1].clone();
     if py_truthy(&{ let __b = Py::Bool(!py_contains(&g_RADIATOR_UP(), &word.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&g_RADIATOR_DOWN(), &word.clone())) } }) {
     continue;
     }
-    let __unpk4 = py_unpack(&py_tuple(vec![py_call(&nearest, &[i.clone(), g_RADIATOR_COLD()]), py_call(&nearest, &[i.clone(), g_RADIATOR_WARM()])]), 2, None);
-    cold = __unpk4[0].clone();
-    warm = __unpk4[1].clone();
+    let __unpk5 = py_unpack(&py_tuple(vec![py_call(&nearest, &[i.clone(), g_RADIATOR_COLD()]), py_call(&nearest, &[i.clone(), g_RADIATOR_WARM()])]), 2, None);
+    cold = __unpk5[0].clone();
+    warm = __unpk5[1].clone();
     if py_truthy(&{ let __b = Py::Bool(py_is(&cold.clone(), &Py::None)); if !py_truthy(&__b) { __b } else { Py::Bool(py_is(&warm.clone(), &Py::None)) } }) {
     continue;
     }
     is_cold = { let __b = Py::Bool(!py_is(&cold.clone(), &Py::None)); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_is(&warm.clone(), &Py::None)); if py_truthy(&__b) { __b } else { op_lt(&cold.clone(), &warm.clone()) } } } };
     is_warm = { let __b = Py::Bool(!py_is(&warm.clone(), &Py::None)); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_is(&cold.clone(), &Py::None)); if py_truthy(&__b) { __b } else { op_lt(&warm.clone(), &cold.clone()) } } } };
     if py_truthy(&Py::Bool(py_contains(&g_RADIATOR_UP(), &word.clone()))) {
-    let __aug5 = op_add(&cold_up.clone(), &if py_truthy(&is_cold.clone()) { Py::Int(1) } else { Py::Int(0) });
-    cold_up = __aug5;
-    let __aug6 = op_add(&cold_down.clone(), &if py_truthy(&is_warm.clone()) { Py::Int(1) } else { Py::Int(0) });
-    cold_down = __aug6;
-    } else {
-    let __aug7 = op_add(&cold_down.clone(), &if py_truthy(&is_cold.clone()) { Py::Int(1) } else { Py::Int(0) });
+    let __aug6 = op_add(&cold_up.clone(), &if py_truthy(&is_cold.clone()) { Py::Int(1) } else { Py::Int(0) });
+    cold_up = __aug6;
+    let __aug7 = op_add(&cold_down.clone(), &if py_truthy(&is_warm.clone()) { Py::Int(1) } else { Py::Int(0) });
     cold_down = __aug7;
-    let __aug8 = op_add(&cold_up.clone(), &if py_truthy(&is_warm.clone()) { Py::Int(1) } else { Py::Int(0) });
-    cold_up = __aug8;
+    } else {
+    let __aug8 = op_add(&cold_down.clone(), &if py_truthy(&is_cold.clone()) { Py::Int(1) } else { Py::Int(0) });
+    cold_down = __aug8;
+    let __aug9 = op_add(&cold_up.clone(), &if py_truthy(&is_warm.clone()) { Py::Int(1) } else { Py::Int(0) });
+    cold_up = __aug9;
     }
     }
     if py_truthy(&{ let __b = cold_up.clone(); if !py_truthy(&__b) { __b } else { cold_down.clone() } }) {

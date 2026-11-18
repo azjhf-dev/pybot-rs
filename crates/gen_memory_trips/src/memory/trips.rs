@@ -1299,8 +1299,9 @@ pub fn _keep_the_new_place(args: &[Py]) -> Py {
     let _ = py_setitem(&known.clone(), &py_str("plan"), call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&geti(&known.clone(), &py_str("plans"))) { let mut entry: Py = __item.clone(); if py_truthy(&Py::Bool(py_contains(&_low(&[entry.clone()]), &_low(&[place.clone()])))) {  __out.push(entry.clone()); } } py_list(__out) })() }, place.clone()]).unwrap_or_else(|e| exc::raise(e)));
     log = mcall(&memory.clone(), "get", &[py_str("facts_log")]);
     if py_truthy(&Py::Bool(!py_truthy(&call_builtin("isinstance", &[log.clone(), py_func("list", |args: &[Py]| call_builtin("list", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))))) {
-    log = py_list(vec![]);
-    let _ = py_setitem(&memory.clone(), &py_str("facts_log"), py_list(vec![]));
+    let __assigned1 = py_list(vec![]);
+    log = __assigned1.clone();
+    let _ = py_setitem(&memory.clone(), &py_str("facts_log"), __assigned1.clone());
     }
     let _ = mcall(&log.clone(), "append", &[py_dict(vec![(py_str("key"), py_str("places")), (py_str("value"), place.clone()), (py_str("turn"), call_builtin("len", &[{ let __b = mcall(&memory.clone(), "get", &[py_str("turns")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }]).unwrap_or_else(|e| exc::raise(e))), (py_str("text"), said.clone())])]);
     let _ = mcall(&log.clone(), "append", &[py_dict(vec![(py_str("key"), py_str("plan")), (py_str("value"), place.clone()), (py_str("turn"), call_builtin("len", &[{ let __b = mcall(&memory.clone(), "get", &[py_str("turns")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }]).unwrap_or_else(|e| exc::raise(e))), (py_str("text"), said.clone())])]);

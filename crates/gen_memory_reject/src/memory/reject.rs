@@ -932,8 +932,9 @@ pub fn reply_for(args: &[Py]) -> Py {
     had_them_all = __unpk2[0].clone();
     wants_them_all = __unpk2[1].clone();
     if py_truthy(&op_gt(&call_builtin("len", &[offered.clone()]).unwrap_or_else(|e| exc::raise(e)), &g_THE_MOST_A_LIST())) {
-    had_them_all = Py::Bool(false);
-    wants_them_all = Py::Bool(false);
+    let __assigned3 = Py::Bool(false);
+    had_them_all = __assigned3.clone();
+    wants_them_all = __assigned3.clone();
     }
     if py_truthy(&op_lt(&call_builtin("len", &[offered.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2))) {
     if py_truthy(&{ let __b = had_them_all.clone(); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&{ let __b = left.clone(); if py_truthy(&__b) { __b } else { wants_them_all.clone() } })) } }) {
@@ -943,9 +944,9 @@ pub fn reply_for(args: &[Py]) -> Py {
     said = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("option".to_string(), geti(&{ let __b = left.clone(); if py_truthy(&__b) { __b } else { offered.clone() } }, &Py::Int(0)))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| mcall(&pyrt::xrefs::xcall("compose", "pick", &[pool.clone(), memory.clone(), call_builtin("str", &[text.clone()]).unwrap_or_else(|e| exc::raise(e))]), "format", args))(&__args) };
     return op_add(&mcall(&slice_or_raise(&said.clone(), &Py::None, &Py::Int(1), &Py::None), "upper", &[]), &slice_or_raise(&said.clone(), &Py::Int(1), &Py::None, &Py::None));
     }
-    let __unpk3 = py_unpack(&py_tuple(vec![_the_whole_lot(&[offered.clone()]), _the_names(&[offered.clone()])]), 2, None);
-    which = __unpk3[0].clone();
-    names = __unpk3[1].clone();
+    let __unpk4 = py_unpack(&py_tuple(vec![_the_whole_lot(&[offered.clone()]), _the_names(&[offered.clone()])]), 2, None);
+    which = __unpk4[0].clone();
+    names = __unpk4[1].clone();
     if py_truthy(&had_them_all.clone()) {
     return pyrt::xrefs::xcall("compose", "pick", &[g_PICK_AGAIN(), memory.clone(), call_builtin("str", &[text.clone()]).unwrap_or_else(|e| exc::raise(e))]);
     }

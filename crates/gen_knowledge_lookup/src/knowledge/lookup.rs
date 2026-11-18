@@ -2999,13 +2999,14 @@ pub fn _the_device_is_the_one_falling_asleep(args: &[Py]) -> Py {
     let mut person: Py = Py::None;
     let mut word: Py = Py::None;
     let _ = py_str("Whether the words in front of a sleep shape name a device rather than the person.");
-    device = op_neg(&Py::Int(1));
-    person = op_neg(&Py::Int(1));
-    let __iter1 = py_iter_or_raise(&call_builtin("enumerate", &[mcall(&slice_or_raise(&said.clone(), &Py::None, &start.clone(), &Py::None), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
-    for __item in __iter1 {
-    let __unpk2 = py_unpack(&__item.clone(), 2, None);
-    index = __unpk2[0].clone();
-    word = __unpk2[1].clone();
+    let __assigned1 = op_neg(&Py::Int(1));
+    device = __assigned1.clone();
+    person = __assigned1.clone();
+    let __iter2 = py_iter_or_raise(&call_builtin("enumerate", &[mcall(&slice_or_raise(&said.clone(), &Py::None, &start.clone(), &Py::None), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter2 {
+    let __unpk3 = py_unpack(&__item.clone(), 2, None);
+    index = __unpk3[0].clone();
+    word = __unpk3[1].clone();
     bare = mcall(&mcall(&word.clone(), "strip", &[g__SLEEPY_MARKS()]), "lower", &[]);
     if py_truthy(&Py::Bool(py_contains(&g_A_DEVICE_THAT_SLEEPS(), &bare.clone()))) {
     device = index.clone();
@@ -6192,17 +6193,18 @@ pub fn score(args: &[Py]) -> Py {
     return Py::Int(0);
     }
     parts_said = if py_truthy(&typed.clone()) { _body_parts(&[typed.clone()]) } else { Py::None };
-    ask_forms = Py::None;
-    ask_seen = Py::None;
-    let __iter10 = py_iter_or_raise(&gattr(&item.clone(), "avoid"));
-    for __item in __iter10 {
+    let __assigned10 = Py::None;
+    ask_forms = __assigned10.clone();
+    ask_seen = __assigned10.clone();
+    let __iter11 = py_iter_or_raise(&gattr(&item.clone(), "avoid"));
+    for __item in __iter11 {
     word = __item.clone();
     key = if py_truthy(&call_builtin("isinstance", &[word.clone(), py_func("str", |args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) { mcall(&mcall(&word.clone(), "strip", &[]), "lower", &[]) } else { py_str("") };
     if py_truthy(&Py::Bool(py_contains(&g_ASK_PHRASE_WORDS(), &key.clone()))) {
     if py_truthy(&Py::Bool(py_is(&ask_forms.clone(), &Py::None))) {
-    let __unpk11 = py_unpack(&_without_ask_phrase(&[forms.clone(), seen.clone()]), 2, None);
-    ask_forms = __unpk11[0].clone();
-    ask_seen = __unpk11[1].clone();
+    let __unpk12 = py_unpack(&_without_ask_phrase(&[forms.clone(), seen.clone()]), 2, None);
+    ask_forms = __unpk12[0].clone();
+    ask_seen = __unpk12[1].clone();
     }
     if py_truthy(&_part_score(&[word.clone(), ask_forms.clone(), ask_seen.clone()])) {
     return Py::Int(0);

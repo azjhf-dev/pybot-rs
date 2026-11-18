@@ -2635,22 +2635,24 @@ pub fn _the_day(args: &[Py]) -> Py {
     let _ = py_str("The calendar day a date said the short way falls on, and how it was said.\n\n    The kinds are how much of the date the person gave, because the reply says back only that\n    much: a month alone is \"sometime in October\", a day is \"Tuesday 14 October\". A date already\n    gone is the next time it comes round, which is how people say \"in march\" in November.\n    ");
     today = { let __b = today.clone(); if py_truthy(&__b) { __b } else { _today(&[]) } };
     words = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&mcall(&_plain(&[when.clone()]), "replace", &[py_str(","), py_str(" ")]), "split", &[])) { let mut word: Py = __item.clone(); if py_truthy(&word.clone()) {  __out.push(word.clone()); } } py_list(__out) })() };
-    month = Py::None;
-    day = Py::None;
-    weekday = Py::None;
-    early = Py::Bool(false);
-    has_end = Py::Bool(false);
-    has_next = Py::Bool(false);
-    has_this = Py::Bool(false);
-    has_month = Py::Bool(false);
-    has_week = Py::Bool(false);
+    let __assigned1 = Py::None;
+    month = __assigned1.clone();
+    day = __assigned1.clone();
+    weekday = __assigned1.clone();
+    let __assigned2 = Py::Bool(false);
+    early = __assigned2.clone();
+    has_end = __assigned2.clone();
+    has_next = __assigned2.clone();
+    has_this = __assigned2.clone();
+    has_month = __assigned2.clone();
+    has_week = __assigned2.clone();
     dated = Py::Bool(false);
     anchored = call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&words.clone()) { let mut word: Py = __item.clone(); __out.push({ let __b = Py::Bool(py_contains(&g_MONTH_NUMBER(), &word.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_WEEKDAY_NUMBER(), &word.clone())) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
-    let __iter1 = py_iter_or_raise(&call_builtin("enumerate", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)));
-    for __item in __iter1 {
-    let __unpk2 = py_unpack(&__item.clone(), 2, None);
-    index = __unpk2[0].clone();
-    word = __unpk2[1].clone();
+    let __iter3 = py_iter_or_raise(&call_builtin("enumerate", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter3 {
+    let __unpk4 = py_unpack(&__item.clone(), 2, None);
+    index = __unpk4[0].clone();
+    word = __unpk4[1].clone();
     if py_truthy(&Py::Bool(!py_truthy(&dated.clone()))) {
     started = Py::Bool(py_contains(&g_A_DATE_ITSELF(), &word.clone()));
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&started.clone())); if !py_truthy(&__b) { __b } else { _a_day_number(&[word.clone()]) } }) {
@@ -2731,9 +2733,9 @@ pub fn _the_day(args: &[Py]) -> Py {
     return py_tuple(vec![op_add(&today.clone(), &{ let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new();  __kws.extend(vec![("days".to_string(), ahead.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| stdlib_call("datetime", "timedelta", args).unwrap_or_else(|e| exc::raise(e)))(&__args) }), py_str("date")]);
     }
     if py_truthy(&Py::Bool(!py_is(&day.clone(), &Py::None))) {
-    let __unpk3 = py_unpack(&_this_month_or_next(&[today.clone(), day.clone()]), 2, None);
-    upcoming = __unpk3[0].clone();
-    kind = __unpk3[1].clone();
+    let __unpk5 = py_unpack(&_this_month_or_next(&[today.clone(), day.clone()]), 2, None);
+    upcoming = __unpk5[0].clone();
+    kind = __unpk5[1].clone();
     return py_tuple(vec![upcoming.clone(), if py_truthy(&early.clone()) { py_str("month") } else { kind.clone() }]);
     }
     return py_tuple(vec![Py::None, Py::None]);
@@ -2951,16 +2953,19 @@ pub fn _how_long(args: &[Py]) -> Py {
     asked = mcall(&call_builtin("str", &[{ let __b = line.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]);
     named = py_str("");
     if py_truthy(&stdlib_call("re", "search", &[py_str("\\bweeks?\\b"), asked.clone()]).unwrap_or_else(|e| exc::raise(e))) {
-    named = py_str("week");
-    unit = py_str("week");
+    let __assigned1 = py_str("week");
+    named = __assigned1.clone();
+    unit = __assigned1.clone();
     } else {
     if py_truthy(&stdlib_call("re", "search", &[py_str("\\bdays?\\b"), asked.clone()]).unwrap_or_else(|e| exc::raise(e))) {
-    named = py_str("day");
-    unit = py_str("day");
+    let __assigned2 = py_str("day");
+    named = __assigned2.clone();
+    unit = __assigned2.clone();
     } else {
     if py_truthy(&stdlib_call("re", "search", &[py_str("\\bmonths?\\b"), asked.clone()]).unwrap_or_else(|e| exc::raise(e))) {
-    named = py_str("month");
-    unit = py_str("month");
+    let __assigned3 = py_str("month");
+    named = __assigned3.clone();
+    unit = __assigned3.clone();
     } else {
     if py_truthy(&op_le(&days.clone(), &Py::Int(14))) {
     unit = py_str("day");
