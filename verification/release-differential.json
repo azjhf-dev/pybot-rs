@@ -262,7 +262,7 @@
     "exact": true
   },
   {
-    "binary_sha256": "b84c22abffae6825dd5b70341887eb51482a4f66344401316112bfbd5a63e52e",
+    "binary_sha256": "d4cabea0451fe30ff4ca24c455750b4e0d45833b59a77fa13bf5c230bb078a33",
     "case": 2,
     "inputs": [
       "what is 2 plus 2",
@@ -284,7 +284,8 @@
       "timeout": true,
       "timeout_seconds": 110,
       "replies": [
-        "That's 4."
+        "That's 4.",
+        "That's 96."
       ]
     },
     "exact": false
