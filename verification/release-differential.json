@@ -54,33 +54,6 @@
     "exact": false
   },
   {
-    "case": 2,
-    "inputs": [
-      "what is 2 plus 2",
-      "what is 12 times 8",
-      "what is the capital of France"
-    ],
-    "python": {
-      "returncode": 0,
-      "replies": [
-        "That's 4.",
-        "That's 96.",
-        "Paris."
-      ],
-      "diagnostics": "[module: answers | 6458 ms]\n[module: answers | 6734 ms]\n[module: answers | 1096 ms]\n"
-    },
-    "rust": {
-      "returncode": 0,
-      "replies": [
-        "No number from me without the figures it comes from - that is what stops it being a guess. What numbers do you already have?",
-        "That's beyond what I know well, sorry. Searching for it will turn up better sources than I can offer; tell me what you find and I'll help you weigh it up.",
-        "Paris."
-      ],
-      "diagnostics": "[module: the_shape_of_the_answer | 52205 ms]\n[module: greeting | 13010 ms]\n[module: answers | 5840 ms]\n"
-    },
-    "exact": false
-  },
-  {
     "case": 3,
     "inputs": [
       "I feel sad",
@@ -148,5 +121,32 @@
       "diagnostics": "\nthread 'pybot' (587601) has overflowed its stack\nfatal runtime error: stack overflow, aborting\n"
     },
     "exact": false
+  },
+  {
+    "case": 2,
+    "inputs": [
+      "what is 2 plus 2",
+      "what is 12 times 8",
+      "what is the capital of France"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "That's 4.",
+        "That's 96.",
+        "Paris."
+      ],
+      "diagnostics": "[module: answers | 6413 ms]\n[module: answers | 6775 ms]\n[module: answers | 1086 ms]\n"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "That's 4.",
+        "That's 96.",
+        "Paris."
+      ],
+      "diagnostics": "[module: answers | 54289 ms]\n[module: answers | 15761 ms]\n[module: answers | 10121 ms]\n"
+    },
+    "exact": true
   }
 ]
