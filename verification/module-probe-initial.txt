@@ -1,0 +1,3 @@
+modules.safety	None
+modules.greeting	ERROR TypeError: 'NoneType' object is not iterable
+modules.chat	'Hi there — what do you need?'

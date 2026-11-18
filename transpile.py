@@ -1441,7 +1441,7 @@ class Gen:
         if isinstance(target, ast.Name):
             lines.append(f'let mut {rust_ident(target.id)}: Py = {expr};')
         elif isinstance(target, (ast.Tuple, ast.List)):
-            tmp = f'__unpk{id(target) % 9999}'
+            tmp = ctx.tmpname('unpk')
             star = next((i for i,e in enumerate(target.elts) if isinstance(e, ast.Starred)), None)
             star_expr = 'None' if star is None else f'Some({star})'
             lines.append(f'let {tmp} = py_unpack(&{expr}, {len(target.elts)}, {star_expr});')
