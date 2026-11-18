@@ -9,6 +9,7 @@ Conventions (see src/pyrt/):
   - Python exceptions are Rust panics carrying PyExc; try/except -> catch().
 """
 import ast
+import hashlib
 import os
 import re
 import symtable as symtable_mod
@@ -77,8 +78,7 @@ def pkg_of(dotted):
     return dotted.split('.')[0]
 
 def crate_of(dotted):
-    p = pkg_of(dotted)
-    return 'gen_core' if p in CORE_PKGS else 'gen_' + p
+    return 'gen_' + dotted.replace('.', '_')
 
 def rust_path(dotted, cur_dotted=None):
     """Absolute in-crate or cross-crate path for a dotted bot module."""
@@ -109,8 +109,11 @@ class ImportInfo:
 
 def resolve_imports(tree, dotted, mods, classes):
     info = ImportInfo()
-    for node in tree.body:
+    def visit(node):
         resolve_one_import(node, info, dotted, mods, classes)
+        if not isinstance(node, (ast.FunctionDef, ast.ClassDef, ast.Lambda)):
+            for child in ast.iter_child_nodes(node): visit(child)
+    for node in tree.body: visit(node)
     return info
 
 def resolve_one_import(node, info, dotted, mods, classes):
@@ -273,8 +276,7 @@ class Gen:
         return rust_path(target_dotted, self.dotted)
 
     def is_xref(self, target_dotted):
-        return (crate_of(target_dotted) != crate_of(self.dotted)
-                and PKG_ORDER[pkg_of(target_dotted)] > PKG_ORDER[pkg_of(self.dotted)])
+        return target_dotted != self.dotted
 
     def ref_fn_value(self, tdotted, item):
         """Py value referencing a fn/class/decorated in another module."""
@@ -343,6 +345,8 @@ class Gen:
                 for d in n.args.defaults:
                     walk(d)
                 return
+            if isinstance(n, (ast.Import, ast.ImportFrom)):
+                locals_.update(a.asname or (a.name.split('.')[0] if isinstance(n, ast.Import) else a.name) for a in n.names)
             if isinstance(n, ast.Name) and isinstance(n.ctx, ast.Store):
                 locals_.add(n.id)
             elif isinstance(n, (ast.For,)):
@@ -378,14 +382,20 @@ class Gen:
         # decorated functions and plain functions
         fdefs = [n for n in body if isinstance(n, ast.FunctionDef)]
         cdefs = [n for n in body if isinstance(n, ast.ClassDef)]
+        seen = {}
+        for f in reversed(fdefs):
+            old = f.name
+            if old in seen:
+                seen[old] += 1
+                f.name += '__dup' + str(seen[old])
+            else:
+                seen[old] = 0
         fn_names = {f.name for f in fdefs} | {c.name for c in cdefs}
         # `from M import G as A` at module level binds A as a module global
         self.import_globals = {}
-        for alias, (full, item) in self.info.func.items():
-            if (item in self.glbs.get(full, set())
-                    and item not in self.fns.get(full, set())
-                    and alias not in mod_globals and alias not in fn_names):
-                self.import_globals[alias] = (full, item)
+        for alias, pair in self.info.func.items():
+            if alias not in mod_globals and alias not in fn_names:
+                self.import_globals[alias] = pair
         mod_globals |= set(self.import_globals)
         for name in sorted(mod_globals):
             rname = rust_ident(name)
@@ -429,7 +439,8 @@ class Gen:
                     for alias in als:
                         if alias in self.import_globals:
                             full, item = self.import_globals[alias]
-                            self.emit(f"    s_{rust_ident(alias)}({self.ref_global_read(full, item)});")
+                            expr = self.ref_fn_value(full, item) if item in self.fns.get(full, set()) else self.ref_global_read(full, item)
+                            self.emit(f"    s_{rust_ident(alias)}({expr});")
                 continue
             if isinstance(stmt, (ast.FunctionDef, ast.ClassDef)):
                 if isinstance(stmt, ast.ClassDef):
@@ -576,7 +587,8 @@ class Gen:
         self.emit("    ensure_init();")
         self.emit(f"    let inst = Py::Instance(Rc::new(PyInstance {{ class_name: {rust_string(node.name)}.to_string(), attrs: Rc::new(RefCell::new(IndexMap::new())) }}));")
         self.emit(f"    let mut full = vec![inst.clone()]; full.extend_from_slice(args);")
-        self.emit(f"    {cname}____init__(&full);")
+        if any(m.name == "__init__" for m in methods):
+            self.emit(f"    {cname}____init__(&full);")
         self.emit("    inst")
         self.emit("}")
 
@@ -651,7 +663,11 @@ class Gen:
         elif isinstance(node, ast.Break):
             E("    break;")
         elif isinstance(node, ast.Continue):
-            E("    continue;")
+            if getattr(ctx, 'try_closure', 0):
+                E('    return py_tuple(vec![Py::Int(2), Py::None]);')
+                ctx.try_has_continue = True
+            else:
+                E("    continue;")
         elif isinstance(node, ast.Try):
             body_tmp = ctx.tmpname('try')
             ret_v, val_v, unh_v, hnd_v = (ctx.tmpname('ret'), ctx.tmpname('val'),
@@ -691,7 +707,13 @@ class Gen:
                 self.gen_stmt(s, ctx)
             E(f"    if let Some(__e) = {unh_v} {{ exc::raise(__e); }}")
             if ctx.kind == 'fn':
-                E(f"    if py_truthy(&{ret_v}) {{ return {val_v}; }}")
+                if getattr(ctx, 'try_has_continue', False):
+                    E(f"    if py_eq(&{ret_v}, &Py::Int(2)) {{ continue; }}")
+                    ctx.try_has_continue = False
+                if getattr(ctx, 'try_closure', 0):
+                    E(f"    if py_truthy(&{ret_v}) {{ return py_tuple(vec![{ret_v}, {val_v}]); }}")
+                else:
+                    E(f"    if py_truthy(&{ret_v}) {{ return {val_v}; }}")
         elif isinstance(node, ast.Raise):
             if node.exc is None:
                 stack = getattr(self, '_exc_stack', [])
@@ -858,6 +880,14 @@ class Gen:
         }[type(op)]
 
     def gen_expr(self, node, ctx):
+        if ctx.kind == 'module' and isinstance(node, (ast.List, ast.Tuple, ast.Set, ast.Dict)) and not getattr(node, '_outlined', False):
+            size = len(node.keys) if isinstance(node, ast.Dict) else len(node.elts)
+            if size > 12:
+                node._outlined = True
+                name = ctx.tmpname('data')
+                expr = self.gen_expr(node, ctx)
+                self.emit(f'    fn {name}() -> Py {{ {expr} }}')
+                return f'{name}()'
         if node is None:
             return 'Py::None'
         if isinstance(node, ast.Constant):
@@ -1027,6 +1057,12 @@ class Gen:
     # ------------------------------------------------------------ name resolution
     def resolve_name(self, name, ctx):
         r = rust_ident(name)
+        if name == '__name__':
+            return 'py_str(' + rust_string('bot.' + self.dotted) + ')'
+        if name == '__path__':
+            return 'py_list(vec![' + 'py_str(' + rust_string(self.dotted) + ')])'
+        if name == '__package__':
+            return 'py_str(' + rust_string('bot.' + self.dotted.rsplit('.', 1)[0]) + ')'
         if name in ('True', 'False', 'None'):
             return {'True': 'Py::Bool(true)', 'False': 'Py::Bool(false)', 'None': 'Py::None'}[name]
         if ctx.kind == 'fn':
@@ -1048,7 +1084,9 @@ class Gen:
             # module body context
             if name in getattr(self, 'rebound_pending', set()):
                 return f'py_func({rust_string(name)}, |args: &[Py]| {r}__wrapped(args))'
-            if name in self.fns.get(self.dotted, set()) or name in self.glbs.get(self.dotted, set()):
+            if name in self.fns.get(self.dotted, set()) and name not in self.decorated:
+                return f'py_func({rust_string(name)}, |args: &[Py]| {r}(args))'
+            if name in self.glbs.get(self.dotted, set()) or name in self.decorated:
                 return f'g_{r}()'
         # imports
         if name in self.info.std:
@@ -1072,11 +1110,11 @@ class Gen:
         # unknown -> try module global (might be assigned later), else builtin error
         if name in self.glbs.get(self.dotted, set()):
             return f'g_{r}()'
-        return f'g_{r}()'
+        return f'unbound_name({rust_string(name)})'
 
     def gen_attribute(self, node, ctx):
         # module.attr resolution first
-        base = self.attr_base_module(node.value)
+        base = self.attr_base_module(node.value, ctx)
         if base is not None:
             kind, data = base
             if kind == 'stdlib':
@@ -1111,9 +1149,11 @@ class Gen:
             return list(reversed(parts))
         return None
 
-    def attr_base_module(self, node):
+    def attr_base_module(self, node, ctx=None):
         if isinstance(node, ast.Name):
             name = node.id
+            if ctx is not None and ctx.kind == 'fn' and (name in ctx.locals or name in ctx.params):
+                return None
             if name in self.info.std:
                 return ('stdlib', self.info.std[name])
             if name in self.info.mod:
@@ -1129,7 +1169,7 @@ class Gen:
         E = self.emit
         def bind(alias, expr):
             r = rust_ident(alias)
-            E(f"    let mut {r}: Py = {expr};")
+            E(f"    {r} = {expr};" if alias in ctx.locals else f"    let mut {r}: Py = {expr};")
             ctx.locals.add(alias)
         for alias, modname in info.std.items():
             bind(alias, f'stdlib_module({rust_string(modname)})')
@@ -1164,12 +1204,12 @@ class Gen:
         # attribute call on module?  mod.fn(...)
         if isinstance(node.func, ast.Attribute):
             chain = self.attr_chain(node.func)
-            if chain and chain[0] in self.info.std:
+            if chain and chain[0] in self.info.std and not (ctx.kind == 'fn' and chain[0] in ctx.locals):
                 modname = self.info.std[chain[0]]
                 path = '.'.join(chain[1:])
                 return self.call_with_args(f'|args: &[Py]| stdlib_call({rust_string(modname)}, {rust_string(path)}, args).unwrap_or_else(|e| exc::raise(e))',
                                            args, kwargs, has_star, ctx, node)
-            base = self.attr_base_module(node.func.value)
+            base = self.attr_base_module(node.func.value, ctx)
             if base is not None and base[0] == 'botmod':
                 dotted = base[1]
                 item = node.func.attr
@@ -1187,6 +1227,9 @@ class Gen:
                                        args, kwargs, has_star, ctx, node)
         if isinstance(node.func, ast.Name):
             name = node.func.id
+            # Function-local bindings shadow imports and builtins.
+            if ctx.kind == 'fn' and (name in ctx.locals or name in ctx.params):
+                return self.call_with_args(f'|args: &[Py]| py_call(&{rust_ident(name)}, args)', args, kwargs, has_star, ctx, node)
             # direct resolutions
             if name in ('True', 'False', 'None'):
                 return 'Py::None'
@@ -1236,8 +1279,7 @@ class Gen:
                 return self.call_with_args(f'|args: &[Py]| call_builtin({rust_string(name)}, args).unwrap_or_else(|e| exc::raise(e))',
                                            args, kwargs, has_star, ctx, node)
             self.warn(f"unresolved call {name}", node)
-            return self.call_with_args(f'|args: &[Py]| py_call(&g_{rust_ident(name)}(), args)',
-                                       args, kwargs, has_star, ctx, node)
+            return f'unbound_name({rust_string(name)})'
         # call of arbitrary expression
         fexpr = self.gen_expr(node.func, ctx)
         return self.call_with_args(f'|args: &[Py]| py_call(&{fexpr}, args)',
@@ -1260,6 +1302,17 @@ class Gen:
         return self._dec_cache[dotted]
 
     def call_with_args(self, fn_builder, args, kwargs, has_star, ctx, node):
+        if not has_star and not kwargs:
+            values = ', '.join(v for _, v in args)
+            prefix = '|args: &[Py]| '
+            if fn_builder.startswith(prefix):
+                core = fn_builder[len(prefix):]
+                # Only replace the last argument-slice reference.
+                at = core.rfind('args')
+                if at >= 0:
+                    core = core[:at] + '&[' + values + ']' + core[at+4:]
+                    return core
+            return '(' + fn_builder + ')(&[' + values + '])'
         pieces = []
         for kind, val in args:
             if kind == 'star':
@@ -1370,6 +1423,10 @@ class Gen:
             else:
                 prologue.append(f'let {rust_ident(p)}: Py = __kwp(args, {i}, {rust_string(p)}).unwrap_or(Py::None);')
         inner = Ctx(self, 'fn', 'lambda')
+        if node.args.vararg:
+            vp = node.args.vararg.arg
+            prologue.append(f'let {rust_ident(vp)} = py_tuple(args.get({len(params)}..).unwrap_or(&[]).to_vec());')
+            params.append(vp)
         inner.params = params
         inner.locals = set()
         inner.global_names = set()
@@ -1466,51 +1523,44 @@ edition = "2021"
 
 def write_crate_files(mods, fns, glbs, classes):
     pkgs = package_prefixes(mods)
-    children = {}  # (crate, pkg dotted) -> set of child stems
-    crate_mods = {}  # crate -> list of dotted
+    crate_mods = {}
     for dotted in mods:
-        crate = crate_of(dotted)
-        crate_mods.setdefault(crate, []).append(dotted)
-        parts = dotted.split('.')
-        for i in range(1, len(parts)):
-            children.setdefault((crate, '.'.join(parts[:i])), set()).add(rust_ident(parts[i]))
-    for (crate, pkg), kids in children.items():
-        path = out_path_for(pkg, pkgs)
-        decls = ''.join(f"pub mod {k};\n" for k in sorted(kids))
-        existing = open(path).read() if os.path.exists(path) else ''
-        if existing:
-            elines = existing.split('\n')
-            i = 0
-            while i < len(elines) and (elines[i].startswith('#![') or not elines[i].strip()):
-                i += 1
-            open(path, 'w').write('\n'.join(elines[:i]) + '\n' + decls + '\n'.join(elines[i:]))
-        else:
-            os.makedirs(os.path.dirname(path), exist_ok=True)
-            open(path, 'w').write(decls)
-    # crate roots + manifests
-    for crate, pkgs_in in CRATE_PKGS.items():
+        crate_mods.setdefault(crate_of(dotted), []).append(dotted)
+    for crate, members in sorted(crate_mods.items()):
         cdir = os.path.join(CRATES, crate)
         os.makedirs(os.path.join(cdir, 'src'), exist_ok=True)
-        deps = ['pyrt = { path = "../pyrt" }']
-        deps += [f'{d} = {{ path = "../{d}" }}' for d in CRATE_DEPS[crate]]
-        open(os.path.join(cdir, 'Cargo.toml'), 'w').write(
-            CRATE_MANIFEST.format(crate=crate, deps='\n'.join(deps)))
-        lines = ["#![allow(non_snake_case, non_upper_case_globals, dead_code, unused_mut, unused_variables, unused_assignments, unused_parens, unused_imports)]"]
-        for p in pkgs_in:
-            lines.append(f"pub mod {rust_ident(p)};")
-        lines.append("")
-        lines.append("pub fn register_all() {")
-        for dotted in sorted(crate_mods.get(crate, [])):
-            lines.append(f"    crate::{ '::'.join(rust_ident(p) for p in dotted.split('.')) }::register();")
-        lines.append("}")
-        open(os.path.join(cdir, 'src', 'lib.rs'), 'w').write('\n'.join(lines) + '\n')
+        open(os.path.join(cdir, 'Cargo.toml'), 'w').write(CRATE_MANIFEST.format(crate=crate, deps='pyrt = { path = "../pyrt" }'))
+        decls = {}
+        for dotted in members:
+            parts = dotted.split('.')
+            for i in range(len(parts)):
+                decls.setdefault('.'.join(parts[:i]), set()).add(parts[i])
+        for parent, kids in decls.items():
+            if parent:
+                path = os.path.join(cdir, 'src', *[rust_ident(x) for x in parent.split('.')], 'mod.rs')
+                existing = open(path).read() if os.path.exists(path) else ''
+                existing = re.sub(r'^pub mod \w+;\n', '', existing, flags=re.M)
+                childdecls = ''.join('pub mod ' + rust_ident(k) + ';\n' for k in sorted(kids))
+                os.makedirs(os.path.dirname(path), exist_ok=True)
+                # Inner attributes must precede child module declarations.
+                lines = existing.splitlines(True)
+                i = 0
+                while i < len(lines) and (lines[i].startswith('#![') or not lines[i].strip()): i += 1
+                open(path, 'w').write(''.join(lines[:i]) + childdecls + ''.join(lines[i:]))
+            else:
+                rootdecls = ''.join('pub mod ' + rust_ident(k) + ';\n' for k in sorted(kids))
+        rootdecls += 'pub fn register_all() {\n'
+        for dotted in sorted(members):
+            rootdecls += 'crate::' + '::'.join(rust_ident(x) for x in dotted.split('.')) + '::register();\n'
+        rootdecls += '}\n'
+        open(os.path.join(cdir, 'src', 'lib.rs'), 'w').write(rootdecls)
     # pyrt crate manifest (sources moved by the shell script)
     os.makedirs(os.path.join(CRATES, 'pyrt'), exist_ok=True)
     open(os.path.join(CRATES, 'pyrt', 'Cargo.toml'), 'w').write(PYRT_MANIFEST)
     # gen_meta crate
     mdir = os.path.join(CRATES, 'gen_meta')
     os.makedirs(os.path.join(mdir, 'src'), exist_ok=True)
-    all_gen = list(CRATE_PKGS)
+    all_gen = sorted(crate_mods)
     deps = ['pyrt = { path = "../pyrt" }'] + [f'{d} = {{ path = "../{d}" }}' for d in all_gen]
     open(os.path.join(mdir, 'Cargo.toml'), 'w').write(META_MANIFEST.format(deps='\n'.join(deps)))
     lines = ["//! Registry of bot/modules entries, arbiter and cross-crate registration.",
@@ -1528,7 +1578,7 @@ def write_crate_files(mods, fns, glbs, classes):
     lines.append("    vec![")
     for stem in mod_children:
         dotted = f"modules.{stem}"
-        path = "gen_modules::modules::" + rust_ident(stem)
+        path = rust_path(dotted)
         pri = f"|| match {path}::g_PRIORITY() {{ Py::Int(i) => i, Py::Float(f) => f as i64, _ => 0 }}" if 'PRIORITY' in glbs.get(dotted, set()) else "|| 0"
         obs = f"Some({path}::observe)" if 'observe' in fns.get(dotted, set()) else "None"
         resp = f"Some({path}::respond)" if 'respond' in fns.get(dotted, set()) else "None"
@@ -1538,10 +1588,14 @@ def write_crate_files(mods, fns, glbs, classes):
     lines.append("}")
     lines.append("")
     if 'modules.arbiter' in mods and 'choose' in fns.get('modules.arbiter', set()):
-        lines.append("pub fn arbiter_choose() -> Option<fn(&[Py]) -> Py> { Some(gen_modules::modules::arbiter::choose) }")
+        lines.append('pub fn arbiter_choose() -> Option<fn(&[Py]) -> Py> { Some(' + rust_path('modules.arbiter') + '::choose) }')
     else:
         lines.append("pub fn arbiter_choose() -> Option<fn(&[Py]) -> Py> { None }")
     open(os.path.join(mdir, 'src', 'lib.rs'), 'w').write('\n'.join(lines) + '\n')
+
+def write_changed(path, text):
+    if os.path.exists(path) and open(path).read() == text: return
+    open(path, 'w').write(text)
 
 def main():
     only = [a for a in sys.argv[1:] if not a.startswith('-')]
@@ -1559,7 +1613,7 @@ def main():
             out = gen.generate()
             path = out_path_for(dotted, pkgs)
             os.makedirs(os.path.dirname(path), exist_ok=True)
-            open(path, 'w').write(out)
+            write_changed(path, out)
             all_warnings.extend(gen.warnings)
         except Exception as e:
             failed.append((dotted, repr(e)))

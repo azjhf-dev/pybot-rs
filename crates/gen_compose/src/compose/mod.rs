@@ -1,129 +1,4 @@
 #![allow(non_snake_case, non_upper_case_globals, dead_code, unused_mut, unused_variables, unused_assignments, unused_parens, unused_imports, clippy::all)]
-pub mod a_count_of_packets;
-pub mod a_detail_dropped;
-pub mod a_document_lives_with_an_office;
-pub mod a_first_time;
-pub mod a_number_the_bot_knows;
-pub mod a_place_nobody_can_see;
-pub mod a_thing_being_weighed;
-pub mod a_thing_wants_doing;
-pub mod a_trouble;
-pub mod a_wait_about_a_body;
-pub mod aboutness;
-pub mod badnews;
-pub mod breakup;
-pub mod check_with_you;
-pub mod checking;
-pub mod childwords;
-pub mod circumstance;
-pub mod clause;
-pub mod colour_on_the_body;
-pub mod doubt;
-pub mod draft;
-pub mod facts;
-pub mod fallback;
-pub mod fallback_chain;
-pub mod fallback_data;
-pub mod fallback_pools;
-pub mod fallback_words;
-pub mod find_a_place;
-pub mod finding_out;
-pub mod findout;
-pub mod fit;
-pub mod for_the_day;
-pub mod gap;
-pub mod goodnews;
-pub mod griefplea;
-pub mod habit;
-pub mod handoff;
-pub mod hands;
-pub mod harm;
-pub mod hedge;
-pub mod how_it_went;
-pub mod invitation;
-pub mod is_it_worth_it;
-pub mod judgement;
-pub mod kept_nearby;
-pub mod lead;
-pub mod lead_in;
-pub mod leaving;
-pub mod limit;
-pub mod liveask;
-pub mod loss;
-pub mod missing_half;
-pub mod morning_after;
-pub mod moving;
-pub mod nearby_one;
-pub mod news_ask;
-pub mod no_advice;
-pub mod no_eyes;
-pub mod no_page;
-pub mod not_knowing;
-pub mod nottheirbest;
-pub mod occasionplan;
-pub mod onething;
-pub mod only_they_know;
-pub mod onmybehalf;
-pub mod onscreen;
-pub mod onsubject;
-pub mod outlook;
-pub mod own_ask;
-pub mod own_facts;
-pub mod pace;
-pub mod place_facts;
-pub mod plan_ask;
-pub mod plans;
-pub mod pleased;
-pub mod postcode;
-pub mod prices;
-pub mod quantity;
-pub mod reaction;
-pub mod reading;
-pub mod recall;
-pub mod receiving_end;
-pub mod remark;
-pub mod repair;
-pub mod rotten_luck;
-pub mod routes;
-pub mod rule;
-pub mod ruledout;
-pub mod safety_doubt;
-pub mod safetyask;
-pub mod said_about_me;
-pub mod saidby;
-pub mod setting_off;
-pub mod stepwords;
-pub mod still;
-pub mod stretches;
-pub mod talktime;
-pub mod talkto;
-pub mod taste;
-pub mod the_course_of_it;
-pub mod the_rule_for_it;
-pub mod the_shape_without_the_fact;
-pub mod the_trouble_named;
-pub mod the_turn_after;
-pub mod their_day;
-pub mod their_detail;
-pub mod their_life;
-pub mod theirperson;
-pub mod thread_detail;
-pub mod toknow;
-pub mod tone_again;
-pub mod trouble;
-pub mod unseen;
-pub mod urgent;
-pub mod verdict;
-pub mod waited_for;
-pub mod ward;
-pub mod what_decides_it;
-pub mod what_i_do_know;
-pub mod what_it_asks;
-pub mod who;
-pub mod who_to_see;
-pub mod whole;
-pub mod why;
-pub mod worn;
 use pyrt::builtins::*;
 use pyrt::pybuiltins::*;
 use pyrt::stdlib::*;
@@ -236,17 +111,21 @@ pub fn g__SHORT_RUN() -> Py { ensure_init(); G__SHORT_RUN.with(|c| c.borrow().cl
 pub fn s__SHORT_RUN(v: Py) { ensure_init(); G__SHORT_RUN.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("Phrasing helpers for the response composer. The routing lane owns the composer: what to do\nthis turn (bot/modules/arbiter.py chooses among the modules' replies) and how it is phrased.\n");
-    s_NEGATORS(call_builtin("frozenset", &[py_tuple(vec![py_str("not"), py_str("no"), py_str("never"), py_str("hardly"), py_str("barely"), py_str("nothing"), py_str("without"), py_str("cant"), py_str("cannot"), py_str("dont"), py_str("doesnt"), py_str("didnt"), py_str("isnt"), py_str("wasnt"), py_str("arent"), py_str("werent"), py_str("wont"), py_str("wouldnt"), py_str("couldnt"), py_str("shouldnt"), py_str("havent"), py_str("hasnt"), py_str("aint")])]).unwrap_or_else(|e| exc::raise(e)));
+    fn __data1() -> Py { py_tuple(vec![py_str("not"), py_str("no"), py_str("never"), py_str("hardly"), py_str("barely"), py_str("nothing"), py_str("without"), py_str("cant"), py_str("cannot"), py_str("dont"), py_str("doesnt"), py_str("didnt"), py_str("isnt"), py_str("wasnt"), py_str("arent"), py_str("werent"), py_str("wont"), py_str("wouldnt"), py_str("couldnt"), py_str("shouldnt"), py_str("havent"), py_str("hasnt"), py_str("aint")]) }
+    s_NEGATORS(call_builtin("frozenset", &[__data1()]).unwrap_or_else(|e| exc::raise(e)));
     s_NEARLY(call_builtin("frozenset", &[py_tuple(vec![py_str("nearly"), py_str("almost")])]).unwrap_or_else(|e| exc::raise(e)));
     s_SAYS_IT_HAS_LINGERED(stdlib_call("re", "compile", &[py_str("\\b(?:wont|won'?t|not)\\s+(?:go|shift|clear|budge|settle)\\w*|\\bfor\\s+(?:\\d+|a\\s+couple\\s+of|a\\s+few|a|an|two|three|four|five|six|seven|eight|nine|ten)\\s+(?:days?|weeks?|months?|years?)\\b|\\b(?:been going|going on|dragging on)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     s_STILL_AT_IT(stdlib_call("re", "compile", &[py_str("\\bstill\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     s__SHORT_RUN(stdlib_call("re", "compile", &[py_str("\\b(?:(?:one|two|a\\s+couple\\s+of)\\s+days?|day\\s+(?:one|two|three|1|2|3))\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     s_LINGERED_LINE(py_tuple(vec![py_str("Anything that has hung on is worth getting looked at — a pharmacist will see you quicker than a GP, and they'll tell you if it needs one."), py_str("That is long enough to be worth a proper look rather than another stretch of waiting: a pharmacist today, and a GP if it is still there after that."), py_str("Sorry it is still going. Note when it is worst and what eases it, then take that to a pharmacist — a thing that has lasted this long is worth putting a name to.")]));
-    s_AUX(call_builtin("frozenset", &[py_tuple(vec![py_str("can"), py_str("could"), py_str("do"), py_str("does"), py_str("did"), py_str("is"), py_str("was"), py_str("were"), py_str("are"), py_str("would"), py_str("should"), py_str("have"), py_str("has"), py_str("had"), py_str("wo"), py_str("ai"), py_str("must"), py_str("need"), py_str("might")])]).unwrap_or_else(|e| exc::raise(e)));
-    s_CONTRACTED_AUX(call_builtin("frozenset", &[py_tuple(vec![py_str("do"), py_str("did"), py_str("ca"), py_str("wo"), py_str("ai"), py_str("is"), py_str("are"), py_str("was"), py_str("were"), py_str("has"), py_str("have"), py_str("had"), py_str("could"), py_str("would"), py_str("should"), py_str("must"), py_str("need"), py_str("dare"), py_str("does"), py_str("am"), py_str("might")])]).unwrap_or_else(|e| exc::raise(e)));
+    fn __data2() -> Py { py_tuple(vec![py_str("can"), py_str("could"), py_str("do"), py_str("does"), py_str("did"), py_str("is"), py_str("was"), py_str("were"), py_str("are"), py_str("would"), py_str("should"), py_str("have"), py_str("has"), py_str("had"), py_str("wo"), py_str("ai"), py_str("must"), py_str("need"), py_str("might")]) }
+    s_AUX(call_builtin("frozenset", &[__data2()]).unwrap_or_else(|e| exc::raise(e)));
+    fn __data3() -> Py { py_tuple(vec![py_str("do"), py_str("did"), py_str("ca"), py_str("wo"), py_str("ai"), py_str("is"), py_str("are"), py_str("was"), py_str("were"), py_str("has"), py_str("have"), py_str("had"), py_str("could"), py_str("would"), py_str("should"), py_str("must"), py_str("need"), py_str("dare"), py_str("does"), py_str("am"), py_str("might")]) }
+    s_CONTRACTED_AUX(call_builtin("frozenset", &[__data3()]).unwrap_or_else(|e| exc::raise(e)));
     s_DOUBT(call_builtin("frozenset", &[py_tuple(vec![py_str("believe"), py_str("believed"), py_str("imagine"), py_str("imagined"), py_str("thought"), py_str("think")])]).unwrap_or_else(|e| exc::raise(e)));
     s_CANNOT(call_builtin("frozenset", &[py_tuple(vec![py_str("cant"), py_str("cannot"), py_str("couldnt"), py_str("never"), py_str("always")])]).unwrap_or_else(|e| exc::raise(e)));
-    s_SURE(call_builtin("frozenset", &[py_tuple(vec![py_str("think"), py_str("thought"), py_str("know"), py_str("knew"), py_str("reckon"), py_str("guess"), py_str("suppose"), py_str("sure"), py_str("expect"), py_str("imagine"), py_str("say"), py_str("believe"), py_str("believed"), py_str("certain")])]).unwrap_or_else(|e| exc::raise(e)));
+    fn __data4() -> Py { py_tuple(vec![py_str("think"), py_str("thought"), py_str("know"), py_str("knew"), py_str("reckon"), py_str("guess"), py_str("suppose"), py_str("sure"), py_str("expect"), py_str("imagine"), py_str("say"), py_str("believe"), py_str("believed"), py_str("certain")]) }
+    s_SURE(call_builtin("frozenset", &[__data4()]).unwrap_or_else(|e| exc::raise(e)));
     s_DOUBTED(call_builtin("frozenset", &[py_tuple(vec![py_str("doubt"), py_str("doubts"), py_str("doubted"), py_str("doubting"), py_str("unsure"), py_str("uncertain")])]).unwrap_or_else(|e| exc::raise(e)));
     s_BELIEVE_IT(call_builtin("frozenset", &[py_tuple(vec![py_str("believe"), py_str("believed")])]).unwrap_or_else(|e| exc::raise(e)));
     s__PERSON_WORD(stdlib_call("re", "compile", &[py_str("\\b(?:he|she|they|him|her|them|his|hers|their|himself|herself|themselves)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
@@ -629,8 +508,8 @@ pub fn pick(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = standing.clone(); if !py_truthy(&__b) { __b } else { op_lt(&call_builtin("len", &[standing.clone()]).unwrap_or_else(|e| exc::raise(e)), &call_builtin("len", &[options.clone()]).unwrap_or_else(|e| exc::raise(e))) } }) {
     options = standing.clone();
     }
-    if py_truthy(&Py::Bool(!py_truthy(&gen_memory::memory::history::an_earlier_turn(&[memory.clone()])))) {
-    backed = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&options.clone()) { let mut o: Py = __item.clone(); if py_truthy(&Py::Bool(!py_truthy(&gen_memory::memory::history::a_past_that_is_not_there(&[o.clone(), memory.clone()])))) {  __out.push(o.clone()); } } py_list(__out) })() };
+    if py_truthy(&Py::Bool(!py_truthy(&pyrt::xrefs::xcall("memory.history", "an_earlier_turn", &[memory.clone()])))) {
+    backed = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&options.clone()) { let mut o: Py = __item.clone(); if py_truthy(&Py::Bool(!py_truthy(&pyrt::xrefs::xcall("memory.history", "a_past_that_is_not_there", &[o.clone(), memory.clone()])))) {  __out.push(o.clone()); } } py_list(__out) })() };
     if py_truthy(&backed.clone()) {
     options = backed.clone();
     }
@@ -785,6 +664,11 @@ pub fn step_when_low(args: &[Py]) -> Py {
     else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "comfort_said") { v.clone() }
     else { exc::raise(type_err(&format!("missing required argument: comfort_said"))) };
     let mut last: Py = Py::None;
+    let mut reads_as_a_leaving_already_gone: Py = Py::None;
+    let mut reads_as_a_reported_leaving: Py = Py::None;
+    let mut reads_as_a_sacking: Py = Py::None;
+    let mut reads_as_bad_news: Py = Py::None;
+    let mut reads_as_the_leaving: Py = Py::None;
     let mut said: Py = Py::None;
     let mut turn: Py = Py::None;
     let mut turns: Py = Py::None;
@@ -799,11 +683,11 @@ pub fn step_when_low(args: &[Py]) -> Py {
     return Py::None;
     }
     let __try1 = exc::catch(|| {
-    let mut reads_as_a_leaving_already_gone: Py = py_func("reads_as_a_leaving_already_gone", |args: &[Py]| crate::compose::badnews::reads_as_a_leaving_already_gone(args));
-    let mut reads_as_a_reported_leaving: Py = py_func("reads_as_a_reported_leaving", |args: &[Py]| crate::compose::badnews::reads_as_a_reported_leaving(args));
-    let mut reads_as_a_sacking: Py = py_func("reads_as_a_sacking", |args: &[Py]| crate::compose::badnews::reads_as_a_sacking(args));
-    let mut reads_as_bad_news: Py = py_func("reads_as_bad_news", |args: &[Py]| crate::compose::badnews::reads_as_bad_news(args));
-    let mut reads_as_the_leaving: Py = py_func("reads_as_the_leaving", |args: &[Py]| crate::compose::badnews::reads_as_the_leaving(args));
+    reads_as_a_leaving_already_gone = py_func("reads_as_a_leaving_already_gone", |args: &[Py]| pyrt::xrefs::xcall("compose.badnews", "reads_as_a_leaving_already_gone", args));
+    reads_as_a_reported_leaving = py_func("reads_as_a_reported_leaving", |args: &[Py]| pyrt::xrefs::xcall("compose.badnews", "reads_as_a_reported_leaving", args));
+    reads_as_a_sacking = py_func("reads_as_a_sacking", |args: &[Py]| pyrt::xrefs::xcall("compose.badnews", "reads_as_a_sacking", args));
+    reads_as_bad_news = py_func("reads_as_bad_news", |args: &[Py]| pyrt::xrefs::xcall("compose.badnews", "reads_as_bad_news", args));
+    reads_as_the_leaving = py_func("reads_as_the_leaving", |args: &[Py]| pyrt::xrefs::xcall("compose.badnews", "reads_as_the_leaving", args));
     said = mcall(&py_str(" "), "join", &[mcall(&mcall(&call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("user")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]), "split", &[])]);
     if py_truthy(&py_call(&reads_as_a_reported_leaving, &[said.clone()])) {
     return py_tuple(vec![Py::Bool(true), Py::None]);

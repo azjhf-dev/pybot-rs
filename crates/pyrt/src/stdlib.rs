@@ -652,3 +652,15 @@ fn json_dumps(v: &Py) -> String {
         other => format!("\"{}\"", py_str_of(other)),
     }
 }
+
+/// A first-class stdlib module used by function-local imports.
+pub fn stdlib_module(name: &str) -> Py {
+    let module = name.to_string();
+    Py::Module(Rc::new(PyModule { name: name.to_string(), set: None,
+        get: Rc::new(move |attr| {
+            if let Ok(value) = stdlib_attr(&module, attr) { return Some(value); }
+            let m = module.clone(); let a = attr.to_string();
+            Some(py_func(attr, move |args| stdlib_call(&m, &a, args).unwrap_or_else(|e| crate::exc::raise(e))))
+        })
+    }))
+}

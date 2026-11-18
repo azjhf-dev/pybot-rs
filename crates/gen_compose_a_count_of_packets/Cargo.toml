@@ -1,0 +1,8 @@
+[package]
+name = "gen_compose_a_count_of_packets"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+pyrt = { path = "../pyrt" }
+indexmap = "2"

@@ -1,0 +1,8 @@
+[package]
+name = "gen_memory_decided"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+pyrt = { path = "../pyrt" }
+indexmap = "2"

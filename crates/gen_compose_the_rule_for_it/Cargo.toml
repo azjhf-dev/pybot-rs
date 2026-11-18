@@ -1,0 +1,8 @@
+[package]
+name = "gen_compose_the_rule_for_it"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+pyrt = { path = "../pyrt" }
+indexmap = "2"

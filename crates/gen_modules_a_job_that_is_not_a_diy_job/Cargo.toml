@@ -1,0 +1,8 @@
+[package]
+name = "gen_modules_a_job_that_is_not_a_diy_job"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+pyrt = { path = "../pyrt" }
+indexmap = "2"

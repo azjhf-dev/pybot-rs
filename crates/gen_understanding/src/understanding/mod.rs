@@ -1,16 +1,4 @@
 #![allow(non_snake_case, non_upper_case_globals, dead_code, unused_mut, unused_variables, unused_assignments, unused_parens, unused_imports, clippy::all)]
-pub mod attempts;
-pub mod body;
-pub mod breeds;
-pub mod car_glass;
-pub mod cars;
-pub mod confusion;
-pub mod kinds;
-pub mod lexicon;
-pub mod normalize;
-pub mod references;
-pub mod senses;
-pub mod topics;
 use pyrt::builtins::*;
 use pyrt::pybuiltins::*;
 use pyrt::stdlib::*;
@@ -136,6 +124,12 @@ thread_local! { static G__A_CLAUSE_WITH_NO_SUBJECT: RefCell<Py> = const { RefCel
 thread_local! { static G__A_THING_THAT_CHANGES: RefCell<Py> = const { RefCell::new(Py::None) }; }
 thread_local! { static G__NOT_ABOUT_THE_THING: RefCell<Py> = const { RefCell::new(Py::None) }; }
 thread_local! { static G__SEARCH_FRAME: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__the_part_that_hurts: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G__the_sugar_that_is_blood: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G_background_positions: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G_normalise: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G_respell_urgent: RefCell<Py> = const { RefCell::new(Py::None) }; }
+thread_local! { static G_without_the_figure_of_speech: RefCell<Py> = const { RefCell::new(Py::None) }; }
 static INIT: Once = Once::new();
 thread_local! { static INITIALIZING: Cell<bool> = const { Cell::new(false) }; }
 pub fn ensure_init() {
@@ -485,8 +479,32 @@ pub fn s__NOT_ABOUT_THE_THING(v: Py) { ensure_init(); G__NOT_ABOUT_THE_THING.wit
 pub fn g__SEARCH_FRAME() -> Py { ensure_init(); G__SEARCH_FRAME.with(|c| c.borrow().clone()) }
 #[allow(non_snake_case)]
 pub fn s__SEARCH_FRAME(v: Py) { ensure_init(); G__SEARCH_FRAME.with(|c| *c.borrow_mut() = v); }
+pub fn g__the_part_that_hurts() -> Py { ensure_init(); G__the_part_that_hurts.with(|c| c.borrow().clone()) }
+#[allow(non_snake_case)]
+pub fn s__the_part_that_hurts(v: Py) { ensure_init(); G__the_part_that_hurts.with(|c| *c.borrow_mut() = v); }
+pub fn g__the_sugar_that_is_blood() -> Py { ensure_init(); G__the_sugar_that_is_blood.with(|c| c.borrow().clone()) }
+#[allow(non_snake_case)]
+pub fn s__the_sugar_that_is_blood(v: Py) { ensure_init(); G__the_sugar_that_is_blood.with(|c| *c.borrow_mut() = v); }
+pub fn g_background_positions() -> Py { ensure_init(); G_background_positions.with(|c| c.borrow().clone()) }
+#[allow(non_snake_case)]
+pub fn s_background_positions(v: Py) { ensure_init(); G_background_positions.with(|c| *c.borrow_mut() = v); }
+pub fn g_normalise() -> Py { ensure_init(); G_normalise.with(|c| c.borrow().clone()) }
+#[allow(non_snake_case)]
+pub fn s_normalise(v: Py) { ensure_init(); G_normalise.with(|c| *c.borrow_mut() = v); }
+pub fn g_respell_urgent() -> Py { ensure_init(); G_respell_urgent.with(|c| c.borrow().clone()) }
+#[allow(non_snake_case)]
+pub fn s_respell_urgent(v: Py) { ensure_init(); G_respell_urgent.with(|c| *c.borrow_mut() = v); }
+pub fn g_without_the_figure_of_speech() -> Py { ensure_init(); G_without_the_figure_of_speech.with(|c| c.borrow().clone()) }
+#[allow(non_snake_case)]
+pub fn s_without_the_figure_of_speech(v: Py) { ensure_init(); G_without_the_figure_of_speech.with(|c| *c.borrow_mut() = v); }
 fn module_body() {
     let _ = py_str("The understanding engine: what the user said and meant. The understanding lane owns it.\n\nbot/modules/understand.py stores understand(text, memory) in memory[\"understood\"] before any\nmodule proposes a reply, so every module reads one reading of the line instead of matching its\nown keywords.\n\nThe reading is built in four steps, each in its own module:\n\n- `normalize.py`: messy typing becomes ordinary words (chat-speak, missing apostrophes,\n  obvious typos, stretched letters), and run-on lines are split into clauses.\n- `kinds.py`: what kind of line it is, the finer intent, and what it asks for.\n- `topics.py`: the topic, the things it names, and the numbers with their units.\n- `references.py`: what \"it\", \"that\", \"they\" and \"there\" point at, and whether the line\n  follows the last one.\n\n`understand()` returns a plain dict of plain data (README.md lists every key). Nothing here\nanswers; it only reads. `kind` keeps its four original values and `clean`/`words` keep their\nmeaning, so a module written against the seed's reading keeps working.\n");
+    s_background_positions(py_func("background_positions", |args: &[Py]| pyrt::xrefs::xcall("understanding.normalize", "background_positions", args)));
+    s_normalise(py_func("normalise", |args: &[Py]| pyrt::xrefs::xcall("understanding.normalize", "normalise", args)));
+    s_respell_urgent(py_func("respell_urgent", |args: &[Py]| pyrt::xrefs::xcall("understanding.normalize", "respell_urgent", args)));
+    s__the_part_that_hurts(py_func("_the_part_that_hurts", |args: &[Py]| pyrt::xrefs::xcall("understanding.normalize", "_the_part_that_hurts", args)));
+    s__the_sugar_that_is_blood(py_func("_the_sugar_that_is_blood", |args: &[Py]| pyrt::xrefs::xcall("understanding.normalize", "_the_sugar_that_is_blood", args)));
+    s_without_the_figure_of_speech(py_func("without_the_figure_of_speech", |args: &[Py]| pyrt::xrefs::xcall("understanding.normalize", "without_the_figure_of_speech", args)));
     s_STOPWORDS(call_builtin("frozenset", &[mcall(&py_str("\na an the and or but if then than that this these those there here it its i me my myself\nwe our us you your yours he him his she her hers they them their theirs am is are was were be\nbeen being do does did doing done have has had having will would shall should can could may\nmight must not no nor so too very just really quite only also as at by for from in into of\noff on onto out over under up with within without about above after again against all any\nboth each few more most other some such own same what which who whom whose when where why how\nplease thanks thank hi hello hey ok okay yeah yes sure sorry oh um uh like get got to want\nneed help tell give show find know think guess\n"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
     s_MAX_KEYWORDS(Py::Int(14));
     s_LOOKBACK(Py::Int(4));
@@ -520,12 +538,13 @@ fn module_body() {
     s_A_FAULT_TO_LEND(stdlib_call("re", "compile", &[py_str("\\b(is\\s+killing\\s+me|kills\\s+me|is\\s+playing\\s+up|is\\s+on\\s+the\\s+blink|(?:is|are)\\s+not\\s+working|(?:isnt|aren't|aint|isn't)\\s+working|has\\s+stopped|have\\s+stopped|keeps\\s+stopping|wont\\s+start|won't\\s+start|doesnt\\s+start|doesn't\\s+start|wont\\s+turn\\s+on|won't\\s+turn\\s+on|doesnt\\s+turn\\s+on|doesn't\\s+turn\\s+on|wont\\s+come\\s+on|isnt\\s+working|isn't\\s+working|is\\s+blocked|is\\s+blocked\\s+up|is\\s+leaking|is\\s+flat|is\\s+dead|is\\s+sore|is\\s+stiff|is\\s+swollen|is\\s+broken|has\\s+gone|is\\s+bad|itches|itch|hurts|hurting|hurt|aches|aching|ache)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     s_STAND_IN_WORDS(call_builtin("frozenset", &[mcall(&py_str("cold hot warm cool freezing big small little large tiny huge\n    old new broken faulty dodgy leaky cracked chipped rusty worn dead slow fast noisy loud\n    quiet heavy light cheap expensive dear long short tall wide narrow thick thin hard soft wet\n    dry clean dirty full empty spare extra front back top bottom middle inner outer upstairs\n    downstairs left right wrong loose tight green red blue black white dark pale stained\n    missing"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
     s_STAND_IN_SELECTORS(call_builtin("frozenset", &[mcall(&py_str("other first second third last next same former latter"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
-    s_A_DESCRIBING_SUBJECT(op_bitor(&op_bitor(&op_bitor(&g_STAND_IN_WORDS(), &crate::understanding::lexicon::g_A_STATE()), &crate::understanding::lexicon::g_FEELINGS()), &crate::understanding::lexicon::g_A_DESCRIBING()));
+    s_A_DESCRIBING_SUBJECT(op_bitor(&op_bitor(&op_bitor(&g_STAND_IN_WORDS(), &pyrt::xrefs::xget("understanding.lexicon", "A_STATE")), &pyrt::xrefs::xget("understanding.lexicon", "FEELINGS")), &pyrt::xrefs::xget("understanding.lexicon", "A_DESCRIBING")));
     s_A_STAND_IN(stdlib_call("re", "compile", &[py_str("\\b(the|these|those|my|our|your|his|her|their|both)\\s+(?:([a-z][a-z'-]*)\\s+)?(ones|one)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     s_STAND_IN_NOT_THINGS(call_builtin("frozenset", &[mcall(&py_str("winter summer spring autumn morning afternoon evening night\n    week weekend month year hour minute day today tomorrow yesterday christmas birthday\n    holiday weekend weeknight fortnight decade moment time while"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
     s_HOME_LOOKBACK(Py::Int(8));
-    s_ANY_PRONOUN(call_builtin("frozenset", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&crate::understanding::references::g_PRONOUNS(), "values", &[])) { let mut aliases: Py = __item.clone(); for __item in py_iter_or_raise(&aliases.clone()) { let mut word: Py = __item.clone(); __out.push(word.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
-    s_SHIFTS(py_tuple(vec![py_str("never mind"), py_str("nevermind"), py_str("forget that"), py_str("forget it"), py_str("different question"), py_str("new question"), py_str("new topic"), py_str("changing the subject"), py_str("change of subject"), py_str("on another note"), py_str("moving on"), py_str("back to"), py_str("anyway"), py_str("anyways"), py_str("instead"), py_str("another thing"), py_str("unrelated"), py_str("off topic")]));
+    s_ANY_PRONOUN(call_builtin("frozenset", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&pyrt::xrefs::xget("understanding.references", "PRONOUNS"), "values", &[])) { let mut aliases: Py = __item.clone(); for __item in py_iter_or_raise(&aliases.clone()) { let mut word: Py = __item.clone(); __out.push(word.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
+    fn __data1() -> Py { py_tuple(vec![py_str("never mind"), py_str("nevermind"), py_str("forget that"), py_str("forget it"), py_str("different question"), py_str("new question"), py_str("new topic"), py_str("changing the subject"), py_str("change of subject"), py_str("on another note"), py_str("moving on"), py_str("back to"), py_str("anyway"), py_str("anyways"), py_str("instead"), py_str("another thing"), py_str("unrelated"), py_str("off topic")]) }
+    s_SHIFTS(__data1());
     s_SHIFT_ACTUALLY(stdlib_call("re", "compile", &[py_str("(?:^|\\|)\\s*actually\\b|\\b(?:no|oh|well|sorry|and|but),? actually\\b")]).unwrap_or_else(|e| exc::raise(e)));
     s_CHAT_WORDS(call_builtin("frozenset", &[mcall(&py_str("talk talking talks chat chatting chats message messages conversation\nramble rambling wittering waffling going typing write writing"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
     s_TALK_ASK(stdlib_call("re", "compile", &[py_str("\\b(?:bor(?:ing|ed)|annoy(?:ing|ed)|wast(?:e|ing)\\s+(?:your|my)\\s+time|keeping\\s+you|still\\s+(?:with|there|following|listening)|too\\s+(?:long|much)|going\\s+on|ramble|rambling|wittering|waffling)\\b"), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
@@ -536,8 +555,8 @@ fn module_body() {
     s_PRESENCE_ASKER(call_builtin("frozenset", &[mcall(&py_str("anyone anybody someone"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
     s_PRESENCE_NOT(call_builtin("frozenset", &[mcall(&py_str("greeting thanks farewell empty"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
     s_PRESENCE_MAX(Py::Int(5));
-    s_PRESENCE_GREETING(call_builtin("frozenset", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&crate::understanding::kinds::g_GREETINGS()) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&word.clone(), &py_str(" ")))) {  __out.push(word.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
-    s_GREETING_PHRASE(call_builtin("frozenset", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&crate::understanding::kinds::g_GREETINGS()) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(py_contains(&word.clone(), &py_str(" ")))) {  __out.push(word.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
+    s_PRESENCE_GREETING(call_builtin("frozenset", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("understanding.kinds", "GREETINGS")) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&word.clone(), &py_str(" ")))) {  __out.push(word.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
+    s_GREETING_PHRASE(call_builtin("frozenset", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xget("understanding.kinds", "GREETINGS")) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(py_contains(&word.clone(), &py_str(" ")))) {  __out.push(word.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)));
     s_OWN_QUESTION_TOPIC(py_str("nature-and-weather"));
     s_NOTHING_NAMED_ASK_WORDS(call_builtin("frozenset", &[mcall(&py_str("what which who how why when where do does did would should\n    will can could is are any anything something else more that this it for me i we to about of\n    in on with"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
     s_NOTHING_NAMED_VIEW_WORDS(call_builtin("frozenset", &[mcall(&py_str("think say suggest recommend advise reckon opinion advice\n    thoughts thought view take recommendation suggestion ideas idea"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
@@ -555,7 +574,8 @@ fn module_body() {
     s_MOMENT_WORDS(call_builtin("frozenset", &[mcall(&py_str("sec secs second seconds min mins minute minutes mo moment\n    time"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
     s_MOMENT_VERBS(call_builtin("frozenset", &[mcall(&py_str("got have get spare"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
     s_MOMENT_FILLER(call_builtin("frozenset", &[mcall(&py_str("a an the to for chat talk and i you u me ask something question\n    quick please ta thanks can could would may might will just wanted like us we mind if\n    wondering favour favor do does did hey hi hello so well um er there"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
-    s_ASK_PERMISSION(py_tuple(vec![py_str("ask you something"), py_str("ask you a question"), py_str("ask you one"), py_str("ask a question"), py_str("ask something"), py_str("ask you quick question"), py_str("ask a quick question"), py_str("bend your ear"), py_str("pick your brains"), py_str("ask your advice"), py_str("talk to you"), py_str("talk with you"), py_str("chat to you"), py_str("chat with you"), py_str("can we talk"), py_str("could we talk"), py_str("can we chat"), py_str("have a word"), py_str("quick word"), py_str("quick question"), py_str("quick one"), py_str("ask a favour"), py_str("ask you a favour")]));
+    fn __data2() -> Py { py_tuple(vec![py_str("ask you something"), py_str("ask you a question"), py_str("ask you one"), py_str("ask a question"), py_str("ask something"), py_str("ask you quick question"), py_str("ask a quick question"), py_str("bend your ear"), py_str("pick your brains"), py_str("ask your advice"), py_str("talk to you"), py_str("talk with you"), py_str("chat to you"), py_str("chat with you"), py_str("can we talk"), py_str("could we talk"), py_str("can we chat"), py_str("have a word"), py_str("quick word"), py_str("quick question"), py_str("quick one"), py_str("ask a favour"), py_str("ask you a favour")]) }
+    s_ASK_PERMISSION(__data2());
     s_PERMISSION_FILLER(call_builtin("frozenset", &[mcall(&py_str("you u ya your yourself need needed want wanted mind about\n    something then now bit wee little one just really actually\n    ok okay hey hi hello so well oh ah and but or yeah yes please ta thanks love mate"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
     s_ASK_FREE_WORDS(call_builtin("frozenset", &[mcall(&py_str("free around available busy"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
     s_ASK_FREE_FILLER(call_builtin("frozenset", &[mcall(&py_str("are is you u ya to for a chat talk then now still or and quick\n    moment min minute sec second right mate please"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
@@ -592,7 +612,7 @@ fn module_body() {
     s_NOT_A_THING(call_builtin("frozenset", &[mcall(&py_str("i im ive me we us you your youre u he she they theyre it its is are\n    was were am be been being do does did can could should would will shall may might have has\n    had if when while because since until though although than that this then there here and or\n    but not no"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
     s_CORRECTION_OPENER(call_builtin("frozenset", &[mcall(&py_str("no nah sorry actually oops wait nope"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
     s_DETERMINER_TAIL(call_builtin("frozenset", &[mcall(&py_str("the a an my your our their his her each every"), "split", &[])]).unwrap_or_else(|e| exc::raise(e)));
-    s_SAME_KIND_WORDS(py_tuple(vec![py_tuple(vec![py_str("person"), crate::understanding::topics::g_RELATIONS()]), py_tuple(vec![py_str("name"), crate::understanding::lexicon::g_COMMON_NAMES()]), py_tuple(vec![py_str("part"), crate::understanding::lexicon::g_BODY_PARTS()]), py_tuple(vec![py_str("time"), crate::understanding::normalize::g_COUNT_UNITS()])]));
+    s_SAME_KIND_WORDS(py_tuple(vec![py_tuple(vec![py_str("person"), pyrt::xrefs::xget("understanding.topics", "RELATIONS")]), py_tuple(vec![py_str("name"), pyrt::xrefs::xget("understanding.lexicon", "COMMON_NAMES")]), py_tuple(vec![py_str("part"), pyrt::xrefs::xget("understanding.lexicon", "BODY_PARTS")]), py_tuple(vec![py_str("time"), pyrt::xrefs::xget("understanding.normalize", "COUNT_UNITS")])]));
     s_SUBJECT_TYPES(py_tuple(vec![py_str("title"), py_str("name"), py_str("person"), py_str("place"), py_str("thing")]));
     s_REACHING_KEYS(py_tuple(vec![py_str("topic"), py_str("emotion"), py_str("body"), py_str("numbers"), py_str("summons"), py_str("presence")]));
     s__SEARCH_FRAME(stdlib_call("re", "compile", &[py_str("^(?P<polite>\\s*(?:(?:can|could|would|will)\\s+you\\s+|please\\s+|pls\\s+|just\\s+|ok(?:ay)?\\s+|so\\s+|and\\s+|go\\s+|quick\\s+)*)(?:search\\s+for|search\\s+up|look\\s+up)\\s+|^(?P<polite2>\\s*(?:(?:can|could|would|will)\\s+you\\s+|please\\s+|pls\\s+|just\\s+)*)google\\s+"), stdlib_attr("re", "IGNORECASE").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
@@ -876,9 +896,9 @@ pub fn _the_noun_to_lend(args: &[Py]) -> Py {
     let __iter1 = py_iter_or_raise(&call_builtin("reversed", &[_user_lines(&[memory.clone(), Py::Int(3)])]).unwrap_or_else(|e| exc::raise(e)));
     for __item in __iter1 {
     earlier = __item.clone();
-    line = crate::understanding::normalize::normalise(&[earlier.clone()]);
-    entities = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&crate::understanding::topics::detect_entities(&[line.clone()])) { let mut entity: Py = __item.clone(); if py_truthy(&call_builtin("isinstance", &[entity.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(entity.clone()); } } py_list(__out) })() };
-    let __unpk2 = py_unpack(&crate::understanding::references::_target(&[line.clone(), entities.clone(), Py::None]), 2, None);
+    line = pyrt::xrefs::xcall("understanding.normalize", "normalise", &[earlier.clone()]);
+    entities = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xcall("understanding.topics", "detect_entities", &[line.clone()])) { let mut entity: Py = __item.clone(); if py_truthy(&call_builtin("isinstance", &[entity.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(entity.clone()); } } py_list(__out) })() };
+    let __unpk2 = py_unpack(&pyrt::xrefs::xcall("understanding.references", "_target", &[line.clone(), entities.clone(), Py::None]), 2, None);
     name = __unpk2[0].clone();
     kind = __unpk2[1].clone();
     if py_truthy(&{ let __b = Py::Bool(!py_eq(&kind.clone(), &py_str("thing"))); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&call_builtin("isinstance", &[name.clone(), py_func("str", |args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e)))); if py_truthy(&__b) { __b } else { op_lt(&call_builtin("len", &[name.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(3)) } } } }) {
@@ -1112,7 +1132,7 @@ pub fn _pointable(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(py_contains(&py_tuple(vec![py_str("thing"), py_str("place"), py_str("person"), py_str("title")]), &kind.clone()))) {
     let _ = mcall(&kept.clone(), "append", &[entity.clone()]);
     } else {
-    if py_truthy(&{ let __b = Py::Bool(py_eq(&kind.clone(), &py_str("name"))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_contains(&word.clone(), &py_str("'"))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&crate::understanding::topics::g_COMMON_WORDS(), &word.clone())) } } } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_eq(&kind.clone(), &py_str("name"))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_contains(&word.clone(), &py_str("'"))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&pyrt::xrefs::xget("understanding.topics", "COMMON_WORDS"), &word.clone())) } } } }) {
     let _ = mcall(&kept.clone(), "append", &[entity.clone()]);
     }
     }
@@ -1140,8 +1160,8 @@ pub fn _pointed_at(args: &[Py]) -> Py {
     let __iter1 = py_iter_or_raise(&call_builtin("reversed", &[history.clone()]).unwrap_or_else(|e| exc::raise(e)));
     for __item in __iter1 {
     text = __item.clone();
-    read = crate::understanding::normalize::normalise(&[text.clone()]);
-    entities = _pointable(&[crate::understanding::topics::detect_entities(&[read.clone()])]);
+    read = pyrt::xrefs::xcall("understanding.normalize", "normalise", &[text.clone()]);
+    entities = _pointable(&[pyrt::xrefs::xcall("understanding.topics", "detect_entities", &[read.clone()])]);
     if py_truthy(&entities.clone()) {
     return py_tuple(vec![read.clone(), entities.clone()]);
     }
@@ -1179,8 +1199,8 @@ pub fn _the_recorded_subject(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&call_builtin("isinstance", &[line.clone(), py_func("str", |args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e)))); if py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&line.clone(), "strip", &[]))) } }) {
     continue;
     }
-    read = crate::understanding::normalize::normalise(&[line.clone()]);
-    entities = _pointable(&[crate::understanding::topics::detect_entities(&[read.clone()])]);
+    read = pyrt::xrefs::xcall("understanding.normalize", "normalise", &[line.clone()]);
+    entities = _pointable(&[pyrt::xrefs::xcall("understanding.topics", "detect_entities", &[read.clone()])]);
     if py_truthy(&entities.clone()) {
     return py_tuple(vec![read.clone(), entities.clone()]);
     }
@@ -1215,8 +1235,8 @@ pub fn _recent_topic(args: &[Py]) -> Py {
     let __unpk2 = py_unpack(&__item.clone(), 2, None);
     index = __unpk2[0].clone();
     text = __unpk2[1].clone();
-    read = crate::understanding::normalize::normalise(&[text.clone()]);
-    let __unpk3 = py_unpack(&crate::understanding::topics::detect_topic(&[read.clone(), Py::None, crate::understanding::topics::detect_entities(&[read.clone()])]), 2, None);
+    read = pyrt::xrefs::xcall("understanding.normalize", "normalise", &[text.clone()]);
+    let __unpk3 = py_unpack(&pyrt::xrefs::xcall("understanding.topics", "detect_topic", &[read.clone(), Py::None, pyrt::xrefs::xcall("understanding.topics", "detect_entities", &[read.clone()])]), 2, None);
     topic = __unpk3[0].clone();
     score = __unpk3[1].clone();
     if py_truthy(&{ let __b = topic.clone(); if !py_truthy(&__b) { __b } else { op_ge(&score.clone(), &g_CARRY_TOPIC()) } }) {
@@ -1366,7 +1386,7 @@ pub fn _about_the_bot(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(py_eq(&geti(&words.clone(), &Py::Int(0)), &py_str("who")))) {
     return { let __b = Py::Bool(py_contains(&g_SECOND_PERSON(), &geti(&words.clone(), &op_neg(&Py::Int(1))))); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_WHO_ENDS(), &geti(&words.clone(), &op_neg(&Py::Int(1))))) } };
     }
-    bot_at = call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk5789 = py_unpack(&__item.clone(), 2, None); let mut index: Py = __unpk5789[0].clone(); let mut word: Py = __unpk5789[1].clone(); if py_truthy(&Py::Bool(py_contains(&g_SECOND_PERSON(), &word.clone()))) {  __out.push(index.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
+    bot_at = call_builtin("next", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("enumerate", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))) { let __unpk2817 = py_unpack(&__item.clone(), 2, None); let mut index: Py = __unpk2817[0].clone(); let mut word: Py = __unpk2817[1].clone(); if py_truthy(&Py::Bool(py_contains(&g_SECOND_PERSON(), &word.clone()))) {  __out.push(index.clone()); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&slice_or_raise(&words.clone(), &Py::Int(1), &bot_at.clone(), &Py::None)) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&g_HYPOTHETICAL(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     return Py::Bool(false);
     }
@@ -1865,7 +1885,7 @@ pub fn _the_chat_subject(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&text.clone()))) {
     return py_tuple(vec![Py::None, Py::None, py_list(vec![])]);
     }
-    named = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&crate::understanding::topics::detect_entities(&[crate::understanding::normalize::normalise(&[text.clone()])])) { let mut entity: Py = __item.clone(); if py_truthy(&Py::Bool(py_contains(&g_SUBJECT_TYPES(), &geti(&entity.clone(), &py_str("type"))))) {  __out.push(entity.clone()); } } py_list(__out) })() };
+    named = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xcall("understanding.topics", "detect_entities", &[pyrt::xrefs::xcall("understanding.normalize", "normalise", &[text.clone()])])) { let mut entity: Py = __item.clone(); if py_truthy(&Py::Bool(py_contains(&g_SUBJECT_TYPES(), &geti(&entity.clone(), &py_str("type"))))) {  __out.push(entity.clone()); } } py_list(__out) })() };
     if py_truthy(&Py::Bool(!py_truthy(&named.clone()))) {
     return py_tuple(vec![Py::None, Py::None, py_list(vec![])]);
     }
@@ -1902,7 +1922,7 @@ pub fn _the_meaning_is_applied_to_what_was_said(args: &[Py]) -> Py {
     let mut word: Py = Py::None;
     let mut words: Py = Py::None;
     let _ = py_str("True when a \"what does that mean for my X\" is still about the line just given.\n\n    \"so what does that mean for my pay\" after an answer about a payslip is this question: the\n    thing the meaning is applied to has just been talked about, so the store says the bit of the\n    answer again. \"what does that mean for my mortgage\" after \"my back hurts\" is a question about\n    a mortgage, and a sentence about back pain applied to it would be a guess dressed as an\n    answer - so the reading does not claim it and the thing's own card keeps the turn.\n    ");
-    applied = mcall(&crate::understanding::kinds::g_MEANT_APPLIED_TO(), "search", &[call_builtin("str", &[{ let __b = mcall(&line.clone(), "get", &[py_str("text")]); if py_truthy(&__b) { __b } else { { let __b = mcall(&line.clone(), "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { py_str("") } } } }]).unwrap_or_else(|e| exc::raise(e))]);
+    applied = mcall(&pyrt::xrefs::xget("understanding.kinds", "MEANT_APPLIED_TO"), "search", &[call_builtin("str", &[{ let __b = mcall(&line.clone(), "get", &[py_str("text")]); if py_truthy(&__b) { __b } else { { let __b = mcall(&line.clone(), "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { py_str("") } } } }]).unwrap_or_else(|e| exc::raise(e))]);
     if py_truthy(&Py::Bool(!py_truthy(&applied.clone()))) {
     return Py::Bool(true);
     }
@@ -1992,7 +2012,7 @@ pub fn _leans_on(args: &[Py]) -> Py {
     if py_truthy(&_changes_subject(&[line.clone()])) {
     return Py::None;
     }
-    words = crate::understanding::breeds::the_animal_a_breed_is(&[_keywords(&[geti(&carried.clone(), &py_str("norm"))])]);
+    words = pyrt::xrefs::xcall("understanding.breeds", "the_animal_a_breed_is", &[_keywords(&[geti(&carried.clone(), &py_str("norm"))])]);
     if py_truthy(&{ let __b = Py::Bool(!py_is(&carried.clone(), &previous.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&carried_is_older.clone())) } }) {
     let __iter1 = py_iter_or_raise(&_keywords(&[geti(&previous.clone(), &py_str("norm"))]));
     for __item in __iter1 {
@@ -2046,16 +2066,16 @@ pub fn _about_a_person_or_a_trouble(args: &[Py]) -> Py {
     else if let Some((_, v)) = __kw.iter().find(|(n, _)| n == "after") { v.clone() }
     else { exc::raise(type_err(&format!("missing required argument: after"))) };
     let _ = py_str("True when the words after a courtesy are about a person or name a trouble.");
-    if py_truthy(&op_bitand(&call_builtin("set", &[after.clone()]).unwrap_or_else(|e| exc::raise(e)), &op_bitor(&crate::understanding::kinds::g_NEEDS_ANSWER(), &g_AT_IT_STILL()))) {
+    if py_truthy(&op_bitand(&call_builtin("set", &[after.clone()]).unwrap_or_else(|e| exc::raise(e)), &op_bitor(&pyrt::xrefs::xget("understanding.kinds", "NEEDS_ANSWER"), &g_AT_IT_STILL()))) {
     return Py::Bool(true);
     }
-    if py_truthy(&mcall(&crate::understanding::kinds::g_STILL_WRONG(), "search", &[mcall(&py_str(" "), "join", &[after.clone()])])) {
+    if py_truthy(&mcall(&pyrt::xrefs::xget("understanding.kinds", "STILL_WRONG"), "search", &[mcall(&py_str(" "), "join", &[after.clone()])])) {
     return Py::Bool(true);
     }
     if py_truthy(&Py::Bool(py_contains(&g_PERSON_HEADS(), &geti(&after.clone(), &Py::Int(0))))) {
     return Py::Bool(true);
     }
-    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_POSSESSIVE(), &geti(&after.clone(), &Py::Int(0)))); if !py_truthy(&__b) { __b } else { { let __b = op_gt(&call_builtin("len", &[after.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1)); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&op_bitor(&op_bitor(&crate::understanding::kinds::g_OTHER_PEOPLE(), &crate::understanding::kinds::g_PERSON_NOUNS()), &crate::understanding::kinds::g_MOOD_NOUNS()), &geti(&after.clone(), &Py::Int(1)))) } } } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&g_POSSESSIVE(), &geti(&after.clone(), &Py::Int(0)))); if !py_truthy(&__b) { __b } else { { let __b = op_gt(&call_builtin("len", &[after.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1)); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&op_bitor(&op_bitor(&pyrt::xrefs::xget("understanding.kinds", "OTHER_PEOPLE"), &pyrt::xrefs::xget("understanding.kinds", "PERSON_NOUNS")), &pyrt::xrefs::xget("understanding.kinds", "MOOD_NOUNS")), &geti(&after.clone(), &Py::Int(1)))) } } } }) {
     return Py::Bool(true);
     }
     return Py::Bool(false);
@@ -2080,11 +2100,11 @@ pub fn _about_something_of_its_own(args: &[Py]) -> Py {
     let mut topic: Py = Py::None;
     let mut words: Py = Py::None;
     let _ = py_str("True when the words after a thank-you are a line about something, not a sign-off.\n\n    \"my boss is a nightmare\" and \"the tap is still dripping\" name a thing and say something\n    about it, so the thank-you is a wrapper and the line inside needs the answer. \"that\n    worked\", \"that helps a lot\" and \"love\" say nothing of their own, and \"that explains the\n    boiler\" comments on the answer just given rather than asking again, so the bar is the one\n    a line's own topic has to clear.\n    ");
-    if py_truthy(&{ let __b = op_lt(&call_builtin("len", &[after.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&crate::understanding::kinds::g_ADDRESS_WORDS(), &geti(&after.clone(), &Py::Int(0)))) } }) {
+    if py_truthy(&{ let __b = op_lt(&call_builtin("len", &[after.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("understanding.kinds", "ADDRESS_WORDS"), &geti(&after.clone(), &Py::Int(0)))) } }) {
     return Py::Bool(false);
     }
     if py_truthy(&{ let __b = Py::Bool(py_eq(&geti(&after.clone(), &Py::Int(0)), &py_str("i"))); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_DID_IT(), &geti(&after.clone(), &Py::Int(1)))) } }) {
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&op_bitand(&call_builtin("set", &[after.clone()]).unwrap_or_else(|e| exc::raise(e)), &crate::understanding::kinds::g_NEEDS_ANSWER()))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&crate::understanding::kinds::g_STILL_WRONG(), "search", &[mcall(&py_str(" "), "join", &[after.clone()])]))) } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&op_bitand(&call_builtin("set", &[after.clone()]).unwrap_or_else(|e| exc::raise(e)), &pyrt::xrefs::xget("understanding.kinds", "NEEDS_ANSWER")))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&pyrt::xrefs::xget("understanding.kinds", "STILL_WRONG"), "search", &[mcall(&py_str(" "), "join", &[after.clone()])]))) } }) {
     return Py::Bool(false);
     }
     }
@@ -2092,24 +2112,24 @@ pub fn _about_something_of_its_own(args: &[Py]) -> Py {
     if py_truthy(&op_bitand(&words.clone(), &g_PRAISED())) {
     return Py::Bool(false);
     }
-    if py_truthy(&{ let __b = crate::understanding::kinds::_a_step_done(&[after.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&crate::understanding::kinds::_the_step_went_wrong(&[after.clone()]))) } }) {
+    if py_truthy(&{ let __b = pyrt::xrefs::xcall("understanding.kinds", "_a_step_done", &[after.clone()]); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&pyrt::xrefs::xcall("understanding.kinds", "_the_step_went_wrong", &[after.clone()]))) } }) {
     return Py::Bool(false);
     }
-    if py_truthy(&{ let __b = op_bitand(&words.clone(), &crate::understanding::kinds::g_PRAISING_VERB()); if py_truthy(&__b) { __b } else { mcall(&crate::understanding::kinds::g_PRAISE_SAID(), "search", &[mcall(&py_str(" "), "join", &[after.clone()])]) } }) {
+    if py_truthy(&{ let __b = op_bitand(&words.clone(), &pyrt::xrefs::xget("understanding.kinds", "PRAISING_VERB")); if py_truthy(&__b) { __b } else { mcall(&pyrt::xrefs::xget("understanding.kinds", "PRAISE_SAID"), "search", &[mcall(&py_str(" "), "join", &[after.clone()])]) } }) {
     return Py::Bool(false);
     }
-    if py_truthy(&crate::understanding::kinds::_a_fall_that_is_not_one(&[after.clone()])) {
+    if py_truthy(&pyrt::xrefs::xcall("understanding.kinds", "_a_fall_that_is_not_one", &[after.clone()])) {
     return Py::Bool(false);
     }
-    if py_truthy(&{ let __b = Py::Bool(py_contains(&after.clone(), &py_str("temperature"))); if py_truthy(&__b) { __b } else { mcall(&crate::understanding::kinds::g_SIGNING_OFF(), "search", &[mcall(&py_str(" "), "join", &[after.clone()])]) } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&after.clone(), &py_str("temperature"))); if py_truthy(&__b) { __b } else { mcall(&pyrt::xrefs::xget("understanding.kinds", "SIGNING_OFF"), "search", &[mcall(&py_str(" "), "join", &[after.clone()])]) } }) {
     return Py::Bool(false);
     }
     if py_truthy(&Py::Bool(!py_truthy(&_about_a_person_or_a_trouble(&[after.clone()])))) {
     return Py::Bool(false);
     }
-    rest = crate::understanding::normalize::normalise(&[mcall(&py_str(" "), "join", &[after.clone()])]);
-    entities = crate::understanding::topics::detect_entities(&[rest.clone()]);
-    let __unpk1 = py_unpack(&crate::understanding::topics::detect_topic(&[rest.clone(), Py::None, entities.clone(), Py::Bool(false)]), 2, None);
+    rest = pyrt::xrefs::xcall("understanding.normalize", "normalise", &[mcall(&py_str(" "), "join", &[after.clone()])]);
+    entities = pyrt::xrefs::xcall("understanding.topics", "detect_entities", &[rest.clone()]);
+    let __unpk1 = py_unpack(&pyrt::xrefs::xcall("understanding.topics", "detect_topic", &[rest.clone(), Py::None, entities.clone(), Py::Bool(false)]), 2, None);
     topic = __unpk1[0].clone();
     score = __unpk1[1].clone();
     return { let __b = Py::Bool(!py_is(&topic.clone(), &Py::None)); if !py_truthy(&__b) { __b } else { op_ge(&score.clone(), &op_add(&g_CARRY_TOPIC(), &Py::Int(1))) } };
@@ -2160,7 +2180,7 @@ pub fn _the_new_thing(args: &[Py]) -> Py {
     return Py::None;
     }
     }
-    if py_truthy(&Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&phrase.clone()) { let mut word: Py = __item.clone(); __out.push({ let __b = op_gt(&call_builtin("len", &[word.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&crate::understanding::lexicon::g_COMMON_NAMES(), &word.clone())) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))))) {
+    if py_truthy(&Py::Bool(!py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&phrase.clone()) { let mut word: Py = __item.clone(); __out.push({ let __b = op_gt(&call_builtin("len", &[word.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("understanding.lexicon", "COMMON_NAMES"), &word.clone())) } }); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))))) {
     return Py::None;
     }
     return phrase.clone();
@@ -2243,7 +2263,7 @@ pub fn _where_the_swap_goes(args: &[Py]) -> Py {
     }
     end = op_add(&at.clone(), &Py::Int(1));
     if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&earlier.clone()) { let mut ch: Py = __item.clone(); __out.push(mcall(&ch.clone(), "isdigit", &[])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
-    while py_truthy(&{ let __b = op_lt(&end.clone(), &call_builtin("len", &[places.clone()]).unwrap_or_else(|e| exc::raise(e))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&crate::understanding::normalize::g_COUNT_UNITS(), &geti(&places.clone(), &end.clone()))); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&py_tuple(vec![py_str("a"), py_str("an"), py_str("each"), py_str("per"), py_str("every")]), &geti(&places.clone(), &end.clone()))) } } } }) {
+    while py_truthy(&{ let __b = op_lt(&end.clone(), &call_builtin("len", &[places.clone()]).unwrap_or_else(|e| exc::raise(e))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("understanding.normalize", "COUNT_UNITS"), &geti(&places.clone(), &end.clone()))); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&py_tuple(vec![py_str("a"), py_str("an"), py_str("each"), py_str("per"), py_str("every")]), &geti(&places.clone(), &end.clone()))) } } } }) {
     let __aug4 = op_add(&end.clone(), &Py::Int(1));
     end = __aug4;
     }
@@ -2368,7 +2388,7 @@ pub fn _asked_again(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&phrase.clone()))) {
     return Py::None;
     }
-    earlier = crate::understanding::normalize::normalise(&[before.clone()]);
+    earlier = pyrt::xrefs::xcall("understanding.normalize", "normalise", &[before.clone()]);
     at = _where_the_swap_goes(&[geti(&earlier.clone(), &py_str("norm")), phrase.clone()]);
     if py_truthy(&Py::Bool(py_is(&at.clone(), &Py::None))) {
     return Py::None;
@@ -2683,7 +2703,7 @@ pub fn _an_introduction_that_says_how_they_are(args: &[Py]) -> Py {
     return py_str("");
     }
     word = mcall(&mcall(&match_.clone(), "group", &[Py::Int(1)]), "lower", &[]);
-    if py_truthy(&{ let __b = Py::Bool(py_contains(&crate::understanding::lexicon::g_A_DESCRIBING(), &word.clone())); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&crate::understanding::lexicon::g_TRAITS(), &word.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&crate::understanding::lexicon::g_A_STATE(), &word.clone())) } } } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("understanding.lexicon", "A_DESCRIBING"), &word.clone())); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&pyrt::xrefs::xget("understanding.lexicon", "TRAITS"), &word.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("understanding.lexicon", "A_STATE"), &word.clone())) } } } }) {
     return op_add(&py_str("im "), &word.clone());
     }
     return py_str("");
@@ -2709,7 +2729,7 @@ pub fn _said_of_themselves(args: &[Py]) -> Py {
     let mut lead: Py = Py::None;
     let _ = py_str("True when the word at `place` is how the person says they are.\n\n    \"im board\", \"im so board\", \"i feel really board\": a first-person frame, at most a filler or\n    two between it and the word. \"my board has split down the middle\" and \"the chairman of the\n    board\" are a board, and this is what tells the one from the other.\n    ");
     back = op_sub(&place.clone(), &Py::Int(1));
-    while py_truthy(&{ let __b = op_ge(&back.clone(), &Py::Int(0)); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&crate::understanding::lexicon::g_FEELING_FILLER(), &geti(&geti(&words.clone(), &back.clone()), &Py::Int(0)))) } }) {
+    while py_truthy(&{ let __b = op_ge(&back.clone(), &Py::Int(0)); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("understanding.lexicon", "FEELING_FILLER"), &geti(&geti(&words.clone(), &back.clone()), &Py::Int(0)))) } }) {
     let __aug1 = op_sub(&back.clone(), &Py::Int(1));
     back = __aug1;
     }
@@ -2717,7 +2737,7 @@ pub fn _said_of_themselves(args: &[Py]) -> Py {
     return Py::Bool(false);
     }
     lead = geti(&geti(&words.clone(), &back.clone()), &Py::Int(0));
-    if py_truthy(&Py::Bool(py_contains(&crate::understanding::lexicon::g_FEELING_LEAD(), &lead.clone()))) {
+    if py_truthy(&Py::Bool(py_contains(&pyrt::xrefs::xget("understanding.lexicon", "FEELING_LEAD"), &lead.clone()))) {
     return Py::Bool(true);
     }
     return { let __b = Py::Bool(py_contains(&py_tuple(vec![py_str("was"), py_str("wasnt"), py_str("wasn't"), py_str("is"), py_str("isnt"), py_str("isn't"), py_str("get"), py_str("got")]), &lead.clone())); if !py_truthy(&__b) { __b } else { { let __b = op_gt(&back.clone(), &Py::Int(0)); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&py_tuple(vec![py_str("i"), py_str("im"), py_str("i'm"), py_str("iam")]), &geti(&geti(&words.clone(), &op_sub(&back.clone(), &Py::Int(1))), &Py::Int(0)))) } } } };
@@ -2771,13 +2791,13 @@ pub fn _confused_text(args: &[Py]) -> Py {
     end = __unpk4[2].clone();
     before = if py_truthy(&place.clone()) { geti(&geti(&words.clone(), &op_sub(&place.clone(), &Py::Int(1))), &Py::Int(0)) } else { py_str("") };
     after = if py_truthy(&op_lt(&op_add(&place.clone(), &Py::Int(1)), &call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)))) { geti(&geti(&words.clone(), &op_add(&place.clone(), &Py::Int(1))), &Py::Int(0)) } else { py_str("") };
-    meant = mcall(&crate::understanding::lexicon::g_CONFUSIONS(), "get", &[word.clone()]);
+    meant = mcall(&pyrt::xrefs::xget("understanding.lexicon", "CONFUSIONS"), "get", &[word.clone()]);
     if py_truthy(&Py::Bool(!py_truthy(&meant.clone()))) {
-    pair = mcall(&crate::understanding::lexicon::g_CONFUSIONS_AFTER(), "get", &[word.clone()]);
+    pair = mcall(&pyrt::xrefs::xget("understanding.lexicon", "CONFUSIONS_AFTER"), "get", &[word.clone()]);
     if py_truthy(&{ let __b = pair.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&geti(&pair.clone(), &Py::Int(1)), &before.clone())) } }) {
     meant = geti(&pair.clone(), &Py::Int(0));
     } else {
-    pair = mcall(&crate::understanding::lexicon::g_CONFUSIONS_BEFORE(), "get", &[word.clone()]);
+    pair = mcall(&pyrt::xrefs::xget("understanding.lexicon", "CONFUSIONS_BEFORE"), "get", &[word.clone()]);
     if py_truthy(&{ let __b = pair.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&geti(&pair.clone(), &Py::Int(1)), &after.clone())) } }) {
     meant = geti(&pair.clone(), &Py::Int(0));
     } else {
@@ -2788,13 +2808,13 @@ pub fn _confused_text(args: &[Py]) -> Py {
     }
     }
     if py_truthy(&Py::Bool(!py_truthy(&meant.clone()))) {
-    pair = mcall(&crate::understanding::lexicon::g_CONFUSIONS_IN_A_FEELING(), "get", &[word.clone()]);
+    pair = mcall(&pyrt::xrefs::xget("understanding.lexicon", "CONFUSIONS_IN_A_FEELING"), "get", &[word.clone()]);
     if py_truthy(&{ let __b = pair.clone(); if !py_truthy(&__b) { __b } else { { let __b = { let __b = Py::Bool(!py_truthy(&after.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&geti(&pair.clone(), &Py::Int(1)), &after.clone())) } }; if !py_truthy(&__b) { __b } else { _said_of_themselves(&[words.clone(), place.clone()]) } } } }) {
     meant = geti(&pair.clone(), &Py::Int(0));
     }
     }
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&meant.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&crate::understanding::lexicon::g_QUESTION_WORDS(), &after.clone())) } }) {
-    meant = mcall(&crate::understanding::lexicon::g_CONFUSIONS_BEFORE_A_QUESTION(), "get", &[word.clone()]);
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&meant.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&pyrt::xrefs::xget("understanding.lexicon", "QUESTION_WORDS"), &after.clone())) } }) {
+    meant = mcall(&pyrt::xrefs::xget("understanding.lexicon", "CONFUSIONS_BEFORE_A_QUESTION"), "get", &[word.clone()]);
     }
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&meant.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_eq(&meant.clone(), &word.clone())) } }) {
     continue;
@@ -2902,22 +2922,22 @@ pub fn _read_line(args: &[Py]) -> Py {
     let mut words: Py = Py::None;
     let _ = py_str("One reading of the user's line, before the second chance at the words in it.");
     memory = if py_truthy(&call_builtin("isinstance", &[memory.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) { memory.clone() } else { py_dict(vec![]) };
-    line = crate::understanding::normalize::normalise(&[crate::understanding::normalize::_the_sugar_that_is_blood(&[crate::understanding::normalize::_the_part_that_hurts(&[crate::understanding::normalize::without_the_figure_of_speech(&[text.clone()])])])]);
-    read = crate::understanding::kinds::classify(&[line.clone()]);
+    line = pyrt::xrefs::xcall("understanding.normalize", "normalise", &[pyrt::xrefs::xcall("understanding.normalize", "_the_sugar_that_is_blood", &[pyrt::xrefs::xcall("understanding.normalize", "_the_part_that_hurts", &[pyrt::xrefs::xcall("understanding.normalize", "without_the_figure_of_speech", &[text.clone()])])])]);
+    read = pyrt::xrefs::xcall("understanding.kinds", "classify", &[line.clone()]);
     if py_truthy(&Py::Bool(py_eq(&geti(&read.clone(), &py_str("kind")), &py_str("thanks")))) {
-    after = crate::understanding::kinds::the_line_after_a_courtesy(&[geti(&line.clone(), &py_str("norm"))]);
+    after = pyrt::xrefs::xcall("understanding.kinds", "the_line_after_a_courtesy", &[geti(&line.clone(), &py_str("norm"))]);
     if py_truthy(&{ let __b = after.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_contains(&g_THANKED_FOR(), &geti(&after.clone(), &Py::Int(0)))); if !py_truthy(&__b) { __b } else { _about_something_of_its_own(&[after.clone()]) } } } }) {
-    line = crate::understanding::normalize::normalise(&[mcall(&py_str(" "), "join", &[after.clone()])]);
-    read = crate::understanding::kinds::classify(&[line.clone()]);
+    line = pyrt::xrefs::xcall("understanding.normalize", "normalise", &[mcall(&py_str(" "), "join", &[after.clone()])]);
+    read = pyrt::xrefs::xcall("understanding.kinds", "classify", &[line.clone()]);
     }
     }
     history = _user_lines(&[memory.clone(), g_LOOKBACK()]);
     previous_text = if py_truthy(&history.clone()) { geti(&history.clone(), &op_neg(&Py::Int(1))) } else { Py::None };
-    previous = if py_truthy(&previous_text.clone()) { crate::understanding::normalize::normalise(&[previous_text.clone()]) } else { Py::None };
-    previous_entities = if py_truthy(&previous.clone()) { crate::understanding::topics::detect_entities(&[previous.clone()]) } else { py_list(vec![]) };
+    previous = if py_truthy(&previous_text.clone()) { pyrt::xrefs::xcall("understanding.normalize", "normalise", &[previous_text.clone()]) } else { Py::None };
+    previous_entities = if py_truthy(&previous.clone()) { pyrt::xrefs::xcall("understanding.topics", "detect_entities", &[previous.clone()]) } else { py_list(vec![]) };
     previous_topic = Py::None;
     if py_truthy(&previous.clone()) {
-    let __unpk1 = py_unpack(&crate::understanding::topics::detect_topic(&[previous.clone(), Py::None, previous_entities.clone()]), 2, None);
+    let __unpk1 = py_unpack(&pyrt::xrefs::xcall("understanding.topics", "detect_topic", &[previous.clone(), Py::None, previous_entities.clone()]), 2, None);
     previous_topic = __unpk1[0].clone();
     _u = __unpk1[1].clone();
     }
@@ -2927,7 +2947,7 @@ pub fn _read_line(args: &[Py]) -> Py {
     carried_is_older = Py::Bool(false);
     constraint_before = _a_constraint_on_the_thing(&[previous.clone()]);
     if py_truthy(&{ let __b = previous.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&previous_entities.clone())); if py_truthy(&__b) { __b } else { constraint_before.clone() } } } }) {
-    own_subject = if py_truthy(&constraint_before.clone()) { Py::None } else { crate::understanding::topics::subject_topic(&[previous.clone(), previous_entities.clone()]) };
+    own_subject = if py_truthy(&constraint_before.clone()) { Py::None } else { pyrt::xrefs::xcall("understanding.topics", "subject_topic", &[previous.clone(), previous_entities.clone()]) };
     let __unpk3 = py_unpack(&_pointed_at(&[slice_or_raise(&history.clone(), &Py::None, &op_neg(&Py::Int(1)), &Py::None)]), 2, None);
     earlier = __unpk3[0].clone();
     earlier_entities = __unpk3[1].clone();
@@ -2938,7 +2958,7 @@ pub fn _read_line(args: &[Py]) -> Py {
     carried_is_older = call_builtin("bool", &[earlier_entities.clone()]).unwrap_or_else(|e| exc::raise(e));
     }
     if py_truthy(&{ let __b = earlier_entities.clone(); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_is(&own_subject.clone(), &Py::None)); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&constraint_before.clone())) } } } }) {
-    earlier_subject = crate::understanding::topics::subject_topic(&[earlier.clone(), earlier_entities.clone()]);
+    earlier_subject = pyrt::xrefs::xcall("understanding.topics", "subject_topic", &[earlier.clone(), earlier_entities.clone()]);
     if py_truthy(&{ let __b = Py::Bool(!py_is(&earlier_subject.clone(), &Py::None)); if !py_truthy(&__b) { __b } else { Py::Bool(!py_eq(&earlier_subject.clone(), &own_subject.clone())) } }) {
     let __unpk5 = py_unpack(&py_tuple(vec![Py::None, py_list(vec![])]), 2, None);
     earlier = __unpk5[0].clone();
@@ -2952,22 +2972,22 @@ pub fn _read_line(args: &[Py]) -> Py {
     carried_text = __unpk6[0].clone();
     carried = __unpk6[1].clone();
     if py_truthy(&Py::Bool(py_is(&previous_topic.clone(), &Py::None))) {
-    previous_topic = geti(&crate::understanding::topics::detect_topic(&[earlier.clone(), Py::None, earlier_entities.clone()]), &Py::Int(0));
+    previous_topic = geti(&pyrt::xrefs::xcall("understanding.topics", "detect_topic", &[earlier.clone(), Py::None, earlier_entities.clone()]), &Py::Int(0));
     }
     }
     }
-    ref_ = crate::understanding::references::resolve(&[line.clone(), read.clone(), previous.clone(), previous_entities.clone(), previous_topic.clone()]);
-    about = crate::understanding::kinds::after_any_link(&[geti(&line.clone(), &py_str("norm"))]);
+    ref_ = pyrt::xrefs::xcall("understanding.references", "resolve", &[line.clone(), read.clone(), previous.clone(), previous_entities.clone(), previous_topic.clone()]);
+    about = pyrt::xrefs::xcall("understanding.kinds", "after_any_link", &[geti(&line.clone(), &py_str("norm"))]);
     topic_line = line.clone();
-    after_entities = if py_truthy(&about.clone()) { crate::understanding::topics::detect_entities(&[crate::understanding::normalize::normalise(&[mcall(&py_str(" "), "join", &[about.clone()])])]) } else { Py::None };
-    if py_truthy(&{ let __b = Py::Bool(!py_is(&after_entities.clone(), &Py::None)); if !py_truthy(&__b) { __b } else { Py::Bool(!py_is(&crate::understanding::topics::subject_topic(&[crate::understanding::normalize::normalise(&[mcall(&py_str(" "), "join", &[about.clone()])]), after_entities.clone()]), &Py::None)) } }) {
-    let __unpk7 = py_unpack(&py_tuple(vec![crate::understanding::normalize::normalise(&[mcall(&py_str(" "), "join", &[about.clone()])]), after_entities.clone()]), 2, None);
+    after_entities = if py_truthy(&about.clone()) { pyrt::xrefs::xcall("understanding.topics", "detect_entities", &[pyrt::xrefs::xcall("understanding.normalize", "normalise", &[mcall(&py_str(" "), "join", &[about.clone()])])]) } else { Py::None };
+    if py_truthy(&{ let __b = Py::Bool(!py_is(&after_entities.clone(), &Py::None)); if !py_truthy(&__b) { __b } else { Py::Bool(!py_is(&pyrt::xrefs::xcall("understanding.topics", "subject_topic", &[pyrt::xrefs::xcall("understanding.normalize", "normalise", &[mcall(&py_str(" "), "join", &[about.clone()])]), after_entities.clone()]), &Py::None)) } }) {
+    let __unpk7 = py_unpack(&py_tuple(vec![pyrt::xrefs::xcall("understanding.normalize", "normalise", &[mcall(&py_str(" "), "join", &[about.clone()])]), after_entities.clone()]), 2, None);
     topic_line = __unpk7[0].clone();
     entities = __unpk7[1].clone();
     } else {
-    entities = crate::understanding::topics::detect_entities(&[line.clone()]);
+    entities = pyrt::xrefs::xcall("understanding.topics", "detect_entities", &[line.clone()]);
     }
-    continues = { let __b = geti(&ref_.clone(), &py_str("followup")); if py_truthy(&__b) { __b } else { Py::Bool(py_is(&crate::understanding::topics::subject_topic(&[topic_line.clone(), entities.clone()]), &Py::None)) } };
+    continues = { let __b = geti(&ref_.clone(), &py_str("followup")); if py_truthy(&__b) { __b } else { Py::Bool(py_is(&pyrt::xrefs::xcall("understanding.topics", "subject_topic", &[topic_line.clone(), entities.clone()]), &Py::None)) } };
     inherited = Py::None;
     if py_truthy(&{ let __b = continues.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&_changes_subject(&[line.clone()]))) } }) {
     claimed = mcall(&memory.clone(), "get", &[py_str("topic")]);
@@ -2977,19 +2997,19 @@ pub fn _read_line(args: &[Py]) -> Py {
     inherited = { let __b = _recent_topic(&[history.clone()]); if py_truthy(&__b) { __b } else { previous_topic.clone() } };
     }
     }
-    if py_truthy(&{ let __b = Py::Bool(py_eq(&geti(&read.clone(), &py_str("kind")), &py_str("statement"))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&geti(&read.clone(), &py_str("asks")))); if !py_truthy(&__b) { __b } else { { let __b = call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&entities.clone()) { let mut entity: Py = __item.clone(); __out.push(Py::Bool(py_eq(&geti(&entity.clone(), &py_str("type")), &py_str("place")))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { crate::understanding::kinds::noun_phrase_request(&[line.clone()]) } } } } } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_eq(&geti(&read.clone(), &py_str("kind")), &py_str("statement"))); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&geti(&read.clone(), &py_str("asks")))); if !py_truthy(&__b) { __b } else { { let __b = call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&entities.clone()) { let mut entity: Py = __item.clone(); __out.push(Py::Bool(py_eq(&geti(&entity.clone(), &py_str("type")), &py_str("place")))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { pyrt::xrefs::xcall("understanding.kinds", "noun_phrase_request", &[line.clone()]) } } } } } }) {
     let _ = py_setitem(&read.clone(), &py_str("intent"), py_str("request"));
     let _ = py_setitem(&read.clone(), &py_str("asks"), py_list(vec![py_str("recommend")]));
     let _ = py_setitem(&read.clone(), &py_str("replies_to_bot"), Py::Bool(false));
     }
     asks_something = { let __b = Py::Bool(py_eq(&geti(&read.clone(), &py_str("kind")), &py_str("question"))); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&py_tuple(vec![py_str("request"), py_str("advice")]), &geti(&read.clone(), &py_str("intent")))) } };
-    let __unpk8 = py_unpack(&crate::understanding::topics::detect_topic(&[topic_line.clone(), Py::None, entities.clone(), asks_something.clone()]), 2, None);
+    let __unpk8 = py_unpack(&pyrt::xrefs::xcall("understanding.topics", "detect_topic", &[topic_line.clone(), Py::None, entities.clone(), asks_something.clone()]), 2, None);
     own_topic = __unpk8[0].clone();
     own_score = __unpk8[1].clone();
-    let __unpk9 = py_unpack(&crate::understanding::topics::detect_topic(&[topic_line.clone(), inherited.clone(), entities.clone(), asks_something.clone()]), 2, None);
+    let __unpk9 = py_unpack(&pyrt::xrefs::xcall("understanding.topics", "detect_topic", &[topic_line.clone(), inherited.clone(), entities.clone(), asks_something.clone()]), 2, None);
     topic = __unpk9[0].clone();
     score = __unpk9[1].clone();
-    ranked = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&crate::understanding::topics::rank_topics(&[topic_line.clone(), Py::None, entities.clone(), asks_something.clone()])) { let __unpk7356 = py_unpack(&__item.clone(), 2, None); let mut name: Py = __unpk7356[0].clone(); let mut points: Py = __unpk7356[1].clone(); __out.push(name.clone()); } py_list(__out) })() };
+    ranked = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&pyrt::xrefs::xcall("understanding.topics", "rank_topics", &[topic_line.clone(), Py::None, entities.clone(), asks_something.clone()])) { let __unpk7926 = py_unpack(&__item.clone(), 2, None); let mut name: Py = __unpk7926[0].clone(); let mut points: Py = __unpk7926[1].clone(); __out.push(name.clone()); } py_list(__out) })() };
     if py_truthy(&_a_stop_in_a_chat_about_something(&[geti(&line.clone(), &py_str("norm")), memory.clone()])) {
     if py_truthy(&Py::Bool(py_eq(&mcall(&read.clone(), "get", &[py_str("intent")]), &py_str("about_bot")))) {
     let _ = py_setitem(&read.clone(), &py_str("intent"), py_str("question"));
@@ -2997,7 +3017,7 @@ pub fn _read_line(args: &[Py]) -> Py {
     let _ = py_setitem(&read.clone(), &py_str("about_bot"), Py::Bool(false));
     let _ = py_setitem(&read.clone(), &py_str("about_bot_kind"), Py::None);
     }
-    if py_truthy(&{ let __b = Py::Bool(py_is(&topic.clone(), &Py::None)); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&crate::understanding::kinds::opening_line(&[geti(&line.clone(), &py_str("norm"))]))); if !py_truthy(&__b) { __b } else { _about_the_bot(&[line.clone(), read.clone(), entities.clone()]) } } } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_is(&topic.clone(), &Py::None)); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&pyrt::xrefs::xcall("understanding.kinds", "opening_line", &[geti(&line.clone(), &py_str("norm"))]))); if !py_truthy(&__b) { __b } else { _about_the_bot(&[line.clone(), read.clone(), entities.clone()]) } } } }) {
     topic = g_ABOUT_THE_BOT();
     ranked = op_add(&py_list(vec![g_ABOUT_THE_BOT()]), &{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&ranked.clone()) { let mut name: Py = __item.clone(); if py_truthy(&Py::Bool(!py_eq(&name.clone(), &g_ABOUT_THE_BOT()))) {  __out.push(name.clone()); } } py_list(__out) })() });
     } else {
@@ -3019,16 +3039,16 @@ pub fn _read_line(args: &[Py]) -> Py {
     ask_subject = __unpk10[0].clone();
     setting = __unpk10[1].clone();
     subject_from = __unpk10[2].clone();
-    topic_from = crate::understanding::topics::the_words_that_said(&[line.clone(), topic.clone(), entities.clone()]);
+    topic_from = pyrt::xrefs::xcall("understanding.topics", "the_words_that_said", &[line.clone(), topic.clone(), entities.clone()]);
     leans_on = _leans_on(&[line.clone(), read.clone(), ref_.clone(), carried_text.clone(), carried.clone(), previous.clone(), own_topic.clone(), previous_topic.clone(), previous_entities.clone(), carried_is_older.clone(), mcall(&memory.clone(), "get", &[py_str("topic")])]);
     intent = geti(&read.clone(), &py_str("intent"));
-    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&ranked.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&py_tuple(vec![py_str("question"), py_str("request"), py_str("news"), py_str("statement"), py_str("ack")]), &intent.clone())); if !py_truthy(&__b) { __b } else { crate::understanding::kinds::opening_line(&[geti(&line.clone(), &py_str("norm"))]) } } } }) {
+    if py_truthy(&{ let __b = Py::Bool(!py_truthy(&ranked.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&py_tuple(vec![py_str("question"), py_str("request"), py_str("news"), py_str("statement"), py_str("ack")]), &intent.clone())); if !py_truthy(&__b) { __b } else { pyrt::xrefs::xcall("understanding.kinds", "opening_line", &[geti(&line.clone(), &py_str("norm"))]) } } } }) {
     intent = py_str("opening");
     } else {
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&entities.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&leans_on.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&py_tuple(vec![py_str("question"), py_str("request")]), &intent.clone())); if !py_truthy(&__b) { __b } else { { let __b = _opens_the_conversation(&[previous.clone()]); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&{ let __b = previous_topic.clone(); if py_truthy(&__b) { __b } else { previous_entities.clone() } })); if !py_truthy(&__b) { __b } else { asks_with_nothing_named(&[geti(&line.clone(), &py_str("norm"))]) } } } } } } } } } }) {
     intent = py_str("opening");
     } else {
-    if py_truthy(&{ let __b = Py::Bool(py_contains(&py_tuple(vec![py_str("question"), py_str("request"), py_str("news"), py_str("statement"), py_str("ack")]), &intent.clone())); if !py_truthy(&__b) { __b } else { crate::understanding::kinds::talk_frame(&[geti(&line.clone(), &py_str("norm"))]) } }) {
+    if py_truthy(&{ let __b = Py::Bool(py_contains(&py_tuple(vec![py_str("question"), py_str("request"), py_str("news"), py_str("statement"), py_str("ack")]), &intent.clone())); if !py_truthy(&__b) { __b } else { pyrt::xrefs::xcall("understanding.kinds", "talk_frame", &[geti(&line.clone(), &py_str("norm"))]) } }) {
     intent = py_str("opening");
     }
     }
@@ -3041,17 +3061,17 @@ pub fn _read_line(args: &[Py]) -> Py {
     intent = py_str("presence");
     }
     plain = _a_word_that_depends_on_the_owner(&[geti(&line.clone(), &py_str("plain")), entities.clone(), geti(&read.clone(), &py_str("state_owner"))]);
-    words = crate::understanding::breeds::the_animal_a_breed_is(&[geti(&line.clone(), &py_str("words"))]);
-    animal_in_hand = crate::understanding::references::the_animal_in_hand(&[ref_.clone(), words.clone()]);
+    words = pyrt::xrefs::xcall("understanding.breeds", "the_animal_a_breed_is", &[geti(&line.clone(), &py_str("words"))]);
+    animal_in_hand = pyrt::xrefs::xcall("understanding.references", "the_animal_in_hand", &[ref_.clone(), words.clone()]);
     if py_truthy(&Py::Bool(!py_truthy(&animal_in_hand.clone()))) {
-    animal_in_hand = crate::understanding::references::the_animal_the_chat_is_on(&[words.clone(), if py_truthy(&call_builtin("isinstance", &[memory.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) { mcall(&memory.clone(), "get", &[py_str("understood")]) } else { Py::None }]);
+    animal_in_hand = pyrt::xrefs::xcall("understanding.references", "the_animal_the_chat_is_on", &[words.clone(), if py_truthy(&call_builtin("isinstance", &[memory.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) { mcall(&memory.clone(), "get", &[py_str("understood")]) } else { Py::None }]);
     }
-    let __unpk11 = py_unpack(&crate::understanding::kinds::over_time(&[line.clone(), read.clone()]), 2, None);
+    let __unpk11 = py_unpack(&pyrt::xrefs::xcall("understanding.kinds", "over_time", &[line.clone(), read.clone()]), 2, None);
     over_time = __unpk11[0].clone();
     over_time_what = __unpk11[1].clone();
     last_read = if py_truthy(&call_builtin("isinstance", &[memory.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) { mcall(&memory.clone(), "get", &[py_str("understood")]) } else { Py::None };
-    out = py_dict(vec![(py_str("text"), if py_truthy(&call_builtin("isinstance", &[text.clone(), py_func("str", |args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) { text.clone() } else { py_str("") }), (py_str("clean"), geti(&line.clone(), &py_str("clean"))), (py_str("words"), words.clone()), (py_str("plain"), plain.clone()), (py_str("animal_in_hand"), animal_in_hand.clone()), (py_str("change_of_subject"), call_builtin("bool", &[mcall(&line.clone(), "get", &[py_str("change_of_subject")])]).unwrap_or_else(|e| exc::raise(e))), (py_str("dropped_subject"), geti(&line.clone(), &py_str("dropped_subject"))), (py_str("sense"), crate::understanding::senses::senses(&[line.clone()])), (py_str("over_time"), over_time.clone()), (py_str("over_time_what"), over_time_what.clone()), (py_str("kept"), mcall(&line.clone(), "get", &[py_str("kept")])), (py_str("kind"), if py_truthy(&presence.clone()) { py_str("question") } else { geti(&read.clone(), &py_str("kind")) }), (py_str("intent"), intent.clone()), (py_str("asks_how_i_am"), { let __b = crate::understanding::kinds::asks_how_i_am(&[geti(&line.clone(), &py_str("norm"))]); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&py_tuple(vec![py_str("smalltalk"), py_str("greeting")]), &intent.clone())) } }), (py_str("presence"), presence.clone()), (py_str("asks"), geti(&read.clone(), &py_str("asks"))), (py_str("tag"), call_builtin("bool", &[mcall(&read.clone(), "get", &[py_str("tag")])]).unwrap_or_else(|e| exc::raise(e))), (py_str("taking_up"), crate::understanding::kinds::taking_up(&[line.clone(), read.clone()])), (py_str("shift"), crate::understanding::kinds::shift_worked(&[geti(&line.clone(), &py_str("clean"))])), (py_str("care_home"), { let __b = crate::understanding::kinds::a_care_home(&[geti(&line.clone(), &py_str("clean"))]); if py_truthy(&__b) { __b } else { crate::understanding::kinds::a_home_carried_forward(&[geti(&line.clone(), &py_str("clean")), _user_lines(&[memory.clone(), g_HOME_LOOKBACK()])]) } }), (py_str("setup"), crate::understanding::kinds::the_setup(&[line.clone()])), (py_str("help_ask"), geti(&read.clone(), &py_str("help_ask"))), (py_str("asks_a_verdict"), geti(&read.clone(), &py_str("asks_a_verdict"))), (py_str("emotion"), geti(&read.clone(), &py_str("emotion"))), (py_str("state_owner"), geti(&read.clone(), &py_str("state_owner"))), (py_str("shortage"), mcall(&read.clone(), "get", &[py_str("shortage")])), (py_str("polarity"), geti(&read.clone(), &py_str("polarity"))), (py_str("warmth"), crate::understanding::topics::the_warmth_said(&[geti(&line.clone(), &py_str("norm"))])), (py_str("body"), crate::understanding::body::read(&[geti(&line.clone(), &py_str("norm_text"))])), (py_str("own_output"), crate::understanding::topics::own_output_word(&[geti(&line.clone(), &py_str("norm"))])), (py_str("short"), geti(&read.clone(), &py_str("short"))), (py_str("first_person"), geti(&read.clone(), &py_str("first_person"))), (py_str("about_bot"), geti(&read.clone(), &py_str("about_bot"))), (py_str("about_bot_kind"), geti(&read.clone(), &py_str("about_bot_kind"))), (py_str("counts_the_bots_own_day"), call_builtin("bool", &[mcall(&read.clone(), "get", &[py_str("counts_the_bots_own_day")])]).unwrap_or_else(|e| exc::raise(e))), (py_str("replies_to_bot"), geti(&read.clone(), &py_str("replies_to_bot"))), (py_str("agrees_to_try"), { let __b = call_builtin("bool", &[mcall(&read.clone(), "get", &[py_str("agrees_to_try")])]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { Py::Bool(py_eq(&intent.clone(), &py_str("ack"))) } }), (py_str("wants_a_quiz"), call_builtin("bool", &[mcall(&read.clone(), "get", &[py_str("wants_a_quiz")])]).unwrap_or_else(|e| exc::raise(e))), (py_str("agreement"), mcall(&read.clone(), "get", &[py_str("agreement")])), (py_str("tight_on_money"), crate::understanding::topics::tight_on_money(&[geti(&line.clone(), &py_str("norm")), geti(&read.clone(), &py_str("kind")), { let __b = mcall(&line.clone(), "get", &[py_str("text")]); if py_truthy(&__b) { __b } else { py_str("") } }])), (py_str("amount_left"), Py::Bool(!py_is(&crate::understanding::topics::purse_till_at(&[geti(&line.clone(), &py_str("norm")), { let __b = mcall(&line.clone(), "get", &[py_str("text")]); if py_truthy(&__b) { __b } else { py_str("") } }]), &Py::None))), (py_str("routine"), crate::understanding::kinds::is_a_routine(&[line.clone(), read.clone()])), (py_str("a_load_carried"), a_load_carried(&[geti(&line.clone(), &py_str("clean"))])), (py_str("car_fault"), crate::understanding::cars::a_broken_car_is_the_subject(&[geti(&line.clone(), &py_str("clean")), _user_lines(&[memory.clone(), crate::understanding::cars::g_LOOKBACK()])])), (py_str("summons"), geti(&read.clone(), &py_str("summons"))), (py_str("asks_back"), geti(&read.clone(), &py_str("asks_back"))), (py_str("stand_in"), _stand_in_here(&[text.clone()])), (py_str("excludes"), { let __b = mcall(&read.clone(), "get", &[py_str("excludes")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }), (py_str("constraint"), call_builtin("bool", &[mcall(&read.clone(), "get", &[py_str("constraint")])]).unwrap_or_else(|e| exc::raise(e))), (py_str("confusion"), crate::understanding::confusion::confusion_of(&[line.clone()])), (py_str("suggestion"), mcall(&read.clone(), "get", &[py_str("suggestion")])), (py_str("ruled_out"), { let __b = mcall(&read.clone(), "get", &[py_str("ruled_out")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }), (py_str("norm"), geti(&line.clone(), &py_str("norm"))), (py_str("norm_text"), geti(&line.clone(), &py_str("norm_text"))), (py_str("fixes"), geti(&line.clone(), &py_str("fixes"))), (py_str("clauses"), geti(&line.clone(), &py_str("clauses"))), (py_str("focus"), geti(&line.clone(), &py_str("focus"))), (py_str("asking"), { let __b = mcall(&line.clone(), "get", &[py_str("asking")]); if py_truthy(&__b) { __b } else { geti(&line.clone(), &py_str("focus")) } }), (py_str("signals"), geti(&line.clone(), &py_str("signals"))), (py_str("topic"), topic.clone()), (py_str("topic_score"), score.clone()), (py_str("topics"), ranked.clone()), (py_str("topic_own"), own_topic.clone()), (py_str("topic_own_score"), own_score.clone()), (py_str("topic_from"), topic_from.clone()), (py_str("topic_is_a_brush"), call_builtin("all", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&topic_from.clone()) { let __unpk5479 = py_unpack(&__item.clone(), 2, None); let mut _word: Py = __unpk5479[0].clone(); let mut weight: Py = __unpk5479[1].clone(); __out.push(op_lt(&weight.clone(), &Py::Int(2))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))), (py_str("unsure"), crate::understanding::topics::unsure_words(&[{ let __b = mcall(&line.clone(), "get", &[py_str("norm")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }, { let __b = own_topic.clone(); if py_truthy(&__b) { __b } else { topic.clone() } }])), (py_str("entities"), entities.clone()), (py_str("person_names"), crate::understanding::topics::person_names(&[line.clone()])), (py_str("background"), { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("sorted", &[crate::understanding::normalize::background_positions(&[geti(&line.clone(), &py_str("norm"))])]).unwrap_or_else(|e| exc::raise(e))) { let mut index: Py = __item.clone(); __out.push(geti(&geti(&line.clone(), &py_str("norm")), &index.clone())); } py_list(__out) })() }), (py_str("intensifier"), call_builtin("list", &[{ let __b = mcall(&line.clone(), "get", &[py_str("intensifier")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }]).unwrap_or_else(|e| exc::raise(e))), (py_str("intensifier_left"), call_builtin("list", &[{ let __b = mcall(&line.clone(), "get", &[py_str("intensifier_left")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }]).unwrap_or_else(|e| exc::raise(e))), (py_str("subject"), subject.clone()), (py_str("subject_unclear"), crate::understanding::topics::unclear_subject(&[geti(&line.clone(), &py_str("norm")), inherited.clone(), previous.clone()])), (py_str("ask_subject"), ask_subject.clone()), (py_str("setting"), setting.clone()), (py_str("subject_from"), subject_from.clone()), (py_str("numbers"), crate::understanding::topics::detect_numbers(&[line.clone()])), (py_str("tried"), crate::understanding::attempts::things_tried(&[if py_truthy(&call_builtin("isinstance", &[mcall(&line.clone(), "get", &[py_str("text")]), py_func("str", |args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) { geti(&line.clone(), &py_str("text")) } else { py_str("") }, geti(&line.clone(), &py_str("norm"))])), (py_str("keywords"), _keywords(&[geti(&line.clone(), &py_str("norm"))])), (py_str("ref"), ref_.clone()), (py_str("followup"), geti(&ref_.clone(), &py_str("followup"))), (py_str("someone_new"), crate::understanding::references::person_is_new(&[line.clone(), previous_entities.clone()])), (py_str("asks_what_was_meant"), { let __b = geti(&read.clone(), &py_str("asks_what_was_meant")); if !py_truthy(&__b) { __b } else { _the_meaning_is_applied_to_what_was_said(&[line.clone(), leans_on.clone(), memory.clone()]) } }), (py_str("leans_on"), leans_on.clone())]);
-    carrying_on = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(line.clone()); __args.push(out.clone()); __args.push(last_read.clone()); __kws.extend(vec![("carrying_on".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| crate::understanding::kinds::over_time(args))(&__args) };
+    out = py_dict(vec![(py_str("text"), if py_truthy(&call_builtin("isinstance", &[text.clone(), py_func("str", |args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) { text.clone() } else { py_str("") }), (py_str("clean"), geti(&line.clone(), &py_str("clean"))), (py_str("words"), words.clone()), (py_str("plain"), plain.clone()), (py_str("animal_in_hand"), animal_in_hand.clone()), (py_str("change_of_subject"), call_builtin("bool", &[mcall(&line.clone(), "get", &[py_str("change_of_subject")])]).unwrap_or_else(|e| exc::raise(e))), (py_str("dropped_subject"), geti(&line.clone(), &py_str("dropped_subject"))), (py_str("sense"), pyrt::xrefs::xcall("understanding.senses", "senses", &[line.clone()])), (py_str("over_time"), over_time.clone()), (py_str("over_time_what"), over_time_what.clone()), (py_str("kept"), mcall(&line.clone(), "get", &[py_str("kept")])), (py_str("kind"), if py_truthy(&presence.clone()) { py_str("question") } else { geti(&read.clone(), &py_str("kind")) }), (py_str("intent"), intent.clone()), (py_str("asks_how_i_am"), { let __b = pyrt::xrefs::xcall("understanding.kinds", "asks_how_i_am", &[geti(&line.clone(), &py_str("norm"))]); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&py_tuple(vec![py_str("smalltalk"), py_str("greeting")]), &intent.clone())) } }), (py_str("presence"), presence.clone()), (py_str("asks"), geti(&read.clone(), &py_str("asks"))), (py_str("tag"), call_builtin("bool", &[mcall(&read.clone(), "get", &[py_str("tag")])]).unwrap_or_else(|e| exc::raise(e))), (py_str("taking_up"), pyrt::xrefs::xcall("understanding.kinds", "taking_up", &[line.clone(), read.clone()])), (py_str("shift"), pyrt::xrefs::xcall("understanding.kinds", "shift_worked", &[geti(&line.clone(), &py_str("clean"))])), (py_str("care_home"), { let __b = pyrt::xrefs::xcall("understanding.kinds", "a_care_home", &[geti(&line.clone(), &py_str("clean"))]); if py_truthy(&__b) { __b } else { pyrt::xrefs::xcall("understanding.kinds", "a_home_carried_forward", &[geti(&line.clone(), &py_str("clean")), _user_lines(&[memory.clone(), g_HOME_LOOKBACK()])]) } }), (py_str("setup"), pyrt::xrefs::xcall("understanding.kinds", "the_setup", &[line.clone()])), (py_str("help_ask"), geti(&read.clone(), &py_str("help_ask"))), (py_str("asks_a_verdict"), geti(&read.clone(), &py_str("asks_a_verdict"))), (py_str("emotion"), geti(&read.clone(), &py_str("emotion"))), (py_str("state_owner"), geti(&read.clone(), &py_str("state_owner"))), (py_str("shortage"), mcall(&read.clone(), "get", &[py_str("shortage")])), (py_str("polarity"), geti(&read.clone(), &py_str("polarity"))), (py_str("warmth"), pyrt::xrefs::xcall("understanding.topics", "the_warmth_said", &[geti(&line.clone(), &py_str("norm"))])), (py_str("body"), pyrt::xrefs::xcall("understanding.body", "read", &[geti(&line.clone(), &py_str("norm_text"))])), (py_str("own_output"), pyrt::xrefs::xcall("understanding.topics", "own_output_word", &[geti(&line.clone(), &py_str("norm"))])), (py_str("short"), geti(&read.clone(), &py_str("short"))), (py_str("first_person"), geti(&read.clone(), &py_str("first_person"))), (py_str("about_bot"), geti(&read.clone(), &py_str("about_bot"))), (py_str("about_bot_kind"), geti(&read.clone(), &py_str("about_bot_kind"))), (py_str("counts_the_bots_own_day"), call_builtin("bool", &[mcall(&read.clone(), "get", &[py_str("counts_the_bots_own_day")])]).unwrap_or_else(|e| exc::raise(e))), (py_str("replies_to_bot"), geti(&read.clone(), &py_str("replies_to_bot"))), (py_str("agrees_to_try"), { let __b = call_builtin("bool", &[mcall(&read.clone(), "get", &[py_str("agrees_to_try")])]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { Py::Bool(py_eq(&intent.clone(), &py_str("ack"))) } }), (py_str("wants_a_quiz"), call_builtin("bool", &[mcall(&read.clone(), "get", &[py_str("wants_a_quiz")])]).unwrap_or_else(|e| exc::raise(e))), (py_str("agreement"), mcall(&read.clone(), "get", &[py_str("agreement")])), (py_str("tight_on_money"), pyrt::xrefs::xcall("understanding.topics", "tight_on_money", &[geti(&line.clone(), &py_str("norm")), geti(&read.clone(), &py_str("kind")), { let __b = mcall(&line.clone(), "get", &[py_str("text")]); if py_truthy(&__b) { __b } else { py_str("") } }])), (py_str("amount_left"), Py::Bool(!py_is(&pyrt::xrefs::xcall("understanding.topics", "purse_till_at", &[geti(&line.clone(), &py_str("norm")), { let __b = mcall(&line.clone(), "get", &[py_str("text")]); if py_truthy(&__b) { __b } else { py_str("") } }]), &Py::None))), (py_str("routine"), pyrt::xrefs::xcall("understanding.kinds", "is_a_routine", &[line.clone(), read.clone()])), (py_str("a_load_carried"), a_load_carried(&[geti(&line.clone(), &py_str("clean"))])), (py_str("car_fault"), pyrt::xrefs::xcall("understanding.cars", "a_broken_car_is_the_subject", &[geti(&line.clone(), &py_str("clean")), _user_lines(&[memory.clone(), pyrt::xrefs::xget("understanding.cars", "LOOKBACK")])])), (py_str("summons"), geti(&read.clone(), &py_str("summons"))), (py_str("asks_back"), geti(&read.clone(), &py_str("asks_back"))), (py_str("stand_in"), _stand_in_here(&[text.clone()])), (py_str("excludes"), { let __b = mcall(&read.clone(), "get", &[py_str("excludes")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }), (py_str("constraint"), call_builtin("bool", &[mcall(&read.clone(), "get", &[py_str("constraint")])]).unwrap_or_else(|e| exc::raise(e))), (py_str("confusion"), pyrt::xrefs::xcall("understanding.confusion", "confusion_of", &[line.clone()])), (py_str("suggestion"), mcall(&read.clone(), "get", &[py_str("suggestion")])), (py_str("ruled_out"), { let __b = mcall(&read.clone(), "get", &[py_str("ruled_out")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }), (py_str("norm"), geti(&line.clone(), &py_str("norm"))), (py_str("norm_text"), geti(&line.clone(), &py_str("norm_text"))), (py_str("fixes"), geti(&line.clone(), &py_str("fixes"))), (py_str("clauses"), geti(&line.clone(), &py_str("clauses"))), (py_str("focus"), geti(&line.clone(), &py_str("focus"))), (py_str("asking"), { let __b = mcall(&line.clone(), "get", &[py_str("asking")]); if py_truthy(&__b) { __b } else { geti(&line.clone(), &py_str("focus")) } }), (py_str("signals"), geti(&line.clone(), &py_str("signals"))), (py_str("topic"), topic.clone()), (py_str("topic_score"), score.clone()), (py_str("topics"), ranked.clone()), (py_str("topic_own"), own_topic.clone()), (py_str("topic_own_score"), own_score.clone()), (py_str("topic_from"), topic_from.clone()), (py_str("topic_is_a_brush"), call_builtin("all", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&topic_from.clone()) { let __unpk5932 = py_unpack(&__item.clone(), 2, None); let mut _word: Py = __unpk5932[0].clone(); let mut weight: Py = __unpk5932[1].clone(); __out.push(op_lt(&weight.clone(), &Py::Int(2))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))), (py_str("unsure"), pyrt::xrefs::xcall("understanding.topics", "unsure_words", &[{ let __b = mcall(&line.clone(), "get", &[py_str("norm")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }, { let __b = own_topic.clone(); if py_truthy(&__b) { __b } else { topic.clone() } }])), (py_str("entities"), entities.clone()), (py_str("person_names"), pyrt::xrefs::xcall("understanding.topics", "person_names", &[line.clone()])), (py_str("background"), { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&call_builtin("sorted", &[pyrt::xrefs::xcall("understanding.normalize", "background_positions", &[geti(&line.clone(), &py_str("norm"))])]).unwrap_or_else(|e| exc::raise(e))) { let mut index: Py = __item.clone(); __out.push(geti(&geti(&line.clone(), &py_str("norm")), &index.clone())); } py_list(__out) })() }), (py_str("intensifier"), call_builtin("list", &[{ let __b = mcall(&line.clone(), "get", &[py_str("intensifier")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }]).unwrap_or_else(|e| exc::raise(e))), (py_str("intensifier_left"), call_builtin("list", &[{ let __b = mcall(&line.clone(), "get", &[py_str("intensifier_left")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }]).unwrap_or_else(|e| exc::raise(e))), (py_str("subject"), subject.clone()), (py_str("subject_unclear"), pyrt::xrefs::xcall("understanding.topics", "unclear_subject", &[geti(&line.clone(), &py_str("norm")), inherited.clone(), previous.clone()])), (py_str("ask_subject"), ask_subject.clone()), (py_str("setting"), setting.clone()), (py_str("subject_from"), subject_from.clone()), (py_str("numbers"), pyrt::xrefs::xcall("understanding.topics", "detect_numbers", &[line.clone()])), (py_str("tried"), pyrt::xrefs::xcall("understanding.attempts", "things_tried", &[if py_truthy(&call_builtin("isinstance", &[mcall(&line.clone(), "get", &[py_str("text")]), py_func("str", |args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) { geti(&line.clone(), &py_str("text")) } else { py_str("") }, geti(&line.clone(), &py_str("norm"))])), (py_str("keywords"), _keywords(&[geti(&line.clone(), &py_str("norm"))])), (py_str("ref"), ref_.clone()), (py_str("followup"), geti(&ref_.clone(), &py_str("followup"))), (py_str("someone_new"), pyrt::xrefs::xcall("understanding.references", "person_is_new", &[line.clone(), previous_entities.clone()])), (py_str("asks_what_was_meant"), { let __b = geti(&read.clone(), &py_str("asks_what_was_meant")); if !py_truthy(&__b) { __b } else { _the_meaning_is_applied_to_what_was_said(&[line.clone(), leans_on.clone(), memory.clone()]) } }), (py_str("leans_on"), leans_on.clone())]);
+    carrying_on = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(line.clone()); __args.push(out.clone()); __args.push(last_read.clone()); __kws.extend(vec![("carrying_on".to_string(), Py::Bool(true))]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("understanding.kinds", "over_time", args))(&__args) };
     if py_truthy(&Py::Bool(!py_is(&carrying_on.clone(), &Py::None))) {
     let __unpk12 = py_unpack(&carrying_on.clone(), 2, None);
     let _ = py_setitem(&out.clone(), &py_str("over_time"), __unpk12[0].clone());
@@ -3217,11 +3237,13 @@ pub fn module_obj() -> Py {
             "_the_meaning_is_applied_to_what_was_said" => Some(py_func("_the_meaning_is_applied_to_what_was_said", |args: &[Py]| _the_meaning_is_applied_to_what_was_said(args))),
             "_the_new_thing" => Some(py_func("_the_new_thing", |args: &[Py]| _the_new_thing(args))),
             "_the_noun_to_lend" => Some(py_func("_the_noun_to_lend", |args: &[Py]| _the_noun_to_lend(args))),
+            "_the_part_that_hurts" => Some(g__the_part_that_hurts()),
             "_the_recorded_subject" => Some(py_func("_the_recorded_subject", |args: &[Py]| _the_recorded_subject(args))),
             "_the_same_kind" => Some(py_func("_the_same_kind", |args: &[Py]| _the_same_kind(args))),
             "_the_second_thing" => Some(py_func("_the_second_thing", |args: &[Py]| _the_second_thing(args))),
             "_the_spans_of" => Some(py_func("_the_spans_of", |args: &[Py]| _the_spans_of(args))),
             "_the_speaker_is_the_subject" => Some(py_func("_the_speaker_is_the_subject", |args: &[Py]| _the_speaker_is_the_subject(args))),
+            "_the_sugar_that_is_blood" => Some(g__the_sugar_that_is_blood()),
             "_the_swap_is_said" => Some(py_func("_the_swap_is_said", |args: &[Py]| _the_swap_is_said(args))),
             "_the_thing_the_ask_names" => Some(py_func("_the_thing_the_ask_names", |args: &[Py]| _the_thing_the_ask_names(args))),
             "_turns" => Some(py_func("_turns", |args: &[Py]| _turns(args))),
@@ -3231,8 +3253,12 @@ pub fn module_obj() -> Py {
             "_with_the_noun_lent" => Some(py_func("_with_the_noun_lent", |args: &[Py]| _with_the_noun_lent(args))),
             "a_load_carried" => Some(py_func("a_load_carried", |args: &[Py]| a_load_carried(args))),
             "asks_with_nothing_named" => Some(py_func("asks_with_nothing_named", |args: &[Py]| asks_with_nothing_named(args))),
+            "background_positions" => Some(g_background_positions()),
             "line_as_read" => Some(py_func("line_as_read", |args: &[Py]| line_as_read(args))),
+            "normalise" => Some(g_normalise()),
+            "respell_urgent" => Some(g_respell_urgent()),
             "understand" => Some(py_func("understand", |args: &[Py]| understand(args))),
+            "without_the_figure_of_speech" => Some(g_without_the_figure_of_speech()),
             _ => None,
         }),
         set: Some(Rc::new(|attr: &str, v: Py| match attr {
@@ -3349,6 +3375,12 @@ pub fn module_obj() -> Py {
             "_A_THING_THAT_CHANGES" => s__A_THING_THAT_CHANGES(v),
             "_NOT_ABOUT_THE_THING" => s__NOT_ABOUT_THE_THING(v),
             "_SEARCH_FRAME" => s__SEARCH_FRAME(v),
+            "_the_part_that_hurts" => s__the_part_that_hurts(v),
+            "_the_sugar_that_is_blood" => s__the_sugar_that_is_blood(v),
+            "background_positions" => s_background_positions(v),
+            "normalise" => s_normalise(v),
+            "respell_urgent" => s_respell_urgent(v),
+            "without_the_figure_of_speech" => s_without_the_figure_of_speech(v),
             _ => {},
         })),
     }))
@@ -3524,4 +3556,10 @@ pub fn register() {
     pyrt::xrefs::reg_access("understanding", "_A_THING_THAT_CHANGES", g__A_THING_THAT_CHANGES, s__A_THING_THAT_CHANGES);
     pyrt::xrefs::reg_access("understanding", "_NOT_ABOUT_THE_THING", g__NOT_ABOUT_THE_THING, s__NOT_ABOUT_THE_THING);
     pyrt::xrefs::reg_access("understanding", "_SEARCH_FRAME", g__SEARCH_FRAME, s__SEARCH_FRAME);
+    pyrt::xrefs::reg_access("understanding", "_the_part_that_hurts", g__the_part_that_hurts, s__the_part_that_hurts);
+    pyrt::xrefs::reg_access("understanding", "_the_sugar_that_is_blood", g__the_sugar_that_is_blood, s__the_sugar_that_is_blood);
+    pyrt::xrefs::reg_access("understanding", "background_positions", g_background_positions, s_background_positions);
+    pyrt::xrefs::reg_access("understanding", "normalise", g_normalise, s_normalise);
+    pyrt::xrefs::reg_access("understanding", "respell_urgent", g_respell_urgent, s_respell_urgent);
+    pyrt::xrefs::reg_access("understanding", "without_the_figure_of_speech", g_without_the_figure_of_speech, s_without_the_figure_of_speech);
 }

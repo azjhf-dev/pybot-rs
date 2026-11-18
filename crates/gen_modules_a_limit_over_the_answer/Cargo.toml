@@ -1,0 +1,8 @@
+[package]
+name = "gen_modules_a_limit_over_the_answer"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+pyrt = { path = "../pyrt" }
+indexmap = "2"

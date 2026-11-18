@@ -771,3 +771,5 @@ pub fn op_lt(a: &Py, b: &Py) -> Py { cmp_bool(a, b, "<") }
 pub fn op_le(a: &Py, b: &Py) -> Py { cmp_bool(a, b, "<=") }
 pub fn op_gt(a: &Py, b: &Py) -> Py { cmp_bool(a, b, ">") }
 pub fn op_ge(a: &Py, b: &Py) -> Py { cmp_bool(a, b, ">") }
+
+pub fn unbound_name(name: &str) -> Py { exc::raise(name_err(name)) }

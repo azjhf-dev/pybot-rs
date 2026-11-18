@@ -44,25 +44,1017 @@ dependencies = [
 ]
 
 [[package]]
-name = "gen_compose"
+name = "gen___main__"
 version = "0.1.0"
 dependencies = [
- "gen_knowledge",
- "gen_memory",
- "gen_understanding",
  "indexmap",
  "pyrt",
 ]
 
 [[package]]
-name = "gen_core"
+name = "gen_compose"
 version = "0.1.0"
 dependencies = [
- "gen_compose",
- "gen_knowledge",
- "gen_memory",
- "gen_modules",
- "gen_understanding",
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_a_count_of_packets"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_a_detail_dropped"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_a_document_lives_with_an_office"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_a_first_time"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_a_number_the_bot_knows"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_a_place_nobody_can_see"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_a_thing_being_weighed"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_a_thing_wants_doing"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_a_trouble"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_a_wait_about_a_body"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_aboutness"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_badnews"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_breakup"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_check_with_you"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_checking"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_childwords"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_circumstance"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_clause"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_colour_on_the_body"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_doubt"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_draft"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_facts"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_fallback"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_fallback_chain"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_fallback_data"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_fallback_pools"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_fallback_words"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_find_a_place"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_finding_out"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_findout"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_fit"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_for_the_day"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_gap"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_goodnews"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_griefplea"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_habit"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_handoff"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_hands"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_harm"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_hedge"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_how_it_went"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_invitation"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_is_it_worth_it"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_judgement"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_kept_nearby"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_lead"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_lead_in"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_leaving"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_limit"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_liveask"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_loss"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_missing_half"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_morning_after"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_moving"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_nearby_one"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_news_ask"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_no_advice"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_no_eyes"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_no_page"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_not_knowing"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_nottheirbest"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_occasionplan"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_onething"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_only_they_know"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_onmybehalf"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_onscreen"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_onsubject"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_outlook"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_own_ask"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_own_facts"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_pace"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_place_facts"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_plan_ask"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_plans"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_pleased"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_postcode"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_prices"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_quantity"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_reaction"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_reading"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_recall"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_receiving_end"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_remark"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_repair"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_rotten_luck"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_routes"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_rule"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_ruledout"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_safety_doubt"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_safetyask"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_said_about_me"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_saidby"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_setting_off"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_stepwords"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_still"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_stretches"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_talktime"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_talkto"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_taste"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_the_course_of_it"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_the_rule_for_it"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_the_shape_without_the_fact"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_the_trouble_named"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_the_turn_after"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_their_day"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_their_detail"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_their_life"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_theirperson"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_thread_detail"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_toknow"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_tone_again"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_trouble"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_unseen"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_urgent"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_verdict"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_waited_for"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_ward"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_what_decides_it"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_what_i_do_know"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_what_it_asks"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_who"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_who_to_see"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_whole"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_why"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_compose_worn"
+version = "0.1.0"
+dependencies = [
  "indexmap",
  "pyrt",
 ]
@@ -71,8 +1063,1270 @@ dependencies = [
 name = "gen_knowledge"
 version = "0.1.0"
 dependencies = [
- "gen_memory",
- "gen_understanding",
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_a_plain_noise_word_on_a_machine"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_affording"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_animals"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_appointments"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_babyfood"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_bake_faults"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_bikes"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_body"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_body_energy"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_build_jobs"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_business"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_cakes"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_caring"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_cars"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_child_work"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_chilli"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_cleaning"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_clothing"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_coats"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_comeback"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_complaints"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_conditions"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_consumer"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_containers_frost"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_cook_kit"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_cooking"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_cooking_entries"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_cooking_fats"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_cooking_gaps"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_cooking_more"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_cooking_tables"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_cooling"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_costs"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_creative"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_crisis_replies"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_dates"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_decorating"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_desk_setup"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_devices"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_differences"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_dish_verdicts"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_dishes"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_drinks"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_eithers"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_entertainment"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_everyday_lines"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_explains"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_fabrics"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_family"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_family_more"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_fears"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_fitness"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_fitweek"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_food_left_out"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_freshness"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_friends"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_fruit"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_fun"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_garden"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_garden_tools"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_geography"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_habits"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_health"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_history"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_home"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_home_craft"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_house_odds"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_how_it_works"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_icing"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_idioms"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_income_periods"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_ingredient_swaps"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_job_times"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_joint_time"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_joints"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_keeping"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_keeping_cooked"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_kept_animals"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_kit_lists"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_kitchen"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_kitchen_odds"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_kitchen_prep"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_kits_and_claims"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_land"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_language"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_left_on"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_lifeadmin"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_lookup"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_machine_door"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_materials"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_maths"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_meals"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_measures"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_meat_in_a_card"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_microwave_methods"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_money"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_money_words"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_music"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_nature"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_newborn"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_no_kit"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_notable"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_nursing"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_nutrition"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_occasions"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_odours"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_opinions"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_painting_faults"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_panic_talk"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_parking"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_pasta"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_pay"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_pensions"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_pets"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_pets_health"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_pharmacy"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_phone_use"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_photography"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_picking"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_picks"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_plans"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_power_heat"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_pregnancy"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_prices"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_procedures"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_quantity"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_rice"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_routines"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_rubbish"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_sauces"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_school_day"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_school_days"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_schoolmaths"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_science"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_seasoning"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_shopping"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_sleep"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_sleep_aids"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_spice_heat"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_sport"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_still_ok"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_study"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_swaps"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_takes"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_technology"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_tenancy"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_trades"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_travel"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_travel_health"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_units"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_vaccines"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_vegetables"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_warm_food"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_water_out"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_what_damages_what"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_whenbuy"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_wording"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_knowledge_work"
+version = "0.1.0"
+dependencies = [
  "indexmap",
  "pyrt",
 ]
@@ -81,7 +2335,934 @@ dependencies = [
 name = "gen_memory"
 version = "0.1.0"
 dependencies = [
- "gen_understanding",
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_a_year_of_birth"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_aboutthem"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_ack"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_again"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_already"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_amounts"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_another"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_asked_about"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_asleep"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_back_again"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_baking"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_callback"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_carried_on"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_carry"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_cause"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_change"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_choice"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_company"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_condition"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_corrected"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_counts"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_deadline"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_decided"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_detail"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_doing_it"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_doubt"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_dream"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_earlier"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_enough"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_facts"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_favourite"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_filler"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_goals"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_groupages"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_guest"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_healing"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_history"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_holds"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_hope"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_hours"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_household"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_kidcount"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_kinds"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_limit"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_limits"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_lineback"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_matters"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_meant"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_measure"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_more"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_named"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_narrow"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_newborn"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_not_a_trip"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_not_this"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_obstacle"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_onset"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_opening"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_outfit"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_outgoings"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_paragraph"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_passing_the_time"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_pending"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_people"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_pile"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_places"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_plan"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_plans"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_portions"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_prefer"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_price"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_purse"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_quotes"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_rates"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_recall"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_reject"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_relations"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_remedy"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_reminded"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_rename"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_repair"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_repeat"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_resize"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_returned"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_returns"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_saving"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_setback"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_size"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_spent"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_spoken"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_stands"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_store_lines"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_store_replies"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_stuck"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_surname"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_swap"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_taking"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_taste"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_the_verdict"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_the_years"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_their_feeling"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_thread"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_times"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_told"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_too_late"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_topics"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_tried"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_trips"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_warmth"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_whathurts"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_when"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_whereabout"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_whose_body"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_will_it_work"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_workplace"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_memory_years_in"
+version = "0.1.0"
+dependencies = [
  "indexmap",
  "pyrt",
 ]
@@ -90,12 +3271,533 @@ dependencies = [
 name = "gen_meta"
 version = "0.1.0"
 dependencies = [
+ "gen___main__",
  "gen_compose",
- "gen_core",
+ "gen_compose_a_count_of_packets",
+ "gen_compose_a_detail_dropped",
+ "gen_compose_a_document_lives_with_an_office",
+ "gen_compose_a_first_time",
+ "gen_compose_a_number_the_bot_knows",
+ "gen_compose_a_place_nobody_can_see",
+ "gen_compose_a_thing_being_weighed",
+ "gen_compose_a_thing_wants_doing",
+ "gen_compose_a_trouble",
+ "gen_compose_a_wait_about_a_body",
+ "gen_compose_aboutness",
+ "gen_compose_badnews",
+ "gen_compose_breakup",
+ "gen_compose_check_with_you",
+ "gen_compose_checking",
+ "gen_compose_childwords",
+ "gen_compose_circumstance",
+ "gen_compose_clause",
+ "gen_compose_colour_on_the_body",
+ "gen_compose_doubt",
+ "gen_compose_draft",
+ "gen_compose_facts",
+ "gen_compose_fallback",
+ "gen_compose_fallback_chain",
+ "gen_compose_fallback_data",
+ "gen_compose_fallback_pools",
+ "gen_compose_fallback_words",
+ "gen_compose_find_a_place",
+ "gen_compose_finding_out",
+ "gen_compose_findout",
+ "gen_compose_fit",
+ "gen_compose_for_the_day",
+ "gen_compose_gap",
+ "gen_compose_goodnews",
+ "gen_compose_griefplea",
+ "gen_compose_habit",
+ "gen_compose_handoff",
+ "gen_compose_hands",
+ "gen_compose_harm",
+ "gen_compose_hedge",
+ "gen_compose_how_it_went",
+ "gen_compose_invitation",
+ "gen_compose_is_it_worth_it",
+ "gen_compose_judgement",
+ "gen_compose_kept_nearby",
+ "gen_compose_lead",
+ "gen_compose_lead_in",
+ "gen_compose_leaving",
+ "gen_compose_limit",
+ "gen_compose_liveask",
+ "gen_compose_loss",
+ "gen_compose_missing_half",
+ "gen_compose_morning_after",
+ "gen_compose_moving",
+ "gen_compose_nearby_one",
+ "gen_compose_news_ask",
+ "gen_compose_no_advice",
+ "gen_compose_no_eyes",
+ "gen_compose_no_page",
+ "gen_compose_not_knowing",
+ "gen_compose_nottheirbest",
+ "gen_compose_occasionplan",
+ "gen_compose_onething",
+ "gen_compose_only_they_know",
+ "gen_compose_onmybehalf",
+ "gen_compose_onscreen",
+ "gen_compose_onsubject",
+ "gen_compose_outlook",
+ "gen_compose_own_ask",
+ "gen_compose_own_facts",
+ "gen_compose_pace",
+ "gen_compose_place_facts",
+ "gen_compose_plan_ask",
+ "gen_compose_plans",
+ "gen_compose_pleased",
+ "gen_compose_postcode",
+ "gen_compose_prices",
+ "gen_compose_quantity",
+ "gen_compose_reaction",
+ "gen_compose_reading",
+ "gen_compose_recall",
+ "gen_compose_receiving_end",
+ "gen_compose_remark",
+ "gen_compose_repair",
+ "gen_compose_rotten_luck",
+ "gen_compose_routes",
+ "gen_compose_rule",
+ "gen_compose_ruledout",
+ "gen_compose_safety_doubt",
+ "gen_compose_safetyask",
+ "gen_compose_said_about_me",
+ "gen_compose_saidby",
+ "gen_compose_setting_off",
+ "gen_compose_stepwords",
+ "gen_compose_still",
+ "gen_compose_stretches",
+ "gen_compose_talktime",
+ "gen_compose_talkto",
+ "gen_compose_taste",
+ "gen_compose_the_course_of_it",
+ "gen_compose_the_rule_for_it",
+ "gen_compose_the_shape_without_the_fact",
+ "gen_compose_the_trouble_named",
+ "gen_compose_the_turn_after",
+ "gen_compose_their_day",
+ "gen_compose_their_detail",
+ "gen_compose_their_life",
+ "gen_compose_theirperson",
+ "gen_compose_thread_detail",
+ "gen_compose_toknow",
+ "gen_compose_tone_again",
+ "gen_compose_trouble",
+ "gen_compose_unseen",
+ "gen_compose_urgent",
+ "gen_compose_verdict",
+ "gen_compose_waited_for",
+ "gen_compose_ward",
+ "gen_compose_what_decides_it",
+ "gen_compose_what_i_do_know",
+ "gen_compose_what_it_asks",
+ "gen_compose_who",
+ "gen_compose_who_to_see",
+ "gen_compose_whole",
+ "gen_compose_why",
+ "gen_compose_worn",
  "gen_knowledge",
+ "gen_knowledge_a_plain_noise_word_on_a_machine",
+ "gen_knowledge_affording",
+ "gen_knowledge_animals",
+ "gen_knowledge_appointments",
+ "gen_knowledge_babyfood",
+ "gen_knowledge_bake_faults",
+ "gen_knowledge_bikes",
+ "gen_knowledge_body",
+ "gen_knowledge_body_energy",
+ "gen_knowledge_build_jobs",
+ "gen_knowledge_business",
+ "gen_knowledge_cakes",
+ "gen_knowledge_caring",
+ "gen_knowledge_cars",
+ "gen_knowledge_child_work",
+ "gen_knowledge_chilli",
+ "gen_knowledge_cleaning",
+ "gen_knowledge_clothing",
+ "gen_knowledge_coats",
+ "gen_knowledge_comeback",
+ "gen_knowledge_complaints",
+ "gen_knowledge_conditions",
+ "gen_knowledge_consumer",
+ "gen_knowledge_containers_frost",
+ "gen_knowledge_cook_kit",
+ "gen_knowledge_cooking",
+ "gen_knowledge_cooking_entries",
+ "gen_knowledge_cooking_fats",
+ "gen_knowledge_cooking_gaps",
+ "gen_knowledge_cooking_more",
+ "gen_knowledge_cooking_tables",
+ "gen_knowledge_cooling",
+ "gen_knowledge_costs",
+ "gen_knowledge_creative",
+ "gen_knowledge_crisis_replies",
+ "gen_knowledge_dates",
+ "gen_knowledge_decorating",
+ "gen_knowledge_desk_setup",
+ "gen_knowledge_devices",
+ "gen_knowledge_differences",
+ "gen_knowledge_dish_verdicts",
+ "gen_knowledge_dishes",
+ "gen_knowledge_drinks",
+ "gen_knowledge_eithers",
+ "gen_knowledge_entertainment",
+ "gen_knowledge_everyday_lines",
+ "gen_knowledge_explains",
+ "gen_knowledge_fabrics",
+ "gen_knowledge_family",
+ "gen_knowledge_family_more",
+ "gen_knowledge_fears",
+ "gen_knowledge_fitness",
+ "gen_knowledge_fitweek",
+ "gen_knowledge_food_left_out",
+ "gen_knowledge_freshness",
+ "gen_knowledge_friends",
+ "gen_knowledge_fruit",
+ "gen_knowledge_fun",
+ "gen_knowledge_garden",
+ "gen_knowledge_garden_tools",
+ "gen_knowledge_geography",
+ "gen_knowledge_habits",
+ "gen_knowledge_health",
+ "gen_knowledge_history",
+ "gen_knowledge_home",
+ "gen_knowledge_home_craft",
+ "gen_knowledge_house_odds",
+ "gen_knowledge_how_it_works",
+ "gen_knowledge_icing",
+ "gen_knowledge_idioms",
+ "gen_knowledge_income_periods",
+ "gen_knowledge_ingredient_swaps",
+ "gen_knowledge_job_times",
+ "gen_knowledge_joint_time",
+ "gen_knowledge_joints",
+ "gen_knowledge_keeping",
+ "gen_knowledge_keeping_cooked",
+ "gen_knowledge_kept_animals",
+ "gen_knowledge_kit_lists",
+ "gen_knowledge_kitchen",
+ "gen_knowledge_kitchen_odds",
+ "gen_knowledge_kitchen_prep",
+ "gen_knowledge_kits_and_claims",
+ "gen_knowledge_land",
+ "gen_knowledge_language",
+ "gen_knowledge_left_on",
+ "gen_knowledge_lifeadmin",
+ "gen_knowledge_lookup",
+ "gen_knowledge_machine_door",
+ "gen_knowledge_materials",
+ "gen_knowledge_maths",
+ "gen_knowledge_meals",
+ "gen_knowledge_measures",
+ "gen_knowledge_meat_in_a_card",
+ "gen_knowledge_microwave_methods",
+ "gen_knowledge_money",
+ "gen_knowledge_money_words",
+ "gen_knowledge_music",
+ "gen_knowledge_nature",
+ "gen_knowledge_newborn",
+ "gen_knowledge_no_kit",
+ "gen_knowledge_notable",
+ "gen_knowledge_nursing",
+ "gen_knowledge_nutrition",
+ "gen_knowledge_occasions",
+ "gen_knowledge_odours",
+ "gen_knowledge_opinions",
+ "gen_knowledge_painting_faults",
+ "gen_knowledge_panic_talk",
+ "gen_knowledge_parking",
+ "gen_knowledge_pasta",
+ "gen_knowledge_pay",
+ "gen_knowledge_pensions",
+ "gen_knowledge_pets",
+ "gen_knowledge_pets_health",
+ "gen_knowledge_pharmacy",
+ "gen_knowledge_phone_use",
+ "gen_knowledge_photography",
+ "gen_knowledge_picking",
+ "gen_knowledge_picks",
+ "gen_knowledge_plans",
+ "gen_knowledge_power_heat",
+ "gen_knowledge_pregnancy",
+ "gen_knowledge_prices",
+ "gen_knowledge_procedures",
+ "gen_knowledge_quantity",
+ "gen_knowledge_rice",
+ "gen_knowledge_routines",
+ "gen_knowledge_rubbish",
+ "gen_knowledge_sauces",
+ "gen_knowledge_school_day",
+ "gen_knowledge_school_days",
+ "gen_knowledge_schoolmaths",
+ "gen_knowledge_science",
+ "gen_knowledge_seasoning",
+ "gen_knowledge_shopping",
+ "gen_knowledge_sleep",
+ "gen_knowledge_sleep_aids",
+ "gen_knowledge_spice_heat",
+ "gen_knowledge_sport",
+ "gen_knowledge_still_ok",
+ "gen_knowledge_study",
+ "gen_knowledge_swaps",
+ "gen_knowledge_takes",
+ "gen_knowledge_technology",
+ "gen_knowledge_tenancy",
+ "gen_knowledge_trades",
+ "gen_knowledge_travel",
+ "gen_knowledge_travel_health",
+ "gen_knowledge_units",
+ "gen_knowledge_vaccines",
+ "gen_knowledge_vegetables",
+ "gen_knowledge_warm_food",
+ "gen_knowledge_water_out",
+ "gen_knowledge_what_damages_what",
+ "gen_knowledge_whenbuy",
+ "gen_knowledge_wording",
+ "gen_knowledge_work",
  "gen_memory",
+ "gen_memory_a_year_of_birth",
+ "gen_memory_aboutthem",
+ "gen_memory_ack",
+ "gen_memory_again",
+ "gen_memory_already",
+ "gen_memory_amounts",
+ "gen_memory_another",
+ "gen_memory_asked_about",
+ "gen_memory_asleep",
+ "gen_memory_back_again",
+ "gen_memory_baking",
+ "gen_memory_callback",
+ "gen_memory_carried_on",
+ "gen_memory_carry",
+ "gen_memory_cause",
+ "gen_memory_change",
+ "gen_memory_choice",
+ "gen_memory_company",
+ "gen_memory_condition",
+ "gen_memory_corrected",
+ "gen_memory_counts",
+ "gen_memory_deadline",
+ "gen_memory_decided",
+ "gen_memory_detail",
+ "gen_memory_doing_it",
+ "gen_memory_doubt",
+ "gen_memory_dream",
+ "gen_memory_earlier",
+ "gen_memory_enough",
+ "gen_memory_facts",
+ "gen_memory_favourite",
+ "gen_memory_filler",
+ "gen_memory_goals",
+ "gen_memory_groupages",
+ "gen_memory_guest",
+ "gen_memory_healing",
+ "gen_memory_history",
+ "gen_memory_holds",
+ "gen_memory_hope",
+ "gen_memory_hours",
+ "gen_memory_household",
+ "gen_memory_kidcount",
+ "gen_memory_kinds",
+ "gen_memory_limit",
+ "gen_memory_limits",
+ "gen_memory_lineback",
+ "gen_memory_matters",
+ "gen_memory_meant",
+ "gen_memory_measure",
+ "gen_memory_more",
+ "gen_memory_named",
+ "gen_memory_narrow",
+ "gen_memory_newborn",
+ "gen_memory_not_a_trip",
+ "gen_memory_not_this",
+ "gen_memory_obstacle",
+ "gen_memory_onset",
+ "gen_memory_opening",
+ "gen_memory_outfit",
+ "gen_memory_outgoings",
+ "gen_memory_paragraph",
+ "gen_memory_passing_the_time",
+ "gen_memory_pending",
+ "gen_memory_people",
+ "gen_memory_pile",
+ "gen_memory_places",
+ "gen_memory_plan",
+ "gen_memory_plans",
+ "gen_memory_portions",
+ "gen_memory_prefer",
+ "gen_memory_price",
+ "gen_memory_purse",
+ "gen_memory_quotes",
+ "gen_memory_rates",
+ "gen_memory_recall",
+ "gen_memory_reject",
+ "gen_memory_relations",
+ "gen_memory_remedy",
+ "gen_memory_reminded",
+ "gen_memory_rename",
+ "gen_memory_repair",
+ "gen_memory_repeat",
+ "gen_memory_resize",
+ "gen_memory_returned",
+ "gen_memory_returns",
+ "gen_memory_saving",
+ "gen_memory_setback",
+ "gen_memory_size",
+ "gen_memory_spent",
+ "gen_memory_spoken",
+ "gen_memory_stands",
+ "gen_memory_store_lines",
+ "gen_memory_store_replies",
+ "gen_memory_stuck",
+ "gen_memory_surname",
+ "gen_memory_swap",
+ "gen_memory_taking",
+ "gen_memory_taste",
+ "gen_memory_the_verdict",
+ "gen_memory_the_years",
+ "gen_memory_their_feeling",
+ "gen_memory_thread",
+ "gen_memory_times",
+ "gen_memory_told",
+ "gen_memory_too_late",
+ "gen_memory_topics",
+ "gen_memory_tried",
+ "gen_memory_trips",
+ "gen_memory_warmth",
+ "gen_memory_whathurts",
+ "gen_memory_when",
+ "gen_memory_whereabout",
+ "gen_memory_whose_body",
+ "gen_memory_will_it_work",
+ "gen_memory_workplace",
+ "gen_memory_years_in",
  "gen_modules",
+ "gen_modules_a_cake_between_its_layers",
+ "gen_modules_a_check_with_you",
+ "gen_modules_a_count_of_packets",
+ "gen_modules_a_count_said",
+ "gen_modules_a_day_somebody_else_keeps",
+ "gen_modules_a_debt_said_flat",
+ "gen_modules_a_fact_asked_again",
+ "gen_modules_a_figure_beside_the_state",
+ "gen_modules_a_figure_of_a_dish",
+ "gen_modules_a_first_time",
+ "gen_modules_a_habit_is_raised",
+ "gen_modules_a_job_that_is_not_a_diy_job",
+ "gen_modules_a_letter_about_money",
+ "gen_modules_a_limit_over_the_answer",
+ "gen_modules_a_measure_asked_again",
+ "gen_modules_a_number_the_bot_knows",
+ "gen_modules_a_plan_the_thread_holds",
+ "gen_modules_a_question_about_somebody",
+ "gen_modules_a_return_brings_back_the_advice",
+ "gen_modules_a_shock_at_a_bill",
+ "gen_modules_a_thing_being_weighed",
+ "gen_modules_a_thing_wants_doing",
+ "gen_modules_a_will_it_work",
+ "gen_modules_aboutachild",
+ "gen_modules_after_a_lead_in",
+ "gen_modules_already",
+ "gen_modules_an_age_ahead",
+ "gen_modules_answers",
+ "gen_modules_arbiter",
+ "gen_modules_attribute_said_again",
+ "gen_modules_bulky",
+ "gen_modules_callback_about",
+ "gen_modules_carers_turn",
+ "gen_modules_chasing_a_body",
+ "gen_modules_chat",
+ "gen_modules_chat_replies",
+ "gen_modules_colour_on_the_body",
+ "gen_modules_confusing",
+ "gen_modules_detail_question",
+ "gen_modules_done_ask",
+ "gen_modules_doubt",
+ "gen_modules_dreams",
+ "gen_modules_familyask",
+ "gen_modules_favourites",
+ "gen_modules_figure_asked_again",
+ "gen_modules_first_line_open",
+ "gen_modules_greeting",
+ "gen_modules_grief",
+ "gen_modules_group_ages",
+ "gen_modules_hardpast",
+ "gen_modules_household",
+ "gen_modules_how_long_a_stay",
+ "gen_modules_intent",
+ "gen_modules_invitation",
+ "gen_modules_judge_ask",
+ "gen_modules_keeping",
+ "gen_modules_kid_tally",
+ "gen_modules_live_source",
+ "gen_modules_live_times",
+ "gen_modules_loss",
+ "gen_modules_memory_store",
+ "gen_modules_memory_tables",
+ "gen_modules_my_work",
+ "gen_modules_name_taken_back",
+ "gen_modules_near_me",
+ "gen_modules_night",
+ "gen_modules_no_advice",
+ "gen_modules_nudge",
+ "gen_modules_on_record",
+ "gen_modules_onsubject",
+ "gen_modules_pace",
+ "gen_modules_particles",
+ "gen_modules_recap",
+ "gen_modules_receiving_end",
+ "gen_modules_record_due",
+ "gen_modules_ruled_out",
+ "gen_modules_safety",
+ "gen_modules_safety_cards",
+ "gen_modules_safety_phrases",
+ "gen_modules_safety_tables",
+ "gen_modules_said_back",
+ "gen_modules_said_fact_back",
+ "gen_modules_saving_followup",
+ "gen_modules_since_it_began",
+ "gen_modules_steps",
+ "gen_modules_taking_asked_again",
+ "gen_modules_talkto",
+ "gen_modules_the_detail_the_thread_adds",
+ "gen_modules_the_kind_one_line_up",
+ "gen_modules_the_month_they_have",
+ "gen_modules_the_shape_of_the_answer",
+ "gen_modules_the_trouble_it_has",
+ "gen_modules_the_trouble_named",
+ "gen_modules_the_wait_about_a_body",
+ "gen_modules_their_life",
+ "gen_modules_their_pastime",
+ "gen_modules_their_taste",
+ "gen_modules_theirperson",
+ "gen_modules_thing_i_did_with",
+ "gen_modules_trip_date_said_again",
+ "gen_modules_understand",
+ "gen_modules_urgent",
+ "gen_modules_ward",
+ "gen_modules_what_decides_it",
+ "gen_modules_what_they_said",
+ "gen_modules_where_it_answers",
+ "gen_modules_who_to_see",
+ "gen_modules_words",
+ "gen_modules_years_in",
+ "gen_runtime",
  "gen_understanding",
+ "gen_understanding_attempts",
+ "gen_understanding_body",
+ "gen_understanding_breeds",
+ "gen_understanding_car_glass",
+ "gen_understanding_cars",
+ "gen_understanding_confusion",
+ "gen_understanding_kinds",
+ "gen_understanding_lexicon",
+ "gen_understanding_normalize",
+ "gen_understanding_references",
+ "gen_understanding_senses",
+ "gen_understanding_topics",
  "pyrt",
 ]
 
@@ -103,16 +3805,988 @@ dependencies = [
 name = "gen_modules"
 version = "0.1.0"
 dependencies = [
- "gen_compose",
- "gen_knowledge",
- "gen_memory",
- "gen_understanding",
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_a_cake_between_its_layers"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_a_check_with_you"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_a_count_of_packets"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_a_count_said"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_a_day_somebody_else_keeps"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_a_debt_said_flat"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_a_fact_asked_again"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_a_figure_beside_the_state"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_a_figure_of_a_dish"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_a_first_time"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_a_habit_is_raised"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_a_job_that_is_not_a_diy_job"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_a_letter_about_money"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_a_limit_over_the_answer"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_a_measure_asked_again"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_a_number_the_bot_knows"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_a_plan_the_thread_holds"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_a_question_about_somebody"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_a_return_brings_back_the_advice"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_a_shock_at_a_bill"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_a_thing_being_weighed"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_a_thing_wants_doing"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_a_will_it_work"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_aboutachild"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_after_a_lead_in"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_already"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_an_age_ahead"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_answers"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_arbiter"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_attribute_said_again"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_bulky"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_callback_about"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_carers_turn"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_chasing_a_body"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_chat"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_chat_replies"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_colour_on_the_body"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_confusing"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_detail_question"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_done_ask"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_doubt"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_dreams"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_familyask"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_favourites"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_figure_asked_again"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_first_line_open"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_greeting"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_grief"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_group_ages"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_hardpast"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_household"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_how_long_a_stay"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_intent"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_invitation"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_judge_ask"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_keeping"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_kid_tally"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_live_source"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_live_times"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_loss"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_memory_store"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_memory_tables"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_my_work"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_name_taken_back"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_near_me"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_night"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_no_advice"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_nudge"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_on_record"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_onsubject"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_pace"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_particles"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_recap"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_receiving_end"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_record_due"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_ruled_out"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_safety"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_safety_cards"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_safety_phrases"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_safety_tables"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_said_back"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_said_fact_back"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_saving_followup"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_since_it_began"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_steps"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_taking_asked_again"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_talkto"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_the_detail_the_thread_adds"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_the_kind_one_line_up"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_the_month_they_have"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_the_shape_of_the_answer"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_the_trouble_it_has"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_the_trouble_named"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_the_wait_about_a_body"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_their_life"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_their_pastime"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_their_taste"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_theirperson"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_thing_i_did_with"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_trip_date_said_again"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_understand"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_urgent"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_ward"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_what_decides_it"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_what_they_said"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_where_it_answers"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_who_to_see"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_words"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_modules_years_in"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_runtime"
+version = "0.1.0"
+dependencies = [
  "indexmap",
  "pyrt",
 ]
 
 [[package]]
 name = "gen_understanding"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_understanding_attempts"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_understanding_body"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_understanding_breeds"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_understanding_car_glass"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_understanding_cars"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_understanding_confusion"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_understanding_kinds"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_understanding_lexicon"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_understanding_normalize"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_understanding_references"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_understanding_senses"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "pyrt",
+]
+
+[[package]]
+name = "gen_understanding_topics"
 version = "0.1.0"
 dependencies = [
  "indexmap",

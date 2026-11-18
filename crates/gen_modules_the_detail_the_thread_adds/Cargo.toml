@@ -1,0 +1,8 @@
+[package]
+name = "gen_modules_the_detail_the_thread_adds"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+pyrt = { path = "../pyrt" }
+indexmap = "2"
