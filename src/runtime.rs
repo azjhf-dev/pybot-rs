@@ -59,6 +59,7 @@ impl Runtime {
                 if let Py::Str(reply) = &answer {
                     let cleaned = reply.split_whitespace().collect::<Vec<_>>().join(" ");
                     if !cleaned.is_empty() {
+                        if std::env::var_os("PYBOT_TRACE_CANDIDATES").is_some() { eprintln!("CANDIDATE {}: {}",m.name,cleaned); }
                         candidates.push(Candidate {
                             module: name.to_string(),
                             priority: (m.priority)(),

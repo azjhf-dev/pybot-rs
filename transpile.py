@@ -1690,7 +1690,7 @@ def write_crate_files(mods, fns, glbs, classes):
     for stem in mod_children:
         dotted = f"modules.{stem}"
         path = rust_path(dotted)
-        pri = f"|| match {path}::g_PRIORITY() {{ Py::Int(i) => i, Py::Float(f) => f as i64, _ => 0 }}" if 'PRIORITY' in glbs.get(dotted, set()) else "|| 0"
+        pri = f"|| match {path}::g_PRIORITY() {{ Py::Int(i) => i, Py::Float(f) => f as i64, _ => 0 }}" if 'pub fn g_PRIORITY()' in open(out_path_for(dotted, pkgs)).read() else "|| 0"
         obs = f'Some(|args| pyrt::xrefs::xcall("{dotted}", "observe", args))' if 'observe' in fns.get(dotted, set()) else "None"
         resp = f'Some(|args| pyrt::xrefs::xcall("{dotted}", "respond", args))' if 'respond' in fns.get(dotted, set()) else "None"
         aft = f'Some(|args| pyrt::xrefs::xcall("{dotted}", "after", args))' if 'after' in fns.get(dotted, set()) else "None"
