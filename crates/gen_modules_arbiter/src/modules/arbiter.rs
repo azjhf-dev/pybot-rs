@@ -3225,15 +3225,18 @@ pub fn _names_the_thing(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = op_ge(&index.clone(), &call_builtin("len", &[opening.clone()]).unwrap_or_else(|e| exc::raise(e))); if py_truthy(&__b) { __b } else { Py::Bool(!py_eq(&token.clone(), &word.clone())) } }) {
     return Py::Bool(true);
     }
-    let __iter4 = py_iter_or_raise(&slice_or_raise(&opening.clone(), &op_add(&index.clone(), &Py::Int(1)), &Py::None, &Py::None));
-    let mut __else5 = false;
-    for __item in __iter4 {
+    let mut __broke4 = false;
+    let __iter5 = py_iter_or_raise(&slice_or_raise(&opening.clone(), &op_add(&index.clone(), &Py::Int(1)), &Py::None, &Py::None));
+    for __item in __iter5 {
     after = __item.clone();
     if py_truthy(&{ let __b = op_ge(&call_builtin("len", &[after.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(3)); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_contains(&g_CARRIES_NO_SUBJECT(), &after.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&line_words.clone(), &after.clone())) } } } }) {
+    __broke4 = true;
     break;
     }
     }
+    if !__broke4 {
     return Py::Bool(true);
+    }
     }
     return Py::Bool(false);
     Py::None
@@ -8834,15 +8837,17 @@ pub fn _labels(args: &[Py]) -> Py {
     if py_truthy(&call_builtin("isinstance", &[value.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) {
     let __aug1 = op_bitor(&found.clone(), &_stored(&[value.clone()]));
     found = __aug1;
-    let __iter2 = py_iter_or_raise(&g_LABEL_KEYS());
-    let mut __else3 = false;
-    for __item in __iter2 {
+    let mut __broke2 = false;
+    let __iter3 = py_iter_or_raise(&g_LABEL_KEYS());
+    for __item in __iter3 {
     key = __item.clone();
     if py_truthy(&call_builtin("isinstance", &[mcall(&value.clone(), "get", &[key.clone()]), py_func("str", |args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) {
     let _ = mcall(&found.clone(), "add", &[_label(&[geti(&value.clone(), &key.clone())])]);
+    __broke2 = true;
     break;
     }
     }
+    if !__broke2 {
     if py_truthy(&Py::Bool(py_contains(&value.clone(), &py_str("topics")))) {
     let __aug4 = op_bitor(&found.clone(), &_labels(&[mcall(&value.clone(), "get", &[py_str("topics")])]));
     found = __aug4;
@@ -8853,6 +8858,7 @@ pub fn _labels(args: &[Py]) -> Py {
     key = __item.clone();
     if py_truthy(&{ let __b = call_builtin("isinstance", &[key.clone(), py_func("str", |args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&g_LABEL_KEYS(), &key.clone())) } }) {
     let _ = mcall(&found.clone(), "add", &[_label(&[key.clone()])]);
+    }
     }
     }
     }

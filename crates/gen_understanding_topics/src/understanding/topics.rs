@@ -4382,18 +4382,21 @@ pub fn _gift_ask(args: &[Py]) -> Py {
     return Py::Bool(true);
     }
     tail = rest.clone();
-    let __iter5 = py_iter_or_raise(&call_builtin("enumerate", &[slice_or_raise(&rest.clone(), &Py::None, &Py::Int(2), &Py::None)]).unwrap_or_else(|e| exc::raise(e)));
-    let mut __else6 = false;
-    for __item in __iter5 {
+    let mut __broke5 = false;
+    let __iter6 = py_iter_or_raise(&call_builtin("enumerate", &[slice_or_raise(&rest.clone(), &Py::None, &Py::Int(2), &Py::None)]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter6 {
     let __unpk7 = py_unpack(&__item.clone(), 2, None);
     index = __unpk7[0].clone();
     one = __unpk7[1].clone();
     if py_truthy(&{ let __b = Py::Bool(py_contains(&g_GIVE_TO(), &one.clone())); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&g_GIVE_DETERMINERS(), &one.clone())); if !py_truthy(&__b) { __b } else { { let __b = slice_or_raise(&rest.clone(), &op_add(&index.clone(), &Py::Int(1)), &op_add(&index.clone(), &Py::Int(2)), &Py::None); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_GIVE_TO(), &geti(&rest.clone(), &op_add(&index.clone(), &Py::Int(1))))) } } } } } }) {
     tail = if py_truthy(&Py::Bool(py_contains(&g_GIVE_TO(), &one.clone()))) { slice_or_raise(&rest.clone(), &op_add(&index.clone(), &Py::Int(1)), &Py::None, &Py::None) } else { slice_or_raise(&rest.clone(), &op_add(&index.clone(), &Py::Int(2)), &Py::None, &Py::None) };
+    __broke5 = true;
     break;
     }
     }
+    if !__broke5 {
     continue;
+    }
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&tail.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_GIVE_RELATIVE(), &geti(&tail.clone(), &Py::Int(0)))) } }) {
     return Py::Bool(true);
     }
@@ -4442,22 +4445,26 @@ pub fn _gift_still_to_get(args: &[Py]) -> Py {
     continue;
     }
     rest = slice_or_raise(&norm.clone(), &op_add(&position.clone(), &Py::Int(1)), &Py::None, &Py::None);
-    let __iter3 = py_iter_or_raise(&call_builtin("enumerate", &[slice_or_raise(&rest.clone(), &Py::None, &Py::Int(2), &Py::None)]).unwrap_or_else(|e| exc::raise(e)));
-    let mut __else4 = false;
-    for __item in __iter3 {
+    let mut __broke3 = false;
+    let __iter4 = py_iter_or_raise(&call_builtin("enumerate", &[slice_or_raise(&rest.clone(), &Py::None, &Py::Int(2), &Py::None)]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter4 {
     let __unpk5 = py_unpack(&__item.clone(), 2, None);
     index = __unpk5[0].clone();
     one = __unpk5[1].clone();
     if py_truthy(&Py::Bool(py_contains(&g_GIVE_TO(), &one.clone()))) {
     tail = slice_or_raise(&rest.clone(), &op_add(&index.clone(), &Py::Int(1)), &Py::None, &Py::None);
+    __broke3 = true;
     break;
     }
     if py_truthy(&{ let __b = Py::Bool(py_contains(&g_GIVE_DETERMINERS(), &one.clone())); if !py_truthy(&__b) { __b } else { { let __b = slice_or_raise(&rest.clone(), &op_add(&index.clone(), &Py::Int(1)), &op_add(&index.clone(), &Py::Int(2)), &Py::None); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_GIVE_TO(), &geti(&rest.clone(), &op_add(&index.clone(), &Py::Int(1))))) } } } }) {
     tail = slice_or_raise(&rest.clone(), &op_add(&index.clone(), &Py::Int(2)), &Py::None, &Py::None);
+    __broke3 = true;
     break;
     }
     }
+    if !__broke3 {
     continue;
+    }
     if py_truthy(&Py::Bool(!py_truthy(&tail.clone()))) {
     continue;
     }

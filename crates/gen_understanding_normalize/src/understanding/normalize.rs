@@ -3163,16 +3163,19 @@ pub fn _stopped_th(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = op_lt(&call_builtin("len", &[word.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(5)); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_LEXICON(), &word.clone())) } }) {
     return Py::None;
     }
-    let __iter1 = py_iter_or_raise(&py_tuple(vec![py_str("fings"), py_str("fing"), py_str("finks"), py_str("fink"), py_str("fins"), py_str("fin")]));
-    let mut __else2 = false;
-    for __item in __iter1 {
+    let mut __broke1 = false;
+    let __iter2 = py_iter_or_raise(&py_tuple(vec![py_str("fings"), py_str("fing"), py_str("finks"), py_str("fink"), py_str("fins"), py_str("fin")]));
+    for __item in __iter2 {
     suffix = __item.clone();
     if py_truthy(&mcall(&word.clone(), "endswith", &[suffix.clone()])) {
     stem = slice_or_raise(&word.clone(), &Py::None, &op_neg(&call_builtin("len", &[suffix.clone()]).unwrap_or_else(|e| exc::raise(e))), &Py::None);
+    __broke1 = true;
     break;
     }
     }
+    if !__broke1 {
     return Py::None;
+    }
     plural = mcall(&suffix.clone(), "endswith", &[py_str("s")]);
     found = mcall(&g_STOPPED_TH_STEMS(), "get", &[stem.clone()]);
     return if py_truthy(&{ let __b = found.clone(); if !py_truthy(&__b) { __b } else { plural.clone() } }) { op_add(&found.clone(), &py_str("s")) } else { found.clone() };
@@ -6184,24 +6187,29 @@ pub fn loose_is_lose(args: &[Py]) -> Py {
     token = __unpk2[1].clone();
     fixed = mcall(&g_LOOSE_FOR_LOSE(), "get", &[token.clone()]);
     if py_truthy(&fixed.clone()) {
-    let __iter3 = py_iter_or_raise(&py_tuple(vec![Py::Int(1), Py::Int(2), Py::Int(3), Py::Int(4)]));
-    let mut __else4 = false;
-    for __item in __iter3 {
+    let mut __broke3 = false;
+    let __iter4 = py_iter_or_raise(&py_tuple(vec![Py::Int(1), Py::Int(2), Py::Int(3), Py::Int(4)]));
+    for __item in __iter4 {
     step = __item.clone();
     after = if py_truthy(&op_lt(&op_add(&index.clone(), &step.clone()), &call_builtin("len", &[tokens.clone()]).unwrap_or_else(|e| exc::raise(e)))) { geti(&tokens.clone(), &op_add(&index.clone(), &step.clone())) } else { Py::None };
     if py_truthy(&Py::Bool(py_is(&after.clone(), &Py::None))) {
+    __broke3 = true;
     break;
     }
     if py_truthy(&Py::Bool(py_contains(&g_THE_LOSING(), &after.clone()))) {
     let _ = mcall(&out.clone(), "append", &[fixed.clone()]);
+    __broke3 = true;
     break;
     }
     if py_truthy(&{ let __b = Py::Bool(!py_contains(&g_BEFORE_THE_LOSING(), &after.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&mcall(&after.clone(), "isdigit", &[]))) } }) {
+    __broke3 = true;
     break;
     }
     }
+    if !__broke3 {
     let _ = mcall(&out.clone(), "append", &[token.clone()]);
     continue;
+    }
     if py_truthy(&{ let __b = out.clone(); if !py_truthy(&__b) { __b } else { Py::Bool(py_eq(&geti(&out.clone(), &op_neg(&Py::Int(1))), &fixed.clone())) } }) {
     continue;
     }

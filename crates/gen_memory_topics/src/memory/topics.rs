@@ -6208,16 +6208,19 @@ pub fn the_thing_the_subject_brings(args: &[Py]) -> Py {
     let _ = mcall(&lines.clone(), "insert", &[Py::Int(0), typed.clone()]);
     }
     }
-    let __iter2 = py_iter_or_raise(&lines.clone());
-    let mut __else3 = false;
-    for __item in __iter2 {
+    let mut __broke2 = false;
+    let __iter3 = py_iter_or_raise(&lines.clone());
+    for __item in __iter3 {
     said_as = __item.clone();
     found = mcall(&g_ABOUT_NAMED(), "match", &[said_as.clone()]);
     if py_truthy(&found.clone()) {
+    __broke2 = true;
     break;
     }
     }
+    if !__broke2 {
     return Py::None;
+    }
     thing = mcall(&mcall(&g__ABOUT_TAIL_PRONOUN(), "sub", &[py_str(""), mcall(&mcall(&found.clone(), "group", &[py_str("thing")]), "strip", &[])]), "strip", &[]);
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&thing.clone())); if py_truthy(&__b) { __b } else { op_gt(&call_builtin("len", &[mcall(&thing.clone(), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), &g_ABOUT_MOST_WORDS()) } }) {
     return Py::None;

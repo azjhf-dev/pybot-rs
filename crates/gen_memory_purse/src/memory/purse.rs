@@ -245,17 +245,20 @@ pub fn against_the_bands(args: &[Py]) -> Py {
     return Py::None;
     }
     mine = geti(&theirs.clone(), &op_neg(&Py::Int(1)));
-    let __iter2 = py_iter_or_raise(&call_builtin("reversed", &[slice_or_raise(&call_builtin("list", &[{ let __b = turns.clone(); if py_truthy(&__b) { __b } else { py_list(vec![]) } }]).unwrap_or_else(|e| exc::raise(e)), &op_neg(&Py::Int(2)), &Py::None, &Py::None)]).unwrap_or_else(|e| exc::raise(e)));
-    let mut __else3 = false;
-    for __item in __iter2 {
+    let mut __broke2 = false;
+    let __iter3 = py_iter_or_raise(&call_builtin("reversed", &[slice_or_raise(&call_builtin("list", &[{ let __b = turns.clone(); if py_truthy(&__b) { __b } else { py_list(vec![]) } }]).unwrap_or_else(|e| exc::raise(e)), &op_neg(&Py::Int(2)), &Py::None, &Py::None)]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter3 {
     turn = __item.clone();
     answer = if py_truthy(&call_builtin("isinstance", &[turn.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) { call_builtin("str", &[{ let __b = mcall(&turn.clone(), "get", &[py_str("bot")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)) } else { py_str("") };
     bands = _money_bands(&[answer.clone()]);
     if py_truthy(&bands.clone()) {
+    __broke2 = true;
     break;
     }
     }
+    if !__broke2 {
     return Py::None;
+    }
     spoken = _the_money(&[mine.clone()]);
     inside = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&bands.clone()) { let mut band: Py = __item.clone(); if py_truthy(&{ let __cmp11: Py = mine.clone(); if py_truthy(&op_le(&geti(&band.clone(), &Py::Int(0)), &__cmp11)) { op_le(&__cmp11, &geti(&band.clone(), &Py::Int(1))) } else { Py::Bool(false) } }) {  __out.push(band.clone()); } } py_list(__out) })() };
     if py_truthy(&inside.clone()) {

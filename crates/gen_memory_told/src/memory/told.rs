@@ -2351,16 +2351,19 @@ pub fn _stem(args: &[Py]) -> Py {
     let __iter1 = py_iter_or_raise(&call_builtin("range", &[Py::Int(3)]).unwrap_or_else(|e| exc::raise(e)));
     for __item in __iter1 {
     _u = __item.clone();
-    let __iter2 = py_iter_or_raise(&py_tuple(vec![py_str("ings"), py_str("ing"), py_str("ies"), py_str("es"), py_str("ed"), py_str("s"), py_str("e"), py_str("y")]));
-    let mut __else3 = false;
-    for __item in __iter2 {
+    let mut __broke2 = false;
+    let __iter3 = py_iter_or_raise(&py_tuple(vec![py_str("ings"), py_str("ing"), py_str("ies"), py_str("es"), py_str("ed"), py_str("s"), py_str("e"), py_str("y")]));
+    for __item in __iter3 {
     ending = __item.clone();
     if py_truthy(&{ let __b = op_gt(&call_builtin("len", &[word.clone()]).unwrap_or_else(|e| exc::raise(e)), &op_add(&call_builtin("len", &[ending.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2))); if !py_truthy(&__b) { __b } else { mcall(&word.clone(), "endswith", &[ending.clone()]) } }) {
     word = slice_or_raise(&word.clone(), &Py::None, &op_neg(&call_builtin("len", &[ending.clone()]).unwrap_or_else(|e| exc::raise(e))), &Py::None);
+    __broke2 = true;
     break;
     }
     }
+    if !__broke2 {
     break;
+    }
     }
     return word.clone();
     Py::None

@@ -264,15 +264,18 @@ pub fn respond(args: &[Py]) -> Py {
     }
     }
     order = _rotate(&[lines.clone(), text.clone()]);
-    let __iter4 = py_iter_or_raise(&order.clone());
-    let mut __else5 = false;
-    for __item in __iter4 {
+    let mut __broke4 = false;
+    let __iter5 = py_iter_or_raise(&order.clone());
+    for __item in __iter5 {
     line = __item.clone();
     if py_truthy(&Py::Bool(!py_contains(&said.clone(), &line.clone()))) {
+    __broke4 = true;
     break;
     }
     }
+    if !__broke4 {
     line = geti(&order.clone(), &Py::Int(0));
+    }
     tail = _pick(&[tails.clone(), op_add(&text.clone(), &py_str(" tail"))]);
     return mcall(&op_add(&line.clone(), &if py_truthy(&tail.clone()) { op_add(&py_str(" "), &tail.clone()) } else { py_str("") }), "strip", &[]);
     Py::None

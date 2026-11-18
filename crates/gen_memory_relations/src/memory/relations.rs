@@ -2088,9 +2088,9 @@ pub fn _the_names_of_the_group(args: &[Py]) -> Py {
     who = __unpk3[0].clone();
     value = __unpk3[1].clone();
     paired = __unpk3[2].clone();
-    let __iter4 = py_iter_or_raise(&call_builtin("enumerate", &[grouped.clone()]).unwrap_or_else(|e| exc::raise(e)));
-    let mut __else5 = false;
-    for __item in __iter4 {
+    let mut __broke4 = false;
+    let __iter5 = py_iter_or_raise(&call_builtin("enumerate", &[grouped.clone()]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter5 {
     let __unpk6 = py_unpack(&__item.clone(), 2, None);
     at = __unpk6[0].clone();
     let __unpk7 = py_unpack(&__unpk6[1].clone(), 3, None);
@@ -2099,10 +2099,13 @@ pub fn _the_names_of_the_group(args: &[Py]) -> Py {
     held_paired = __unpk7[2].clone();
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&paired.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&held_paired.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(py_eq(&held_who.clone(), &who.clone())) } } } }) {
     let _ = py_setitem(&grouped.clone(), &at.clone(), py_tuple(vec![who.clone(), op_add(&op_add(&held_value.clone(), &py_str("\0")), &value.clone()), paired.clone()]));
+    __broke4 = true;
     break;
     }
     }
+    if !__broke4 {
     let _ = mcall(&grouped.clone(), "append", &[py_tuple(vec![who.clone(), value.clone(), paired.clone()])]);
+    }
     }
     parts = py_list(vec![]);
     let __iter8 = py_iter_or_raise(&grouped.clone());
@@ -3108,16 +3111,19 @@ pub fn _ages_sentence(args: &[Py]) -> Py {
     turns = __unpk2[2].clone();
     to_come = __unpk2[3].clone();
     held = __unpk2[4].clone();
-    let __iter3 = py_iter_or_raise(&groups.clone());
-    let mut __else4 = false;
-    for __item in __iter3 {
+    let mut __broke3 = false;
+    let __iter4 = py_iter_or_raise(&groups.clone());
+    for __item in __iter4 {
     group = __item.clone();
     if py_truthy(&{ let __b = Py::Bool(py_eq(&geti(&group.clone(), &Py::Int(0)), &who.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_eq(&geti(&group.clone(), &Py::Int(4)), &held.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&geti(&group.clone(), &Py::Int(2)))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&turns.clone())) } } } } } }) {
     let _ = mcall(&geti(&group.clone(), &Py::Int(1)), "append", &[age.clone()]);
+    __broke3 = true;
     break;
     }
     }
+    if !__broke3 {
     let _ = mcall(&groups.clone(), "append", &[py_list(vec![who.clone(), py_list(vec![age.clone()]), turns.clone(), to_come.clone(), held.clone()])]);
+    }
     }
     parts = py_list(vec![]);
     let __iter5 = py_iter_or_raise(&groups.clone());

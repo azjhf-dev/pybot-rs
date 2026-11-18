@@ -6492,17 +6492,20 @@ pub fn _line_text(args: &[Py]) -> Py {
     let mut value: Py = Py::None;
     let _ = py_str("The line as plain text: lower case, one space, curly apostrophes straightened.\n\n    Takes the words or the `understood` dict, so a caller may pass either. A dict read with\n    `str()` is every field name and its value, and the words of that read - \"short\", \"lines\",\n    \"false\" - are what a `_names_what_the_line_named` gate would match: the line's own words are\n    all a reply should be measured against.\n\n    The field is the line as the person typed it, in the plain reading: the field `plain` keeps\n    the figures and drops the punctuation, and `norm_text` does the opposite, turning \"i got a 5\n    in my maths mock\" into \"a five ... | ...\", so a reply that says \"A 5 is a strong pass\" shares\n    no word with its own line and the \"names what the line named\" gate reads the answer as a\n    miss. The words a reply is measured against are the words on the screen.\n    ");
     if py_truthy(&call_builtin("isinstance", &[line.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) {
-    let __iter1 = py_iter_or_raise(&g_LINE_TEXT_FIELDS());
-    let mut __else2 = false;
-    for __item in __iter1 {
+    let mut __broke1 = false;
+    let __iter2 = py_iter_or_raise(&g_LINE_TEXT_FIELDS());
+    for __item in __iter2 {
     field = __item.clone();
     value = mcall(&line.clone(), "get", &[field.clone()]);
     if py_truthy(&{ let __b = call_builtin("isinstance", &[value.clone(), py_func("str", |args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { mcall(&value.clone(), "strip", &[]) } }) {
     line = value.clone();
+    __broke1 = true;
     break;
     }
     }
+    if !__broke1 {
     line = py_str("");
+    }
     }
     return mcall(&py_str(" "), "join", &[mcall(&mcall(&mcall(&call_builtin("str", &[{ let __b = line.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]), "replace", &[py_str("’"), py_str("'")]), "split", &[])]);
     Py::None

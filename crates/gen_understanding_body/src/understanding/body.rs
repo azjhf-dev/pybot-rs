@@ -746,21 +746,24 @@ pub fn _phrase_after(args: &[Py]) -> Py {
     for __item in __iter1 {
     phrase = __item.clone();
     at = op_add(&index.clone(), &Py::Int(1));
-    let __iter2 = py_iter_or_raise(&phrase.clone());
-    let mut __else3 = false;
-    for __item in __iter2 {
+    let mut __broke2 = false;
+    let __iter3 = py_iter_or_raise(&phrase.clone());
+    for __item in __iter3 {
     word = __item.clone();
     if py_truthy(&{ let __b = op_lt(&at.clone(), &call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_PAIN_BETWEEN(), &geti(&words.clone(), &at.clone()))) } }) {
     let __aug4 = op_add(&at.clone(), &Py::Int(1));
     at = __aug4;
     }
     if py_truthy(&{ let __b = op_ge(&at.clone(), &call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))); if py_truthy(&__b) { __b } else { Py::Bool(!py_eq(&geti(&words.clone(), &at.clone()), &word.clone())) } }) {
+    __broke2 = true;
     break;
     }
     let __aug5 = op_add(&at.clone(), &Py::Int(1));
     at = __aug5;
     }
+    if !__broke2 {
     return Py::Bool(true);
+    }
     }
     return Py::Bool(false);
     Py::None

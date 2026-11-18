@@ -4677,9 +4677,9 @@ pub fn _birds_for_a_table(args: &[Py]) -> Py {
     let __unpk1 = py_unpack(&py_tuple(vec![mcall(&found.clone(), "group", &[Py::Int(1)]), mcall(&found.clone(), "group", &[Py::Int(2)])]), 2, None);
     word = __unpk1[0].clone();
     name = __unpk1[1].clone();
-    let __iter2 = py_iter_or_raise(&g_WHOLE_THING_SERVES());
-    let mut __else3 = false;
-    for __item in __iter2 {
+    let mut __broke2 = false;
+    let __iter3 = py_iter_or_raise(&g_WHOLE_THING_SERVES());
+    for __item in __iter3 {
     let __unpk4 = py_unpack(&__item.clone(), 8, None);
     names = __unpk4[0].clone();
     size = __unpk4[1].clone();
@@ -4690,10 +4690,13 @@ pub fn _birds_for_a_table(args: &[Py]) -> Py {
     allowance = __unpk4[6].clone();
     keeps = __unpk4[7].clone();
     if py_truthy(&Py::Bool(py_contains(&names.clone(), &name.clone()))) {
+    __broke2 = true;
     break;
     }
     }
+    if !__broke2 {
     return Py::None;
+    }
     meat = geti(&names.clone(), &Py::Int(0));
     one = op_mul(&grams_each.clone(), &feeds.clone());
     said = _a_table_word(&[wanted.clone()]);

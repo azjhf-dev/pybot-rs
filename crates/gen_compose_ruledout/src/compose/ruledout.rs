@@ -478,9 +478,9 @@ pub fn _ruled_out_thing(args: &[Py]) -> Py {
     thing = __unpk1[0].clone();
     kept = __unpk1[1].clone();
     patterns = op_add(&g_RULED_OUT(), &if py_truthy(&asked_for_the_other.clone()) { op_add(&g_RULED_OUT_NOT_THEN_ELSE(), &g_RULED_OUT_NO_THEN_ELSE()) } else { py_tuple(vec![]) });
-    let __iter2 = py_iter_or_raise(&patterns.clone());
-    let mut __else3 = false;
-    for __item in __iter2 {
+    let mut __broke2 = false;
+    let __iter3 = py_iter_or_raise(&patterns.clone());
+    for __item in __iter3 {
     let __unpk4 = py_unpack(&__item.clone(), 2, None);
     pattern = __unpk4[0].clone();
     with_determiner = __unpk4[1].clone();
@@ -489,10 +489,13 @@ pub fn _ruled_out_thing(args: &[Py]) -> Py {
     let __unpk5 = py_unpack(&py_tuple(vec![mcall(&found.clone(), "group", &[py_str("thing")]), with_determiner.clone()]), 2, None);
     thing = __unpk5[0].clone();
     kept = __unpk5[1].clone();
+    __broke2 = true;
     break;
     }
     }
+    if !__broke2 {
     return py_tuple(vec![py_str(""), Py::Bool(false)]);
+    }
     thing = mcall(&py_str(" "), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&thing.clone(), "split", &[])) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&g_RULED_OUT_WORDS(), &word.clone()))) {  __out.push(word.clone()); } } py_list(__out) })() }]);
     thing = mcall(&mcall(&g_RULED_OUT_TAIL(), "sub", &[py_str(""), thing.clone()]), "strip", &[py_str(" .,!?'\"")]);
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&thing.clone())); if py_truthy(&__b) { __b } else { { let __b = mcall(&g_RULED_OUT_PREP(), "search", &[thing.clone()]); if py_truthy(&__b) { __b } else { mcall(&g_RULED_OUT_OPENS_WITH(), "search", &[thing.clone()]) } } } }) {

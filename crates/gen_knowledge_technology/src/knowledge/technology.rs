@@ -1880,17 +1880,20 @@ pub fn _symbol_on_the_keyboard(args: &[Py]) -> Py {
     let _ = py_str("The line of the answer for the symbol the person actually asked about.");
     said = { let __b = mcall(&{ let __b = understood.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { { let __b = mcall(&{ let __b = understood.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[py_str("text")]); if py_truthy(&__b) { __b } else { py_str("") } } } };
     said = mcall(&said.clone(), "lower", &[]);
-    let __iter1 = py_iter_or_raise(&g__SYMBOLS());
-    let mut __else2 = false;
-    for __item in __iter1 {
+    let mut __broke1 = false;
+    let __iter2 = py_iter_or_raise(&g__SYMBOLS());
+    for __item in __iter2 {
     let __unpk3 = py_unpack(&__item.clone(), 2, None);
     names = __unpk3[0].clone();
     line = __unpk3[1].clone();
     if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&names.clone()) { let mut name: Py = __item.clone(); __out.push(Py::Bool(py_contains(&said.clone(), &name.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    __broke1 = true;
     break;
     }
     }
+    if !__broke1 {
     return Py::None;
+    }
     return op_add(&op_add(&py_str("On a UK keyboard "), &line.clone()), &py_str(". If a symbol comes out as a different one, the keyboard is set to the US layout: Settings > Time & language > Language on Windows, System Settings > Keyboard > Input Sources on a Mac."));
     Py::None
 }

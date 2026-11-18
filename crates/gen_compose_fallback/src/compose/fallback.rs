@@ -17743,15 +17743,18 @@ pub fn _the_plan_is_the_last_thing_said__wrapped(args: &[Py]) -> Py {
     said = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let __b = mcall(&memory.clone(), "get", &[py_str("turns")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }) { let mut turn: Py = __item.clone(); if py_truthy(&call_builtin("isinstance", &[turn.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(py_call(&g__matchable(), &[mcall(&turn.clone(), "get", &[py_str("user")])])); } } py_list(__out) })() };
     said = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&said.clone()) { let mut line: Py = __item.clone(); if py_truthy(&line.clone()) {  __out.push(line.clone()); } } py_list(__out) })() };
     about = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&stdlib_call("re", "sub", &[py_str("[^a-z0-9 ]"), py_str(" "), plan_line.clone()]).unwrap_or_else(|e| exc::raise(e)), "split", &[])) { let mut word: Py = __item.clone(); if py_truthy(&{ let __b = op_gt(&call_builtin("len", &[word.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&g_JUDGE_NOD_WORDS(), &word.clone())) } }) {  __out.push(word.clone()); } } py_set(__out) })() };
-    let __iter1 = py_iter_or_raise(&call_builtin("range", &[op_sub(&call_builtin("len", &[said.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1)), op_neg(&Py::Int(1)), op_neg(&Py::Int(1))]).unwrap_or_else(|e| exc::raise(e)));
-    let mut __else2 = false;
-    for __item in __iter1 {
+    let mut __broke1 = false;
+    let __iter2 = py_iter_or_raise(&call_builtin("range", &[op_sub(&call_builtin("len", &[said.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1)), op_neg(&Py::Int(1)), op_neg(&Py::Int(1))]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter2 {
     stop = __item.clone();
     if py_truthy(&Py::Bool(py_eq(&geti(&said.clone(), &stop.clone()), &plan_line.clone()))) {
+    __broke1 = true;
     break;
     }
     }
+    if !__broke1 {
     return Py::Bool(true);
+    }
     let __iter3 = py_iter_or_raise(&slice_or_raise(&said.clone(), &op_add(&stop.clone(), &Py::Int(1)), &Py::None, &Py::None));
     for __item in __iter3 {
     line = __item.clone();
@@ -20730,16 +20733,19 @@ pub fn _a_said_claim__wrapped(args: &[Py]) -> Py {
     words = mcall(&first.clone(), "split", &[]);
     if py_truthy(&op_gt(&call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(30))) {
     cut = Py::Int(20);
-    let __iter1 = py_iter_or_raise(&call_builtin("range", &[Py::Int(20), call_builtin("min", &[call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), Py::Int(44)]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
-    let mut __else2 = false;
-    for __item in __iter1 {
+    let mut __broke1 = false;
+    let __iter2 = py_iter_or_raise(&call_builtin("range", &[Py::Int(20), call_builtin("min", &[call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), Py::Int(44)]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter2 {
     index = __item.clone();
     if py_truthy(&mcall(&geti(&words.clone(), &index.clone()), "endswith", &[py_str(",")])) {
     cut = op_add(&index.clone(), &Py::Int(1));
+    __broke1 = true;
     break;
     }
     }
+    if !__broke1 {
     cut = Py::Int(30);
+    }
     first = op_add(&mcall(&mcall(&py_str(" "), "join", &[slice_or_raise(&words.clone(), &Py::None, &cut.clone(), &Py::None)]), "rstrip", &[py_str(",")]), &py_str("."));
     }
     if py_truthy(&op_lt(&call_builtin("len", &[mcall(&first.clone(), "split", &[])]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(3))) {

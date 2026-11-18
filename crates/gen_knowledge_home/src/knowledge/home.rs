@@ -3447,15 +3447,18 @@ pub fn _appliance_noise(args: &[Py]) -> Py {
     let mut word: Py = Py::None;
     let _ = py_str("What the noise means for the appliance the line names.\n\n    A line that names the sound gets the sentence for that sound first - it is the question -\n    and the ordinary sounds after it, so the fault is not buried under what is normal. A line\n    that only says \"noisy\" or \"loud\" has named nothing, so the ordinary sounds come first.\n    ");
     said = mcall(&call_builtin("str", &[{ let __b = mcall(&{ let __b = understood.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]);
-    let __iter1 = py_iter_or_raise(&g_NOISE_TABLE());
-    let mut __else2 = false;
-    for __item in __iter1 {
+    let mut __broke1 = false;
+    let __iter2 = py_iter_or_raise(&g_NOISE_TABLE());
+    for __item in __iter2 {
     record = __item.clone();
     if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&geti(&record.clone(), &py_str("words"))) { let mut word: Py = __item.clone(); __out.push(_says(&[said.clone(), word.clone()])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
+    __broke1 = true;
     break;
     }
     }
+    if !__broke1 {
     return Py::None;
+    }
     kind = _noise_kind(&[said.clone(), record.clone()]);
     advice = if py_truthy(&kind.clone()) { mcall(&geti(&record.clone(), &py_str("kinds")), "get", &[kind.clone()]) } else { Py::None };
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&advice.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(py_eq(&kind.clone(), &py_str("knock"))) } }) {

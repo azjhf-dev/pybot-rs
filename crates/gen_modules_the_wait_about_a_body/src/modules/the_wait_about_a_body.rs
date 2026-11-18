@@ -123,16 +123,19 @@ pub fn said_back(args: &[Py]) -> Py {
     let mut wrapper: Py = Py::None;
     let _ = py_str("True when the reply is the person's own line handed back and nothing else.\n\n    \"Got it - your sister might have ms.\" says that the bot heard it and no more, which is the\n    placeholder this module exists for. Only the words are compared, in order, after the one\n    wrapper the bot puts in front of an echo, so \"Got it - your sister might have ms. When do you\n    hear?\" is a reply and not an echo.\n    ");
     said = mcall(&mcall(&mcall(&call_builtin("str", &[{ let __b = reply.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "strip", &[]), "lower", &[]), "replace", &[py_str("’"), py_str("'")]);
-    let __iter1 = py_iter_or_raise(&op_add(&g_GOT_IT(), &py_tuple(vec![g_NOTED()])));
-    let mut __else2 = false;
-    for __item in __iter1 {
+    let mut __broke1 = false;
+    let __iter2 = py_iter_or_raise(&op_add(&g_GOT_IT(), &py_tuple(vec![g_NOTED()])));
+    for __item in __iter2 {
     wrapper = __item.clone();
     if py_truthy(&mcall(&said.clone(), "startswith", &[wrapper.clone()])) {
     said = slice_or_raise(&said.clone(), &call_builtin("len", &[wrapper.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::None, &Py::None);
+    __broke1 = true;
     break;
     }
     }
+    if !__broke1 {
     return Py::Bool(false);
+    }
     return { let __b = call_builtin("bool", &[_words(&[said.clone()])]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { Py::Bool(py_eq(&_words(&[said.clone()]), &_words(&[text.clone()]))) } };
     Py::None
 }

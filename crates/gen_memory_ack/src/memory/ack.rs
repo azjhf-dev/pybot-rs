@@ -3951,19 +3951,22 @@ pub fn _without_a_frame(args: &[Py]) -> Py {
     words = call_builtin("list", &[words.clone()]).unwrap_or_else(|e| exc::raise(e));
     took = Py::Bool(false);
     while py_truthy(&words.clone()) {
-    let __iter1 = py_iter_or_raise(&phrases.clone());
-    let mut __else2 = false;
-    for __item in __iter1 {
+    let mut __broke1 = false;
+    let __iter2 = py_iter_or_raise(&phrases.clone());
+    for __item in __iter2 {
     phrase = __item.clone();
     end = if py_truthy(&back.clone()) { slice_or_raise(&words.clone(), &op_neg(&call_builtin("len", &[phrase.clone()]).unwrap_or_else(|e| exc::raise(e))), &Py::None, &Py::None) } else { slice_or_raise(&words.clone(), &Py::None, &call_builtin("len", &[phrase.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::None) };
     said = call_builtin("tuple", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&end.clone()) { let mut word: Py = __item.clone(); __out.push(mcall(&mcall(&word.clone(), "lower", &[]), "strip", &[py_str(".,!?;:'’")])); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&Py::Bool(py_eq(&said.clone(), &phrase.clone()))) {
     words = if py_truthy(&back.clone()) { slice_or_raise(&words.clone(), &Py::None, &op_neg(&call_builtin("len", &[phrase.clone()]).unwrap_or_else(|e| exc::raise(e))), &Py::None) } else { slice_or_raise(&words.clone(), &call_builtin("len", &[phrase.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::None, &Py::None) };
     took = Py::Bool(true);
+    __broke1 = true;
     break;
     }
     }
+    if !__broke1 {
     break;
+    }
     }
     return py_tuple(vec![words.clone(), took.clone()]);
     Py::None
@@ -6229,17 +6232,20 @@ pub fn _the_pets_said(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_truthy(&animal.clone()))) {
     continue;
     }
-    let __iter7 = py_iter_or_raise(&groups.clone());
-    let mut __else8 = false;
-    for __item in __iter7 {
+    let mut __broke7 = false;
+    let __iter8 = py_iter_or_raise(&groups.clone());
+    for __item in __iter8 {
     group = __item.clone();
     if py_truthy(&Py::Bool(py_eq(&geti(&group.clone(), &Py::Int(0)), &animal.clone()))) {
     let __aug9 = op_add(&geti(&group.clone(), &Py::Int(1)), &count.clone());
     let _ = py_setitem(&group.clone(), &Py::Int(1), __aug9);
+    __broke7 = true;
     break;
     }
     }
+    if !__broke7 {
     let _ = mcall(&groups.clone(), "append", &[py_list(vec![animal.clone(), count.clone()])]);
+    }
     }
     if py_truthy(&Py::Bool(!py_truthy(&groups.clone()))) {
     return py_tuple(vec![py_str(""), Py::Bool(false)]);

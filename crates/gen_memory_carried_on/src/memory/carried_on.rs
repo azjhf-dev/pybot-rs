@@ -153,18 +153,21 @@ pub fn _a_whole_step(args: &[Py]) -> Py {
     return mcall(&said.clone(), "strip", &[py_str(" ,;:")]);
     }
     words = slice_or_raise(&words.clone(), &Py::None, &g_STEP_WORDS(), &Py::None);
-    let __iter1 = py_iter_or_raise(&call_builtin("range", &[op_sub(&call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1)), Py::Int(2), op_neg(&Py::Int(1))]).unwrap_or_else(|e| exc::raise(e)));
-    let mut __else2 = false;
-    for __item in __iter1 {
+    let mut __broke1 = false;
+    let __iter2 = py_iter_or_raise(&call_builtin("range", &[op_sub(&call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1)), Py::Int(2), op_neg(&Py::Int(1))]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter2 {
     at = __item.clone();
     if py_truthy(&mcall(&geti(&words.clone(), &op_sub(&at.clone(), &Py::Int(1))), "endswith", &[py_tuple(vec![py_str(":"), py_str(";"), py_str(",")])])) {
     words = slice_or_raise(&words.clone(), &Py::None, &at.clone(), &Py::None);
     let _ = py_setitem(&words.clone(), &op_sub(&at.clone(), &Py::Int(1)), mcall(&geti(&words.clone(), &op_sub(&at.clone(), &Py::Int(1))), "rstrip", &[py_str(":;,")]));
+    __broke1 = true;
     break;
     }
     }
+    if !__broke1 {
     while py_truthy(&{ let __b = op_gt(&call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&g_DANGLING(), &mcall(&mcall(&geti(&words.clone(), &op_neg(&Py::Int(1))), "lower", &[]), "strip", &[py_str(",;:")]))); if py_truthy(&__b) { __b } else { mcall(&geti(&words.clone(), &op_neg(&Py::Int(1))), "endswith", &[py_tuple(vec![py_str(","), py_str(":"), py_str(";")])]) } } } }) {
     words = slice_or_raise(&words.clone(), &Py::None, &op_neg(&Py::Int(1)), &Py::None);
+    }
     }
     return mcall(&mcall(&py_str(" "), "join", &[words.clone()]), "strip", &[py_str(" ,;:")]);
     Py::None

@@ -6025,15 +6025,17 @@ pub fn _a_lost_pet(args: &[Py]) -> Py {
     return py_str("");
     }
     words = op_add(&op_add(&py_str(" "), &mcall(&mcall(&py_str(" "), "join", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&{ let __b = mcall(&{ let __b = understood.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[py_str("words")]); if py_truthy(&__b) { __b } else { py_tuple(vec![]) } }) { let mut w: Py = __item.clone(); __out.push(call_builtin("str", &[w.clone()]).unwrap_or_else(|e| exc::raise(e))); } py_list(__out) })() }]), "lower", &[])), &py_str(" "));
-    let __iter1 = py_iter_or_raise(&g__A_LOST_ANIMAL());
-    let mut __else2 = false;
-    for __item in __iter1 {
+    let mut __broke1 = false;
+    let __iter2 = py_iter_or_raise(&g__A_LOST_ANIMAL());
+    for __item in __iter2 {
     word = __item.clone();
     if py_truthy(&Py::Bool(py_contains(&words.clone(), &op_add(&op_add(&py_str(" "), &word.clone()), &py_str(" "))))) {
     noun = if py_truthy(&Py::Bool(py_contains(&py_tuple(vec![py_str("kitten")]), &word.clone()))) { py_str("cat") } else { word.clone() };
+    __broke1 = true;
     break;
     }
     }
+    if !__broke1 {
     text = op_add(&op_add(&py_str(" "), &mcall(&call_builtin("str", &[{ let __b = mcall(&{ let __b = understood.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[])), &py_str(" "));
     let __iter3 = py_iter_or_raise(&g__A_LOST_ANIMAL());
     for __item in __iter3 {
@@ -6041,6 +6043,7 @@ pub fn _a_lost_pet(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(py_contains(&text.clone(), &op_add(&op_add(&py_str(" "), &word.clone()), &py_str(" "))))) {
     noun = if py_truthy(&Py::Bool(py_contains(&py_tuple(vec![py_str("kitten")]), &word.clone()))) { py_str("cat") } else { word.clone() };
     break;
+    }
     }
     }
     return op_add(&op_add(&op_add(&op_add(&py_str("Ring the microchip register and the council's animal warden to report the "), &noun.clone()), &py_str(" missing, then a photo with the last place seen on the local Facebook and Nextdoor pages and a call to the vets within five miles. Walk the streets calling calmly, since a frightened ")), &noun.clone()), &py_str(" hides close by, and leave something that smells of home and water at the door. Never chase it: kneel down and let it come to you."));

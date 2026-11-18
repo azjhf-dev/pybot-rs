@@ -198,18 +198,21 @@ pub fn _keep_a_time(args: &[Py]) -> Py {
     }
     held = _the_times(&[memory.clone()]);
     turn = call_builtin("len", &[{ let __b = mcall(&memory.clone(), "get", &[py_str("turns")]); if py_truthy(&__b) { __b } else { py_list(vec![]) } }]).unwrap_or_else(|e| exc::raise(e));
-    let __iter1 = py_iter_or_raise(&held.clone());
-    let mut __else2 = false;
-    for __item in __iter1 {
+    let mut __broke1 = false;
+    let __iter2 = py_iter_or_raise(&held.clone());
+    for __item in __iter2 {
     item = __item.clone();
     if py_truthy(&{ let __b = call_builtin("isinstance", &[item.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { Py::Bool(py_eq(&mcall(&item.clone(), "get", &[py_str("what")]), &what.clone())) } }) {
     let _ = py_setitem(&item.clone(), &py_str("at"), at.clone());
     let _ = py_setitem(&item.clone(), &py_str("said"), said.clone());
     let _ = py_setitem(&item.clone(), &py_str("turn"), turn.clone());
+    __broke1 = true;
     break;
     }
     }
+    if !__broke1 {
     let _ = mcall(&held.clone(), "append", &[py_dict(vec![(py_str("what"), what.clone()), (py_str("at"), at.clone()), (py_str("said"), said.clone()), (py_str("turn"), turn.clone())])]);
+    }
     let _ = py_setitem(&memory.clone(), &py_str("times"), slice_or_raise(&held.clone(), &op_neg(&Py::Int(8)), &Py::None, &Py::None));
     Py::None
 }

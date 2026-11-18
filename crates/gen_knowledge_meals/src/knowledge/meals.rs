@@ -1193,21 +1193,24 @@ pub fn _ruled_out(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(!py_contains(&plain.clone(), &{ let mut __s = String::new(); __s.push_str(" "); __s.push_str(&fstr(&shape.clone(), -1, "")); __s.push_str(" "); py_string(__s) }))) {
     continue;
     }
-    let __iter5 = py_iter_or_raise(&g_NO_CUE());
-    let mut __else6 = false;
-    for __item in __iter5 {
+    let mut __broke5 = false;
+    let __iter6 = py_iter_or_raise(&g_NO_CUE());
+    for __item in __iter6 {
     cue = __item.clone();
     if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&g_NO_GAP()) { let mut gap: Py = __item.clone(); __out.push(Py::Bool(py_contains(&plain.clone(), &{ let mut __s = String::new(); __s.push_str(" "); __s.push_str(&fstr(&cue.clone(), -1, "")); __s.push_str(&fstr(&gap.clone(), -1, "")); __s.push_str(" "); __s.push_str(&fstr(&shape.clone(), -1, "")); __s.push_str(" "); py_string(__s) }))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     let _ = mcall(&out.clone(), "add", &[ingredient.clone()]);
+    __broke5 = true;
     break;
     }
     }
+    if !__broke5 {
     let __iter7 = py_iter_or_raise(&g_NO_HAVE());
     for __item in __iter7 {
     cue = __item.clone();
     if py_truthy(&mcall(&py_call(&g__no_have(), &[cue.clone(), shape.clone()]), "search", &[plain.clone()])) {
     let _ = mcall(&out.clone(), "add", &[ingredient.clone()]);
     break;
+    }
     }
     }
     }

@@ -739,18 +739,21 @@ pub fn _the_fence(args: &[Py]) -> Py {
     offer = __unpk1[0].clone();
     options = __unpk1[1].clone();
     request = __unpk1[2].clone();
-    let __iter2 = py_iter_or_raise(&call_builtin("range", &[op_sub(&call_builtin("len", &[turns.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1)), op_neg(&Py::Int(1)), op_neg(&Py::Int(1))]).unwrap_or_else(|e| exc::raise(e)));
-    let mut __else3 = false;
-    for __item in __iter2 {
+    let mut __broke2 = false;
+    let __iter3 = py_iter_or_raise(&call_builtin("range", &[op_sub(&call_builtin("len", &[turns.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(1)), op_neg(&Py::Int(1)), op_neg(&Py::Int(1))]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter3 {
     index = __item.clone();
     offer = call_builtin("str", &[{ let __b = mcall(&geti(&turns.clone(), &index.clone()), "get", &[py_str("bot")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e));
     options = _options(&[offer.clone()]);
     if py_truthy(&op_ge(&call_builtin("len", &[options.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2))) {
     request = call_builtin("str", &[{ let __b = mcall(&geti(&turns.clone(), &index.clone()), "get", &[py_str("user")]); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e));
+    __broke2 = true;
     break;
     }
     }
+    if !__broke2 {
     return Py::None;
+    }
     ruled_out = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&mcall(&g__FENCE(), "findall", &[request.clone()])) { let mut word: Py = __item.clone(); if py_truthy(&Py::Bool(!py_contains(&g_KNOWN(), &word.clone()))) {  __out.push(word.clone()); } } py_list(__out) })() };
     if py_truthy(&Py::Bool(!py_truthy(&ruled_out.clone()))) {
     return Py::None;

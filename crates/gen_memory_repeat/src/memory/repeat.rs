@@ -3003,9 +3003,9 @@ pub fn _a_move_in__wrapped(args: &[Py]) -> Py {
     clauses = stdlib_call("re", "split", &[py_str("(?<!\\d),(?!\\d)| - |;| \\u2014 |\\. "), piece.clone()]).unwrap_or_else(|e| exc::raise(e));
     conditional = Py::Bool(false);
     in_a_bracket = Py::Int(0);
-    let __iter4 = py_iter_or_raise(&clauses.clone());
-    let mut __else5 = false;
-    for __item in __iter4 {
+    let mut __broke4 = false;
+    let __iter5 = py_iter_or_raise(&clauses.clone());
+    for __item in __iter5 {
     clause = __item.clone();
     head = mcall(&clause.clone(), "strip", &[py_str(" .:;")]);
     if py_truthy(&Py::Bool(!py_truthy(&head.clone()))) {
@@ -3050,9 +3050,12 @@ pub fn _a_move_in__wrapped(args: &[Py]) -> Py {
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&questions_are_steps.clone())); if !py_truthy(&__b) { __b } else { py_call(&g__a_question(), &[head.clone()]) } }) {
     continue;
     }
+    __broke4 = true;
     break;
     }
+    if !__broke4 {
     continue;
+    }
     if py_truthy(&{ let __b = stdlib_call("re", "match", &[py_str("(?:start|begin) with\\b"), head.clone(), stdlib_attr("re", "I").unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&part.clone(), &py_str(":"))) } }) {
     continue;
     }

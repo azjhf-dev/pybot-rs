@@ -1614,17 +1614,20 @@ pub fn _the_words_the_ask_names(args: &[Py]) -> Py {
     let mut word: Py = Py::None;
     let _ = py_str("The words the line asks the plural of, read after the ask; empty when it names none.");
     said = _the_words_of(&[understood.clone()]);
-    let __iter1 = py_iter_or_raise(&call_builtin("enumerate", &[said.clone()]).unwrap_or_else(|e| exc::raise(e)));
-    let mut __else2 = false;
-    for __item in __iter1 {
+    let mut __broke1 = false;
+    let __iter2 = py_iter_or_raise(&call_builtin("enumerate", &[said.clone()]).unwrap_or_else(|e| exc::raise(e)));
+    for __item in __iter2 {
     let __unpk3 = py_unpack(&__item.clone(), 2, None);
     at = __unpk3[0].clone();
     word = __unpk3[1].clone();
     if py_truthy(&{ let __b = Py::Bool(py_contains(&g__PLURAL_ASK(), &word.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g__PLURAL_ASK_FRAME(), &word.clone())) } }) {
+    __broke1 = true;
     break;
     }
     }
+    if !__broke1 {
     return py_list(vec![]);
+    }
     named = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&slice_or_raise(&said.clone(), &op_add(&at.clone(), &Py::Int(1)), &Py::None, &Py::None)) { let mut word: Py = __item.clone(); if py_truthy(&{ let __b = Py::Bool(!py_contains(&g__PLURAL_NOT_THE_NOUN(), &word.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_contains(&g__PLURAL_ASK(), &word.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_truthy(&mcall(&word.clone(), "isdigit", &[]))); if !py_truthy(&__b) { __b } else { { let __b = op_gt(&call_builtin("len", &[word.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)); if !py_truthy(&__b) { __b } else { { let __b = mcall(&word.clone(), "isalpha", &[]); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_contains(&g_PLURALS(), &word.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_contains(&g_PLURAL_SINGULARS(), &word.clone())); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_contains(&g__UNCOUNTABLE(), &word.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&g__PLUS_FORMS(), &word.clone())) } } } } } } } } } } } } } } } }) {  __out.push(word.clone()); } } py_list(__out) })() };
     return named.clone();
     Py::None
