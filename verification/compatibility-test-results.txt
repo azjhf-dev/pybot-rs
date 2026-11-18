@@ -1,0 +1,22 @@
+   Compiling pyrt v0.1.0 (/home/sandbox/pybot-job/pybot-rs/crates/pyrt)
+    Finished `test` profile [unoptimized] target(s) in 5.45s
+     Running unittests src/lib.rs (target/debug/build/pyrt/94c5d3733f0ff252/out/pyrt-94c5d3733f0ff252)
+
+running 14 tests
+test builtins::comparison_tests::equality_is_inclusive_for_ge ... ok
+test builtins::missing_attribute_tests::none_has_no_key_attribute ... ok
+test builtins::stable_sort_tests::reverse_sort_keeps_equal_keys_in_input_order ... ok
+test builtins::subset_tests::subset_is_not_lexicographic ... ok
+test pyrandom::tests::matches_cpython_seed42 ... ok
+test pyrandom::tests::matches_cpython_seed7 ... ok
+test builtins::regex_method_tests::pattern_sub_takes_replacement_then_text ... ok
+test pyre::regex_position_tests::empty_unicode_search_does_not_split_codepoint ... ok
+test pyre::regex_position_tests::named_group_indices_include_unnamed ... ok
+test pyre::regex_position_tests::search_pos_preserves_anchor_and_lookbehind ... ok
+test value::identity_tests::identity_hash_survives_clone ... ok
+test value::identity_tests::numeric_equal_keys_hash_equally ... ok
+test value::slice_assignment_tests::full_slice_replaces_not_nests ... ok
+test value::slice_tests::reverse_slices_stay_in_range ... ok
+
+test result: ok. 14 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

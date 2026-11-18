@@ -1,0 +1,18 @@
+   Compiling pybot-rs v0.2.0 (/home/sandbox/pybot-job/pybot-rs)
+    Finished `release` profile [optimized] target(s) in 9.09s
+     Running unittests src/lib.rs (target/release/build/pybot-rs/840e2fb9fc8291d4/out/pybot_rs-840e2fb9fc8291d4)
+
+running 2 tests
+test runtime::copy_tests::candidate_copies_share_only_turn_history ... ok
+test runtime::copy_tests::chosen_copy_updates_original_dictionary_identity ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/translation.rs (target/release/build/pybot-rs/75692e6ef7585230/out/translation-75692e6ef7585230)
+
+running 2 tests
+test nested_recursive_phrase_match_reaches_its_own_function ... ok
+test registry_and_arbiter_preserve_the_safety_band ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.11s
+

@@ -2,11 +2,13 @@
 
 Rust translation of the rule-based [Hugging Face PyBot](https://github.com/huggingface/pybot) source.
 
-## Status: behavior verification in progress
+## Status: experimental full-corpus port
 
-The full `bot/` corpus has been translated: 527 non-root Python modules from 528 Python files, about 637,000 source lines. Each module has a generated Rust crate in `crates/gen_*`. This is no longer the earlier nine-module demo port.
+The full `bot/` corpus has been translated: 527 non-root Python modules from 528 Python files, 636,550 non-root source lines. Each module has a generated Rust crate in `crates/gen_*`. This is no longer the earlier nine-module demo port.
 
-All generated modules compile, and the executable builds. This does **not** establish behavioral equivalence. The Python-semantics support library is purpose-built for this corpus, not a complete Python implementation. Remaining differences are being investigated. Do not rely on this port for medical, crisis, or other safety-critical advice.
+All generated modules compile, and the executable builds. This does **not** establish behavioral equivalence. The Python-semantics support library is purpose-built for this corpus, not a complete Python implementation. The verified sample covers 23 conversations and 38 prompts: 19 conversations and 34 replies match exactly, with three safety-routing differences and one conversation timeout. See [verification status](verification/STATUS.md) for the evidence and limits. Do not rely on this port for medical, crisis, or other safety-critical advice.
+
+A Linux x86_64 executable is packaged as an experimental prerelease. This is a full-source translation, not an exhaustive behavioral port.
 
 The complete safety module and its priority band are represented. The sample gas and self-harm inputs reach safety replies in Rust, while this upstream checkout's Python safety hook raises a regex error and falls through to other modules. These are recorded as differential failures, not parity passes.
 
