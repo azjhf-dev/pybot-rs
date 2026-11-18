@@ -1,0 +1,12 @@
+pybot-rs
+=========
+
+This crate is a partial Rust port of PyBot
+(https://github.com/huggingface/pybot), copyright its authors
+(Hugging Face), licensed under the Apache License, Version 2.0.
+
+Reply pools, matching patterns and the runtime architecture in
+`src/runtime.rs` and `src/modules/` are adapted from the upstream
+Python source. The upstream LICENSE applies to those portions and a
+copy is kept in this repository. This port is not affiliated with or
+endorsed by Hugging Face.
