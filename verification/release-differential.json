@@ -27,27 +27,6 @@
     "exact": true
   },
   {
-    "case": 8,
-    "inputs": [
-      "my chest hurts and I cannot breathe"
-    ],
-    "python": {
-      "returncode": 0,
-      "replies": [
-        "Sorry to hear that. What would help most right now?"
-      ],
-      "diagnostics": "[module: greeting | 1197 ms]\n"
-    },
-    "rust": {
-      "returncode": 0,
-      "replies": [
-        "That's an emergency: ring 999 or 911 and stay on the line; the call handler will tell you what to do. If they stop breathing normally, start CPR if you can."
-      ],
-      "diagnostics": "[module: safety | 37196 ms]\n"
-    },
-    "exact": false
-  },
-  {
     "case": 10,
     "inputs": [
       "thank you",
@@ -92,30 +71,6 @@
         "You've got a dog called Buddy."
       ],
       "diagnostics": "[module: chat | 37810 ms]\n[module: memory_store | 6359 ms]\n"
-    },
-    "exact": true
-  },
-  {
-    "case": 9,
-    "inputs": [
-      "tell me a joke",
-      "another one"
-    ],
-    "python": {
-      "returncode": 0,
-      "replies": [
-        "What do you call a sleeping bull? A bulldozer.",
-        "I haven't got anything for that to point at yet \u2014 give me the thing in a few words and I'll answer for it."
-      ],
-      "diagnostics": "[module: chat | 837 ms]\n[module: memory_store | 191 ms]\n"
-    },
-    "rust": {
-      "returncode": 0,
-      "replies": [
-        "What do you call a sleeping bull? A bulldozer.",
-        "I haven't got anything for that to point at yet \u2014 give me the thing in a few words and I'll answer for it."
-      ],
-      "diagnostics": "[module: chat | 26700 ms]\n[module: memory_store | 773 ms]\n"
     },
     "exact": true
   },
@@ -286,5 +241,50 @@
       "diagnostics": "[module: safety | 24029 ms]\n"
     },
     "exact": false
+  },
+  {
+    "case": 8,
+    "inputs": [
+      "my chest hurts and I cannot breathe"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "Sorry to hear that. What would help most right now?"
+      ],
+      "diagnostics": "[module: greeting | 1153 ms]\n"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "That's an emergency: ring 999 or 911 and stay on the line; the call handler will tell you what to do. If they stop breathing normally, start CPR if you can."
+      ],
+      "diagnostics": "[module: safety | 34159 ms]\n"
+    },
+    "exact": false
+  },
+  {
+    "case": 9,
+    "inputs": [
+      "tell me a joke",
+      "another one"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "What do you call a sleeping bull? A bulldozer.",
+        "I haven't got anything for that to point at yet \u2014 give me the thing in a few words and I'll answer for it."
+      ],
+      "diagnostics": "[module: chat | 828 ms]\n[module: memory_store | 175 ms]\n"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "What do you call a sleeping bull? A bulldozer.",
+        "I haven't got anything for that to point at yet \u2014 give me the thing in a few words and I'll answer for it."
+      ],
+      "diagnostics": "[module: chat | 25693 ms]\n[module: memory_store | 774 ms]\n"
+    },
+    "exact": true
   }
 ]
