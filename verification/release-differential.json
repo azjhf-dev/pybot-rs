@@ -48,30 +48,6 @@
     "exact": true
   },
   {
-    "case": 1,
-    "inputs": [
-      "my name is Alex",
-      "what is my name"
-    ],
-    "python": {
-      "returncode": 0,
-      "replies": [
-        "Nice to meet you, Alex. What can I help with?",
-        "You're Alex."
-      ],
-      "diagnostics": "[module: chat | 1086 ms]\n[module: memory_store | 2817 ms]\n"
-    },
-    "rust": {
-      "returncode": 0,
-      "replies": [
-        "Nice to meet you, Alex. What can I help with?",
-        "You're Alex."
-      ],
-      "diagnostics": "[module: chat | 35334 ms]\n[module: memory_store | 11411 ms]\n"
-    },
-    "exact": true
-  },
-  {
     "case": 4,
     "inputs": [
       "I like pizza",
@@ -290,6 +266,33 @@
         "See you \u2014 good luck with it."
       ],
       "diagnostics": "[module: chat | 23721 ms]\n[module: chat | 2739 ms]\n[module: chat | 15092 ms]\n[module: chat | 446 ms]\n"
+    },
+    "exact": true
+  },
+  {
+    "binary_sha256": "bf98fc48613880ed03b5c39ce2e1c0769a2ba2ab7ebf72108aa0dbe06a569520",
+    "case": 1,
+    "inputs": [
+      "my name is Alex",
+      "what is my name"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "Nice to meet you, Alex. What can I help with?",
+        "You're Alex."
+      ],
+      "diagnostics": "[module: chat | 1086 ms]\n[module: memory_store | 2817 ms]\n",
+      "baseline_reused": true,
+      "source_commit": "7d63c7fbebb44c7e466e5c8b5c1f341ab767929e"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "Nice to meet you, Alex. What can I help with?",
+        "You're Alex."
+      ],
+      "diagnostics": "[module: chat | 35604 ms]\n[module: memory_store | 10547 ms]\n"
     },
     "exact": true
   }
