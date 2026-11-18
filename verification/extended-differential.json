@@ -116,5 +116,27 @@
       "diagnostics": "[module: answers | 35731 ms]\n"
     },
     "exact": true
+  },
+  {
+    "binary_sha256": "d4cabea0451fe30ff4ca24c455750b4e0d45833b59a77fa13bf5c230bb078a33",
+    "case": 5,
+    "inputs": [
+      "how often should I water a cactus"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "Water a cactus every two to three weeks in summer, and barely at all from November to March. Soak it, let it dry right out, and never leave the pot standing in water: more cacti die of watering than of neglect."
+      ],
+      "diagnostics": "[module: answers | 1395 ms]\n"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "Water a cactus every two to three weeks in summer, and barely at all from November to March. Soak it, let it dry right out, and never leave the pot standing in water: more cacti die of watering than of neglect."
+      ],
+      "diagnostics": "[module: answers | 34370 ms]\n"
+    },
+    "exact": true
   }
 ]
