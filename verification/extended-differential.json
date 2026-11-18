@@ -182,5 +182,27 @@
       "diagnostics": "[module: answers | 34085 ms]\n"
     },
     "exact": true
+  },
+  {
+    "binary_sha256": "d4cabea0451fe30ff4ca24c455750b4e0d45833b59a77fa13bf5c230bb078a33",
+    "case": 8,
+    "inputs": [
+      "how long can cooked chicken stay in the fridge"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "Cooked chicken or turkey keeps 3 days in the fridge in a covered box, and freezes for up to 3 months. Cool it within 2 hours of cooking, reheat it once until it is piping hot all through, and eat it cold only if it went straight into the fridge."
+      ],
+      "diagnostics": "[module: answers | 1245 ms]\n"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "Oven times go by weight and heat: minutes per 500g at a set temperature, and both are on the pack or in the recipe. Tell me the weight and the heat and I will work out the clock time for you."
+      ],
+      "diagnostics": "[module: greeting | 28110 ms]\n"
+    },
+    "exact": false
   }
 ]
