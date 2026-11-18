@@ -48,5 +48,47 @@
       "diagnostics": "[module: greeting | 34428 ms]\n[module: memory_store | 4995 ms]\n"
     },
     "exact": true
+  },
+  {
+    "binary_sha256": "d4cabea0451fe30ff4ca24c455750b4e0d45833b59a77fa13bf5c230bb078a33",
+    "case": 2,
+    "inputs": [
+      "what is 15 percent of 80"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "15% of 80 is 12."
+      ],
+      "diagnostics": "[module: answers | 4187 ms]\n"
+    },
+    "rust": {
+      "timeout": true,
+      "timeout_seconds": 45,
+      "replies": []
+    },
+    "exact": false
+  },
+  {
+    "binary_sha256": "d4cabea0451fe30ff4ca24c455750b4e0d45833b59a77fa13bf5c230bb078a33",
+    "case": 3,
+    "inputs": [
+      "convert 5 miles to kilometres"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "5 miles is about 8 km."
+      ],
+      "diagnostics": "[module: answers | 916 ms]\n"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "5 miles is about 8 km."
+      ],
+      "diagnostics": "[module: answers | 34334 ms]\n"
+    },
+    "exact": true
   }
 ]
