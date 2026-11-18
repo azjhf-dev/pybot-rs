@@ -21,7 +21,6 @@ enum Engine {
 }
 
 pub struct PyPattern {
-    cache_id: u64,
     pub source: String,
     pub flags: i64,
     pub engine: Engine,
@@ -99,7 +98,6 @@ fn translate_pattern(pat: &str) -> String {
     pat.replace(r"\Z", r"\z")
 }
 
-static NEXT_PATTERN_ID: std::sync::atomic::AtomicU64 = std::sync::atomic::AtomicU64::new(1);
 thread_local! { static PATTERN_CACHE: std::cell::RefCell<std::collections::HashMap<(String,i64),Rc<PyPattern>>> = std::cell::RefCell::new(std::collections::HashMap::new()); }
 pub fn compile(pattern:&str,flags:i64)->Result<Rc<PyPattern>,PyExc>{
  let key=(pattern.to_string(),flags);
@@ -111,33 +109,18 @@ fn compile_uncached(pattern: &str, flags: i64) -> Result<Rc<PyPattern>, PyExc> {
     let (group_count, group_names) = count_groups(pattern);
     let full = format!("{}{}", flag_prefix(flags), pattern);
     if let Ok(re) = regex::Regex::new(&full) {
-        return Ok(Rc::new(PyPattern { cache_id: NEXT_PATTERN_ID.fetch_add(1,std::sync::atomic::Ordering::Relaxed), source: pattern.to_string(), flags, engine: Engine::Fast(re), group_count, group_names }));
+        return Ok(Rc::new(PyPattern { source: pattern.to_string(), flags, engine: Engine::Fast(re), group_count, group_names }));
     }
     let translated = translate_pattern(pattern);
     let full = format!("{}{}", flag_prefix(flags), translated);
     match fancy_regex::Regex::new(&full) {
-        Ok(re) => Ok(Rc::new(PyPattern { cache_id: NEXT_PATTERN_ID.fetch_add(1,std::sync::atomic::Ordering::Relaxed), source: pattern.to_string(), flags, engine: Engine::Fancy(re), group_count, group_names })),
+        Ok(re) => Ok(Rc::new(PyPattern { source: pattern.to_string(), flags, engine: Engine::Fancy(re), group_count, group_names })),
         Err(e) => { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("BADPAT {:?}", pattern); } Err(crate::exc::py_err("error", &format!("regex error: {}", e))) },
     }
 }
 
 /// Byte-span capture result.
-type Captured = Option<Vec<Option<(usize,usize)>>>;
-#[derive(Default)]
-struct CaptureCache {
-    entries: std::collections::HashMap<u64,std::collections::HashMap<String,std::collections::HashMap<usize,Captured>>>,
-    len: usize,
-}
-thread_local! {static CAPTURE_CACHE:std::cell::RefCell<CaptureCache>=std::cell::RefCell::new(CaptureCache::default());}
-fn captures(pat: &PyPattern,text:&str,start_at:usize)->Captured {
-    if text.len()>2048 {return captures_uncached(pat,text,start_at);}
-    if let Some(cached)=CAPTURE_CACHE.with(|c|c.borrow().entries.get(&pat.cache_id).and_then(|texts|texts.get(text)).and_then(|positions|positions.get(&start_at)).cloned()) {return cached;}
-    let found=captures_uncached(pat,text,start_at);
-    CAPTURE_CACHE.with(|c|{let mut c=c.borrow_mut();if c.len>=32768 {c.entries.clear();c.len=0;}
-        c.entries.entry(pat.cache_id).or_default().entry(text.to_string()).or_default().insert(start_at,found.clone());c.len+=1;});
-    found
-}
-fn captures_uncached(pat: &PyPattern, text: &str, start_at: usize) -> Option<Vec<Option<(usize, usize)>>> {
+fn captures(pat: &PyPattern, text: &str, start_at: usize) -> Option<Vec<Option<(usize, usize)>>> {
     if start_at>text.len() || !text.is_char_boundary(start_at) { return None; }
     match &pat.engine {
         Engine::Fast(re) => {
@@ -466,16 +449,4 @@ fn next_boundary(text:&str,pos:usize)->usize{text[pos..].chars().next().map(|c|p
  #[test] fn search_pos_preserves_anchor_and_lookbehind(){let p=compile("^a",0).unwrap();assert!(search(&p,"ba",1).is_none());let p=compile("(?<=b)a",0).unwrap();assert!(!search(&p,"ba",1).is_none());}
  #[test] fn named_group_indices_include_unnamed(){let p=compile("(a)(?P<last>b)",0).unwrap();assert_eq!(p.group_names,vec!["".to_string(),"last".to_string()]);}
  #[test] fn empty_unicode_search_does_not_split_codepoint(){let p=compile("",0).unwrap();assert_eq!(py_iter(&findall(&p,"é")).unwrap().len(),2);}
-}
-
-#[cfg(test)] mod capture_cache_tests {
- use super::*;
- #[test] fn cached_spans_preserve_pattern_text_and_position() {
- for source in ["cat","^cat","(?<=a)b","(c)(?P<end>at)","a*"] {
- let p=compile(source,0).unwrap();
- for text in ["cat","cat cat","ab","é"] {for pos in 0..=text.len() {
- assert_eq!(captures(&p,text,pos),captures_uncached(&p,text,pos));
- assert_eq!(captures(&p,text,pos),captures_uncached(&p,text,pos));
- }} }
- }
 }
