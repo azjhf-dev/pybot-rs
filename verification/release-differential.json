@@ -1,29 +1,5 @@
 [
   {
-    "case": 11,
-    "inputs": [
-      "I have a dog named Buddy",
-      "what is my dog called"
-    ],
-    "python": {
-      "returncode": 0,
-      "replies": [
-        "Buddy \u2014 good name for a dog. How old is Buddy?",
-        "You've got a dog called Buddy."
-      ],
-      "diagnostics": "[module: chat | 1263 ms]\n[module: memory_store | 2587 ms]\n"
-    },
-    "rust": {
-      "returncode": 0,
-      "replies": [
-        "Buddy \u2014 good name for a dog. How old is Buddy?",
-        "You've got a dog called Buddy."
-      ],
-      "diagnostics": "[module: chat | 37810 ms]\n[module: memory_store | 6359 ms]\n"
-    },
-    "exact": true
-  },
-  {
     "case": 5,
     "inputs": [
       "how do I boil an egg",
@@ -285,5 +261,30 @@
       ]
     },
     "exact": false
+  },
+  {
+    "binary_sha256": "b84c22abffae6825dd5b70341887eb51482a4f66344401316112bfbd5a63e52e",
+    "case": 11,
+    "inputs": [
+      "I have a dog named Buddy",
+      "what is my dog called"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "Buddy \u2014 good name for a dog. How old is Buddy?",
+        "You've got a dog called Buddy."
+      ],
+      "diagnostics": "[module: chat | 1247 ms]\n[module: memory_store | 2569 ms]\n"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "Buddy \u2014 good name for a dog. How old is Buddy?",
+        "You've got a dog called Buddy."
+      ],
+      "diagnostics": "[module: chat | 35575 ms]\n[module: memory_store | 11189 ms]\n"
+    },
+    "exact": true
   }
 ]
