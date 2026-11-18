@@ -595,6 +595,11 @@ class Gen:
             kp = rust_ident(node.args.kwarg.arg)
             pnames = ', '.join(rust_string(p) for p in params)
             self.emit(f"    let mut {kp}: Py = py_dict(__kw.iter().filter(|(n, _)| ![{pnames}].contains(&n.as_str())).map(|(n, v)| (py_str(n), v.clone())).collect());")
+        for arg, default in zip(node.args.kwonlyargs, node.args.kw_defaults):
+            param = arg.arg
+            value = self.gen_expr(default, ctx) if default is not None else f'exc::raise(type_err("missing keyword-only argument {param}"))'
+            self.emit(f'    let mut {rust_ident(param)}: Py = __kw.iter().find(|(n,_)| n == {rust_string(param)}).map(|(_,v)|v.clone()).unwrap_or_else(|| {value});')
+            params.append(param)
         for name in sorted(ctx.locals - set(params) - ({node.args.vararg.arg} if node.args.vararg else set()) - ({node.args.kwarg.arg} if node.args.kwarg else set())):
             self.emit(f"    let mut {rust_ident(name)}: Py = Py::None;")
         if ctx.generator:

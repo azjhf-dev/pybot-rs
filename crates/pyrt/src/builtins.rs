@@ -776,6 +776,11 @@ fn cmp_bool(a: &Py, b: &Py, op: &str) -> Py {
 pub fn op_lt(a: &Py, b: &Py) -> Py { cmp_bool(a, b, "<") }
 pub fn op_le(a: &Py, b: &Py) -> Py { cmp_bool(a, b, "<=") }
 pub fn op_gt(a: &Py, b: &Py) -> Py { cmp_bool(a, b, ">") }
-pub fn op_ge(a: &Py, b: &Py) -> Py { cmp_bool(a, b, ">") }
+pub fn op_ge(a: &Py, b: &Py) -> Py { cmp_bool(a, b, ">=") }
 
 pub fn unbound_name(name: &str) -> Py { exc::raise(name_err(name)) }
+
+#[cfg(test)] mod comparison_tests {
+ use super::*;
+ #[test] fn equality_is_inclusive_for_ge() { assert!(py_truthy(&op_ge(&Py::Int(2), &Py::Int(2)))); assert!(!py_truthy(&op_gt(&Py::Int(2), &Py::Int(2)))); }
+}
