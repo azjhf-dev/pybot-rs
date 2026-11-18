@@ -52,5 +52,80 @@
       "diagnostics": "[module: first_line_open | 36159 ms]\n[module: attribute_said_again | 5021 ms]\n"
     },
     "exact": false
+  },
+  {
+    "case": 2,
+    "inputs": [
+      "what is 2 plus 2",
+      "what is 12 times 8",
+      "what is the capital of France"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "That's 4.",
+        "That's 96.",
+        "Paris."
+      ],
+      "diagnostics": "[module: answers | 6458 ms]\n[module: answers | 6734 ms]\n[module: answers | 1096 ms]\n"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "No number from me without the figures it comes from - that is what stops it being a guess. What numbers do you already have?",
+        "That's beyond what I know well, sorry. Searching for it will turn up better sources than I can offer; tell me what you find and I'll help you weigh it up.",
+        "Paris."
+      ],
+      "diagnostics": "[module: the_shape_of_the_answer | 52205 ms]\n[module: greeting | 13010 ms]\n[module: answers | 5840 ms]\n"
+    },
+    "exact": false
+  },
+  {
+    "case": 3,
+    "inputs": [
+      "I feel sad",
+      "I had a hard day"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "Do one small thing you used to enjoy today, at half enthusiasm, because mood follows action more often than it arrives on its own: a walk to the shop, a phone call, ten minutes of a game you liked. Then stack the three things that lift a low mood most reliably - daylight within an hour of waking, 20 minutes of walking, and one person you really talk to rather than message - and keep bedtime and meals at the same time, because a sad week wrecks both and then feeds itself. Write one line a day about how it went, so you can see it is not all bad. If it is most days for two weeks, if the pleasure has gone out of everything, or if it is stopping you eating or working, take it to the GP: talking therapy works, and in most areas you can refer yourself.",
+        "Those days are draining. Get the food and the rest in first, and leave the rest till tomorrow."
+      ],
+      "diagnostics": "[module: answers | 719 ms]\n[module: chat | 527 ms]\n"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "Do one small thing you used to enjoy today, at half enthusiasm, because mood follows action more often than it arrives on its own: a walk to the shop, a phone call, ten minutes of a game you liked. Then stack the three things that lift a low mood most reliably - daylight within an hour of waking, 20 minutes of walking, and one person you really talk to rather than message - and keep bedtime and meals at the same time, because a sad week wrecks both and then feeds itself. Write one line a day about how it went, so you can see it is not all bad. If it is most days for two weeks, if the pleasure has gone out of everything, or if it is stopping you eating or working, take it to the GP: talking therapy works, and in most areas you can refer yourself.",
+        "Those days are draining. Get the food and the rest in first, and leave the rest till tomorrow."
+      ],
+      "diagnostics": "[module: answers | 27144 ms]\n[module: chat | 2441 ms]\n"
+    },
+    "exact": true
+  },
+  {
+    "case": 4,
+    "inputs": [
+      "I like pizza",
+      "what do I like"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "Ah, pizza. What got you into that?",
+        "You like pizza."
+      ],
+      "diagnostics": "[module: greeting | 680 ms]\n[module: memory_store | 961 ms]\n"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "Ah, pizza. What got you into that?",
+        "One pizza each and a garlic bread to share: a 12-inch is one hungry person and a 9-inch a light one, so a 12-inch between two plus a side is the cheaper way to feed a pair. A plain margherita and one with a topping beats two fully loaded ones, which are the ones left half eaten."
+      ],
+      "diagnostics": "[module: greeting | 26785 ms]\n[module: answers | 3448 ms]\n"
+    },
+    "exact": false
   }
 ]
