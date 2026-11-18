@@ -258,6 +258,8 @@ pub fn stdlib_call(module: &str, name: &str, args: &[Py]) -> PyResult {
 }
 
 fn re_call(name: &str, args: &[Py]) -> PyResult {
+    if name=="escape" {return Ok(py_string(pyre::escape(args.first().and_then(|v|v.as_str()).unwrap_or(""))));}
+    if name=="purge" {return Ok(Py::None);}
     let pat_arg = args.first().cloned().unwrap_or(Py::None);
     let flag_idx = match name {
         "compile" => 1,

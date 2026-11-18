@@ -82,6 +82,7 @@ fn count_groups(pattern: &str) -> (usize, Vec<String>) {
                     // (?'name') not python; (?= (?! (?<= (?<! (?: (?# (?i: etc non-capturing
                 } else {
                     count += 1;
+                    names.push(String::new());
                 }
                 i += 1;
             }
@@ -120,21 +121,21 @@ fn compile_uncached(pattern: &str, flags: i64) -> Result<Rc<PyPattern>, PyExc> {
 
 /// Byte-span capture result.
 fn captures(pat: &PyPattern, text: &str, start_at: usize) -> Option<Vec<Option<(usize, usize)>>> {
-    let hay = &text[start_at..];
+    if start_at>text.len() || !text.is_char_boundary(start_at) { return None; }
     match &pat.engine {
         Engine::Fast(re) => {
-            let caps = re.captures(hay)?;
+            let caps = re.captures_at(text,start_at)?;
             let mut spans = Vec::with_capacity(caps.len());
             for i in 0..caps.len() {
-                spans.push(caps.get(i).map(|m| (m.start() + start_at, m.end() + start_at)));
+                spans.push(caps.get(i).map(|m| (m.start(), m.end())));
             }
             Some(spans)
         }
         Engine::Fancy(re) => {
-            let caps = re.captures(hay).ok()??;
+            let caps = re.captures_from_pos(text,start_at).ok()??;
             let mut spans = Vec::with_capacity(caps.len());
             for i in 0..caps.len() {
-                spans.push(caps.get(i).map(|m| (m.start() + start_at, m.end() + start_at)));
+                spans.push(caps.get(i).map(|m| (m.start(), m.end())));
             }
             Some(spans)
         }
@@ -324,7 +325,7 @@ pub fn findall(pat: &Rc<PyPattern>, text: &str) -> Py {
                     }
                     out.push(py_tuple(t));
                 }
-                pos = if e > s { e } else { e + 1 };
+                pos = if e > s { e } else { next_boundary(text,e) };
                 if pos > text.len() { break; }
             }
             None => break,
@@ -341,7 +342,7 @@ pub fn finditer(pat: &Rc<PyPattern>, text: &str) -> Py {
             Some(spans) => {
                 let (s, e) = spans[0].unwrap();
                 out.push(make_match(text, spans.clone(), pat));
-                pos = if e > s { e } else { e + 1 };
+                pos = if e > s { e } else { next_boundary(text,e) };
                 if pos > text.len() { break; }
             }
             None => break,
@@ -369,7 +370,7 @@ pub fn split(pat: &Rc<PyPattern>, text: &str, maxsplit: i64) -> Py {
                 }
                 last = e;
                 splits += 1;
-                pos = if e > s { e } else { e + 1 };
+                pos = if e > s { e } else { next_boundary(text,e) };
                 if pos > text.len() { break; }
             }
             None => break,
@@ -411,7 +412,7 @@ fn sub_impl(pat: &Rc<PyPattern>, repl: &Py, text: &str, count: i64) -> (Py, usiz
                 out.push_str(&replacement);
                 last = e;
                 n += 1;
-                pos = if e > s { e } else { e + 1 };
+                pos = if e > s { e } else { next_boundary(text,e) };
                 if pos > text.len() { break; }
             }
             None => break,
@@ -440,4 +441,12 @@ pub fn escape(s: &str) -> String {
 /// re.fullmatch with fancy: anchor both ends
 pub fn fullmatch(pat: &Rc<PyPattern>, text: &str, pos: usize) -> Py {
     match_at(pat, text, pos, true, true)
+}
+
+fn next_boundary(text:&str,pos:usize)->usize{text[pos..].chars().next().map(|c|pos+c.len_utf8()).unwrap_or(text.len()+1)}
+#[cfg(test)] mod regex_position_tests {
+ use super::*;
+ #[test] fn search_pos_preserves_anchor_and_lookbehind(){let p=compile("^a",0).unwrap();assert!(search(&p,"ba",1).is_none());let p=compile("(?<=b)a",0).unwrap();assert!(!search(&p,"ba",1).is_none());}
+ #[test] fn named_group_indices_include_unnamed(){let p=compile("(a)(?P<last>b)",0).unwrap();assert_eq!(p.group_names,vec!["".to_string(),"last".to_string()]);}
+ #[test] fn empty_unicode_search_does_not_split_codepoint(){let p=compile("",0).unwrap();assert_eq!(py_iter(&findall(&p,"é")).unwrap().len(),2);}
 }
