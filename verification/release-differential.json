@@ -1,35 +1,5 @@
 [
   {
-    "case": 0,
-    "inputs": [
-      "hello",
-      "how are you",
-      "what is your name",
-      "goodbye"
-    ],
-    "python": {
-      "returncode": 0,
-      "replies": [
-        "Hi there \u2014 what do you need?",
-        "Still here, thanks \u2014 how are you getting on?",
-        "No name of my own \u2014 call me whatever you like, I'll answer to it. What can I help with?",
-        "See you \u2014 good luck with it."
-      ],
-      "diagnostics": "[module: chat | 621 ms]\n[module: chat | 578 ms]\n[module: chat | 5306 ms]\n[module: chat | 71 ms]\n"
-    },
-    "rust": {
-      "returncode": 0,
-      "replies": [
-        "Hi there \u2014 what do you need?",
-        "Still here, thanks \u2014 how are you getting on?",
-        "No name of my own \u2014 call me whatever you like, I'll answer to it. What can I help with?",
-        "See you \u2014 good luck with it."
-      ],
-      "diagnostics": "[module: chat | 26076 ms]\n[module: chat | 2705 ms]\n[module: chat | 13746 ms]\n[module: chat | 355 ms]\n"
-    },
-    "exact": true
-  },
-  {
     "case": 3,
     "inputs": [
       "I feel sad",
@@ -284,6 +254,36 @@
         "White long grain takes 10 to 12 minutes on a low simmer with the lid on, then 10 more off the heat. Use 1 part rice to about 1.5 parts water by volume, or the fingertip test: water one knuckle above the rice. Brown and wholegrain are the ones that take longer. Too much water is what turns rice to porridge."
       ],
       "diagnostics": "[module: answers | 27397 ms]\n[module: answers | 2607 ms]\n"
+    },
+    "exact": true
+  },
+  {
+    "case": 0,
+    "inputs": [
+      "hello",
+      "how are you",
+      "what is your name",
+      "goodbye"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "Hi there \u2014 what do you need?",
+        "Still here, thanks \u2014 how are you getting on?",
+        "No name of my own \u2014 call me whatever you like, I'll answer to it. What can I help with?",
+        "See you \u2014 good luck with it."
+      ],
+      "diagnostics": "[module: chat | 630 ms]\n[module: chat | 566 ms]\n[module: chat | 5272 ms]\n[module: chat | 70 ms]\n"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "Hi there \u2014 what do you need?",
+        "Still here, thanks \u2014 how are you getting on?",
+        "No name of my own \u2014 call me whatever you like, I'll answer to it. What can I help with?",
+        "See you \u2014 good luck with it."
+      ],
+      "diagnostics": "[module: chat | 25049 ms]\n[module: chat | 2915 ms]\n[module: chat | 15535 ms]\n[module: chat | 454 ms]\n"
     },
     "exact": true
   }
