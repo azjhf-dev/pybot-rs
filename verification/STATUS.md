@@ -1,15 +1,16 @@
 # Work in progress, November 18, 2026
 
-The executable builds. This is NOT a complete behaviorally verified port.
+Not a completed behaviorally verified port.
 
-Observed checks:
-- All 527 generated modules have passed workspace type checking.
-- Runtime unit tests: 3 passed, including reverse-slice bounds regression.
-- CLI seeded hello matches Python exactly: Hi there, what do you need? (punctuation in actual output preserved by CLI).
-- Direct modules.chat hello matches Python exactly.
-- Direct modules.greeting hello still fails in Rust because compose.verdict initialization fails.
-- Multiple knowledge domains still fail initialization. Their data has not been omitted; runtime semantics need further fixes.
-- Direct Python modules.safety.respond currently raises a regular-expression multiple-repeat error at position 626 for the sample emergency prompts. Rust returns None for those same direct calls. This is not a passing exact parity test.
-- A two-turn full CLI sample is too slow in the unoptimized debug build and has timed out before the second reply.
+- All 527 generated modules compile. Full executable builds.
+- Runtime unit tests: 9 passed.
+- Latest direct knowledge probe correctly selects `gas-shut-off` for the gas sample after fixing loop-else semantics.
+- Seeded full CLI gas and self-harm cases both return safety replies in Rust. Neither exactly matches Python: Python falls through its failing safety hook. Recorded cases: 2, exact matches: 0. This is not a passing parity suite.
+- Full conversation sample suite is not finished.
+- Release build is not yet verified.
+- No domain initialization failures are reported by current traces, but this is not exhaustive behavior coverage.
+- Runtime is slow: roughly 44-57 seconds per fresh-process safety sample before adding a dynamic regex compilation cache. Cache verification is pending.
+- Full generated code includes finite eager generator approximations, not general lazy Python generators. String/float random seeding is approximate.
+- Some unresolved calls in upstream modules.memory_store remain generator warnings. Their upstream definitions also need investigation before deciding whether these are upstream defects or translation gaps.
 
-Next: fix remaining runtime/initialization differences, enable an optimized build, run the differential sample, and record exact pass counts. The port is not ready for a completion claim.
+Next: verify regex cache, run the differential suite, investigate non-safety differences, build release, and report measured coverage and remaining gaps.

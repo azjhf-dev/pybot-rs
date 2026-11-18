@@ -97,7 +97,14 @@ fn translate_pattern(pat: &str) -> String {
     pat.replace(r"\Z", r"\z")
 }
 
-pub fn compile(pattern: &str, flags: i64) -> Result<Rc<PyPattern>, PyExc> {
+thread_local! { static PATTERN_CACHE: std::cell::RefCell<std::collections::HashMap<(String,i64),Rc<PyPattern>>> = std::cell::RefCell::new(std::collections::HashMap::new()); }
+pub fn compile(pattern:&str,flags:i64)->Result<Rc<PyPattern>,PyExc>{
+ let key=(pattern.to_string(),flags);
+ if let Some(p)=PATTERN_CACHE.with(|c|c.borrow().get(&key).cloned()){return Ok(p);}
+ let p=compile_uncached(pattern,flags)?;
+ PATTERN_CACHE.with(|c|{let mut c=c.borrow_mut();if c.len()>=16384{c.clear();}c.insert(key,p.clone());});Ok(p)
+}
+fn compile_uncached(pattern: &str, flags: i64) -> Result<Rc<PyPattern>, PyExc> {
     let (group_count, group_names) = count_groups(pattern);
     let full = format!("{}{}", flag_prefix(flags), pattern);
     if let Ok(re) = regex::Regex::new(&full) {

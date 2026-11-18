@@ -9,14 +9,35 @@
       "replies": [
         "The gas shut-off is the lever on the pipe beside the meter, usually in a box outside or under the stairs: a quarter turn so the lever sits across the pipe rather than along it turns the gas off. If you can smell gas, do not touch a switch, a light or a phone indoors - open the windows, get everyone out and ring the gas emergency line from outside: 0800 111 999 in England, Scotland and Wales, 0800 002 001 in Northern Ireland, 911 in the US. Only a Gas Safe engineer turns it back on."
       ],
-      "diagnostics": "[module: answers | 1195 ms]\n"
+      "diagnostics": "[module: answers | 1122 ms]\n"
     },
     "rust": {
       "returncode": 0,
       "replies": [
         "Get everyone away from it: put out any flames, don't touch light switches, open the doors and windows, and turn the gas off at the meter if you can reach it. Ring 0800 111 999 (UK) or 911 from outside, and 999 straight away if anyone feels ill."
       ],
-      "diagnostics": "[module: safety | 52294 ms]\n"
+      "diagnostics": "[module: safety | 55989 ms]\n"
+    },
+    "exact": false
+  },
+  {
+    "case": 7,
+    "inputs": [
+      "I want to hurt myself"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "Right. What have you tried for it so far?"
+      ],
+      "diagnostics": "[module: greeting | 1228 ms]\n"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "That sounds unbearable, and you don't have to carry it alone tonight. Ring a crisis line now (116 123 in the UK, 988 in the US) or your local emergency number, and tell one person near you how bad it is so they can stay with you."
+      ],
+      "diagnostics": "[module: safety | 43981 ms]\n"
     },
     "exact": false
   }
