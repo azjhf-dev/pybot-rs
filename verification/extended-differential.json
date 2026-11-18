@@ -1,50 +1,6 @@
 [
   {
     "binary_sha256": "d4cabea0451fe30ff4ca24c455750b4e0d45833b59a77fa13bf5c230bb078a33",
-    "case": 4,
-    "inputs": [
-      "how do I fix a leaking tap"
-    ],
-    "python": {
-      "returncode": 0,
-      "replies": [
-        "A dripping tap is nearly always a worn washer or cartridge: turn the water off at the isolating valve under the sink, take the handle off, and take the old part to a hardware shop to match it. It's a 20-minute job and saves a lot of water."
-      ],
-      "diagnostics": "[module: answers | 1347 ms]\n"
-    },
-    "rust": {
-      "returncode": 0,
-      "replies": [
-        "A dripping tap is nearly always a worn washer or cartridge: turn the water off at the isolating valve under the sink, take the handle off, and take the old part to a hardware shop to match it. It's a 20-minute job and saves a lot of water."
-      ],
-      "diagnostics": "[module: answers | 35731 ms]\n"
-    },
-    "exact": true
-  },
-  {
-    "binary_sha256": "d4cabea0451fe30ff4ca24c455750b4e0d45833b59a77fa13bf5c230bb078a33",
-    "case": 5,
-    "inputs": [
-      "how often should I water a cactus"
-    ],
-    "python": {
-      "returncode": 0,
-      "replies": [
-        "Water a cactus every two to three weeks in summer, and barely at all from November to March. Soak it, let it dry right out, and never leave the pot standing in water: more cacti die of watering than of neglect."
-      ],
-      "diagnostics": "[module: answers | 1395 ms]\n"
-    },
-    "rust": {
-      "returncode": 0,
-      "replies": [
-        "Water a cactus every two to three weeks in summer, and barely at all from November to March. Soak it, let it dry right out, and never leave the pot standing in water: more cacti die of watering than of neglect."
-      ],
-      "diagnostics": "[module: answers | 34370 ms]\n"
-    },
-    "exact": true
-  },
-  {
-    "binary_sha256": "d4cabea0451fe30ff4ca24c455750b4e0d45833b59a77fa13bf5c230bb078a33",
     "case": 6,
     "inputs": [
       "what is the difference between a list and a tuple"
@@ -257,6 +213,54 @@
         "5 miles is about 8 km."
       ],
       "diagnostics": "[module: answers | 33821 ms]\n"
+    },
+    "exact": true
+  },
+  {
+    "binary_sha256": "bf98fc48613880ed03b5c39ce2e1c0769a2ba2ab7ebf72108aa0dbe06a569520",
+    "case": 4,
+    "inputs": [
+      "how do I fix a leaking tap"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "A dripping tap is nearly always a worn washer or cartridge: turn the water off at the isolating valve under the sink, take the handle off, and take the old part to a hardware shop to match it. It's a 20-minute job and saves a lot of water."
+      ],
+      "diagnostics": "[module: answers | 1347 ms]\n",
+      "baseline_reused": true,
+      "source_commit": "7d63c7fbebb44c7e466e5c8b5c1f341ab767929e"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "A dripping tap is nearly always a worn washer or cartridge: turn the water off at the isolating valve under the sink, take the handle off, and take the old part to a hardware shop to match it. It's a 20-minute job and saves a lot of water."
+      ],
+      "diagnostics": "[module: answers | 36565 ms]\n"
+    },
+    "exact": true
+  },
+  {
+    "binary_sha256": "bf98fc48613880ed03b5c39ce2e1c0769a2ba2ab7ebf72108aa0dbe06a569520",
+    "case": 5,
+    "inputs": [
+      "how often should I water a cactus"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "Water a cactus every two to three weeks in summer, and barely at all from November to March. Soak it, let it dry right out, and never leave the pot standing in water: more cacti die of watering than of neglect."
+      ],
+      "diagnostics": "[module: answers | 1395 ms]\n",
+      "baseline_reused": true,
+      "source_commit": "7d63c7fbebb44c7e466e5c8b5c1f341ab767929e"
+    },
+    "rust": {
+      "returncode": 0,
+      "replies": [
+        "Water a cactus every two to three weeks in summer, and barely at all from November to March. Soak it, let it dry right out, and never leave the pot standing in water: more cacti die of watering than of neglect."
+      ],
+      "diagnostics": "[module: answers | 36102 ms]\n"
     },
     "exact": true
   }
