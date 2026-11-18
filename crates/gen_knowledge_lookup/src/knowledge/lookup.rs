@@ -2317,10 +2317,9 @@ pub fn __nested_reply_0(args: &[Py]) -> Py {
     let __pos = &args[..__split];
     let mut female: Py = __pos.get(0).cloned().unwrap_or(Py::None);
     let mut male: Py = __pos.get(1).cloned().unwrap_or(Py::None);
-    let mut reply: Py = __pos.get(2).cloned().unwrap_or(Py::None);
-    let mut template: Py = __pos.get(3).cloned().unwrap_or(Py::None);
-    let mut memory: Py = __pos.get(4).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "memory").map(|(_, v)| v.clone())).unwrap_or(Py::None);
-    let mut reading: Py = __pos.get(5).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "reading").map(|(_, v)| v.clone())).unwrap_or(Py::None);
+    let mut template: Py = __pos.get(2).cloned().unwrap_or(Py::None);
+    let mut memory: Py = __pos.get(3).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "memory").map(|(_, v)| v.clone())).unwrap_or(Py::None);
+    let mut reading: Py = __pos.get(4).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "reading").map(|(_, v)| v.clone())).unwrap_or(Py::None);
     let mut fills: Py = Py::None;
     let mut out: Py = Py::None;
     let mut plural: Py = Py::None;
@@ -2355,7 +2354,7 @@ pub fn __nested_reply_0(args: &[Py]) -> Py {
     return op_add(&mcall(&slice_or_raise(&out.clone(), &Py::None, &Py::Int(1), &Py::None), "upper", &[]), &slice_or_raise(&out.clone(), &Py::Int(1), &Py::None, &Py::None));
     Py::None
 }
-    reply = {{ let female = female.clone(); let male = male.clone(); let reply = reply.clone(); let template = template.clone(); py_func("reply", move |args: &[Py]| { let mut full = vec![female.clone(), male.clone(), reply.clone(), template.clone()]; full.extend_from_slice(args); __nested_reply_0(&full) }) }};
+    reply = {{ let female = female.clone(); let male = male.clone(); let template = template.clone(); py_func("reply", move |args: &[Py]| { let mut full = vec![female.clone(), male.clone(), template.clone()]; full.extend_from_slice(args); __nested_reply_0(&full) }) }};
     return reply.clone();
     Py::None
 }
@@ -2482,14 +2481,13 @@ pub fn __nested_reply_0(args: &[Py]) -> Py {
     for (i, a) in args.iter().enumerate() { if let Py::Kwargs(kws) = a { __split = i; for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } break; } }
     let __pos = &args[..__split];
     let mut noun: Py = __pos.get(0).cloned().unwrap_or(Py::None);
-    let mut reply: Py = __pos.get(1).cloned().unwrap_or(Py::None);
-    let mut table: Py = __pos.get(2).cloned().unwrap_or(Py::None);
-    let mut template: Py = __pos.get(3).cloned().unwrap_or(Py::None);
-    let mut wanted: Py = __pos.get(4).cloned().unwrap_or(Py::None);
-    let mut when_unnamed: Py = __pos.get(5).cloned().unwrap_or(Py::None);
-    let mut word: Py = __pos.get(6).cloned().unwrap_or(Py::None);
-    let mut memory: Py = __pos.get(7).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "memory").map(|(_, v)| v.clone())).unwrap_or(Py::None);
-    let mut reading: Py = __pos.get(8).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "reading").map(|(_, v)| v.clone())).unwrap_or(Py::None);
+    let mut table: Py = __pos.get(1).cloned().unwrap_or(Py::None);
+    let mut template: Py = __pos.get(2).cloned().unwrap_or(Py::None);
+    let mut wanted: Py = __pos.get(3).cloned().unwrap_or(Py::None);
+    let mut when_unnamed: Py = __pos.get(4).cloned().unwrap_or(Py::None);
+    let mut word: Py = __pos.get(5).cloned().unwrap_or(Py::None);
+    let mut memory: Py = __pos.get(6).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "memory").map(|(_, v)| v.clone())).unwrap_or(Py::None);
+    let mut reading: Py = __pos.get(7).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "reading").map(|(_, v)| v.clone())).unwrap_or(Py::None);
     let mut line: Py = Py::None;
     let mut pattern: Py = Py::None;
     line = mcall(&call_builtin("str", &[{ let __b = mcall(&reading.clone(), "get", &[py_str("text")]); if py_truthy(&__b) { __b } else { { let __b = mcall(&reading.clone(), "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { py_str("") } } } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[]);
@@ -2505,7 +2503,7 @@ pub fn __nested_reply_0(args: &[Py]) -> Py {
     return when_unnamed.clone();
     Py::None
 }
-    reply = {{ let noun = noun.clone(); let reply = reply.clone(); let table = table.clone(); let template = template.clone(); let wanted = wanted.clone(); let when_unnamed = when_unnamed.clone(); let word = word.clone(); py_func("reply", move |args: &[Py]| { let mut full = vec![noun.clone(), reply.clone(), table.clone(), template.clone(), wanted.clone(), when_unnamed.clone(), word.clone()]; full.extend_from_slice(args); __nested_reply_0(&full) }) }};
+    reply = {{ let noun = noun.clone(); let table = table.clone(); let template = template.clone(); let wanted = wanted.clone(); let when_unnamed = when_unnamed.clone(); let word = word.clone(); py_func("reply", move |args: &[Py]| { let mut full = vec![noun.clone(), table.clone(), template.clone(), wanted.clone(), when_unnamed.clone(), word.clone()]; full.extend_from_slice(args); __nested_reply_0(&full) }) }};
     return reply.clone();
     Py::None
 }
@@ -3087,13 +3085,12 @@ pub fn __nested_test_0(args: &[Py]) -> Py {
     for (i, a) in args.iter().enumerate() { if let Py::Kwargs(kws) = a { __split = i; for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } break; } }
     let __pos = &args[..__split];
     let mut guards: Py = __pos.get(0).cloned().unwrap_or(Py::None);
-    let mut test: Py = __pos.get(1).cloned().unwrap_or(Py::None);
-    let mut understood: Py = __pos.get(2).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "understood").map(|(_, v)| v.clone())).unwrap_or(Py::None);
+    let mut understood: Py = __pos.get(1).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "understood").map(|(_, v)| v.clone())).unwrap_or(Py::None);
     let mut guard: Py = Py::None;
     return call_builtin("all", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&guards.clone()) { let mut guard: Py = __item.clone(); if py_truthy(&guard.clone()) {  __out.push(call_builtin("bool", &[py_call(&guard, &[understood.clone()])]).unwrap_or_else(|e| exc::raise(e))); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
-    test = {{ let guards = guards.clone(); let test = test.clone(); py_func("test", move |args: &[Py]| { let mut full = vec![guards.clone(), test.clone()]; full.extend_from_slice(args); __nested_test_0(&full) }) }};
+    test = {{ let guards = guards.clone(); py_func("test", move |args: &[Py]| { let mut full = vec![guards.clone()]; full.extend_from_slice(args); __nested_test_0(&full) }) }};
     return test.clone();
     Py::None
 }
@@ -4290,11 +4287,10 @@ pub fn __nested_walk_0(args: &[Py]) -> Py {
     let mut seen: Py = __pos.get(5).cloned().unwrap_or(Py::None);
     let mut spans: Py = __pos.get(6).cloned().unwrap_or(Py::None);
     let mut start: Py = __pos.get(7).cloned().unwrap_or(Py::None);
-    let mut walk: Py = __pos.get(8).cloned().unwrap_or(Py::None);
-    let mut wanted: Py = __pos.get(9).cloned().unwrap_or(Py::None);
-    let mut at: Py = __pos.get(10).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "at").map(|(_, v)| v.clone())).unwrap_or(Py::None);
-    let mut next_word: Py = __pos.get(11).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "next_word").map(|(_, v)| v.clone())).unwrap_or(Py::None);
-    let mut span: Py = __pos.get(12).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "span").map(|(_, v)| v.clone())).unwrap_or(Py::None);
+    let mut wanted: Py = __pos.get(8).cloned().unwrap_or(Py::None);
+    let mut at: Py = __pos.get(9).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "at").map(|(_, v)| v.clone())).unwrap_or(Py::None);
+    let mut next_word: Py = __pos.get(10).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "next_word").map(|(_, v)| v.clone())).unwrap_or(Py::None);
+    let mut span: Py = __pos.get(11).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "span").map(|(_, v)| v.clone())).unwrap_or(Py::None);
     let mut gaps: Py = Py::None;
     if py_truthy(&Py::Bool(py_eq(&next_word.clone(), &call_builtin("len", &[wanted.clone()]).unwrap_or_else(|e| exc::raise(e))))) {
     return call_builtin("tuple", &[span.clone()]).unwrap_or_else(|e| exc::raise(e));
@@ -4302,7 +4298,7 @@ pub fn __nested_walk_0(args: &[Py]) -> Py {
     gaps = Py::Int(0);
     while py_truthy(&{ let __b = op_lt(&at.clone(), &call_builtin("len", &[forms.clone()]).unwrap_or_else(|e| exc::raise(e))); if !py_truthy(&__b) { __b } else { op_le(&gaps.clone(), &g__A_BREATH()) } }) {
     if py_truthy(&op_bitand(&geti(&forms.clone(), &at.clone()), &geti(&wanted.clone(), &next_word.clone()))) {
-    got = py_call(&walk, &[op_add(&at.clone(), &Py::Int(1)), op_add(&next_word.clone(), &Py::Int(1)), op_add(&span.clone(), &py_list(vec![at.clone()]))]);
+    got = { let mut full = vec![answer.clone(), forms.clone(), got.clone(), key.clone(), phrase.clone(), seen.clone(), spans.clone(), start.clone(), wanted.clone()]; full.extend_from_slice(&[op_add(&at.clone(), &Py::Int(1)), op_add(&next_word.clone(), &Py::Int(1)), op_add(&span.clone(), &py_list(vec![at.clone()]))]); __nested_walk_0(&full) };
     if py_truthy(&got.clone()) {
     return got.clone();
     }
@@ -4318,7 +4314,7 @@ pub fn __nested_walk_0(args: &[Py]) -> Py {
     return py_tuple(vec![]);
     Py::None
 }
-    walk = {{ let answer = answer.clone(); let forms = forms.clone(); let got = got.clone(); let key = key.clone(); let phrase = phrase.clone(); let seen = seen.clone(); let spans = spans.clone(); let start = start.clone(); let walk = walk.clone(); let wanted = wanted.clone(); py_func("walk", move |args: &[Py]| { let mut full = vec![answer.clone(), forms.clone(), got.clone(), key.clone(), phrase.clone(), seen.clone(), spans.clone(), start.clone(), walk.clone(), wanted.clone()]; full.extend_from_slice(args); __nested_walk_0(&full) }) }};
+    walk = {{ let answer = answer.clone(); let forms = forms.clone(); let got = got.clone(); let key = key.clone(); let phrase = phrase.clone(); let seen = seen.clone(); let spans = spans.clone(); let start = start.clone(); let wanted = wanted.clone(); py_func("walk", move |args: &[Py]| { let mut full = vec![answer.clone(), forms.clone(), got.clone(), key.clone(), phrase.clone(), seen.clone(), spans.clone(), start.clone(), wanted.clone()]; full.extend_from_slice(args); __nested_walk_0(&full) }) }};
     answer = py_tuple(vec![]);
     let __iter2 = py_iter_or_raise(&call_builtin("range", &[call_builtin("len", &[forms.clone()]).unwrap_or_else(|e| exc::raise(e))]).unwrap_or_else(|e| exc::raise(e)));
     for __item in __iter2 {
@@ -8785,19 +8781,18 @@ pub fn __nested__names_itself_1(args: &[Py]) -> Py {
     let mut __split = __pos.len();
     for (i, a) in args.iter().enumerate() { if let Py::Kwargs(kws) = a { __split = i; for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } break; } }
     let __pos = &args[..__split];
-    let mut _names_itself: Py = __pos.get(0).cloned().unwrap_or(Py::None);
-    let mut allowed: Py = __pos.get(1).cloned().unwrap_or(Py::None);
-    let mut alternatives: Py = __pos.get(2).cloned().unwrap_or(Py::None);
-    let mut entries: Py = __pos.get(3).cloned().unwrap_or(Py::None);
-    let mut found: Py = __pos.get(4).cloned().unwrap_or(Py::None);
-    let mut item: Py = __pos.get(5).cloned().unwrap_or(Py::None);
-    let mut key: Py = __pos.get(6).cloned().unwrap_or(Py::None);
-    let mut part: Py = __pos.get(7).cloned().unwrap_or(Py::None);
-    let mut phrase: Py = __pos.get(8).cloned().unwrap_or(Py::None);
-    let mut reject: Py = __pos.get(9).cloned().unwrap_or(Py::None);
-    let mut said: Py = __pos.get(10).cloned().unwrap_or(Py::None);
-    let mut typed: Py = __pos.get(11).cloned().unwrap_or(Py::None);
-    let mut item: Py = __pos.get(12).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "item").map(|(_, v)| v.clone())).unwrap_or(Py::None);
+    let mut allowed: Py = __pos.get(0).cloned().unwrap_or(Py::None);
+    let mut alternatives: Py = __pos.get(1).cloned().unwrap_or(Py::None);
+    let mut entries: Py = __pos.get(2).cloned().unwrap_or(Py::None);
+    let mut found: Py = __pos.get(3).cloned().unwrap_or(Py::None);
+    let mut item: Py = __pos.get(4).cloned().unwrap_or(Py::None);
+    let mut key: Py = __pos.get(5).cloned().unwrap_or(Py::None);
+    let mut part: Py = __pos.get(6).cloned().unwrap_or(Py::None);
+    let mut phrase: Py = __pos.get(7).cloned().unwrap_or(Py::None);
+    let mut reject: Py = __pos.get(8).cloned().unwrap_or(Py::None);
+    let mut said: Py = __pos.get(9).cloned().unwrap_or(Py::None);
+    let mut typed: Py = __pos.get(10).cloned().unwrap_or(Py::None);
+    let mut item: Py = __pos.get(11).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "item").map(|(_, v)| v.clone())).unwrap_or(Py::None);
     let mut name: Py = Py::None;
     let mut reply: Py = Py::None;
     name = if py_truthy(&gattr(&item.clone(), "key")) { geti(&geti(&gattr(&item.clone(), "key"), &Py::Int(0)), &Py::Int(0)) } else { py_str("") };
@@ -8805,7 +8800,7 @@ pub fn __nested__names_itself_1(args: &[Py]) -> Py {
     return if py_truthy(&{ let __b = call_builtin("isinstance", &[name.clone(), py_func("str", |args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e)); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&reply.clone(), &mcall(&name.clone(), "lower", &[]))) } }) { Py::Int(0) } else { Py::Int(1) };
     Py::None
 }
-    _names_itself = {{ let _names_itself = _names_itself.clone(); let allowed = allowed.clone(); let alternatives = alternatives.clone(); let entries = entries.clone(); let found = found.clone(); let item = item.clone(); let key = key.clone(); let part = part.clone(); let phrase = phrase.clone(); let reject = reject.clone(); let said = said.clone(); let typed = typed.clone(); py_func("_names_itself", move |args: &[Py]| { let mut full = vec![_names_itself.clone(), allowed.clone(), alternatives.clone(), entries.clone(), found.clone(), item.clone(), key.clone(), part.clone(), phrase.clone(), reject.clone(), said.clone(), typed.clone()]; full.extend_from_slice(args); __nested__names_itself_1(&full) }) }};
+    _names_itself = {{ let allowed = allowed.clone(); let alternatives = alternatives.clone(); let entries = entries.clone(); let found = found.clone(); let item = item.clone(); let key = key.clone(); let part = part.clone(); let phrase = phrase.clone(); let reject = reject.clone(); let said = said.clone(); let typed = typed.clone(); py_func("_names_itself", move |args: &[Py]| { let mut full = vec![allowed.clone(), alternatives.clone(), entries.clone(), found.clone(), item.clone(), key.clone(), part.clone(), phrase.clone(), reject.clone(), said.clone(), typed.clone()]; full.extend_from_slice(args); __nested__names_itself_1(&full) }) }};
     return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(found.clone()); __kws.extend(vec![("key".to_string(), _names_itself.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| call_builtin("min", args).unwrap_or_else(|e| exc::raise(e)))(&__args) };
     Py::None
 }
@@ -9944,10 +9939,9 @@ pub fn __nested_collect_0(args: &[Py]) -> Py {
     let mut __split = __pos.len();
     for (i, a) in args.iter().enumerate() { if let Py::Kwargs(kws) = a { __split = i; for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } break; } }
     let __pos = &args[..__split];
-    let mut collect: Py = __pos.get(0).cloned().unwrap_or(Py::None);
-    let mut item: Py = __pos.get(1).cloned().unwrap_or(Py::None);
-    let mut words: Py = __pos.get(2).cloned().unwrap_or(Py::None);
-    let mut part: Py = __pos.get(3).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "part").map(|(_, v)| v.clone())).unwrap_or(Py::None);
+    let mut item: Py = __pos.get(0).cloned().unwrap_or(Py::None);
+    let mut words: Py = __pos.get(1).cloned().unwrap_or(Py::None);
+    let mut part: Py = __pos.get(2).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "part").map(|(_, v)| v.clone())).unwrap_or(Py::None);
     let mut inner: Py = Py::None;
     if py_truthy(&call_builtin("isinstance", &[part.clone(), py_func("str", |args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) {
     let _ = mcall(&words.clone(), "update", &[mcall(&mcall(&part.clone(), "lower", &[]), "split", &[])]);
@@ -9956,13 +9950,13 @@ pub fn __nested_collect_0(args: &[Py]) -> Py {
     let __iter1 = py_iter_or_raise(&part.clone());
     for __item in __iter1 {
     inner = __item.clone();
-    let _ = py_call(&collect, &[inner.clone()]);
+    let _ = { let mut full = vec![item.clone(), words.clone()]; full.extend_from_slice(&[inner.clone()]); __nested_collect_0(&full) };
     }
     }
     }
     Py::None
 }
-    collect = {{ let collect = collect.clone(); let item = item.clone(); let words = words.clone(); py_func("collect", move |args: &[Py]| { let mut full = vec![collect.clone(), item.clone(), words.clone()]; full.extend_from_slice(args); __nested_collect_0(&full) }) }};
+    collect = {{ let item = item.clone(); let words = words.clone(); py_func("collect", move |args: &[Py]| { let mut full = vec![item.clone(), words.clone()]; full.extend_from_slice(args); __nested_collect_0(&full) }) }};
     let _ = py_call(&collect, &[{ let __b = call_builtin("getattr", &[item.clone(), py_str("key"), py_tuple(vec![])]).unwrap_or_else(|e| exc::raise(e)); if py_truthy(&__b) { __b } else { py_tuple(vec![]) } }]);
     return call_builtin("bool", &[mcall(&g__KEEPING_WORDS(), "intersection", &[words.clone()])]).unwrap_or_else(|e| exc::raise(e));
     Py::None
@@ -10426,22 +10420,21 @@ pub fn __nested_rank_0(args: &[Py]) -> Py {
     let mut kept: Py = __pos.get(22).cloned().unwrap_or(Py::None);
     let mut line_parts: Py = __pos.get(23).cloned().unwrap_or(Py::None);
     let mut plain: Py = __pos.get(24).cloned().unwrap_or(Py::None);
-    let mut rank: Py = __pos.get(25).cloned().unwrap_or(Py::None);
-    let mut ranked_items: Py = __pos.get(26).cloned().unwrap_or(Py::None);
-    let mut reject: Py = __pos.get(27).cloned().unwrap_or(Py::None);
-    let mut row: Py = __pos.get(28).cloned().unwrap_or(Py::None);
-    let mut says_ask: Py = __pos.get(29).cloned().unwrap_or(Py::None);
-    let mut says_scene: Py = __pos.get(30).cloned().unwrap_or(Py::None);
-    let mut scene: Py = __pos.get(31).cloned().unwrap_or(Py::None);
-    let mut scene_only: Py = __pos.get(32).cloned().unwrap_or(Py::None);
-    let mut turned_down: Py = __pos.get(33).cloned().unwrap_or(Py::None);
-    let mut typed: Py = __pos.get(34).cloned().unwrap_or(Py::None);
-    let mut understood: Py = __pos.get(35).cloned().unwrap_or(Py::None);
-    let mut v: Py = __pos.get(36).cloned().unwrap_or(Py::None);
-    let mut whole_line_first: Py = __pos.get(37).cloned().unwrap_or(Py::None);
-    let mut words: Py = __pos.get(38).cloned().unwrap_or(Py::None);
-    let mut reading: Py = __pos.get(39).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "reading").map(|(_, v)| v.clone())).unwrap_or(Py::None);
-    let mut filter_keeping: Py = __pos.get(40).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "filter_keeping").map(|(_, v)| v.clone())).unwrap_or(Py::None);
+    let mut ranked_items: Py = __pos.get(25).cloned().unwrap_or(Py::None);
+    let mut reject: Py = __pos.get(26).cloned().unwrap_or(Py::None);
+    let mut row: Py = __pos.get(27).cloned().unwrap_or(Py::None);
+    let mut says_ask: Py = __pos.get(28).cloned().unwrap_or(Py::None);
+    let mut says_scene: Py = __pos.get(29).cloned().unwrap_or(Py::None);
+    let mut scene: Py = __pos.get(30).cloned().unwrap_or(Py::None);
+    let mut scene_only: Py = __pos.get(31).cloned().unwrap_or(Py::None);
+    let mut turned_down: Py = __pos.get(32).cloned().unwrap_or(Py::None);
+    let mut typed: Py = __pos.get(33).cloned().unwrap_or(Py::None);
+    let mut understood: Py = __pos.get(34).cloned().unwrap_or(Py::None);
+    let mut v: Py = __pos.get(35).cloned().unwrap_or(Py::None);
+    let mut whole_line_first: Py = __pos.get(36).cloned().unwrap_or(Py::None);
+    let mut words: Py = __pos.get(37).cloned().unwrap_or(Py::None);
+    let mut reading: Py = __pos.get(38).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "reading").map(|(_, v)| v.clone())).unwrap_or(Py::None);
+    let mut filter_keeping: Py = __pos.get(39).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "filter_keeping").map(|(_, v)| v.clone())).unwrap_or(Py::None);
     let mut named: Py = Py::None;
     let mut plain_rows: Py = Py::None;
     let mut reached: Py = Py::None;
@@ -10482,24 +10475,22 @@ pub fn __nested_stands_down_0(args: &[Py]) -> Py {
     let mut named: Py = __pos.get(25).cloned().unwrap_or(Py::None);
     let mut plain: Py = __pos.get(26).cloned().unwrap_or(Py::None);
     let mut plain_rows: Py = __pos.get(27).cloned().unwrap_or(Py::None);
-    let mut rank: Py = __pos.get(28).cloned().unwrap_or(Py::None);
-    let mut ranked_items: Py = __pos.get(29).cloned().unwrap_or(Py::None);
-    let mut reached: Py = __pos.get(30).cloned().unwrap_or(Py::None);
-    let mut reading: Py = __pos.get(31).cloned().unwrap_or(Py::None);
-    let mut reject: Py = __pos.get(32).cloned().unwrap_or(Py::None);
-    let mut row: Py = __pos.get(33).cloned().unwrap_or(Py::None);
-    let mut says_ask: Py = __pos.get(34).cloned().unwrap_or(Py::None);
-    let mut says_scene: Py = __pos.get(35).cloned().unwrap_or(Py::None);
-    let mut scene: Py = __pos.get(36).cloned().unwrap_or(Py::None);
-    let mut scene_only: Py = __pos.get(37).cloned().unwrap_or(Py::None);
-    let mut stands_down: Py = __pos.get(38).cloned().unwrap_or(Py::None);
-    let mut turned_down: Py = __pos.get(39).cloned().unwrap_or(Py::None);
-    let mut typed: Py = __pos.get(40).cloned().unwrap_or(Py::None);
-    let mut understood: Py = __pos.get(41).cloned().unwrap_or(Py::None);
-    let mut v: Py = __pos.get(42).cloned().unwrap_or(Py::None);
-    let mut whole_line_first: Py = __pos.get(43).cloned().unwrap_or(Py::None);
-    let mut words: Py = __pos.get(44).cloned().unwrap_or(Py::None);
-    let mut item: Py = __pos.get(45).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "item").map(|(_, v)| v.clone())).unwrap_or(Py::None);
+    let mut ranked_items: Py = __pos.get(28).cloned().unwrap_or(Py::None);
+    let mut reached: Py = __pos.get(29).cloned().unwrap_or(Py::None);
+    let mut reading: Py = __pos.get(30).cloned().unwrap_or(Py::None);
+    let mut reject: Py = __pos.get(31).cloned().unwrap_or(Py::None);
+    let mut row: Py = __pos.get(32).cloned().unwrap_or(Py::None);
+    let mut says_ask: Py = __pos.get(33).cloned().unwrap_or(Py::None);
+    let mut says_scene: Py = __pos.get(34).cloned().unwrap_or(Py::None);
+    let mut scene: Py = __pos.get(35).cloned().unwrap_or(Py::None);
+    let mut scene_only: Py = __pos.get(36).cloned().unwrap_or(Py::None);
+    let mut turned_down: Py = __pos.get(37).cloned().unwrap_or(Py::None);
+    let mut typed: Py = __pos.get(38).cloned().unwrap_or(Py::None);
+    let mut understood: Py = __pos.get(39).cloned().unwrap_or(Py::None);
+    let mut v: Py = __pos.get(40).cloned().unwrap_or(Py::None);
+    let mut whole_line_first: Py = __pos.get(41).cloned().unwrap_or(Py::None);
+    let mut words: Py = __pos.get(42).cloned().unwrap_or(Py::None);
+    let mut item: Py = __pos.get(43).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "item").map(|(_, v)| v.clone())).unwrap_or(Py::None);
     if py_truthy(&Py::Bool(!py_truthy(&guard_passes(&[item.clone(), reading.clone()])))) {
     return Py::Bool(true);
     }
@@ -10515,7 +10506,7 @@ pub fn __nested_stands_down_0(args: &[Py]) -> Py {
     return _another_part(&[item.clone(), line_parts.clone()]);
     Py::None
 }
-    stands_down = {{ let _asked = _asked.clone(); let _keys = _keys.clone(); let _named = _named.clone(); let _on_ask = _on_ask.clone(); let _plans = _plans.clone(); let _ranked = _ranked.clone(); let aged_a_thing = aged_a_thing.clone(); let ask_names = ask_names.clone(); let ask_said = ask_said.clone(); let ask_thing = ask_thing.clone(); let by_domain = by_domain.clone(); let carried = carried.clone(); let clean = clean.clone(); let cold_place = cold_place.clone(); let degrees_are_heat = degrees_are_heat.clone(); let entries = entries.clone(); let every = every.clone(); let filter_keeping = filter_keeping.clone(); let forms = forms.clone(); let framed = framed.clone(); let item = item.clone(); let k = k.clone(); let keeping_question = keeping_question.clone(); let kept = kept.clone(); let line_parts = line_parts.clone(); let named = named.clone(); let plain = plain.clone(); let plain_rows = plain_rows.clone(); let rank = rank.clone(); let ranked_items = ranked_items.clone(); let reached = reached.clone(); let reading = reading.clone(); let reject = reject.clone(); let row = row.clone(); let says_ask = says_ask.clone(); let says_scene = says_scene.clone(); let scene = scene.clone(); let scene_only = scene_only.clone(); let stands_down = stands_down.clone(); let turned_down = turned_down.clone(); let typed = typed.clone(); let understood = understood.clone(); let v = v.clone(); let whole_line_first = whole_line_first.clone(); let words = words.clone(); py_func("stands_down", move |args: &[Py]| { let mut full = vec![_asked.clone(), _keys.clone(), _named.clone(), _on_ask.clone(), _plans.clone(), _ranked.clone(), aged_a_thing.clone(), ask_names.clone(), ask_said.clone(), ask_thing.clone(), by_domain.clone(), carried.clone(), clean.clone(), cold_place.clone(), degrees_are_heat.clone(), entries.clone(), every.clone(), filter_keeping.clone(), forms.clone(), framed.clone(), item.clone(), k.clone(), keeping_question.clone(), kept.clone(), line_parts.clone(), named.clone(), plain.clone(), plain_rows.clone(), rank.clone(), ranked_items.clone(), reached.clone(), reading.clone(), reject.clone(), row.clone(), says_ask.clone(), says_scene.clone(), scene.clone(), scene_only.clone(), stands_down.clone(), turned_down.clone(), typed.clone(), understood.clone(), v.clone(), whole_line_first.clone(), words.clone()]; full.extend_from_slice(args); __nested_stands_down_0(&full) }) }};
+    stands_down = {{ let _asked = _asked.clone(); let _keys = _keys.clone(); let _named = _named.clone(); let _on_ask = _on_ask.clone(); let _plans = _plans.clone(); let _ranked = _ranked.clone(); let aged_a_thing = aged_a_thing.clone(); let ask_names = ask_names.clone(); let ask_said = ask_said.clone(); let ask_thing = ask_thing.clone(); let by_domain = by_domain.clone(); let carried = carried.clone(); let clean = clean.clone(); let cold_place = cold_place.clone(); let degrees_are_heat = degrees_are_heat.clone(); let entries = entries.clone(); let every = every.clone(); let filter_keeping = filter_keeping.clone(); let forms = forms.clone(); let framed = framed.clone(); let item = item.clone(); let k = k.clone(); let keeping_question = keeping_question.clone(); let kept = kept.clone(); let line_parts = line_parts.clone(); let named = named.clone(); let plain = plain.clone(); let plain_rows = plain_rows.clone(); let ranked_items = ranked_items.clone(); let reached = reached.clone(); let reading = reading.clone(); let reject = reject.clone(); let row = row.clone(); let says_ask = says_ask.clone(); let says_scene = says_scene.clone(); let scene = scene.clone(); let scene_only = scene_only.clone(); let turned_down = turned_down.clone(); let typed = typed.clone(); let understood = understood.clone(); let v = v.clone(); let whole_line_first = whole_line_first.clone(); let words = words.clone(); py_func("stands_down", move |args: &[Py]| { let mut full = vec![_asked.clone(), _keys.clone(), _named.clone(), _on_ask.clone(), _plans.clone(), _ranked.clone(), aged_a_thing.clone(), ask_names.clone(), ask_said.clone(), ask_thing.clone(), by_domain.clone(), carried.clone(), clean.clone(), cold_place.clone(), degrees_are_heat.clone(), entries.clone(), every.clone(), filter_keeping.clone(), forms.clone(), framed.clone(), item.clone(), k.clone(), keeping_question.clone(), kept.clone(), line_parts.clone(), named.clone(), plain.clone(), plain_rows.clone(), ranked_items.clone(), reached.clone(), reading.clone(), reject.clone(), row.clone(), says_ask.clone(), says_scene.clone(), scene.clone(), scene_only.clone(), turned_down.clone(), typed.clone(), understood.clone(), v.clone(), whole_line_first.clone(), words.clone()]; full.extend_from_slice(args); __nested_stands_down_0(&full) }) }};
     named = _named_things(&[reading.clone()]);
     reached = { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(forms.clone()); __args.push(typed.clone()); __args.push(entries.clone()); __args.push(by_domain.clone()); __args.push(every.clone()); __args.push(named.clone()); __kws.extend(vec![("stands_down".to_string(), stands_down.clone()), ("framed".to_string(), framed.clone()), ("ask_names".to_string(), ask_names.clone()), ("ask_said".to_string(), ask_said.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| _line_rows(args))(&__args) };
     plain_rows = Py::None;
@@ -10531,7 +10522,7 @@ pub fn __nested_stands_down_0(args: &[Py]) -> Py {
     return py_tuple(vec![reached.clone(), plain_rows.clone()]);
     Py::None
 }
-    rank = {{ let _asked = _asked.clone(); let _keys = _keys.clone(); let _named = _named.clone(); let _on_ask = _on_ask.clone(); let _plans = _plans.clone(); let _ranked = _ranked.clone(); let aged_a_thing = aged_a_thing.clone(); let ask_names = ask_names.clone(); let ask_said = ask_said.clone(); let ask_thing = ask_thing.clone(); let by_domain = by_domain.clone(); let carried = carried.clone(); let clean = clean.clone(); let cold_place = cold_place.clone(); let degrees_are_heat = degrees_are_heat.clone(); let entries = entries.clone(); let every = every.clone(); let forms = forms.clone(); let framed = framed.clone(); let item = item.clone(); let k = k.clone(); let keeping_question = keeping_question.clone(); let kept = kept.clone(); let line_parts = line_parts.clone(); let plain = plain.clone(); let rank = rank.clone(); let ranked_items = ranked_items.clone(); let reject = reject.clone(); let row = row.clone(); let says_ask = says_ask.clone(); let says_scene = says_scene.clone(); let scene = scene.clone(); let scene_only = scene_only.clone(); let turned_down = turned_down.clone(); let typed = typed.clone(); let understood = understood.clone(); let v = v.clone(); let whole_line_first = whole_line_first.clone(); let words = words.clone(); py_func("rank", move |args: &[Py]| { let mut full = vec![_asked.clone(), _keys.clone(), _named.clone(), _on_ask.clone(), _plans.clone(), _ranked.clone(), aged_a_thing.clone(), ask_names.clone(), ask_said.clone(), ask_thing.clone(), by_domain.clone(), carried.clone(), clean.clone(), cold_place.clone(), degrees_are_heat.clone(), entries.clone(), every.clone(), forms.clone(), framed.clone(), item.clone(), k.clone(), keeping_question.clone(), kept.clone(), line_parts.clone(), plain.clone(), rank.clone(), ranked_items.clone(), reject.clone(), row.clone(), says_ask.clone(), says_scene.clone(), scene.clone(), scene_only.clone(), turned_down.clone(), typed.clone(), understood.clone(), v.clone(), whole_line_first.clone(), words.clone()]; full.extend_from_slice(args); __nested_rank_0(&full) }) }};
+    rank = {{ let _asked = _asked.clone(); let _keys = _keys.clone(); let _named = _named.clone(); let _on_ask = _on_ask.clone(); let _plans = _plans.clone(); let _ranked = _ranked.clone(); let aged_a_thing = aged_a_thing.clone(); let ask_names = ask_names.clone(); let ask_said = ask_said.clone(); let ask_thing = ask_thing.clone(); let by_domain = by_domain.clone(); let carried = carried.clone(); let clean = clean.clone(); let cold_place = cold_place.clone(); let degrees_are_heat = degrees_are_heat.clone(); let entries = entries.clone(); let every = every.clone(); let forms = forms.clone(); let framed = framed.clone(); let item = item.clone(); let k = k.clone(); let keeping_question = keeping_question.clone(); let kept = kept.clone(); let line_parts = line_parts.clone(); let plain = plain.clone(); let ranked_items = ranked_items.clone(); let reject = reject.clone(); let row = row.clone(); let says_ask = says_ask.clone(); let says_scene = says_scene.clone(); let scene = scene.clone(); let scene_only = scene_only.clone(); let turned_down = turned_down.clone(); let typed = typed.clone(); let understood = understood.clone(); let v = v.clone(); let whole_line_first = whole_line_first.clone(); let words = words.clone(); py_func("rank", move |args: &[Py]| { let mut full = vec![_asked.clone(), _keys.clone(), _named.clone(), _on_ask.clone(), _plans.clone(), _ranked.clone(), aged_a_thing.clone(), ask_names.clone(), ask_said.clone(), ask_thing.clone(), by_domain.clone(), carried.clone(), clean.clone(), cold_place.clone(), degrees_are_heat.clone(), entries.clone(), every.clone(), forms.clone(), framed.clone(), item.clone(), k.clone(), keeping_question.clone(), kept.clone(), line_parts.clone(), plain.clone(), ranked_items.clone(), reject.clone(), row.clone(), says_ask.clone(), says_scene.clone(), scene.clone(), scene_only.clone(), turned_down.clone(), typed.clone(), understood.clone(), v.clone(), whole_line_first.clone(), words.clone()]; full.extend_from_slice(args); __nested_rank_0(&full) }) }};
     let __unpk2 = py_unpack(&py_call(&rank, &[understood.clone(), keeping_question.clone()]), 2, None);
     ranked_items = __unpk2[0].clone();
     plain = __unpk2[1].clone();

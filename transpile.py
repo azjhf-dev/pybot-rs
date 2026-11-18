@@ -894,7 +894,7 @@ class Gen:
 
     def gen_nested_fn(self, node, ctx):
         rname = rust_ident(node.name)
-        captures = sorted(ctx.locals | set(ctx.params))
+        captures = sorted((ctx.locals | set(ctx.params)) - {node.name})
         cap_args = ', '.join(rust_ident(c) + ".clone()" for c in captures)
         cap_names = ', '.join(rust_ident(c) for c in captures)
         # closure calling a generated top-level fn with captures prepended
@@ -909,6 +909,7 @@ class Gen:
         inner_ctx.locals = locals_
         inner_ctx.global_names = globals_declared
         inner_ctx.generator = is_generator(node)
+        inner_ctx.self_recursive = (node.name, hidden, captures)
         self.emit(f"pub fn {hidden}(args: &[Py]) -> Py {{")
         self.emit("    ensure_init();")
         self.emit("    let mut __pos: Vec<Py> = args.to_vec();")
@@ -1365,6 +1366,11 @@ class Gen:
                 modname, item = self.info.unknown[name]
                 return self.call_with_args(f'|args: &[Py]| stdlib_call({rust_string(modname)}, {rust_string(item)}, args).unwrap_or_else(|e| exc::raise(e))',
                                            args, kwargs, has_star, ctx, node)
+            recursive = getattr(ctx, 'self_recursive', None)
+            if recursive and name == recursive[0]:
+                initial = ', '.join(rust_ident(c) + '.clone()' for c in recursive[2])
+                callee = f'|args: &[Py]| {{ let mut full = vec![{initial}]; full.extend_from_slice(args); {recursive[1]}(&full) }}'
+                return self.call_with_args(callee, args, kwargs, has_star, ctx, node)
             if ctx.kind == 'fn':
                 c = ctx
                 is_local = False

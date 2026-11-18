@@ -6085,33 +6085,32 @@ pub fn __nested__it_says_it_is_not_1(args: &[Py]) -> Py {
     let mut __split = __pos.len();
     for (i, a) in args.iter().enumerate() { if let Py::Kwargs(kws) = a { __split = i; for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } break; } }
     let __pos = &args[..__split];
-    let mut _it_says_it_is_not: Py = __pos.get(0).cloned().unwrap_or(Py::None);
-    let mut about: Py = __pos.get(1).cloned().unwrap_or(Py::None);
-    let mut about_text: Py = __pos.get(2).cloned().unwrap_or(Py::None);
-    let mut ask_side: Py = __pos.get(3).cloned().unwrap_or(Py::None);
-    let mut avoid: Py = __pos.get(4).cloned().unwrap_or(Py::None);
-    let mut carried: Py = __pos.get(5).cloned().unwrap_or(Py::None);
-    let mut hits: Py = __pos.get(6).cloned().unwrap_or(Py::None);
-    let mut item: Py = __pos.get(7).cloned().unwrap_or(Py::None);
-    let mut keyed: Py = __pos.get(8).cloned().unwrap_or(Py::None);
-    let mut lent: Py = __pos.get(9).cloned().unwrap_or(Py::None);
-    let mut line: Py = __pos.get(10).cloned().unwrap_or(Py::None);
-    let mut line_words: Py = __pos.get(11).cloned().unwrap_or(Py::None);
-    let mut memory: Py = __pos.get(12).cloned().unwrap_or(Py::None);
-    let mut named: Py = __pos.get(13).cloned().unwrap_or(Py::None);
-    let mut names_it: Py = __pos.get(14).cloned().unwrap_or(Py::None);
-    let mut other: Py = __pos.get(15).cloned().unwrap_or(Py::None);
-    let mut own: Py = __pos.get(16).cloned().unwrap_or(Py::None);
-    let mut reading: Py = __pos.get(17).cloned().unwrap_or(Py::None);
-    let mut reply: Py = __pos.get(18).cloned().unwrap_or(Py::None);
-    let mut said: Py = __pos.get(19).cloned().unwrap_or(Py::None);
-    let mut says: Py = __pos.get(20).cloned().unwrap_or(Py::None);
-    let mut subject_of_the_topic: Py = __pos.get(21).cloned().unwrap_or(Py::None);
-    let mut topic: Py = __pos.get(22).cloned().unwrap_or(Py::None);
-    let mut topic_text: Py = __pos.get(23).cloned().unwrap_or(Py::None);
-    let mut vague: Py = __pos.get(24).cloned().unwrap_or(Py::None);
-    let mut word: Py = __pos.get(25).cloned().unwrap_or(Py::None);
-    let mut phrase: Py = __pos.get(26).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "phrase").map(|(_, v)| v.clone())).unwrap_or(Py::None);
+    let mut about: Py = __pos.get(0).cloned().unwrap_or(Py::None);
+    let mut about_text: Py = __pos.get(1).cloned().unwrap_or(Py::None);
+    let mut ask_side: Py = __pos.get(2).cloned().unwrap_or(Py::None);
+    let mut avoid: Py = __pos.get(3).cloned().unwrap_or(Py::None);
+    let mut carried: Py = __pos.get(4).cloned().unwrap_or(Py::None);
+    let mut hits: Py = __pos.get(5).cloned().unwrap_or(Py::None);
+    let mut item: Py = __pos.get(6).cloned().unwrap_or(Py::None);
+    let mut keyed: Py = __pos.get(7).cloned().unwrap_or(Py::None);
+    let mut lent: Py = __pos.get(8).cloned().unwrap_or(Py::None);
+    let mut line: Py = __pos.get(9).cloned().unwrap_or(Py::None);
+    let mut line_words: Py = __pos.get(10).cloned().unwrap_or(Py::None);
+    let mut memory: Py = __pos.get(11).cloned().unwrap_or(Py::None);
+    let mut named: Py = __pos.get(12).cloned().unwrap_or(Py::None);
+    let mut names_it: Py = __pos.get(13).cloned().unwrap_or(Py::None);
+    let mut other: Py = __pos.get(14).cloned().unwrap_or(Py::None);
+    let mut own: Py = __pos.get(15).cloned().unwrap_or(Py::None);
+    let mut reading: Py = __pos.get(16).cloned().unwrap_or(Py::None);
+    let mut reply: Py = __pos.get(17).cloned().unwrap_or(Py::None);
+    let mut said: Py = __pos.get(18).cloned().unwrap_or(Py::None);
+    let mut says: Py = __pos.get(19).cloned().unwrap_or(Py::None);
+    let mut subject_of_the_topic: Py = __pos.get(20).cloned().unwrap_or(Py::None);
+    let mut topic: Py = __pos.get(21).cloned().unwrap_or(Py::None);
+    let mut topic_text: Py = __pos.get(22).cloned().unwrap_or(Py::None);
+    let mut vague: Py = __pos.get(23).cloned().unwrap_or(Py::None);
+    let mut word: Py = __pos.get(24).cloned().unwrap_or(Py::None);
+    let mut phrase: Py = __pos.get(25).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "phrase").map(|(_, v)| v.clone())).unwrap_or(Py::None);
     let _ = py_str("True when the avoid list names what the topic is: a word of the topic, or a phrase\n        said across the topic's own sentence (\"learn to swim\" is two words of the topic list).\n\n        It is the thing the topic is about that is tested, not the ask it made about it: the\n        topic \"when did the romans leave britain\" is about the Romans in Britain, and \"leave\"\n        is only what was asked there, so it does not make the length of the stay a different\n        subject. The whole of the topic is used when its subject words are not known, which is\n        where the test was before.\n        ");
     phrase = mcall(&mcall(&phrase.clone(), "strip", &[]), "lower", &[]);
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&phrase.clone())); if py_truthy(&__b) { __b } else { Py::Bool(py_contains(&g_FEELINGS(), &phrase.clone())) } }) {
@@ -6120,7 +6119,7 @@ pub fn __nested__it_says_it_is_not_1(args: &[Py]) -> Py {
     return { let __b = Py::Bool(py_contains(&about.clone(), &phrase.clone())); if py_truthy(&__b) { __b } else { { let __b = Py::Bool(py_contains(&phrase.clone(), &py_str(" "))); if !py_truthy(&__b) { __b } else { Py::Bool(py_contains(&about_text.clone(), &phrase.clone())) } } } };
     Py::None
 }
-    _it_says_it_is_not = {{ let _it_says_it_is_not = _it_says_it_is_not.clone(); let about = about.clone(); let about_text = about_text.clone(); let ask_side = ask_side.clone(); let avoid = avoid.clone(); let carried = carried.clone(); let hits = hits.clone(); let item = item.clone(); let keyed = keyed.clone(); let lent = lent.clone(); let line = line.clone(); let line_words = line_words.clone(); let memory = memory.clone(); let named = named.clone(); let names_it = names_it.clone(); let other = other.clone(); let own = own.clone(); let reading = reading.clone(); let reply = reply.clone(); let said = said.clone(); let says = says.clone(); let subject_of_the_topic = subject_of_the_topic.clone(); let topic = topic.clone(); let topic_text = topic_text.clone(); let vague = vague.clone(); let word = word.clone(); py_func("_it_says_it_is_not", move |args: &[Py]| { let mut full = vec![_it_says_it_is_not.clone(), about.clone(), about_text.clone(), ask_side.clone(), avoid.clone(), carried.clone(), hits.clone(), item.clone(), keyed.clone(), lent.clone(), line.clone(), line_words.clone(), memory.clone(), named.clone(), names_it.clone(), other.clone(), own.clone(), reading.clone(), reply.clone(), said.clone(), says.clone(), subject_of_the_topic.clone(), topic.clone(), topic_text.clone(), vague.clone(), word.clone()]; full.extend_from_slice(args); __nested__it_says_it_is_not_1(&full) }) }};
+    _it_says_it_is_not = {{ let about = about.clone(); let about_text = about_text.clone(); let ask_side = ask_side.clone(); let avoid = avoid.clone(); let carried = carried.clone(); let hits = hits.clone(); let item = item.clone(); let keyed = keyed.clone(); let lent = lent.clone(); let line = line.clone(); let line_words = line_words.clone(); let memory = memory.clone(); let named = named.clone(); let names_it = names_it.clone(); let other = other.clone(); let own = own.clone(); let reading = reading.clone(); let reply = reply.clone(); let said = said.clone(); let says = says.clone(); let subject_of_the_topic = subject_of_the_topic.clone(); let topic = topic.clone(); let topic_text = topic_text.clone(); let vague = vague.clone(); let word = word.clone(); py_func("_it_says_it_is_not", move |args: &[Py]| { let mut full = vec![about.clone(), about_text.clone(), ask_side.clone(), avoid.clone(), carried.clone(), hits.clone(), item.clone(), keyed.clone(), lent.clone(), line.clone(), line_words.clone(), memory.clone(), named.clone(), names_it.clone(), other.clone(), own.clone(), reading.clone(), reply.clone(), said.clone(), says.clone(), subject_of_the_topic.clone(), topic.clone(), topic_text.clone(), vague.clone(), word.clone()]; full.extend_from_slice(args); __nested__it_says_it_is_not_1(&full) }) }};
     if py_truthy(&call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&avoid.clone()) { let mut word: Py = __item.clone(); if py_truthy(&call_builtin("isinstance", &[word.clone(), py_func("str", |args: &[Py]| call_builtin("str", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) {  __out.push(py_call(&_it_says_it_is_not, &[word.clone()])); } } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e))) {
     return Py::Bool(false);
     }
@@ -9775,15 +9774,14 @@ pub fn __nested_veto_0(args: &[Py]) -> Py {
     let __pos = &args[..__split];
     let mut reading: Py = __pos.get(0).cloned().unwrap_or(Py::None);
     let mut reject: Py = __pos.get(1).cloned().unwrap_or(Py::None);
-    let mut veto: Py = __pos.get(2).cloned().unwrap_or(Py::None);
-    let mut item: Py = __pos.get(3).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "item").map(|(_, v)| v.clone())).unwrap_or(Py::None);
+    let mut item: Py = __pos.get(2).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "item").map(|(_, v)| v.clone())).unwrap_or(Py::None);
     if py_truthy(&Py::Bool(!py_truthy(&pyrt::xrefs::xcall("knowledge.lookup", "about_the_topic", &[item.clone(), reading.clone()])))) {
     return Py::Bool(true);
     }
     return call_builtin("bool", &[{ let __b = Py::Bool(!py_is(&reject.clone(), &Py::None)); if !py_truthy(&__b) { __b } else { py_call(&reject, &[item.clone()]) } }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
-    veto = {{ let reading = reading.clone(); let reject = reject.clone(); let veto = veto.clone(); py_func("veto", move |args: &[Py]| { let mut full = vec![reading.clone(), reject.clone(), veto.clone()]; full.extend_from_slice(args); __nested_veto_0(&full) }) }};
+    veto = {{ let reading = reading.clone(); let reject = reject.clone(); py_func("veto", move |args: &[Py]| { let mut full = vec![reading.clone(), reject.clone()]; full.extend_from_slice(args); __nested_veto_0(&full) }) }};
     return veto.clone();
     Py::None
 }
@@ -10927,8 +10925,7 @@ pub fn __nested_walk_0(args: &[Py]) -> Py {
     for (i, a) in args.iter().enumerate() { if let Py::Kwargs(kws) = a { __split = i; for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } break; } }
     let __pos = &args[..__split];
     let mut item: Py = __pos.get(0).cloned().unwrap_or(Py::None);
-    let mut walk: Py = __pos.get(1).cloned().unwrap_or(Py::None);
-    let mut node: Py = __pos.get(2).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "node").map(|(_, v)| v.clone())).unwrap_or(Py::None);
+    let mut node: Py = __pos.get(1).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "node").map(|(_, v)| v.clone())).unwrap_or(Py::None);
     let mut child: Py = Py::None;
     let mut children: Py = Py::None;
     let mut out: Py = Py::None;
@@ -10959,12 +10956,12 @@ pub fn __nested_walk_0(args: &[Py]) -> Py {
     let __iter6 = py_iter_or_raise(&children.clone());
     for __item in __iter6 {
     child = __item.clone();
-    let _ = mcall(&out.clone(), "extend", &[py_call(&walk, &[child.clone()])]);
+    let _ = mcall(&out.clone(), "extend", &[{ let mut full = vec![item.clone()]; full.extend_from_slice(&[child.clone()]); __nested_walk_0(&full) }]);
     }
     return out.clone();
     Py::None
 }
-    walk = {{ let item = item.clone(); let walk = walk.clone(); py_func("walk", move |args: &[Py]| { let mut full = vec![item.clone(), walk.clone()]; full.extend_from_slice(args); __nested_walk_0(&full) }) }};
+    walk = {{ let item = item.clone(); py_func("walk", move |args: &[Py]| { let mut full = vec![item.clone()]; full.extend_from_slice(args); __nested_walk_0(&full) }) }};
     return py_call(&walk, &[{ let __b = call_builtin("getattr", &[item.clone(), py_str("key"), Py::None]).unwrap_or_else(|e| exc::raise(e)); if py_truthy(&__b) { __b } else { py_tuple(vec![]) } }]);
     Py::None
 }
@@ -11149,20 +11146,19 @@ pub fn __nested_price_asked_0(args: &[Py]) -> Py {
     let mut memory: Py = __pos.get(7).cloned().unwrap_or(Py::None);
     let mut names_it: Py = __pos.get(8).cloned().unwrap_or(Py::None);
     let mut now: Py = __pos.get(9).cloned().unwrap_or(Py::None);
-    let mut price_asked: Py = __pos.get(10).cloned().unwrap_or(Py::None);
-    let mut reader: Py = __pos.get(11).cloned().unwrap_or(Py::None);
-    let mut reading: Py = __pos.get(12).cloned().unwrap_or(Py::None);
-    let mut refused: Py = __pos.get(13).cloned().unwrap_or(Py::None);
-    let mut reply: Py = __pos.get(14).cloned().unwrap_or(Py::None);
-    let mut text_here: Py = __pos.get(15).cloned().unwrap_or(Py::None);
-    let mut words_declines: Py = __pos.get(16).cloned().unwrap_or(Py::None);
-    let mut words_fallback: Py = __pos.get(17).cloned().unwrap_or(Py::None);
-    let mut words_wanted: Py = __pos.get(18).cloned().unwrap_or(Py::None);
-    let mut held: Py = __pos.get(19).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "held").map(|(_, v)| v.clone())).unwrap_or(Py::None);
+    let mut reader: Py = __pos.get(10).cloned().unwrap_or(Py::None);
+    let mut reading: Py = __pos.get(11).cloned().unwrap_or(Py::None);
+    let mut refused: Py = __pos.get(12).cloned().unwrap_or(Py::None);
+    let mut reply: Py = __pos.get(13).cloned().unwrap_or(Py::None);
+    let mut text_here: Py = __pos.get(14).cloned().unwrap_or(Py::None);
+    let mut words_declines: Py = __pos.get(15).cloned().unwrap_or(Py::None);
+    let mut words_fallback: Py = __pos.get(16).cloned().unwrap_or(Py::None);
+    let mut words_wanted: Py = __pos.get(17).cloned().unwrap_or(Py::None);
+    let mut held: Py = __pos.get(18).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "held").map(|(_, v)| v.clone())).unwrap_or(Py::None);
     return _asks_a_price(&[if py_truthy(&call_builtin("isinstance", &[held.clone(), py_func("dict", |args: &[Py]| call_builtin("dict", args).unwrap_or_else(|e| exc::raise(e)))]).unwrap_or_else(|e| exc::raise(e))) { mcall(&{ let __b = held.clone(); if py_truthy(&__b) { __b } else { py_dict(vec![]) } }, "get", &[py_str("text")]) } else { text_here.clone() }]);
     Py::None
 }
-    price_asked = {{ let declined = declined.clone(); let fallback = fallback.clone(); let got = got.clone(); let held = held.clone(); let here = here.clone(); let item = item.clone(); let kept = kept.clone(); let memory = memory.clone(); let names_it = names_it.clone(); let now = now.clone(); let price_asked = price_asked.clone(); let reader = reader.clone(); let reading = reading.clone(); let refused = refused.clone(); let reply = reply.clone(); let text_here = text_here.clone(); let words_declines = words_declines.clone(); let words_fallback = words_fallback.clone(); let words_wanted = words_wanted.clone(); py_func("price_asked", move |args: &[Py]| { let mut full = vec![declined.clone(), fallback.clone(), got.clone(), held.clone(), here.clone(), item.clone(), kept.clone(), memory.clone(), names_it.clone(), now.clone(), price_asked.clone(), reader.clone(), reading.clone(), refused.clone(), reply.clone(), text_here.clone(), words_declines.clone(), words_fallback.clone(), words_wanted.clone()]; full.extend_from_slice(args); __nested_price_asked_0(&full) }) }};
+    price_asked = {{ let declined = declined.clone(); let fallback = fallback.clone(); let got = got.clone(); let held = held.clone(); let here = here.clone(); let item = item.clone(); let kept = kept.clone(); let memory = memory.clone(); let names_it = names_it.clone(); let now = now.clone(); let reader = reader.clone(); let reading = reading.clone(); let refused = refused.clone(); let reply = reply.clone(); let text_here = text_here.clone(); let words_declines = words_declines.clone(); let words_fallback = words_fallback.clone(); let words_wanted = words_wanted.clone(); py_func("price_asked", move |args: &[Py]| { let mut full = vec![declined.clone(), fallback.clone(), got.clone(), held.clone(), here.clone(), item.clone(), kept.clone(), memory.clone(), names_it.clone(), now.clone(), reader.clone(), reading.clone(), refused.clone(), reply.clone(), text_here.clone(), words_declines.clone(), words_fallback.clone(), words_wanted.clone()]; full.extend_from_slice(args); __nested_price_asked_0(&full) }) }};
     declined = call_builtin("set", &[]).unwrap_or_else(|e| exc::raise(e));
     refused = _refused(&[text_here.clone()]);
     fallback = Py::None;
@@ -11301,14 +11297,13 @@ pub fn __nested_keeps_0(args: &[Py]) -> Py {
     for (i, a) in args.iter().enumerate() { if let Py::Kwargs(kws) = a { __split = i; for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } break; } }
     let __pos = &args[..__split];
     let mut in_the_fridge: Py = __pos.get(0).cloned().unwrap_or(Py::None);
-    let mut keeps: Py = __pos.get(1).cloned().unwrap_or(Py::None);
-    let mut memory: Py = __pos.get(2).cloned().unwrap_or(Py::None);
-    let mut own: Py = __pos.get(3).cloned().unwrap_or(Py::None);
-    let mut reader: Py = __pos.get(4).cloned().unwrap_or(Py::None);
-    let mut reading: Py = __pos.get(5).cloned().unwrap_or(Py::None);
-    let mut with_the_thing: Py = __pos.get(6).cloned().unwrap_or(Py::None);
-    let mut of: Py = __pos.get(7).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "of").map(|(_, v)| v.clone())).unwrap_or(Py::None);
-    let mut reject: Py = __pos.get(8).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "reject").map(|(_, v)| v.clone())).unwrap_or(Py::None);
+    let mut memory: Py = __pos.get(1).cloned().unwrap_or(Py::None);
+    let mut own: Py = __pos.get(2).cloned().unwrap_or(Py::None);
+    let mut reader: Py = __pos.get(3).cloned().unwrap_or(Py::None);
+    let mut reading: Py = __pos.get(4).cloned().unwrap_or(Py::None);
+    let mut with_the_thing: Py = __pos.get(5).cloned().unwrap_or(Py::None);
+    let mut of: Py = __pos.get(6).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "of").map(|(_, v)| v.clone())).unwrap_or(Py::None);
+    let mut reject: Py = __pos.get(7).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "reject").map(|(_, v)| v.clone())).unwrap_or(Py::None);
     let mut not_about_keeping: Py = Py::None;
 pub fn __nested_not_about_keeping_0(args: &[Py]) -> Py {
     ensure_init();
@@ -11318,27 +11313,25 @@ pub fn __nested_not_about_keeping_0(args: &[Py]) -> Py {
     for (i, a) in args.iter().enumerate() { if let Py::Kwargs(kws) = a { __split = i; for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } break; } }
     let __pos = &args[..__split];
     let mut in_the_fridge: Py = __pos.get(0).cloned().unwrap_or(Py::None);
-    let mut keeps: Py = __pos.get(1).cloned().unwrap_or(Py::None);
-    let mut memory: Py = __pos.get(2).cloned().unwrap_or(Py::None);
-    let mut not_about_keeping: Py = __pos.get(3).cloned().unwrap_or(Py::None);
-    let mut of: Py = __pos.get(4).cloned().unwrap_or(Py::None);
-    let mut own: Py = __pos.get(5).cloned().unwrap_or(Py::None);
-    let mut reader: Py = __pos.get(6).cloned().unwrap_or(Py::None);
-    let mut reading: Py = __pos.get(7).cloned().unwrap_or(Py::None);
-    let mut reject: Py = __pos.get(8).cloned().unwrap_or(Py::None);
-    let mut with_the_thing: Py = __pos.get(9).cloned().unwrap_or(Py::None);
-    let mut one: Py = __pos.get(10).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "one").map(|(_, v)| v.clone())).unwrap_or(Py::None);
+    let mut memory: Py = __pos.get(1).cloned().unwrap_or(Py::None);
+    let mut of: Py = __pos.get(2).cloned().unwrap_or(Py::None);
+    let mut own: Py = __pos.get(3).cloned().unwrap_or(Py::None);
+    let mut reader: Py = __pos.get(4).cloned().unwrap_or(Py::None);
+    let mut reading: Py = __pos.get(5).cloned().unwrap_or(Py::None);
+    let mut reject: Py = __pos.get(6).cloned().unwrap_or(Py::None);
+    let mut with_the_thing: Py = __pos.get(7).cloned().unwrap_or(Py::None);
+    let mut one: Py = __pos.get(8).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "one").map(|(_, v)| v.clone())).unwrap_or(Py::None);
     if py_truthy(&py_call(&reject, &[one.clone()])) {
     return Py::Bool(true);
     }
     return Py::Bool(!py_truthy(&pyrt::xrefs::xcall("knowledge.cooking", "speaks_of_keeping", &[_payload(&[one.clone(), memory.clone(), of.clone()])])));
     Py::None
 }
-    not_about_keeping = {{ let in_the_fridge = in_the_fridge.clone(); let keeps = keeps.clone(); let memory = memory.clone(); let not_about_keeping = not_about_keeping.clone(); let of = of.clone(); let own = own.clone(); let reader = reader.clone(); let reading = reading.clone(); let reject = reject.clone(); let with_the_thing = with_the_thing.clone(); py_func("not_about_keeping", move |args: &[Py]| { let mut full = vec![in_the_fridge.clone(), keeps.clone(), memory.clone(), not_about_keeping.clone(), of.clone(), own.clone(), reader.clone(), reading.clone(), reject.clone(), with_the_thing.clone()]; full.extend_from_slice(args); __nested_not_about_keeping_0(&full) }) }};
+    not_about_keeping = {{ let in_the_fridge = in_the_fridge.clone(); let memory = memory.clone(); let of = of.clone(); let own = own.clone(); let reader = reader.clone(); let reading = reading.clone(); let reject = reject.clone(); let with_the_thing = with_the_thing.clone(); py_func("not_about_keeping", move |args: &[Py]| { let mut full = vec![in_the_fridge.clone(), memory.clone(), of.clone(), own.clone(), reader.clone(), reading.clone(), reject.clone(), with_the_thing.clone()]; full.extend_from_slice(args); __nested_not_about_keeping_0(&full) }) }};
     return { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(of.clone()); __kws.extend(vec![("reject".to_string(), not_about_keeping.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "find", args))(&__args) };
     Py::None
 }
-    keeps = {{ let in_the_fridge = in_the_fridge.clone(); let keeps = keeps.clone(); let memory = memory.clone(); let own = own.clone(); let reader = reader.clone(); let reading = reading.clone(); let with_the_thing = with_the_thing.clone(); py_func("keeps", move |args: &[Py]| { let mut full = vec![in_the_fridge.clone(), keeps.clone(), memory.clone(), own.clone(), reader.clone(), reading.clone(), with_the_thing.clone()]; full.extend_from_slice(args); __nested_keeps_0(&full) }) }};
+    keeps = {{ let in_the_fridge = in_the_fridge.clone(); let memory = memory.clone(); let own = own.clone(); let reader = reader.clone(); let reading = reading.clone(); let with_the_thing = with_the_thing.clone(); py_func("keeps", move |args: &[Py]| { let mut full = vec![in_the_fridge.clone(), memory.clone(), own.clone(), reader.clone(), reading.clone(), with_the_thing.clone()]; full.extend_from_slice(args); __nested_keeps_0(&full) }) }};
 pub fn __nested_in_the_fridge_1(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = args.to_vec();
@@ -11346,14 +11339,13 @@ pub fn __nested_in_the_fridge_1(args: &[Py]) -> Py {
     let mut __split = __pos.len();
     for (i, a) in args.iter().enumerate() { if let Py::Kwargs(kws) = a { __split = i; for (n, v) in kws.iter() { __kw.push((n.clone(), v.clone())); } break; } }
     let __pos = &args[..__split];
-    let mut in_the_fridge: Py = __pos.get(0).cloned().unwrap_or(Py::None);
-    let mut keeps: Py = __pos.get(1).cloned().unwrap_or(Py::None);
-    let mut memory: Py = __pos.get(2).cloned().unwrap_or(Py::None);
-    let mut own: Py = __pos.get(3).cloned().unwrap_or(Py::None);
-    let mut reader: Py = __pos.get(4).cloned().unwrap_or(Py::None);
-    let mut reading: Py = __pos.get(5).cloned().unwrap_or(Py::None);
-    let mut with_the_thing: Py = __pos.get(6).cloned().unwrap_or(Py::None);
-    let mut of: Py = __pos.get(7).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "of").map(|(_, v)| v.clone())).unwrap_or(Py::None);
+    let mut keeps: Py = __pos.get(0).cloned().unwrap_or(Py::None);
+    let mut memory: Py = __pos.get(1).cloned().unwrap_or(Py::None);
+    let mut own: Py = __pos.get(2).cloned().unwrap_or(Py::None);
+    let mut reader: Py = __pos.get(3).cloned().unwrap_or(Py::None);
+    let mut reading: Py = __pos.get(4).cloned().unwrap_or(Py::None);
+    let mut with_the_thing: Py = __pos.get(5).cloned().unwrap_or(Py::None);
+    let mut of: Py = __pos.get(6).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "of").map(|(_, v)| v.clone())).unwrap_or(Py::None);
     let mut cold: Py = Py::None;
     cold = call_builtin("dict", &[of.clone()]).unwrap_or_else(|e| exc::raise(e));
     let _ = py_setitem(&cold.clone(), &py_str("clean"), op_add(&call_builtin("str", &[{ let __b = mcall(&of.clone(), "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { { let __b = mcall(&of.clone(), "get", &[py_str("text")]); if py_truthy(&__b) { __b } else { py_str("") } } } }]).unwrap_or_else(|e| exc::raise(e)), &py_str(" in the fridge")));
@@ -11361,7 +11353,7 @@ pub fn __nested_in_the_fridge_1(args: &[Py]) -> Py {
     return cold.clone();
     Py::None
 }
-    in_the_fridge = {{ let in_the_fridge = in_the_fridge.clone(); let keeps = keeps.clone(); let memory = memory.clone(); let own = own.clone(); let reader = reader.clone(); let reading = reading.clone(); let with_the_thing = with_the_thing.clone(); py_func("in_the_fridge", move |args: &[Py]| { let mut full = vec![in_the_fridge.clone(), keeps.clone(), memory.clone(), own.clone(), reader.clone(), reading.clone(), with_the_thing.clone()]; full.extend_from_slice(args); __nested_in_the_fridge_1(&full) }) }};
+    in_the_fridge = {{ let keeps = keeps.clone(); let memory = memory.clone(); let own = own.clone(); let reader = reader.clone(); let reading = reading.clone(); let with_the_thing = with_the_thing.clone(); py_func("in_the_fridge", move |args: &[Py]| { let mut full = vec![keeps.clone(), memory.clone(), own.clone(), reader.clone(), reading.clone(), with_the_thing.clone()]; full.extend_from_slice(args); __nested_in_the_fridge_1(&full) }) }};
 pub fn __nested_with_the_thing_2(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = args.to_vec();
@@ -11375,8 +11367,7 @@ pub fn __nested_with_the_thing_2(args: &[Py]) -> Py {
     let mut own: Py = __pos.get(3).cloned().unwrap_or(Py::None);
     let mut reader: Py = __pos.get(4).cloned().unwrap_or(Py::None);
     let mut reading: Py = __pos.get(5).cloned().unwrap_or(Py::None);
-    let mut with_the_thing: Py = __pos.get(6).cloned().unwrap_or(Py::None);
-    let mut of: Py = __pos.get(7).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "of").map(|(_, v)| v.clone())).unwrap_or(Py::None);
+    let mut of: Py = __pos.get(6).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "of").map(|(_, v)| v.clone())).unwrap_or(Py::None);
     let mut fuller: Py = Py::None;
     let mut said: Py = Py::None;
     said = call_builtin("str", &[{ let __b = mcall(&of.clone(), "get", &[py_str("text")]); if py_truthy(&__b) { __b } else { { let __b = mcall(&of.clone(), "get", &[py_str("clean")]); if py_truthy(&__b) { __b } else { py_str("") } } } }]).unwrap_or_else(|e| exc::raise(e));
@@ -11387,7 +11378,7 @@ pub fn __nested_with_the_thing_2(args: &[Py]) -> Py {
     return pyrt::xrefs::xcall("understanding", "understand", &[fuller.clone(), memory.clone()]);
     Py::None
 }
-    with_the_thing = {{ let in_the_fridge = in_the_fridge.clone(); let keeps = keeps.clone(); let memory = memory.clone(); let own = own.clone(); let reader = reader.clone(); let reading = reading.clone(); let with_the_thing = with_the_thing.clone(); py_func("with_the_thing", move |args: &[Py]| { let mut full = vec![in_the_fridge.clone(), keeps.clone(), memory.clone(), own.clone(), reader.clone(), reading.clone(), with_the_thing.clone()]; full.extend_from_slice(args); __nested_with_the_thing_2(&full) }) }};
+    with_the_thing = {{ let in_the_fridge = in_the_fridge.clone(); let keeps = keeps.clone(); let memory = memory.clone(); let own = own.clone(); let reader = reader.clone(); let reading = reading.clone(); py_func("with_the_thing", move |args: &[Py]| { let mut full = vec![in_the_fridge.clone(), keeps.clone(), memory.clone(), own.clone(), reader.clone(), reading.clone()]; full.extend_from_slice(args); __nested_with_the_thing_2(&full) }) }};
 pub fn __nested_reader_3(args: &[Py]) -> Py {
     ensure_init();
     let mut __pos: Vec<Py> = args.to_vec();
@@ -11399,10 +11390,9 @@ pub fn __nested_reader_3(args: &[Py]) -> Py {
     let mut keeps: Py = __pos.get(1).cloned().unwrap_or(Py::None);
     let mut memory: Py = __pos.get(2).cloned().unwrap_or(Py::None);
     let mut own: Py = __pos.get(3).cloned().unwrap_or(Py::None);
-    let mut reader: Py = __pos.get(4).cloned().unwrap_or(Py::None);
-    let mut reading: Py = __pos.get(5).cloned().unwrap_or(Py::None);
-    let mut with_the_thing: Py = __pos.get(6).cloned().unwrap_or(Py::None);
-    let mut reject: Py = __pos.get(7).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "reject").map(|(_, v)| v.clone())).unwrap_or(Py::None);
+    let mut reading: Py = __pos.get(4).cloned().unwrap_or(Py::None);
+    let mut with_the_thing: Py = __pos.get(5).cloned().unwrap_or(Py::None);
+    let mut reject: Py = __pos.get(6).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "reject").map(|(_, v)| v.clone())).unwrap_or(Py::None);
     let mut cold: Py = Py::None;
     let mut found: Py = Py::None;
     let mut kept: Py = Py::None;
@@ -11430,7 +11420,7 @@ pub fn __nested_reader_3(args: &[Py]) -> Py {
     return { let __b = found.clone(); if py_truthy(&__b) { __b } else { { let mut __args: Vec<Py> = Vec::new(); let mut __kws: Vec<(String, Py)> = Vec::new(); __args.push(reading.clone()); __kws.extend(vec![("reject".to_string(), reject.clone())]); if !__kws.is_empty() { __args.push(Py::Kwargs(Rc::new(__kws))); } (|args: &[Py]| pyrt::xrefs::xcall("knowledge.lookup", "find", args))(&__args) } } };
     Py::None
 }
-    reader = {{ let in_the_fridge = in_the_fridge.clone(); let keeps = keeps.clone(); let memory = memory.clone(); let own = own.clone(); let reader = reader.clone(); let reading = reading.clone(); let with_the_thing = with_the_thing.clone(); py_func("reader", move |args: &[Py]| { let mut full = vec![in_the_fridge.clone(), keeps.clone(), memory.clone(), own.clone(), reader.clone(), reading.clone(), with_the_thing.clone()]; full.extend_from_slice(args); __nested_reader_3(&full) }) }};
+    reader = {{ let in_the_fridge = in_the_fridge.clone(); let keeps = keeps.clone(); let memory = memory.clone(); let own = own.clone(); let reading = reading.clone(); let with_the_thing = with_the_thing.clone(); py_func("reader", move |args: &[Py]| { let mut full = vec![in_the_fridge.clone(), keeps.clone(), memory.clone(), own.clone(), reading.clone(), with_the_thing.clone()]; full.extend_from_slice(args); __nested_reader_3(&full) }) }};
     return reader.clone();
     Py::None
 }
@@ -14716,17 +14706,16 @@ pub fn __nested_tells_8(args: &[Py]) -> Py {
     let mut said: Py = __pos.get(7).cloned().unwrap_or(Py::None);
     let mut stated: Py = __pos.get(8).cloned().unwrap_or(Py::None);
     let mut subject: Py = __pos.get(9).cloned().unwrap_or(Py::None);
-    let mut tells: Py = __pos.get(10).cloned().unwrap_or(Py::None);
-    let mut text: Py = __pos.get(11).cloned().unwrap_or(Py::None);
-    let mut told: Py = __pos.get(12).cloned().unwrap_or(Py::None);
-    let mut turn: Py = __pos.get(13).cloned().unwrap_or(Py::None);
-    let mut word: Py = __pos.get(14).cloned().unwrap_or(Py::None);
-    let mut word: Py = __pos.get(15).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "word").map(|(_, v)| v.clone())).unwrap_or(Py::None);
+    let mut text: Py = __pos.get(10).cloned().unwrap_or(Py::None);
+    let mut told: Py = __pos.get(11).cloned().unwrap_or(Py::None);
+    let mut turn: Py = __pos.get(12).cloned().unwrap_or(Py::None);
+    let mut word: Py = __pos.get(13).cloned().unwrap_or(Py::None);
+    let mut word: Py = __pos.get(14).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "word").map(|(_, v)| v.clone())).unwrap_or(Py::None);
     let mut key: Py = Py::None;
     return call_builtin("any", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&keys.clone()) { let mut key: Py = __item.clone(); __out.push(stdlib_call("re", "search", &[op_add(&op_add(&py_str("\\b"), &stdlib_call("re", "escape", &[word.clone()]).unwrap_or_else(|e| exc::raise(e))), &py_str("(?:s|es)?\\b")), key.clone()]).unwrap_or_else(|e| exc::raise(e))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
-    tells = {{ let alternative = alternative.clone(); let entry = entry.clone(); let hold = hold.clone(); let keys = keys.clone(); let low = low.clone(); let memory = memory.clone(); let part = part.clone(); let said = said.clone(); let stated = stated.clone(); let subject = subject.clone(); let tells = tells.clone(); let text = text.clone(); let told = told.clone(); let turn = turn.clone(); let word = word.clone(); py_func("tells", move |args: &[Py]| { let mut full = vec![alternative.clone(), entry.clone(), hold.clone(), keys.clone(), low.clone(), memory.clone(), part.clone(), said.clone(), stated.clone(), subject.clone(), tells.clone(), text.clone(), told.clone(), turn.clone(), word.clone()]; full.extend_from_slice(args); __nested_tells_8(&full) }) }};
+    tells = {{ let alternative = alternative.clone(); let entry = entry.clone(); let hold = hold.clone(); let keys = keys.clone(); let low = low.clone(); let memory = memory.clone(); let part = part.clone(); let said = said.clone(); let stated = stated.clone(); let subject = subject.clone(); let text = text.clone(); let told = told.clone(); let turn = turn.clone(); let word = word.clone(); py_func("tells", move |args: &[Py]| { let mut full = vec![alternative.clone(), entry.clone(), hold.clone(), keys.clone(), low.clone(), memory.clone(), part.clone(), said.clone(), stated.clone(), subject.clone(), text.clone(), told.clone(), turn.clone(), word.clone()]; full.extend_from_slice(args); __nested_tells_8(&full) }) }};
     said = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&stdlib_call("re", "findall", &[py_str("[a-z0-9']+"), mcall(&call_builtin("str", &[{ let __b = text.clone(); if py_truthy(&__b) { __b } else { py_str("") } }]).unwrap_or_else(|e| exc::raise(e)), "lower", &[])]).unwrap_or_else(|e| exc::raise(e))) { let mut word: Py = __item.clone(); if py_truthy(&{ let __b = op_gt(&call_builtin("len", &[word.clone()]).unwrap_or_else(|e| exc::raise(e)), &Py::Int(2)); if !py_truthy(&__b) { __b } else { { let __b = Py::Bool(!py_contains(&pyrt::xrefs::xget("memory.named", "FACT_FILLER"), &word.clone())); if !py_truthy(&__b) { __b } else { Py::Bool(!py_contains(&pyrt::xrefs::xget("memory.named", "JOINING"), &word.clone())) } } } }) {  __out.push(word.clone()); } } py_list(__out) })() };
     told = { (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&said.clone()) { let mut word: Py = __item.clone(); if py_truthy(&py_call(&tells, &[word.clone()])) {  __out.push(word.clone()); } } py_list(__out) })() };
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&told.clone())); if py_truthy(&__b) { __b } else { call_builtin("all", &[{ (|| -> Py { let mut __out: Vec<Py> = Vec::new(); for __item in py_iter_or_raise(&told.clone()) { let mut word: Py = __item.clone(); __out.push(Py::Bool(py_contains(&g_A_DEGREE(), &word.clone()))); } py_list(__out) })() }]).unwrap_or_else(|e| exc::raise(e)) } }) {
@@ -16301,131 +16290,130 @@ pub fn __nested__guard_15(args: &[Py]) -> Py {
     let __pos = &args[..__split];
     let mut PLAN_FIRST: Py = __pos.get(0).cloned().unwrap_or(Py::None);
     let mut PLAN_KINDS: Py = __pos.get(1).cloned().unwrap_or(Py::None);
-    let mut _guard: Py = __pos.get(2).cloned().unwrap_or(Py::None);
-    let mut _meal_entry: Py = __pos.get(3).cloned().unwrap_or(Py::None);
-    let mut _meal_reply: Py = __pos.get(4).cloned().unwrap_or(Py::None);
-    let mut about: Py = __pos.get(5).cloned().unwrap_or(Py::None);
-    let mut about_someone: Py = __pos.get(6).cloned().unwrap_or(Py::None);
-    let mut about_the_food: Py = __pos.get(7).cloned().unwrap_or(Py::None);
-    let mut added: Py = __pos.get(8).cloned().unwrap_or(Py::None);
-    let mut again: Py = __pos.get(9).cloned().unwrap_or(Py::None);
-    let mut amount: Py = __pos.get(10).cloned().unwrap_or(Py::None);
-    let mut announced: Py = __pos.get(11).cloned().unwrap_or(Py::None);
-    let mut another: Py = __pos.get(12).cloned().unwrap_or(Py::None);
-    let mut asked: Py = __pos.get(13).cloned().unwrap_or(Py::None);
-    let mut asks_a_part: Py = __pos.get(14).cloned().unwrap_or(Py::None);
-    let mut attributed: Py = __pos.get(15).cloned().unwrap_or(Py::None);
-    let mut baked: Py = __pos.get(16).cloned().unwrap_or(Py::None);
-    let mut bare: Py = __pos.get(17).cloned().unwrap_or(Py::None);
-    let mut bare_ask: Py = __pos.get(18).cloned().unwrap_or(Py::None);
-    let mut before: Py = __pos.get(19).cloned().unwrap_or(Py::None);
-    let mut began: Py = __pos.get(20).cloned().unwrap_or(Py::None);
-    let mut beside: Py = __pos.get(21).cloned().unwrap_or(Py::None);
-    let mut calculated: Py = __pos.get(22).cloned().unwrap_or(Py::None);
-    let mut care: Py = __pos.get(23).cloned().unwrap_or(Py::None);
-    let mut chosen: Py = __pos.get(24).cloned().unwrap_or(Py::None);
-    let mut cooked: Py = __pos.get(25).cloned().unwrap_or(Py::None);
-    let mut cooked_ask: Py = __pos.get(26).cloned().unwrap_or(Py::None);
-    let mut covered: Py = __pos.get(27).cloned().unwrap_or(Py::None);
-    let mut defined: Py = __pos.get(28).cloned().unwrap_or(Py::None);
-    let mut detail: Py = __pos.get(29).cloned().unwrap_or(Py::None);
-    let mut earlier: Py = __pos.get(30).cloned().unwrap_or(Py::None);
-    let mut figure: Py = __pos.get(31).cloned().unwrap_or(Py::None);
-    let mut follow_up: Py = __pos.get(32).cloned().unwrap_or(Py::None);
-    let mut followed: Py = __pos.get(33).cloned().unwrap_or(Py::None);
-    let mut found: Py = __pos.get(34).cloned().unwrap_or(Py::None);
-    let mut framed: Py = __pos.get(35).cloned().unwrap_or(Py::None);
-    let mut fuller: Py = __pos.get(36).cloned().unwrap_or(Py::None);
-    let mut given_to: Py = __pos.get(37).cloned().unwrap_or(Py::None);
-    let mut handed: Py = __pos.get(38).cloned().unwrap_or(Py::None);
-    let mut head: Py = __pos.get(39).cloned().unwrap_or(Py::None);
-    let mut helped: Py = __pos.get(40).cloned().unwrap_or(Py::None);
-    let mut honest: Py = __pos.get(41).cloned().unwrap_or(Py::None);
-    let mut intro: Py = __pos.get(42).cloned().unwrap_or(Py::None);
-    let mut introduction: Py = __pos.get(43).cloned().unwrap_or(Py::None);
-    let mut item: Py = __pos.get(44).cloned().unwrap_or(Py::None);
-    let mut keeping: Py = __pos.get(45).cloned().unwrap_or(Py::None);
-    let mut kept: Py = __pos.get(46).cloned().unwrap_or(Py::None);
-    let mut keys: Py = __pos.get(47).cloned().unwrap_or(Py::None);
-    let mut kind: Py = __pos.get(48).cloned().unwrap_or(Py::None);
-    let mut kitchen: Py = __pos.get(49).cloned().unwrap_or(Py::None);
-    let mut left_out: Py = __pos.get(50).cloned().unwrap_or(Py::None);
-    let mut longer: Py = __pos.get(51).cloned().unwrap_or(Py::None);
-    let mut meal: Py = __pos.get(52).cloned().unwrap_or(Py::None);
-    let mut memory: Py = __pos.get(53).cloned().unwrap_or(Py::None);
-    let mut move_: Py = __pos.get(54).cloned().unwrap_or(Py::None);
-    let mut named_foods: Py = __pos.get(55).cloned().unwrap_or(Py::None);
-    let mut newer: Py = __pos.get(56).cloned().unwrap_or(Py::None);
-    let mut newer_said: Py = __pos.get(57).cloned().unwrap_or(Py::None);
-    let mut off_topic: Py = __pos.get(58).cloned().unwrap_or(Py::None);
-    let mut older: Py = __pos.get(59).cloned().unwrap_or(Py::None);
-    let mut other: Py = __pos.get(60).cloned().unwrap_or(Py::None);
-    let mut other_food: Py = __pos.get(61).cloned().unwrap_or(Py::None);
-    let mut ours: Py = __pos.get(62).cloned().unwrap_or(Py::None);
-    let mut outfitted: Py = __pos.get(63).cloned().unwrap_or(Py::None);
-    let mut owed: Py = __pos.get(64).cloned().unwrap_or(Py::None);
-    let mut own: Py = __pos.get(65).cloned().unwrap_or(Py::None);
-    let mut own_said: Py = __pos.get(66).cloned().unwrap_or(Py::None);
-    let mut own_thing: Py = __pos.get(67).cloned().unwrap_or(Py::None);
-    let mut part: Py = __pos.get(68).cloned().unwrap_or(Py::None);
-    let mut parting: Py = __pos.get(69).cloned().unwrap_or(Py::None);
-    let mut phrase: Py = __pos.get(70).cloned().unwrap_or(Py::None);
-    let mut picked: Py = __pos.get(71).cloned().unwrap_or(Py::None);
-    let mut plan: Py = __pos.get(72).cloned().unwrap_or(Py::None);
-    let mut planned: Py = __pos.get(73).cloned().unwrap_or(Py::None);
-    let mut pointed: Py = __pos.get(74).cloned().unwrap_or(Py::None);
-    let mut priced: Py = __pos.get(75).cloned().unwrap_or(Py::None);
-    let mut read: Py = __pos.get(76).cloned().unwrap_or(Py::None);
-    let mut readied: Py = __pos.get(77).cloned().unwrap_or(Py::None);
-    let mut reading: Py = __pos.get(78).cloned().unwrap_or(Py::None);
-    let mut readings: Py = __pos.get(79).cloned().unwrap_or(Py::None);
-    let mut repaired: Py = __pos.get(80).cloned().unwrap_or(Py::None);
-    let mut reply: Py = __pos.get(81).cloned().unwrap_or(Py::None);
-    let mut reread: Py = __pos.get(82).cloned().unwrap_or(Py::None);
-    let mut resized: Py = __pos.get(83).cloned().unwrap_or(Py::None);
-    let mut rest: Py = __pos.get(84).cloned().unwrap_or(Py::None);
-    let mut said: Py = __pos.get(85).cloned().unwrap_or(Py::None);
-    let mut same: Py = __pos.get(86).cloned().unwrap_or(Py::None);
-    let mut same_answer: Py = __pos.get(87).cloned().unwrap_or(Py::None);
-    let mut same_line: Py = __pos.get(88).cloned().unwrap_or(Py::None);
-    let mut sentence: Py = __pos.get(89).cloned().unwrap_or(Py::None);
-    let mut short_line: Py = __pos.get(90).cloned().unwrap_or(Py::None);
-    let mut side: Py = __pos.get(91).cloned().unwrap_or(Py::None);
-    let mut sized: Py = __pos.get(92).cloned().unwrap_or(Py::None);
-    let mut someone: Py = __pos.get(93).cloned().unwrap_or(Py::None);
-    let mut specific: Py = __pos.get(94).cloned().unwrap_or(Py::None);
-    let mut stated: Py = __pos.get(95).cloned().unwrap_or(Py::None);
-    let mut subject: Py = __pos.get(96).cloned().unwrap_or(Py::None);
-    let mut suits: Py = __pos.get(97).cloned().unwrap_or(Py::None);
-    let mut swapped: Py = __pos.get(98).cloned().unwrap_or(Py::None);
-    let mut text: Py = __pos.get(99).cloned().unwrap_or(Py::None);
-    let mut thing: Py = __pos.get(100).cloned().unwrap_or(Py::None);
-    let mut thing_words: Py = __pos.get(101).cloned().unwrap_or(Py::None);
-    let mut thinking: Py = __pos.get(102).cloned().unwrap_or(Py::None);
-    let mut timed: Py = __pos.get(103).cloned().unwrap_or(Py::None);
-    let mut tones: Py = __pos.get(104).cloned().unwrap_or(Py::None);
-    let mut understood: Py = __pos.get(105).cloned().unwrap_or(Py::None);
-    let mut use_up: Py = __pos.get(106).cloned().unwrap_or(Py::None);
-    let mut verdict: Py = __pos.get(107).cloned().unwrap_or(Py::None);
-    let mut verse: Py = __pos.get(108).cloned().unwrap_or(Py::None);
-    let mut vouched: Py = __pos.get(109).cloned().unwrap_or(Py::None);
-    let mut whole: Py = __pos.get(110).cloned().unwrap_or(Py::None);
-    let mut wider: Py = __pos.get(111).cloned().unwrap_or(Py::None);
-    let mut wider_item: Py = __pos.get(112).cloned().unwrap_or(Py::None);
-    let mut wider_reply: Py = __pos.get(113).cloned().unwrap_or(Py::None);
-    let mut without: Py = __pos.get(114).cloned().unwrap_or(Py::None);
-    let mut word: Py = __pos.get(115).cloned().unwrap_or(Py::None);
-    let mut words: Py = __pos.get(116).cloned().unwrap_or(Py::None);
-    let mut written: Py = __pos.get(117).cloned().unwrap_or(Py::None);
-    let mut written_out: Py = __pos.get(118).cloned().unwrap_or(Py::None);
-    let mut reject: Py = __pos.get(119).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "reject").map(|(_, v)| v.clone())).unwrap_or(Py::None);
+    let mut _meal_entry: Py = __pos.get(2).cloned().unwrap_or(Py::None);
+    let mut _meal_reply: Py = __pos.get(3).cloned().unwrap_or(Py::None);
+    let mut about: Py = __pos.get(4).cloned().unwrap_or(Py::None);
+    let mut about_someone: Py = __pos.get(5).cloned().unwrap_or(Py::None);
+    let mut about_the_food: Py = __pos.get(6).cloned().unwrap_or(Py::None);
+    let mut added: Py = __pos.get(7).cloned().unwrap_or(Py::None);
+    let mut again: Py = __pos.get(8).cloned().unwrap_or(Py::None);
+    let mut amount: Py = __pos.get(9).cloned().unwrap_or(Py::None);
+    let mut announced: Py = __pos.get(10).cloned().unwrap_or(Py::None);
+    let mut another: Py = __pos.get(11).cloned().unwrap_or(Py::None);
+    let mut asked: Py = __pos.get(12).cloned().unwrap_or(Py::None);
+    let mut asks_a_part: Py = __pos.get(13).cloned().unwrap_or(Py::None);
+    let mut attributed: Py = __pos.get(14).cloned().unwrap_or(Py::None);
+    let mut baked: Py = __pos.get(15).cloned().unwrap_or(Py::None);
+    let mut bare: Py = __pos.get(16).cloned().unwrap_or(Py::None);
+    let mut bare_ask: Py = __pos.get(17).cloned().unwrap_or(Py::None);
+    let mut before: Py = __pos.get(18).cloned().unwrap_or(Py::None);
+    let mut began: Py = __pos.get(19).cloned().unwrap_or(Py::None);
+    let mut beside: Py = __pos.get(20).cloned().unwrap_or(Py::None);
+    let mut calculated: Py = __pos.get(21).cloned().unwrap_or(Py::None);
+    let mut care: Py = __pos.get(22).cloned().unwrap_or(Py::None);
+    let mut chosen: Py = __pos.get(23).cloned().unwrap_or(Py::None);
+    let mut cooked: Py = __pos.get(24).cloned().unwrap_or(Py::None);
+    let mut cooked_ask: Py = __pos.get(25).cloned().unwrap_or(Py::None);
+    let mut covered: Py = __pos.get(26).cloned().unwrap_or(Py::None);
+    let mut defined: Py = __pos.get(27).cloned().unwrap_or(Py::None);
+    let mut detail: Py = __pos.get(28).cloned().unwrap_or(Py::None);
+    let mut earlier: Py = __pos.get(29).cloned().unwrap_or(Py::None);
+    let mut figure: Py = __pos.get(30).cloned().unwrap_or(Py::None);
+    let mut follow_up: Py = __pos.get(31).cloned().unwrap_or(Py::None);
+    let mut followed: Py = __pos.get(32).cloned().unwrap_or(Py::None);
+    let mut found: Py = __pos.get(33).cloned().unwrap_or(Py::None);
+    let mut framed: Py = __pos.get(34).cloned().unwrap_or(Py::None);
+    let mut fuller: Py = __pos.get(35).cloned().unwrap_or(Py::None);
+    let mut given_to: Py = __pos.get(36).cloned().unwrap_or(Py::None);
+    let mut handed: Py = __pos.get(37).cloned().unwrap_or(Py::None);
+    let mut head: Py = __pos.get(38).cloned().unwrap_or(Py::None);
+    let mut helped: Py = __pos.get(39).cloned().unwrap_or(Py::None);
+    let mut honest: Py = __pos.get(40).cloned().unwrap_or(Py::None);
+    let mut intro: Py = __pos.get(41).cloned().unwrap_or(Py::None);
+    let mut introduction: Py = __pos.get(42).cloned().unwrap_or(Py::None);
+    let mut item: Py = __pos.get(43).cloned().unwrap_or(Py::None);
+    let mut keeping: Py = __pos.get(44).cloned().unwrap_or(Py::None);
+    let mut kept: Py = __pos.get(45).cloned().unwrap_or(Py::None);
+    let mut keys: Py = __pos.get(46).cloned().unwrap_or(Py::None);
+    let mut kind: Py = __pos.get(47).cloned().unwrap_or(Py::None);
+    let mut kitchen: Py = __pos.get(48).cloned().unwrap_or(Py::None);
+    let mut left_out: Py = __pos.get(49).cloned().unwrap_or(Py::None);
+    let mut longer: Py = __pos.get(50).cloned().unwrap_or(Py::None);
+    let mut meal: Py = __pos.get(51).cloned().unwrap_or(Py::None);
+    let mut memory: Py = __pos.get(52).cloned().unwrap_or(Py::None);
+    let mut move_: Py = __pos.get(53).cloned().unwrap_or(Py::None);
+    let mut named_foods: Py = __pos.get(54).cloned().unwrap_or(Py::None);
+    let mut newer: Py = __pos.get(55).cloned().unwrap_or(Py::None);
+    let mut newer_said: Py = __pos.get(56).cloned().unwrap_or(Py::None);
+    let mut off_topic: Py = __pos.get(57).cloned().unwrap_or(Py::None);
+    let mut older: Py = __pos.get(58).cloned().unwrap_or(Py::None);
+    let mut other: Py = __pos.get(59).cloned().unwrap_or(Py::None);
+    let mut other_food: Py = __pos.get(60).cloned().unwrap_or(Py::None);
+    let mut ours: Py = __pos.get(61).cloned().unwrap_or(Py::None);
+    let mut outfitted: Py = __pos.get(62).cloned().unwrap_or(Py::None);
+    let mut owed: Py = __pos.get(63).cloned().unwrap_or(Py::None);
+    let mut own: Py = __pos.get(64).cloned().unwrap_or(Py::None);
+    let mut own_said: Py = __pos.get(65).cloned().unwrap_or(Py::None);
+    let mut own_thing: Py = __pos.get(66).cloned().unwrap_or(Py::None);
+    let mut part: Py = __pos.get(67).cloned().unwrap_or(Py::None);
+    let mut parting: Py = __pos.get(68).cloned().unwrap_or(Py::None);
+    let mut phrase: Py = __pos.get(69).cloned().unwrap_or(Py::None);
+    let mut picked: Py = __pos.get(70).cloned().unwrap_or(Py::None);
+    let mut plan: Py = __pos.get(71).cloned().unwrap_or(Py::None);
+    let mut planned: Py = __pos.get(72).cloned().unwrap_or(Py::None);
+    let mut pointed: Py = __pos.get(73).cloned().unwrap_or(Py::None);
+    let mut priced: Py = __pos.get(74).cloned().unwrap_or(Py::None);
+    let mut read: Py = __pos.get(75).cloned().unwrap_or(Py::None);
+    let mut readied: Py = __pos.get(76).cloned().unwrap_or(Py::None);
+    let mut reading: Py = __pos.get(77).cloned().unwrap_or(Py::None);
+    let mut readings: Py = __pos.get(78).cloned().unwrap_or(Py::None);
+    let mut repaired: Py = __pos.get(79).cloned().unwrap_or(Py::None);
+    let mut reply: Py = __pos.get(80).cloned().unwrap_or(Py::None);
+    let mut reread: Py = __pos.get(81).cloned().unwrap_or(Py::None);
+    let mut resized: Py = __pos.get(82).cloned().unwrap_or(Py::None);
+    let mut rest: Py = __pos.get(83).cloned().unwrap_or(Py::None);
+    let mut said: Py = __pos.get(84).cloned().unwrap_or(Py::None);
+    let mut same: Py = __pos.get(85).cloned().unwrap_or(Py::None);
+    let mut same_answer: Py = __pos.get(86).cloned().unwrap_or(Py::None);
+    let mut same_line: Py = __pos.get(87).cloned().unwrap_or(Py::None);
+    let mut sentence: Py = __pos.get(88).cloned().unwrap_or(Py::None);
+    let mut short_line: Py = __pos.get(89).cloned().unwrap_or(Py::None);
+    let mut side: Py = __pos.get(90).cloned().unwrap_or(Py::None);
+    let mut sized: Py = __pos.get(91).cloned().unwrap_or(Py::None);
+    let mut someone: Py = __pos.get(92).cloned().unwrap_or(Py::None);
+    let mut specific: Py = __pos.get(93).cloned().unwrap_or(Py::None);
+    let mut stated: Py = __pos.get(94).cloned().unwrap_or(Py::None);
+    let mut subject: Py = __pos.get(95).cloned().unwrap_or(Py::None);
+    let mut suits: Py = __pos.get(96).cloned().unwrap_or(Py::None);
+    let mut swapped: Py = __pos.get(97).cloned().unwrap_or(Py::None);
+    let mut text: Py = __pos.get(98).cloned().unwrap_or(Py::None);
+    let mut thing: Py = __pos.get(99).cloned().unwrap_or(Py::None);
+    let mut thing_words: Py = __pos.get(100).cloned().unwrap_or(Py::None);
+    let mut thinking: Py = __pos.get(101).cloned().unwrap_or(Py::None);
+    let mut timed: Py = __pos.get(102).cloned().unwrap_or(Py::None);
+    let mut tones: Py = __pos.get(103).cloned().unwrap_or(Py::None);
+    let mut understood: Py = __pos.get(104).cloned().unwrap_or(Py::None);
+    let mut use_up: Py = __pos.get(105).cloned().unwrap_or(Py::None);
+    let mut verdict: Py = __pos.get(106).cloned().unwrap_or(Py::None);
+    let mut verse: Py = __pos.get(107).cloned().unwrap_or(Py::None);
+    let mut vouched: Py = __pos.get(108).cloned().unwrap_or(Py::None);
+    let mut whole: Py = __pos.get(109).cloned().unwrap_or(Py::None);
+    let mut wider: Py = __pos.get(110).cloned().unwrap_or(Py::None);
+    let mut wider_item: Py = __pos.get(111).cloned().unwrap_or(Py::None);
+    let mut wider_reply: Py = __pos.get(112).cloned().unwrap_or(Py::None);
+    let mut without: Py = __pos.get(113).cloned().unwrap_or(Py::None);
+    let mut word: Py = __pos.get(114).cloned().unwrap_or(Py::None);
+    let mut words: Py = __pos.get(115).cloned().unwrap_or(Py::None);
+    let mut written: Py = __pos.get(116).cloned().unwrap_or(Py::None);
+    let mut written_out: Py = __pos.get(117).cloned().unwrap_or(Py::None);
+    let mut reject: Py = __pos.get(118).cloned().or_else(|| __kw.iter().find(|(n, _)| n == "reject").map(|(_, v)| v.clone())).unwrap_or(Py::None);
     if py_truthy(&{ let __b = Py::Bool(!py_truthy(&geti(&off_topic.clone(), &Py::Int(1)))); if !py_truthy(&__b) { __b } else { Py::Bool(!py_truthy(&geti(&off_topic.clone(), &Py::Int(2)))) } }) {
     return reject.clone();
     }
-    return { let PLAN_FIRST = PLAN_FIRST.clone(); let PLAN_KINDS = PLAN_KINDS.clone(); let _guard = _guard.clone(); let _meal_entry = _meal_entry.clone(); let _meal_reply = _meal_reply.clone(); let about = about.clone(); let about_someone = about_someone.clone(); let about_the_food = about_the_food.clone(); let added = added.clone(); let again = again.clone(); let amount = amount.clone(); let announced = announced.clone(); let another = another.clone(); let asked = asked.clone(); let asks_a_part = asks_a_part.clone(); let attributed = attributed.clone(); let baked = baked.clone(); let bare = bare.clone(); let bare_ask = bare_ask.clone(); let before = before.clone(); let began = began.clone(); let beside = beside.clone(); let calculated = calculated.clone(); let care = care.clone(); let chosen = chosen.clone(); let cooked = cooked.clone(); let cooked_ask = cooked_ask.clone(); let covered = covered.clone(); let defined = defined.clone(); let detail = detail.clone(); let earlier = earlier.clone(); let figure = figure.clone(); let follow_up = follow_up.clone(); let followed = followed.clone(); let found = found.clone(); let framed = framed.clone(); let fuller = fuller.clone(); let given_to = given_to.clone(); let handed = handed.clone(); let head = head.clone(); let helped = helped.clone(); let honest = honest.clone(); let intro = intro.clone(); let introduction = introduction.clone(); let item = item.clone(); let keeping = keeping.clone(); let kept = kept.clone(); let keys = keys.clone(); let kind = kind.clone(); let kitchen = kitchen.clone(); let left_out = left_out.clone(); let longer = longer.clone(); let meal = meal.clone(); let memory = memory.clone(); let move_ = move_.clone(); let named_foods = named_foods.clone(); let newer = newer.clone(); let newer_said = newer_said.clone(); let off_topic = off_topic.clone(); let older = older.clone(); let other = other.clone(); let other_food = other_food.clone(); let ours = ours.clone(); let outfitted = outfitted.clone(); let owed = owed.clone(); let own = own.clone(); let own_said = own_said.clone(); let own_thing = own_thing.clone(); let part = part.clone(); let parting = parting.clone(); let phrase = phrase.clone(); let picked = picked.clone(); let plan = plan.clone(); let planned = planned.clone(); let pointed = pointed.clone(); let priced = priced.clone(); let read = read.clone(); let readied = readied.clone(); let reading = reading.clone(); let readings = readings.clone(); let reject = reject.clone(); let repaired = repaired.clone(); let reply = reply.clone(); let reread = reread.clone(); let resized = resized.clone(); let rest = rest.clone(); let said = said.clone(); let same = same.clone(); let same_answer = same_answer.clone(); let same_line = same_line.clone(); let sentence = sentence.clone(); let short_line = short_line.clone(); let side = side.clone(); let sized = sized.clone(); let someone = someone.clone(); let specific = specific.clone(); let stated = stated.clone(); let subject = subject.clone(); let suits = suits.clone(); let swapped = swapped.clone(); let text = text.clone(); let thing = thing.clone(); let thing_words = thing_words.clone(); let thinking = thinking.clone(); let timed = timed.clone(); let tones = tones.clone(); let understood = understood.clone(); let use_up = use_up.clone(); let verdict = verdict.clone(); let verse = verse.clone(); let vouched = vouched.clone(); let whole = whole.clone(); let wider = wider.clone(); let wider_item = wider_item.clone(); let wider_reply = wider_reply.clone(); let without = without.clone(); let word = word.clone(); let words = words.clone(); let written = written.clone(); let written_out = written_out.clone(); py_func("lambda", move |args: &[Py]| { let PLAN_FIRST = PLAN_FIRST.clone(); let PLAN_KINDS = PLAN_KINDS.clone(); let _guard = _guard.clone(); let _meal_entry = _meal_entry.clone(); let _meal_reply = _meal_reply.clone(); let about = about.clone(); let about_someone = about_someone.clone(); let about_the_food = about_the_food.clone(); let added = added.clone(); let again = again.clone(); let amount = amount.clone(); let announced = announced.clone(); let another = another.clone(); let asked = asked.clone(); let asks_a_part = asks_a_part.clone(); let attributed = attributed.clone(); let baked = baked.clone(); let bare = bare.clone(); let bare_ask = bare_ask.clone(); let before = before.clone(); let began = began.clone(); let beside = beside.clone(); let calculated = calculated.clone(); let care = care.clone(); let chosen = chosen.clone(); let cooked = cooked.clone(); let cooked_ask = cooked_ask.clone(); let covered = covered.clone(); let defined = defined.clone(); let detail = detail.clone(); let earlier = earlier.clone(); let figure = figure.clone(); let follow_up = follow_up.clone(); let followed = followed.clone(); let found = found.clone(); let framed = framed.clone(); let fuller = fuller.clone(); let given_to = given_to.clone(); let handed = handed.clone(); let head = head.clone(); let helped = helped.clone(); let honest = honest.clone(); let intro = intro.clone(); let introduction = introduction.clone(); let item = item.clone(); let keeping = keeping.clone(); let kept = kept.clone(); let keys = keys.clone(); let kind = kind.clone(); let kitchen = kitchen.clone(); let left_out = left_out.clone(); let longer = longer.clone(); let meal = meal.clone(); let memory = memory.clone(); let move_ = move_.clone(); let named_foods = named_foods.clone(); let newer = newer.clone(); let newer_said = newer_said.clone(); let off_topic = off_topic.clone(); let older = older.clone(); let other = other.clone(); let other_food = other_food.clone(); let ours = ours.clone(); let outfitted = outfitted.clone(); let owed = owed.clone(); let own = own.clone(); let own_said = own_said.clone(); let own_thing = own_thing.clone(); let part = part.clone(); let parting = parting.clone(); let phrase = phrase.clone(); let picked = picked.clone(); let plan = plan.clone(); let planned = planned.clone(); let pointed = pointed.clone(); let priced = priced.clone(); let read = read.clone(); let readied = readied.clone(); let reading = reading.clone(); let readings = readings.clone(); let reject = reject.clone(); let repaired = repaired.clone(); let reply = reply.clone(); let reread = reread.clone(); let resized = resized.clone(); let rest = rest.clone(); let said = said.clone(); let same = same.clone(); let same_answer = same_answer.clone(); let same_line = same_line.clone(); let sentence = sentence.clone(); let short_line = short_line.clone(); let side = side.clone(); let sized = sized.clone(); let someone = someone.clone(); let specific = specific.clone(); let stated = stated.clone(); let subject = subject.clone(); let suits = suits.clone(); let swapped = swapped.clone(); let text = text.clone(); let thing = thing.clone(); let thing_words = thing_words.clone(); let thinking = thinking.clone(); let timed = timed.clone(); let tones = tones.clone(); let understood = understood.clone(); let use_up = use_up.clone(); let verdict = verdict.clone(); let verse = verse.clone(); let vouched = vouched.clone(); let whole = whole.clone(); let wider = wider.clone(); let wider_item = wider_item.clone(); let wider_reply = wider_reply.clone(); let without = without.clone(); let word = word.clone(); let words = words.clone(); let written = written.clone(); let written_out = written_out.clone(); let one: Py = __kwp(args, 0, "one").unwrap_or(Py::None); { let __b = py_call(&reject, &[one.clone()]); if py_truthy(&__b) { __b } else { _from_another_domain(&[one.clone(), off_topic.clone()]) } } }) };
+    return { let PLAN_FIRST = PLAN_FIRST.clone(); let PLAN_KINDS = PLAN_KINDS.clone(); let _meal_entry = _meal_entry.clone(); let _meal_reply = _meal_reply.clone(); let about = about.clone(); let about_someone = about_someone.clone(); let about_the_food = about_the_food.clone(); let added = added.clone(); let again = again.clone(); let amount = amount.clone(); let announced = announced.clone(); let another = another.clone(); let asked = asked.clone(); let asks_a_part = asks_a_part.clone(); let attributed = attributed.clone(); let baked = baked.clone(); let bare = bare.clone(); let bare_ask = bare_ask.clone(); let before = before.clone(); let began = began.clone(); let beside = beside.clone(); let calculated = calculated.clone(); let care = care.clone(); let chosen = chosen.clone(); let cooked = cooked.clone(); let cooked_ask = cooked_ask.clone(); let covered = covered.clone(); let defined = defined.clone(); let detail = detail.clone(); let earlier = earlier.clone(); let figure = figure.clone(); let follow_up = follow_up.clone(); let followed = followed.clone(); let found = found.clone(); let framed = framed.clone(); let fuller = fuller.clone(); let given_to = given_to.clone(); let handed = handed.clone(); let head = head.clone(); let helped = helped.clone(); let honest = honest.clone(); let intro = intro.clone(); let introduction = introduction.clone(); let item = item.clone(); let keeping = keeping.clone(); let kept = kept.clone(); let keys = keys.clone(); let kind = kind.clone(); let kitchen = kitchen.clone(); let left_out = left_out.clone(); let longer = longer.clone(); let meal = meal.clone(); let memory = memory.clone(); let move_ = move_.clone(); let named_foods = named_foods.clone(); let newer = newer.clone(); let newer_said = newer_said.clone(); let off_topic = off_topic.clone(); let older = older.clone(); let other = other.clone(); let other_food = other_food.clone(); let ours = ours.clone(); let outfitted = outfitted.clone(); let owed = owed.clone(); let own = own.clone(); let own_said = own_said.clone(); let own_thing = own_thing.clone(); let part = part.clone(); let parting = parting.clone(); let phrase = phrase.clone(); let picked = picked.clone(); let plan = plan.clone(); let planned = planned.clone(); let pointed = pointed.clone(); let priced = priced.clone(); let read = read.clone(); let readied = readied.clone(); let reading = reading.clone(); let readings = readings.clone(); let reject = reject.clone(); let repaired = repaired.clone(); let reply = reply.clone(); let reread = reread.clone(); let resized = resized.clone(); let rest = rest.clone(); let said = said.clone(); let same = same.clone(); let same_answer = same_answer.clone(); let same_line = same_line.clone(); let sentence = sentence.clone(); let short_line = short_line.clone(); let side = side.clone(); let sized = sized.clone(); let someone = someone.clone(); let specific = specific.clone(); let stated = stated.clone(); let subject = subject.clone(); let suits = suits.clone(); let swapped = swapped.clone(); let text = text.clone(); let thing = thing.clone(); let thing_words = thing_words.clone(); let thinking = thinking.clone(); let timed = timed.clone(); let tones = tones.clone(); let understood = understood.clone(); let use_up = use_up.clone(); let verdict = verdict.clone(); let verse = verse.clone(); let vouched = vouched.clone(); let whole = whole.clone(); let wider = wider.clone(); let wider_item = wider_item.clone(); let wider_reply = wider_reply.clone(); let without = without.clone(); let word = word.clone(); let words = words.clone(); let written = written.clone(); let written_out = written_out.clone(); py_func("lambda", move |args: &[Py]| { let PLAN_FIRST = PLAN_FIRST.clone(); let PLAN_KINDS = PLAN_KINDS.clone(); let _meal_entry = _meal_entry.clone(); let _meal_reply = _meal_reply.clone(); let about = about.clone(); let about_someone = about_someone.clone(); let about_the_food = about_the_food.clone(); let added = added.clone(); let again = again.clone(); let amount = amount.clone(); let announced = announced.clone(); let another = another.clone(); let asked = asked.clone(); let asks_a_part = asks_a_part.clone(); let attributed = attributed.clone(); let baked = baked.clone(); let bare = bare.clone(); let bare_ask = bare_ask.clone(); let before = before.clone(); let began = began.clone(); let beside = beside.clone(); let calculated = calculated.clone(); let care = care.clone(); let chosen = chosen.clone(); let cooked = cooked.clone(); let cooked_ask = cooked_ask.clone(); let covered = covered.clone(); let defined = defined.clone(); let detail = detail.clone(); let earlier = earlier.clone(); let figure = figure.clone(); let follow_up = follow_up.clone(); let followed = followed.clone(); let found = found.clone(); let framed = framed.clone(); let fuller = fuller.clone(); let given_to = given_to.clone(); let handed = handed.clone(); let head = head.clone(); let helped = helped.clone(); let honest = honest.clone(); let intro = intro.clone(); let introduction = introduction.clone(); let item = item.clone(); let keeping = keeping.clone(); let kept = kept.clone(); let keys = keys.clone(); let kind = kind.clone(); let kitchen = kitchen.clone(); let left_out = left_out.clone(); let longer = longer.clone(); let meal = meal.clone(); let memory = memory.clone(); let move_ = move_.clone(); let named_foods = named_foods.clone(); let newer = newer.clone(); let newer_said = newer_said.clone(); let off_topic = off_topic.clone(); let older = older.clone(); let other = other.clone(); let other_food = other_food.clone(); let ours = ours.clone(); let outfitted = outfitted.clone(); let owed = owed.clone(); let own = own.clone(); let own_said = own_said.clone(); let own_thing = own_thing.clone(); let part = part.clone(); let parting = parting.clone(); let phrase = phrase.clone(); let picked = picked.clone(); let plan = plan.clone(); let planned = planned.clone(); let pointed = pointed.clone(); let priced = priced.clone(); let read = read.clone(); let readied = readied.clone(); let reading = reading.clone(); let readings = readings.clone(); let reject = reject.clone(); let repaired = repaired.clone(); let reply = reply.clone(); let reread = reread.clone(); let resized = resized.clone(); let rest = rest.clone(); let said = said.clone(); let same = same.clone(); let same_answer = same_answer.clone(); let same_line = same_line.clone(); let sentence = sentence.clone(); let short_line = short_line.clone(); let side = side.clone(); let sized = sized.clone(); let someone = someone.clone(); let specific = specific.clone(); let stated = stated.clone(); let subject = subject.clone(); let suits = suits.clone(); let swapped = swapped.clone(); let text = text.clone(); let thing = thing.clone(); let thing_words = thing_words.clone(); let thinking = thinking.clone(); let timed = timed.clone(); let tones = tones.clone(); let understood = understood.clone(); let use_up = use_up.clone(); let verdict = verdict.clone(); let verse = verse.clone(); let vouched = vouched.clone(); let whole = whole.clone(); let wider = wider.clone(); let wider_item = wider_item.clone(); let wider_reply = wider_reply.clone(); let without = without.clone(); let word = word.clone(); let words = words.clone(); let written = written.clone(); let written_out = written_out.clone(); let one: Py = __kwp(args, 0, "one").unwrap_or(Py::None); { let __b = py_call(&reject, &[one.clone()]); if py_truthy(&__b) { __b } else { _from_another_domain(&[one.clone(), off_topic.clone()]) } } }) };
     Py::None
 }
-    _guard = {{ let PLAN_FIRST = PLAN_FIRST.clone(); let PLAN_KINDS = PLAN_KINDS.clone(); let _guard = _guard.clone(); let _meal_entry = _meal_entry.clone(); let _meal_reply = _meal_reply.clone(); let about = about.clone(); let about_someone = about_someone.clone(); let about_the_food = about_the_food.clone(); let added = added.clone(); let again = again.clone(); let amount = amount.clone(); let announced = announced.clone(); let another = another.clone(); let asked = asked.clone(); let asks_a_part = asks_a_part.clone(); let attributed = attributed.clone(); let baked = baked.clone(); let bare = bare.clone(); let bare_ask = bare_ask.clone(); let before = before.clone(); let began = began.clone(); let beside = beside.clone(); let calculated = calculated.clone(); let care = care.clone(); let chosen = chosen.clone(); let cooked = cooked.clone(); let cooked_ask = cooked_ask.clone(); let covered = covered.clone(); let defined = defined.clone(); let detail = detail.clone(); let earlier = earlier.clone(); let figure = figure.clone(); let follow_up = follow_up.clone(); let followed = followed.clone(); let found = found.clone(); let framed = framed.clone(); let fuller = fuller.clone(); let given_to = given_to.clone(); let handed = handed.clone(); let head = head.clone(); let helped = helped.clone(); let honest = honest.clone(); let intro = intro.clone(); let introduction = introduction.clone(); let item = item.clone(); let keeping = keeping.clone(); let kept = kept.clone(); let keys = keys.clone(); let kind = kind.clone(); let kitchen = kitchen.clone(); let left_out = left_out.clone(); let longer = longer.clone(); let meal = meal.clone(); let memory = memory.clone(); let move_ = move_.clone(); let named_foods = named_foods.clone(); let newer = newer.clone(); let newer_said = newer_said.clone(); let off_topic = off_topic.clone(); let older = older.clone(); let other = other.clone(); let other_food = other_food.clone(); let ours = ours.clone(); let outfitted = outfitted.clone(); let owed = owed.clone(); let own = own.clone(); let own_said = own_said.clone(); let own_thing = own_thing.clone(); let part = part.clone(); let parting = parting.clone(); let phrase = phrase.clone(); let picked = picked.clone(); let plan = plan.clone(); let planned = planned.clone(); let pointed = pointed.clone(); let priced = priced.clone(); let read = read.clone(); let readied = readied.clone(); let reading = reading.clone(); let readings = readings.clone(); let repaired = repaired.clone(); let reply = reply.clone(); let reread = reread.clone(); let resized = resized.clone(); let rest = rest.clone(); let said = said.clone(); let same = same.clone(); let same_answer = same_answer.clone(); let same_line = same_line.clone(); let sentence = sentence.clone(); let short_line = short_line.clone(); let side = side.clone(); let sized = sized.clone(); let someone = someone.clone(); let specific = specific.clone(); let stated = stated.clone(); let subject = subject.clone(); let suits = suits.clone(); let swapped = swapped.clone(); let text = text.clone(); let thing = thing.clone(); let thing_words = thing_words.clone(); let thinking = thinking.clone(); let timed = timed.clone(); let tones = tones.clone(); let understood = understood.clone(); let use_up = use_up.clone(); let verdict = verdict.clone(); let verse = verse.clone(); let vouched = vouched.clone(); let whole = whole.clone(); let wider = wider.clone(); let wider_item = wider_item.clone(); let wider_reply = wider_reply.clone(); let without = without.clone(); let word = word.clone(); let words = words.clone(); let written = written.clone(); let written_out = written_out.clone(); py_func("_guard", move |args: &[Py]| { let mut full = vec![PLAN_FIRST.clone(), PLAN_KINDS.clone(), _guard.clone(), _meal_entry.clone(), _meal_reply.clone(), about.clone(), about_someone.clone(), about_the_food.clone(), added.clone(), again.clone(), amount.clone(), announced.clone(), another.clone(), asked.clone(), asks_a_part.clone(), attributed.clone(), baked.clone(), bare.clone(), bare_ask.clone(), before.clone(), began.clone(), beside.clone(), calculated.clone(), care.clone(), chosen.clone(), cooked.clone(), cooked_ask.clone(), covered.clone(), defined.clone(), detail.clone(), earlier.clone(), figure.clone(), follow_up.clone(), followed.clone(), found.clone(), framed.clone(), fuller.clone(), given_to.clone(), handed.clone(), head.clone(), helped.clone(), honest.clone(), intro.clone(), introduction.clone(), item.clone(), keeping.clone(), kept.clone(), keys.clone(), kind.clone(), kitchen.clone(), left_out.clone(), longer.clone(), meal.clone(), memory.clone(), move_.clone(), named_foods.clone(), newer.clone(), newer_said.clone(), off_topic.clone(), older.clone(), other.clone(), other_food.clone(), ours.clone(), outfitted.clone(), owed.clone(), own.clone(), own_said.clone(), own_thing.clone(), part.clone(), parting.clone(), phrase.clone(), picked.clone(), plan.clone(), planned.clone(), pointed.clone(), priced.clone(), read.clone(), readied.clone(), reading.clone(), readings.clone(), repaired.clone(), reply.clone(), reread.clone(), resized.clone(), rest.clone(), said.clone(), same.clone(), same_answer.clone(), same_line.clone(), sentence.clone(), short_line.clone(), side.clone(), sized.clone(), someone.clone(), specific.clone(), stated.clone(), subject.clone(), suits.clone(), swapped.clone(), text.clone(), thing.clone(), thing_words.clone(), thinking.clone(), timed.clone(), tones.clone(), understood.clone(), use_up.clone(), verdict.clone(), verse.clone(), vouched.clone(), whole.clone(), wider.clone(), wider_item.clone(), wider_reply.clone(), without.clone(), word.clone(), words.clone(), written.clone(), written_out.clone()]; full.extend_from_slice(args); __nested__guard_15(&full) }) }};
+    _guard = {{ let PLAN_FIRST = PLAN_FIRST.clone(); let PLAN_KINDS = PLAN_KINDS.clone(); let _meal_entry = _meal_entry.clone(); let _meal_reply = _meal_reply.clone(); let about = about.clone(); let about_someone = about_someone.clone(); let about_the_food = about_the_food.clone(); let added = added.clone(); let again = again.clone(); let amount = amount.clone(); let announced = announced.clone(); let another = another.clone(); let asked = asked.clone(); let asks_a_part = asks_a_part.clone(); let attributed = attributed.clone(); let baked = baked.clone(); let bare = bare.clone(); let bare_ask = bare_ask.clone(); let before = before.clone(); let began = began.clone(); let beside = beside.clone(); let calculated = calculated.clone(); let care = care.clone(); let chosen = chosen.clone(); let cooked = cooked.clone(); let cooked_ask = cooked_ask.clone(); let covered = covered.clone(); let defined = defined.clone(); let detail = detail.clone(); let earlier = earlier.clone(); let figure = figure.clone(); let follow_up = follow_up.clone(); let followed = followed.clone(); let found = found.clone(); let framed = framed.clone(); let fuller = fuller.clone(); let given_to = given_to.clone(); let handed = handed.clone(); let head = head.clone(); let helped = helped.clone(); let honest = honest.clone(); let intro = intro.clone(); let introduction = introduction.clone(); let item = item.clone(); let keeping = keeping.clone(); let kept = kept.clone(); let keys = keys.clone(); let kind = kind.clone(); let kitchen = kitchen.clone(); let left_out = left_out.clone(); let longer = longer.clone(); let meal = meal.clone(); let memory = memory.clone(); let move_ = move_.clone(); let named_foods = named_foods.clone(); let newer = newer.clone(); let newer_said = newer_said.clone(); let off_topic = off_topic.clone(); let older = older.clone(); let other = other.clone(); let other_food = other_food.clone(); let ours = ours.clone(); let outfitted = outfitted.clone(); let owed = owed.clone(); let own = own.clone(); let own_said = own_said.clone(); let own_thing = own_thing.clone(); let part = part.clone(); let parting = parting.clone(); let phrase = phrase.clone(); let picked = picked.clone(); let plan = plan.clone(); let planned = planned.clone(); let pointed = pointed.clone(); let priced = priced.clone(); let read = read.clone(); let readied = readied.clone(); let reading = reading.clone(); let readings = readings.clone(); let repaired = repaired.clone(); let reply = reply.clone(); let reread = reread.clone(); let resized = resized.clone(); let rest = rest.clone(); let said = said.clone(); let same = same.clone(); let same_answer = same_answer.clone(); let same_line = same_line.clone(); let sentence = sentence.clone(); let short_line = short_line.clone(); let side = side.clone(); let sized = sized.clone(); let someone = someone.clone(); let specific = specific.clone(); let stated = stated.clone(); let subject = subject.clone(); let suits = suits.clone(); let swapped = swapped.clone(); let text = text.clone(); let thing = thing.clone(); let thing_words = thing_words.clone(); let thinking = thinking.clone(); let timed = timed.clone(); let tones = tones.clone(); let understood = understood.clone(); let use_up = use_up.clone(); let verdict = verdict.clone(); let verse = verse.clone(); let vouched = vouched.clone(); let whole = whole.clone(); let wider = wider.clone(); let wider_item = wider_item.clone(); let wider_reply = wider_reply.clone(); let without = without.clone(); let word = word.clone(); let words = words.clone(); let written = written.clone(); let written_out = written_out.clone(); py_func("_guard", move |args: &[Py]| { let mut full = vec![PLAN_FIRST.clone(), PLAN_KINDS.clone(), _meal_entry.clone(), _meal_reply.clone(), about.clone(), about_someone.clone(), about_the_food.clone(), added.clone(), again.clone(), amount.clone(), announced.clone(), another.clone(), asked.clone(), asks_a_part.clone(), attributed.clone(), baked.clone(), bare.clone(), bare_ask.clone(), before.clone(), began.clone(), beside.clone(), calculated.clone(), care.clone(), chosen.clone(), cooked.clone(), cooked_ask.clone(), covered.clone(), defined.clone(), detail.clone(), earlier.clone(), figure.clone(), follow_up.clone(), followed.clone(), found.clone(), framed.clone(), fuller.clone(), given_to.clone(), handed.clone(), head.clone(), helped.clone(), honest.clone(), intro.clone(), introduction.clone(), item.clone(), keeping.clone(), kept.clone(), keys.clone(), kind.clone(), kitchen.clone(), left_out.clone(), longer.clone(), meal.clone(), memory.clone(), move_.clone(), named_foods.clone(), newer.clone(), newer_said.clone(), off_topic.clone(), older.clone(), other.clone(), other_food.clone(), ours.clone(), outfitted.clone(), owed.clone(), own.clone(), own_said.clone(), own_thing.clone(), part.clone(), parting.clone(), phrase.clone(), picked.clone(), plan.clone(), planned.clone(), pointed.clone(), priced.clone(), read.clone(), readied.clone(), reading.clone(), readings.clone(), repaired.clone(), reply.clone(), reread.clone(), resized.clone(), rest.clone(), said.clone(), same.clone(), same_answer.clone(), same_line.clone(), sentence.clone(), short_line.clone(), side.clone(), sized.clone(), someone.clone(), specific.clone(), stated.clone(), subject.clone(), suits.clone(), swapped.clone(), text.clone(), thing.clone(), thing_words.clone(), thinking.clone(), timed.clone(), tones.clone(), understood.clone(), use_up.clone(), verdict.clone(), verse.clone(), vouched.clone(), whole.clone(), wider.clone(), wider_item.clone(), wider_reply.clone(), without.clone(), word.clone(), words.clone(), written.clone(), written_out.clone()]; full.extend_from_slice(args); __nested__guard_15(&full) }) }};
     keeping = _keeping_reader(&[reading.clone(), memory.clone()]);
     let __unpk17 = py_unpack(&_offer(&[{ let PLAN_FIRST = PLAN_FIRST.clone(); let PLAN_KINDS = PLAN_KINDS.clone(); let _guard = _guard.clone(); let _meal_entry = _meal_entry.clone(); let _meal_reply = _meal_reply.clone(); let about = about.clone(); let about_someone = about_someone.clone(); let about_the_food = about_the_food.clone(); let added = added.clone(); let again = again.clone(); let amount = amount.clone(); let announced = announced.clone(); let another = another.clone(); let asked = asked.clone(); let asks_a_part = asks_a_part.clone(); let attributed = attributed.clone(); let baked = baked.clone(); let bare = bare.clone(); let bare_ask = bare_ask.clone(); let before = before.clone(); let began = began.clone(); let beside = beside.clone(); let calculated = calculated.clone(); let care = care.clone(); let chosen = chosen.clone(); let cooked = cooked.clone(); let cooked_ask = cooked_ask.clone(); let covered = covered.clone(); let defined = defined.clone(); let detail = detail.clone(); let earlier = earlier.clone(); let figure = figure.clone(); let follow_up = follow_up.clone(); let followed = followed.clone(); let found = found.clone(); let framed = framed.clone(); let fuller = fuller.clone(); let given_to = given_to.clone(); let handed = handed.clone(); let head = head.clone(); let helped = helped.clone(); let honest = honest.clone(); let intro = intro.clone(); let introduction = introduction.clone(); let item = item.clone(); let keeping = keeping.clone(); let kept = kept.clone(); let keys = keys.clone(); let kind = kind.clone(); let kitchen = kitchen.clone(); let left_out = left_out.clone(); let longer = longer.clone(); let meal = meal.clone(); let memory = memory.clone(); let move_ = move_.clone(); let named_foods = named_foods.clone(); let newer = newer.clone(); let newer_said = newer_said.clone(); let off_topic = off_topic.clone(); let older = older.clone(); let other = other.clone(); let other_food = other_food.clone(); let ours = ours.clone(); let outfitted = outfitted.clone(); let owed = owed.clone(); let own = own.clone(); let own_said = own_said.clone(); let own_thing = own_thing.clone(); let part = part.clone(); let parting = parting.clone(); let phrase = phrase.clone(); let picked = picked.clone(); let plan = plan.clone(); let planned = planned.clone(); let pointed = pointed.clone(); let priced = priced.clone(); let read = read.clone(); let readied = readied.clone(); let reading = reading.clone(); let readings = readings.clone(); let repaired = repaired.clone(); let reply = reply.clone(); let reread = reread.clone(); let resized = resized.clone(); let rest = rest.clone(); let said = said.clone(); let same = same.clone(); let same_answer = same_answer.clone(); let same_line = same_line.clone(); let sentence = sentence.clone(); let short_line = short_line.clone(); let side = side.clone(); let sized = sized.clone(); let someone = someone.clone(); let specific = specific.clone(); let stated = stated.clone(); let subject = subject.clone(); let suits = suits.clone(); let swapped = swapped.clone(); let text = text.clone(); let thing = thing.clone(); let thing_words = thing_words.clone(); let thinking = thinking.clone(); let timed = timed.clone(); let tones = tones.clone(); let understood = understood.clone(); let use_up = use_up.clone(); let verdict = verdict.clone(); let verse = verse.clone(); let vouched = vouched.clone(); let whole = whole.clone(); let wider = wider.clone(); let wider_item = wider_item.clone(); let wider_reply = wider_reply.clone(); let without = without.clone(); let word = word.clone(); let words = words.clone(); let written = written.clone(); let written_out = written_out.clone(); py_func("lambda", move |args: &[Py]| { let PLAN_FIRST = PLAN_FIRST.clone(); let PLAN_KINDS = PLAN_KINDS.clone(); let _guard = _guard.clone(); let _meal_entry = _meal_entry.clone(); let _meal_reply = _meal_reply.clone(); let about = about.clone(); let about_someone = about_someone.clone(); let about_the_food = about_the_food.clone(); let added = added.clone(); let again = again.clone(); let amount = amount.clone(); let announced = announced.clone(); let another = another.clone(); let asked = asked.clone(); let asks_a_part = asks_a_part.clone(); let attributed = attributed.clone(); let baked = baked.clone(); let bare = bare.clone(); let bare_ask = bare_ask.clone(); let before = before.clone(); let began = began.clone(); let beside = beside.clone(); let calculated = calculated.clone(); let care = care.clone(); let chosen = chosen.clone(); let cooked = cooked.clone(); let cooked_ask = cooked_ask.clone(); let covered = covered.clone(); let defined = defined.clone(); let detail = detail.clone(); let earlier = earlier.clone(); let figure = figure.clone(); let follow_up = follow_up.clone(); let followed = followed.clone(); let found = found.clone(); let framed = framed.clone(); let fuller = fuller.clone(); let given_to = given_to.clone(); let handed = handed.clone(); let head = head.clone(); let helped = helped.clone(); let honest = honest.clone(); let intro = intro.clone(); let introduction = introduction.clone(); let item = item.clone(); let keeping = keeping.clone(); let kept = kept.clone(); let keys = keys.clone(); let kind = kind.clone(); let kitchen = kitchen.clone(); let left_out = left_out.clone(); let longer = longer.clone(); let meal = meal.clone(); let memory = memory.clone(); let move_ = move_.clone(); let named_foods = named_foods.clone(); let newer = newer.clone(); let newer_said = newer_said.clone(); let off_topic = off_topic.clone(); let older = older.clone(); let other = other.clone(); let other_food = other_food.clone(); let ours = ours.clone(); let outfitted = outfitted.clone(); let owed = owed.clone(); let own = own.clone(); let own_said = own_said.clone(); let own_thing = own_thing.clone(); let part = part.clone(); let parting = parting.clone(); let phrase = phrase.clone(); let picked = picked.clone(); let plan = plan.clone(); let planned = planned.clone(); let pointed = pointed.clone(); let priced = priced.clone(); let read = read.clone(); let readied = readied.clone(); let reading = reading.clone(); let readings = readings.clone(); let repaired = repaired.clone(); let reply = reply.clone(); let reread = reread.clone(); let resized = resized.clone(); let rest = rest.clone(); let said = said.clone(); let same = same.clone(); let same_answer = same_answer.clone(); let same_line = same_line.clone(); let sentence = sentence.clone(); let short_line = short_line.clone(); let side = side.clone(); let sized = sized.clone(); let someone = someone.clone(); let specific = specific.clone(); let stated = stated.clone(); let subject = subject.clone(); let suits = suits.clone(); let swapped = swapped.clone(); let text = text.clone(); let thing = thing.clone(); let thing_words = thing_words.clone(); let thinking = thinking.clone(); let timed = timed.clone(); let tones = tones.clone(); let understood = understood.clone(); let use_up = use_up.clone(); let verdict = verdict.clone(); let verse = verse.clone(); let vouched = vouched.clone(); let whole = whole.clone(); let wider = wider.clone(); let wider_item = wider_item.clone(); let wider_reply = wider_reply.clone(); let without = without.clone(); let word = word.clone(); let words = words.clone(); let written = written.clone(); let written_out = written_out.clone(); let reject: Py = __kwp(args, 0, "reject").unwrap_or(Py::None); py_call(&keeping, &[py_call(&_guard, &[reject.clone()])]) }) }, memory.clone(), reading.clone()]), 2, None);
     item = __unpk17[0].clone();
