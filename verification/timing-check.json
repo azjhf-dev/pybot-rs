@@ -1,0 +1,26 @@
+[
+  {
+    "binary_sha256": "b84c22abffae6825dd5b70341887eb51482a4f66344401316112bfbd5a63e52e",
+    "case": 2,
+    "inputs": [
+      "what is 2 plus 2",
+      "what is 12 times 8",
+      "what is the capital of France"
+    ],
+    "python": {
+      "returncode": 0,
+      "replies": [
+        "That's 4.",
+        "That's 96.",
+        "Paris."
+      ],
+      "diagnostics": "[module: answers | 6451 ms]\n[module: answers | 6732 ms]\n[module: answers | 1129 ms]\n"
+    },
+    "rust": {
+      "timeout": true,
+      "timeout_seconds": 45,
+      "replies": []
+    },
+    "exact": false
+  }
+]
