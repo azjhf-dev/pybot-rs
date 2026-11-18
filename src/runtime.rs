@@ -49,6 +49,7 @@ impl Runtime {
         for m in &self.modules {
             if let Some(respond) = m.respond {
                 if std::env::var_os("PYBOT_TRACE_MODULES").is_some() { eprintln!("RESPOND {}",m.name); }
+                let tick=std::time::Instant::now();
                 let mut mine = pyrt::builtins::py_deepcopy(memory);
                 let name = m.name;
                 let answer = exc::catch({
@@ -56,6 +57,7 @@ impl Runtime {
                     let mine_ref = mine.clone();
                     move || respond(&[text_py, mine_ref])
                 }).unwrap_or_else(|e| { if std::env::var_os("PYBOT_TRACE").is_some() { eprintln!("{}: {} {}", name, e.class_name, e.message); } Py::None });
+                if std::env::var_os("PYBOT_TRACE_TIMING").is_some() && tick.elapsed().as_millis()>50 { eprintln!("TIME {} {}ms",m.name,tick.elapsed().as_millis()); }
                 if let Py::Str(reply) = &answer {
                     let cleaned = reply.split_whitespace().collect::<Vec<_>>().join(" ");
                     if !cleaned.is_empty() {
