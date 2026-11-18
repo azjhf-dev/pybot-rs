@@ -947,3 +947,10 @@ pub fn py_identity(v:&Py)->i64 { match v {
  Py::Exc(x)=>Rc::as_ptr(x) as usize as i64,
  Py::Bytes(x)=>Rc::as_ptr(x) as usize as i64,
  Py::None=>1,Py::Bool(false)=>2,Py::Bool(true)=>3,Py::Int(n)=>n.wrapping_mul(16).wrapping_add(4),Py::Float(n)=>n.to_bits() as i64,_=>5,}}
+
+pub fn py_delslice(v:&Py,start:&Py,stop:&Py,step:&Py)->Result<(),PyExc>{
+ let list=match v{Py::List(x)=>x,_=>return Err(type_err("slice deletion requires list"))};
+ let st=step.as_i64().unwrap_or(1);if st==0{return Err(value_err("slice step cannot be zero"));}
+ let mut b=list.borrow_mut();let mut indices=slice_indices(b.len() as i64,start.as_i64(),stop.as_i64(),st);
+ indices.sort_unstable();for i in indices.into_iter().rev(){b.remove(i as usize);}Ok(())
+}

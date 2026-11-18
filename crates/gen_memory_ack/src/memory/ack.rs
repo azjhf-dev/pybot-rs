@@ -4868,7 +4868,7 @@ pub fn _a_hand_back(args: &[Py]) -> Py {
     let _ = py_setitem(&memory.clone(), &py_str("hand_backs"), kept.clone());
     }
     let _ = mcall(&kept.clone(), "append", &[said.clone()]);
-    let _ = py_delitem(&kept.clone(), &Py::None).unwrap_or(());
+    py_delslice(&kept.clone(), &Py::None, &op_neg(&Py::Int(4)), &Py::None).unwrap_or_else(|e| exc::raise(e));
     Py::None
 }
 pub fn _a_remark_on_what_was_said(args: &[Py]) -> Py {

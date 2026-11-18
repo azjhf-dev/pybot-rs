@@ -3423,7 +3423,7 @@ pub fn _handed_back__wrapped(args: &[Py]) -> Py {
     let _ = py_setitem(&memory.clone(), &py_str("repeated"), py_list(vec![]));
     }
     let _ = mcall(&kept.clone(), "append", &[reply.clone()]);
-    let _ = py_delitem(&kept.clone(), &Py::None).unwrap_or(());
+    py_delslice(&kept.clone(), &Py::None, &op_neg(&Py::Int(8)), &Py::None).unwrap_or_else(|e| exc::raise(e));
     return reply.clone();
     Py::None
 }

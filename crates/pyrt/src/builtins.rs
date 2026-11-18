@@ -509,12 +509,14 @@ fn pattern_method(p: &Rc<pyre::PyPattern>, name: &str, args: &[Py]) -> PyResult 
             Ok(pyre::split(p, &text, maxsplit))
         }
         "sub" => {
-            let repl = args.get(1).cloned().unwrap_or(Py::None);
+            let repl = args.first().cloned().unwrap_or(Py::None);
+            let text = args.get(1).and_then(|v|v.as_str()).unwrap_or("");
             let count = args.get(2).and_then(|v| v.as_i64()).unwrap_or(0);
             Ok(pyre::sub(p, &repl, &text, count))
         }
         "subn" => {
-            let repl = args.get(1).cloned().unwrap_or(Py::None);
+            let repl = args.first().cloned().unwrap_or(Py::None);
+            let text = args.get(1).and_then(|v|v.as_str()).unwrap_or("");
             let count = args.get(2).and_then(|v| v.as_i64()).unwrap_or(0);
             Ok(pyre::subn(p, &repl, &text, count))
         }
@@ -790,4 +792,9 @@ pub fn unbound_name(name: &str) -> Py { exc::raise(name_err(name)) }
 #[cfg(test)] mod comparison_tests {
  use super::*;
  #[test] fn equality_is_inclusive_for_ge() { assert!(py_truthy(&op_ge(&Py::Int(2), &Py::Int(2)))); assert!(!py_truthy(&op_gt(&Py::Int(2), &Py::Int(2)))); }
+}
+
+#[cfg(test)] mod regex_method_tests {
+ use super::*;
+ #[test] fn pattern_sub_takes_replacement_then_text(){let p=pyre::compile(r"(cat)",0).unwrap();let x=pattern_method(&p,"sub",&[py_str(r"\1s"),py_str("one cat")]).unwrap();assert_eq!(x.as_str(),Some("one cats"));}
 }

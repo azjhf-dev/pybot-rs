@@ -784,7 +784,13 @@ class Gen:
         elif isinstance(node, ast.Delete):
             for t in node.targets:
                 if isinstance(t, ast.Subscript):
-                    E(f"    let _ = py_delitem(&{self.gen_expr(t.value, ctx)}, &{self.gen_expr(t.slice, ctx)}).unwrap_or(());")
+                    if isinstance(t.slice, ast.Slice):
+                        lo = self.gen_expr(t.slice.lower, ctx)
+                        hi = self.gen_expr(t.slice.upper, ctx)
+                        step = self.gen_expr(t.slice.step, ctx)
+                        E(f"    py_delslice(&{self.gen_expr(t.value, ctx)}, &{lo}, &{hi}, &{step}).unwrap_or_else(|e| exc::raise(e));")
+                    else:
+                        E(f"    py_delitem(&{self.gen_expr(t.value, ctx)}, &{self.gen_expr(t.slice, ctx)}).unwrap_or_else(|e| exc::raise(e));")
                 elif isinstance(t, ast.Name):
                     self.gen_assign(t, 'Py::None', ctx)
         elif isinstance(node, ast.Global):

@@ -5129,7 +5129,7 @@ pub fn _asks_how_the_bot_sees_me(args: &[Py]) -> Py {
     phrase = __item.clone();
     size = call_builtin("len", &[mcall(&phrase.clone(), "split", &[])]).unwrap_or_else(|e| exc::raise(e));
     if py_truthy(&{ let __b = op_lt(&size.clone(), &call_builtin("len", &[words.clone()]).unwrap_or_else(|e| exc::raise(e))); if !py_truthy(&__b) { __b } else { Py::Bool(py_eq(&slice_or_raise(&words.clone(), &op_neg(&size.clone()), &Py::None, &Py::None), &mcall(&phrase.clone(), "split", &[]))) } }) {
-    let _ = py_delitem(&words.clone(), &Py::None).unwrap_or(());
+    py_delslice(&words.clone(), &op_neg(&size.clone()), &Py::None, &Py::None).unwrap_or_else(|e| exc::raise(e));
     changed = Py::Bool(true);
     }
     }
@@ -5402,7 +5402,7 @@ pub fn _without_mood_tail(args: &[Py]) -> Py {
     if py_truthy(&Py::Bool(py_contains(&g_MOOD_TAIL_TAKEN(), &geti(&words.clone(), &op_sub(&op_neg(&size.clone()), &Py::Int(1)))))) {
     continue;
     }
-    let _ = py_delitem(&words.clone(), &Py::None).unwrap_or(());
+    py_delslice(&words.clone(), &op_neg(&size.clone()), &Py::None, &Py::None).unwrap_or_else(|e| exc::raise(e));
     changed = Py::Bool(true);
     break;
     }
