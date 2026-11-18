@@ -104,8 +104,7 @@ pub fn call_builtin(name: &str, args: &[Py]) -> PyResult {
                 let k = match &key { Some(f) => py_call(f, std::slice::from_ref(&x)), None => x.clone() };
                 (k, x)
             }).collect();
-            keyed.sort_by(|a, b| py_cmp_total(&a.0, &b.0));
-            if reverse { keyed.reverse(); }
+            keyed.sort_by(|a, b| if reverse { py_cmp_total(&b.0, &a.0) } else { py_cmp_total(&a.0, &b.0) });
             Ok(py_list(keyed.into_iter().map(|(_, x)| x).collect()))
         }
         "min" | "max" => {

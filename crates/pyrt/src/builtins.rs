@@ -302,8 +302,7 @@ fn list_method(l: &Rc<RefCell<Vec<Py>>>, name: &str, args: &[Py]) -> PyResult {
                 let k = match &key { Some(f) => py_call(f, std::slice::from_ref(x)), None => x.clone() };
                 (k, x.clone())
             }).collect();
-            items.sort_by(|a, b| py_cmp_total(&a.0, &b.0));
-            if reverse { items.reverse(); }
+            items.sort_by(|a, b| if reverse { py_cmp_total(&b.0, &a.0) } else { py_cmp_total(&a.0, &b.0) });
             *l.borrow_mut() = items.into_iter().map(|(_, x)| x).collect();
             Ok(Py::None)
         }
@@ -811,4 +810,15 @@ pub fn unbound_name(name: &str) -> Py { exc::raise(name_err(name)) }
 
 #[cfg(test)] mod missing_attribute_tests{use super::*;
  #[test] fn none_has_no_key_attribute(){assert!(py_getattr(&Py::None,"key").is_err());let x=crate::pybuiltins::call_builtin("getattr",&[Py::None,py_str("key"),py_tuple(vec![])]).unwrap();assert!(py_iter(&x).unwrap().is_empty());}
+}
+
+#[cfg(test)] mod stable_sort_tests {
+ use super::*;
+ #[test] fn reverse_sort_keeps_equal_keys_in_input_order() {
+ let a=py_list(vec![py_str("first"),py_str("second"),py_str("third")]);
+ let args=vec![Py::Kwargs(Rc::new(vec![("key".into(),py_func("constant",|_|Py::Int(0))),("reverse".into(),Py::Bool(true))]))];
+ let expected=a.clone(); let sorted=crate::pybuiltins::call_builtin("sorted",&[a.clone(),args[0].clone()]).unwrap();
+ assert!(py_eq(&sorted,&expected));
+ let original=py_repr(&a);py_getattr(&a,"sort").map(|f|py_call(&f,&args)).unwrap();assert_eq!(py_repr(&a),original);
+ }
 }
